@@ -1,3 +1,5 @@
+> 历史 R44–R53 切片与原评审记录。2026-09-28 起，当前阶段顺序、任务归并及版本规则以 [设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) 第 10 节为准；下文的 Approve 不是对新设计或当前在制实现的批准。
+
 Approve with three small revisions: R44 的“1-frame flash”改为约 0.18s pulse，否则手机上几乎不可感知；R52 的 80ms“跑”改为约 0.18s；R50 只有已有 authored route name 时显示，禁止为此新增路线数据结构。
 
 Round	Engine play slice	Executable acceptance	Bump

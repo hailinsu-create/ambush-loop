@@ -1,5 +1,7 @@
 # WWII night-raid art bible
 
+> Historical prototype art notes. New visual targets follow [Design v2, section 7](../../.cursor/docs/AMBUSH_DESIGN_V2_20260928.md): original stylized 2.5D scenes, readable silhouettes and height, coherent light and material. The old 100-art-round target below is not a current delivery gate. This does not claim new assets are implemented.
+
 Commandos ambush loop. Original procedural art (polygons, palettes, WAV).
 No other-game textures. No neon. No modern polymer guns.
 
