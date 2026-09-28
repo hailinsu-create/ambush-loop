@@ -1,5 +1,7 @@
 # Ambush Loop
 
+当前开发设计以 [设计规划 v2](../.cursor/docs/AMBUSH_DESIGN_V2_20260928.md) 为准；下文保留现有原型的运行与操作说明，不表示新高点或新视觉已实现。
+
 Godot 4.7.2 vertical slice — Commandos-style night raid: scout, loot, ambush, multi-wave alarm, sweep.
 
 **朋友包 / 程序多边形 / 合成音 / 必须横屏。** 不是正式版，不要写成 9.5。  
