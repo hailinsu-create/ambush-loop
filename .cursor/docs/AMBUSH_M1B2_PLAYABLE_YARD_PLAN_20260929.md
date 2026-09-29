@@ -1,6 +1,14 @@
 # M1-B2 院子可玩高点执行计划
 
-更新日期：2026-09-29。状态：待实现；本文件是执行提案，不表示关卡或高点玩法已经验收。
+更新日期：2026-09-29。状态：代码已实现、自动门禁通过；Draft PR #6。场景视觉复核、真机复验及本工作区的外部 GPT 代码评审仍未完成，因此 B2 尚未验收完成。
+
+## 当前实施记录
+
+- 分支 `codex/m1-b2-playable-yard`，提交 `340b819`；Draft PR #6 以 `codex/m1-ramp-pathfinding`（PR #5）为基底。仅表示代码已推送供审阅，不表示已合并。
+- 已实现 yard 3×3 台面、南侧唯一坡道、台面既有 SMG、台阶/坡道绘制及高度/坡道缓存签名；点击移动与实际队员运动逐段校验高度边，非法 follow shortcut 由 A* 重新规划，断坡时停在原层。
+- `m1_b2_yard_height_gate.gd`、`m1_ramp_pathfinder_gate.gd`、`m1_height_data_gate.gd`、`r45_sweep_gate.gd` 和完整隔离 `smoke_test.gd` 均退出码 0；完整日志到达 `SMOKE_SLICE_COMPLETE`，各测试报告 `PLAYER_DATA_UNCHANGED=1`。
+- Android APK `build/android/AmbushLoop-m1-b2.apk` 已导出并签名验证：`com.ambushloop.game`，versionName `0.6.29` / versionCode `78`，35,782,309 字节，SHA-256 `F8CBE0C68A9DE53D2A9504D1AD47D1EAD8668929BE6048ED61019D923F2B7238`。APK 导出和签名验证不是手机安装或运行证据。
+- 最新复查中 vivo X Fold2 已显示在 ADB，但状态为 `authorizing`；本次没有安装、卸载或清理设备数据。B2 的 GPT 代码评审尚未开始：新工作区的只读连接器准备就绪，但仍需用户在 ChatGPT 完成一次授权。
 
 ## 目标与评审输入
 
@@ -32,7 +40,7 @@
 3. 用真实 `_tick_squad_follow()` 构造领队与跟随者位于坡道两侧的场景；跟随者必须经坡道、或在没有合法路径时留在原侧。正反向都验证，并包含断开坡道的负例；不得靠直线/弧线 slide 越层。
 4. 台面没有掩体部署点；对台上补给的移动与搜刮不允许通过 `nearest_open()` 或 `_open_cell_near()` 传送到不连通格。
 5. map draw/cache 对高度与坡道变化失效；默认与省电绘制都能看出平台顶面和坡道方向，不改平地图视觉快照。
-6. focused B2 gate、M1-A 数据门、M1-B1 寻路门、R45 独立门、完整隔离 smoke 退出码均为 0；运行包装器报告 `PLAYER_DATA_UNCHANGED=1`。自动化之外仍须在可运行画面逐步核对低地→坡道→高台→坡道→低地、SMG 获取与随队行为；synthetic gate 不能替代这一关卡证据。
+6. 当前 focused B2 gate、M1-A 数据门、M1-B1 寻路门、R45 独立门和完整隔离 smoke 均退出码为 0；运行包装器报告 `PLAYER_DATA_UNCHANGED=1`。但验收还要求保存同版本场景证据，并在可运行画面核对低地→坡道→高台→坡道→低地、SMG 获取与双向随队行为；synthetic gate 和 APK 签名不能替代这一关卡/设备证据。
 
 ## 实施顺序与停点
 
@@ -40,7 +48,7 @@
 2. 加平台/坡道低保真绘制，并把它纳入静态缓存键。
 3. 为队员运动执行和 follow 弧线/滑动建立高度拓扑保护；非法快捷路转入现有 A*，无合法路径时保持原位，不能降级成任意 slide。若无法在不改变平地 follow 行为的前提下完成，缩小 B2 而不是大规模重写 `main.gd`。
 4. 实现真实 yard 移动/往返/补给 gate，跑现有隔离门；记录源码提交、实际退出码和日志。
-5. 保存同版本场景证据后才可将 B2 标为完成。M1-C 的高度 LOS 与 M1-E 的两种有效战术方案仍未完成。
+5. 已记录提交、PR 与自动门禁结果；仍须取得同版本场景证据，并完成真机安装/启动检查以及本工作区的外部 GPT 代码评审，之后才可将 B2 标为验收完成。M1-C 的高度 LOS 与 M1-E 的两种有效战术方案仍未完成。
 
 ## 风险与下一步
 

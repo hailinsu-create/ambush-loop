@@ -25,3 +25,9 @@
 - 从 M1-B1 当前代码导出调试包：`ambush_loop/build/android/AmbushLoop.apk`，35,761,650 字节，SHA-256 `1DBADCA5B063AEACF2A0E7295410FF238CF646435C15C30162F73B771F3DCAA9`；包名 `com.ambushloop.game`、versionName `0.6.29`、versionCode `78`、compile SDK 36；APK 签名验证通过。
 - 目标设备为 vivo X Fold2（型号 V2266A / PD2266，Android 16，arm64）。用户已在手机确认 USB 调试授权；截至本补记，ADB transport 仍为 `offline`。一次保留数据更新安装未成功，禁用增量安装重试返回 `device offline`。未卸载应用、未清理应用数据，因此 Back 去重修复及 v0.6.29 尚未在该设备上验证。
 - 结论：SDK/导出工具问题已解决；设备传输稳定性仍是 M0 真机复验的阻塞项。待 ADB 稳定显示 `device` 后，先核对已安装版本与签名，再以 `adb install -r --no-incremental` 更新并执行 Back、后台恢复和触控复验。若传输再次掉线即停止，不做卸载或清档。
+
+### 2026-09-29 用户重新授权后的复查
+
+- 用户确认已在 vivo X Fold2 允许 USB 调试；ADB 能列出设备 `10AD4L182J001DB`，但状态持续为 `authorizing`，未达到可安全安装状态。
+- B2 分支另行导出 `AmbushLoop-m1-b2.apk`（0.6.29 / versionCode 78）；签名验证通过。尚未对手机安装该包，也未卸载应用或清理数据。
+- 当前只需等设备握手成为 `device`；再执行保留数据更新和启动验证。如果手机还弹出 USB 调试确认，需在设备上确认一次；若无弹窗，不重复重启 ADB 或强装。
