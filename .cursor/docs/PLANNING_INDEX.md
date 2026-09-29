@@ -8,7 +8,7 @@
 | --- | --- |
 | [游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) | 当前开发设计基线：玩法、高点规则、六关、视觉、手机操作、M0–M5。用户已同意以此推进；具体设计仍须逐切片实现、验证。 |
 | [产品方向](AMBUSH_PRODUCT_DIRECTION_20260928.md) | 保留用户需求来源：“搜集弹药 → 占领高点 → 埋伏 → 歼灭”。细化方案以 v2 为准。 |
-| [M0 状态报告](AMBUSH_M0_REPORT.md) | 工程基线与验收缺口。SDK 和 v0.6.29 导出已验证；vivo X Fold2 最近状态为 ADB `authorizing`，最终修复包真机复验、陌生人首局仍未完成。 |
+| [M0 状态报告](AMBUSH_M0_REPORT.md) | 工程基线与验收缺口。SDK 和 v0.6.29 导出已验证；vivo X Fold2 经 USB 兼容模式短暂连通，安装失败后又 offline，下一步无线调试备选。真机复验、陌生人首局仍未完成。 |
 | [M1 院子高点 ADR](AMBUSH_M1_YARD_HEIGHT_ADR_20260929.md) | 高度、坡道、遮挡和弹药预算提案；M1-A 桌面门禁通过，M1-B1 已获外部 GPT 代码评审；真实玩法验收未完成。 |
 | [M1-B 坡道寻路执行计划](AMBUSH_M1B_RAMP_PATHFINDER_PLAN_20260929.md) | M1-B1 在 Draft PR #5、M1-B2 在 Draft PR #6；桌面自动门通过。B2 GPT 实码评审无新阻断项，下坡随队/场景证据和真机复验待完成。 |
 | [M1-B2 院子可玩高点计划](AMBUSH_M1B2_PLAYABLE_YARD_PLAN_20260929.md) | 代码已实现并推送 Draft PR #6；自动门禁和精确提交 GPT 代码评审完成。下坡随队、场景证据及真机复验待完成；M1-C 高度火力仍另行验收。 |

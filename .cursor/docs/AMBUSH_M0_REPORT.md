@@ -36,3 +36,11 @@
 
 - Windows 同时识别 vivo X Fold2 和 ADB Interface，设备状态均为 OK；仅有一个官方 SDK ADB 服务进程。执行一次 reconnect 和一次服务重启后，手机恢复出现在列表但仍为 `authorizing`，因此未继续强装；已引导用户在手机重新开关 USB 调试以触发确认。安装、Back、后台恢复仍待验证，未卸载或清档。
 - GPT 评审通路已恢复并实测完成 B2 代码评审：复用既有游戏连接，固定评审工作区切至精确提交 `340b819`，连接器身份和文件读取测试通过，原项目对话已返回实码复核结果。无需额外连接授权；不将此结果写作浏览器页面点击控制器已修复。旧报告中的 Edge 故障不是当前评审通路的阻塞项。详情见 B2 计划。
+
+### 2026-09-29 再次允许后的 USB 实验与后续方案
+
+- 用户再次确认允许后仍为 `authorizing`。ADB 37.0.1 的 server-status 显示 Windows 新 `LIBADBUSB` 后端；日志含重复的 USB read/write terminated。依据 [官方版本说明](https://developer.android.com/tools/releases/platform-tools)，仅在启动服务的进程环境设置 `ADB_USB_LEGACY=1`，切换后 server-status 为 `NATIVE`；未改机器级环境、未删除或替换授权密钥。
+- 兼容模式稍后出现 `device`，`shell getprop ro.product.model` 成功返回 `V2266A`，说明不是始终未授权。但随后保留数据的 `install -r --no-incremental` 退出码 1（空错误详情），设备再次 `offline`。连接短暂恢复不等于稳定性修复，B2 安装未成功，启动/Back/后台测试未执行。
+- 安装前包查询还出现 `Shell does not have permission to access user 666`；当前 Android 用户/应用安装状态尚未核实，不能据查询无结果推断未安装。后续连接稳定后先核实当前用户及对应应用状态，不切换用户、不绕过权限。
+- 曾尝试仅重启 ADB Interface 的 PnP 设备，Windows 返回 Access denied，未实际重启；不反复提升权限或替换驱动。
+- 下一步采用无线调试备选：用户在与电脑同一 Wi-Fi 下打开无线调试，再通过手机显示的配对页面授权。配对信息不入库；成功后先核实设备与用户，再执行保留数据更新、冷启动、Back/后台恢复并保存证据。若不可用，再检查数据线/直连 USB 口；不卸载游戏或清档。当前无线调试尚未开启/配对验证。
