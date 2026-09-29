@@ -9203,6 +9203,11 @@ func _follow_nudge_path_end(op: OperatorUnit, dest_w: Vector2) -> bool:
 	var last: Vector2 = p[p.size() - 1]
 	if last.distance_squared_to(dest_w) < 4.0:
 		return true
+	if grid != null and grid.uses_height_topology():
+		if not grid.world_segment_traversable(p[p.size() - 2], dest_w):
+			p[p.size() - 1] = dest_w
+			op.set_move_path(p)
+			return op.is_moving()
 	p[p.size() - 1] = dest_w
 	op.move_path = p
 	return true

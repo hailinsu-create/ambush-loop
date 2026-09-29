@@ -22,6 +22,7 @@ const MuzzleFlashScript := preload("res://scripts/fx/muzzle_flash.gd")
 const CombatFxScript := preload("res://scripts/fx/combat_fx.gd")
 const Silhouette := preload("res://scripts/fx/operator_silhouette.gd")
 const Weapons := preload("res://scripts/raid/weapon_catalog.gd")
+const Pathfinder := preload("res://scripts/raid/pathfinder.gd")
 const WeaponArtScript := preload("res://scripts/art/weapon_art.gd")
 const RaidBackpackScript := preload("res://scripts/raid/backpack.gd")
 
@@ -495,7 +496,10 @@ func receive_item(kind: String, amount: int = 1) -> Dictionary:
 
 
 func set_move_path(world_pts: PackedVector2Array) -> void:
-	move_path = world_pts
+	var accepted_path := world_pts
+	if grid != null and grid.uses_height_topology() and not _world_polyline_traversable(accepted_path):
+		accepted_path = _height_safe_path_to(accepted_path[accepted_path.size() - 1]) if not accepted_path.is_empty() else PackedVector2Array()
+	move_path = accepted_path
 	_path_i = 0
 	if move_path.size() > 1:
 		_path_i = 1
@@ -649,7 +653,16 @@ func tick_move(delta: float) -> bool:
 	if is_searching():
 		cancel_search()
 	var target: Vector2 = move_path[_path_i]
-	global_position = global_position.move_toward(target, move_speed * delta)
+	var next_position := global_position.move_toward(target, move_speed * delta)
+	if grid != null and grid.uses_height_topology() and not grid.world_segment_traversable(global_position, next_position):
+		var safe_path := _height_safe_path_to(move_path[move_path.size() - 1])
+		if safe_path.is_empty() or safe_path.size() < 2:
+			stop_move()
+			return false
+		move_path = safe_path
+		_path_i = 1
+		return true
+	global_position = next_position
 	var aim := target - global_position
 	if aim.length_squared() > 4.0:
 		set_facing(rad_to_deg(atan2(aim.y, aim.x)))
@@ -663,6 +676,35 @@ func tick_move(delta: float) -> bool:
 			stop_move()
 			return false
 	return true
+
+
+func _world_polyline_traversable(points: PackedVector2Array) -> bool:
+	if grid == null or points.is_empty():
+		return false
+	for i in range(1, points.size()):
+		if not grid.world_segment_traversable(points[i - 1], points[i]):
+			return false
+	return true
+
+
+func _height_safe_path_to(target_world: Vector2) -> PackedVector2Array:
+	var safe: PackedVector2Array = PackedVector2Array()
+	if grid == null:
+		return safe
+	var from_cell := grid.world_to_cell(global_position)
+	var to_cell := grid.world_to_cell(target_world)
+	var cells: Array[Vector2i] = Pathfinder.find_path(grid, from_cell, to_cell)
+	if cells.is_empty():
+		return safe
+	safe.append(global_position)
+	for i in range(1, cells.size()):
+		safe.append(grid.cell_to_world_center(cells[i]))
+	var last := safe[safe.size() - 1]
+	if last.distance_squared_to(target_world) > 1.0:
+		if not grid.world_segment_traversable(last, target_world):
+			return PackedVector2Array()
+		safe.append(target_world)
+	return safe
 
 
 func grid_cell() -> Vector2i:
