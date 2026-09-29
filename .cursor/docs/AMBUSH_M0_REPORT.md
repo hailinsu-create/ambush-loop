@@ -18,3 +18,10 @@
 4. 网页版 GPT 桥接的 `status` 返回 `EDGE_CDP_UNAVAILABLE`，未进入登录或授权阶段；PLAN/REVIEW 没有被假定通过。后续需修复专用 Edge CDP 再跑审核。
 
 当前 APK 是调试签名包，不是 1.0 正式发行包。不要卸载设备上的游戏来解决更新问题，也不要运行未隔离的清档测试。
+
+## 2026-09-29 复验补记
+
+- 按用户授权安装并接受官方 Android SDK 许可；本机现有 Godot 4.7.2、JDK 17、ADB 37.0.1、Android platforms/build-tools 34 与 36，以及 Godot 4.7.2 Android 导出模板。环境检查无缺项。
+- 从 M1-B1 当前代码导出调试包：`ambush_loop/build/android/AmbushLoop.apk`，35,761,650 字节，SHA-256 `1DBADCA5B063AEACF2A0E7295410FF238CF646435C15C30162F73B771F3DCAA9`；包名 `com.ambushloop.game`、versionName `0.6.29`、versionCode `78`、compile SDK 36；APK 签名验证通过。
+- 目标设备为 vivo X Fold2（型号 V2266A / PD2266，Android 16，arm64）。用户已在手机确认 USB 调试授权；截至本补记，ADB transport 仍为 `offline`。一次保留数据更新安装未成功，禁用增量安装重试返回 `device offline`。未卸载应用、未清理应用数据，因此 Back 去重修复及 v0.6.29 尚未在该设备上验证。
+- 结论：SDK/导出工具问题已解决；设备传输稳定性仍是 M0 真机复验的阻塞项。待 ADB 稳定显示 `device` 后，先核对已安装版本与签名，再以 `adb install -r --no-incremental` 更新并执行 Back、后台恢复和触控复验。若传输再次掉线即停止，不做卸载或清档。
