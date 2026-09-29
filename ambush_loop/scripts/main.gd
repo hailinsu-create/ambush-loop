@@ -200,6 +200,7 @@ var scrub_slider: HSlider = null
 var event_log: Control = null
 var level_label: Label = null
 var tut_label: Label = null
+var sweep_hint_shown_this_attempt := false
 var flash_label: Label = null
 var role_box: Control = null
 var role_card_buttons: Array[Button] = []
@@ -3308,6 +3309,7 @@ func door_slam_dust_active() -> bool:
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	phase = Phase.SETUP
+	sweep_hint_shown_this_attempt = false
 	tool = Tool.DEPLOY
 	fail_reason = ""
 	pending_result = ""
@@ -11998,6 +12000,7 @@ func _tick_raid_decoys(dt: float) -> void:
 
 func _enter_sweep() -> void:
 	phase = Phase.SWEEP
+	var last: bool = raid != null and raid.is_last_wave(level)
 	if raid:
 		raid.mark_wave_cleared()
 	for op in operators:
@@ -12017,12 +12020,17 @@ func _enter_sweep() -> void:
 		speed_button.disabled = true
 	_set_watch_view_buttons(false)
 	_refresh_alarm_cta()
-	var last: bool = raid != null and raid.is_last_wave(level)
-	if last:
+	if not sweep_hint_shown_this_attempt:
+		var hint := "搜尸 · 空格撤离" if last else "搜尸 · 准备下一波"
+		_flash(hint, Color(0.85, 0.92, 0.45) if last else Color(0.95, 0.82, 0.38))
+		sweep_hint_shown_this_attempt = true
+	elif last:
 		_flash("打扫战场 · 空格撤离封锁", Color(0.85, 0.92, 0.45))
-		status_label.text = "最后一波已清。走近尸体搜刮，空格撤离。"
 	else:
 		_flash("打扫战场 · 空格下一波", Color(0.95, 0.82, 0.38))
+	if last:
+		status_label.text = "最后一波已清。走近尸体搜刮，空格撤离。"
+	else:
 		status_label.text = "本波已清。搜刮掉落，空格拉下一波警报。"
 	_sfx("ui")
 	if selected:
@@ -12044,6 +12052,7 @@ func _on_sweep_commit() -> void:
 
 
 func _begin_next_wave() -> void:
+	_clear_flash()
 	if raid:
 		raid.advance_wave()
 	run_id += 1
@@ -12075,6 +12084,7 @@ func _begin_next_wave() -> void:
 
 
 func _extract_win() -> void:
+	_clear_flash()
 	phase = Phase.WON
 	battle_log.mark_terminal(sim.tick, "win")
 	_ensure_watch_cinema()

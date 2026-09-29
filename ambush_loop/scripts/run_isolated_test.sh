@@ -4,7 +4,7 @@ set -euo pipefail
 godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 case "$entry" in
-  smoke_test.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
+  smoke_test.gd|r45_sweep_gate.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
   *) printf 'Unsupported destructive test entry: %s\n' "$entry" >&2; exit 2 ;;
 esac
 
