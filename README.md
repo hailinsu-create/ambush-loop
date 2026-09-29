@@ -1,6 +1,6 @@
 # Ambush Loop
 
-《Ambush Loop》是 Godot 4.7.2 制作的安卓横屏、离线六夜夜袭战术游戏。本次规划发布沿用已入库游戏基线 0.6.28（Android versionCode 77）；R45 的在制版本 0.6.29 / 78 不包含在本次文档发布中。游戏仍处于开发与试玩阶段，不是 1.0 成品。
+《Ambush Loop》是 Godot 4.7.2 制作的安卓横屏、离线六夜夜袭战术游戏。当前在制版本为 0.6.29（Android versionCode 78），R45 的独立隔离验收已通过；完整回归和修复包真机复验仍未闭环。游戏仍处于开发与试玩阶段，不是 1.0 成品。
 
 Godot 工程位于 [`ambush_loop/`](ambush_loop/)，运行、操作和导出说明见 [游戏 README](ambush_loop/README.md)。在仓库根目录可用 `godot --path ambush_loop` 启动。会清理测试存档的冒烟测试必须通过 `ambush_loop/scripts/run_isolated_test.ps1`（Windows）或 `run_isolated_test.sh`（Linux）启动；不要直接执行 `smoke_test.gd`。
 
@@ -17,4 +17,4 @@ Godot 工程位于 [`ambush_loop/`](ambush_loop/)，运行、操作和导出说�
 - [协作说明](CONTRIBUTING.md)：分支、测试和证据要求。
 - [网页版 GPT 独立检查](.cursor/docs/WEB_GPT_REVIEW_20260927.md)：M0 退出门和后续阶段风险建议。
 
-后续开发先保留并核实 R45 在制工作，闭环 M0 真机缺项，再按 v2 验证院子战术样板与视觉样板。此仓库没有发行签名密钥；密钥不得提交。
+后续先闭环 M0 真机缺项并保留完整回归状态，再按 v2 验证院子战术样板与视觉样板。R45 隔离验收结果见 [R45 报告](.cursor/docs/AMBUSH_R45_REPORT_20260929.md)。此仓库没有发行签名密钥；密钥不得提交。

@@ -3,6 +3,7 @@ param(
     [string]$GodotExe,
     [ValidateSet(
         'smoke_test.gd',
+        'r45_sweep_gate.gd',
         'feel_gate.gd',
         'playable_dump.gd',
         'visual_dump.gd',
