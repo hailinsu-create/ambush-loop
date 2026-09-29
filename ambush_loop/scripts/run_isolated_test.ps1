@@ -4,6 +4,7 @@ param(
     [ValidateSet(
         'smoke_test.gd',
         'r45_sweep_gate.gd',
+        'm1_height_data_gate.gd',
         'feel_gate.gd',
         'playable_dump.gd',
         'visual_dump.gd',
