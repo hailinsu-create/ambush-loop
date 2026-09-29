@@ -101,7 +101,7 @@ Codex 补充了中断测试不能补记通过、候选构建身份、测试不�
 
 本节记录用户要求启动本计划后的续查。原六小时窗口已于 2026-09-29 21:35:59 UTC 结束；以下是后续新增证据，不把原窗口延长或改写成通过。
 
-- 重新读取 Vivo 的 crash buffer，确认 2026-09-29 22:43:23（UTC+08:00）存在 PID 29708、运行 295 秒的原生崩溃：`SIGSEGV / SEGV_MAPERR`，线程 `AudioTrack`，fault address `0xb400007945bb0000`。Android `AudioTrackCallback::onMoreData` 是可见的首个系统帧；其上方 5 帧位于 `libgodot_android.so`，但当前 tombstone 没有函数名/源码行。该证据确认旧的原生音频回调崩溃，不等于已确定根因。
+- 重新读取 Vivo 的 crash buffer 与系统 DropBox tombstone，确认 2026-09-29 22:43:23（UTC+08:00）存在 PID 29708、前台运行 294 秒的原生崩溃；版本为 0.6.29/code 78。崩溃为 `SIGSEGV / SEGV_MAPERR`，线程 `AudioTrack`，fault address `0xb400007945bb0000`。Android `AudioTrackCallback::onMoreData` 是可见的首个系统帧；其上方 5 帧位于 `libgodot_android.so`，但当前 tombstone 没有函数名/源码行。该证据确认旧的原生音频回调崩溃，不等于已确定根因。
 - 另有 2026-09-30 多个进程退出被 `ApplicationExitInfo` 分类为 `LOW_MEMORY`。它们与 9 月 29 日的 native SIGSEGV 分开记录；没有采样到退出时内存压力，也没有证据把 `LOW_MEMORY` 归因于音频。
 - 从手机现装 APK 提取的 `libgodot_android.so` Build ID 为 `379cc52e73d31af89517a529d3bbc6108b808986`，与 Godot 4.7.2 `android_debug.apk` 中的库完全一致。该库没有 `.debug_*` 或 `.symtab` 节；本机 `android_release.apk` 的库 Build ID 是 `270121fef88100c19643517c328b5868e01d345c`，与崩溃库不同。Godot 文档要求用匹配架构和构建的 native symbols 执行 `ndk-stack`；因此不拿 release 符号包冒充 debug 崩溃的准确符号化结果，下一步需要精确匹配的 debug symbols 或可复现的带符号构建。
 - 新增测试门 `scripts/accept_cta_flow_gate.gd` 并加入隔离测试入口白名单。Godot 4.7.2 headless 隔离运行通过：真实执行标题 → 任务列表 → briefing → `AcceptCta.pressed` 信号 → `_enter_mission`，输出 `ANDROID_ACCEPT_PRESSED level=yard`、`ACCEPT_CTA_FLOW_OK level=yard frames=1`、退出码 0 和 `PLAYER_DATA_UNCHANGED=1`。这是桌面上对 GDScript 回调/场景切换的验证，不证明 Android 触摸命中或 Android 原生音频稳定。
