@@ -4,6 +4,8 @@
 
 ## 当前实施记录
 
+最新真机补记：无线调试已完成 B2 原包安装、标题、Back 确认及短时标题后台恢复；但进入院子测试附近捕获音频线程原生崩溃，B2 运行验收阻塞。先执行 [Android 音频诊断计划](AMBUSH_ANDROID_AUDIO_DIAG_PLAN_20260929.md)，不能以旧 GPT 移动代码评审代替这个新问题的修复。
+
 - 分支 `codex/m1-b2-playable-yard`，提交 `340b819`；Draft PR #6 以 `codex/m1-ramp-pathfinding`（PR #5）为基底。仅表示代码已推送供审阅，不表示已合并。
 - 已实现 yard 3×3 台面、南侧唯一坡道、台面既有 SMG、台阶/坡道绘制及高度/坡道缓存签名；点击移动与实际队员运动逐段校验高度边，非法 follow shortcut 由 A* 重新规划，断坡时停在原层。
 - `m1_b2_yard_height_gate.gd`、`m1_ramp_pathfinder_gate.gd`、`m1_height_data_gate.gd`、`r45_sweep_gate.gd` 和完整隔离 `smoke_test.gd` 均退出码 0；完整日志到达 `SMOKE_SLICE_COMPLETE`，各测试报告 `PLAYER_DATA_UNCHANGED=1`。

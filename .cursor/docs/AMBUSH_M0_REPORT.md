@@ -1,5 +1,7 @@
 # Ambush Loop M0 交付与待办
 
+**最新状态（2026-09-29 晚）：** 无线调试连接、B2 APK 安装、冷启动、标题 Back 确认及一次短时标题后台恢复已验证；USB 未修复。真机首次运行捕获 AudioTrack / libgodot_android.so 原生崩溃，院子及完整运行验收未通过。下一步及截图见 [Android 音频诊断计划](AMBUSH_ANDROID_AUDIO_DIAG_PLAN_20260929.md)。下文早期授权/未安装状态为历史记录，不再作为当前阻塞项。
+
 日期：2026-09-27。源码基线：PR #64 的 `c87aee4`；M0 已进入 PR #64，远端提交 `ab2076f`（与本地提交 `0558947` 的源码树 SHA 完全相同）。项目保持 Godot 4.7.2、安卓横屏、六夜，游戏版本 v0.6.28 / Android versionCode 77。
 
 ## 已验证
