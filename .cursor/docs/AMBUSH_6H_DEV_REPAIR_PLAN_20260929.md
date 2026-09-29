@@ -1,6 +1,6 @@
 # 6 小时开发与修复执行计划
 
-日期：2026-09-29。执行窗口：T0 = 2026-09-29 15:35:59 UTC 至 21:35:59 UTC。状态：执行中；外部 GPT 规划与复核已接入。
+日期：2026-09-29。原执行窗口：T0 = 2026-09-29 15:35:59 UTC 至 21:35:59 UTC。状态：原窗口已结束；当前按用户要求继续未完成诊断和验收，但不延长或改写原 360 分钟记录。外部 GPT 规划与复核已接入。
 
 用户要求先规划一轮 6 小时开发和修复，随后明确开始执行。本轮按开始执行时刻 T0 计时，共 360 分钟；不是定时任务，也不代表后台运行。主目标是解决 Android 音频崩溃，并尽可能完成院子 B2 的剩余验收。六小时是投入上限，修复结果按证据判定。
 
@@ -109,3 +109,16 @@ Codex 补充了中断测试不能补记通过、候选构建身份、测试不�
 - 固定的外部 GPT 连接工作区当前仍是 clean `340b819`，不是本地诊断 worktree；因此此轮新测试代码还没有通过 GPT 对精确代码差异的复核。早先 marker 建议来自 GPT，但不把那次建议算作本次测试门的代码评审。
 
 **续做顺序：** 先等待用户对手机安装确认作明确授权；获准后仅安装同签名诊断更新、点击一次“接受任务”、分别记录 marker 与院子画面。只有该触摸/转场链路明确后，再以单变量对照定位音频回调触发面。未获授权时只继续精确符号化和桌面可做的验证；不做猜测性音频修复，也不把本机 smoke 当成真机通过。Godot 官方流程：[Android 崩溃符号化](https://docs.godotengine.org/en/latest/tutorials/platform/android/resolving_crashes_on_android.html)，[4.7.2 官方发行资产](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)。
+
+## 10. 2026-09-30 用户要求继续执行后的状态核对
+
+记录时间：2026-09-30 06:56（Asia/Shanghai）。这是原六小时窗口之后的安全续查，不计入原窗口，也不表示缺失的阶段已通过。
+
+- C2C 版本检查结果为 0.1.3、无需更新；sandbox 写入授权已存在。`doctor` 全项通过，命名连接正常。既有 session 仍为 task `c2c_audio_device` / iteration 4 / `EXECUTED_LOCAL` / `waitingFor=USER`，要求先等候诊断 APK 安装授权；没有重发 INIT/EXECUTED、没有改写 checkpoint。
+- 复核 C2C 固定工作区仍为 clean `340b819`。当前 CTA 测试门和接受按钮 marker 在独立的 `codex/android-audio-crash` 诊断 worktree，尚未进入 GPT 连接器工作区；因此没有新的 GPT 实码评审结论。
+- ADB 只读查询确认无线调试设备在线、USB 连接仍不稳定；安装包仍是 `0.6.29` / code `78`，`lastUpdateTime=2026-09-29 22:37:36`。手机前台显示 `PackageInterceptActivity`（vivo 外部来源安装风险确认）。本次没有点击确认、安装/卸载、清理存档或改变手机状态。
+- crash buffer 仍包含 2026-09-29 22:43:23 的 AudioTrack `SIGSEGV / SEGV_MAPERR`；栈内 `libgodot_android.so` Build ID 是 `379cc52e73d31af89517a529d3bbc6108b808986`，`AudioTrackCallback::onMoreData` 为首个可见系统帧。抽查未发现新的 `com.ambushloop.game` 原生崩溃；其它 init 进程 SIGABRT 与本游戏崩溃分开。
+- 静态只读复核 `audio_director.gd` / `sfx_bus.gd`：背景音乐与 mood 是常驻 `AudioStreamPlayer`，音效按 cue 复用池化 player；PCM 循环 WAV 为 mono/16-bit/22,050 Hz。任务 mood 切换前会 stop 并替换 stream，后台静音会 stop 当前 player。该结构帮助界定诊断面，但不能单独证明崩溃因果关系；本次没有更改生产音频代码。
+- 官方 [Godot 4.7.2 发布资产](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)包含 Android `template_release` 符号包，但没有与现装 Android `template_debug` Build ID 对应的符号包。release 符号与本次崩溃的 debug 库不匹配，不能用于准确符号化；没有下载 744 MB 的不匹配资产，也没有声称取得源码行。
+
+**当前安全下一步：** 保持手机安装确认页不动。明确获准后再安装同签名诊断包、验证一次真实触摸 marker/院子转场；获得 marker 证据后，再决定如何做 Android 音频单变量对照。此前桌面 CTA gate 通过仍不替代真机验收；音频根因、Android 稳定时长和 B2 `follow_down` 仍未完成。
