@@ -1,6 +1,6 @@
 # M1-B2 院子可玩高点执行计划
 
-更新日期：2026-09-29。状态：代码已实现、自动门禁通过；Draft PR #6。场景视觉复核、真机复验及本工作区的外部 GPT 代码评审仍未完成，因此 B2 尚未验收完成。
+更新日期：2026-09-29。状态：代码已实现、自动门禁通过；Draft PR #6。外部 GPT 已对精确提交 `340b819` 完成代码评审，未发现新阻断问题；反向随队、场景视觉复核和真机复验仍待完成，因此 B2 尚未验收完成。
 
 ## 当前实施记录
 
@@ -8,7 +8,9 @@
 - 已实现 yard 3×3 台面、南侧唯一坡道、台面既有 SMG、台阶/坡道绘制及高度/坡道缓存签名；点击移动与实际队员运动逐段校验高度边，非法 follow shortcut 由 A* 重新规划，断坡时停在原层。
 - `m1_b2_yard_height_gate.gd`、`m1_ramp_pathfinder_gate.gd`、`m1_height_data_gate.gd`、`r45_sweep_gate.gd` 和完整隔离 `smoke_test.gd` 均退出码 0；完整日志到达 `SMOKE_SLICE_COMPLETE`，各测试报告 `PLAYER_DATA_UNCHANGED=1`。
 - Android APK `build/android/AmbushLoop-m1-b2.apk` 已导出并签名验证：`com.ambushloop.game`，versionName `0.6.29` / versionCode `78`，35,782,309 字节，SHA-256 `F8CBE0C68A9DE53D2A9504D1AD47D1EAD8668929BE6048ED61019D923F2B7238`。APK 导出和签名验证不是手机安装或运行证据。
-- 最新复查中 vivo X Fold2 已显示在 ADB，但状态为 `authorizing`；本次没有安装、卸载或清理设备数据。B2 的 GPT 代码评审尚未开始：新工作区的只读连接器准备就绪，但仍需用户在 ChatGPT 完成一次授权。
+- 最新复查中 vivo X Fold2 已显示在 ADB，但状态为 `authorizing`；本次没有安装、卸载或清理设备数据。Windows 的手机与 ADB Interface 驱动状态均为 OK，电脑端重连及服务重启后仍等待手机握手；已引导用户重新开关 USB 调试触发确认。
+- GPT 连接复查纠正了之前“必须新授权”的判断：既有 `ambush-loop-collab` 连接仍有效。确认评审工作区 clean 后，将其 detached HEAD 定位到 `340b819`（保留原分支），连接器已验证该提交并读取 B2 gate。未新建或删除连接器、未要求重复授权。后续继续使用这个固定评审工作区，先核对精确提交再评审，不能把旧代码评审冒充新版本评审。
+- 外部 GPT 在原项目对话完成独立实码复核（回复 ID `be7cfac9-8d99-4a97-8613-8497e0a14740`）：确认 setter 路径验证、逐帧运动护栏、follow 端点重验证、真实 SMG 拾取和缓存签名实现，未发现新的 ramp-only movement correctness blocker。明确保留下坡 follow integration、画面可辨识性及真机复验缺口；建议增加 `follow_up` / `follow_down` 分项断言。此结论不是完整 B2 验收或合入批准。
 
 ## 目标与评审输入
 
@@ -48,7 +50,7 @@
 2. 加平台/坡道低保真绘制，并把它纳入静态缓存键。
 3. 为队员运动执行和 follow 弧线/滑动建立高度拓扑保护；非法快捷路转入现有 A*，无合法路径时保持原位，不能降级成任意 slide。若无法在不改变平地 follow 行为的前提下完成，缩小 B2 而不是大规模重写 `main.gd`。
 4. 实现真实 yard 移动/往返/补给 gate，跑现有隔离门；记录源码提交、实际退出码和日志。
-5. 已记录提交、PR 与自动门禁结果；仍须取得同版本场景证据，并完成真机安装/启动检查以及本工作区的外部 GPT 代码评审，之后才可将 B2 标为验收完成。M1-C 的高度 LOS 与 M1-E 的两种有效战术方案仍未完成。
+5. 已记录提交、PR、自动门禁和精确提交的外部 GPT 代码评审结果；仍须补下坡 follow integration、取得同版本场景证据并完成真机安装/启动检查，之后才可将 B2 标为验收完成。M1-C 的高度 LOS 与 M1-E 的两种有效战术方案仍未完成。
 
 ## 风险与下一步
 
