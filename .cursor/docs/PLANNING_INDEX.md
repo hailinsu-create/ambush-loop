@@ -15,8 +15,8 @@
 | [M0 状态报告](AMBUSH_M0_REPORT.md) | 工程基线与验收缺口。无线安装/标题/Back/短时后台恢复已验证；本次诊断包真机到达任务简报，但接受任务后出现 `LOW_MEMORY` 进程退出，完整真机复验与陌生人首局仍未闭环。 |
 | [Android 音频诊断计划](AMBUSH_ANDROID_AUDIO_DIAG_PLAN_20260929.md) | 当前优先诊断切片；有真机崩溃栈和外部 GPT 诊断建议，未定因/未修复，不以静音代替修复。 |
 | [M1 院子高点 ADR](AMBUSH_M1_YARD_HEIGHT_ADR_20260929.md) | 高度、坡道、遮挡和弹药预算提案；M1-A 桌面门禁通过，M1-B1 已获外部 GPT 代码评审；真实玩法验收未完成。 |
-| [M1-B 坡道寻路执行计划](AMBUSH_M1B_RAMP_PATHFINDER_PLAN_20260929.md) | M1-B1 在 Draft PR #5、M1-B2 在 Draft PR #6；桌面自动门通过。B2 GPT 实码评审无新阻断项，下坡随队/场景证据和真机复验待完成。 |
-| [M1-B2 院子可玩高点计划](AMBUSH_M1B2_PLAYABLE_YARD_PLAN_20260929.md) | 代码已实现并推送 Draft PR #6；自动门禁和精确提交 GPT 代码评审完成。下坡随队、场景证据及真机复验待完成；M1-C 高度火力仍另行验收。 |
+| [M1-B 坡道寻路执行计划](AMBUSH_M1B_RAMP_PATHFINDER_PLAN_20260929.md) | M1-B1 在 Draft PR #5、M1-B2 在 Draft PR #6。新增桌面双向随队及断坡门已通过、GPT 评审无阻断项；实际真机下坡随队、场景证据仍待完成，最新证据见当前补验报告。 |
+| [M1-B2 院子可玩高点计划](AMBUSH_M1B2_PLAYABLE_YARD_PLAN_20260929.md) | Draft PR #6 已追加 `2205b3f`：双向随队及双向断坡桌面覆盖。该测试切片已获实际 GPT 代码评审，但不等于完整真机验收；M1-C 高度火力仍另行验收。 |
 | [旧成品总计划](AMBUSH_TO_FINISHED_PRODUCT_PLAN_20260927.md) | 工程、数据安全和发行质量门槛仍有效；产品定位、阶段顺序、美术目标被 v2 替代。 |
 | [R44–R53 历史切片表](AMBUSH_10_ROUNDS_R44.md) | 历史执行与复核记录；按 v2 重新归并，不视为新版设计已获验收。 |
 
