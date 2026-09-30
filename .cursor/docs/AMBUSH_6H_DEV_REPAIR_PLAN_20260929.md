@@ -133,4 +133,29 @@ Codex 补充了中断测试不能补记通过、候选构建身份、测试不�
 - 2026-09-30 03:12 UTC 的 ADB 恢复记录：先前 USB 设备为 `offline`、Wi‑Fi 设备未列出。第一次 `adb reconnect offline` 后 USB 短暂显示 `device`，但只读 package 查询返回 `error: closed`，mDNS 无服务；第二次重连后 `adb devices -l` 为空。当前设备不可读，包身份无法重新确认。未安装或卸载 APK，未清除应用数据/存档，也未操作 vivo 风险确认；音频诊断 worktree 的 marker 与桌面 CTA gate 状态保持此前记录，不冒充真机结果。
 - 手机再次联机且用户明确授权安装同签名诊断更新后，仍先验证 `ANDROID_ACCEPT_PRESSED` 与 yard 转场；仅在取得真机操作证据后再设计 AudioTrack 单变量对照。Android 音频稳定性与 B2 `follow_down` 仍未通过。
 
+**本节状态截至 2026-09-30 03:12 UTC；设备重连、安装授权及后续真机结果见第 12 节。**
+
 官方版本核对：[Godot 4.7.2-stable 发布记录](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)。本地引擎源码、NDK、构建缓存与符号 ZIP 不进入游戏仓库。
+
+## 12. 2026-09-30 诊断包真机 CTA 复验
+
+用户授权安装同签名诊断更新；未卸载游戏，也未清除应用数据或存档。手机为 vivo X Fold2（PD2266 / V2266A），通过已授权的无线 ADB 连接。
+
+- 候选包 `AmbushLoop-accept-diag-20260930.apk`：SHA-256 `212C1B72518F47D3E0B707A48CAF6190E7559D2861597B21997AB6D1CD47A4D8`；包名 `com.ambushloop.game`，版本 `0.6.29` / code `78`。候选包、本地安装基线和手机当前 APK 的证书 SHA-256 均为 `7079e51f05b862a5f2656a4e4189a6f9a98810227cef56004b7ed205e724a1c8`。
+- `adb install -r --no-streaming` 返回 `Success`。`lastUpdateTime` 更新为 `2026-09-30 11:39:53`，`firstInstallTime` 仍为 `2026-09-29 22:37:36`，确认是原位覆盖更新而非卸载重装。
+- 更新后可启动标题界面、进入任务列表并打开第一关院子简报；接受任务测试后留存的画面仍是该简报：[真机 CTA 测试截图](evidence/20260930-vivo-after-accept.png)。用户报告点“接受任务”后程序崩溃。随后查询到 Android `ApplicationExitInfo`：PID `24925` 于 `2026-09-30 11:43:26.898` 退出，reason `3 (LOW_MEMORY)`、subreason `0 (UNKNOWN)`、status `0`、RSS `21 MB`、trace 为空；本次退出在系统记录中不是 `APP CRASH(NATIVE)`。
+- 保留的 crash buffer 仍只有 2026-09-29 AudioTrack `SIGSEGV / SEGV_MAPERR` 记录，没有发现 2026-09-30 新的本游戏 native tombstone 或可见脚本致命异常。保留日志中未检索到 `ANDROID_ACCEPT_PRESSED level=yard`，接受任务到院子场景的真机转场**未通过/未证实**。退出原因为 `LOW_MEMORY` 与用户观察到的程序退出相符，但当前数据不足以证明是场景切换代码、系统内存压力或其它 vivo 管理行为所致；不能把低内存记录当作 CTA 成功或音频根因。
+- 后续受控重启停在标题页时，`/proc` 与 `dumpsys meminfo` 交叉测得游戏 RSS 约 `1.40–1.43 GB`、PSS 约 `1.40 GB`、Native Heap 约 `1.19–1.21 GB`；8 秒间隔内数值基本稳定。设备 `MemAvailable` 约 `3.93 GB`。该进程占用异常偏高，是 `LOW_MEMORY` 退出的优先调查线索，但尚不能证明因果；因此暂停第二次 CTA 点击，不让设备重复承受疑似内存压力。
+- 本轮未更改生产游戏代码。AudioTrack 根因、CTA/场景转场、连续稳定性和 B2 `follow_down` 均保持未验收；在归因前不以静音规避音频问题，也不推进 B2 真机视觉验收。
+
+**下一步：** 保留现有日志与存档；先定位标题页约 `1.4 GB` 原生堆的来源，并用游戏进程级采集记录内存变化。确认占用回到可接受范围后，再决定是否进行单次 CTA 复现；采集须覆盖 marker、场景转场及进程退出线索。先厘清 `LOW_MEMORY` 退出，再决定是否需要对 CTA 或音频代码作最小修复。
+
+## 13. 后续 code80、符号匹配及设备不可用交接
+
+本节更新第 12 节的后续状态，不改变已结束的原执行窗口。先前 code80 / `0.6.30-font-cache-diag` 设备证据及外部 GPT iteration 5/6 已确认 Accept → Yard、至少三分钟存活；此前“CTA 未证实”不再是当前阻断项。短时内存记录约 PSS 533 MiB、native heap 306 MiB、RSS 650 MiB；未证明低内存根因、音频修复或长时稳定性。
+
+新全量 Android template_debug/arm64 构建 exit 0、耗时 02:50:26.29，但库 Build ID `f4a54bf106d04f551f8ba43f03fa1ada8ace1526` 不匹配 tombstone/code80 的 `379cc52e73d31af89517a529d3bbc6108b808986`。后续增量构建完成情况未证实，未用这套符号解释历史 PC。历史 AudioTrack SIGSEGV 仍未定因。
+
+本次发现不到已授权 vivo 的无线服务，已知地址重连失败；当前 USB 型号是另一设备 AAP-AN00。当前无法取得 vivo 新的稳定性或 B2 操作证据。外部 GPT 读取 iteration 7 实际输出后，建议限定 75–90 分钟补真实桌面下坡随队、双向断坡 scheduler 反例及隔离回归；不把该结果升级为 Android/B2 完整验收。
+
+续做范围、实际门禁与最终评审见 [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。游戏音频及其它生产逻辑保持既有状态；无新 APK 安装。后续设备恢复和精确符号仍是独立未完成事项。
