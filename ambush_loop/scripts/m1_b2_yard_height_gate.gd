@@ -44,7 +44,7 @@ func _run() -> void:
 		return
 	if not _check_no_ramp_bypass(main):
 		return
-	print("M1_B2_YARD_HEIGHT_GATE_OK topology=1 click_move=1 stash_pickup=1 ascend=1 descend=1 follow=1 no_bypass=1 cache=1")
+	print("M1_B2_YARD_HEIGHT_GATE_OK topology=1 click_move=1 stash_pickup=1 ascend=1 descend=1 follow_up=1 follow_down=1 follow_up_disconnected=1 follow_down_disconnected=1 no_bypass=1 cache=1")
 	quit(0)
 
 
@@ -181,20 +181,36 @@ func _trace_to_target(main, op, target_cell: Vector2i, ramp_from: Vector2i, ramp
 
 
 func _check_real_follow_crossing(main) -> bool:
+	return _check_follow_direction(main, true) and _check_follow_direction(main, false)
+
+
+func _check_follow_direction(main, ascending: bool) -> bool:
+	# Each direction is an independent formation assignment, not a continuation
+	# of the previous case's facing/arrival/blend state.
+	main.reset_follow_dest_flips()
 	var grid = main.grid
 	var leader = main.operators[0]
 	var follower = main.operators[1]
+	var source_tier: int = GridScript.HEIGHT_GROUND if ascending else GridScript.HEIGHT_PLATFORM
+	var target_tier: int = GridScript.HEIGHT_PLATFORM if ascending else GridScript.HEIGHT_GROUND
+	var ramp_from: Vector2i = RAMP_GROUND if ascending else RAMP_PLATFORM
+	var ramp_to: Vector2i = RAMP_PLATFORM if ascending else RAMP_GROUND
+	var direction := "UP" if ascending else "DOWN"
 	var chosen_lead := Vector2i(-1, -1)
 	var chosen_follower := Vector2i(-1, -1)
 	var chosen_face := 0.0
-	for lx in range(PLATFORM_MIN.x, PLATFORM_MAX.x + 1):
-		for ly in range(PLATFORM_MIN.y, PLATFORM_MAX.y + 1):
+	for lx in range(RAMP_GROUND.x - 3, RAMP_GROUND.x + 4):
+		for ly in range(RAMP_GROUND.y - 3, RAMP_GROUND.y + 3):
+			if not grid.in_bounds(lx, ly) or grid.is_blocked(lx, ly):
+				continue
+			if grid.get_elevation_tier(lx, ly) != target_tier:
+				continue
 			for fy in range(RAMP_GROUND.y - 3, RAMP_GROUND.y + 3):
 				for fx in range(RAMP_GROUND.x - 3, RAMP_GROUND.x + 4):
 					var follower_cell := Vector2i(fx, fy)
 					if not grid.in_bounds(fx, fy) or grid.is_blocked(fx, fy):
 						continue
-					if grid.get_elevation_tier(fx, fy) != GridScript.HEIGHT_GROUND:
+					if grid.get_elevation_tier(fx, fy) != source_tier:
 						continue
 					for face in [0.0, 90.0, 180.0, 270.0]:
 						leader.stop_move()
@@ -205,7 +221,7 @@ func _check_real_follow_crossing(main) -> bool:
 						follower.follow_lead = true
 						main.selected = leader
 						var target: Vector2i = main._follow_anchor_cell(leader, follower)
-						if target.x >= 0 and grid.get_elevation_tier(target.x, target.y) == GridScript.HEIGHT_PLATFORM:
+						if target.x >= 0 and grid.get_elevation_tier(target.x, target.y) == target_tier:
 							if maxi(absi(target.x - follower_cell.x), absi(target.y - follower_cell.y)) <= 2:
 								chosen_lead = Vector2i(lx, ly)
 								chosen_follower = follower_cell
@@ -220,26 +236,57 @@ func _check_real_follow_crossing(main) -> bool:
 		if chosen_lead.x >= 0:
 			break
 	if chosen_lead.x < 0:
-		return _fail("M1_B2_FOLLOW_CAN_TARGET_PLATFORM_FROM_GROUND", 25)
+		return _fail("M1_B2_FOLLOW_%s_FIXTURE" % direction, 25)
 	leader.global_position = grid.cell_to_world_center(chosen_lead)
 	leader.set_facing(chosen_face)
 	follower.global_position = grid.cell_to_world_center(chosen_follower)
 	follower.stop_move()
 	main.selected = leader
 	var oid := int(follower.op_id)
-	main._follow_dest[oid] = chosen_follower
-	main._follow_lock[oid] = chosen_follower
-	main._follow_blend_t.erase(oid)
-	main._follow_blend_arc.erase(oid)
+	main.reset_follow_dest_flips()
 	var target: Vector2i = main._follow_anchor_cell(leader, follower)
 	if maxi(absi(target.x - chosen_follower.x), absi(target.y - chosen_follower.y)) > 2:
 		return _fail("M1_B2_FOLLOW_HOP_SHORTCUT_TEST_SETUP", 26)
+	# Seed the formation destination, never the movement path. The real tick must
+	# schedule and execute a legal route to this opposite-tier anchor.
+	main._follow_dest[oid] = target
+	main._follow_lock[oid] = target
 	main._tick_squad_follow(0.05)
 	if not follower.is_moving():
 		return _fail("M1_B2_FOLLOW_TICK_SCHEDULES_MOVE", 27)
-	var trace := _trace_follow_until_target(main, follower, target, RAMP_GROUND, RAMP_PLATFORM)
+	var trace := _trace_follow_until_target(main, follower, target, ramp_from, ramp_to)
 	if not bool(trace.get("ok", false)) or not bool(trace.get("crossed", false)):
-		return _fail("M1_B2_FOLLOWER_ASCENDS_VIA_RAMP", 29)
+		return _fail("M1_B2_FOLLOW_%s_VIA_RAMP" % direction, 29)
+	print("M1_B2_FOLLOW_%s_OK start=%s target=%s ramp=%s->%s" % [direction, chosen_follower, target, ramp_from, ramp_to])
+
+	# Keep the already chosen opposite-tier destination while removing its sole
+	# cross-height edge. This exercises the scheduler with a stale formation target,
+	# rather than freezing its destination at the starting cell (a vacuous pass).
+	# Movement within the original tier is allowed; crossing to the other tier is not.
+	follower.stop_move()
+	follower.global_position = grid.cell_to_world_center(chosen_follower)
+	main._follow_dest[oid] = target
+	main._follow_lock[oid] = target
+	main._follow_blend_t.erase(oid)
+	main._follow_blend_arc.erase(oid)
+	main._follow_ring_hold = true
+	if not grid.set_ramp_link(RAMP_GROUND, RAMP_PLATFORM, false):
+		return _fail("M1_B2_FOLLOW_%s_DISCONNECT_SETUP" % direction, 40)
+	for _step in range(80):
+		main._tick_squad_follow(0.05)
+		if follower.is_moving() and not _world_path_is_safe(grid, follower.move_path):
+			return _fail("M1_B2_FOLLOW_%s_DISCONNECTED_PATH" % direction, 41)
+		var before_world: Vector2 = follower.global_position
+		follower.tick_move(0.20)
+		var blocked_trace := _trace_world_segment(grid, before_world, follower.global_position, ramp_from, ramp_to)
+		if not bool(blocked_trace.get("ok", false)) or bool(blocked_trace.get("crossed", false)):
+			return _fail("M1_B2_FOLLOW_%s_DISCONNECTED_SEGMENT" % direction, 42)
+		var cell: Vector2i = follower.grid_cell()
+		if grid.get_elevation_tier(cell.x, cell.y) != source_tier:
+			return _fail("M1_B2_FOLLOW_%s_DISCONNECTED_TIER" % direction, 43)
+	grid.set_ramp_link(RAMP_GROUND, RAMP_PLATFORM)
+	main._follow_ring_hold = false
+	print("M1_B2_FOLLOW_%s_DISCONNECTED_OK tier=%s requested=%s steps=80" % [direction, source_tier, target])
 	return true
 
 
