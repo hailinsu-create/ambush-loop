@@ -122,3 +122,15 @@ Codex 补充了中断测试不能补记通过、候选构建身份、测试不�
 - 官方 [Godot 4.7.2 发布资产](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)包含 Android `template_release` 符号包，但没有与现装 Android `template_debug` Build ID 对应的符号包。release 符号与本次崩溃的 debug 库不匹配，不能用于准确符号化；没有下载 744 MB 的不匹配资产，也没有声称取得源码行。
 
 **当前安全下一步：** 保持手机安装确认页不动。明确获准后再安装同签名诊断包、验证一次真实触摸 marker/院子转场；获得 marker 证据后，再决定如何做 Android 音频单变量对照。此前桌面 CTA gate 通过仍不替代真机验收；音频根因、Android 稳定时长和 B2 `follow_down` 仍未完成。
+
+## 11. 2026-09-30 精确符号构建核验
+
+本节记录窗口外为 AudioTrack 崩溃尝试的引擎符号化路径。原六小时窗口仍结束于 `2026-09-29 21:35:59 UTC`，本次不延长该窗口。
+
+- Godot 4.7.2-stable 官方源码压缩包 SHA-256 为 `a18ce0ccec3ecc40b0dd6c4f5132ca934e9fb7c2979717940ff32aee1eb35481`；生成的版本提交哈希 `ed1daf0bf001b61586d9930840f2f1394092c079` 与官方 4.7.2-stable 发布记录一致。使用 Android NDK `29.0.14206865`、`target=template_debug`、`production=yes`、`debug_symbols=yes`、`separate_debug_symbols=yes` 完成全量 arm64 模板构建，SCons exit 0，耗时 `03:15:31.86`。
+- 构建生成本地临时文件 `bin/android-template-debug-native-symbols.zip`，SHA-256 `757D3DC3CC6FBFEBDC0CC7B29A967C5D9C73242EC39DA2A20A5BEB508ED7F991`，含 `arm64-v8a/libgodot_android.so`。符号 ELF 与同次构建的 stripped 库 Build ID 均为 `17025cdc98e86c90f4769e65bcaf32d79792c43e`，证明符号包与本机这次构建彼此匹配。
+- 该 Build ID **不等于**手机 tombstone 中现装引擎库的 `379cc52e73d31af89517a529d3bbc6108b808986`。因此不对手机崩溃栈的五个引擎 offset 运行/报告这份不匹配符号的源码行；音频根因仍未定位，没有生产音频修复或修复验证。
+- 复查 ADB 时 USB 设备显示 `offline`，Wi‑Fi 设备未列出。未安装或卸载 APK，未清除应用数据/存档，也未操作 vivo 风险确认；当前手机包身份无法重新确认。音频诊断 worktree 的接受按钮 marker 及桌面 CTA gate 状态保持此前记录，不冒充真机结果。
+- 手机再次联机且用户明确授权安装同签名诊断更新后，仍先验证 `ANDROID_ACCEPT_PRESSED` 与 yard 转场；仅在取得真机操作证据后再设计 AudioTrack 单变量对照。Android 音频稳定性与 B2 `follow_down` 仍未通过。
+
+官方版本核对：[Godot 4.7.2-stable 发布记录](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)。本地引擎源码、NDK、构建缓存与符号 ZIP 不进入游戏仓库。
