@@ -65,13 +65,16 @@ func _run() -> void:
 	if not _check_avoiding_and_blocked_ramps():
 		return
 
-	print("M1_RAMP_PATHFINDER_GATE_OK flat=1 legacy_maps=6 unlinked=1 ramp=1 reverse=1 avoid=1 alternate=1 soft=1 blocked_endpoints=1 removal=1")
+	print("M1_RAMP_PATHFINDER_GATE_OK flat=1 legacy_maps=5 unlinked=1 ramp=1 reverse=1 avoid=1 alternate=1 soft=1 blocked_endpoints=1 removal=1")
 	quit(0)
 
 
 func _check_legacy_neighbors() -> bool:
 	var grid = GridScript.new()
-	var level_ids: Array[String] = ["yard", "warehouse", "pump", "railcut", "depot", "radio"]
+	# Yard now intentionally contains a platform and ramp; its authored topology
+	# is covered by the M1-B2 integration gate. Keep this legacy compatibility
+	# check focused on the five remaining flat maps.
+	var level_ids: Array[String] = ["warehouse", "pump", "railcut", "depot", "radio"]
 	var dirs: Array[Vector2i] = [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.DOWN, Vector2i.UP]
 	for level_id in level_ids:
 		grid.rebuild(level_id)

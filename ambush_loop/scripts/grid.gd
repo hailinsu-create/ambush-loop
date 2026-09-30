@@ -105,6 +105,12 @@ func _build_yard() -> void:
 	_block_rect(18, 9, 22, 12)
 	_block_rect(27, 8, 30, 10)
 	_block_rect(16, 14, 20, 16)
+	# M1-B2 loading dock. The existing SMG cache at (17,12) stays on top;
+	# the only height transition is the south ramp at x=15.
+	for x in range(15, 18):
+		for y in range(10, 13):
+			set_elevation_tier(x, y, HEIGHT_PLATFORM)
+	set_ramp_link(Vector2i(15, 13), Vector2i(15, 12))
 
 
 func _build_warehouse() -> void:
@@ -253,6 +259,38 @@ func can_traverse_height(a: Vector2i, b: Vector2i) -> bool:
 	if get_elevation_tier(a.x, a.y) == get_elevation_tier(b.x, b.y):
 		return true
 	return has_ramp_link(a, b)
+
+
+func uses_height_topology() -> bool:
+	if not ramp_links.is_empty():
+		return true
+	for tier in elevation_tier:
+		if int(tier) != HEIGHT_GROUND:
+			return true
+	return false
+
+
+func world_segment_traversable(from_world: Vector2, to_world: Vector2, max_sample_px: float = 8.0) -> bool:
+	## Validate every cell boundary crossed by a world-space movement segment.
+	## Short samples make diagonal corner cuts fail closed instead of skipping an edge.
+	var from_cell := world_to_cell(from_world)
+	var to_cell := world_to_cell(to_world)
+	if not in_bounds(from_cell.x, from_cell.y) or not in_bounds(to_cell.x, to_cell.y):
+		return false
+	if is_blocked(from_cell.x, from_cell.y):
+		return false
+	var sample_px := maxf(max_sample_px, 1.0)
+	var sample_count := maxi(1, int(ceil(from_world.distance_to(to_world) / sample_px)))
+	var previous := from_cell
+	for i in range(1, sample_count + 1):
+		var point := from_world.lerp(to_world, float(i) / float(sample_count))
+		var current := world_to_cell(point)
+		if current == previous:
+			continue
+		if not can_traverse_height(previous, current):
+			return false
+		previous = current
+	return previous == to_cell
 
 
 func _ramp_edge_key(a: Vector2i, b: Vector2i) -> Vector2i:

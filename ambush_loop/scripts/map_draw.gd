@@ -165,9 +165,20 @@ func _cache_signature() -> String:
 		var blocked := grid.blocked
 		for i in blocked.size():
 			h = ((h << 5) - h + int(blocked[i])) & 0x7fffffff
+		var heights_hash := 0
+		for tier in grid.elevation_tier:
+			heights_hash = ((heights_hash << 5) - heights_hash + int(tier)) & 0x7fffffff
+		var ramp_keys := PackedStringArray()
+		for raw_edge in grid.ramp_links.keys():
+			var edge: Vector2i = raw_edge
+			ramp_keys.append("%d:%d" % [edge.x, edge.y])
+		ramp_keys.sort()
+		var ramps_hash := 0
+		for ramp_key in ramp_keys:
+			ramps_hash = ((ramps_hash << 5) - ramps_hash + ramp_key.hash()) & 0x7fffffff
 		layout = str(grid.layout_id)
-		geo = "%s:%d:%d:%d:%d" % [
-			layout, grid.door_cell.x, grid.door_cell.y, int(grid.door_locked), h
+		geo = "%s:%d:%d:%d:%d:%d:%d" % [
+			layout, grid.door_cell.x, grid.door_cell.y, int(grid.door_locked), h, heights_hash, ramps_hash
 		]
 	var atmo := atmosphere_id
 	if atmo == "" and layout != "":
@@ -212,11 +223,72 @@ func _draw_static_into(c: CanvasItem) -> void:
 				_draw_wall_tile(c, rect, x, y)
 			else:
 				_draw_floor_tile(c, rect, x, y)
+	_draw_height_terrain(c)
 	_draw_static_landmarks(c)
 	_draw_floor_accent_stripe(c)
 	_draw_doorway_detail(c)
 	_draw_floor_stain_wash(c)
 	_draw_wall_ao(c)
+
+
+func _draw_height_terrain(c: CanvasItem) -> void:
+	if grid == null or not grid.uses_height_topology():
+		return
+	var tile := float(AmbushGrid.TILE)
+	var top := Color(0.48, 0.50, 0.41, 1.0)
+	var side := Color(0.18, 0.22, 0.19, 0.96)
+	var rim := Color(0.77, 0.70, 0.49, 0.82)
+	for y in AmbushGrid.ROWS:
+		for x in AmbushGrid.COLS:
+			if grid.get_elevation_tier(x, y) != AmbushGrid.HEIGHT_PLATFORM:
+				continue
+			var rect := _cell_rect(x, y)
+			c.draw_rect(Rect2(rect.position + Vector2(3, 5), rect.size), Color(0.02, 0.03, 0.025, 0.38))
+			c.draw_rect(rect, top)
+			if not _is_platform_cell(Vector2i(x - 1, y)):
+				c.draw_rect(Rect2(rect.position, Vector2(4, tile)), side)
+			if not _is_platform_cell(Vector2i(x + 1, y)):
+				c.draw_rect(Rect2(rect.position + Vector2(tile - 4, 0), Vector2(4, tile)), side)
+			if not _is_platform_cell(Vector2i(x, y + 1)):
+				c.draw_rect(Rect2(rect.position + Vector2(0, tile - 5), Vector2(tile, 5)), side)
+				c.draw_line(rect.position + Vector2(1, tile - 6), rect.position + Vector2(tile - 1, tile - 6), rim, 1.4, true)
+			if not _is_platform_cell(Vector2i(x, y - 1)):
+				c.draw_line(rect.position + Vector2(1, 1), rect.position + Vector2(tile - 1, 1), rim, 1.2, true)
+			c.draw_rect(rect.grow(-2), Color(0.72, 0.70, 0.58, 0.22), false, 1.0)
+	_draw_ramp_surfaces(c)
+
+
+func _is_platform_cell(cell: Vector2i) -> bool:
+	return grid.in_bounds(cell.x, cell.y) and grid.get_elevation_tier(cell.x, cell.y) == AmbushGrid.HEIGHT_PLATFORM
+
+
+func _draw_ramp_surfaces(c: CanvasItem) -> void:
+	for raw_edge in grid.ramp_links.keys():
+		var edge: Vector2i = raw_edge
+		var a := Vector2i(edge.x % AmbushGrid.COLS, int(edge.x / AmbushGrid.COLS))
+		var b := Vector2i(edge.y % AmbushGrid.COLS, int(edge.y / AmbushGrid.COLS))
+		var high := a if grid.get_elevation_tier(a.x, a.y) == AmbushGrid.HEIGHT_PLATFORM else b
+		var ground := b if high == a else a
+		if grid.get_elevation_tier(ground.x, ground.y) != AmbushGrid.HEIGHT_GROUND:
+			continue
+		var center := grid.cell_to_world_center(ground)
+		var axis := Vector2(high - ground).normalized()
+		var side_axis := Vector2(-axis.y, axis.x)
+		var start := center - axis * 13.0
+		var finish := center + axis * 13.0
+		var ramp := PackedVector2Array([
+			start - side_axis * 8.0,
+			finish - side_axis * 8.0,
+			finish + side_axis * 8.0,
+			start + side_axis * 8.0,
+		])
+		c.draw_colored_polygon(ramp, Color(0.38, 0.39, 0.32, 0.98))
+		c.draw_line(start - side_axis * 8.0, finish - side_axis * 8.0, Color(0.78, 0.70, 0.46, 0.90), 1.4, true)
+		c.draw_line(start + side_axis * 8.0, finish + side_axis * 8.0, Color(0.78, 0.70, 0.46, 0.90), 1.4, true)
+		for offset in [-3.0, 3.0]:
+			var arrow: Vector2 = center + axis * offset
+			c.draw_line(arrow - side_axis * 4.0 - axis * 3.0, arrow + axis * 3.0, Color(0.92, 0.84, 0.58, 0.96), 1.8, true)
+			c.draw_line(arrow + side_axis * 4.0 - axis * 3.0, arrow + axis * 3.0, Color(0.92, 0.84, 0.58, 0.96), 1.8, true)
 
 
 func _atmo() -> String:
