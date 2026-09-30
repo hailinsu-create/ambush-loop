@@ -66,6 +66,25 @@
 
 历史 native 调查仅接受精确匹配的原库符号，或符号已保存、包身份已记录的新 native binary 的新崩溃样本；不根据不匹配 PCs 猜函数，不因此修改 WAV/loop/stream 生命周期。若下一轮 vivo 仍不可用，完整 smoke 结束后停在“桌面回归完成、设备验收待补”，不继续扩张桌面实现范围。本机 Android 诊断 worktree 仍有未提交改动；本次只提交 gate 与文档，后续接手先核对独立诊断差异，勿覆盖。
 
+## 2026-10-01 完整隔离冒烟补验
+
+按 iteration 9 规划新建独立 run `0e588b66cd504c8ea11d3f03d6d6a5c8`，从头执行 `smoke_test.gd`，没有拼接前次中断输出。最终同时取得：
+
+- `SMOKE_OK_TYPICAL_LOOPS yard,warehouse,pump,railcut,depot,radio`
+- `SMOKE_SLICE_COMPLETE`
+- 包装器 exit 0
+- `PLAYER_DATA_UNCHANGED=1`
+
+因此桌面完整回归门现已通过；此前 run `29ac853d16ad4855998f47392784ab8e` 仍保留为达限中断记录，不以新结果改写历史。新 run 覆盖院子、仓库、油泵、铁路、油库、电台的完整典型循环，并通过触屏、跟随、生命周期、音频提示、视觉可读性和失败路径等既有检查。
+
+同日 ADB 已重新识别目标 vivo X Fold2：serial `10AD4L182J001DB`、型号 `V2266A`、产品 `PD2266`，无线服务为 `192.168.1.25:39047`。设备查询时 `com.ambushloop.game` 不存在，未由本轮执行卸载或清数据。已校验此前获授权的 code80 APK：`com.ambushloop.game`、versionCode `80`、versionName `0.6.30-font-cache-diag`、证书 SHA-256 `7079e51f…a1c8`、文件 SHA-256 `F91CB08B…EEEA`。安装命令已提交，当前停在 vivo 系统安装风险确认页；未取得 `Success` 前不记录为已安装，也不启动真机验收。
+
+当前边界更新为：桌面回归完成；目标设备包安装、B2 横屏画面与上下坡随队、30 分钟连续/60 分钟累计带声音稳定性仍待完成。历史 AudioTrack SIGSEGV 仍未定因，Build ID 不匹配结论不变。
+
+外部 GPT iteration 10 已实读该 run 的执行输出及本报告，确认新 run 是独立从头执行，桌面 completion boundary 可以从 iteration 9 的 incomplete 更新为 complete/pass。结合此前 B2、B1、height、R45 定向门 exit 0，本轮要求的 desktop regression gates 已完成；这仍不等于完整 B2 或 Android 验收。
+
+后续真机证据链固定为：安装命令明确 `Success` → 设备端复查 code80 身份 → Title / briefing / Accept / Yard → 横屏平台与坡道、角色双向上下坡、SMG 拾取、真实 follow-up/follow-down → 带声音 30 分钟连续、60 分钟累计，并覆盖一次前后台与 Back。开始/结束记录 PID、包身份、时间、内存和 fresh `ApplicationExitInfo`。未复现只能写该时长与指定生命周期内未复现，不能写 AudioTrack 已修复。
+
 ## 仍需完成
 
 恢复此前 vivo 设备后，先确认包身份，再做带声音任务切换、前后台、Back 与连续运行；用同一版本保存院子实际上下坡、SMG 拾取、双向随队及画面证据。历史 native 崩溃未解决时，不标记音频已修复、B2 已验收或 PR 可合并。
