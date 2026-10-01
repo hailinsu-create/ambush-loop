@@ -29,6 +29,11 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 
 新任务提交成功，不代表实际工具安装或测试已通过。任务指令中的精确提交是它提交时的分支状态；后续文档提交不得被当作该任务评审过的代码。
 
+重试后网页日志确认 `Godot Engine v4.7.2.stable.official.ed1daf0bf` 已启动导入工程；随后页面从“正在设置环境”进入任务执行，出现“Capturing import logs with exit codes”和读取 PaperRoute `build_yard_crate.py` 的记录。原 `origin` 引导阻塞已越过。最后观察时任务仍执行中，CLI 为 PENDING、没有 diff；尚无最终隔离门退出码或新渲染验收报告，不将运行中写为通过。
+
+实际任务页面：
+https://chatgpt.com/remote/task_e_6abdbc4d29308332be5ab93be3bcc26a
+
 仍待验证：该任务实际安装和运行结果、Linux Godot 门、Blender 渲染及 glTF 检查、同提交的首次网页 PLAN/REVIEW、APK 和 vivo 真机门。浏览器动作偶发超时，操作后重新读取已核对保存结果；不再将“云环境未创建”作为当前阻塞。
 
 ## 下一步与验收门
