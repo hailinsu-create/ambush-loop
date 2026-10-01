@@ -87,3 +87,15 @@ PaperRoute 依赖核对补充：`.codex/cloud/install-look.sh` 从 `download.ble
 2026-10-01 最新只读复核补充：环境列表显示 `Ambush Loop Cloud`（仓库 `hailinsu-create/ambush-loop`），没有“未发布”标记；详情页提供“使用此环境”。按官方说明，未发布环境会有“Unpublished”标记，且新任务使用已发布快照，因此当前环境可判断为已发布、可用。编辑页读回手动安装、缓存启用、bootstrap 固定到 `5f6cdff8ae541b2eaf4e9d942dfe8af588740ca3`，任务运行期网络关闭；本轮未保存/发布或变更权限。UI 未显示已发布快照的修订号/时间，仍需新任务实测当前快照。
 
 同日重新读取现有云任务 `https://chatgpt.com/codex/cloud/tasks/task_e_6abddca04260833297732b1f9fd73797`：它检出源 SHA `56bea5e790080433b565b6f23bb0cf428d0472ea`，安装时 `github.com` 的 HTTPS CONNECT 被 Envoy 返回 `403`（curl / 安装脚本退出码 `22`）；Godot 安装、版本确认、导入、headless 启动与隔离冒烟测试均未运行。任务页面曾据该旧树指出 `install.sh` 无 SHA-512；但当前 Cloud 编辑页明确将 bootstrap 固定到 `5f6cdff...`（含 SHA-512 修复），页面未给出实际解析并执行的安装器哈希，故不能证明那次任务已跑到当前 pin。它也不验证分支现 HEAD `da8a519e3e9d547938c74f2bc21a8058e11814a6`。下一云端验收必须由 `Ambush Loop Cloud` 的已发布环境启动新任务、选 `codex/cloud-main`，先记录实际 HEAD 与安装入口，再验证 Godot 和 PaperRoute；不得复用旧任务结论，不得扩网或改用镜像。新任务本轮未创建，避免在浏览器连续超时后重复操作。新工作区 C2C 状态仍为 `needsChoice=true`、未选地址方案；不得配对或借用旧 workspace 连接。
+
+## 2026-10-01 当前分支精确 Cloud 验收
+
+已从已发布环境 `Ambush Loop Cloud`、分支选择器 `codex/cloud-main` 新建只读验收任务：[执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92)。任务实际检出的 HEAD 与启动前核对的远端分支 SHA 一致：`9675c034469e8adcecef403df6ebd5492209e153`。执行器本地分支标签为 `work`，但精确 SHA 匹配；没有切换、拉取或更新 Git 引用。
+
+Bootstrap 固定到 `5f6cdff8ae541b2eaf4e9d942dfe8af588740ca3`；云任务核验 `.codex/cloud/install.sh` 与 `.codex/cloud/install-look.sh` 的当前 blob 分别为 `b658f7b3fb8c66cd1f5a54bbb20e4bae81ea92d4`、`fd3a358cae5cc42669b57e167de436523a3d8679`，均与固定提交匹配。实际工具版本：Godot `4.7.2.stable.official.ed1daf0bf`、Blender `5.2.2 LTS`、`gltf-transform 4.5.1`。
+
+Godot headless editor import 退出码 0，日志 `/tmp/ambush_cloud_godot_import_9675c034.log`。隔离验收仅通过 `bash ambush_loop/scripts/run_isolated_test.sh "$HOME/.local/bin/godot" accept_cta_flow_gate.gd` 执行，退出码 0，run ID `87a2d30995ff4de49719a6447731629d`，输出 `TEST_STORAGE_ISOLATED` 和 `ACCEPT_CTA_FLOW_OK level=yard frames=1`；正式日志位于 `ambush_loop/build/ambush_test_runs/87a2d30995ff4de49719a6447731629d/run.log`。
+
+PaperRoute 在 `/tmp/ambush_paperroute_9675c034/ArtSource` 的副本中生成了 `yard_crate.glb`、turnaround、iso 与 top；GLB 检查和 PNG 结构检查退出码均为 0，三张图均已目视检查。**限制：** Blender 渲染进程在写出完整文件后出现 `EGL_BAD_MATCH` 且没有自行退出；复跑后为清理遗留进程而终止，真实退出码 143。因此只能确认产物已生成、格式有效并完成目视，不能把 PaperRoute 生成命令本身标记为干净通过。日志：`/tmp/ambush_paperroute_9675c034/blender_yard_crate.log`、`/tmp/ambush_paperroute_9675c034/blender_yard_crate_rerun.log`、`/tmp/ambush_paperroute_9675c034/gltf_inspect_yard_crate_final.log`。
+
+最终 HEAD 未变，暂存差异和已跟踪工作树差异为空；仅保留任务开始前已有的未跟踪 `ambush_loop/scripts/r45_sweep_gate.gd.uid`。未修改代码或仓库资产、未提交/推送/合并、未调用 Meshy，也未执行外部 GPT 评审或 Android/vivo 验收。本轮状态为 **Cloud headless 部分通过**；后续分别处理 Blender 退出码、当前 SHA 的 GPT PLAN/REVIEW，以及本机设备质量门。之前在 `2933da0` 上通过的完整 PaperRoute 运行仅为历史证据，不替代本轮精确 SHA 的退出码。
