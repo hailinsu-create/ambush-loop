@@ -70,6 +70,8 @@ PaperRoute 依赖核对补充：`.codex/cloud/install-look.sh` 从 `download.ble
 
 2026-10-01 复核并更正云任务来源判断：任务页面元数据显示仓库为 `hailinsu-create/ambush-loop`、所选来源分支为 `codex/cloud-main`；任务内 HEAD `56bea5e790080433b565b6f23bb0cf428d0472ea` 与该分支当时的源码 SHA 相同。容器内部显示分支名 `work` 且没有 Git remote，是执行器布局，不足以判定取错仓库；撤回此前的“workspace mismatch”结论。仍然成立的失败是下载阶段 `HTTP CONNECT 403`，Godot、隔离门及 PaperRoute 没有完成。该旧任务不覆盖之后的新提交，也不为它们提供评审。
 
+随后在同一云任务中提交只读更正，网页现已明确确认原任务来源 SHA 匹配，并保留 403 与未执行测试的结果。该更正回合的任务引导快照显示当前分支源已检出到 `4d4687a498e81884dce08f1a38f479bd3b93aff7`；该回合只更正结论，没有运行下载、Godot 或 PaperRoute 测试。因此最新 SHA 已进入该任务上下文，但仍没有获得该 SHA 的云端验收证据。
+
 2026-10-01 本地安装安全修复已提交并推送到 Draft PR #7：`5f6cdff` 为官方 Godot 4.7.2 Linux 归档加入固定 SHA-512 校验，失败时在解压前终止；`8e8ba5d` 将云端 bootstrap 固定到含该校验的安装脚本。显式安装 `coreutils`/`curl`。本机 Git Bash `bash -n` 与 `git diff --check` 均通过，提交已推送且分支与 PR 同步核实。后续提交 `2ea4453` 更正云任务来源记录并更新索引。这不是 Linux 安装、Godot 导入、PaperRoute 渲染或运行测试通过；因云任务仍遇 403，未重复创建新的无效任务。未跟踪用户文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid`、`error.log` 仍保留。
 
 外部 GPT 精确 SHA 评审仍未完成。连接新云端工作区的地址偏好待用户选择（固定 `hailinsu.top` 或临时地址）；在获得选择前不修改原工作区连接。后续若出现实际安全连接授权页，再单独请求用户批准。
