@@ -17,12 +17,12 @@
 
 2026-10-01 后续：用户完成 GitHub 授权。云端页面确认本游戏仓库可选，已保存 `Ambush Loop Cloud` 环境，编号 `6abdb7e5d66c8191842afe8f89853403`。配置 universal/Ubuntu 24.04、手动安装、容器缓存、任务运行期网络关闭；安装/维护阶段可联网。未添加密钥。保存后的详情页已核对安装与维护命令。环境列表另有同仓库同名条目，保留未删除。
 
-安装入口从迁移提交 `c8a9fa4806fb95173b7f6ce2481c50a1dab96ef2` 提取两个安装脚本到临时目录，安装 Linux 图形依赖并执行。这样默认 `main` 尚无脚本时也能引导；后续维护使用任务检出的仓库脚本。
+安装入口固定迁移提交 `c8a9fa4806fb95173b7f6ce2481c50a1dab96ef2` 的两个安装脚本，安装 Linux 图形依赖并执行。首轮使用 `git fetch origin` 提取失败：该云容器没有可用的 `origin` remote。后续引导改为固定提交的公开 GitHub raw 文件下载，不依赖云容器 remote；默认 `main` 尚无脚本时也能引导。后续维护使用任务检出的仓库脚本。
 
 已通过官方 CLI 在 `codex/cloud-main` 提交首个验证任务：
 https://chatgpt.com/codex/tasks/task_e_6abdba17e8788332b9ce551703a9ee4b
 
-任务要求核对精确 SHA、工具版本、隔离 Accept-to-Yard 门，以及临时副本中的道具生成/glTF 检查；禁止改玩法、推送、合并或冒充外部批准。提交返回任务链接，首次状态为 PENDING；这证明已接单，不证明安装/测试通过。
+任务要求核对精确 SHA、工具版本、隔离 Accept-to-Yard 门，以及临时副本中的道具生成/glTF 检查；禁止改玩法、推送、合并或冒充外部批准。首轮状态由 PENDING 转为 ERROR，网页日志确认 Linux 系统依赖已安装，随后 `git fetch origin` 失败，Godot/Blender 安装和测试尚未执行；不算迁移通过。
 
 仍待验证：该任务实际安装和运行结果、Linux Godot 门、Blender 渲染及 glTF 检查、同提交的首次网页 PLAN/REVIEW、APK 和 vivo 真机门。浏览器动作偶发超时，操作后重新读取已核对保存结果；不再将“云环境未创建”作为当前阻塞。
 
