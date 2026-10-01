@@ -1,5 +1,7 @@
 # External GPT planning and review
 
+Cloud-only GitHub source workflow and request templates: `.cursor/docs/AMBUSH_CLOUD_GPT_REVIEW_PLAN_20261001.md`. This is a proposed workflow, not proof that the ChatGPT GitHub connection is usable or that any current revision is approved.
+
 Preserve the existing Ambush Loop reviewer Project:
 https://chatgpt.com/g/g-p-6ab943ae67ac81919bcbe3cd35ebe3b7/project
 
