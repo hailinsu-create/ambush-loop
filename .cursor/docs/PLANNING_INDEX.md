@@ -2,7 +2,7 @@
 
 更新日期：2026-10-01。仅用于本游戏；设计文件不是实现或验收证明。
 
-**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 已包含 Godot 官方 SHA-512 安装校验和固定 bootstrap（`8e8ba5d`）；本机语法/差异检查通过。已发布环境仍引用旧 bootstrap `c8a9fa`，更新尝试未保存；设置阶段的 Godot Release 请求遇 HTTP CONNECT 403，任务运行期联网当前关闭。Godot/PaperRoute 仍未获云端验收，新提交也尚未取得精确 SHA 的网页 GPT 评审。保留以下开发/真机质量门，工作流入库不代表实现已通过。
+**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 当前与 `origin/codex/cloud-main` 同步于 `fcbfda3`；Godot/Blender 安装脚本静态检查通过，且与 Cloud 保存的 bootstrap 固定提交 `5f6cdff` 一致。旧 Cloud 任务检出 SHA `56bea5e` 时安装阶段遇 HTTP CONNECT 403，未完成 Godot/PaperRoute 验收；该任务不验证当前保存配置或最新 SHA。任务运行期联网关闭，设置/维护阶段可联网；出口拒绝根因仍未确诊，不得扩大为 unrestricted。新提交仍无精确 SHA 的网页 GPT 评审，连接选择待处理。保留以下开发/真机质量门，工作流入库不代表实现已通过。
 
 ## 当前有效规划
 

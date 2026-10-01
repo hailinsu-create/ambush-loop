@@ -60,13 +60,13 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 
 2026-10-01 只读复核该环境详情与编辑页：任务运行期“代理网络访问”设为“关闭”；页面说明设置/维护脚本阶段始终启用网络，设置完成后才禁用任务运行期网络。因此，后续任务运行期的白名单主机与 PyPI 403 探测，符合当前运行期禁网设置，不能证明设置阶段也被同一策略拦截。独立成立的失败仍是安装脚本阶段的 GitHub Release CONNECT 403；其根因尚未确定。未开启任务运行期网络，也未改变环境或安全设置；开启它会扩大任务代码的出站访问，且不保证修复设置阶段下载。
 
-2026-10-01 再次核对已发布环境编辑页：保存的设置脚本仍固定读取旧提交 `c8a9fa4806fb95173b7f6ce2481c50a1dab96ef2`；仓库中的 `.codex/cloud/environment-setup.sh` 已固定到包含 SHA-512 校验的 `5f6cdff8ae541b2eaf4e9d942dfe8af588740ca3`，并显式安装 `coreutils`/`curl`。一次只修改脚本字段的自动化尝试超时；随后读回确认表单仍是旧值，未点击保存，云环境没有改变。重试前需先解决页面控制延迟，并在保存后重新读取确认。
+2026-10-01 后续复核已更正上述记录：`Ambush Loop Cloud` 详情页与编辑页均读回确认设置脚本已保存，固定下载提交 `5f6cdff8ae541b2eaf4e9d942dfe8af588740ca3` 的安装脚本，并调用 Godot 安装入口；当前分支 `fcbfda35a6f35445b7425ba6660f4d6b33ddea04` 的 `install.sh` 与 `install-look.sh` Git blob 均与该固定提交一致。编辑页显示任务运行期网络访问关闭；页面说明设置/维护脚本阶段始终启用网络。此项只证明当前配置已保存，不证明它已在新任务中成功执行。既有失败任务检出的是较早 SHA `56bea5e790080433b565b6f23bb0cf428d0472ea`，不能代替对当前 SHA/当前保存配置的验收。
 
 官方 [Godot 4.7.2 下载页](https://godotengine.org/download/archive/4.7.2-stable/)的 Linux 链接从 `downloads.godotengine.org` 重定向到 `godot-releases.nbg1.your-objectstorage.com`；后者不属于 Package managers 预设。现有固定安装器使用 GitHub Release 与固定 SHA-512；未经明确授权，不改用该重定向源、不新增网络域名。
 
 2026-10-01 查阅官方排障说明：环境域名设置与 Enterprise Agent Security 策略可能同时生效；特定 `allow_local_binding=false` 策略还可能导致即使域名已放行，云任务仍无法连到上游代理。[Cloud 环境说明](https://learn.chatgpt.com/docs/environments/cloud-environments) · [Agent Security 网络策略](https://learn.chatgpt.com/docs/enterprise/agent-security)。目前没有证据确认此账号属于 Enterprise workspace，也没有有效策略快照能确认该字段；这只是一个待核实的可能原因，不是已诊断根因。若工作区有管理员，应核对 Cloud 环境的有效 Agent Security 网络策略；若没有，应携任务 ID 与 `HTTP CONNECT 403` 结果向 OpenAI 支持反馈。不要把环境切到“全部不受限制”，也不要绕过代理。
 
-本机 `codex/cloud-main` 与 `origin/codex/cloud-main` 在复核时均为上述 SHA。工作区里原有未跟踪文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid` 与 `error.log` 保留，未纳入本次文档变更。用户无需在手机端另建云任务；请在 Codex Cloud 任务列表查找标题，或使用上方正确链接。
+本机 `codex/cloud-main` 与 `origin/codex/cloud-main` 在复核时均为 `fcbfda35a6f35445b7425ba6660f4d6b33ddea04`，Draft PR #7 仍为 OPEN。用 Git Bash 对当前三个安装脚本执行 `bash -n`，退出码均为 0；`git diff --check` 退出码 0。当前 HEAD 的两个安装脚本与环境固定提交的 blob 一致。工作区里原有未跟踪文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid` 与 `error.log` 保留，未纳入本次文档变更。用户无需在手机端另建云任务；请在 Codex Cloud 任务列表查找标题，或使用上方正确链接。
 
 同一精确提交的外部 GPT PLAN/REVIEW 尚未取得；专用只读评审连接尚未建立，当前连接选择待用户确认（固定域名 `hailinsu.top` 或临时地址）。连接完成前，不把旧本地工作区或旧提交上的历史反馈当作本次批准。下一步分别是：解决/定位该 Cloud 环境出口拒绝；取得精确 SHA 的实际外部评审；然后安装 Godot/Blender 并记录可复现的 headless 与 PaperRoute 证据。Android 与 vivo 门仍在本机完成。
 
@@ -80,4 +80,6 @@ PaperRoute 依赖核对补充：`.codex/cloud/install-look.sh` 从 `download.ble
 
 2026-10-01 本地安装安全修复已提交并推送到 Draft PR #7：`5f6cdff` 为官方 Godot 4.7.2 Linux 归档加入固定 SHA-512 校验，失败时在解压前终止；`8e8ba5d` 将云端 bootstrap 固定到含该校验的安装脚本。显式安装 `coreutils`/`curl`。本机 Git Bash `bash -n` 与 `git diff --check` 均通过，提交已推送且分支与 PR 同步核实。后续提交 `2ea4453` 更正云任务来源记录并更新索引。这不是 Linux 安装、Godot 导入、PaperRoute 渲染或运行测试通过；因云任务仍遇 403，未重复创建新的无效任务。未跟踪用户文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid`、`error.log` 仍保留。
 
-外部 GPT 精确 SHA 评审仍未完成。连接新云端工作区的地址偏好待用户选择（固定 `hailinsu.top` 或临时地址）；在获得选择前不修改原工作区连接。后续若出现实际安全连接授权页，再单独请求用户批准。
+外部 GPT 精确 SHA 评审仍未完成。新工作区桥接状态当前为本地服务运行、无公开地址、无配对、无会话；连接地址偏好待用户选择（固定 `hailinsu.top` 或临时地址），不得借用原工作区连接或修改其会话。后续若出现实际安全连接授权页，再单独请求用户批准。
+
+官方 [Codex Cloud 环境说明](https://learn.chatgpt.com/docs/environments/cloud-environments)指出：环境域名允许列表与 Enterprise Agent Security 网络要求可以同时约束任务；GitHub Release 主机位于 Package managers 预设中，其他主机及重定向目标需逐一允许。当前 Cloud 任务在安装阶段访问已允许的 GitHub 主机仍返回 HTTPS CONNECT 403，根因未确诊；任务运行期网络关闭只解释运行阶段的探测结果，不能解释安装阶段拒绝。不要通过启用 unrestricted 网络或绕开代理来规避。当前账号页面显示 Plus，尚无证据指向 Enterprise 管理策略；需以之后新任务的安装日志确认当前保存配置的实际行为。
