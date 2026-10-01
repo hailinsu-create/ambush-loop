@@ -58,6 +58,8 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 
 云执行器的继承代理对已放行域名及包管理器站点均返回连接阶段 `HTTP CONNECT 403`，下载未到达源站；因此没有安装 Godot，也没有运行测试。该任务中未提供 `/etc/codex/network-policy.json`，当前工具目录也没有运行时环境状态接口。这些现象证明本次出口不可用，但不足以确定究竟是哪一层策略拒绝；不通过绕代理或扩大至不受限联网来规避。
 
+2026-10-01 查阅官方排障说明：环境域名设置与 Enterprise Agent Security 策略可能同时生效；特定 `allow_local_binding=false` 策略还可能导致即使域名已放行，云任务仍无法连到上游代理。[Cloud 环境说明](https://learn.chatgpt.com/docs/environments/cloud-environments) · [Agent Security 网络策略](https://learn.chatgpt.com/docs/enterprise/agent-security)。目前没有证据确认此账号属于 Enterprise workspace，也没有有效策略快照能确认该字段；这只是一个待核实的可能原因，不是已诊断根因。若工作区有管理员，应核对 Cloud 环境的有效 Agent Security 网络策略；若没有，应携任务 ID 与 `HTTP CONNECT 403` 结果向 OpenAI 支持反馈。不要把环境切到“全部不受限制”，也不要绕过代理。
+
 本机 `codex/cloud-main` 与 `origin/codex/cloud-main` 在复核时均为上述 SHA。工作区里原有未跟踪文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid` 与 `error.log` 保留，未纳入本次文档变更。用户无需在手机端另建云任务；请在 Codex Cloud 任务列表查找标题，或使用上方正确链接。
 
 同一精确提交的外部 GPT PLAN/REVIEW 尚未取得；专用只读评审连接尚未建立，当前连接选择待用户确认（固定域名 `hailinsu.top` 或临时地址）。连接完成前，不把旧本地工作区或旧提交上的历史反馈当作本次批准。下一步分别是：解决/定位该 Cloud 环境出口拒绝；取得精确 SHA 的实际外部评审；然后安装 Godot/Blender 并记录可复现的 headless 与 PaperRoute 证据。Android 与 vivo 门仍在本机完成。
