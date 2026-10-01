@@ -24,6 +24,11 @@ https://chatgpt.com/codex/tasks/task_e_6abdba17e8788332b9ce551703a9ee4b
 
 任务要求核对精确 SHA、工具版本、隔离 Accept-to-Yard 门，以及临时副本中的道具生成/glTF 检查；禁止改玩法、推送、合并或冒充外部批准。首轮状态由 PENDING 转为 ERROR，网页日志确认 Linux 系统依赖已安装，随后 `git fetch origin` 失败，Godot/Blender 安装和测试尚未执行；不算迁移通过。
 
+修正后的设置命令已保存并重新读取确认；可复现副本为 `.codex/cloud/environment-setup.sh`。重新提交验证任务，目标代码 `2933da0b4a7a97703a599e5a50f5989d0b2f68c6`：
+https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
+
+新任务提交成功，不代表实际工具安装或测试已通过。任务指令中的精确提交是它提交时的分支状态；后续文档提交不得被当作该任务评审过的代码。
+
 仍待验证：该任务实际安装和运行结果、Linux Godot 门、Blender 渲染及 glTF 检查、同提交的首次网页 PLAN/REVIEW、APK 和 vivo 真机门。浏览器动作偶发超时，操作后重新读取已核对保存结果；不再将“云环境未创建”作为当前阻塞。
 
 ## 下一步与验收门
