@@ -23,6 +23,17 @@ sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True)
 result = {"source_sha": sha, "technical_status": "failed",
           "external_gpt_review": "unavailable", "product_snapshot": "unverified",
           "checks": {}}
+review_files = [".codex/cloud/blender-headless.py", ".codex/cloud/test-look-runtime.py",
+                ".codex/cloud/verify.py", ".codex/cloud/install.sh", ".codex/cloud/install-look.sh",
+                ".codex/cloud/environment-setup.sh", ".codex/cloud/environment-bootstrap.sh",
+                ".github/workflows/cloud-verification.yml", ".codex/cloud/WEB_REVIEW.md"]
+manifest = {"repository": "hailinsu-create/ambush-loop", "source_sha": sha,
+            "status": "unavailable", "files": []}
+for path in review_files:
+    blob = subprocess.check_output(["git", "rev-parse", f"{sha}:{path}"], cwd=repo, text=True).strip()
+    manifest["files"].append({"path": path, "blob_sha": blob,
+                             "url": f"https://github.com/hailinsu-create/ambush-loop/blob/{sha}/{path}"})
+(output / "review-request.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
 
 def run(name, command, cwd, timeout=180, markers=()):
