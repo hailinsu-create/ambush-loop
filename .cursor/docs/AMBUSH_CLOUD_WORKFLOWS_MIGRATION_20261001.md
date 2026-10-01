@@ -56,7 +56,9 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 - 检出源：`codex/cloud-main`，提交 `56bea5e790080433b565b6f23bb0cf428d0472ea`
 - 结果：Godot 安装尚未完成，隔离导入/门禁尚未运行，PaperRoute 未执行，不能记为通过。
 
-云执行器的继承代理对已放行域名及包管理器站点均返回连接阶段 `HTTP CONNECT 403`，下载未到达源站；因此没有安装 Godot，也没有运行测试。该任务中未提供 `/etc/codex/network-policy.json`，当前工具目录也没有运行时环境状态接口。这些现象证明本次出口不可用，但不足以确定究竟是哪一层策略拒绝；不通过绕代理或扩大至不受限联网来规避。
+安装脚本阶段访问 GitHub Release 确实在 HTTPS CONNECT 阶段收到 `403`，未到达源站；因此没有安装 Godot，也没有运行测试。之后在任务执行阶段做的只读 HEAD 探测同样收到 CONNECT 403，但不能据此诊断安装脚本阶段的网络策略。该任务中未提供 `/etc/codex/network-policy.json`，当前工具目录也没有运行时环境状态接口；不通过绕代理或扩大至不受限联网来规避。
+
+2026-10-01 只读复核该环境详情与编辑页：任务运行期“代理网络访问”设为“关闭”；页面说明设置/维护脚本阶段始终启用网络，设置完成后才禁用任务运行期网络。因此，后续任务运行期的白名单主机与 PyPI 403 探测，符合当前运行期禁网设置，不能证明设置阶段也被同一策略拦截。独立成立的失败仍是安装脚本阶段的 GitHub Release CONNECT 403；其根因尚未确定。未开启任务运行期网络，也未改变环境或安全设置；开启它会扩大任务代码的出站访问，且不保证修复设置阶段下载。
 
 2026-10-01 查阅官方排障说明：环境域名设置与 Enterprise Agent Security 策略可能同时生效；特定 `allow_local_binding=false` 策略还可能导致即使域名已放行，云任务仍无法连到上游代理。[Cloud 环境说明](https://learn.chatgpt.com/docs/environments/cloud-environments) · [Agent Security 网络策略](https://learn.chatgpt.com/docs/enterprise/agent-security)。目前没有证据确认此账号属于 Enterprise workspace，也没有有效策略快照能确认该字段；这只是一个待核实的可能原因，不是已诊断根因。若工作区有管理员，应核对 Cloud 环境的有效 Agent Security 网络策略；若没有，应携任务 ID 与 `HTTP CONNECT 403` 结果向 OpenAI 支持反馈。不要把环境切到“全部不受限制”，也不要绕过代理。
 
