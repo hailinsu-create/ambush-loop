@@ -83,3 +83,5 @@ PaperRoute 依赖核对补充：`.codex/cloud/install-look.sh` 从 `download.ble
 外部 GPT 精确 SHA 评审仍未完成。新工作区桥接状态当前为本地服务运行、无公开地址、无配对、无会话；连接地址偏好待用户选择（固定 `hailinsu.top` 或临时地址），不得借用原工作区连接或修改其会话。后续若出现实际安全连接授权页，再单独请求用户批准。
 
 官方 [Codex Cloud 环境说明](https://learn.chatgpt.com/docs/environments/cloud-environments)指出：环境域名允许列表与 Enterprise Agent Security 网络要求可以同时约束任务；GitHub Release 主机位于 Package managers 预设中，其他主机及重定向目标需逐一允许。当前 Cloud 任务在安装阶段访问已允许的 GitHub 主机仍返回 HTTPS CONNECT 403，根因未确诊；任务运行期网络关闭只解释运行阶段的探测结果，不能解释安装阶段拒绝。不要通过启用 unrestricted 网络或绕开代理来规避。当前账号页面显示 Plus，尚无证据指向 Enterprise 管理策略；需以之后新任务的安装日志确认当前保存配置的实际行为。
+
+2026-10-01 最新只读复核：Cloud 编辑页再次读回手动安装模式、缓存开启、固定 bootstrap `5f6cdff8ae541b2eaf4e9d942dfe8af588740ca3` 与任务运行期网络关闭；本轮没有保存或发布环境。编辑页读回本身不能证明当前配置已重新发布，因此不要把此前“环境已发布”的历史记录扩展为“最新配置已发布”。官方环境说明要求用已发布快照启动新任务；最新配置的发布状态和新任务执行均待验证。未改环境权限、未新增网络域名或密钥。连接偏好仍待用户选择；这是新评审连接的地址方案选择，不是额外授权。

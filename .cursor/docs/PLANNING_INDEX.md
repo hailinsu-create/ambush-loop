@@ -2,7 +2,7 @@
 
 更新日期：2026-10-01。仅用于本游戏；设计文件不是实现或验收证明。
 
-**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 保持 OPEN；最近一次安装脚本静态核验对应代码 SHA `fcbfda3`，与 Cloud 保存的 bootstrap 固定提交 `5f6cdff` 一致，本次仅更新文档/索引。旧 Cloud 任务检出 SHA `56bea5e` 时安装阶段遇 HTTP CONNECT 403，未完成 Godot/PaperRoute 验收；该任务不验证当前保存配置或最近核验的代码。任务运行期联网关闭，设置/维护阶段可联网；出口拒绝根因仍未确诊，不得扩大为 unrestricted。新提交仍无精确 SHA 的网页 GPT 评审，连接选择待处理。保留以下开发/真机质量门，工作流入库不代表实现已通过。
+**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 保持 OPEN；最近一次安装脚本静态核验对应代码 SHA `fcbfda3`，与 Cloud 编辑页读回的 bootstrap 固定提交 `5f6cdff` 一致，本次仅更新文档/索引。旧 Cloud 任务检出 SHA `56bea5e` 时安装阶段遇 HTTP CONNECT 403，未完成 Godot/PaperRoute 验收；该任务不验证当前保存配置或最近核验的代码。任务运行期联网关闭，设置/维护阶段可联网；出口拒绝根因仍未确诊，不得扩大为 unrestricted。最新编辑页读回不足以证明该配置已重新发布；未保存、未发布、未启动新任务。新提交仍无精确 SHA 的网页 GPT 评审，连接选择待处理。保留以下开发/真机质量门，工作流入库不代表实现已通过。
 
 ## 当前有效规划
 
