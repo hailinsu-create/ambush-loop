@@ -99,3 +99,11 @@ Godot headless editor import 退出码 0，日志 `/tmp/ambush_cloud_godot_impor
 PaperRoute 在 `/tmp/ambush_paperroute_9675c034/ArtSource` 的副本中生成了 `yard_crate.glb`、turnaround、iso 与 top；GLB 检查和 PNG 结构检查退出码均为 0，三张图均已目视检查。**限制：** Blender 渲染进程在写出完整文件后出现 `EGL_BAD_MATCH` 且没有自行退出；复跑后为清理遗留进程而终止，真实退出码 143。因此只能确认产物已生成、格式有效并完成目视，不能把 PaperRoute 生成命令本身标记为干净通过。日志：`/tmp/ambush_paperroute_9675c034/blender_yard_crate.log`、`/tmp/ambush_paperroute_9675c034/blender_yard_crate_rerun.log`、`/tmp/ambush_paperroute_9675c034/gltf_inspect_yard_crate_final.log`。
 
 最终 HEAD 未变，暂存差异和已跟踪工作树差异为空；仅保留任务开始前已有的未跟踪 `ambush_loop/scripts/r45_sweep_gate.gd.uid`。未修改代码或仓库资产、未提交/推送/合并、未调用 Meshy，也未执行外部 GPT 评审或 Android/vivo 验收。本轮状态为 **Cloud headless 部分通过**；后续分别处理 Blender 退出码、当前 SHA 的 GPT PLAN/REVIEW，以及本机设备质量门。之前在 `2933da0` 上通过的完整 PaperRoute 运行仅为历史证据，不替代本轮精确 SHA 的退出码。
+
+## 2026-10-01 新工作区评审服务恢复
+
+沿用用户先前对 `hailinsu.top` 固定地址的授权，新工作区独立地址已配置为 `https://c2c-ambush-loop-cloud.hailinsu.top/mcp`，连接器名称为 `Codex with ChatGPT · ambush-loop-cloud`。无需再次选择地址或登录 Cloudflare；此前“地址方案待选择”的记录已被本节替代。未覆盖旧工作区的连接器、Project 或会话。
+
+首次 doctor 因服务启动超过等待窗口而报错，随后 status 确认同一工作区服务正常运行；再次 doctor 完成恢复，node、sandbox、workspace、bridge、MCP 未授权请求返回 401、OAuth 和固定地址检查全部通过。新工作区仍未配对、未取得实际外部 PLAN/REVIEW；本地服务与地址健康不等于 ChatGPT 已连接。
+
+已打开 ChatGPT 的新连接器设置页，但现有 Cloud 页与新设置页的 DOM/无障碍读取均持续超时。因此没有填写或提交新连接器，也没有伪造配对成功。针对 Blender 正常退出的跟进请求在超时前尝试提交，是否发送成功尚未确认；恢复浏览器后必须先读取原任务状态，不能盲目重复提交或另建验收任务。下一步仅为恢复页面控制、完成上述独立只读连接及精确 SHA 评审、补齐 Blender 正常退出证据；无需重新迁移代码或扩网。
