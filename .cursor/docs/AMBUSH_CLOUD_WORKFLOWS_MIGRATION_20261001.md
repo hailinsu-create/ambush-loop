@@ -63,3 +63,5 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 本机 `codex/cloud-main` 与 `origin/codex/cloud-main` 在复核时均为上述 SHA。工作区里原有未跟踪文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid` 与 `error.log` 保留，未纳入本次文档变更。用户无需在手机端另建云任务；请在 Codex Cloud 任务列表查找标题，或使用上方正确链接。
 
 同一精确提交的外部 GPT PLAN/REVIEW 尚未取得；专用只读评审连接尚未建立，当前连接选择待用户确认（固定域名 `hailinsu.top` 或临时地址）。连接完成前，不把旧本地工作区或旧提交上的历史反馈当作本次批准。下一步分别是：解决/定位该 Cloud 环境出口拒绝；取得精确 SHA 的实际外部评审；然后安装 Godot/Blender 并记录可复现的 headless 与 PaperRoute 证据。Android 与 vivo 门仍在本机完成。
+
+PaperRoute 依赖核对补充：`.codex/cloud/install-look.sh` 从 `download.blender.org` 下载 Blender 5.2.2 归档及校验文件；该主机不在当前“包管理器 + 5 个域名”列表中。npm 的 `registry.npmjs.org` 属于包管理器预设，不需再加自定义域名。等已允许站点能正常连通后，如需云端 Look 安装，只为 Blender 源站和日志实际证实的重定向目标添加最小域名；先前任务对 `pypi.org` 等均遇到连接阶段 403，所以现在加此域名无法证明修复，也不应扩大权限。
