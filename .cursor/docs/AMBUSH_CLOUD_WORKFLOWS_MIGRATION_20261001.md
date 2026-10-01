@@ -15,7 +15,16 @@
 
 本次打包检查：两个安装脚本经 Git Bash `bash -n`，退出码 0；`git diff --check` 退出码 0。`install.sh` 会串行安装 Godot 与 Look 工具，Shell 文件固定 LF；不以语法检查冒充 Linux 安装/渲染通过。
 
-待验证：云端环境创建/发布、Linux 实际 Godot 门、Blender 渲染及 glTF 检查、同提交的首次网页 PLAN/REVIEW、APK 和 vivo 真机门。浏览器读取恢复后，云端入口导航仍发生超时；没有环境发布证明，不标记已迁移运行成功。
+2026-10-01 后续：用户完成 GitHub 授权。云端页面确认本游戏仓库可选，已保存 `Ambush Loop Cloud` 环境，编号 `6abdb7e5d66c8191842afe8f89853403`。配置 universal/Ubuntu 24.04、手动安装、容器缓存、任务运行期网络关闭；安装/维护阶段可联网。未添加密钥。保存后的详情页已核对安装与维护命令。环境列表另有同仓库同名条目，保留未删除。
+
+安装入口从迁移提交 `c8a9fa4806fb95173b7f6ce2481c50a1dab96ef2` 提取两个安装脚本到临时目录，安装 Linux 图形依赖并执行。这样默认 `main` 尚无脚本时也能引导；后续维护使用任务检出的仓库脚本。
+
+已通过官方 CLI 在 `codex/cloud-main` 提交首个验证任务：
+https://chatgpt.com/codex/tasks/task_e_6abdba17e8788332b9ce551703a9ee4b
+
+任务要求核对精确 SHA、工具版本、隔离 Accept-to-Yard 门，以及临时副本中的道具生成/glTF 检查；禁止改玩法、推送、合并或冒充外部批准。提交返回任务链接，首次状态为 PENDING；这证明已接单，不证明安装/测试通过。
+
+仍待验证：该任务实际安装和运行结果、Linux Godot 门、Blender 渲染及 glTF 检查、同提交的首次网页 PLAN/REVIEW、APK 和 vivo 真机门。浏览器动作偶发超时，操作后重新读取已核对保存结果；不再将“云环境未创建”作为当前阻塞。
 
 ## 下一步与验收门
 
