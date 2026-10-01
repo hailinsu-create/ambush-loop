@@ -19,32 +19,42 @@ const ACCENT_LINE := Color(0.62, 0.52, 0.28, 0.85)
 const INK := Color(0.028, 0.024, 0.018, 0.94)
 const RAIL := Color(0.70, 0.58, 0.30, 0.92)
 
+static var _display_font_cache: Font
+static var _ui_font_cache: Font
+static var _ui_font_bold_cache: Font
+
 
 static func game_version() -> String:
 	return str(ProjectSettings.get_setting("application/config/version", "0.0.0"))
 
 
 static func display_font() -> Font:
-	var f := SystemFont.new()
-	f.font_names = PackedStringArray(["Noto Sans Display", "Noto Sans", "DejaVu Sans"])
-	f.font_weight = 800
-	f.font_stretch = 70
-	f.fallbacks = [ui_font()]
-	return f
+	if _display_font_cache == null:
+		var f := SystemFont.new()
+		f.font_names = PackedStringArray(["Noto Sans Display", "Noto Sans", "DejaVu Sans"])
+		f.font_weight = 800
+		f.font_stretch = 70
+		f.fallbacks = [ui_font()]
+		_display_font_cache = f
+	return _display_font_cache
 
 
 static func ui_font() -> Font:
-	var f := SystemFont.new()
-	f.font_names = PackedStringArray(["WenQuanYi Micro Hei", "Droid Sans Fallback", "Noto Sans Display"])
-	f.font_weight = 600
-	return f
+	if _ui_font_cache == null:
+		var f := SystemFont.new()
+		f.font_names = PackedStringArray(["WenQuanYi Micro Hei", "Droid Sans Fallback", "Noto Sans Display"])
+		f.font_weight = 600
+		_ui_font_cache = f
+	return _ui_font_cache
 
 
 static func ui_font_bold() -> Font:
-	var f := SystemFont.new()
-	f.font_names = PackedStringArray(["WenQuanYi Micro Hei", "Droid Sans Fallback", "Noto Sans Display"])
-	f.font_weight = 800
-	return f
+	if _ui_font_bold_cache == null:
+		var f := SystemFont.new()
+		f.font_names = PackedStringArray(["WenQuanYi Micro Hei", "Droid Sans Fallback", "Noto Sans Display"])
+		f.font_weight = 800
+		_ui_font_bold_cache = f
+	return _ui_font_bold_cache
 
 
 static func flat(bg: Color, border: Color, bw: int = 1, pad: int = 10, radius: int = 4) -> StyleBoxFlat:

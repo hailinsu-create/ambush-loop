@@ -340,7 +340,9 @@ var _c2_sprint_next: bool = false
 
 
 func _ready() -> void:
+	_diag_memory("main.ready.begin")
 	_resolve_optional_hud()
+	_diag_memory("main.hud.ready")
 	sfx = get_node_or_null("/root/AudioDirector")
 	if sfx == null:
 		sfx = SfxBusScript.new()
@@ -362,7 +364,34 @@ func _ready() -> void:
 	_ensure_presentation_fx()
 	_ensure_touch_hud()
 	_ensure_c2()
+	_diag_memory("main.controllers.ready")
 	_load_level(_resolve_start_level(), false, false)
+	_diag_memory("main.level.ready")
+
+
+func _diag_memory(stage: String) -> void:
+	var line := (
+		"AMBL_MEM stage=%s static_bytes=%d static_peak_bytes=%d objects=%d"
+		% [
+			stage,
+			int(Performance.get_monitor(Performance.MEMORY_STATIC)),
+			int(Performance.get_monitor(Performance.MEMORY_STATIC_MAX)),
+			int(Performance.get_monitor(Performance.OBJECT_COUNT))
+		]
+	)
+	print(line)
+	_diag_append(line)
+
+
+func _diag_append(line: String) -> void:
+	const PATH := "user://ambl_memory_diag.log"
+	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(PATH) else FileAccess.WRITE_READ
+	var file := FileAccess.open(PATH, mode)
+	if file == null:
+		return
+	file.seek_end()
+	file.store_line("%s %s" % [Time.get_datetime_string_from_system(), line])
+	file.flush()
 
 
 func _ensure_c2() -> void:
@@ -2320,6 +2349,7 @@ func _play_mission_ambient() -> void:
 	if sfx.has_method("play_mission_mood"):
 		sfx.play_mission_mood(level.level_id)
 	_sfx("night_enter")
+	_diag_memory("main.mission_audio.started")
 
 
 func _build_route_world() -> void:
