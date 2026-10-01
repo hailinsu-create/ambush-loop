@@ -1,0 +1,47 @@
+name: Cloud technical verification
+on:
+  push:
+    branches: ['codex/**']
+    paths: ['.codex/cloud/**', '.github/workflows/cloud-verification.yml', 'ambush_loop/**']
+  pull_request:
+    paths: ['.codex/cloud/**', '.github/workflows/cloud-verification.yml', 'ambush_loop/**']
+permissions:
+  contents: read
+concurrency:
+  group: cloud-verification-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      AMBUSH_BLENDER_THREADS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Set isolated tool directories
+        run: |
+          echo "AMBUSH_TOOLS_DIR=$RUNNER_TEMP/ambush-tools" >> "$GITHUB_ENV"
+          echo "AMBUSH_DOWNLOAD_CACHE=$RUNNER_TEMP/ambush-downloads" >> "$GITHUB_ENV"
+      - name: Install platform dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 curl unzip xz-utils xvfb xauth libx11-6 libxi6 libxxf86vm1 libxfixes3 libxrender1 libsm6 libgl1 libegl1 libxkbcommon0
+      - name: Install pinned tools outside source checkout
+        run: |
+          mkdir -p "$RUNNER_TEMP/ambush-install"
+          cd "$RUNNER_TEMP/ambush-install"
+          bash "$GITHUB_WORKSPACE/.codex/cloud/install.sh" > "$RUNNER_TEMP/install.log" 2>&1
+      - name: Run real checks on exact commit
+        run: python3 .codex/cloud/verify.py --tools-dir "$AMBUSH_TOOLS_DIR" --output "$RUNNER_TEMP/verification"
+      - name: Upload evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cloud-verification-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/verification/
+            ${{ runner.temp }}/install.log
+          if-no-files-found: error
+          retention-days: 30

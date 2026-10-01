@@ -1,5 +1,11 @@
 # 云端开发、网页评审与 PaperRoute 迁移交接
 
+## 当前后续切片入口
+
+最新续修结果以 [Cloud 生命周期与安装闭环报告](AMBUSH_CLOUD_COMPLETION_REPORT_20261001.md) 为准：`99e6b70` 修复 Xvfb 子进程回收与安装/启动版本脱节，完整回归通过；配置草稿已保存，尚未发布新快照。外部 Project 实际访问需要登录，PLAN/REVIEW 仍 unavailable。以下 7520983 记录为上一轮证据。
+
+从远端最新 `e3faeb58` 建立独立修复分支及 Draft PR #8；实现 `7520983` 使用 Xvfb/OpenGL，完整生成与实际包装器复跑退出 0，错误传播与隔离 Accept→Yard 检查通过。本轮旧方式也正常退出，仅复现 EGL 错误，历史挂起根因仍未确定。详见 [当轮退出修复报告](AMBUSH_CLOUD_EXIT_REPORT_20261001.md) 和 [不依赖本机的外部 GPT 流程](AMBUSH_CLOUD_GPT_REVIEW_PLAN_20261001.md)。外部 PLAN/REVIEW unavailable；原 bootstrap 未更新、未验证新实例部署，PR 未合并、网络权限未改变。下文保留此前任务与本机交接历史，不能据此批准本轮。
+
 日期：2026-10-01。用户要求将游戏开发、原网页 GPT 审核/规划和 PaperRoute 一并迁移；仅本游戏，不涉及其他项目。
 
 ## 范围与保留规则

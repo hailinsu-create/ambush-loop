@@ -1,0 +1,8 @@
+verify	Run real checks on exact commit	﻿2026-10-01T18:42:04.2795952Z ##[group]Run python3 .codex/cloud/verify.py --tools-dir "$AMBUSH_TOOLS_DIR" --output "$RUNNER_TEMP/verification"
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2796596Z [36;1mpython3 .codex/cloud/verify.py --tools-dir "$AMBUSH_TOOLS_DIR" --output "$RUNNER_TEMP/verification"[0m
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2851906Z shell: /usr/bin/bash -e {0}
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2852124Z env:
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2852310Z   AMBUSH_BLENDER_THREADS: 2
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2852549Z   AMBUSH_TOOLS_DIR: /home/runner/work/_temp/ambush-tools
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2852873Z   AMBUSH_DOWNLOAD_CACHE: /home/runner/work/_temp/ambush-downloads
+verify	Run real checks on exact commit	2026-10-01T18:42:04.2853146Z ##[endgroup]

@@ -1,0 +1,40 @@
+{
+  "success": {
+    "exit_code": 0,
+    "expected": 0
+  },
+  "python-failure": {
+    "exit_code": 1,
+    "expected": 1
+  },
+  "timeout": {
+    "exit_code": 124,
+    "expected": 124
+  },
+  "invalid-timeout": {
+    "exit_code": 1,
+    "expected": 1
+  },
+  "term": {
+    "exit_code": 143,
+    "expected": 143
+  },
+  "interrupt": {
+    "exit_code": 130,
+    "expected": 130
+  },
+  "concurrent-0": {
+    "exit_code": 0,
+    "expected": 0
+  },
+  "concurrent-1": {
+    "exit_code": 0,
+    "expected": 0
+  },
+  "concurrent_displays": [
+    ":1",
+    ":0"
+  ],
+  "new_runtime_pids": [],
+  "status": "passed"
+}
