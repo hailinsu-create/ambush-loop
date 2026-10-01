@@ -1,0 +1,161 @@
+# 6 小时开发与修复执行计划
+
+日期：2026-09-29。原执行窗口：T0 = 2026-09-29 15:35:59 UTC 至 21:35:59 UTC。状态：原窗口已结束；当前按用户要求继续未完成诊断和验收，但不延长或改写原 360 分钟记录。外部 GPT 规划与复核已接入。
+
+用户要求先规划一轮 6 小时开发和修复，随后明确开始执行。本轮按开始执行时刻 T0 计时，共 360 分钟；不是定时任务，也不代表后台运行。主目标是解决 Android 音频崩溃，并尽可能完成院子 B2 的剩余验收。六小时是投入上限，修复结果按证据判定。
+
+## 1. 开工基线
+
+- 产品方向沿用 [设计 v2](AMBUSH_DESIGN_V2_20260928.md)：原创三人小队、六个短任务、搜集弹药 → 占领高点 → 埋伏 → 歼灭，安卓横屏、离线。
+- 游戏代码 `340b819de0543a6b116c5f014ccb698a5f410d09`，Draft PR #6；B2/B1/高度/R45 定向门及完整桌面隔离冒烟此前已通过。外部 GPT 实读此提交，未发现坡道移动的新阻断项。
+- 当前文档基线 `20852487203ee26a9c5273f4c3df14f61175d28a`，文档 PR #3。功能依赖链为 R45 PR #2 → M1-A PR #4 → B1 PR #5 → B2 PR #6；规划时核实均未合并，#4/#5/#6 为 Draft。
+- vivo X Fold2 的无线调试、0.6.29/code 78 安装、标题、Back 确认、一次短时标题后台恢复已验证。USB 仍不稳定，本轮沿用已授权的无线通路。
+- 已捕获一次 AudioTrack / libgodot_android.so 的 SIGSEGV，进程运行约 295 秒；具体根因未确认。B2 下坡随队、院子真机运行及视觉证据未齐。
+- 上次标题静置验证被中断，只有启动截图和后来进程仍存活的查询；没有连续观察记录，不能补记成完成的 6 分钟测试。
+- 现有游戏 worktree 的未跟踪 `r45_sweep_gate.gd.uid` 保留。修改前记录各工作区状态；固定 GPT 评审工作区须核对待评审提交，避免读到旧代码。
+
+## 2. 360 分钟安排
+
+| 相对时间 | 时长 | 开发/修复工作 | 可检查的产出与进入下一步条件 |
+| --- | ---: | --- | --- |
+| 00:00–00:45 | 45 分钟 | 建立真机复现基线：冷启动、标题静置、任务切换、前后台各自记录时间与音频日志；保存当前包身份 | 一条可对齐的事件时间线和崩溃栈，或明确的“本段未复现”记录；开始缩小触发范围 |
+| 00:45–02:00 | 75 分钟 | 单变量诊断：依证据检查循环背景音、任务音轨替换、后台停播/恢复、音效池；必要时增加轻量诊断记录 | 原版与诊断版的对照结果。第 120 分钟决定进入最小修复，还是继续诊断并撤掉后续新功能工作 |
+| 02:00–03:00 | 60 分钟 | 实现证据支持的最小音频修复；验证相关脚本，导出可追溯的修复候选包 | 独立修复提交、实际测试结果、APK 哈希/版本；原触发步骤短时复验通过后进入稳定性检查 |
+| 03:00–04:15 | 75 分钟 | 真机稳定性和必要回归：带音频运行、重复进入/退出任务、后台恢复、Back；运行受影响的隔离门 | 目标至少 60 分钟累计针对性运行，其中至少 30 分钟连续运行；记录操作次数和结果，无崩溃/卡音才继续 B2 验收 |
+| 04:15–05:15 | 60 分钟 | 补 B2 下坡随队与断坡负例；核对院子上下坡、SMG 拾取和平台入口画面 | 新 follow 断言与现有 B2 门通过；同版本真机截图/片段。仅有剩余时间且发现实际视觉问题时，微调坡道箭头或台面边沿 |
+| 05:15–06:00 | 45 分钟 | 固定收尾窗口：外部 GPT 实码评审、处理其阻断反馈、整理版本和证据、提交/推送与接手记录 | GitHub 分支/PR、核实的远端 SHA、修复状态、验证范围及未完成项；时间到时留下可继续工作的明确入口 |
+
+时间合计：45 + 75 + 60 + 75 + 60 + 45 = **360 分钟**。构建、自动回归和真机静置可在互不影响时重叠进行；手机交互与代码修改保持单执行者。
+
+## 3. 具体切片和文件边界
+
+### A. 音频修复：本轮第一优先级
+
+入口为 `ambush_loop/scripts/sfx/audio_director.gd`，按证据再涉及 `sfx_bus.gd`、`game_settings.gd` 及 `title.gd` / `main.gd` 的音频与前后台调用。现有 PCM 字节数、格式与 loop 范围静态一致，mood pitch 实际固定为 1.0；当前没有依据直接改 loop_end 或归因于变速。
+
+诊断先记录 stream 身份、播放/停止/替换、focus 事件和实际 PCM 参数。每次只改变一个待验证因素。测试用静音或暂停某个音轨只能算诊断对照，最终候选须恢复预期音频功能。
+
+修复退出条件：有证据支持的触发机制；修复版对原步骤的对照结果；针对回归风险的必要测试；真机带声音持续运行。仅“这一段没有崩溃”不等于根因已修复。
+
+### B. B2 验收补齐：稳定性通过后推进
+
+重点扩充 `ambush_loop/scripts/m1_b2_yard_height_gate.gd::_check_real_follow_crossing()`：从平台跟随领队下到地面，真实调用随队/运动逻辑并记录逐格路径，必须经过唯一坡道；移除坡道后保持原高度侧。区分 `follow_up` 和 `follow_down` 结果，避免用直接设置位置代替随队验证。
+
+在 vivo 实际院子画面检查低地 → 坡道 → 台面补给 → 坡道 → 低地，验证点击/拾取与可见入口一致。若有表现问题，修改范围限定 `map_draw.gd` 的已有平台/坡道绘制，使用前后同尺度截图判定改善。规则仍维持当前 B2 契约。
+
+### C. 可选视觉小改与后续阶段
+
+最多做一个有真机证据支持的 M1-D 可读性小改。M1-C 高度 LOS 要同时接入预览、敌我攻击和回放，本轮不作为承诺或加时任务。M2 的 HUD、完整资产和动画改版留在独立规划中。
+
+已发现标题和暂停界面仍显示 `COMMANDOS/WW2`（`title.gd`、`ui/pause_overlay.gd`）。记录为后续原创展示文案清理项，与设计 v2 的对外“小队伏击战术”定位统一；本轮优先修运行问题。
+
+## 4. 第 2 小时决策与替代路线
+
+- **已定位可重复触发面：** 进入对应最小修复，并保留原版对照。修复后仍崩溃则撤掉 B2 新代码/视觉修改，继续处理本缺陷。
+- **可复现但未定因：** 第 120–315 分钟转为符号化栈、事件记录和单变量定位；保留最后 45 分钟交接。交付诊断构建和证据，状态写“未修复”。
+- **一直未复现：** 继续四类场景的带音频运行，记录真实时长与次数；保留生产行为，结论写“在 X 分钟、Y 次切换中未复现”。可以整理已有 B2 场景证据，不把它升级为稳定性已解决。
+- **手机断开/不可用：** 自动重新发现已授权的无线设备并重连；两次有明确结果的恢复尝试后仍不可用，就推进桌面可做的诊断、B2 下坡断言及可安装候选包。设备验收写“未验证”，需要重新授权时才联系用户。
+- **构建、回归或评审超时：** 优先占用 B2/可选视觉时间；最后 45 分钟仍保留。运行未结束的检查记录进程、日志和状态，不能写通过或宣布可合并。
+
+## 5. 验证与提交规则
+
+- 测试按实际改动选择。音频生命周期变更须验证相应前后台/任务切换及完整隔离 smoke；B2 门变更须执行真实上下坡/随队门。B1、高度和 R45 作为兼容门在最终相关候选执行一次，只有新改动或新失败才重复。
+- 所有会清理测试数据的脚本经 `scripts/run_isolated_test.ps1` / `.sh`；记录退出码、完成标记和 `PLAYER_DATA_UNCHANGED=1`。桌面静音驱动通过不替代 Android 音频结果。
+- 真机记录源码 SHA、APK SHA-256、版本、运行区间、任务/前后台/Back 次数、截图与崩溃摘要。修改运行时代码后，先核实本地/远端和已分发的最高 versionCode，再给候选分配递增身份；诊断包和修复包分清，避免覆盖后无法追溯。
+- 音频修复和 B2 验收改动分开提交；根据实际依赖建立修复分支/PR。现有 Draft PR 链不因本轮时间到而自动合并。新增 PR 必须附当前任务。
+- 原游戏 GPT 对话持续复用，先确认连接器读到本轮待审代码，再进行独立评审。新发现记录到问题清单，功能/真机证据与 GPT 意见共同决定当前状态。
+- 所有规划和接手文档进入游戏仓库；只同步游戏截图和去敏日志摘要。APK/缓存/存档/密钥与网络配对信息不入源码 Git。
+
+## 6. 外部 GPT 规划记录
+
+本计划依据 2026-09-29 原项目对话的真实回复 `6b207e0a-826e-4d2d-95cf-cd9d58cacb0c` 整理。GPT 确认读取的代码为 `340b819`，建议按 45/75/60/75/60/45 分钟分配、两小时仍未定位就撤掉新功能、保留最后 45 分钟交接；认为 M1-C 超出本轮合理范围，只把 M1-D 局部可读性列为条件目标。
+
+Codex 补充了中断测试不能补记通过、候选构建身份、测试不重复空跑及 PR 依赖处理。此前音频诊断计划保留为技术证据入口，本文件规定其本轮时间安排；产品设计 v2 与各阶段退出门继续有效。
+
+## 7. 本轮应交付什么
+
+理想交付：带音频稳定运行的修复候选 + 根因/对照记录 + B2 下坡随队与院子画面证据 + 外部代码评审 + GitHub 交接。
+
+若音频仍阻塞：交付可复现的诊断材料、明确的已排除/未排除项、诊断包身份、下一步操作与独立提交；不会把这类交付标为修复完成。六小时结束不代表 M0/M1/M2 或 1.0 完成，真人首局和完整战役验证仍独立安排。
+
+## 8. 执行进展与六小时交接（窗口于 2026-09-29 21:35:59 UTC 结束；记录于 21:40 UTC）
+
+- T0 已登记为 `2026-09-29 15:35:59 UTC`，本轮窗口至 `21:35:59 UTC`；六小时窗口现已结束。
+- 已复核 B2 worktree `codex/m1-b2-playable-yard`、提交 `340b819`，原有用户文件 `r45_sweep_gate.gd.uid` 保留；音频诊断 worktree 基于同一提交。
+- Godot 4.7.2 隔离完整 smoke 的先前记录为 exit 0，包含 `SMOKE_OK_LIFECYCLE`、`SMOKE_SLICE_COMPLETE` 和 `PLAYER_DATA_UNCHANGED=1`。这不是 Android native stability 通过，也不补记为新的连续真机静置测试。
+- 复用原 ChatGPT 项目及已授权 MCP 工作区。其 `workspace_info` 仍为 clean `340b819`。外部 GPT 复核建议先在零生产代码变化下确认 briefing → yard；两次未确认后建议只在 `AcceptCta.pressed` 边界加可观察 marker，以区分 touch 未命中与 scene transition 失败。
+- vivo X Fold2 上 v0.6.29/code 78 两次从标题进入任务列表和 briefing；点击接受任务按钮中心与右侧后，+2 秒/+700 毫秒仍是同一 PID、同一 Godot Activity、同一 briefing 画面。没有 yard-entry 证据。PID 21075 与 26195 后续分别被 Android 记录为 `LOW_MEMORY`，RSS 26 MB 与 20 MB；抽查未发现新 SIGSEGV。该分类不证明原因，也不能归因于音频。
+- 第 120 分钟 gate 未取得音频根因，因此本轮没有推进 M1-C、M1-D、B2 下坡/视觉验收或猜测性音频修复。当前只在隔离诊断 worktree 的 `title.gd` 按评审建议新增 `ANDROID_ACCEPT_PRESSED` 日志；Godot 4.7.2 Android debug export 成功，APK 版本/签名与手机现有包匹配。vivo 已显示外部来源风险确认页，安装尚未完成，等待用户授权；未卸载、未清除存档。
+- 执行输出和去敏设备摘要已通过同一 C2C 工作区记录；设备截图与 APK 保持在本地忽略构建/证据目录，不进源码 Git。
+
+### 六小时窗口结论
+
+- 执行窗口为 `15:35:59–21:35:59 UTC`。窗口结束时音频根因仍未定位，未修改生产音频路径，也未宣称修复。
+- 诊断 APK 已构建、哈希/签名已记录，但 vivo 风险页的安装确认没有获得用户授权；设备仍是 v0.6.29/code 78。因此 callback marker、yard 进入、真机音频稳定性和 B2 反向随队均未验证。
+- 当前可继续的唯一门槛：用户明确授权越过 vivo 外部 APK 风险确认后，安装同包诊断更新并观察一次 `ANDROID_ACCEPT_PRESSED`。marker 未出现时查触摸命中/坐标；出现但不转场时再查 scene transition。音频和 B2 不并行改动。
+- 保持 `codex/android-audio-crash` worktree 的 marker 改动为诊断性未提交状态；保留 `r45_sweep_gate.gd.uid` 用户文件。现有 Draft PR 不合并。
+
+**接手下一步：** 窗口到期前未收到授权；电脑端等待中的 ADB install 客户端已停止，手机风险页未操作，诊断 APK 保留在本地构建目录。用户之后回复“授权继续安装”即可从该门槛续做。GitHub 本计划仍在 PR #3，执行进度不代表游戏功能或稳定性验收通过。
+
+## 9. 2026-09-30 窗口外的安全诊断延续
+
+本节记录用户要求启动本计划后的续查。原六小时窗口已于 2026-09-29 21:35:59 UTC 结束；以下是后续新增证据，不把原窗口延长或改写成通过。
+
+- 重新读取 Vivo 的 crash buffer 与系统 DropBox tombstone，确认 2026-09-29 22:43:23（UTC+08:00）存在 PID 29708、前台运行 294 秒的原生崩溃；版本为 0.6.29/code 78。崩溃为 `SIGSEGV / SEGV_MAPERR`，线程 `AudioTrack`，fault address `0xb400007945bb0000`。Android `AudioTrackCallback::onMoreData` 是可见的首个系统帧；其上方 5 帧位于 `libgodot_android.so`，但当前 tombstone 没有函数名/源码行。该证据确认旧的原生音频回调崩溃，不等于已确定根因。
+- 另有 2026-09-30 多个进程退出被 `ApplicationExitInfo` 分类为 `LOW_MEMORY`。它们与 9 月 29 日的 native SIGSEGV 分开记录；没有采样到退出时内存压力，也没有证据把 `LOW_MEMORY` 归因于音频。
+- 从手机现装 APK 提取的 `libgodot_android.so` Build ID 为 `379cc52e73d31af89517a529d3bbc6108b808986`，与 Godot 4.7.2 `android_debug.apk` 中的库完全一致。该库没有 `.debug_*` 或 `.symtab` 节；本机 `android_release.apk` 的库 Build ID 是 `270121fef88100c19643517c328b5868e01d345c`，与崩溃库不同。Godot 文档要求用匹配架构和构建的 native symbols 执行 `ndk-stack`；因此不拿 release 符号包冒充 debug 崩溃的准确符号化结果，下一步需要精确匹配的 debug symbols 或可复现的带符号构建。
+- 在本地诊断 worktree 新增测试门 `scripts/accept_cta_flow_gate.gd` 并加入隔离测试入口白名单。Godot 4.7.2 headless 隔离运行通过：真实执行标题 → 任务列表 → briefing → `AcceptCta.pressed` 信号 → `_enter_mission`，输出 `ANDROID_ACCEPT_PRESSED level=yard`、`ACCEPT_CTA_FLOW_OK level=yard frames=1`、退出码 0 和 `PLAYER_DATA_UNCHANGED=1`。这是桌面上对 GDScript 回调/场景切换的验证，不证明 Android 触摸命中或 Android 原生音频稳定。
+- 当前诊断 APK 尚未安装，手机的 vivo 外部来源风险确认页保持原样。未在手机上点确认、未卸载或清除数据。音频生产代码和 B2 玩法均未修改。
+- 固定的外部 GPT 连接工作区当前仍是 clean `340b819`，不是本地诊断 worktree；因此此轮新测试代码还没有通过 GPT 对精确代码差异的复核。早先 marker 建议来自 GPT，但不把那次建议算作本次测试门的代码评审。
+
+**续做顺序：** 先等待用户对手机安装确认作明确授权；获准后仅安装同签名诊断更新、点击一次“接受任务”、分别记录 marker 与院子画面。只有该触摸/转场链路明确后，再以单变量对照定位音频回调触发面。未获授权时只继续精确符号化和桌面可做的验证；不做猜测性音频修复，也不把本机 smoke 当成真机通过。Godot 官方流程：[Android 崩溃符号化](https://docs.godotengine.org/en/latest/tutorials/platform/android/resolving_crashes_on_android.html)，[4.7.2 官方发行资产](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)。
+
+## 10. 2026-09-30 用户要求继续执行后的状态核对
+
+记录时间：2026-09-30 06:56（Asia/Shanghai）。这是原六小时窗口之后的安全续查，不计入原窗口，也不表示缺失的阶段已通过。
+
+- C2C 版本检查结果为 0.1.3、无需更新；sandbox 写入授权已存在。`doctor` 全项通过，命名连接正常。既有 session 仍为 task `c2c_audio_device` / iteration 4 / `EXECUTED_LOCAL` / `waitingFor=USER`，要求先等候诊断 APK 安装授权；没有重发 INIT/EXECUTED、没有改写 checkpoint。
+- 复核 C2C 固定工作区仍为 clean `340b819`。当前 CTA 测试门和接受按钮 marker 在独立的 `codex/android-audio-crash` 诊断 worktree，尚未进入 GPT 连接器工作区；因此没有新的 GPT 实码评审结论。
+- ADB 只读查询确认无线调试设备在线、USB 连接仍不稳定；安装包仍是 `0.6.29` / code `78`，`lastUpdateTime=2026-09-29 22:37:36`。手机前台显示 `PackageInterceptActivity`（vivo 外部来源安装风险确认）。本次没有点击确认、安装/卸载、清理存档或改变手机状态。
+- crash buffer 仍包含 2026-09-29 22:43:23 的 AudioTrack `SIGSEGV / SEGV_MAPERR`；栈内 `libgodot_android.so` Build ID 是 `379cc52e73d31af89517a529d3bbc6108b808986`，`AudioTrackCallback::onMoreData` 为首个可见系统帧。抽查未发现新的 `com.ambushloop.game` 原生崩溃；其它 init 进程 SIGABRT 与本游戏崩溃分开。
+- 静态只读复核 `audio_director.gd` / `sfx_bus.gd`：背景音乐与 mood 是常驻 `AudioStreamPlayer`，音效按 cue 复用池化 player；PCM 循环 WAV 为 mono/16-bit/22,050 Hz。任务 mood 切换前会 stop 并替换 stream，后台静音会 stop 当前 player。该结构帮助界定诊断面，但不能单独证明崩溃因果关系；本次没有更改生产音频代码。
+- 官方 [Godot 4.7.2 发布资产](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)包含 Android `template_release` 符号包，但没有与现装 Android `template_debug` Build ID 对应的符号包。release 符号与本次崩溃的 debug 库不匹配，不能用于准确符号化；没有下载 744 MB 的不匹配资产，也没有声称取得源码行。
+
+**当前安全下一步：** 保持手机安装确认页不动。明确获准后再安装同签名诊断包、验证一次真实触摸 marker/院子转场；获得 marker 证据后，再决定如何做 Android 音频单变量对照。此前桌面 CTA gate 通过仍不替代真机验收；音频根因、Android 稳定时长和 B2 `follow_down` 仍未完成。
+
+## 11. 2026-09-30 精确符号构建核验
+
+本节记录窗口外为 AudioTrack 崩溃尝试的引擎符号化路径。原六小时窗口仍结束于 `2026-09-29 21:35:59 UTC`，本次不延长该窗口。
+
+- Godot 4.7.2-stable 官方源码压缩包 SHA-256 为 `a18ce0ccec3ecc40b0dd6c4f5132ca934e9fb7c2979717940ff32aee1eb35481`；生成的版本提交哈希 `ed1daf0bf001b61586d9930840f2f1394092c079` 与官方 4.7.2-stable 发布记录一致。使用 Android NDK `29.0.14206865`、`target=template_debug`、`production=yes`、`debug_symbols=yes`、`separate_debug_symbols=yes` 完成全量 arm64 模板构建，SCons exit 0，耗时 `03:15:31.86`。
+- 构建生成本地临时文件 `bin/android-template-debug-native-symbols.zip`，SHA-256 `757D3DC3CC6FBFEBDC0CC7B29A967C5D9C73242EC39DA2A20A5BEB508ED7F991`，含 `arm64-v8a/libgodot_android.so`。符号 ELF 与同次构建的 stripped 库 Build ID 均为 `17025cdc98e86c90f4769e65bcaf32d79792c43e`，证明符号包与本机这次构建彼此匹配。
+- 该 Build ID **不等于**手机 tombstone 中现装引擎库的 `379cc52e73d31af89517a529d3bbc6108b808986`。因此不对手机崩溃栈的五个引擎 offset 运行/报告这份不匹配符号的源码行；音频根因仍未定位，没有生产音频修复或修复验证。
+- 2026-09-30 03:12 UTC 的 ADB 恢复记录：先前 USB 设备为 `offline`、Wi‑Fi 设备未列出。第一次 `adb reconnect offline` 后 USB 短暂显示 `device`，但只读 package 查询返回 `error: closed`，mDNS 无服务；第二次重连后 `adb devices -l` 为空。当前设备不可读，包身份无法重新确认。未安装或卸载 APK，未清除应用数据/存档，也未操作 vivo 风险确认；音频诊断 worktree 的 marker 与桌面 CTA gate 状态保持此前记录，不冒充真机结果。
+- 手机再次联机且用户明确授权安装同签名诊断更新后，仍先验证 `ANDROID_ACCEPT_PRESSED` 与 yard 转场；仅在取得真机操作证据后再设计 AudioTrack 单变量对照。Android 音频稳定性与 B2 `follow_down` 仍未通过。
+
+**本节状态截至 2026-09-30 03:12 UTC；设备重连、安装授权及后续真机结果见第 12 节。**
+
+官方版本核对：[Godot 4.7.2-stable 发布记录](https://github.com/godotengine/godot/releases/tag/4.7.2-stable)。本地引擎源码、NDK、构建缓存与符号 ZIP 不进入游戏仓库。
+
+## 12. 2026-09-30 诊断包真机 CTA 复验
+
+用户授权安装同签名诊断更新；未卸载游戏，也未清除应用数据或存档。手机为 vivo X Fold2（PD2266 / V2266A），通过已授权的无线 ADB 连接。
+
+- 候选包 `AmbushLoop-accept-diag-20260930.apk`：SHA-256 `212C1B72518F47D3E0B707A48CAF6190E7559D2861597B21997AB6D1CD47A4D8`；包名 `com.ambushloop.game`，版本 `0.6.29` / code `78`。候选包、本地安装基线和手机当前 APK 的证书 SHA-256 均为 `7079e51f05b862a5f2656a4e4189a6f9a98810227cef56004b7ed205e724a1c8`。
+- `adb install -r --no-streaming` 返回 `Success`。`lastUpdateTime` 更新为 `2026-09-30 11:39:53`，`firstInstallTime` 仍为 `2026-09-29 22:37:36`，确认是原位覆盖更新而非卸载重装。
+- 更新后可启动标题界面、进入任务列表并打开第一关院子简报；接受任务测试后留存的画面仍是该简报：[真机 CTA 测试截图](evidence/20260930-vivo-after-accept.png)。用户报告点“接受任务”后程序崩溃。随后查询到 Android `ApplicationExitInfo`：PID `24925` 于 `2026-09-30 11:43:26.898` 退出，reason `3 (LOW_MEMORY)`、subreason `0 (UNKNOWN)`、status `0`、RSS `21 MB`、trace 为空；本次退出在系统记录中不是 `APP CRASH(NATIVE)`。
+- 保留的 crash buffer 仍只有 2026-09-29 AudioTrack `SIGSEGV / SEGV_MAPERR` 记录，没有发现 2026-09-30 新的本游戏 native tombstone 或可见脚本致命异常。保留日志中未检索到 `ANDROID_ACCEPT_PRESSED level=yard`，接受任务到院子场景的真机转场**未通过/未证实**。退出原因为 `LOW_MEMORY` 与用户观察到的程序退出相符，但当前数据不足以证明是场景切换代码、系统内存压力或其它 vivo 管理行为所致；不能把低内存记录当作 CTA 成功或音频根因。
+- 后续受控重启停在标题页时，`/proc` 与 `dumpsys meminfo` 交叉测得游戏 RSS 约 `1.40–1.43 GB`、PSS 约 `1.40 GB`、Native Heap 约 `1.19–1.21 GB`；8 秒间隔内数值基本稳定。设备 `MemAvailable` 约 `3.93 GB`。该进程占用异常偏高，是 `LOW_MEMORY` 退出的优先调查线索，但尚不能证明因果；因此暂停第二次 CTA 点击，不让设备重复承受疑似内存压力。
+- 本轮未更改生产游戏代码。AudioTrack 根因、CTA/场景转场、连续稳定性和 B2 `follow_down` 均保持未验收；在归因前不以静音规避音频问题，也不推进 B2 真机视觉验收。
+
+**下一步：** 保留现有日志与存档；先定位标题页约 `1.4 GB` 原生堆的来源，并用游戏进程级采集记录内存变化。确认占用回到可接受范围后，再决定是否进行单次 CTA 复现；采集须覆盖 marker、场景转场及进程退出线索。先厘清 `LOW_MEMORY` 退出，再决定是否需要对 CTA 或音频代码作最小修复。
+
+## 13. 后续 code80、符号匹配及设备不可用交接
+
+本节更新第 12 节的后续状态，不改变已结束的原执行窗口。先前 code80 / `0.6.30-font-cache-diag` 设备证据及外部 GPT iteration 5/6 已确认 Accept → Yard、至少三分钟存活；此前“CTA 未证实”不再是当前阻断项。短时内存记录约 PSS 533 MiB、native heap 306 MiB、RSS 650 MiB；未证明低内存根因、音频修复或长时稳定性。
+
+新全量 Android template_debug/arm64 构建 exit 0、耗时 02:50:26.29，但库 Build ID `f4a54bf106d04f551f8ba43f03fa1ada8ace1526` 不匹配 tombstone/code80 的 `379cc52e73d31af89517a529d3bbc6108b808986`。后续增量构建完成情况未证实，未用这套符号解释历史 PC。历史 AudioTrack SIGSEGV 仍未定因。
+
+本次发现不到已授权 vivo 的无线服务，已知地址重连失败；当前 USB 型号是另一设备 AAP-AN00。当前无法取得 vivo 新的稳定性或 B2 操作证据。外部 GPT 读取 iteration 7 实际输出后，建议限定 75–90 分钟补真实桌面下坡随队、双向断坡 scheduler 反例及隔离回归；不把该结果升级为 Android/B2 完整验收。
+
+续做范围、实际门禁与最终评审见 [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。游戏音频及其它生产逻辑保持既有状态；无新 APK 安装。后续设备恢复和精确符号仍是独立未完成事项。

@@ -200,6 +200,7 @@ var scrub_slider: HSlider = null
 var event_log: Control = null
 var level_label: Label = null
 var tut_label: Label = null
+var sweep_hint_shown_this_attempt := false
 var flash_label: Label = null
 var role_box: Control = null
 var role_card_buttons: Array[Button] = []
@@ -339,7 +340,9 @@ var _c2_sprint_next: bool = false
 
 
 func _ready() -> void:
+	_diag_memory("main.ready.begin")
 	_resolve_optional_hud()
+	_diag_memory("main.hud.ready")
 	sfx = get_node_or_null("/root/AudioDirector")
 	if sfx == null:
 		sfx = SfxBusScript.new()
@@ -361,7 +364,34 @@ func _ready() -> void:
 	_ensure_presentation_fx()
 	_ensure_touch_hud()
 	_ensure_c2()
+	_diag_memory("main.controllers.ready")
 	_load_level(_resolve_start_level(), false, false)
+	_diag_memory("main.level.ready")
+
+
+func _diag_memory(stage: String) -> void:
+	var line := (
+		"AMBL_MEM stage=%s static_bytes=%d static_peak_bytes=%d objects=%d"
+		% [
+			stage,
+			int(Performance.get_monitor(Performance.MEMORY_STATIC)),
+			int(Performance.get_monitor(Performance.MEMORY_STATIC_MAX)),
+			int(Performance.get_monitor(Performance.OBJECT_COUNT))
+		]
+	)
+	print(line)
+	_diag_append(line)
+
+
+func _diag_append(line: String) -> void:
+	const PATH := "user://ambl_memory_diag.log"
+	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(PATH) else FileAccess.WRITE_READ
+	var file := FileAccess.open(PATH, mode)
+	if file == null:
+		return
+	file.seek_end()
+	file.store_line("%s %s" % [Time.get_datetime_string_from_system(), line])
+	file.flush()
 
 
 func _ensure_c2() -> void:
@@ -2319,6 +2349,7 @@ func _play_mission_ambient() -> void:
 	if sfx.has_method("play_mission_mood"):
 		sfx.play_mission_mood(level.level_id)
 	_sfx("night_enter")
+	_diag_memory("main.mission_audio.started")
 
 
 func _build_route_world() -> void:
@@ -3308,6 +3339,7 @@ func door_slam_dust_active() -> bool:
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	phase = Phase.SETUP
+	sweep_hint_shown_this_attempt = false
 	tool = Tool.DEPLOY
 	fail_reason = ""
 	pending_result = ""
@@ -9201,6 +9233,11 @@ func _follow_nudge_path_end(op: OperatorUnit, dest_w: Vector2) -> bool:
 	var last: Vector2 = p[p.size() - 1]
 	if last.distance_squared_to(dest_w) < 4.0:
 		return true
+	if grid != null and grid.uses_height_topology():
+		if not grid.world_segment_traversable(p[p.size() - 2], dest_w):
+			p[p.size() - 1] = dest_w
+			op.set_move_path(p)
+			return op.is_moving()
 	p[p.size() - 1] = dest_w
 	op.move_path = p
 	return true
@@ -11998,6 +12035,7 @@ func _tick_raid_decoys(dt: float) -> void:
 
 func _enter_sweep() -> void:
 	phase = Phase.SWEEP
+	var last: bool = raid != null and raid.is_last_wave(level)
 	if raid:
 		raid.mark_wave_cleared()
 	for op in operators:
@@ -12017,12 +12055,17 @@ func _enter_sweep() -> void:
 		speed_button.disabled = true
 	_set_watch_view_buttons(false)
 	_refresh_alarm_cta()
-	var last: bool = raid != null and raid.is_last_wave(level)
-	if last:
+	if not sweep_hint_shown_this_attempt:
+		var hint := "搜尸 · 空格撤离" if last else "搜尸 · 准备下一波"
+		_flash(hint, Color(0.85, 0.92, 0.45) if last else Color(0.95, 0.82, 0.38))
+		sweep_hint_shown_this_attempt = true
+	elif last:
 		_flash("打扫战场 · 空格撤离封锁", Color(0.85, 0.92, 0.45))
-		status_label.text = "最后一波已清。走近尸体搜刮，空格撤离。"
 	else:
 		_flash("打扫战场 · 空格下一波", Color(0.95, 0.82, 0.38))
+	if last:
+		status_label.text = "最后一波已清。走近尸体搜刮，空格撤离。"
+	else:
 		status_label.text = "本波已清。搜刮掉落，空格拉下一波警报。"
 	_sfx("ui")
 	if selected:
@@ -12044,6 +12087,7 @@ func _on_sweep_commit() -> void:
 
 
 func _begin_next_wave() -> void:
+	_clear_flash()
 	if raid:
 		raid.advance_wave()
 	run_id += 1
@@ -12075,6 +12119,7 @@ func _begin_next_wave() -> void:
 
 
 func _extract_win() -> void:
+	_clear_flash()
 	phase = Phase.WON
 	battle_log.mark_terminal(sim.tick, "win")
 	_ensure_watch_cinema()

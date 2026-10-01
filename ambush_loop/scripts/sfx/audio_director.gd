@@ -17,13 +17,42 @@ var _mood_stream: AudioStreamWAV
 
 
 func _ready() -> void:
+	_diag_memory("audio.ready.begin")
 	_ensure_buses()
 	super._ready()
+	_diag_memory("audio.sfx_pool.ready")
 	_setup_music()
+	_diag_memory("audio.music_beds.ready")
 	var gs = get_node_or_null("/root/GameSettings")
 	if gs and not gs.changed.is_connected(_on_settings_changed):
 		gs.changed.connect(_on_settings_changed)
 	_on_settings_changed()
+	_diag_memory("audio.ready.done")
+
+
+func _diag_memory(stage: String) -> void:
+	var line := (
+		"AMBL_MEM stage=%s static_bytes=%d static_peak_bytes=%d objects=%d"
+		% [
+			stage,
+			int(Performance.get_monitor(Performance.MEMORY_STATIC)),
+			int(Performance.get_monitor(Performance.MEMORY_STATIC_MAX)),
+			int(Performance.get_monitor(Performance.OBJECT_COUNT))
+		]
+	)
+	print(line)
+	_diag_append(line)
+
+
+func _diag_append(line: String) -> void:
+	const PATH := "user://ambl_memory_diag.log"
+	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(PATH) else FileAccess.WRITE_READ
+	var file := FileAccess.open(PATH, mode)
+	if file == null:
+		return
+	file.seek_end()
+	file.store_line("%s %s" % [Time.get_datetime_string_from_system(), line])
+	file.flush()
 
 
 func _exit_tree() -> void:

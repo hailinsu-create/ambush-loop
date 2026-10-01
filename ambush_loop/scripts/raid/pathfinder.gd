@@ -92,7 +92,7 @@ static func _neighbors(grid: AmbushGrid, c: Vector2i) -> Array[Vector2i]:
 	var dirs := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
 	for d in dirs:
 		var n: Vector2i = c + d
-		if grid.in_bounds(n.x, n.y) and not grid.is_blocked(n.x, n.y):
+		if grid.can_traverse_height(c, n):
 			out.append(n)
 	return out
 

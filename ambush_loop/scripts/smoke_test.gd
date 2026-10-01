@@ -20,7 +20,7 @@ func _init() -> void:
 func _run() -> void:
 	var ver := str(ProjectSettings.get_setting("application/config/version", ""))
 	print("SMOKE_GAME_VERSION ", ver)
-	if ver != "0.6.28":
+	if ver != "0.6.29":
 		push_error("SMOKE_BAD_VERSION %s" % ver)
 		quit(90)
 		return
@@ -103,6 +103,8 @@ func _run() -> void:
 	if not await _assert_skip_to_outcome(main):
 		return
 	if not await _assert_raid_campaign(main):
+		return
+	if not _assert_sweep_hint(main):
 		return
 	return
 
@@ -13388,6 +13390,46 @@ func _assert_teaching(main) -> bool:
 	if not _assert_night_handoff(main):
 		return false
 	print("SMOKE_OK_TEACHING beats=6 timeline=1 path=1 spawn_teach=1 overlay=1")
+	return true
+
+
+func _assert_sweep_hint(main) -> bool:
+	main._start_setup(false, false)
+	main._enter_sweep()
+	var expected := "搜尸 · 准备下一波"
+	if main.flash_text() != expected:
+		push_error("SMOKE_SWEEP_FIRST_HINT text=%s" % main.flash_text())
+		quit(78)
+		return false
+	if expected.length() > 16:
+		push_error("SMOKE_SWEEP_HINT_TOO_LONG len=%s" % expected.length())
+		quit(78)
+		return false
+	main._begin_next_wave()
+	if main.flash_text() != "":
+		push_error("SMOKE_SWEEP_HINT_CARRIED_INTO_WAVE text=%s" % main.flash_text())
+		quit(78)
+		return false
+	main._enter_sweep()
+	if main.flash_text() == expected:
+		push_error("SMOKE_SWEEP_HINT_REPEATED_WITHIN_ATTEMPT")
+		quit(78)
+		return false
+	main._start_setup(false, false)
+	main.raid.wave_index = main.raid.wave_count(main.level) - 1
+	main._enter_sweep()
+	expected = "搜尸 · 空格撤离"
+	if main.flash_text() != expected or expected.length() > 16:
+		push_error("SMOKE_SWEEP_LAST_HINT text=%s len=%s" % [main.flash_text(), expected.length()])
+		quit(78)
+		return false
+	main._extract_win()
+	if main.flash_text() != "零逃逸 · 撤离封锁":
+		push_error("SMOKE_SWEEP_HINT_CARRIED_INTO_EXTRACTION text=%s" % main.flash_text())
+		quit(78)
+		return false
+	main._start_setup(false, false)
+	print("SMOKE_OK_SWEEP_FIRST_HINT per_attempt=1 max_chars=16")
 	return true
 
 
