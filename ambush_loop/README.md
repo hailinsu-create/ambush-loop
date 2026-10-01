@@ -53,6 +53,18 @@ Desktop presets: `ambush_loop/export_presets.cfg` (Linux / Windows / **Android A
 
 `build/` is gitignored. You do not need export templates to *play* from the editor. This cloud VM often cannot produce a signed APK; export on a machine with the Android SDK.
 
+## Android acceptance preflight
+
+Before the recorded vivo/code80 acceptance run, check device and package identity without modifying the phone:
+
+```bash
+python ambush_loop/scripts/android_preflight.py --adb /absolute/path/to/adb
+# With multiple USB/Wi-Fi entries, explicitly add --serial <target>.
+python -m unittest discover -s ambush_loop/scripts -p test_android_preflight.py -v
+```
+
+Run from the repository root. Defaults require model `V2266A`, package `com.ambushloop.game`, versionCode `80` and versionName `0.6.30-font-cache-diag`. Exit 0 / `ready=true` means only that these identities match; signature, APK provenance, real interaction, audio and stability are separate gates. Exit 2 rejects absent/ambiguous/unauthorized devices, missing or mismatching packages, and failed/timed-out ADB commands. Register a new test package before overriding expected-version arguments. JSON does not expose the device serial or full package dump.
+
 ## Controls
 
 | Key / UI | Action |
