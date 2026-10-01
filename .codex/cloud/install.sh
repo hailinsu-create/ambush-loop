@@ -21,3 +21,4 @@ if [[ -f "ambush_loop/project.godot" ]]; then
   "${bin_dir}/godot" --headless --editor --path ambush_loop --import
 fi
 printf 'Ambush Loop cloud toolchain ready: %s\n' "${bin_dir}/godot"
+bash "$(dirname "${BASH_SOURCE[0]}")/install-look.sh"

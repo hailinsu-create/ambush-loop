@@ -9,3 +9,4 @@
 - 网页 GPT PLAN/REVIEW 可用时记录实际反馈；不可用时标注 unavailable，不臆造 approve。密钥和签名文件不得入库。
 - 旧 `.cursor/docs/AMBUSH_HANDOVER_20260927.md` 含历史环境与分支状态；当前执行状态以 M0 报告及最新提交为准。
 - Codex Cloud 使用 `.codex/cloud/install.sh` 固定 Godot 4.7.2，并按 `.codex/cloud/START.md` 启动。云端只形成 desktop/headless 证据；APK、触控、音频、内存和 vivo 真机验收仍在本机完成。
+- 云端保留网页 GPT PLAN/REVIEW 与 PaperRoute：入口在 `.agents/skills/`，评审核对精确提交，Look 按既有 Blender 脚本再生成并验证。迁移交接见 `.cursor/docs/AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md`；不得把连接正常当作新提交已评审。

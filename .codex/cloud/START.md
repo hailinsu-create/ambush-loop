@@ -8,3 +8,5 @@
 5. For gameplay changes, run the relevant focused gate and then the full smoke through the same wrapper.
 6. Cloud results are desktop/headless evidence only. Android APK, touch, audio, memory, and vivo device acceptance remain local gates.
 7. Never commit APKs, signing files, secrets, device logs, or personal phone data.
+8. Run `.codex/cloud/install-look.sh` in environment setup for pinned Blender 5.2.2 and glTF tools. Put `$HOME/.local/bin` on PATH. Use `.agents/skills/paperroute-game-build/SKILL.md` for Look work; preserve the existing ArtSource pipeline and Engine/Look separation. Linux graphics-library dependencies and actual rendering must be checked in the published environment.
+9. Use `.agents/skills/ambush-web-gpt-review/SKILL.md` and `.codex/cloud/WEB_REVIEW.md` for external PLAN/REVIEW. Verify exact source revision before accepting any response; the old local connector does not automatically follow this branch.
