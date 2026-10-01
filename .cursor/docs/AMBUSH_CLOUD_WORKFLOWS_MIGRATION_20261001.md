@@ -60,6 +60,10 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 
 2026-10-01 只读复核该环境详情与编辑页：任务运行期“代理网络访问”设为“关闭”；页面说明设置/维护脚本阶段始终启用网络，设置完成后才禁用任务运行期网络。因此，后续任务运行期的白名单主机与 PyPI 403 探测，符合当前运行期禁网设置，不能证明设置阶段也被同一策略拦截。独立成立的失败仍是安装脚本阶段的 GitHub Release CONNECT 403；其根因尚未确定。未开启任务运行期网络，也未改变环境或安全设置；开启它会扩大任务代码的出站访问，且不保证修复设置阶段下载。
 
+2026-10-01 再次核对已发布环境编辑页：保存的设置脚本仍固定读取旧提交 `c8a9fa4806fb95173b7f6ce2481c50a1dab96ef2`；仓库中的 `.codex/cloud/environment-setup.sh` 已固定到包含 SHA-512 校验的 `5f6cdff8ae541b2eaf4e9d942dfe8af588740ca3`，并显式安装 `coreutils`/`curl`。一次只修改脚本字段的自动化尝试超时；随后读回确认表单仍是旧值，未点击保存，云环境没有改变。重试前需先解决页面控制延迟，并在保存后重新读取确认。
+
+官方 [Godot 4.7.2 下载页](https://godotengine.org/download/archive/4.7.2-stable/)的 Linux 链接从 `downloads.godotengine.org` 重定向到 `godot-releases.nbg1.your-objectstorage.com`；后者不属于 Package managers 预设。现有固定安装器使用 GitHub Release 与固定 SHA-512；未经明确授权，不改用该重定向源、不新增网络域名。
+
 2026-10-01 查阅官方排障说明：环境域名设置与 Enterprise Agent Security 策略可能同时生效；特定 `allow_local_binding=false` 策略还可能导致即使域名已放行，云任务仍无法连到上游代理。[Cloud 环境说明](https://learn.chatgpt.com/docs/environments/cloud-environments) · [Agent Security 网络策略](https://learn.chatgpt.com/docs/enterprise/agent-security)。目前没有证据确认此账号属于 Enterprise workspace，也没有有效策略快照能确认该字段；这只是一个待核实的可能原因，不是已诊断根因。若工作区有管理员，应核对 Cloud 环境的有效 Agent Security 网络策略；若没有，应携任务 ID 与 `HTTP CONNECT 403` 结果向 OpenAI 支持反馈。不要把环境切到“全部不受限制”，也不要绕过代理。
 
 本机 `codex/cloud-main` 与 `origin/codex/cloud-main` 在复核时均为上述 SHA。工作区里原有未跟踪文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid` 与 `error.log` 保留，未纳入本次文档变更。用户无需在手机端另建云任务；请在 Codex Cloud 任务列表查找标题，或使用上方正确链接。
