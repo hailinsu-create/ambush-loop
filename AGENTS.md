@@ -8,3 +8,4 @@
 - 每次只做一个可验证切片。记录源码提交、实际测试退出码、截图或真机证据；尚未验证的事项明确标为待验证。
 - 网页 GPT PLAN/REVIEW 可用时记录实际反馈；不可用时标注 unavailable，不臆造 approve。密钥和签名文件不得入库。
 - 旧 `.cursor/docs/AMBUSH_HANDOVER_20260927.md` 含历史环境与分支状态；当前执行状态以 M0 报告及最新提交为准。
+- Codex Cloud 使用 `.codex/cloud/install.sh` 固定 Godot 4.7.2，并按 `.codex/cloud/START.md` 启动。云端只形成 desktop/headless 证据；APK、触控、音频、内存和 vivo 真机验收仍在本机完成。
