@@ -4,7 +4,7 @@
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y unzip xz-utils libx11-6 libxi6 libxxf86vm1 libxfixes3 libxrender1 libsm6 libgl1 libegl1 libxkbcommon0 xvfb
+apt-get install -y coreutils curl unzip xz-utils libx11-6 libxi6 libxxf86vm1 libxfixes3 libxrender1 libsm6 libgl1 libegl1 libxkbcommon0 xvfb
 cd /workspace/ambush-loop
 task_setup="$(mktemp -d)"
 base="https://raw.githubusercontent.com/hailinsu-create/ambush-loop/c8a9fa4806fb95173b7f6ce2481c50a1dab96ef2/.codex/cloud"

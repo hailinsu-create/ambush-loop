@@ -1,6 +1,6 @@
 # Ambush Loop cloud start
 
-1. Run `.codex/cloud/install.sh`; it pins Godot 4.7.2 and performs the required first editor import.
+1. Run `.codex/cloud/install.sh`; it pins Godot 4.7.2, verifies the official release archive's SHA-512 before extraction, and performs the required first editor import.
 2. Read `AGENTS.md` and `.cursor/docs/PLANNING_INDEX.md` before editing.
 3. Run destructive tests only through `ambush_loop/scripts/run_isolated_test.sh`.
 4. First verify the real Accept-to-Yard transition:
