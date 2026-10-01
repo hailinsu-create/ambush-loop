@@ -22,4 +22,4 @@ Ask for the next single playable or visual slice, dependencies, non-goals, focus
 
 Provide exact implementation SHA and test evidence paths. Ask for blocking defects and explicitly distinguish code review, desktop/headless validation, in-engine visuals, and Android/device acceptance. Record the review's source identity, actual response, approval status and unresolved issues in a dated document. If access fails or the reviewer reads an old SHA, status is `unavailable`, not approve.
 
-Cloud environment publication and the first exact-cloud-revision web review remain pending until proven live. Historical GPT reviews remain historical evidence, not approval of this migration.
+The Cloud environment is published and an execution task exists, but the first exact-cloud-revision web review remains pending until it successfully reads and reviews that SHA. Historical GPT reviews remain historical evidence, not approval of this migration.

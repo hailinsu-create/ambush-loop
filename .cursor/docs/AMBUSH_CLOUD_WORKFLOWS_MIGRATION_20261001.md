@@ -67,3 +67,9 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 PaperRoute 依赖核对补充：`.codex/cloud/install-look.sh` 从 `download.blender.org` 下载 Blender 5.2.2 归档及校验文件；该主机不在当前“包管理器 + 5 个域名”列表中。npm 的 `registry.npmjs.org` 属于包管理器预设，不需再加自定义域名。等已允许站点能正常连通后，如需云端 Look 安装，只为 Blender 源站和日志实际证实的重定向目标添加最小域名；先前任务对 `pypi.org` 等均遇到连接阶段 403，所以现在加此域名无法证明修复，也不应扩大权限。
 
 2026-10-01 公共状态页核对：当前仅列出 ChatGPT Space Pages 的错误事件，未列 Codex Cloud/网络出口事件；这不能排除账户级策略或未公告的单独故障。[OpenAI 状态页](https://status.openai.com)。
+
+2026-10-01 复核并更正云任务来源判断：任务页面元数据显示仓库为 `hailinsu-create/ambush-loop`、所选来源分支为 `codex/cloud-main`；任务内 HEAD `56bea5e790080433b565b6f23bb0cf428d0472ea` 与该分支当时的源码 SHA 相同。容器内部显示分支名 `work` 且没有 Git remote，是执行器布局，不足以判定取错仓库；撤回此前的“workspace mismatch”结论。仍然成立的失败是下载阶段 `HTTP CONNECT 403`，Godot、隔离门及 PaperRoute 没有完成。该旧任务不覆盖之后的新提交，也不为它们提供评审。
+
+2026-10-01 本地安装安全修复已提交并推送到 Draft PR #7：`5f6cdff` 为官方 Godot 4.7.2 Linux 归档加入固定 SHA-512 校验，失败时在解压前终止；`8e8ba5d` 将云端 bootstrap 固定到含该校验的安装脚本。显式安装 `coreutils`/`curl`。本机 Git Bash `bash -n` 与 `git diff --check` 均通过；GitHub 分支及 PR #7 最新 SHA 已核对为 `8e8ba5d3f867a5cf9342b580bec392920870a35f`。这不是 Linux 安装、Godot 导入、PaperRoute 渲染或运行测试通过；因云任务仍遇 403，未重复创建新的无效任务。未跟踪用户文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid`、`error.log` 仍保留。
+
+外部 GPT 精确 SHA 评审仍未完成。连接新云端工作区的地址偏好待用户选择（固定 `hailinsu.top` 或临时地址）；在获得选择前不修改原工作区连接。后续若出现实际安全连接授权页，再单独请求用户批准。
