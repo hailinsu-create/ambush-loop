@@ -2,7 +2,7 @@
 
 更新日期：2026-10-01。仅用于本游戏；设计文件不是实现或验收证明。
 
-**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。保留以下开发/真机质量门；工作流入库不代表云环境已发布或新提交已获网页批准。
+**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。云环境现已发布并创建了复验任务，但代理出口返回 HTTP CONNECT 403，Godot/PaperRoute 尚未验收；新提交也尚未取得精确 SHA 的网页 GPT 评审。保留以下开发/真机质量门，工作流入库不代表实现已通过。
 
 ## 当前有效规划
 

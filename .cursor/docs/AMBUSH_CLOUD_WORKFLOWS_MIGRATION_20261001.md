@@ -31,8 +31,7 @@ https://chatgpt.com/codex/tasks/task_e_6abdbc4d29308332be5ab93be3bcc26a
 
 重试后网页日志确认 `Godot Engine v4.7.2.stable.official.ed1daf0bf` 已启动导入工程；随后页面从“正在设置环境”进入任务执行，出现“Capturing import logs with exit codes”和读取 PaperRoute `build_yard_crate.py` 的记录。原 `origin` 引导阻塞已越过。最后观察时任务仍执行中，CLI 为 PENDING、没有 diff；尚无最终隔离门退出码或新渲染验收报告，不将运行中写为通过。
 
-实际任务页面：
-https://chatgpt.com/remote/task_e_6abdbc4d29308332be5ab93be3bcc26a
+此前记录的 `https://chatgpt.com/remote/task_e_6abdbc4d29308332be5ab93be3bcc26a` 路径在手机端显示 404，不能作为有效入口；该旧任务应从 Codex Cloud 任务列表打开。后续任务使用新版 Cloud task URL（见下方实时状态）。
 
 仍待验证：该任务实际安装和运行结果、Linux Godot 门、Blender 渲染及 glTF 检查、同提交的首次网页 PLAN/REVIEW、APK 和 vivo 真机门。浏览器动作偶发超时，操作后重新读取已核对保存结果；不再将“云环境未创建”作为当前阻塞。
 
@@ -45,3 +44,20 @@ https://chatgpt.com/remote/task_e_6abdbc4d29308332be5ab93be3bcc26a
 5. 发布环境后从该分支启动单个切片，Android 验收保持本机待办，旧 AudioTrack 根因不标记修复。
 
 此文件补充迁移与工作流，不替代设计 v2 或当前 B2/Android 质量门。
+
+## 2026-10-01 实时 Cloud 复验状态
+
+已发布环境 `ambush-loop`，仓库 `hailinsu-create/ambush-loop`，任务使用 `codex/cloud-main`。设置页显示网络范围为“包管理器 + 5 个指定域名”（`api.github.com`、`downloads.godotengine.org`、`github.com`、`godotengine.org`、`release-assets.githubusercontent.com`），未配置密钥；不是“全部不受限制”。
+
+从该环境创建的云任务：
+
+- 标题：`执行云端迁移验收测试`
+- 任务：https://chatgpt.com/codex/cloud/tasks/task_e_6abddca04260833297732b1f9fd73797
+- 检出源：`codex/cloud-main`，提交 `56bea5e790080433b565b6f23bb0cf428d0472ea`
+- 结果：Godot 安装尚未完成，隔离导入/门禁尚未运行，PaperRoute 未执行，不能记为通过。
+
+云执行器的继承代理对已放行域名及包管理器站点均返回连接阶段 `HTTP CONNECT 403`，下载未到达源站；因此没有安装 Godot，也没有运行测试。该任务中未提供 `/etc/codex/network-policy.json`，当前工具目录也没有运行时环境状态接口。这些现象证明本次出口不可用，但不足以确定究竟是哪一层策略拒绝；不通过绕代理或扩大至不受限联网来规避。
+
+本机 `codex/cloud-main` 与 `origin/codex/cloud-main` 在复核时均为上述 SHA。工作区里原有未跟踪文件 `ambush_loop/scripts/r45_sweep_gate.gd.uid` 与 `error.log` 保留，未纳入本次文档变更。用户无需在手机端另建云任务；请在 Codex Cloud 任务列表查找标题，或使用上方正确链接。
+
+同一精确提交的外部 GPT PLAN/REVIEW 尚未取得；专用只读评审连接尚未建立，当前连接选择待用户确认（固定域名 `hailinsu.top` 或临时地址）。连接完成前，不把旧本地工作区或旧提交上的历史反馈当作本次批准。下一步分别是：解决/定位该 Cloud 环境出口拒绝；取得精确 SHA 的实际外部评审；然后安装 Godot/Blender 并记录可复现的 headless 与 PaperRoute 证据。Android 与 vivo 门仍在本机完成。
