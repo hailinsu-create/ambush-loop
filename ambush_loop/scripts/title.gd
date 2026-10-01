@@ -83,6 +83,7 @@ var _brief_prev: Label
 
 
 func _ready() -> void:
+	_diag_memory("title.ready.begin")
 	theme = NightOps.theme()
 	wordmark.add_theme_font_override("font", NightOps.display_font())
 	wordmark.add_theme_font_size_override("font_size", 76)
@@ -97,12 +98,14 @@ func _ready() -> void:
 	tagline.add_theme_color_override("font_color", NightOps.OLIVE_DIM)
 	tagline.add_theme_color_override("font_shadow_color", Color(0.02, 0.03, 0.02, 0.80))
 	tagline.add_theme_constant_override("shadow_offset_y", 2)
+	_diag_memory("title.theme.ready")
 	start_btn.add_theme_font_size_override("font_size", 20)
 	_wire_menu()
 	_build_briefing()
 	_build_howto()
 	_build_mission_select()
 	_build_quit_confirm()
+	_diag_memory("title.modals.ready")
 	pause_ui = PauseOverlay.new()
 	add_child(pause_ui)
 	pause_ui.closed.connect(func() -> void: pass)
@@ -115,9 +118,36 @@ func _ready() -> void:
 	continue_btn.custom_minimum_size = Vector2(300, 48)
 	help_btn.custom_minimum_size = Vector2(300, 48)
 	quit_btn.custom_minimum_size = Vector2(300, 48)
+	_diag_memory("title.pause_and_intro.ready")
 	_build_journal()
 	_build_ops_stamp()
 	_refresh_campaign_title()
+	_diag_memory("title.ready.done")
+
+
+func _diag_memory(stage: String) -> void:
+	var line := (
+		"AMBL_MEM stage=%s static_bytes=%d static_peak_bytes=%d objects=%d"
+		% [
+			stage,
+			int(Performance.get_monitor(Performance.MEMORY_STATIC)),
+			int(Performance.get_monitor(Performance.MEMORY_STATIC_MAX)),
+			int(Performance.get_monitor(Performance.OBJECT_COUNT))
+		]
+	)
+	print(line)
+	_diag_append(line)
+
+
+func _diag_append(line: String) -> void:
+	const PATH := "user://ambl_memory_diag.log"
+	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(PATH) else FileAccess.WRITE_READ
+	var file := FileAccess.open(PATH, mode)
+	if file == null:
+		return
+	file.seek_end()
+	file.store_line("%s %s" % [Time.get_datetime_string_from_system(), line])
+	file.flush()
 
 
 func mission_row_count() -> int:
@@ -643,7 +673,13 @@ func _build_briefing() -> void:
 	_brief_go.text = "接受任务"
 	_brief_go.custom_minimum_size = Vector2(220, 48)
 	_brief_go.add_theme_font_size_override("font_size", 18)
-	_brief_go.pressed.connect(func() -> void: _enter_mission(_pending_id))
+	_brief_go.pressed.connect(func() -> void:
+		var marker := "ANDROID_ACCEPT_PRESSED level=%s" % _pending_id
+		print(marker)
+		_diag_append(marker)
+		_diag_memory("title.accept.before_transition")
+		_enter_mission(_pending_id)
+	)
 	row.add_child(_brief_go)
 
 
