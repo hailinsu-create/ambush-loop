@@ -6,6 +6,8 @@
 
 **最新结果：** [Cloud 生命周期与安装闭环报告](AMBUSH_CLOUD_COMPLETION_REPORT_20261001.md)。实现 `99e6b70` 已完成真实安装、正常/失败/超时/信号/并发回归，无新增子进程遗留；完整渲染与 Accept→Yard 通过。install_script/start_skill 已保存并读回；发布新快照及实际外部 GPT 登录/反馈仍待完成，不算当前批准。
 
+**待发送的当前评审：** [精确提交评审请求](AMBUSH_CLOUD_REVIEW_REQUEST_20261001.md)，目标/证据 `629e3ef`，附 source/blob manifest。浏览器 TLS 已恢复且仍启用校验，原 Project 当前返回登录页；取得真实外部反馈前保持 unavailable。
+
 **当前迁移修复切片：** [Cloud Blender 退出修复与外部评审迁移计划](AMBUSH_CLOUD_EXIT_PLAN_20261001.md)。从 `e3faeb58` 继续，优先取得 PaperRoute 正常退出证据，再规划 GitHub 精确 SHA 外部评审；本轮外部 PLAN/REVIEW 尚不可用，历史批准不沿用。原迁移交接保留历史证据，PR 不合并、网络不扩权。
 
 **外部评审迁移方案：** [不依赖本机的外部 GPT 评审流程](AMBUSH_CLOUD_GPT_REVIEW_PLAN_20261001.md)。使用既有 Project 的授权 GitHub 精确提交来源；当前只交付流程及控制消息，连接状态与实际外部反馈仍待验证。
