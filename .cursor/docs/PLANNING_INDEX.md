@@ -2,7 +2,7 @@
 
 更新日期：2026-10-01。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前自动化切片：** [云端核验自动化计划](AMBUSH_CLOUD_AUTOMATION_PLAN_20261001.md)。用户要求自动化，新增机器核验入口与 GitHub Actions；技术测试、外部评审和产品发布分别留证，未取得外部批准。
+**当前自动化切片：** [云端核验自动化计划](AMBUSH_CLOUD_AUTOMATION_PLAN_20261001.md)。用户要求自动化，新增机器核验入口与 GitHub Actions；技术测试、外部评审和产品发布分别留证，未取得外部批准。最新 [自动化报告](AMBUSH_CLOUD_AUTOMATION_REPORT_20261001.md)：GitHub 干净 runner 完整核验 success，外部评审仍待认证接口/接入选择。
 
 **当前账号阻塞：** [发布与外部评审认证诊断](AMBUSH_CLOUD_AUTH_BLOCKER_20261001.md)。本地 Codex 登录标志存在，但实际 Cloud API 返回 401；没有已登录浏览器或额外 MCP。文件系统权限已开放，剩余缺口为账号会话和产品发布操作，已向用户请求具体动作，尚未取得外部批准或新快照证据。
 

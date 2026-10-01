@@ -1,0 +1,86 @@
+{
+  "jobs": [
+    {
+      "id": 110525545955,
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-01T18:41:12Z",
+      "completed_at": "2026-10-01T18:45:42Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-01T18:41:13Z",
+          "completed_at": "2026-10-01T18:41:14Z"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-01T18:41:14Z",
+          "completed_at": "2026-10-01T18:41:17Z"
+        },
+        {
+          "name": "Set isolated tool directories",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-01T18:41:17Z",
+          "completed_at": "2026-10-01T18:41:17Z"
+        },
+        {
+          "name": "Install platform dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-01T18:41:17Z",
+          "completed_at": "2026-10-01T18:41:35Z"
+        },
+        {
+          "name": "Install pinned tools outside source checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-01T18:41:35Z",
+          "completed_at": "2026-10-01T18:42:04Z"
+        },
+        {
+          "name": "Run real checks on exact commit",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-01T18:42:04Z",
+          "completed_at": "2026-10-01T18:45:38Z"
+        },
+        {
+          "name": "Upload evidence even on failure",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-01T18:45:38Z",
+          "completed_at": "2026-10-01T18:45:39Z"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-01T18:45:39Z",
+          "completed_at": "2026-10-01T18:45:39Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-01T18:45:39Z",
+          "completed_at": "2026-10-01T18:45:39Z"
+        }
+      ]
+    }
+  ]
+}
