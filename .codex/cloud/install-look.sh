@@ -21,7 +21,13 @@ ln -sfn "${root}/blender" "${bin_dir}/blender"
 cat > "${bin_dir}/blender-headless" <<'WRAPPER'
 #!/usr/bin/env bash
 set -euo pipefail
-exec "$(dirname "$0")/blender" --background --python-exit-code 1 "$@"
+# EEVEE still creates an OpenGL context in background mode. A private X11
+# display avoids the cloud EGL fallback; xvfb-run owns and cleans up Xvfb.
+command -v xvfb-run >/dev/null || { printf 'xvfb-run required; install xvfb and xauth in environment setup.\n' >&2; exit 1; }
+command -v xauth >/dev/null || { printf 'xauth required for the private Xvfb display.\n' >&2; exit 1; }
+exec xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' \
+  "$(dirname "$0")/blender" --background --factory-startup --gpu-backend opengl \
+  --threads "${AMBUSH_BLENDER_THREADS:-2}" --python-exit-code 1 "$@"
 WRAPPER
 chmod +x "${bin_dir}/blender-headless"
 export PATH="${bin_dir}:${PATH}"
