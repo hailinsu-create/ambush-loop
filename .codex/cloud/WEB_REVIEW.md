@@ -2,6 +2,12 @@
 
 Cloud-only GitHub source workflow and request templates: `.cursor/docs/AMBUSH_CLOUD_GPT_REVIEW_PLAN_20261001.md`. This is a proposed workflow, not proof that the ChatGPT GitHub connection is usable or that any current revision is approved.
 
+## Cloud browser prerequisites
+
+Use the inherited HTTPS proxy and keep TLS verification enabled. On Chromium/Linux the NSS trust database requires directory write access for its locks, even when the correct platform CA is already present. In the current runtime the database is `/home/agent/.pki/nssdb`; grant write access only to the verified database directory if the sandbox blocks it. Do not change HOME, ignore certificate errors, copy credential databases, or replace the proxy. See Chromium's [Linux certificate documentation](https://chromium.googlesource.com/chromium/src/+/main/docs/linux/cert_management.md).
+
+2026-10-01 actual probe: the system proxy CA and the existing NSS root fingerprint matched; directory-scoped write permission restored Chromium TLS. The original Project returned HTTP 200 and redirected to the ChatGPT login page with verification still enabled. No authenticated review session was obtained; PLAN/REVIEW remain unavailable. A login page or HTTP 401 from the MCP endpoint does not establish reviewer access. Use an existing authorized ChatGPT session, and verify GitHub revision reads before sending review work.
+
 Preserve the existing Ambush Loop reviewer Project:
 https://chatgpt.com/g/g-p-6ab943ae67ac81919bcbe3cd35ebe3b7/project
 
