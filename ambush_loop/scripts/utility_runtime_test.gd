@@ -343,6 +343,34 @@ func _drop_roundtrip() -> void:
 
 
 
+func _drop_cases() -> void:
+	_drop_roundtrip()
+	_reset()
+	var op = main.selected
+	var original: String = op.weapon_id
+	_check(main._throw_grenade_from(op, op.global_position + Vector2(64, 0)), "drop policy fixture starts actual SCOUT throw")
+	var original_event: String = _body().get_meta("pose_event_id")
+	var loot_before: int = main.loot_piles.size()
+	main._on_pack_drop("luger") # Absent from the original rifle fixture inventory.
+	_check(_body().sampled_action == "grenade_throw" and str(_body().get_meta("pose_event_id")) == original_event and main.loot_piles.size() == loot_before, "failed drop preserves the ongoing actual throw and inventory")
+	var grenades_before_drop: int = op.grenades
+	main._on_pack_drop("grenade")
+	_check(op.weapon_id == original and op.grenades == grenades_before_drop - 1 and main.loot_piles.size() == loot_before + 1, "successful non-weapon drop preserves equipped gun and original inventory change")
+	var dropped = main.loot_piles.back()
+	main._process(0.001)
+	_check(dropped.collected and op.grenades == grenades_before_drop and op.weapon_id == original, "ordinary pickup restores dropped kit without changing the equipped weapon")
+	_check(_body().sampled_action != "grenade_throw" and str(_body().get_meta("pose_event_id")) != original_event and main.raid_grenades.size() == 1, "successful same-weapon kit drop cancels only presentation; live released grenade persists")
+	_reset()
+	op = main.selected
+	main.raid_force_alarm()
+	_check(main._throw_grenade_from(op, op.global_position + Vector2(64, 0)), "ALERT policy fixture uses actual authorized grenade consume/setup")
+	original_event = _body().get_meta("pose_event_id")
+	original = op.weapon_id
+	loot_before = main.loot_piles.size()
+	main._on_pack_drop(original)
+	_check(op.weapon_id == original and main.loot_piles.size() == loot_before and _body().sampled_action == "grenade_throw" and str(_body().get_meta("pose_event_id")) == original_event, "phase-locked ALERT rejects drop without cancelling an ongoing real ALERT throw")
+
+
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	var settings = root.get_node("GameSettings")
@@ -356,6 +384,11 @@ func _run() -> void:
 	view = main.presentation_3d
 	main.set_process(false)
 	view.set_process(false)
+	if OS.get_environment("AMBUSH_UTILITY_TEST_SCOPE") == "drop_cases":
+		_drop_cases()
+		print("UTILITY_DROP_CASES checks=", checks, " failures=", failures)
+		quit(0 if failures == 0 else 1)
+		return
 	if OS.get_environment("AMBUSH_UTILITY_TEST_SCOPE") == "drop_roundtrip":
 		_drop_roundtrip()
 		print("UTILITY_DROP_ROUNDTRIP checks=", checks, " failures=", failures)
@@ -371,7 +404,7 @@ func _run() -> void:
 	await _actual_alert()
 	_check(completed_stages == 3, "mask and both interaction stages reach their final assertion")
 	_equip_roundtrip()
-	_drop_roundtrip()
+	_drop_cases()
 	root.get_node("AudioDirector").pause_for_background()
 	var report := {"checks": checks, "failures": failures, "captures": captures,
 		"actor_source": Pose.ASSET_REVISION, "scope": "three-role/three-LOD mask fixtures; actual SCOUT C2 knife/throw/decoy and ALERT auto-grenade/melee; copied history. Not corpse pairing, full campaign or device."}
