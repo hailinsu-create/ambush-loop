@@ -129,7 +129,7 @@
   "remaining_acceptance": [
     "Main PR15 author: review candidate catalogs/material routing, choose clips from historical weapon ID, connect gameplay/replay equipment events without live-state leakage.",
     "Main PR15 author: locomotion upper-body masks, arbitrary midclip cancellation, rapid repeated shots, weapon swaps, LOD transitions, full six-level replay/pause/2x behavior.",
-    "Dot asset stream: knife lunge, grenade throw, dedicated decoy placement, corpse haul and improved death/contact candidates; existing haul remains ammo carry.",
+    "Dot candidates: knife torso stab, overhand throw, local decoy placement, paired corpse grab/drag/release, prone/lift/lower/death provided and independently sampled. Main author owns historical events, exact pickup/cancel integration; near-face/static-glove/variant/historical-shape artistic limitations remain.",
     "Dot asset stream plus parent art review: historically accurate ten-gun geometry/mechanisms, static-glove limitations, procedural near faces/clothing and final tactical style quality.",
     "Main author plus parent: actual six-level dusk occlusion, silhouettes, identity/muzzle readability and scene rendering/animation memory budgets.",
     "Device validation owner after production/integration: mobile FPS/memory/compression/thermals/touch; postponed by user.",
@@ -166,6 +166,7 @@
     "low_ready": "Weapon barrel follows common hand bone direction; do not hard-code a world forward basis for low-ready."
   },
   "firearm_profiles": "Optional firearm_profiles_candidate.json: 10 actual IDs x 3 roles, six pose groups (Thompson vertical foregrip variant), 40 added clips. Existing 12 actions, 20 rest bones and all original sockets unchanged.",
-  "animation_catalog": "All seven characters and all three LODs expose 52 animations: legacy12 plus six groups x ready/aim/fire/raise/lower and ten reload_contact_<weapon_id>.",
-  "runtime_timing_candidate": "firearm_runtime_contract_candidate.json mirrors actual ten-gun timing read-only; no independent simulation reload state exists in the baseline. Main author owns historical event selection, rapid-fire scaling, masking and interruption."
+  "animation_catalog": "All seven actors and all three LODs expose64 animations: unchanged52 R4 actions plus12 optional utility/corpse actions. See utility_profiles_candidate.json.",
+  "runtime_timing_candidate": "firearm_runtime_contract_candidate.json mirrors actual ten-gun timing read-only; no independent simulation reload state exists in the baseline. Main author owns historical event selection, rapid-fire scaling, masking and interruption.",
+  "utility_profiles": "Optional utility_profiles_candidate.json and read-only utility_runtime_contract_candidate.json: tool grips unchanged; shoulder markers defined on existing upper_arm.L/R bones; no additional bones or exported replacement sockets."
 }

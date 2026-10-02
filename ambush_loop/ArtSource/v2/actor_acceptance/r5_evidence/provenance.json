@@ -1,0 +1,40 @@
+{
+  "baseline": "c4c21708a2e06d3a7eaefbb8ab6bfeee31f5073d",
+  "tested_source_sha": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+  "engine_source_sha_log_equal": true,
+  "files": [
+    {
+      "path": "ambush_loop/ArtSource/v2/build_actors.py",
+      "sha256": "8aac9cb0c089b1a5959e3158d5554993ab93266eecf61142c3a7710139e43601"
+    },
+    {
+      "path": "ambush_loop/ArtSource/v2/actor_acceptance/utility_contract.py",
+      "sha256": "440571311fff6590d5fc258ab2c50dffc9062b9e20f664f2e981e0d999bdbc8d"
+    },
+    {
+      "path": "ambush_loop/ArtSource/v2/actor_acceptance/utility_review.gd",
+      "sha256": "be50b690d5310748119e180feb5c1105a65505a9751d086e119f5ae06eddb7e9"
+    },
+    {
+      "path": "ambush_loop/ArtSource/v2/actor_acceptance/catalog_candidate.json",
+      "sha256": "c26cfa2ba6477ea9cbaf8ba3ca78681142267a5a1ebb93a14e1c1297584b80b6"
+    },
+    {
+      "path": "ambush_loop/ArtSource/v2/actor_acceptance/utility_profiles_candidate.json",
+      "sha256": "8249d990792510094a8d56898a5e2ecebf38261b5f3039ee87cc927976c0e9f3"
+    }
+  ],
+  "diagnostics": "pre-final source71ea5d0 tests were diagnostic; boot/head overlap prompted local20cm new-clip correction; both final engine logs and GLBs are2974915, earlier reports not passed off as final",
+  "exit_codes": {
+    "blender_publish_a": 0,
+    "blender_publish_b": 0,
+    "raw_compatibility": 0,
+    "binary": 0,
+    "utility_binary": 0,
+    "source_render": 0,
+    "Godot_utility": 0,
+    "Godot_regression": 0
+  },
+  "scope": "independent read-only scene only; no gameplay/events/historical replay/device/artistic approval",
+  "supplemental_endpoint_probe": "isolated headless replay of death terminal/prone entry confirms translation-only residual; initial unisolated read-only probe failed cache/data initialization and is retained outside curated evidence"
+}
