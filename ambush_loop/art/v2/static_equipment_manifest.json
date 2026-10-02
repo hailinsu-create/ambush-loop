@@ -3,7 +3,7 @@
   "source_commit": "0242c983e8ae972b58b4f7afe9d08084b8f421c6",
   "source_manifest": "https://github.com/hailinsu-create/ambush-loop/blob/0242c983e8ae972b58b4f7afe9d08084b8f421c6/ambush_loop/art/v2/actors_manifest.json",
   "scope": "static equipment only; characters deferred until reproducible LODs and pose acceptance",
-  "status": "binary and repeated export verified upstream; runtime loader/visual review pending; battlefield integration pending",
+  "status": "static fixture loader/render and standalone PCK resource check verified; battlefield integration pending",
   "assets": [
     {
       "asset_id": "m1911",
@@ -60,7 +60,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "luger",
@@ -117,7 +117,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "m1_garand",
@@ -178,7 +178,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "kar98k",
@@ -239,7 +239,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "thompson",
@@ -300,7 +300,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "mp40",
@@ -361,7 +361,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "bar",
@@ -422,7 +422,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "mg42",
@@ -483,7 +483,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "springfield",
@@ -544,7 +544,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "kar98k_zf",
@@ -605,7 +605,7 @@
         1500
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "knife",
@@ -661,7 +661,7 @@
         1000
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "grenade",
@@ -706,7 +706,7 @@
         1000
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "mine",
@@ -751,7 +751,7 @@
         1000
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "decoy",
@@ -796,7 +796,7 @@
         1000
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     },
     {
       "asset_id": "ammo_pack",
@@ -841,7 +841,7 @@
         1000
       ],
       "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
-      "status": "repaired candidate; acceptance report required"
+      "status": "static loader/material/socket/triangle verification passed; battlefield integration pending"
     }
   ],
   "textures": [
@@ -857,5 +857,6 @@
       "path": "art/v2/textures/actor_atlas_orm.png",
       "sha256": "25ddbcfd90ba98e86d63a933ff5544e64c7b9dda8f54e815a422406c47c31483"
     }
-  ]
+  ],
+  "runtime_evidence": ".cursor/docs/AMBUSH_PR15_STATIC_EQUIPMENT_20261002.md"
 }
