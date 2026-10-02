@@ -813,7 +813,7 @@ func _toggle_pause_menu() -> void:
 	if pause_overlay.is_open():
 		pause_overlay.dismiss()
 		return
-	pause_overlay.present(_is_command_phase(), true)
+	pause_overlay.present(_is_command_phase(), true, phase != Phase.WATCHING)
 	if phase == Phase.WATCHING and not sim.paused:
 		sim.paused = true
 		_menu_paused_sim = true
@@ -1265,6 +1265,8 @@ func _gate_scene_audio(paused: bool) -> void:
 
 
 func _on_memory_wipe_from_menu() -> void:
+	if phase == Phase.WATCHING:
+		return
 	if pause_overlay:
 		pause_overlay.dismiss()
 	loop_index = 1
@@ -3822,6 +3824,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed("reset_run"):
+		if phase == Phase.WATCHING:
+			get_viewport().set_input_as_handled()
+			return
 		loop_index = 1
 		intel_paths.clear()
 		intel.clear()
@@ -4165,7 +4170,7 @@ func _nearest_slot(world_pos: Vector2, max_dist: float) -> CoverSlot:
 
 
 func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
-	if selected == null:
+	if not _is_command_phase() or selected == null:
 		return
 	var had_cover := selected.visible and selected.slot != null
 	var keep_deg := selected.facing_deg
@@ -4224,6 +4229,8 @@ func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
 
 
 func _try_place_tripwire(world_pos: Vector2) -> void:
+	if not _is_command_phase():
+		return
 	if not _near_any_route_segment(world_pos, TRIPWIRE_ROUTE_DIST):
 		status_label.text = "绊索只能布在路线线段附近"
 		return
@@ -5030,6 +5037,8 @@ func _on_alarm_pressed() -> void:
 	run_id += 1
 	var this_run := run_id
 	phase = Phase.WATCHING
+	if backpack_panel != null and backpack_panel.is_open():
+		backpack_panel.dismiss()
 	if c2:
 		c2.begin_alert()
 	leak_advice_shown = ""
@@ -7722,7 +7731,7 @@ func _spawn_level_stashes() -> void:
 
 
 func _command_move_selected(world_pos: Vector2) -> void:
-	if selected == null:
+	if not _is_command_phase() or selected == null:
 		return
 	var sprint := _c2_sprint_next
 	_c2_sprint_next = false
@@ -11778,7 +11787,7 @@ func raid_advance_search(seconds: float) -> int:
 
 
 func _try_place_inventory_mine(world_pos: Vector2) -> void:
-	if selected == null or not selected.alive:
+	if not _is_command_phase() or selected == null or not selected.alive:
 		return
 	if selected.mines <= 0:
 		_try_place_tripwire(world_pos)
@@ -11843,7 +11852,7 @@ func _throw_grenade_from(op: OperatorUnit, world_pos: Vector2) -> bool:
 
 
 func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
-	if selected == null or not selected.alive or not selected.visible:
+	if not _is_command_phase() or selected == null or not selected.alive or not selected.visible:
 		return
 	if selected.grenades <= 0:
 		status_label.text = "没有手雷"
@@ -11948,6 +11957,8 @@ func _toggle_backpack() -> void:
 	if backpack_panel.is_open():
 		backpack_panel.dismiss()
 		return
+	if not _is_command_phase():
+		return
 	if selected == null:
 		return
 	backpack_panel.present(selected)
@@ -11959,7 +11970,7 @@ func _refresh_backpack_if_open() -> void:
 
 
 func _on_pack_equip(kind: String) -> void:
-	if selected == null:
+	if not _is_command_phase() or selected == null:
 		return
 	var rec: Dictionary = selected.equip_from_pack(kind)
 	status_label.text = str(rec.get("text", ""))
@@ -11972,7 +11983,7 @@ func _on_pack_equip(kind: String) -> void:
 
 
 func _on_pack_pass(kind: String) -> void:
-	if selected == null:
+	if not _is_command_phase() or selected == null:
 		return
 	var best: OperatorUnit = null
 	var best_d := 56.0
@@ -11997,7 +12008,7 @@ func _on_pack_pass(kind: String) -> void:
 
 
 func _on_pack_drop(kind: String) -> void:
-	if selected == null:
+	if not _is_command_phase() or selected == null:
 		return
 	var rec: Dictionary = selected.drop_from_pack(kind)
 	if not bool(rec.get("ok", false)):
@@ -12033,7 +12044,7 @@ func _throw_decoy_at_cursor() -> void:
 
 
 func _throw_decoy_at(world_pos: Vector2) -> void:
-	if selected == null or not selected.alive:
+	if not _is_command_phase() or selected == null or not selected.alive:
 		return
 	if selected.decoys <= 0:
 		status_label.text = "没有诱饵"
@@ -12357,7 +12368,7 @@ func raid_transfer(from_index: int, to_index: int, kind: String = "auto") -> Dic
 
 
 func _transfer_selected_to_nearest() -> void:
-	if selected == null or not selected.alive:
+	if not _is_command_phase() or selected == null or not selected.alive:
 		return
 	var best: OperatorUnit = null
 	var best_d := 64.0

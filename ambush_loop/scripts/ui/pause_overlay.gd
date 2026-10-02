@@ -149,7 +149,7 @@ func is_open() -> bool:
 	return _open
 
 
-func present(show_redeploy: bool, show_title: bool) -> void:
+func present(show_redeploy: bool, show_title: bool, show_memory_wipe: bool = true) -> void:
 	_open = true
 	visible = true
 	_wipe_armed = false
@@ -158,7 +158,7 @@ func present(show_redeploy: bool, show_title: bool) -> void:
 	_redeploy_btn.text = "重新部署" if show_redeploy else "重新部署（仅布置阶段）"
 	_title_btn.visible = show_title
 	if _wipe_btn:
-		_wipe_btn.visible = show_title
+		_wipe_btn.visible = show_title and show_memory_wipe
 	_refresh_audio()
 	if _panel:
 		_panel.pivot_offset = Vector2(210, 296)
