@@ -76,11 +76,12 @@ func _run() -> void:
 			killed = event
 	_check(not killed.is_empty(), "actual recent death event exists")
 	var key := "enemies:%d" % int(killed.actor_id)
+	var death_position: Vector2 = view.frame.enemies.filter(func(item: Dictionary) -> bool: return item.id == killed.actor_id).front().pos
 	var dead = view.actors[key].get_node("Body") as Actor
 	var first_time: float = dead.sampled_time
 	var first_bones := _bones(dead)
 	var first: Dictionary = main._snapshot_data().duplicate(true)
-	await _capture(main, killed.position, "initial")
+	await _capture(main, death_position, "initial")
 	main._select_op(2)
 	var scout = main.selected
 	var from: Vector2 = scout.global_position
@@ -101,7 +102,7 @@ func _run() -> void:
 	view.refresh()
 	_check(dead.sampled_time > mid_time + 0.35, "death continues on the command presentation clock")
 	var last: Dictionary = main._snapshot_data().duplicate(true)
-	await _capture(main, killed.position, "after_0800")
+	await _capture(main, death_position, "after_0800")
 	var live_bones := _bones(dead)
 	# The real pause menu must gate command simulation and pose time.
 	main._toggle_pause_menu()
