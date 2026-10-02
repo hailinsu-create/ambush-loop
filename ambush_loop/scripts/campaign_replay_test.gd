@@ -12,6 +12,7 @@ const CASES := [
 ]
 var failures := 0
 var checks := 0
+var _utility_scopes := {}
 
 
 func _init() -> void:
@@ -59,6 +60,9 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 	if case[0] in ["depot", "radio"]:
 		main._try_place_tripwire(main.grid.cell_to_world_center(Vector2i(7, 11)))
 	main.raid_force_alarm()
+	var utility_scope: String = main._snapshot_data().get("utility_scope_id", "")
+	_check(not utility_scope.is_empty() and not _utility_scopes.has(utility_scope), "each real attempt owns a distinct SCOUT recording identity")
+	_utility_scopes[utility_scope] = true
 	var wave_ends := []
 	for wave in main.level.wave_count():
 		main.sim.set_speed(speed)
@@ -101,6 +105,10 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 		identities[ev.event_id] = true
 		previous = BattleLog.record_tick(ev)
 	var final: Dictionary = main._snapshot_data().duplicate(true)
+	_check(log.snapshots.all(func(snap: Dictionary) -> bool: return str(snap.data.get("utility_scope_id", "")) == utility_scope), "all waves keep the original utility recording identity")
+	# Like BattleLog attempt/event IDs, this identity intentionally differs
+	# across attempts. Every other state value remains in the comparison.
+	final.erase("utility_scope_id")
 	var events: Array = log.events.duplicate(true)
 	for ev in events:
 		ev.erase("attempt_id")

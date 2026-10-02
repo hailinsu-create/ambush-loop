@@ -168,5 +168,9 @@ func _battle(main: Node, rotate: bool, fps: int, speed: float) -> Dictionary:
 	for ev in events:
 		ev.erase("attempt_id")
 		ev.erase("event_id")
-	return {"phase": int(main.phase), "tick": main.sim.tick,
-		"state": main._snapshot_data().duplicate(true), "events": events}
+	var final: Dictionary = main._snapshot_data().duplicate(true)
+	var scope: String = final.get("utility_scope_id", "")
+	_check(not scope.is_empty() and main.battle_log.snapshots.all(func(snap: Dictionary) -> bool: return str(snap.data.get("utility_scope_id", "")) == scope), "real wave preserves its independent utility recording identity")
+	# All gameplay/visual values still participate in cross-FPS/2x equivalence.
+	final.erase("utility_scope_id")
+	return {"phase": int(main.phase), "tick": main.sim.tick, "state": final, "events": events}
