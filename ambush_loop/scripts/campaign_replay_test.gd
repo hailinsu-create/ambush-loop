@@ -40,9 +40,16 @@ func _run() -> void:
 	var main = current_scene
 	main.set_process(false)
 	for case in CASES:
+		var scope := OS.get_environment("AMBUSH_CAMPAIGN_LEVEL")
+		if not scope.is_empty() and scope != str(case[0]):
+			continue
 		var reference: Dictionary = await _battle(main, case, 60, 1.0, false)
 		var rotating: Dictionary = await _battle(main, case, 30, 1.0, true)
 		var fast: Dictionary = await _battle(main, case, 60, 2.0, true)
+		if reference != rotating:
+			_report_difference(reference, rotating, str(case[0]) + ":30fps")
+		if reference != fast:
+			_report_difference(reference, fast, str(case[0]) + ":2x")
 		_check(reference == rotating and reference == fast, case[0] + " complete multi-wave outcomes/events match at 30/60 FPS and 2x")
 		print("CAMPAIGN_REPLAY_LEVEL ", case[0], " waves=", main.level.wave_count(),
 			" terminal=", main.battle_log.terminal_tick, " events=", main.battle_log.events.size())
@@ -142,3 +149,16 @@ func _normalize_identity(value: Variant, scope: String, attempt: String) -> void
 	elif value is Array:
 		for item in value:
 			_normalize_identity(item, scope, attempt)
+
+
+func _report_difference(left: Variant, right: Variant, path: String) -> void:
+	if left == right:
+		return
+	if left is Dictionary and right is Dictionary:
+		for key in left:
+			_report_difference(left[key], right.get(key), path+"."+str(key))
+	elif left is Array and right is Array and left.size() == right.size():
+		for index in left.size():
+			_report_difference(left[index],right[index],path+"["+str(index)+"]")
+	else:
+		print("CAMPAIGN_DIFFERENCE ",path," left=",left," right=",right)
