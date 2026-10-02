@@ -176,6 +176,38 @@ func _run() -> void:
 	old.event_pose_schema = 9
 	old.event_pose_clock_s = 900.0
 	_check(Pose.sample(corpse, old, "enemies").seconds == 1.2, "future event clock cannot invent command age")
+	# Finish the authored second wave and use the normal app's retained terminal
+	# record/replay path, in addition to the separate copied-record seek above.
+	main.raid_vacuum_loot()
+	main._on_sweep_commit()
+	count = 0
+	while main.phase == main.Phase.WATCHING and count < 5000:
+		main._sim_tick()
+		count += 1
+	_check(main.phase == main.Phase.SWEEP and main.raid.waves_cleared == 2, "actual unchanged second wave reaches final SWEEP")
+	if main.phase == main.Phase.SWEEP:
+		view.refresh()
+		var final_kill: Dictionary = main.battle_log.last_of_type("kill")
+		var final_key := "enemies:%d" % int(final_kill.actor_id)
+		var final_body = view.actors[final_key].get_node("Body") as Actor
+		var start: float = final_body.sampled_time
+		var final_tick: int = main.sim.tick
+		main._process(0.8)
+		view.refresh()
+		_check(main.sim.tick == final_tick and final_body.sampled_time > start + 0.75, "exact 0.8-second command step advances final recent death with frozen sim tick")
+		main._on_sweep_commit()
+		view.refresh()
+		var expected: Array = _bones(view.actors[final_key].get_node("Body") as Actor)
+		var recording: Dictionary = main.battle_log.snapshots.back().duplicate(true)
+		_check(main.phase == main.Phase.WON and recording.data.event_pose_schema == 1 and recording.data.pose_clock_domain == "command", "normal extraction saves the command clock/age in its actual record")
+		main._on_replay_pressed()
+		view.refresh()
+		_check(_bones(view.actors[final_key].get_node("Body") as Actor) == expected, "normal app terminal replay reproduces the exact saved command bones")
+		main._pose_command_clock_s += 100.0
+		main._night_timer += 100.0
+		main._apply_replay_scrub()
+		view.refresh()
+		_check(_bones(view.actors[final_key].get_node("Body") as Actor) == expected and main.battle_log.snapshots.back() == recording, "actual replay ignores poisoned current clocks and preserves its saved record")
 	root.get_node("AudioDirector").pause_for_background()
 	print("COMMAND_POSE_CLOCK_OK" if failures == 0 else "COMMAND_POSE_CLOCK_FAILED", " checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)
