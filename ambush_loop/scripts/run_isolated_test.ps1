@@ -7,6 +7,7 @@ param(
         'm1_height_data_gate.gd',
         'm1_height_los_gate.gd',
         'm1_height_fire_gate.gd',
+        'm1_height_coverage_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
         'm1_b2_yard_height_gate.gd',
         'accept_cta_flow_gate.gd',
@@ -22,10 +23,14 @@ param(
         'eval_dump_touch_hud.gd'
     )]
     [string]$Entry = 'smoke_test.gd',
-    [switch]$ImportOnly
+    [switch]$ImportOnly,
+    [switch]$Rendered
 )
 
 $ErrorActionPreference = 'Stop'
+if ($Rendered -and ($ImportOnly -or $Entry -ne 'm1_height_coverage_gate.gd')) {
+    throw 'Rendered mode is restricted to the C3 coverage gate.'
+}
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $enginePath = [IO.Path]::GetFullPath($GodotExe)
 if (-not [IO.File]::Exists($enginePath)) {
@@ -73,8 +78,14 @@ try {
     }
     else {
         Write-Output "TEST_ENTRY=$Entry"
-        & $enginePath --headless --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
-            Tee-Object -FilePath $runLog
+        if ($Rendered) {
+            & $enginePath --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
+                Tee-Object -FilePath $runLog
+        }
+        else {
+            & $enginePath --headless --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
+                Tee-Object -FilePath $runLog
+        }
     }
     $engineExit = $LASTEXITCODE
     if ((Get-ReadOnlyHash $realSave) -ne $beforeSave -or
