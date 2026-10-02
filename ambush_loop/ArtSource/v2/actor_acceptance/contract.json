@@ -43,7 +43,7 @@
   "rig": {
     "bones": 20,
     "rest_pose": "same named bone hierarchy, rest matrices and inverse binds for all seven characters and all three LODs",
-    "weights": "normalized; at most four GLB influences; these segmented clothing pieces currently use one rigid influence",
+    "weights": "Normalized, at most four GLB influences. Continuous jacket blends spine/chest; limbs and accessories remain predominantly rigid single-bone segments.",
     "scale": "1,1,1; unit is metres; no root motion",
     "bone_socket": {
       "weapon_hand": {
@@ -71,25 +71,33 @@
           0,
           0
         ]
+      },
+      "sight_eye": {
+        "bone": "head",
+        "translation_local_m": [
+          0.037,
+          0.139,
+          -0.11
+        ]
       }
     }
   },
   "weapon_socket": "actual GLB nodes <asset_id>__socket_grip / <asset_id>__socket_muzzle / <asset_id>__socket_support_hand, authored and validated in exported +Y up/-Z forward axes. Pistol has no support marker. Socket points are model local: transform by attached gun.global_transform.",
   "grip_contract": "rifle-family long guns bind at grip origin, support at (0,0,-0.26). Shared rifle hold verified for priority pair; other gun families require own grip overlays before combat acceptance.",
-  "animation_loop": "glTF does not serialize loop policy: set Animation.loop_mode from actors_manifest.json after import; AnimationPlayer starts at t=0 and never translates the actor Node3D",
+  "animation_loop": "glTF has no looping field; use catalog_candidate.json after integration review",
   "animation_actions": {
     "idle": "rifle low-ready breathing",
     "walk": "in-place rifle locomotion; actor world travel comes only from historical/presentation state",
     "run": "in-place common two-hand rifle swing",
     "aim": "stationary rifle raised",
     "fire": "single rifle recoil, return to aim",
-    "pickup": "two-hand reach; weapon must be stowed/hidden by presentation",
-    "deploy": "crouched reach; attach selected logical tool separately",
+    "pickup": "Deep crouch, right palm at grenade ground grip at midclip; presentation controls pickup/stow events",
+    "deploy": "Deep crouch, right palm at mine ground grip at midclip; presentation controls placement/release events",
     "death": "fall, tuck arms, hold terminal prone pose; detach/hide weapon independently",
     "crouch": "crouched rifle hold",
     "crouch_walk": "in-place crouched locomotion",
     "hit": "brief recoil, return to low-ready",
-    "haul": "two-hand drag reach; corpse attachment/weapon stow is integration work"
+    "haul": "In-place two-hand ammo-pack carry at front waist, 0.12m separation; corpse drag not accepted"
   },
   "sneak_pose": "sneak identity uses enemy_sneak, crouch/crouch_walk when historical state requests crouch. Asset does not invent historical state.",
   "material": {
@@ -115,7 +123,8 @@
       1000
     ],
     "surfaces_per_model": 1,
-    "selection": "explicit fixture LOD selection verified; runtime screen size/distance thresholds and hysteresis belong to integrator. No automatic LOD claim."
+    "selection": "explicit fixture LOD selection verified; runtime screen size/distance thresholds and hysteresis belong to integrator. No automatic LOD claim.",
+    "generation": "Each LOD constructed at fixed tessellation/feature tier. No Decimate. 51/51 raw and semantic hashes equal in independent Blender 4.3.2 runs."
   },
   "remaining_acceptance": [
     "Byte-identical character regeneration has not passed: repeated Blender Decimate exports can differ at symmetric corners; use frozen artifact hashes and independently audit a rebuild. Static kit and texture hashes are stable in the recorded repeat.",
@@ -125,5 +134,7 @@
     "complete six-level battle, pause/2x/replay/event timing/LOD switching in integration",
     "mobile hardware FPS, memory, texture compression, thermal and touch tests (postponed by user)",
     "external GPT PLAN/REVIEW unavailable"
-  ]
+  ],
+  "catalog": "ArtSource/v2/actor_acceptance/catalog_candidate.json is review data, not auto-applied runtime manifest",
+  "tool_socket": "All 5 tools have real named GLB grip nodes; knife tip, grenade fuse, mine pressure_plate, decoy speaker, ammo_pack support_hand. Transform socket by tool.global_transform. Mount offset must subtract rotated tool-local grip."
 }

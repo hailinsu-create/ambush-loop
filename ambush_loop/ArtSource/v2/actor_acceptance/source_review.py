@@ -33,6 +33,7 @@ data=bpy.data.cameras.new('Review');cam=bpy.data.objects.new('Review',data);scen
 clay=bpy.data.materials.new('Clay');clay.diffuse_color=(.55,.55,.55,1)
 for shade in ['clay','material']:
  scene.view_layers[0].material_override=clay if shade=='clay' else None
+ scene.view_settings.exposure=-1.5 if shade=='clay' else 0
  for label,angle in [('front',0),('side',90),('rear',180)]:
   a=math.radians(angle);cam.location=(7*math.sin(a),7*math.cos(a),3.7);cam.rotation_euler=(Vector((0,0,.9))-cam.location).to_track_quat('-Z','Y').to_euler()
   scene.render.filepath=str(out/f'source_{shade}_{label}.png');bpy.ops.render.render(write_still=True)
