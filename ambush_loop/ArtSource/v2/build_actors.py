@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Original skinned military characters, in-place clips and the ten-gun kit.
-Blender 4.3.2: blender -b --python ArtSource/v2/build_actors.py
+Blender 4.3.2: blender -b --python-exit-code 1 --python ArtSource/v2/build_actors.py
+              -- --output-root /tmp/independent-actor-build
 Authoring metres, +Z up/+Y forward; runtime +Y up/-Z forward.
 No root motion, downloaded meshes, markings or external services.
 """
@@ -9,6 +10,7 @@ import json
 import math
 from pathlib import Path
 import sys
+import argparse
 import bpy
 import bmesh
 import numpy as np
@@ -22,6 +24,10 @@ PROJECT = HERE.parents[1]
 OUT = PROJECT / 'art/v2'
 PARTS = []
 MAT = None
+DETAIL_LEVEL = None
+DETAIL_KIND = None
+CATALOG = OUT / 'actors_manifest.json'
+BLEND_SOURCE = HERE / 'actors.blend'
 SEED = 194407
 CLIPS = {'idle': (2.4, True), 'walk': (.9, True), 'run': (.6, True),
          'aim': (1.8, True), 'fire': (.24, False), 'pickup': (1.0, False),
@@ -46,10 +52,10 @@ def atlas():
     yy, xx = np.mgrid[0:n, 0:n] / n
     rgb = np.zeros((1024, 1024, 3), np.float32)
     orm = np.zeros_like(rgb); normal = np.zeros_like(rgb)
-    palette = [(.26,.30,.19), (.47,.42,.29), (.16,.19,.18), (.22,.24,.25),
-               (.18,.11,.064), (.59,.40,.27), (.26,.30,.18), (.055,.057,.052),
-               (.50,.38,.15), (.49,.46,.34), (.72,.67,.52), (.047,.035,.028),
-               (.39,.12,.085), (.28,.32,.30), (.31,.17,.078), (.20,.27,.26)]
+    palette = [(.15,.19,.12), (.28,.25,.18), (.10,.13,.12), (.12,.14,.15),
+               (.18,.11,.064), (.42,.29,.20), (.14,.17,.10), (.055,.057,.052),
+               (.50,.38,.15), (.27,.25,.19), (.72,.67,.52), (.047,.035,.028),
+               (.27,.10,.07), (.18,.22,.21), (.31,.17,.078), (.20,.27,.26)]
     for tile, base in enumerate(palette):
         noise = rng.random((n,n)).astype(np.float32)-.5
         broad = np.sin(xx*24+np.cos(yy*17))*.5+np.sin(yy*39+xx*12)*.23
@@ -108,10 +114,17 @@ def finish(obj,name,tile,bone=None,bevel=0):
 def box(name,size,at,tile,bone=None,bevel=.006):
     bpy.ops.mesh.primitive_cube_add(size=1,location=at)
     obj=bpy.context.object; obj.dimensions=size
-    return finish(obj,name,tile,bone,bevel)
+    return finish(obj,name,tile,bone,0 if DETAIL_LEVEL==2 or (DETAIL_KIND!='character' and DETAIL_LEVEL==1) else bevel)
+
+
+def resolution(segments,rings):
+    if DETAIL_LEVEL is None: return segments,rings
+    scale=(.8,.5,.3)[DETAIL_LEVEL]
+    return max(6,round(segments*scale)),max(2,round(rings*scale))
 
 
 def ellipsoid(name,size,at,tile,bone=None,segments=16,rings=10):
+    segments,rings=resolution(segments,rings)
     bpy.ops.mesh.primitive_uv_sphere_add(segments=segments,ring_count=rings,radius=1,location=at)
     obj=bpy.context.object; obj.scale=size
     for poly in obj.data.polygons: poly.use_smooth=True
@@ -119,6 +132,8 @@ def ellipsoid(name,size,at,tile,bone=None,segments=16,rings=10):
 
 
 def tube(name,a,b,r0,r1,tile,bone=None,sides=12,rings=7,fold=.006):
+    if DETAIL_LEVEL is not None:
+        sides,rings=resolution(sides,rings)
     a,b=Vector(a),Vector(b); direction=(b-a).normalized()
     x=direction.cross(Vector((0,1,0)))
     if x.length<.1: x=direction.cross(Vector((1,0,0)))
@@ -182,12 +197,37 @@ def skeleton():
     return rig,joints
 
 
-def character(asset,cloth,style):
+def jacket(cloth):
+    # One continuous garment rather than overlapping spherical chest shells.
+    sections=[(1.025,.185,.13),(1.10,.204,.13),(1.20,.206,.135),
+              (1.32,.225,.135),(1.43,.222,.142),(1.47,.14,.08)]
+    sides=(16,10,6)[DETAIL_LEVEL];vertices=[];faces=[]
+    for z,rx,ry in sections:
+        for i in range(sides):
+            a=math.tau*i/sides
+            vertices.append((rx*math.cos(a),ry*math.sin(a),z))
+    for row in range(len(sections)-1):
+        for i in range(sides):
+            a=row*sides+i;b=row*sides+(i+1)%sides
+            faces.append((a,b,b+sides,a+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple(range((len(sections)-1)*sides,len(sections)*sides))])
+    data=bpy.data.meshes.new('jacket');data.from_pydata(vertices,[],faces);data.update()
+    obj=bpy.data.objects.new('jacket',data);bpy.context.collection.objects.link(obj)
+    bpy.ops.object.select_all(action='DESELECT');obj.select_set(True);bpy.context.view_layer.objects.active=obj
+    finish(obj,'jacket',cloth)
+    spine=obj.vertex_groups.new(name='spine');chest=obj.vertex_groups.new(name='chest')
+    for v in data.vertices:
+        w=max(0,min(1,(v.co.z-1.20)/.16))
+        if w<1:spine.add([v.index],1-w,'REPLACE')
+        if w>0:chest.add([v.index],w,'REPLACE')
+    for p in data.polygons:p.use_smooth=len(p.vertices)==4
+
+
+def character(asset,cloth,style,rig=None,joints=None):
     kit.CURRENT=asset
     # Slightly tapered, folded jacket, with overlapping panels at the waist.
     ellipsoid('trousers_seat',(.19,.125,.20),(0,-.007,.98),cloth,'pelvis')
-    ellipsoid('jacket_lower',(.205,.139,.21),(0,.0,1.15),cloth,'spine')
-    ellipsoid('jacket_chest',(.22,.137,.205),(0,.002,1.34),cloth,'chest',20,12)
+    jacket(cloth)
     tube('neck',(0,0,1.47),(0,0,1.60),.061,.06,5,'neck',12,3,0)
     ellipsoid('head',(.095,.096,.135),(0,.014,1.674),5,'head',20,12)
     ellipsoid('jaw',(.073,.085,.068),(0,.04,1.605),5,'head')
@@ -206,7 +246,8 @@ def character(asset,cloth,style):
         if style=='rolled':
             box('helmet_band',(.185,.013,.022),(0,.134,1.754),9,'head',.003)
     elif style=='hood':
-        bpy.ops.mesh.primitive_uv_sphere_add(segments=20,ring_count=12,radius=1,
+        segments,rings=resolution(20,12)
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=segments,ring_count=rings,radius=1,
                                            location=(0,-.012,1.705))
         hood=bpy.context.object
         bm=bmesh.new(); bm.from_mesh(hood.data)
@@ -216,7 +257,6 @@ def character(asset,cloth,style):
         bm.to_mesh(hood.data); bm.free()
         hood.scale=(.128,.135,.161); finish(hood,'hood',cloth,'head')
         for side in (-1,1): tube('hood_edge',(side*.099,.080,1.62),(side*.094,.086,1.78),.011,.012,cloth,'head',8,2,0)
-        ellipsoid('smock_back',(.236,.111,.24),(0,-.086,1.305),cloth,'chest',20,12)
     elif style=='beret':
         ellipsoid('soft_beret',(.124,.12,.053),(-.02,0,1.785),2,'head',20,8)
         box('unit_tab',(.025,.006,.027),(.05,.107,1.775),10,'head',.002)
@@ -233,19 +273,20 @@ def character(asset,cloth,style):
         box('ammo_pouch',(.098,.065,.095),(side*.145,.137,1.061),4 if style!='rolled' else 9,'pelvis',.012)
         box('cargo_pocket',(.046,.115,.105),(side*.196,.02,.788),cloth,'thigh.'+('R' if side>0 else 'L'),.014)
     tube('jacket_placket',(0,.143,1.12),(0,.139,1.44),.012,.012,cloth,'spine',6,1,0)
-    for z in (1.19,1.27,1.35,1.42): ellipsoid('button',(.005,.004,.005),(0,.153,z),8,'chest',8,4)
+    if DETAIL_LEVEL==0:
+        for z in (1.19,1.27,1.35,1.42): ellipsoid('button',(.005,.004,.005),(0,.153,z),8,'chest',8,4)
     ellipsoid('belt',(.207,.146,.025),(0,0,1.041),4,'pelvis',20,6)
     box('buckle',(.043,.013,.033),(0,.15,1.041),8,'pelvis',.003)
-    box('pack',(.255,.135,.27),(0,-.159,1.282),9,'chest',.025)
+    if style!='radio':box('pack',(.255,.135,.27),(0,-.159,1.282),9,'chest',.025)
     for x in (-.078,.078): box('pack_strap',(.022,.014,.25),(x,-.235,1.282),4,'chest',.004)
     ellipsoid('canteen',(.065,.057,.093),(.205,-.068,1.012),3,'pelvis')
-    if style in ('heavy','rolled'):
+    if style in ('heavy','rolled') and DETAIL_LEVEL<2:
         for i in range(10): tube('cartridge',(-.13+i*.028,.16,1.29),(-.13+i*.028,.16,1.35),.010,.008,8,'chest',6,1,0)
     if style=='radio':
         box('radio_pack',(.29,.14,.37),(0,-.18,1.32),2,'chest',.013)
         tube('radio_aerial',(.105,-.22,1.49),(.105,-.22,2.15),.005,.003,3,'chest',6,1,0)
     # Anatomy and clothing follow the exact bind skeleton.
-    _,joints=skeleton(); rig=bpy.context.object
+    if rig is None: rig,joints=skeleton()
     for suffix in ('L','R'):
         for bone,r0,r1,tile in [('upper_arm',.083,.061,cloth),('forearm',.061,.043,cloth),('thigh',.110,.083,cloth),('shin',.078,.053,cloth)]:
             name=bone+'.'+suffix; a,b,_=joints[name]
@@ -255,14 +296,16 @@ def character(asset,cloth,style):
         hx,hy,hz=joints['hand.'+suffix][0]
         ellipsoid('glove',(.042,.062,.039),(hx,hy+.032,hz),4,'hand.'+suffix,12,8)
         # Individual curled fingers and opposed thumb remain attached to hand.
-        for finger in range(4):
-            ellipsoid('finger',(.009,.028,.012),(hx-.029+finger*.019,hy+.073,hz-.012),4,'hand.'+suffix,8,6)
-        ellipsoid('thumb',(.014,.032,.017),(hx+(-.035 if suffix=='R' else .035),hy+.025,hz+.009),4,'hand.'+suffix,8,6)
+        if DETAIL_LEVEL==0:
+            for finger in range(4):
+                ellipsoid('finger',(.009,.028,.012),(hx-.029+finger*.019,hy+.073,hz-.012),4,'hand.'+suffix,8,6)
+            ellipsoid('thumb',(.014,.032,.017),(hx+(-.035 if suffix=='R' else .035),hy+.025,hz+.009),4,'hand.'+suffix,8,6)
         x=joints['foot.'+suffix][0][0]
         box('boot_sole',(.125,.273,.027),(x,.067,.0135),7,'foot.'+suffix,.010)
         ellipsoid('boot_toe',(.063,.13,.055),(x,.081,.075),4,'foot.'+suffix,16,8)
         tube('boot_shaft',(x,-.02,.08),(x,-.009,.26),.064,.057,4,'shin.'+suffix,12,4,.002)
-        for z in (.11,.145,.18,.215): box('boot_lace',(.068,.007,.008),(x,.052,z),2,'shin.'+suffix,.002)
+        if DETAIL_LEVEL==0:
+            for z in (.11,.145,.18,.215): box('boot_lace',(.068,.007,.008),(x,.052,z),2,'shin.'+suffix,.002)
     return rig,joints
 
 
@@ -283,18 +326,29 @@ def animation(rig,joints):
             bend=math.sin(math.pi*t) if clip in ('pickup','deploy') else 0
             recoil=math.exp(-t*12)*math.sin(t*math.pi*4) if clip=='fire' else 0
             hit=math.sin(math.pi*t)*.12 if clip=='hit' else 0
-            drop=.36 if crouch else .13 if clip=='run' else .06 if moving else 0
+            drop=.44 if clip=='deploy' else .36 if crouch else .13 if clip=='run' else .06 if moving else 0
             bob=(.028 if clip=='run' else .014)*math.cos(phase*2) if moving else .004*(math.sin(phase)-1)
-            shift=Vector((0,-bend*.10-recoil*.03, -drop-bend*(.32 if clip=='pickup' else .16)+bob))
+            shift=Vector((0,-bend*.10-recoil*.03, -drop-bend*(.65 if clip=='pickup' else .21)+bob))
             for name in targets:
                 if name!='root': targets[name]=[p+shift for p in targets[name]]
             # Torso lean about the pelvis; legs are recomputed with foot contacts.
-            lean=(.35 if crouch else .1 if clip=='run' else .035)+bend*.65-hit
+            lean=(.35 if crouch else .1 if clip=='run' else .035)+bend*(.915 if clip=='pickup' else .65)-hit
             pivot=targets['pelvis'][0]
             rotation=Matrix.Rotation(-lean,3,'X')
             for name in targets:
                 if name=='root' or name.startswith(('thigh','shin','foot')): continue
                 targets[name]=[pivot+rotation@(p-pivot) for p in targets[name]]
+            aiming=clip in ('aim','fire')
+            if aiming:
+                # Protract the support shoulder while keeping the clavicle
+                # length. Tilt the head toward the stock's sight line.
+                for suffix,angle in [('L',-15),('R',-8)]:
+                    name='clavicle.'+suffix;a,b=targets[name]
+                    targets[name]=[a,a+Matrix.Rotation(math.radians(angle),3,'Z')@(b-a)]
+                    targets['upper_arm.'+suffix][0]=targets[name][1].copy()
+                neck=targets['neck'][0]
+                tilt=Matrix.Rotation(.37,3,'Y')@Matrix.Rotation(-.24,3,'X')
+                for name in ('neck','head'):targets[name]=[neck+tilt@(p-neck) for p in targets[name]]
             for suffix,side in [('L',-1),('R',1)]:
                 thigh='thigh.'+suffix; shin='shin.'+suffix; foot='foot.'+suffix
                 hip=Vector(joints[thigh][0])+shift
@@ -308,12 +362,11 @@ def animation(rig,joints):
                 targets[thigh]=[hip,knee]; targets[shin]=[knee,ankle]
                 targets[foot]=[ankle,ankle+Vector((0,.18,-.06))]
                 shoulder=targets['upper_arm.'+suffix][0]
-                aiming=clip in ('aim','fire')
                 # Both palms lie on the rifle grip axis, 0.26 m apart.
-                hand=Vector((.035, .24 if side==1 else .50,1.39 if aiming else 1.22))+shift
+                hand=Vector((.12 if aiming else .035, (.28 if side==1 else .54) if aiming else (.24 if side==1 else .50),1.56 if aiming else 1.22))+shift
                 if aiming: hand.y-=recoil*.07
-                if clip in ('pickup','deploy'): hand=hand.lerp(Vector((side*.10,.47,.49)),bend)
-                if clip=='haul': hand=Vector((side*.15,-.13,.86))+shift
+                if clip in ('pickup','deploy'):hand=hand.lerp(Vector((side*.10,.57,.065 if clip=='pickup' else .035)),bend)
+                if clip=='haul': hand=Vector((side*.06,.35,1.06))+shift
                 if clip=='run': hand.z+=.035*math.sin(phase)
                 if clip=='death':
                     tuck=min(t/.75,1)
@@ -349,9 +402,9 @@ def animation(rig,joints):
             if clip=='death':
                 # Keep the collapsing skinned surface on the floor, including
                 # hands/pack, instead of guessing a pelvis height.
-                bottom=min((matrices[obj.vertex_groups[0].name]@
-                            rig.data.bones[obj.vertex_groups[0].name].matrix_local.inverted()@
-                            obj.matrix_world@v.co).z for obj in PARTS for v in obj.data.vertices)
+                skin={name:matrices[name]@rig.data.bones[name].matrix_local.inverted() for name in joints}
+                bottom=min(sum(g.weight*(skin[obj.vertex_groups[g.group].name]@obj.matrix_world@v.co).z
+                               for g in v.groups) for obj in PARTS for v in obj.data.vertices)
                 lift=max(0,.003-bottom)
                 for name,matrix in matrices.items():
                     if name!='root': matrix.translation.z+=lift
@@ -385,7 +438,7 @@ def solve_joint(a,b,upper,lower,pole):
 
 def weapon(asset,length,family):
     kit.CURRENT=asset
-    pistol=family=='pistol'; end=length-(.07 if pistol else .32)
+    pistol=family=='pistol'; rifle=family in ('rifle','scout');end=length-(.07 if pistol else .275 if rifle else .32)
     wood=asset in ('m1_garand','kar98k','springfield','kar98k_zf','bar','thompson','mg42')
     stock_tile=14 if wood else 3
     if pistol:
@@ -400,16 +453,18 @@ def weapon(asset,length,family):
             box('stock_loop',(.065,.014,.06),(0,-.34,-.037),3,None,.003)
             grip=box('pistol_grip',(.039,.058,.11),(0,-.065,-.055),4,None,.005); grip.rotation_euler.x=-.25
         else:
-            stock=box('shoulder_stock',(.053,.245,.110),(0,-.21,-.012),stock_tile,None,.012); stock.rotation_euler.x=-.10
-            box('buttplate',(.058,.014,.114),(0,-.332,-.002),3,None,.004)
+            stock=box('shoulder_stock',(.053,.185 if rifle else .245,.110),(0,-.175 if rifle else -.21,-.012),stock_tile,None,.012); stock.rotation_euler.x=-.10
+            box('buttplate',(.058,.014,.114),(0,-.274 if rifle else -.332,-.002),3,None,.004)
         box('receiver',(.056,.25,.066),(0,.025,.035),3,None,.007)
         box('fore_stock',(.052,.28,.042),(0,.257,.012),stock_tile,None,.008)
         tube('barrel',(0,.21,.045),(0,end,.045),.018,.011,3,None,12,2,0)
         box('front_sight',(.018,.011,.038),(0,end-.025,.073),3,None,.002)
         box('rear_sight',(.031,.025,.021),(0,.055,.077),3,None,.003)
-        tube('bolt',(0,.046,.053),(.065,.046,.053),.006,.006,3,None,8,1,0)
-        ellipsoid('bolt_knob',(.012,.012,.012),(.07,.046,.053),3,None,10,6)
+        if asset in ('kar98k','kar98k_zf','springfield'):
+            tube('bolt',(0,.046,.053),(.065,.046,.053),.006,.006,3,None,8,1,0)
+            ellipsoid('bolt_knob',(.012,.012,.012),(.07,.046,.053),3,None,10,6)
         if asset=='m1_garand':
+            box('operating_rod_handle',(.020,.055,.018),(.038,.045,.048),3,None,.002)
             tube('gas_cylinder',(0,.46,.022),(0,end-.012,.022),.017,.015,3,None,12,1,0)
             for x in (-.024,.024): box('aperture_ears',(.009,.04,.034),(x,-.052,.083),3,None,.002)
         if asset in ('kar98k','kar98k_zf'):
@@ -445,8 +500,13 @@ def tool(asset):
     if asset=='knife':
         box('grip',(.030,.105,.023),(0,-.02,0),4,None,.005)
         box('guard',(.072,.012,.009),(0,.035,0),3,None,.002)
-        box('blade',(.027,.16,.006),(0,.12,0),3,None,.001)
-        tube('tip',(0,.194,0),(0,.238,0),.013,0.001,3,None,4,1,0)
+        outline=[(-.0135,.041),(.0135,.041),(.0135,.178),(0,.238),(-.0135,.178)]
+        verts=[(x,y,z) for z in (-.0015,.0015) for x,y in outline]
+        faces=[tuple(reversed(range(5))),tuple(range(5,10))]+[(i,(i+1)%5,(i+1)%5+5,i+5) for i in range(5)]
+        data=bpy.data.meshes.new('blade');data.from_pydata(verts,[],faces);data.update()
+        obj=bpy.data.objects.new('blade',data);bpy.context.collection.objects.link(obj)
+        bpy.ops.object.select_all(action='DESELECT');obj.select_set(True);bpy.context.view_layer.objects.active=obj
+        finish(obj,'blade',3)
     elif asset=='grenade':
         ellipsoid('body',(.043,.043,.065),(0,0,.064),0,None,16,10)
         box('spoon',(.017,.071,.008),(0,.01,.133),3,None,.002)
@@ -458,10 +518,18 @@ def tool(asset):
         box('case',(.16,.23,.11),(0,0,.065),2,None,.012)
         for x in (-.045,0,.045): box('speaker_slot',(.014,.11,.001),(x,.02,.122),7,None,.002)
         tube('aerial',(.05,-.08,.1),(.05,-.08,.35),.003,.002,3,None,6,1,0)
+        for x in (-.04,.04):box('handle_riser',(.014,.02,.045),(x,-.06,.138),4,None,.002)
+        box('handle',(.095,.025,.015),(0,-.06,.165),4,None,.002)
     elif asset=='ammo_pack':
         box('satchel',(.33,.20,.22),(0,0,.13),9,None,.025)
         for x in (-.105,.105): box('strap',(.034,.211,.018),(x,0,.248),4,None,.003)
-    return {'grip':[0,0,0],'tip':[0,0,-.238]} if asset=='knife' else {}
+        for x in (-.06,.06):box('handle_riser',(.02,.022,.052),(x,0,.27),4,None,.003)
+        box('handle',(.14,.025,.018),(0,0,.30),4,None,.003)
+    return {'knife':{'grip':[0,0,0],'tip':[0,0,-.238]},
+            'grenade':{'grip':[0,.064,0],'fuse':[0,.145,0]},
+            'mine':{'grip':[.115,.045,0],'pressure_plate':[0,.085,0]},
+            'decoy':{'grip':[0,.165,.06],'speaker':[0,.122,-.02]},
+            'ammo_pack':{'grip':[.06,.30,0],'support_hand':[-.06,.30,0]}}[asset]
 
 
 def export(asset,objects,level,animated=False):
@@ -478,7 +546,7 @@ def export(asset,objects,level,animated=False):
     for obj in objects:
         if obj.type!='MESH': continue
         obj.data.calc_loop_triangles(); tris+=len(obj.data.loop_triangles); surfaces+=len(obj.data.materials)
-    return {'path':path.relative_to(PROJECT).as_posix(),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+    return {'path':f'art/v2/models/{path.name}','sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
             'triangles':tris,'surfaces':surfaces}
 
 
@@ -486,7 +554,7 @@ def clean_mesh(obj):
     # Decimate on n-gons can collapse opposite faces into duplicate polygons.
     # Triangulate first and validate the *result*, including corner/UV arrays.
     bm=bmesh.new(); bm.from_mesh(obj.data)
-    bmesh.ops.triangulate(bm, faces=list(bm.faces))
+    bmesh.ops.triangulate(bm, faces=list(bm.faces),quad_method='FIXED',ngon_method='EAR_CLIP')
     bmesh.ops.dissolve_degenerate(bm, dist=1e-7, edges=list(bm.edges))
     bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
     bm.to_mesh(obj.data); bm.free()
@@ -496,21 +564,13 @@ def clean_mesh(obj):
     if changed: print('MESH_REPAIRED',obj.name,flush=True)
 
 
-def reduce_mesh(obj, budget):
+def prepare_mesh(obj, budget):
     clean_mesh(obj)
     obj.data.calc_loop_triangles()
     count=len(obj.data.loop_triangles)
-    if count>budget:
-        bpy.context.view_layer.objects.active=obj
-        dec=obj.modifiers.new('BudgetLOD','DECIMATE'); dec.ratio=(budget-40)/count
-        dec.use_collapse_triangulate=True
-        while list(obj.modifiers).index(dec)>0: bpy.ops.object.modifier_move_up(modifier=dec.name)
-        bpy.ops.object.modifier_apply(modifier=dec.name)
-        clean_mesh(obj)
     obj.data.calc_loop_triangles()
     assert len(obj.data.loop_triangles)<=budget, (obj.name,len(obj.data.loop_triangles),budget)
-    # Symmetric Decimate corners choose different inherited UV values across
-    # processes. Preserve each corner's atlas tile and deterministically project
+    # Preserve each corner's atlas tile and deterministically project
     # bind-space metre coordinates, with the same inset/gutter contract.
     uv=obj.data.uv_layers.active.data
     for face in obj.data.polygons:
@@ -525,7 +585,7 @@ def reduce_mesh(obj, budget):
 
 
 def build():
-    global PARTS
+    global PARTS,DETAIL_LEVEL,DETAIL_KIND
     bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
     bpy.context.scene.render.fps=30
     bpy.context.scene.unit_settings.system='METRIC'
@@ -533,14 +593,16 @@ def build():
     # Retire only the misidentified WIP candidate; the game has no heavy enemy.
     for level in range(3): (OUT/'models'/f'enemy_heavy_lod{level}.glb').unlink(missing_ok=True)
     for asset in [*CHARACTERS,*GUNS,'knife','grenade','mine','decoy','ammo_pack']:
-        PARTS=[]; rig=None; sockets={}
+        PARTS=[]; rig=None; sockets={};DETAIL_LEVEL=0 if asset in CHARACTERS else None
+        DETAIL_KIND='character' if asset in CHARACTERS else 'equipment'
         if asset in CHARACTERS:
             rig,joints=character(asset,*CHARACTERS[asset]); category='character'
             animation(rig,joints)
             sockets={'weapon_hand':{'bone':'hand.R','position_bone_local_m':[0,.035,0],
                        'rotation_bone_local_deg':[90,0,0]},
                      'support_hand':{'bone':'hand.L','position_bone_local_m':[0,.035,0],
-                       'rotation_bone_local_deg':[90,0,0]}}
+                       'rotation_bone_local_deg':[90,0,0]},
+                     'sight_eye':{'bone':'head','position_bone_local_m':[.037,.139,-.110]}}
         elif asset in GUNS:
             sockets=weapon(asset,*GUNS[asset]); category='weapon'
         else: sockets=tool(asset); category='tool'
@@ -549,12 +611,13 @@ def build():
             floor=min(v.co.z for v in mesh.data.vertices)
             mesh.data.transform(Matrix.Translation((0,0,-floor)))
             mesh.data.update()
-        reduce_mesh(mesh,LOD_BUDGET[category][0])
+            for point in sockets.values():point[1]-=floor
+        prepare_mesh(mesh,LOD_BUDGET[category][0])
         if rig:
             mesh.parent=rig; modifier=mesh.modifiers.new('SharedSkin','ARMATURE'); modifier.object=rig
         collection=bpy.data.collections.new(asset); bpy.context.scene.collection.children.link(collection)
         originals=[mesh]+([rig] if rig else [])
-        if category=='weapon' or asset=='knife':
+        if category in ('weapon','tool'):
             for name,position in sockets.items():
                 if position is None: continue
                 marker=bpy.data.objects.new(asset+'__socket_'+name,None)
@@ -567,13 +630,31 @@ def build():
             collection.objects.link(obj)
             obj['asset_id']=asset; obj['collision_class']='visual_only'
         lods=[export(asset,originals,0,rig is not None)]
+        mesh['lod']=0
         for level,budget in enumerate(LOD_BUDGET[category][1:],1):
-            copy=mesh.copy(); copy.data=mesh.data.copy(); collection.objects.link(copy)
+            if rig:
+                PARTS=[];DETAIL_LEVEL=level
+                character(asset,*CHARACTERS[asset],rig,joints)
+                copy=kit.join_parts(PARTS,asset+f'_body_lod{level}')
+                for old in list(copy.users_collection):old.objects.unlink(copy)
+                collection.objects.link(copy)
+                copy.parent=rig;modifier=copy.modifiers.new('SharedSkin','ARMATURE');modifier.object=rig
+                copy['lod']=level
+            else:
+                PARTS=[];DETAIL_LEVEL=level
+                if asset in GUNS:weapon(asset,*GUNS[asset])
+                else:tool(asset)
+                copy=kit.join_parts(PARTS,asset+f'_body_lod{level}')
+                if category=='tool' and asset!='knife':
+                    copy.data.transform(Matrix.Translation((0,0,-floor)));copy.data.update()
+                for old in list(copy.users_collection):old.objects.unlink(copy)
+                collection.objects.link(copy)
             bpy.context.view_layer.objects.active=copy
-            # Always work from LOD0 in bind space, ahead of SharedSkin.
-            reduce_mesh(copy,min(budget,int(lods[0]['triangles']*.52**level)))
+            # Every LOD is generated directly; no symmetric collapse ties.
+            prepare_mesh(copy,budget)
             lods.append(export(asset,[copy]+[o for o in originals if o!=mesh],level,rig is not None))
-            bpy.data.objects.remove(copy,do_unlink=True)
+            if rig:copy.hide_render=True;copy.hide_set(True)
+            else:bpy.data.objects.remove(copy,do_unlink=True)
         points=[mesh.matrix_world@Vector(p) for p in mesh.bound_box]
         dims=[max(p[i] for p in points)-min(p[i] for p in points) for i in (0,2,1)]
         entries.append({'asset_id':asset,'category':category,'source':'ArtSource/v2/build_actors.py',
@@ -585,19 +666,28 @@ def build():
             'materials':['shared actor 1024px albedo/normal/ORM atlas'],'collision':'visual_only',
             'skeleton':list(joints) if rig else [],'animations':[{'name':n,'duration':round(d*30)/30,'loop':l,'root_motion':False} for n,(d,l) in CLIPS.items()] if rig else [],
             'sockets':sockets,'lod_triangle_budget':LOD_BUDGET[category],
+            'lod_generation':'Constructive tessellation and feature tiers; no Decimate',
             'validation_scene':'res://ArtSource/v2/actor_acceptance/review.gd','status':'repaired candidate; acceptance report required'})
         # Hide other collections in Blender viewport; exports use selection only.
         for obj in originals: obj.hide_set(True)
         print('ACTOR_ASSET',asset,[(x['triangles'],x['surfaces']) for x in lods],flush=True)
     manifest={'schema':2,'seed':SEED,'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'canonicalizer_sha256':hashlib.sha256((HERE/'actor_acceptance/canonicalize.py').read_bytes()).hexdigest(),'assets':entries,
-              'textures':[{'path':p.relative_to(PROJECT).as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((OUT/'textures').glob('actor_*.png'))]}
-    (OUT/'actors_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+              'textures':[{'path':f'art/v2/textures/{p.name}','sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((OUT/'textures').glob('actor_*.png'))]}
+    CATALOG.write_text(json.dumps(manifest,indent=2)+'\n')
     for img in bpy.data.images:
         if img.filepath: img.pack()
-    for obj in bpy.data.objects: obj.hide_set(False)
-    bpy.ops.wm.save_as_mainfile(filepath=str(HERE/'actors.blend'))
+    for obj in bpy.data.objects: obj.hide_set(obj.get('lod',0)>0)
+    bpy.ops.wm.save_as_mainfile(filepath=str(BLEND_SOURCE))
     print('ACTOR_KIT_EXPORTED',len(entries),flush=True)
 
 
-if __name__=='__main__': build()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--output-root',type=Path,required=True,help='Independent project root; no shared manifest is written')
+    args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+    OUT=args.output_root.resolve()/'art/v2';OUT.joinpath('models').mkdir(parents=True,exist_ok=True)
+    kit.TEX=OUT/'textures';kit.TEX.mkdir(parents=True,exist_ok=True)
+    CATALOG=args.output_root.resolve()/'catalog_candidate.json'
+    BLEND_SOURCE=args.output_root.resolve()/'actors.blend'
+    build()

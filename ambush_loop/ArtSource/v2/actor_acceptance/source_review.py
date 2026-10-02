@@ -4,7 +4,8 @@ import sys,math,json,bpy
 from mathutils import Vector
 root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[sys.argv.index('--')+1]);out.mkdir(parents=True,exist_ok=True)
-bpy.ops.wm.open_mainfile(filepath=str(root/'actors.blend'))
+blend=Path(sys.argv[sys.argv.index('--')+2]) if len(sys.argv)>sys.argv.index('--')+2 else root/'actors.blend'
+bpy.ops.wm.open_mainfile(filepath=str(blend))
 scene=bpy.context.scene; report=[]
 for collection in bpy.data.collections:
  if collection.name.startswith(('operator_','enemy_')):
@@ -15,7 +16,7 @@ for collection in bpy.data.collections:
 for o in bpy.data.objects:o.hide_render=True
 for id,x in [('operator_rifle',-.85),('enemy_patrol',.85)]:
  collection=bpy.data.collections[id]
- for o in collection.objects:o.hide_render=False
+ for o in collection.objects:o.hide_render=o.type=='MESH' and o.get('lod',0)>0
  rig=next(o for o in collection.objects if o.type=='ARMATURE');rig.location.x=x
  rig.animation_data.action=bpy.data.actions['idle']
 scene.frame_set(18);bpy.context.view_layer.update()

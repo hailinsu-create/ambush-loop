@@ -58,6 +58,12 @@ func mount(n: Node3D, id: String, lod: int) -> Node3D:
 	gun.transform = Transform3D(Basis(Vector3.RIGHT, PI / 2), Vector3(0, 0.035, 0))
 	return gun
 
+func mount_tool(n: Node3D, asset: Dictionary, lod: int) -> Node3D:
+	var tool := mount(n, asset.asset_id, lod)
+	var grip := Vector3(float(asset.sockets.grip[0]),float(asset.sockets.grip[1]),float(asset.sockets.grip[2]))
+	tool.position -= tool.basis * grip
+	return tool
+
 func pose(n: Node3D, clip: String, phase: float) -> void:
 	var ap := player(n)
 	check(ap != null and ap.has_animation(clip), "clip: " + clip)
@@ -193,10 +199,16 @@ func run() -> void:
 			var left := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("hand.L")) * Vector3(0,0.035,0)
 			var support := gun.global_transform * Vector3(0,0,-0.26)
 			var error := left.distance_to(support)
+			var eye := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("head")) * Vector3(0.037,0.139,-0.110)
+			var sight := gun.global_transform * Vector3(0,0.077,-0.055)
+			var direction := -gun.global_basis.z.normalized()
+			var sight_error := (eye-sight-direction*(eye-sight).dot(direction)).length()
+			if clip.name in ["aim","fire"]:
+				check(sight_error < 0.035,"priority sight line: %s %d error=%f" % [clip.name,sample,sight_error])
 			if holds_gun:
 				check(error < 0.04, "support grip: %s %d error=%f" % [clip.name,sample,error])
 			look(130, 35, 4.6, Vector3(0,0.85,0))
-			await capture("pose_%s_%02d" % [clip.name,sample],{"clip":clip.name,"phase":sample/24.0,"support_error_m":error,"holds_gun":holds_gun})
+			await capture("pose_%s_%02d" % [clip.name,sample],{"clip":clip.name,"phase":sample/24.0,"support_error_m":error,"eye_to_sight_line_m":sight_error,"holds_gun":holds_gun})
 			await clear_stage()
 	# All candidates, near and far incl. 65 degree pitch. Keep floor readable.
 	for level in 3:
@@ -210,6 +222,34 @@ func run() -> void:
 		look(0, 50, 24, Vector3(0,0.8,0))
 		await capture("characters_far_lod%d" % level,{"lod":level,"pitch":50,"camera_size_m":24})
 		await clear_stage()
+	# Asset fit samples. Runtime pickup/release/stow events are outside this fixture.
+	var tool_clips := {"knife":"idle","grenade":"pickup","mine":"deploy","decoy":"idle","ammo_pack":"haul"}
+	for level in 2:
+		for asset in manifest.assets:
+			if asset.category != "tool": continue
+			for sample in 5:
+				var subject := load_asset("operator_rifle",level)
+				var item := mount_tool(subject,asset,level)
+				var clip: String = tool_clips[asset.asset_id]
+				pose(subject,clip,sample/4.0)
+				await process_frame
+				var sk := rig(subject)
+				var wrist := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("hand.R")) * Vector3(0,0.035,0)
+				var marker := item.find_child(asset.asset_id+"__socket_grip",true,false) as Node3D
+				check(marker != null,"tool grip marker: "+asset.asset_id)
+				var grip_error := marker.global_position.distance_to(wrist) if marker != null else INF
+				check(grip_error < 0.0001,"tool grip fit: "+asset.asset_id)
+				var support_error := 0.0
+				if asset.asset_id == "ammo_pack":
+					var support := item.find_child("ammo_pack__socket_support_hand",true,false) as Node3D
+					var left := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("hand.L")) * Vector3(0,0.035,0)
+					support_error = support.global_position.distance_to(left)
+					check(support_error < 0.02,"ammo pack support fit")
+				if sample == 2 and asset.asset_id in ["mine","grenade"]:
+					check(abs(item.global_position.y)<0.015,"tool ground contact: "+asset.asset_id)
+				look(130,35,3.4,Vector3(0,0.65,0))
+				await capture("tool_%s_lod%d_%02d" % [asset.asset_id,level,sample],{"asset":asset.asset_id,"clip":clip,"phase":sample/4.0,"lod":level,"grip_error_m":grip_error,"support_error_m":support_error,"ground_origin_y_m":item.global_position.y,"scope":"fit only; no runtime events"})
+				await clear_stage()
 	# Every character/LOD in every declared action at its middle sample.
 	for level in 3:
 		for clip in manifest.assets[0].animations:

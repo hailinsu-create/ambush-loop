@@ -1,0 +1,2193 @@
+{
+  "schema": 2,
+  "seed": 194407,
+  "generator_sha256": "e5ba01c9caac5c6bc60994b693592ca0e668991e3de9d93e985d377f4b8fc324",
+  "canonicalizer_sha256": "203d95edad99d5221ffa956cf36f7554175369403dc4df115113774ad6182f5f",
+  "assets": [
+    {
+      "asset_id": "operator_rifle",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        1.844,
+        0.6616
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/operator_rifle_lod0.glb",
+          "sha256": "1db85db60fec600889364d6177330f76cdb1d142adcc73b86876f45b9e8821a5",
+          "triangles": 6510,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_rifle_lod1.glb",
+          "sha256": "14e7b31fc5c5412cdea6289ce1c843d472478befeba04788e611d51fa4185fd3",
+          "triangles": 2764,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_rifle_lod2.glb",
+          "sha256": "0a3d53f53238179af21c16eccf9dde42d6bc88bd5b1f96672dd1b2f4e51705aa",
+          "triangles": 1492,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "operator_mg",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        1.844,
+        0.6616
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/operator_mg_lod0.glb",
+          "sha256": "f544b8c3314ca8343463be0d2840786ab571b89b816bad2079b336cf71154614",
+          "triangles": 6874,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_mg_lod1.glb",
+          "sha256": "7d55a73631baed3eb4434607ffd2500fbc44fefe05c48ca6807334f8f6e97f75",
+          "triangles": 3128,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_mg_lod2.glb",
+          "sha256": "e2a87c09fe543cb2f88a76104f4fecd85bd10bcf46544d9ff41625b4663e0698",
+          "triangles": 1504,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "operator_scout",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        1.838,
+        0.6616
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/operator_scout_lod0.glb",
+          "sha256": "6240f852cafa064f484f266b4dae4ea23e4b8e9da07e8ecd8b9c712a23aae9f0",
+          "triangles": 6298,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_scout_lod1.glb",
+          "sha256": "c833b933937900127baa038d5d18fe00232cb7d1ebc41c6246b5c625b8fbb869",
+          "triangles": 2684,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_scout_lod2.glb",
+          "sha256": "ca9f9e2b069853fe4ff4b520c1d5a7ec64437d250f3a6bfb247e8156cee72425",
+          "triangles": 1416,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_patrol",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        1.844,
+        0.6616
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_patrol_lod0.glb",
+          "sha256": "10974ac4ea455b521aa63b17ed1366313e2d7b3db08962ec42bb85c45f2a04f9",
+          "triangles": 6510,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_patrol_lod1.glb",
+          "sha256": "a6ea7e6fb36bc8ad4fa6e58057e755a5ec01682318fbc78b6a04c726cc699162",
+          "triangles": 2764,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_patrol_lod2.glb",
+          "sha256": "ec9a505bf4fc0d4936f63b7bbb02731d5ca7974716426092aea0bd54e37374e2",
+          "triangles": 1492,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_flank",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        1.824,
+        0.6616
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_flank_lod0.glb",
+          "sha256": "f71f21bf1a8da55dd878a98203a4d98437a4c345243f64715d339ab0d2b3da4a",
+          "triangles": 6304,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_flank_lod1.glb",
+          "sha256": "db61f42596312b89c094642f0705384a73f6b396e7e846758d69bbfb2d725c8c",
+          "triangles": 2672,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_flank_lod2.glb",
+          "sha256": "b14ecf3e51a7b383dea004103d799f1e6201cf1d6aa559b284e11d5f9c35a1d4",
+          "triangles": 1416,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_sneak",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        1.866,
+        0.6616
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_sneak_lod0.glb",
+          "sha256": "9ce5438de76fc4beda84d50d8d078dd36eb1448ca5964e35076a131779dcaa51",
+          "triangles": 6390,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_sneak_lod1.glb",
+          "sha256": "34a108d32e1f50d314234ae39097362d8fc7de8458c5f16cb2a3fda6d7f53e79",
+          "triangles": 2720,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_sneak_lod2.glb",
+          "sha256": "abdea992ce54d47d236371179bdcd92e3042b0e76b5596541aaf9c838f285a35",
+          "triangles": 1472,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_radio",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6574,
+        2.15,
+        0.6696
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_radio_lod0.glb",
+          "sha256": "ab1c4943151235ab224f302dfd197310f2d16cb8fb69c1f9948340db4b1b0cfc",
+          "triangles": 6542,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_radio_lod1.glb",
+          "sha256": "126ca2a71220a582d8e09940b39282f31217618f6bf1dba58d270ffbe1cfb749",
+          "triangles": 2796,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_radio_lod2.glb",
+          "sha256": "d32eae2dc18e3e2cecfc52c8cbadb7a6a039ac3cf32179648987afaba8aa8042",
+          "triangles": 1524,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.11
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "m1911",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.035,
+        0.1648,
+        0.2095
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/m1911_lod0.glb",
+          "sha256": "088e86c049ab665fde4662ae4b9b28b42bb2af849add14adc9fcdb35a39aab7d",
+          "triangles": 352,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/m1911_lod1.glb",
+          "sha256": "6e5acd3db4e8a184b981bd9a42bb99c1d72564352d425f8a3dc4a1c3195acf9e",
+          "triangles": 116,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.035,
+          -0.15
+        ],
+        "support_hand": null
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "luger",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.035,
+        0.1808,
+        0.2395
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/luger_lod0.glb",
+          "sha256": "0fe4bf458986868580c133c275497a91c8703821c2a86fd459869039853dab24",
+          "triangles": 396,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/luger_lod1.glb",
+          "sha256": "c75fad70ecbab544c18d60dc5e94e1bd246395b346cd1467974ade447af7b3e0",
+          "triangles": 128,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.035,
+          -0.18
+        ],
+        "support_hand": null
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "m1_garand",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.077,
+        0.1748,
+        1.106
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/m1_garand_lod0.glb",
+          "sha256": "4ee1ee2449f76d31bab58a651c7699ee451783ef7d49dd463c385e86769e5684",
+          "triangles": 816,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/m1_garand_lod1.glb",
+          "sha256": "d78e81653d3718c81c02b78abc42507d13516ff645047475b8e2536c191e59ee",
+          "triangles": 256,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8250000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "kar98k",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.1104,
+        0.1668,
+        1.116
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/kar98k_lod0.glb",
+          "sha256": "024542d4f79fb2869b153f8d0f6e01835393e5b380255ff2cd91090a25ae78b8",
+          "triangles": 856,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/kar98k_lod1.glb",
+          "sha256": "09bc4abceb2fdc1d1eb2332c80052cebd19d632a8e4f9ce9db42ff4676f3e407",
+          "triangles": 268,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8350000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "thompson",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.08,
+        0.236,
+        0.839
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/thompson_lod0.glb",
+          "sha256": "466f9949f41bb123e18b75869541302124aeb711475c0280df13e177c2978631",
+          "triangles": 760,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/thompson_lod1.glb",
+          "sha256": "6b4a427f00e31b2eef072a231a26462f2c40366b5eb45adc5e7efaaed18641ed",
+          "triangles": 256,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.49999999999999994
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "mp40",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.066,
+        0.2485,
+        0.857
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/mp40_lod0.glb",
+          "sha256": "c9dfc7d314a371f5a8f92c425823980ebaf6ddee6204e9d3f27c3153690b34b2",
+          "triangles": 740,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/mp40_lod1.glb",
+          "sha256": "0912402a3b4ad918a31f8d752dae65f7f914b1ca0a622ccdaab86606f61270e0",
+          "triangles": 264,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.51
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "bar",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.2994,
+        0.2485,
+        1.219
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/bar_lod0.glb",
+          "sha256": "b642d11f54e8ff85be7f2c512aaa23da20012e098578d98cc2fab4d9b5039e86",
+          "triangles": 740,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/bar_lod1.glb",
+          "sha256": "91166f1a5be0262b1c6b58c6fe2e6fa37a3053bbe6406532ec7c0607e295c3d1",
+          "triangles": 264,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8799999999999999
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "mg42",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.2994,
+        0.2485,
+        1.239
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/mg42_lod0.glb",
+          "sha256": "629c64a5b93e4aeba86bdea5071026a0e9e658b22fa0271ab874be1f1397e347",
+          "triangles": 1288,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/mg42_lod1.glb",
+          "sha256": "47e916c95651b2336b0e70fb42199e7898fad890d4568faee0c3ed5a90823a2f",
+          "triangles": 492,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8999999999999999
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "springfield",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.1104,
+        0.2178,
+        1.126
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/springfield_lod0.glb",
+          "sha256": "caecdd32aa6bcfb50497cb592705e22cc6f1db557e06b47b0487004d5d0f949e",
+          "triangles": 960,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/springfield_lod1.glb",
+          "sha256": "d2a3edb6dda3645606f4ed0577b6749f62299c9750a654bc8916be448be500f2",
+          "triangles": 344,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8450000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "kar98k_zf",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.1104,
+        0.2178,
+        1.116
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/kar98k_zf_lod0.glb",
+          "sha256": "1be0edfe9b99597488aa07a05b70883c3f30c8682f4c933dbfa19fc364189f69",
+          "triangles": 1048,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/kar98k_zf_lod1.glb",
+          "sha256": "58925fedd06934dd4a3114828ea51a2917b4bfe65ae243d4a546cbe9ecccd606",
+          "triangles": 368,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8350000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "knife",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.072,
+        0.023,
+        0.3105
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/knife_lod0.glb",
+          "sha256": "6871eb1bb101fdd67cd4eb37c5dff588283cedb289843c5b2520bff73f620092",
+          "triangles": 104,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/knife_lod1.glb",
+          "sha256": "865b3cd39a37a096c7024c833588a1c85febd767a6b75baec977e86c38feafdc",
+          "triangles": 40,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "tip": [
+          0,
+          0,
+          -0.238
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "grenade",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.086,
+        0.146,
+        0.0885
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/grenade_lod0.glb",
+          "sha256": "b4f9e63af392a2c0b9a208a79291076271e0d33887d0e7597920f47290019ae3",
+          "triangles": 368,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/grenade_lod1.glb",
+          "sha256": "59629af7c6231d121f527d997e42133157569c262b4b439a6a4406927cc575f3",
+          "triangles": 108,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0.06499999457597733,
+          0
+        ],
+        "fuse": [
+          0,
+          0.14599999457597732,
+          0
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "mine",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.27,
+        0.075,
+        0.27
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/mine_lod0.glb",
+          "sha256": "bda75655ee43d3dab835b3b6bb8bf3f0ed67103dbe229b002c394468ca896b7d",
+          "triangles": 168,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/mine_lod1.glb",
+          "sha256": "714c1eba81956d7bf0f0e550e9b83cbd096e438fb9b3b1228b8890b8c335c16b",
+          "triangles": 124,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0.115,
+          0.035000000223517416,
+          0
+        ],
+        "pressure_plate": [
+          0,
+          0.07500000022351742,
+          0
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "decoy",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.16,
+        0.34,
+        0.23
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/decoy_lod0.glb",
+          "sha256": "91f9a57fb84e7c96ac252d972613bdfab15e72040feaa34cb035ed4236cfb757",
+          "triangles": 280,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/decoy_lod1.glb",
+          "sha256": "925a733ae05a751d434197a1f9e3df0a21380f0346a0f69333aaba2ac2dc12d1",
+          "triangles": 116,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0.15500000208616257,
+          0.06
+        ],
+        "speaker": [
+          0,
+          0.11200000208616256,
+          -0.02
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "ammo_pack",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.33,
+        0.289,
+        0.211
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/ammo_pack_lod0.glb",
+          "sha256": "1b0a3689e4caba9b0caaaae3c5283a6203a1acc4762539dda0eb43c86182d151",
+          "triangles": 264,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/ammo_pack_lod1.glb",
+          "sha256": "73e82f4c084054aaac50b01d4fdc76dcb010598bbbf15919c56ab31af4f6aa29",
+          "triangles": 72,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0.06,
+          0.2800000041723251,
+          0
+        ],
+        "support_hand": [
+          -0.06,
+          0.2800000041723251,
+          0
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    }
+  ],
+  "textures": [
+    {
+      "path": "art/v2/textures/actor_atlas_albedo.png",
+      "sha256": "9739afae52b182db5c2e9689ff152f7fd3d1c0395d9e2438c2d25b900e33f2c5"
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_normal.png",
+      "sha256": "3a92856dcfe0094bc8c470e2935672041d10d95ff00a4f13eff5516a6f68ab8a"
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_orm.png",
+      "sha256": "25ddbcfd90ba98e86d63a933ff5544e64c7b9dda8f54e815a422406c47c31483"
+    }
+  ]
+}

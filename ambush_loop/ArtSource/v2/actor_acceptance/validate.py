@@ -48,8 +48,8 @@ def pose(d,b,a,t):
   mods.setdefault(ch['target']['node'],{})[ch['target']['path']]=value.tolist()
  return worlds(d,mods)
 
-def audit(project,strict=True):
- manifest=json.loads((project/'art/v2/actors_manifest.json').read_text());out={'assets':[],'violations':[]};reference=None
+def audit(project,strict=True,catalog=None):
+ manifest=json.loads((catalog or project/'art/v2/actors_manifest.json').read_text());out={'assets':[],'violations':[]};reference=None
  def check(ok,msg):
   if not ok:out['violations'].append(msg)
  for e in manifest['assets']:
@@ -68,7 +68,7 @@ def audit(project,strict=True):
      if e['category']=='character':
       joints=acc(d,b,at['JOINTS_0']);w=acc(d,b,at['WEIGHTS_0']);check((abs(w.sum(axis=1)-1)<1e-5).all() and (w>=0).all(),label+' weights');check(joints.max()<20,label+' joints')
    entry.update(triangles=tris,vertices=verts,degenerate_triangles=degenerate)
-   if e['category']=='weapon' or e['asset_id']=='knife':
+   if e['category'] in ('weapon','tool'):
     world=worlds(d)
     markers={n['name']:world[i][:3,3] for i,n in enumerate(d['nodes']) if '__socket_' in n['name']}
     for key,value in e['sockets'].items():
@@ -115,5 +115,5 @@ def audit(project,strict=True):
 
 if __name__=='__main__':
  import argparse
- ap=argparse.ArgumentParser();ap.add_argument('--project',type=Path,default=PROJECT);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--diagnostic',action='store_true');args=ap.parse_args()
- result=audit(args.project);args.output.write_text(json.dumps(result,indent=2)+'\n');print('ACTOR_BINARY_AUDIT',result['asset_count'],result['lod_count'],'violations',len(result['violations']));print('\n'.join(result['violations']));sys.exit(bool(result['violations']) and not args.diagnostic)
+ ap=argparse.ArgumentParser();ap.add_argument('--project',type=Path,default=PROJECT);ap.add_argument('--catalog',type=Path);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--diagnostic',action='store_true');args=ap.parse_args()
+ result=audit(args.project,catalog=args.catalog);args.output.write_text(json.dumps(result,indent=2)+'\n');print('ACTOR_BINARY_AUDIT',result['asset_count'],result['lod_count'],'violations',len(result['violations']));print('\n'.join(result['violations']));sys.exit(bool(result['violations']) and not args.diagnostic)
