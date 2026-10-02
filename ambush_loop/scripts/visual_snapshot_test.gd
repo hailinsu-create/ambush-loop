@@ -3,6 +3,7 @@ extends SceneTree
 const StorageGuard := preload("res://scripts/test_storage_guard.gd")
 const ViewState := preload("res://scripts/presentation/view_state.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
+const ActorVisual := preload("res://scripts/presentation/actor_visual.gd")
 var checks := 0
 var failures := 0
 
@@ -115,7 +116,7 @@ func _run() -> void:
 		var selection: Array = frame.ops.filter(func(o: Dictionary) -> bool: return o.id == frame.selected_id)
 		_check(main.presentation_3d.focus_selected() and main.presentation_3d.rig.focus == Space.logic_to_world(selection[0].pos), "selected camera focus uses the historical position")
 		var body: Node3D = main.presentation_3d.actors["ops:2"].get_node("Body")
-		_check(body is preload("res://scripts/presentation/actor_visual.gd") and body.scale == Vector3.ONE and (frame.ops[1].stance != 1 or not frame.ops[1].alive or body.sampled_action in ["crouch", "crouch_walk"]), "rigged proxy uses historical crouch bones without shrinking its root")
+		_check(body is ActorVisual and body.scale == Vector3.ONE and (frame.ops[1].stance != 1 or not frame.ops[1].alive or body.sampled_action in ["crouch", "crouch_walk"]), "rigged proxy uses historical crouch bones without shrinking its root")
 	_check(live == main._snapshot_data(), "capture, rendering, focus and scrubs cannot write live state")
 	if DisplayServer.get_name() != "headless":
 		DirAccess.make_dir_recursive_absolute("res://build/asset_review/pr15-runtime")
