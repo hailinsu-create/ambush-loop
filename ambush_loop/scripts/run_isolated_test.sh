@@ -5,7 +5,7 @@ godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 render_mode="${3:---headless}"
 case "$entry" in
-  replay_timeline_test.gd|equipment_freeze_test.gd|presentation_lifecycle_test.gd|campaign_replay_test.gd|visual_snapshot_test.gd) ;;
+  replay_timeline_test.gd|equipment_freeze_test.gd|presentation_lifecycle_test.gd|campaign_replay_test.gd|visual_snapshot_test.gd|asset_library_test.gd|asset_pack_test.gd) ;;
   editor_import|asset_review_capture.gd|presentation_contract_test.gd|presentation_interaction_test.gd|camera_input_test.gd|presentation_capture.gd|presentation_preview.gd) ;;
   smoke_test.gd|pathfinder_test.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
   *) printf 'Unsupported destructive test entry: %s\n' "$entry" >&2; exit 2 ;;
@@ -30,10 +30,20 @@ export XDG_CONFIG_HOME="$run_dir/config"
 export XDG_CACHE_HOME="$run_dir/cache"
 export AMBUSH_TEST_DATA_ROOT="$data_root"
 export AMBUSH_TEST_RUN_ID="$run_id"
+launch_root="$project_root"
+if [[ "$entry" == asset_pack_test.gd ]]; then
+  test_pack="${AMBUSH_TEST_PACK:?Pass an exported PCK in AMBUSH_TEST_PACK}"
+  [[ -f "$test_pack" ]] || { printf 'Missing test pack: %s\n' "$test_pack" >&2; exit 2; }
+  test_pack="$(realpath -- "$test_pack")"
+  launch_root="$run_dir/packed-project"
+  mkdir -p -- "$launch_root"
+  export AMBUSH_ASSET_PACK_ROOT="$launch_root"
+  engine_flags+=(--main-pack "$test_pack" --audio-driver Dummy)
+fi
 printf 'TEST_RUN_ID=%s\nTEST_DATA_ROOT=%s\nTEST_ENTRY=%s\n' "$run_id" "$data_root" "$entry"
 if [[ "$entry" == editor_import ]]; then
   "$godot_bin" --headless --editor --path "$project_root" --import 2>&1 | tee "$run_dir/run.log"
 else
-  "$godot_bin" "${engine_flags[@]}" --path "$project_root" -s "res://scripts/$entry" 2>&1 | tee "$run_dir/run.log"
+  "$godot_bin" "${engine_flags[@]}" --path "$launch_root" -s "res://scripts/$entry" 2>&1 | tee "$run_dir/run.log"
 fi
 printf 'TEST_LOG=%s\n' "$run_dir/run.log"

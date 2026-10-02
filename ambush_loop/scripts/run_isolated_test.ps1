@@ -7,6 +7,8 @@ param(
         'presentation_lifecycle_test.gd',
         'campaign_replay_test.gd',
         'visual_snapshot_test.gd',
+        'asset_library_test.gd',
+        'asset_pack_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',
@@ -28,7 +30,8 @@ param(
     )]
     [string]$Entry = 'smoke_test.gd',
     [switch]$ImportOnly,
-    [switch]$Rendered
+    [switch]$Rendered,
+    [string]$TestPack = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -53,6 +56,7 @@ $previousAppData = $env:APPDATA
 $previousLocalAppData = $env:LOCALAPPDATA
 $previousDataRoot = $env:AMBUSH_TEST_DATA_ROOT
 $previousRunId = $env:AMBUSH_TEST_RUN_ID
+$previousPackRoot = $env:AMBUSH_ASSET_PACK_ROOT
 $realDataDir = Join-Path $previousAppData 'Godot/app_userdata/Ambush Loop'
 $realSave = Join-Path $realDataDir 'ambush_loop.cfg'
 $realSettings = Join-Path $realDataDir 'ambush_loop_settings.cfg'
@@ -82,7 +86,18 @@ try {
         Write-Output "TEST_ENTRY=$Entry"
         $engineFlags = if ($Rendered) { @('--rendering-method', 'gl_compatibility') } else { @('--headless') }
         if ($Entry -like '*capture.gd') { $engineFlags += @('--audio-driver', 'Dummy') }
-        & $enginePath @engineFlags --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
+        $launchRoot = $projectRoot
+        if ($Entry -eq 'asset_pack_test.gd') {
+            if (-not (Test-Path -LiteralPath $TestPack -PathType Leaf)) {
+                throw 'Pass an exported PCK in -TestPack.'
+            }
+            $packPath = [IO.Path]::GetFullPath($TestPack)
+            $launchRoot = Join-Path $runDir 'packed-project'
+            New-Item -ItemType Directory -Path $launchRoot -Force | Out-Null
+            $env:AMBUSH_ASSET_PACK_ROOT = $launchRoot.Replace('\', '/')
+            $engineFlags += @('--main-pack', $packPath, '--audio-driver', 'Dummy')
+        }
+        & $enginePath @engineFlags --path $launchRoot -s "res://scripts/$Entry" 2>&1 |
             Tee-Object -FilePath $runLog
     }
     $engineExit = $LASTEXITCODE
@@ -99,4 +114,5 @@ finally {
     $env:LOCALAPPDATA = $previousLocalAppData
     $env:AMBUSH_TEST_DATA_ROOT = $previousDataRoot
     $env:AMBUSH_TEST_RUN_ID = $previousRunId
+    $env:AMBUSH_ASSET_PACK_ROOT = $previousPackRoot
 }
