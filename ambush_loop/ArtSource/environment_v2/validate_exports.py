@@ -18,6 +18,7 @@ def array(j,d,index):
  ac=j['accessors'][index];view=j['bufferViews'][ac['bufferView']];fmt,n=formats[ac['componentType']];width=lengths[ac['type']];stride=view.get('byteStride',n*width);start=view.get('byteOffset',0)+ac.get('byteOffset',0)
  return [struct.unpack_from('<'+fmt*width,d,start+i*stride) for i in range(ac['count'])]
 ex=json.loads((O/'exports.json').read_text());reports=[]
+check(ex['generator_sha256']==sha(H/'build_environment.py'),'frozen generator source SHA')
 for asset in ex['assets']:
  for i,lod in enumerate(asset['lods']):
   p=O/'models'/Path(lod['path']).name;check(sha(p)==lod['sha256'],str(p)+' SHA');j,b=glb(p);tris=0;surfaces=0

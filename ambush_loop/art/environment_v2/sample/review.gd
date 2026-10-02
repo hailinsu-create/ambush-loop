@@ -156,6 +156,8 @@ func validate() -> void:
 				if socket!=null:
 					var pos: Array = record.sockets[socket_name].position_m
 					check(socket.position.distance_to(Vector3(pos[0],pos[1],pos[2]))<0.002,"Socket transform mismatch: "+str(id)+"/"+socket_name)
+					if str(record.sockets[socket_name].get("parent_node","")).ends_with("leaf_pivot"):
+						check(str(socket.get_parent().name)==str(record.sockets[socket_name].parent_node),"Handle socket must follow moving leaf: "+str(id))
 			for key in record.get("moving_nodes",{}):
 				var motion: Dictionary = record.moving_nodes[key]
 				var joint := n.find_child(str(motion.node),true,false) as Node3D
@@ -166,6 +168,19 @@ func validate() -> void:
 			check(n.find_children("*","CollisionObject3D",true,false).is_empty(),"Unexpected collision: "+str(id))
 			counts.append({"id":id,"lod":lod,"dimensions_m":[dims.x,dims.y,dims.z],"triangles":r.triangles,"surfaces":r.surfaces,"min_y":lo.y})
 			n.free()
+	for slot in ["environment_v2_atlas","environment_v2_emission"]:
+		var persisted := load("res://art/environment_v2/materials/"+slot+".tres") as StandardMaterial3D
+		check(persisted!=null,"Persisted candidate material missing "+slot)
+		if persisted!=null:
+			check(persisted.resource_name==slot,"Persisted material name "+slot)
+			var constructed := material(slot)
+			check(persisted.normal_enabled==constructed.normal_enabled,"Persisted normal mode "+slot)
+			check(persisted.emission_enabled==constructed.emission_enabled,"Persisted emission mode "+slot)
+			if slot=="environment_v2_atlas":
+				check(persisted.albedo_texture.resource_path==constructed.albedo_texture.resource_path,"Persisted albedo path")
+				check(persisted.normal_texture.resource_path==constructed.normal_texture.resource_path,"Persisted normal path")
+				check(persisted.metallic_texture_channel==BaseMaterial3D.TEXTURE_CHANNEL_BLUE and persisted.roughness_texture_channel==BaseMaterial3D.TEXTURE_CHANNEL_GREEN,"Persisted ORM channels")
+				check(is_equal_approx(persisted.normal_scale,constructed.normal_scale),"Persisted normal strength")
 	print("ENVIRONMENT_GODOT_CHECKS ",checks," issues=",issues.size())
 
 func clear_stage() -> void:
@@ -256,7 +271,7 @@ func _run() -> void:
 		return
 	build_theme("yard")
 	lighting(true)
-	pose(145,55,14,Vector3(0,1,0))
+	pose(35,55,14,Vector3(0,1,0))
 	caption.text = "ENVIRONMENT CANDIDATE / YARD\nStandalone asset exhibition. No combat or performance acceptance."
 
 func write_report() -> void:
@@ -264,10 +279,16 @@ func write_report() -> void:
 	f.store_string(JSON.stringify({"engine":Engine.get_version_info(),"checks":checks,"issues":issues,"models":counts,"device":"cloud llvmpipe compatibility, not Android","screenshots":"rendered frames, require pixel review"},"\t"))
 
 func capture() -> void:
+	var asset_filter := ""
+	var theme_filter := ""
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--asset-only="): asset_filter = arg.get_slice("=",1)
+		if arg.begins_with("--theme-only="): theme_filter = arg.get_slice("=",1)
 	if "--themes-only" not in OS.get_cmdline_user_args():
 		# Actual model pixels for each new and reused core asset: eight directions,
 		# both pitch limits, close LOD0 and distant LOD1, neutral/dusk and clay.
 		for id in records:
+			if not asset_filter.is_empty() and id != asset_filter: continue
 			var dims: Array = records[id].dimensions_m
 			var span := maxf(1.25,maxf(float(dims[1]),maxf(float(dims[0]),float(dims[2])))*1.65)
 			for lod in range(2):
@@ -293,6 +314,7 @@ func capture() -> void:
 			print("CAPTURE_ASSET ",id)
 	# Themes at all camera extremes. These are compositions, not live levels.
 	for theme in catalog.themes:
+		if not theme_filter.is_empty() and theme != theme_filter: continue
 		for lod in range(2):
 			for mode in ["neutral","dusk"]:
 				build_theme(theme,lod)
@@ -313,16 +335,32 @@ func capture() -> void:
 	caption.add_theme_font_size_override("font_size",12)
 	build_theme("yard")
 	lighting(true)
-	pose(180,55,14,Vector3(0,1,0))
+	pose(0,55,14,Vector3(0,1,0))
 	caption.text = "YARD / native 800x450 cloud viewport / no device test"
 	await snap("phone_yard_800x450")
 	get_tree().root.size = Vector2i(1280,720)
 	caption.add_theme_font_size_override("font_size",18)
+	if "--skip-motion" in OS.get_cmdline_user_args(): return
 	# Door, gate, sliding leaf, and every new container lid move at their actual pivots.
 	clear_stage()
 	var ids := ["env_yard_crate","env_ammo_can","env_gun_case","env_rations_crate","env_door_leaf","env_gate_leaf","env_loading_leaf"]
 	var actors: Array[Node3D] = []
-	for i in ids.size():actors.append(place(ids[i],Vector3((i-3)*1.65,0,0)))
+	for i in ids.size():
+		var actor := place(ids[i],Vector3((i-3)*1.65,0,0))
+		actors.append(actor)
+		var handle := actor.find_child(ids[i]+"__socket_handle_anchor",true,false) as Node3D
+		if handle!=null:
+			var marker := MeshInstance3D.new()
+			var sphere := SphereMesh.new()
+			sphere.radius = 0.035
+			sphere.height = 0.07
+			marker.mesh = sphere
+			var marker_mat := StandardMaterial3D.new()
+			marker_mat.albedo_color = Color("ffde65")
+			marker_mat.emission_enabled = true
+			marker_mat.emission = Color("ffde65")
+			marker.material_override = marker_mat
+			handle.add_child(marker)
 	lighting(false)
 	pose(160,45,10,Vector3(0,1,0))
 	for frame in range(180):
@@ -336,6 +374,6 @@ func capture() -> void:
 					joint.rotation_degrees.x = phase*float(motion.range[1]) if motion.axis=="X" else 0.0
 					joint.rotation_degrees.y = phase*float(motion.range[1]) if motion.axis=="Y" else 0.0
 				else:joint.position.x = float(motion.position_m[0])+phase*float(motion.range[1])
-		caption.text = "ACTUAL GODOT DISPLAY MOTION / %03d\nFour hinged lids, door, gate and sliding leaf. Visual only."%frame
+		caption.text = "ACTUAL GODOT DISPLAY MOTION / %03d\nFour hinged lids, door, gate, sliding leaf. Gold dots follow handle sockets."%frame
 		await snap("motion_%03d"%frame)
 	print("ENVIRONMENT_CAPTURE_COMPLETE")

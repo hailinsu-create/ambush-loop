@@ -39,11 +39,10 @@ def materials():
         if k==0:
             grain=np.sin(y*190+np.sin(x*15)*3); v+=grain*.05; h+=grain*.002; rough+=grain*.02
         if k in (1,8,13):
-            fleck=(broad+fine*.2>.33)
-            metal[:]=.65; metal[fleck]=.40
-            rough[:]=.68+fleck*.07+fine*.025
-            h=fine*.0005+fleck*.0003
-            v+=fleck*.025
+            # Subtle oxidised metal response; broad metallic islands create
+            # false camouflage and are not directional lighting or decals.
+            metal[:]=.55; rough[:]=.74+broad*.025+fine*.025
+            h=fine*.0005
         if k==2:
             # Enamel is painted metal: retain mostly dielectric, matte response.
             # Strong metallic/roughness islands read as camouflage under Godot.
@@ -54,11 +53,28 @@ def materials():
         if k==3:
             row=np.floor(y*24); seam=((x*8+(row%2)*.5)%1<.045)|((y*24)%1<.10)
             v+=np.sin(row*17+np.floor(x*8)*13)*.085; h+=np.where(seam,-.035,.002)
-        if k in (10,12):
-            cells=np.floor(x*7)+np.floor(y*7)*13
-            seam=((x*7)%1<.05)|((y*7)%1<.05); v+=np.sin(cells*17)*.13; h+=np.where(seam,-.025,.008)
+        if k==10:
+            # Rounded, closely spaced paving stones; real height in normal only.
+            xx=(x*14)%1-.5; yy=(y*14)%1-.5
+            edge=np.maximum(abs(xx),abs(yy))
+            stonecolors=np.random.default_rng(SEED+310).uniform(-.075,.075,(14,14))
+            v+=stonecolors[(y*14).astype(int),(x*14).astype(int)]
+            v[edge>.48]-=.08
+            h+=np.clip(.48-edge,0,.055)*.22
+        if k==12:
+            # Periodic jittered Voronoi aggregate, not a square cobble grid.
+            ncell=24; best=np.full_like(x,1e9); second=best.copy(); color_id=np.zeros_like(x)
+            weights=rng.random(ncell*ncell)*.14-.07
+            for i in range(ncell*ncell):
+                px=(i%ncell)+.5+rng.uniform(-.37,.37); py=(i//ncell)+.5+rng.uniform(-.37,.37)
+                dx=(x*ncell-px+ncell/2)%ncell-ncell/2; dy=(y*ncell-py+ncell/2)%ncell-ncell/2
+                dist=np.sqrt(dx*dx+dy*dy); nearer=dist<best
+                second=np.where(nearer,best,np.minimum(second,dist)); best=np.minimum(best,dist); color_id=np.where(nearer,weights[i],color_id)
+            border=second-best<.06
+            v=color_id+fine*.075; v[border]-=.10
+            h=np.maximum(0,.60-best)*.016; h[border]=-.001
         if k==11:
-            h=fine*.018+broad*.008; v+=np.sin(x*70+y*4)*.03
+            h=fine*.012+broad*.002; v=fine*.11+broad*.035
         if k==9:
             rad=np.sqrt((x-.5)**2+(y-.5)**2); ang=np.arctan2(y-.5,x-.5)
             scale=(rad>.31)&(rad<.39)&(np.sin(ang*24)>.5)
@@ -120,7 +136,11 @@ def ring(name,major,minor,at,tile=1,axis=None):
 def group(name):
     global GROUP; GROUP=name
 
-def socket(name,at,semantic): SOCKETS[name]={'position_m':[at[0],at[2],-at[1]],'rotation_degrees':[0,0,0],'semantic':semantic}
+def socket(name,at,semantic):
+    parent='leaf_pivot' if name=='handle_anchor' and 'leaf_pivot' in MOVING else None
+    origin=MOVING[parent]['author_at'] if parent else (0,0,0)
+    local=[at[i]-origin[i] for i in range(3)]
+    SOCKETS[name]={'parent_node':CURRENT+'__'+parent if parent else CURRENT,'position_m':[local[0],local[2],-local[1]],'rotation_degrees':[0,0,0],'asset_closed_position_m':[at[0],at[2],-at[1]],'semantic':semantic+('; follows actual moving leaf' if parent else '; static asset-root reference')}
 def pivot(name,at,kind,axis,value): MOVING[name]={'author_at':at,'position_m':[at[0],at[2],-at[1]],'rotation_degrees':[0,0,0],'motion':kind,'axis':axis,'range':value}
 def bolts(y,z,w=.5):
     if LOD: return
@@ -187,11 +207,25 @@ def spare_tire():
 
 def wooden_barrel():
     count=12 if LOD else 18
+    zs=[.04,.29,.59,.83] if LOD else [.04,.20,.36,.53,.70,.83]
+    rs=[.245,.30,.30,.245] if LOD else [.245,.28,.30,.30,.275,.245]
     for i in range(count):
-        a=i*math.tau/count; o=box('stave',(.104 if LOD else .069,.065,.82),(math.cos(a)*.27,math.sin(a)*.27,.42),0,.003); o.rotation_euler.z=a-math.pi/2
-    for z in (.10,.24,.62,.77): ring('hoop',.281,.017,(0,0,z),1)
-    cyl('barrel_top',.271,.035,(0,0,.83),0,24); cyl('bottom',.271,.035,(0,0,.025),0,24)
-    cyl('bung',.032,.01,(.07,.06,.854),0,12)
+        a=i*math.tau/count; delta=math.pi/count*.975
+        verts=[]; faces=[]
+        for z,r in zip(zs,rs):
+            for radius,t in [(r,a-delta),(r,a+delta),(r-.028,a-delta),(r-.028,a+delta)]:
+                verts.append((math.cos(t)*radius,math.sin(t)*radius,z))
+        for j in range(len(zs)-1):
+            b=j*4; c=b+4
+            faces.extend([(b,b+1,c+1,c),(b+3,b+2,c+2,c+3),(b+2,b,c,c+2),(b+1,b+3,c+3,c+1)])
+        faces.extend([(0,2,3,1),tuple((len(zs)-1)*4+x for x in (0,1,3,2))])
+        mesh=bpy.data.meshes.new('coopered_stave');mesh.from_pydata(verts,[],faces);mesh.update()
+        o=bpy.data.objects.new('stave',mesh);bpy.context.collection.objects.link(o);bpy.ops.object.select_all(action='DESELECT');o.select_set(True);bpy.context.view_layer.objects.active=o;finish(o,'stave',0)
+    for z in (.12,.28,.62,.76):
+        r=float(np.interp(z,zs,rs));ring('hoop',r+.010,.009,(0,0,z),1)
+    cyl('barrel_top',.242,.035,(0,0,.837),0,20)
+    cyl('bottom',.242,.05,(0,0,.025),0,20)
+    cyl('bung',.032,.01,(.07,.06,.86),0,12)
 
 def fence():
     for x in (-1,1): box('post',(.07,.08,2),(x,0,1),1)
@@ -466,7 +500,7 @@ def build_one(asset,builder,kind,lod):
         else:o.parent=root
         o['collision_class']='visual_only';o['occlusion_class']='roof' if tag=='roof' else ('wall' if tag.startswith('wall_') else 'detail')
     for name,info in SOCKETS.items():
-        p=bpy.data.objects.new(asset+'__socket_'+name,None);bpy.context.collection.objects.link(p);p.parent=root
+        p=bpy.data.objects.new(asset+'__socket_'+name,None);bpy.context.collection.objects.link(p);p.parent=bpy.data.objects.get(info['parent_node'],root)
         v=info['position_m'];p.location=(v[0],-v[2],v[1]);p['semantic']=info['semantic'];p['visual_only']=True
     path=OUT/'models'/f'{asset}_lod{lod}.glb'
     bpy.ops.object.select_all(action='SELECT')
@@ -484,7 +518,7 @@ def main():
         for lod in (0,1):
             info,dims,sockets,moving,groups=build_one(asset,builder,kind,lod);lods.append(info)
             if lod==0:d0=dims;s0=sockets;m0=moving;g0=list(groups)
-        entries.append({'asset_id':asset,'category':kind,'source':'ArtSource/environment_v2/build_environment.py','tool':'Blender '+bpy.app.version_string,'provenance':'Original procedural geometry and material fields created for this project; no external assets','usage':'Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.','unit':'metre','origin':'ground centre; ground top Y=0; roof preserves assembled height','runtime_axes':'+Y up / -Z forward','dimensions_m':d0,'lods':lods,'materials':['environment_v2_atlas']+(['environment_v2_emission'] if asset in ('env_wall_lamp','env_signal_mast') else []),'collision':'visual_only; no physics, navigation, combat LOS or height benefit','logic_footprint':'NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.','display_groups':g0,'sockets':s0,'moving_nodes':m0,'skeleton':None,'animations':[],'lod_policy_candidate':{'lod0_below_camera_span_m':20,'lod1_above_camera_span_m':24,'hysteresis_m':2,'status':'integrator proposal only, no shared runtime changes'},'status':'exported; candidate awaiting engine/pixel review and integration'})
+        entries.append({'asset_id':asset,'category':kind,'source':'ArtSource/environment_v2/build_environment.py','tool':'Blender '+bpy.app.version_string,'provenance':'Original procedural geometry and material fields created for this project; no external assets','usage':'Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.','unit':'metre','origin':'ground centre; ground top Y=0; roof preserves assembled height','runtime_axes':'+Y up / -Z forward','dimensions_m':d0,'lods':lods,'materials':['environment_v2_atlas']+(['environment_v2_emission'] if asset in ('env_wall_lamp','env_signal_mast') else []),'collision':'visual_only; no physics, navigation, combat LOS or height benefit','logic_footprint':'NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.','display_groups':g0,'sockets':s0,'moving_nodes':m0,'skeleton':None,'animations':[],'lod_policy_candidate':{'lod0_below_camera_span_m':20,'lod1_above_camera_span_m':24,'hysteresis_m':2,'status':'integrator proposal only, no shared runtime changes'},'status':'exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented'})
     textures=[{'path':'art/environment_v2/textures/'+p.name,'sha256':sha(p),'resolution':[1024,1024]} for p in sorted((OUT/'textures').glob('*.png'))]
     (OUT/'exports.json').write_text(json.dumps({'schema':1,'baseline':'744cb01439bd98d69e816d39d2584067f49043b0','seed':SEED,'generator_sha256':sha(__file__),'textures':textures,'orm_channels':'R=1 unbaked occlusion, G=roughness, B=metallic','albedo':'sRGB, no directional lighting','normal':'tangent +Y (OpenGL), linear','material_binding':'GLB named PBR material slots omit duplicate images. Bind shared environment_v2 atlas using sample/review.gd; no embedded duplicate textures.','assets':entries},indent=2)+'\n')
     print('ENVIRONMENT_EXPORTED',len(entries),'assets',len(entries)*2,'GLBs')

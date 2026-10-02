@@ -20,14 +20,14 @@ modules=[r for r in cat['new_assets'] if r['category'] in ('building','ground')]
 board('modules.png',[(F/f'asset_{r["asset_id"]}_l0_neutral_p65_y135.png',r['asset_id'].removeprefix('env_')) for r in modules],5,(320,220))
 landmarks=[r for r in cat['new_assets'] if r['category']=='landmark']+[next(r for r in cat['new_assets'] if r['asset_id']=='env_warehouse_shell')]
 board('landmarks_front_rear.png',[(F/f'asset_{r["asset_id"]}_l0_neutral_p35_y{yaw}.png',r['asset_id']+' yaw'+str(yaw)) for r in landmarks for yaw in (180,0)],4,(400,250))
-board('themes_dusk.png',[(F/f'theme_{k}_l0_dusk_p35_y180.png',k.upper()+' / exhibition candidate') for k in cat['themes']],2,(640,385))
+board('themes_dusk.png',[(F/f'theme_{k}_l0_dusk_p35_y{0 if k=="yard" else 180}.png',k.upper()+' / exhibition candidate') for k in cat['themes']],2,(640,385))
 board('themes_neutral.png',[(F/f'theme_{k}_l0_neutral_p65_y135.png',k.upper()+' / exhibition candidate') for k in cat['themes']],2,(640,385))
 board('yard_360.png',[(F/f'theme_yard_l0_{mode}_p{pitch}_y{yaw}.png',f'yard {mode} yaw{yaw} pitch{pitch}') for mode,pitch in [('neutral',35),('dusk',65)] for yaw in range(0,360,45)],4,(400,250))
 board('yard_far_lod1.png',[(F/f'theme_yard_l1_dusk_p{pitch}_y{yaw}.png',f'yard LOD1 far pitch{pitch} yaw{yaw}') for pitch in (35,65) for yaw in (0,90,180,270)],4,(400,250))
 board('themes_roof_removed.png',[(F/f'theme_{k}_roof_removed.png',k.upper()+' / roof removed') for k in cat['themes']],2,(640,385))
 board('motion_keyframes.png',[(F/f'motion_{i:03}.png',f'actual Godot motion frame {i}') for i in (0,45,90,135)],2,(640,385))
 shutil.copy2(F/'phone_yard_800x450.png',E/'phone_yard_800x450.png');shutil.copy2(F/'godot_report.json',E/'godot_report.json')
-for k in cat['themes']:shutil.copy2(F/f'theme_{k}_l0_dusk_p35_y180.png',E/f'{k}_dusk.png')
+for k in cat['themes']:shutil.copy2(F/f'theme_{k}_l0_dusk_p35_y{0 if k=="yard" else 180}.png',E/f'{k}_dusk.png')
 blenders=list(args.blender.glob('*_clay_*.png'))
 if blenders:
  ids=['env_ammo_can','env_yard_crate','env_warehouse_shell','env_pump_skid','env_depot_tank_pair','env_radio_antenna']

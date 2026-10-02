@@ -24,11 +24,27 @@ recipes={
 'depot':{'landmark':'env_depot_tank_pair','grounds':['env_ground_concrete_2m','env_ground_gravel_2m'],'placements':common+[place('env_depot_tank_pair',(0,0,-.5)),place('env_pipe_elbow',(0,0,2)),place('env_jerry_can',(2.5,0,2.5)),place('env_curb_2m',(-1.8,0,2.1)),place('env_curb_2m',(1.8,0,2.1))],'identity':'paired vertical storage tanks, access ladders, vents and front manifold; no barrel-explosion semantics'},
 'radio':{'landmark':'env_radio_antenna','grounds':['env_ground_cobble_2m','env_ground_concrete_2m'],'placements':common+[place('env_radio_antenna',(0,0,-.7)),place('env_fence_section',(-2.8,0,2.2)),place('env_gate_leaf',(0,0,2.2)),place('env_fence_section',(2.8,0,2.2)),place('field_radio',(2.6,0,.4)),place('env_roof_flat_4m',(-2,0,-3.1),occlusion_group='roof'),place('env_wall_plaster_2m',(-3,0,-3))],'identity':'directional dish with rear ribs, yagi crown and maintenance cabinet, separate gated boundary'}
 }
-for k,v in recipes.items():v.update({'status':'exhibition composition candidate, NOT authored game placement','world_units':'metres','root_origin':'ground centre','sample_size_m':[12,10],'logic':'visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground'})
+for k,v in recipes.items():v.update({'status':'exhibition composition candidate, NOT authored game placement','world_units':'metres','root_origin':'ground centre','sample_size_m':[12,12],'logic':'visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground'})
 deps=[]
 for a in reused:
     for l in a['lods']:deps.append({'path':l['path'],'sha256':l['sha256']})
 for t in base['textures']:deps.append(t)
-cat={'schema':1,'status':'candidate, not shared runtime manifest','baseline':ex['baseline'],'source_sha256':ex['generator_sha256'],'new_exports_manifest':'art/environment_v2/exports.json','new_assets':ex['assets'],'reuse_assets':reused,'reuse_dependencies':deps,'original_14_mapping':rows,'themes':recipes,'material_contract':{'new_slot':'environment_v2_atlas','new_textures':ex['textures'],'baseline_slots':['v2_shared_atlas','v2_lamp_emission'],'baseline_textures':'unchanged art/v2/textures/yard_atlas_*','orm_channels':ex['orm_channels'],'normal_convention':ex['normal'],'binding_example':'art/environment_v2/sample/review.gd; sample only, integrator must extend runtime loader'},'acceptance':'sample import/render review distinct from integrated six-level play and device performance'}
+cat={'schema':1,'status':'candidate, not shared runtime manifest','baseline':ex['baseline'],'source_sha256':ex['generator_sha256'],'new_exports_manifest':'art/environment_v2/exports.json','new_assets':ex['assets'],'reuse_assets':reused,'reuse_dependencies':deps,'original_14_mapping':rows,'themes':recipes,'material_contract':{'new_slot':'environment_v2_atlas','new_textures':ex['textures'],'baseline_slots':['v2_shared_atlas','v2_lamp_emission'],'baseline_textures':'unchanged art/v2/textures/yard_atlas_*','orm_channels':ex['orm_channels'],'normal_convention':ex['normal'],'candidate_material_resources':['art/environment_v2/materials/environment_v2_atlas.tres','art/environment_v2/materials/environment_v2_emission.tres'],'binding_example':'art/environment_v2/sample/review.gd; sample only, integrator must extend runtime loader'},'acceptance':'sample import/render review distinct from integrated six-level play and device performance'}
 (H/'catalog_candidate.json').write_text(json.dumps(cat,indent=2,ensure_ascii=False)+'\n'); (O/'catalog_sample.json').write_text(json.dumps(cat,indent=2,ensure_ascii=False)+'\n')
 print('CATALOG',len(rows),'original categories',len(ex['assets']),'new assets',len(reused),'reused assets',len(recipes),'distinct themes')
+
+semantics={}
+for record in ex['assets']+reused:
+    id=record['asset_id']; category=record['category']; kind='decorative_prop'
+    if 'ground_' in id:kind='ground_tile_top_y0'
+    elif id=='env_rail_2m':kind='ballast_top_y0_with_visual_railhead_above_ground'
+    elif id=='env_drain_2m':kind='inset_grate; visual ground cutout recommended; logical ground unchanged'
+    elif id=='env_curb_2m':kind='ground_edging; raised display only'
+    elif 'roof' in id:kind='roof_at_authored_assembled_height; instance_y0'
+    elif id in ('env_door_leaf','env_loading_leaf','env_gate_leaf'):kind='independent_visual_leaf; align jamb socket; root at ground centre'
+    elif 'frame' in id:kind='fixed_jamb_and_lintel; pair independent leaf; never animate frame'
+    elif id=='env_wall_lamp':kind='wall_mount; placement_y is mount height; warm_light socket owned by integrator'
+    elif category=='landmark':kind='theme_landmark; visual_only; avoid obscuring routes/selection'
+    elif category=='building':kind='modular_shell_or_wall; pair visual edges; independent observation occlusion'
+    semantics[id]={'placement_kind':kind,'local_ground_y':0,'grid_unit_m':1,'front':'-Z','snap_candidate':'module root to intended visual origin; exact logical cell map comes from existing level','visual_dimensions_m':record['dimensions_m'],'logical_occupancy':'NOT ASSIGNED; retain existing 40x22 blockers','collision':'visual_only; do not derive physical/LOS blockers from AABB','selection':'candidate anchor only; integrator assigns allowed existing commands','sockets':record.get('sockets',{}),'moving_nodes':record.get('moving_nodes',{})}
+(H/'placement_semantics_candidate.json').write_text(json.dumps({'schema':1,'status':'candidate','assets':semantics},indent=2,ensure_ascii=False)+'\n')

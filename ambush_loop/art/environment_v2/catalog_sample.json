@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "candidate, not shared runtime manifest",
   "baseline": "744cb01439bd98d69e816d39d2584067f49043b0",
-  "source_sha256": "c69527f7e86df67b014dabc14e14d1eb82baca71b1321160e912b4c937afc337",
+  "source_sha256": "42affe24b2ab3260e1a731942007bdf2e8f599502f571a27216209c5335937c4",
   "new_exports_manifest": "art/environment_v2/exports.json",
   "new_assets": [
     {
@@ -23,13 +23,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_ammo_can_lod0.glb",
-          "sha256": "a475be7a678c5eaeb87ad3e826ce48e1466859cb3c3dbca2e15fea79ca595b0f",
+          "sha256": "79af09d14fa77dab6f9acec9d983aa25085aa96d4c9a2509e4025a41cdac2677",
           "triangles": 536,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_ammo_can_lod1.glb",
-          "sha256": "9da4e92d2bb8245fc4121dfbbc06d5db8560115e0f17bdb512ad1f67a1114b1c",
+          "sha256": "7fb9ac8aab63f454da4b1c570a831bc3f39260db51355b6aab29c0177f183a2b",
           "triangles": 168,
           "surfaces": 2
         }
@@ -45,6 +45,7 @@
       ],
       "sockets": {
         "loot_anchor": {
+          "parent_node": "env_ammo_can",
           "position_m": [
             0,
             0.44,
@@ -55,7 +56,12 @@
             0,
             0
           ],
-          "semantic": "ammo container pickup anchor"
+          "asset_closed_position_m": [
+            0,
+            0.44,
+            0
+          ],
+          "semantic": "ammo container pickup anchor; static asset-root reference"
         }
       },
       "moving_nodes": {
@@ -87,7 +93,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_barbed_wire",
@@ -136,7 +142,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_fence_section",
@@ -185,7 +191,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_gun_case",
@@ -205,13 +211,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_gun_case_lod0.glb",
-          "sha256": "794108b2e964fc963964d6e6ac6c2df412c44cddcf664bf0d587aa1bd3d5105a",
+          "sha256": "3d3e530f08469356eb0b0600f60914103b02550b7a521cb8aee429cf416e1dbe",
           "triangles": 1276,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_gun_case_lod1.glb",
-          "sha256": "fbb7470d220686d92671ed459c4d273802a3489045b4b01a77c99918b347eefa",
+          "sha256": "829a8bb3db1b70b30509d62eb1c0e64b2c2c12fd5ce525b227c84d71f0a10d4f",
           "triangles": 364,
           "surfaces": 2
         }
@@ -227,6 +233,7 @@
       ],
       "sockets": {
         "loot_anchor": {
+          "parent_node": "env_gun_case",
           "position_m": [
             0,
             0.38,
@@ -237,7 +244,12 @@
             0,
             0
           ],
-          "semantic": "display pickup point, game loot identity remains external"
+          "asset_closed_position_m": [
+            0,
+            0.38,
+            0
+          ],
+          "semantic": "display pickup point, game loot identity remains external; static asset-root reference"
         }
       },
       "moving_nodes": {
@@ -269,7 +281,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_handcart",
@@ -289,13 +301,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_handcart_lod0.glb",
-          "sha256": "44f8675fab2afcb12ef13013bc87a14cbff9146281d42859dd88e4aa06ff9531",
+          "sha256": "6010e959e25df7ea322b83519c3c1266ac89da9755d856e0aa72d26c72b16437",
           "triangles": 1404,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_handcart_lod1.glb",
-          "sha256": "2fc8431f3ae4fc8804a4ef6dfbd7a50c095764a9cffd0f279cd33860f050b1a5",
+          "sha256": "772e80a8044cefa29ae19adf081f34f38b032feaf217c8eb57bb5ba5aca48523",
           "triangles": 636,
           "surfaces": 1
         }
@@ -310,6 +322,7 @@
       ],
       "sockets": {
         "cargo_anchor": {
+          "parent_node": "env_handcart",
           "position_m": [
             0,
             0.81,
@@ -320,7 +333,12 @@
             0,
             0
           ],
-          "semantic": "decorative cargo only; no new inventory logic"
+          "asset_closed_position_m": [
+            0,
+            0.81,
+            0
+          ],
+          "semantic": "decorative cargo only; no new inventory logic; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -332,7 +350,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_jerry_can",
@@ -352,13 +370,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_jerry_can_lod0.glb",
-          "sha256": "07343cbe9edea86e0ebcd65cc4eb457f5d3b0abd25398e1cd23fd00d96d0443e",
+          "sha256": "c9b6f3ac1feff97c3a2ce7a293fc50ef4f15f1be516a5e66f732d5ee3413ac3f",
           "triangles": 284,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_jerry_can_lod1.glb",
-          "sha256": "7763739b406f2874f402b1c89475a155885aff2e936f4e4c466b7c3b218f743d",
+          "sha256": "aa1b6b3f3c5669f1a9764555e24da3f61e6b77dc3210c6240093dece25cd0523",
           "triangles": 172,
           "surfaces": 1
         }
@@ -373,6 +391,7 @@
       ],
       "sockets": {
         "pickup_anchor": {
+          "parent_node": "env_jerry_can",
           "position_m": [
             0,
             0.55,
@@ -383,7 +402,12 @@
             0,
             0
           ],
-          "semantic": "ground decoration or external pickup mapping"
+          "asset_closed_position_m": [
+            0,
+            0.55,
+            0
+          ],
+          "semantic": "ground decoration or external pickup mapping; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -395,7 +419,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_rations_crate",
@@ -415,13 +439,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_rations_crate_lod0.glb",
-          "sha256": "1e5dd2a052b418e940bc17cc3ac81ca57ff978c29332511603047f68ece8260b",
+          "sha256": "65e16bde01472df7f04fd9a3f22a481ea4afdb545a97a9e6a7d229db64aa9478",
           "triangles": 1320,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_rations_crate_lod1.glb",
-          "sha256": "9f1b2f5e12685845c010debce0af35980178c7881e76795c046f865665ed92cf",
+          "sha256": "4ddca4ca8704dd04bd430446beeefa477359ca61f178fd50dfa7d9277b90e44c",
           "triangles": 376,
           "surfaces": 2
         }
@@ -437,6 +461,7 @@
       ],
       "sockets": {
         "loot_anchor": {
+          "parent_node": "env_rations_crate",
           "position_m": [
             0,
             0.62,
@@ -447,7 +472,12 @@
             0,
             0
           ],
-          "semantic": "display pickup point, game loot identity remains external"
+          "asset_closed_position_m": [
+            0,
+            0.62,
+            0
+          ],
+          "semantic": "display pickup point, game loot identity remains external; static asset-root reference"
         }
       },
       "moving_nodes": {
@@ -479,7 +509,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_spare_tire",
@@ -528,7 +558,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_wooden_barrel",
@@ -541,21 +571,21 @@
       "origin": "ground centre; ground top Y=0; roof preserves assembled height",
       "runtime_axes": "+Y up / -Z forward",
       "dimensions_m": [
-        0.605,
-        0.8515,
-        0.6078
+        0.618,
+        0.865,
+        0.618
       ],
       "lods": [
         {
           "path": "art/environment_v2/models/env_wooden_barrel_lod0.glb",
-          "sha256": "4cd7737225c355616a58d2d5874ce957dcbf69b9c6de737e9eb7dc5af66884f0",
-          "triangles": 1980,
+          "sha256": "fd995804f72e792e5132107752f55467874b164b00de2dff17c984dd4eafacd1",
+          "triangles": 1948,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_wooden_barrel_lod1.glb",
-          "sha256": "dc353de0f88207a71d82c0bdf42e66aba73bde62d8e3d62cf9a5d9db79890bbc",
-          "triangles": 764,
+          "sha256": "f152e28a2b32cdf00fac445ea227b7aeaafb2883e3689381e620e760f59ca236",
+          "triangles": 940,
           "surfaces": 1
         }
       ],
@@ -577,7 +607,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_yard_crate",
@@ -597,13 +627,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_yard_crate_lod0.glb",
-          "sha256": "2a3097de5fc94cb31094b80fac1cabe868c89038f2f0597293efb3a5989ebdd7",
+          "sha256": "baaf6a50db88f3bfae3d3babecfae8c9cdc5255f26478e937c5f37e869be71ed",
           "triangles": 1276,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_yard_crate_lod1.glb",
-          "sha256": "f373ecbd518528c534c521cb97205e5a8b15f7d6de47d6ad044030ab89bf22f9",
+          "sha256": "3af39225decd64b5fae6aaf9d439effc55526118955a2c588ca138ded9020bfa",
           "triangles": 364,
           "surfaces": 2
         }
@@ -619,6 +649,7 @@
       ],
       "sockets": {
         "loot_anchor": {
+          "parent_node": "env_yard_crate",
           "position_m": [
             0,
             0.77,
@@ -629,7 +660,12 @@
             0,
             0
           ],
-          "semantic": "display pickup point, game loot identity remains external"
+          "asset_closed_position_m": [
+            0,
+            0.77,
+            0
+          ],
+          "semantic": "display pickup point, game loot identity remains external; static asset-root reference"
         }
       },
       "moving_nodes": {
@@ -661,7 +697,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_wall_brick_2m",
@@ -681,13 +717,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_wall_brick_2m_lod0.glb",
-          "sha256": "f3f5b07a550aeeb39096e4a1da6ddf6934db366791fffd50f44a15c7a3787bc0",
+          "sha256": "e8c10cb29763d3ee76dd7634e764c3a7a4a2c66f6e01cf18a2aa47f6b0b7739d",
           "triangles": 264,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_wall_brick_2m_lod1.glb",
-          "sha256": "aa245933bb66c50d0dc4ba5a8c2b91831ae097f746fd4bbe18d094e7db76d1bb",
+          "sha256": "d0d87fca90a2e26c5af4449e7a1e1c4b1a971e4aa3bf47a299992fe50f6e029d",
           "triangles": 48,
           "surfaces": 1
         }
@@ -710,7 +746,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_wall_plaster_2m",
@@ -730,13 +766,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_wall_plaster_2m_lod0.glb",
-          "sha256": "6a9bb887a7c73bc3f49ef65d213fdc93268bd33d2d7dbf7ce91dcc4cd7f7e475",
+          "sha256": "9f93e357032a9db2224c78d82c4752556880f10d84885b35fb67aa96554ce893",
           "triangles": 308,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_wall_plaster_2m_lod1.glb",
-          "sha256": "10dd43729ac3d6d50967e6b28e55aadf2ea6ca312dc6398af415a5e96ae802a5",
+          "sha256": "4e6ea708b06e79c572e99c5a2b8f02c6aaa8f9e23fd6729eb86b892147fa85ec",
           "triangles": 60,
           "surfaces": 1
         }
@@ -759,7 +795,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_wall_corner",
@@ -779,13 +815,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_wall_corner_lod0.glb",
-          "sha256": "1411d7c3104d3de723b62521b3808eda968fb95bef34102e942d89c0c4d1d70f",
+          "sha256": "be35f899ca91aa5a416d2bf5c218668ca4f7007556d6c8c50950dbf937e4b58e",
           "triangles": 528,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_wall_corner_lod1.glb",
-          "sha256": "a569161b0bbff7d8a16bd46496ffe80ddf29f3dad15208747354cbd45a012ee0",
+          "sha256": "9e36e9e0a8b3d7a9d378e58b62aa96beee7a96e9a5d550b98dc28d23194ca5ba",
           "triangles": 96,
           "surfaces": 1
         }
@@ -808,7 +844,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_window_bay",
@@ -828,13 +864,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_window_bay_lod0.glb",
-          "sha256": "2df26ee40f87233edfcd361057432999a3f0a81999f4f4a585ffef95608a9819",
+          "sha256": "8d9c89d9cbb97887b730093f9f6b97a743eb9cb12011e527f015101b987cd1f9",
           "triangles": 528,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_window_bay_lod1.glb",
-          "sha256": "41b23aad8349c6b2a20cf21372e1e5b9eb298c4a89960fde21605a6f3f4b793c",
+          "sha256": "034cdfa54474cfc14071f334cd27d1579540e96936772d2b59e9fd1ed7a2a6e1",
           "triangles": 144,
           "surfaces": 1
         }
@@ -857,7 +893,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_door_frame",
@@ -877,13 +913,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_door_frame_lod0.glb",
-          "sha256": "2f89cebf97de57a93e68b2f576ec789550003936ac942d942b3b049a3e144f04",
+          "sha256": "f9dfcfdfa379c465997b7191f68e5743cb309b227415a535997ebf16b5b42896",
           "triangles": 176,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_door_frame_lod1.glb",
-          "sha256": "63a202fdc761f93c9a215baee4791f01ccfab3edbe56e854b50396f031a1fafb",
+          "sha256": "8e88cef7b9675cb73e5a292edaad95b902e6926e7c22c94d59bf115d5a63432a",
           "triangles": 48,
           "surfaces": 2
         }
@@ -899,6 +935,7 @@
       ],
       "sockets": {
         "door_hinge": {
+          "parent_node": "env_door_frame",
           "position_m": [
             -0.6,
             0,
@@ -909,9 +946,15 @@
             0,
             0
           ],
-          "semantic": "hinge alignment for separate door leaf, no navigation change"
+          "asset_closed_position_m": [
+            -0.6,
+            0,
+            0
+          ],
+          "semantic": "hinge alignment for separate door leaf, no navigation change; static asset-root reference"
         },
         "door_clearance": {
+          "parent_node": "env_door_frame",
           "position_m": [
             0,
             0,
@@ -922,7 +965,12 @@
             0,
             0
           ],
-          "semantic": "clear visual opening; logical door cell assigned by integrator"
+          "asset_closed_position_m": [
+            0,
+            0,
+            0
+          ],
+          "semantic": "clear visual opening; logical door cell assigned by integrator; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -934,7 +982,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_door_leaf",
@@ -954,13 +1002,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_door_leaf_lod0.glb",
-          "sha256": "e554a262ea376d15fb60a7569d700c777888104973818367c3e5c249a81d32ca",
+          "sha256": "fec8e213f936d122f44fa07698269ecf7c21420b417802119119f34aef315f78",
           "triangles": 572,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_door_leaf_lod1.glb",
-          "sha256": "33fc99bb7b535e8efc299035507fdab0079217958573328f41f635d0a9df62d5",
+          "sha256": "3344a7283fd3baadd75ba333e81b2f2a2e44dc5d71405fa2737f06bf54f50b77",
           "triangles": 72,
           "surfaces": 1
         }
@@ -975,8 +1023,9 @@
       ],
       "sockets": {
         "handle_anchor": {
+          "parent_node": "env_door_leaf__leaf_pivot",
           "position_m": [
-            0.384,
+            0.984,
             1.128,
             -0.12
           ],
@@ -985,7 +1034,12 @@
             0,
             0
           ],
-          "semantic": "visual interaction point; command authority is external"
+          "asset_closed_position_m": [
+            0.384,
+            1.128,
+            -0.12
+          ],
+          "semantic": "visual interaction point; command authority is external; follows actual moving leaf"
         }
       },
       "moving_nodes": {
@@ -1017,7 +1071,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_loading_frame",
@@ -1037,13 +1091,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_loading_frame_lod0.glb",
-          "sha256": "77fbb60bcbc6189445fb2460ba881318c57777c54974bdbf5c1bd74554b824b9",
+          "sha256": "b7fead05dc4533a311497140b5064d47c16bac5387c08712eba10df6556ca363",
           "triangles": 176,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_loading_frame_lod1.glb",
-          "sha256": "6888de90bed7431836e8c4dc0bdd567305f8c03dd37a6d0067235868eefb7827",
+          "sha256": "a184a560e758dfbf9fedded3f901511c7307d8bec74f196ee46a0bceb838b4f9",
           "triangles": 48,
           "surfaces": 2
         }
@@ -1059,6 +1113,7 @@
       ],
       "sockets": {
         "door_hinge": {
+          "parent_node": "env_loading_frame",
           "position_m": [
             -1.4,
             0,
@@ -1069,9 +1124,15 @@
             0,
             0
           ],
-          "semantic": "hinge alignment for separate door leaf, no navigation change"
+          "asset_closed_position_m": [
+            -1.4,
+            0,
+            0
+          ],
+          "semantic": "hinge alignment for separate door leaf, no navigation change; static asset-root reference"
         },
         "door_clearance": {
+          "parent_node": "env_loading_frame",
           "position_m": [
             0,
             0,
@@ -1082,7 +1143,12 @@
             0,
             0
           ],
-          "semantic": "clear visual opening; logical door cell assigned by integrator"
+          "asset_closed_position_m": [
+            0,
+            0,
+            0
+          ],
+          "semantic": "clear visual opening; logical door cell assigned by integrator; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -1094,7 +1160,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_loading_leaf",
@@ -1114,13 +1180,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_loading_leaf_lod0.glb",
-          "sha256": "e45af9411de45ac4e8460be622abae2321287c267d17b9f2b5a21be8a81ee72c",
+          "sha256": "a35f2a3e7a1ed42cd69242f0a2e7453689d2f0b4453ed50fbf7c7591a1b89519",
           "triangles": 616,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_loading_leaf_lod1.glb",
-          "sha256": "9ca6b64fa2864f54e9953315d63bd903ffb0e8680908f66e1e296ac0d60c5d6d",
+          "sha256": "dfc61ef7ba65f8740940c364c6477508a6dc07c181479686c297ac93c33aeaa9",
           "triangles": 72,
           "surfaces": 1
         }
@@ -1135,8 +1201,9 @@
       ],
       "sockets": {
         "handle_anchor": {
+          "parent_node": "env_loading_leaf__leaf_pivot",
           "position_m": [
-            0.44799999999999995,
+            1.148,
             1.224,
             -0.12
           ],
@@ -1145,7 +1212,12 @@
             0,
             0
           ],
-          "semantic": "visual interaction point; command authority is external"
+          "asset_closed_position_m": [
+            0.44799999999999995,
+            1.224,
+            -0.12
+          ],
+          "semantic": "visual interaction point; command authority is external; follows actual moving leaf"
         }
       },
       "moving_nodes": {
@@ -1177,7 +1249,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_roof_gable_4m",
@@ -1197,13 +1269,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_roof_gable_4m_lod0.glb",
-          "sha256": "ff7809602cce9256aade61f67c162a833cf3189a6f5ec6fce6374bfb0c92e4e0",
+          "sha256": "9da1f87baa98a9d265aa0fbf8350792cf1833d504af723ebbb7937def1191615",
           "triangles": 676,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_roof_gable_4m_lod1.glb",
-          "sha256": "81f949138afb19e9d00f37540172f8781e1b73301ddf6b9550c204b60b511ffb",
+          "sha256": "474750c963cec0d4e0081664141518b59b945a9e8f2d4541af30c489de92a428",
           "triangles": 244,
           "surfaces": 1
         }
@@ -1218,6 +1290,7 @@
       ],
       "sockets": {
         "roof_anchor": {
+          "parent_node": "env_roof_gable_4m",
           "position_m": [
             0,
             3,
@@ -1228,7 +1301,12 @@
             0,
             0
           ],
-          "semantic": "removable display roof anchor"
+          "asset_closed_position_m": [
+            0,
+            3,
+            0
+          ],
+          "semantic": "removable display roof anchor; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -1240,7 +1318,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_roof_flat_4m",
@@ -1260,13 +1338,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_roof_flat_4m_lod0.glb",
-          "sha256": "77dd09276e54229128ebd3fec6bd2f47401d80176446564909543fbf1c909f6a",
+          "sha256": "f681aeb412c6d7800db9d6a7e61f947c9af38006af5fb500125aa85629b87002",
           "triangles": 220,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_roof_flat_4m_lod1.glb",
-          "sha256": "4bc9d104e2b990a88b7c499f4b83c0ac37a23ff35dee5f7ee7a956797fcd8c43",
+          "sha256": "d35306cbbf0f90086f77b37a3f2e3b1c42bdcbece402bf997f9ecce64faefdb6",
           "triangles": 60,
           "surfaces": 1
         }
@@ -1281,6 +1359,7 @@
       ],
       "sockets": {
         "roof_anchor": {
+          "parent_node": "env_roof_flat_4m",
           "position_m": [
             0,
             3,
@@ -1291,7 +1370,12 @@
             0,
             0
           ],
-          "semantic": "removable display roof anchor"
+          "asset_closed_position_m": [
+            0,
+            3,
+            0
+          ],
+          "semantic": "removable display roof anchor; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -1303,7 +1387,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_low_wall_2m",
@@ -1323,13 +1407,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_low_wall_2m_lod0.glb",
-          "sha256": "4055b18e2662347fc182506fd4088385a885689cfa455514d3a664cbb215973a",
+          "sha256": "d93f881d3800cc3b3c3d846fe740442061f9ba26b1a193e1b212387e6e92f513",
           "triangles": 176,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_low_wall_2m_lod1.glb",
-          "sha256": "6d00aec59f5976defe3cde7c2a89a982aaecca027f134b38a4126ffd474e499e",
+          "sha256": "2b0e8ef8e605a9699b06b82adf3ff9f4bdeb933ae229fc3217f6ae0691ff266b",
           "triangles": 48,
           "surfaces": 1
         }
@@ -1352,7 +1436,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_gate_leaf",
@@ -1372,13 +1456,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_gate_leaf_lod0.glb",
-          "sha256": "2dc6ff089f2b054d37f907d67fdaff6a5ee3afbf30ea141daff11b39eced9f03",
+          "sha256": "6e97c672edb8899ae452cdc689eb7b02e72ced4c220defef7586f28fe1b4a866",
           "triangles": 600,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_gate_leaf_lod1.glb",
-          "sha256": "2bde8785dcc3f277129be5def5dc09a138d33cbb0c68940aca351fdc01d46903",
+          "sha256": "f434623add41b4a48ac05b2d78cfa647a3560665d7258bc1a5d937779796ff49",
           "triangles": 176,
           "surfaces": 1
         }
@@ -1393,8 +1477,9 @@
       ],
       "sockets": {
         "handle_anchor": {
+          "parent_node": "env_gate_leaf__leaf_pivot",
           "position_m": [
-            0.8,
+            1.8,
             0.95,
             -0.09
           ],
@@ -1403,7 +1488,12 @@
             0,
             0
           ],
-          "semantic": "gate interaction anchor"
+          "asset_closed_position_m": [
+            0.8,
+            0.95,
+            -0.09
+          ],
+          "semantic": "gate interaction anchor; follows actual moving leaf"
         }
       },
       "moving_nodes": {
@@ -1435,7 +1525,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_ground_concrete_2m",
@@ -1455,13 +1545,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_ground_concrete_2m_lod0.glb",
-          "sha256": "1d8485e953e476e1f07484fd1e28ef586dda4309f3d8b0bad6757018bdab5585",
+          "sha256": "93ad179ad020f47891b0986c853b49736b9a84d1b88f05331d403767a74338a4",
           "triangles": 60,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_ground_concrete_2m_lod1.glb",
-          "sha256": "2e28f70bbd44c749ebb0f1b6384a977efb5a3bc6ca6f64a639608653317ea199",
+          "sha256": "86427f1a2cce5297b976d709d1c2675a92842c08cc3aab6002ecca46755d506a",
           "triangles": 60,
           "surfaces": 1
         }
@@ -1484,7 +1574,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_ground_earth_2m",
@@ -1504,13 +1594,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_ground_earth_2m_lod0.glb",
-          "sha256": "06e2c6d407fd0115c7685ba8853d138a439c335abff4f8c847f5344d1fcbc9b5",
+          "sha256": "c2c06b99f063408586b6e63175dbc527a1a5ab4ab315457c7967ffd3529570c0",
           "triangles": 12,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_ground_earth_2m_lod1.glb",
-          "sha256": "706e2c9ebbfcc224ec3938cfadcd722efbdc6725d5acaaa8a55015da6aca9bd4",
+          "sha256": "719d82d24e572656b81ffb147799bac01bcef9e0d4d794595193fa46bd6c24cc",
           "triangles": 12,
           "surfaces": 1
         }
@@ -1533,7 +1623,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_ground_cobble_2m",
@@ -1553,13 +1643,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_ground_cobble_2m_lod0.glb",
-          "sha256": "1104adf05ec41179fc321f228c1adebadfdabb0942bfd7d5557421b3bbcc9146",
+          "sha256": "d1c97a39421c5ff600430c759dd07611846a7bfa9b1d455d7e2c3aa95ba075db",
           "triangles": 12,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_ground_cobble_2m_lod1.glb",
-          "sha256": "84d28b23a99c2dddc8ae2aecff404809ca7338fa8696e774b7f32ab7f9684182",
+          "sha256": "631238c2d6b0dc9839378c0b0a7aad979a01974502a9ce03ab05d315a46d4aec",
           "triangles": 12,
           "surfaces": 1
         }
@@ -1582,7 +1672,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_ground_steel_2m",
@@ -1602,13 +1692,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_ground_steel_2m_lod0.glb",
-          "sha256": "ee8c489d1241a9d2e105313f655929a5bd4dd443a789c4f6d48efc2381f06c87",
+          "sha256": "71fbc7e6c7bfaad58a58715ed591d244f8024c781c9da10372dc616cfbeddee6",
           "triangles": 168,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_ground_steel_2m_lod1.glb",
-          "sha256": "33a847323a06c70a893d973f94be8f5b17d0784c104854a1d67b33265451a6de",
+          "sha256": "59d063a9e69a3936c8bc6569142055a5df68ce7988d4960861c950b41fb52de0",
           "triangles": 168,
           "surfaces": 1
         }
@@ -1631,7 +1721,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_ground_gravel_2m",
@@ -1651,13 +1741,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_ground_gravel_2m_lod0.glb",
-          "sha256": "a7f6111e19bb9b2c3eac83fb878f9a93f799fc6aec35a270a2361cb57429c00d",
+          "sha256": "2e6196d0131545b64d31c9b49749cbff6d0bea48c542e0cc04f6b190d6d7e3e2",
           "triangles": 12,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_ground_gravel_2m_lod1.glb",
-          "sha256": "7509b14d3220703047b0f89f6ae80d88a97dd4944bd208b2c51a34ced66d312a",
+          "sha256": "048c3ad0ed48f78449ba5920e84ea81a93e1b188d63d83b708e033ee85316ec2",
           "triangles": 12,
           "surfaces": 1
         }
@@ -1680,7 +1770,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_drain_2m",
@@ -1700,13 +1790,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_drain_2m_lod0.glb",
-          "sha256": "3ce75445c6773e0d29959b8c650557799cacebefb13266fabfeb0fdf337cdfe7",
+          "sha256": "fb15afd50d53e687bfa254bb01471a4aad14b8f65312620a134f68c04995dde8",
           "triangles": 284,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_drain_2m_lod1.glb",
-          "sha256": "3be80976843c4a07169a799065b4de3128943ab2334206066ea41440eddd551d",
+          "sha256": "304ffbfb96f57dab4a59c9f80a45e4c19055f821a2e5e429aad237a1ad0780a6",
           "triangles": 132,
           "surfaces": 1
         }
@@ -1729,7 +1819,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_curb_2m",
@@ -1749,13 +1839,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_curb_2m_lod0.glb",
-          "sha256": "6f2e4f89e01ba505d4af47f1f12f28b8c22787989140b60e11036c9304673ec6",
+          "sha256": "47cd3d7d5d57b7bc1fb072d5a55842cb8f5abf4c378e49d265233e8a4f3c3a51",
           "triangles": 44,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_curb_2m_lod1.glb",
-          "sha256": "c5b2b8b2cc5835035604937db68a8453a0fa77bd23066509d1711ef0caf1c7e4",
+          "sha256": "40f0c6cf7790bac41d2a6a927b1db928066feff13fb4f16d54481f9329d11926",
           "triangles": 12,
           "surfaces": 1
         }
@@ -1778,7 +1868,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_seam_debris",
@@ -1798,13 +1888,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_seam_debris_lod0.glb",
-          "sha256": "3bb4f272ec12dea6e9a5d7d57b7d0391d1a5882b6d509dc131f5b665f8251629",
+          "sha256": "aa7c64fe2fd0ce69dd8c42b4c09cce536c26e58dae4724e9656451f74aa8c280",
           "triangles": 440,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_seam_debris_lod1.glb",
-          "sha256": "86b4d47cffefefa743a39414d3f0e0acd57d18df53193d1911f838a763a0d222",
+          "sha256": "3e3b8ac475595f53679d45aca26779b1a56f0b3ad078e83d798bd62b2bde086d",
           "triangles": 72,
           "surfaces": 1
         }
@@ -1827,7 +1917,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_warehouse_shell",
@@ -1847,13 +1937,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_warehouse_shell_lod0.glb",
-          "sha256": "f9b6e7f9adc745f406a43f6a0caaee51cd999b20e49cd497cb1412aa24ba16bb",
+          "sha256": "fa9d9a7b83772ef6059ce6a5561852a65a5c459dd99d321ec444ce90387a4f42",
           "triangles": 668,
           "surfaces": 6
         },
         {
           "path": "art/environment_v2/models/env_warehouse_shell_lod1.glb",
-          "sha256": "f64c5e3aeff46a497517bf4d380ad848e5a875d300003edd44b1def4164ebf6a",
+          "sha256": "9d109ba021a54837d7c94252e774004d4047134a5043ba7e9c664081e8a5d110",
           "triangles": 252,
           "surfaces": 6
         }
@@ -1873,6 +1963,7 @@
       ],
       "sockets": {
         "loading_left": {
+          "parent_node": "env_warehouse_shell",
           "position_m": [
             -0.7,
             0,
@@ -1883,9 +1974,15 @@
             0,
             0
           ],
-          "semantic": "env_loading_leaf root; slide outward negative X"
+          "asset_closed_position_m": [
+            -0.7,
+            0,
+            -2.1
+          ],
+          "semantic": "env_loading_leaf root; slide outward negative X; static asset-root reference"
         },
         "loading_right": {
+          "parent_node": "env_warehouse_shell",
           "position_m": [
             0.7,
             0,
@@ -1896,9 +1993,15 @@
             0,
             0
           ],
-          "semantic": "env_loading_leaf root; slide outward positive X"
+          "asset_closed_position_m": [
+            0.7,
+            0,
+            -2.1
+          ],
+          "semantic": "env_loading_leaf root; slide outward positive X; static asset-root reference"
         },
         "warm_light": {
+          "parent_node": "env_warehouse_shell",
           "position_m": [
             2.1,
             2.6,
@@ -1909,9 +2012,15 @@
             0,
             0
           ],
-          "semantic": "warm light anchor, integrator owns light budget"
+          "asset_closed_position_m": [
+            2.1,
+            2.6,
+            -2.28
+          ],
+          "semantic": "warm light anchor, integrator owns light budget; static asset-root reference"
         },
         "roof_anchor": {
+          "parent_node": "env_warehouse_shell",
           "position_m": [
             0,
             3,
@@ -1922,7 +2031,12 @@
             0,
             0
           ],
-          "semantic": "separate warehouse roof; wall groups remain recoverable"
+          "asset_closed_position_m": [
+            0,
+            3,
+            0
+          ],
+          "semantic": "separate warehouse roof; wall groups remain recoverable; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -1934,7 +2048,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_warehouse_roof",
@@ -1954,13 +2068,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_warehouse_roof_lod0.glb",
-          "sha256": "f334fc188c36845298c6c52a3f0c56ab2401c15a5c9a80f398bb3eda162336f8",
+          "sha256": "3b56e61ec7ef0e737b192682bc6b2e11f22e982be3dd6157a28fea7d03895074",
           "triangles": 948,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_warehouse_roof_lod1.glb",
-          "sha256": "0c6b2c3a09fc3810cec7389d5973a2352d01868f0818cd41d019a90886c29191",
+          "sha256": "35509f507c26ee88233abcb1bd0c273ef7e08bee7144dddb04b6d06e518acbff",
           "triangles": 444,
           "surfaces": 1
         }
@@ -1983,7 +2097,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_warehouse_gantry",
@@ -2003,13 +2117,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_warehouse_gantry_lod0.glb",
-          "sha256": "92f7c1ba64c625bcc3e1e824e3eafc04e88eb2935c5b2ed6ee1b7cef5837ffe1",
+          "sha256": "c78d1e5d169374de3a6378eebf4609f21f8f2741c7623a14247146bcf9afa31b",
           "triangles": 1712,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_warehouse_gantry_lod1.glb",
-          "sha256": "5f6bb053dd1e708e57c6afee231bf29e03a3a234ac35865adbedefd5b6916437",
+          "sha256": "43790cad0d759b30f7455fff0d42f10b206bbdbba2399c64058c27ba6cea2253",
           "triangles": 680,
           "surfaces": 2
         }
@@ -2025,6 +2139,7 @@
       ],
       "sockets": {
         "cargo_anchor": {
+          "parent_node": "env_warehouse_gantry",
           "position_m": [
             0,
             0.02,
@@ -2035,7 +2150,12 @@
             0,
             0
           ],
-          "semantic": "warehouse canopy undercroft decorative storage zone"
+          "asset_closed_position_m": [
+            0,
+            0.02,
+            0
+          ],
+          "semantic": "warehouse canopy undercroft decorative storage zone; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -2047,7 +2167,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_pump_skid",
@@ -2067,13 +2187,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_pump_skid_lod0.glb",
-          "sha256": "c4a61412ee61ae9f35cee78d5469ef4f248f774c7251f1644c84fc17e685b29a",
+          "sha256": "1b60c4a6ec70156ce45026b89c10801f84745369ee573202c952ea1592facd84",
           "triangles": 3924,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_pump_skid_lod1.glb",
-          "sha256": "4c159cc41772efd155767469494cf39ed589afc13d860434327941e1e7ae63f6",
+          "sha256": "0542870005a38cd84633d284232ac5513dbcd5bdd6d0e89d3ca24679ca990e47",
           "triangles": 1516,
           "surfaces": 1
         }
@@ -2088,6 +2208,7 @@
       ],
       "sockets": {
         "valve_anchor": {
+          "parent_node": "env_pump_skid",
           "position_m": [
             -0.64,
             1.45,
@@ -2098,7 +2219,12 @@
             0,
             0
           ],
-          "semantic": "visual maintenance anchor, not a new interaction"
+          "asset_closed_position_m": [
+            -0.64,
+            1.45,
+            1.23
+          ],
+          "semantic": "visual maintenance anchor, not a new interaction; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -2110,7 +2236,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_pipe_elbow",
@@ -2159,7 +2285,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_signal_mast",
@@ -2179,13 +2305,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_signal_mast_lod0.glb",
-          "sha256": "9433f462889ee80e2f170d82970b4d4a0cc61d90d5059f51a923f5a0a82f1eff",
+          "sha256": "8515f1ebbd60077fc7850a8d97c7c84d840bf7df492c5fa39b53d5132b2d8f68",
           "triangles": 2092,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_signal_mast_lod1.glb",
-          "sha256": "5a526f122d6ad190103735625f2b38571bb34eb1ea2b6a5f2d95a9b45be3c228",
+          "sha256": "3c27372ad916bf94730e5b0461b24c699eeb54f6aa9dc95673347e8f9d332c3b",
           "triangles": 868,
           "surfaces": 2
         }
@@ -2201,6 +2327,7 @@
       ],
       "sockets": {
         "signal_anchor": {
+          "parent_node": "env_signal_mast",
           "position_m": [
             0,
             4.75,
@@ -2211,7 +2338,12 @@
             0,
             0
           ],
-          "semantic": "signal lens visual cue; not a game alarm owner"
+          "asset_closed_position_m": [
+            0,
+            4.75,
+            0
+          ],
+          "semantic": "signal lens visual cue; not a game alarm owner; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -2223,7 +2355,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_depot_tank_pair",
@@ -2243,13 +2375,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_depot_tank_pair_lod0.glb",
-          "sha256": "a3722508778b87836c96d30d5869ae52dffcf6e959d04c2bacf5b301fb5b98e2",
+          "sha256": "704241d6d81dab1339bd61bf0a54aca531fc4dee9cb7f79fcd9bbd1c61d3e6c4",
           "triangles": 3148,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_depot_tank_pair_lod1.glb",
-          "sha256": "f2e31118ab2b3e1b6b5ea760edf5354ef56811b16d44325038f7a2fd900d38b1",
+          "sha256": "93276867dd1a6205984b10787cdfa28344ac177a5aed6399ca7fd6f00680bc82",
           "triangles": 1564,
           "surfaces": 1
         }
@@ -2264,6 +2396,7 @@
       ],
       "sockets": {
         "maintenance_anchor": {
+          "parent_node": "env_depot_tank_pair",
           "position_m": [
             0,
             0.45,
@@ -2274,7 +2407,12 @@
             0,
             0
           ],
-          "semantic": "depot manifold visual landmark; no explosive-barrel behavior"
+          "asset_closed_position_m": [
+            0,
+            0.45,
+            -1.25
+          ],
+          "semantic": "depot manifold visual landmark; no explosive-barrel behavior; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -2286,7 +2424,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_radio_antenna",
@@ -2306,13 +2444,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_radio_antenna_lod0.glb",
-          "sha256": "e11b03c2b30f3d08ac40babfaa18b2064e50b3b29665f52581e35e2a800568e4",
+          "sha256": "52d8b54b502ccbad2ac8d4379e7a624c874546ca98b40429d350d93f3c9c9764",
           "triangles": 2392,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_radio_antenna_lod1.glb",
-          "sha256": "f273450970a682a2ab34c33a3596d742976ea813bf5319af24ccc0f60c1355d2",
+          "sha256": "957122011b0c746bd5655564d2b40a371426759103204e861110e849f85af08a",
           "triangles": 1088,
           "surfaces": 1
         }
@@ -2327,6 +2465,7 @@
       ],
       "sockets": {
         "signal_anchor": {
+          "parent_node": "env_radio_antenna",
           "position_m": [
             0,
             4.35,
@@ -2337,9 +2476,15 @@
             0,
             0
           ],
-          "semantic": "signal lens visual cue; not a game alarm owner"
+          "asset_closed_position_m": [
+            0,
+            4.35,
+            0
+          ],
+          "semantic": "signal lens visual cue; not a game alarm owner; static asset-root reference"
         },
         "radio_anchor": {
+          "parent_node": "env_radio_antenna",
           "position_m": [
             1.2,
             0.8,
@@ -2350,7 +2495,12 @@
             0,
             0
           ],
-          "semantic": "radio cabinet decorative maintenance point"
+          "asset_closed_position_m": [
+            1.2,
+            0.8,
+            -0.36
+          ],
+          "semantic": "radio cabinet decorative maintenance point; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -2362,7 +2512,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_rail_2m",
@@ -2382,13 +2532,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_rail_2m_lod0.glb",
-          "sha256": "ea68180666fabb7afe64e7de5007fd56ee2cc5f068e70f48f53b549c038c89a2",
+          "sha256": "6fe5e5bb65c7f4c603acbc61b8a8c453131bcaae6693d359eb94bb04fc2cbb12",
           "triangles": 396,
           "surfaces": 1
         },
         {
           "path": "art/environment_v2/models/env_rail_2m_lod1.glb",
-          "sha256": "4941631072a011f180e388865238333880cf5c7a9fee7697aad6faf9bd4cc7c0",
+          "sha256": "16d119921e0d787bdaad2400db7f345ee479734e1e2e61e5a3dc56b9e073c38f",
           "triangles": 204,
           "surfaces": 1
         }
@@ -2411,7 +2561,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     },
     {
       "asset_id": "env_wall_lamp",
@@ -2431,13 +2581,13 @@
       "lods": [
         {
           "path": "art/environment_v2/models/env_wall_lamp_lod0.glb",
-          "sha256": "1208d5feeecce27482de758b7c12214068e3d0d776023e680864de29b5c52151",
+          "sha256": "7902aaa44a8a5a1d21def6351e8d3ed73f7ee807ec4a1167b9bf23224902ded0",
           "triangles": 304,
           "surfaces": 2
         },
         {
           "path": "art/environment_v2/models/env_wall_lamp_lod1.glb",
-          "sha256": "81386209504a2751c72091392cd97ab52085289ff1209269f70f67d43fa50c1a",
+          "sha256": "043b25131330eaf0374906df2c51ee9f3d839a069e354240590de56ad510270d",
           "triangles": 168,
           "surfaces": 2
         }
@@ -2453,6 +2603,7 @@
       ],
       "sockets": {
         "warm_light": {
+          "parent_node": "env_wall_lamp",
           "position_m": [
             0,
             0.09,
@@ -2463,7 +2614,12 @@
             0,
             0
           ],
-          "semantic": "warm omni anchor; no light object in GLB"
+          "asset_closed_position_m": [
+            0,
+            0.09,
+            -0.36
+          ],
+          "semantic": "warm omni anchor; no light object in GLB; static asset-root reference"
         }
       },
       "moving_nodes": {},
@@ -2475,7 +2631,7 @@
         "hysteresis_m": 2,
         "status": "integrator proposal only, no shared runtime changes"
       },
-      "status": "exported; candidate awaiting engine/pixel review and integration"
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
     }
   ],
   "reuse_assets": [
@@ -3054,7 +3210,7 @@
       "root_origin": "ground centre",
       "sample_size_m": [
         12,
-        10
+        12
       ],
       "logic": "visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground"
     },
@@ -3162,7 +3318,7 @@
       "root_origin": "ground centre",
       "sample_size_m": [
         12,
-        10
+        12
       ],
       "logic": "visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground"
     },
@@ -3279,7 +3435,7 @@
       "root_origin": "ground centre",
       "sample_size_m": [
         12,
-        10
+        12
       ],
       "logic": "visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground"
     },
@@ -3396,7 +3552,7 @@
       "root_origin": "ground centre",
       "sample_size_m": [
         12,
-        10
+        12
       ],
       "logic": "visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground"
     },
@@ -3495,7 +3651,7 @@
       "root_origin": "ground centre",
       "sample_size_m": [
         12,
-        10
+        12
       ],
       "logic": "visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground"
     },
@@ -3613,7 +3769,7 @@
       "root_origin": "ground centre",
       "sample_size_m": [
         12,
-        10
+        12
       ],
       "logic": "visual_only; does not introduce grid occupancy, LOS, selection, navigation or high ground"
     }
@@ -3623,7 +3779,7 @@
     "new_textures": [
       {
         "path": "art/environment_v2/textures/environment_v2_albedo.png",
-        "sha256": "857483d0ee17c3f3336065379658a6e5769e33327be57ec7f416aea3e5c7a422",
+        "sha256": "3fcea2ad2b67391fdb0ca62319831d6beb1a648f68d61a4b5a4fff1360c01789",
         "resolution": [
           1024,
           1024
@@ -3631,7 +3787,7 @@
       },
       {
         "path": "art/environment_v2/textures/environment_v2_normal.png",
-        "sha256": "fd6dddcbae8e51fd6bc1e073c803a51a065fd29009552e543b0d54a7e6211e75",
+        "sha256": "1f26655b1c0389e66586c3f11ac4bb2ed6c7347bb931d8869d08dd2ef1f87dc8",
         "resolution": [
           1024,
           1024
@@ -3639,7 +3795,7 @@
       },
       {
         "path": "art/environment_v2/textures/environment_v2_orm.png",
-        "sha256": "bc39d6518d6f2eb99c3aede40315f3df784d089946b847cf7a1cc18744cfbd0c",
+        "sha256": "6446d3645e27d4e70e2f4561c5d6bbcd4ee2e4e638c1cde9bd6066a30319484e",
         "resolution": [
           1024,
           1024
@@ -3653,6 +3809,10 @@
     "baseline_textures": "unchanged art/v2/textures/yard_atlas_*",
     "orm_channels": "R=1 unbaked occlusion, G=roughness, B=metallic",
     "normal_convention": "tangent +Y (OpenGL), linear",
+    "candidate_material_resources": [
+      "art/environment_v2/materials/environment_v2_atlas.tres",
+      "art/environment_v2/materials/environment_v2_emission.tres"
+    ],
     "binding_example": "art/environment_v2/sample/review.gd; sample only, integrator must extend runtime loader"
   },
   "acceptance": "sample import/render review distinct from integrated six-level play and device performance"
