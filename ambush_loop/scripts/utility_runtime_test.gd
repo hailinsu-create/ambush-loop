@@ -392,6 +392,7 @@ func _run() -> void:
 	if OS.get_environment("AMBUSH_UTILITY_TEST_SCOPE") == "drop_roundtrip":
 		_drop_roundtrip()
 		await _capture("drop_pickup_restored")
+		root.get_node("AudioDirector").pause_for_background()
 		print("UTILITY_DROP_ROUNDTRIP checks=", checks, " failures=", failures)
 		quit(0 if failures == 0 else 1)
 		return
