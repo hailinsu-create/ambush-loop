@@ -322,6 +322,27 @@ func _equip_roundtrip() -> void:
 	_check(_body().sampled_action != "knife_stab", "same-frame equipment roundtrip cannot resurrect interrupted utility")
 
 
+func _drop_roundtrip() -> void:
+	_reset()
+	var op = main.selected
+	var original: String = op.weapon_id
+	var grenades_before: int = op.grenades
+	_check(main._throw_grenade_from(op, op.global_position + Vector2(64, 0)), "drop fixture starts successful production SCOUT grenade")
+	_check(_body().sampled_action == "grenade_throw", "drop fixture samples actual throw before inventory action")
+	var original_event: String = _body().get_meta("pose_event_id")
+	var count_before: int = main.loot_piles.size()
+	main._on_pack_drop(original)
+	_check(op.weapon_id != original and main.loot_piles.size() == count_before + 1, "real drop switches weapon and creates original loot immediately")
+	var dropped = main.loot_piles.back()
+	# No presentation capture between drop and the original command update.
+	main._process(0.001)
+	_check(dropped.collected and op.weapon_id == original, "normal command pickup restores the original gun in the same frame")
+	var body := _body()
+	_check(body.sampled_action != "grenade_throw" and str(body.get_meta("pose_event_id")) != original_event, "same-frame drop and auto-pickup cannot resurrect interrupted throw")
+	_check(op.grenades == grenades_before - 1 and main.raid_grenades.size() == 1, "drop cancellation preserves actual released grenade and consumption")
+
+
+
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	var settings = root.get_node("GameSettings")
@@ -335,6 +356,11 @@ func _run() -> void:
 	view = main.presentation_3d
 	main.set_process(false)
 	view.set_process(false)
+	if OS.get_environment("AMBUSH_UTILITY_TEST_SCOPE") == "drop_roundtrip":
+		_drop_roundtrip()
+		print("UTILITY_DROP_ROUNDTRIP checks=", checks, " failures=", failures)
+		quit(0 if failures == 0 else 1)
+		return
 	if OS.get_environment("AMBUSH_UTILITY_TEST_SCOPE") == "equip_roundtrip":
 		_equip_roundtrip()
 		print("UTILITY_EQUIP_ROUNDTRIP checks=", checks, " failures=", failures)
@@ -345,6 +371,7 @@ func _run() -> void:
 	await _actual_alert()
 	_check(completed_stages == 3, "mask and both interaction stages reach their final assertion")
 	_equip_roundtrip()
+	_drop_roundtrip()
 	root.get_node("AudioDirector").pause_for_background()
 	var report := {"checks": checks, "failures": failures, "captures": captures,
 		"actor_source": Pose.ASSET_REVISION, "scope": "three-role/three-LOD mask fixtures; actual SCOUT C2 knife/throw/decoy and ALERT auto-grenade/melee; copied history. Not corpse pairing, full campaign or device."}
