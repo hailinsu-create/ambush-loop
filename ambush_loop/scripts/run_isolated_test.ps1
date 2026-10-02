@@ -5,6 +5,7 @@ param(
         'smoke_test.gd',
         'r45_sweep_gate.gd',
         'm1_height_data_gate.gd',
+        'm1_height_los_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
         'm1_b2_yard_height_gate.gd',
         'accept_cta_flow_gate.gd',

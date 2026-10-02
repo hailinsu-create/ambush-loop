@@ -307,6 +307,68 @@ func cell_to_world_center(cell: Vector2i) -> Vector2:
 	return Vector2((cell.x + 0.5) * TILE, (cell.y + 0.5) * TILE)
 
 
+func has_height_los(from: Vector2, to: Vector2) -> bool:
+	## M1-C1 opt-in geometry only: cell-center Bresenham, not pixel supercover.
+	## Eye height is tier + 0.5; contact with a low occluder's top blocks sight.
+	## Keep legacy has_los and all production consumers unchanged until migration.
+	if not from.is_finite() or not to.is_finite():
+		return false
+	if from.x < 0.0 or from.y < 0.0 or to.x < 0.0 or to.y < 0.0:
+		return false
+	if from.x >= COLS * TILE or to.x >= COLS * TILE or from.y >= ROWS * TILE or to.y >= ROWS * TILE:
+		return false
+	var a := world_to_cell(from)
+	var b := world_to_cell(to)
+	if is_blocked(a.x, a.y) or is_blocked(b.x, b.y):
+		return false
+	var tier_a := get_elevation_tier(a.x, a.y)
+	var tier_b := get_elevation_tier(b.x, b.y)
+	if tier_a < HEIGHT_GROUND or tier_a > HEIGHT_PLATFORM or tier_b < HEIGHT_GROUND or tier_b > HEIGHT_PLATFORM:
+		return false
+	if a == b:
+		return true
+	# Canonicalize before rasterization: Bresenham tie choices can be directional.
+	if idx(a.x, a.y) > idx(b.x, b.y):
+		var swap := a
+		a = b
+		b = swap
+		tier_a = get_elevation_tier(a.x, a.y)
+		tier_b = get_elevation_tier(b.x, b.y)
+	var origin := cell_to_world_center(a)
+	var delta := cell_to_world_center(b) - origin
+	var distance_squared := delta.length_squared()
+	var x := a.x
+	var y := a.y
+	var dx := absi(b.x - a.x)
+	var dy := -absi(b.y - a.y)
+	var sx := 1 if a.x < b.x else -1
+	var sy := 1 if a.y < b.y else -1
+	var err := dx + dy
+	while true:
+		var cell := Vector2i(x, y)
+		if cell != a and cell != b:
+			var kind := get_occlusion_kind(x, y)
+			if kind < OCCLUSION_INHERIT or kind > OCCLUSION_FULL:
+				return false
+			if kind == OCCLUSION_FULL or (kind == OCCLUSION_INHERIT and is_blocked(x, y)):
+				return false
+			var t := clampf((cell_to_world_center(cell) - origin).dot(delta) / distance_squared, 0.0, 1.0)
+			var ray_height := lerpf(float(tier_a) + 0.5, float(tier_b) + 0.5, t)
+			var obstacle_height := occlusion_height_at(x, y)
+			if obstacle_height > 0.0 and obstacle_height >= ray_height:
+				return false
+		if cell == b:
+			break
+		var e2 := 2 * err
+		if e2 >= dy:
+			err += dy
+			x += sx
+		if e2 <= dx:
+			err += dx
+			y += sy
+	return true
+
+
 func has_los(from: Vector2, to: Vector2) -> bool:
 	var a := world_to_cell(from)
 	var b := world_to_cell(to)
