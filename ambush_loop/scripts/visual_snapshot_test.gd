@@ -82,7 +82,9 @@ func _run() -> void:
 	_tool_contract(main)
 	main.battle_log.add_snapshot(main.sim.tick, main._snapshot_data())
 	second = main.battle_log.snapshots.back()
+	main._flash("LIVE_ONLY 自动手雷 开", Color.WHITE)
 	main._on_replay_pressed()
+	_check(main.flash_label.text.is_empty() and main.flash_text().is_empty(), "entering history clears transient live banners and their plate")
 	main.operators[1].weapon_id = "knife"
 	main.operators[1].display_name = "LIVE_ONLY"
 	main.operators[1].hp = 3.0
@@ -123,6 +125,7 @@ func _run() -> void:
 			if phone:
 				_check(main.touch_hud != null and main.touch_hud._row_setup.visible and not main.touch_hud._row_watch.visible, "phone replay provides the return action row")
 				if main.touch_hud != null:
+					_check(main.touch_hud._hint.position.y >= 48.0, "phone replay hint stays below the recorded title band")
 					_check(main.touch_hud._replay_scrub.is_visible_in_tree() and main.touch_hud._replay_time.text.contains("复盘"), "phone replay has a visible synchronized timeline")
 					_check(main.touch_hud._btns["alarm"].visible and not main.touch_hud._btns["alarm"].disabled and main.touch_hud._btns["alarm"].text == "返回搜刮", "phone replay return button is visible and enabled")
 					for cmd in main.touch_hud._btns:

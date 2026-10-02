@@ -6307,6 +6307,7 @@ func _on_replay_pressed() -> void:
 		backpack_panel.dismiss()
 	frozen_plan = last_plan.duplicate_plan()
 	phase = Phase.REPLAY
+	_clear_flash()
 	result_panel.visible = false
 	replay.bind(battle_log)
 	if scrub_slider:

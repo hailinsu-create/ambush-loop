@@ -576,6 +576,7 @@ func refresh_phase(
 	has_door: bool = true
 ) -> void:
 	_apply_safe_area()
+	_hint.position.y = 48.0 if phase_name == "REPLAY" else 6.0
 	if _row_setup:
 		_row_setup.visible = phase_name in ["SETUP", "SWEEP", "REPLAY"]
 	if _row_watch:
