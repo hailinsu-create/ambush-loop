@@ -58,6 +58,10 @@ func _run() -> void:
 	print("ASSET_REVIEW_RENDER draws=", Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 		" primitives=", Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME))
 	print("ASSET_REVIEW_CAPTURE_OK")
+	# The project autoload starts its old 2D music bed even in this asset studio.
+	# Detach playback before quitting a rendered run with a Dummy audio driver.
+	root.get_node("AudioDirector")._stop_music_hard()
+	await process_frame
 	quit(0)
 
 
