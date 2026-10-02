@@ -27,7 +27,7 @@ func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	root.get_node("AudioDirector").pause_for_background()
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
-	_check(doc.assets.size() == 22 and doc.source_commit == "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "R4 runtime catalog has frozen provenance")
+	_check(doc.assets.size() == 22 and doc.source_commit == "29749157c5db064bfea626c3ed9d75d9a1791ece", "R5 runtime catalog has frozen provenance")
 	doc.assets = doc.assets.filter(func(row: Dictionary) -> bool: return row.category != "character")
 	_check(doc.assets.size() == 15 and Assets.has_asset("operator_rifle") and not Assets.has_asset("enemy_heavy"), "R3 replaces the static catalog and rejects retired character identity")
 	_check(not Assets.has_asset("../main") and not Assets.has_asset("m1_garand", 2) and not Assets.has_asset("m1_garand", -1), "unknown paths and unsupported LODs are refused")
