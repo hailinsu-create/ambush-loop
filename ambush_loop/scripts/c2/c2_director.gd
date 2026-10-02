@@ -36,6 +36,7 @@ var quiet_yard: bool = false
 var spotted_bark: bool = false
 var cam_follow: bool = true
 var _hud_root: Control = null
+var _hint_tween: Tween
 
 
 func bind(main: Node) -> void:
@@ -170,7 +171,10 @@ func layout_chrome(phone: bool) -> void:
 	if cursor:
 		cursor.visible = not phone
 	if help_chip:
-		help_chip.visible = not phone
+		if _in_replay():
+			_clear_live_hint()
+		else:
+			help_chip.visible = not phone
 	if prompt:
 		prompt.visible = phone
 
@@ -780,19 +784,38 @@ func _spawn_ring(world: Vector2, r: float, col: Color) -> void:
 
 
 func _hint(text: String) -> void:
+	if _in_replay():
+		_clear_live_hint()
+		return
 	if _is_phone() and host != null and host.get("touch_hud") != null and host.touch_hud.has_method("set_hint"):
 		host.touch_hud.set_hint(text)
 		if host.get("status_label") != null and text.length() < 28:
 			host.status_label.text = text
 		return
 	if help_chip:
+		if _hint_tween != null:
+			_hint_tween.kill()
 		help_chip.text = text
 		help_chip.modulate.a = 1.0
-		var tw := help_chip.create_tween()
-		tw.tween_interval(3.2)
-		tw.tween_property(help_chip, "modulate:a", 0.35, 0.8)
+		_hint_tween = help_chip.create_tween()
+		_hint_tween.tween_interval(3.2)
+		_hint_tween.tween_property(help_chip, "modulate:a", 0.35, 0.8)
 	if host != null and host.get("status_label") != null:
 		host.status_label.text = text
+
+
+func _in_replay() -> bool:
+	return host != null and host.phase == host.Phase.REPLAY
+
+
+func _clear_live_hint() -> void:
+	if _hint_tween != null:
+		_hint_tween.kill()
+		_hint_tween = null
+	if help_chip:
+		help_chip.text = ""
+		help_chip.visible = false
+		help_chip.modulate.a = 1.0
 
 
 func refresh_hud() -> void:
@@ -825,6 +848,8 @@ func refresh_hud() -> void:
 
 
 func refresh_hud_light() -> void:
+	if _in_replay():
+		_clear_live_hint()
 	if portraits and host:
 		if host.phase == host.Phase.REPLAY:
 			portraits.bind_history(host.replay_hud_frame())

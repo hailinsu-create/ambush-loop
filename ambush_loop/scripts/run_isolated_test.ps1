@@ -11,6 +11,7 @@ param(
         'asset_library_test.gd',
         'asset_pack_test.gd',
         'actor_visual_test.gd',
+        'c2_history_hint_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',
