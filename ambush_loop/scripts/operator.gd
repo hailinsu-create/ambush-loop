@@ -867,7 +867,8 @@ func tick_cooldown(delta: float) -> void:
 
 
 func _los_clip_distance(local_dir: Vector2) -> float:
-	## March along ray in world space; stop at first blocked cell (Commandos LOS cone).
+	## Legacy directional guide, NOT authoritative for targets at different heights.
+	## Target-specific firearm coverage/eligibility uses _attack_has_los instead.
 	if grid == null:
 		return range_px
 	var origin := global_position
@@ -942,6 +943,16 @@ func _rebuild_cone() -> void:
 		_refresh_role_rim(poly)
 
 
+func _attack_has_los(target: Vector2, p_grid: AmbushGrid) -> bool:
+	var g := p_grid if p_grid != null else grid
+	if g == null:
+		return false
+	# Shared eligibility also serves knives; do not grant melee height penetration.
+	if melee:
+		return g.has_los(global_position, target)
+	return g.has_height_los(global_position, target)
+
+
 func in_fire_geometry(target: Vector2, p_grid: AmbushGrid) -> bool:
 	## Range + cone + LOS only — ignore ammo, hold-fire, and alive.
 	var to_v := target - global_position
@@ -951,10 +962,7 @@ func in_fire_geometry(target: Vector2, p_grid: AmbushGrid) -> bool:
 	var ang := rad_to_deg(atan2(to_v.y, to_v.x))
 	if absf(angle_diff_deg(facing_deg, ang)) > half_angle_deg:
 		return false
-	var g := p_grid if p_grid != null else grid
-	if g == null:
-		return false
-	return g.has_los(global_position, target)
+	return _attack_has_los(target, p_grid)
 
 
 func engage_block_reason(target: Vector2, p_grid: AmbushGrid) -> String:
@@ -970,8 +978,7 @@ func engage_block_reason(target: Vector2, p_grid: AmbushGrid) -> String:
 	var ang := rad_to_deg(atan2(to_v.y, to_v.x))
 	if absf(angle_diff_deg(facing_deg, ang)) > half_angle_deg:
 		return "cone"
-	var g := p_grid if p_grid != null else grid
-	if g == null or not g.has_los(global_position, target):
+	if not _attack_has_los(target, p_grid):
 		return "los"
 	return ""
 
