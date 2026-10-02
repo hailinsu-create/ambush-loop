@@ -6,6 +6,7 @@ extends CanvasLayer
 signal equip_requested(kind: String)
 signal pass_requested(kind: String)
 signal drop_requested(kind: String)
+signal auto_grenade_requested
 signal closed
 
 const Weapons := preload("res://scripts/raid/weapon_catalog.gd")
@@ -21,6 +22,7 @@ var _equip_btn: Button
 var _pass_btn: Button
 var _drop_btn: Button
 var _close_btn: Button
+var _auto_btn: Button
 var _picked: String = ""
 var _slot_btns: Array = []
 
@@ -60,11 +62,18 @@ func _ready() -> void:
 	box.add_theme_constant_override("separation", 8)
 	margin.add_child(box)
 	_title = Label.new()
+	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_title.add_theme_font_size_override("font_size", 18)
 	_title.add_theme_font_override("font", NightOps.ui_font_bold())
 	_title.add_theme_color_override("font_color", NightOps.OLIVE_HI)
 	_title.text = "背包"
-	box.add_child(_title)
+	var heading := HBoxContainer.new()
+	box.add_child(heading)
+	heading.add_child(_title)
+	_auto_btn = _act("自动雷 开")
+	_auto_btn.size_flags_horizontal = Control.SIZE_SHRINK_END
+	_auto_btn.pressed.connect(func() -> void: auto_grenade_requested.emit())
+	heading.add_child(_auto_btn)
 	_grid = GridContainer.new()
 	_grid.columns = 3
 	_grid.add_theme_constant_override("h_separation", 8)
@@ -190,6 +199,7 @@ func refresh(op: OperatorUnit) -> void:
 	if pack != null:
 		used = int(pack.occupied())
 	_title.text = "%s  背包 %d/%d%s" % [op.display_name, used, 6, "  · 匍匐" if op.get("stance") != null and int(op.stance) == 1 else ""]
+	_auto_btn.text = "自动雷 " + ("开" if op.auto_grenade else "关")
 	var items: Array = pack.items() if pack != null else []
 	if _picked != "":
 		var still := false

@@ -704,6 +704,7 @@ func _build_modals() -> void:
 	backpack_panel.equip_requested.connect(_on_pack_equip)
 	backpack_panel.pass_requested.connect(_on_pack_pass)
 	backpack_panel.drop_requested.connect(_on_pack_drop)
+	backpack_panel.auto_grenade_requested.connect(_toggle_auto_grenade)
 	backpack_panel.closed.connect(func() -> void:
 		_update_hud()
 	)
@@ -3316,6 +3317,8 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	if backpack_panel:
+		backpack_panel.dismiss()
 	phase = Phase.SETUP
 	tool = Tool.DEPLOY
 	fail_reason = ""
@@ -4060,6 +4063,8 @@ func _refresh_selection_visual() -> void:
 
 
 func _refresh_mode_pack_buttons() -> void:
+	if bag_button:
+		bag_button.disabled = not _can_edit_equipment()
 	if mode_button and selected:
 		mode_button.text = "开火: %s (F)" % selected.fire_mode_label()
 	if pack_button:
@@ -4985,6 +4990,8 @@ func _on_alarm_pressed() -> void:
 	_capture_plan()
 	frozen_plan = last_plan.duplicate_plan()
 	run_id += 1
+	if backpack_panel:
+		backpack_panel.dismiss()
 	var this_run := run_id
 	phase = Phase.WATCHING
 	if c2:
@@ -6285,6 +6292,8 @@ func _on_replay_pressed() -> void:
 	if battle_log.events.is_empty() and battle_log.snapshots.is_empty():
 		return
 	replay_return_phase = phase
+	if backpack_panel:
+		backpack_panel.dismiss()
 	frozen_plan = last_plan.duplicate_plan()
 	phase = Phase.REPLAY
 	result_panel.visible = false
@@ -11822,12 +11831,13 @@ func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
 
 
 func _toggle_auto_grenade() -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	selected.auto_grenade = not selected.auto_grenade
 	var on := selected.auto_grenade
 	status_label.text = "%s 自动手雷 %s" % [selected.display_name, "开" if on else "关"]
 	_flash(status_label.text, Color(0.95, 0.72, 0.32) if on else Color(0.62, 0.58, 0.48))
+	_refresh_backpack_if_open()
 	_update_hud()
 
 
@@ -11903,18 +11913,25 @@ func _toggle_backpack() -> void:
 	if backpack_panel.is_open():
 		backpack_panel.dismiss()
 		return
-	if selected == null:
+	if not _can_edit_equipment() or _modal_blocks_input():
 		return
 	backpack_panel.present(selected)
 
 
 func _refresh_backpack_if_open() -> void:
 	if backpack_panel != null and backpack_panel.is_open() and selected != null:
-		backpack_panel.refresh(selected)
+		if _can_edit_equipment():
+			backpack_panel.refresh(selected)
+		else:
+			backpack_panel.dismiss()
+
+
+func _can_edit_equipment() -> bool:
+	return _is_command_phase() and selected != null and selected.visible and selected.alive and not selected.locked
 
 
 func _on_pack_equip(kind: String) -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	var rec: Dictionary = selected.equip_from_pack(kind)
 	status_label.text = str(rec.get("text", ""))
@@ -11927,7 +11944,7 @@ func _on_pack_equip(kind: String) -> void:
 
 
 func _on_pack_pass(kind: String) -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	var best: OperatorUnit = null
 	var best_d := 56.0
@@ -11952,7 +11969,7 @@ func _on_pack_pass(kind: String) -> void:
 
 
 func _on_pack_drop(kind: String) -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	var rec: Dictionary = selected.drop_from_pack(kind)
 	if not bool(rec.get("ok", false)):
@@ -12083,6 +12100,8 @@ func _on_sweep_commit() -> void:
 
 
 func _begin_next_wave() -> void:
+	if backpack_panel:
+		backpack_panel.dismiss()
 	if raid:
 		raid.advance_wave()
 	run_id += 1
@@ -12303,6 +12322,8 @@ func squad_has_firearm() -> bool:
 
 
 func raid_transfer(from_index: int, to_index: int, kind: String = "auto") -> Dictionary:
+	if not _is_command_phase():
+		return {"ok": false, "text": "当前阶段装备已冻结"}
 	if from_index < 0 or from_index >= operators.size() or to_index < 0 or to_index >= operators.size():
 		return {"ok": false, "text": "索引"}
 	var rec: Dictionary = operators[from_index].transfer_to(operators[to_index], kind)
@@ -12312,7 +12333,7 @@ func raid_transfer(from_index: int, to_index: int, kind: String = "auto") -> Dic
 
 
 func _transfer_selected_to_nearest() -> void:
-	if selected == null or not selected.alive:
+	if not _can_edit_equipment():
 		return
 	var best: OperatorUnit = null
 	var best_d := 64.0

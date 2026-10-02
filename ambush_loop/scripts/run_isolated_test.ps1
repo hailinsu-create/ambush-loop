@@ -3,6 +3,7 @@ param(
     [string]$GodotExe,
     [ValidateSet(
         'replay_timeline_test.gd',
+        'equipment_freeze_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',

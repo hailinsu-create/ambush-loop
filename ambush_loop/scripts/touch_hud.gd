@@ -591,7 +591,7 @@ func refresh_phase(
 	if _btns.has("nade"):
 		_btns["nade"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("bag"):
-		_btns["bag"].disabled = false
+		_btns["bag"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("decoy"):
 		_btns["decoy"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("crouch"):
@@ -605,7 +605,7 @@ func refresh_phase(
 	if _btns.has("pass"):
 		_btns["pass"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("nade_watch"):
-		_btns["nade_watch"].disabled = phase_name != "WATCHING"
+		_btns["nade_watch"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("door"):
 		_btns["door"].visible = false
 		_btns["door"].disabled = (phase_name != "SETUP" and phase_name != "SWEEP") or not has_door

@@ -5,7 +5,7 @@ godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 render_mode="${3:---headless}"
 case "$entry" in
-  replay_timeline_test.gd) ;;
+  replay_timeline_test.gd|equipment_freeze_test.gd) ;;
   editor_import|asset_review_capture.gd|presentation_contract_test.gd|presentation_interaction_test.gd|camera_input_test.gd|presentation_capture.gd|presentation_preview.gd) ;;
   smoke_test.gd|pathfinder_test.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
   *) printf 'Unsupported destructive test entry: %s\n' "$entry" >&2; exit 2 ;;
