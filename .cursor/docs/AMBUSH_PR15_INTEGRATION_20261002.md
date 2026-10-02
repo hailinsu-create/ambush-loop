@@ -41,3 +41,7 @@
 继承入口：[PR14 完整执行详单](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/AMBUSH_ASSET_EXECUTION_PLAN_20261002.md) · [资产 inventory](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/evidence/asset-audit-20261002/inventory.json)。已读取；后者为 c1aaf27 原资产静态盘点，不作为当前新资产集成验收。
 
 当前独立新P2优先补：3ba263c / c381测试补片修SWEEP事件年龄和暂停/后台command时钟，真实反例22/11→正式24/0与正常记录/回放29/0，六关10296及其余回归通过，见 [动作时钟补片](AMBUSH_PR15_COMMAND_POSE_CLOCK_20261002.md)。dot独立关闭待验。环境资源85文件/11冻结依赖、40件80LOD618与空目录PCK1476已在a54d538/e0f50dd通过；实际六关组装和R5接入继续，资产制作源仍归独立作者。
+
+最新状态替代上段：dot于98075独立68/0关闭SWEEPclock P2；实际六关组装ffb95a670b4b58cbe420571bd9f884fed3a1a41b已283/0、六关10296/合同84039/HUD164/生命周期32/clock29退出0，50真实捕获，见 [环境正式报告](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md)。旧/未知环境与布局保持记录grid灰盒；85/11原字节不改，未用展场取代战場。2ce6c602e31fb29556c85961704778185ca5a776独立修实时色罩入历史，36/18fail→36/0及HUD164/生命周期32；05a90268086dde694cc2f8313e808b5b23b629ba只将挡物实心圈改轮廓，近景11/生命周期32退出0。环境/角色/audio制作源和共享atlas所有权不变。
+
+下一主作者包为R5源29749157c5db064bfea626c3ed9d75d9a1791ece、交付ebedb829e3263abbeb6dd266905f24a3869fa281：先只读复核旧52clip/骨架/几何/挂点，接验收过的21角色GLB原字节，运行代码自行实现刀/投雷/诱饵/尸体真实事件clock/mask/cancel及历史纯副本；不整体并候选runtime/制作源。父端可并行安排此批固定环境/色罩的独立QA与当前HUD/视觉只读评审，主作者仍独占共享运行代码/测试，未自行派代理。其余完整HUD/FX、连续SWEEP时间轴及FAILED/abort终局、A3预算/六关完整smoke和可追溯APK继续；耳听/设备后置。

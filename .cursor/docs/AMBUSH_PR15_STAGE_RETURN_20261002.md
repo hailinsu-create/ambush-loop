@@ -27,3 +27,11 @@ R4仅工作树开发验证：52clip真实采样17802；修正蹲姿后真实batt
 ## 环境资源与新SWEEP clock P2返回
 
 环境源码a54d538d10658440ac1bd8336d91a68d1da305ad、证据e0f50dda2f12f8ae7cb8335dd91b98ced8d421ae已推。85新文件/11冻结依赖，40件80LOD618、实战231、装备333、空目录PCK1476退出0；仅运行资源接口，六关尚未组装。dot新P2优先：源码3ba263c4edfc41dd4a498bec100b1ecc2d14b215，最终测试c381258f9a62cd2ac4046704a47eccf1e1413c57，除command_pose_clock_test外运行树一致。正确反例22/11fail，正式24/0＋正常双波撤离/真实终局记录回放29/0，六关10296/合同84039/枪族7681/实战231/HUD164/生命周期32/装备66/时间66/音频405/PCK1476均退出0，详证 [补片报告](AMBUSH_PR15_COMMAND_POSE_CLOCK_20261002.md)。无活动测试、无权限阻碍。完整command时长UI区段、实际环境/R5/HUD/FX/预算/APK继续，未启动设备/耳听，dot独立关闭待验。
+
+## 六关实际环境及视觉发现返回
+
+本轮固定环境源ffb95a670b4b58cbe420571bd9f884fed3a1a41b：真实六关40×22/13波283/0＋50framebuffer，六关10296、合同84039、HUD164、生命周期32、command clock29全部实际退出0；reference装备与原掉落vacuum fixture明确，不称全部玩家/触控路径。环境/布局独立版本、原grid、门叶/箱盖/空箱、两LOD、35°四方向/65°、历史活体污染与旧/未知版回退已验。旧85/11bytes未改。软件visible draw calls172–424、primitives53826–168748只是A3输入。
+
+视觉评审额外证实实时色罩污染历史：ffb源36/18fail→2ce6c602e31fb29556c85961704778185ca5a776源36/0，HUD164/生命周期32退出0，六张清色罩历史已看。测试738534274fb54bade2e6201c859b2b406907956a只把箱近景焦点放到真实箱；随后05a90268086dde694cc2f8313e808b5b23b629ba将实心selected/event盘改空心轮廓，近景11/生命周期32退出0，盒盖可见而角色同格箱接触仍需R5评审。详证 [环境](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md) / [FX](AMBUSH_PR15_REPLAY_FX_20261002.md)。固定2ce技术PCK24521472 bytes SHA256 f78aa89b1d2bd2cde659b0d4fc26181dbea997d3462f9b6b5a6af1e9ce7f2da0，空物理工程1512/0；早于轮廓补片，不是最终APK。
+
+父端SWEEPclock独立68/0已闭合；断连通知后实际文件/导入/命令/GitHub正常，无恢复阻碍。完成本轮推送核对后可并行独立QA环境/FX与HUD只读视觉评审。主作者下一包R5（2974915/ebedb82），其余HUD/3DFX、连续SWEEP/FAILED/abort终局、A3、最终完整smoke/APK继续；最新完整smoke仍7d34867，耳听0/45、0/6与设备未启动，Draft不merge。

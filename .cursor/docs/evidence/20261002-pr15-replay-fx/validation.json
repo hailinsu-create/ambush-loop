@@ -16,5 +16,51 @@
     "sha256": "2b5b9b260f182164277aade71601bb49d432512e032e11d21e17eeddf7c6653b"
   },
   "scope": "real replay entry over each actual level recording plus explicit real transient FX event fixtures; no actual FAILED/abort terminal claim",
-  "positive": "pending fixed-source test"
+  "fixed_source": "2ce6c602e31fb29556c85961704778185ca5a776",
+  "runs": [
+    {
+      "source": "2ce6c602e31fb29556c85961704778185ca5a776",
+      "entry": "replay_fx_lifecycle_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "e951fad732f34680ae8f06c139188ffb",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture replay_fx_lifecycle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "log": "replay_fx_lifecycle_test.log",
+      "sha256": "ddf2fee1a444d1dc6658263c015cc5174b6dd0d4d09141ae8340b045ba7939c3",
+      "markers": [
+        "REPLAY_FX_OK checks=36 failures=0"
+      ]
+    },
+    {
+      "source": "2ce6c602e31fb29556c85961704778185ca5a776",
+      "entry": "visual_snapshot_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "3a34fd2955f043fa8219a83979b1a302",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "log": "visual_snapshot_test.log",
+      "sha256": "0dbb8df17d2123a673c1b16d98c4d0f6cca74cc9ef21214a103c8f8d27a53ad5",
+      "markers": [
+        "VISUAL_SNAPSHOT_OK checks=164 failures=0"
+      ]
+    },
+    {
+      "source": "2ce6c602e31fb29556c85961704778185ca5a776",
+      "entry": "presentation_lifecycle_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "f27ccd576b624cfd9adc56697dde2f63",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "log": "presentation_lifecycle_test.log",
+      "sha256": "94d26be672b7f35e4902a127c1e2ef51588f5e886ab9bd897c55f43f3b0ad5c9",
+      "markers": [
+        "PRESENTATION_LIFECYCLE_OK checks=32 failures=0"
+      ]
+    }
+  ],
+  "actual_history_contact_sheet": {
+    "path": "history_fx_clear_six_levels.png",
+    "sha256": "0db7481a3c40c067a864f900305ec7ce07a63755cbeddc9fb47880da88356379",
+    "viewed": true
+  }
 }

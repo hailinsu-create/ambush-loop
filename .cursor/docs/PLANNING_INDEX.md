@@ -18,7 +18,8 @@
 | [音频持续层实际播放](AMBUSH_PR15_AUDIO_RUNTIME_20261002.md) | 4a00a91：45 cue实际play／混音405项，战场231、HUD164、生命周期32、六关10296、装备66／时间66和空目录PCK510退出0。七loop唯一持续层／10路限额／生命周期已验；实际耳听0/45、0/6，最终音乐与设备待验。 |
 | [独立45 cue音频接口](AMBUSH_PR15_AUDIO_INTERFACE_20261002.md) | 已给22050Hz mono PCM16、45用途ID与单写者边界；355ea89候选45 WAV／原import已采用；主作者4a00a91实际持续层和播放验证见上行。耳听0/45、0/6；接口及生产边界保留。 |
 | [SWEEP动作时钟补片](AMBUSH_PR15_COMMAND_POSE_CLOCK_20261002.md) | 3ba263c修命令/结果时钟与复制事件年龄；正确22/11fail反例→正式24/0，c381正常双波撤离/终局记录回放29/0；六关10296/合同84039等退出0。dot于98075独立68/0关闭P2；连续command时间轴与FAILED/abort终局列最终回归。 |
-| [环境运行实施计划](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md) | 85 原文件/11 旧依赖已只读核对；主作者接严格 loader/材质与真实六关组装、历史版本和命令，测试中，不把展场当实战。 |
+| [六关实际环境运行](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md) | ffb95a6实际40×22六关13波283/0及50捕获，六关10296/合同84039/HUD164/生命周期32/clock29退出0；2ce只清历史实时色罩，PCK1512/0。保留reference装备/loot fixture限制，完整HUD/FX/艺术/优化/APK另验。 |
+| [REPLAY实时色罩清理](AMBUSH_PR15_REPLAY_FX_20261002.md) | 六关实际源反例36/18fail→2ce6c60固定源36/0；HUD164/生命周期32退出0，真实清理后历史图已看。不是版本化全3DFX或真实FAILED/abort终局验收。 |
 | [独立环境资产包接口](AMBUSH_PR15_ENVIRONMENT_INTERFACE_20261002.md) | 供dot分配：新environment_v2源/导出目录、完整建筑/地表、14类原用途与其余五关地标；不改已有yard/actor/audio或运行代码。dot另派独立生产；九件样本不称六关完整库。 |
 | [PR15 runtime 切片报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md) | 实际多波回放/装备冻结反例、三个修复切片、固定源码与隔离/原生输入/软件渲染证据；首三项修复的完整六夜 smoke、六关多波与历史字段回归已通过；完整历史 HUD/动作/FX 待接。完整角色、院子和五关接入仍待完成。 |
 | [历史画面格式 1](AMBUSH_REPLAY_VISUAL_SCHEMA_20261002.md) | 固定 17aba59 的装备/姿态/工具/环境历史、只读接缝和旧/未知格式兼容；44 项渲染、84,039 项合同和 10,296 项六关回归通过。完整历史 HUD/动画/FX 仍待接入。 |
