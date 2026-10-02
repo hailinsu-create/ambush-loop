@@ -304,6 +304,24 @@ func _mask_contract() -> void:
 	completed_stages += 1
 
 
+func _equip_roundtrip() -> void:
+	_reset()
+	var op = main.selected
+	var sentry = main.c2.sentries.front()
+	op.global_position = sentry.backstab_world()
+	op.facing_deg = sentry.facing_deg
+	var original: String = op.weapon_id
+	_check(main.c2._skill_knife(op) and _body().sampled_action == "knife_stab", "roundtrip fixture starts actual C2 knife hit")
+	op.pack.add_item("mg42", 1)
+	op.pack.add_item(original, 1)
+	# Two real UI handlers in one frame, with no presentation capture between.
+	main._on_pack_equip("mg42")
+	_check(op.weapon_id == "mg42", "first real equip handler changes weapon")
+	main._on_pack_equip(original)
+	_check(op.weapon_id == original, "second real equip handler restores original weapon")
+	_check(_body().sampled_action != "knife_stab", "same-frame equipment roundtrip cannot resurrect interrupted utility")
+
+
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	var settings = root.get_node("GameSettings")
@@ -317,10 +335,16 @@ func _run() -> void:
 	view = main.presentation_3d
 	main.set_process(false)
 	view.set_process(false)
+	if OS.get_environment("AMBUSH_UTILITY_TEST_SCOPE") == "equip_roundtrip":
+		_equip_roundtrip()
+		print("UTILITY_EQUIP_ROUNDTRIP checks=", checks, " failures=", failures)
+		quit(0 if failures == 0 else 1)
+		return
 	_mask_contract()
 	await _actual_command()
 	await _actual_alert()
 	_check(completed_stages == 3, "mask and both interaction stages reach their final assertion")
+	_equip_roundtrip()
 	root.get_node("AudioDirector").pause_for_background()
 	var report := {"checks": checks, "failures": failures, "captures": captures,
 		"actor_source": Pose.ASSET_REVISION, "scope": "three-role/three-LOD mask fixtures; actual SCOUT C2 knife/throw/decoy and ALERT auto-grenade/melee; copied history. Not corpse pairing, full campaign or device."}
