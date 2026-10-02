@@ -18,6 +18,8 @@
 
 45 cue总采样278,528帧，每条至少4,096帧；密集10路捕获4,096帧，绝对峰值0.21602863。保存 [真实混音WAV](evidence/20261002-pr15-audio-runtime/audio_v2_actual_mix_stress.wav) 和 [逐cue数据](evidence/20261002-pr15-audio-runtime/audio_v2_runtime_mix.json)。Dummy驱动运行实际混音线程；这些是工程采样，**实际耳听仍0/45、0/6**，不写听感、美术或设备性能通过。
 
+实际战场重新捕获SCOUT／ALERT；本作者看了ALERT，角色／脚底和战斗层仍在真实yard，建筑与旧HUD布局仍待成品切片。另一张已捕获但不写逐图品质通过。
+
 首轮实际退出1：alarm播放调用／playing均成功，但新AudioEffectCapture的首次异步安装还没有返回帧；其余44条通过。保留失败日志及原计数。修正fixture先证明采集器已收到帧，再清buffer测cue，45条均通过。有限性检查改为逐buffer汇总全部样本，405项不伪装成几十万独立场景。导出时Godot自动补import UID，随后恢复候选45原输入，WAV、导入参数和PCM全部不变。
 
 下一片R4 optional枪族姿态：只读核对194d9c4／c4c2170的21人物几何／20骨／inverse bind和252旧clip完全兼容，76原socket不动；六枪新后握把几何不同，需要保留原R3回放资源。之后environment 9c06／50ef最小85文件＋11冻结依赖、完整yard／HUD／FX、A3云端预算、余五关成品、可追溯APK持续实施。刀／投雷／诱饵／拖尸源动作仍由独立资产作者完成，reload contact只表现既有事件，无新装填机制。
