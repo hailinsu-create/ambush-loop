@@ -529,7 +529,7 @@ def build():
         if category=='weapon' or asset=='knife':
             for name,position in sockets.items():
                 if position is None: continue
-                marker=bpy.data.objects.new('socket_'+name,None)
+                marker=bpy.data.objects.new(asset+'__socket_'+name,None)
                 bpy.context.collection.objects.link(marker)
                 # Contract stores exported (+Y up/-Z forward) coordinates.
                 marker.location=(position[0],-position[2],position[1])

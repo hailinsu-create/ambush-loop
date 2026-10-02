@@ -70,9 +70,9 @@ def audit(project,strict=True):
    entry.update(triangles=tris,vertices=verts,degenerate_triangles=degenerate)
    if e['category']=='weapon' or e['asset_id']=='knife':
     world=worlds(d)
-    markers={n['name']:world[i][:3,3] for i,n in enumerate(d['nodes']) if n['name'].startswith('socket_')}
+    markers={n['name']:world[i][:3,3] for i,n in enumerate(d['nodes']) if '__socket_' in n['name']}
     for key,value in e['sockets'].items():
-     if value is not None:check('socket_'+key in markers and np.allclose(markers['socket_'+key],value,atol=1e-6),label+' socket '+key)
+     if value is not None:check(e['asset_id']+'__socket_'+key in markers and np.allclose(markers[e['asset_id']+'__socket_'+key],value,atol=1e-6),label+' socket '+key)
     entry['socket_positions_m']={k:v.tolist() for k,v in markers.items()}
    check(degenerate==0,label+' degenerate triangles');check(tris==lod['triangles'],label+' stated triangles')
    cap={'character':[8000,4000,1800],'weapon':[3000,1500],'tool':[2000,1000]}[e['category']][level];check(tris<=cap,label+' budget')

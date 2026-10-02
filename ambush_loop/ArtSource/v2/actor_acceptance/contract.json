@@ -74,7 +74,7 @@
       }
     }
   },
-  "weapon_socket": "actual GLB nodes socket_grip/socket_muzzle/socket_support_hand, authored and validated in exported +Y up/-Z forward axes. Pistol has no support marker. Socket points are model local: transform by attached gun.global_transform.",
+  "weapon_socket": "actual GLB nodes <asset_id>__socket_grip / <asset_id>__socket_muzzle / <asset_id>__socket_support_hand, authored and validated in exported +Y up/-Z forward axes. Pistol has no support marker. Socket points are model local: transform by attached gun.global_transform.",
   "grip_contract": "rifle-family long guns bind at grip origin, support at (0,0,-0.26). Shared rifle hold verified for priority pair; other gun families require own grip overlays before combat acceptance.",
   "animation_loop": "glTF does not serialize loop policy: set Animation.loop_mode from actors_manifest.json after import; AnimationPlayer starts at t=0 and never translates the actor Node3D",
   "animation_actions": {
