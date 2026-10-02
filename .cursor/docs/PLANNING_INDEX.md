@@ -2,7 +2,7 @@
 
 更新日期：2026-10-02。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前执行入口：** [M1-C3 实施与证据](AMBUSH_M1C3_IMPLEMENTATION_PLAN_20261002.md)。Draft PR #17 / `1de462a` 已实现，六项定向门 exit 0 / 玩家数据不变；原 GPT iteration 2 已完成代码、自动化和[五张原图](evidence/m1c3/README.md) 的实际像素评审，**STATE: DONE，仅 C3**。图像通过原聊天直接附件送审，未上传整个仓库、重建连接或重复测试；插件 `read_image` 发现问题仍未修复。下一步另取后续切片的正式 GPT PLAN，不扩大已有验收范围；真机继续暂缓，依赖 PR 未合并。
+**当前执行入口：** [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md)。D 冻结/重试合同原 GPT 正式 PLAN，**正在实现，尚未验收**。C3 在 Draft PR #17 / `1de462a` 已 DONE（六项隔离门与五张原图像素评审）；M1 整体尚未退出。手机按用户要求暂缓。
 
 **已被实施计划替代的预研：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)。其离散世界目标覆盖方向已按正式 PLAN 实现并验收；保留历史提案，不将其当作下一待开工切片。
 
@@ -12,7 +12,7 @@
 
 **最新执行顺序调整与进展：** 用户明确暂缓真机，设备插入后再补。[M1-C1 高度视线几何切片](AMBUSH_M1C_GEOMETRY_PLAN_20261002.md) 已按原 GPT 修订 PLAN 实现：新几何 API 与四项定向隔离门通过、GPT iteration 12 实际 REVIEW / DONE，无阻断项。代码在 Draft PR #13 / `e2550b7`，尚未合并；原 LOS 和战斗/预览/音频未改，新查询未接入生产消费者。下一步独立规划同源接入；完整 smoke 本轮未重跑。真机待补不再阻塞桌面原型，但完整 M1/B2/Android 退出门不取消。
 
-**本地续做入口：** [本地浏览器恢复、preflight 补审与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md)，补充 [本地主开发与设备验收续做](AMBUSH_LOCAL_CONTINUATION_20261002.md)。用户选择本地主开发、云端辅助。原开发任务已实际验证浏览器读/操作/结果，原项目 GPT iteration 11 对精确镜像的两份 preflight 文件完成补审，无阻断项，并规划下一 Vivo 设备取证切片。10 项离线测试通过，实机列表仍为空；包版本预检查不证明签名、B2 或音频稳定性。原镜像已有诊断差异未覆盖，完整 B2/设备门仍 pending，不提前进入 M1-C/M1-D。程序更新构建与 199 项串行复查通过，不把连接恢复当作游戏验收。
+**本地续做入口：** [本地浏览器恢复、preflight 补审与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md)，补充 [本地主开发与设备验收续做](AMBUSH_LOCAL_CONTINUATION_20261002.md)。用户选择本地主开发、云端辅助。原开发任务已实际验证浏览器读/操作/结果，原项目 GPT iteration 11 对精确镜像的两份 preflight 文件完成补审，无阻断项，并规划下一 Vivo 设备取证切片。10 项离线测试通过，实机列表仍为空；包版本预检查不证明签名、B2 或音频稳定性。原镜像已有诊断差异未覆盖；设备门仍 pending，桌面 M1-D 至 M1-I 继续推进。程序更新构建与 199 项串行复查通过，不把连接恢复当作游戏验收。
 
 **云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；当时 ChatGPT 连接器配对与外部 GPT 精确 SHA 评审受浏览器超时阻塞。本轮只恢复并验证原本地评审，未重新验收云工作区配对或该 SHA 的外部评审，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
 
