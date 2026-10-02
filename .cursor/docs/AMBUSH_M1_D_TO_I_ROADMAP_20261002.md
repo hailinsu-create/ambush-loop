@@ -35,4 +35,14 @@
 - 音频：历史 AudioTrack SIGSEGV 是独立问题，不能由 D–I 桌面证据关闭。
 - 合并：PR #13/#16/#17 是依赖链，当前均 OPEN/Draft。切片通过与 PR 合并分开记录；不得把 Draft 当成已合入。
 
-**当前状态：** D 规划已获外部 GPT 正式 PLAN，等待实现。下一步只做冻结/重试合同 gate；不重做 C3、不改关卡平衡、不动真机/音频。
+## M1-D 本地实现与隔离验证（2026-10-03）
+
+基于桌面源码提交 `1de462aeb18665111849159945efc0f91d5144b5` 的本地工作树，完成冻结/重试合同 gate。测试首次从仓库父目录调用包装器时因相对路径未启动（exit 1）；改从准确游戏仓库根目录启动后通过。Godot 4.7.2 隔离 run `5e9540de7c4c4562bb0676fdbcab1663`，实际 exit 0，日志位于 `ambush_loop/build/ambush_test_runs/5e9540de7c4c4562bb0676fdbcab1663/run.log`，并显示 `PLAYER_DATA_UNCHANGED=1`。
+
+最终标记：`M1_YARD_PLAN_CONTRACT_OK freeze=1 watch_edit_blocked=1 presentation_only=1 retry_plan=1 retry_resources_reset=1 combat_reset=1 diff=1`。真实院子警报入口冻结计划，WATCHING 修改入口被阻断；展示控制不改变冻结计划；通过真实失败→继续流程验证部署/朝向/火力模式/绊线及泵站门重试语义恢复，背包、敌人、掉落、投掷物、战斗记录和模拟时钟清理，修改一项计划后 diff 可见。隔离存档守卫确认玩家数据不变。
+
+发现并修复的生产路径缺口仅涉及 WATCHING 阶段仍可打开背包、键盘重置、暂停菜单记忆清除，以及背包/布置回调继续改变计划的问题；暂停菜单现在隐藏该阶段不可用的记忆清除入口。D 的 C3/C2/C1/B2、feel 和完整 smoke 回归已在同一实现工作树通过，结果仍仅为桌面自动化证据。
+
+**评审状态：** 尚未完成精确工作树的外部 GPT REVIEW。现有 GPT 连接读到的是另一副本，不能将旧副本或此前的 GPT PLAN 当成本次实现批准。D 保持“本地实现与桌面门通过、外部复审待授权/待执行”，不声明切片已获 DONE。收到工作区只读授权并核实准确游戏仓库后，再释放本轮结果并取得 GPT REVIEW；随后进入 E。
+
+**M1 整体状态：** 尚未退出。E–I 桌面门、Android 真机稳定性、五位未参与开发者的首局可理解性试玩、历史 AudioTrack 问题仍未闭环。
