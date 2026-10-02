@@ -71,11 +71,11 @@ func bind(main: Node) -> void:
 	_make_controls()
 	var ring_mat := Geometry.material(Color(0.55, 0.94, 0.82, 0.72), true)
 	ring_mat.no_depth_test = true
-	_selected_ring = Geometry.cylinder(proxies, 0.55, 0.025, Vector3.ZERO, ring_mat)
+	_selected_ring = Geometry.ring(proxies, 0.55, 0.055, Vector3.ZERO, ring_mat)
 	_selected_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var focus_mat := Geometry.material(Color(1.0, 0.8, 0.25, 0.68), true)
 	focus_mat.no_depth_test = true
-	_event_ring = Geometry.cylinder(proxies, 0.72, 0.04, Vector3.ZERO, focus_mat)
+	_event_ring = Geometry.ring(proxies, 0.72, 0.055, Vector3.ZERO, focus_mat)
 	_event_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_event_ring.visible = false
 	refresh()

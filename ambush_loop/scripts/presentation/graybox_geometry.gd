@@ -1,5 +1,27 @@
 extends RefCounted
 
+
+static func ring(parent: Node3D, radius: float, width: float, at: Vector3, mat: Material) -> MeshInstance3D:
+	# A thin ground outline leaves the actor, open lid and dropped items visible.
+	var mesh := ImmediateMesh.new()
+	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES, mat)
+	mesh.surface_set_normal(Vector3.UP)
+	for i in 48:
+		var a := float(i) * TAU / 48.0
+		var b := float(i + 1) * TAU / 48.0
+		var outer_a := Vector3(cos(a), 0, sin(a)) * radius
+		var outer_b := Vector3(cos(b), 0, sin(b)) * radius
+		var inner_a := Vector3(cos(a), 0, sin(a)) * maxf(radius - width, 0.01)
+		var inner_b := Vector3(cos(b), 0, sin(b)) * maxf(radius - width, 0.01)
+		for point in [outer_a, inner_a, outer_b, outer_b, inner_a, inner_b]:
+			mesh.surface_add_vertex(point)
+	mesh.surface_end()
+	var node := MeshInstance3D.new()
+	node.mesh = mesh
+	node.position = at
+	parent.add_child(node)
+	return node
+
 ## Temporary, reusable primitives. Replace through the asset pipeline after A0.
 static func material(color: Color, unshaded: bool = false) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
