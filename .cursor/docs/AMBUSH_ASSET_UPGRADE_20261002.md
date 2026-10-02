@@ -2,6 +2,8 @@
 
 日期：2026-10-02（Asia/Shanghai）。状态：**用户方向已确认；资产盘点已完成；技术路线、预算与制作批次为待验证提案。尚未制作或接入本轮新资产。**
 
+讨论入口：[Draft PR #14](https://github.com/hailinsu-create/ambush-loop/pull/14)。本 PR 保存讨论与盘点，不表示资产升级已经实现或验收。
+
 源码基线：`c1aaf27c23f8f711f23305bf6f3223c38cb69098`。用户已要求合并的 [代码 PR #11](https://github.com/hailinsu-create/ambush-loop/pull/11) 与 [审计 PR #12](https://github.com/hailinsu-create/ambush-loop/pull/12) 均已合并，合并提交分别为 `fd34450`、`c1aaf27`。本讨论在新分支 `docs/asset-upgrade-20261002` 独立推进。
 
 ## 1. 已确认方向与规划替代关系
