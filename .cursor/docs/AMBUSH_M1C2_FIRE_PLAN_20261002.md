@@ -25,3 +25,15 @@ GPT 实际审计指出：operator 的 `in_fire_geometry`、`engage_block_reason`
 ## 实施前实际 GPT 修订
 
 Codex 指出径向采样会在 blocked LOW 端点先停止，单一连续扇形无法表示不同目标高度或不连续可见区；GPT 随后明确修订范围：**只迁移目标特定的枪械资格与覆盖查询，保留黄色扇形的旧裁剪作为有限方向参考，不声称 cone parity**。近战明确使用 legacy LOS。替代以上第 2 项“三入口共享”和第 3 项连续扇形一致性的初稿；目标点 `in_fire_geometry` 与资格必须一致。准确的高度射界可视化留待下一 UI 切片，因此完整 M1 的“预览与模拟一致”退出门仍未闭环。回放仍消费既有事件；此次验证必须区分真实 BattleLog 与单纯信号，不能把信号伪称回放实证。fresh full smoke 要求不取消。
+
+## 在制实现与实际评审（完整回归未完成）
+
+代码 [Draft PR #16](https://github.com/hailinsu-create/ambush-loop/pull/16)，分支 `codex/m1-c2-fire-height`，源码 `e55a5216b2512a10d3bf6713081a66c4586cfcf1`，依赖未合并 PR #13。只有 operator/enemy、一个新 gate、两份包装器五文件。没有 main/audio/资源/回放源码变更。原镜像 operator/enemy/gate blobs 分别 `479fbc3ccc69c75ffaad9900621d12a7dac101d5`、`bd89d1c5004497e713d7e117daf5500e9dd4c74e`、`5c06a31c0259420574ac4f3697ef0fa8871782c6` 与源码一致；其他诊断差异保留。
+
+Godot 4.7.2 规定隔离包装器五项均实际 exit 0 / `PLAYER_DATA_UNCHANGED=1`：新 firearm `5fcc13b82ec048ea9ca16f97c8254159`；C1 `f16a4fc2976d499fabae534de0d9f049`；height `8422fa9bad664ad294748b945fc8befd`；ramp `c57c411100a04a9e86a30740fd14b157`；B2 `d61277f15cac453cbedea35bc749c4f4`。新门调用真实 main `_sim_tick` 与 BattleLog，再绑定 ReplayPlayer、改变遮挡后证明仍只读取记录；地面 LOW/平台 LOW/FULL、敌我正常 HP/弹药、射程/方向/hold/ammo、近战 legacy 非空洞反例、无 grid 拒绝均通过。
+
+最初 gate 两次 `92dba38b5329408cb9ed415490f0b548` / `496ab97523a64992be6c6abda5200b9c` wrapper exit 1：空 route 的剩余路程为 INF，不被既有优先级选择。保留失败日志与 C2 执行记录，改为有限单点 route 夹具后最终通过；没有改生产目标优先级来凑测试。
+
+原 GPT 实际 iteration 1 REVIEW：范围内代码 clean，五项输出已读，无需代码修正；**NOT DONE**，等待 fresh full smoke。确认为 amended scope：枪械/近战分流，enemy 无 grid 拒绝，cone 不声称精准，真实 BattleLog/ReplayPlayer 而非假事件。完整 smoke run `4a70428c37ab43699b9d9ec4d330d41a` 正在运行，尚无完成退出证据，不能记 PASS。不得切换或修改正在运行的代码工作区。接手需续取原进程 session `4903` 的结果，不重复启动；若会话不可用则核查日志和进程，不能靠历史通过替代。
+
+待完整退出 0、`SMOKE_SLICE_COMPLETE`、六关典型循环、玩家数据不变都齐备，再送原 GPT 完成判定；若失败，只处理首个具体失败，保留高度规则门。准确射界 UI、M1 整体玩法/Android/音频均未验收。
