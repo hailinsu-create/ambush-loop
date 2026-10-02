@@ -213,6 +213,18 @@ func _matrix() -> void:
 					var floor := _floor(visual.body)
 					_check(floor>=-0.015,"imported pair floor "+role+"/"+model+"/"+str(lod)+"/"+str(stance)+": "+str(floor))
 					pair_rows.append({"role":role,"model":model,"lod":lod,"stance":stance,"min_y_m":floor})
+					for cycle in [0.3,0.6,0.9]:
+						var moving_pose: Dictionary = pose.duplicate(true)
+						moving_pose.seconds=cycle
+						if stance==1:
+							moving_pose.base_action="crouch_walk"
+							moving_pose.base_seconds=cycle
+							moving_pose.upper_seconds=cycle
+						carrier.sample_layers(moving_pose)
+						visual.sync(item,frame,lod,carrier)
+						_check(visual.body.shoulder("L").distance_to(carrier.bone_socket("support_hand").position)<0.015 and visual.body.shoulder("R").distance_to(carrier.bone_socket("weapon_hand").position)<0.015,"moving cycle retains both actual contacts")
+						_check(_floor(visual.body)>=-0.015,"moving cycle imported skin floor")
+					carrier.sample_layers(pose)
 					for mode in ["grab","release"]:
 						item.mode=mode
 						item.transition={"event_id":"fixture:corpse:0:0","seq":0,"attempt_id":"fixture-attempt","wave_id":0,"phase":0,"actor_id":0,"weapon":"rifle"}
@@ -235,6 +247,18 @@ func _ko() -> Node:
 	return main.loot_piles.back()
 
 func _cancellations() -> void:
+	var moving_loot = _ko()
+	var moving_op = main.selected
+	main._command_move_selected(moving_op.global_position + Vector2(96,0))
+	_check(moving_op.is_moving() and _actor().sampled_action=="corpse_drag" and view.frame.corpses[0].transition.is_empty(),"actual new move cancels grab to ongoing original haul")
+	var initial: Vector2 = moving_op.global_position
+	main._pose_command_clock_s += 0.05
+	main._tick_command_moves(0.05)
+	view.refresh()
+	_check(moving_op.global_position!=initial and moving_loot.global_position==moving_op.global_position+Vector2(0,14),"original movement/follow advance immediately during drag")
+	var moving_id: String = view.frame.corpses[0].id
+	var moving_body = view.corpses[moving_id].body
+	_check(moving_body.shoulder("L").distance_to(_actor().bone_socket("support_hand").position)<0.015 and moving_body.shoulder("R").distance_to(_actor().bone_socket("weapon_hand").position)<0.015,"actual moving carrier pairs imported palms with imported shoulders")
 	var loot=_ko()
 	var op=main.selected
 	var before: int = main.visual_snapshot.corpses._seq
