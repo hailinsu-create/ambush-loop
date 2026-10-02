@@ -16,6 +16,8 @@ static func capture(host: Node) -> Dictionary:
 		data = {}
 	var snapshot_delta := maxf(float(host.replay.scrub_tick - BattleLog.record_tick(snap)) / 60.0, 0.0) if historical else 0.0
 	var simulation_clock: bool = str(data.get("pose_clock_domain", "")) == "simulation"
+	var raw_event_clock: Variant = data.get("event_pose_clock_s")
+	var event_clock_valid: bool = int(data.get("event_pose_schema", 0)) == 1 and (raw_event_clock is int or raw_event_clock is float) and is_finite(float(raw_event_clock)) and float(raw_event_clock) >= 0.0
 	var frame := {
 		"run_id": -1 if historical else host.run_id,
 		"tick": host.replay.scrub_tick if historical else host.battle_log.timeline_tick(host.sim.tick),
@@ -33,6 +35,8 @@ static func capture(host: Node) -> Dictionary:
 		"animation_supported": ActorPose.supported(data),
 		"pose_snapshot_delta_s": snapshot_delta if simulation_clock else 0.0,
 		"pose_clock_s": float(data.get("pose_clock_s", 0.0)) + (snapshot_delta if simulation_clock else 0.0),
+		"event_pose_schema": 1 if event_clock_valid else 0,
+		"event_pose_clock_s": float(raw_event_clock) + (snapshot_delta if simulation_clock else 0.0) if event_clock_valid else 0.0,
 		"level_id": str(data.get("level_id", "")), "blocked": data.get("blocked", PackedByteArray()).duplicate(),
 		"selected_id": int(data.get("selected_id", -1)), "escape": data.get("escape", Vector2.ZERO),
 		"door_locked": bool(data.get("door_locked", false)), "replay": historical,

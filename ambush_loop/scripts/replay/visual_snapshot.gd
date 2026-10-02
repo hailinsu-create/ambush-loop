@@ -10,6 +10,9 @@ var _objects := {}
 var _next_ids := {}
 var _pose_scope := ""
 var _pose_states := {}
+var _event_clock_scope := ""
+var _event_command_anchor_s := 0.0
+var _event_battle_anchor_s := 0.0
 
 
 func capture(host: Node) -> Dictionary:
@@ -19,7 +22,18 @@ func capture(host: Node) -> Dictionary:
 		_objects.clear()
 		_next_ids.clear()
 	var simulation_time: bool = host.phase == host.Phase.WATCHING
-	var pose_clock: float = float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0 if simulation_time else host._night_timer
+	var battle_clock: float = float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0
+	var pose_clock: float = battle_clock if simulation_time else host._pose_command_clock_s
+	var event_clock: float = battle_clock
+	if simulation_time:
+		_event_clock_scope = ""
+	else:
+		var event_scope := "%s:%d:command" % [identity, host.battle_log.wave_id]
+		if _event_clock_scope != event_scope:
+			_event_clock_scope = event_scope
+			_event_command_anchor_s = pose_clock
+			_event_battle_anchor_s = battle_clock
+		event_clock = maxf(_event_battle_anchor_s, battle_clock) + maxf(pose_clock - _event_command_anchor_s, 0.0)
 	var scope := "%s:%d:%s" % [identity, host.battle_log.wave_id, "simulation" if simulation_time else "command"]
 	if scope != _pose_scope:
 		_pose_scope = scope
@@ -28,6 +42,7 @@ func capture(host: Node) -> Dictionary:
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
 		"pose_clock_domain": "simulation" if simulation_time else "command",
 		"pose_clock_s": pose_clock,
+		"event_pose_schema": 1, "event_pose_clock_s": event_clock,
 		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,

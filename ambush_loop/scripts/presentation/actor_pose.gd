@@ -88,7 +88,10 @@ static func _legacy_sample(item: Dictionary, frame: Dictionary, group: String) -
 	if not bool(item.get("alive", true)):
 		var ev := _last_event(frame, group, int(item.id), "op_down" if group == "ops" else "kill")
 		result.action = "death"
-		result.seconds = _elapsed(frame, ev) if not ev.is_empty() else 1.2
+		# Old command records have no trustworthy bridge from frozen battle time.
+		# Complete their non-looping fall rather than freezing a standing corpse.
+		var command_without_clock: bool = int(frame.get("recorded_phase", -1)) != 1 and not _has_event_clock(frame)
+		result.seconds = _elapsed(frame, ev) if not ev.is_empty() and not command_without_clock else 1.2
 		result.event_id = str(ev.get("event_id", ""))
 		return result
 	if bool(item.get("hauling", false)):
@@ -105,7 +108,7 @@ static func _legacy_sample(item: Dictionary, frame: Dictionary, group: String) -
 		result.action = "run" if bool(item.get("sprinting", false)) else "walk"
 	else:
 		result.action = "aim" if bool(item.get("locked", false)) or bool(item.get("returning_fire", false)) else "idle"
-	if group in ["ops", "enemies"] and int(item.get("stance", 0)) == 0 and not bool(item.get("searching", false)) and not bool(item.get("hauling", false)):
+	if int(frame.get("recorded_phase", -1)) == 1 and group in ["ops", "enemies"] and int(item.get("stance", 0)) == 0 and not bool(item.get("searching", false)) and not bool(item.get("hauling", false)):
 		var ev := _last_event(frame, group, int(item.id), "fire" if group == "ops" else "return_fire")
 		if not ev.is_empty() and _elapsed(frame, ev) <= FIRE_SECONDS:
 			result.action = "fire"
@@ -115,7 +118,14 @@ static func _legacy_sample(item: Dictionary, frame: Dictionary, group: String) -
 
 
 static func _elapsed(frame: Dictionary, event: Dictionary) -> float:
+	if _has_event_clock(frame):
+		return maxf(float(frame.event_pose_clock_s) - float(BattleLog.record_tick(event)) / 60.0, 0.0)
 	return maxf(float(int(frame.tick) - BattleLog.record_tick(event)) / 60.0, 0.0)
+
+
+static func _has_event_clock(frame: Dictionary) -> bool:
+	var clock: Variant = frame.get("event_pose_clock_s")
+	return int(frame.get("event_pose_schema", 0)) == 1 and (clock is float or clock is int) and is_finite(float(clock)) and float(clock) >= 0.0
 
 
 static func _last_event(frame: Dictionary, group: String, id: int, type: String) -> Dictionary:

@@ -129,6 +129,8 @@ var _alarm_warned_no_gun: bool = false
 var _alarm_pulled_unarmed: bool = false
 var _night_hp_lost: bool = false
 var _night_timer: float = 0.0
+var _pose_command_clock_s: float = 0.0
+var _presentation_suspended := false
 var _wave_fail_index: int = 0
 var _hold_move_acc: float = 0.0
 var _foot_acc: float = 0.0
@@ -1217,6 +1219,7 @@ func handle_android_back() -> void:
 
 
 func handle_app_focus_out() -> void:
+	_presentation_suspended = true
 	_cancel_world_input(true)
 	_gate_scene_audio(true)
 	# Freeze the sim clock whenever it can still step. Result panels are idle.
@@ -1231,6 +1234,7 @@ func handle_app_focus_out() -> void:
 
 
 func handle_app_focus_in() -> void:
+	_presentation_suspended = false
 	_gate_scene_audio(false)
 	# Stay paused after a home-button; player taps 继续. Do not auto-unpause sim.
 	_refresh_touch_hud()
@@ -3370,6 +3374,7 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	_clear_flash()
 	_night_hp_lost = false
 	_night_timer = 0.0
+	_pose_command_clock_s = 0.0
 	_wave_fail_index = 0
 	_watch_first_fire = false
 	_watch_first_return = false
@@ -5278,6 +5283,13 @@ func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 
 
 func _process(delta: float) -> void:
+	var presentation_paused := _presentation_suspended or (pause_overlay != null and pause_overlay.is_open())
+	# Command movement and presentation share the pause menu/focus gate. The
+	# battle clock remains authoritative in ALERT, including its existing 2x.
+	if _is_command_phase() and presentation_paused:
+		return
+	if phase in [Phase.SETUP, Phase.SWEEP, Phase.WON, Phase.FAILED] and not presentation_paused:
+		_pose_command_clock_s += maxf(delta, 0.0)
 	if phase == Phase.SETUP or phase == Phase.WATCHING or phase == Phase.SWEEP:
 		_night_timer += delta
 	if _is_command_phase():
