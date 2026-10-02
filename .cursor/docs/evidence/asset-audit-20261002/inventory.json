@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-02",
+  "source_commit": "c1aaf27c23f8f711f23305bf6f3223c38cb69098",
+  "scope": "Tracked source assets and direct resource references; current-run static inspection with previously archived images. No new gameplay or audio playback verification.",
+  "summary": {
+    "source_glb_count": 14,
+    "runtime_look_png_count": 13,
+    "model_texture_count": 0,
+    "model_primitives_with_uv": 0,
+    "model_primitive_count": 424,
+    "model_triangles_mesh_definition_sum": 9400,
+    "model_animation_count": 0,
+    "model_skin_count": 0,
+    "procedural_audio_cue_count": 45
+  },
+  "source_models": [
+    {
+      "path": "ambush_loop/ArtSource/ammo_can.glb",
+      "bytes": 32544,
+      "sha256": "bf04d7398d2b4f7b106f3056a279ddce9b2b3d13edd553189ba7acabf70199b1",
+      "meshes": 26,
+      "primitives": 26,
+      "triangles_mesh_definition_sum": 312,
+      "vertices_mesh_definition_sum": 624,
+      "materials": 4,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/barbed_wire.glb",
+      "bytes": 155772,
+      "sha256": "d35cea3fb2b6e334fc8d91cac77acd27f5a99e5a60c4128f49aba5ec506b9e33",
+      "meshes": 105,
+      "primitives": 105,
+      "triangles_mesh_definition_sum": 1836,
+      "vertices_mesh_definition_sum": 3384,
+      "materials": 3,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/fence_section.glb",
+      "bytes": 9524,
+      "sha256": "a393c68c8675404c45aab69f4863b4b66e68f9570bf53bcce0ea372c6b515b32",
+      "meshes": 7,
+      "primitives": 7,
+      "triangles_mesh_definition_sum": 84,
+      "vertices_mesh_definition_sum": 168,
+      "materials": 3,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/field_radio.glb",
+      "bytes": 53584,
+      "sha256": "973308158ac477b30acfd9b67ac89b5d544e81c7f862a75c763846e5c60e44d9",
+      "meshes": 32,
+      "primitives": 32,
+      "triangles_mesh_definition_sum": 696,
+      "vertices_mesh_definition_sum": 1252,
+      "materials": 6,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/gun_case.glb",
+      "bytes": 59004,
+      "sha256": "1f8fc04324f7b12b34a43079bdddbdb4af6927cb6a9aaa322ae72fbad47247fd",
+      "meshes": 48,
+      "primitives": 48,
+      "triangles_mesh_definition_sum": 576,
+      "vertices_mesh_definition_sum": 1152,
+      "materials": 5,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/handcart.glb",
+      "bytes": 33668,
+      "sha256": "7e66fb67dc4516f7e9b57eaa13cf07f6b9434745a0ac284e5b01515d7b0020fa",
+      "meshes": 19,
+      "primitives": 19,
+      "triangles_mesh_definition_sum": 452,
+      "vertices_mesh_definition_sum": 792,
+      "materials": 4,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/jerry_can.glb",
+      "bytes": 58104,
+      "sha256": "ac20e3101b54a9d253ebf5c2aaf37231a4d1d4f07242f1f30199d4f67046bcd6",
+      "meshes": 33,
+      "primitives": 33,
+      "triangles_mesh_definition_sum": 844,
+      "vertices_mesh_definition_sum": 1464,
+      "materials": 5,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/lamp_post.glb",
+      "bytes": 13312,
+      "sha256": "eb03de13b937791fc7614d1c9e5bd12f78a96ba9369bf01e7cd38533d1deceb1",
+      "meshes": 10,
+      "primitives": 10,
+      "triangles_mesh_definition_sum": 120,
+      "vertices_mesh_definition_sum": 240,
+      "materials": 4,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/oil_drum.glb",
+      "bytes": 72004,
+      "sha256": "d782585c55022c2616efc9d518bbfed7d835f46fc84a5cb1054f6bc3fbcde3d9",
+      "meshes": 14,
+      "primitives": 14,
+      "triangles_mesh_definition_sum": 1560,
+      "vertices_mesh_definition_sum": 2382,
+      "materials": 4,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/rations_crate.glb",
+      "bytes": 49188,
+      "sha256": "f4eeb8830feaa68efedb37250c999b1769e4257a81cb7d54ed20c6b03b53837e",
+      "meshes": 40,
+      "primitives": 40,
+      "triangles_mesh_definition_sum": 480,
+      "vertices_mesh_definition_sum": 960,
+      "materials": 4,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/sandbag.glb",
+      "bytes": 8652,
+      "sha256": "3d5abc51c6838fe3d54bcf9e56ee6f7c98f00184d312a30d9db3d8f7470881bd",
+      "meshes": 6,
+      "primitives": 6,
+      "triangles_mesh_definition_sum": 72,
+      "vertices_mesh_definition_sum": 144,
+      "materials": 3,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/spare_tire.glb",
+      "bytes": 62832,
+      "sha256": "0a1a29ffcb98dc5b1d54e4bcb5e8944a10b5b81fe4ba9628d79984f3259d2511",
+      "meshes": 27,
+      "primitives": 27,
+      "triangles_mesh_definition_sum": 1060,
+      "vertices_mesh_definition_sum": 1732,
+      "materials": 5,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/wooden_barrel.glb",
+      "bytes": 35360,
+      "sha256": "f38a0a457e5c91fcbe9111b82257d3020bb8a51540a53813f8266f1d9bf986ed",
+      "meshes": 5,
+      "primitives": 6,
+      "triangles_mesh_definition_sum": 696,
+      "vertices_mesh_definition_sum": 1152,
+      "materials": 4,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "ambush_loop/ArtSource/yard_crate.glb",
+      "bytes": 62680,
+      "sha256": "38c79bc1af59a56a5f624696df3ab904a83e95d25cd359376745167e6fc92ade",
+      "meshes": 51,
+      "primitives": 51,
+      "triangles_mesh_definition_sum": 612,
+      "vertices_mesh_definition_sum": 1224,
+      "materials": 5,
+      "textures": 0,
+      "primitives_with_uv": 0,
+      "skins": 0,
+      "animations": 0
+    }
+  ],
+  "runtime_images": [
+    {
+      "path": "ambush_loop/art/look/ammo_can_iso.png",
+      "bytes": 33453,
+      "sha256": "b378db32473a27da742a2a514a4270e837520f344bcd2caa62e9ae4149a85b95",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/fence_section_iso.png",
+      "bytes": 45757,
+      "sha256": "dad86776e17a2be2d04940b29cf171caa7bd52cc292feed0874053c1b907e231",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/field_radio_iso.png",
+      "bytes": 34467,
+      "sha256": "c0254c9398d50b2f59b9fb3ab0e7192301e5d777477ea855bb2b154725ae48a4",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/gun_case_iso.png",
+      "bytes": 38470,
+      "sha256": "7d1d5ab76bc6d882b0b68bdec7d9eb0e7d610ee021ad8ac42abc9523d0c4bff1",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/handcart_iso.png",
+      "bytes": 34280,
+      "sha256": "3a5a9ca38fc0f180deb112a419664451cf8c0cff580fbf130b633107c00b37a6",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/jerry_can_iso.png",
+      "bytes": 31911,
+      "sha256": "f568a5796182bb00436190cffad00293c8b1146043481d4bc3827c4e3bc7ca6f",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/lamp_post_iso.png",
+      "bytes": 28536,
+      "sha256": "2ac725ac76edf5f30f4d71b49d991198bd204c63e5336cdb88f4dc99ab755b14",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/oil_drum_iso.png",
+      "bytes": 46930,
+      "sha256": "15d3bb117acae4b392fe60e9aacc8b8979c5346d0e2380537b35487d2afc4c4d",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/rations_crate_iso.png",
+      "bytes": 39073,
+      "sha256": "e07de0f066da373ad31cc2a4eeaa4bc3c5be4dcaed219d57e15944ecaa4450b3",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/sandbag_iso.png",
+      "bytes": 38814,
+      "sha256": "12589bb4ce710342a6e2855ef10feb3eb6e5f53fbaf62e512f36bee84785a8fa",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/spare_tire_iso.png",
+      "bytes": 39575,
+      "sha256": "5c6a87be756e6f9b8909e8367bc2aefb1e73f556581715342d414f5ba359f028",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/wooden_barrel_iso.png",
+      "bytes": 36444,
+      "sha256": "7185fb7503dfc0f8e2dd228d87ce0ae63997119bb1a8b11cd4079ef226a614ee",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "path": "ambush_loop/art/look/yard_crate_iso.png",
+      "bytes": 39785,
+      "sha256": "c4d051b279092b677f683e50fe20e0637b2dcb6dec60d2ca5a1f8526e1130d18",
+      "width": 256,
+      "height": 256,
+      "references": [
+        {
+          "path": "ambush_loop/scripts/map_draw.gd",
+          "line": 8
+        }
+      ]
+    }
+  ],
+  "direct_model_references": {},
+  "tracked_audio_files_outside_docs_and_art_source": [],
+  "tracked_font_files_outside_docs_and_art_source": [],
+  "procedural_audio_cues": [
+    "alarm",
+    "alarm_stinger",
+    "fire",
+    "fire_mg",
+    "fire_scout",
+    "fire_smg",
+    "fire_bolt",
+    "fire_garand",
+    "fire_mg42",
+    "fire_pistol",
+    "fire_shotgun",
+    "fire_ping",
+    "return_fire",
+    "empty",
+    "loot",
+    "op_death",
+    "escape",
+    "fail",
+    "win",
+    "win_stinger",
+    "door",
+    "trip",
+    "barrel",
+    "kill",
+    "hit",
+    "ui",
+    "spawn",
+    "echo_ping",
+    "handoff",
+    "leak",
+    "night_enter",
+    "tension",
+    "ambient_yard",
+    "ambient_warehouse",
+    "ambient_pump",
+    "ambient_railcut",
+    "ambient_depot",
+    "ambient_radio",
+    "foot",
+    "whistle",
+    "knife",
+    "crate_lid",
+    "body_drop",
+    "select",
+    "stealth_bed"
+  ],
+  "inspected_image_sources": [
+    {
+      "path": ".cursor/docs/evidence/20261002/16_scout_yard_ref.png",
+      "bytes": 364374,
+      "sha256": "a74b1f2a439e38f360246974ee311123d96503cb66a8a8fa40b3348f3e6e4d89"
+    },
+    {
+      "path": ".cursor/docs/evidence/20261002/17_alert_yard_w1.png",
+      "bytes": 298721,
+      "sha256": "65ff0ec54c2e1b366973716cbaeead4fb7b95bfec39f0f171d3d8493bd5f4005"
+    },
+    {
+      "path": ".cursor/docs/evidence/20261002/30_scout_radio_empty.png",
+      "bytes": 382529,
+      "sha256": "35ca21974f77744041d646654bf5740bebd239ade681f73f26ac54f91ba22ec7"
+    },
+    {
+      "path": "ambush_loop/ArtSource/yard_crate_turnaround.png",
+      "bytes": 325606,
+      "sha256": "8038bdd70723e4e9db30fe54c7e7d97583cc319a82221a2c020ea6f12579aa85"
+    },
+    {
+      "path": "ambush_loop/ArtSource/sandbag_turnaround.png",
+      "bytes": 261150,
+      "sha256": "cc904f9620686d299a4e186cb6ddeca5fe3a44be3939b33c7c27df22e1f71e9e"
+    },
+    {
+      "path": "ambush_loop/ArtSource/field_radio_turnaround.png",
+      "bytes": 218893,
+      "sha256": "241d859b0b484c2c3df399d22c3597c8c25a4a418e980905b6bb6f579e674c34"
+    }
+  ]
+}

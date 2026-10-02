@@ -10,6 +10,7 @@ Godot 工程位于 [`ambush_loop/`](ambush_loop/)，运行、操作和导出说�
 
 - [规划与续开发索引](.cursor/docs/PLANNING_INDEX.md)：当前有效规划、历史替代关系、接手顺序，以及每次规划保存并同步 GitHub 的规则。
 - [游戏设计规划 v2](.cursor/docs/AMBUSH_DESIGN_V2_20260928.md)：当前主设计，包含玩法、高点规则、六关职责、视觉、手机操作与重新排序的 M0–M5。
+- [资产升级与旋转场景讨论稿](.cursor/docs/AMBUSH_ASSET_UPGRADE_20261002.md)：源资产盘点与全面升级提案；写实厚重、水平 360° 旋转、俯角受限和缩放已确认，替代 v2 固定镜头约束；实时 3D 路线与新资产尚待样板验证。
 - [产品方向：短关卡小队伏击](.cursor/docs/AMBUSH_PRODUCT_DIRECTION_20260928.md)：用户确认的“搜集弹药 → 占领高点 → 埋伏 → 歼灭”主循环及待验证方案。
 - [M0 状态报告](.cursor/docs/AMBUSH_M0_REPORT.md)：已完成的隔离、构建与待复验的手机项目。
 - [旧成品总计划](.cursor/docs/AMBUSH_TO_FINISHED_PRODUCT_PLAN_20260927.md)：保留工程与发行验收；阶段顺序以 v2 为准。
