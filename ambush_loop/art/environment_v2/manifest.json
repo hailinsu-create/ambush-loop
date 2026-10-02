@@ -1,0 +1,3310 @@
+{
+  "schema": 1,
+  "status": "IMMUTABLE_CANDIDATE_ADOPTED_RUNTIME_TEST_PENDING",
+  "source_commit": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+  "delivery_commit": "9c06f04cf7795faf69d9d69d0f853f30ccf80838",
+  "axes": "+Y up / -Z forward, 1 cell = 1 metre, visual only",
+  "assets": [
+    {
+      "asset_id": "env_ammo_can",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.5,
+        0.412,
+        0.297
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_ammo_can_lod0.glb",
+          "sha256": "79af09d14fa77dab6f9acec9d983aa25085aa96d4c9a2509e4025a41cdac2677",
+          "triangles": 536,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_ammo_can_lod1.glb",
+          "sha256": "7fb9ac8aab63f454da4b1c570a831bc3f39260db51355b6aab29c0177f183a2b",
+          "triangles": 168,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "lid_pivot"
+      ],
+      "sockets": {
+        "loot_anchor": {
+          "parent_node": "env_ammo_can",
+          "position_m": [
+            0,
+            0.44,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.44,
+            0
+          ],
+          "semantic": "ammo container pickup anchor; static asset-root reference"
+        }
+      },
+      "moving_nodes": {
+        "lid_pivot": {
+          "node": "env_ammo_can__lid_pivot",
+          "position_m": [
+            0,
+            0.32,
+            0.13
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "rotate",
+          "axis": "X",
+          "range": [
+            0,
+            100
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_barbed_wire",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0158,
+        0.4731,
+        0.4884
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_barbed_wire_lod0.glb",
+          "sha256": "05bc8eb7a9acf45cc3ed0619bebae15cc46b7d84c41a8725f78f3fb0fd64a55d",
+          "triangles": 1940,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_barbed_wire_lod1.glb",
+          "sha256": "723aae422f32479019adc818f7c8834eb097560016af78641e585aa512b5b68a",
+          "triangles": 900,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_fence_section",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.07,
+        2.0,
+        0.08
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_fence_section_lod0.glb",
+          "sha256": "1c57adb5182da38dc5c00541ae514e0b067a9ef30024df4a0b743cb2251bfb85",
+          "triangles": 636,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_fence_section_lod1.glb",
+          "sha256": "01d10d2ad09d8ea9a0c48ed150e45e9abf1040d37fda8fcfcaa620b2fb01edaa",
+          "triangles": 348,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_gun_case",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.415,
+        0.329,
+        0.4465
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_gun_case_lod0.glb",
+          "sha256": "3d3e530f08469356eb0b0600f60914103b02550b7a521cb8aee429cf416e1dbe",
+          "triangles": 1276,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_gun_case_lod1.glb",
+          "sha256": "829a8bb3db1b70b30509d62eb1c0e64b2c2c12fd5ce525b227c84d71f0a10d4f",
+          "triangles": 364,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "lid_pivot"
+      ],
+      "sockets": {
+        "loot_anchor": {
+          "parent_node": "env_gun_case",
+          "position_m": [
+            0,
+            0.38,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.38,
+            0
+          ],
+          "semantic": "display pickup point, game loot identity remains external; static asset-root reference"
+        }
+      },
+      "moving_nodes": {
+        "lid_pivot": {
+          "node": "env_gun_case__lid_pivot",
+          "position_m": [
+            0,
+            0.26,
+            0.17
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "rotate",
+          "axis": "X",
+          "range": [
+            0,
+            105
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_handcart",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.38,
+        0.807,
+        1.737
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_handcart_lod0.glb",
+          "sha256": "6010e959e25df7ea322b83519c3c1266ac89da9755d856e0aa72d26c72b16437",
+          "triangles": 1404,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_handcart_lod1.glb",
+          "sha256": "772e80a8044cefa29ae19adf081f34f38b032feaf217c8eb57bb5ba5aca48523",
+          "triangles": 636,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "cargo_anchor": {
+          "parent_node": "env_handcart",
+          "position_m": [
+            0,
+            0.81,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.81,
+            0
+          ],
+          "semantic": "decorative cargo only; no new inventory logic; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_jerry_can",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.36,
+        0.562,
+        0.234
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_jerry_can_lod0.glb",
+          "sha256": "c9b6f3ac1feff97c3a2ce7a293fc50ef4f15f1be516a5e66f732d5ee3413ac3f",
+          "triangles": 284,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_jerry_can_lod1.glb",
+          "sha256": "aa1b6b3f3c5669f1a9764555e24da3f61e6b77dc3210c6240093dece25cd0523",
+          "triangles": 172,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "pickup_anchor": {
+          "parent_node": "env_jerry_can",
+          "position_m": [
+            0,
+            0.55,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.55,
+            0
+          ],
+          "semantic": "ground decoration or external pickup mapping; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_rations_crate",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.815,
+        0.569,
+        0.6565
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_rations_crate_lod0.glb",
+          "sha256": "65e16bde01472df7f04fd9a3f22a481ea4afdb545a97a9e6a7d229db64aa9478",
+          "triangles": 1320,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_rations_crate_lod1.glb",
+          "sha256": "4ddca4ca8704dd04bd430446beeefa477359ca61f178fd50dfa7d9277b90e44c",
+          "triangles": 376,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "lid_pivot"
+      ],
+      "sockets": {
+        "loot_anchor": {
+          "parent_node": "env_rations_crate",
+          "position_m": [
+            0,
+            0.62,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.62,
+            0
+          ],
+          "semantic": "display pickup point, game loot identity remains external; static asset-root reference"
+        }
+      },
+      "moving_nodes": {
+        "lid_pivot": {
+          "node": "env_rations_crate__lid_pivot",
+          "position_m": [
+            0,
+            0.5,
+            0.275
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "rotate",
+          "axis": "X",
+          "range": [
+            0,
+            105
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_spare_tire",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.841,
+        0.841,
+        0.185
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_spare_tire_lod0.glb",
+          "sha256": "b33e310c8f2d4e869dce55d9e22f15e1608ab4bd610a3897e2be67b813869c81",
+          "triangles": 1432,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_spare_tire_lod1.glb",
+          "sha256": "242a259b9c45ef4cb83db29e0d9a46ff6b030c5c798bd7e227d9e9a4d5f90da2",
+          "triangles": 336,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_wooden_barrel",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.618,
+        0.865,
+        0.618
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_wooden_barrel_lod0.glb",
+          "sha256": "fd995804f72e792e5132107752f55467874b164b00de2dff17c984dd4eafacd1",
+          "triangles": 1948,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_wooden_barrel_lod1.glb",
+          "sha256": "f152e28a2b32cdf00fac445ea227b7aeaafb2883e3689381e620e760f59ca236",
+          "triangles": 940,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_yard_crate",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.965,
+        0.719,
+        0.7565
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_yard_crate_lod0.glb",
+          "sha256": "baaf6a50db88f3bfae3d3babecfae8c9cdc5255f26478e937c5f37e869be71ed",
+          "triangles": 1276,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_yard_crate_lod1.glb",
+          "sha256": "3af39225decd64b5fae6aaf9d439effc55526118955a2c588ca138ded9020bfa",
+          "triangles": 364,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "lid_pivot"
+      ],
+      "sockets": {
+        "loot_anchor": {
+          "parent_node": "env_yard_crate",
+          "position_m": [
+            0,
+            0.77,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.77,
+            0
+          ],
+          "semantic": "display pickup point, game loot identity remains external; static asset-root reference"
+        }
+      },
+      "moving_nodes": {
+        "lid_pivot": {
+          "node": "env_yard_crate__lid_pivot",
+          "position_m": [
+            0,
+            0.65,
+            0.325
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "rotate",
+          "axis": "X",
+          "range": [
+            0,
+            105
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_wall_brick_2m",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        3.0,
+        0.3
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_wall_brick_2m_lod0.glb",
+          "sha256": "e8c10cb29763d3ee76dd7634e764c3a7a4a2c66f6e01cf18a2aa47f6b0b7739d",
+          "triangles": 264,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_wall_brick_2m_lod1.glb",
+          "sha256": "d0d87fca90a2e26c5af4449e7a1e1c4b1a971e4aa3bf47a299992fe50f6e029d",
+          "triangles": 48,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_wall_plaster_2m",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        3.0,
+        0.3
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_wall_plaster_2m_lod0.glb",
+          "sha256": "9f93e357032a9db2224c78d82c4752556880f10d84885b35fb67aa96554ce893",
+          "triangles": 308,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_wall_plaster_2m_lod1.glb",
+          "sha256": "4e6ea708b06e79c572e99c5a2b8f02c6aaa8f9e23fd6729eb86b892147fa85ec",
+          "triangles": 60,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_wall_corner",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.03,
+        3.0,
+        2.03
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_wall_corner_lod0.glb",
+          "sha256": "be35f899ca91aa5a416d2bf5c218668ca4f7007556d6c8c50950dbf937e4b58e",
+          "triangles": 528,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_wall_corner_lod1.glb",
+          "sha256": "9e36e9e0a8b3d7a9d378e58b62aa96beee7a96e9a5d550b98dc28d23194ca5ba",
+          "triangles": 96,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_window_bay",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        3.0,
+        0.4
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_window_bay_lod0.glb",
+          "sha256": "8d9c89d9cbb97887b730093f9f6b97a743eb9cb12011e527f015101b987cd1f9",
+          "triangles": 528,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_window_bay_lod1.glb",
+          "sha256": "034cdfa54474cfc14071f334cd27d1579540e96936772d2b59e9fd1ed7a2a6e1",
+          "triangles": 144,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_door_frame",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        3.0,
+        0.36
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_door_frame_lod0.glb",
+          "sha256": "f9dfcfdfa379c465997b7191f68e5743cb309b227415a535997ebf16b5b42896",
+          "triangles": 176,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_door_frame_lod1.glb",
+          "sha256": "8e88cef7b9675cb73e5a292edaad95b902e6926e7c22c94d59bf115d5a63432a",
+          "triangles": 48,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "lintel"
+      ],
+      "sockets": {
+        "door_hinge": {
+          "parent_node": "env_door_frame",
+          "position_m": [
+            -0.6,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            -0.6,
+            0,
+            0
+          ],
+          "semantic": "hinge alignment for separate door leaf, no navigation change; static asset-root reference"
+        },
+        "door_clearance": {
+          "parent_node": "env_door_frame",
+          "position_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0,
+            0
+          ],
+          "semantic": "clear visual opening; logical door cell assigned by integrator; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_door_leaf",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.2,
+        2.35,
+        0.16
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_door_leaf_lod0.glb",
+          "sha256": "fec8e213f936d122f44fa07698269ecf7c21420b417802119119f34aef315f78",
+          "triangles": 572,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_door_leaf_lod1.glb",
+          "sha256": "3344a7283fd3baadd75ba333e81b2f2a2e44dc5d71405fa2737f06bf54f50b77",
+          "triangles": 72,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "leaf_pivot"
+      ],
+      "sockets": {
+        "handle_anchor": {
+          "parent_node": "env_door_leaf__leaf_pivot",
+          "position_m": [
+            0.984,
+            1.128,
+            -0.12
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0.384,
+            1.128,
+            -0.12
+          ],
+          "semantic": "visual interaction point; command authority is external; follows actual moving leaf"
+        }
+      },
+      "moving_nodes": {
+        "leaf_pivot": {
+          "node": "env_door_leaf__leaf_pivot",
+          "position_m": [
+            -0.6,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "rotate",
+          "axis": "Y",
+          "range": [
+            0,
+            100
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_loading_frame",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        4.0,
+        3.0,
+        0.36
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_loading_frame_lod0.glb",
+          "sha256": "b7fead05dc4533a311497140b5064d47c16bac5387c08712eba10df6556ca363",
+          "triangles": 176,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_loading_frame_lod1.glb",
+          "sha256": "a184a560e758dfbf9fedded3f901511c7307d8bec74f196ee46a0bceb838b4f9",
+          "triangles": 48,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "lintel"
+      ],
+      "sockets": {
+        "door_hinge": {
+          "parent_node": "env_loading_frame",
+          "position_m": [
+            -1.4,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            -1.4,
+            0,
+            0
+          ],
+          "semantic": "hinge alignment for separate door leaf, no navigation change; static asset-root reference"
+        },
+        "door_clearance": {
+          "parent_node": "env_loading_frame",
+          "position_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0,
+            0
+          ],
+          "semantic": "clear visual opening; logical door cell assigned by integrator; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_loading_leaf",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.4,
+        2.55,
+        0.16
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_loading_leaf_lod0.glb",
+          "sha256": "a35f2a3e7a1ed42cd69242f0a2e7453689d2f0b4453ed50fbf7c7591a1b89519",
+          "triangles": 616,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_loading_leaf_lod1.glb",
+          "sha256": "dfc61ef7ba65f8740940c364c6477508a6dc07c181479686c297ac93c33aeaa9",
+          "triangles": 72,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "leaf_pivot"
+      ],
+      "sockets": {
+        "handle_anchor": {
+          "parent_node": "env_loading_leaf__leaf_pivot",
+          "position_m": [
+            1.148,
+            1.224,
+            -0.12
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0.44799999999999995,
+            1.224,
+            -0.12
+          ],
+          "semantic": "visual interaction point; command authority is external; follows actual moving leaf"
+        }
+      },
+      "moving_nodes": {
+        "leaf_pivot": {
+          "node": "env_loading_leaf__leaf_pivot",
+          "position_m": [
+            -0.7,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "translate",
+          "axis": "X",
+          "range": [
+            0,
+            -1.4
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_roof_gable_4m",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        4.2145,
+        0.7348,
+        4.4
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_roof_gable_4m_lod0.glb",
+          "sha256": "9da1f87baa98a9d265aa0fbf8350792cf1833d504af723ebbb7937def1191615",
+          "triangles": 676,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_roof_gable_4m_lod1.glb",
+          "sha256": "474750c963cec0d4e0081664141518b59b945a9e8f2d4541af30c489de92a428",
+          "triangles": 244,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "roof"
+      ],
+      "sockets": {
+        "roof_anchor": {
+          "parent_node": "env_roof_gable_4m",
+          "position_m": [
+            0,
+            3,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            3,
+            0
+          ],
+          "semantic": "removable display roof anchor; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_roof_flat_4m",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        4.2,
+        0.335,
+        4.2
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_roof_flat_4m_lod0.glb",
+          "sha256": "f681aeb412c6d7800db9d6a7e61f947c9af38006af5fb500125aa85629b87002",
+          "triangles": 220,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_roof_flat_4m_lod1.glb",
+          "sha256": "d35306cbbf0f90086f77b37a3f2e3b1c42bdcbece402bf997f9ecce64faefdb6",
+          "triangles": 60,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "roof"
+      ],
+      "sockets": {
+        "roof_anchor": {
+          "parent_node": "env_roof_flat_4m",
+          "position_m": [
+            0,
+            3,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            3,
+            0
+          ],
+          "semantic": "removable display roof anchor; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_low_wall_2m",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.12,
+        1.04,
+        0.47
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_low_wall_2m_lod0.glb",
+          "sha256": "d93f881d3800cc3b3c3d846fe740442061f9ba26b1a193e1b212387e6e92f513",
+          "triangles": 176,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_low_wall_2m_lod1.glb",
+          "sha256": "2b0e8ef8e605a9699b06b82adf3ff9f4bdeb933ae229fc3217f6ae0691ff266b",
+          "triangles": 48,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_gate_leaf",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        1.9,
+        0.07
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_gate_leaf_lod0.glb",
+          "sha256": "6e97c672edb8899ae452cdc689eb7b02e72ced4c220defef7586f28fe1b4a866",
+          "triangles": 600,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_gate_leaf_lod1.glb",
+          "sha256": "f434623add41b4a48ac05b2d78cfa647a3560665d7258bc1a5d937779796ff49",
+          "triangles": 176,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "leaf_pivot"
+      ],
+      "sockets": {
+        "handle_anchor": {
+          "parent_node": "env_gate_leaf__leaf_pivot",
+          "position_m": [
+            1.8,
+            0.95,
+            -0.09
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0.8,
+            0.95,
+            -0.09
+          ],
+          "semantic": "gate interaction anchor; follows actual moving leaf"
+        }
+      },
+      "moving_nodes": {
+        "leaf_pivot": {
+          "node": "env_gate_leaf__leaf_pivot",
+          "position_m": [
+            -1,
+            0,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "motion": "rotate",
+          "axis": "Y",
+          "range": [
+            0,
+            110
+          ]
+        }
+      },
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_ground_concrete_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_ground_concrete_2m_lod0.glb",
+          "sha256": "93ad179ad020f47891b0986c853b49736b9a84d1b88f05331d403767a74338a4",
+          "triangles": 60,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_ground_concrete_2m_lod1.glb",
+          "sha256": "86427f1a2cce5297b976d709d1c2675a92842c08cc3aab6002ecca46755d506a",
+          "triangles": 60,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_ground_earth_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_ground_earth_2m_lod0.glb",
+          "sha256": "c2c06b99f063408586b6e63175dbc527a1a5ab4ab315457c7967ffd3529570c0",
+          "triangles": 12,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_ground_earth_2m_lod1.glb",
+          "sha256": "719d82d24e572656b81ffb147799bac01bcef9e0d4d794595193fa46bd6c24cc",
+          "triangles": 12,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_ground_cobble_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_ground_cobble_2m_lod0.glb",
+          "sha256": "d1c97a39421c5ff600430c759dd07611846a7bfa9b1d455d7e2c3aa95ba075db",
+          "triangles": 12,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_ground_cobble_2m_lod1.glb",
+          "sha256": "631238c2d6b0dc9839378c0b0a7aad979a01974502a9ce03ab05d315a46d4aec",
+          "triangles": 12,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_ground_steel_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_ground_steel_2m_lod0.glb",
+          "sha256": "71fbc7e6c7bfaad58a58715ed591d244f8024c781c9da10372dc616cfbeddee6",
+          "triangles": 168,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_ground_steel_2m_lod1.glb",
+          "sha256": "59d063a9e69a3936c8bc6569142055a5df68ce7988d4960861c950b41fb52de0",
+          "triangles": 168,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_ground_gravel_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_ground_gravel_2m_lod0.glb",
+          "sha256": "2e6196d0131545b64d31c9b49749cbff6d0bea48c542e0cc04f6b190d6d7e3e2",
+          "triangles": 12,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_ground_gravel_2m_lod1.glb",
+          "sha256": "048c3ad0ed48f78449ba5920e84ea81a93e1b188d63d83b708e033ee85316ec2",
+          "triangles": 12,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_drain_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.082,
+        0.28
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_drain_2m_lod0.glb",
+          "sha256": "fb15afd50d53e687bfa254bb01471a4aad14b8f65312620a134f68c04995dde8",
+          "triangles": 284,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_drain_2m_lod1.glb",
+          "sha256": "304ffbfb96f57dab4a59c9f80a45e4c19055f821a2e5e429aad237a1ad0780a6",
+          "triangles": 132,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_curb_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.18,
+        0.2
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_curb_2m_lod0.glb",
+          "sha256": "47cd3d7d5d57b7bc1fb072d5a55842cb8f5abf4c378e49d265233e8a4f3c3a51",
+          "triangles": 44,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_curb_2m_lod1.glb",
+          "sha256": "40f0c6cf7790bac41d2a6a927b1db928066feff13fb4f16d54481f9329d11926",
+          "triangles": 12,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_seam_debris",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.7192,
+        0.065,
+        0.5067
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_seam_debris_lod0.glb",
+          "sha256": "aa7c64fe2fd0ce69dd8c42b4c09cce536c26e58dae4724e9656451f74aa8c280",
+          "triangles": 440,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_seam_debris_lod1.glb",
+          "sha256": "3e3b8ac475595f53679d45aca26779b1a56f0b3ad078e83d798bd62b2bde086d",
+          "triangles": 72,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_warehouse_shell",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        6.38,
+        4.02,
+        4.41
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_warehouse_shell_lod0.glb",
+          "sha256": "fa9d9a7b83772ef6059ce6a5561852a65a5c459dd99d321ec444ce90387a4f42",
+          "triangles": 668,
+          "surfaces": 6
+        },
+        {
+          "path": "art/environment_v2/models/env_warehouse_shell_lod1.glb",
+          "sha256": "9d109ba021a54837d7c94252e774004d4047134a5043ba7e9c664081e8a5d110",
+          "triangles": 252,
+          "surfaces": 6
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "wall_back",
+        "wall_left",
+        "wall_right",
+        "wall_front",
+        "lintel",
+        "interior"
+      ],
+      "sockets": {
+        "loading_left": {
+          "parent_node": "env_warehouse_shell",
+          "position_m": [
+            -0.7,
+            0,
+            -2.1
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            -0.7,
+            0,
+            -2.1
+          ],
+          "semantic": "env_loading_leaf root; slide outward negative X; static asset-root reference"
+        },
+        "loading_right": {
+          "parent_node": "env_warehouse_shell",
+          "position_m": [
+            0.7,
+            0,
+            -2.1
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0.7,
+            0,
+            -2.1
+          ],
+          "semantic": "env_loading_leaf root; slide outward positive X; static asset-root reference"
+        },
+        "warm_light": {
+          "parent_node": "env_warehouse_shell",
+          "position_m": [
+            2.1,
+            2.6,
+            -2.28
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            2.1,
+            2.6,
+            -2.28
+          ],
+          "semantic": "warm light anchor, integrator owns light budget; static asset-root reference"
+        },
+        "roof_anchor": {
+          "parent_node": "env_warehouse_shell",
+          "position_m": [
+            0,
+            3,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            3,
+            0
+          ],
+          "semantic": "separate warehouse roof; wall groups remain recoverable; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_warehouse_roof",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        6.2858,
+        1.0379,
+        4.44
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_warehouse_roof_lod0.glb",
+          "sha256": "3b56e61ec7ef0e737b192682bc6b2e11f22e982be3dd6157a28fea7d03895074",
+          "triangles": 948,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_warehouse_roof_lod1.glb",
+          "sha256": "35509f507c26ee88233abcb1bd0c273ef7e08bee7144dddb04b6d06e518acbff",
+          "triangles": 444,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "roof"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_warehouse_gantry",
+      "category": "landmark",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        4.5,
+        3.733,
+        3.65
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_warehouse_gantry_lod0.glb",
+          "sha256": "c78d1e5d169374de3a6378eebf4609f21f8f2741c7623a14247146bcf9afa31b",
+          "triangles": 1712,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_warehouse_gantry_lod1.glb",
+          "sha256": "43790cad0d759b30f7455fff0d42f10b206bbdbba2399c64058c27ba6cea2253",
+          "triangles": 680,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell",
+        "roof"
+      ],
+      "sockets": {
+        "cargo_anchor": {
+          "parent_node": "env_warehouse_gantry",
+          "position_m": [
+            0,
+            0.02,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.02,
+            0
+          ],
+          "semantic": "warehouse canopy undercroft decorative storage zone; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_pump_skid",
+      "category": "landmark",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.6,
+        1.67,
+        2.175
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_pump_skid_lod0.glb",
+          "sha256": "1b60c4a6ec70156ce45026b89c10801f84745369ee573202c952ea1592facd84",
+          "triangles": 3924,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_pump_skid_lod1.glb",
+          "sha256": "0542870005a38cd84633d284232ac5513dbcd5bdd6d0e89d3ca24679ca990e47",
+          "triangles": 1516,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "valve_anchor": {
+          "parent_node": "env_pump_skid",
+          "position_m": [
+            -0.64,
+            1.45,
+            1.23
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            -0.64,
+            1.45,
+            1.23
+          ],
+          "semantic": "visual maintenance anchor, not a new interaction; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_pipe_elbow",
+      "category": "building",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.34,
+        1.94,
+        0.4
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_pipe_elbow_lod0.glb",
+          "sha256": "d303fa55140f619b52c0b160290dc84ab5acd4887b93523d6cee60a7f21d8149",
+          "triangles": 296,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_pipe_elbow_lod1.glb",
+          "sha256": "48c7e4eb9d43830861fcae697c78753e9835275f24f3abd111c20d8542306eef",
+          "triangles": 136,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_signal_mast",
+      "category": "landmark",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        1.0978,
+        6.05,
+        1.0978
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_signal_mast_lod0.glb",
+          "sha256": "8515f1ebbd60077fc7850a8d97c7c84d840bf7df492c5fa39b53d5132b2d8f68",
+          "triangles": 2092,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_signal_mast_lod1.glb",
+          "sha256": "3c27372ad916bf94730e5b0461b24c699eeb54f6aa9dc95673347e8f9d332c3b",
+          "triangles": 868,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas",
+        "environment_v2_emission"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "signal_anchor": {
+          "parent_node": "env_signal_mast",
+          "position_m": [
+            0,
+            4.75,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            4.75,
+            0
+          ],
+          "semantic": "signal lens visual cue; not a game alarm owner; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_depot_tank_pair",
+      "category": "landmark",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        4.85,
+        3.12,
+        2.375
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_depot_tank_pair_lod0.glb",
+          "sha256": "704241d6d81dab1339bd61bf0a54aca531fc4dee9cb7f79fcd9bbd1c61d3e6c4",
+          "triangles": 3148,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_depot_tank_pair_lod1.glb",
+          "sha256": "93276867dd1a6205984b10787cdfa28344ac177a5aed6399ca7fd6f00680bc82",
+          "triangles": 1564,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "maintenance_anchor": {
+          "parent_node": "env_depot_tank_pair",
+          "position_m": [
+            0,
+            0.45,
+            -1.25
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.45,
+            -1.25
+          ],
+          "semantic": "depot manifold visual landmark; no explosive-barrel behavior; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_radio_antenna",
+      "category": "landmark",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.5609,
+        5.65,
+        1.8667
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_radio_antenna_lod0.glb",
+          "sha256": "52d8b54b502ccbad2ac8d4379e7a624c874546ca98b40429d350d93f3c9c9764",
+          "triangles": 2392,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_radio_antenna_lod1.glb",
+          "sha256": "957122011b0c746bd5655564d2b40a371426759103204e861110e849f85af08a",
+          "triangles": 1088,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "signal_anchor": {
+          "parent_node": "env_radio_antenna",
+          "position_m": [
+            0,
+            4.35,
+            0
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            4.35,
+            0
+          ],
+          "semantic": "signal lens visual cue; not a game alarm owner; static asset-root reference"
+        },
+        "radio_anchor": {
+          "parent_node": "env_radio_antenna",
+          "position_m": [
+            1.2,
+            0.8,
+            -0.36
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            1.2,
+            0.8,
+            -0.36
+          ],
+          "semantic": "radio cabinet decorative maintenance point; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_rail_2m",
+      "category": "ground",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        2.0,
+        0.2975,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_rail_2m_lod0.glb",
+          "sha256": "6fe5e5bb65c7f4c603acbc61b8a8c453131bcaae6693d359eb94bb04fc2cbb12",
+          "triangles": 396,
+          "surfaces": 1
+        },
+        {
+          "path": "art/environment_v2/models/env_rail_2m_lod1.glb",
+          "sha256": "16d119921e0d787bdaad2400db7f345ee479734e1e2e61e5a3dc56b9e073c38f",
+          "triangles": 204,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {},
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    },
+    {
+      "asset_id": "env_wall_lamp",
+      "category": "prop",
+      "source": "ArtSource/environment_v2/build_environment.py",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields created for this project; no external assets",
+      "usage": "Project-authored, for Ambush Loop and its project contributors; no external attribution or paid dependency. No separate public relicensing claim.",
+      "unit": "metre",
+      "origin": "ground centre; ground top Y=0; roof preserves assembled height",
+      "runtime_axes": "+Y up / -Z forward",
+      "dimensions_m": [
+        0.36,
+        0.3,
+        0.615
+      ],
+      "lods": [
+        {
+          "path": "art/environment_v2/models/env_wall_lamp_lod0.glb",
+          "sha256": "7902aaa44a8a5a1d21def6351e8d3ed73f7ee807ec4a1167b9bf23224902ded0",
+          "triangles": 304,
+          "surfaces": 2
+        },
+        {
+          "path": "art/environment_v2/models/env_wall_lamp_lod1.glb",
+          "sha256": "043b25131330eaf0374906df2c51ee9f3d839a069e354240590de56ad510270d",
+          "triangles": 168,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "environment_v2_atlas",
+        "environment_v2_emission"
+      ],
+      "collision": "visual_only; no physics, navigation, combat LOS or height benefit",
+      "logic_footprint": "NOT assigned. Integrator must map existing grid blockers; do not infer gameplay occupancy from bounds.",
+      "display_groups": [
+        "shell"
+      ],
+      "sockets": {
+        "warm_light": {
+          "parent_node": "env_wall_lamp",
+          "position_m": [
+            0,
+            0.09,
+            -0.36
+          ],
+          "rotation_degrees": [
+            0,
+            0,
+            0
+          ],
+          "asset_closed_position_m": [
+            0,
+            0.09,
+            -0.36
+          ],
+          "semantic": "warm omni anchor; no light object in GLB; static asset-root reference"
+        }
+      },
+      "moving_nodes": {},
+      "skeleton": null,
+      "animations": [],
+      "lod_policy_candidate": {
+        "lod0_below_camera_span_m": 20,
+        "lod1_above_camera_span_m": 24,
+        "hysteresis_m": 2,
+        "status": "integrator proposal only, no shared runtime changes"
+      },
+      "status": "exported candidate; executed checks in evidence/validation_receipt.json; shared runtime integration not implemented"
+    }
+  ],
+  "textures": [
+    {
+      "path": "art/environment_v2/textures/environment_v2_albedo.png",
+      "sha256": "3fcea2ad2b67391fdb0ca62319831d6beb1a648f68d61a4b5a4fff1360c01789",
+      "resolution": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "art/environment_v2/textures/environment_v2_normal.png",
+      "sha256": "1f26655b1c0389e66586c3f11ac4bb2ed6c7347bb931d8869d08dd2ef1f87dc8",
+      "resolution": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "art/environment_v2/textures/environment_v2_orm.png",
+      "sha256": "6446d3645e27d4e70e2f4561c5d6bbcd4ee2e4e638c1cde9bd6066a30319484e",
+      "resolution": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "materials": [
+    "art/environment_v2/materials/environment_v2_atlas.tres",
+    "art/environment_v2/materials/environment_v2_emission.tres"
+  ],
+  "runtime_files": [
+    {
+      "path": "art/environment_v2/materials/environment_v2_atlas.tres",
+      "sha256": "56016544c54598a612bde777f3c8fea84a0a9f79cac089f8b26716fead84ab3e",
+      "bytes": 673
+    },
+    {
+      "path": "art/environment_v2/materials/environment_v2_emission.tres",
+      "sha256": "92e244da43c48fc189a425531673c67e3edf6a8048884d7045686892c9905ca0",
+      "bytes": 256
+    },
+    {
+      "path": "art/environment_v2/models/env_ammo_can_lod0.glb",
+      "sha256": "79af09d14fa77dab6f9acec9d983aa25085aa96d4c9a2509e4025a41cdac2677",
+      "bytes": 41156
+    },
+    {
+      "path": "art/environment_v2/models/env_ammo_can_lod1.glb",
+      "sha256": "7fb9ac8aab63f454da4b1c570a831bc3f39260db51355b6aab29c0177f183a2b",
+      "bytes": 13980
+    },
+    {
+      "path": "art/environment_v2/models/env_barbed_wire_lod0.glb",
+      "sha256": "05bc8eb7a9acf45cc3ed0619bebae15cc46b7d84c41a8725f78f3fb0fd64a55d",
+      "bytes": 124812
+    },
+    {
+      "path": "art/environment_v2/models/env_barbed_wire_lod1.glb",
+      "sha256": "723aae422f32479019adc818f7c8834eb097560016af78641e585aa512b5b68a",
+      "bytes": 58664
+    },
+    {
+      "path": "art/environment_v2/models/env_curb_2m_lod0.glb",
+      "sha256": "47cd3d7d5d57b7bc1fb072d5a55842cb8f5abf4c378e49d265233e8a4f3c3a51",
+      "bytes": 4676
+    },
+    {
+      "path": "art/environment_v2/models/env_curb_2m_lod1.glb",
+      "sha256": "40f0c6cf7790bac41d2a6a927b1db928066feff13fb4f16d54481f9329d11926",
+      "bytes": 2172
+    },
+    {
+      "path": "art/environment_v2/models/env_depot_tank_pair_lod0.glb",
+      "sha256": "704241d6d81dab1339bd61bf0a54aca531fc4dee9cb7f79fcd9bbd1c61d3e6c4",
+      "bytes": 188732
+    },
+    {
+      "path": "art/environment_v2/models/env_depot_tank_pair_lod1.glb",
+      "sha256": "93276867dd1a6205984b10787cdfa28344ac177a5aed6399ca7fd6f00680bc82",
+      "bytes": 103576
+    },
+    {
+      "path": "art/environment_v2/models/env_door_frame_lod0.glb",
+      "sha256": "f9dfcfdfa379c465997b7191f68e5743cb309b227415a535997ebf16b5b42896",
+      "bytes": 15312
+    },
+    {
+      "path": "art/environment_v2/models/env_door_frame_lod1.glb",
+      "sha256": "8e88cef7b9675cb73e5a292edaad95b902e6926e7c22c94d59bf115d5a63432a",
+      "bytes": 5696
+    },
+    {
+      "path": "art/environment_v2/models/env_door_leaf_lod0.glb",
+      "sha256": "fec8e213f936d122f44fa07698269ecf7c21420b417802119119f34aef315f78",
+      "bytes": 45144
+    },
+    {
+      "path": "art/environment_v2/models/env_door_leaf_lod1.glb",
+      "sha256": "3344a7283fd3baadd75ba333e81b2f2a2e44dc5d71405fa2737f06bf54f50b77",
+      "bytes": 6804
+    },
+    {
+      "path": "art/environment_v2/models/env_drain_2m_lod0.glb",
+      "sha256": "fb15afd50d53e687bfa254bb01471a4aad14b8f65312620a134f68c04995dde8",
+      "bytes": 21508
+    },
+    {
+      "path": "art/environment_v2/models/env_drain_2m_lod1.glb",
+      "sha256": "304ffbfb96f57dab4a59c9f80a45e4c19055f821a2e5e429aad237a1ad0780a6",
+      "bytes": 10608
+    },
+    {
+      "path": "art/environment_v2/models/env_fence_section_lod0.glb",
+      "sha256": "1c57adb5182da38dc5c00541ae514e0b067a9ef30024df4a0b743cb2251bfb85",
+      "bytes": 43988
+    },
+    {
+      "path": "art/environment_v2/models/env_fence_section_lod1.glb",
+      "sha256": "01d10d2ad09d8ea9a0c48ed150e45e9abf1040d37fda8fcfcaa620b2fb01edaa",
+      "bytes": 23824
+    },
+    {
+      "path": "art/environment_v2/models/env_gate_leaf_lod0.glb",
+      "sha256": "6e97c672edb8899ae452cdc689eb7b02e72ced4c220defef7586f28fe1b4a866",
+      "bytes": 46784
+    },
+    {
+      "path": "art/environment_v2/models/env_gate_leaf_lod1.glb",
+      "sha256": "f434623add41b4a48ac05b2d78cfa647a3560665d7258bc1a5d937779796ff49",
+      "bytes": 13892
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_cobble_2m_lod0.glb",
+      "sha256": "d1c97a39421c5ff600430c759dd07611846a7bfa9b1d455d7e2c3aa95ba075db",
+      "bytes": 2164
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_cobble_2m_lod1.glb",
+      "sha256": "631238c2d6b0dc9839378c0b0a7aad979a01974502a9ce03ab05d315a46d4aec",
+      "bytes": 2164
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_concrete_2m_lod0.glb",
+      "sha256": "93ad179ad020f47891b0986c853b49736b9a84d1b88f05331d403767a74338a4",
+      "bytes": 5540
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_concrete_2m_lod1.glb",
+      "sha256": "86427f1a2cce5297b976d709d1c2675a92842c08cc3aab6002ecca46755d506a",
+      "bytes": 5540
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_earth_2m_lod0.glb",
+      "sha256": "c2c06b99f063408586b6e63175dbc527a1a5ab4ab315457c7967ffd3529570c0",
+      "bytes": 2160
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_earth_2m_lod1.glb",
+      "sha256": "719d82d24e572656b81ffb147799bac01bcef9e0d4d794595193fa46bd6c24cc",
+      "bytes": 2160
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_gravel_2m_lod0.glb",
+      "sha256": "2e6196d0131545b64d31c9b49749cbff6d0bea48c542e0cc04f6b190d6d7e3e2",
+      "bytes": 2164
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_gravel_2m_lod1.glb",
+      "sha256": "048c3ad0ed48f78449ba5920e84ea81a93e1b188d63d83b708e033ee85316ec2",
+      "bytes": 2164
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_steel_2m_lod0.glb",
+      "sha256": "71fbc7e6c7bfaad58a58715ed591d244f8024c781c9da10372dc616cfbeddee6",
+      "bytes": 13096
+    },
+    {
+      "path": "art/environment_v2/models/env_ground_steel_2m_lod1.glb",
+      "sha256": "59d063a9e69a3936c8bc6569142055a5df68ce7988d4960861c950b41fb52de0",
+      "bytes": 13096
+    },
+    {
+      "path": "art/environment_v2/models/env_gun_case_lod0.glb",
+      "sha256": "3d3e530f08469356eb0b0600f60914103b02550b7a521cb8aee429cf416e1dbe",
+      "bytes": 97864
+    },
+    {
+      "path": "art/environment_v2/models/env_gun_case_lod1.glb",
+      "sha256": "829a8bb3db1b70b30509d62eb1c0e64b2c2c12fd5ce525b227c84d71f0a10d4f",
+      "bytes": 27868
+    },
+    {
+      "path": "art/environment_v2/models/env_handcart_lod0.glb",
+      "sha256": "6010e959e25df7ea322b83519c3c1266ac89da9755d856e0aa72d26c72b16437",
+      "bytes": 89652
+    },
+    {
+      "path": "art/environment_v2/models/env_handcart_lod1.glb",
+      "sha256": "772e80a8044cefa29ae19adf081f34f38b032feaf217c8eb57bb5ba5aca48523",
+      "bytes": 44084
+    },
+    {
+      "path": "art/environment_v2/models/env_jerry_can_lod0.glb",
+      "sha256": "c9b6f3ac1feff97c3a2ce7a293fc50ef4f15f1be516a5e66f732d5ee3413ac3f",
+      "bytes": 19424
+    },
+    {
+      "path": "art/environment_v2/models/env_jerry_can_lod1.glb",
+      "sha256": "aa1b6b3f3c5669f1a9764555e24da3f61e6b77dc3210c6240093dece25cd0523",
+      "bytes": 12608
+    },
+    {
+      "path": "art/environment_v2/models/env_loading_frame_lod0.glb",
+      "sha256": "b7fead05dc4533a311497140b5064d47c16bac5387c08712eba10df6556ca363",
+      "bytes": 15328
+    },
+    {
+      "path": "art/environment_v2/models/env_loading_frame_lod1.glb",
+      "sha256": "a184a560e758dfbf9fedded3f901511c7307d8bec74f196ee46a0bceb838b4f9",
+      "bytes": 5712
+    },
+    {
+      "path": "art/environment_v2/models/env_loading_leaf_lod0.glb",
+      "sha256": "a35f2a3e7a1ed42cd69242f0a2e7453689d2f0b4453ed50fbf7c7591a1b89519",
+      "bytes": 48496
+    },
+    {
+      "path": "art/environment_v2/models/env_loading_leaf_lod1.glb",
+      "sha256": "dfc61ef7ba65f8740940c364c6477508a6dc07c181479686c297ac93c33aeaa9",
+      "bytes": 6820
+    },
+    {
+      "path": "art/environment_v2/models/env_low_wall_2m_lod0.glb",
+      "sha256": "d93f881d3800cc3b3c3d846fe740442061f9ba26b1a193e1b212387e6e92f513",
+      "bytes": 14736
+    },
+    {
+      "path": "art/environment_v2/models/env_low_wall_2m_lod1.glb",
+      "sha256": "2b0e8ef8e605a9699b06b82adf3ff9f4bdeb933ae229fc3217f6ae0691ff266b",
+      "bytes": 4744
+    },
+    {
+      "path": "art/environment_v2/models/env_pipe_elbow_lod0.glb",
+      "sha256": "d303fa55140f619b52c0b160290dc84ab5acd4887b93523d6cee60a7f21d8149",
+      "bytes": 20068
+    },
+    {
+      "path": "art/environment_v2/models/env_pipe_elbow_lod1.glb",
+      "sha256": "48c7e4eb9d43830861fcae697c78753e9835275f24f3abd111c20d8542306eef",
+      "bytes": 9888
+    },
+    {
+      "path": "art/environment_v2/models/env_pump_skid_lod0.glb",
+      "sha256": "1b60c4a6ec70156ce45026b89c10801f84745369ee573202c952ea1592facd84",
+      "bytes": 237152
+    },
+    {
+      "path": "art/environment_v2/models/env_pump_skid_lod1.glb",
+      "sha256": "0542870005a38cd84633d284232ac5513dbcd5bdd6d0e89d3ca24679ca990e47",
+      "bytes": 103532
+    },
+    {
+      "path": "art/environment_v2/models/env_radio_antenna_lod0.glb",
+      "sha256": "52d8b54b502ccbad2ac8d4379e7a624c874546ca98b40429d350d93f3c9c9764",
+      "bytes": 152920
+    },
+    {
+      "path": "art/environment_v2/models/env_radio_antenna_lod1.glb",
+      "sha256": "957122011b0c746bd5655564d2b40a371426759103204e861110e849f85af08a",
+      "bytes": 72516
+    },
+    {
+      "path": "art/environment_v2/models/env_rail_2m_lod0.glb",
+      "sha256": "6fe5e5bb65c7f4c603acbc61b8a8c453131bcaae6693d359eb94bb04fc2cbb12",
+      "bytes": 30592
+    },
+    {
+      "path": "art/environment_v2/models/env_rail_2m_lod1.glb",
+      "sha256": "16d119921e0d787bdaad2400db7f345ee479734e1e2e61e5a3dc56b9e073c38f",
+      "bytes": 15612
+    },
+    {
+      "path": "art/environment_v2/models/env_rations_crate_lod0.glb",
+      "sha256": "65e16bde01472df7f04fd9a3f22a481ea4afdb545a97a9e6a7d229db64aa9478",
+      "bytes": 101188
+    },
+    {
+      "path": "art/environment_v2/models/env_rations_crate_lod1.glb",
+      "sha256": "4ddca4ca8704dd04bd430446beeefa477359ca61f178fd50dfa7d9277b90e44c",
+      "bytes": 28696
+    },
+    {
+      "path": "art/environment_v2/models/env_roof_flat_4m_lod0.glb",
+      "sha256": "f681aeb412c6d7800db9d6a7e61f947c9af38006af5fb500125aa85629b87002",
+      "bytes": 18248
+    },
+    {
+      "path": "art/environment_v2/models/env_roof_flat_4m_lod1.glb",
+      "sha256": "d35306cbbf0f90086f77b37a3f2e3b1c42bdcbece402bf997f9ecce64faefdb6",
+      "bytes": 5764
+    },
+    {
+      "path": "art/environment_v2/models/env_roof_gable_4m_lod0.glb",
+      "sha256": "9da1f87baa98a9d265aa0fbf8350792cf1833d504af723ebbb7937def1191615",
+      "bytes": 45576
+    },
+    {
+      "path": "art/environment_v2/models/env_roof_gable_4m_lod1.glb",
+      "sha256": "474750c963cec0d4e0081664141518b59b945a9e8f2d4541af30c489de92a428",
+      "bytes": 17252
+    },
+    {
+      "path": "art/environment_v2/models/env_seam_debris_lod0.glb",
+      "sha256": "aa7c64fe2fd0ce69dd8c42b4c09cce536c26e58dae4724e9656451f74aa8c280",
+      "bytes": 34776
+    },
+    {
+      "path": "art/environment_v2/models/env_seam_debris_lod1.glb",
+      "sha256": "3e3b8ac475595f53679d45aca26779b1a56f0b3ad078e83d798bd62b2bde086d",
+      "bytes": 6448
+    },
+    {
+      "path": "art/environment_v2/models/env_signal_mast_lod0.glb",
+      "sha256": "8515f1ebbd60077fc7850a8d97c7c84d840bf7df492c5fa39b53d5132b2d8f68",
+      "bytes": 133524
+    },
+    {
+      "path": "art/environment_v2/models/env_signal_mast_lod1.glb",
+      "sha256": "3c27372ad916bf94730e5b0461b24c699eeb54f6aa9dc95673347e8f9d332c3b",
+      "bytes": 58204
+    },
+    {
+      "path": "art/environment_v2/models/env_spare_tire_lod0.glb",
+      "sha256": "b33e310c8f2d4e869dce55d9e22f15e1608ab4bd610a3897e2be67b813869c81",
+      "bytes": 103580
+    },
+    {
+      "path": "art/environment_v2/models/env_spare_tire_lod1.glb",
+      "sha256": "242a259b9c45ef4cb83db29e0d9a46ff6b030c5c798bd7e227d9e9a4d5f90da2",
+      "bytes": 24292
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_brick_2m_lod0.glb",
+      "sha256": "e8c10cb29763d3ee76dd7634e764c3a7a4a2c66f6e01cf18a2aa47f6b0b7739d",
+      "bytes": 21364
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_brick_2m_lod1.glb",
+      "sha256": "d0d87fca90a2e26c5af4449e7a1e1c4b1a971e4aa3bf47a299992fe50f6e029d",
+      "bytes": 4700
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_corner_lod0.glb",
+      "sha256": "be35f899ca91aa5a416d2bf5c218668ca4f7007556d6c8c50950dbf937e4b58e",
+      "bytes": 41396
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_corner_lod1.glb",
+      "sha256": "9e36e9e0a8b3d7a9d378e58b62aa96beee7a96e9a5d550b98dc28d23194ca5ba",
+      "bytes": 8072
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_lamp_lod0.glb",
+      "sha256": "7902aaa44a8a5a1d21def6351e8d3ed73f7ee807ec4a1167b9bf23224902ded0",
+      "bytes": 21424
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_lamp_lod1.glb",
+      "sha256": "043b25131330eaf0374906df2c51ee9f3d839a069e354240590de56ad510270d",
+      "bytes": 13304
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_plaster_2m_lod0.glb",
+      "sha256": "9f93e357032a9db2224c78d82c4752556880f10d84885b35fb67aa96554ce893",
+      "bytes": 24708
+    },
+    {
+      "path": "art/environment_v2/models/env_wall_plaster_2m_lod1.glb",
+      "sha256": "4e6ea708b06e79c572e99c5a2b8f02c6aaa8f9e23fd6729eb86b892147fa85ec",
+      "bytes": 5548
+    },
+    {
+      "path": "art/environment_v2/models/env_warehouse_gantry_lod0.glb",
+      "sha256": "c78d1e5d169374de3a6378eebf4609f21f8f2741c7623a14247146bcf9afa31b",
+      "bytes": 121792
+    },
+    {
+      "path": "art/environment_v2/models/env_warehouse_gantry_lod1.glb",
+      "sha256": "43790cad0d759b30f7455fff0d42f10b206bbdbba2399c64058c27ba6cea2253",
+      "bytes": 47232
+    },
+    {
+      "path": "art/environment_v2/models/env_warehouse_roof_lod0.glb",
+      "sha256": "3b56e61ec7ef0e737b192682bc6b2e11f22e982be3dd6157a28fea7d03895074",
+      "bytes": 62404
+    },
+    {
+      "path": "art/environment_v2/models/env_warehouse_roof_lod1.glb",
+      "sha256": "35509f507c26ee88233abcb1bd0c273ef7e08bee7144dddb04b6d06e518acbff",
+      "bytes": 29804
+    },
+    {
+      "path": "art/environment_v2/models/env_warehouse_shell_lod0.glb",
+      "sha256": "fa9d9a7b83772ef6059ce6a5561852a65a5c459dd99d321ec444ce90387a4f42",
+      "bytes": 53948
+    },
+    {
+      "path": "art/environment_v2/models/env_warehouse_shell_lod1.glb",
+      "sha256": "9d109ba021a54837d7c94252e774004d4047134a5043ba7e9c664081e8a5d110",
+      "bytes": 23048
+    },
+    {
+      "path": "art/environment_v2/models/env_window_bay_lod0.glb",
+      "sha256": "8d9c89d9cbb97887b730093f9f6b97a743eb9cb12011e527f015101b987cd1f9",
+      "bytes": 41400
+    },
+    {
+      "path": "art/environment_v2/models/env_window_bay_lod1.glb",
+      "sha256": "034cdfa54474cfc14071f334cd27d1579540e96936772d2b59e9fd1ed7a2a6e1",
+      "bytes": 11440
+    },
+    {
+      "path": "art/environment_v2/models/env_wooden_barrel_lod0.glb",
+      "sha256": "fd995804f72e792e5132107752f55467874b164b00de2dff17c984dd4eafacd1",
+      "bytes": 116276
+    },
+    {
+      "path": "art/environment_v2/models/env_wooden_barrel_lod1.glb",
+      "sha256": "f152e28a2b32cdf00fac445ea227b7aeaafb2883e3689381e620e760f59ca236",
+      "bytes": 63252
+    },
+    {
+      "path": "art/environment_v2/models/env_yard_crate_lod0.glb",
+      "sha256": "baaf6a50db88f3bfae3d3babecfae8c9cdc5255f26478e937c5f37e869be71ed",
+      "bytes": 97876
+    },
+    {
+      "path": "art/environment_v2/models/env_yard_crate_lod1.glb",
+      "sha256": "3af39225decd64b5fae6aaf9d439effc55526118955a2c588ca138ded9020bfa",
+      "bytes": 27880
+    },
+    {
+      "path": "art/environment_v2/textures/environment_v2_albedo.png",
+      "sha256": "3fcea2ad2b67391fdb0ca62319831d6beb1a648f68d61a4b5a4fff1360c01789",
+      "bytes": 1191859
+    },
+    {
+      "path": "art/environment_v2/textures/environment_v2_normal.png",
+      "sha256": "1f26655b1c0389e66586c3f11ac4bb2ed6c7347bb931d8869d08dd2ef1f87dc8",
+      "bytes": 829349
+    },
+    {
+      "path": "art/environment_v2/textures/environment_v2_orm.png",
+      "sha256": "6446d3645e27d4e70e2f4561c5d6bbcd4ee2e4e638c1cde9bd6066a30319484e",
+      "bytes": 843501
+    }
+  ],
+  "reuse_dependencies": [
+    {
+      "path": "art/v2/models/oil_drum_lod0.glb",
+      "sha256": "eba777e00afd5953d95c6f16a00b6cfaa6ed43ef61ee696b9689c9cb438c61bd"
+    },
+    {
+      "path": "art/v2/models/oil_drum_lod1.glb",
+      "sha256": "c658033c8f3916a13a0992245a634237ba1386b379c13aa4f68309ac6d8e2066"
+    },
+    {
+      "path": "art/v2/models/sandbag_stack_lod0.glb",
+      "sha256": "51b23a282c1a84b840cc83a3959742c9a7b9929b958ab866f77639189458cf3c"
+    },
+    {
+      "path": "art/v2/models/sandbag_stack_lod1.glb",
+      "sha256": "04cc139719ac3fad656cbc26547a20846e2ac7d42bd007fa3e2182df9691215d"
+    },
+    {
+      "path": "art/v2/models/field_radio_lod0.glb",
+      "sha256": "f4cc81dfacdc038e24224b27a36ed45800c36120962ee9089e5036471ff944db"
+    },
+    {
+      "path": "art/v2/models/field_radio_lod1.glb",
+      "sha256": "3af11d8eeaf89a39c058ad1bdd6b87e28a54859d3bf929386d006e4013f9102f"
+    },
+    {
+      "path": "art/v2/models/yard_lamp_lod0.glb",
+      "sha256": "c44af28ea08b7f25c6a5ac979c5ffa3f848f1dec53843ba1a77862f5a162192d"
+    },
+    {
+      "path": "art/v2/models/yard_lamp_lod1.glb",
+      "sha256": "f1af6917d6484f472cc3c2f5264a4c2eb34f8b7f2a86fa520637915b9978db50"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_albedo.png",
+      "sha256": "e08c646cbf8f5690819258c382be942e3c2e8712700adb6fe91b2ed5935072f2"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_normal.png",
+      "sha256": "825f4849f1f54d8e6c33c15b8498e124472f82db0866e1b8f2c64227e29bc931"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_orm.png",
+      "sha256": "3c95dc6f7f060a7e735ba58831164cad05f6a9be080413f640b5f827f7b867af"
+    }
+  ],
+  "original_14_mapping": [
+    {
+      "original_class": "ammo_can",
+      "legacy_source": "ArtSource/build_ammo_can.py",
+      "legacy_source_sha256": "ec85acb6a008dcac86bd0042e2057989a83dd7ce82a7e71844e2848963157386",
+      "legacy_glb": "ArtSource/ammo_can.glb",
+      "legacy_glb_sha256": "bf04d7398d2b4f7b106f3056a279ddce9b2b3d13edd553189ba7acabf70199b1",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_ammo_can",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "decorative ammo container at courtyard crate edge; game loot identity external",
+      "interaction": "visual moving node and anchor present; game command wiring NOT implemented"
+    },
+    {
+      "original_class": "barbed_wire",
+      "legacy_source": "ArtSource/build_barbed_wire.py",
+      "legacy_source_sha256": "d8c26342151eabd1ff5653fd6530ed96b5474a0fcc946edf96321a81cc44b2ce",
+      "legacy_glb": "ArtSource/barbed_wire.glb",
+      "legacy_glb_sha256": "d35cea3fb2b6e334fc8d91cac77acd27f5a99e5a60c4128f49aba5ec506b9e33",
+      "legacy_runtime_reference": "not referenced (audit exception)",
+      "asset_id": "env_barbed_wire",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "original unreferenced 3D study; no legacy PNG runtime reference; decorative wire only",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "fence_section",
+      "legacy_source": "ArtSource/build_fence_section.py",
+      "legacy_source_sha256": "8c1119fc8c3a15233dbfb1fce8414e56764873a997088c37a0448667b76a91aa",
+      "legacy_glb": "ArtSource/fence_section.glb",
+      "legacy_glb_sha256": "a393c68c8675404c45aab69f4863b4b66e68f9570bf53bcce0ea372c6b515b32",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_fence_section",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "west alley overlay; no added logical blocker",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "field_radio",
+      "legacy_source": "ArtSource/build_field_radio.py",
+      "legacy_source_sha256": "8d8c81e98d959c0e18ef79e478f93794637677a6fcb36adb76f2dc3b6d48768e",
+      "legacy_glb": "ArtSource/field_radio.glb",
+      "legacy_glb_sha256": "973308158ac477b30acfd9b67ac89b5d544e81c7f862a75c763846e5c60e44d9",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "field_radio",
+      "mode": "reuse_baseline_bytes",
+      "purpose_candidate": "NE courtyard window decoration; not a new alarm owner",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "gun_case",
+      "legacy_source": "ArtSource/build_gun_case.py",
+      "legacy_source_sha256": "98bd0c66d1a6bc7b5beddeeca923027af08e4b6b702f5599a76789ac203f6511",
+      "legacy_glb": "ArtSource/gun_case.glb",
+      "legacy_glb_sha256": "1f8fc04324f7b12b34a43079bdddbdb4af6927cb6a9aaa322ae72fbad47247fd",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_gun_case",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "rifle case decoration; empty container, no R2 gun/tool duplication",
+      "interaction": "visual moving node and anchor present; game command wiring NOT implemented"
+    },
+    {
+      "original_class": "handcart",
+      "legacy_source": "ArtSource/build_handcart.py",
+      "legacy_source_sha256": "7c6e5b4a57db52bb4d6a865b831127bfde7436bbdda0e2f24e436c328b5e9193",
+      "legacy_glb": "ArtSource/handcart.glb",
+      "legacy_glb_sha256": "7e66fb67dc4516f7e9b57eaa13cf07f6b9434745a0ac284e5b01515d7b0020fa",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_handcart",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "east yard overlay outside walk spine; no blocking",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "jerry_can",
+      "legacy_source": "ArtSource/build_jerry_can.py",
+      "legacy_source_sha256": "586950982fada4558337de66e182b25465fcb357ff0983b09b9083b8e8634557",
+      "legacy_glb": "ArtSource/jerry_can.glb",
+      "legacy_glb_sha256": "ac20e3101b54a9d253ebf5c2aaf37231a4d1d4f07242f1f30199d4f67046bcd6",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_jerry_can",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "SW lip decoration; no new explosive behavior",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "lamp_post",
+      "legacy_source": "ArtSource/build_lamp_post.py",
+      "legacy_source_sha256": "cfd8f3200da12a0e94bc9fe19178491fbfa61b06f7807f30987a7a2627ea8281",
+      "legacy_glb": "ArtSource/lamp_post.glb",
+      "legacy_glb_sha256": "eb03de13b937791fc7614d1c9e5bd12f78a96ba9369bf01e7cd38533d1deceb1",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "yard_lamp",
+      "mode": "reuse_baseline_bytes",
+      "purpose_candidate": "existing warm-light landmark; no baked lights",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "oil_drum",
+      "legacy_source": "ArtSource/build_oil_drum.py",
+      "legacy_source_sha256": "1fe07089ecf925cc1b80b314b58c51688e8f4d8bf39733419bd2256648d4df89",
+      "legacy_glb": "ArtSource/oil_drum.glb",
+      "legacy_glb_sha256": "d782585c55022c2616efc9d518bbfed7d835f46fc84a5cb1054f6bc3fbcde3d9",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "oil_drum",
+      "mode": "reuse_baseline_bytes",
+      "purpose_candidate": "yard crate SE edge decoration; warehouse explosive identity only if assigned by integrator",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "rations_crate",
+      "legacy_source": "ArtSource/build_rations_crate.py",
+      "legacy_source_sha256": "0c06bb67de8e2060abb6ed2cc08b0267a54a908087c5609c355a92bb68d855c6",
+      "legacy_glb": "ArtSource/rations_crate.glb",
+      "legacy_glb_sha256": "f4eeb8830feaa68efedb37250c999b1769e4257a81cb7d54ed20c6b03b53837e",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_rations_crate",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "courtyard ration decoration; inventory remains external",
+      "interaction": "visual moving node and anchor present; game command wiring NOT implemented"
+    },
+    {
+      "original_class": "sandbag",
+      "legacy_source": "ArtSource/build_sandbag.py",
+      "legacy_source_sha256": "f959fdde729be57957c7e3a14cefe4a191ab9ef1200b85e9e73bd76ee157a250",
+      "legacy_glb": "ArtSource/sandbag.glb",
+      "legacy_glb_sha256": "3d5abc51c6838fe3d54bcf9e56ee6f7c98f00184d312a30d9db3d8f7470881bd",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "sandbag_stack",
+      "mode": "reuse_baseline_bytes",
+      "purpose_candidate": "west wall overlay; selected logical cover must be assigned externally",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "spare_tire",
+      "legacy_source": "ArtSource/build_spare_tire.py",
+      "legacy_source_sha256": "4463522c9201aea33a0c9eeb83081f874cbd5473115cc15b5c49af469237a845",
+      "legacy_glb": "ArtSource/spare_tire.glb",
+      "legacy_glb_sha256": "0a1a29ffcb98dc5b1d54e4bcb5e8944a10b5b81fe4ba9628d79984f3259d2511",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_spare_tire",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "bike wreck overlay; no collision",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "wooden_barrel",
+      "legacy_source": "ArtSource/build_wooden_barrel.py",
+      "legacy_source_sha256": "82ad1452c031a4a247a3044426dcb0d77c881f1e61ec57c282f489ba9e277c64",
+      "legacy_glb": "ArtSource/wooden_barrel.glb",
+      "legacy_glb_sha256": "f38a0a457e5c91fcbe9111b82257d3020bb8a51540a53813f8266f1d9bf986ed",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_wooden_barrel",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "west lip decoration; not warehouse explosive barrel",
+      "interaction": "decorative or reused visual; logic mapping belongs to integrator"
+    },
+    {
+      "original_class": "yard_crate",
+      "legacy_source": "ArtSource/build_yard_crate.py",
+      "legacy_source_sha256": "1ecab7e76aa56a2370ee881c968c5b8567e50f9d3ebd1efce9cb5299e3207971",
+      "legacy_glb": "ArtSource/yard_crate.glb",
+      "legacy_glb_sha256": "38c79bc1af59a56a5f624696df3ab904a83e95d25cd359376745167e6fc92ade",
+      "legacy_runtime_reference": "scripts/map_draw.gd fixed-angle overlay",
+      "asset_id": "env_yard_crate",
+      "mode": "new_environment_candidate",
+      "purpose_candidate": "supply crate display and external loot container mapping; hinged lid candidate",
+      "interaction": "visual moving node and anchor present; game command wiring NOT implemented"
+    }
+  ]
+}

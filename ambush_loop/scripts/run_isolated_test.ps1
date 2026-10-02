@@ -15,6 +15,7 @@ param(
         'actor_battle_test.gd',
         'audio_runtime_test.gd',
         'firearm_runtime_test.gd',
+        'environment_assets_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',

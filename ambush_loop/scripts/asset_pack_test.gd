@@ -75,6 +75,18 @@ func _run() -> void:
 	_check(yard != null and _meshes(yard) > 0 and Assets.has_asset("operator_rifle", 2), "pack retains old yard and all registered R4 character LODs")
 	if yard != null:
 		yard.free()
+	var environment_doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/environment_v2/manifest.json"))
+	_check(environment_doc.assets.size() == 40 and environment_doc.source_commit == Assets.ENVIRONMENT_REVISION, "all forty environment records retain provenance in the pack")
+	var environment_material := Assets.material_for_slot("environment_v2_atlas")
+	_check(environment_material != null and environment_material.albedo_texture != null and environment_material.normal_texture != null and environment_material.roughness_texture != null, "environment shared material and external textures load from the empty physical project")
+	for entry in environment_doc.assets:
+		for lod in entry.lods.size():
+			var model := Assets.instantiate(entry.asset_id, lod, Assets.ENVIRONMENT_REVISION)
+			_check(model != null and _meshes(model) > 0, "actual packed environment LOD loads: " + entry.asset_id)
+			if model != null:
+				for key in entry.get("moving_nodes", {}):
+					_check(model.find_child(entry.moving_nodes[key].node, true, false) != null, "packed active pivot remains available")
+				model.free()
 	Assets.release_materials()
 	root.get_node("AudioDirector")._stop_music_hard()
 	await process_frame
