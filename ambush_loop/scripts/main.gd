@@ -4992,7 +4992,7 @@ func _on_alarm_pressed() -> void:
 	leak_advice_shown = ""
 	_clear_intel_path_ghost()
 	sim.reset()
-	battle_log.clear()
+	battle_log.begin_attempt()
 	_watch_first_fire = false
 	_watch_first_return = false
 	_kill_combo = 0
@@ -5031,6 +5031,7 @@ func _on_alarm_pressed() -> void:
 	_update_tripwire_ghost()
 	battle_log.add_event(0, "door", -1, -1, Vector2.ZERO, {"locked": door_locked})
 	_queue_spawns(this_run)
+	battle_log.add_snapshot(0, _snapshot_data())
 	_set_watch_view_buttons(true)
 	if pause_button:
 		pause_button.disabled = false
@@ -6305,6 +6306,8 @@ func _on_replay_pressed() -> void:
 	_clear_replay_layer()
 	_apply_replay_scrub()
 	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
+	if replay.legacy_ambiguous:
+		status_label.text = "旧记录缺少波次边界，无法可靠复盘；原记录保留。空格返回"
 	_update_hud()
 
 
@@ -6954,7 +6957,7 @@ func _focus_battle_event(ev: Dictionary) -> void:
 	replay_focus_actor = int(ev.get("actor_id", -1))
 	replay_focus_type = str(ev.get("type", ""))
 	if phase == Phase.REPLAY:
-		replay.set_tick(int(ev["tick"]))
+		replay.set_tick(BattleLog.record_tick(ev))
 		_apply_replay_scrub()
 	var pos := _event_focus_position(ev)
 	if phase == Phase.REPLAY:
@@ -12086,6 +12089,7 @@ func _begin_next_wave() -> void:
 	var this_run := run_id
 	phase = Phase.WATCHING
 	sim.reset()
+	battle_log.begin_wave(raid.wave_index if raid else battle_log.wave_id + 1)
 	_watch_first_fire = false
 	_watch_first_return = false
 	_kill_combo = 0
@@ -12105,6 +12109,7 @@ func _begin_next_wave() -> void:
 			if op.fire_mode == OperatorUnit.FireMode.HOLD_FOR_AMBUSH:
 				op.arm_ambush()
 	_queue_spawns(this_run)
+	battle_log.add_snapshot(0, _snapshot_data())
 	_set_watch_view_buttons(true)
 	status_label.text = "警报 · 第%d波" % (raid.wave_index + 1 if raid else 1)
 	_update_hud()
@@ -12113,6 +12118,7 @@ func _begin_next_wave() -> void:
 func _extract_win() -> void:
 	phase = Phase.WON
 	battle_log.mark_terminal(sim.tick, "win")
+	battle_log.add_snapshot(sim.tick, _snapshot_data())
 	_ensure_watch_cinema()
 	if _watch_letterbox:
 		_watch_letterbox.visible = true

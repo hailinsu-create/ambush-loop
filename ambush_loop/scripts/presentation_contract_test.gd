@@ -161,5 +161,10 @@ func _battle(main: Node, rotate: bool, fps: int, speed: float) -> Dictionary:
 			main.presentation_3d.refresh()
 		frames += 1
 	_check(main.phase == main.Phase.SWEEP, "reference wave clears")
+	var events: Array = main.battle_log.events.duplicate(true)
+	# Independent recordings have independent identities, but identical combat.
+	for ev in events:
+		ev.erase("attempt_id")
+		ev.erase("event_id")
 	return {"phase": int(main.phase), "tick": main.sim.tick,
-		"state": main._snapshot_data().duplicate(true), "events": main.battle_log.events.duplicate(true)}
+		"state": main._snapshot_data().duplicate(true), "events": events}

@@ -7,23 +7,34 @@ extends RefCounted
 var log: BattleLog = null
 var scrub_tick: int = 0
 var playing: bool = false
+var legacy_ambiguous: bool = false
 
 
 func bind(p_log: BattleLog) -> void:
 	log = p_log
 	scrub_tick = 0
 	playing = false
-	if log != null and log.terminal_tick >= 0:
+	legacy_ambiguous = false
+	# An unversioned recording with a reset clock has no trustworthy mapping
+	# between its snapshot segments and events. Keep the source, refuse mixed scrub.
+	var previous := -1
+	if log != null:
+		for snap in log.snapshots:
+			var t := BattleLog.record_tick(snap)
+			if not snap.has("timeline_tick") and t < previous:
+				legacy_ambiguous = true
+			previous = t
+	if log != null and not legacy_ambiguous and log.terminal_tick >= 0:
 		scrub_tick = log.terminal_tick
 
 
 func max_tick() -> int:
-	if log == null:
+	if log == null or legacy_ambiguous:
 		return 0
 	if log.terminal_tick >= 0:
 		return log.terminal_tick
 	if not log.snapshots.is_empty():
-		return int(log.snapshots[log.snapshots.size() - 1]["tick"])
+		return BattleLog.record_tick(log.snapshots[log.snapshots.size() - 1])
 	return 0
 
 
@@ -36,11 +47,11 @@ func seek_ratio(r: float) -> void:
 
 
 func snapshot_at_or_before(tick: int) -> Dictionary:
-	if log == null or log.snapshots.is_empty():
+	if log == null or legacy_ambiguous or log.snapshots.is_empty():
 		return {}
 	var best: Dictionary = log.snapshots[0]
 	for s in log.snapshots:
-		if int(s["tick"]) <= tick:
+		if BattleLog.record_tick(s) <= tick:
 			best = s
 		else:
 			break
@@ -49,10 +60,10 @@ func snapshot_at_or_before(tick: int) -> Dictionary:
 
 func events_up_to(tick: int) -> Array:
 	var out: Array = []
-	if log == null:
+	if log == null or legacy_ambiguous:
 		return out
 	for ev in log.events:
-		if int(ev["tick"]) <= tick:
+		if BattleLog.record_tick(ev) <= tick:
 			out.append(ev)
 	return out
 

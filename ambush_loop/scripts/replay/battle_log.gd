@@ -7,6 +7,11 @@ var events: Array = [] # Dictionaries
 var snapshots: Array = [] # every ~0.1s
 var terminal_tick: int = -1
 var terminal_reason: String = ""
+const SCHEMA_VERSION := 2
+var attempt_id: String = ""
+var wave_id: int = 0
+var wave_offset: int = 0
+var _last_timeline_tick: int = -1
 
 
 func clear() -> void:
@@ -14,34 +19,65 @@ func clear() -> void:
 	snapshots.clear()
 	terminal_tick = -1
 	terminal_reason = ""
+	attempt_id = ""
+	wave_id = 0
+	wave_offset = 0
+	_last_timeline_tick = -1
+
+
+func begin_attempt(id: String = "") -> void:
+	clear()
+	# Stored with the recording; independent of the host's coroutine run token.
+	attempt_id = id if id != "" else Crypto.new().generate_random_bytes(16).hex_encode()
+
+
+func begin_wave(index: int) -> void:
+	if index == wave_id:
+		return
+	wave_id = index
+	wave_offset = _last_timeline_tick + 1
+
+
+func timeline_tick(local_tick: int) -> int:
+	return wave_offset + local_tick
+
+
+static func record_tick(record: Dictionary) -> int:
+	# Original single-wave snapshots/events used only tick.
+	return int(record.get("timeline_tick", record.get("tick", 0)))
+
+
+func _stamp(tick: int) -> Dictionary:
+	var global_tick := timeline_tick(tick)
+	_last_timeline_tick = maxi(_last_timeline_tick, global_tick)
+	return {"schema": SCHEMA_VERSION, "attempt_id": attempt_id,
+		"wave_id": wave_id, "tick": tick, "timeline_tick": global_tick}
 
 
 func add_event(tick: int, type: String, actor_id: int = -1, target_id: int = -1, pos: Vector2 = Vector2.ZERO, payload: Dictionary = {}) -> void:
-	events.append({
-		"tick": tick,
-		"seq": events.size(),
-		"type": type,
-		"actor_id": actor_id,
-		"target_id": target_id,
-		"position": pos,
-		"payload": payload,
-	})
+	var event := _stamp(tick)
+	event.merge({"seq": events.size(), "event_id": "%s:%d:%d" % [attempt_id, wave_id, events.size()],
+		"type": type, "actor_id": actor_id, "target_id": target_id,
+		"position": pos, "payload": payload.duplicate(true)})
+	events.append(event)
 
 
 func add_snapshot(tick: int, data: Dictionary) -> void:
-	snapshots.append({"tick": tick, "data": data})
+	var snapshot := _stamp(tick)
+	snapshot["data"] = data.duplicate(true)
+	snapshots.append(snapshot)
 
 
 func mark_terminal(tick: int, reason: String) -> void:
 	if terminal_tick >= 0:
 		return
-	terminal_tick = tick
+	terminal_tick = timeline_tick(tick)
 	terminal_reason = reason
 	add_event(tick, "terminal", -1, -1, Vector2.ZERO, {"reason": reason})
 
 
 func format_event(ev: Dictionary) -> String:
-	var t: float = float(ev["tick"]) / 60.0
+	var t: float = float(record_tick(ev)) / 60.0
 	var typ: String = str(ev["type"])
 	match typ:
 		"spawn":
@@ -173,15 +209,18 @@ func max_kill_combo(window_ticks: int = 48) -> int:
 	var best := 0
 	var run := 0
 	var last := -99999
+	var last_wave := -1
 	for ev in events:
 		if str(ev.get("type", "")) != "kill":
 			continue
-		var t := int(ev.get("tick", 0))
-		if t - last <= window_ticks and last >= 0:
+		var t := record_tick(ev)
+		var wave := int(ev.get("wave_id", 0))
+		if wave == last_wave and t - last <= window_ticks and last >= 0:
 			run += 1
 		else:
 			run = 1
 		last = t
+		last_wave = wave
 		best = maxi(best, run)
 	return best
 

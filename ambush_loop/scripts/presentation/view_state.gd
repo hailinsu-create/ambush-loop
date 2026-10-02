@@ -6,6 +6,8 @@ extends RefCounted
 static func capture(host: Node) -> Dictionary:
 	var frame := {
 		"run_id": host.run_id, "tick": host.sim.tick, "phase": int(host.phase),
+		"schema": BattleLog.SCHEMA_VERSION, "attempt_id": host.battle_log.attempt_id,
+		"wave_id": host.battle_log.wave_id, "local_tick": host.sim.tick,
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"selected_id": host.selected.op_id if host.selected != null else -1,
 		"escape": host.escape_world, "replay": host.phase == host.Phase.REPLAY,
@@ -18,6 +20,12 @@ static func capture(host: Node) -> Dictionary:
 	if frame.replay:
 		var snap: Dictionary = host.replay.snapshot_at_or_before(host.replay.scrub_tick)
 		frame.tick = host.replay.scrub_tick
+		frame.run_id = -1
+		frame.schema = int(snap.get("schema", 1))
+		frame.attempt_id = str(snap.get("attempt_id", ""))
+		frame.wave_id = int(snap.get("wave_id", -1))
+		frame.local_tick = int(snap.get("tick", 0))
+		frame.events = host.replay.events_up_to(host.replay.scrub_tick).duplicate(true)
 		var data: Dictionary = snap.get("data", {})
 		# Missing historical fields use neutral defaults, never live actor equipment.
 		for op in data.get("ops", []):
@@ -32,6 +40,8 @@ static func capture(host: Node) -> Dictionary:
 			copy["facing"] = float(copy.get("facing", 90.0))
 			frame.enemies.append(copy)
 	else:
+		frame.tick = host.battle_log.timeline_tick(host.sim.tick)
+		frame.events = host.battle_log.events.duplicate(true)
 		for op in host.operators:
 			frame.ops.append({"id": op.op_id, "pos": op.global_position,
 				"active": op.visible, "alive": op.alive, "hp": op.hp, "ammo": op.ammo,

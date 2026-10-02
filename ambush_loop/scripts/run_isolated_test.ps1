@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotExe,
     [ValidateSet(
+        'replay_timeline_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',
