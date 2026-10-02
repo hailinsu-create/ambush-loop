@@ -17,13 +17,16 @@ func bind(p_log: BattleLog) -> void:
 	legacy_ambiguous = false
 	# An unversioned recording with a reset clock has no trustworthy mapping
 	# between its snapshot segments and events. Keep the source, refuse mixed scrub.
-	var previous := -1
 	if log != null:
-		for snap in log.snapshots:
-			var t := BattleLog.record_tick(snap)
-			if not snap.has("timeline_tick") and t < previous:
-				legacy_ambiguous = true
-			previous = t
+		# Either stream can reveal a missing wave boundary. A sparse snapshot
+		# stream does not make a regressing event stream safe to mix.
+		for records in [log.snapshots, log.events]:
+			var previous := -1
+			for record in records:
+				var t := BattleLog.record_tick(record)
+				if not record.has("timeline_tick") and t < previous:
+					legacy_ambiguous = true
+				previous = t
 	if log != null and not legacy_ambiguous and log.terminal_tick >= 0:
 		scrub_tick = log.terminal_tick
 

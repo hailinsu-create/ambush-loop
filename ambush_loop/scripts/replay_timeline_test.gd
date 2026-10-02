@@ -88,6 +88,13 @@ func _legacy() -> void:
 	player.bind(old)
 	_check(player.legacy_ambiguous and player.snapshot_at_or_before(3).is_empty() and player.events_up_to(3).is_empty(), "ambiguous unversioned reset recording cannot mix waves")
 	_check(old.snapshots == retained, "legacy source records are retained unchanged")
+	var event_reset := BattleLog.new()
+	event_reset.snapshots = [{"tick": 0, "data": {"ops": []}}, {"tick": 6, "data": {"ops": []}}]
+	event_reset.events = [{"tick": 3, "type": "fire"}, {"tick": 0, "type": "spawn"}]
+	var retained_events: Array = event_reset.events.duplicate(true)
+	player.bind(event_reset)
+	_check(player.legacy_ambiguous and player.snapshot_at_or_before(0).is_empty() and player.events_up_to(0).is_empty(), "event-only clock reset is also ambiguous and cannot expose the later spawn early")
+	_check(event_reset.events == retained_events and event_reset.snapshots.size() == 2, "event-only ambiguous source arrays remain intact")
 
 
 func _recording_contract() -> void:

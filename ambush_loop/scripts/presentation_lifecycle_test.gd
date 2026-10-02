@@ -106,7 +106,7 @@ func _run() -> void:
 	await _key(KEY_I)
 	_check(not main.backpack_panel.is_open(), "native I rejects paused ALERT backpack")
 	main.sim.paused = false
-	for i in 30:
+	for i in 60:
 		main._sim_tick()
 	var ev: Dictionary = main.battle_log.last_of_type("spawn")
 	var snapshot: Dictionary = main.replay.snapshot_at_or_before(0)
@@ -122,6 +122,14 @@ func _run() -> void:
 	_check(view._event_ring.visible and view._event_ring.position.distance_to(Space.logic_to_world(expected, 0.065)) < 0.001, "3D event ring uses recorded position")
 	_check(view.rig.focus.distance_to(Space.logic_to_world(expected)) < 0.001, "3D event focus moves the camera")
 	_check(before == main._snapshot_data(), "3D focus does not write live combat state")
+	_check(BattleLog.record_tick(ev) > 0, "focus regression uses an actual delayed spawn")
+	main.replay.set_tick(BattleLog.record_tick(ev) - 1)
+	main._apply_replay_scrub()
+	view.refresh()
+	_check(not view._event_ring.visible, "backward scrub before the focused event clears its future ring within the same wave")
+	main._focus_battle_event(ev)
+	view.refresh()
+	_check(view._event_ring.visible, "refocusing a recorded event restores its ring")
 	if DisplayServer.get_name() != "headless":
 		var output := "res://build/asset_review/pr15-runtime"
 		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
