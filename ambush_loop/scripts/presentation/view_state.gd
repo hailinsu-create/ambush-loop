@@ -22,6 +22,8 @@ static func capture(host: Node) -> Dictionary:
 		"wave_id": int(snap.get("wave_id", -1)) if historical else host.battle_log.wave_id,
 		"local_tick": int(snap.get("tick", 0)) if historical else host.sim.tick,
 		"visual_schema": visual_schema, "historical_defaults": historical and visual_schema == 0,
+		"hud_schema": int(data.get("hud_schema", 0)), "level_title": str(data.get("level_title", "历史关卡")),
+		"attempt_number": int(data.get("attempt_number", -1)), "wave_count": int(data.get("wave_count", -1)),
 		"visual_unsupported": unsupported,
 		"level_id": str(data.get("level_id", "")), "blocked": data.get("blocked", PackedByteArray()).duplicate(),
 		"selected_id": int(data.get("selected_id", -1)), "escape": data.get("escape", Vector2.ZERO),

@@ -14,7 +14,8 @@ func capture(host: Node) -> Dictionary:
 		_identity = identity
 		_objects.clear()
 		_next_ids.clear()
-	var data := {"visual_schema": FORMAT_VERSION, "phase": int(host.phase),
+	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
+		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,
 		"selected_id": host.selected.op_id if host.selected != null else -1,
@@ -37,6 +38,11 @@ func capture(host: Node) -> Dictionary:
 		elif op.locked:
 			action = "aim"
 		data.ops.append({"id": op.op_id, "pos": op.global_position, "active": op.visible,
+			"display_name": op.display_name, "role_label": OperatorUnit.role_display(op.role),
+			"weapon_label": WeaponCatalog.display_name(op.weapon_id) if op.weapon_id != "knife" else "匕首",
+			"inventory_line": op.inventory_line(), "fire_mode_label": op.fire_mode_label(),
+			"max_ammo": op.max_ammo, "start_ammo": op.start_ammo, "max_hp": OperatorUnit.MAX_HP,
+			"follow_lead": op.follow_lead, "cover_label": op.slot.label_text if op.slot != null else "机动",
 			"hp": op.hp, "ammo": op.ammo, "alive": op.alive, "facing": op.facing_deg,
 			"role": op.role, "weapon": op.weapon_id, "moving": op.is_moving(),
 			"stance": op.stance, "sprinting": op.sprinting, "hidden": op.hidden_in_shadow,

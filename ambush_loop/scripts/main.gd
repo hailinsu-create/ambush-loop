@@ -92,6 +92,8 @@ const RaidDecoyScript := preload("res://scripts/raid/decoy.gd")
 const BackpackPanelScript := preload("res://scripts/ui/backpack_panel.gd")
 const C2DirectorScript := preload("res://scripts/c2/c2_director.gd")
 const VisualSnapshotScript := preload("res://scripts/replay/visual_snapshot.gd")
+const ViewStateScript := preload("res://scripts/presentation/view_state.gd")
+const HudRecord := preload("res://scripts/replay/hud_record.gd")
 
 var grid: AmbushGrid = AmbushGrid.new()
 var phase: Phase = Phase.SETUP
@@ -4084,6 +4086,16 @@ func _refresh_selection_visual() -> void:
 func _refresh_mode_pack_buttons() -> void:
 	if bag_button:
 		bag_button.disabled = not _can_edit_equipment()
+	if phase == Phase.REPLAY:
+		var op := HudRecord.selected(replay_hud_frame())
+		if mode_button:
+			mode_button.text = "开火: %s" % str(op.get("fire_mode_label", "未记录"))
+			mode_button.disabled = true
+		if pack_button:
+			pack_button.visible = false
+		return
+	if mode_button:
+		mode_button.disabled = not _is_command_phase()
 	if mode_button and selected:
 		mode_button.text = "开火: %s (F)" % selected.fire_mode_label()
 	if pack_button:
@@ -4982,6 +4994,9 @@ func raid_force_alarm() -> void:
 
 
 func _on_alarm_pressed() -> void:
+	if phase == Phase.REPLAY:
+		_exit_replay_to_setup()
+		return
 	if phase == Phase.SWEEP:
 		_on_sweep_commit()
 		return
@@ -6886,6 +6901,11 @@ func _redraw_ghosts() -> void:
 
 func _ammo_summary() -> String:
 	var parts: PackedStringArray = []
+	if phase == Phase.REPLAY:
+		for op in replay_hud_frame().ops:
+			if bool(op.get("active", true)):
+				parts.append("%s:%s" % [HudRecord.operator_name(op), str(op.get("ammo", "—"))])
+		return "  ".join(parts)
 	for op in operators:
 		if op.visible:
 			if not op.alive:
@@ -7211,9 +7231,18 @@ func result_cta_buried_by_bars() -> bool:
 func _update_hud() -> void:
 	var lv_title := level.title if level else "AMBUSH LOOP"
 	title_label.text = "AMBUSH LOOP  ·  第 %d 世  ·  波 %d/%d" % [loop_index, wave_index() + 1, wave_total()]
+	if phase == Phase.REPLAY:
+		var history := replay_hud_frame()
+		lv_title = str(history.level_title)
+		var attempt := str(history.attempt_number) if int(history.attempt_number) > 0 else "—"
+		var wave := str(int(history.wave_id) + 1) if int(history.wave_id) >= 0 else "—"
+		var total := str(history.wave_count) if int(history.wave_count) > 0 else "—"
+		title_label.text = "AMBUSH LOOP  ·  第 %s 世  ·  波 %s/%s" % [attempt, wave, total]
 	if level_label:
 		level_label.text = lv_title
-	if tut_label and level:
+	if tut_label and phase == Phase.REPLAY:
+		tut_label.text = ""
+	elif tut_label and level:
 		tut_label.text = level.tutorial if phase == Phase.SETUP else level.teaching
 	_hide_duplicate_tut()
 	_sync_desktop_bars(not _want_touch())
@@ -7238,6 +7267,8 @@ func _update_hud() -> void:
 	_refresh_checklist()
 	_refresh_decision_pulse()
 	for op in operators:
+		if phase == Phase.REPLAY:
+			break
 		if op == null or not is_instance_valid(op):
 			continue
 		op.tag_emphasis = phase == Phase.WATCHING and op.alive and op.slot != null
@@ -7548,7 +7579,16 @@ func _update_cover_previews() -> void:
 func _update_role_cards() -> void:
 	_apply_result_rail()
 	if role_box:
-		role_box.modulate = Color(1, 1, 1, 0.45) if phase == Phase.REPLAY else Color.WHITE
+		role_box.modulate = Color.WHITE
+	if phase == Phase.REPLAY:
+		var history := replay_hud_frame()
+		for i in role_cards.size():
+			var op := HudRecord.operator_at(history, i)
+			role_cards[i].bind_record(op, int(op.get("id", -2)) == int(history.selected_id))
+		if plan_readout:
+			var op := HudRecord.selected(history)
+			plan_readout.text = "历史选择未记录" if op.is_empty() else "%s · %s\n%s · 射界朝%s" % [HudRecord.operator_name(op), str(op.get("cover_label", "掩体未记录")), HudRecord.inventory_line(op), _compass_deg(float(op.get("facing", 90.0)))]
+		return
 	for i in role_cards.size():
 		var card: OpCard = role_cards[i]
 		if i >= operators.size():
@@ -7584,6 +7624,10 @@ func _update_role_cards() -> void:
 
 func _is_command_phase() -> bool:
 	return phase == Phase.SETUP or phase == Phase.SWEEP
+
+
+func replay_hud_frame() -> Dictionary:
+	return ViewStateScript.capture(self) if phase == Phase.REPLAY else {}
 
 
 func phase_id() -> String:
@@ -12186,6 +12230,9 @@ func _refresh_alarm_cta() -> void:
 		Phase.WATCHING:
 			alarm_button.text = "警报中"
 			alarm_button.disabled = true
+		Phase.REPLAY:
+			alarm_button.text = "返回搜刮"
+			alarm_button.disabled = false
 		_:
 			alarm_button.disabled = true
 	var now := str(alarm_button.text)

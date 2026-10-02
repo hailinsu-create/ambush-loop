@@ -11,6 +11,9 @@ var _host: Node = null
 var _hint: Label = null
 var _row_setup: HBoxContainer = null
 var _row_watch: HBoxContainer = null
+var _replay_controls: VBoxContainer = null
+var _replay_time: Label = null
+var _replay_scrub: HSlider = null
 var _stack_secondary: VBoxContainer = null
 var _twist_pair: HBoxContainer = null
 var _safe: MarginContainer = null
@@ -200,6 +203,25 @@ func _build() -> void:
 	col.add_theme_constant_override("separation", 6)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_safe.add_child(col)
+	_replay_controls = VBoxContainer.new()
+	_replay_controls.name = "ReplayControls"
+	_replay_controls.visible = false
+	col.add_child(_replay_controls)
+	_replay_time = Label.new()
+	_replay_time.theme = NightOps.theme()
+	_replay_time.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_replay_controls.add_child(_replay_time)
+	_replay_scrub = HSlider.new()
+	_replay_scrub.name = "ReplayScrub"
+	_replay_scrub.min_value = 0.0
+	_replay_scrub.max_value = 1.0
+	_replay_scrub.step = 0.001
+	_replay_scrub.custom_minimum_size = Vector2(160, 36)
+	_replay_scrub.value_changed.connect(func(value: float) -> void:
+		if _host != null and _host.phase == _host.Phase.REPLAY:
+			_host._on_scrub_changed(value)
+	)
+	_replay_controls.add_child(_replay_scrub)
 
 	_row_setup = HBoxContainer.new()
 	_row_setup.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -555,9 +577,13 @@ func refresh_phase(
 ) -> void:
 	_apply_safe_area()
 	if _row_setup:
-		_row_setup.visible = phase_name == "SETUP" or phase_name == "SWEEP"
+		_row_setup.visible = phase_name in ["SETUP", "SWEEP", "REPLAY"]
 	if _row_watch:
-		_row_watch.visible = phase_name != "SETUP" and phase_name != "SWEEP"
+		_row_watch.visible = phase_name not in ["SETUP", "SWEEP", "REPLAY"]
+	_replay_controls.visible = phase_name == "REPLAY"
+	if _replay_controls.visible and _host != null:
+		_replay_time.text = "复盘 %.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
+		_replay_scrub.set_value_no_signal(float(_host.replay.scrub_tick) / maxf(float(_host.replay.max_tick()), 1.0))
 	match phase_name:
 		"SETUP":
 			set_hint("点地走 · 短拖拖图 · 长按跑 · 近背面绕背/割喉 · 角标跟上 · 匍匐 · 按住↺/↻或左右滑拧射界 · 拉警报")
@@ -626,16 +652,19 @@ func refresh_phase(
 		if _wave_chip:
 			_wave_chip.visible = false
 	_paint_crouch_sticky()
-	_hide_overflow()
+	_hide_overflow(phase_name == "REPLAY")
 	_paint_lock_states(phase_name)
 
 
-func _hide_overflow() -> void:
+func _hide_overflow(replay_mode: bool = false) -> void:
 	for cmd in _btns.keys():
 		var b: Button = _btns[cmd]
 		if b == null:
 			continue
 		var c := str(cmd)
+		if replay_mode:
+			b.visible = c == "alarm"
+			continue
 		if SETUP_RESIDENT.has(c) or WATCH_RESIDENT.has(c):
 			b.visible = true
 			continue
@@ -647,7 +676,12 @@ func _paint_crouch_sticky() -> void:
 		return
 	var b: Button = _btns["crouch"]
 	var crouched := false
-	if _host != null and _host.get("selected") != null:
+	if _host != null and _host.phase == _host.Phase.REPLAY:
+		var history: Dictionary = _host.replay_hud_frame()
+		for op in history.get("ops", []):
+			if int(op.get("id", -2)) == int(history.get("selected_id", -1)):
+				crouched = int(op.get("stance", 0)) == 1
+	elif _host != null and _host.get("selected") != null:
 		var op = _host.selected
 		crouched = op.get("stance") != null and int(op.stance) == 1
 	b.text = "匍中" if crouched else "匍匐"

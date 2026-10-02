@@ -15,6 +15,7 @@ const ShadowScript := preload("res://scripts/c2/shadow_layer.gd")
 const RingScript := preload("res://scripts/c2/sound_ring.gd")
 const PromptScript := preload("res://scripts/c2/context_prompt.gd")
 const WheelScript := preload("res://scripts/c2/skill_wheel.gd")
+const Space := preload("res://scripts/presentation/world_space.gd")
 
 var host: Node = null
 var sentries: Array = []
@@ -489,6 +490,11 @@ func _tick_arrows(delta: float) -> void:
 func _pan_to(world: Vector2) -> void:
 	if host == null:
 		return
+	if host.presentation_3d != null:
+		host.presentation_3d.cancel_input()
+		host.presentation_3d.rig.focus = Space.logic_to_world(world)
+		host.presentation_3d.rig.apply_pose()
+		return
 	var center := Vector2(640, 360)
 	host._cam_pan = (world - center) * 0.42
 	if host.has_method("_apply_cam"):
@@ -793,6 +799,16 @@ func refresh_hud() -> void:
 	refresh_hud_light()
 	var phone := _is_phone()
 	layout_chrome(phone)
+	if host != null and host.phase == host.Phase.REPLAY:
+		if skill_bar:
+			skill_bar.visible = false
+		if minimap:
+			minimap.bind_history(host.replay_hud_frame())
+		if cursor:
+			cursor.visible = false
+		if prompt:
+			prompt.visible = false
+		return
 	if skill_bar and host:
 		var cds: Dictionary = {}
 		if host.selected:
@@ -810,7 +826,10 @@ func refresh_hud() -> void:
 
 func refresh_hud_light() -> void:
 	if portraits and host:
-		portraits.bind_ops(host.operators, host.selected, bool(host._is_command_phase()) if host.has_method("_is_command_phase") else true)
+		if host.phase == host.Phase.REPLAY:
+			portraits.bind_history(host.replay_hud_frame())
+		else:
+			portraits.bind_ops(host.operators, host.selected, bool(host._is_command_phase()) if host.has_method("_is_command_phase") else true)
 
 
 func sentry_count() -> int:
