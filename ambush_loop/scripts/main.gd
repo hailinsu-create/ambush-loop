@@ -12098,6 +12098,7 @@ func _on_pack_drop(kind: String) -> void:
 	if not bool(rec.get("ok", false)):
 		status_label.text = str(rec.get("text", "丢不掉"))
 		return
+	visual_snapshot.cancel_utility(selected.op_id)
 	_spawn_loot_at(selected.global_position + Vector2(16, 12), int(rec.get("amount", 1)), str(rec.get("kind", kind)))
 	status_label.text = str(rec.get("text", "丢掉"))
 	_sfx("ui")
