@@ -1,0 +1,15 @@
+{
+  "base_source_sha": "4dea88b264d57f21da589ab5ad7a6ceb18662d43",
+  "branch": "feat/audio-v2-candidate-20261002",
+  "observed_pr15_head": "b43e1e38e97257a26a49b39e716bb4485c3bc1ac",
+  "base_scopes_absent": true,
+  "observed_pr15_scopes_absent": true,
+  "write_scope": [
+    "ambush_loop/ArtSource/audio_v2/",
+    "ambush_loop/art/audio_v2/"
+  ],
+  "scope_audit": "git diff --name-only BASE..delivery must contain only these prefixes",
+  "main_integration_author": "01a0fcab-4daa-716b-8d26-e998edbb30bd",
+  "pr15_not_pushed": true,
+  "old_audio_not_overwritten": true
+}

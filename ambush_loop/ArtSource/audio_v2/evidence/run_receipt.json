@@ -1,0 +1,63 @@
+{
+  "validated_source_sha": "86df6d0b4af9f30f3f1e670207cc54b22e2f043b",
+  "base_source_sha": "4dea88b264d57f21da589ab5ad7a6ceb18662d43",
+  "recorded_utc": "2026-10-02T15:49:06.142887+00:00",
+  "technical_exit": 0,
+  "reproducibility_exit": 0,
+  "engine_runner_exit": 0,
+  "engine_stages_exits": [
+    0,
+    0
+  ],
+  "completion_markers": [
+    "AUDIO_V2_TECHNICAL_OK",
+    "AUDIO_V2_REPRODUCIBLE_OK",
+    "AUDIO_V2_GODOT_VALIDATION_OK"
+  ],
+  "scope_only_new_audio_v2": true,
+  "changed_source_paths": 107,
+  "listening_status": "NOT_LISTENED_NO_AUDIO_CAPABILITY",
+  "commands": [
+    "python3 ambush_loop/ArtSource/audio_v2/validate_audio.py --source-sha 86df6d0b4af9f30f3f1e670207cc54b22e2f043b",
+    "python3 ambush_loop/ArtSource/audio_v2/reproduce.py --source-sha 86df6d0b4af9f30f3f1e670207cc54b22e2f043b",
+    "python3 ambush_loop/ArtSource/audio_v2/run_engine_validation.py --godot /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --source-sha 86df6d0b4af9f30f3f1e670207cc54b22e2f043b"
+  ],
+  "evidence_files": [
+    {
+      "path": "environment.json",
+      "sha256": "546ba81168c07de899375e12a11b9d2c95ec55745d7a00397d032c6a7a158537"
+    },
+    {
+      "path": "godot_import.log",
+      "sha256": "c53cd9da7c9c0b803da2969a3b94b09dc91dad7c461cb27a363539711ff66be4"
+    },
+    {
+      "path": "godot_probe.log",
+      "sha256": "fda98fac293979ce08d95f1b9c631a168aa4a3fe8a446fde34bfb8b1ffbad0c2"
+    },
+    {
+      "path": "godot_report.json",
+      "sha256": "855abf10ccd8613899c688b4329efdba1583de1c07dc23f0245f28807816afeb"
+    },
+    {
+      "path": "ownership.json",
+      "sha256": "e2a2aee3db4163b5ba330da01d744efb498042074dbc7144d7795b6c58e64101"
+    },
+    {
+      "path": "rebuild_1.log",
+      "sha256": "eb8ec5a40d4c74ff9300b8e23b9fb2f3e36a9e1527b0c21023e5b45ced26437c"
+    },
+    {
+      "path": "rebuild_2.log",
+      "sha256": "ac198c3d02bd349947a905dd41d1b2e50a80bfe4785abfaf2c6e58d300675cd3"
+    },
+    {
+      "path": "reproducibility_report.json",
+      "sha256": "0801d9333e4c6c5d1719d72a02c686883d74c8dc18d1e5d246f5faf11da8f958"
+    },
+    {
+      "path": "technical_report.json",
+      "sha256": "08469585e46398439f3cc3a791128eb7e19b95455c2b683aefe2de7b5616ebf0"
+    }
+  ]
+}
