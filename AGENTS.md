@@ -2,6 +2,8 @@
 
 - Godot 工程在 `ambush_loop/`，版本固定为 4.7.2；先读根 README、`ambush_loop/README.md`、`.cursor/docs/PLANNING_INDEX.md` 与其中的当前有效规划。
 - 当前产品设计与阶段优先级以 `.cursor/docs/AMBUSH_DESIGN_V2_20260928.md` 为准；旧总计划保留工程/发行质量门槛。设计提案不代表代码已实现；高度等新规则必须独立切片声明契约变化并验证。
+- 资产与镜头补充见 `.cursor/docs/AMBUSH_ASSET_UPGRADE_20261002.md`：用户已确认更写实的厚重细节、水平 360° 旋转、受限俯角与缩放，替代 v2 的固定镜头要求；工具可按需选择和安装。实时 3D 表现路线仍须样板验证，不代表旋转、新资产或高度玩法已实现。
+- 资产实施入口为 `.cursor/docs/AMBUSH_ASSET_EXECUTION_PLAN_20261002.md`：中端安卓 30 FPS/高配可选 60 FPS、暮色冷灰环境光与局部暖灯已确认。按 A0–A4 切片推进，保留单一战术逻辑状态；旋转、3D 显示或回放不得改写冻结方案及活体状态。计划中的预算与功能尚需实际验证。
 - 每次规划必须保存为 `.cursor/docs/` 下带日期的文档，更新 `PLANNING_INDEX.md` 的有效入口、替代关系、当前状态和下一步，并通过本游戏仓库的分支/PR 流程同步 GitHub。区分提案、已确认、已实现和已验证；保留历史规划，不混入未验收代码。只有核对远端提交后才能报告已同步；失败时明确标注仅本地保存。具体内容要求见规划索引。
 - 修改玩法遵守 `SCOUT → ALERT → SWEEP` 与冻结计划契约。不要顺手加入第七夜、FOW、联网或大规模战斗重写。
 - 运行会清理测试档的脚本时必须走 `ambush_loop/scripts/run_isolated_test.ps1` 或 `.sh` 包装器，先确认隔离守卫通过。不能直接调用 `smoke_test.gd`。

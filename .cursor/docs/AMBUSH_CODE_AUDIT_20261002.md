@@ -6,7 +6,7 @@
 
 用户要求审计项目，重点寻找代码优化机会，在新的 `lning` 分支目录通过 PR 交付，并提供实际运行截图。代码分支与工作目录为 `lning`；审计文档使用独立的 `lning-audit` 分支。游戏基线仍为 v0.6.28 / Android code 77。
 
-本记录补充代码质量审计与一个性能切片，不替代设计 v2、M0 真机门槛或现有玩法契约。当前状态：静态审计、寻路优化、针对性与完整回归、实际截图均已完成；代码和审计分支已推送并核对，已创建代码 PR #11 与审计 PR #12，均未合并。实现提交：`989f8ebb5bdf5f6ff2bef3542f93349c06f40117`。
+本记录补充代码质量审计与一个性能切片，不替代设计 v2、M0 真机门槛或现有玩法契约。当前状态：静态审计、寻路优化、针对性与完整回归、实际截图均已完成；代码 PR #11 与审计 PR #12 已于 2026-10-02 按用户明确要求合并，并核对远端状态。实现提交仍为 `989f8ebb5bdf5f6ff2bef3542f93349c06f40117`，原测试证据未改变。
 
 范围：GDScript 主循环、寻路、存档访问、回放和测试入口。此次不是完整安全审计；不增加玩法、高度系统、新关卡或联网，不修改数值、邻居访问顺序和同代价路径的选择规则。
 
@@ -97,5 +97,5 @@ bash ambush_loop/scripts/run_isolated_test.sh /path/to/godot
 
 - 代码：`lning`，已通过 `git ls-remote` 核对远端为 `989f8ebb5bdf5f6ff2bef3542f93349c06f40117`。
 - 审计与精选证据：独立分支 `lning-audit`，不混入游戏源码改动。
-- 已创建 [代码 PR #11](https://github.com/hailinsu-create/ambush-loop/pull/11)（`lning → main`）与 [审计 PR #12](https://github.com/hailinsu-create/ambush-loop/pull/12)（`lning-audit → main`），并关联到本次任务；均未合并。
-- 本次恢复仅完成 PR 交付及文档状态更新，已验证的游戏代码提交未改变。后续按各 PR 的评审结果处理，不自动合并。
+- [代码 PR #11](https://github.com/hailinsu-create/ambush-loop/pull/11)（`lning → main`）与 [审计 PR #12](https://github.com/hailinsu-create/ambush-loop/pull/12)（`lning-audit → main`）均已于 2026-10-02 按用户要求合并；合并提交分别为 `fd34450d201dc6d7436ce0a831a0a3507f357a33`、`c1aaf27c23f8f711f23305bf6f3223c38cb69098`。
+- 两项合并已核对 GitHub 状态和远端 `main`。后续资产与旋转场景讨论在独立分支/PR 推进，详见[资产升级讨论稿](AMBUSH_ASSET_UPGRADE_20261002.md)；不把原寻路测试作为新资产或 3D 功能的验收。
