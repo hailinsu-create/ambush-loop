@@ -1,5 +1,7 @@
 # Ambush Loop 工作说明
 
+- 2026-10-02 本轮已按用户要求交接并暂停，后续由 dot 统一安排。先读 `.cursor/docs/AMBUSH_HANDOFF_TO_DOT_20261002.md`；WIP 人物源含未处理网格告警，不能视为已验收或自动继续施工。
+
 - Godot 工程在 `ambush_loop/`，版本固定为 4.7.2；先读根 README、`ambush_loop/README.md`、`.cursor/docs/PLANNING_INDEX.md` 与其中的当前有效规划。
 - 当前产品设计与阶段优先级以 `.cursor/docs/AMBUSH_DESIGN_V2_20260928.md` 为准；旧总计划保留工程/发行质量门槛。设计提案不代表代码已实现；高度等新规则必须独立切片声明契约变化并验证。
 - 当前实施顺序以 `.cursor/docs/AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md` 为准：用户要求先完成全部资产、六关接入及云端验证，之后再安排模拟器/真机；替代 PR #14 中设备检查阻塞生产的顺序。中端安卓 30 FPS/高配可选 60 FPS、暮色工业院落和 360° 镜头为目标。表现与回放不得改写模拟状态，未测真机不得称通过。
