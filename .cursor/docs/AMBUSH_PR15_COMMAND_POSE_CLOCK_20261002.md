@@ -16,6 +16,8 @@
 
 ## 固定源实际结果
 
+dot独立复验回报（2026-10-02，源98075ca7d6f0636f0aef5008c43ea785c1990049）：原dead/walk退出0，simtick1056保持、death0.016667→0.816667且20bone变、移动walk；独立68/0覆盖pause/background叠加、ALERT1×/2×、正常双波终局record、liveclock/weapon污染、倒退跨波seek。独立判定SWEEPclock P2闭合，无新运行P1/P2。仓库29/0复跑，首次29/2为PNG目录缺失且保留、不计通过。本段为父端报告，未冒称主作者重跑；连续SWEEP时间轴、FAILED/abort终局、当前全smoke/设备/耳听仍未验，R4全回归未独立重跑。
+
 完整命令/cwd/run_id/退出码/哈希在 [validation.json](evidence/20261002-pr15-command-pose/validation.json)。Godot 4.7.2 `ed1daf0bf`，所有入口走独立XDG/StorageGuard，均实际退出0：
 
 | 入口 | 结果 |

@@ -2,7 +2,8 @@ extends RefCounted
 
 const VisualSnapshot := preload("res://scripts/replay/visual_snapshot.gd")
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
-const GROUPS := ["ops", "enemies", "sentries", "stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys"]
+const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
+const GROUPS := ["ops", "enemies", "sentries", "stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys", "environment_objects"]
 
 ## Historical frames use only the selected record, including its world layout,
 ## equipment and object state. No nodes or live containers cross the seam.
@@ -33,6 +34,10 @@ static func capture(host: Node) -> Dictionary:
 		"animation_schema": int(data.get("animation_schema", 0)),
 		"actor_asset_revision": str(data.get("actor_asset_revision", "")),
 		"animation_supported": ActorPose.supported(data),
+		"environment_schema": int(data.get("environment_schema", 0)),
+		"environment_revision": str(data.get("environment_revision", "")),
+		"environment_layout_revision": str(data.get("environment_layout_revision", "")),
+		"environment_supported": EnvironmentScene.supported(data),
 		"pose_snapshot_delta_s": snapshot_delta if simulation_clock else 0.0,
 		"pose_clock_s": float(data.get("pose_clock_s", 0.0)) + (snapshot_delta if simulation_clock else 0.0),
 		"event_pose_schema": 1 if event_clock_valid else 0,
@@ -40,6 +45,7 @@ static func capture(host: Node) -> Dictionary:
 		"level_id": str(data.get("level_id", "")), "blocked": data.get("blocked", PackedByteArray()).duplicate(),
 		"selected_id": int(data.get("selected_id", -1)), "escape": data.get("escape", Vector2.ZERO),
 		"door_locked": bool(data.get("door_locked", false)), "replay": historical,
+		"has_door": bool(data.get("has_door", false)), "door_pos": data.get("door_pos", Vector2.ZERO),
 		"events": host.replay.events_up_to(host.replay.scrub_tick).duplicate(true) if historical else host.battle_log.events.duplicate(true),
 	}
 	for group in GROUPS:

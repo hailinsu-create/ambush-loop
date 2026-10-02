@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "IMMUTABLE_CANDIDATE_ADOPTED_RUNTIME_TEST_PENDING",
+  "status": "RESOURCE_INTERFACE_ACCEPTED_SIX_LEVEL_SCENE_INTEGRATION_CLOUD_TEST_PENDING",
   "source_commit": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
   "delivery_commit": "9c06f04cf7795faf69d9d69d0f853f30ccf80838",
   "axes": "+Y up / -Z forward, 1 cell = 1 metre, visual only",
@@ -3306,5 +3306,16 @@
       "purpose_candidate": "supply crate display and external loot container mapping; hinged lid candidate",
       "interaction": "visual moving node and anchor present; game command wiring NOT implemented"
     }
-  ]
+  ],
+  "scene_contract": {
+    "schema": 1,
+    "layout_revision": "six_level_grid_assembly_1",
+    "gameplay_grid": [
+      40,
+      22
+    ],
+    "legacy_environment": "original recorded graybox",
+    "unknown_revision": "neutral graybox from recorded grid; never current assets",
+    "simulation_effects": false
+  }
 }

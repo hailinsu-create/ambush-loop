@@ -7755,6 +7755,7 @@ func _clear_raid_throwables() -> void:
 
 
 func _spawn_level_stashes() -> void:
+	visual_snapshot.reset_environment()
 	_clear_stashes()
 	if level == null or grid == null:
 		return
@@ -11776,6 +11777,7 @@ func _complete_stash_search(op: OperatorUnit) -> bool:
 	var item: Dictionary = st.take()
 	if item.is_empty():
 		return false
+	visual_snapshot.remember_collected_stash(st)
 	var rec: Dictionary = op.receive_item(str(item.get("kind", "ammo")), int(item.get("amount", 1)))
 	if not bool(rec.get("ok", false)) and bool(rec.get("full", false)):
 		_spawn_loot_at(op.global_position + Vector2(18, 10), int(item.get("amount", 1)), str(item.get("kind", "ammo")))

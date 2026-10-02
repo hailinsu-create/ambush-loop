@@ -12,6 +12,8 @@ const DeviceProbe := preload("res://scripts/presentation/device_probe.gd")
 const ActorVisual := preload("res://scripts/presentation/actor_visual.gd")
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const Assets := preload("res://scripts/presentation/asset_library.gd")
+const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
+const EnvironmentVisual := preload("res://scripts/presentation/environment_visual.gd")
 
 var host: Node
 var rig: Node3D
@@ -23,6 +25,9 @@ var walls: Array = []
 var actors: Dictionary = {}
 var _actor_scope: Array = []
 var objects: Dictionary = {}
+var _object_scope: Array = []
+var _environment_scene: Node3D
+var _environment_lod := 0
 var cones: Dictionary = {}
 var _layout_hash := 0
 var _selected_ring: MeshInstance3D
@@ -211,10 +216,18 @@ func refresh() -> void:
 	frame = next_frame
 	if _event_ring.visible and (_focus_attempt != frame.attempt_id or _focus_wave != frame.wave_id or int(frame.tick) < _focus_tick):
 		_event_ring.visible = false
-	var layout_hash: int = hash([frame.level_id, frame.blocked])
+	# Hysteresis avoids rebuilding the static batches while pinching at a boundary.
+	if rig.view_size > 26.0:
+		_environment_lod = 1
+	elif rig.view_size < 22.0:
+		_environment_lod = 0
+	var layout_hash: int = hash([frame.level_id, frame.blocked, frame.environment_supported,
+		frame.environment_revision, frame.environment_layout_revision, frame.has_door, frame.door_pos, _environment_lod])
 	if layout_hash != _layout_hash:
 		_layout_hash = layout_hash
 		_rebuild_geometry()
+	if _environment_scene != null and _environment_scene.set_door(frame.door_locked):
+		_last_pose = Transform3D.IDENTITY
 	_sync_actors()
 	_sync_objects()
 	_sync_cones()
@@ -225,10 +238,12 @@ func refresh() -> void:
 			_selected_ring.position = Space.logic_to_world(op.pos, 0.035)
 	if _occlusion_acc >= 0.1 or rig.camera.global_transform != _last_pose:
 		var targets: Array = []
-		for group in [frame.ops, frame.sentries, frame.stashes]:
+		for group in [frame.ops, frame.enemies, frame.sentries, frame.stashes, frame.loot]:
 			for item in group:
 				if bool(item.get("active", true)):
-					targets.append(Space.logic_to_world(item.pos, 0.75))
+					targets.append(Space.logic_to_world(item.pos, 0.12))
+					if bool(item.get("alive", false)):
+						targets.append(Space.logic_to_world(item.pos, 0.9))
 		Occlusion.update(rig.camera, walls, targets)
 		_occlusion_acc = 0.0
 		_last_pose = rig.camera.global_transform
@@ -247,15 +262,23 @@ func _rebuild_geometry() -> void:
 	for child in geometry.get_children():
 		child.free()
 	walls.clear()
-	Geometry.box(geometry, Vector3(40, 0.24, 22), Vector3(0, -0.13, 0), Geometry.material(Color("454b4e")))
-	var wall_mat := Geometry.material(Color("777d7d"))
-	for rect in Geometry.blocked_rectangles(frame.blocked):
-		var height := 2.4 if rect.size.x == 1 or rect.size.y == 1 else 1.7
-		var size := Vector3(rect.size.x, height, rect.size.y)
-		var at := Vector3(rect.position.x - 20 + rect.size.x * 0.5, height * 0.5,
-			rect.position.y - 11 + rect.size.y * 0.5)
-		var mesh := Geometry.box(geometry, size - Vector3(0.03, 0, 0.03), at, wall_mat)
-		walls.append({"mesh": mesh, "bounds": AABB(at - size * 0.5, size)})
+	_last_pose = Transform3D.IDENTITY
+	_environment_scene = null
+	if frame.environment_supported:
+		_environment_scene = EnvironmentScene.new()
+		geometry.add_child(_environment_scene)
+		_environment_scene.build(frame, _environment_lod)
+		walls = _environment_scene.walls
+	else:
+		Geometry.box(geometry, Vector3(40, 0.24, 22), Vector3(0, -0.13, 0), Geometry.material(Color("454b4e")))
+		var wall_mat := Geometry.material(Color("777d7d"))
+		for rect in Geometry.blocked_rectangles(frame.blocked):
+			var height := 2.4 if rect.size.x == 1 or rect.size.y == 1 else 1.7
+			var size := Vector3(rect.size.x, height, rect.size.y)
+			var at := Vector3(rect.position.x - 20 + rect.size.x * 0.5, height * 0.5,
+				rect.position.y - 11 + rect.size.y * 0.5)
+			var mesh := Geometry.box(geometry, size - Vector3(0.03, 0, 0.03), at, wall_mat)
+			walls.append({"mesh": mesh, "bounds": AABB(at - size * 0.5, size)})
 	if frame.visual_schema == 0 or frame.visual_unsupported:
 		return
 	var exit_mat := Geometry.material(Color("8bac9c"), true)
@@ -341,15 +364,28 @@ func _sync_body(proxy: Node3D, item: Dictionary, group: String) -> void:
 
 
 func _sync_objects() -> void:
+	var scope := [frame.level_id, frame.attempt_id, frame.wave_id, frame.replay,
+		frame.environment_supported, frame.environment_revision]
+	if scope != _object_scope:
+		for proxy in objects.values():
+			proxy.free()
+		objects.clear()
+		_object_scope = scope
 	var seen := {}
-	for group in ["stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys"]:
+	for group in ["stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys", "environment_objects"]:
 		for item in frame[group]:
 			var key := "%s:%s" % [group, item.id]
 			seen[key] = true
 			if not objects.has(key):
 				var proxy := Node3D.new()
 				proxies.add_child(proxy)
-				if group == "stashes":
+				var model_id: String = EnvironmentVisual.model_for(group, item) if frame.environment_supported else ""
+				if not model_id.is_empty():
+					var visual := EnvironmentVisual.new()
+					visual.name = "EnvironmentVisual"
+					proxy.add_child(visual)
+					visual.set_asset(model_id, _environment_lod)
+				elif group in ["stashes", "environment_objects"]:
 					Geometry.box(proxy, Vector3(0.85, 0.6, 0.58), Vector3(0, 0.3, 0), _crate)
 					Geometry.box(proxy, Vector3(0.9, 0.1, 0.65), Vector3(0, 0.64, 0), _cover)
 				elif group == "covers":
@@ -367,6 +403,20 @@ func _sync_objects() -> void:
 				objects[key] = proxy
 			objects[key].position = Space.logic_to_world(item.pos)
 			objects[key].visible = bool(item.get("active", true))
+			var visual := objects[key].get_node_or_null("EnvironmentVisual") as Node3D
+			if visual != null:
+				visual.set_asset(EnvironmentVisual.model_for(group, item), _environment_lod)
+				visual.set_lid(float(item.get("progress", 0.0)))
+				if group == "covers":
+					visual.rotation.y = Space.facing_yaw(float(item.get("facing", 90.0)))
+					visual.position = Space.facing_direction(float(item.get("facing", 90.0))) * 0.58
+				elif group == "loot":
+					visual.scale = Vector3.ONE * 0.7
+				elif group in ["stashes", "environment_objects"]:
+					visual.scale = Vector3.ONE * 0.8
+				if group == "grenades":
+					var flight: float = clampf(float(item.get("flight", 0.0)) / maxf(float(item.get("flight_duration", 0.18)), 0.001), 0.0, 1.0)
+					visual.position.y = sin(flight * PI) * 1.25
 			if group == "barrels":
 				objects[key].scale.y = 0.3 if bool(item.get("spent", false)) else 1.0
 			elif group in ["tripwires", "mines"]:

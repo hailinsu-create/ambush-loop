@@ -5,6 +5,7 @@ extends RefCounted
 const FORMAT_VERSION := 1
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
+const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 var _identity := ""
 var _objects := {}
 var _next_ids := {}
@@ -13,6 +14,18 @@ var _pose_states := {}
 var _event_clock_scope := ""
 var _event_command_anchor_s := 0.0
 var _event_battle_anchor_s := 0.0
+var _empty_stashes: Array = []
+
+
+func reset_environment() -> void:
+	_empty_stashes.clear()
+
+
+func remember_collected_stash(stash: Node2D) -> void:
+	# take() has queued the node for deletion. Retain only original plain values;
+	# this decorative open crate never participates in search or picking again.
+	_empty_stashes.append({"id": "empty:%d" % _empty_stashes.size(), "pos": stash.global_position,
+		"kind": stash.kind, "amount": 0, "progress": 1.0, "active": true, "empty": true})
 
 
 func capture(host: Node) -> Dictionary:
@@ -39,6 +52,8 @@ func capture(host: Node) -> Dictionary:
 		_pose_scope = scope
 		_pose_states.clear()
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
+		"environment_schema": EnvironmentScene.FORMAT, "environment_revision": EnvironmentScene.REVISION,
+		"environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
 		"pose_clock_domain": "simulation" if simulation_time else "command",
 		"pose_clock_s": pose_clock,
@@ -46,9 +61,11 @@ func capture(host: Node) -> Dictionary:
 		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,
+		"has_door": host.level.door_cell.x >= 0, "door_pos": host.grid.cell_to_world_center(host.level.door_cell) if host.level.door_cell.x >= 0 else Vector2.ZERO,
 		"selected_id": host.selected.op_id if host.selected != null else -1,
 		"ops": [], "enemies": [], "sentries": [], "covers": [], "stashes": [],
-		"loot": [], "barrels": [], "tripwires": [], "mines": [], "grenades": [], "decoys": []}
+		"loot": [], "barrels": [], "tripwires": [], "mines": [], "grenades": [], "decoys": [],
+		"environment_objects": _empty_stashes.duplicate(true)}
 	for op in host.operators:
 		var action := "idle"
 		if not op.alive:

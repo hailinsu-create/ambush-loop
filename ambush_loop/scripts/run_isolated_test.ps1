@@ -16,6 +16,7 @@ param(
         'audio_runtime_test.gd',
         'firearm_runtime_test.gd',
         'environment_assets_test.gd',
+        'environment_battle_test.gd',
         'command_pose_clock_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',

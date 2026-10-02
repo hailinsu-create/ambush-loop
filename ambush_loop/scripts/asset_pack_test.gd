@@ -6,6 +6,7 @@ const Actor := preload("res://scripts/presentation/actor_visual.gd")
 const AudioAssets := preload("res://scripts/sfx/audio_assets.gd")
 const Profiles := preload("res://scripts/presentation/firearm_pose.gd")
 const Pose := preload("res://scripts/presentation/actor_pose.gd")
+const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 var checks := 0
 var failures := 0
 
@@ -87,6 +88,31 @@ func _run() -> void:
 				for key in entry.get("moving_nodes", {}):
 					_check(model.find_child(entry.moving_nodes[key].node, true, false) != null, "packed active pivot remains available")
 				model.free()
+	# Assemble the actual authored grids from the PCK as well as loading the
+	# individual GLBs. No physical project can supply a missing script or model.
+	var grid := AmbushGrid.new()
+	for id in EnvironmentScene.LANDMARKS:
+		var level := LevelDef.by_id(id)
+		grid.rebuild(id)
+		if level.door_cell.x >= 0:
+			grid.set_door_state(level.door_cell, false)
+		else:
+			grid.door_cell = Vector2i(-1, -1)
+			grid.door_locked = false
+			grid.rebuild(id)
+		var bytes := grid.blocked.duplicate()
+		var frame := {"environment_schema": EnvironmentScene.FORMAT,
+			"environment_revision": EnvironmentScene.REVISION, "environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
+			"level_id": id, "blocked": bytes, "has_door": level.door_cell.x >= 0,
+			"door_pos": grid.cell_to_world_center(level.door_cell) if level.door_cell.x >= 0 else Vector2.ZERO, "door_locked": false}
+		for lod in [0, 1]:
+			var display := EnvironmentScene.new()
+			root.add_child(display)
+			display.build(frame, lod)
+			_check(EnvironmentScene.supported(frame) and display.get_meta("recorded_layout_hash") == hash(bytes), "packed actual grid assembly uses recorded layout: " + id)
+			_check(_has_asset(display, EnvironmentScene.LANDMARKS[id]), "packed actual theme landmark exists: " + id)
+			_check(grid.blocked == bytes, "packed display cannot mutate tactical grid: " + id)
+			display.free()
 	Assets.release_materials()
 	root.get_node("AudioDirector")._stop_music_hard()
 	await process_frame
@@ -101,3 +127,12 @@ func _meshes(node: Node) -> int:
 	for child in node.get_children():
 		count += _meshes(child)
 	return count
+
+
+func _has_asset(node: Node, id: String) -> bool:
+	if node.get_meta("asset_id", "") == id:
+		return true
+	for child in node.get_children():
+		if _has_asset(child, id):
+			return true
+	return false
