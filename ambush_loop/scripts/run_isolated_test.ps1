@@ -8,6 +8,7 @@ param(
         'm1_height_los_gate.gd',
         'm1_height_fire_gate.gd',
         'm1_height_coverage_gate.gd',
+        'm1_yard_plan_contract_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
         'm1_b2_yard_height_gate.gd',
         'accept_cta_flow_gate.gd',
