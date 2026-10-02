@@ -14,6 +14,7 @@ param(
         'c2_history_hint_test.gd',
         'actor_battle_test.gd',
         'audio_runtime_test.gd',
+        'firearm_runtime_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',

@@ -26,7 +26,7 @@ func _run() -> void:
 	var physical_root := OS.get_environment("AMBUSH_ASSET_PACK_ROOT")
 	_check(not physical_root.is_empty() and DirAccess.get_files_at(physical_root).is_empty(), "probe has no physical project files to conceal missing packed resources")
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
-	_check(doc.assets.size() == 22 and doc.source_commit == "00b270863ba5a2cd5425abf2a31e78965c72ae45", "R3 manifest is included in the pack with fixed provenance")
+	_check(doc.assets.size() == 22 and doc.source_commit == "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "R4 manifest is included in the pack with fixed provenance")
 	_check(FileAccess.file_exists("res://art/v2/manifest.json"), "yard manifest is included in the pack")
 	var audio_doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(AudioAssets.MANIFEST))
 	_check(audio_doc.cues.size() == 45 and audio_doc.asset_source_commit == "86df6d0b4af9f30f3f1e670207cc54b22e2f043b", "45-cue audio manifest retains fixed producer provenance in the pack")
@@ -56,7 +56,7 @@ func _run() -> void:
 							_check(player.has_animation(clip.name) and is_equal_approx(player.get_animation(clip.name).length, clip.duration), "packed character retains every named clip and duration")
 				model.free()
 	var yard := Assets.instantiate("supply_crate")
-	_check(yard != null and _meshes(yard) > 0 and Assets.has_asset("operator_rifle", 2), "pack retains old yard and all registered R3 character LODs")
+	_check(yard != null and _meshes(yard) > 0 and Assets.has_asset("operator_rifle", 2), "pack retains old yard and all registered R4 character LODs")
 	if yard != null:
 		yard.free()
 	Assets.release_materials()

@@ -23,13 +23,16 @@ static func asset_record(asset_id: String) -> Dictionary:
 	return _catalog.get(asset_id, {}).duplicate(true)
 
 
-static func has_asset(asset_id: String, lod: int = 0) -> bool:
-	return not model_path(asset_id, lod).is_empty()
+static func has_asset(asset_id: String, lod: int = 0, revision: String = "") -> bool:
+	return not model_path(asset_id, lod, revision).is_empty()
 
 
-static func model_path(asset_id: String, lod: int = 0) -> String:
+static func model_path(asset_id: String, lod: int = 0, revision: String = "") -> String:
+	if revision not in ["", "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "00b270863ba5a2cd5425abf2a31e78965c72ae45"]:
+		return ""
 	var entry := asset_record(asset_id)
-	var lods: Array = entry.get("lods", [])
+	var legacy: bool = revision == "00b270863ba5a2cd5425abf2a31e78965c72ae45" and entry.has("legacy_r3_lods")
+	var lods: Array = entry.get("legacy_r3_lods", []) if legacy else entry.get("lods", [])
 	if lod < 0 or lod >= lods.size():
 		return ""
 	return "res://" + str(lods[lod].path)
@@ -55,6 +58,8 @@ static func _read_catalog() -> void:
 			for i in entry.get("lods", []).size():
 				var model := str(entry.lods[i].get("path", ""))
 				valid = valid and path_rule.search(model) != null and model == "art/v2/models/%s_lod%d.glb" % [id, i]
+			for i in entry.get("legacy_r3_lods", []).size():
+				valid = valid and id in ["thompson", "bar", "mg42"] and str(entry.legacy_r3_lods[i].path) == "art/v2/replay_r3/%s_lod%d.glb" % [id, i] and i < 2
 			if valid:
 				_catalog[id] = entry.duplicate(true)
 			else:
@@ -99,8 +104,8 @@ static func _atlas_material(name: String, prefix: String, normal_scale: float) -
 	return material
 
 
-static func instantiate(asset_id: String, lod: int = 0) -> Node3D:
-	var path := model_path(asset_id, lod)
+static func instantiate(asset_id: String, lod: int = 0, revision: String = "") -> Node3D:
+	var path := model_path(asset_id, lod, revision)
 	if path.is_empty():
 		push_error("ASSET_NOT_REGISTERED %s lod=%d" % [asset_id, lod])
 		return null
@@ -114,6 +119,7 @@ static func instantiate(asset_id: String, lod: int = 0) -> Node3D:
 		return null
 	node.set_meta("asset_id", asset_id)
 	node.set_meta("asset_lod", lod)
+	node.set_meta("asset_resource_path", path)
 	if not _apply(node):
 		node.free()
 		return null

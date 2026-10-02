@@ -3,7 +3,9 @@ extends Node3D
 ## A visual model and explicit pose sampler. No host, simulation, clock or
 ## automatic animation advancement is held here. The caller supplies time.
 const Assets := preload("res://scripts/presentation/asset_library.gd")
+const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
 var asset_id := ""
+var asset_revision := ""
 var lod := -1
 var model: Node3D
 var skeleton: Skeleton3D
@@ -14,15 +16,16 @@ var sampled_action := "idle"
 var sampled_time := 0.0
 var _record: Dictionary = {}
 var _attachment: BoneAttachment3D
+var _layers: Dictionary = {}
 
 
-func set_asset(id: String, level: int) -> bool:
-	if asset_id == id and lod == level:
+func set_asset(id: String, level: int, revision: String = "") -> bool:
+	if asset_id == id and lod == level and asset_revision == revision:
 		return true
 	var entry := Assets.asset_record(id)
-	if entry.get("category", "") != "character" or not Assets.has_asset(id, level):
+	if entry.get("category", "") != "character" or not Assets.has_asset(id, level, revision):
 		return false
-	var replacement := Assets.instantiate(id, level)
+	var replacement := Assets.instantiate(id, level, revision)
 	if replacement == null:
 		return false
 	var rig := find_type(replacement, "Skeleton3D") as Skeleton3D
@@ -33,6 +36,7 @@ func set_asset(id: String, level: int) -> bool:
 	var previous_item := equipped_id
 	var previous_action := sampled_action
 	var previous_time := sampled_time
+	var previous_layers := _layers.duplicate(true)
 	if model != null:
 		model.free()
 	model = replacement
@@ -42,18 +46,24 @@ func set_asset(id: String, level: int) -> bool:
 	player = animation
 	player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	asset_id = id
+	asset_revision = revision
 	lod = level
 	_record = entry
 	equipped = null
 	_attachment = null
 	equipped_id = ""
+	_layers.clear()
 	if not previous_item.is_empty():
 		mount_item(previous_item)
-	sample_pose(previous_action, previous_time)
+	if previous_layers.is_empty():
+		sample_pose(previous_action, previous_time)
+	else:
+		sample_layers(previous_layers)
 	return true
 
 
 func sample_pose(action: String, elapsed: float) -> bool:
+	_layers.clear()
 	if player == null or not is_finite(elapsed):
 		return false
 	if action == sampled_action and is_equal_approx(maxf(elapsed, 0.0), sampled_time) and player.current_animation == action:
@@ -79,6 +89,44 @@ func sample_pose(action: String, elapsed: float) -> bool:
 	return true
 
 
+func sample_layers(pose: Dictionary) -> bool:
+	if not pose.has("upper_action"):
+		return sample_pose(str(pose.action), float(pose.seconds))
+	if _layers == pose:
+		return true
+	if not sample_pose(str(pose.base_action), float(pose.base_seconds)):
+		return false
+	var base := []
+	for i in skeleton.get_bone_count():
+		base.append(skeleton.get_bone_pose(i))
+	if not sample_pose(str(pose.upper_action), float(pose.upper_seconds)):
+		return false
+	var spine := skeleton.find_bone("spine")
+	var parent := skeleton.get_bone_parent(spine)
+	var desired_basis := skeleton.get_bone_global_pose(spine).basis
+	# Account for the imported rig's local-pose/rest convention from actual
+	# transforms. Keep hips/legs and spine height, while crouch or gait hip tilt
+	# cannot tip an aimed firearm away from the recorded ground heading.
+	var parent_basis := skeleton.get_bone_global_pose(parent).basis
+	var local_basis := skeleton.get_bone_pose(spine).basis
+	var rest_factor := parent_basis.inverse() * desired_basis * local_basis.inverse()
+	for i in skeleton.get_bone_count():
+		if skeleton.get_bone_name(i) not in FirearmPose.UPPER_BONES:
+			var value: Transform3D = base[i]
+			skeleton.set_bone_pose_position(i, value.origin)
+			skeleton.set_bone_pose_rotation(i, value.basis.get_rotation_quaternion())
+			skeleton.set_bone_pose_scale(i, value.basis.get_scale())
+	skeleton.force_update_all_bone_transforms()
+	var corrected := rest_factor.inverse() * skeleton.get_bone_global_pose(parent).basis.inverse() * desired_basis
+	skeleton.set_bone_pose_rotation(spine, corrected.get_rotation_quaternion())
+	skeleton.force_update_all_bone_transforms()
+	_sync_attachment()
+	sampled_action = str(pose.action)
+	sampled_time = float(pose.seconds)
+	_layers = pose.duplicate(true)
+	return true
+
+
 func mount_item(id: String) -> bool:
 	if id == equipped_id:
 		return true
@@ -92,7 +140,7 @@ func mount_item(id: String) -> bool:
 	var item_record := Assets.asset_record(id)
 	if item_record.get("category", "") not in ["weapon", "tool"] or skeleton == null:
 		return false
-	var replacement := Assets.instantiate(id, mini(lod, 1))
+	var replacement := Assets.instantiate(id, mini(lod, 1), asset_revision)
 	if replacement == null:
 		return false
 	var socket: Dictionary = _record.sockets.weapon_hand
@@ -110,6 +158,7 @@ func mount_item(id: String) -> bool:
 	_attachment = attachment
 	equipped = replacement
 	equipped_id = id
+	_layers.clear()
 	equipped.visible = sampled_action not in ["pickup", "deploy", "haul", "death"]
 	skeleton.force_update_all_bone_transforms()
 	_sync_attachment()

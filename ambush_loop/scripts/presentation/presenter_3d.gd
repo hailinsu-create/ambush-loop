@@ -270,7 +270,7 @@ func _rebuild_geometry() -> void:
 
 
 func _sync_actors() -> void:
-	var scope := [frame.level_id, frame.attempt_id, frame.wave_id, frame.replay, frame.animation_supported]
+	var scope := [frame.level_id, frame.attempt_id, frame.wave_id, frame.replay, frame.animation_supported, frame.actor_asset_revision]
 	if scope != _actor_scope:
 		for proxy in actors.values():
 			proxy.free()
@@ -327,11 +327,11 @@ func _sync_body(proxy: Node3D, item: Dictionary, group: String) -> void:
 		body.rotation = Vector3(0, Space.facing_yaw(item.facing), 0)
 		body.position = Vector3.ZERO
 		body.scale = Vector3.ONE
-		body.set_asset(model_id, lod)
+		body.set_asset(model_id, lod, frame.actor_asset_revision)
 		var weapon_id: String = item.visual_weapon
 		body.mount_item(weapon_id if Assets.has_asset(weapon_id) else "")
 		var pose := ActorPose.sample(item, frame, group)
-		body.sample_pose(pose.action, pose.seconds)
+		body.sample_layers(pose)
 		body.set_meta("pose_event_id", pose.event_id)
 		body.set_meta("pose_fallback", pose.fallback)
 	else:

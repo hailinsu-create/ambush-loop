@@ -1290,9 +1290,9 @@ func _sfx(cue: String) -> void:
 	sfx.play(cue)
 
 
-func _sfx_every_shot(op: OperatorUnit = null) -> void:
+func _sfx_every_shot(op: OperatorUnit = null, recorded_cue: String = "") -> void:
 	## Every burst, not only the first-contact payoff. Kit timbre per role.
-	_sfx(fire_cue_for(op))
+	_sfx(recorded_cue if recorded_cue != "" else fire_cue_for(op))
 
 
 func fire_cue_for(op: OperatorUnit = null) -> String:
@@ -5267,7 +5267,8 @@ func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> void:
 func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 	# Called before damage is applied so terminal summaries include the shot.
 	if phase == Phase.WATCHING or pending_result != "":
-		battle_log.add_event(sim.tick, "return_fire", from.label_id, to.op_id, from.global_position)
+		battle_log.add_event(sim.tick, "return_fire", from.label_id, to.op_id, from.global_position,
+			{"animation_schema": 2, "visual_weapon": {"main": "kar98k", "flank": "mp40", "sneak": "kar98k", "echo": "luger"}.get(from.kind_id(), ""), "shot_interval_s": EnemyRunner.RETURN_INTERVAL})
 	_sfx("return_fire")
 	_night_hp_lost = true
 	if not _watch_first_return:
@@ -5407,12 +5408,16 @@ func _sim_tick() -> void:
 					best_id = enemy.label_id
 					best = enemy
 			if best != null and op.shot_cd <= 0.0 and op.can_engage(best.global_position, grid):
+				var shot_cue := fire_cue_for(op)
 				battle_log.add_event(
 					sim.tick, "fire", op.op_id, best.label_id, op.global_position,
-					{"name": op.display_name, "role": op.role_short, "codename": op.display_name}
+					{"name": op.display_name, "role": op.role_short, "codename": op.display_name,
+						"animation_schema": 2, "weapon": op.weapon_id,
+						"visual_weapon": WeaponCatalog.resolve_crate_kind(op.weapon_id, str(level.level_id), op.op_id),
+						"shot_interval_s": op.shot_interval, "reload_s": op.reload_s, "sfx_cue": shot_cue}
 				)
 				if op.try_fire(best, grid):
-					_sfx_every_shot(op)
+					_sfx_every_shot(op, shot_cue)
 					if not _watch_first_fire:
 						_watch_first_fire = true
 						_announce_payoff(
@@ -5942,7 +5947,18 @@ func _operator_bark(op: OperatorUnit, kind: String) -> void:
 
 func _on_op_ammo_repacked(op: OperatorUnit) -> void:
 	if phase == Phase.WATCHING or pending_result != "":
-		battle_log.add_event(sim.tick, "repack", op.op_id, -1, op.global_position, {"name": op.display_name})
+		var shot := {}
+		for i in range(battle_log.events.size() - 1, -1, -1):
+			var event: Dictionary = battle_log.events[i]
+			if event.type == "fire" and int(event.actor_id) == op.op_id and int(event.wave_id) == battle_log.wave_id and int(event.tick) == sim.tick:
+				shot = event.payload
+				break
+		var visual_weapon := WeaponCatalog.resolve_crate_kind(op.weapon_id, str(level.level_id), op.op_id)
+		battle_log.add_event(sim.tick, "repack", op.op_id, -1, op.global_position,
+			{"name": op.display_name, "animation_schema": 2, "visual_weapon": visual_weapon,
+				"source_visual_weapon": str(shot.get("visual_weapon", "")),
+				"repack_kind": "same_weapon" if visual_weapon == str(shot.get("visual_weapon", "")) else "weapon_switch",
+				"reload_s": float(shot.get("reload_s", 0.0))})
 	_announce_payoff("repack", {"name": op.display_name}, op.global_position)
 	_update_event_log()
 	_update_role_cards()

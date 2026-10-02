@@ -4,9 +4,12 @@ extends RefCounted
 ## Snapshot format 1 accompanies BattleLog's independent timeline schema.
 const FORMAT_VERSION := 1
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
+const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
 var _identity := ""
 var _objects := {}
 var _next_ids := {}
+var _pose_scope := ""
+var _pose_states := {}
 
 
 func capture(host: Node) -> Dictionary:
@@ -16,10 +19,15 @@ func capture(host: Node) -> Dictionary:
 		_objects.clear()
 		_next_ids.clear()
 	var simulation_time: bool = host.phase == host.Phase.WATCHING
+	var pose_clock: float = float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0 if simulation_time else host._night_timer
+	var scope := "%s:%d:%s" % [identity, host.battle_log.wave_id, "simulation" if simulation_time else "command"]
+	if scope != _pose_scope:
+		_pose_scope = scope
+		_pose_states.clear()
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
 		"pose_clock_domain": "simulation" if simulation_time else "command",
-		"pose_clock_s": float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0 if simulation_time else host._night_timer,
+		"pose_clock_s": pose_clock,
 		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,
@@ -123,6 +131,18 @@ func capture(host: Node) -> Dictionary:
 			var item := _object(decoy, "decoys")
 			item.merge({"life": decoy.life, "elapsed": decoy._t})
 			data.decoys.append(item)
+	for group in ["ops", "enemies", "sentries"]:
+		for item in data[group]:
+			var key := "%s:%s" % [group, item.id]
+			var intent := FirearmPose.intent(item, group)
+			var weapon: String = item.visual_weapon
+			var state: Dictionary = _pose_states.get(key, {})
+			if state.is_empty() or str(state.weapon) != weapon or str(state.intent) != intent:
+				var same_weapon: bool = not state.is_empty() and str(state.weapon) == weapon
+				state = {"weapon": weapon, "intent": intent, "since": pose_clock,
+					"from_intent": str(state.intent) if same_weapon else "", "changed_weapon": not same_weapon}
+				_pose_states[key] = state
+			item["firearm_pose"] = state.duplicate(true)
 	return data
 
 
