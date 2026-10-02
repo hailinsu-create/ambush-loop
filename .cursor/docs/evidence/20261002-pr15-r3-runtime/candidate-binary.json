@@ -1,0 +1,2972 @@
+{
+  "assets": [
+    {
+      "asset_id": "operator_rifle",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "b97872f3077d56d6ef4439aac147846e032e6224707196d3a2cfb710ad95eb9f",
+          "triangles": 5846,
+          "vertices": 7370,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82347,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82329,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "451c164ffd09cbbdacf55082d3e25fb95c2bc50ee77195622af37500e66bdcc7",
+          "triangles": 2852,
+          "vertices": 4124,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82303,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82285,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "13db675aa4a6e2197c3ffac473f53b04c8d6aaba580e5faaa76db555dbe86745",
+          "triangles": 1668,
+          "vertices": 2161,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82349,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.8233,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "operator_mg",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "b69da06dd74436c8e883d8de6ac040e8cf3cdee71d7808586e496b52125ccd93",
+          "triangles": 6210,
+          "vertices": 7886,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82347,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82329,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "b1b1c5c1a322aca1063508379ebe2d0e89f806ad1104c135a2393508336bed3b",
+          "triangles": 3216,
+          "vertices": 4640,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82303,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82285,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "197f5b91e0dfe204ada6486618538a5cbd8107eb324dc44900aee458e624fdc9",
+          "triangles": 1680,
+          "vertices": 2185,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82349,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.8233,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "operator_scout",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "c29ea25e1f0defab71a88e14bae0cbec7ffd1bd58dd584beb6d11a8ba9fb99cc",
+          "triangles": 5750,
+          "vertices": 7291,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.83045,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43685,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45085,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.84451,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.848604,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35285,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.83027,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79144,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.83713,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.83744,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73146,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79144,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "f568112db333cd234f551023d788606caa5493bcfee9a3476a1ca48fcef6c169",
+          "triangles": 2752,
+          "vertices": 4055,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.8305,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43746,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45146,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.8442,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.847891,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35346,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.83031,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79144,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.83713,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.83744,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73146,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79144,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "be655868fd2f46f9049096ca6998a87ea18d6d59765bb73e53f3b7677c850397",
+          "triangles": 1548,
+          "vertices": 2030,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.83055,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43369,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.44769,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 1.8442,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.841895,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.34969,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.83036,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 1.79144,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.83713,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.83744,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 1.73146,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 1.79144,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "enemy_patrol",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "9fe441b38efbba45f340476e05a6370e3cb6a85bc1d60a10fb3b4cebdea57d51",
+          "triangles": 5902,
+          "vertices": 7432,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82347,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82329,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "706d52d58dd314bc39879264cf9a5dfe4125a78fd6b7a65167714914cf00941e",
+          "triangles": 2884,
+          "vertices": 4166,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82303,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82285,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "8890ab05b59071354c92587ce333db363c0c59f828ec937300c2d781217a19fe",
+          "triangles": 1700,
+          "vertices": 2203,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82349,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.43962,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.45362,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 1.85082,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.852256,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.35562,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.8233,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.84195,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.84221,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.83821,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 1.73764,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 1.79621,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "enemy_flank",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "8c766b5018542409428ac0ac6d58b1dd7bbcb1128bef755681bef449bc06beb7",
+          "triangles": 5756,
+          "vertices": 7260,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.80657,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.4193,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.4333,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.83055,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.830206,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.3353,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.80639,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.77721,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.8234,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.82321,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.81921,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.71709,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.77721,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "f83f5eba2a8fd59ae88b6dca15921b71135c6e1ca18dae88e633168ebb494570",
+          "triangles": 2740,
+          "vertices": 4017,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.80578,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.4204,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.4344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.82946,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.831354,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.3364,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.8056,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.77721,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.8234,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.82321,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.81921,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.71684,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.77721,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "53c68e09aafb3cdda939e9d22beba876468967136dde7826498d91be8326dc6b",
+          "triangles": 1548,
+          "vertices": 2030,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.805,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.41628,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.43028,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 1.82946,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.824306,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.33228,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.80482,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 1.77721,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.8234,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.82321,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.81921,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 1.71684,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 1.77721,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "enemy_sneak",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "2316a56ebbdfcd02b0fc167d62dfe623f3c941754031066adc424200e9224a49",
+          "triangles": 5842,
+          "vertices": 7647,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.83994,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.46027,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.47427,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.87344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.873185,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.37627,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.83976,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.81985,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.86469,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.86585,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.86185,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.76052,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.81985,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "ae0e731ca7cd31c5e91aafba170dc88ef184fae972fc3d1a51499a0820710afc",
+          "triangles": 2788,
+          "vertices": 4153,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.83784,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.45625,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.47025,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 1.87344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.869202,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.37225,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.83765,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 1.81985,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.86469,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.86585,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.86185,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 1.76052,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 1.81985,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "1032932040ba6bc7f3ecded67e0b594beafdae488bf3bd1c661ca7ea75c25af5",
+          "triangles": 1604,
+          "vertices": 2124,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 1.82927,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.45337,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.46737,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 1.87344,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 1.869202,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.36937,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 1.82909,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 1.81985,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 1.86469,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 1.86585,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 1.86185,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 1.76052,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 1.81985,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "enemy_radio",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "f04ecc01e15ded7a818fdece5059f8681de83809a7c568c123e5a74e6162d18b",
+          "triangles": 5878,
+          "vertices": 7412,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 2.15704,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.79236,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.80636,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 2.19013,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 2.21708,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.70836,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 2.15685,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 2.11104,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 2.15304,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 2.15704,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 2.15304,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 2.06413,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 2.11104,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "6ce3efb4c0a91ad92dec7aea7c2082cb1abaf6d878c05ff407acd1da95bf147f",
+          "triangles": 2884,
+          "vertices": 4166,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 2.15704,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.79236,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00027,
+              "max_y_m": 1.80636,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": 0.00261,
+              "max_y_m": 2.19013,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 2.21708,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.70836,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 2.15685,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00028,
+              "max_y_m": 2.11104,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 2.15304,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 2.15704,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 2.15304,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00279,
+              "max_y_m": 2.06413,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00069,
+              "max_y_m": 2.11104,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        },
+        {
+          "level": 2,
+          "sha256": "83c27188fac9b8e6a10ded76be8d74364f431ca7d360a2a3b6f28a234df03398",
+          "triangles": 1700,
+          "vertices": 2203,
+          "degenerate_triangles": 0,
+          "animation_samples": {
+            "aim": {
+              "duration_s": 1.7999999523162842,
+              "min_y_m": -0.0,
+              "max_y_m": 2.15704,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch": {
+              "duration_s": 2.0,
+              "min_y_m": -0.0,
+              "max_y_m": 1.79236,
+              "max_limb_endpoint_gap_m": 2e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "crouch_walk": {
+              "duration_s": 1.1333333253860474,
+              "min_y_m": -0.00228,
+              "max_y_m": 1.80636,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "death": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00419,
+              "max_y_m": 2.19013,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 2.21708,
+              "samples": 25
+            },
+            "deploy": {
+              "duration_s": 1.2666666507720947,
+              "min_y_m": -5e-05,
+              "max_y_m": 1.70836,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "fire": {
+              "duration_s": 0.23333333432674408,
+              "min_y_m": -0.00015,
+              "max_y_m": 2.15685,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "haul": {
+              "duration_s": 1.2000000476837158,
+              "min_y_m": -0.00309,
+              "max_y_m": 2.11104,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "hit": {
+              "duration_s": 0.30000001192092896,
+              "min_y_m": -9e-05,
+              "max_y_m": 2.15304,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "idle": {
+              "duration_s": 2.4000000953674316,
+              "min_y_m": 0.0,
+              "max_y_m": 2.15704,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "pickup": {
+              "duration_s": 1.0,
+              "min_y_m": -0.00197,
+              "max_y_m": 2.15304,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "run": {
+              "duration_s": 0.6000000238418579,
+              "min_y_m": -0.00284,
+              "max_y_m": 2.06413,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            },
+            "walk": {
+              "duration_s": 0.8999999761581421,
+              "min_y_m": -0.00249,
+              "max_y_m": 2.11104,
+              "max_limb_endpoint_gap_m": 3e-06,
+              "loop_seam_m": 0.0,
+              "samples": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "m1911",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "9e4359ef0f8d9b8fd2d01f8f4c4eeaf912f34f8fbb221f7efe355c1cb676b76d",
+          "triangles": 352,
+          "vertices": 744,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "m1911__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "m1911__socket_muzzle": [
+              0.0,
+              0.03500000014901161,
+              -0.15000000596046448
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "b217c0b6404f8c73a59b0934b7be251eac27729408e6f3ee07bf9ef1b773b144",
+          "triangles": 116,
+          "vertices": 210,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "m1911__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "m1911__socket_muzzle": [
+              0.0,
+              0.03500000014901161,
+              -0.15000000596046448
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "luger",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "057873a6511d1cfd52b588fae992dd444e1b29fae58068faf76bce205cdd6a23",
+          "triangles": 396,
+          "vertices": 842,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "luger__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "luger__socket_muzzle": [
+              0.0,
+              0.03500000014901161,
+              -0.18000000715255737
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "9b9d6ba143ebc91c13552109fc0e8d4632d83cb79c8f568dec3dca14652158c2",
+          "triangles": 128,
+          "vertices": 234,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "luger__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "luger__socket_muzzle": [
+              0.0,
+              0.03500000014901161,
+              -0.18000000715255737
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "m1_garand",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "56cd21a8751625f3da1ea5322d5be6fed3189bddb87cdf0de9e2872e7efb2e93",
+          "triangles": 1124,
+          "vertices": 2454,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "m1_garand__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "m1_garand__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.824999988079071
+            ],
+            "m1_garand__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "171aa8d86a38e8a0f7799a0c98f19907ae6e1a4560b5d944195096cba0d009a9",
+          "triangles": 340,
+          "vertices": 636,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "m1_garand__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "m1_garand__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.824999988079071
+            ],
+            "m1_garand__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "kar98k",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "794fb388cb940c4e471a5cdc00addbb3537098ea3dc917ccdc1bd939575b1ef4",
+          "triangles": 1164,
+          "vertices": 2442,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "kar98k__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "kar98k__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8349999785423279
+            ],
+            "kar98k__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "2540f6e4393b0c2b36ac2f33ba187d81913770ee62c5afc592be54d5050a7f4a",
+          "triangles": 352,
+          "vertices": 646,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "kar98k__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "kar98k__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8349999785423279
+            ],
+            "kar98k__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "thompson",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "84ec7e572a363714b6b9820e36149d9fd81096226383a8ffb30d25ff5e8a3834",
+          "triangles": 1024,
+          "vertices": 2228,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "thompson__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "thompson__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.5
+            ],
+            "thompson__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "bdb5caf36061972fa0a652ee58b33d1e3c23c3926bd71bd7b25fd1232bd236e1",
+          "triangles": 328,
+          "vertices": 584,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "thompson__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "thompson__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.5
+            ],
+            "thompson__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "mp40",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "4c3277a7abe11d3c37830d97bbd2277d2142a39aba0cb92cc7d49e4d380a93c2",
+          "triangles": 1004,
+          "vertices": 2072,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "mp40__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mp40__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.5099999904632568
+            ],
+            "mp40__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "611c887d7997e3a0f6c4bc80e4736e40fc1c69aa992e71a9073b30852a5d741c",
+          "triangles": 336,
+          "vertices": 606,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "mp40__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mp40__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.5099999904632568
+            ],
+            "mp40__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "bar",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "c986fbefeb77214f41f04841ebd66335ed4f0248e50e198ab32e25423567ab68",
+          "triangles": 1004,
+          "vertices": 2224,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "bar__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "bar__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8799999952316284
+            ],
+            "bar__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "edadeb7e566c460e5255f2704a2b3b550dd6b9eb57c83a6c571c1215833a2d7b",
+          "triangles": 336,
+          "vertices": 606,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "bar__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "bar__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8799999952316284
+            ],
+            "bar__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "mg42",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "d2ab09203f76df93da9b3df672974c93a7987c848d1cf8f151f231ec04f85537",
+          "triangles": 1552,
+          "vertices": 3616,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "mg42__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mg42__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8999999761581421
+            ],
+            "mg42__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "a111328803a967ae9aac5452f4c22bbf28ac102b498b76ca338b667fe605e6bc",
+          "triangles": 564,
+          "vertices": 1062,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "mg42__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mg42__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8999999761581421
+            ],
+            "mg42__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "springfield",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "e965ab6f1cecab8a42a3f9308dd8507eaca92737485d277217850bf7372b9e4f",
+          "triangles": 1268,
+          "vertices": 2574,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "springfield__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "springfield__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8450000286102295
+            ],
+            "springfield__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "0414bfe5b08a9e839430f4adf8af64eb35b51df34045282088bb57de75829d4f",
+          "triangles": 428,
+          "vertices": 740,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "springfield__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "springfield__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8450000286102295
+            ],
+            "springfield__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "kar98k_zf",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "2aad84791e6e7f1d6ff6941bfbcb8d1379a2dcfdde1c8d80c41b52bd176b12ad",
+          "triangles": 1356,
+          "vertices": 2778,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "kar98k_zf__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "kar98k_zf__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8349999785423279
+            ],
+            "kar98k_zf__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "acb90d3c0adac708cdd425a1b6555eeab8261c4f03028220debe3ea63a18d3a8",
+          "triangles": 452,
+          "vertices": 788,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "kar98k_zf__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "kar98k_zf__socket_muzzle": [
+              0.0,
+              0.04500000178813934,
+              -0.8349999785423279
+            ],
+            "kar98k_zf__socket_support_hand": [
+              0.0,
+              0.0,
+              -0.25999999046325684
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "knife",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "e3f4a53c7e6d78c035e56693d54a7158c2f0dd90c81b35542fadc748df84f857",
+          "triangles": 104,
+          "vertices": 222,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "knife__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "knife__socket_tip": [
+              0.0,
+              0.0,
+              -0.23800000548362732
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "5a886b6c5ec320af153f4142360303ec3c07e2e45c8c47da353a653cf96cc8ca",
+          "triangles": 40,
+          "vertices": 78,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "knife__socket_grip": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "knife__socket_tip": [
+              0.0,
+              0.0,
+              -0.23800000548362732
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "grenade",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "4d293048d9576cb243e39740869348e1917898e204304c966b2d79267c2d0157",
+          "triangles": 368,
+          "vertices": 336,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "grenade__socket_grip": [
+              0.0,
+              0.06499999761581421,
+              0.0
+            ],
+            "grenade__socket_fuse": [
+              0.0,
+              0.1459999978542328,
+              0.0
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "7dc64818ad2be21fc8db3d4bd31700cb6596e723db178397a497bd6cf9ee8b5c",
+          "triangles": 108,
+          "vertices": 124,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "grenade__socket_grip": [
+              0.0,
+              0.06499999761581421,
+              0.0
+            ],
+            "grenade__socket_fuse": [
+              0.0,
+              0.1459999978542328,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "mine",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "bddb254756887e327e7155b5b9f211668fc809e9a715444ad9aaad7ec455ad48",
+          "triangles": 168,
+          "vertices": 188,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "mine__socket_grip": [
+              0.11500000208616257,
+              0.07500000298023224,
+              0.0
+            ],
+            "mine__socket_pressure_plate": [
+              0.0,
+              0.07500000298023224,
+              0.0
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "9ad8f1445c0208f74726ecb2c8b87ffe2971c80ea0389226237a3f3cdf662e73",
+          "triangles": 124,
+          "vertices": 134,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "mine__socket_grip": [
+              0.11500000208616257,
+              0.07500000298023224,
+              0.0
+            ],
+            "mine__socket_pressure_plate": [
+              0.0,
+              0.07500000298023224,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "decoy",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "54540d6c775b94c8d8008b083093a8fe2a38fd6fb366e09ded59176e43e2fdf5",
+          "triangles": 280,
+          "vertices": 608,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "decoy__socket_grip": [
+              0.0,
+              0.1550000011920929,
+              0.05999999865889549
+            ],
+            "decoy__socket_speaker": [
+              0.0,
+              0.1120000034570694,
+              -0.019999999552965164
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "8ad97f1c0bbb9471de223df2f1327ef9982c326d0732f5df3d01ca4f2091d984",
+          "triangles": 116,
+          "vertices": 210,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "decoy__socket_grip": [
+              0.0,
+              0.1550000011920929,
+              0.05999999865889549
+            ],
+            "decoy__socket_speaker": [
+              0.0,
+              0.1120000034570694,
+              -0.019999999552965164
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "ammo_pack",
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "0762c567a427b786f1997308749d0803f15e2694f7b8386c88f990356d9f6873",
+          "triangles": 264,
+          "vertices": 576,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "ammo_pack__socket_grip": [
+              0.05999999865889549,
+              0.2800000011920929,
+              0.0
+            ],
+            "ammo_pack__socket_support_hand": [
+              -0.05999999865889549,
+              0.2800000011920929,
+              0.0
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "sha256": "c9b85696c8f42ef26df6fdd7c0ea5261726f80fc46d055607eb3def45492acc6",
+          "triangles": 72,
+          "vertices": 144,
+          "degenerate_triangles": 0,
+          "socket_positions_m": {
+            "ammo_pack__socket_grip": [
+              0.05999999865889549,
+              0.2800000011920929,
+              0.0
+            ],
+            "ammo_pack__socket_support_hand": [
+              -0.05999999865889549,
+              0.2800000011920929,
+              0.0
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "violations": [],
+  "asset_count": 22,
+  "lod_count": 51
+}
