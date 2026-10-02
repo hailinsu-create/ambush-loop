@@ -142,9 +142,8 @@ func _make_controls() -> void:
 	focus_button.custom_minimum_size.y = 36
 	panel.add_child(focus_button)
 	focus_button.pressed.connect(func() -> void:
-		if host.selected != null and not host._modal_blocks_input():
-			rig.focus = Space.logic_to_world(host.selected.global_position)
-			rig.apply_pose()
+		if not host._modal_blocks_input():
+			focus_selected()
 	)
 	_pitch_slider = HSlider.new()
 	_pitch_slider.min_value = Rig.MIN_PITCH
@@ -252,6 +251,8 @@ func _rebuild_geometry() -> void:
 			rect.position.y - 11 + rect.size.y * 0.5)
 		var mesh := Geometry.box(geometry, size - Vector3(0.03, 0, 0.03), at, wall_mat)
 		walls.append({"mesh": mesh, "bounds": AABB(at - size * 0.5, size)})
+	if frame.visual_schema == 0 or frame.visual_unsupported:
+		return
 	var exit_mat := Geometry.material(Color("8bac9c"), true)
 	Geometry.box(geometry, Vector3(2.3, 0.03, 0.28), Space.logic_to_world(frame.escape, 0.02), exit_mat)
 	var exit_label := Label3D.new()
@@ -291,6 +292,7 @@ func _sync_actors() -> void:
 			var body: Node3D = proxy.get_node("Body")
 			body.rotation = Vector3(0.0 if item.alive else -PI * 0.5, Space.facing_yaw(item.facing), 0.0)
 			body.position.y = 0.0 if item.alive else 0.22
+			body.scale.y = 0.7 if item.alive and int(item.get("stance", 0)) == 1 else 1.0
 			proxy.get_node("Marker").visible = item.alive
 	for key in actors.keys():
 		if not seen.has(key):
@@ -300,7 +302,7 @@ func _sync_actors() -> void:
 
 func _sync_objects() -> void:
 	var seen := {}
-	for group in ["stashes", "covers", "loot"]:
+	for group in ["stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys"]:
 		for item in frame[group]:
 			var key := "%s:%s" % [group, item.id]
 			seen[key] = true
@@ -312,14 +314,36 @@ func _sync_objects() -> void:
 					Geometry.box(proxy, Vector3(0.9, 0.1, 0.65), Vector3(0, 0.64, 0), _cover)
 				elif group == "covers":
 					Geometry.cylinder(proxy, 0.42, 0.04, Vector3(0, 0.03, 0), _cover)
+				elif group == "barrels":
+					Geometry.cylinder(proxy, 0.3, 0.9, Vector3(0, 0.45, 0), _steel)
+				elif group in ["tripwires", "mines"]:
+					Geometry.cylinder(proxy, 0.2, 0.04, Vector3(0, 0.03, 0), _cover)
+				elif group == "grenades":
+					Geometry.cylinder(proxy, 0.07, 0.18, Vector3(0, 0.12, 0), _steel)
+				elif group == "decoys":
+					Geometry.box(proxy, Vector3(0.15, 0.05, 0.15), Vector3(0, 0.04, 0), _crate)
 				else:
 					Geometry.box(proxy, Vector3(0.4, 0.16, 0.3), Vector3(0, 0.1, 0), _crate)
 				objects[key] = proxy
 			objects[key].position = Space.logic_to_world(item.pos)
+			objects[key].visible = bool(item.get("active", true))
+			if group == "barrels":
+				objects[key].scale.y = 0.3 if bool(item.get("spent", false)) else 1.0
+			elif group in ["tripwires", "mines"]:
+				objects[key].visible = objects[key].visible and not bool(item.get("spent", false))
 	for key in objects.keys():
 		if not seen.has(key):
 			objects[key].free()
 			objects.erase(key)
+
+
+func focus_selected() -> bool:
+	for op in frame.get("ops", []):
+		if op.id == frame.get("selected_id", -1) and op.active:
+			rig.focus = Space.logic_to_world(op.pos)
+			rig.apply_pose()
+			return true
+	return false
 
 
 func _sync_cones() -> void:

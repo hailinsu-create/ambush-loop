@@ -119,7 +119,9 @@ func _run() -> void:
 			_check(main.operators[i].hp == live_before.ops[i].hp and main.operators[i].ammo == live_before.ops[i].ammo,
 				"scrubbing never changes live HP/ammo")
 		for op in historical.ops:
-			_check(op.weapon == "", "legacy snapshots use neutral equipment")
+			var recorded: Array = main.replay.snapshot_at_or_before(tick).data.ops
+			var matching: Array = recorded.filter(func(item: Dictionary) -> bool: return item.id == op.id)
+			_check(op.weapon == matching[0].weapon, "replay uses recorded equipment")
 	main._exit_replay_to_setup()
 	view.refresh()
 	_check(main.phase == main.Phase.SETUP, "exit replay restores setup")

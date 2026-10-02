@@ -64,6 +64,8 @@ static func actor(parent: Node3D, mat: Material, equipment: Material) -> Node3D:
 
 
 static func blocked_rectangles(blocked: PackedByteArray) -> Array[Rect2i]:
+	if blocked.size() != 40 * 22:
+		return []
 	var used := PackedByteArray()
 	used.resize(880)
 	var out: Array[Rect2i] = []

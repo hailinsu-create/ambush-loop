@@ -91,6 +91,7 @@ const RaidMineScript := preload("res://scripts/raid/landmine.gd")
 const RaidDecoyScript := preload("res://scripts/raid/decoy.gd")
 const BackpackPanelScript := preload("res://scripts/ui/backpack_panel.gd")
 const C2DirectorScript := preload("res://scripts/c2/c2_director.gd")
+const VisualSnapshotScript := preload("res://scripts/replay/visual_snapshot.gd")
 
 var grid: AmbushGrid = AmbushGrid.new()
 var phase: Phase = Phase.SETUP
@@ -106,6 +107,7 @@ var level: LevelDef = null
 var level_index: int = 0
 var sim: SimClock = SimClock.new()
 var battle_log: BattleLog = BattleLog.new()
+var visual_snapshot := VisualSnapshotScript.new()
 var last_plan: PlanState = PlanState.new()
 var door_locked: bool = false
 
@@ -5542,32 +5544,7 @@ func _tick_ambush_zone() -> void:
 
 
 func _snapshot_data() -> Dictionary:
-	var ops := []
-	for op in operators:
-		if op.visible:
-			ops.append({
-				"id": op.op_id,
-				"hp": op.hp,
-				"ammo": op.ammo,
-				"alive": op.alive,
-				"pos": op.global_position,
-				"facing": op.facing_deg,
-				"role": op.role,
-			})
-	var ens := []
-	for e in enemies:
-		ens.append({
-			"id": e.label_id,
-			"hp": e.hp,
-			"alive": e.alive,
-			"pos": e.global_position,
-			"route": e.spawn_route,
-		})
-	var bars := []
-	for b in barrels:
-		if is_instance_valid(b):
-			bars.append({"pos": b.global_position, "spent": bool(b.spent)})
-	return {"ops": ops, "enemies": ens, "barrels": bars}
+	return visual_snapshot.capture(self)
 
 
 func _try_assign_loot(loot: LootPickup) -> void:
@@ -6333,9 +6310,7 @@ func _on_replay_pressed() -> void:
 			l.visible = false
 	_clear_replay_layer()
 	_apply_replay_scrub()
-	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
-	if replay.legacy_ambiguous:
-		status_label.text = "旧记录缺少波次边界，无法可靠复盘；原记录保留。空格返回"
+	_update_replay_status()
 	_update_hud()
 
 
@@ -6354,7 +6329,21 @@ func _apply_replay_scrub() -> void:
 		scrub_slider.set_value_no_signal(float(replay.scrub_tick) / float(replay.max_tick()))
 	_paint_replay_snapshot(snap)
 	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "复盘 t=%.1fs · 点击定位" % (float(replay.scrub_tick) / 60.0))
+	_update_replay_status()
 	_update_hud()
+
+
+func _update_replay_status() -> void:
+	var data: Dictionary = replay.snapshot_at_or_before(replay.scrub_tick).get("data", {})
+	var format := int(data.get("visual_schema", 0))
+	if replay.legacy_ambiguous:
+		status_label.text = "旧记录缺少波次边界，无法可靠复盘；原记录保留。空格返回"
+	elif format > VisualSnapshotScript.FORMAT_VERSION or format < 0:
+		status_label.text = "暂不支持此历史画面版本；原记录保留。空格返回"
+	elif format == 0:
+		status_label.text = "旧记录 · 缺失装备/场景以中性值显示。空格返回"
+	else:
+		status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
 
 
 func _paint_replay_snapshot(snap: Dictionary) -> void:
@@ -6362,9 +6351,12 @@ func _paint_replay_snapshot(snap: Dictionary) -> void:
 	if replay_layer == null or not snap.has("data"):
 		return
 	var data: Dictionary = snap["data"]
+	var format := int(data.get("visual_schema", 0))
+	if format > VisualSnapshotScript.FORMAT_VERSION or format < 0:
+		return
 	for o in data.get("ops", []):
-		var op := _op_by_id(int(o["id"]))
-		var col := op.body_color if op != null else Color(0.35, 0.65, 0.95)
+		var palette := [Color(0.36, 0.34, 0.24), Color(0.38, 0.36, 0.22), Color(0.24, 0.28, 0.22)]
+		var col: Color = palette[clampi(int(o.get("role", 0)), 0, 2)]
 		var alive := bool(o["alive"])
 		var hot := replay_focus_actor == int(o["id"]) and replay_focus_type in ["fire", "empty", "op_down", "loot", "ambush_armed", "repack", "return_fire", "no_engage"]
 		_add_replay_marker(
@@ -6386,7 +6378,7 @@ func _paint_replay_snapshot(snap: Dictionary) -> void:
 			"敌%d" % int(e["id"]),
 			alive,
 			hot,
-			90.0,
+			float(e.get("facing", 90.0)),
 			false,
 			not alive
 		)
