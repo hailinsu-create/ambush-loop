@@ -19,7 +19,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("godot", "java", "sdk", "templates"):
         parser.add_argument("--" + name, type=Path, required=True)
-    parser.add_argument("--version-code", type=int, default=2026100201)
+    parser.add_argument("--version-code", type=int, default=2026100202)
     parser.add_argument("--abi", choices=("arm64-v8a", "x86_64"), default="arm64-v8a",
                         help="x86_64 is for cloud Android emulator verification only.")
     args = parser.parse_args()
@@ -73,7 +73,12 @@ def main():
                         "\n".join(k + " = " + json.dumps(v) for k, v in values.items()) + "\n")
     project = staged / "project.godot"
     project.write_text(project.read_text().replace('run/main_scene="res://scenes/title.tscn"',
-                       'run/main_scene="res://scenes/presentation/preview_boot.tscn"'))
+                       'run/main_scene="res://scenes/presentation/preview_boot.tscn"')
+                       .replace('window/stretch/mode="canvas_items"', 'window/stretch/mode="viewport"')
+                       .replace('[rendering]', '[rendering]\nlimits/opengl/max_renderable_lights=8\n'
+                                'limits/opengl/max_lights_per_object=4\n'
+                                'lights_and_shadows/directional_shadow/size=1024\n'
+                                'lights_and_shadows/directional_shadow/size.mobile=1024'))
     presets = staged / "export_presets.cfg"
     text = presets.read_text()
     text = text[text.index("[preset.2]"):].replace("[preset.2", "[preset.0")
@@ -81,7 +86,7 @@ def main():
         'name="Android APK"': 'name="A0 Preview"',
         'custom_features="mobile"': 'custom_features="mobile,a0_preview"',
         'version/code=77': 'version/code=' + str(args.version_code),
-        'version/name="0.6.28"': 'version/name="0.7.0-a0.1"',
+        'version/name="0.6.28"': 'version/name="0.7.0-a0.2"',
         'package/unique_name="com.ambushloop.game"': 'package/unique_name="com.ambushloop.game.a0"',
         'package/name="Ambush Loop"': 'package/name="Ambush Loop A0"',
         'exclude_filter="docs/*,*.md"': 'exclude_filter="ArtSource/*,docs/*,*.md,scripts/*test*.gd,scripts/*dump*.gd,scripts/*capture*.gd,scripts/presentation_preview.gd"',
