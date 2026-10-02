@@ -1,0 +1,210 @@
+{
+  "schema": 1,
+  "baseline": "744cb01439bd98d69e816d39d2584067f49043b0",
+  "production_commit": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+  "branch": "feat/environment-dot-candidate-20261002",
+  "candidate_status": "authored and isolated asset validation complete; integration and final art acceptance pending",
+  "tools": {
+    "blender": "4.3.2",
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "godot": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "renderer": "Mesa llvmpipe, X11 dummy, gl_compatibility; not Android"
+  },
+  "source_generator_sha256": "42affe24b2ab3260e1a731942007bdf2e8f599502f571a27216209c5335937c4",
+  "executed": [
+    {
+      "check": "two independent Blender exports and GLB/PNG structure",
+      "command": "python3 ambush_loop/ArtSource/environment_v2/validate_exports.py --compare /tmp/environment-v2-final-independent",
+      "exit_code": 0,
+      "checks": 1582,
+      "report": "structure_report.json",
+      "log": "export.log"
+    },
+    {
+      "check": "actual Godot final import",
+      "command": "Godot 4.7.2 --headless --editor --path /tmp/environment-v2-anchor-capture --import",
+      "exit_code": 0,
+      "log": "godot_import.log"
+    },
+    {
+      "check": "actual Godot final instantiation, material/pivot/socket/size/LOD/collision checks",
+      "command": "Godot 4.7.2 --headless --path /tmp/environment-v2-anchor-capture -- --validate",
+      "exit_code": 0,
+      "checks": 546,
+      "issues": 0,
+      "report": "godot_headless_report.json",
+      "log": "godot_validation.log"
+    },
+    {
+      "check": "actual Godot graphical full capture",
+      "exit_code": 0,
+      "frames": 3519,
+      "log": "godot_capture_full.log",
+      "run_details": "capture_runs.json"
+    },
+    {
+      "check": "affected stone tile plus six themes and native phone recapture",
+      "exit_code": 0,
+      "frames": 458,
+      "log": "godot_capture.log",
+      "run_details": "capture_runs.json"
+    },
+    {
+      "check": "final moving handle parent validation, motion and native phone recapture",
+      "exit_code": 0,
+      "report_checks": 789,
+      "issues": 0,
+      "log": "godot_anchor_capture.log",
+      "report": "godot_report.json",
+      "run_details": "capture_runs.json"
+    },
+    {
+      "check": "Blender authored source shaded and clay views",
+      "exit_code": 0,
+      "frames": 84,
+      "log": "blender_review.log",
+      "curated": "blender_source_review.png"
+    },
+    {
+      "check": "two independent Godot material exports",
+      "exit_code": 0,
+      "files_byte_identical": 2,
+      "log": "material_export.log",
+      "report": "reproducibility.json"
+    },
+    {
+      "check": "standalone exhibition render counters",
+      "exit_code": 0,
+      "samples": 12,
+      "log": "budget_capture.log",
+      "report": "exhibition_budget.json"
+    },
+    {
+      "check": "actual Godot motion frames encoded with ffmpeg; ffprobe inspected",
+      "exit_code": 0,
+      "duration_seconds": 6,
+      "resolution": [
+        1280,
+        720
+      ],
+      "fps": 30,
+      "bytes": 263465,
+      "video": "display_motion.mp4"
+    }
+  ],
+  "source_and_generated_hash_inventories": [
+    "ArtSource/environment_v2/SOURCE_SHA256SUMS",
+    "art/environment_v2/GENERATED_SHA256SUMS",
+    "art/environment_v2/evidence/SHA256SUMS"
+  ],
+  "pixel_review": {
+    "inspected": true,
+    "method": "view_image on actual framebuffer contact sheets and native 800x450 image; Blender source/clay board inspected",
+    "retained_unique_frames": 3519,
+    "retained_run_disclosure": "capture_runs.json",
+    "frame_sha_ledger": "frame_ledger.json",
+    "capture_success_is_not_art_acceptance": true,
+    "observed_limits": [
+      "35-degree exhibition views have some pump/radio-base occlusion; runtime cutaway is not implemented",
+      "small ammo/radio interaction details need actual gameplay zoom or selection cues at 800x450",
+      "legacy oil drum/radio atlas retains stronger mottling; protected shared atlas unchanged",
+      "thin far wire/grate geometry must not define interaction hit targets"
+    ],
+    "final_art_acceptance": false
+  },
+  "budgets": {
+    "checks": 1582,
+    "status": "pass",
+    "model_bytes": 3265608,
+    "total_lod0_triangles": 33804,
+    "max_prop_lod0_triangles": 1948,
+    "independent_output_match": true,
+    "atlas_resident_uncompressed_estimate_bytes": 16777216,
+    "notes": [
+      "Simple walls/grounds intentionally below triangle target range",
+      "Warehouse shell has six independently removable display surfaces; not a single surface asset",
+      "No collision shapes or authored gameplay mapping",
+      "No mobile performance claim"
+    ]
+  },
+  "scope_guard": "scope_guard.json",
+  "baseline_dependencies_rechecked": [
+    {
+      "path": "art/v2/models/oil_drum_lod0.glb",
+      "sha256": "eba777e00afd5953d95c6f16a00b6cfaa6ed43ef61ee696b9689c9cb438c61bd"
+    },
+    {
+      "path": "art/v2/models/oil_drum_lod1.glb",
+      "sha256": "c658033c8f3916a13a0992245a634237ba1386b379c13aa4f68309ac6d8e2066"
+    },
+    {
+      "path": "art/v2/models/sandbag_stack_lod0.glb",
+      "sha256": "51b23a282c1a84b840cc83a3959742c9a7b9929b958ab866f77639189458cf3c"
+    },
+    {
+      "path": "art/v2/models/sandbag_stack_lod1.glb",
+      "sha256": "04cc139719ac3fad656cbc26547a20846e2ac7d42bd007fa3e2182df9691215d"
+    },
+    {
+      "path": "art/v2/models/field_radio_lod0.glb",
+      "sha256": "f4cc81dfacdc038e24224b27a36ed45800c36120962ee9089e5036471ff944db"
+    },
+    {
+      "path": "art/v2/models/field_radio_lod1.glb",
+      "sha256": "3af11d8eeaf89a39c058ad1bdd6b87e28a54859d3bf929386d006e4013f9102f"
+    },
+    {
+      "path": "art/v2/models/yard_lamp_lod0.glb",
+      "sha256": "c44af28ea08b7f25c6a5ac979c5ffa3f848f1dec53843ba1a77862f5a162192d"
+    },
+    {
+      "path": "art/v2/models/yard_lamp_lod1.glb",
+      "sha256": "f1af6917d6484f472cc3c2f5264a4c2eb34f8b7f2a86fa520637915b9978db50"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_albedo.png",
+      "sha256": "e08c646cbf8f5690819258c382be942e3c2e8712700adb6fe91b2ed5935072f2"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_normal.png",
+      "sha256": "825f4849f1f54d8e6c33c15b8498e124472f82db0866e1b8f2c64227e29bc931"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_orm.png",
+      "sha256": "3c95dc6f7f060a7e735ba58831164cad05f6a9be080413f640b5f827f7b867af"
+    }
+  ],
+  "interrupted_attempts": [
+    {
+      "log": "godot_capture_initial_interrupted.log",
+      "exit_code": 130,
+      "counted_as_pass": false
+    },
+    {
+      "log": "godot_capture_material_interrupted.log",
+      "exit_code": 130,
+      "counted_as_pass": false
+    }
+  ],
+  "remaining_candidate_blockers": [],
+  "not_verified": [
+    "shared runtime loader/manifest and game logic placement",
+    "SCOUT->ALERT->SWEEP, replay/retry, six-level behavior invariants",
+    "complete battlefield art acceptance and gameplay visibility",
+    "runtime LOD/cutaway/lighting performance",
+    "Android APK, emulator or physical device FPS/thermal/memory/input/audio"
+  ],
+  "main_integrator": "01a0fcab-4daa-716b-8d26-e998edbb30bd",
+  "no_pr15_push_merge_or_deploy": true
+}

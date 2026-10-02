@@ -1,0 +1,30 @@
+{
+  "full_run": {
+    "generator_sha256": "d2fea087c2bf33734f051bbaf0f000132fdebb91fe436194de442a2fb633223f",
+    "runner_sha256": "5734b0499ff9983c6d1cfb00317f36a8803d0e3a39db9ce6240ecf54276b974b",
+    "runner_snapshot": "art/environment_v2/evidence/full_capture_runner.gd",
+    "exit_code": 0,
+    "frames": 3519,
+    "scope": "44 new/reused assets, 6 themes, neutral/dusk, 8 yaw, 35/65, near LOD0/far LOD1, clay, native 800x450, 180 motion frames",
+    "log": "godot_capture_full.log"
+  },
+  "final_affected_run": {
+    "generator_sha256": "304c7814dffa6c0065826d592be984010bef5b71d1b04f2ab4ec1f2d08ac64fd",
+    "runner_sha256": "284878215d664b709006064017d86f01c114f69b91e99ab24b20224be680a3b8",
+    "runner_snapshot": "art/environment_v2/evidence/final_capture_runner.gd",
+    "scope": "Final random-color stone tile plus all six theme matrices and native phone viewport; geometry and other atlas tiles unchanged; retained full-run asset/motion pixels",
+    "expected_frames": 458,
+    "log": "godot_capture.log",
+    "exit_code": 0
+  },
+  "disclosure": "No claim that every retained pixel was recaptured after the isolated stone-tile change. Final asset/texture bytes have independent double-export proof; final material resources have separate actual Godot validation.",
+  "final_anchor_run": {
+    "generator_sha256": "42affe24b2ab3260e1a731942007bdf2e8f599502f571a27216209c5335937c4",
+    "runner_sha256": "be07328d7a188c7e2930c7ba0087ab8b857f3dbfbd255514d93e4659f9535f32",
+    "runner_snapshot": "art/environment_v2/evidence/anchor_capture_runner.gd",
+    "exit_code": 0,
+    "scope": "moving handle socket parents checked in final Godot validation; actual motion frames recaptured with gold socket markers; native 800x450 yard recaptured; static mesh pixels retained because geometry/materials unchanged by socket-parent-only change",
+    "log": "godot_anchor_capture.log",
+    "actual_report_checks": 789
+  }
+}
