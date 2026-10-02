@@ -1,0 +1,51 @@
+--- a/ambush_loop/scripts/presentation/asset_library.gd
++++ b/ambush_loop/scripts/presentation/asset_library.gd
+@@ -4,11 +4,13 @@
+ ## slots only, so textures are not duplicated in each model or in GPU memory.
+ static var _atlas: StandardMaterial3D
+ static var _emission: StandardMaterial3D
++static var _actor_atlas: StandardMaterial3D
+ 
+ 
+ static func release_materials() -> void:
+ 	_atlas = null
+ 	_emission = null
++	_actor_atlas = null
+ 
+ 
+ static func _materials() -> void:
+@@ -26,6 +28,18 @@
+ 	_atlas.metallic_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_BLUE
+ 	_atlas.metallic = 1.0
+ 	_atlas.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
++	_actor_atlas = StandardMaterial3D.new()
++	_actor_atlas.resource_name = "ActorSharedAtlas"
++	_actor_atlas.albedo_texture = load("res://art/v2/textures/actor_atlas_albedo.png")
++	_actor_atlas.normal_enabled = true
++	_actor_atlas.normal_texture = load("res://art/v2/textures/actor_atlas_normal.png")
++	_actor_atlas.normal_scale = 0.4
++	_actor_atlas.roughness_texture = load("res://art/v2/textures/actor_atlas_orm.png")
++	_actor_atlas.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_GREEN
++	_actor_atlas.metallic_texture = _actor_atlas.roughness_texture
++	_actor_atlas.metallic_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_BLUE
++	_actor_atlas.metallic = 1.0
++	_actor_atlas.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+ 	_emission = StandardMaterial3D.new()
+ 	_emission.albedo_color = Color("ffd5a2")
+ 	_emission.emission_enabled = true
+@@ -50,6 +64,14 @@
+ 	if node is MeshInstance3D:
+ 		for surface in node.mesh.get_surface_count():
+ 			var original: Material = node.mesh.surface_get_material(surface)
+-			node.set_surface_override_material(surface, _emission if original != null and original.resource_name == "v2_lamp_emission" else _atlas)
++			if original != null and original.resource_name == "v2_actor_atlas":
++				node.set_surface_override_material(surface, _actor_atlas)
++			elif original != null and original.resource_name == "v2_lamp_emission":
++				node.set_surface_override_material(surface, _emission)
++			elif original == null or original.resource_name in ["", "v2_shared_atlas"]:
++				# Legacy yard GLBs were exported with unnamed PLACEHOLDER slots.
++				node.set_surface_override_material(surface, _atlas)
++			else:
++				push_error("ASSET_MATERIAL_UNMAPPED " + original.resource_name)
+ 	for child in node.get_children():
+ 		_apply(child)
