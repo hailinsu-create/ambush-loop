@@ -17,11 +17,11 @@ var _attachment: BoneAttachment3D
 
 
 func set_asset(id: String, level: int) -> bool:
+	if asset_id == id and lod == level:
+		return true
 	var entry := Assets.asset_record(id)
 	if entry.get("category", "") != "character" or not Assets.has_asset(id, level):
 		return false
-	if asset_id == id and lod == level:
-		return true
 	var replacement := Assets.instantiate(id, level)
 	if replacement == null:
 		return false
@@ -56,6 +56,8 @@ func set_asset(id: String, level: int) -> bool:
 func sample_pose(action: String, elapsed: float) -> bool:
 	if player == null or not is_finite(elapsed):
 		return false
+	if action == sampled_action and is_equal_approx(maxf(elapsed, 0.0), sampled_time) and player.current_animation == action:
+		return true
 	var clip: Dictionary = {}
 	for row in _record.get("animations", []):
 		if str(row.name) == action:
@@ -69,6 +71,7 @@ func sample_pose(action: String, elapsed: float) -> bool:
 	player.play(action)
 	player.seek(seconds, true, true)
 	skeleton.force_update_all_bone_transforms()
+	_sync_attachment()
 	sampled_action = action
 	sampled_time = maxf(elapsed, 0.0)
 	if equipped != null:
@@ -109,7 +112,15 @@ func mount_item(id: String) -> bool:
 	equipped_id = id
 	equipped.visible = sampled_action not in ["pickup", "deploy", "haul", "death"]
 	skeleton.force_update_all_bone_transforms()
+	_sync_attachment()
 	return true
+
+
+func _sync_attachment() -> void:
+	# BoneAttachment's deferred skeleton notification otherwise leaves the
+	# previous pose's muzzle visible until the next render frame after seek/LOD.
+	if _attachment != null:
+		_attachment.transform = skeleton.get_bone_global_pose(skeleton.find_bone(_attachment.bone_name))
 
 
 func bone_socket(name: String) -> Dictionary:

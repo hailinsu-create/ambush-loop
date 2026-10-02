@@ -9,6 +9,9 @@ const CameraInput := preload("res://scripts/input/camera_input.gd")
 const Geometry := preload("res://scripts/presentation/graybox_geometry.gd")
 const Occlusion := preload("res://scripts/presentation/occlusion_controller.gd")
 const DeviceProbe := preload("res://scripts/presentation/device_probe.gd")
+const ActorVisual := preload("res://scripts/presentation/actor_visual.gd")
+const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
+const Assets := preload("res://scripts/presentation/asset_library.gd")
 
 var host: Node
 var rig: Node3D
@@ -18,6 +21,7 @@ var geometry := Node3D.new()
 var proxies := Node3D.new()
 var walls: Array = []
 var actors: Dictionary = {}
+var _actor_scope: Array = []
 var objects: Dictionary = {}
 var cones: Dictionary = {}
 var _layout_hash := 0
@@ -266,6 +270,12 @@ func _rebuild_geometry() -> void:
 
 
 func _sync_actors() -> void:
+	var scope := [frame.level_id, frame.attempt_id, frame.wave_id, frame.replay, frame.animation_supported]
+	if scope != _actor_scope:
+		for proxy in actors.values():
+			proxy.free()
+		actors.clear()
+		_actor_scope = scope
 	var seen := {}
 	for group in ["ops", "enemies", "sentries"]:
 		for item in frame[group]:
@@ -274,8 +284,6 @@ func _sync_actors() -> void:
 			if not actors.has(key):
 				var proxy := Node3D.new()
 				proxies.add_child(proxy)
-				var mat: Material = _role_materials[clampi(int(item.get("role", 0)), 0, 2)] if group == "ops" else _hostile
-				Geometry.actor(proxy, mat, _steel)
 				var label := Label3D.new()
 				label.name = "Marker"
 				label.text = str(item.id) if group == "ops" else "◆"
@@ -290,15 +298,46 @@ func _sync_actors() -> void:
 			var proxy: Node3D = actors[key]
 			proxy.position = Space.logic_to_world(item.pos)
 			proxy.visible = item.active
-			var body: Node3D = proxy.get_node("Body")
-			body.rotation = Vector3(0.0 if item.alive else -PI * 0.5, Space.facing_yaw(item.facing), 0.0)
-			body.position.y = 0.0 if item.alive else 0.22
-			body.scale.y = 0.7 if item.alive and int(item.get("stance", 0)) == 1 else 1.0
+			_sync_body(proxy, item, group)
 			proxy.get_node("Marker").visible = item.alive
 	for key in actors.keys():
 		if not seen.has(key):
 			actors[key].free()
 			actors.erase(key)
+
+
+func _sync_body(proxy: Node3D, item: Dictionary, group: String) -> void:
+	var model_id: String = item.visual_model
+	var rigged: bool = frame.animation_supported and Assets.has_asset(model_id) and Assets.asset_record(model_id).get("category", "") == "character"
+	var body := proxy.get_node_or_null("Body") as Node3D
+	if body != null and (body is ActorVisual) != rigged:
+		body.free()
+		body = null
+	if body == null:
+		if rigged:
+			body = ActorVisual.new()
+			body.name = "Body"
+			proxy.add_child(body)
+		else:
+			var mat: Material = _role_materials[clampi(int(item.get("role", 0)), 0, 2)] if group == "ops" else _hostile
+			body = Geometry.actor(proxy, mat, _steel)
+	if rigged:
+		var pixels: float = 1.85 * get_viewport().get_visible_rect().size.y / rig.view_size
+		var lod: int = ActorPose.choose_lod(pixels, body.lod)
+		body.rotation = Vector3(0, Space.facing_yaw(item.facing), 0)
+		body.position = Vector3.ZERO
+		body.scale = Vector3.ONE
+		body.set_asset(model_id, lod)
+		var weapon_id: String = item.visual_weapon
+		body.mount_item(weapon_id if Assets.has_asset(weapon_id) else "")
+		var pose := ActorPose.sample(item, frame, group)
+		body.sample_pose(pose.action, pose.seconds)
+		body.set_meta("pose_event_id", pose.event_id)
+		body.set_meta("pose_fallback", pose.fallback)
+	else:
+		body.rotation = Vector3(0.0 if item.alive else -PI * 0.5, Space.facing_yaw(item.facing), 0.0)
+		body.position.y = 0.0 if item.alive else 0.22
+		body.scale.y = 0.7 if item.alive and int(item.get("stance", 0)) == 1 else 1.0
 
 
 func _sync_objects() -> void:

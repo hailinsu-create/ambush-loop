@@ -3,6 +3,7 @@ extends RefCounted
 ## Presentation history owns copies and object IDs; it never writes to simulation nodes.
 ## Snapshot format 1 accompanies BattleLog's independent timeline schema.
 const FORMAT_VERSION := 1
+const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 var _identity := ""
 var _objects := {}
 var _next_ids := {}
@@ -14,7 +15,11 @@ func capture(host: Node) -> Dictionary:
 		_identity = identity
 		_objects.clear()
 		_next_ids.clear()
+	var simulation_time: bool = host.phase == host.Phase.WATCHING
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
+		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
+		"pose_clock_domain": "simulation" if simulation_time else "command",
+		"pose_clock_s": float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0 if simulation_time else host._night_timer,
 		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,
@@ -38,6 +43,8 @@ func capture(host: Node) -> Dictionary:
 		elif op.locked:
 			action = "aim"
 		data.ops.append({"id": op.op_id, "pos": op.global_position, "active": op.visible,
+			"visual_model": ["operator_rifle", "operator_mg", "operator_scout"][int(op.role)],
+			"visual_weapon": WeaponCatalog.resolve_crate_kind(op.weapon_id, str(host.level.level_id), op.op_id),
 			"display_name": op.display_name, "role_label": OperatorUnit.role_display(op.role),
 			"weapon_label": WeaponCatalog.display_name(op.weapon_id) if op.weapon_id != "knife" else "匕首",
 			"inventory_line": op.inventory_line(), "fire_mode_label": op.fire_mode_label(),
@@ -59,7 +66,11 @@ func capture(host: Node) -> Dictionary:
 			continue
 		var moving: bool = enemy.active and enemy.alive and enemy.route_index < enemy.route.size() and enemy._distract_t <= 0.0
 		var action := "death" if not enemy.alive else ("fire" if enemy.returning_fire else ("walk" if moving else "idle"))
+		var kind: String = enemy.kind_id()
 		data.enemies.append({"id": enemy.label_id, "pos": enemy.global_position,
+			"visual_model": {"main": "enemy_patrol", "flank": "enemy_flank", "sneak": "enemy_sneak", "echo": "enemy_radio"}.get(kind, ""),
+			# Authored display prop only: EnemyRunner has no named-gun equipment mechanic.
+			"visual_weapon": {"main": "kar98k", "flank": "mp40", "sneak": "kar98k", "echo": "luger"}.get(kind, ""),
 			"active": enemy.visible, "alive": enemy.alive, "hp": enemy.hp,
 			"facing": enemy.facing_deg, "route": enemy.spawn_route, "moving": moving,
 			"alerted": enemy.alerted, "returning_fire": enemy.returning_fire,
@@ -70,6 +81,7 @@ func capture(host: Node) -> Dictionary:
 			if not is_instance_valid(sentry):
 				continue
 			data.sentries.append({"id": sentry.label_id, "pos": sentry.global_position,
+				"visual_model": "enemy_patrol", "visual_weapon": "kar98k",
 				"active": sentry.visible, "alive": not sentry.is_down(), "facing": sentry.facing_deg,
 				"state": sentry.state, "suspicion": sentry.suspicion, "frozen": sentry.frozen,
 				"action": "death" if sentry.is_down() else ("idle" if sentry.frozen else "walk"),

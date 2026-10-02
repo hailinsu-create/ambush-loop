@@ -6358,6 +6358,10 @@ func _update_replay_status() -> void:
 		status_label.text = "暂不支持此历史画面版本；原记录保留。空格返回"
 	elif format == 0:
 		status_label.text = "旧记录 · 缺失装备/场景以中性值显示。空格返回"
+	elif int(data.get("animation_schema", 0)) == 0:
+		status_label.text = "旧记录 · 动作未保存，使用简化人物显示。空格返回"
+	elif not preload("res://scripts/presentation/actor_pose.gd").supported(data):
+		status_label.text = "历史动作版本暂不支持，使用简化人物显示；原记录保留。空格返回"
 	else:
 		status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
 
