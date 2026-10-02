@@ -101,9 +101,10 @@ func _run() -> void:
 		_check(node != null and _triangles(node) > 0 and _yard_materials(node, yard), "old yard imports retain their atlas and emission mapping")
 		if node != null:
 			node.free()
-	root.get_node("AudioDirector").pause_for_background()
+	root.get_node("AudioDirector")._stop_music_hard()
 	studio.free()
 	Assets.release_materials()
+	await process_frame
 	print("ASSET_LIBRARY_OK" if failures == 0 else "ASSET_LIBRARY_FAILED", " checks=", checks, " failures=", failures, " assets=15 lods=30")
 	quit(0 if failures == 0 else 1)
 

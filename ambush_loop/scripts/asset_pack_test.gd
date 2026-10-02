@@ -39,7 +39,8 @@ func _run() -> void:
 	if yard != null:
 		yard.free()
 	Assets.release_materials()
-	root.get_node("AudioDirector").pause_for_background()
+	root.get_node("AudioDirector")._stop_music_hard()
+	await process_frame
 	print("ASSET_PACK_OK" if failures == 0 else "ASSET_PACK_FAILED", " checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)
 
