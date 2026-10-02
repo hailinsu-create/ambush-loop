@@ -25,4 +25,25 @@
 
 成功仅表示 M1-C1 几何查询的桌面门与外部评审完成；不表示 combat/preview/replay 已统一或完整 M1/B2/Android 通过。风险：Bresenham 不是完整空间相交、眼高单位与视觉模型还需后续校准；未接入生产消费者之前不能宣称高点已改变火力。
 
-状态：实际 GPT PLAN 已取得；尚未实现/验证。下一步按此计划开发几何查询。手机恢复后另按原安装身份 → B2 视觉/玩法 → 30 分钟连续/60 分钟累计生命周期取证链补验；历史 AudioTrack 崩溃仍未定因。
+状态：M1-C1 已实现并通过四项桌面定向隔离门、原 GPT iteration 12 实际 REVIEW / DONE；见下方精确结果。不等于完整 M1-C 或玩法验收。手机恢复后另按原安装身份 → B2 视觉/玩法 → 30 分钟连续/60 分钟累计生命周期取证链补验；历史 AudioTrack 崩溃仍未定因。
+
+## 实际实现、测试与补审
+
+代码 [Draft PR #13](https://github.com/hailinsu-create/ambush-loop/pull/13)，分支 `codex/m1-c-height-los`，提交 `e2550b73a29f0cdb19ddd51b963e6b4b5ed487c5`。独立四文件差异：grid 新 API、LOS gate、Windows/Linux 包装器的新入口。其他生产调用者未改；全文搜索新 API 仅找到定义与新门。实施前确认源/镜像 grid 基线相同；送审后 grid blob `584f7e8f813f2204d3e898e69221f12deb093f86`、gate blob `97fe54742679171ae1fe13120d1057e279d46ef0` 均相同，未覆盖原 main/audio/CTA 等诊断差异。
+
+Godot 4.7.2 经规定包装器执行，四次均 exit 0 且 `PLAYER_DATA_UNCHANGED=1`：
+
+| 入口 | Run ID | 实际完成标记 |
+| --- | --- | --- |
+| `m1_height_los_gate.gd` | `cac76026306447ec8104e39bc06a4c22` | `M1_HEIGHT_LOS_GATE_OK`，低/全遮挡、反向、插值、拒绝非法输入、旧查询不变均为 1 |
+| `m1_height_data_gate.gd` | `80b9b9550c914b0ab26fbb8ed5f56e55` | `M1_HEIGHT_DATA_GATE_OK` |
+| `m1_ramp_pathfinder_gate.gd` | `1642b4bb603f407fabf1bd031902323f` | `M1_RAMP_PATHFINDER_GATE_OK` |
+| `m1_b2_yard_height_gate.gd` | `e386a47b7f5f42f5a91efc7d83b384c0` | `M1_B2_YARD_HEIGHT_GATE_OK`，上/下随队与上/下断坡反例均为 1 |
+
+新 gate 首次 run `39cac0ebccdc4781b0ac7f04cb4df931` 也通过；随后加强非法遮挡反例，先清空其他遮挡并证明同一线通，再设置非法值证明拒绝、恢复后再次通线，以避免负例空洞。上表记录的是加强后的最终版本。
+
+`git diff --check` 通过；full smoke 本轮未重跑，Linux 包装器未执行，不能引用历史结果作为本轮通过。未进行真机、APK 安装、音频长期测试或新视觉验收。
+
+原 GPT 实际读取四份范围内代码/差异及 iteration 12 四项执行输出，返回 `STATE: DONE`：geometry-only slice accepted，无需修正。重点确认：规范化后方向一致、端点高度随之正确交换；LOW/FULL、移除碰撞但仍 FULL、混合高低近端插值等负例非空洞；非法输入拒绝与旧查询未变；认可包装器仅增加新入口，并明确原 CTA 注册不在本结论范围。
+
+此 DONE 仅结束本轮几何目标，不代表旧原生崩溃定因、整阶段通过、GitHub 正式 review 或主线合并。已达到本协作任务第 12 轮且当前小目标完成，不继续扩展同一轮。下一独立切片应先请 GPT 规划敌我射击、预览与回放同源接入，再实现并重建受影响回归；手机插入后恢复待补真机链。
