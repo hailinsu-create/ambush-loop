@@ -739,7 +739,7 @@ func _modal_blocks_input() -> bool:
 	if night_handoff and night_handoff.is_open():
 		return true
 	if backpack_panel and backpack_panel.has_method("is_open") and backpack_panel.is_open():
-		return false
+		return true
 	return false
 
 
@@ -787,6 +787,7 @@ func _toggle_pause_menu() -> void:
 	if pause_overlay.is_open():
 		pause_overlay.dismiss()
 		return
+	_cancel_world_input()
 	pause_overlay.present(_is_command_phase(), true)
 	if phase == Phase.WATCHING and not sim.paused:
 		sim.paused = true
@@ -1197,6 +1198,10 @@ func apply_context_action(cmd: String, world: Vector2 = Vector2.ZERO) -> void:
 
 
 func handle_android_back() -> void:
+	_cancel_world_input()
+	if backpack_panel and backpack_panel.is_open():
+		backpack_panel.dismiss()
+		return
 	if tutorial_overlay and tutorial_overlay.is_open():
 		return
 	if credits_overlay and credits_overlay.is_open():
@@ -1206,6 +1211,7 @@ func handle_android_back() -> void:
 
 
 func handle_app_focus_out() -> void:
+	_cancel_world_input(true)
 	_gate_scene_audio(true)
 	# Freeze the sim clock whenever it can still step. Result panels are idle.
 	if phase == Phase.WATCHING and not sim.paused:
@@ -1222,6 +1228,20 @@ func handle_app_focus_in() -> void:
 	_gate_scene_audio(false)
 	# Stay paused after a home-button; player taps 继续. Do not auto-unpause sim.
 	_refresh_touch_hud()
+
+
+func _cancel_world_input(reset_contacts: bool = false) -> void:
+	_touches.clear()
+	_facing_touch = -1
+	_pending_setup_touch = false
+	_pending_touch_world = Vector2.ZERO
+	_cover_hold_slot = null
+	_touch_preview_slot = null
+	_sprint_hold_armed = false
+	_touch_panning = false
+	_pinch_start_dist = 0.0
+	if presentation_3d != null:
+		presentation_3d.cancel_input(reset_contacts)
 
 
 func _gate_scene_audio(paused: bool) -> void:
@@ -3317,6 +3337,7 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	_cancel_world_input()
 	if backpack_panel:
 		backpack_panel.dismiss()
 	phase = Phase.SETUP
@@ -3750,14 +3771,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if tutorial_overlay and tutorial_overlay.is_open():
-			get_viewport().set_input_as_handled()
-			return
-		if credits_overlay and credits_overlay.is_open():
-			_return_to_title()
-			get_viewport().set_input_as_handled()
-			return
-		_toggle_pause_menu()
+		handle_android_back()
 		get_viewport().set_input_as_handled()
 		return
 	if _handle_touch_gestures(event):
@@ -3911,6 +3925,9 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		return true
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch
+		if st.canceled:
+			_cancel_world_input()
+			return true
 		if st.pressed:
 			_touches[st.index] = st.position
 			if _touches.size() >= 2:
@@ -4990,6 +5007,7 @@ func _on_alarm_pressed() -> void:
 	_capture_plan()
 	frozen_plan = last_plan.duplicate_plan()
 	run_id += 1
+	_cancel_world_input()
 	if backpack_panel:
 		backpack_panel.dismiss()
 	var this_run := run_id
@@ -6292,6 +6310,7 @@ func _on_replay_pressed() -> void:
 	if battle_log.events.is_empty() and battle_log.snapshots.is_empty():
 		return
 	replay_return_phase = phase
+	_cancel_world_input()
 	if backpack_panel:
 		backpack_panel.dismiss()
 	frozen_plan = last_plan.duplicate_plan()
@@ -6968,9 +6987,11 @@ func _focus_battle_event(ev: Dictionary) -> void:
 	if phase == Phase.REPLAY:
 		replay.set_tick(BattleLog.record_tick(ev))
 		_apply_replay_scrub()
-	var pos := _event_focus_position(ev)
+	var pos := _event_focus_position(ev) if phase != Phase.REPLAY else Vector2(ev.get("position", escape_world))
 	if phase == Phase.REPLAY:
 		pos = _pos_from_snapshot(replay.snapshot_at_or_before(replay.scrub_tick), ev, pos)
+	if presentation_3d != null:
+		presentation_3d.focus_event(pos, ev)
 	_spawn_focus_ring(pos)
 	if str(ev["type"]) == "escape":
 		_begin_escape_flash()
@@ -11915,6 +11936,7 @@ func _toggle_backpack() -> void:
 		return
 	if not _can_edit_equipment() or _modal_blocks_input():
 		return
+	_cancel_world_input()
 	backpack_panel.present(selected)
 
 
@@ -12100,6 +12122,7 @@ func _on_sweep_commit() -> void:
 
 
 func _begin_next_wave() -> void:
+	_cancel_world_input()
 	if backpack_panel:
 		backpack_panel.dismiss()
 	if raid:

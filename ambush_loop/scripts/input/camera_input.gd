@@ -11,9 +11,15 @@ var tap_cancelled := false
 var multi_latched := false
 var block_emulated_mouse := false
 var middle_down := false
+var suppressed_contacts: Dictionary = {}
 
 
-func cancel() -> void:
+func cancel(reset_contacts: bool = false) -> void:
+	if reset_contacts:
+		suppressed_contacts.clear()
+	else:
+		for id in contacts:
+			suppressed_contacts[id] = true
 	contacts.clear()
 	ui_contacts.clear()
 	pending_id = -1
@@ -24,6 +30,16 @@ func cancel() -> void:
 
 func touch(event: InputEvent, rig: Node3D, over_ui: bool) -> Dictionary:
 	var result := {"handled": false, "tap": false, "position": Vector2.ZERO}
+	if not suppressed_contacts.is_empty():
+		if event is InputEventScreenTouch:
+			if event.pressed:
+				suppressed_contacts[event.index] = true
+			else:
+				suppressed_contacts.erase(event.index)
+			result.handled = not over_ui
+		elif event is InputEventScreenDrag:
+			result.handled = not over_ui
+		return result
 	if event is InputEventScreenTouch:
 		var id: int = event.index
 		if event.pressed:

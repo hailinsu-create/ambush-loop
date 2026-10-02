@@ -22,6 +22,9 @@ var objects: Dictionary = {}
 var cones: Dictionary = {}
 var _layout_hash := 0
 var _selected_ring: MeshInstance3D
+var _event_ring: MeshInstance3D
+var _focus_attempt := ""
+var _focus_wave := -1
 var _compass: Label
 var _pitch_slider: HSlider
 var _camera_controls: CanvasLayer
@@ -60,6 +63,11 @@ func bind(main: Node) -> void:
 	ring_mat.no_depth_test = true
 	_selected_ring = Geometry.cylinder(proxies, 0.55, 0.025, Vector3.ZERO, ring_mat)
 	_selected_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var focus_mat := Geometry.material(Color(1.0, 0.8, 0.25, 0.68), true)
+	focus_mat.no_depth_test = true
+	_event_ring = Geometry.cylinder(proxies, 0.72, 0.04, Vector3.ZERO, focus_mat)
+	_event_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_event_ring.visible = false
 	refresh()
 
 
@@ -193,7 +201,12 @@ func refresh() -> void:
 	# Hide only the RenderingServer canvas branch. Node visibility and all
 	# simulation participation checks retain their original values.
 	RenderingServer.canvas_item_set_visible(host.get_node("World").get_canvas_item(), false)
-	frame = ViewState.capture(host)
+	var next_frame: Dictionary = ViewState.capture(host)
+	if not frame.is_empty() and (frame.run_id != next_frame.run_id or frame.phase != next_frame.phase):
+		cancel_input()
+	frame = next_frame
+	if _event_ring.visible and (_focus_attempt != frame.attempt_id or _focus_wave != frame.wave_id):
+		_event_ring.visible = false
 	var layout_hash: int = hash([frame.level_id, frame.blocked])
 	if layout_hash != _layout_hash:
 		_layout_hash = layout_hash
@@ -347,7 +360,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if host._modal_blocks_input():
 		gestures.cancel()
-		gestures.block_emulated_mouse = false
+		if event is InputEventScreenTouch or event is InputEventScreenDrag:
+			gestures.touch(event, rig, true)
 		return
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		var blocked: bool = pointer_over_ui(event.position)
@@ -390,6 +404,22 @@ func pick_at(screen: Vector2) -> Dictionary:
 	return Picker.pick(rig.camera, screen, frame)
 
 
+func cancel_input(reset_contacts: bool = false) -> void:
+	gestures.cancel(reset_contacts)
+
+
+func focus_event(pos: Vector2, event: Dictionary) -> void:
+	if not Space.contains_logic(pos):
+		return
+	cancel_input()
+	_focus_attempt = str(event.get("attempt_id", ""))
+	_focus_wave = int(event.get("wave_id", -1))
+	_event_ring.position = Space.logic_to_world(pos, 0.065)
+	_event_ring.visible = true
+	rig.focus = Space.logic_to_world(pos)
+	rig.apply_pose()
+
+
 func pointer_logic_position() -> Vector2:
 	var screen := get_viewport().get_mouse_position()
 	if pointer_over_ui(screen):
@@ -420,7 +450,7 @@ func _control_at(node: Node, screen: Vector2) -> bool:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
-		gestures.cancel()
+		cancel_input(true)
 		if _probe.active:
 			_probe.stop(rig)
 			_probe_button.text = "镜头巡检 · 30 秒"
@@ -428,6 +458,7 @@ func _notification(what: int) -> void:
 
 
 func _exit_tree() -> void:
+	cancel_input(true)
 	if is_instance_valid(host):
 		var world := host.get_node_or_null("World")
 		if is_instance_valid(world):
