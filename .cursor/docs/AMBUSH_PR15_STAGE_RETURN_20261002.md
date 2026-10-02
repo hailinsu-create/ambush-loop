@@ -38,3 +38,6 @@ R4仅工作树开发验证：52clip真实采样17802；修正蹲姿后真实batt
 
 
 最新R5工具片：[实际刀/雷/诱饵报告](AMBUSH_PR15_R5_TOOLS_20261002.md)。只接2974915/ebedb82的21角色GLB原字节，1092旧键/rig/geometry及30装备/3atlas兼容复核0失败；c5ec8ff工具真实事件clock/target/mask/取消与格式3保留R4/R3历史，d53成功装备立即取消修真实同帧反例4/1→4/0，工具1034/0和冻结66/0。分固定源六关10332/合同84042/角色21818/枪7681/战场231/clock29/HUD164/生命周期32/audio405/static333均退出0，f687空工程PCK1764/0。每run固定源、混合等价范围与保留失败在validation；未称当前全smoke/逐波视觉/设备通过。未merge/生产，制作源/atlas仍独立作者所有，尸体body来源/肩掌配对与20cm局部offset一次为下一片；之后必修desktop HUD覆盖和radio yaw345天线整隐，再FX/A3预算和13波视觉矩阵/完整回归APK，耳听设备后置。
+
+
+最新尸体片：[真实来源/肩掌/取消与纯回放报告](AMBUSH_PR15_CORPSE_RUNTIME_20261002.md)。ce932cc成功来源绑定/ground/held及真实H抓放先770/0；完整六关10332/3暴露age随capture浮点累加，bf1261c railcut1249/1明确只在两个年龄字段。3048294改domain原锚点后尸体770/合同84042/六关13波10332均0失败；91b9bdc仅扩实际移动/步态测试至1207/0和emptyPCK1766/0，运行树与304等价。复制bodyID/source wave不重绑，原任意loot haul/屏幕14px follow/自动ammo拾取和共享引用不变；内嵌20cm只采样一次。四张实际帧已看，72配对接触及−15mm最低floor门限通过，正向离地/自然艺术/墙碰撞/完整SWEEP玩家拖尸路径未称验收。当前技术PCK25618864 bytes SHA52e14b6b4189af54cb28086b0f36ec08f7201ba24a6be8fa2e823da376562378，非APK；环境重连旧exit句柄失效，304成功有pipefail后TEST_LOG证实0，两个FAILED退出码不冒称观测。HUD盖目标与radio整隐仍是下一必修，然后FX/continuous command/FAILED-A3/13波visual/最新fullsmoke/APK；生产源/GLB/atlas仍独立作者，最新fullsmoke7d34867、耳听设备后置。

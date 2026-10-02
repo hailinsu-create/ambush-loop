@@ -1,0 +1,312 @@
+{
+  "runtime_source_sha": "30482940a3b873ec146b68e9a907c2869ccb2b3e",
+  "final_test_export_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+  "runs": [
+    {
+      "source_sha": "ce932cc4904f4f46722864d37782ec8530df08cb",
+      "entry": "corpse_runtime_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {},
+      "run_id": "c2f32cc5a18f4d378a3925c85d04db1b",
+      "checks": 770,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "formal.log",
+      "log_sha256": "e8ff030628a4dd2262e8860505c9fe8e8c13f0a54dcdeae05364c3cd05be60f1"
+    },
+    {
+      "source_sha": "ce932cc4904f4f46722864d37782ec8530df08cb",
+      "entry": "presentation_contract_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_contract_test.gd"
+      ],
+      "environment": {},
+      "run_id": "1524de636a7249e69376659102102e6c",
+      "checks": 84042,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "contract.log",
+      "log_sha256": "225af5602787e4faa57fb314f43ce562dd43c326d71fd84a903f1b498eff09e5"
+    },
+    {
+      "source_sha": "ce932cc4904f4f46722864d37782ec8530df08cb",
+      "entry": "utility_runtime_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd"
+      ],
+      "environment": {},
+      "run_id": "610b0ffd59f641819b4f15d7910477a7",
+      "checks": 1028,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "tools.log",
+      "log_sha256": "a052d8c8d1dfcd26722ad9c24f9e520d12dff9b78510918e4caa3de5d3358e55"
+    },
+    {
+      "source_sha": "ce932cc4904f4f46722864d37782ec8530df08cb",
+      "entry": "equipment_freeze_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "equipment_freeze_test.gd"
+      ],
+      "environment": {},
+      "run_id": "29a67d6989164b068bf67486560c8650",
+      "checks": 66,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "freeze.log",
+      "log_sha256": "2fa927b6c88436461eccfe60d0605f3f0909180a597e5fc3b26e6819d1123776"
+    },
+    {
+      "source_sha": "ce932cc4904f4f46722864d37782ec8530df08cb",
+      "entry": "command_pose_clock_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "command_pose_clock_test.gd"
+      ],
+      "environment": {},
+      "run_id": "056de1c19f5a476fa6510423f94837c7",
+      "checks": 27,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "clock.log",
+      "log_sha256": "fc93b181725fed36daf7c594238ebc3fe95c3eda6628f66b570aee0684ad008d"
+    },
+    {
+      "source_sha": "30482940a3b873ec146b68e9a907c2869ccb2b3e",
+      "entry": "corpse_runtime_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {},
+      "run_id": "e67b77d5225944999966042c1b4c78d3",
+      "checks": 770,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "environment reconnect lost old unified session IDs; set -euo pipefail wrapper emitted TEST_LOG after successful engine/tee pipeline",
+      "log": "formal-final.log",
+      "log_sha256": "05ebd027d42355f0ea70fe8690fcf5ec3dd824330cb89a6257cd4c96d2ff0328"
+    },
+    {
+      "source_sha": "30482940a3b873ec146b68e9a907c2869ccb2b3e",
+      "entry": "presentation_contract_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_contract_test.gd"
+      ],
+      "environment": {},
+      "run_id": "48e27e0605da4387900e0f9d45344bfa",
+      "checks": 84042,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "environment reconnect lost old unified session IDs; set -euo pipefail wrapper emitted TEST_LOG after successful engine/tee pipeline",
+      "log": "contract-final.log",
+      "log_sha256": "4a74eca517ff2512b0178fd26ed0d378a680a6d52d16025b30adc76db4801ba7"
+    },
+    {
+      "source_sha": "30482940a3b873ec146b68e9a907c2869ccb2b3e",
+      "entry": "campaign_replay_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd"
+      ],
+      "environment": {},
+      "run_id": "4f8bc4e6251d4a5cabbc03e1d54f3ebb",
+      "checks": 10332,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "environment reconnect lost old unified session IDs; set -euo pipefail wrapper emitted TEST_LOG after successful engine/tee pipeline",
+      "log": "campaign-final.log",
+      "log_sha256": "738fdf3aa0bf8c855b1e392ce95b9f99cfe86077cb9c9832efd0b11f41f8c093"
+    },
+    {
+      "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+      "entry": "corpse_runtime_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {},
+      "run_id": "da814429e19343de83d0b2a153cc158b",
+      "checks": 1207,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "moving-final.log",
+      "log_sha256": "9f04dbe5cdc1f57fa590f38dbcd03287e27bcc83843bb83de4356d3060f201c9"
+    },
+    {
+      "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+      "entry": "asset_pack_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "asset_pack_test.gd"
+      ],
+      "environment": {
+        "AMBUSH_TEST_PACK": "/tmp/pr15-corpse-runtime.pck"
+      },
+      "run_id": "a3f9991bc57e43dd87a91c054144ff7c",
+      "checks": 1766,
+      "failures": 0,
+      "exit_code": 0,
+      "exit_evidence": "unified exec completed with exit_code=0",
+      "log": "pack-test.log",
+      "log_sha256": "c14208a2e445d807395cf0ccff25b83db6a538ccef736e4a6e6a4361a21a7d61"
+    }
+  ],
+  "retained_negative": [
+    {
+      "source_sha": "ce932cc4904f4f46722864d37782ec8530df08cb",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd"
+      ],
+      "environment": {},
+      "checks": 10332,
+      "failures": 3,
+      "exit_code": null,
+      "exit_evidence": "failed completion marker preserved; original unified exit handle unavailable after environment reconnect, not claimed as observed exit1",
+      "log": "campaign.log",
+      "log_sha256": "27bf761f7ce3f2cc5c259ad3e91e1b95a8523340b7075c7eda86e21335f41aa3"
+    },
+    {
+      "source_sha": "bf1261c8d24d295b18796dfc65bd0da876d10a6b",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "railcut"
+      },
+      "checks": 1249,
+      "failures": 1,
+      "exit_code": null,
+      "exit_evidence": "failed completion marker preserved; original unified exit handle unavailable after environment reconnect, not claimed as observed exit1",
+      "log": "railcut-negative.log",
+      "log_sha256": "f85f2355dfc12c670378394a93be5f1d4a0d8a611cd56e69f3d8294bfaa08529"
+    }
+  ],
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/corpse_grab_half.png",
+      "sha256": "3bfb109fee6d5f3ab4386c3d3893bd394508ff0f8543af9ca3f99fd252c924aa",
+      "file": "corpse_grab_half.png",
+      "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+      "visually_inspected": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/corpse_hold.png",
+      "sha256": "e0b88cbd11cf7bf410764ed4e6145202e0df8e170cae23ac73d545fb63e108bc",
+      "file": "corpse_hold.png",
+      "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+      "visually_inspected": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/corpse_release_half.png",
+      "sha256": "4a96a61fae2ad4d831df11fbeec0b95f6101dfff8696531191baa3b994446733",
+      "file": "corpse_release_half.png",
+      "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+      "visually_inspected": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/corpse_ground.png",
+      "sha256": "2634a0c1040487466772cd24bc56cc1cf4c25cb6f56621677622fb4376e2b793",
+      "file": "corpse_ground.png",
+      "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+      "visually_inspected": true
+    }
+  ],
+  "pairs": {
+    "configurations": 72,
+    "roles": 3,
+    "enemy_models": 4,
+    "lods": 3,
+    "stances": 2,
+    "held_cycle_seconds": [
+      0,
+      0.3,
+      0.6,
+      0.9
+    ],
+    "transition_phases": [
+      0,
+      0.5,
+      1
+    ],
+    "static_min_y_range_m": [
+      -0.00123487412929535,
+      0.10103178024292
+    ],
+    "floor_gate": "min imported skinned vertex y >= -0.015m; positive clearance maximum/natural body grounding are not accepted by this gate"
+  },
+  "pack": {
+    "run_id": "aecd375188cf4501ad5bf1a083abc7d5",
+    "command": [
+      "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "--headless",
+      "--path",
+      "/workspace/ambush-pr15/ambush_loop",
+      "--export-pack",
+      "Linux Desktop",
+      "/tmp/pr15-corpse-runtime.pck"
+    ],
+    "exit_code": 0,
+    "source_sha": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+    "path": "/tmp/pr15-corpse-runtime.pck",
+    "bytes": 25618864,
+    "sha256": "52e14b6b4189af54cb28086b0f36ec08f7201ba24a6be8fa2e823da376562378",
+    "audio_imports_restored": 45,
+    "export_log": "export.log",
+    "export_log_sha256": "fbec8a4af5e7afc5022e51d3398d87007ad00904cdf646da7032d57dfad24c2a"
+  },
+  "equivalence": {
+    "head_vs_runtime_source": "exit0 diff excluding only asset_pack_test.gd and corpse_runtime_test.gd; production runtime byte-identical",
+    "art_and_ArtSource_vs_41eff0f": "git diff --exit-code =0, no source generator or atlas/GLB edited/rebuilt"
+  },
+  "development": "unfrozen development logs included for parse/helper fixture diagnostics, excluded from fixed-source accepted runs",
+  "limitations": [
+    "actual interaction fixture is SCOUT; production alarm/next-wave handlers, manual queue spawn followed by actual EnemyRunner.kill signal",
+    "pairing fixture advances copied command clock without normal auto-pickup during demonstration; original ammo auto-pickup separately passes and cancels grab",
+    "no full SWEEP hauling player journey, rigid-body/collision/natural choreography or wall-clearance approval",
+    "four actual cloud frames; not13wave visual, full latest smoke/APK or device performance",
+    "latest full smoke remains7d34867, ear listening0/45 cues0/6 scene mixes"
+  ]
+}

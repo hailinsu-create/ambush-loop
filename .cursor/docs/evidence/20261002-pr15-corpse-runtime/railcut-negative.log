@@ -1,0 +1,18 @@
+TEST_RUN_ID=d7466b5937224d2ebd27786b4c931a95
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d7466b5937224d2ebd27786b4c931a95/data
+TEST_ENTRY=campaign_replay_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d7466b5937224d2ebd27786b4c931a95/data/godot/app_userdata/Ambush Loop run_id=d7466b5937224d2ebd27786b4c931a95
+CAMPAIGN_DIFFERENCE railcut:30fps.state.corpses[1].death_age_s left=10.0166666666667 right=10.0166666666667
+CAMPAIGN_DIFFERENCE railcut:30fps.state.corpses[1].transition_age_s left=10.0166666666667 right=10.0166666666667
+CAMPAIGN_DIFFERENCE railcut:2x.state.corpses[1].death_age_s left=10.0166666666667 right=10.0166666666667
+CAMPAIGN_DIFFERENCE railcut:2x.state.corpses[1].transition_age_s left=10.0166666666667 right=10.0166666666667
+ERROR: CAMPAIGN_REPLAY: railcut complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:29)
+       [1] _run (res://scripts/campaign_replay_test.gd:53)
+       [2] _battle (res://scripts/campaign_replay_test.gd:135)
+CAMPAIGN_REPLAY_LEVEL railcut waves=2 terminal=719 events=38
+CAMPAIGN_REPLAY_FAILED checks=1249 failures=1
