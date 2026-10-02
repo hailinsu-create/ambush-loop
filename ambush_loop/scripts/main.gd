@@ -12056,6 +12056,7 @@ func _on_pack_equip(kind: String) -> void:
 	var rec: Dictionary = selected.equip_from_pack(kind)
 	status_label.text = str(rec.get("text", ""))
 	if bool(rec.get("ok", false)):
+		visual_snapshot.cancel_utility(selected.op_id)
 		_sfx("loot")
 		_flash(str(rec.get("text", "")), Color(0.82, 0.92, 0.45))
 	_refresh_backpack_if_open()
