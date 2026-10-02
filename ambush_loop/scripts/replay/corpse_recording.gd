@@ -35,6 +35,7 @@ func remember(host: Node, loot: Node2D, actor: Node2D, group: String) -> void:
 		"source_wave_id": host.battle_log.wave_id, "source_pos": actor.global_position,
 		"model": model, "facing": float(actor.facing_deg), "pos": loot.global_position,
 		"death_clock_domain": domain, "death_clock_s": clock, "death_age_s": 0.0,
+		"death_base_s": 0.0, "transition_base_s": 0.0,
 		"last_domain": domain, "last_clock": clock, "mode": "ground", "carrier_id": -1,
 		"ever_grabbed": false, "ground_anchor": {}, "last_carrier": {}, "transition": {}, "transition_age_s": 0.0}
 	links[id] = weakref(loot)
@@ -64,6 +65,7 @@ func action(host: Node, op: Node, loot: Node, mode: String) -> void:
 	record.ever_grabbed = true
 	record.mode = mode
 	record.transition_age_s = 0.0
+	record.transition_base_s = -maxf(_clock(host, str(record.last_domain)) - float(record.last_clock), 0.0)
 	record.transition = {"event_id": "%s:corpse:%d:%d" % [scope, host.battle_log.wave_id, _seq],
 		"seq": _seq, "attempt_id": host.battle_log.attempt_id, "wave_id": host.battle_log.wave_id,
 		"phase": int(host.phase), "actor_id": int(op.op_id), "weapon": str(op.weapon_id), "clock_domain": _domain(host)}
@@ -167,10 +169,15 @@ static func _clock(host: Node, domain: String) -> float:
 
 static func _advance(record: Dictionary, host: Node) -> void:
 	var domain := _domain(host)
-	# On a domain change, close the original clock interval before switching.
-	# This removes capture-frequency dependence at the final battle tick.
-	var delta := maxf(_clock(host, str(record.last_domain)) - float(record.last_clock), 0.0)
-	record.death_age_s = float(record.death_age_s) + delta
-	record.transition_age_s = float(record.transition_age_s) + delta
-	record.last_domain = domain
-	record.last_clock = _clock(host, domain)
+	# Each domain uses its original anchor, not a sum of per-capture deltas.
+	# Repeated refreshes at different FPS otherwise accumulate distinct IEEE
+	# rounding in plain history even with identical gameplay ticks and events.
+	if domain != str(record.last_domain):
+		var closed := maxf(_clock(host, str(record.last_domain)) - float(record.last_clock), 0.0)
+		record.death_base_s = float(record.death_base_s) + closed
+		record.transition_base_s = float(record.transition_base_s) + closed
+		record.last_domain = domain
+		record.last_clock = _clock(host, domain)
+	var elapsed := maxf(_clock(host, domain) - float(record.last_clock), 0.0)
+	record.death_age_s = float(record.death_base_s) + elapsed
+	record.transition_age_s = maxf(float(record.transition_base_s) + elapsed, 0.0)
