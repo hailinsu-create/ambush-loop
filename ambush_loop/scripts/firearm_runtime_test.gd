@@ -138,6 +138,9 @@ func _sample_configuration(body: Actor, gun: String, role: String, lod: int) -> 
 
 
 func _capture(main: Node, name: String) -> void:
+	# This fixture advances sim ticks with main._process disabled. Refresh the
+	# normal HUD path before capture so labels do not remain at tick zero.
+	main._update_hud()
 	main.presentation_3d.refresh()
 	await process_frame
 	await RenderingServer.frame_post_draw
