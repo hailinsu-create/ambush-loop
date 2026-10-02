@@ -2,9 +2,9 @@
 
 更新日期：2026-10-02。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前执行入口：** [M1-C3 实施与证据](AMBUSH_M1C3_IMPLEMENTATION_PLAN_20261002.md)。Draft PR #17 / `1de462a` 已实现，C3 headless/rendered、corrected feel、C2/C1/B2 六项门 exit 0 / 玩家数据不变；原 GPT iteration 2 代码/自动化评审 clean。[五张原图](evidence/m1c3/README.md) 本地目视已完成，但同一评审连接尚不能读取像素，**外部图像评审待补、未 DONE**。下一步仅补像素评审，不重复实现/测试或删除健康连接；真机继续暂缓。
+**当前执行入口：** [M1-C3 实施与证据](AMBUSH_M1C3_IMPLEMENTATION_PLAN_20261002.md)。Draft PR #17 / `1de462a` 已实现，六项定向门 exit 0 / 玩家数据不变；原 GPT iteration 2 已完成代码、自动化和[五张原图](evidence/m1c3/README.md) 的实际像素评审，**STATE: DONE，仅 C3**。图像通过原聊天直接附件送审，未上传整个仓库、重建连接或重复测试；插件 `read_image` 发现问题仍未修复。下一步另取后续切片的正式 GPT PLAN，不扩大已有验收范围；真机继续暂缓，依赖 PR 未合并。
 
-**下一切片预研（未开工）：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)，原 GPT 已实际给出 preliminary proposal：离散世界目标覆盖，不假装连续扇形精准。C2 完整 smoke/DONE 已完成，下一步先确认 C3 正式实施 PLAN；本候选方案不是实现证据。
+**已被实施计划替代的预研：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)。其离散世界目标覆盖方向已按正式 PLAN 实现并验收；保留历史提案，不将其当作下一待开工切片。
 
 **最新完成切片：** [M1-C2 枪械高度视线接入计划](AMBUSH_M1C2_FIRE_PLAN_20261002.md)，已实现并获实际 GPT DONE。继承 C1 几何，仅接入枪械目标资格/覆盖与记录事件；非枪械视线/音频不改。真机继续暂缓，不取消历史验收门。
 

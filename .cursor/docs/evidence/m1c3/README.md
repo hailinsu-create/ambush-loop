@@ -10,4 +10,6 @@
 - [FULL](c3-full.png)：(16,8) FULL；无点。
 - [Move/pan](c3-move-pan.png)：恢复 LOW，真实 command tick 向同高邻格移动后刷新，再 pan (48,-24)/zoom 1.15；仍有正确世界目标点。
 
-Codex 已逐张目视，最终 portrait 和侧栏均选中灰狼。外部 GPT 已读结构/执行记录与文件存在性，但当前连接工具未暴露图片读取；像素评审暂不可用，未 DONE。不能把文件生成、结构门或本地目视当作外部像素评审。
+Codex 已逐张目视，最终 portrait 和侧栏均选中灰狼。2026-10-02 原 GPT 聊天通过直接附件实际查看这五张原图，`c2c_d38a` iteration 2 明确 `STATE: DONE`，接受源码 `1de462aeb18665111849159945efc0f91d5144b5` 的 M1-C3。确认选中身份、离散青色点与旧橙色/黄色层的区别、mixed 两端差异、FULL 无点和 move/pan 世界锚定。原连接的 `read_image` 发现问题仍未解决；直接聊天图像附件补齐本轮像素门，不代表插件工具已恢复。没有改图、重新生成图或重跑测试。
+
+该 DONE 仅限 C3，不包含完整 M1/B2、Android、真机或旧 AudioTrack 崩溃修复。原评审：[同一 GPT 聊天](https://chatgpt.com/g/g-p-6ab943ae67ac81919bcbe3cd35ebe3b7-ambush-loop-collab/c/6aba7f25-906c-83ec-8054-159a82a62b20)。

@@ -1,6 +1,6 @@
 # M1-C3 选中枪械队员高度覆盖实施计划
 
-2026-10-02。原 GPT `c2c_d38a` iteration 0 实际 STATE: PLAN，核对工作区 `363712641ef7`；继承 C2 `e55a521` 的完整回归及 DONE。**已实现并通过定向测试，外部 GPT 代码/自动化评审 clean；像素评审尚不可用，未 DONE。** 此文替代 C3 预研的待确认状态。用户继续暂缓真机。
+2026-10-02。原 GPT `c2c_d38a` iteration 0 实际 STATE: PLAN，核对工作区 `363712641ef7`；继承 C2 `e55a521` 的完整回归及 DONE。**已实现、定向测试通过，外部 GPT 已完成代码、自动化和五张原图的像素评审，iteration 2 实际 STATE: DONE（仅 C3）。** 此文替代 C3 预研的待确认状态。用户继续暂缓真机。
 
 ## 范围与理由
 
@@ -21,6 +21,14 @@ SETUP-only 的独立世界坐标 Node2D 图层，对当前选中、存活、可�
 原 GPT iteration 0 明确 PLAN AMENDED：PowerShell 包装器可新增 `-Rendered`，仅允许 C3 gate，其他 entry/import 拒绝；默认仍 headless，保留原隔离与玩家数据 hash。C3 分别跑 headless 结构门和 rendered 截图门，不让渲染器存在决定几何通过。截图仅保存本轮 isolated run 输出目录，检查非空与 viewport 尺寸，实际目视及 GPT 评审。生产代码不区分测试渲染模式；shell 保持 headless-only。
 
 ## 实现、回归与实际评审
+
+### 最终像素验收（覆盖下文历史 unavailable 状态）
+
+2026-10-02 22:33 原聊天直接附加同一五张 PNG，未上传仓库到 Project、未新建/重连插件，源码与六项执行结果不变。原 GPT 实际查看全部五张 1280×720 图，明确 `STATE: DONE / TASK_ID: c2c_d38a / ITERATION: 2`，接受源码 `1de462aeb18665111849159945efc0f91d5144b5` 的 M1-C3。逐项确认灰狼身份、青色独立目标点与旧橙色并集/黄色扇形区别、LOW/near-high 有点而 near-low/FULL 无点、移动后镜头平移缩放仍世界锚定。无代码修正或额外回归要求。
+
+图像附件是本轮送审路径修订，不是 `read_image` 工具发现故障的修复；原连接 doctor 全绿，该工具在 ChatGPT 中仍不可发现。直接附件的真实图像查看补齐像素门，不能以文件名、文字或大小代替。发送操作返回超时，但随后 DOM 核实消息、五附件和 DONE 已存在，未重复发送。下一开发切片需另取正式 GPT PLAN；PR #17/#16 仍 Draft、未合并，完整 M1/B2/Android/AudioTrack 不因 C3 DONE 自动完成。
+
+评审记录：[原 GPT 对话](https://chatgpt.com/g/g-p-6ab943ae67ac81919bcbe3cd35ebe3b7-ambush-loop-collab/c/6aba7f25-906c-83ec-8054-159a82a62b20)。以下保留前次工具发现受阻的历史过程，以本节最终验收为准。
 
 代码 [Draft PR #17](https://github.com/hailinsu-create/ambush-loop/pull/17)，分支 `codex/m1-c3-selected-coverage`，源码 `1de462aeb18665111849159945efc0f91d5144b5`，依赖未合并 PR #16。仅 main、新 coverage gate、feel gate 夹具、两份包装器五文件。生产 main 增加独立青色菱形点层；原 killzone 行为、战斗和音频未变。镜像保留旧诊断差异，不把 dirty main 当作 clean 源码；新 gate blob `df15d8d351ec8afdcc7d66ec5504fa7c9cfbe85c` 与 feel blob `8a13226dc194b26dc8013f777a0667327b687257` 与生产提交一致。
 
