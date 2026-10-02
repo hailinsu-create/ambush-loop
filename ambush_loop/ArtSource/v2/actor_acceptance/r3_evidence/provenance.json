@@ -1,0 +1,40 @@
+{
+  "baseline": "812261a0d7c29446ab631108feec5389cec2950b",
+  "tested_source": "00b270863ba5a2cd5425abf2a31e78965c72ae45",
+  "quality_before_assets": "R2 build-final-a; quality script authored for this slice before source commit; logged SOURCE_SHA is workspace HEAD, not a claim that this script existed in R2",
+  "commands_exit_codes": {
+    "Blender export A": 0,
+    "Blender export B": 0,
+    "binary audit": 0,
+    "semantic repeat": 0,
+    "semantic falsification": 0,
+    "Godot full asset import and review": 0,
+    "Godot quality before review": 0,
+    "Godot quality after review": 0,
+    "Blender source review": 0
+  },
+  "exit_code_evidence": "Actual exec sessions completed with exit_code 0; stdout logs are retained. No inferred success from log text alone.",
+  "engine_captures": 462,
+  "quality_before_captures": 190,
+  "quality_after_captures": 190,
+  "actual_png_hash_rows": 848,
+  "gun_support_max_m": 0.00050482718506828,
+  "aim_fire_eye_to_sight_max_m": 0.0146373184397817,
+  "sampled_skin_min_y_m": -0.00419,
+  "reference_load": {
+    "draw_calls": 66,
+    "image": "reference_16_actor_load.png",
+    "primitives": 71084,
+    "scenario": "asset fixture: 3 hero LOD0 + 13 enemy LOD1 + 16 guns"
+  },
+  "script_hashes": {
+    "review.gd": "eee162c8bce569a19cb775d3a086c28ea4ab7123f7ff4cd5be810763aa5eba63",
+    "quality_review.gd": "e1ad7865eb1f93335d12b01f74a86205d6d9315fce7d853693b6f56122d598bd",
+    "validate.py": "1a5f21fd8e716fa9f2a04cffa6d3b8e4ce62c7a80185266a8e05704eca8c7f63",
+    "semantic_hash.py": "e21ebb882ada2d8200beb75a0c66b6cad1264e07331a70b6ec2fb9bb79850973",
+    "source_review.py": "454375f605d1b885e6becf994edb155542fe90cc88a82ad64484c854fea93d63"
+  },
+  "artistic_approval": false,
+  "full_battle_approval": false,
+  "device_approval": false
+}

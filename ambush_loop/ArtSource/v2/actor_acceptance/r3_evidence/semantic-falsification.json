@@ -1,0 +1,64 @@
+{
+  "asset": "ambush_loop/art/v2/models/operator_rifle_lod0.glb",
+  "quantum": 1e-06,
+  "cases": [
+    {
+      "case": "permuted_nodes_joints_vertices_triangles_channels_metadata",
+      "changed_components": [],
+      "passed": true
+    },
+    {
+      "case": "moved_vertex",
+      "changed_components": [
+        "geometry",
+        "normals",
+        "uv",
+        "weights"
+      ],
+      "passed": true
+    },
+    {
+      "case": "changed_normal",
+      "changed_components": [
+        "normals"
+      ],
+      "passed": true
+    },
+    {
+      "case": "changed_uv",
+      "changed_components": [
+        "uv"
+      ],
+      "passed": true
+    },
+    {
+      "case": "changed_bone_influence",
+      "changed_components": [
+        "weights"
+      ],
+      "passed": true
+    },
+    {
+      "case": "changed_animation_key",
+      "changed_components": [
+        "animations"
+      ],
+      "passed": true
+    },
+    {
+      "case": "changed_rig_rest",
+      "changed_components": [
+        "rig"
+      ],
+      "passed": true
+    },
+    {
+      "case": "changed_material",
+      "changed_components": [
+        "materials"
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 8
+}
