@@ -51,3 +51,6 @@
 
 
 最新尸体片：[真实来源/肩掌/取消与纯回放报告](AMBUSH_PR15_CORPSE_RUNTIME_20261002.md)。ce932cc成功来源绑定/ground/held及真实H抓放先770/0；完整六关10332/3暴露age随capture浮点累加，bf1261c railcut1249/1明确只在两个年龄字段。3048294改domain原锚点后尸体770/合同84042/六关13波10332均0失败；91b9bdc仅扩实际移动/步态测试至1207/0和emptyPCK1766/0，运行树与304等价。复制bodyID/source wave不重绑，原任意loot haul/屏幕14px follow/自动ammo拾取和共享引用不变；内嵌20cm只采样一次。四张实际帧已看，72配对接触及−15mm最低floor门限通过，正向离地/自然艺术/墙碰撞/完整SWEEP玩家拖尸路径未称验收。当前技术PCK25618864 bytes SHA52e14b6b4189af54cb28086b0f36ec08f7201ba24a6be8fa2e823da376562378，非APK；环境重连旧exit句柄失效，304成功有pipefail后TEST_LOG证实0，两个FAILED退出码不冒称观测。HUD盖目标与radio整隐仍是下一必修，然后FX/continuous command/FAILED-A3/13波visual/最新fullsmoke/APK；生产源/GLB/atlas仍独立作者，最新fullsmoke7d34867、耳听设备后置。
+
+
+最新独立P2：[成功丢弃取消报告](AMBUSH_PR15_DROP_CANCEL_20261002.md)。原518仍同帧投雷→drop rifle→普通更新拾回rifle导致旧throw复活，b082540真实headless6/1exit1；47f0634仅成功drop立即cancel一行修为6/0，6e9ed4c扩失败/同枪kit/ALERT拒绝13/0、完整render1047/0、装备66/0、尸体headless1203/0，3e09a82专项render7/0与恢复枪实际帧。所有实际exit/durable状态和原日志已存。尸体正文按518原receipt改最低−0.001234874m（原误0.003765）、最高0.101031780m，原receipt不改；自然接地/离地上限/墙contact/完整SWEEP玩家路径独立待验。制作资产无修改，既有PCK91早于此修复，最新fullsmoke7d34867；HUD/radio→FX/A3/13wavevisual/fullsmoke/APK继续，未merge/生产/设备。
