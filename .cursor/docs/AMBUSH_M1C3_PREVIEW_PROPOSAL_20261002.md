@@ -30,3 +30,11 @@
 ## 当前状态与下一步
 
 未改生产源码，未跑新测试，未生成 C3 画面。当前先继续原 C2 smoke `4a70428c37ab43699b9d9ec4d330d41a`；2026-10-02 19 点后已继续输出 `SMOKE_OK_FOLLOW_SETTLE`，无完整退出证据。若 C2 失败，仅针对首个具体失败修正；不能绕过当前门先做 C3。真机仍按用户明确要求暂缓，M1 整体验收与 AudioTrack 长时门不取消。
+
+## Codex 只读入口核查与提案修正
+
+以生产 `e55a521` 读取 main，未修改运行源码：`_select_op` 已调用 `_refresh_killzone_preview`；旋转、门、重置/部署等也有刷新入口。但 `_tick_command_moves` 只推进移动、吸附掩体和镜头，**没有普通移动的预览刷新**。`_snap_op_to_cover_if_clicked` 临时替换 selected 再恢复，不能把吸附过程临时选择的覆盖留到下一帧。候选实现应明确移动期间隐藏/清空旧标记，停止后重建，并验证普通移动、随队、吸附的真实选择身份；不在每个移动帧重建所有路线几何。
+
+`_is_command_phase` 同时包括 SETUP 和 SWEEP，但旧 `_refresh_killzone_preview` 只在 SETUP 构建；新层同样严格限定 SETUP，WATCHING/REPLAY/SWEEP 都清空，不因父节点的 command-phase visible 标记误显。既有 KillzoneDraw 使用 world z=3，新层须区分 aggregate 橙色带和选中覆盖点，且不能借其连续 Line2D 把间隙补成通线。
+
+修正混合高度的测试措辞：**高台射手对地面目标不是必然被 LOW 阻挡**。以 C1 插值为依据，LOW 近高端可通、近低端拒绝；这两个对照必须进入正式 C3 门。所有样本结果以相同 `in_fire_geometry` 为真值，不用“地面目标一概拒绝”或“高台一概可见”的简化规则。此节仍是预研，不代表最终 GPT 实施 PLAN 或源码已实现。
