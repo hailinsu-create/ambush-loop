@@ -2,16 +2,17 @@
 
 更新日期：2026-10-02。仅用于本游戏；设计文件不是实现或验收证明。
 
-**本地续做入口：** [本地主开发与设备验收续做](AMBUSH_LOCAL_CONTINUATION_20261002.md)。用户选择本地主开发、云端辅助。本轮只补只读目标设备/包身份预检查，不提前进入 M1-C；10 项离线测试通过，实机列表为空，设备验收仍待补。原评审服务的过期运行记录已备份并修复，全项检查和已授权连接器的工作区/文件实读通过；旧镜像未覆盖，浏览器仍超时，最新 preflight 的外部 PLAN/REVIEW 仍待补，不把连接恢复当作代码批准。
+**本地续做入口：** [本地浏览器恢复、preflight 补审与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md)，补充 [本地主开发与设备验收续做](AMBUSH_LOCAL_CONTINUATION_20261002.md)。用户选择本地主开发、云端辅助。原开发任务已实际验证浏览器读/操作/结果，原项目 GPT iteration 11 对精确镜像的两份 preflight 文件完成补审，无阻断项，并规划下一 Vivo 设备取证切片。10 项离线测试通过，实机列表仍为空；包版本预检查不证明签名、B2 或音频稳定性。原镜像已有诊断差异未覆盖，完整 B2/设备门仍 pending，不提前进入 M1-C/M1-D。程序更新构建与 199 项串行复查通过，不把连接恢复当作游戏验收。
 
-**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；ChatGPT 连接器配对与外部 GPT 精确 SHA 评审仍受浏览器控制超时阻塞，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
+**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；当时 ChatGPT 连接器配对与外部 GPT 精确 SHA 评审受浏览器超时阻塞。本轮只恢复并验证原本地评审，未重新验收云工作区配对或该 SHA 的外部评审，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
 
 ## 当前有效规划
 
-**当前执行入口：** [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。原六小时窗口已结束，用户要求继续处理未完成工作。后续 code80 记录确认 Accept → Yard 与至少三分钟存活；此前 CTA 未证实状态已被更新，但 Android 长时稳定性、旧 AudioTrack 根因仍未闭环。新符号构建成功但 Build ID `f4a54bf1…1526` 仍不匹配原库，未接受行号结果。当前 vivo 不可用，按外部 GPT iteration 7 规划，仅补桌面双向随队和断坡反例，再完成回归、评审与交接。评审工作区有诊断改动，已不是 clean `340b819`；后续评审须确认精确差异。
+**B2 既有证据入口：** [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。原六小时窗口已结束。code80 已有 Accept → Yard 与至少三分钟存活的短样本；Android 长时稳定性、旧 AudioTrack 根因仍未闭环。桌面双向随队/断坡反例已补，fresh full isolated smoke 已取得六关循环、完成标记、exit 0 和玩家数据不变，并获 GPT iteration 10 核对。iteration 11 已补审设备预检查，下一步只有 Vivo 设备取证；当前 ADB 无设备，不再扩桌面测试。新符号 Build ID `f4a54bf1…1526` 仍不匹配原库，未接受行号结果。评审镜像仍是 `340b819` 加诊断差异及两份新镜像文件，不是 clean；后续评审须核对精确差异。
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [本地评审恢复与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md) | 当前本地入口：浏览器实际恢复；preflight 精确两文件补审；下一步仅 Vivo 包身份、B2 视觉/玩法与音频生命周期样本。 |
 | [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md) | 当前窗口外续做切片：真实双向随队、双向断坡反例、隔离回归和 GPT 评审；完整 B2/Android 验收仍待真机证据。 |
 | [6 小时开发与修复计划](AMBUSH_6H_DEV_REPAIR_PLAN_20260929.md) | 原窗口已结束，后续状态见第 13 节及当前补验报告。code80 已有 Accept → Yard 短时样本；AudioTrack 根因、长时稳定性及完整 B2 真机验收仍未闭环。 |
 | [游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) | 当前开发设计基线：玩法、高点规则、六关、视觉、手机操作、M0–M5。用户已同意以此推进；具体设计仍须逐切片实现、验证。 |

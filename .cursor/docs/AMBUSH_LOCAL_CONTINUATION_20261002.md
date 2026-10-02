@@ -15,7 +15,7 @@
 - 标准库离线单元测试覆盖正例、无设备、多设备、未授权/offline、错机、无包、错误/缺失版本、指定目标不存在、非零退出和超时。
 - 实际 preflight 通过要求 exit 0 和 `ready=true`；无设备 exit 2 是正确拒绝，不是手机验收通过。
 - 设备恢复后沿用 B2 交接：包来源/签名确认、Title→briefing→Accept→Yard、双向上下坡/随队/拾取、声音与生命周期稳定性。历史桌面门不重记为本轮结果。
-- 原本地 C2C `workspace_info` 返回 internal error，doctor 报 `workspace_mismatch` 且拒绝自动修复。未借用 cloud 连接、重配/覆盖原连接；本切片外部 PLAN/REVIEW unavailable，待恢复后在原项目对话针对精确差异补审。此处规划由 Codex 给出，不冒充 GPT 规划。
+- 实施时原本地 C2C `workspace_info` 返回 internal error，doctor 报 `workspace_mismatch` 且拒绝自动修复。未借用 cloud 连接、重配/覆盖原连接；当时外部 PLAN/REVIEW unavailable，此处最初规划由 Codex 给出，不冒充 GPT 规划。恢复后的实际补审与下一设备 PLAN 见 [本地评审恢复记录](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md)。
 
 规划与代码分开提交；保留原未跟踪文件。不合并或发布游戏、不扩大云网络、不把只读设备门当作玩法交付。
 
@@ -29,4 +29,6 @@
 
 通过原已授权连接器实际调用 `workspace_info` 和 `read_file(README.md)` 成功，返回原本地 `ambush-loop-collab`（ID `363712641ef7`）及游戏 README；云工作区 status 同时仍为运行状态。身份冲突已修复，文件读取能力已验证。旧运行记录可从备份恢复；备份和凭据不入仓库。
 
-限制：原评审镜像仍是 detached `340b819` 加已有诊断差异，本轮没有覆盖/更新镜像，不能把文件读取成功当作对新 preflight 提交 `8e31d88` 的代码评审。内置浏览器初始化仍超时，未向原 GPT 对话发送新的 PLAN/REVIEW，也没有取得本轮反馈；最新代码评审仍待补。服务恢复与浏览器控制、镜像同步、实际评审是不同验收门。
+这一修复阶段的限制：原评审镜像是 detached `340b819` 加已有诊断差异，当时没有覆盖/更新镜像，不能把文件读取成功当作对新 preflight 提交 `8e31d88` 的代码评审。当时内置浏览器仍超时，尚未发出补审或取得反馈。服务恢复、浏览器控制、镜像同步、实际评审是不同验收门。
+
+后续已在原开发任务证明页面读取、操作及结果验证成功；仅镜像两份 preflight 文件并核对精确 Git blobs，取得原 GPT iteration 11 的实质性 REVIEW 和设备证据 PLAN。详见 [恢复、补审与下一切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md)。离线 10 tests 再次通过，真实设备列表仍为空，B2 真机/音频门没有新增通过证据。
