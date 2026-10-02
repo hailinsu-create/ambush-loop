@@ -2,7 +2,7 @@
 
 更新日期：2026-10-02。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前执行入口：** [M1-C3 正式实施计划](AMBUSH_M1C3_IMPLEMENTATION_PLAN_20261002.md)。原 GPT `c2c_d38a` iteration 0 已实际 PLAN，依赖已完成 C2。当前未实施/验收，取代下方 C3 预研的待确认状态；真机继续暂缓。
+**当前执行入口：** [M1-C3 实施与证据](AMBUSH_M1C3_IMPLEMENTATION_PLAN_20261002.md)。Draft PR #17 / `1de462a` 已实现，C3 headless/rendered、corrected feel、C2/C1/B2 六项门 exit 0 / 玩家数据不变；原 GPT iteration 2 代码/自动化评审 clean。[五张原图](evidence/m1c3/README.md) 本地目视已完成，但同一评审连接尚不能读取像素，**外部图像评审待补、未 DONE**。下一步仅补像素评审，不重复实现/测试或删除健康连接；真机继续暂缓。
 
 **下一切片预研（未开工）：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)，原 GPT 已实际给出 preliminary proposal：离散世界目标覆盖，不假装连续扇形精准。C2 完整 smoke/DONE 已完成，下一步先确认 C3 正式实施 PLAN；本候选方案不是实现证据。
 
