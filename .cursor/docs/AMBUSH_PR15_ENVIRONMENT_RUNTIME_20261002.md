@@ -10,3 +10,9 @@
 4. SCOUT/ALERT/SWEEP/REPLAY、暂停/2×/任意 seek、重试/换关、六关多波与逻辑不变量回归；实际云画面和预算另报。完整 HUD/FX、R5 交互、A3 优化与可追溯 APK 后续，不把样本或软件渲染称设备验收。
 
 已观察候选限制：35° 门框/屋顶可能挡地标，旧油桶/电台 atlas 斑纹与新包不一致；共享 atlas 不改，主作者处理遮挡/显示绑定。耳听/设备后置，GPT PLAN/REVIEW unavailable；无需阻塞可逆集成。
+
+## 环境资源接口固定源验收
+
+固定源码 `a54d538d10658440ac1bd8336d91a68d1da305ad`，85 原运行文件采用，11旧依赖原字节不变；新独立材质槽及旧lamp空surface1发光显式绑定。正式 `environment_assets_test.gd --render` 618（40件/80LOD），`actor_battle_test.gd --render`231，`asset_library_test.gd --render`333，以及空物理工程 `asset_pack_test.gd`1476，全部实际退出0。完整命令/run_id/哈希/失败开发日志见 [资源接口证据](evidence/20261002-pr15-environment-library/validation.json)。云端资源库 framebuffer 已保存8张、实际看1张；小物与材质在远库画面较暗，完整实战光照/缩放另调，不称最终品质通过。
+
+技术PCK 24478880 bytes，SHA256 `7796693420562ae102031b21ffce3523fb79dee7c0e3cad96d28a88f8de00ff2`，不是APK；45原音频import恢复。此门不代表六关实战环境接入。下一片按真实blocked副本搭建地表/建筑/地标，接门/开箱和旧历史兼容，再跑实际关卡与六关不变量。
