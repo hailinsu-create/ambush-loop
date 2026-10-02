@@ -7,6 +7,8 @@ const AudioAssets := preload("res://scripts/sfx/audio_assets.gd")
 const Profiles := preload("res://scripts/presentation/firearm_pose.gd")
 const Pose := preload("res://scripts/presentation/actor_pose.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
+const CorpseVisual := preload("res://scripts/presentation/corpse_visual.gd")
+const Space := preload("res://scripts/presentation/world_space.gd")
 var checks := 0
 var failures := 0
 
@@ -45,6 +47,17 @@ func _run() -> void:
 			_check(body.equipped.get_meta("asset_resource_path") == "res://art/v2/replay_r3/%s_lod%d.glb" % [weapon, lod] and body.item_socket("pose_support").is_empty(), "actual packaged R3 geometry retains its original resource and marker set: " + weapon)
 			_check(body.sample_pose("aim", 0.4) and not body.item_socket("muzzle").is_empty(), "old-version packed animation/muzzle still sample: " + weapon)
 	body.free()
+	var corpse := CorpseVisual.new()
+	root.add_child(corpse)
+	var corpse_frame := {"corpse_schema": 1, "animation_schema": 3, "actor_asset_revision": Pose.ASSET_REVISION,
+		"utility_scope_id": "pack-probe", "pose_snapshot_delta_s": 0.0}
+	var corpse_item := {"schema": 1, "id": "pack-probe:body:0", "scope_id": "pack-probe",
+		"asset_revision": Pose.ASSET_REVISION, "source_group": "enemies", "model": "enemy_patrol",
+		"pos": Vector2(656, 368), "facing": 90.0, "mode": "ground", "transition_age_s": 0.0,
+		"death_age_s": 1.2, "pairing": false, "ever_grabbed": false, "carrier": {}, "ground_anchor": {}}
+	_check(corpse.sync(corpse_item, corpse_frame, 0, null), "actual packed optional corpse sampler and its R5 model load")
+	_check(corpse.position == Space.logic_to_world(corpse_item.pos) and corpse.body.position == Vector3.ZERO and corpse.body.sampled_action == "corpse_prone", "packed prone uses gameplay root once and no added20cm offset")
+	corpse.free()
 	var audio_doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(AudioAssets.MANIFEST))
 	_check(audio_doc.cues.size() == 45 and audio_doc.asset_source_commit == "86df6d0b4af9f30f3f1e670207cc54b22e2f043b", "45-cue audio manifest retains fixed producer provenance in the pack")
 	for row in audio_doc.cues:
