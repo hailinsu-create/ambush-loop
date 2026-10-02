@@ -223,29 +223,170 @@ def jacket(cloth):
     for p in data.polygons:p.use_smooth=len(p.vertices)==4
 
 
+def authored_mesh(name,vertices,faces,tile,bone=None):
+    data=bpy.data.meshes.new(name);data.from_pydata(vertices,[],faces);data.update()
+    obj=bpy.data.objects.new(name,data);bpy.context.collection.objects.link(obj)
+    bpy.ops.object.select_all(action='DESELECT');obj.select_set(True);bpy.context.view_layer.objects.active=obj
+    finish(obj,name,tile,bone)
+    return obj
+
+
+def ring_shell(name,sections,sides,tile,bone,facial=True):
+    vertices=[];faces=[]
+    for z,rx,front,back in sections:
+        for i in range(sides):
+            a=math.tau*i/sides;c,s=math.cos(a),math.sin(a)
+            # Broad facial planes, narrower jaw: avoid an egg with floating eyes.
+            vertices.append((rx*math.copysign(abs(c)**(.85 if facial else 1),c),
+                             (front if s>=0 else back)*math.copysign(abs(s)**(.6 if facial else 1),s),z))
+    for row in range(len(sections)-1):
+        for i in range(sides):
+            a=row*sides+i;b=row*sides+(i+1)%sides
+            faces.append((a,b,b+sides,a+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple(range((len(sections)-1)*sides,len(sections)*sides))])
+    obj=authored_mesh(name,vertices,faces,tile,bone)
+    for face in obj.data.polygons:face.use_smooth=len(face.vertices)==4
+    return obj
+
+
+def face_and_helmet(cloth,style):
+    ring_shell('head',[(1.574,.029,.069,.044),(1.599,.061,.087,.059),
+        (1.628,.079,.105,.074),(1.663,.086,.108,.085),
+        (1.699,.084,.110,.090),(1.730,.088,.106,.095),
+        (1.773,.083,.087,.091),(1.811,.047,.042,.049)],(20,12,8)[DETAIL_LEVEL],5,'head')
+    ellipsoid('nose',(.012,.024,.031),(0,.113,1.670),5,'head',16,10)
+    ellipsoid('nose_bridge',(.007,.011,.026),(0,.108,1.695),5,'head',12,8)
+    for side in (-1,1):
+        ellipsoid('ear',(.012,.020,.027),(side*.087,.008,1.674),5,'head',10,6)
+        if DETAIL_LEVEL==1:
+            xx=side*.037
+            authored_mesh('orbital_shadow',[(xx-.0125,.1055,1.696),(xx+.0125,.1055,1.696),(xx+.0125,.1055,1.702),(xx-.0125,.1055,1.702)],[(0,1,2,3)],4,'head')
+        if DETAIL_LEVEL==0:
+            box('orbital_shadow',(.025,.0015,.006),(side*.037,.105,1.699),4,'head',.001)
+            ellipsoid('pupil',(.0035,.001,.0025),(side*.037,.106,1.699),11,'head',8,4)
+            rigid_curve('upper_lid',[(side*.037+x,.1054+y,1.702+z) for x,y,z in [(-.014,0,0),(0,.0007,.002),(.014,0,0)]],.0015,.0015,5,'head')
+            box('brow',(.030,.003,.003),(side*.037,.104,1.711),11,'head',.001)
+    if DETAIL_LEVEL<2:box('mouth',(.033,.003,.0025),(0,.107,1.626),4,'head',.001)
+    if style in ('helmet','heavy','radio','rolled'):
+        ring_shell('helmet_shell',[(1.732,.120,.144,.132),(1.739,.119,.142,.132),
+            (1.766,.114,.135,.126),(1.799,.097,.113,.106),
+            (1.828,.069,.078,.076),(1.842,.018,.022,.022)],
+            (20,12,8)[DETAIL_LEVEL],3 if cloth==13 else 0,'head',False)
+        for side in (-1,1):tube('chin_strap',(side*.099,.005,1.737),(side*.043,.067,1.588),.004,.004,4,'head',6,1,0)
+        if style=='rolled':box('helmet_band',(.185,.012,.017),(0,.139,1.742),9,'head',.003)
+
+
+def continuous_limb(name,points,radii,bones,tile,anchor,terminal):
+    sides,rings=resolution(14,9);a,j,b=map(Vector,points)
+    first=(j-a).normalized();last=(b-j).normalized();vertices=[];faces=[];weights=[]
+    for row in range(rings*2+1):
+        segment=min(row//rings,1);t=(row-segment*rings)/rings
+        center=(a.lerp(j,t) if segment==0 else j.lerp(b,t))
+        tangent=(first+last).normalized() if row==rings else first if segment==0 else last
+        if row==0 and name.startswith('upper_arm'):
+            tangent=(Vector((1 if a.x>0 else -1,0,0))+first).normalized()
+        reference=Vector((0,1,0)) if name.startswith('upper_arm') else Vector((1,0,0))
+        x=reference-tangent*tangent.dot(reference);x.normalize();y=tangent.cross(x).normalized()
+        radius=radii[segment]*(1-t)+radii[segment+1]*t
+        lower=max(0,(t-.7)/.3)*.5 if segment==0 else min(1,.5+t/.6)
+        influences={bones[0]:1-lower,bones[1]:lower}
+        if segment==0 and t<.15:
+            w=.4*(1-t/.15);influences={bones[0]:1-w,anchor:w}
+        if segment==1 and t>.8:
+            w=.65*(t-.8)/.2;influences={bones[1]:1-w,terminal:w}
+        for i in range(sides):
+            angle=math.tau*i/sides;fold=.002*math.sin(t*math.pi)*math.sin(t*19+angle*3)
+            vertices.append(center+(x*math.cos(angle)+y*math.sin(angle))*(radius+fold));weights.append(influences)
+    rows=rings*2+1
+    if name.startswith('upper_arm'):
+        # Continue the sleeve inside the jacket instead of leaving an exposed
+        # flat shoulder cap. Both rings share the existing chest/clavicle skin.
+        side=1 if a.x>0 else -1;extra=[];extra_weights=[]
+        for xx,radius,influences in [(side*.14,.042,{'chest':1}),
+                                      (side*.175,.058,{'chest':.4,anchor:.6})]:
+            tangent=Vector((side,0,0)) if abs(xx)<.15 else (Vector((side,0,0))+first).normalized()
+            x=Vector((0,1,0))-tangent*tangent.y;x.normalize();y=tangent.cross(x).normalized()
+            center=Vector((xx,0,a.z))
+            for i in range(sides):
+                angle=math.tau*i/sides;extra.append(center+(x*math.cos(angle)+y*math.sin(angle))*radius);extra_weights.append(influences)
+        vertices=extra+vertices;weights=extra_weights+weights;rows+=2
+    for row in range(rows-1):
+        for i in range(sides):
+            p=row*sides+i;q=row*sides+(i+1)%sides;faces.append((p,q,q+sides,p+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple(range((rows-1)*sides,rows*sides))])
+    obj=authored_mesh(name,vertices,faces,tile)
+    groups={n:obj.vertex_groups.new(name=n) for n in dict.fromkeys([*bones,anchor,terminal]+(['chest'] if name.startswith('upper_arm') else []))}
+    for i,influences in enumerate(weights):
+        for n,w in influences.items():
+            if w>0:groups[n].add([i],w,'REPLACE')
+    for face in obj.data.polygons:face.use_smooth=len(face.vertices)==4
+
+
+def rigid_curve(name,points,minor,width,tile,bone):
+    points=list(map(Vector,points));sides=8 if DETAIL_LEVEL==0 else 6;vertices=[];faces=[]
+    for row,p in enumerate(points):
+        direction=(points[min(row+1,len(points)-1)]-points[max(row-1,0)]).normalized()
+        x=Vector((0,1,0))-direction*direction.y
+        if x.length<.1:x=Vector((1,0,0))-direction*direction.x
+        x.normalize();y=direction.cross(x).normalized()
+        for i in range(sides):
+            a=math.tau*i/sides;vertices.append(p+x*(width*math.cos(a))+y*(minor*math.sin(a)))
+    for row in range(len(points)-1):
+        for i in range(sides):
+            p=row*sides+i;q=row*sides+(i+1)%sides;faces.append((p,q,q+sides,p+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple(range((len(points)-1)*sides,len(points)*sides))])
+    obj=authored_mesh(name,vertices,faces,tile,bone)
+    for face in obj.data.polygons:face.use_smooth=len(face.vertices)==4
+
+
+def rifle_glove(suffix,joints):
+    hx,hy,hz=joints['hand.'+suffix][0];bone='hand.'+suffix
+    if suffix=='R':
+        box('palm',(.028,.063,.041),(hx+.028,hy+.035,hz-.022),4,bone,.008)
+        contour=[(.040,-.012),(.042,-.037),(.009,-.055),(-.022,-.034)]
+        thumb=[(.021,.017,-.014),(.035,-.010,.004),(.018,-.040,.015),(-.015,-.042,.004)]
+    else:
+        box('palm',(.073,.062,.031),(hx,hy+.035,hz-.027),4,bone,.008)
+        contour=[(.028,-.022),(.043,-.013),(.039,.015),(.018,.025)]
+        thumb=[(-.020,.030,-.028),(-.040,.030,-.010),(-.038,.030,.012),(-.014,.030,.024)]
+    count=(4,2,1)[DETAIL_LEVEL]
+    for i in range(count):
+        offset=.013+i*.015 if count==4 else .020+i*.027 if count==2 else .035
+        finger_contour=contour
+        if suffix=='R' and DETAIL_LEVEL<2 and i==count-1:
+            offset=.049;finger_contour=[(.040,-.012),(.028,-.030),(.008,-.037)]
+        rigid_curve('curled_fingers',[(hx+x,hy+offset,hz+z) for x,z in finger_contour],.0075 if count==4 else .011,.0075 if count==4 else .012 if count==2 else .031,4,bone)
+    rigid_curve('thumb',[(hx+x,hy+y,hz+z) for x,y,z in thumb],.010,.012,4,bone)
+    tube('glove_cuff',(hx,hy-.012,hz),(hx,hy+.022,hz),.029,.032,4,bone,8,1,0)
+
+
+def boot_upper(x,bone):
+    # A closed lasted upper meets the sole along its entire outline. An
+    # ellipsoid toe reveals a visible gap when the foot rolls onto its heel.
+    sections=[(-.065,.048,.102),(-.028,.057,.136),(.040,.060,.115),
+              (.115,.056,.093),(.195,.047,.069),(.210,.026,.050)]
+    sides=max(6,round(12*(.8,.5,.3)[DETAIL_LEVEL]));vertices=[];faces=[]
+    for y,width,top in sections:
+        for i in range(sides):
+            angle=math.tau*i/sides
+            vertices.append((x+width*math.cos(angle),y,.022+(top-.022)*max(0,math.sin(angle))))
+    for row in range(len(sections)-1):
+        for i in range(sides):
+            p=row*sides+i;q=row*sides+(i+1)%sides;faces.append((p,q,q+sides,p+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple(range((len(sections)-1)*sides,len(sections)*sides))])
+    obj=authored_mesh('boot_upper',vertices,faces,4,bone)
+    for face in obj.data.polygons:face.use_smooth=len(face.vertices)==4
+
+
 def character(asset,cloth,style,rig=None,joints=None):
     kit.CURRENT=asset
     # Slightly tapered, folded jacket, with overlapping panels at the waist.
     ellipsoid('trousers_seat',(.19,.125,.20),(0,-.007,.98),cloth,'pelvis')
     jacket(cloth)
     tube('neck',(0,0,1.47),(0,0,1.60),.061,.06,5,'neck',12,3,0)
-    ellipsoid('head',(.095,.096,.135),(0,.014,1.674),5,'head',20,12)
-    ellipsoid('jaw',(.073,.085,.068),(0,.04,1.605),5,'head')
-    ellipsoid('nose',(.022,.035,.028),(0,.108,1.665),5,'head',10,6)
-    for side in (-1,1):
-        ellipsoid('ear',(.018,.025,.037),(side*.095,.01,1.67),5,'head',10,6)
-        box('brow',(.035,.009,.010),(side*.038,.104,1.711),4,'head',.003)
-        ellipsoid('eye',(.012,.006,.006),(side*.037,.110,1.699),11,'head',8,4)
-    box('mouth',(.036,.006,.004),(0,.123,1.624),4,'head',.001)
+    face_and_helmet(cloth,style)
     # Headgear gives distinguishable silhouettes from every side.
-    if style in ('helmet','heavy','radio','rolled'):
-        ellipsoid('helmet_shell',(.118,.124,.073),(0,.007,1.771),3 if cloth==13 else 0,'head',20,10)
-        ellipsoid('helmet_rim',(.133,.144,.017),(0,.016,1.748),3 if cloth==13 else 0,'head',20,6)
-        for side in (-1,1):
-            tube('chin_strap',(side*.093,.01,1.74),(side*.043,.075,1.588),.008,.008,4,'head',6,1,0)
-        if style=='rolled':
-            box('helmet_band',(.185,.013,.022),(0,.134,1.754),9,'head',.003)
-    elif style=='hood':
+    if style=='hood':
         segments,rings=resolution(20,12)
         bpy.ops.mesh.primitive_uv_sphere_add(segments=segments,ring_count=rings,radius=1,
                                            location=(0,-.012,1.705))
@@ -260,7 +401,7 @@ def character(asset,cloth,style,rig=None,joints=None):
     elif style=='beret':
         ellipsoid('soft_beret',(.124,.12,.053),(-.02,0,1.785),2,'head',20,8)
         box('unit_tab',(.025,.006,.027),(.05,.107,1.775),10,'head',.002)
-    else:
+    elif style not in ('helmet','heavy','radio','rolled'):
         ellipsoid('field_cap',(.108,.109,.05),(0,.007,1.774),cloth,'head')
         box('cap_peak',(.16,.086,.008),(0,.103,1.754),cloth,'head',.01)
     # Collar, webbing, pouches and belt are geometry, not painted shadow.
@@ -277,8 +418,13 @@ def character(asset,cloth,style,rig=None,joints=None):
         for z in (1.19,1.27,1.35,1.42): ellipsoid('button',(.005,.004,.005),(0,.153,z),8,'chest',8,4)
     ellipsoid('belt',(.207,.146,.025),(0,0,1.041),4,'pelvis',20,6)
     box('buckle',(.043,.013,.033),(0,.15,1.041),8,'pelvis',.003)
-    if style!='radio':box('pack',(.255,.135,.27),(0,-.159,1.282),9,'chest',.025)
-    for x in (-.078,.078): box('pack_strap',(.022,.014,.25),(x,-.235,1.282),4,'chest',.004)
+    if asset=='enemy_patrol':
+        tube('bedroll',(-.15,-.175,1.20),(.15,-.175,1.20),.060,.060,cloth,'chest',12,3,0)
+        for x in (-.09,.09):box('bedroll_strap',(.023,.141,.129),(x,-.175,1.20),4,'chest',.004)
+        box('breadbag',(.145,.095,.15),(.105,-.13,1.055),9,'pelvis',.012)
+    else:
+        if style!='radio':box('pack',(.255,.135,.27),(0,-.159,1.282),9,'chest',.025)
+        for x in (-.078,.078):box('pack_strap',(.022,.014,.25),(x,-.235,1.282),4,'chest',.004)
     ellipsoid('canteen',(.065,.057,.093),(.205,-.068,1.012),3,'pelvis')
     if style in ('heavy','rolled') and DETAIL_LEVEL<2:
         for i in range(10): tube('cartridge',(-.13+i*.028,.16,1.29),(-.13+i*.028,.16,1.35),.010,.008,8,'chest',6,1,0)
@@ -288,29 +434,35 @@ def character(asset,cloth,style,rig=None,joints=None):
     # Anatomy and clothing follow the exact bind skeleton.
     if rig is None: rig,joints=skeleton()
     for suffix in ('L','R'):
-        for bone,r0,r1,tile in [('upper_arm',.083,.061,cloth),('forearm',.061,.043,cloth),('thigh',.110,.083,cloth),('shin',.078,.053,cloth)]:
-            name=bone+'.'+suffix; a,b,_=joints[name]
-            tube(bone,a,b,r0,r1,tile,name,14,9)
-            # Filled joints prevent visible gaps while the garment bends.
-            ellipsoid(bone+'_joint',(r0*.92,r0*.92,r0*.92),a,tile,name,12,8)
-        hx,hy,hz=joints['hand.'+suffix][0]
-        ellipsoid('glove',(.042,.062,.039),(hx,hy+.032,hz),4,'hand.'+suffix,12,8)
-        # Individual curled fingers and opposed thumb remain attached to hand.
-        if DETAIL_LEVEL==0:
-            for finger in range(4):
-                ellipsoid('finger',(.009,.028,.012),(hx-.029+finger*.019,hy+.073,hz-.012),4,'hand.'+suffix,8,6)
-            ellipsoid('thumb',(.014,.032,.017),(hx+(-.035 if suffix=='R' else .035),hy+.025,hz+.009),4,'hand.'+suffix,8,6)
+        for first,last,radii,anchor,terminal in [('upper_arm','forearm',(.063,.048,.033),'clavicle','hand'),('thigh','shin',(.098,.071,.050),'pelvis','foot')]:
+            upper=first+'.'+suffix;lower=last+'.'+suffix
+            continuous_limb(first+'_continuous',[joints[upper][0],joints[upper][1],joints[lower][1]],radii,[upper,lower],cloth,anchor+'.'+suffix if anchor=='clavicle' else anchor,terminal+'.'+suffix)
+        rifle_glove(suffix,joints)
         x=joints['foot.'+suffix][0][0]
         box('boot_sole',(.125,.273,.027),(x,.067,.0135),7,'foot.'+suffix,.010)
-        ellipsoid('boot_toe',(.063,.13,.055),(x,.081,.075),4,'foot.'+suffix,16,8)
-        tube('boot_shaft',(x,-.02,.08),(x,-.009,.26),.064,.057,4,'shin.'+suffix,12,4,.002)
+        boot_upper(x,'foot.'+suffix)
+        shaft=tube('boot_shaft',(x,-.02,.08),(x,-.009,.26),.064,.057,4,'shin.'+suffix,12,4,.002)
+        shin=shaft.vertex_groups['shin.'+suffix];foot=shaft.vertex_groups.new(name='foot.'+suffix)
+        for v in shaft.data.vertices:
+            w=max(0,min(1,(.20-v.co.z)/.10));shin.add([v.index],1-w,'REPLACE')
+            if w>0:foot.add([v.index],w,'REPLACE')
         if DETAIL_LEVEL==0:
-            for z in (.11,.145,.18,.215): box('boot_lace',(.068,.007,.008),(x,.052,z),2,'shin.'+suffix,.002)
+            for z in (.11,.145,.18,.215):
+                lace=box('boot_lace',(.069,.005,.004),(x,.043,z),2,'shin.'+suffix,.001)
+                shin=lace.vertex_groups['shin.'+suffix];foot=lace.vertex_groups.new(name='foot.'+suffix)
+                for v in lace.data.vertices:
+                    w=max(0,min(1,(.20-(lace.matrix_world@v.co).z)/.10));shin.add([v.index],1-w,'REPLACE')
+                    if w>0:foot.add([v.index],w,'REPLACE')
     return rig,joints
 
 
 def animation(rig,joints):
     rig.animation_data_create()
+    foot_points={}
+    for suffix in ('L','R'):
+        name='foot.'+suffix
+        foot_points[suffix]=[obj.matrix_world@v.co-Vector(joints[name][0]) for obj in PARTS for v in obj.data.vertices
+                            if any(obj.vertex_groups[g.group].name==name and g.weight>.999 for g in v.groups)]
     for clip,(duration,loop) in CLIPS.items():
         action=bpy.data.actions.get(clip)
         if action:
@@ -328,7 +480,7 @@ def animation(rig,joints):
             hit=math.sin(math.pi*t)*.12 if clip=='hit' else 0
             drop=.44 if clip=='deploy' else .36 if crouch else .13 if clip=='run' else .06 if moving else 0
             bob=(.028 if clip=='run' else .014)*math.cos(phase*2) if moving else .004*(math.sin(phase)-1)
-            shift=Vector((0,-bend*.10-recoil*.03, -drop-bend*(.65 if clip=='pickup' else .21)+bob))
+            shift=Vector((.014*math.sin(phase) if moving else 0,-bend*.10-recoil*.03, -drop-bend*(.65 if clip=='pickup' else .21)+bob))
             for name in targets:
                 if name!='root': targets[name]=[p+shift for p in targets[name]]
             # Torso lean about the pelvis; legs are recomputed with foot contacts.
@@ -339,33 +491,53 @@ def animation(rig,joints):
                 if name=='root' or name.startswith(('thigh','shin','foot')): continue
                 targets[name]=[pivot+rotation@(p-pivot) for p in targets[name]]
             aiming=clip in ('aim','fire')
-            if aiming:
+            holding=clip in ('idle','walk','run','aim','fire','crouch','crouch_walk','hit')
+            if holding:
                 # Protract the support shoulder while keeping the clavicle
                 # length. Tilt the head toward the stock's sight line.
-                for suffix,angle in [('L',-15),('R',-8)]:
+                for suffix,angle in [('L',-15 if aiming else -22),('R',-8)]:
                     name='clavicle.'+suffix;a,b=targets[name]
                     targets[name]=[a,a+Matrix.Rotation(math.radians(angle),3,'Z')@(b-a)]
                     targets['upper_arm.'+suffix][0]=targets[name][1].copy()
-                neck=targets['neck'][0]
-                tilt=Matrix.Rotation(.37,3,'Y')@Matrix.Rotation(-.24,3,'X')
-                for name in ('neck','head'):targets[name]=[neck+tilt@(p-neck) for p in targets[name]]
+                if aiming:
+                    neck=targets['neck'][0]
+                    tilt=Matrix.Rotation(.37,3,'Y')@Matrix.Rotation(-.24,3,'X')
+                    for name in ('neck','head'):targets[name]=[neck+tilt@(p-neck) for p in targets[name]]
             for suffix,side in [('L',-1),('R',1)]:
                 thigh='thigh.'+suffix; shin='shin.'+suffix; foot='foot.'+suffix
                 hip=Vector(joints[thigh][0])+shift
-                wave=math.sin(phase+(0 if side==1 else math.pi))
+                leg_phase=(phase+(0 if side==1 else math.pi))%math.tau
+                wave=math.sin(leg_phase)
                 stride=(.28 if clip=='walk' else .40 if clip=='run' else .18) if moving else 0
                 ankle=Vector((side*.135,wave*stride,.14+max(0,math.cos(phase+(0 if side==1 else math.pi)))*(.13 if clip=='run' else .065))) if moving else Vector(joints[shin][1])
+                pitch=0
+                if moving:
+                    if math.pi/2<=leg_phase<=math.pi*1.5:
+                        stance=(leg_phase-math.pi/2)/math.pi
+                        pitch=math.radians(12)*max(0,1-stance/.25)-math.radians(18)*max(0,(stance-.70)/.30)
+                    else:
+                        swing=((leg_phase-math.pi*1.5)%math.tau)/math.pi
+                        degrees=-18+26*swing/.25 if swing<.25 else 8+4*(swing-.75)/.25 if swing>.75 else 8
+                        pitch=math.radians(degrees)
+                    ankle.z+=max(0,-(.14+min((Matrix.Rotation(pitch,3,'X')@p).z for p in foot_points[suffix])))
                 # Analytic two-bone knee solve with fixed segment lengths.
                 upper=(Vector(joints[thigh][1])-Vector(joints[thigh][0])).length
                 lower=(Vector(joints[shin][1])-Vector(joints[shin][0])).length
                 knee=solve_joint(hip,ankle,upper,lower,Vector((0,1,0)))
                 targets[thigh]=[hip,knee]; targets[shin]=[knee,ankle]
-                targets[foot]=[ankle,ankle+Vector((0,.18,-.06))]
+                targets[foot]=[ankle,ankle+Matrix.Rotation(pitch,3,'X')@Vector((0,.18,-.06))]
                 shoulder=targets['upper_arm.'+suffix][0]
                 # Both palms lie on the rifle grip axis, 0.26 m apart.
                 hand=Vector((.12 if aiming else .035, (.28 if side==1 else .54) if aiming else (.24 if side==1 else .50),1.56 if aiming else 1.22))+shift
+                hand_direction=Vector((0,1,0))
+                if holding and not aiming:
+                    yaw=math.radians(20);pitch=math.radians(10)
+                    direction=Vector((-math.sin(yaw)*math.cos(pitch),math.cos(yaw)*math.cos(pitch),-math.sin(pitch)))
+                    base=Vector((.17,.30,1.34))+shift
+                    if side==-1:base+=direction*.26
+                    hand=pivot+rotation@(base-pivot);hand_direction=rotation@direction
                 if aiming: hand.y-=recoil*.07
-                if clip in ('pickup','deploy'):hand=hand.lerp(Vector((side*.10,.57,.065 if clip=='pickup' else .035)),bend)
+                if clip in ('pickup','deploy'):hand=hand.lerp(Vector((side*.10,.57,.065 if clip=='pickup' else .075)),bend)
                 if clip=='haul': hand=Vector((side*.06,.35,1.06))+shift
                 if clip=='run': hand.z+=.035*math.sin(phase)
                 if clip=='death':
@@ -378,7 +550,7 @@ def animation(rig,joints):
                 elbow=solve_joint(shoulder,hand,upper,lower,Vector((side*.65,-.15,-1)))
                 targets['upper_arm.'+suffix]=[shoulder,elbow]
                 targets['forearm.'+suffix]=[elbow,hand]
-                targets['hand.'+suffix]=[hand,hand+Vector((0,.09,0))]
+                targets['hand.'+suffix]=[hand,hand+hand_direction*.09]
             if clip=='death':
                 # Falling body stays in the actor's cell; only the skeleton moves.
                 fall=min(t/.75,1); angle=-math.pi*.49*fall
@@ -455,7 +627,8 @@ def weapon(asset,length,family):
         else:
             stock=box('shoulder_stock',(.053,.185 if rifle else .245,.110),(0,-.175 if rifle else -.21,-.012),stock_tile,None,.012); stock.rotation_euler.x=-.10
             box('buttplate',(.058,.014,.114),(0,-.274 if rifle else -.332,-.002),3,None,.004)
-        box('receiver',(.056,.25,.066),(0,.025,.035),3,None,.007)
+            if rifle:box('stock_wrist',(.043,.13,.044),(0,-.028,-.022),stock_tile,None,.005)
+        box('receiver',(.052,.20,.062) if rifle else (.056,.25,.066),(0,.035,.040) if rifle else (0,.025,.035),3,None,.007)
         box('fore_stock',(.052,.28,.042),(0,.257,.012),stock_tile,None,.008)
         tube('barrel',(0,.21,.045),(0,end,.045),.018,.011,3,None,12,2,0)
         box('front_sight',(.018,.011,.038),(0,end-.025,.073),3,None,.002)
@@ -486,7 +659,12 @@ def weapon(asset,length,family):
             tube('scope',(0,-.048,.12),(0,scope_front,.12),.023,.023,3,None,14,1,0)
             for y in (0,.18): box('scope_mount',(.025,.018,.07),(0,y,.09),3,None,.003)
             tube('scope_lens',(0,scope_front-.001,.12),(0,scope_front+.001,.12),.021,.021,15,None,14,1,0)
-        for y in (-.20,.33): box('sling_swivel',(.05,.008,.021),(0,y,-.042),3,None,.003)
+        # Hangers connect to the actual stock surface. The old front box was
+        # 22 mm below the wood and visibly floated in grip close-ups.
+        for y,z in [(-.20,-.058 if asset=='mp40' else -.069),(.33,-.011)]:
+            box('sling_base',(.066 if asset=='mp40' and y<0 else .032,.016,.007),(0,y,z),3,None,.001)
+            for x in (-.020,.020):box('sling_loop_side',(.004,.010,.020),(x,y,z-.014),3,None,.001)
+            box('sling_loop_bridge',(.044,.010,.004),(0,y,z-.024),3,None,.001)
     # Open trigger guard is a four-sided hoop rather than an opaque rectangle.
     for x in (-.014,.014): box('trigger_guard',(.005,.060,.007),(x,.015,-.046),3,None,.002)
     for y in (-.017,.047): box('trigger_guard_end',(.033,.006,.030),(0,y,-.033),3,None,.002)
@@ -527,7 +705,7 @@ def tool(asset):
         box('handle',(.14,.025,.018),(0,0,.30),4,None,.003)
     return {'knife':{'grip':[0,0,0],'tip':[0,0,-.238]},
             'grenade':{'grip':[0,.064,0],'fuse':[0,.145,0]},
-            'mine':{'grip':[.115,.045,0],'pressure_plate':[0,.085,0]},
+            'mine':{'grip':[.115,.085,0],'pressure_plate':[0,.085,0]},
             'decoy':{'grip':[0,.165,.06],'speaker':[0,.122,-.02]},
             'ammo_pack':{'grip':[.06,.30,0],'support_hand':[-.06,.30,0]}}[asset]
 
@@ -602,7 +780,7 @@ def build():
                        'rotation_bone_local_deg':[90,0,0]},
                      'support_hand':{'bone':'hand.L','position_bone_local_m':[0,.035,0],
                        'rotation_bone_local_deg':[90,0,0]},
-                     'sight_eye':{'bone':'head','position_bone_local_m':[.037,.139,-.110]}}
+                     'sight_eye':{'bone':'head','position_bone_local_m':[.037,.139,-.106]}}
         elif asset in GUNS:
             sockets=weapon(asset,*GUNS[asset]); category='weapon'
         else: sockets=tool(asset); category='tool'

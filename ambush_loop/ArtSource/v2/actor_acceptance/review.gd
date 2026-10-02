@@ -199,7 +199,7 @@ func run() -> void:
 			var left := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("hand.L")) * Vector3(0,0.035,0)
 			var support := gun.global_transform * Vector3(0,0,-0.26)
 			var error := left.distance_to(support)
-			var eye := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("head")) * Vector3(0.037,0.139,-0.110)
+			var eye := sk.global_transform * sk.get_bone_global_pose(sk.find_bone("head")) * Vector3(0.037,0.139,-0.106)
 			var sight := gun.global_transform * Vector3(0,0.077,-0.055)
 			var direction := -gun.global_basis.z.normalized()
 			var sight_error := (eye-sight-direction*(eye-sight).dot(direction)).length()
