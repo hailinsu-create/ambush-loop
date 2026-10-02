@@ -25,7 +25,7 @@
 
 ## 实际六关环境固定源结果
 
-源码 **ffb95a670b4b58cbe420571bd9f884fed3a1a41b**，Godot4.7.2 ed1daf0bf。实际六关40×22组装与13原波已运行，不再只是资源展场；部署/装备采用既有reference fixture，波后消费原掉落采用与smoke同样的loot-vacuum fixture，不能称完整玩家寻路/实机触控旅程。50张1280×720实际framebuffer，包括六关SCOUT/ALERT、35°四方位SWEEP、65°SWEEP和历史；箱半开/已搜空另捕获。已看六关SCOUT、低角及历史三张接触表、两张原低角图和开箱原图。
+源码 **ffb95a670b4b58cbe420571bd9f884fed3a1a41b**，Godot4.7.2 ed1daf0bf。实际六关40×22组装与13原波已运行，不再只是资源展场；部署/装备采用既有reference fixture，波后消费原掉落采用与smoke同样的loot-vacuum fixture，不能称完整玩家寻路/实机触控旅程。50张1280×720实际framebuffer，包括六关SCOUT/ALERT、35°四方位SWEEP、65°SWEEP和历史；箱半开/已搜空另捕获。 **这50张台账全部wave0（yard10张，其余各8张）；13波是运行/reference fixture覆盖，尚未逐波视觉验收。**已看六关SCOUT、低角及历史三张接触表、两张原低角图和开箱原图。
 
 | 固定源入口 | 实际退出0结果 |
 | --- | --- |
@@ -46,3 +46,9 @@
 技术PCK固定2ce源24521472 bytes，SHA256`f78aa89b1d2bd2cde659b0d4fc26181dbea997d3462f9b6b5a6af1e9ce7f2da0`，空物理工程1512/0（原R4/R3/40环境80LOD/45PCM＋六真实网格×两档组装36项）。不是APK，导出后45原import恢复且运行树差异检查退出0。
 
 近景随后发现旧实心selected/event圆盘仍挡住脚下箱子，独立显示源码 **05a90268086dde694cc2f8313e808b5b23b629ba** 改为空心轮廓，不改位置/拾取/事件身份。focused crate11/0、定位/触控生命周期32/0，半开/空箱原图再捕获并实际看验；盒盖可见，人物同格脚/箱接触仍需R5/完整HUD阶段评审。原50帧仍归ffb，新的两张轮廓近图另按05a固定归档；技术PCK2ce早于这个纯显示补片，未冒称最新整包/最终APK。
+
+
+2026-10-02父端证据核对补充：软件渲染实际draw172–424、primitives53826–168748，部分视角超过暂定200draw警戒；列入A3真实LOD/batch/导入动画内存预算，并在最终回归补六关全部13波视觉矩阵。警戒不是设备FPS门槛，通过软件截图或逻辑fixture不代表中端安卓性能。
+
+
+651f72独立父端复验：六关实际40×22/13wave运行283/0、HUD164/clock29/tint36；独立156/0覆盖六关真实abort→FAILED→REPLAY与live污染首尾seek，current empty PCK1512/0，无新增P1/P2。实际看16/50原图，仍有desktop HUD挡战场、radio yaw345近远整根天线被隐藏只留占格底片的质量缺口；主作者在R5之后修HUD和局部遮挡。288帧软件静态rotation median190–388ms仅cloud初筛，纳入A3真实预算，不称设备性能通过。独立结果归651源，不归当前R5。

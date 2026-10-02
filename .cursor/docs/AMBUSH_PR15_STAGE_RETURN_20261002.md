@@ -35,3 +35,6 @@ R4仅工作树开发验证：52clip真实采样17802；修正蹲姿后真实batt
 视觉评审额外证实实时色罩污染历史：ffb源36/18fail→2ce6c602e31fb29556c85961704778185ca5a776源36/0，HUD164/生命周期32退出0，六张清色罩历史已看。测试738534274fb54bade2e6201c859b2b406907956a只把箱近景焦点放到真实箱；随后05a90268086dde694cc2f8313e808b5b23b629ba将实心selected/event盘改空心轮廓，近景11/生命周期32退出0，盒盖可见而角色同格箱接触仍需R5评审。详证 [环境](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md) / [FX](AMBUSH_PR15_REPLAY_FX_20261002.md)。固定2ce技术PCK24521472 bytes SHA256 f78aa89b1d2bd2cde659b0d4fc26181dbea997d3462f9b6b5a6af1e9ce7f2da0，空物理工程1512/0；早于轮廓补片，不是最终APK。
 
 父端SWEEPclock独立68/0已闭合；断连通知后实际文件/导入/命令/GitHub正常，无恢复阻碍。完成本轮推送核对后可并行独立QA环境/FX与HUD只读视觉评审。主作者下一包R5（2974915/ebedb82），其余HUD/3DFX、连续SWEEP/FAILED/abort终局、A3、最终完整smoke/APK继续；最新完整smoke仍7d34867，耳听0/45、0/6与设备未启动，Draft不merge。
+
+
+最新R5工具片：[实际刀/雷/诱饵报告](AMBUSH_PR15_R5_TOOLS_20261002.md)。只接2974915/ebedb82的21角色GLB原字节，1092旧键/rig/geometry及30装备/3atlas兼容复核0失败；c5ec8ff工具真实事件clock/target/mask/取消与格式3保留R4/R3历史，d53成功装备立即取消修真实同帧反例4/1→4/0，工具1034/0和冻结66/0。分固定源六关10332/合同84042/角色21818/枪7681/战场231/clock29/HUD164/生命周期32/audio405/static333均退出0，f687空工程PCK1764/0。每run固定源、混合等价范围与保留失败在validation；未称当前全smoke/逐波视觉/设备通过。未merge/生产，制作源/atlas仍独立作者所有，尸体body来源/肩掌配对与20cm局部offset一次为下一片；之后必修desktop HUD覆盖和radio yaw345天线整隐，再FX/A3预算和13波视觉矩阵/完整回归APK，耳听设备后置。
