@@ -1120,13 +1120,13 @@ func apply_touch_command(cmd: String) -> void:
 		"replay":
 			_on_replay_pressed()
 		"rotate_cw":
-			if phase == Phase.SETUP and selected and selected.visible:
+			if _can_edit_equipment():
 				selected.rotate_by(15.0)
 				_sfx("ui")
 				_announce_plan_edit()
 				_refresh_killzone_preview()
 		"rotate_ccw":
-			if phase == Phase.SETUP and selected and selected.visible:
+			if _can_edit_equipment():
 				selected.rotate_by(-15.0)
 				_sfx("ui")
 				_announce_plan_edit()
@@ -11818,7 +11818,7 @@ func _throw_grenade_from(op: OperatorUnit, world_pos: Vector2) -> bool:
 
 
 func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
-	if selected == null or not selected.alive or not selected.visible:
+	if not _can_edit_equipment() or _modal_blocks_input():
 		return
 	if selected.grenades <= 0:
 		status_label.text = "没有手雷"
@@ -12021,7 +12021,7 @@ func _throw_decoy_at_cursor() -> void:
 
 
 func _throw_decoy_at(world_pos: Vector2) -> void:
-	if selected == null or not selected.alive:
+	if not _can_edit_equipment() or _modal_blocks_input() or not world_pos.is_finite():
 		return
 	if selected.decoys <= 0:
 		status_label.text = "没有诱饵"

@@ -4,6 +4,7 @@ param(
     [ValidateSet(
         'replay_timeline_test.gd',
         'equipment_freeze_test.gd',
+        'phase_tools_test.gd',
         'presentation_lifecycle_test.gd',
         'campaign_replay_test.gd',
         'visual_snapshot_test.gd',
