@@ -21,6 +21,7 @@ sys.path.insert(0, str(HERE))
 import build_yard_kit as kit
 from actor_acceptance.canonicalize import normalize_glb
 from actor_acceptance import firearm_contract as firearms
+from actor_acceptance import utility_contract as utility
 PROJECT = HERE.parents[1]
 OUT = PROJECT / 'art/v2'
 PARTS = []
@@ -35,6 +36,7 @@ CLIPS = {'idle': (2.4, True), 'walk': (.9, True), 'run': (.6, True),
          'death': (1.2, False), 'crouch': (2., True), 'crouch_walk': (1.15, True),
          'deploy': (1.25, False), 'hit': (.3, False), 'haul': (1.2, True)}
 CLIPS.update(firearms.ADDED_CLIPS)
+CLIPS.update(utility.ADDED_CLIPS)
 CHARACTERS = {'operator_rifle': (0, 'helmet'), 'operator_mg': (1, 'rolled'),
               'operator_scout': (6, 'beret'), 'enemy_patrol': (13, 'helmet'),
               'enemy_flank': (2, 'cap'), 'enemy_sneak': (6, 'hood'),
@@ -467,7 +469,8 @@ def animation(rig,joints):
                             if any(obj.vertex_groups[g.group].name==name and g.weight>.999 for g in v.groups)]
     for clip_name,(duration,loop) in CLIPS.items():
         spec=firearms.SPECS.get(clip_name)
-        clip='fire' if spec and spec['stage']=='fire' else 'aim' if spec else clip_name
+        util=clip_name in utility.ADDED_CLIPS
+        clip='haul' if clip_name in utility.DRAG else 'idle' if util else 'fire' if spec and spec['stage']=='fire' else 'aim' if spec else clip_name
         action=bpy.data.actions.get(clip_name)
         if action:
             continue
@@ -476,33 +479,51 @@ def animation(rig,joints):
         frames=round(duration*30)
         for frame in range(frames+1):
             t=frame/frames; phase=math.tau*t
+            drag=utility.drag_blend(clip_name,t) if clip_name in utility.DRAG else 0.
+            if clip_name in ('corpse_grab','corpse_release'):phase=0.
             targets={n:[Vector(a),Vector(b)] for n,(a,b,_) in joints.items()}
             crouch=clip in ('crouch','crouch_walk','deploy')
             moving=clip in ('walk','run','crouch_walk','haul')
             bend=math.sin(math.pi*t) if clip in ('pickup','deploy') else 0
+            if clip_name=='decoy_place':bend=utility.reach(t)
             recoil=math.exp(-t*12)*math.sin(t*math.pi*4) if clip=='fire' else 0
             if spec:recoil*=firearms.POSE[spec['group']]['recoil_gain']
             hit=math.sin(math.pi*t)*.12 if clip=='hit' else 0
             drop=.44 if clip=='deploy' else .36 if crouch else .13 if clip=='run' else .06 if moving else 0
             bob=(.028 if clip=='run' else .014)*math.cos(phase*2) if moving else .004*(math.sin(phase)-1)
             shift=Vector((.014*math.sin(phase) if moving else 0,-bend*.10-recoil*.03, -drop-bend*(.65 if clip=='pickup' else .21)+bob))
+            if util:
+                if clip_name in utility.DRAG:
+                    shift=Vector((drag*.014*math.sin(phase),0,-.004*(1-drag)+drag*(-.28+.014*math.cos(phase*2))))
+                elif clip_name=='decoy_place':shift=Vector((0,-bend*.10,-.004-bend*.65))
+                elif clip_name in utility.CORPSE:
+                    fall=utility.smooth(t/.75) if clip_name=='death_prone' else 1.
+                    shift=Vector((0,0,-.004*(1-fall)))
+                else:shift=Vector((0,0,-.004))
             for name in targets:
                 if name!='root': targets[name]=[p+shift for p in targets[name]]
             # Torso lean about the pelvis; legs are recomputed with foot contacts.
             lean=(.35 if crouch else .1 if clip=='run' else .035)+bend*(.915 if clip=='pickup' else .65)-hit
+            if util:
+                if clip_name in utility.DRAG:lean=.035*(1-drag)-.15*drag
+                elif clip_name in utility.CORPSE:lean=.035*(1-fall)
+                else:lean=.035+bend*.65
             pivot=targets['pelvis'][0]
             rotation=Matrix.Rotation(-lean,3,'X')
             for name in targets:
                 if name=='root' or name.startswith(('thigh','shin','foot')): continue
                 targets[name]=[pivot+rotation@(p-pivot) for p in targets[name]]
             aiming=clip in ('aim','fire')
-            holding=clip in ('idle','walk','run','aim','fire','crouch','crouch_walk','hit')
+            holding=clip in ('idle','walk','run','aim','fire','crouch','crouch_walk','hit') or util
             lift=firearms.raised(spec['stage'],t) if spec else float(aiming)
             if holding:
                 # Protract the support shoulder while keeping the clavicle
                 # length. Tilt the head toward the stock's sight line.
                 left_angle=(-22*(1-lift)+firearms.POSE[spec['group']]['support_shoulder_deg']*lift) if spec else -15 if aiming else -22
-                for suffix,angle in [('L',left_angle),('R',-8)]:
+                right_angle=-8
+                if clip_name in utility.DRAG:left_angle*=(1-drag);right_angle*=(1-drag)
+                if clip_name in utility.CORPSE:left_angle*=(1-fall);right_angle*=(1-fall)
+                for suffix,angle in [('L',left_angle),('R',right_angle)]:
                     name='clavicle.'+suffix;a,b=targets[name]
                     targets[name]=[a,a+Matrix.Rotation(math.radians(angle),3,'Z')@(b-a)]
                     targets['upper_arm.'+suffix][0]=targets[name][1].copy()
@@ -539,7 +560,9 @@ def animation(rig,joints):
                 leg_phase=(phase+(0 if side==1 else math.pi))%math.tau
                 wave=math.sin(leg_phase)
                 stride=(.28 if clip=='walk' else .40 if clip=='run' else .18) if moving else 0
+                if clip_name in utility.DRAG:stride=.14*drag
                 ankle=Vector((side*.135,wave*stride,.14+max(0,math.cos(phase+(0 if side==1 else math.pi)))*(.13 if clip=='run' else .065))) if moving else Vector(joints[shin][1])
+                if clip_name in utility.DRAG:ankle=Vector(joints[shin][1]).lerp(ankle,drag)
                 pitch=0
                 if moving:
                     if math.pi/2<=leg_phase<=math.pi*1.5:
@@ -549,6 +572,7 @@ def animation(rig,joints):
                         swing=((leg_phase-math.pi*1.5)%math.tau)/math.pi
                         degrees=-18+26*swing/.25 if swing<.25 else 8+4*(swing-.75)/.25 if swing>.75 else 8
                         pitch=math.radians(degrees)
+                    if clip_name in utility.DRAG:pitch*=drag
                     ankle.z+=max(0,-(.14+min((Matrix.Rotation(pitch,3,'X')@p).z for p in foot_points[suffix])))
                 # Analytic two-bone knee solve with fixed segment lengths.
                 upper=(Vector(joints[thigh][1])-Vector(joints[thigh][0])).length
@@ -574,6 +598,21 @@ def animation(rig,joints):
                     tuck=min(t/.75,1)
                     hand=hand.lerp(Vector((side*.23,.025,1.12))+shift,tuck)
                 if spec:hand,hand_direction=firearm_hands[suffix]
+                if util:
+                    hand=Vector((side*.18,.24,1.15))+shift
+                    hand_direction=Vector((0,1,0))
+                    if clip_name=='knife_stab' and side==1:hand=hand.lerp(Vector((.15,.57,1.35))+shift,utility.reach(t))
+                    if clip_name=='grenade_throw' and side==1:hand=Vector(utility.throw_hand(t))+shift
+                    if clip_name=='decoy_place' and side==1:hand=hand.lerp(Vector((.10,.47,.155)),bend)
+                    if clip_name in utility.DRAG:
+                        grip=Vector((side*.205,-.43,1.17))+shift
+                        # Keep the held body's contact height stable while the
+                        # hauling actor's torso follows its in-place gait bob.
+                        grip.z-=drag*.014*math.cos(phase*2)
+                        hand=hand.lerp(grip,drag)
+                        hand_direction=Vector((math.sin(math.pi*drag),math.cos(math.pi*drag),0))
+                    if clip_name in utility.CORPSE:
+                        hand=hand.lerp(Vector((side*.23,.015,1.13))+shift,fall)
                 upper=(Vector(joints['upper_arm.'+suffix][1])-Vector(joints['upper_arm.'+suffix][0])).length
                 lower=(Vector(joints['forearm.'+suffix][1])-Vector(joints['forearm.'+suffix][0])).length
                 delta=hand-shoulder
@@ -590,6 +629,16 @@ def animation(rig,joints):
                     if name=='root': continue
                     targets[name]=[Vector((p.x,p.y,p.z)) for p in targets[name]]
                     targets[name]=[turn@(p-Vector((0,0,.9)))+Vector((0,0,.22+.68*(1-fall))) for p in targets[name]]
+            if clip_name in utility.CORPSE:
+                angle=-math.pi/3 if clip_name=='corpse_dragged' else -math.pi/2*fall
+                back=0. if clip_name=='corpse_dragged' else .20*fall
+                if clip_name in ('corpse_lift','corpse_lower'):
+                    raised=utility.smooth(t) if clip_name=='corpse_lift' else 1-utility.smooth(t)
+                    angle=-math.pi/2+math.pi/6*raised
+                    back=.20*(1-raised)
+                turn=Matrix.Rotation(angle,3,'X')
+                for name in targets:
+                    if name!='root':targets[name]=[turn@p+Vector((0,-back,0)) for p in targets[name]]
             bpy.context.scene.frame_set(frame)
             # Compute every local basis from absolute target matrices. Setting
             # pb.matrix one-by-one reads a stale evaluated parent from the
@@ -602,13 +651,14 @@ def animation(rig,joints):
                     direction=(b-a).normalized(); original=(Vector(joints[name][1])-Vector(joints[name][0])).normalized()
                     q=original.rotation_difference(direction)@rest.to_quaternion()
                     matrices[name]=Matrix.LocRotScale(a,q,Vector((1,1,1)))
-            if clip=='death':
+            if clip=='death' or clip_name in utility.CORPSE:
                 # Keep the collapsing skinned surface on the floor, including
                 # hands/pack, instead of guessing a pelvis height.
                 skin={name:matrices[name]@rig.data.bones[name].matrix_local.inverted() for name in joints}
                 bottom=min(sum(g.weight*(skin[obj.vertex_groups[g.group].name]@obj.matrix_world@v.co).z
                                for g in v.groups) for obj in PARTS for v in obj.data.vertices)
                 lift=max(0,.003-bottom)
+                if clip_name=='death_prone':lift=max(0,-bottom)+.003*fall
                 for name,matrix in matrices.items():
                     if name!='root': matrix.translation.z+=lift
             for name in joints:
@@ -886,10 +936,12 @@ def build():
         print('ACTOR_ASSET',asset,[(x['triangles'],x['surfaces']) for x in lods],flush=True)
     manifest={'schema':2,'seed':SEED,'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'firearm_contract_sha256':hashlib.sha256((HERE/'actor_acceptance/firearm_contract.py').read_bytes()).hexdigest(),
+              'utility_contract_sha256':hashlib.sha256((HERE/'actor_acceptance/utility_contract.py').read_bytes()).hexdigest(),
               'canonicalizer_sha256':hashlib.sha256((HERE/'actor_acceptance/canonicalize.py').read_bytes()).hexdigest(),'assets':entries,
               'textures':[{'path':f'art/v2/textures/{p.name}','sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((OUT/'textures').glob('actor_*.png'))]}
     CATALOG.write_text(json.dumps(manifest,indent=2)+'\n')
     (CATALOG.parent/'firearm_profiles_candidate.json').write_text(json.dumps(firearms.candidate(),indent=2)+'\n')
+    (CATALOG.parent/'utility_profiles_candidate.json').write_text(json.dumps(utility.candidate(),indent=2)+'\n')
     for img in bpy.data.images:
         if img.filepath: img.pack()
     for obj in bpy.data.objects: obj.hide_set(obj.get('lod',0)>0)

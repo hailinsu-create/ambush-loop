@@ -25,6 +25,8 @@ shutil.copy2(project/'ArtSource/v2/actor_acceptance/review.gd',fixture/'base_rev
 shutil.copy2(review_script,fixture/'review.gd')
 if review_script.name=='firearm_review.gd':
     shutil.copy2(profile_contract,fixture/'firearm_profiles_candidate.json')
+if review_script.name=='utility_review.gd':
+    shutil.copy2(Path(catalog).parent/'utility_profiles_candidate.json',fixture/'utility_profiles_candidate.json')
 if review_script.name=='quality_review.gd':
     yard=json.loads((project/'art/v2/manifest.json').read_text())
     context=[l['path'] for a in yard['assets'] for l in a['lods'] if a['asset_id'] in ['warehouse_fragment','ground_concrete','yard_lamp','oil_drum','sandbag_stack']]+[t['path'] for t in yard['textures']]

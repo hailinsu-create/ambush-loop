@@ -1,0 +1,50 @@
+{
+  "frozen_source_sha": "c4c21708a2e06d3a7eaefbb8ab6bfeee31f5073d",
+  "source_files": [
+    {
+      "path": "scripts/operator.gd",
+      "sha256": "3c1b4bebdde55f32ea2797ff629cc93fd1d506ce306a1333e96c47fa6f8bb3c5"
+    },
+    {
+      "path": "scripts/main.gd",
+      "sha256": "bb52095d6f5fab10e3c71ef2a6a428470d48c1cbb3a61a82776579ce8fe60c78"
+    },
+    {
+      "path": "scripts/c2/c2_director.gd",
+      "sha256": "a28b234f5b42f2ef2b8419760fdc9e21f9362edf4084e506dd6174f08d2a5beb"
+    },
+    {
+      "path": "scripts/raid/grenade.gd",
+      "sha256": "2738b599ec8b57e167f7bc1e6f5c44d7c3f224a2043d9366a2097d4c767c7556"
+    },
+    {
+      "path": "scripts/raid/decoy.gd",
+      "sha256": "b18370a3718cf0008f7967267588eaee6ec33d8b04818ec1adae23aa0d115773"
+    },
+    {
+      "path": "scripts/presentation/view_state.gd",
+      "sha256": "c91156c06e411d395ecb236d3e7b2ee9e53420f845b46dda072400aff5bbad14"
+    }
+  ],
+  "knife": {
+    "melee_signal": "OperatorUnit.fired_shot emitted immediately before apply_fire",
+    "sentry_skill": "C2Director._skill_knife directly knock_out; no equivalent animation event",
+    "asset": "knife_stab .8s; impact window .4-.6 normalized; cosmetic retrospective/early-start selection is main author responsibility"
+  },
+  "grenade": {
+    "creation": "main._throw_grenade_from immediately consumes and creates RaidGrenade at op position",
+    "flight": "RaidGrenade._flight_t=.18s initial; bounce resets _flight=.55 and _flight_t=.10s; fuse only decreases after flight/bounce",
+    "asset": "grenade_throw release .5s of 1s candidate. Never delay simulation or fuse to wait for anticipation. Main author maps recorded release to candidate phase and projectile historical position."
+  },
+  "decoy": {
+    "creation": "main._throw_decoy_at creates RaidDecoy at arbitrary selected world point immediately",
+    "asset": "decoy_place local-ground candidate; far-target placement needs main author presentation selection; no added approach requirement/flight/range rule"
+  },
+  "corpse": {
+    "creation": "main._toggle_haul_corpse selects nearby uncollected LootPickup, not a skinned corpse entity",
+    "following": "OperatorUnit.sync_hauled uses global_position+Vector2(0,14), independent of facing",
+    "asset": "paired shoulders only standalone visual candidate; no new corpse ID/loot/facing state. Main author chooses legitimate historical mapping and alignment."
+  },
+  "history_gap": "Frozen view_state events is empty; loot stores only id/pos; grenade/decoy/haul/knife-specific pose clocks absent. Do not use current live objects to invent replay history.",
+  "ownership": "Main PR15 author event clocks, masks, interrupts/cancellation, utility/body/projectile adoption; dot animation/contact defects. This metadata does not modify runtime."
+}
