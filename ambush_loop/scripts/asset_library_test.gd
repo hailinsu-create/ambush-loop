@@ -26,9 +26,10 @@ func _check(ok: bool, message: String) -> void:
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	root.get_node("AudioDirector").pause_for_background()
-	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/static_equipment_manifest.json"))
-	_check(doc.assets.size() == 15 and doc.source_commit == "0242c983e8ae972b58b4f7afe9d08084b8f421c6", "static subset has frozen provenance")
-	_check(not Assets.has_asset("operator_rifle") and not Assets.has_asset("enemy_heavy"), "unaccepted characters are outside the runtime catalog")
+	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
+	_check(doc.assets.size() == 22 and doc.source_commit == "00b270863ba5a2cd5425abf2a31e78965c72ae45", "R3 runtime catalog has frozen provenance")
+	doc.assets = doc.assets.filter(func(row: Dictionary) -> bool: return row.category != "character")
+	_check(doc.assets.size() == 15 and Assets.has_asset("operator_rifle") and not Assets.has_asset("enemy_heavy"), "R3 replaces the static catalog and rejects retired character identity")
 	_check(not Assets.has_asset("../main") and not Assets.has_asset("m1_garand", 2) and not Assets.has_asset("m1_garand", -1), "unknown paths and unsupported LODs are refused")
 	var actor := Assets.material_for_slot("v2_actor_atlas")
 	var yard := Assets.material_for_slot("")

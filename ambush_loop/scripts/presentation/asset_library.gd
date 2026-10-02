@@ -2,7 +2,7 @@ extends RefCounted
 
 ## Manifest paths are the accepted library boundary. Actor and yard slots have
 ## distinct shared materials; a model never silently acquires the wrong atlas.
-const MANIFESTS := ["res://art/v2/manifest.json", "res://art/v2/static_equipment_manifest.json"]
+const MANIFESTS := ["res://art/v2/manifest.json", "res://art/v2/actors_manifest.json"]
 static var _atlas: StandardMaterial3D
 static var _emission: StandardMaterial3D
 static var _actor_atlas: StandardMaterial3D
@@ -42,7 +42,8 @@ static func _read_catalog() -> void:
 	var path_rule := RegEx.create_from_string("^art/v2/models/[a-z0-9_]+_lod[0-2]\\.glb$")
 	for path in MANIFESTS:
 		var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-		if not doc is Dictionary or int(doc.get("schema", 0)) != 1:
+		var expected_schema := 2 if path.ends_with("actors_manifest.json") else 1
+		if not doc is Dictionary or int(doc.get("schema", 0)) != expected_schema:
 			push_error("ASSET_MANIFEST_INVALID " + path)
 			continue
 		for entry in doc.get("assets", []):

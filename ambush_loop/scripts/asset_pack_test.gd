@@ -2,6 +2,7 @@ extends SceneTree
 
 const StorageGuard := preload("res://scripts/test_storage_guard.gd")
 const Assets := preload("res://scripts/presentation/asset_library.gd")
+const Actor := preload("res://scripts/presentation/actor_visual.gd")
 var checks := 0
 var failures := 0
 
@@ -23,8 +24,8 @@ func _check(ok: bool, message: String) -> void:
 func _run() -> void:
 	var physical_root := OS.get_environment("AMBUSH_ASSET_PACK_ROOT")
 	_check(not physical_root.is_empty() and DirAccess.get_files_at(physical_root).is_empty(), "probe has no physical project files to conceal missing packed resources")
-	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/static_equipment_manifest.json"))
-	_check(doc.assets.size() == 15, "equipment manifest is included in the pack")
+	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
+	_check(doc.assets.size() == 22 and doc.source_commit == "00b270863ba5a2cd5425abf2a31e78965c72ae45", "R3 manifest is included in the pack with fixed provenance")
 	_check(FileAccess.file_exists("res://art/v2/manifest.json"), "yard manifest is included in the pack")
 	var actor := Assets.material_for_slot("v2_actor_atlas")
 	_check(actor.albedo_texture != null and actor.normal_texture != null and actor.roughness_texture != null, "external shared atlas textures load from the pack")
@@ -33,9 +34,16 @@ func _run() -> void:
 			var model := Assets.instantiate(entry.asset_id, lod)
 			_check(model != null and _meshes(model) > 0, "accepted equipment scene loads through the packaged manifest")
 			if model != null:
+				if entry.category == "character":
+					var skeleton := Actor.find_type(model, "Skeleton3D") as Skeleton3D
+					var player := Actor.find_type(model, "AnimationPlayer") as AnimationPlayer
+					_check(skeleton != null and skeleton.get_bone_count() == 20 and player != null, "packed character retains its actual rig/player")
+					if player != null:
+						for clip in entry.animations:
+							_check(player.has_animation(clip.name) and is_equal_approx(player.get_animation(clip.name).length, clip.duration), "packed character retains every named clip and duration")
 				model.free()
 	var yard := Assets.instantiate("supply_crate")
-	_check(yard != null and _meshes(yard) > 0 and not Assets.has_asset("operator_rifle"), "pack retains the old yard and excludes unaccepted characters")
+	_check(yard != null and _meshes(yard) > 0 and Assets.has_asset("operator_rifle", 2), "pack retains old yard and all registered R3 character LODs")
 	if yard != null:
 		yard.free()
 	Assets.release_materials()
