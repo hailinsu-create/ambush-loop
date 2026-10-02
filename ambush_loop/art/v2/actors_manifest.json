@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "seed": 194407,
-  "generator_sha256": "a5fd22c2a7c525fb55719226d76cddec3c3e6ff94924e94173e6ffb70e2301b8",
+  "generator_sha256": "486f8bd75c45c22e6013104e6142c7e1724bd5ba8e0cc85fc5223f85725d1e8a",
   "assets": [
     {
       "asset_id": "operator_rifle",
@@ -14,29 +14,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "operator_rifle",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        1.8275,
-        0.663
+        1.844,
+        0.6615
       ],
       "lods": [
         {
           "path": "art/v2/models/operator_rifle_lod0.glb",
-          "sha256": "f14f5e44e886c1dfdc9a4c38a5b43c9d68a887e37584df3567876a11879978c4",
-          "triangles": 10176,
+          "sha256": "677f0ef8d8b3a7cb6cef3ed6078cc35b62248b0aa589cefe1dac5bfd73ed2426",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/operator_rifle_lod1.glb",
-          "sha256": "301b1391b7c05fff0b4337fceae70c4cf1b24bb1a1e14f69eaa283e073ccd482",
-          "triangles": 5578,
+          "sha256": "90908ae93605fca92d1c3f89096e41c7ef1f3918374b4d74b8ecd9153dd418eb",
+          "triangles": 3945,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/operator_rifle_lod2.glb",
-          "sha256": "eaefdeae6894cfa8273b7abddd9b39bd632afcee651486668ab387ab556e5cf6",
-          "triangles": 2725,
+          "sha256": "97f84be0d343437ee916e9557462e171611907225510a14404f66201003b7c5b",
+          "triangles": 1736,
           "surfaces": 1
         }
       ],
@@ -93,7 +93,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -117,13 +117,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -141,11 +141,40 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "operator_mg",
@@ -158,29 +187,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "operator_mg",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        1.8275,
-        0.663
+        1.844,
+        0.6615
       ],
       "lods": [
         {
           "path": "art/v2/models/operator_mg_lod0.glb",
-          "sha256": "ad218602ccd1798238782dfa79a7a6d5c0cc2935ade8fba9b4b1812612fac44a",
-          "triangles": 10420,
+          "sha256": "6ddb0dc7545924bac1ed194d7f10de7ce3d06f6d0251862aa70b0a3ec1fc5665",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/operator_mg_lod1.glb",
-          "sha256": "7c35bcc1ab8c3f5bbd8c8a0b16a6c66eac1fe1e33ef0c65c4f2b3484202b2f42",
-          "triangles": 5712,
+          "sha256": "1f6035ddd7ed4186161a2fde58dd5406ec507fe230a077eea50cc8fb54ed917b",
+          "triangles": 3945,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/operator_mg_lod2.glb",
-          "sha256": "4ccb159ae9e07e95f54d6e3e706923fabcf00a39569660e334a27f0d18e694be",
-          "triangles": 2787,
+          "sha256": "0b009f170fd3555b43ef8a2b01ba71bcc58ad0147c440e751b4dc26356ae121d",
+          "triangles": 1726,
           "surfaces": 1
         }
       ],
@@ -237,7 +266,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -261,13 +290,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -285,11 +314,40 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "operator_scout",
@@ -302,29 +360,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "operator_scout",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        1.8215,
-        0.663
+        1.838,
+        0.6615
       ],
       "lods": [
         {
           "path": "art/v2/models/operator_scout_lod0.glb",
-          "sha256": "b1b95bd06e2acfde903e417e4fa6743106975ba14f54ecbda3248f62e78bbcfd",
-          "triangles": 9900,
+          "sha256": "0d8953117b8fa87acc7746f99000a91fe68e19a470b682a772d91c93684ef42c",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/operator_scout_lod1.glb",
-          "sha256": "5ee22a82abccff1762694b745590e97a1d51c53b29e43b4cdc50f3075e52e323",
-          "triangles": 5424,
+          "sha256": "4ef3fd7e772b45adcaa0ad1bd91b7a2bfae7fbf9f17cb934dac8cf28649ec83a",
+          "triangles": 3945,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/operator_scout_lod2.glb",
-          "sha256": "5aca7b4ceae2d2ca7dac22934f26344ab434e7e4ff6a9a204779123f5bef0a58",
-          "triangles": 2649,
+          "sha256": "71624aec08534bf1779db6a86f9173ee0c8826a69bb257cf2db003281aa94480",
+          "triangles": 1738,
           "surfaces": 1
         }
       ],
@@ -381,7 +439,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -405,13 +463,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -429,11 +487,40 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "enemy_patrol",
@@ -446,29 +533,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "enemy_patrol",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        1.8275,
-        0.663
+        1.844,
+        0.6615
       ],
       "lods": [
         {
           "path": "art/v2/models/enemy_patrol_lod0.glb",
-          "sha256": "d48125da3933c3e77c6bc475ef84f40e917ffe25f8f16088672481fe361ff92e",
-          "triangles": 10176,
+          "sha256": "f0486a7576f7d371b0af2255440d94cc24f9d98e494f39fc0c186eabd8ef16b3",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/enemy_patrol_lod1.glb",
-          "sha256": "3f80de9bedecdf06f6736a11e73f170e41c6d7599b8ce64138ac39347459faf7",
-          "triangles": 5578,
+          "sha256": "25745741eed724dbd9ec0d3c98a5413be26b4fe9c55885b24af3283262cbf810",
+          "triangles": 3945,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/enemy_patrol_lod2.glb",
-          "sha256": "9ccc0172e4241cce13869a741dd8e060cf5fb727e40540a89629090145ee40dd",
-          "triangles": 2725,
+          "sha256": "4b58e1bcf81f5a79170e61cf0a5e4019a09049c55b2d3973495fb049ca67d179",
+          "triangles": 1736,
           "surfaces": 1
         }
       ],
@@ -525,7 +612,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -549,13 +636,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -573,11 +660,40 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "enemy_flank",
@@ -590,29 +706,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "enemy_flank",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        1.8075,
-        0.663
+        1.824,
+        0.6615
       ],
       "lods": [
         {
           "path": "art/v2/models/enemy_flank_lod0.glb",
-          "sha256": "06523e2856809838d9381dbeb44d4ef639f374282a478352bf153876213ee61f",
-          "triangles": 9908,
+          "sha256": "dc6dcaed4b3c0b8413606873c99f426824cda56d675f9ad3e9d5bdf827655187",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/enemy_flank_lod1.glb",
-          "sha256": "1d937f9495512483d4062874b5643256cd0b5f80f1fd9548e96c0bbf240d692e",
-          "triangles": 5430,
+          "sha256": "32a870674ab6ab1d322fdfbf392daa7f527c5af9be613441c63a2771af2498c3",
+          "triangles": 3945,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/enemy_flank_lod2.glb",
-          "sha256": "99328f46a0ecb21eea7f4d6ddb8710c2ddc719e04f557ad3eb67540df0edc780",
-          "triangles": 2653,
+          "sha256": "934dfde4fb82c4d110e442391e1b9da87189e68f778068cfe13a23d8dd643cae",
+          "triangles": 1739,
           "surfaces": 1
         }
       ],
@@ -669,7 +785,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -693,13 +809,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -717,14 +833,43 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
-      "asset_id": "enemy_heavy",
+      "asset_id": "enemy_sneak",
       "category": "character",
       "source": "ArtSource/v2/build_actors.py",
       "editable_source": "ArtSource/v2/actors.blend",
@@ -734,29 +879,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "enemy_heavy",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        1.8275,
-        0.663
+        1.866,
+        0.6615
       ],
       "lods": [
         {
-          "path": "art/v2/models/enemy_heavy_lod0.glb",
-          "sha256": "b9cb6df72c93be903d6dfaa3ce24e25e47ec9fba6595b12e9757063a42e2da5d",
-          "triangles": 10376,
+          "path": "art/v2/models/enemy_sneak_lod0.glb",
+          "sha256": "0e0c09e76bdb42de0e29339c39ae3211873e9e86d1b41cee5181014d1d7387d3",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
-          "path": "art/v2/models/enemy_heavy_lod1.glb",
-          "sha256": "c48246a4716412600a908ec7d95e0dc2402487385262717d3e1005a1ab209641",
-          "triangles": 5688,
+          "path": "art/v2/models/enemy_sneak_lod1.glb",
+          "sha256": "61d65c7aadbb04fa302800c05152def01a0150cb0891a3a9112162c826471daf",
+          "triangles": 3945,
           "surfaces": 1
         },
         {
-          "path": "art/v2/models/enemy_heavy_lod2.glb",
-          "sha256": "de6ac5fd07263b521115b39342fa26fe3225ce6764899aa0ed4738cc1bf9cf8b",
-          "triangles": 2777,
+          "path": "art/v2/models/enemy_sneak_lod2.glb",
+          "sha256": "5e0a514f11414145d6a5b4324b5c43ca9ed92bc0ae36bdae1e1b1c6b7f67ffb9",
+          "triangles": 1738,
           "surfaces": 1
         }
       ],
@@ -813,7 +958,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -837,13 +982,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -861,11 +1006,40 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "enemy_radio",
@@ -878,29 +1052,29 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "enemy_radio",
+      "logic_id": null,
       "dimensions_m": [
         0.659,
-        2.1335,
-        0.671
+        2.15,
+        0.6705
       ],
       "lods": [
         {
           "path": "art/v2/models/enemy_radio_lod0.glb",
-          "sha256": "d4668899f2fc3d0d901f51a33a5e00f757820d2f05afb085ad057c00520c787f",
-          "triangles": 10240,
+          "sha256": "60b033130bcef901eb4edcc89ee082e5dca2e7fe9130df1fb9ea37090dd25a0c",
+          "triangles": 7960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/enemy_radio_lod1.glb",
-          "sha256": "51faa688f0b486485e8e71ffe579fdf56bb5a5ac3721cbb0353636cb52883136",
-          "triangles": 5614,
+          "sha256": "538b328cd0927a2769a6b8e83190614f694d5a73101fa1e833df33e246a325ae",
+          "triangles": 3944,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/enemy_radio_lod2.glb",
-          "sha256": "239e0871f2e3540b3f99628c9e46445bf8c666db638ba7fad2b4a5d650bb9ac5",
-          "triangles": 2742,
+          "sha256": "28a3084c4ab01b6f16737e18bd28f8f0165e4588f18d15852e0531880f11e746",
+          "triangles": 1735,
           "surfaces": 1
         }
       ],
@@ -957,7 +1131,7 @@
         },
         {
           "name": "fire",
-          "duration": 0.24,
+          "duration": 0.23333333333333334,
           "loop": false,
           "root_motion": false
         },
@@ -981,13 +1155,13 @@
         },
         {
           "name": "crouch_walk",
-          "duration": 1.15,
+          "duration": 1.1333333333333333,
           "loop": true,
           "root_motion": false
         },
         {
           "name": "deploy",
-          "duration": 1.25,
+          "duration": 1.2666666666666666,
           "loop": false,
           "root_motion": false
         },
@@ -1005,11 +1179,40 @@
         }
       ],
       "sockets": {
-        "weapon_hand": "hand.R",
-        "support_hand": "hand.L"
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        }
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "m1911",
@@ -1022,7 +1225,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "m1911",
+      "logic_id": null,
       "dimensions_m": [
         0.035,
         0.1648,
@@ -1031,14 +1234,14 @@
       "lods": [
         {
           "path": "art/v2/models/m1911_lod0.glb",
-          "sha256": "bc50d52719bcaebf71afcb887a37ad8dc0ce7e2aac365c4a68e83430b4d89b5e",
+          "sha256": "a2ab8e41ba339818218776be7db1590d44fa958b34dc7cd213e6c414085bf108",
           "triangles": 352,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/m1911_lod1.glb",
-          "sha256": "62517f8b7224172c360f8640a9b7b155b76a763e6f4c666aa9bd526a2d7fcee8",
-          "triangles": 192,
+          "sha256": "848694fbb9374ede0339d08d45f42397fa6e03cc2de7e02c0691c6baf27aaf56",
+          "triangles": 142,
           "surfaces": 1
         }
       ],
@@ -1059,14 +1262,14 @@
           0.035,
           -0.15
         ],
-        "support_hand": [
-          0,
-          0,
-          -0.26
-        ]
+        "support_hand": null
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "luger",
@@ -1079,7 +1282,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "luger",
+      "logic_id": null,
       "dimensions_m": [
         0.035,
         0.1808,
@@ -1088,14 +1291,14 @@
       "lods": [
         {
           "path": "art/v2/models/luger_lod0.glb",
-          "sha256": "a6781813c8e9eb17f03e51cb37a2acd945841d931c0bd50230dc8ad0de5e1b2a",
+          "sha256": "b1e0d249552ca32ca1c413b8bc90a2d334514faa187902d3678d618fbe41ae0b",
           "triangles": 396,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/luger_lod1.glb",
-          "sha256": "820518e69c2e591f7c6da6e5604d6258ee0ee487f7dbc1e448df9d38566d1008",
-          "triangles": 216,
+          "sha256": "5d60ff32527becb3a84ed894e1ad93e601578429cfc6f81ff3e23c398a481075",
+          "triangles": 164,
           "surfaces": 1
         }
       ],
@@ -1116,14 +1319,14 @@
           0.035,
           -0.18
         ],
-        "support_hand": [
-          0,
-          0,
-          -0.26
-        ]
+        "support_hand": null
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "m1_garand",
@@ -1136,23 +1339,23 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "m1_garand",
+      "logic_id": null,
       "dimensions_m": [
         0.1104,
-        0.1698,
+        0.1778,
         1.119
       ],
       "lods": [
         {
           "path": "art/v2/models/m1_garand_lod0.glb",
-          "sha256": "5f513c5d0c32e2f1d2e4324d2437d4cc67cf87709e1f839153b067fc4b6fa93c",
-          "triangles": 768,
+          "sha256": "abb3af0dcdc5608346c3f6635161a57981b726ae15eeaa897b91d89608f1901c",
+          "triangles": 900,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/m1_garand_lod1.glb",
-          "sha256": "b7fe9baaa8df79c4a8844b067e9ec7bce45b3e11a0eb5d596fba3311803b0a44",
-          "triangles": 422,
+          "sha256": "7eed4f00359e3fe19164cada849477c8617e86cf966aa383e5cd4f6493f4608a",
+          "triangles": 428,
           "surfaces": 1
         }
       ],
@@ -1179,8 +1382,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "kar98k",
@@ -1193,7 +1400,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "kar98k",
+      "logic_id": null,
       "dimensions_m": [
         0.1104,
         0.1698,
@@ -1202,14 +1409,14 @@
       "lods": [
         {
           "path": "art/v2/models/kar98k_lod0.glb",
-          "sha256": "18bb96e36515f961469cf4205bff7599c9c659142e3f28740ff74cf34eafd621",
-          "triangles": 768,
+          "sha256": "25c6c37143cda20a5b5d5d31de5042d918b450cb63ca77bab06c2e0048fee58e",
+          "triangles": 856,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/kar98k_lod1.glb",
-          "sha256": "fcf74ce0190f88863f848e6cab5ba3b29c52fa0ab91fc6daad25006d9ddea063",
-          "triangles": 422,
+          "sha256": "74bf76be2519cfd0eead4e1e5e3098f2da317440a851b1c5d8c3cc154dd3c4b4",
+          "triangles": 404,
           "surfaces": 1
         }
       ],
@@ -1236,8 +1443,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "thompson",
@@ -1250,7 +1461,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "thompson",
+      "logic_id": null,
       "dimensions_m": [
         0.1214,
         0.236,
@@ -1259,14 +1470,14 @@
       "lods": [
         {
           "path": "art/v2/models/thompson_lod0.glb",
-          "sha256": "5e091f86e1f47574fa4a19acd94f29c8e48555c0cb08b2c7b4e3631349a0f2cf",
+          "sha256": "4aafc8ada1f8114678e920a201dcb52dc0dd62682a94254d82036a58685a5f05",
           "triangles": 888,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/thompson_lod1.glb",
-          "sha256": "ffe00470c83e290f46817cfb254e13b5559196ae0667970c6be0ef338d3cf41a",
-          "triangles": 488,
+          "sha256": "1bc1d997bd6b203dd2ec20418f71ae77f130826860629fc3d8e8e04ff59180c7",
+          "triangles": 420,
           "surfaces": 1
         }
       ],
@@ -1293,8 +1504,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "mp40",
@@ -1307,23 +1522,23 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "mp40",
+      "logic_id": null,
       "dimensions_m": [
-        0.1104,
+        0.1144,
         0.2485,
-        0.849
+        0.857
       ],
       "lods": [
         {
           "path": "art/v2/models/mp40_lod0.glb",
-          "sha256": "82aee3d66f6e9dfbc3ae95f37f3f4e4d7d811469519eedd72b096242e400cad5",
-          "triangles": 812,
+          "sha256": "cc3ef1ae1dfd4383f0dcbc5e6935f6da080ccb7c197d4fe0c5ce5bc62f6cbf58",
+          "triangles": 868,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/mp40_lod1.glb",
-          "sha256": "559ab73290f8044d6c89048fb60c9e73f0dddda480e4024d6affcb59ef2fab68",
-          "triangles": 446,
+          "sha256": "f63763415a4ea097aa5ce801a4e268446d0c717a30163af603d593a7ce3fa4da",
+          "triangles": 410,
           "surfaces": 1
         }
       ],
@@ -1350,8 +1565,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "bar",
@@ -1364,7 +1583,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "bar",
+      "logic_id": null,
       "dimensions_m": [
         0.2994,
         0.2485,
@@ -1373,14 +1592,14 @@
       "lods": [
         {
           "path": "art/v2/models/bar_lod0.glb",
-          "sha256": "4cb699772839326ee38c200d05e2ba9186f4cf78c27a3eb4d63fa3bd1f368864",
+          "sha256": "35f3f86818fb8d93b8e2fd7c454648af08126371678998429f0b5887f3a08d8f",
           "triangles": 868,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/bar_lod1.glb",
-          "sha256": "14556009e33674cee78b61a5cbd7a868641c9b0864a0e5ac9bfe842d7b6b19b6",
-          "triangles": 476,
+          "sha256": "0f680941adf5dc3d09a00efb16abee596b055139f08a0b1367876eb42aff0c0a",
+          "triangles": 410,
           "surfaces": 1
         }
       ],
@@ -1407,8 +1626,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "mg42",
@@ -1421,7 +1644,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "mg42",
+      "logic_id": null,
       "dimensions_m": [
         0.2994,
         0.2485,
@@ -1430,14 +1653,14 @@
       "lods": [
         {
           "path": "art/v2/models/mg42_lod0.glb",
-          "sha256": "692aeb741beb11e0f141c9fd3f94cb1ad76a49275003b319623cf5b324407386",
-          "triangles": 1704,
+          "sha256": "c5624393ec58048f31ac93580195c3e632b11d3c9a1d1d4d5717092c5610632f",
+          "triangles": 1416,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/mg42_lod1.glb",
-          "sha256": "ae6454d44ba7304b00c29e4fee9adc55642ccdd9fd3605f0ffb8789d37241f88",
-          "triangles": 922,
+          "sha256": "465d2fb0a170cc4c6abdec225c15e2a911aa9ebc5a89545d8aae61e8a78e966b",
+          "triangles": 696,
           "surfaces": 1
         }
       ],
@@ -1464,8 +1687,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "springfield",
@@ -1478,7 +1705,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "springfield",
+      "logic_id": null,
       "dimensions_m": [
         0.1104,
         0.2208,
@@ -1487,14 +1714,14 @@
       "lods": [
         {
           "path": "art/v2/models/springfield_lod0.glb",
-          "sha256": "67d90191710151204630d3234405ff720197aca5486b989ab2e088a7c1f8770c",
+          "sha256": "02b60ff145cf956e69530351fd4f5ae9b3822fa174e1fc6663562e745e6ad714",
           "triangles": 960,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/springfield_lod1.glb",
-          "sha256": "7e0f33602adf1cb9439b6aad8844f62b6129cb0d13c786400c7584b21c2813c3",
-          "triangles": 516,
+          "sha256": "d87c1e8d661b5c7b167eb9c9258b894c017ed4b704f97debbbeeb95b5401ace8",
+          "triangles": 458,
           "surfaces": 1
         }
       ],
@@ -1521,8 +1748,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "kar98k_zf",
@@ -1535,7 +1766,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "weapon grip",
-      "logic_id": "kar98k_zf",
+      "logic_id": null,
       "dimensions_m": [
         0.1104,
         0.2208,
@@ -1544,14 +1775,14 @@
       "lods": [
         {
           "path": "art/v2/models/kar98k_zf_lod0.glb",
-          "sha256": "f7860417a078791af570c7a0e1dc609e93408ca037cb091dd4c170dac6d90c64",
-          "triangles": 960,
+          "sha256": "153f44e9c9e005b670dc526c07d482ea1d4977352fda58539186f360f3129d8a",
+          "triangles": 1048,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/kar98k_zf_lod1.glb",
-          "sha256": "7c98f55c17a1385e27ae1b49a9aa6ef5cf6bb2b610bbe01f97776a523cac576e",
-          "triangles": 516,
+          "sha256": "d877a0b3c47f2d6e09d67c0b18a8679a07eeb5f288d55742fe2403979cd6c3f5",
+          "triangles": 504,
           "surfaces": 1
         }
       ],
@@ -1578,8 +1809,12 @@
           -0.26
         ]
       },
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "knife",
@@ -1591,8 +1826,8 @@
       "usage": "Project-authored; same repository terms; generic equipment without insignia",
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
-      "origin": "ground centre",
-      "logic_id": "knife",
+      "origin": "weapon grip",
+      "logic_id": null,
       "dimensions_m": [
         0.072,
         0.026,
@@ -1601,14 +1836,14 @@
       "lods": [
         {
           "path": "art/v2/models/knife_lod0.glb",
-          "sha256": "34dcd599163b231abf3bad94f82c98947123700495fd5d544a296f3bde406c29",
+          "sha256": "dc739594ca5c817f7f3c80ab8a60d31e505d6dbedb1d60d87d09ab01d76362ba",
           "triangles": 144,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/knife_lod1.glb",
-          "sha256": "e014cdfcc24a41a8df4bd9ce3e0cd5d0575906e564f67b6eb0f725d843fec69f",
-          "triangles": 78,
+          "sha256": "673e7182e2b5186b5dded30023c08dc907fbebe72b9bec142b120b0c9578ae14",
+          "triangles": 34,
           "surfaces": 1
         }
       ],
@@ -1618,9 +1853,24 @@
       "collision": "visual_only",
       "skeleton": [],
       "animations": [],
-      "sockets": {},
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "tip": [
+          0,
+          0,
+          -0.238
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "grenade",
@@ -1633,7 +1883,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "grenade",
+      "logic_id": null,
       "dimensions_m": [
         0.086,
         0.146,
@@ -1642,14 +1892,14 @@
       "lods": [
         {
           "path": "art/v2/models/grenade_lod0.glb",
-          "sha256": "d1bb5a2b7b877ee56deba7eee471bb332087c612f37ab3f4bb0ce6ff16150e81",
+          "sha256": "8041fee10c167c5c568d10477af84633649054d95b0cfe67d4c9e238d5e9523d",
           "triangles": 368,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/grenade_lod1.glb",
-          "sha256": "fe90f91d6a381746d82e6b7e6777c4ce4a772e6fbd94dcda2c6027e7b3b9a61b",
-          "triangles": 202,
+          "sha256": "5927f1761ff43ecb21d9f1a46344be0801f7bd633fb5d9ccbcaad35ea51775d0",
+          "triangles": 150,
           "surfaces": 1
         }
       ],
@@ -1660,8 +1910,12 @@
       "skeleton": [],
       "animations": [],
       "sockets": {},
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "mine",
@@ -1674,7 +1928,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "mine",
+      "logic_id": null,
       "dimensions_m": [
         0.27,
         0.075,
@@ -1683,14 +1937,14 @@
       "lods": [
         {
           "path": "art/v2/models/mine_lod0.glb",
-          "sha256": "5ac545e36ce1d022b04000cb31b6e6f6347a6715d41d27374e71b7937ac405e3",
+          "sha256": "04f8594a7708067a6f60c3681710f5fc8c49c9efbdbe3f50f5f7246a0165eb66",
           "triangles": 168,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/mine_lod1.glb",
-          "sha256": "5e5bc7135bf9c577968c832cebc26181421efc647feeb68a379a36ef9bd9131c",
-          "triangles": 92,
+          "sha256": "4fc47fc2dacbb1c30643195b56648c349c7d6094ab55fd9ce32a3a23e7c2da78",
+          "triangles": 46,
           "surfaces": 1
         }
       ],
@@ -1701,8 +1955,12 @@
       "skeleton": [],
       "animations": [],
       "sockets": {},
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "decoy",
@@ -1715,7 +1973,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "decoy",
+      "logic_id": null,
       "dimensions_m": [
         0.16,
         0.34,
@@ -1724,14 +1982,14 @@
       "lods": [
         {
           "path": "art/v2/models/decoy_lod0.glb",
-          "sha256": "56c3ed851c369b5aa79857ef42db0a28695165822d945283d4120c2fd4e34b5c",
-          "triangles": 196,
+          "sha256": "f52ad91a2bf23f15965ec0d6ebb9ab84507a8e8b4fb3563a632d494d59960bc6",
+          "triangles": 148,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/decoy_lod1.glb",
-          "sha256": "3ab82416f665144b395515aa51a4fca6c06342425e463e88fb3f819541afe555",
-          "triangles": 105,
+          "sha256": "7abede2e6cee385a09d0a09bf1bce23eda02f112b42a0ae2853f132b285b74b4",
+          "triangles": 35,
           "surfaces": 1
         }
       ],
@@ -1742,8 +2000,12 @@
       "skeleton": [],
       "animations": [],
       "sockets": {},
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     },
     {
       "asset_id": "ammo_pack",
@@ -1756,7 +2018,7 @@
       "unit": "metre",
       "runtime_axes": "+Y up, -Z forward",
       "origin": "ground centre",
-      "logic_id": "ammo_pack",
+      "logic_id": null,
       "dimensions_m": [
         0.33,
         0.237,
@@ -1765,14 +2027,14 @@
       "lods": [
         {
           "path": "art/v2/models/ammo_pack_lod0.glb",
-          "sha256": "28e476bc16bd8dc61e8eefddce8526077fe763fc2f4ff0ffef0c49c096c96752",
+          "sha256": "1dd5a0ede7c766abf078ea3ad260d1c5b36ee187ef157d9d94dca8b08c2ccea5",
           "triangles": 132,
           "surfaces": 1
         },
         {
           "path": "art/v2/models/ammo_pack_lod1.glb",
-          "sha256": "75385d238de56725f9294908b8f0d856f50824f447dd56f8afd848f9dc122d8d",
-          "triangles": 72,
+          "sha256": "825a0bfd018c0258ff6c80bce0b00bc0f537f9d7c753c5619096d720524e1c18",
+          "triangles": 28,
           "surfaces": 1
         }
       ],
@@ -1783,8 +2045,12 @@
       "skeleton": [],
       "animations": [],
       "sockets": {},
-      "validation_scene": "res://scripts/character_review_capture.gd",
-      "status": "exported; engine review pending"
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
     }
   ],
   "textures": [

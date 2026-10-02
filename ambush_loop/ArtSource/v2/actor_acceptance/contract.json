@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "coordinate_contract": {
+    "unit": "metre",
+    "cell_m": 1,
+    "runtime_up": "+Y",
+    "runtime_forward": "-Z",
+    "actor_origin": "ground centre; actor transform is authoritative world position",
+    "world_space": "res://scripts/presentation/world_space.gd; do not add a second conversion",
+    "facing": "set actor.rotation.y = WorldSpace.facing_yaw(facing_deg); do not bake a 180 degree correction"
+  },
+  "priority_aliases": {
+    "rifleman": "operator_rifle",
+    "normalenemy": "enemy_patrol",
+    "firstrifle": "m1_garand"
+  },
+  "role_enum": {
+    "0": "operator_rifle",
+    "1": "operator_mg",
+    "2": "operator_scout"
+  },
+  "enemy_kind": {
+    "patrol": "enemy_patrol",
+    "flank": "enemy_flank",
+    "sneak": "enemy_sneak",
+    "echo": "enemy_radio"
+  },
+  "retired_candidate": "enemy_heavy: original WIP has no matching game enemy kind; replaced by hooded enemy_sneak",
+  "weapon_ids": [
+    "m1911",
+    "luger",
+    "m1_garand",
+    "kar98k",
+    "thompson",
+    "mp40",
+    "bar",
+    "mg42",
+    "springfield",
+    "kar98k_zf"
+  ],
+  "typed_ammo": "pistol/rifle/smg/mg/scout ammo -> ammo_pack visual; retain logical item ID",
+  "asset_semantics": "visual_only; never collision, navigation, combat LOS, damage or live replay state",
+  "rig": {
+    "bones": 20,
+    "rest_pose": "same named bone hierarchy, rest matrices and inverse binds for all seven characters and all three LODs",
+    "weights": "normalized; at most four GLB influences; these segmented clothing pieces currently use one rigid influence",
+    "scale": "1,1,1; unit is metres; no root motion",
+    "bone_socket": {
+      "weapon_hand": {
+        "bone": "hand.R",
+        "translation_local_m": [
+          0,
+          0.035,
+          0
+        ],
+        "rotation_local_xyz_deg": [
+          90,
+          0,
+          0
+        ]
+      },
+      "support_hand": {
+        "bone": "hand.L",
+        "translation_local_m": [
+          0,
+          0.035,
+          0
+        ],
+        "rotation_local_xyz_deg": [
+          90,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "weapon_socket": "actual GLB nodes socket_grip/socket_muzzle/socket_support_hand, authored and validated in exported +Y up/-Z forward axes. Pistol has no support marker. Socket points are model local: transform by attached gun.global_transform.",
+  "grip_contract": "rifle-family long guns bind at grip origin, support at (0,0,-0.26). Shared rifle hold verified for priority pair; other gun families require own grip overlays before combat acceptance.",
+  "animation_loop": "glTF does not serialize loop policy: set Animation.loop_mode from actors_manifest.json after import; AnimationPlayer starts at t=0 and never translates the actor Node3D",
+  "animation_actions": {
+    "idle": "rifle low-ready breathing",
+    "walk": "in-place rifle locomotion; actor world travel comes only from historical/presentation state",
+    "run": "in-place common two-hand rifle swing",
+    "aim": "stationary rifle raised",
+    "fire": "single rifle recoil, return to aim",
+    "pickup": "two-hand reach; weapon must be stowed/hidden by presentation",
+    "deploy": "crouched reach; attach selected logical tool separately",
+    "death": "fall, tuck arms, hold terminal prone pose; detach/hide weapon independently",
+    "crouch": "crouched rifle hold",
+    "crouch_walk": "in-place crouched locomotion",
+    "hit": "brief recoil, return to low-ready",
+    "haul": "two-hand drag reach; corpse attachment/weapon stow is integration work"
+  },
+  "sneak_pose": "sneak identity uses enemy_sneak, crouch/crouch_walk when historical state requests crouch. Asset does not invent historical state.",
+  "material": {
+    "slot": "v2_actor_atlas",
+    "albedo": "actor_atlas_albedo.png sRGB",
+    "normal": "actor_atlas_normal.png linear; normal_scale=0.4",
+    "orm": "actor_atlas_orm.png linear; R=AO constant1, G=roughness, B=metallic; metallic scalar1",
+    "sharing": "one StandardMaterial3D reused across all actors, guns and tools; textures remain external and are not duplicated in GLBs",
+    "loader_patch": "separate material-routing.candidate.patch for integrator review; do not apply yard atlas to v2_actor_atlas"
+  },
+  "lod": {
+    "character_triangles": [
+      8000,
+      4000,
+      1800
+    ],
+    "weapon_triangles": [
+      3000,
+      1500
+    ],
+    "tool_triangles": [
+      2000,
+      1000
+    ],
+    "surfaces_per_model": 1,
+    "selection": "explicit fixture LOD selection verified; runtime screen size/distance thresholds and hysteresis belong to integrator. No automatic LOD claim."
+  },
+  "remaining_acceptance": [
+    "main author review of visual quality; procedural faces/clothing remain simple",
+    "family-specific pistol, SMG, MG, scout and knife grip overlays; firearm historical shape accuracy",
+    "tool contact, weapon stow/drop and hauling/corpse binding",
+    "complete six-level battle, pause/2x/replay/event timing/LOD switching in integration",
+    "mobile hardware FPS, memory, texture compression, thermal and touch tests (postponed by user)",
+    "external GPT PLAN/REVIEW unavailable"
+  ]
+}
