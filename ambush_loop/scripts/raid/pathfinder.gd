@@ -3,6 +3,8 @@ extends RefCounted
 
 ## 4-connected A* on AmbushGrid. Small map (40x22).
 
+const UNREACHED := 99999
+
 
 static func find_path(grid: AmbushGrid, from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	return find_path_avoiding(grid, from, to, {}, {})
@@ -30,26 +32,34 @@ static func find_path_avoiding(
 			return empty
 	if from == to:
 		return [from]
-	var open: Array[Vector2i] = [from]
+	# Dense cell IDs avoid hashing Vector2i scores in the frontier scan. Keep the
+	# stable linear scan: equal f scores must retain the original route ordering.
+	var from_id := grid.idx(from.x, from.y)
+	var open: Array[int] = [from_id]
 	var came := {}
-	var gscore := {}
-	var fscore := {}
-	gscore[from] = 0
-	fscore[from] = _h(from, to)
+	var gscore := PackedInt32Array()
+	gscore.resize(AmbushGrid.COLS * AmbushGrid.ROWS)
+	gscore.fill(UNREACHED)
+	var fscore := PackedInt32Array()
+	fscore.resize(gscore.size())
+	gscore[from_id] = 0
+	fscore[from_id] = _h(from, to)
 	var closed := {}
 	var guard := 0
 	while not open.is_empty() and guard < 1600:
 		guard += 1
 		var cur_i := 0
-		var cur: Vector2i = open[0]
-		var best_f: int = int(fscore.get(cur, 99999))
+		var cur_id := open[0]
+		var best_f := fscore[cur_id]
 		for i in range(1, open.size()):
-			var c: Vector2i = open[i]
-			var f: int = int(fscore.get(c, 99999))
+			var candidate_id := open[i]
+			var f := fscore[candidate_id]
 			if f < best_f:
 				best_f = f
-				cur = c
+				cur_id = candidate_id
 				cur_i = i
+		@warning_ignore("integer_division")
+		var cur := Vector2i(cur_id % AmbushGrid.COLS, cur_id / AmbushGrid.COLS)
 		if cur == to:
 			return _rebuild(came, cur, from)
 		open.remove_at(cur_i)
@@ -60,13 +70,17 @@ static func find_path_avoiding(
 			if avoid.has(n) and n != to:
 				continue
 			var step := 1 + int(soft.get(n, 0))
-			var tg: int = int(gscore.get(cur, 99999)) + step
-			if tg < int(gscore.get(n, 99999)):
+			var next_id := grid.idx(n.x, n.y)
+			var previous := gscore[next_id]
+			var tg := gscore[cur_id] + step
+			if tg < previous:
 				came[n] = cur
-				gscore[n] = tg
-				fscore[n] = tg + _h(n, to)
-				if open.find(n) < 0:
-					open.append(n)
+				gscore[next_id] = tg
+				fscore[next_id] = tg + _h(n, to)
+				# Closed nodes were skipped above; an unreached node is exactly a
+				# first insertion. Improved nodes keep their existing queue position.
+				if previous == UNREACHED:
+					open.append(next_id)
 	return empty
 
 
