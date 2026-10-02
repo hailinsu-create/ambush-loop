@@ -117,8 +117,13 @@ func sample_layers(pose: Dictionary) -> bool:
 			skeleton.set_bone_pose_rotation(i, value.basis.get_rotation_quaternion())
 			skeleton.set_bone_pose_scale(i, value.basis.get_scale())
 	skeleton.force_update_all_bone_transforms()
-	var corrected := rest_factor.inverse() * skeleton.get_bone_global_pose(parent).basis.inverse() * desired_basis
-	skeleton.set_bone_pose_rotation(spine, corrected.get_rotation_quaternion())
+	if bool(pose.get("preserve_upper_world_basis", true)):
+		var corrected := rest_factor.inverse() * skeleton.get_bone_global_pose(parent).basis.inverse() * desired_basis
+		skeleton.set_bone_pose_rotation(spine, corrected.get_rotation_quaternion())
+	elif not is_zero_approx(float(pose.get("upper_yaw_rad", 0.0))):
+		var target_basis := Basis(Vector3.UP, float(pose.upper_yaw_rad)) * skeleton.get_bone_global_pose(spine).basis
+		var corrected := rest_factor.inverse() * skeleton.get_bone_global_pose(parent).basis.inverse() * target_basis
+		skeleton.set_bone_pose_rotation(spine, corrected.get_rotation_quaternion())
 	skeleton.force_update_all_bone_transforms()
 	_sync_attachment()
 	sampled_action = str(pose.action)

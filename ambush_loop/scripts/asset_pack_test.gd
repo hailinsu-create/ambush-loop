@@ -29,7 +29,7 @@ func _run() -> void:
 	var physical_root := OS.get_environment("AMBUSH_ASSET_PACK_ROOT")
 	_check(not physical_root.is_empty() and DirAccess.get_files_at(physical_root).is_empty(), "probe has no physical project files to conceal missing packed resources")
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
-	_check(doc.assets.size() == 22 and doc.source_commit == "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "R4 manifest is included in the pack with fixed provenance")
+	_check(doc.assets.size() == 22 and doc.source_commit == "29749157c5db064bfea626c3ed9d75d9a1791ece", "R5 manifest is included in the pack with fixed provenance")
 	_check(FileAccess.file_exists("res://art/v2/manifest.json"), "yard manifest is included in the pack")
 	var profiles: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(Profiles.MANIFEST))
 	_check(profiles.profiles.size() == 10 and profiles.upper_body_mask == Profiles.UPPER_BONES, "packed firearm profiles retain all ten guns and the exact upper-body mask")

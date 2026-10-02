@@ -684,6 +684,8 @@ func _skill_knife(op: Node) -> bool:
 		_hint("正面惊动了岗哨")
 		return true
 	best.knock_out()
+	if host.has_method("_record_utility_action"):
+		host._record_utility_action(op, "knife_stab", best.global_position)
 	_spawn_ring(best.global_position, 36.0, Color(0.72, 0.22, 0.18, 0.4))
 	_hint("割喉 — 拖开或捆上")
 	if host.has_method("_spawn_loot_at"):

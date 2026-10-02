@@ -351,9 +351,10 @@ func _sync_body(proxy: Node3D, item: Dictionary, group: String) -> void:
 		body.position = Vector3.ZERO
 		body.scale = Vector3.ONE
 		body.set_asset(model_id, lod, frame.actor_asset_revision)
-		var weapon_id: String = item.visual_weapon
-		body.mount_item(weapon_id if Assets.has_asset(weapon_id) else "")
 		var pose := ActorPose.sample(item, frame, group)
+		body.rotation.y = Space.facing_yaw(float(pose.get("visual_facing", item.facing)))
+		var weapon_id: String = str(pose.get("visual_item", item.visual_weapon))
+		body.mount_item(weapon_id if Assets.has_asset(weapon_id) else "")
 		body.sample_layers(pose)
 		body.set_meta("pose_event_id", pose.event_id)
 		body.set_meta("pose_fallback", pose.fallback)

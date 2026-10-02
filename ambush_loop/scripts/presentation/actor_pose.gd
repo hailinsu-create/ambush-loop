@@ -1,17 +1,19 @@
 extends RefCounted
 
 ## Pure frame-to-pose conversion. No live actor or wall clock is consulted.
-const FORMAT := 2
-const ASSET_REVISION := "194d9c41aaddbf014f05c70c14d40c09e6d8131b"
+const FORMAT := 3
+const ASSET_REVISION := "29749157c5db064bfea626c3ed9d75d9a1791ece"
+const R4_REVISION := "194d9c41aaddbf014f05c70c14d40c09e6d8131b"
 const LEGACY_REVISION := "00b270863ba5a2cd5425abf2a31e78965c72ae45"
 const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
+const UtilityPose := preload("res://scripts/presentation/utility_pose.gd")
 const FIRE_SECONDS := 0.23333333333333334
 
 
 static func supported(data: Dictionary) -> bool:
 	var revision := str(data.get("actor_asset_revision", ""))
 	var version := int(data.get("animation_schema", 0))
-	var known: bool = (version == FORMAT and revision == ASSET_REVISION) or (version == 1 and revision == LEGACY_REVISION)
+	var known: bool = (version == FORMAT and revision == ASSET_REVISION) or (version == 2 and revision == R4_REVISION) or (version == 1 and revision == LEGACY_REVISION)
 	var numeric_clock: bool = data.get("pose_clock_s") is float or data.get("pose_clock_s") is int
 	return known and numeric_clock and is_finite(float(data.pose_clock_s)) and float(data.pose_clock_s) >= 0.0
 
@@ -20,6 +22,11 @@ static func sample(item: Dictionary, frame: Dictionary, group: String) -> Dictio
 	var result := _legacy_sample(item, frame, group)
 	if int(frame.get("animation_schema", 0)) == 1:
 		return result
+	if group == "ops" and int(frame.get("animation_schema", 0)) == FORMAT and str(frame.get("actor_asset_revision", "")) == ASSET_REVISION:
+		var raw_utility: Variant = item.get("utility_pose", {})
+		var utility := UtilityPose.sample(raw_utility, item, frame, result) if raw_utility is Dictionary else {}
+		if not utility.is_empty():
+			return utility
 	var profile := FirearmPose.profile(str(item.get("visual_weapon", "")))
 	if not bool(item.get("alive", true)) or bool(item.get("searching", false)) or bool(item.get("hauling", false)):
 		return result
@@ -79,7 +86,8 @@ static func sample(item: Dictionary, frame: Dictionary, group: String) -> Dictio
 
 static func _matching_weapon(event: Dictionary, item: Dictionary) -> bool:
 	var payload: Variant = event.get("payload", {})
-	return payload is Dictionary and int(payload.get("animation_schema", 0)) == FORMAT and str(payload.get("visual_weapon", "")) == str(item.visual_weapon)
+	# Firearm event payload 2 keeps its unchanged R4 semantics in R5 frames.
+	return payload is Dictionary and int(payload.get("animation_schema", 0)) == 2 and str(payload.get("visual_weapon", "")) == str(item.visual_weapon)
 
 
 static func _legacy_sample(item: Dictionary, frame: Dictionary, group: String) -> Dictionary:

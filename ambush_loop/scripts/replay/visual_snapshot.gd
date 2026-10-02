@@ -5,6 +5,7 @@ extends RefCounted
 const FORMAT_VERSION := 1
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
+const UtilityPose := preload("res://scripts/presentation/utility_pose.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 var _identity := ""
 var _objects := {}
@@ -15,10 +16,36 @@ var _event_clock_scope := ""
 var _event_command_anchor_s := 0.0
 var _event_battle_anchor_s := 0.0
 var _empty_stashes: Array = []
+var _utility_scope_id := ""
+var _utility_seq := 0
+var _utility_states := {}
 
 
 func reset_environment() -> void:
 	_empty_stashes.clear()
+	# Independent SCOUT identity exists before BattleLog starts an attempt.
+	# A stored event retains its original attempt/wave; no run_id rebinding.
+	_utility_scope_id = Crypto.new().generate_random_bytes(16).hex_encode()
+	_utility_seq = 0
+	_utility_states.clear()
+
+
+func record_utility(host: Node, op: Node, action: String, target: Vector2) -> void:
+	if not UtilityPose.CLIPS.has(action) or _utility_scope_id.is_empty():
+		return
+	var simulation_time: bool = host.phase == host.Phase.WATCHING
+	var clock: float = float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0 if simulation_time else host._pose_command_clock_s
+	_utility_states[int(op.op_id)] = {"schema": UtilityPose.SCHEMA, "scope_id": _utility_scope_id,
+		"seq": _utility_seq, "event_id": "%s:%d:%d" % [_utility_scope_id, host.battle_log.wave_id, _utility_seq],
+		"attempt_id": host.battle_log.attempt_id, "wave_id": host.battle_log.wave_id,
+		"actor_id": int(op.op_id), "phase": int(host.phase), "clock_domain": "simulation" if simulation_time else "command",
+		"battle_seq_floor": host.battle_log.events.size() - 1,
+		"since": clock, "action": action, "weapon": str(op.weapon_id), "target": target}
+	_utility_seq += 1
+
+
+func cancel_utility(op_id: int) -> void:
+	_utility_states.erase(op_id)
 
 
 func remember_collected_stash(stash: Node2D) -> void:
@@ -52,6 +79,7 @@ func capture(host: Node) -> Dictionary:
 		_pose_scope = scope
 		_pose_states.clear()
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
+		"utility_scope_id": _utility_scope_id,
 		"environment_schema": EnvironmentScene.FORMAT, "environment_revision": EnvironmentScene.REVISION,
 		"environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
@@ -175,6 +203,17 @@ func capture(host: Node) -> Dictionary:
 					"from_intent": str(state.intent) if same_weapon else "", "changed_weapon": not same_weapon}
 				_pose_states[key] = state
 			item["firearm_pose"] = state.duplicate(true)
+	# Latch cancellation at the recording seam, so swapping away and back or
+	# crossing phases cannot resurrect a previously cancelled action.
+	var utility_frame := {"pose_clock_s": pose_clock, "pose_clock_domain": data.pose_clock_domain,
+		"utility_scope_id": _utility_scope_id, "attempt_id": host.battle_log.attempt_id,
+		"wave_id": host.battle_log.wave_id, "recorded_phase": int(host.phase)}
+	for item in data.ops:
+		var state: Dictionary = _utility_states.get(int(item.id), {})
+		if not state.is_empty() and UtilityPose.valid(state, item, utility_frame):
+			item["utility_pose"] = state.duplicate(true)
+		elif host.phase != host.Phase.REPLAY:
+			cancel_utility(int(item.id))
 	return data
 
 

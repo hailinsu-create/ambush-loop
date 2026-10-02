@@ -33,6 +33,8 @@ static func capture(host: Node) -> Dictionary:
 		"visual_unsupported": unsupported,
 		"animation_schema": int(data.get("animation_schema", 0)),
 		"actor_asset_revision": str(data.get("actor_asset_revision", "")),
+		"pose_clock_domain": str(data.get("pose_clock_domain", "")),
+		"utility_scope_id": str(data.get("utility_scope_id", "")),
 		"animation_supported": ActorPose.supported(data),
 		"environment_schema": int(data.get("environment_schema", 0)),
 		"environment_revision": str(data.get("environment_revision", "")),

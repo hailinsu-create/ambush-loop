@@ -33,7 +33,7 @@ static func has_asset(asset_id: String, lod: int = 0, revision: String = "") -> 
 
 
 static func model_path(asset_id: String, lod: int = 0, revision: String = "") -> String:
-	var revisions := ["", ENVIRONMENT_REVISION] if asset_id.begins_with("env_") else ["", "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "00b270863ba5a2cd5425abf2a31e78965c72ae45"]
+	var revisions := ["", ENVIRONMENT_REVISION] if asset_id.begins_with("env_") else ["", "29749157c5db064bfea626c3ed9d75d9a1791ece", "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "00b270863ba5a2cd5425abf2a31e78965c72ae45"]
 	if revision not in revisions:
 		return ""
 	var entry := asset_record(asset_id)

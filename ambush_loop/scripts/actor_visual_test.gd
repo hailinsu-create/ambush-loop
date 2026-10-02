@@ -30,7 +30,7 @@ func _run() -> void:
 	stage = Node3D.new()
 	root.add_child(stage)
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
-	_check(doc.schema == 2 and doc.source_commit == "194d9c41aaddbf014f05c70c14d40c09e6d8131b" and doc.assets.size() == 22, "R4 is the sole current character/equipment catalog")
+	_check(doc.schema == 2 and doc.source_commit == "29749157c5db064bfea626c3ed9d75d9a1791ece" and doc.assets.size() == 22, "R5 is the sole current character/equipment catalog")
 	_check(not FileAccess.file_exists("res://art/v2/static_equipment_manifest.json"), "retired R1 hashes cannot masquerade as the active catalog")
 	for texture in doc.textures:
 		_check(FileAccess.get_sha256("res://" + texture.path) == texture.sha256, "R3 atlas bytes match the fixed candidate")

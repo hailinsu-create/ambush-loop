@@ -19,6 +19,7 @@ param(
         'environment_battle_test.gd',
         'replay_fx_lifecycle_test.gd',
         'command_pose_clock_test.gd',
+        'utility_runtime_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',

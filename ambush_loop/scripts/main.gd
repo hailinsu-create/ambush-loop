@@ -5838,6 +5838,11 @@ func _on_abort_pressed() -> void:
 
 
 func _on_op_fired_shot(op: OperatorUnit, target_pos: Vector2) -> void:
+	if op != null:
+		if op.weapon_id == "knife":
+			_record_utility_action(op, "knife_stab", target_pos)
+		else:
+			visual_snapshot.cancel_utility(op.op_id)
 	var col := Color(1.0, 0.96, 0.62, 0.95)
 	var w := 2.15
 	if op != null:
@@ -11910,6 +11915,7 @@ func _throw_grenade_from(op: OperatorUnit, world_pos: Vector2) -> bool:
 	g.setup(op.global_position, dest, float(d.get("fuse", 0.55)), float(d.get("radius", 78.0)), float(d.get("damage", 78.0)), gvar)
 	g.detonated.connect(_on_grenade_boom)
 	raid_grenades.append(g)
+	_record_utility_action(op, "grenade_throw", dest)
 	if op == selected:
 		status_label.text = "%s 丢手雷 剩余%d" % [op.display_name, op.grenades]
 	_sfx("ui")
@@ -12136,6 +12142,7 @@ func _throw_decoy_at(world_pos: Vector2) -> void:
 	d.global_position = world_pos
 	d.setup()
 	raid_decoys.append(d)
+	_record_utility_action(selected, "decoy_place", world_pos)
 	status_label.text = "%s 诱饵" % selected.display_name
 	_sfx("ui")
 
@@ -12146,6 +12153,11 @@ func _tick_raid_grenades(dt: float) -> void:
 			continue
 		g.sim_step(dt)
 	raid_grenades = raid_grenades.filter(func(n) -> bool: return n != null and is_instance_valid(n) and not n.spent())
+
+
+func _record_utility_action(op: OperatorUnit, action: String, target: Vector2) -> void:
+	if op != null and op.alive and op.visible and target.is_finite():
+		visual_snapshot.record_utility(self, op, action, target)
 
 
 func _tick_raid_mines() -> void:
