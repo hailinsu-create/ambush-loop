@@ -39,3 +39,5 @@
 已核对交接、PR15、WIP 与 PR14 详单。独立集成工作树为 `/workspace/ambush-pr15`；本环境 Godot 4.7.2 路径为 `/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64`，版本输出 `4.7.2.stable.official.ed1daf0bf`。首批回放/装备审计已实际复现和独立修复，后续 Back/手势取消/3D 事件聚焦也已施工；具体固定源码和证据见 [runtime 报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md)。完整资产与六关 3D 接入待完成。
 
 继承入口：[PR14 完整执行详单](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/AMBUSH_ASSET_EXECUTION_PLAN_20261002.md) · [资产 inventory](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/evidence/asset-audit-20261002/inventory.json)。已读取；后者为 c1aaf27 原资产静态盘点，不作为当前新资产集成验收。
+
+当前独立新P2优先补：3ba263c / c381测试补片修SWEEP事件年龄和暂停/后台command时钟，真实反例22/11→正式24/0与正常记录/回放29/0，六关10296及其余回归通过，见 [动作时钟补片](AMBUSH_PR15_COMMAND_POSE_CLOCK_20261002.md)。dot独立关闭待验。环境资源85文件/11冻结依赖、40件80LOD618与空目录PCK1476已在a54d538/e0f50dd通过；实际六关组装和R5接入继续，资产制作源仍归独立作者。
