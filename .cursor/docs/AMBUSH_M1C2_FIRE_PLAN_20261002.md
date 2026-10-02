@@ -21,3 +21,7 @@ GPT 实际审计指出：operator 的 `in_fire_geometry`、`engage_block_reason`
 成功仅为 C2 枪械接入的自动化与实际 GPT review，不包括完整 M1、视觉样板、两案玩法、Android 或 AudioTrack 修复。回放是既有事件消费，事件测试不等于新回放画面验收。cell-center Bresenham 非 supercover；黄色单一扇形对不同高度目标可能不能表达全空间视线，必须记录边界。真机与长时音频门仍 pending，手机插入后补验。
 
 下一步：保存计划后实现单一切片，完整回归与外部评审完成前保持未验收。
+
+## 实施前实际 GPT 修订
+
+Codex 指出径向采样会在 blocked LOW 端点先停止，单一连续扇形无法表示不同目标高度或不连续可见区；GPT 随后明确修订范围：**只迁移目标特定的枪械资格与覆盖查询，保留黄色扇形的旧裁剪作为有限方向参考，不声称 cone parity**。近战明确使用 legacy LOS。替代以上第 2 项“三入口共享”和第 3 项连续扇形一致性的初稿；目标点 `in_fire_geometry` 与资格必须一致。准确的高度射界可视化留待下一 UI 切片，因此完整 M1 的“预览与模拟一致”退出门仍未闭环。回放仍消费既有事件；此次验证必须区分真实 BattleLog 与单纯信号，不能把信号伪称回放实证。fresh full smoke 要求不取消。
