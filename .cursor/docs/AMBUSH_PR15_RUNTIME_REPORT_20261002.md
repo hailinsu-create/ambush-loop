@@ -47,14 +47,18 @@ bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/
 
 图片为灰盒真实运行：确认事件定位标记、按钮和面板的可见性；不代表人物/院子成品接入或新版 HUD 验收。当前旧 HUD 的信息拥挤仍属 A2 待改项。
 
-## 运行中与待验
+## 完成与待验
 
-- `7d34867` 完整六夜 smoke：运行中，未认定通过；运行过程中后继 978e27a 仅新增测试和白名单，runtime 源码未变。
+- `7d34867` 完整六夜 smoke：固定源码副本重跑退出 0，run `1ed3dd3ab66f44dcbca13526cf45caef`；含 `SMOKE_OK_LAUNCH_BAR`、`SMOKE_OK_RAID_LOOP`、`SMOKE_OK_TYPICAL_LOOPS yard,warehouse,pump,railcut,depot,radio` 和 `SMOKE_SLICE_COMPLETE`，无脚本错误。首次运行虽完成全部关卡，但 shell 包装器因运行时文件被更新返回 127；此失败也归档，不认定为通过。重跑采用 git archive 固定树，避免包装器改写。完整 smoke 覆盖首三项修复；后续历史字段源 17aba59 的定向/六关回归另列，不能冒充同 SHA 完整 smoke。
 - `978e27a` 六关完整多波回放：已完成，退出 0、`CAMPAIGN_REPLAY_OK checks=10296 failures=0`。使用既有参考武器/阵地与 authored 掉落；SWEEP 使用与 full smoke 相同的 `raid_vacuum_loot`，没有额外授予弹药。它是模拟与回放测试，不能替代物理走近搜刮、全六关成品视觉或设备测试。
-- 尚未加入历史完整装备、敌人朝向、姿态/动作、工具/环境字段；版本化全 3D 历史表现仍待实现。
-- 资产工作者的固定验收提交未收到；角色制作、完整院子/HUD/45 cue、A3 云端优化、A4 五关主题及完整可追溯 APK 未完成。
+- `17aba59df7a4ddd5c98986f12c07125d0bed8190` 增加历史画面格式 1：装备/背包/姿态/朝向/工具/哨兵/场景及选择；渲染 44 项、表现合同 84,039 项、六关多波 10,296 项、时间身份 64 项、原生生命周期渲染 29 项均退出 0。细节见 [格式文档](AMBUSH_REPLAY_VISUAL_SCHEMA_20261002.md)。完整历史 HUD、角色动画、事件特效/声音与 LOD 仍待接入，不能称全 3D 回放完成。
+- 已收到角色候选 `0242c983e8ae972b58b4f7afe9d08084b8f421c6`，在固定远程文件的独立副本只读复核二进制退出 0，22/51、零违规；人物 16 LOD 的重复生成 hash 不一致仍阻碍可复现验收。武器/工具的重复哈希一致；材质 mapping/文件级迁入进入下一切片。完整院子/HUD/45 cue、A3 云端优化、A4 五关主题及完整可追溯 APK 未完成。
 - 模拟器、真机触控/后台与中端持续 30 FPS/高配可选 60 FPS 均待全部计划制作和云端验证后安排；当前未启动模拟器或要求安装。
 
 ## 下一步与可并行包
 
-六关回放已通过，完整 smoke 继续等待最终日志验收；随后把全部证据推送同一 PR15。按 [所有权和资产接口](AMBUSH_PR15_INTEGRATION_20261002.md) 接收角色验收提交及 manifest 候选 patch，不整体合并 WIP；然后接装备/姿态历史、角色 runtime 和完整院子。可以由 dot 分派独立音频包：只写 `audio/v2/` 与独立 45 cue 映射候选/生成说明/响度和峰值/来源及哈希，不改 AudioDirector/main/共享 manifest。Notion 管理继续单写者。网页 GPT PLAN/REVIEW：unavailable。
+六关回放与首三项修复的完整 smoke 已通过，继续推进历史 HUD 和资产文件级接入。按 [所有权和资产接口](AMBUSH_PR15_INTEGRATION_20261002.md) 接收人物重建一致性修复和专用握持提交，不整体合并 WIP；先处理可重复静态装备和材质分流，再推进角色 runtime 与完整院子。可以由 dot 分派独立音频包：只写 `audio/v2/` 与独立 45 cue 映射候选/生成说明/响度和峰值/来源及哈希，不改 AudioDirector/main/共享 manifest。Notion 管理继续单写者。网页 GPT PLAN/REVIEW：unavailable。
+
+新增固定源码复验命令仍使用同一隔离包装器：`visual_snapshot_test.gd --render`（godot-capture）、`presentation_contract_test.gd`、`campaign_replay_test.gd`。首三项完整 smoke 的实际工作目录为 `/tmp/ambush-pr15-smoke-7d34867`，由 `git archive 7d34867eab51f0fddd4b44921a627aa66fe8651d` 建立并先隔离 editor_import；其命令与上文 smoke 一致。
+
+![历史数据灰盒帧](evidence/20261002-pr15-runtime/history_schema_frame.png)
