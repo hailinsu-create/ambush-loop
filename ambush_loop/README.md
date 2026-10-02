@@ -36,6 +36,16 @@ The editor **Main Scene** is `scenes/title.tscn`. Smoke bypasses the title and l
 The isolated runner creates a unique `user://` directory before Godot starts. Direct runs of the destructive smoke/dump scripts now refuse to run without this isolation.
 On Windows, `scripts/verify_storage_isolation.ps1 -GodotExe <absolute Godot path>` tests a simulated player save across normal exit, expected assertion failure, and forced process termination. `scripts/check_m0_env.ps1` records the Godot, template, JDK, Android SDK and adb baseline (pass all four absolute paths as named parameters).
 
+For a fast pathfinding regression (exact legacy routes, weighted shortest costs, avoidance and door changes):
+
+```bash
+bash ambush_loop/scripts/run_isolated_test.sh /path/to/godot pathfinder_test.gd
+# Optional: report five-sample median search times for each workload.
+AMBUSH_PATHFINDER_BENCHMARK=1 bash ambush_loop/scripts/run_isolated_test.sh /path/to/godot pathfinder_test.gd
+```
+
+On Windows, pass `-Entry pathfinder_test.gd` to the PowerShell runner. Success prints `PATHFINDER_OK` and exits 0. This focused check supplements the full smoke test.
+
 Raid contract: `docs/COMMANDOS_RAID.md`. Kit: `docs/COMMANDOS2_KIT.md`. Operators spawn at insertion cells with a knife, loot crates into a 6-slot pack, take cover, pull the alarm per wave (auto fire + auto grenades), sweep loot, extract after the last wave.
 
 Reference raids (after looting role guns): yard slots 1,2,5 facings 90/180/180; warehouse 1,3,5; pump 1,4,5; railcut 1,4,5 facings 270/270/180; depot 1,4,5 facings 270/270/180 + tripwire at `(7,11)`; radio 1,4,5 facings 270/90/270 + tripwire at `(7,11)`.
