@@ -336,6 +336,8 @@ var _stealth_avoid_msec: int = 0
 var _move_ghost: Line2D = null
 var c2 = null
 var _c2_sprint_next: bool = false
+## Optional development presentation; the normal scene keeps the legacy path.
+var presentation_3d: Node3D = null
 
 
 func _ready() -> void:
@@ -362,6 +364,13 @@ func _ready() -> void:
 	_ensure_touch_hud()
 	_ensure_c2()
 	_load_level(_resolve_start_level(), false, false)
+	presentation_3d = get_node_or_null("Presentation3D")
+	if presentation_3d == null and OS.has_feature("a0_preview"):
+		presentation_3d = load("res://scripts/presentation/presenter_3d.gd").new()
+		presentation_3d.name = "Presentation3D"
+		add_child(presentation_3d)
+	if presentation_3d != null:
+		presentation_3d.bind(self)
 
 
 func _ensure_c2() -> void:
@@ -3705,6 +3714,9 @@ func _toggle_tool() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if presentation_3d != null and presentation_3d.handle_unhandled_input(event):
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and _touch_ate_click:
 		if not event.pressed:
 			_touch_ate_click = false
@@ -3848,12 +3860,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_handle_setup_click(get_global_mouse_position())
+		_handle_setup_click(pointer_logic_position())
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		if selected and selected.visible and not selected.locked:
-			var v := get_global_mouse_position() - selected.global_position
+			var v := pointer_logic_position() - selected.global_position
 			selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
 			_announce_plan_edit()
 			_refresh_killzone_preview()
@@ -3862,7 +3874,22 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _screen_to_world(screen_pos: Vector2) -> Vector2:
+	if presentation_3d != null:
+		var picked: Dictionary = presentation_3d.pick_at(screen_pos)
+		return picked.pos if bool(picked.get("valid", false)) else Vector2.INF
 	return get_viewport().get_canvas_transform().affine_inverse() * screen_pos
+
+
+func pointer_logic_position() -> Vector2:
+	if presentation_3d != null:
+		return presentation_3d.pointer_logic_position()
+	return get_global_mouse_position()
+
+
+func project_logic_position(pos: Vector2) -> Vector2:
+	if presentation_3d != null:
+		return presentation_3d.rig.project_logic(pos)
+	return get_viewport().get_canvas_transform() * pos
 
 
 func _touch_span() -> Dictionary:
@@ -5442,7 +5469,7 @@ func _ensure_tripwire_ghost() -> void:
 func _aim_world() -> Vector2:
 	if phase == Phase.SETUP and not _touches.is_empty() and _pending_touch_world != Vector2.ZERO:
 		return _pending_touch_world
-	return get_global_mouse_position()
+	return pointer_logic_position()
 
 
 func _update_tripwire_ghost() -> void:
@@ -5452,6 +5479,9 @@ func _update_tripwire_ghost() -> void:
 		return
 	tripwire_ghost.visible = true
 	var pos := _aim_world()
+	if not pos.is_finite():
+		tripwire_ghost.visible = false
+		return
 	tripwire_ghost.global_position = pos
 	var inv_mine := selected != null and int(selected.mines) > 0
 	var ok := inv_mine or _near_any_route_segment(pos, TRIPWIRE_ROUTE_DIST)
@@ -11721,7 +11751,9 @@ func _try_place_inventory_mine(world_pos: Vector2) -> void:
 
 
 func _throw_grenade_at_cursor() -> void:
-	_throw_grenade_at(get_global_mouse_position())
+	var pos := pointer_logic_position()
+	if pos.is_finite():
+		_throw_grenade_at(pos)
 
 
 func _throw_grenade_at(world_pos: Vector2) -> void:
@@ -11773,6 +11805,8 @@ func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
 		_update_hud()
 		return
 	var dest := world_pos if world_pos.is_finite() else _throw_ahead(110.0)
+	if not dest.is_finite():
+		return
 	var d: Dictionary = WeaponCatalogScript.def("grenade")
 	var max_r := float(d.get("throw_range", 160.0))
 	if selected.global_position.distance_to(dest) > max_r:
@@ -11947,7 +11981,9 @@ func _on_grenade_boom(pos: Vector2, radius: float, damage: float) -> void:
 
 
 func _throw_decoy_at_cursor() -> void:
-	_throw_decoy_at(get_global_mouse_position())
+	var pos := pointer_logic_position()
+	if pos.is_finite():
+		_throw_decoy_at(pos)
 
 
 func _throw_decoy_at(world_pos: Vector2) -> void:
@@ -12182,6 +12218,9 @@ func _raid_clock_text() -> String:
 
 
 func _tick_hold_to_move(delta: float) -> void:
+	# Native 3D touch commands commit only on release; never poll emulated LMB.
+	if presentation_3d != null:
+		return
 	var gs = get_node_or_null("/root/GameSettings")
 	if gs == null or not bool(gs.get("hold_to_move")):
 		return
@@ -12193,7 +12232,7 @@ func _tick_hold_to_move(delta: float) -> void:
 	if _hold_move_acc < 0.28:
 		return
 	_hold_move_acc = 0.0
-	_command_move_selected(get_global_mouse_position())
+	_command_move_selected(pointer_logic_position())
 
 
 func _tick_footsteps(delta: float) -> void:
@@ -12294,7 +12333,7 @@ func _transfer_selected_to_nearest() -> void:
 
 func _throw_ahead(max_r: float) -> Vector2:
 	if selected == null:
-		return get_global_mouse_position()
+		return pointer_logic_position()
 	var rad := deg_to_rad(selected.facing_deg)
 	return selected.global_position + Vector2(cos(rad), sin(rad)) * minf(max_r, 110.0)
 
@@ -12450,4 +12489,3 @@ func raid_vacuum_loot() -> int:
 	loot_piles = loot_piles.filter(func(l: LootPickup) -> bool: return is_instance_valid(l) and not l.collected)
 	_update_hud()
 	return n
-

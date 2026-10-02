@@ -405,7 +405,7 @@ func _tick_cursor() -> void:
 	if not bool(host._is_command_phase()):
 		cursor.set_mode(CursorScript.Mode.NONE)
 		return
-	var world: Vector2 = host.get_global_mouse_position() if host.has_method("get_global_mouse_position") else Vector2.ZERO
+	var world: Vector2 = host.pointer_logic_position() if host.has_method("pointer_logic_position") else Vector2.INF
 	var mode := CursorScript.Mode.WALK
 	for op in host.operators:
 		if op.visible and op.alive and op.global_position.distance_to(world) <= 22.0:

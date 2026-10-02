@@ -1,0 +1,434 @@
+extends Node3D
+
+const Space := preload("res://scripts/presentation/world_space.gd")
+const ViewState := preload("res://scripts/presentation/view_state.gd")
+const Rig := preload("res://scripts/presentation/camera_rig_3d.gd")
+const Picker := preload("res://scripts/presentation/world_picker_3d.gd")
+const Commands := preload("res://scripts/input/command_router.gd")
+const CameraInput := preload("res://scripts/input/camera_input.gd")
+const Geometry := preload("res://scripts/presentation/graybox_geometry.gd")
+const Occlusion := preload("res://scripts/presentation/occlusion_controller.gd")
+const DeviceProbe := preload("res://scripts/presentation/device_probe.gd")
+
+var host: Node
+var rig: Node3D
+var gestures := CameraInput.new()
+var frame: Dictionary = {}
+var geometry := Node3D.new()
+var proxies := Node3D.new()
+var walls: Array = []
+var actors: Dictionary = {}
+var objects: Dictionary = {}
+var cones: Dictionary = {}
+var _layout_hash := 0
+var _selected_ring: MeshInstance3D
+var _compass: Label
+var _pitch_slider: HSlider
+var _camera_controls: CanvasLayer
+var _occlusion_acc := 0.0
+var _last_pose := Transform3D.IDENTITY
+var _steel: StandardMaterial3D
+var _crate: StandardMaterial3D
+var _cover: StandardMaterial3D
+var _hostile: StandardMaterial3D
+var _role_materials: Array[StandardMaterial3D] = []
+var _probe := DeviceProbe.new()
+var _probe_button: Button
+var _probe_result: Label
+
+
+func bind(main: Node) -> void:
+	host = main
+	# Parent's simulation update and child actors finish before we take a frame.
+	process_priority = 100
+	geometry.name = "Geometry"
+	proxies.name = "Proxies"
+	add_child(geometry)
+	add_child(proxies)
+	rig = Rig.new()
+	rig.name = "CameraRig"
+	add_child(rig)
+	_steel = Geometry.material(Color("353d42"))
+	_crate = Geometry.material(Color("8c7150"))
+	_cover = Geometry.material(Color("777762"))
+	_hostile = Geometry.material(Color("5c5150"))
+	for color in [Color("7e8d6a"), Color("566b61"), Color("687b88")]:
+		_role_materials.append(Geometry.material(color))
+	_make_lighting()
+	_make_controls()
+	var ring_mat := Geometry.material(Color(0.55, 0.94, 0.82, 0.72), true)
+	ring_mat.no_depth_test = true
+	_selected_ring = Geometry.cylinder(proxies, 0.55, 0.025, Vector3.ZERO, ring_mat)
+	_selected_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	refresh()
+
+
+func _make_lighting() -> void:
+	var world := WorldEnvironment.new()
+	var environment := Environment.new()
+	environment.background_mode = Environment.BG_COLOR
+	environment.background_color = Color("171d26")
+	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.ambient_light_color = Color("b6c5de")
+	environment.ambient_light_energy = 0.65
+	environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR
+	world.environment = environment
+	add_child(world)
+	var sun := DirectionalLight3D.new()
+	sun.name = "DuskKey"
+	sun.rotation_degrees = Vector3(-58, -35, 0)
+	sun.light_color = Color("c5d1e4")
+	sun.light_energy = 0.95
+	sun.shadow_enabled = true
+	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
+	sun.directional_shadow_max_distance = 90.0
+	add_child(sun)
+	var lamp := OmniLight3D.new()
+	lamp.position = Vector3(10.0, 3.0, 3.0)
+	lamp.light_color = Color("ffbf76")
+	lamp.light_energy = 2.5
+	lamp.omni_range = 11.0
+	lamp.shadow_enabled = false
+	add_child(lamp)
+
+
+func _make_controls() -> void:
+	_camera_controls = CanvasLayer.new()
+	_camera_controls.layer = 4
+	add_child(_camera_controls)
+	var root := Control.new()
+	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_camera_controls.add_child(root)
+	var panel := VBoxContainer.new()
+	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	panel.offset_left = -204
+	panel.offset_right = -16
+	panel.offset_top = 132
+	panel.add_theme_constant_override("separation", 6)
+	root.add_child(panel)
+	_compass = Label.new()
+	_compass.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_compass.add_theme_font_size_override("font_size", 14)
+	panel.add_child(_compass)
+	var row := HBoxContainer.new()
+	panel.add_child(row)
+	for spec in [["↶", -30.0], ["复位", 0.0], ["↷", 30.0]]:
+		var button := Button.new()
+		button.text = spec[0]
+		button.custom_minimum_size = Vector2(58, 42)
+		row.add_child(button)
+		var amount: float = spec[1]
+		button.pressed.connect(func() -> void:
+			if host._modal_blocks_input():
+				return
+			gestures.cancel()
+			if amount == 0.0:
+				rig.reset_view()
+			else:
+				rig.yaw_deg += amount
+				rig.apply_pose()
+		)
+	var focus_button := Button.new()
+	focus_button.text = "定位选中队员"
+	focus_button.custom_minimum_size.y = 36
+	panel.add_child(focus_button)
+	focus_button.pressed.connect(func() -> void:
+		if host.selected != null and not host._modal_blocks_input():
+			rig.focus = Space.logic_to_world(host.selected.global_position)
+			rig.apply_pose()
+	)
+	_pitch_slider = HSlider.new()
+	_pitch_slider.min_value = Rig.MIN_PITCH
+	_pitch_slider.max_value = Rig.MAX_PITCH
+	_pitch_slider.value = Rig.DEFAULT_PITCH
+	_pitch_slider.custom_minimum_size.y = 36
+	_pitch_slider.tooltip_text = "观察俯角"
+	panel.add_child(_pitch_slider)
+	_pitch_slider.value_changed.connect(func(value: float) -> void:
+		if not host._modal_blocks_input():
+			rig.pitch_deg = value
+			rig.apply_pose()
+	)
+	_probe_button = Button.new()
+	_probe_button.text = "镜头巡检 · 30 秒"
+	_probe_button.custom_minimum_size.y = 38
+	panel.add_child(_probe_button)
+	_probe_button.pressed.connect(func() -> void:
+		if host._modal_blocks_input():
+			return
+		gestures.cancel()
+		if _probe.active:
+			_probe.stop(rig)
+			_probe_button.text = "镜头巡检 · 30 秒"
+		elif not _probe.report.is_empty():
+			DisplayServer.clipboard_set(JSON.stringify(_probe.report))
+			_probe.report.clear()
+			_probe_button.text = "镜头巡检 · 30 秒"
+		else:
+			_probe.start(rig)
+			_probe_result.text = "自动转动镜头；可随时取消"
+	)
+	_probe_result = Label.new()
+	_probe_result.add_theme_font_size_override("font_size", 12)
+	_probe_result.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	panel.add_child(_probe_result)
+
+
+func _process(delta: float) -> void:
+	if host == null or not is_instance_valid(host):
+		return
+	_occlusion_acc += delta
+	refresh()
+	if _probe.active:
+		_probe_button.text = "取消巡检 · %d 秒" % ceili(DeviceProbe.DURATION - _probe.elapsed)
+		if _probe.step(rig, frame):
+			_probe_button.text = "复制巡检报告"
+			_probe_result.text = "短测 %.1f FPS · p95 %.1f ms\n不代表持续性能验收" % [_probe.report.avg_fps, _probe.report.p95_ms]
+
+
+func refresh() -> void:
+	if host.level == null:
+		return
+	# Hide only the RenderingServer canvas branch. Node visibility and all
+	# simulation participation checks retain their original values.
+	RenderingServer.canvas_item_set_visible(host.get_node("World").get_canvas_item(), false)
+	frame = ViewState.capture(host)
+	var layout_hash: int = hash([frame.level_id, frame.blocked])
+	if layout_hash != _layout_hash:
+		_layout_hash = layout_hash
+		_rebuild_geometry()
+	_sync_actors()
+	_sync_objects()
+	_sync_cones()
+	_selected_ring.visible = false
+	for op in frame.ops:
+		if op.id == frame.selected_id and op.active and op.alive:
+			_selected_ring.visible = true
+			_selected_ring.position = Space.logic_to_world(op.pos, 0.035)
+	if _occlusion_acc >= 0.1 or rig.camera.global_transform != _last_pose:
+		var targets: Array = []
+		for group in [frame.ops, frame.sentries, frame.stashes]:
+			for item in group:
+				if bool(item.get("active", true)):
+					targets.append(Space.logic_to_world(item.pos, 0.75))
+		Occlusion.update(rig.camera, walls, targets)
+		_occlusion_acc = 0.0
+		_last_pose = rig.camera.global_transform
+	_compass.text = "镜头 %03d° · 俯角 %d°" % [int(rig.yaw_deg), int(rig.pitch_deg)]
+	_pitch_slider.set_value_no_signal(rig.pitch_deg)
+	# The A0 scene reuses the old HUD, but must describe its actual gestures.
+	if host.touch_hud != null and host.touch_hud._hint.text.contains("短拖"):
+		host.touch_hud.set_hint("点选 / 点地移动 · 双指平移、旋转、缩放 · ↶↷调整队员射界")
+	if host.touch_hud != null:
+		host.touch_hud._hint.position.y = 60.0
+	if host.c2 != null and host.c2.help_chip != null and host.c2.help_chip.text.contains("短拖"):
+		host.c2.help_chip.text = "点选 / 点地移动 · 双指操作镜头 · 近背面出绕背"
+
+
+func _rebuild_geometry() -> void:
+	for child in geometry.get_children():
+		child.free()
+	walls.clear()
+	Geometry.box(geometry, Vector3(40, 0.24, 22), Vector3(0, -0.13, 0), Geometry.material(Color("454b4e")))
+	var wall_mat := Geometry.material(Color("777d7d"))
+	for rect in Geometry.blocked_rectangles(frame.blocked):
+		var height := 2.4 if rect.size.x == 1 or rect.size.y == 1 else 1.7
+		var size := Vector3(rect.size.x, height, rect.size.y)
+		var at := Vector3(rect.position.x - 20 + rect.size.x * 0.5, height * 0.5,
+			rect.position.y - 11 + rect.size.y * 0.5)
+		var mesh := Geometry.box(geometry, size - Vector3(0.03, 0, 0.03), at, wall_mat)
+		walls.append({"mesh": mesh, "bounds": AABB(at - size * 0.5, size)})
+	var exit_mat := Geometry.material(Color("8bac9c"), true)
+	Geometry.box(geometry, Vector3(2.3, 0.03, 0.28), Space.logic_to_world(frame.escape, 0.02), exit_mat)
+	var exit_label := Label3D.new()
+	exit_label.text = "逃逸口"
+	exit_label.position = Space.logic_to_world(frame.escape, 0.55)
+	exit_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	exit_label.font_size = 40
+	exit_label.pixel_size = 0.008
+	geometry.add_child(exit_label)
+
+
+func _sync_actors() -> void:
+	var seen := {}
+	for group in ["ops", "enemies", "sentries"]:
+		for item in frame[group]:
+			var key := "%s:%s" % [group, item.id]
+			seen[key] = true
+			if not actors.has(key):
+				var proxy := Node3D.new()
+				proxies.add_child(proxy)
+				var mat: Material = _role_materials[clampi(int(item.get("role", 0)), 0, 2)] if group == "ops" else _hostile
+				Geometry.actor(proxy, mat, _steel)
+				var label := Label3D.new()
+				label.name = "Marker"
+				label.text = str(item.id) if group == "ops" else "◆"
+				label.position.y = 2.0
+				label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+				label.font_size = 40
+				label.pixel_size = 0.009
+				label.modulate = Color("cbebe0") if group == "ops" else Color("e79c80")
+				label.no_depth_test = true
+				proxy.add_child(label)
+				actors[key] = proxy
+			var proxy: Node3D = actors[key]
+			proxy.position = Space.logic_to_world(item.pos)
+			proxy.visible = item.active
+			var body: Node3D = proxy.get_node("Body")
+			body.rotation = Vector3(0.0 if item.alive else -PI * 0.5, Space.facing_yaw(item.facing), 0.0)
+			body.position.y = 0.0 if item.alive else 0.22
+			proxy.get_node("Marker").visible = item.alive
+	for key in actors.keys():
+		if not seen.has(key):
+			actors[key].free()
+			actors.erase(key)
+
+
+func _sync_objects() -> void:
+	var seen := {}
+	for group in ["stashes", "covers", "loot"]:
+		for item in frame[group]:
+			var key := "%s:%s" % [group, item.id]
+			seen[key] = true
+			if not objects.has(key):
+				var proxy := Node3D.new()
+				proxies.add_child(proxy)
+				if group == "stashes":
+					Geometry.box(proxy, Vector3(0.85, 0.6, 0.58), Vector3(0, 0.3, 0), _crate)
+					Geometry.box(proxy, Vector3(0.9, 0.1, 0.65), Vector3(0, 0.64, 0), _cover)
+				elif group == "covers":
+					Geometry.cylinder(proxy, 0.42, 0.04, Vector3(0, 0.03, 0), _cover)
+				else:
+					Geometry.box(proxy, Vector3(0.4, 0.16, 0.3), Vector3(0, 0.1, 0), _crate)
+				objects[key] = proxy
+			objects[key].position = Space.logic_to_world(item.pos)
+	for key in objects.keys():
+		if not seen.has(key):
+			objects[key].free()
+			objects.erase(key)
+
+
+func _sync_cones() -> void:
+	var seen := {}
+	for group in ["ops", "sentries"]:
+		for item in frame[group]:
+			if not item.active or not item.alive or (group == "ops" and item.id != frame.selected_id):
+				continue
+			var points: PackedVector2Array = item.get("cone", PackedVector2Array())
+			if points.size() < 3:
+				continue
+			var key := "%s:%s" % [group, item.id]
+			seen[key] = true
+			if not cones.has(key):
+				var instance := MeshInstance3D.new()
+				instance.mesh = ImmediateMesh.new()
+				instance.material_override = Geometry.material(Color(0.65, 0.85, 0.75, 0.16) if group == "ops" else Color(0.85, 0.57, 0.32, 0.14), true)
+				instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+				proxies.add_child(instance)
+				cones[key] = instance
+			var instance: MeshInstance3D = cones[key]
+			instance.position = Space.logic_to_world(item.pos, 0.055)
+			var mesh: ImmediateMesh = instance.mesh
+			mesh.clear_surfaces()
+			mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+			for i in range(1, points.size() - 1):
+				for point in [points[0], points[i], points[i + 1]]:
+					mesh.surface_add_vertex(Vector3(point.x, 0, point.y) / Space.PIXELS_PER_METRE)
+			mesh.surface_end()
+	for key in cones.keys():
+		if not seen.has(key):
+			cones[key].free()
+			cones.erase(key)
+
+
+func _input(event: InputEvent) -> void:
+	if host == null or rig == null:
+		return
+	if host._modal_blocks_input():
+		gestures.cancel()
+		gestures.block_emulated_mouse = false
+		return
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		var blocked: bool = pointer_over_ui(event.position)
+		var result: Dictionary = gestures.touch(event, rig, blocked)
+		if result.tap:
+			Commands.dispatch(host, "primary", pick_at(result.position))
+		if result.handled:
+			get_viewport().set_input_as_handled()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and not event.pressed:
+		gestures.middle_down = false
+	elif event is InputEventMouseMotion and gestures.middle_down:
+		gestures.mouse(event, rig)
+		get_viewport().set_input_as_handled()
+	elif event is InputEventMouse and event.device == InputEvent.DEVICE_ID_EMULATION and gestures.block_emulated_mouse:
+		get_viewport().set_input_as_handled()
+
+
+func handle_unhandled_input(event: InputEvent) -> bool:
+	if event is InputEventMouse and event.device == InputEvent.DEVICE_ID_EMULATION:
+		return true
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		return true
+	if event is InputEventMouse or event is InputEventGesture:
+		if host._modal_blocks_input():
+			return true
+		if gestures.mouse(event, rig):
+			return true
+		if event is InputEventMouseButton and event.pressed:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				Commands.dispatch(host, "primary", pick_at(event.position))
+			elif event.button_index == MOUSE_BUTTON_RIGHT:
+				var ground: Variant = rig.ground_at(event.position)
+				if ground is Vector3:
+					Commands.dispatch(host, "face", {"valid": true, "pos": Space.world_to_logic(ground)})
+		return true
+	return false
+
+
+func pick_at(screen: Vector2) -> Dictionary:
+	return Picker.pick(rig.camera, screen, frame)
+
+
+func pointer_logic_position() -> Vector2:
+	var screen := get_viewport().get_mouse_position()
+	if pointer_over_ui(screen):
+		return Vector2.INF
+	var result := pick_at(screen)
+	return result.pos if bool(result.get("valid", false)) else Vector2.INF
+
+
+func pointer_over_ui(screen: Vector2) -> bool:
+	return _control_at(host, screen)
+
+
+func _control_at(node: Node, screen: Vector2) -> bool:
+	if node is CanvasLayer and not node.visible:
+		return false
+	if node is Control:
+		if not node.is_visible_in_tree():
+			return false
+		if node.mouse_filter == Control.MOUSE_FILTER_STOP and node.get_global_rect().has_point(screen):
+			return true
+	for child in node.get_children():
+		if child == host.get_node("World"):
+			continue
+		if _control_at(child, screen):
+			return true
+	return false
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		gestures.cancel()
+		if _probe.active:
+			_probe.stop(rig)
+			_probe_button.text = "镜头巡检 · 30 秒"
+			_probe_result.text = "巡检已取消（应用离开前台）"
+
+
+func _exit_tree() -> void:
+	if is_instance_valid(host):
+		var world := host.get_node_or_null("World")
+		if is_instance_valid(world):
+			RenderingServer.canvas_item_set_visible(world.get_canvas_item(), world.visible)

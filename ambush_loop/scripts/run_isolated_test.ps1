@@ -3,6 +3,11 @@ param(
     [string]$GodotExe,
     [ValidateSet(
         'smoke_test.gd',
+        'presentation_contract_test.gd',
+        'presentation_interaction_test.gd',
+        'camera_input_test.gd',
+        'presentation_capture.gd',
+        'presentation_preview.gd',
         'pathfinder_test.gd',
         'feel_gate.gd',
         'playable_dump.gd',
@@ -16,7 +21,8 @@ param(
         'eval_dump_touch_hud.gd'
     )]
     [string]$Entry = 'smoke_test.gd',
-    [switch]$ImportOnly
+    [switch]$ImportOnly,
+    [switch]$Rendered
 )
 
 $ErrorActionPreference = 'Stop'
@@ -31,6 +37,7 @@ $runParent = Join-Path $projectRoot 'build/ambush_test_runs'
 $runDir = Join-Path $runParent $runId
 $dataRoot = Join-Path $runDir 'data'
 New-Item -ItemType Directory -Path $dataRoot -Force | Out-Null
+New-Item -ItemType File -Path (Join-Path $projectRoot 'build/.gdignore') -Force | Out-Null
 $dataRoot = [IO.Path]::GetFullPath($dataRoot)
 $runLog = Join-Path $runDir 'run.log'
 
@@ -67,7 +74,9 @@ try {
     }
     else {
         Write-Output "TEST_ENTRY=$Entry"
-        & $enginePath --headless --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
+        $engineFlags = if ($Rendered) { @('--rendering-method', 'gl_compatibility') } else { @('--headless') }
+        if ($Entry -eq 'presentation_capture.gd') { $engineFlags += @('--audio-driver', 'Dummy') }
+        & $enginePath @engineFlags --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
             Tee-Object -FilePath $runLog
     }
     $engineExit = $LASTEXITCODE
