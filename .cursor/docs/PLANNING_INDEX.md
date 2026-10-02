@@ -8,9 +8,10 @@
 | --- | --- |
 | [PR15 接管与资产接口](AMBUSH_PR15_INTEGRATION_20261002.md) | 主集成代码单写者、独立资产工作者和 Notion 管理边界；首批回放/装备冻结已实际复现并独立修复。继承 v2 顺序，资产 WIP 不整体并入；完整计划仍待实施。 |
 | [PR15 静态装备/loader](AMBUSH_PR15_STATIC_EQUIPMENT_20261002.md) | 固定候选 15 件 / 30 LOD 原字节迁入；a870eb5 实际渲染 257 项、空目录 PCK 35 项退出 0。人物可复现 LOD/握持、战场接入和 APK 待完成；网格 fixture 不作为成品验收。 |
-| [PR15 独立复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md) | 四项P2已实际复现：同波未来定位环、旧事件流tick回退、雷点/诱饵入口锁和SWEEP旋转；cc11bb0/71df99a独立切片。历史HUD读取活体仍待闭合；实际结果见证据索引。 |
+| [PR15 独立复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md) | 四项P2已实际复现并由dot独立复验关闭：同波未来定位环、旧事件流tick回退、雷点/诱饵入口锁和SWEEP旋转；cc11bb0/71df99a独立切片。历史HUD后续切片见下一行。 |
+| [历史队员HUD/手机时间轴](AMBUSH_PR15_HISTORY_HUD_20261002.md) | a932历史字段/中性兼容与原生手机seek，七项核心回归完成；ed673ed清活体横幅/手机提示分层，164项渲染+32生命周期退出0。作者已验，dot独立复验待返回；完整HUD/FX/成品场景另验。 |
 | [R2候选采用计划](AMBUSH_PR15_R2_ADOPTION_20261002.md) | 812261a候选22/51只读二进制复核退出0；尚未迁入。R2必须按catalog_candidate更新主作者台账；接历史HUD、动作时间、骨/挂点、LOD及战场验证，最终美术未通过。 |
-| [独立45 cue音频接口](AMBUSH_PR15_AUDIO_INTERFACE_20261002.md) | 已按现有SfxBus/AudioDirector/smoke给出22050Hz mono PCM16、干声/loop/45用途ID与脚步变体、候选台账和单写者边界。制作及实际声音品质尚待交付验收。 |
+| [独立45 cue音频接口](AMBUSH_PR15_AUDIO_INTERFACE_20261002.md) | 已给22050Hz mono PCM16、45用途ID与单写者边界；355ea89候选README已审、未采用。技术导入/绑定未play，听验0/45、0/6；七loop导入区间、持续层/gain/并发/生命周期/战场混音待接验。 |
 | [独立环境资产包接口](AMBUSH_PR15_ENVIRONMENT_INTERFACE_20261002.md) | 供dot分配：新environment_v2源/导出目录、完整建筑/地表、14类原用途与其余五关地标；不改已有yard/actor/audio或运行代码。尚未派遣生产；九件样本不称六关完整库。 |
 | [PR15 runtime 切片报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md) | 实际多波回放/装备冻结反例、三个修复切片、固定源码与隔离/原生输入/软件渲染证据；首三项修复的完整六夜 smoke、六关多波与历史字段回归已通过；完整历史 HUD/动作/FX 待接。完整角色、院子和五关接入仍待完成。 |
 | [历史画面格式 1](AMBUSH_REPLAY_VISUAL_SCHEMA_20261002.md) | 固定 17aba59 的装备/姿态/工具/环境历史、只读接缝和旧/未知格式兼容；44 项渲染、84,039 项合同和 10,296 项六关回归通过。完整历史 HUD/动画/FX 仍待接入。 |
