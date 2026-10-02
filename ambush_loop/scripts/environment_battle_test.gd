@@ -41,6 +41,11 @@ func _run() -> void:
 	main.set_process(false)
 	main.presentation_3d.set_process(false)
 	await _stash_contract(main)
+	if OS.get_environment("AMBUSH_ENV_TEST_SCOPE") == "crate_only":
+		root.get_node("AudioDirector").pause_for_background()
+		print("ENVIRONMENT_CRATE_VISUAL_OK" if failures == 0 else "ENVIRONMENT_CRATE_VISUAL_FAILED", " checks=", checks, " failures=", failures)
+		quit(0 if failures == 0 else 1)
+		return
 	for case in CASES:
 		await _journey(main, case)
 	root.get_node("AudioDirector").pause_for_background()
@@ -69,7 +74,8 @@ func _stash_contract(main: Node) -> void:
 	var key: String = "stashes:" + recorded[0].id
 	var visual := main.presentation_3d.objects[key].get_node("EnvironmentVisual") as EnvironmentVisual
 	_check(visual != null and visual.pivot != null and visual.pivot.rotation_degrees.x > 45.0, "actual imported crate lid opens at real progress")
-	await _capture(main, "yard_search_half", 35, 55, 18)
+	main.presentation_3d.rig.focus = Space.logic_to_world(stash.global_position)
+	await _capture(main, "yard_search_half", 35, 55, 12)
 	main._tick_crate_search(0.2)
 	main.presentation_3d.refresh()
 	var empty: Dictionary = main._snapshot_data().duplicate(true)
@@ -81,7 +87,7 @@ func _stash_contract(main: Node) -> void:
 	_check(hit.get("kind", "") == "ground" and hit.get("id", -1) == -1, "decorative empty crate is not an interactive pick target")
 	await process_frame
 	_check(empty.environment_objects[0].pos == empty_item.pos and not is_instance_valid(stash), "plain empty-crate record outlives queued source node")
-	await _capture(main, "yard_search_empty", 35, 55, 18)
+	await _capture(main, "yard_search_empty", 35, 55, 12)
 	var log := BattleLog.new()
 	log.snapshots = [{"tick": 0, "data": partial}, {"tick": 1, "data": empty}]
 	main.phase = main.Phase.REPLAY
