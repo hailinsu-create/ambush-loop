@@ -7,6 +7,7 @@ param(
         'presentation_interaction_test.gd',
         'camera_input_test.gd',
         'presentation_capture.gd',
+        'asset_review_capture.gd',
         'presentation_preview.gd',
         'pathfinder_test.gd',
         'feel_gate.gd',
@@ -75,7 +76,7 @@ try {
     else {
         Write-Output "TEST_ENTRY=$Entry"
         $engineFlags = if ($Rendered) { @('--rendering-method', 'gl_compatibility') } else { @('--headless') }
-        if ($Entry -eq 'presentation_capture.gd') { $engineFlags += @('--audio-driver', 'Dummy') }
+        if ($Entry -like '*capture.gd') { $engineFlags += @('--audio-driver', 'Dummy') }
         & $enginePath @engineFlags --path $projectRoot -s "res://scripts/$Entry" 2>&1 |
             Tee-Object -FilePath $runLog
     }

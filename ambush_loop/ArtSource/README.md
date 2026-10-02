@@ -7,7 +7,7 @@ blender-headless --python ambush_loop/ArtSource/build_yard_crate.py
 gltf-transform inspect ambush_loop/ArtSource/yard_crate.glb
 ```
 
-Contract: each `build_*.py` is deterministic, no GUI, writes a GLB next to the script plus a clay/shaded front-side-rear contact sheet. Do not check in a unique unscripted `.blend` as the source of truth.
+The historical Look scripts below remain reproducible studies. The current 360° pipeline is in [`v2/README.md`](v2/README.md): editable `.blend` files are allowed alongside deterministic generators and export manifests. Runtime models live in `art/v2`; source files are excluded from Godot import. This replaces the old restriction against editable Blender source.
 
 `yard_crate` is an art-study WWII supply crate (mailbox-scale, wet pine + iron straps). It is **not** imported into the playable courtyard until a later Look prompt names a frame and a defect.
 
