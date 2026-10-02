@@ -229,6 +229,7 @@ var replay_focus_type: String = ""
 var _escape_tween: Tween = null
 var _result_panel_home: Vector4 = Vector4(-180, -90, 180, 90)
 var killzone_draw: Node2D = null
+var selected_coverage_draw: Node2D = null
 var _leak_miss_draw: Node2D = null
 var tripwire_ghost: Node2D = null
 
@@ -594,6 +595,11 @@ func _resolve_optional_hud() -> void:
 		$World.add_child(killzone_draw)
 		$World.move_child(killzone_draw, routes_draw.get_index())
 	_play_ensure_leak_miss_draw()
+	if selected_coverage_draw == null:
+		selected_coverage_draw = Node2D.new()
+		selected_coverage_draw.name = "SelectedCoverageDraw"
+		$World.add_child(selected_coverage_draw)
+		selected_coverage_draw.z_index = 4
 	_ensure_tripwire_ghost()
 	_setup_world_layers()
 	_ensure_game_camera()
@@ -1556,6 +1562,10 @@ func _setup_world_layers() -> void:
 
 
 func _apply_watch_layers() -> void:
+	if selected_coverage_draw:
+		selected_coverage_draw.visible = phase == Phase.SETUP
+		if phase != Phase.SETUP:
+			_refresh_selected_coverage()
 	var dim_routes := not _is_command_phase()
 	if routes_draw:
 		routes_draw.modulate = Color(1, 1, 1, 0.32) if dim_routes else Color.WHITE
@@ -2388,6 +2398,7 @@ func _killzone_ops() -> Array[OperatorUnit]:
 
 
 func _refresh_killzone_preview() -> void:
+	_refresh_selected_coverage()
 	if killzone_draw == null:
 		return
 	for c in killzone_draw.get_children():
@@ -2413,6 +2424,33 @@ func _refresh_killzone_preview() -> void:
 				_add_killzone_line(hit_run)
 				hit_run = PackedVector2Array()
 		_add_killzone_line(hit_run)
+
+
+func _refresh_selected_coverage() -> void:
+	## Concrete target geometry only: not ammo/readiness, not a continuous cone.
+	if selected_coverage_draw == null:
+		return
+	for child in selected_coverage_draw.get_children():
+		selected_coverage_draw.remove_child(child)
+		child.free()
+	selected_coverage_draw.visible = phase == Phase.SETUP
+	if phase != Phase.SETUP or grid == null or selected == null:
+		return
+	if not selected.visible or not selected.alive or selected.melee:
+		return
+	var seen: Dictionary = {}
+	for route in _active_routes():
+		for point in _sample_polyline(route, 16.0):
+			if seen.has(point) or not selected.in_fire_geometry(point, grid):
+				continue
+			seen[point] = true
+			var marker := Polygon2D.new()
+			marker.position = point
+			marker.polygon = PackedVector2Array([
+				Vector2(0, -4), Vector2(4, 0), Vector2(0, 4), Vector2(-4, 0)
+			])
+			marker.color = Color(0.32, 0.96, 0.90, 0.94)
+			selected_coverage_draw.add_child(marker)
 
 
 func _sample_polyline(points: PackedVector2Array, spacing: float) -> PackedVector2Array:
@@ -11526,6 +11564,9 @@ func follow_min_chebyshev() -> int:
 
 
 func _tick_command_moves(delta: float) -> void:
+	var previous_selected: OperatorUnit = selected
+	var previous_position := selected.global_position if selected else Vector2.ZERO
+	var previous_facing := selected.facing_deg if selected else 0.0
 	for op in operators:
 		if op == null or not op.visible or not op.alive:
 			continue
@@ -11536,6 +11577,9 @@ func _tick_command_moves(delta: float) -> void:
 	if selected and not selected.is_moving() and _move_ghost:
 		_move_ghost.visible = false
 	_follow_selected_cam(delta)
+	if phase == Phase.SETUP and selected != null:
+		if selected != previous_selected or selected.global_position != previous_position or selected.facing_deg != previous_facing:
+			_refresh_selected_coverage()
 
 
 func _snap_op_to_cover_if_clicked(op: OperatorUnit) -> void:
@@ -11555,6 +11599,7 @@ func _snap_op_to_cover_if_clicked(op: OperatorUnit) -> void:
 	_deploy_selected_to(slot, false)
 	selected = prev
 	_refresh_selection_visual()
+	_refresh_selected_coverage()
 
 
 func _facing_toward_wave_route() -> float:

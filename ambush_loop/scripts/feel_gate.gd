@@ -127,12 +127,18 @@ func _evaluate_watch_cinema(main) -> String:
 	if main.cover_slots.size() > 0 and main.operators.size() > 0:
 		if main.has_method("_select_op"):
 			main._select_op(0)
+		# This fixture must actually enter WATCHING, not stop at the no-gun warning.
+		main.operators[0].apply_weapon("rifle", true)
 		if main.has_method("_deploy_selected_to"):
 			main._deploy_selected_to(main.cover_slots[0], false)
 	if main.has_method("_on_alarm_pressed"):
 		main._on_alarm_pressed()
 	for i in 4:
 		await process_frame
+	if main.phase != main.Phase.WATCHING:
+		if main.has_method("_on_abort_pressed"):
+			main._on_abort_pressed()
+		return "watch_cinema_not_watching"
 	if not has_watch_cinema(main):
 		if main.has_method("_on_abort_pressed"):
 			main._on_abort_pressed()
