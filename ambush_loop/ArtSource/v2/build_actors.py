@@ -20,6 +20,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import build_yard_kit as kit
 from actor_acceptance.canonicalize import normalize_glb
+from actor_acceptance import firearm_contract as firearms
 PROJECT = HERE.parents[1]
 OUT = PROJECT / 'art/v2'
 PARTS = []
@@ -33,6 +34,7 @@ CLIPS = {'idle': (2.4, True), 'walk': (.9, True), 'run': (.6, True),
          'aim': (1.8, True), 'fire': (.24, False), 'pickup': (1.0, False),
          'death': (1.2, False), 'crouch': (2., True), 'crouch_walk': (1.15, True),
          'deploy': (1.25, False), 'hit': (.3, False), 'haul': (1.2, True)}
+CLIPS.update(firearms.ADDED_CLIPS)
 CHARACTERS = {'operator_rifle': (0, 'helmet'), 'operator_mg': (1, 'rolled'),
               'operator_scout': (6, 'beret'), 'enemy_patrol': (13, 'helmet'),
               'enemy_flank': (2, 'cap'), 'enemy_sneak': (6, 'hood'),
@@ -463,11 +465,13 @@ def animation(rig,joints):
         name='foot.'+suffix
         foot_points[suffix]=[obj.matrix_world@v.co-Vector(joints[name][0]) for obj in PARTS for v in obj.data.vertices
                             if any(obj.vertex_groups[g.group].name==name and g.weight>.999 for g in v.groups)]
-    for clip,(duration,loop) in CLIPS.items():
-        action=bpy.data.actions.get(clip)
+    for clip_name,(duration,loop) in CLIPS.items():
+        spec=firearms.SPECS.get(clip_name)
+        clip='fire' if spec and spec['stage']=='fire' else 'aim' if spec else clip_name
+        action=bpy.data.actions.get(clip_name)
         if action:
             continue
-        action=bpy.data.actions.new(clip); action.use_fake_user=True
+        action=bpy.data.actions.new(clip_name); action.use_fake_user=True
         rig.animation_data.action=action
         frames=round(duration*30)
         for frame in range(frames+1):
@@ -477,6 +481,7 @@ def animation(rig,joints):
             moving=clip in ('walk','run','crouch_walk','haul')
             bend=math.sin(math.pi*t) if clip in ('pickup','deploy') else 0
             recoil=math.exp(-t*12)*math.sin(t*math.pi*4) if clip=='fire' else 0
+            if spec:recoil*=firearms.POSE[spec['group']]['recoil_gain']
             hit=math.sin(math.pi*t)*.12 if clip=='hit' else 0
             drop=.44 if clip=='deploy' else .36 if crouch else .13 if clip=='run' else .06 if moving else 0
             bob=(.028 if clip=='run' else .014)*math.cos(phase*2) if moving else .004*(math.sin(phase)-1)
@@ -492,17 +497,42 @@ def animation(rig,joints):
                 targets[name]=[pivot+rotation@(p-pivot) for p in targets[name]]
             aiming=clip in ('aim','fire')
             holding=clip in ('idle','walk','run','aim','fire','crouch','crouch_walk','hit')
+            lift=firearms.raised(spec['stage'],t) if spec else float(aiming)
             if holding:
                 # Protract the support shoulder while keeping the clavicle
                 # length. Tilt the head toward the stock's sight line.
-                for suffix,angle in [('L',-15 if aiming else -22),('R',-8)]:
+                left_angle=(-22*(1-lift)+firearms.POSE[spec['group']]['support_shoulder_deg']*lift) if spec else -15 if aiming else -22
+                for suffix,angle in [('L',left_angle),('R',-8)]:
                     name='clavicle.'+suffix;a,b=targets[name]
                     targets[name]=[a,a+Matrix.Rotation(math.radians(angle),3,'Z')@(b-a)]
                     targets['upper_arm.'+suffix][0]=targets[name][1].copy()
                 if aiming:
                     neck=targets['neck'][0]
-                    tilt=Matrix.Rotation(.37,3,'Y')@Matrix.Rotation(-.24,3,'X')
+                    cant=firearms.POSE[spec['group']]['head_cant'] if spec else .37
+                    tilt=Matrix.Rotation(cant*lift,3,'Y')@Matrix.Rotation(-.24*lift,3,'X')
                     for name in ('neck','head'):targets[name]=[neck+tilt@(p-neck) for p in targets[name]]
+            firearm_hands={}
+            if spec:
+                profile=firearms.POSE[spec['group']]
+                representative=spec.get('gun') or next(g for g in firearms.GROUPS if firearms.GROUPS[g]==spec['group'])
+                yaw=math.radians(20);down=math.radians(10)
+                low_direction=rotation@Vector((-math.sin(yaw)*math.cos(down),math.cos(yaw)*math.cos(down),-math.sin(down)))
+                low=pivot+rotation@(Vector((.17,.30,1.34))+shift-pivot)
+                head_a,head_b=targets['head'];rest=rig.data.bones['head'].matrix_local
+                head_q=(Vector(joints['head'][1])-Vector(joints['head'][0])).normalized().rotation_difference((head_b-head_a).normalized())@rest.to_quaternion()
+                eye=Matrix.LocRotScale(head_a,head_q,Vector((1,1,1)))@Vector((.037,.139,-.106))
+                # Match the actual head-local eye height; horizontal sight line
+                # allows the eye to remain behind the gun along the barrel axis.
+                high=Vector((eye.x,profile['forward']+shift.y,eye.z-profile['sight_height']))
+                right=low.lerp(high,lift);direction=low_direction.lerp(Vector((0,1,0)),lift).normalized()
+                orient=Vector((0,1,0)).rotation_difference(direction)
+                support=firearms.SUPPORT[representative]
+                left=right+orient@Vector((support[0],-support[2],support[1]))
+                if spec['stage']=='reload':
+                    point=firearms.RELOAD[representative]
+                    reach=right+orient@Vector((point[0],-point[2],point[1]))
+                    left=left.lerp(reach,firearms.contact(t))
+                firearm_hands={'R':(right,direction),'L':(left,direction)}
             for suffix,side in [('L',-1),('R',1)]:
                 thigh='thigh.'+suffix; shin='shin.'+suffix; foot='foot.'+suffix
                 hip=Vector(joints[thigh][0])+shift
@@ -543,6 +573,7 @@ def animation(rig,joints):
                 if clip=='death':
                     tuck=min(t/.75,1)
                     hand=hand.lerp(Vector((side*.23,.025,1.12))+shift,tuck)
+                if spec:hand,hand_direction=firearm_hands[suffix]
                 upper=(Vector(joints['upper_arm.'+suffix][1])-Vector(joints['upper_arm.'+suffix][0])).length
                 lower=(Vector(joints['forearm.'+suffix][1])-Vector(joints['forearm.'+suffix][0])).length
                 delta=hand-shoulder
@@ -628,6 +659,8 @@ def weapon(asset,length,family):
             stock=box('shoulder_stock',(.053,.185 if rifle else .245,.110),(0,-.175 if rifle else -.21,-.012),stock_tile,None,.012); stock.rotation_euler.x=-.10
             box('buttplate',(.058,.014,.114),(0,-.274 if rifle else -.332,-.002),3,None,.004)
             if rifle:box('stock_wrist',(.043,.13,.044),(0,-.028,-.022),stock_tile,None,.005)
+            elif family in ('smg','mg'):
+                grip=box('pistol_grip',(.039,.058,.11),(0,-.032,-.055),stock_tile,None,.005);grip.rotation_euler.x=-.20
         box('receiver',(.052,.20,.062) if rifle else (.056,.25,.066),(0,.035,.040) if rifle else (0,.025,.035),3,None,.007)
         box('fore_stock',(.052,.28,.042),(0,.257,.012),stock_tile,None,.008)
         tube('barrel',(0,.21,.045),(0,end,.045),.018,.011,3,None,12,2,0)
@@ -670,7 +703,9 @@ def weapon(asset,length,family):
     for y in (-.017,.047): box('trigger_guard_end',(.033,.006,.030),(0,y,-.033),3,None,.002)
     box('trigger',(.005,.011,.025),(0,.008,-.029),3,None,.001)
     return {'grip':[0,0,0],'muzzle':[0,.035 if pistol else .045,-end],
-            'support_hand':[0,0,-.26] if not pistol else None}
+            'support_hand':[0,0,-.26] if not pistol else None,
+            'pose_support':firearms.SUPPORT[asset],'sight':firearms.SIGHT[asset],
+            'reload_contact':firearms.RELOAD[asset]}
 
 
 def tool(asset):
@@ -850,9 +885,11 @@ def build():
         for obj in originals: obj.hide_set(True)
         print('ACTOR_ASSET',asset,[(x['triangles'],x['surfaces']) for x in lods],flush=True)
     manifest={'schema':2,'seed':SEED,'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'firearm_contract_sha256':hashlib.sha256((HERE/'actor_acceptance/firearm_contract.py').read_bytes()).hexdigest(),
               'canonicalizer_sha256':hashlib.sha256((HERE/'actor_acceptance/canonicalize.py').read_bytes()).hexdigest(),'assets':entries,
               'textures':[{'path':f'art/v2/textures/{p.name}','sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((OUT/'textures').glob('actor_*.png'))]}
     CATALOG.write_text(json.dumps(manifest,indent=2)+'\n')
+    (CATALOG.parent/'firearm_profiles_candidate.json').write_text(json.dumps(firearms.candidate(),indent=2)+'\n')
     for img in bpy.data.images:
         if img.filepath: img.pack()
     for obj in bpy.data.objects: obj.hide_set(obj.get('lod',0)>0)

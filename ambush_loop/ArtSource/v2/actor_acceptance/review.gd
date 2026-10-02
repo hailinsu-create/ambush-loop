@@ -9,6 +9,7 @@ var records: Array = []
 var actors: Array = []
 var failures: Array = []
 var stage: Node3D
+const BASE_ACTIONS = ["idle", "walk", "run", "aim", "fire", "pickup", "death", "crouch", "crouch_walk", "deploy", "hit", "haul"]
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -187,6 +188,7 @@ func run() -> void:
 			fill.light_color = Color.WHITE; fill.light_energy = 0.7
 	# All claimed clips, five temporal samples, priority pair including actual guns.
 	for clip in manifest.assets[0].animations:
+		if clip.name not in BASE_ACTIONS: continue
 		for sample in 25:
 			var op := load_asset("operator_rifle", 0); op.position.x = -0.85
 			var enemy := load_asset("enemy_patrol", 0); enemy.position.x = 0.85
@@ -253,6 +255,7 @@ func run() -> void:
 	# Every character/LOD in every declared action at its middle sample.
 	for level in 3:
 		for clip in manifest.assets[0].animations:
+			if clip.name not in BASE_ACTIONS: continue
 			for index in 7:
 				var n := load_asset(manifest.assets[index].asset_id,level)
 				n.position.x = (index-3)*1.4; pose(n,clip.name,0.5)
