@@ -798,6 +798,7 @@ func _toggle_pause_menu() -> void:
 		_menu_paused_sim = true
 		if pause_button:
 			pause_button.text = "继续"
+	_sync_audio_state()
 
 
 func _on_pause_overlay_closed() -> void:
@@ -806,6 +807,7 @@ func _on_pause_overlay_closed() -> void:
 		_menu_paused_sim = false
 		if pause_button:
 			pause_button.text = "暂停"
+	_sync_audio_state()
 
 
 func _on_redeploy_from_menu() -> void:
@@ -1262,6 +1264,14 @@ func _gate_scene_audio(paused: bool) -> void:
 		audio.resume_from_background()
 
 
+func _sync_audio_state() -> void:
+	if sfx and sfx.has_method("set_phase_state"):
+		var paused: bool = (phase == Phase.WATCHING and sim.paused) or (pause_overlay != null and pause_overlay.is_open())
+		sfx.set_phase_state(phase == Phase.WATCHING, paused, phase == Phase.REPLAY)
+	elif sfx and sfx.has_method("set_watch_bed"):
+		sfx.set_watch_bed(phase == Phase.WATCHING)
+
+
 func _on_memory_wipe_from_menu() -> void:
 	if pause_overlay:
 		pause_overlay.dismiss()
@@ -1594,8 +1604,7 @@ func _apply_watch_layers() -> void:
 		entities.modulate = Color.WHITE
 	if ghosts:
 		ghosts.modulate = Color.WHITE
-	if sfx and sfx.has_method("set_watch_bed"):
-		sfx.set_watch_bed(phase == Phase.WATCHING)
+	_sync_audio_state()
 	_ensure_watch_cinema()
 	var cinema := phase == Phase.WATCHING or phase == Phase.WON
 	if _watch_letterbox:
@@ -2296,7 +2305,6 @@ func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void
 	map_draw.queue_redraw()
 	_ensure_mission_sky()
 	_ensure_night_grade()
-	_play_mission_ambient()
 	_build_route_world()
 	_build_cover_slots()
 	_build_operators()
@@ -3342,6 +3350,8 @@ func door_slam_dust_active() -> bool:
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	_cancel_world_input()
+	if sfx and sfx.has_method("stop_mission_audio"):
+		sfx.stop_mission_audio()
 	if backpack_panel:
 		backpack_panel.dismiss()
 	phase = Phase.SETUP
@@ -3475,6 +3485,7 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	_ensure_c2()
 	if c2:
 		c2.begin_scout()
+	_play_mission_ambient()
 	_update_hud()
 
 
@@ -4979,6 +4990,7 @@ func _on_pause_pressed() -> void:
 		pause_button.text = "继续" if sim.paused else "暂停"
 	_refresh_phase_chip()
 	_refresh_touch_hud()
+	_sync_audio_state()
 
 
 func alarm_leak_warning() -> String:
@@ -5905,6 +5917,8 @@ func _clear_tracer_pool() -> void:
 
 func _exit_tree() -> void:
 	_clear_tracer_pool()
+	if sfx and sfx.has_method("stop_mission_audio"):
+		sfx.stop_mission_audio()
 
 
 func _on_op_ammo_empty(op: OperatorUnit) -> void:

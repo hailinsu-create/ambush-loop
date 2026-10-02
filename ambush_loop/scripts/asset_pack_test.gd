@@ -3,6 +3,7 @@ extends SceneTree
 const StorageGuard := preload("res://scripts/test_storage_guard.gd")
 const Assets := preload("res://scripts/presentation/asset_library.gd")
 const Actor := preload("res://scripts/presentation/actor_visual.gd")
+const AudioAssets := preload("res://scripts/sfx/audio_assets.gd")
 var checks := 0
 var failures := 0
 
@@ -27,6 +28,18 @@ func _run() -> void:
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
 	_check(doc.assets.size() == 22 and doc.source_commit == "00b270863ba5a2cd5425abf2a31e78965c72ae45", "R3 manifest is included in the pack with fixed provenance")
 	_check(FileAccess.file_exists("res://art/v2/manifest.json"), "yard manifest is included in the pack")
+	var audio_doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(AudioAssets.MANIFEST))
+	_check(audio_doc.cues.size() == 45 and audio_doc.asset_source_commit == "86df6d0b4af9f30f3f1e670207cc54b22e2f043b", "45-cue audio manifest retains fixed producer provenance in the pack")
+	for row in audio_doc.cues:
+		var stream := AudioAssets.stream(str(row.cue))
+		_check(stream != null, "actual packed imported audio loads: " + str(row.cue))
+		if stream != null:
+			var hash := HashingContext.new()
+			hash.start(HashingContext.HASH_SHA256)
+			hash.update(stream.data)
+			_check(hash.finish().hex_encode() == str(row.pcm_sha256), "packed PCM retains original producer samples: " + str(row.cue))
+			_check(stream.data.size() == int(row.frames) * 2 and stream.mix_rate == 22050 and not stream.stereo, "packed PCM retains rate, channels and frames: " + str(row.cue))
+			_check(stream.loop_mode == (AudioStreamWAV.LOOP_FORWARD if row.loop else AudioStreamWAV.LOOP_DISABLED) and (not row.loop or (stream.loop_begin == 0 and stream.loop_end == 352800)), "packed audio retains exact exclusive loop period: " + str(row.cue))
 	var actor := Assets.material_for_slot("v2_actor_atlas")
 	_check(actor.albedo_texture != null and actor.normal_texture != null and actor.roughness_texture != null, "external shared atlas textures load from the pack")
 	for entry in doc.assets:
