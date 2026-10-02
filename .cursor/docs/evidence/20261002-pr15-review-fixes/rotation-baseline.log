@@ -1,0 +1,26 @@
+TEST_RUN_ID=568cab905c454b6bb190e32ba71541b5
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/568cab905c454b6bb190e32ba71541b5/data
+TEST_ENTRY=phase_tools_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/568cab905c454b6bb190e32ba71541b5/data/godot/app_userdata/Ambush Loop run_id=568cab905c454b6bb190e32ba71541b5
+PHASE_TOOLS_NATIVE phase=scout command=rotate_cw role=1 before=180.0 actual=188.0 expected=188.0 modal=false locked=false
+PHASE_TOOLS_NATIVE phase=scout command=rotate_ccw role=1 before=188.0 actual=180.0 expected=180.0 modal=false locked=false
+PHASE_TOOLS_NATIVE phase=sweep command=rotate_cw role=1 before=180.0 actual=180.0 expected=188.0 modal=false locked=false
+ERROR: PHASE_TOOLS: sweep rotate_cw rotates the selected MG within its existing 8-degree limit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/phase_tools_test.gd:20)
+       [1] _run (res://scripts/phase_tools_test.gd:108)
+       [2] _mouse (res://scripts/phase_tools_test.gd:52)
+PHASE_TOOLS_NATIVE phase=sweep command=rotate_ccw role=1 before=180.0 actual=180.0 expected=172.0 modal=false locked=false
+ERROR: PHASE_TOOLS: sweep rotate_ccw rotates the selected MG within its existing 8-degree limit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/phase_tools_test.gd:20)
+       [1] _run (res://scripts/phase_tools_test.gd:108)
+       [2] _mouse (res://scripts/phase_tools_test.gd:52)
+PHASE_TOOLS_FAILED checks=17 failures=2

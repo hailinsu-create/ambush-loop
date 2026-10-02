@@ -1,0 +1,189 @@
+{
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "isolated runtime P2 corrections; old records kept intact; 3D graybox input/focus render does not imply final assets or device performance",
+  "diagnostic_note": "Baselines add diagnostic fixtures to fixed runtime sources. First MG step/tool-supply assumptions corrected, and hold-repeat disabled for the single-native-press regression; the hold-confounded SCOUT rotation failures are not treated as product defects. Candidate validator is read-only, not independent generation.",
+  "runs": [
+    {
+      "source_sha": "a4f3c18037929b78037fafc0150f2e1f60ceeeed",
+      "entry": "replay_timeline_test.gd diagnostic",
+      "exit_code": 1,
+      "completion_marker": "REPLAY_TIMELINE_FAILED failures=1 checks=66",
+      "run_id": "c09f6955c32d4295b30417250c9cb48f",
+      "log": "timeline-baseline.log",
+      "sha256": "f5613430aaad919c58d81c524419c4445de943dd3f6ba2735bedf9037ee9c420"
+    },
+    {
+      "source_sha": "a4f3c18037929b78037fafc0150f2e1f60ceeeed",
+      "entry": "presentation_lifecycle_test.gd diagnostic --render",
+      "exit_code": 1,
+      "completion_marker": "PRESENTATION_LIFECYCLE_FAILED checks=32 failures=1",
+      "run_id": "af920d1c2b804f4ab413fd8b31488366",
+      "log": "focus-baseline.log",
+      "sha256": "cf4b5ddcf4a34e95c2ec639eae1b6d2de82d47cb7b5c00ad5e2ead3a81522be5"
+    },
+    {
+      "source_sha": "a4f3c18037929b78037fafc0150f2e1f60ceeeed",
+      "entry": "phase_tools_test.gd initial diagnostic --render",
+      "exit_code": 1,
+      "completion_marker": "PHASE_TOOLS_FAILED checks=33 failures=16",
+      "run_id": "22202d7dd9e14bf0bc71f6b1d02db925",
+      "log": "tools-first-fixture-errors.log",
+      "sha256": "f192d48aa0e761e96ead60e4466d7d5b956b2e43c01702d96da2c1770a70e57b"
+    },
+    {
+      "source_sha": "a4f3c18037929b78037fafc0150f2e1f60ceeeed",
+      "entry": "phase_tools_test.gd diagnostic --render",
+      "exit_code": 1,
+      "completion_marker": "PHASE_TOOLS_FAILED checks=35 failures=14",
+      "run_id": "91c164716cd248cb8150e26d69a29b84",
+      "log": "tools-baseline-hold-confounded.log",
+      "sha256": "5f0a0353f21ec2ac3a0fab736c7f98e37fd6cf477c42c048c5e6e44c12f6da2f"
+    },
+    {
+      "source_sha": "cc11bb074fd6e8a67f4a3ca81eaf2daf566ad962",
+      "entry": "AMBUSH_PHASE_TOOLS_LEGAL_ONLY=1 phase_tools_test.gd diagnostic --render",
+      "exit_code": 1,
+      "completion_marker": "PHASE_TOOLS_FAILED checks=17 failures=2",
+      "run_id": "568cab905c454b6bb190e32ba71541b5",
+      "log": "rotation-baseline.log",
+      "sha256": "96c6eeb7ca07a92aa05091b224897bfaed6a93fb543ce8ff2cea4611c69abe98"
+    },
+    {
+      "source_sha": "cc11bb074fd6e8a67f4a3ca81eaf2daf566ad962",
+      "entry": "replay_timeline_test.gd",
+      "exit_code": 0,
+      "completion_marker": "REPLAY_TIMELINE_OK checks=66",
+      "run_id": "7038ea40ebb94d61a8ad960b6bb5afc7",
+      "log": "timeline-final.log",
+      "sha256": "b65d364e202ad83c3b8880c5c21d5e88a5b007f8f02e512d62166cd3698ca229"
+    },
+    {
+      "source_sha": "cc11bb074fd6e8a67f4a3ca81eaf2daf566ad962",
+      "entry": "presentation_lifecycle_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "PRESENTATION_LIFECYCLE_OK checks=32 failures=0",
+      "run_id": "b70bf8bec16748af9b7bc05a833f8946",
+      "log": "focus-final.log",
+      "sha256": "92a7fba0a8e7e4b3b02c6961d7aba661af39ca9368a94f78588cd6c204a83668"
+    },
+    {
+      "source_sha": "71df99a852780f927aa15a74f67fd0f9b96b6f4d",
+      "entry": "phase_tools_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "PHASE_TOOLS_OK checks=35 failures=0",
+      "run_id": "cb3bca386ad04e4f9795b094c6ca14ba",
+      "log": "tools-final.log",
+      "sha256": "2154dfc28ce6fe2cd89df3b866bea7eb699052b53f19bb844d8e6001b44cecbb"
+    },
+    {
+      "source_sha": "71df99a852780f927aa15a74f67fd0f9b96b6f4d",
+      "entry": "equipment_freeze_test.gd",
+      "exit_code": 0,
+      "completion_marker": "EQUIPMENT_FREEZE_OK checks=66",
+      "run_id": "3689f6ffa9694a9490e06cd3f64b0993",
+      "log": "freeze-final.log",
+      "sha256": "39bb517effd316a32d1ab76b1638abeda1116acc9d511512b5c83fb0a10e5db7"
+    },
+    {
+      "source_sha": "71df99a852780f927aa15a74f67fd0f9b96b6f4d",
+      "entry": "timeout 300 campaign_replay_test.gd",
+      "exit_code": 124,
+      "completion_marker": null,
+      "run_id": "a7f8c82846d142d7904139aa7cb51a0d",
+      "log": "campaign-timeout-300.log",
+      "sha256": "bd491b0ab640de033f39af337290d365eca0a1e544a326f203eb1688f23b30fe"
+    },
+    {
+      "source_sha": "812261a0d7c29446ab631108feec5389cec2950b",
+      "entry": "readonly candidate validate.py --catalog catalog_candidate.json",
+      "exit_code": 0,
+      "completion_marker": "ACTOR_BINARY_AUDIT 22 51 violations 0",
+      "run_id": null,
+      "log": "r2-candidate-binary.log",
+      "sha256": "5883b0a72d86993ae95fbdd0b956eaec8b648bc5a5a9775b2ec6de35c36e3a51"
+    },
+    {
+      "source_sha": "71df99a852780f927aa15a74f67fd0f9b96b6f4d",
+      "entry": "timeout 900 campaign_replay_test.gd",
+      "exit_code": 0,
+      "completion_marker": "CAMPAIGN_REPLAY_OK checks=10296 failures=0",
+      "run_id": "1890705f242f44e2b1df66f030f31010",
+      "log": "campaign-final.log",
+      "sha256": "7a295c328cb8d699a0fe485a4c6dd3b6f320ff364b076f5cf6310434af67155b"
+    }
+  ],
+  "files": {
+    "campaign-final.log": {
+      "bytes": 974,
+      "sha256": "7a295c328cb8d699a0fe485a4c6dd3b6f320ff364b076f5cf6310434af67155b"
+    },
+    "campaign-timeout-300.log": {
+      "bytes": 763,
+      "sha256": "bd491b0ab640de033f39af337290d365eca0a1e544a326f203eb1688f23b30fe"
+    },
+    "focus-baseline.log": {
+      "bytes": 1304,
+      "sha256": "cf4b5ddcf4a34e95c2ec639eae1b6d2de82d47cb7b5c00ad5e2ead3a81522be5"
+    },
+    "focus-final.log": {
+      "bytes": 919,
+      "sha256": "92a7fba0a8e7e4b3b02c6961d7aba661af39ca9368a94f78588cd6c204a83668"
+    },
+    "freeze-final.log": {
+      "bytes": 601,
+      "sha256": "39bb517effd316a32d1ab76b1638abeda1116acc9d511512b5c83fb0a10e5db7"
+    },
+    "r2-candidate-binary.json": {
+      "bytes": 90847,
+      "sha256": "5f304e41a9f330a0699d9c1d9025a675c8c15704d5c4c0e02a800107dc687938"
+    },
+    "r2-candidate-binary.log": {
+      "bytes": 39,
+      "sha256": "5883b0a72d86993ae95fbdd0b956eaec8b648bc5a5a9775b2ec6de35c36e3a51"
+    },
+    "replay_event_focus.png": {
+      "bytes": 116998,
+      "sha256": "4a2b8882f404aedcc21ef27b579c09975a0897e28cea20504a3f1f4ea2217f8f"
+    },
+    "rotation-baseline.log": {
+      "bytes": 2026,
+      "sha256": "96c6eeb7ca07a92aa05091b224897bfaed6a93fb543ce8ff2cea4611c69abe98"
+    },
+    "scout_backpack.png": {
+      "bytes": 118070,
+      "sha256": "a627e89caa63acfc51284db96124bcbd2b0de32f820c19458dd499066620d200"
+    },
+    "timeline-baseline.log": {
+      "bytes": 899,
+      "sha256": "f5613430aaad919c58d81c524419c4445de943dd3f6ba2735bedf9037ee9c420"
+    },
+    "timeline-final.log": {
+      "bytes": 599,
+      "sha256": "b65d364e202ad83c3b8880c5c21d5e88a5b007f8f02e512d62166cd3698ca229"
+    },
+    "tools-baseline-hold-confounded.log": {
+      "bytes": 5791,
+      "sha256": "5f0a0353f21ec2ac3a0fab736c7f98e37fd6cf477c42c048c5e6e44c12f6da2f"
+    },
+    "tools-final.log": {
+      "bytes": 1387,
+      "sha256": "2154dfc28ce6fe2cd89df3b866bea7eb699052b53f19bb844d8e6001b44cecbb"
+    },
+    "tools-first-fixture-errors.log": {
+      "bytes": 5771,
+      "sha256": "f192d48aa0e761e96ead60e4466d7d5b956b2e43c01702d96da2c1770a70e57b"
+    }
+  },
+  "captures": [
+    {
+      "path": "replay_event_focus.png",
+      "source_sha": "cc11bb074fd6e8a67f4a3ca81eaf2daf566ad962",
+      "run_id": "b70bf8bec16748af9b7bc05a833f8946"
+    },
+    {
+      "path": "scout_backpack.png",
+      "source_sha": "cc11bb074fd6e8a67f4a3ca81eaf2daf566ad962",
+      "run_id": "b70bf8bec16748af9b7bc05a833f8946"
+    }
+  ]
+}

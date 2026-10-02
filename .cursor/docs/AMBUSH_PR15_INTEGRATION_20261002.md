@@ -34,6 +34,8 @@
 
 ## 当前状态
 
+后续已迁入R1静态15件/30LOD并验证loader、实际渲染和空目录PCK，见 [静态切片](AMBUSH_PR15_STATIC_EQUIPMENT_20261002.md)。独立QA四项P2的反例已复现，cc11bb0/71df99a修复与六关复验见 [复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md)。历史HUD活体读取下一片继续闭合；R2 812261a只读22/51二进制检查通过但尚未迁入，采用 [R2计划](AMBUSH_PR15_R2_ADOPTION_20261002.md) 的新台账，不拿R1 hash验证新资产。完整资产与六关成品视觉仍待完成。
+
 已核对交接、PR15、WIP 与 PR14 详单。独立集成工作树为 `/workspace/ambush-pr15`；本环境 Godot 4.7.2 路径为 `/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64`，版本输出 `4.7.2.stable.official.ed1daf0bf`。首批回放/装备审计已实际复现和独立修复，后续 Back/手势取消/3D 事件聚焦也已施工；具体固定源码和证据见 [runtime 报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md)。完整资产与六关 3D 接入待完成。
 
 继承入口：[PR14 完整执行详单](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/AMBUSH_ASSET_EXECUTION_PLAN_20261002.md) · [资产 inventory](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/evidence/asset-audit-20261002/inventory.json)。已读取；后者为 c1aaf27 原资产静态盘点，不作为当前新资产集成验收。
