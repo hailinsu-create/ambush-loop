@@ -2,11 +2,11 @@
 
 更新日期：2026-10-02。仅用于本游戏；设计文件不是实现或验收证明。
 
-**下一切片预研（未开工）：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)，原 GPT 已实际给出 preliminary proposal：离散世界目标覆盖，不假装连续扇形精准；C2 完整 smoke/DONE 之前不实施。当前仍以 C2 待回归计划为执行入口。
+**下一切片预研（未开工）：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)，原 GPT 已实际给出 preliminary proposal：离散世界目标覆盖，不假装连续扇形精准。C2 完整 smoke/DONE 已完成，下一步先确认 C3 正式实施 PLAN；本候选方案不是实现证据。
 
-**当前在制：** [M1-C2 枪械高度视线接入计划](AMBUSH_M1C2_FIRE_PLAN_20261002.md)，实际 GPT PLAN 已收到，尚未实现/验收。继承 C1 几何，仅接入枪械资格、对应预览与记录事件；非枪械视线/音频不改。本轮必须 fresh full smoke；真机继续暂缓。此入口替代下段“下一步规划同源接入”的待规划状态，不取消历史验收门。
+**最新完成切片：** [M1-C2 枪械高度视线接入计划](AMBUSH_M1C2_FIRE_PLAN_20261002.md)，已实现并获实际 GPT DONE。继承 C1 几何，仅接入枪械目标资格/覆盖与记录事件；非枪械视线/音频不改。真机继续暂缓，不取消历史验收门。
 
-**C2 最新证据：** 已实现到 Draft PR #16 / `e55a521`，五项定向隔离门通过；原 GPT iteration 1 实际 scoped REVIEW clean，完整 smoke `4a70428c…` 仍在运行，NOT DONE。准确连续高度射界不在本切片，黄色扇形保留 legacy 方向参考；目标点资格/覆盖共享高度规则，近战不迁移。继续取原回归结果后补最终判定，不能把在制或旧六关证据当成本轮通过。
+**C2 最新证据：** Draft PR #16 / `e55a521`，五项定向隔离门通过；原 uninterrupted full smoke `4a70428c…` 已完成六关循环、`SMOKE_SLICE_COMPLETE`、wrapper exit 0 / `PLAYER_DATA_UNCHANGED=1`，原 GPT iteration 2 实际 DONE。准确连续高度射界不在本切片，黄色扇形保留 legacy 方向参考；目标点资格/覆盖共享高度规则，近战不迁移。代码/依赖 PR 尚未合并，完整 M1 与 Android 未验收。
 
 **最新执行顺序调整与进展：** 用户明确暂缓真机，设备插入后再补。[M1-C1 高度视线几何切片](AMBUSH_M1C_GEOMETRY_PLAN_20261002.md) 已按原 GPT 修订 PLAN 实现：新几何 API 与四项定向隔离门通过、GPT iteration 12 实际 REVIEW / DONE，无阻断项。代码在 Draft PR #13 / `e2550b7`，尚未合并；原 LOS 和战斗/预览/音频未改，新查询未接入生产消费者。下一步独立规划同源接入；完整 smoke 本轮未重跑。真机待补不再阻塞桌面原型，但完整 M1/B2/Android 退出门不取消。
 

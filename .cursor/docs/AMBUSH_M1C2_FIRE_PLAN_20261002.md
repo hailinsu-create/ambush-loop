@@ -1,6 +1,6 @@
 # M1-C2 枪械高度视线接入计划
 
-日期：2026-10-02。状态：已实现、五项定向门通过且 GPT scoped REVIEW clean；**完整回归仍未完成，NOT DONE**。下方初稿和实施前修订均保留，实际进展见末节。原对话任务 `c2c_c2a4` iteration 0，已核对原工作区 `363712641ef7`，读取 grid/operator/enemy 与设计。继承已验收 C1 `e2550b7`，不代表完整 M1 通过。用户继续开发并明确暂缓真机。
+日期：2026-10-02。状态：**C2 已实现、五项定向门及 fresh full smoke 通过，原 GPT iteration 2 实际 DONE**。下方初稿、修订及曾经的在制记录均保留，最终证据见末节。原对话任务 `c2c_c2a4`，工作区 `363712641ef7`。继承已验收 C1 `e2550b7`，不代表完整 M1 通过。用户明确暂缓真机。
 
 ## 目标与范围
 
@@ -37,3 +37,11 @@ Godot 4.7.2 规定隔离包装器五项均实际 exit 0 / `PLAYER_DATA_UNCHANGED
 原 GPT 实际 iteration 1 REVIEW：范围内代码 clean，五项输出已读，无需代码修正；**NOT DONE**，等待 fresh full smoke。确认为 amended scope：枪械/近战分流，enemy 无 grid 拒绝，cone 不声称精准，真实 BattleLog/ReplayPlayer 而非假事件。完整 smoke run `4a70428c37ab43699b9d9ec4d330d41a` 正在运行，尚无完成退出证据，不能记 PASS。不得切换或修改正在运行的代码工作区。接手需续取原进程 session `4903` 的结果，不重复启动；若会话不可用则核查日志和进程，不能靠历史通过替代。
 
 待完整退出 0、`SMOKE_SLICE_COMPLETE`、六关典型循环、玩家数据不变都齐备，再送原 GPT 完成判定；若失败，只处理首个具体失败，保留高度规则门。准确射界 UI、M1 整体玩法/Android/音频均未验收。
+
+## 最终回归与实际 GPT DONE
+
+上述在制状态已被本节替代。原 session `4903` 的同一次 uninterrupted full smoke run `4a70428c37ab43699b9d9ec4d330d41a` 最终正常退出：`C2_ENTRY_EXIT=smoke_test.gd/0`，包装器 `PLAYER_DATA_UNCHANGED=1`。原始日志末尾实际包含 `SMOKE_OK_TYPICAL_LOOPS yard,warehouse,pump,railcut,depot,radio`、`SMOKE_SLICE_COMPLETE` 和 `SMOKE_OK_SWEEP_FIRST_HINT per_attempt=1 max_chars=16`。没有重新启动测试、弱化门或在运行中修改代码；完成后核对 source HEAD 仍为 `e55a5216b2512a10d3bf6713081a66c4586cfcf1`，仅保留既有未跟踪诊断文件。
+
+实际输出通过原连接器释放为 `c2c_c2a4` iteration 2。原 GPT 对话实际回复 **STATE: DONE — M1-C2 firearm height-LOS integration is accepted**，核对本轮 test_status / execution_output，结合 iteration 1 范围评审接受 C2。GPT 明确指出输出有截断；完整结束标记和玩家数据不变由本机原日志尾及包装器实际退出共同核验，不把截断之前的正常进展单独当作完成证明。
+
+代码仍在 Draft PR #16，依赖未合并 PR #13；文档独立 PR #9，不宣称主线已合并。下一步确认 C3 正式实施 PLAN，增加选中队员离散高度覆盖提示。C3 候选方案尚未实施；完整 M1/B2、Android 与历史 AudioTrack SIGSEGV 均不因本次 DONE 而验收。
