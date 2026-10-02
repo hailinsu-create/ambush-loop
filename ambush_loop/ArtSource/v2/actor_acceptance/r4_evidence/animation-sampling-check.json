@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "case": "quarter_slerp",
+      "actual_deg": 22.50000044330204,
+      "expected_deg": 22.5,
+      "passed": true
+    },
+    {
+      "case": "step_holds_before_next_key",
+      "actual_deg": 0.0,
+      "expected_deg": 0,
+      "passed": true
+    },
+    {
+      "case": "step_uses_terminal_key",
+      "actual_deg": 89.99999803884896,
+      "expected_deg": 90,
+      "passed": true
+    },
+    {
+      "case": "antipodal_short_path",
+      "actual_deg": 22.50000044330204,
+      "expected_deg": 22.5,
+      "passed": true
+    },
+    {
+      "case": "zero_angle",
+      "actual_deg": 0.0,
+      "expected_deg": 0,
+      "passed": true
+    }
+  ],
+  "passed": 5
+}

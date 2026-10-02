@@ -26,13 +26,13 @@ for position,energy,size in [((3,4,6),750,4),((-3,-4,4),550,5)]:
     data=bpy.data.lights.new('Studio','AREA');data.energy=energy;data.shape='DISK';data.size=size
     light=bpy.data.objects.new('Studio',data);scene.collection.objects.link(light);light.location=position
     light.rotation_euler=(Vector((0,0,.2))-light.location).to_track_quat('-Z','Y').to_euler()
-data=bpy.data.cameras.new('Camera');camera=bpy.data.objects.new('Camera',data);scene.collection.objects.link(camera);scene.camera=camera;data.type='ORTHO';data.ortho_scale=4.7
+data=bpy.data.cameras.new('Camera');camera=bpy.data.objects.new('Camera',data);scene.collection.objects.link(camera);scene.camera=camera;data.type='ORTHO';data.ortho_scale=8.4
 clay=bpy.data.materials.new('Clay');clay.diffuse_color=(.55,.55,.55,1)
 for shade in ['clay','material']:
     scene.view_layers[0].material_override=clay if shade=='clay' else None
     scene.view_settings.exposure=-1.5 if shade=='clay' else 0
     for name,degrees in [('front',0),('side',90),('rear',180)]:
-        angle=math.radians(degrees);screen_right=Vector((math.cos(angle),-math.sin(angle),0))
+        angle=math.radians(degrees);screen_right=Vector((-math.cos(angle),math.sin(angle),0))
         for index,(mesh,centre) in enumerate(meshes):
             column=index//2;row=index%2
             mesh.location=screen_right*((column-2)*1.5)+Vector((0,0,.7-row*.9))-centre

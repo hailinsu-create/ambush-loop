@@ -1,0 +1,40 @@
+{
+  "baseline": "8a1fbe98e4f00ea5209c38d4e0749b1f992f9326",
+  "asset_and_firearm_fixture_source": "194d9c41aaddbf014f05c70c14d40c09e6d8131b",
+  "commands_exit_codes": {
+    "independent Blender export A": 0,
+    "independent Blender export B": 0,
+    "Godot firearm actual advance": 0,
+    "Godot R3 before comparison": 0,
+    "Godot full import/base regression": 0,
+    "Blender source framing-corrected review": 0,
+    "SLERP/STEP binary skin audit": 0,
+    "SLERP/STEP firearm contact audit": 0,
+    "semantic repeat": 0,
+    "semantic falsification": 0,
+    "known-angle sampler checks": 0
+  },
+  "actual_godot_support_max_m": 0.00204519345425069,
+  "actual_godot_sight_max_m": 0.00400031451135874,
+  "actual_godot_reload_contact_max_m": 0.000708345440216362,
+  "actual_godot_endpoint_max": 3.03976605664502e-07,
+  "after_captures": 880,
+  "before_captures": 310,
+  "base_captures": 462,
+  "raw_png_count": 1658,
+  "base_regression_log_source": "73251f6c183880e405663af5f9ed8fff91377631, unpublished pre-consolidation snapshot; fixture/base_review and every tested GLB byte-match 194d9c4; not an additional deliverable commit",
+  "followup_audit_only": "Evidence commit corrects source review camera framing and raw GLTF SLERP/STEP sampler. Generator, 51 GLBs, firearm profile data and actual Godot playback fixture remain exactly 194d9c4.",
+  "cpu_vs_engine": "Raw glTF CPU contact audit and Godot imported AnimationPlayer give distinct between-key maxima; use actual Godot values for adoption. Difference not traced per imported key, both independently below 15mm support/contact threshold. No assertion that raw sampling equals engine rebake.",
+  "diagnostic_attempts": "Superseded first-bind/without-scene-frame diagnostics were rejected. Final fixture waits two tree-entry frames and a scene update after every real advance before reading actual BoneAttachment gun markers.",
+  "script_hashes": {
+    "firearm_review.gd": "57236bf86319cced8ab2a937adf5c8690a194d8a6f93e06c441c21e2557610aa",
+    "review.gd": "5101bdbae7c5f8a09ab17fca181fed3136f4e49bd0010d20bab305fddfca6ab2",
+    "validate.py": "33b9c6feda9dfaf89ce5b00cf47a8d3198bd69318b683e308a21f47830b82fee",
+    "validate_firearms.py": "e4006e74e194a30489fe630b89d8f705ba52941a1f7480b47b2ce10afded4bf8",
+    "source_firearms_review.py": "17ac28ad4da4de98f2200bf534b25d208bb530f4eb66dcf5d9795f711049f9f3"
+  },
+  "artistic_approval": false,
+  "full_battle_approval": false,
+  "device_approval": false,
+  "base_fixture_bytes_match_fixed_source": true
+}

@@ -40,11 +40,19 @@ def pose(d,b,a,t):
  for ch in a['channels']:
   s=a['samplers'][ch['sampler']];ts=acc(d,b,s['input'])[:,0];vs=acc(d,b,s['output']);k=np.searchsorted(ts,t,side='right')-1;k=max(0,min(k,len(ts)-1))
   value=vs[k].copy()
-  if k+1<len(ts):
+  interpolation=s.get('interpolation','LINEAR')
+  assert interpolation in ('LINEAR','STEP'),'Audit supports exported LINEAR/constant STEP channels only'
+  if k+1<len(ts) and interpolation!='STEP':
    alpha=np.clip((t-ts[k])/(ts[k+1]-ts[k]),0,1);nxt=vs[k+1].copy()
-   if ch['target']['path']=='rotation' and np.dot(value,nxt)<0:nxt=-nxt
-   value=value*(1-alpha)+nxt*alpha
-   if ch['target']['path']=='rotation':value/=np.linalg.norm(value)
+   if ch['target']['path']=='rotation':
+    value=value.astype(float);nxt=nxt.astype(float)
+    value/=np.linalg.norm(value);nxt/=np.linalg.norm(nxt)
+    dot=float(np.dot(value,nxt))
+    if dot<0:nxt=-nxt;dot=-dot
+    angle=math.acos(np.clip(dot,-1,1))
+    value=value*(1-alpha)+nxt*alpha if angle<1e-6 else (value*math.sin((1-alpha)*angle)+nxt*math.sin(alpha*angle))/math.sin(angle)
+    value/=np.linalg.norm(value)
+   else:value=value*(1-alpha)+nxt*alpha
   mods.setdefault(ch['target']['node'],{})[ch['target']['path']]=value.tolist()
  return worlds(d,mods)
 

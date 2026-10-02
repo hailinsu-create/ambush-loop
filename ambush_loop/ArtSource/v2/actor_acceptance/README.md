@@ -1,84 +1,90 @@
-# A1.2 独立角色／武器资产候选 R3 — 2026-10-02
+# A1.2 独立资产候选 R4：十枪握持与过渡 — 2026-10-02
 
-本片修复优先步枪人物的球形肘膝接缝、鞋面分离、悬空枪吊环和低持枪双手偏离，补充实际 heel/toe 步态与暮色工业近远景对照。**技术样本通过；近景脸部、最终战术美术质量与完整实战仍未验收。** [R2 历史报告](R2_README.md)、[R1 历史报告](R1_README.md) 保留，不能混作本版证据。
+十枪、三角色、三 LOD 的专用握持／抬枪回位／换弹接触候选已完成真实 Godot 播放检查。**功能候选可审查采用；运行时接入、完整实战和最终美术质量仍未验收。** 程序化近脸暂保留既有品质限制，本片没有继续脸部雕改。
 
-## 固定提交与接收范围
+## 固定交付与范围
 
-- 冻结 WIP：`f7c30f9f7f0c2d53513191235f3a719a251e3a4c`；本片基线为已交付 R2 `812261a0d7c29446ab631108feec5389cec2950b`。
-- **实际被测代码与资产：`00b270863ba5a2cd5425abf2a31e78965c72ae45`**。后续证据提交只改本目录说明／契约／证据，不改变已测生成器、GLB、动画或测试代码。
-- 独立分支 `fix/asset-actors-dot-20261002`，工作区 `/workspace/ambush-actors-dot`；占用 `ArtSource/v2/build_actors.py`、`actors.blend`、`actor_acceptance/` 和候选台账列出的 51 GLB。没有推送 PR15、合并、部署、模拟器或真机测试。
-- [42 路径保护报告](r3_evidence/protected-paths.json) 全部与 R2 字节一致：yard 源／blend／atlas／旧 yard GLB、三张 actor atlas、共享 manifest／loader／main／presenter／view_state／replay／测试。工业环境只复制既有 yard 资产到独立 fixture。
-- **共享 `art/v2/actors_manifest.json` 仍停留 R1。** 主作者审查 [catalog_candidate.json](catalog_candidate.json) 后自行更新；不要用旧 manifest hash 检查 R3。全局 yardatlas 覆盖人物／枪仍错误；[材质分流候选 patch](material-routing.candidate.patch) 沿用，未应用共享 loader。
+- 基线 R3：`8a1fbe98e4f00ea5209c38d4e0749b1f992f9326`；冻结原始 WIP 为 `f7c30f9f7f0c2d53513191235f3a719a251e3a4c`。历史见 [R3](R3_README.md)、[R2](R2_README.md)。
+- **被测资产／生成器／真实枪族播放 fixture：`194d9c41aaddbf014f05c70c14d40c09e6d8131b`**。后续交付只补说明、证据、源图相机范围和独立 CPU sampler 检查；不改变这51 GLB、枪族 profile 或 Godot 播放代码。
+- 独立分支 `fix/asset-actors-dot-20261002`，工作区 `/workspace/ambush-actors-dot`；占用 `ArtSource/v2/build_actors.py`、`actors.blend`、`actor_acceptance/` 与候选台账51 GLB。未推送 PR15，未合并／部署／模拟器／真机测试。
+- [42 保护路径](r4_evidence/protected-paths.json) 与 R3 字节一致，包含共享 manifest／loader／main／presenter／view_state／replay／测试、yard源／GLB／blend／atlas和三张 actor atlas。
+- 共享 `art/v2/actors_manifest.json` 仍停留 R1。主作者审查 [资产台账](catalog_candidate.json)、[枪族合同](firearm_profiles_candidate.json)、[表现时序候选](firearm_runtime_contract_candidate.json) 后接入；不要用旧共享台账 hash 验证 R4。`v2_actor_atlas` 材质保持，[分流候选 patch](material-routing.candidate.patch) 未应用共享 loader。
 
-## 修复与可追溯像素
+## 动作与兼容接口
 
-before／after 使用相同 Godot 相机、灯光、动作与相位。原始截图 SHA 和代码出处见 [capture-index](r3_evidence/capture-index.json) 与 [provenance](r3_evidence/provenance.json)。before 使用 R2 固定资产和本片新增 quality fixture；日志 SOURCE_SHA 是当时工作区 HEAD，不表示新 fixture 已存在 R2。
+原12动作的名字、时长和实际 key 语义在21个人物 GLB全部保持，见 [21×12 比对](r4_evidence/legacy-clip-compatibility.json)。20骨层级／rest／inverse binds、人物几何／法线／UV／权重／材质不变。1 cell=1m，+Y up、-Z forward、ground origin与world_space一次转换不变；visual_only不写模拟状态。
 
-- 连续袖管／裤管替代肘膝球体，肩延伸进夹克，肘膝与腕／踝相邻骨混合权重。[蹲走关节对照](r3_evidence/crouched-joints-before-after.png)。七人物全部 LOD 采用共同生成方式；[21 项 rig 比对](r3_evidence/rig-compatibility.json) 的层级、rest、inverse binds 一致。
-- 靴面改闭合 loft，沿鞋底接合，鞋帮／鞋带随 foot/shin 混合，实际抬脚像素没有旧悬空缺口。[heel/toe 对照](r3_evidence/heel-toe-before-after.png)、[靴部动画](r3_evidence/foot_walk-before-after.mp4)。按实际足部顶点计算地面抬升；二进制 97 相位脚 pitch 从近零变为约 -16.75°～+11.67°，见 [foot-pitch](r3_evidence/walk-foot-pitch.json)。仍是原地动画，不代表实战 world travel 已脚锁定。
-- 双手改掌部、弯曲手指、连通拇指与腕袖口；长枪缩短 receiver、增加 stock wrist，吊环改附着枪身的 U 形结构。[M1 握枪对照](r3_evidence/rifle-grasp-before-after.png)。手指没有独立骨，不宣称开合、扳机事件或其他枪种握持通过。
-- 低持枪斜横胸前，支撑手跟随共同枪轴；走／跑增加足滚动和髋部小幅横移，aim/fire 保持前向射击。[走路动画](r3_evidence/gait_operator_rifle_walk-before-after.mp4)、[跑步动画](r3_evidence/gait_operator_rifle_run-before-after.mp4)。视频由每动作 16 个真实 Godot 帧按台账时长播放，重复三次，是资产采样视频。
-- skull/jaw 合并为连续轮廓，缩小眼／鼻／耳与头盔厚度。[正脸对照](r3_evidence/face-front-before-after.png)、[敌人近脸](r3_evidence/enemy-face-before-after.png)。重叠下巴和凸出眼球已减少；**新脸仍程序化、棱角与简化五官可见，不能标为写实质量通过**。
-- enemy_patrol 增加横向 bedroll／breadbag 身份轮廓。暮色采用既有仓库／地面／油桶／院灯，冷环境光加暖灯：[4 m 近景](r3_evidence/industrial-near-before-after.png)、[10 m LOD2 远景](r3_evidence/industrial-far-before-after.png)。独立样本中制服／装备轮廓有区分；真实遮挡／HUD／六关镜头尚待集成。
+新增40个可选 clip：六姿态组各 `ready_*/aim_*/fire_*/raise_*/lower_*`，以及十个 `reload_contact_<weapon_id>`；七人物各三 LOD均有52动作。Thompson因垂直前握把单独用姿态组，逻辑仍属于SMG。
 
-源 Blender front/side/rear 各有材质和 clay 图：[材质正面](r3_evidence/source_material_front.png)、[clay 侧面](r3_evidence/source_clay_side.png)；[source-report](r3_evidence/source-report.json) 七人物各 20 骨／3 meshes，mesh validate 无修正。CPU Cycles 8 samples 有噪点，非最终宣传图。
-
-## 主作者必须检查的接口
-
-[contract.json](contract.json) 与候选台账为机器入口。rifleman→operator_rifle、normalenemy→enemy_patrol、firstrifle→m1_garand；role 0/1/2 与 patrol/flank/sneak/echo 映射不变。
-
-1 cell = 1 m，+Y up、-Z forward，人物 ground origin，world_space 只转换一次。20 骨层级／rest／inverse binds、12 动作名与时长、手挂点及枪口／支撑 marker 不变；visual_only 不写模拟／碰撞／导航／LOS／回放。
-
-| 接口 | R2 → R3 | 接入要求 |
+| 枪 ID | 姿态组 | 专用接触 |
 | --- | --- | --- |
-| sight_eye，head local | `(0.037,0.139,-0.110)` → `(0.037,0.139,-0.106)` | 眼点靠近新头部表面 4 mm；如运行时使用则更新 |
-| mine socket_grip，tool local | `(0.115,0.035,0)` → `(0.115,0.075,0)` | +40 mm 配合闭合手套；读取 marker，避免旧硬编码 |
-| mine pressure_plate | `(0,0.075,0)`，不变 | ground origin 与放置物坐标保持 |
-| low-ready 方向 | 共同枪轴斜横胸前，约 20° 横向偏转／10° 下倾 | 由手骨与 mount 提供；aim/fire -Z 射击前向不变 |
+| m1911 / luger | pistol | 左手围握右手，枪族平均照准高度，两型号最大眼线差4mm |
+| m1_garand / kar98k | rifle | 前托支撑与机匣上部接触 |
+| thompson | thompson | 垂直前握把与弹鼓侧部接触 |
+| mp40 | smg | 前托支撑与弹匣底部接触 |
+| bar / mg42 | mg | 支撑肩前伸；BAR弹匣、MG42侧部接触 |
+| springfield / kar98k_zf | scout | 瞄准镜高度与枪栓柄接触 |
 
-hand.R / hand.L 局部平移 `(0,.035,0)`、X+90°，枪支 support `(0,0,-.26)` 保持。读取 `<asset_id>__socket_muzzle` 经 gun.global_transform 转世界；工具挂点用 `palm_offset - attachment_basis * tool_local_grip`。**工具 fit 是坐标样本，不是拾取／放置／收枪事件实现。** haul 仍是弹药包携行，尸体拖拽未验收。
+三角色 `operator_rifle/operator_mg/operator_scout` 均检查全部十枪；role 0/1/2、rifleman／normalenemy／firstrifle与四敌人映射不变。身份合同见 [contract.json](contract.json)。
 
-材质仍 `v2_actor_atlas`：albedo sRGB；normal / ORM linear，normal_scale .4；ORM R=AO1、G=roughness、B=metallic，metallic scalar1。一个共享 StandardMaterial3D，每模型一个 surface，无 GLB 内嵌纹理。glTF 无 looping 字段；按台账设置循环，不将所有动作强制循环。
+**现有 socket 全部保留**：[30个装备 GLB 比对](r4_evidence/socket-compatibility.json)。手挂点仍 hand.R／hand.L `(0,.035,0)`、X+90°；R3眼点／地雷 grip 不再移动。每枪只新增可选 `pose_support`、`sight`、`reload_contact` marker；新增动作应读这些实际节点，不能继续把左掌硬套旧长枪 -.26m 支撑点。枪口仍读原 `__socket_muzzle`，由实际 gun.global_transform 转世界坐标。
 
-## 实测、差异与预算
+抬枪／回位各0.3s，端点对齐 ready／aim 的 phase0；开火实际导入时长0.233333s；换弹接触1s、.40–.60相位保持接触并返回aim。暂停／回放／2倍速按历史相位采样，不以动画长度限制模拟射速。
 
-[二进制审计](r3_evidence/binary-verified.json)：22 资产／51 LOD、零违规／退化三角形；21 skins × 12 clips × 25 时刻 = 6300 蒙皮样本。最低点 -4.19 mm，检测门槛 -15 mm；不证明连续所有帧或跨动作混合无穿插。
+基线游戏 `operator.gd:try_fire` 在空弹时立即补包或切手枪、发事件并设置冷却，**没有独立换弹状态**。`reload_contact_*` 只提供闭手伸向现有枪体位置的候选，没有弹匣／枪栓／弹链机械动画，也不提交弹药。主作者根据真实历史事件选择是否采用，不能从回放中的当前活体弹药猜换弹。十枪真实 shot_interval／reload_s 的只读出处与 hash 在表现时序候选中；快速连发、任意中途取消、换枪和上身 locomotion mask 尚待主作者运行时验证。
 
-[Godot 报告](r3_evidence/engine-report.json) 与 [日志](r3_evidence/engine-verified.log)：4.7.2 Compatibility／Mesa llvmpipe，实际导入 51、截图 462、0 failures。包含三 LOD 八方位、12 动作各 25 帧、全部人物各 LOD 动作中帧与五工具双 LOD 五阶段。质量 fixture before／after 各 190 截图，[after 报告](r3_evidence/quality-report.json) 0 failures，含优先两人物近脸／握枪／步态与工业近远景。没有 mesh-invalid 或 Godot mesh warning；虚拟显示打印 VSync 不支持，Blender 打印可选 Draco 库缺失。
+## 真实动态、源图与测量
 
-共同步枪持枪样本支撑误差最大 **0.505 mm**（R2 36.53 mm），aim/fire 眼点至照门枪线最大 14.64 mm。地雷 deploy 中点 ground origin 0.93 mm，工具 grip 误差 <0.001 mm；数字不能代替手指形状／事件验收。
+[Godot枪族报告](r4_evidence/firearm-report.json)／[日志](r4_evidence/firearm-verified.log)：4.7.2 Compatibility、Mesa llvmpipe，实际 AnimationPlayer.advance 播放25相位，**90配置／540接触行／360端点／90项2倍速／880截图，零失败**；R3同镜头对照另310截图。LOD0／2有近远动态，LOD1有数值接触；每枪近景含三角色。左右掌、眼线及枪口数据取实际导入节点，非重建猜测矩阵。
 
-16 人物 + 16 枪参考资产 fixture：**66 draw calls／71,084 submitted primitives**（R2 72,944）；不含整院／HUD／实战负载，不宣称手机 FPS／内存通过。每模型一个 surface，预算字符 8000/4000/1800、枪 3000/1500、工具 2000/1000，全部通过。
+BoneAttachment需要树入口注册和场景更新：fixture等两帧进入树，并在每次advance后等场景帧再读实际挂枪位置。省略更新的诊断检查曾失败，已拒绝；不能把Skeleton强制更新直接当作挂枪节点已完成更新。
 
-| 资产 | 三角面 LOD0 / LOD1 / LOD2 |
+Godot最大支撑误差 **2.045mm**，换弹接触 **0.708mm**，aim/fire眼线 **4.001mm**，右握把0；门槛分别15mm／15mm／35mm。全骨过渡端点最大变换差 `3.04e-7`，2倍速相位／姿态检查误差0。手枪aim旧支撑误差264.67mm、Thompson58.31mm；新候选两者aim均不足0.001mm。**挂点数值不等于静态手指形状或机械动作的艺术批准。**
+
+| 家族 | 前后握持像素 | 实际近景动作循环 | 远景 LOD2 |
+| --- | --- | --- | --- |
+| pistol | [M1911](r4_evidence/m1911-grip-before-after.png)／[Luger](r4_evidence/luger-grip-before-after.png) | [M1911视频](r4_evidence/m1911-lod0-cycle.mp4) | [视频](r4_evidence/m1911-lod2-cycle.mp4) |
+| rifle | [M1](r4_evidence/m1_garand-grip-before-after.png)／[Kar98k](r4_evidence/kar98k-grip-before-after.png) | [M1视频](r4_evidence/m1_garand-lod0-cycle.mp4) | [视频](r4_evidence/m1_garand-lod2-cycle.mp4) |
+| smg | [Thompson](r4_evidence/thompson-grip-before-after.png)／[MP40](r4_evidence/mp40-grip-before-after.png) | [Thompson视频](r4_evidence/thompson-lod0-cycle.mp4)／[MP40](r4_evidence/mp40-lod0-cycle.mp4) | [视频](r4_evidence/thompson-lod2-cycle.mp4) |
+| mg | [BAR](r4_evidence/bar-grip-before-after.png)／[MG42](r4_evidence/mg42-grip-before-after.png) | [BAR视频](r4_evidence/bar-lod0-cycle.mp4)／[MG42](r4_evidence/mg42-lod0-cycle.mp4) | [视频](r4_evidence/mg42-lod2-cycle.mp4) |
+| scout | [Springfield](r4_evidence/springfield-grip-before-after.png)／[KarZF](r4_evidence/kar98k_zf-grip-before-after.png) | [Springfield视频](r4_evidence/springfield-lod0-cycle.mp4)／[KarZF](r4_evidence/kar98k_zf-lod0-cycle.mp4) | [视频](r4_evidence/springfield-lod2-cycle.mp4) |
+
+视频是实际播放捕获的八间隔采样，按原动作时长布局并插入0.3s aim停留；30fps量化与末帧保持后总长2.167s。片段间终点重复帧省略，没有插值伪造动作，也不是实战视频。30张三角色握枪特写和十张换弹接触特写在本证据目录；1658原始PNG（含462回归与六源图）的 [hash索引](r4_evidence/capture-index.json) 指向独立交付目录 `/workspace/deliverables/actor-repair-20261002-r4/`。
+
+Blender实际源材质／clay front/side/rear各一张：[十枪侧面](r4_evidence/guns_material_side.png)、[clay](r4_evidence/guns_clay_side.png)。源相机初轮裁掉外侧列，证据提交修正了取景并实际重渲染；最终六图覆盖十枪。[源报告](r4_evidence/source-firearms-report.json)中mesh validate无修正。
+
+## 重建、回归与预算
+
+[重复](r4_evidence/semantic-repeat.json)／[raw与仓库核对](r4_evidence/raw-repeat-tracked.json)：独立Blender4.3.2两次51 GLB、三贴图、两候选台账全部逐字节一致；51语义hash也相同。无Decimate，精度1e-6，8项语义 [反证](r4_evidence/semantic-falsification.json)通过。blend路径／元数据不宣称raw相同。
+
+[变更分类](r4_evidence/change-classification.json)：21人物只增动画；20枪GLB增加marker，其中Thompson／BAR／MG42双LOD另补后握把。十工具GLB语义不变，六项只有exporter名序metadata变化，四项raw亦未变；没有yard再生成。静态枪的weights fingerprint含位置，其六项变化来自几何，不是人物权重重绘。
+
+[完整二进制审计](r4_evidence/binary-slerp.json)：22/51、零违规，21 skins×52 clips×25=27300蒙皮样本，最低点-4.19mm（门槛-15mm）。审计按声明STEP及四元数SLERP采样，取代原归一线性近似；[五个已知角度／STEP断点检查](r4_evidence/animation-sampling-check.json)通过，依据 [Khronos插值定义](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#appendix-c-animation-sampler-interpolation-modes)。[90配置CPU接触](r4_evidence/firearm-binary-slerp.json)也零失败；raw glTF与Godot导入动画的键间最大值不同，接收以Godot实测为准，未声称逐key等价。
+
+[回归报告](r4_evidence/engine-report.json)真实导入全部51与七人物各52动作，462截图零失败。日志HEAD是整理前未发布73251f6；[provenance](r4_evidence/provenance.json)已核对其fixture源码及全部GLB与194d9c4字节相同，73251f6不是额外交付提交。所有最终命令实际退出0，无mesh-invalid／Godot mesh warning；可选Draco缺失与虚拟显示VSync提示保留在日志。
+
+人物预算8000/4000/1800不变，原人物三角数保持R3；枪3000/1500、工具2000/1000全部通过。新增后握把后Thompson1068/340、BAR1048/348、MG421596/576，每模型仍一个surface。旧16人物+16步枪fixture为66draw calls／71084 primitives；不代表真实场景FPS、动画资源内存或手机预算通过。
+
+## A1.2剩余责任与运行入口
+
+[机器责任表](acceptance_ownership.json)保存完整边界：
+
+| 待验项目 | 负责者 |
 | --- | --- |
-| operator_rifle | 5846 / 2852 / 1668 |
-| operator_mg | 6210 / 3216 / 1680 |
-| operator_scout | 5750 / 2752 / 1548 |
-| enemy_patrol | 5902 / 2884 / 1700 |
-| enemy_flank | 5756 / 2740 / 1548 |
-| enemy_sneak | 5842 / 2788 / 1604 |
-| enemy_radio | 5878 / 2884 / 1700 |
-| m1_garand / kar98k | 1124/340；1164/352 |
-| thompson / mp40 / bar | 1024/328；1004/336；1004/336 |
-| mg42 / springfield / kar98k_zf | 1552/564；1268/428；1356/452 |
+| 审查台账／材质分流，按历史枪ID选clip，四敌人行为映射 | PR15主作者 `01a0fcab-4daa-716b-8d26-e998edbb30bd` |
+| 装备事件、快速连发、中途取消／换枪、行走上身mask与过渡 | 主作者运行时接入；dot提供资产缺陷修复 |
+| 刀刺、投雷、诱饵专用放置、尸体拖拽、死亡接触品质 | dot后续资产切片；当前haul仍弹药包carry |
+| 静态闭手、近脸／服装、十枪历史轮廓与机械准确性 | dot资产制作，父任务／主作者最终艺术评审 |
+| 六关暮色遮挡／身份／枪口VFX，LOD切换，完整回放pause/2x，场景与动画内存预算 | 主作者与父任务云端验收 |
+| 手机30/60FPS、压缩、热／触控 | 父任务在完整制作接入后安排设备验证，当前按用户指令暂缓 |
+| A1.2最终闭合 | 父任务汇总主作者集成与dot证据；本包不能独立标全通过 |
 
-手枪／工具完整值见二进制报告。[R2→R3 分类](r3_evidence/change-classification.json)：角色几何／权重／动画、八长枪几何和地雷握点变更；**另 12 GLB 仅 exporter data-block 名序 metadata 变化**，两手枪与 ammo_pack／decoy／grenade／knife 双 LOD 所有语义组件完全相同。这 12 项明确纳入 51 文件台账，没有 yard 再生成。
-
-两个独立 Blender 4.3.2 进程 **51/51 raw 与 semantic hash 一致**：[重复报告](r3_evidence/semantic-verified.json)；[raw-repeat-tracked](r3_evidence/raw-repeat-tracked.json) 另核对两构建、仓库产物、三纹理与台账字节相同。沿用 R2 固定 tessellation／无 Decimate／1e-6 语义精度，8 个 [反证测试](r3_evidence/semantic-falsification.json) 通过，未放宽检查。blend 内部路径／元数据不宣称 raw 可复现。
-
-## 重做入口与未验事项
-
-从 `ambush_loop/` 运行：
+从仓库根运行独立检查：
 
 ```bash
-blender -b --python-exit-code 1 --python ArtSource/v2/build_actors.py -- --output-root /tmp/actors-a
-blender -b --python-exit-code 1 --python ArtSource/v2/build_actors.py -- --output-root /tmp/actors-b
-python3 ArtSource/v2/actor_acceptance/validate.py --project /tmp/actors-a --catalog /tmp/actors-a/catalog_candidate.json --output /tmp/binary.json
-DISPLAY=:97 bash ArtSource/v2/actor_acceptance/run_review.sh /path/to/Godot_4.7.2 /tmp/actor-review ArtSource/v2/actor_acceptance/catalog_candidate.json
-DISPLAY=:97 bash ArtSource/v2/actor_acceptance/run_review.sh /path/to/Godot_4.7.2 /tmp/actor-quality ArtSource/v2/actor_acceptance/catalog_candidate.json "$PWD" "$PWD/ArtSource/v2/actor_acceptance/quality_review.gd"
+blender -b --python-exit-code 1 --python ambush_loop/ArtSource/v2/build_actors.py -- --output-root /tmp/actors-a
+python3 -m ambush_loop.ArtSource.v2.actor_acceptance.validate_firearms --project /tmp/actors-a --profiles /tmp/actors-a/firearm_profiles_candidate.json --output /tmp/firearms.json
+DISPLAY=:97 bash ambush_loop/ArtSource/v2/actor_acceptance/run_review.sh /path/to/Godot_4.7.2 /tmp/firearm-review ambush_loop/ArtSource/v2/actor_acceptance/catalog_candidate.json "$PWD/ambush_loop" "$PWD/ambush_loop/ArtSource/v2/actor_acceptance/firearm_review.gd"
 ```
 
-生成器强制独立 output root；不要用旧 build_yard_kit.py 重写广泛产物。最终导出／二进制／语义／反证／Godot／源渲染实际退出码均 0，见 provenance。848 原始 PNG 与构建保留于 `/workspace/deliverables/actor-repair-20261002-r3/`；仓库有精选前后图、三段实际采样视频、六源图和完整 hash 索引。
-
-待验：最终近脸／写实质量、其他枪种／刀专用握持、world travel 脚锁与动作过渡、装备事件、死亡掉枪／尸体拖拽、真实遮挡与六关、回放／pause/2x 集成和 LOD 切换。外部 GPT PLAN/REVIEW unavailable；无艺术 approve。设备测试按指令暂缓。**截图捕获和运行时样本 review 通过均不等于 A1.2 或完整实战通过。**
+需要独立显示与隔离fixture；不运行旧build_yard_kit.py。外部GPT PLAN/REVIEW unavailable；无艺术approve。**实际运行时样本review通过仍不是完整实战通过。**

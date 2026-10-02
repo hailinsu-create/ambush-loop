@@ -83,7 +83,7 @@
     }
   },
   "weapon_socket": "actual GLB nodes <asset_id>__socket_grip / <asset_id>__socket_muzzle / <asset_id>__socket_support_hand, authored and validated in exported +Y up/-Z forward axes. Pistol has no support marker. Socket points are model local: transform by attached gun.global_transform.",
-  "grip_contract": "Priority M1 and Kar98k rifle hold: hand.R and hand.L local offset (0,.035,0), X+90deg mount; support at (0,0,-.26). Low-ready barrel rotates diagonally across torso; aim/fire preserve -Z forward. Other gun families still require own grip overlays.",
+  "grip_contract": "For new firearm clips use per-model pose_support. Existing support_hand at (0,0,-.26) remains for legacy rifle holds; pistols retain legacy support_hand=null. All models add pose_support, sight and reload_contact nodes. Hand.R/hand.L mount offset and X+90deg unchanged.",
   "animation_loop": "glTF has no looping field; use catalog_candidate.json after integration review",
   "animation_actions": {
     "idle": "rifle low-ready breathing",
@@ -127,13 +127,13 @@
     "generation": "Each LOD constructed at fixed tessellation/feature tier. No Decimate. 51/51 raw and semantic hashes equal in independent Blender 4.3.2 runs."
   },
   "remaining_acceptance": [
-    "Main author artistic review: angular near faces, simplified clothing folds and helmet silhouette still below final realistic tactical quality.",
-    "Family-specific pistol, SMG, MG, scout and knife grip/trigger overlays; static glove fingers have no opening/closing animation.",
-    "Continuous locomotion world travel, foot locking and inter-clip blend transitions in actual runtime.",
-    "Tool equipment events, weapon stow/drop and corpse hauling bindings; current haul is ammo carry.",
-    "Full six-level battle, visibility/occlusion/HUD readability, pause/2x/replay/event timing and LOD switching after integration.",
-    "Mobile hardware FPS, memory, texture compression, thermals and touch tests postponed by user.",
-    "External GPT PLAN/REVIEW unavailable; no external artistic approve claim."
+    "Main PR15 author: review candidate catalogs/material routing, choose clips from historical weapon ID, connect gameplay/replay equipment events without live-state leakage.",
+    "Main PR15 author: locomotion upper-body masks, arbitrary midclip cancellation, rapid repeated shots, weapon swaps, LOD transitions, full six-level replay/pause/2x behavior.",
+    "Dot asset stream: knife lunge, grenade throw, dedicated decoy placement, corpse haul and improved death/contact candidates; existing haul remains ammo carry.",
+    "Dot asset stream plus parent art review: historically accurate ten-gun geometry/mechanisms, static-glove limitations, procedural near faces/clothing and final tactical style quality.",
+    "Main author plus parent: actual six-level dusk occlusion, silhouettes, identity/muzzle readability and scene rendering/animation memory budgets.",
+    "Device validation owner after production/integration: mobile FPS/memory/compression/thermals/touch; postponed by user.",
+    "External GPT PLAN/REVIEW unavailable; no artistic or full battle approval."
   ],
   "catalog": "ArtSource/v2/actor_acceptance/catalog_candidate.json is review data, not auto-applied runtime manifest",
   "tool_socket": "All five tools have actual named GLB grip markers. Mine grip R3 local [.115,.075,0]; use marker-derived offset, not old hard-coded 35mm height. Mine pressure plate remains [0,.075,0]. Fit checks are independent samples; runtime placement/release events remain integrator scope.",
@@ -164,5 +164,8 @@
     },
     "preserved": "20 named bones/rest/inverse binds, 12 names/durations, all other weapon/tool markers, hand mounts, IDs and material slot",
     "low_ready": "Weapon barrel follows common hand bone direction; do not hard-code a world forward basis for low-ready."
-  }
+  },
+  "firearm_profiles": "Optional firearm_profiles_candidate.json: 10 actual IDs x 3 roles, six pose groups (Thompson vertical foregrip variant), 40 added clips. Existing 12 actions, 20 rest bones and all original sockets unchanged.",
+  "animation_catalog": "All seven characters and all three LODs expose 52 animations: legacy12 plus six groups x ready/aim/fire/raise/lower and ten reload_contact_<weapon_id>.",
+  "runtime_timing_candidate": "firearm_runtime_contract_candidate.json mirrors actual ten-gun timing read-only; no independent simulation reload state exists in the baseline. Main author owns historical event selection, rapid-fire scaling, masking and interruption."
 }

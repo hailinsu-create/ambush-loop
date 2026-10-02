@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "source": "ambush_loop/scripts/raid/weapon_catalog.gd",
+  "source_sha256": "3e3ccb264fc1690462a65096908540d64b643444ca21b7b5901f07faad593c87",
+  "read_only_snapshot_baseline": "8a1fbe98e4f00ea5209c38d4e0749b1f992f9326",
+  "models": [
+    {
+      "weapon_id": "kar98k",
+      "family": "rifle",
+      "simulation_shot_interval_s": 0.52,
+      "simulation_reload_s": 1.15,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "m1_garand",
+      "family": "rifle",
+      "simulation_shot_interval_s": 0.2,
+      "simulation_reload_s": 0.48,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "mp40",
+      "family": "smg",
+      "simulation_shot_interval_s": 0.078,
+      "simulation_reload_s": 0.95,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "thompson",
+      "family": "smg",
+      "simulation_shot_interval_s": 0.068,
+      "simulation_reload_s": 1.05,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "mg42",
+      "family": "mg",
+      "simulation_shot_interval_s": 0.055,
+      "simulation_reload_s": 1.4,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "bar",
+      "family": "mg",
+      "simulation_shot_interval_s": 0.115,
+      "simulation_reload_s": 0.95,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "m1911",
+      "family": "pistol",
+      "simulation_shot_interval_s": 0.18,
+      "simulation_reload_s": 0.5,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "luger",
+      "family": "pistol",
+      "simulation_shot_interval_s": 0.15,
+      "simulation_reload_s": 0.55,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "kar98k_zf",
+      "family": "scout",
+      "simulation_shot_interval_s": 0.62,
+      "simulation_reload_s": 1.35,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    },
+    {
+      "weapon_id": "springfield",
+      "family": "scout",
+      "simulation_shot_interval_s": 0.48,
+      "simulation_reload_s": 1.1,
+      "asset_fire_duration_s": 0.23333333333333334,
+      "asset_reload_contact_duration_s": 1.0,
+      "timing_rule": "presentation only: normalized recorded event phase; no added cooldown, ammo commit, or simulation gating"
+    }
+  ],
+  "event_reference": {
+    "source": "ambush_loop/scripts/operator.gd:try_fire",
+    "actual_behavior": "ammo decrement and fired_shot first; empty ammo immediately tries ammo pack or pistol fallback, emits ammo_repacked/ammo_empty and sets shot_cd to reload_s; no separate reload state",
+    "adoption": "main author supplies historical weapon/event data, may opt into reload_contact only when there is a matching historical equipment event; no reload inferred from live ammo during replay"
+  },
+  "phase_contract": "Read authored animation length from imported resource; fire is 0.233333s, not nominal 0.24s. Replay/pause/2x use historical normalized phase. Rapid shots may require event-scaled sampling or interruptible pulses; must not impose animation duration as shot cooldown.",
+  "transitions": "Authored raise/lower and fire/reload endpoints align to ready/aim phase0. Arbitrary midclip cancellation, rapid repeated shots, weapon swaps and upper-body locomotion masks remain runtime acceptance by main author."
+}
