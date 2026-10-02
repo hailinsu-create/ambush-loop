@@ -11,6 +11,7 @@
 | [PR15 独立复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md) | 四项P2已实际复现：同波未来定位环、旧事件流tick回退、雷点/诱饵入口锁和SWEEP旋转；cc11bb0/71df99a独立切片。历史HUD读取活体仍待闭合；实际结果见证据索引。 |
 | [R2候选采用计划](AMBUSH_PR15_R2_ADOPTION_20261002.md) | 812261a候选22/51只读二进制复核退出0；尚未迁入。R2必须按catalog_candidate更新主作者台账；接历史HUD、动作时间、骨/挂点、LOD及战场验证，最终美术未通过。 |
 | [独立45 cue音频接口](AMBUSH_PR15_AUDIO_INTERFACE_20261002.md) | 已按现有SfxBus/AudioDirector/smoke给出22050Hz mono PCM16、干声/loop/45用途ID与脚步变体、候选台账和单写者边界。制作及实际声音品质尚待交付验收。 |
+| [独立环境资产包接口](AMBUSH_PR15_ENVIRONMENT_INTERFACE_20261002.md) | 供dot分配：新environment_v2源/导出目录、完整建筑/地表、14类原用途与其余五关地标；不改已有yard/actor/audio或运行代码。尚未派遣生产；九件样本不称六关完整库。 |
 | [PR15 runtime 切片报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md) | 实际多波回放/装备冻结反例、三个修复切片、固定源码与隔离/原生输入/软件渲染证据；首三项修复的完整六夜 smoke、六关多波与历史字段回归已通过；完整历史 HUD/动作/FX 待接。完整角色、院子和五关接入仍待完成。 |
 | [历史画面格式 1](AMBUSH_REPLAY_VISUAL_SCHEMA_20261002.md) | 固定 17aba59 的装备/姿态/工具/环境历史、只读接缝和旧/未知格式兼容；44 项渲染、84,039 项合同和 10,296 项六关回归通过。完整历史 HUD/动画/FX 仍待接入。 |
 | [完整资产执行顺序 v2](AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md) | 最新用户指令：先完成 A1/A2、A3 云端优化、A4 六关与完整构建，再统一模拟器/真机；替代此前设备门槛阻塞生产的顺序。 |
