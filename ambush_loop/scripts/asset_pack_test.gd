@@ -21,7 +21,7 @@ func _check(ok: bool, message: String) -> void:
 
 
 func _run() -> void:
-	var physical_root := OS.get_env("AMBUSH_ASSET_PACK_ROOT")
+	var physical_root := OS.get_environment("AMBUSH_ASSET_PACK_ROOT")
 	_check(not physical_root.is_empty() and DirAccess.get_files_at(physical_root).is_empty(), "probe has no physical project files to conceal missing packed resources")
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/static_equipment_manifest.json"))
 	_check(doc.assets.size() == 15, "equipment manifest is included in the pack")

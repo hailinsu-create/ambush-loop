@@ -25,6 +25,7 @@ func _check(ok: bool, message: String) -> void:
 
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
+	root.get_node("AudioDirector").pause_for_background()
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/static_equipment_manifest.json"))
 	_check(doc.assets.size() == 15 and doc.source_commit == "0242c983e8ae972b58b4f7afe9d08084b8f421c6", "static subset has frozen provenance")
 	_check(not Assets.has_asset("operator_rifle") and not Assets.has_asset("enemy_heavy"), "unaccepted characters are outside the runtime catalog")
@@ -104,7 +105,8 @@ func _run() -> void:
 	root.get_node("AudioDirector")._stop_music_hard()
 	studio.free()
 	Assets.release_materials()
-	await process_frame
+	# Allow the Dummy audio driver's outstanding WAV mix to release its playback.
+	await create_timer(0.1).timeout
 	print("ASSET_LIBRARY_OK" if failures == 0 else "ASSET_LIBRARY_FAILED", " checks=", checks, " failures=", failures, " assets=15 lods=30")
 	quit(0 if failures == 0 else 1)
 
