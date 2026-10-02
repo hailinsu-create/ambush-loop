@@ -4,6 +4,8 @@ const StorageGuard := preload("res://scripts/test_storage_guard.gd")
 const Assets := preload("res://scripts/presentation/asset_library.gd")
 const Actor := preload("res://scripts/presentation/actor_visual.gd")
 const AudioAssets := preload("res://scripts/sfx/audio_assets.gd")
+const Profiles := preload("res://scripts/presentation/firearm_pose.gd")
+const Pose := preload("res://scripts/presentation/actor_pose.gd")
 var checks := 0
 var failures := 0
 
@@ -28,6 +30,20 @@ func _run() -> void:
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
 	_check(doc.assets.size() == 22 and doc.source_commit == "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "R4 manifest is included in the pack with fixed provenance")
 	_check(FileAccess.file_exists("res://art/v2/manifest.json"), "yard manifest is included in the pack")
+	var profiles: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(Profiles.MANIFEST))
+	_check(profiles.profiles.size() == 10 and profiles.upper_body_mask == Profiles.UPPER_BONES, "packed firearm profiles retain all ten guns and the exact upper-body mask")
+	var body := Actor.new()
+	root.add_child(body)
+	_check(body.set_asset("operator_mg", 0, Pose.ASSET_REVISION), "actual packaged R4 sampler loads")
+	for weapon in WeaponCatalog.model_ids():
+		var profile := Profiles.profile(weapon)
+		_check(profile.weapon_id == weapon and body.mount_item(weapon) and body.sample_pose(profile.clips.aim, 0.4), "actual packaged current firearm profile/clip/gun works: " + weapon)
+	for weapon in ["thompson", "bar", "mg42"]:
+		for lod in 2:
+			_check(body.set_asset("operator_mg", lod, Pose.LEGACY_REVISION) and body.mount_item(weapon), "old-version packaged rig and gun load: " + weapon)
+			_check(body.equipped.get_meta("asset_resource_path") == "res://art/v2/replay_r3/%s_lod%d.glb" % [weapon, lod] and body.item_socket("pose_support").is_empty(), "actual packaged R3 geometry retains its original resource and marker set: " + weapon)
+			_check(body.sample_pose("aim", 0.4) and not body.item_socket("muzzle").is_empty(), "old-version packed animation/muzzle still sample: " + weapon)
+	body.free()
 	var audio_doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(AudioAssets.MANIFEST))
 	_check(audio_doc.cues.size() == 45 and audio_doc.asset_source_commit == "86df6d0b4af9f30f3f1e670207cc54b22e2f043b", "45-cue audio manifest retains fixed producer provenance in the pack")
 	for row in audio_doc.cues:
