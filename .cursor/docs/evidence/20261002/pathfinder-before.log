@@ -1,0 +1,13 @@
+TEST_RUN_ID=b48b59ab00f444f29f52ea1c75f8827f
+TEST_DATA_ROOT=/workspace/lning/ambush_loop/build/ambush_test_runs/b48b59ab00f444f29f52ea1c75f8827f/data
+TEST_ENTRY=pathfinder_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/lning/ambush_loop/build/ambush_test_runs/b48b59ab00f444f29f52ea1c75f8827f/data/godot/app_userdata/Ambush Loop run_id=b48b59ab00f444f29f52ea1c75f8827f
+PATHFINDER_FINGERPRINT 0b77fff7d2d836cb1eccb589891c1c5f3a6bf5c63b25ea3a8a369e2d6e3aad45
+PATHFINDER_OK cases=504 oracle=311 seed=20261002
+PATHFINDER_BENCH kind=plain queries=126 samples=5 median_us=91879 path_cells=15900
+PATHFINDER_BENCH kind=avoid queries=126 samples=5 median_us=85221 path_cells=15420
+PATHFINDER_BENCH kind=weighted queries=126 samples=5 median_us=92598 path_cells=14810
+PATHFINDER_BENCH kind=mixed queries=126 samples=5 median_us=100338 path_cells=16240
+TEST_LOG=/workspace/lning/ambush_loop/build/ambush_test_runs/b48b59ab00f444f29f52ea1c75f8827f/run.log

@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-02",
+  "base_commit": "0859577be3d83efafb5e6082112c1dac53dd90d4",
+  "implementation_commit": "989f8ebb5bdf5f6ff2bef3542f93349c06f40117",
+  "pathfinder_git_blob": "2a0b63f4005558a777bd475555e4d9827758a340",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "import_exit_code": 0,
+  "storage_probe_exit_code": 0,
+  "targeted_test": {
+    "baseline_exit_code": 0,
+    "optimized_exit_code": 0,
+    "seed": 20261002,
+    "exact_paths": 504,
+    "native_minimum_cost_checks": 311,
+    "fingerprint_sha256": "0b77fff7d2d836cb1eccb589891c1c5f3a6bf5c63b25ea3a8a369e2d6e3aad45"
+  },
+  "benchmarks": [
+    {
+      "kind": "plain",
+      "queries": 126,
+      "samples": 5,
+      "baseline_median_us": 91879,
+      "optimized_median_us": 71859,
+      "time_reduction_percent": 21.8
+    },
+    {
+      "kind": "avoid",
+      "queries": 126,
+      "samples": 5,
+      "baseline_median_us": 85221,
+      "optimized_median_us": 67146,
+      "time_reduction_percent": 21.2
+    },
+    {
+      "kind": "weighted",
+      "queries": 126,
+      "samples": 5,
+      "baseline_median_us": 92598,
+      "optimized_median_us": 72458,
+      "time_reduction_percent": 21.7
+    },
+    {
+      "kind": "mixed",
+      "queries": 126,
+      "samples": 5,
+      "baseline_median_us": 100338,
+      "optimized_median_us": 79081,
+      "time_reduction_percent": 21.2
+    }
+  ],
+  "full_smoke": {
+    "exit_code": 0,
+    "elapsed_seconds": 1117.91,
+    "log": "smoke-final.log",
+    "six_reference_wins": true,
+    "completion_marker": "SMOKE_SLICE_COMPLETE",
+    "warnings_or_errors": 0
+  },
+  "capture": {
+    "exit_code": 0,
+    "elapsed_seconds": 508.05,
+    "original_png_count": 40,
+    "selected_png_count": 6,
+    "width": 1280,
+    "height": 720,
+    "renderer": "X11 / OpenGL Compatibility / Mesa llvmpipe",
+    "six_reference_wins": true,
+    "completion_marker": "DUMP_OK eval_v0.4.0",
+    "warnings": [
+      "VSync mode switching unsupported",
+      "4 ObjectDB instances leaked on exit; cause not investigated"
+    ],
+    "log": "capture.log"
+  },
+  "stable_result_capture": {
+    "exit_code": 0,
+    "elapsed_seconds": 96.43,
+    "phase": "win",
+    "viewport": [
+      1280,
+      720
+    ],
+    "panel_rect": [
+      320,
+      -80.5,
+      640,
+      857
+    ],
+    "title_return_button_rect": [
+      344,
+      708.5,
+      592,
+      44
+    ],
+    "log": "stable-capture.log"
+  },
+  "not_verified": [
+    "Android device behavior or FPS",
+    "PowerShell execution",
+    "Web GPT PLAN/REVIEW (unavailable)"
+  ]
+}
