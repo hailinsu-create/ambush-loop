@@ -17,6 +17,7 @@ from mathutils import Vector, Matrix, Quaternion
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import build_yard_kit as kit
+from actor_acceptance.canonicalize import normalize_glb
 PROJECT = HERE.parents[1]
 OUT = PROJECT / 'art/v2'
 PARTS = []
@@ -135,6 +136,19 @@ def tube(name,a,b,r0,r1,tile,bone=None,sides=12,rings=7,fold=.006):
             faces.append((p,q,q+sides,p+sides))
     faces.extend([tuple(reversed(range(sides))),tuple(range(rings*sides,(rings+1)*sides))])
     mesh=bpy.data.meshes.new(name); mesh.from_pydata(verts,[],faces); mesh.update()
+    uv=mesh.uv_layers.new(name='UVMap')
+    for face in mesh.polygons:
+        for loop in face.loop_indices:
+            index=mesh.loops[loop].vertex_index
+            row,col=divmod(index,sides)
+            if len(face.vertices)==4:
+                # Unwrap the tube seam explicitly; UV smart-project packing
+                # has nondeterministic ties on these repeated symmetric parts.
+                seam=min(v%sides for v in face.vertices)==0 and max(v%sides for v in face.vertices)==sides-1
+                uv.data[loop].uv=((1 if seam and col==0 else col/sides),row/rings)
+            else:
+                theta=math.tau*col/sides
+                uv.data[loop].uv=(.5+.48*math.cos(theta),.5+.48*math.sin(theta))
     obj=bpy.data.objects.new(name,mesh); bpy.context.collection.objects.link(obj)
     bpy.ops.object.select_all(action='DESELECT'); obj.select_set(True); bpy.context.view_layer.objects.active=obj
     for poly in mesh.polygons: poly.use_smooth=len(poly.vertices)==4
@@ -459,6 +473,7 @@ def export(asset,objects,level,animated=False):
         export_yup=True,export_animations=animated,export_animation_mode='ACTIONS',
         export_force_sampling=True,export_frame_range=False,export_skins=animated,
         export_cameras=False,export_lights=False,export_optimize_animation_size=True)
+    normalize_glb(path)
     tris=0; surfaces=0
     for obj in objects:
         if obj.type!='MESH': continue
@@ -494,6 +509,19 @@ def reduce_mesh(obj, budget):
         clean_mesh(obj)
     obj.data.calc_loop_triangles()
     assert len(obj.data.loop_triangles)<=budget, (obj.name,len(obj.data.loop_triangles),budget)
+    # Symmetric Decimate corners choose different inherited UV values across
+    # processes. Preserve each corner's atlas tile and deterministically project
+    # bind-space metre coordinates, with the same inset/gutter contract.
+    uv=obj.data.uv_layers.active.data
+    for face in obj.data.polygons:
+        normal=[round(abs(v),6) for v in face.normal]
+        axis=max(range(3),key=lambda i:normal[i])
+        axes=(1,2) if axis==0 else (0,2) if axis==1 else (0,1)
+        for loop in face.loop_indices:
+            col,row=[min(3,max(0,int(v*4))) for v in uv[loop].uv]
+            point=[round(v,6) for v in obj.data.vertices[obj.data.loops[loop].vertex_index].co]
+            uv[loop].uv=((col+.025+.95*((point[axes[0]]*2)%1))/4,
+                         (row+.025+.95*((point[axes[1]]*2)%1))/4)
 
 
 def build():
@@ -561,7 +589,8 @@ def build():
         # Hide other collections in Blender viewport; exports use selection only.
         for obj in originals: obj.hide_set(True)
         print('ACTOR_ASSET',asset,[(x['triangles'],x['surfaces']) for x in lods],flush=True)
-    manifest={'schema':2,'seed':SEED,'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'assets':entries,
+    manifest={'schema':2,'seed':SEED,'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'canonicalizer_sha256':hashlib.sha256((HERE/'actor_acceptance/canonicalize.py').read_bytes()).hexdigest(),'assets':entries,
               'textures':[{'path':p.relative_to(PROJECT).as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((OUT/'textures').glob('actor_*.png'))]}
     (OUT/'actors_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     for img in bpy.data.images:
