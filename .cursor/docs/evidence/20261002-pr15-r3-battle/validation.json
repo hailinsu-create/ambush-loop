@@ -1,0 +1,193 @@
+{
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "actual R3 live and replay actor/weapon/pose/LOD integration in yard; six levels existing multiwave invariants; software rendering, not full environment/final art/device",
+  "runtime_source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+  "test_fix_sha": "f47f3213331c3ffec88e708f1a0782e4f2ad1435",
+  "production_diff_e7_f47_excluding_visual_snapshot_test": {
+    "exit_code": 0,
+    "scope": "ambush_loop; only test class reference differs"
+  },
+  "runs": [
+    {
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "entry": "actor_battle_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_battle_test.gd --render",
+      "exit_code": 0,
+      "checks": 231,
+      "marker": "ACTOR_BATTLE_OK checks=231 failures=0",
+      "run_id": "4a5ec73e0fb2421c967bde7fed113c2f",
+      "log": "battle.log",
+      "sha256": "1015cdaf4e898dddb35393ee2a60e7ed709860ee259810cda51eca596ab6bfc1"
+    },
+    {
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "entry": "presentation_contract_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "exit_code": 0,
+      "checks": 84039,
+      "marker": "PRESENTATION_CONTRACT_OK checks=84039",
+      "run_id": "d79ab4b1597c4b59b31ac7cff351d23a",
+      "log": "contract.log",
+      "sha256": "f93c092119c3a83c25e2af42e2829f32a40ac342f70d071fa76dd06ec9a51028"
+    },
+    {
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "entry": "campaign_replay_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "exit_code": 0,
+      "checks": 10296,
+      "marker": "CAMPAIGN_REPLAY_OK checks=10296 failures=0",
+      "run_id": "df7f9e3062ef4a41ba9e4b01d3360ece",
+      "log": "campaign.log",
+      "sha256": "b202a5f987abbdbcf6942be73f902cdcece0f0e490b546c7cf87f884ef6e0db4"
+    },
+    {
+      "source_sha": "f47f3213331c3ffec88e708f1a0782e4f2ad1435",
+      "entry": "visual_snapshot_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "exit_code": 0,
+      "checks": 164,
+      "marker": "VISUAL_SNAPSHOT_OK checks=164 failures=0",
+      "run_id": "a7f1344641e74ef99fdd3cbd00679e99",
+      "log": "hud.log",
+      "sha256": "7348d2c268f33f675e099c3c4f7588945d26c8b1e0d0e41cfdef782a5ffc3f12"
+    },
+    {
+      "source_sha": "f47f3213331c3ffec88e708f1a0782e4f2ad1435",
+      "entry": "replay_timeline_test.gd",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 replay_timeline_test.gd",
+      "exit_code": 0,
+      "checks": 66,
+      "marker": "REPLAY_TIMELINE_OK checks=66",
+      "run_id": "640d301e7d774083941258ef28246fc0",
+      "log": "timeline.log",
+      "sha256": "0ea5c143e335e625211d3fdeea7b8327749d8d6e8514702878369e5920e09dd0"
+    },
+    {
+      "source_sha": "f47f3213331c3ffec88e708f1a0782e4f2ad1435",
+      "entry": "equipment_freeze_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "exit_code": 0,
+      "checks": 66,
+      "marker": "EQUIPMENT_FREEZE_OK checks=66",
+      "run_id": "c1af2d8fd2294000aeab2253dc146665",
+      "log": "freeze.log",
+      "sha256": "b78170719963efd3f3d7a8024e1f3fbae0e5a33590569324c8ee8a6c5b75cfe2"
+    },
+    {
+      "source_sha": "f47f3213331c3ffec88e708f1a0782e4f2ad1435",
+      "entry": "actor_visual_test.gd",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_visual_test.gd --render",
+      "exit_code": 0,
+      "checks": 4362,
+      "marker": "ACTOR_VISUAL_OK checks=4362 failures=0",
+      "run_id": "1a7cef0926274551af8510bbacf35c38",
+      "log": "actor.log",
+      "sha256": "fa7e80395991a8cb1c9342164160796a7e34f7c141dcc3702da56622655476fa"
+    },
+    {
+      "source_sha": "f47f3213331c3ffec88e708f1a0782e4f2ad1435",
+      "entry": "presentation_lifecycle_test.gd",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "exit_code": 0,
+      "checks": 32,
+      "marker": "PRESENTATION_LIFECYCLE_OK checks=32 failures=0",
+      "run_id": "cec4ba7d29ba440f85cece8984e56997",
+      "log": "lifecycle.log",
+      "sha256": "f9daa1351615215fff58581aeb5da0ae84b54877bfbecc4dcbc11c2f6af8e473"
+    }
+  ],
+  "captures": [
+    {
+      "file": "r3_battle_alert.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "ffa5e3d2a40648e45b37a615f9a138de9f6887b7ab0e094f19019798565dc170",
+      "bytes": 245706,
+      "viewed": true
+    },
+    {
+      "file": "r3_battle_history_close.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "6cf3d3ed09f1d54abaada189dd69dd43ed30a1bb1273ab491029af87f42e29c8",
+      "bytes": 185152,
+      "viewed": true
+    },
+    {
+      "file": "r3_battle_history_rotated.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "b5b411957b14d37933ce238d274de038c016326c3f3ada71dcb07c7e9ad73e64",
+      "bytes": 177786,
+      "viewed": false
+    },
+    {
+      "file": "r3_battle_history_wave0.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "37f0349c08b3ca5f4b3cb851b3c7296ade78b2ec173ae970a841ec12e015fda9",
+      "bytes": 213264,
+      "viewed": false
+    },
+    {
+      "file": "r3_battle_history_wave1.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "b87b098ed418332c1adff77624d698e3ac854c661d9956c4557b94ef20150512",
+      "bytes": 211213,
+      "viewed": true
+    },
+    {
+      "file": "r3_battle_scout.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "54c794c70c2a87cb640904744178292e5a6b1e5e66ee961f8295538a7b27d587",
+      "bytes": 284226,
+      "viewed": true
+    },
+    {
+      "file": "r3_battle_sweep.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "749e2ed0ef8ddbab5aabfc92912fae06abf59781dad286491c5d12e3f2abb047",
+      "bytes": 244810,
+      "viewed": false
+    },
+    {
+      "file": "r3_battle_wave2.png",
+      "source_sha": "e7b8cfa44bc306c31286e98bff2c2c8957471beb",
+      "sha256": "a788f323f20ad3c554d54a5d00d0084e01576ce3334a48081f20130e990c3bd9",
+      "bytes": 242625,
+      "viewed": false
+    }
+  ],
+  "failed_runs": [
+    {
+      "log": "dev-parse.log",
+      "exit_code": 130,
+      "reason": "presenter float type inference; aborted after parse failure",
+      "sha256": "427ee793c00462deedc85f10c32ef4519fcf26fa3beabbf7ce157bce10f6f637"
+    },
+    {
+      "log": "dev-attachment.log",
+      "exit_code": 1,
+      "reason": "deferred BoneAttachment and pre-existing wall-clock corpse root motion",
+      "sha256": "c35eca3d641fef3ed70fb20ea68c56c25675ea4ecae2098e4c8b578044b4a040"
+    },
+    {
+      "log": "dev-root.log",
+      "exit_code": 1,
+      "reason": "214checks/2fail; real paused/replay corpse anchor +8px while rig pose already stable",
+      "sha256": "d8994ab6fd4bfc16b2bc78937b4872679f9870df23c965f72fcbc4bdec3a5de7"
+    },
+    {
+      "log": "hud-parse.log",
+      "exit_code": 1,
+      "reason": "is requires named script class; test-only fix f47; no pass claimed",
+      "sha256": "7d22f9461866c46404695dd82b57ac384043b519e38a4a496e1442176e0b1331"
+    }
+  ],
+  "pending": [
+    "independent dot QA",
+    "actual family-specific optional R4 overlays/cancel/blending",
+    "knife/throw/decoy/corpse-drag clips still being produced; no fake carry clip",
+    "whole battlefield environment/HUD/FX asset quality",
+    "audio45candidate real playback/lifecycle and listening0/45,0/6",
+    "A3 cloud optimization; final six-level visuals; traceable full APK; later devices",
+    "latest complete smoke still7d34867; not rerun or borrowed"
+  ]
+}

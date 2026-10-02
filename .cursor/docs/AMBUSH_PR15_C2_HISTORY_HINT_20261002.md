@@ -16,6 +16,6 @@ WON/FAILED退出由显式phase fixture验证现有退出/重置函数，未称�
 
 ![桌面历史C2Help隔离](evidence/20261002-pr15-c2-history-hint/c2_history_hint_desktop.png)
 
-Godot4.7.2隔离包装器与StorageGuard、Compatibility软件Mesa；不能作为设备性能或美术验收。dot尚待独立复验本片。
+Godot4.7.2隔离包装器与StorageGuard、Compatibility软件Mesa；不能作为设备性能或美术验收。dot已独立复验关闭本片P2，无新确定P1/P2：原SWEEP/望远镜10case旧2fail新全pass，扩展hint84、真实ALERT/SWEEP/FAILED/两波WON退出41pass，重跑hint30/HUD164/lifecycle32pass，查看新旧3D软件图。该独立范围未包含974的campaign/smoke/设备或R3战場；来源为dot本轮固定974复验反馈。
 
 下一步按 [R3战场计划](AMBUSH_PR15_R3_RUNTIME_20261002.md) 接入实际角色历史时钟/动作/LOD，然后音频唯一持续层与环境候选。R3资产层技术测试与本C2补片的HUD回归分开，不借用旧固定SHA结果。全计划仍未完成，最新完整smoke仍7d34867；Windows包装器未执行，GPT PLAN/REVIEW unavailable。

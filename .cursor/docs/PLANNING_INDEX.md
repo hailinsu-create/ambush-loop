@@ -9,9 +9,10 @@
 | [PR15 接管与资产接口](AMBUSH_PR15_INTEGRATION_20261002.md) | 主集成代码单写者、独立资产工作者和 Notion 管理边界；首批回放/装备冻结已实际复现并独立修复。继承 v2 顺序，资产 WIP 不整体并入；完整计划仍待实施。 |
 | [PR15 静态装备/loader](AMBUSH_PR15_STATIC_EQUIPMENT_20261002.md) | 固定候选 15 件 / 30 LOD 原字节迁入；a870eb5 实际渲染 257 项、空目录 PCK 35 项退出 0。人物可复现 LOD/握持、战场接入和 APK 待完成；网格 fixture 不作为成品验收。 |
 | [PR15 独立复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md) | 四项P2已实际复现并由dot独立复验关闭：同波未来定位环、旧事件流tick回退、雷点/诱饵入口锁和SWEEP旋转；cc11bb0/71df99a独立切片。历史HUD后续切片见下一行。 |
-| [历史队员HUD/手机时间轴](AMBUSH_PR15_HISTORY_HUD_20261002.md) | a932历史字段/中性兼容与原生手机seek，七项核心回归完成；ed673ed清活体横幅/手机提示分层，164项渲染+32生命周期退出0。dot独立复验关闭原HUD P2；新增C2Help遗漏已由cf61721补片作者验证，独立复验待返回；完整HUD/FX/成品场景另验。 |
-| [C2Help历史隔离补片](AMBUSH_PR15_C2_HISTORY_HINT_20261002.md) | cf61721真实SWEEP/合法技能反例30项16fail→0；HUD164/生命周期32退出0。历史布局/迟到hint清空并停止旧Tween，退出重建live帮助；dot独立复验待返回。 |
-| [R3台账/显式骨骼技术接收](AMBUSH_PR15_R3_RUNTIME_20261002.md) | 18dc381采用00b2708/8a1fbe9原字节51GLB/3PNG；角色4362、静态273、空目录PCK329退出0。技术接口已验，实际战场/历史动画接入、其他枪专用握持与最终美术待验；替代R2候选采用步骤，旧报告保留。 |
+| [历史队员HUD/手机时间轴](AMBUSH_PR15_HISTORY_HUD_20261002.md) | a932历史字段/中性兼容与原生手机seek，七项核心回归完成；ed673ed清活体横幅/手机提示分层，164项渲染+32生命周期退出0。dot独立复验关闭原HUD P2；新增C2Help遗漏已由cf61721补片作者验证，dot独立复验已关闭C2Help P2；完整HUD/FX/成品场景另验。 |
+| [C2Help历史隔离补片](AMBUSH_PR15_C2_HISTORY_HINT_20261002.md) | cf61721真实SWEEP/合法技能反例30项16fail→0；HUD164/生命周期32退出0。历史布局/迟到hint清空并停止旧Tween，退出重建live帮助；dotdot独立复验已关闭C2Help P2。 |
+| [R3实战角色/历史动作主路径](AMBUSH_PR15_R3_BATTLE_20261002.md) | e7b8cfa接真实yard/六关角色与动画记录格式1；战场231/合同84039/六关10296，f47测试修正后HUD164/时间66/装备66/角色4362/生命周期32退出0。环境仍灰盒；R4 optional/缺动作与audio/environment继续。 |
+| [R3台账/显式骨骼技术接收](AMBUSH_PR15_R3_RUNTIME_20261002.md) | 18dc381采用00b2708/8a1fbe9原字节51GLB/3PNG；角色4362、静态273、空目录PCK329退出0。技术接口已验，实际战场/历史动作主路径见上行；其他枪专用握持与最终美术待验；替代R2候选采用步骤，旧报告保留。 |
 | [R2候选采用计划](AMBUSH_PR15_R2_ADOPTION_20261002.md) | 历史实施计划：R2未落地即由最新R3替代；原只读复核证据保留，不用来验当前R3。 |
 | [独立45 cue音频接口](AMBUSH_PR15_AUDIO_INTERFACE_20261002.md) | 已给22050Hz mono PCM16、45用途ID与单写者边界；355ea89候选README已审、未采用。技术导入/绑定未play，听验0/45、0/6；七loop导入区间、持续层/gain/并发/生命周期/战场混音待接验。 |
 | [独立环境资产包接口](AMBUSH_PR15_ENVIRONMENT_INTERFACE_20261002.md) | 供dot分配：新environment_v2源/导出目录、完整建筑/地表、14类原用途与其余五关地标；不改已有yard/actor/audio或运行代码。dot另派独立生产；九件样本不称六关完整库。 |
