@@ -2252,6 +2252,12 @@ func _reset_presentation_fx() -> void:
 	if _load_fade_tween != null:
 		_load_fade_tween.kill()
 		_load_fade_tween = null
+	if _fail_static_tween != null:
+		_fail_static_tween.kill()
+		_fail_static_tween = null
+	if _fail_static != null:
+		_fail_static.visible = false
+		_fail_static.modulate.a = 0.0
 	if result_panel:
 		result_panel.modulate = Color.WHITE
 
@@ -6350,6 +6356,7 @@ func _on_replay_pressed() -> void:
 	frozen_plan = last_plan.duplicate_plan()
 	phase = Phase.REPLAY
 	_clear_flash()
+	_reset_presentation_fx()
 	result_panel.visible = false
 	replay.bind(battle_log)
 	if scrub_slider:

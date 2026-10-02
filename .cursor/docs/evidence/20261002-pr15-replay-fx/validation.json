@@ -1,0 +1,20 @@
+{
+  "negative": {
+    "production_source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+    "test_only_changes": [
+      "scripts/replay_fx_lifecycle_test.gd",
+      "scripts/run_isolated_test.sh",
+      "scripts/run_isolated_test.ps1"
+    ],
+    "actual_exit_code": 1,
+    "checks": 36,
+    "failures": 18,
+    "run_id": "d3d07bc8e8a04ad0b8ae8dfa5075fe73",
+    "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture replay_fx_lifecycle_test.gd --render",
+    "cwd": "/workspace/ambush-pr15",
+    "log": "before.log",
+    "sha256": "2b5b9b260f182164277aade71601bb49d432512e032e11d21e17eeddf7c6653b"
+  },
+  "scope": "real replay entry over each actual level recording plus explicit real transient FX event fixtures; no actual FAILED/abort terminal claim",
+  "positive": "pending fixed-source test"
+}
