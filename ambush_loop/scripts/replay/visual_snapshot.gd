@@ -6,6 +6,7 @@ const FORMAT_VERSION := 1
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
 const UtilityPose := preload("res://scripts/presentation/utility_pose.gd")
+const CorpseRecording := preload("res://scripts/replay/corpse_recording.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 var _identity := ""
 var _objects := {}
@@ -19,6 +20,7 @@ var _empty_stashes: Array = []
 var _utility_scope_id := ""
 var _utility_seq := 0
 var _utility_states := {}
+var corpses := CorpseRecording.new()
 
 
 func reset_environment() -> void:
@@ -28,11 +30,13 @@ func reset_environment() -> void:
 	_utility_scope_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	_utility_seq = 0
 	_utility_states.clear()
+	corpses.reset(_utility_scope_id)
 
 
 func record_utility(host: Node, op: Node, action: String, target: Vector2) -> void:
 	if not UtilityPose.CLIPS.has(action) or _utility_scope_id.is_empty():
 		return
+	corpses.cancel_action(int(op.op_id))
 	var simulation_time: bool = host.phase == host.Phase.WATCHING
 	var clock: float = float(host.battle_log.timeline_tick(host.sim.tick)) / 60.0 if simulation_time else host._pose_command_clock_s
 	_utility_states[int(op.op_id)] = {"schema": UtilityPose.SCHEMA, "scope_id": _utility_scope_id,
@@ -46,6 +50,7 @@ func record_utility(host: Node, op: Node, action: String, target: Vector2) -> vo
 
 func cancel_utility(op_id: int) -> void:
 	_utility_states.erase(op_id)
+	corpses.cancel_action(op_id)
 
 
 func remember_collected_stash(stash: Node2D) -> void:
@@ -80,6 +85,7 @@ func capture(host: Node) -> Dictionary:
 		_pose_states.clear()
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
 		"utility_scope_id": _utility_scope_id,
+		"corpse_schema": 1,
 		"environment_schema": EnvironmentScene.FORMAT, "environment_revision": EnvironmentScene.REVISION,
 		"environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
@@ -191,10 +197,22 @@ func capture(host: Node) -> Dictionary:
 			var item := _object(decoy, "decoys")
 			item.merge({"life": decoy.life, "elapsed": decoy._t})
 			data.decoys.append(item)
+	data["corpses"] = corpses.capture(host, data)
+	for group in ["enemies", "sentries"]:
+		var nodes: Array = host.enemies if group == "enemies" else (host.c2.sentries if host.c2 != null else [])
+		for node in nodes:
+			if not is_instance_valid(node):
+				continue
+			for item in data[group]:
+				if int(item.id) == int(node.label_id):
+					item["corpse_id"] = corpses.id_for_actor(node)
 	for group in ["ops", "enemies", "sentries"]:
 		for item in data[group]:
 			var key := "%s:%s" % [group, item.id]
-			var intent := FirearmPose.intent(item, group)
+			var intent_item: Dictionary = item.duplicate(true)
+			if bool(item.get("corpse_known_haul", false)):
+				intent_item.hauling = false
+			var intent := FirearmPose.intent(intent_item, group)
 			var weapon: String = item.visual_weapon
 			var state: Dictionary = _pose_states.get(key, {})
 			if state.is_empty() or str(state.weapon) != weapon or str(state.intent) != intent:
@@ -213,7 +231,7 @@ func capture(host: Node) -> Dictionary:
 		if not state.is_empty() and UtilityPose.valid(state, item, utility_frame):
 			item["utility_pose"] = state.duplicate(true)
 		elif host.phase != host.Phase.REPLAY:
-			cancel_utility(int(item.id))
+			_utility_states.erase(int(item.id))
 	return data
 
 

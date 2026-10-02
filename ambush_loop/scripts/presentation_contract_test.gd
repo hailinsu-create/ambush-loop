@@ -173,4 +173,21 @@ func _battle(main: Node, rotate: bool, fps: int, speed: float) -> Dictionary:
 	_check(not scope.is_empty() and main.battle_log.snapshots.all(func(snap: Dictionary) -> bool: return str(snap.data.get("utility_scope_id", "")) == scope), "real wave preserves its independent utility recording identity")
 	# All gameplay/visual values still participate in cross-FPS/2x equivalence.
 	final.erase("utility_scope_id")
+	_normalize_identity(final, scope, main.battle_log.attempt_id)
 	return {"phase": int(main.phase), "tick": main.sim.tick, "state": final, "events": events}
+
+
+func _normalize_identity(value: Variant, scope: String, attempt: String) -> void:
+	# Retain every body field and relative ID while normalizing only deliberately
+	# random attempt/scope prefixes across independent FPS/2x runs.
+	if value is Dictionary:
+		for key in value:
+			if value[key] is String:
+				value[key] = value[key].replace(scope, "<scope>") if not scope.is_empty() else value[key]
+				if not attempt.is_empty():
+					value[key] = value[key].replace(attempt, "<attempt>")
+			else:
+				_normalize_identity(value[key], scope, attempt)
+	elif value is Array:
+		for item in value:
+			_normalize_identity(item, scope, attempt)

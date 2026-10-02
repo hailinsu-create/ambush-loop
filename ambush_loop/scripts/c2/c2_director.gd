@@ -689,7 +689,8 @@ func _skill_knife(op: Node) -> bool:
 	_spawn_ring(best.global_position, 36.0, Color(0.72, 0.22, 0.18, 0.4))
 	_hint("割喉 — 拖开或捆上")
 	if host.has_method("_spawn_loot_at"):
-		host._spawn_loot_at(best.global_position + Vector2(8, 6), 1, "ammo")
+		var dropped = host._spawn_loot_at(best.global_position + Vector2(8, 6), 1, "ammo")
+		host.visual_snapshot.corpses.remember(host, dropped, best, "sentries")
 	if host.has_method("_operator_bark"):
 		host._operator_bark(op, "ko")
 	if host.has_method("_sfx"):

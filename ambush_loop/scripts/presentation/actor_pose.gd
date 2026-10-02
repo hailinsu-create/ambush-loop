@@ -7,6 +7,7 @@ const R4_REVISION := "194d9c41aaddbf014f05c70c14d40c09e6d8131b"
 const LEGACY_REVISION := "00b270863ba5a2cd5425abf2a31e78965c72ae45"
 const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
 const UtilityPose := preload("res://scripts/presentation/utility_pose.gd")
+const CorpsePose := preload("res://scripts/presentation/corpse_pose.gd")
 const FIRE_SECONDS := 0.23333333333333334
 
 
@@ -19,6 +20,13 @@ static func supported(data: Dictionary) -> bool:
 
 
 static func sample(item: Dictionary, frame: Dictionary, group: String) -> Dictionary:
+	if group == "ops":
+		var corpse := CorpsePose.sample(item, frame)
+		if not corpse.is_empty():
+			return corpse
+		if CorpsePose.supported(frame) and bool(item.get("corpse_known_haul", false)):
+			item = item.duplicate(true)
+			item.hauling = false
 	var result := _legacy_sample(item, frame, group)
 	if int(frame.get("animation_schema", 0)) == 1:
 		return result

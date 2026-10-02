@@ -5252,9 +5252,9 @@ func _make_enemy(id: int) -> EnemyRunner:
 	return e
 
 
-func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> void:
+func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> LootPickup:
 	if amount <= 0 and kind == "ammo":
-		return
+		return null
 	var loot := LootPickup.new()
 	var visual := Polygon2D.new()
 	visual.name = "Visual"
@@ -5273,6 +5273,7 @@ func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> void:
 	loot.global_position = pos
 	loot.setup(amount, kind)
 	loot_piles.append(loot)
+	return loot
 
 
 func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
@@ -5699,7 +5700,8 @@ func _on_enemy_died(enemy: EnemyRunner) -> void:
 	var drop_kit := "echo" if enemy.echo_kit else ""
 	var night := str(level.level_id) if level else ""
 	var drop: Dictionary = WeaponCatalogScript.enemy_drop_for(int(enemy.loot_ammo), drop_kit, night, int(enemy.label_id))
-	_spawn_loot_at(enemy.global_position, int(drop.get("amount", 2)), str(drop.get("kind", "ammo")))
+	var dropped := _spawn_loot_at(enemy.global_position, int(drop.get("amount", 2)), str(drop.get("kind", "ammo")))
+	visual_snapshot.corpses.remember(self, dropped, enemy, "enemies")
 	if phase == Phase.WATCHING:
 		_kill_edge_flash()
 		if _last_kill_tick >= 0 and sim.tick - _last_kill_tick <= PayoffCopy.combo_window_ticks():
@@ -12515,6 +12517,8 @@ func _toggle_haul_corpse() -> void:
 		status_label.text = "走近尸体再拖（H）"
 		return
 	selected.haul_loot(best)
+	visual_snapshot.cancel_utility(selected.op_id)
+	visual_snapshot.corpses.action(self, selected, best, "grab")
 	status_label.text = "%s 拖尸" % selected.display_name
 	_sfx("body_drop")
 
@@ -12522,7 +12526,10 @@ func _toggle_haul_corpse() -> void:
 func _drop_hauled(op: OperatorUnit) -> void:
 	if op == null or not op.has_method("drop_hauled"):
 		return
+	var dropped: LootPickup = op.hauled_loot if op.is_hauling() else null
 	op.drop_hauled()
+	if dropped != null:
+		visual_snapshot.corpses.action(self, op, dropped, "release")
 	status_label.text = "%s 放下尸体" % op.display_name
 	_sfx("ui")
 

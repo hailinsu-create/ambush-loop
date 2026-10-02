@@ -187,6 +187,12 @@ func bone_socket(name: String) -> Dictionary:
 	return {"position": skeleton.global_transform * skeleton.get_bone_global_pose(bone) * vector(socket.position_bone_local_m)}
 
 
+func shoulder(name: String) -> Vector3:
+	# Optional R5 markers, using existing bones; no extra sockets in the GLB.
+	var bone := skeleton.find_bone("upper_arm." + name)
+	return skeleton.global_transform * skeleton.get_bone_global_pose(bone).origin
+
+
 func item_socket(name: String) -> Dictionary:
 	if equipped == null:
 		return {}

@@ -14,6 +14,8 @@ const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const Assets := preload("res://scripts/presentation/asset_library.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 const EnvironmentVisual := preload("res://scripts/presentation/environment_visual.gd")
+const CorpsePose := preload("res://scripts/presentation/corpse_pose.gd")
+const CorpseVisual := preload("res://scripts/presentation/corpse_visual.gd")
 
 var host: Node
 var rig: Node3D
@@ -23,6 +25,7 @@ var geometry := Node3D.new()
 var proxies := Node3D.new()
 var walls: Array = []
 var actors: Dictionary = {}
+var corpses: Dictionary = {}
 var _actor_scope: Array = []
 var objects: Dictionary = {}
 var _object_scope: Array = []
@@ -229,6 +232,7 @@ func refresh() -> void:
 	if _environment_scene != null and _environment_scene.set_door(frame.door_locked):
 		_last_pose = Transform3D.IDENTITY
 	_sync_actors()
+	_sync_corpses()
 	_sync_objects()
 	_sync_cones()
 	_selected_ring.visible = false
@@ -322,6 +326,10 @@ func _sync_actors() -> void:
 			proxy.position = Space.logic_to_world(item.pos)
 			proxy.visible = item.active
 			_sync_body(proxy, item, group)
+			if not item.alive and CorpsePose.supported(frame):
+				for corpse in frame.corpses:
+					if str(item.get("corpse_id", "")) == str(corpse.get("id", "")) and CorpsePose.valid(corpse, frame):
+						proxy.visible = false
 			proxy.get_node("Marker").visible = item.alive
 	for key in actors.keys():
 		if not seen.has(key):
@@ -426,6 +434,31 @@ func _sync_objects() -> void:
 		if not seen.has(key):
 			objects[key].free()
 			objects.erase(key)
+
+
+func _sync_corpses() -> void:
+	var seen := {}
+	if CorpsePose.supported(frame):
+		for item in frame.corpses:
+			if not CorpsePose.valid(item, frame):
+				continue
+			var id := str(item.id)
+			seen[id] = true
+			if not corpses.has(id):
+				var visual := CorpseVisual.new()
+				proxies.add_child(visual)
+				corpses[id] = visual
+			var visual: Node3D = corpses[id]
+			var carrier: ActorVisual = null
+			var key := "ops:%d" % int(item.carrier_id)
+			if bool(item.pairing) and actors.has(key):
+				carrier = actors[key].get_node("Body") as ActorVisual
+			var lod := ActorPose.choose_lod(1.85 * get_viewport().get_visible_rect().size.y / rig.view_size, visual.body.lod)
+			visual.visible = bool(item.active) and visual.sync(item, frame, lod, carrier)
+	for id in corpses.keys():
+		if not seen.has(id):
+			corpses[id].free()
+			corpses.erase(id)
 
 
 func focus_selected() -> bool:

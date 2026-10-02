@@ -109,6 +109,7 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 	# Like BattleLog attempt/event IDs, this identity intentionally differs
 	# across attempts. Every other state value remains in the comparison.
 	final.erase("utility_scope_id")
+	_normalize_identity(final, utility_scope, main.battle_log.attempt_id)
 	var events: Array = log.events.duplicate(true)
 	for ev in events:
 		ev.erase("attempt_id")
@@ -125,3 +126,19 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 				_check(BattleLog.record_tick(ev) <= frame.tick, "scrub excludes future events")
 	_check(live_before == main._snapshot_data(), "complete campaign scrub leaves live actors unchanged")
 	return {"state": final, "events": events, "wave_ends": wave_ends, "terminal": log.terminal_tick}
+
+
+func _normalize_identity(value: Variant, scope: String, attempt: String) -> void:
+	# Retain every body field and relative ID while normalizing only deliberately
+	# random attempt/scope prefixes across independent FPS/2x runs.
+	if value is Dictionary:
+		for key in value:
+			if value[key] is String:
+				value[key] = value[key].replace(scope, "<scope>") if not scope.is_empty() else value[key]
+				if not attempt.is_empty():
+					value[key] = value[key].replace(attempt, "<attempt>")
+			else:
+				_normalize_identity(value[key], scope, attempt)
+	elif value is Array:
+		for item in value:
+			_normalize_identity(item, scope, attempt)
