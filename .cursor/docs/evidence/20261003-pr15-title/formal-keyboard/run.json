@@ -1,0 +1,35 @@
+{
+  "source_sha": "226505fb7cc424fb8ff955e94f98f086835b2423",
+  "actual_exit": 0,
+  "checks": 7,
+  "failures": 0,
+  "engine_errors": 0,
+  "script_errors": 0,
+  "uuid": "e86556c0629c4df0b334c953fa066a14",
+  "exit_kind": "keyboard",
+  "original_quit_signal_received": true,
+  "native_inputs": [
+    {
+      "helper_exit": 0,
+      "id": "exit_keyboard_1600_200",
+      "key": "Escape"
+    },
+    {
+      "helper_exit": 0,
+      "id": "exit_keyboard_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "exit_keyboard_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "exit_keyboard_1600_200",
+      "key": "Return"
+    }
+  ],
+  "command": "AMBUSH_TITLE_EXIT_ONLY=keyboard bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_menu_viewport_test.gd --render",
+  "source_unchanged": true
+}

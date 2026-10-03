@@ -9,3 +9,6 @@
 实现方向：可滚动主菜单flow、响应viewport的modal限高，正文滚动且标题/返回固定，保持原文案/信号/入口；检验任务页/档案/设置全journey与键盘focus。只改title/UI、共享测试及native测试键helper，制作源/GLB/atlas/manifest不动，SCOUT→ALERT→SWEEP不变。
 
 固定负向源和实际log/exit先保留，再修UI；正向固定源码后只跑本片对应测试，不重跑15c formal29。每图留存hash与窗口/比例/scroll/focus/入口结果，实际看关键100/200帧。提交源/证据独立于a218；parent独立title QA待。设备/模拟器仍全计划后，不merge/生产/height/G。网页GPT PLAN/REVIEW unavailable。
+
+
+2026-10-03 实现/作者正式验证完成：[完整报告](AMBUSH_PR15_TITLE_20261003.md)，固定226505fb7cc424fb8ff955e94f98f086835b2423正式8组2391/0+keyboard7/0，2次实际exit0/SCRIPT ERROR0/ERROR0、72物理PNG hash核对、1119+4原生输入。负向195/44及开发372/0独立留存，全部队列已结束。父端fixed15c limitedQA结果单列不加计数，新title独立QA待。源码/证据本地提交尚未同步，Git认证未恢复不重试/绕过；恢复原Git后push/只读核对。资产制作输出未动。后续FX/autoREPLAY2×尚未实现/A3/最终同候选与APK继续，设备后置。

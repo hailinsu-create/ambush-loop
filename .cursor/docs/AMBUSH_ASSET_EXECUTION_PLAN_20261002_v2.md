@@ -65,3 +65,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-03 同候选正式关作者完成：[完整报告](AMBUSH_PR15_FULL_RECORD_20261003.md)。固定15c0783059bb7c2f9e9cd9b7252a9343e71f4168，runtime d860056f2107836c08dfb375a034ebbe694baff6；29次全部实际exit0/ERROR0、75图核hash。SCOUT身份/真实采样保至报警、schema2播放+原domain不变，旧schema1实际874 fixture兼容。六关39reference波/mode、原terminal/events与30/60/2x camera对照保持；不是正常完整玩家旅程/完整3DFX/设备性能。23项checkpoint后只收session5976既有6项，不重跑有效项。失败/旧候选保全，fixture精确hash与历史源重建已写，无LibraryID/不绕过。父端fixed15c独立QA待；继承title200全菜单/Help返回/退出确认/键盘下一独立片，然后FX/A3。R5制作所有权、SCOUT→ALERT→SWEEP、Draft不merge/生产、height/G隔离保持。
+
+
+2026-10-03 checkpoint：[title200全入口报告](AMBUSH_PR15_TITLE_20261003.md)，fixed226505fb7cc424fb8ff955e94f98f086835b2423：原menu+6brief/help/journal/settings/真实SCOUT入场/真实button与keyboard退出，8组2391/0+7/0、2runexit0/ERROR0、72PNGhash核对；作者通过，独立title QA待，Git认证失败后尚仅本地保存。fixed15c fullrecord29/75证据a218已推送，父端另报告limited QA通过（59PNG看19及其计数不相加）。完成队列已结束。继续完整3DFX/autoREPLAY2×（尚未实现）/A3与正常六关玩家旅程、最终同候选smoke-QA-APK；不把controlled2×fixture当auto功能、XTest当手机、llvmpipe当设备性能。资产制作输出未改，Notion/Library仍未写，不merge/生产，高度/G隔离，设备全计划后。

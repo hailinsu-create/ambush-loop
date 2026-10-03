@@ -6,8 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [title200 全入口独立片](AMBUSH_PR15_TITLE_PLAN_20261003.md) | 当前实施：原生主菜单/六关任务与简报/帮助/档案/退出确认/键盘、100/200、8窗口偏好；先保存实际负向再修，不重跑有效formal29。 |
-| [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；证据交付a218，父端fixed15c独立QA待。完整3DFX/A3/正常玩家旅程/APK仍待。 |
+| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。所有队列结束，独立title QA待；Git认证失败后本地未同步，formal29未重跑。 |
+| [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；证据交付a218，父端报告fixed15c limitedQA通过，59PNG/看19及其计数单列，新title不在该QA范围。完整3DFX/A3/正常玩家旅程/APK仍待。 |
 | [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
 | [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |
 | [北侧HUD修复](AMBUSH_PR15_NORTH_HUD_20261003.md) | 816分开checklist/minimap并稳定镜头边界，7edd追加时间条留白；真实窗口/原生输入/焦点往返证据齐备，原裁切未称关闭。 |
@@ -86,3 +86,6 @@
 
 
 2026-10-03 同候选正式关作者完成：[完整报告](AMBUSH_PR15_FULL_RECORD_20261003.md)。固定15c0783059bb7c2f9e9cd9b7252a9343e71f4168，runtime d860056f2107836c08dfb375a034ebbe694baff6；29次全部实际exit0/ERROR0、75图核hash。SCOUT身份/真实采样保至报警、schema2播放+原domain不变，旧schema1实际874 fixture兼容。六关39reference波/mode、原terminal/events与30/60/2x camera对照保持；不是正常完整玩家旅程/完整3DFX/设备性能。23项checkpoint后只收session5976既有6项，不重跑有效项。失败/旧候选保全，fixture精确hash与历史源重建已写，无LibraryID/不绕过。父端fixed15c独立QA待；继承title200全菜单/Help返回/退出确认/键盘下一独立片，然后FX/A3。R5制作所有权、SCOUT→ALERT→SWEEP、Draft不merge/生产、height/G隔离保持。
+
+
+2026-10-03 安全checkpoint：完整记录29次/75图已实际结束并push/只读核对a218；父端fixed15c独立limitedpass单列，不与作者数相加。[title全入口修复](AMBUSH_PR15_TITLE_20261003.md) fixed226现完成本片2次正式run2391/0+7/0exit0/ERROR0，72图hash验证并看overview、4native；源码/证据仅本地提交，Git认证失败未恢复，未重试/改凭据/绕过Library。全部测试队列结束；新title独立QA待。下一FX→autoREPLAY2×（未实现）→A3→正常玩家六关旅程/最终同candidate smoke/QA/APK，原两focus裁切与耳听仍待，资产/规则所有权保持。
