@@ -21,6 +21,7 @@ param(
         'command_pose_clock_test.gd',
         'utility_runtime_test.gd',
         'corpse_runtime_test.gd',
+        'corpse_pose_quality_test.gd',
         'corpse_contact_test.gd',
         'presentation_quality_test.gd',
         'smoke_test.gd',
