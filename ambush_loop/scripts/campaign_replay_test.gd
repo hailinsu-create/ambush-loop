@@ -149,9 +149,14 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 	for wave in main.level.wave_count():
 		var wave_frames: Array = log.snapshots.filter(func(snap: Dictionary) -> bool: return snap.wave_id == wave)
 		for snap in [wave_frames.front(), wave_frames.back()]:
-			main.replay.set_tick(main.replay.playback_time(snap))
+			var playback_tick: int=main.replay.playback_time(snap)
+			main.replay.set_tick(playback_tick)
 			var frame := ViewState.capture(main)
-			_check(frame.wave_id == wave and frame.attempt_id == snap.attempt_id and frame.recorded_phase==snap.data.phase and frame.frame_seq==snap.frame_seq, "scrub resolves the exact historical wave/phase/frame identity")
+			# Alarm initial state and simulation tick0 can share one time. The
+			# established seek contract chooses the last state at that time.
+			var same_time: Array=log.playback_snapshots.filter(func(record: Dictionary) -> bool: return int(record.playback_tick)==playback_tick)
+			var expected: Dictionary=same_time.back()
+			_check(frame.wave_id == wave and frame.attempt_id == snap.attempt_id and frame.recorded_phase==snap.data.phase and frame.frame_seq==expected.frame_seq, "scrub resolves recorded wave/phase and latest same-tick frame identity")
 			for ev in frame.events:
 				_check(BattleLog.record_tick(ev) <= frame.tick, "scrub excludes future events")
 	_check(live_before == main._snapshot_data(), "complete campaign scrub leaves live actors unchanged")
