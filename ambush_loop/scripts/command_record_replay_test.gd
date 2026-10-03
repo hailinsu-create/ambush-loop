@@ -206,7 +206,13 @@ func _run() -> void:
 		_check(int(terminal.data.phase)==main.Phase.FAILED,"continuous recording retains real FAILED terminal boundary "+str(aborted))
 		rows.append({"terminal":main.fail_reason,"battle_terminal_tick":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"recorded_phase":terminal.data.phase})
 	root.get_node("AudioDirector").pause_for_background()
+	# Retain an actual production stream, including typed copied values, for
+	# compatibility checks against later supported playback revisions.
+	var stream_path := "res://build/asset_review/pr15-runtime/command-record-source-v%d.bin" % source.playback_schema
+	var stream_file := FileAccess.open(stream_path,FileAccess.WRITE)
+	stream_file.store_buffer(var_to_bytes({"attempt_id":source.attempt_id,"events":source.events,"snapshots":source.snapshots,"terminal_tick":source.terminal_tick,"terminal_reason":source.terminal_reason,"playback_schema":source.playback_schema,"playback_snapshots":source.playback_snapshots,"playback_terminal_tick":source.playback_terminal_tick}))
+	stream_file.close()
 	var file:=FileAccess.open("res://build/asset_review/pr15-runtime/command-record-report.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"rows":rows,"captures":captures},"  "))
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"rows":rows,"captures":captures,"source_binary":{"path":stream_path,"sha256":FileAccess.get_sha256(stream_path)}},"  "))
 	print("COMMAND_RECORD_TEST checks=%d failures=%d" % [checks,failures])
 	quit(0 if failures==0 else 1)
