@@ -24,7 +24,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [M1-I 渲染可读性与战术差异](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md) | 桌面 gate 与四张 viewport 截图均通过并逐张目视（run `81ca8c1b0c5e45e395cacc3366b103e0`，源码 Draft PR #23）；全量 shared smoke 仍在复验。 |
+| [M1-I 渲染可读性与战术差异](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md) | 桌面 gate 与四张 viewport 截图均通过并逐张目视（run `81ca8c1b0c5e45e395cacc3366b103e0`，源码 Draft PR #23）；全量 smoke 六关循环、完成标记、exit 0、玩家数据不变均已确认。 |
 | [M1-H 院子整关一致性门](AMBUSH_M1_H_END_TO_END_PLAN_20261003.md) | 桌面整关门通过：1×/2×同权威结果；回放只读；flank 逃逸→Continue 重试。源码 Draft PR #22。 |
 | [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md) | 桌面 gate 通过：A/B 均两波获胜；主路集中反例真实 flank 逃逸并记录未交战原因。源码 Draft PR #21。 |
 | [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md) | 已实现并桌面隔离验收通过；同枪同弹药下，见敌即打在区外开火，入伏再打先记录武装后同 tick 开火。源码 Draft PR #20，D/E 回归 exit 0；外部 GPT 精确差异复审仍待授权。 |
