@@ -291,11 +291,126 @@ func _validate(id: String, loot: Node2D) -> void:
 		_check(not bool(view.corpses[id].get_meta("contact_supported",true)) and _penetrations(view.corpses[id].body)>0,"old/unknown contact schema preserves original recorded placement")
 
 
+func _native_key(code: Key) -> void:
+	var event := InputEventKey.new()
+	event.physical_keycode=code
+	event.pressed=true
+	Input.parse_input_event(event)
+	await process_frame
+	event=InputEventKey.new()
+	event.physical_keycode=code
+	Input.parse_input_event(event)
+	await process_frame
+
+
+func _native_mouse(at: Vector2, button: MouseButton) -> void:
+	var screen := view.rig.project_logic(at)
+	_check(not view.pointer_over_ui(screen),"exact QA native mouse target is outside UI")
+	for pressed in [true,false]:
+		var event := InputEventMouseButton.new()
+		event.position=screen
+		event.global_position=screen
+		event.button_index=button
+		event.pressed=pressed
+		Input.parse_input_event(event)
+		await process_frame
+
+
+func _step_command(frames: int) -> void:
+	for index in frames:
+		main._process(1.0/60.0)
+		view.refresh()
+
+
+func _fill_original_guns() -> void:
+	for op in main.operators:
+		for kind in ["luger","mp40","bar","thompson","m1_garand"]:
+			op.receive_item(kind,1)
+
+
+func _qa_exact() -> void:
+	# Parent's fixed518 independent reproduction, with native queued events.
+	main.raid_prepare_ref([1,2,5],[90.0,180.0,180.0])
+	_fill_original_guns()
+	main.raid_force_alarm()
+	for wave in 2:
+		var ticks := 0
+		while main.phase==main.Phase.WATCHING and ticks<12000:
+			main._sim_tick()
+			ticks+=1
+		_check(main.phase==main.Phase.SWEEP,"exact QA actual wave %d clears" % wave)
+		if wave==0:
+			main.raid_vacuum_loot()
+			_fill_original_guns()
+			await _native_key(KEY_SPACE)
+			_check(main.phase==main.Phase.WATCHING and main.battle_log.wave_id==1,"native Space starts actual second wave")
+	for op in main.operators:
+		for kind in ["grenade","mine","decoy"]:
+			op.receive_item(kind,1)
+	var loot: Node2D
+	for candidate in main.loot_piles:
+		if not candidate.collected and candidate.kind=="kar98k":
+			var body_id: String = main.visual_snapshot.corpses.id_for_loot(candidate)
+			if not body_id.is_empty() and int(main.visual_snapshot.corpses.records[body_id].source_wave_id)==1:
+				loot=candidate
+	_check(loot!=null,"exact QA finds real second-wave kar98k corpse")
+	if loot==null:
+		return
+	var id: String = main.visual_snapshot.corpses.id_for_loot(loot)
+	_check(main.visual_snapshot.corpses.records[id].model=="enemy_flank" and int(main.visual_snapshot.corpses.records[id].source_actor_id)==3,"exact QA keeps original enemy_flank #3 provenance")
+	await _native_key(KEY_2)
+	_check(main.selected==main.operators[1] and main.selected.alive and main.selected.visible,"native KEY2 selects surviving MG")
+	_check(not main.selected.pack_can_fit(loot.kind),"original receive_item full-pack fixture prevents automatic gun pickup")
+	# The one disclosed initial positioning fixture; no subsequent teleport.
+	main.selected.global_position=loot.global_position
+	view.rig.focus=Space.logic_to_world(main.selected.global_position)
+	view.rig.view_size=9.0
+	view.rig.yaw_deg=65.0
+	view.rig.pitch_deg=55.0
+	view.rig.apply_pose()
+	view.refresh()
+	await _native_key(KEY_H)
+	_step_command(61)
+	_check(main.selected.hauled_loot==loot and not loot.collected,"native H holds real body after one second")
+	await _native_mouse(main.selected.global_position+Vector2(48,0),MOUSE_BUTTON_LEFT)
+	var steps := 0
+	while main.selected.is_moving() and steps<900:
+		_step_command(1)
+		steps+=1
+	_check(not main.selected.is_moving() and steps>0,"native east movement finishes under original load")
+	await _native_key(KEY_H)
+	_step_command(43)
+	_check(not main.selected.is_hauling(),"native H release completes")
+	await _native_key(KEY_H)
+	_step_command(61)
+	_check(main.selected.hauled_loot==loot and not loot.collected,"native H re-grabs after actual release")
+	view.rig.focus=Space.logic_to_world(main.selected.global_position)
+	view.rig.apply_pose()
+	view.refresh()
+	await _native_mouse(Vector2(592,176),MOUSE_BUTTON_LEFT)
+	steps=0
+	while main.selected.is_moving() and steps<900:
+		_step_command(1)
+		steps+=1
+	_check(not main.selected.is_moving() and main.selected.global_position.distance_to(Vector2(592,176))<3.0,"exact native path reaches original 3px tolerance")
+	await _native_mouse(main.selected.global_position+Vector2(0,64),MOUSE_BUTTON_RIGHT)
+	_step_command(1)
+	_check(absf(main.selected.facing_deg-90.0)<0.001,"exact native right mouse keeps gameplay facing +Y")
+	_check(main.selected.hauled_loot==loot and loot.global_position==main.selected.global_position+Vector2(0,14) and not loot.collected,"exact native 14px follow/ref/pickup rules stay unchanged")
+	var before: Dictionary = main._snapshot_data().duplicate(true)
+	view.refresh()
+	_skin_contract(id,true)
+	_check(main._snapshot_data()==before,"exact native contact rendering never changes gameplay")
+	rows.append({"scope":"parent native MG / real enemy_flank #3 wave1","source_pos":main.visual_snapshot.corpses.records[id].source_pos,"pos":main.selected.global_position,"gameplay_facing":main.selected.facing_deg,"visual_facing":view.corpses[id].get_meta("contact_facing"),"body_id":id,"path_steps":steps,"body_lod":view.corpses[id].body.lod,"vertices_inside_brickwall":_penetrations(view.corpses[id].body)})
+	await _capture(id,"qa_exact")
+	completed=true
+
+
 func _run() -> void:
 	root.size=Vector2i(1280,720)
 	var settings=root.get_node("GameSettings")
 	settings.mark_tutorial_seen("yard")
-	settings.set_force_touch_hud(false)
+	settings.set_force_touch_hud(OS.get_environment("AMBUSH_CONTACT_SCOPE")=="qa_exact")
 	settings.pending_level_id="yard"
 	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
 	await process_frame
@@ -304,7 +419,10 @@ func _run() -> void:
 	view=main.presentation_3d
 	main.set_process(false)
 	view.set_process(false)
-	await _journey()
+	if OS.get_environment("AMBUSH_CONTACT_SCOPE")=="qa_exact":
+		await _qa_exact()
+	else:
+		await _journey()
 	_check(completed,"native second-wave regression completes")
 	root.get_node("AudioDirector").pause_for_background()
 	var file := FileAccess.open("res://build/asset_review/pr15-runtime/corpse-contact-report.json",FileAccess.WRITE)
