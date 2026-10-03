@@ -304,7 +304,7 @@ func _native_key(code: Key) -> void:
 
 
 func _native_mouse(at: Vector2, button: MouseButton) -> void:
-	var screen := view.rig.project_logic(at)
+	var screen: Vector2 = view.rig.project_logic(at)
 	_check(not view.pointer_over_ui(screen),"exact QA native mouse target is outside UI")
 	for pressed in [true,false]:
 		var event := InputEventMouseButton.new()
