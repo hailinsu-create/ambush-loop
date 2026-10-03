@@ -55,3 +55,6 @@
 
 
 2026-10-03状态更新：父端报告68582原native MG/source #3同序97步401 wall skin→0、独立32/0及全新portable再32/0，MG72配置/16H端点/历史387/0与四合法corner48sample133/0（位置fixture）无新P1/P2，原墙P2scope闭合。父端未入本树的raw不混为本作者新run；最高浮空97.64mm、grab/release中段肩掌约0.56m断握、自然握持/正浮空/全墙/same-candidate构建/设备仍待品质优化。本作者随后4741的默认contact576/0及精确nativeMG25/0实际exit0。具体HUD/radio已由[品质小片](AMBUSH_PR15_PRESENTATION_QUALITY_20261003.md)106/0修复；下一优先可见中段断握，再顶部HUD/FX/A3/13波视觉/最终同候选交付。
+
+
+2026-10-03 接触品质续片：[抓放/正浮空报告](AMBUSH_PR15_CORPSE_PAIRING_20261003.md)。原e9 native MG102/15exit1、86矩阵171/83exit1→89fb34be2498123651bb7685dc55eb5aff6436f2运行修复；a575d9ec9b7eed1b934218a727c41c2a6d0ff226仅改专项测试实际camera参数和正式REPLAY入口，生产等价89，代码已推送核对PR15 Draft/Open/未合并。最终render2695/0/103秒、72hold/864相位、17native测点、双掌<0.001mm、body约6mm/搬运者脚底<0.2mm、原墙skin0、原骨段/端点/暂停/后台/复制历史/旧版通过；18正式run全exit0/ERROR0，9最终图已看，六关13波10332/0/393秒及原终局保持。矩阵/年龄/复制时间轴为明确fixture，不称全墙自然艺术或连续command已完成；独立品质复验待。实际camera size12/viewport1280×720，不将请求4/8写成实际。父端b011 R03原遮挡/整隐已独立闭合，真1600和200%HUD裁切待。下一剩余HUD/完整3DFX/连续command→A3/13波视觉与正常旅程→同最终候选fullsmoke/QA/APK；旧smoke7d34867/PCK91不归本片。资产源/GLB/atlas/manifest和R规则未改，无需新增R取舍；Notion指定作者负责，耳听0/45、0/6与设备后置。
