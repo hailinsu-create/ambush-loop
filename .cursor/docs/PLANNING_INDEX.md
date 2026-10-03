@@ -6,9 +6,9 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持。独立QA待；下一先修title两P2，FX/A3后置。 |
-| [title焦点/生命周期补片计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md) | 父端d7b独立QA两P2待：settings自然Tab逃后台/Back关错层、brief缺previous_focus报ERROR；autoREPLAY安全边界后优先修复，尺寸限定关闭，title整体待。 |
-| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。旧队列结束；父端d7b尺寸限定关闭，title焦点/生命周期两P2待；d7b本轮唯一原配置正常push重试成功并GitHub只读核对，formal29未重跑。 |
+| [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持；3ba原配置push/远端HEAD已核对。共享Pause修复后fixed4ba相关H29/R167与生命周期30/32再次实际exit0/ERROR0，单列不相加。独立QA待，FX/A3后置。 |
+| [title焦点/生命周期报告](AMBUSH_PR15_TITLE_FOCUS_20261003.md) / [计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md) | fixed4ba作者正式六次全部actual exit0/ERROR0：自然键盘4476、原Quit7、autoREPLAY29/167、生命周期30/32；四surface profiles×fresh/Continue八组，83PNG核hash/实际看15。129a负向34/4exit1/ERROR1→开发最小36/0→830生产修复；两个830无效native轮次实际143，全部剔除。独立关闭待，先交checkpoint，FX/A3后置。 |
+| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | 历史fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。父端d7b尺寸限定关闭；后发现焦点/生命周期两P2现由830修复、fixed4ba作者专项通过，独立关闭待。d7b原配置push/只读HEAD已核对，formal29未重跑。 |
 | [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；证据交付a218，父端报告fixed15c limitedQA通过，59PNG/看19及其计数单列，新title不在该QA范围。完整3DFX/A3/正常玩家旅程/APK仍待。 |
 | [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
 | [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |

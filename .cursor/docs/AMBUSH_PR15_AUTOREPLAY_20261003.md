@@ -28,6 +28,8 @@ Headless覆盖30/60/240帧cadence、1×/2×、fraction/暂停/seek清债/非法d
 
 原有效负向7c在原无时钟源6/2、exit1/ERROR0；d0a第一轮typed parser失败不算契约负向。开发24/0 H、原12a entry27/2，以及两轮Window未放原点pointer失败134/32、36/2全部保存；后两轮没收到Replay GUI信号，是fixture错误。旧私有X11 `base` arrow100/102造成166/8、167/2；30秒endpoint预算也过早到期，非终点图虽旧文件名含endpoint仍明示development nonterminal。仅自有:112改evdev arrow113/114，Window.position=0、释放GUI焦点后开发167/0，正式168/0。尝试过的GUI前置路由已撤回，patch留档。负向/开发/正式计数分开，[file manifest](evidence/20261003-pr15-autoreplay/file-manifest.json)可追溯。
 
-所有测试队列实际完成；此片不重跑原有效formal29或title8组。未验：正常玩家胜利路径、oldschema1 native自动播放、完整3DFX/耳听、A3预算/全部新候选回归、APK/模拟器/设备性能。独立auto QA由父端安排固定可读SHA。title独立QA两P2未关闭，下一优先片见 [焦点计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md)，不把原尺寸限定关闭当title整体完成。
+所有测试队列实际完成；此片不重跑原有效formal29或旧title2391。后续title/Pause焦点修复已在固定 `4ba2bfd26a17ebbb1500f04c8fb267d852461f65` 另做六次专项，auto H29/R167、生命周期H30/R32全部actual exit0/ERROR0；自动时钟/main/BattleLog/presenter/ViewState源与固定770完全相同。该回归与上述正式770计数分开，见 [title焦点报告](AMBUSH_PR15_TITLE_FOCUS_20261003.md)。3ba自动回放证据交付的原配置push actual exit0与GitHub HEAD核对收据见 [sync-3ba6871](evidence/20261003-pr15-autoreplay/sync-3ba6871/receipt.json)。
+
+未验：正常玩家胜利路径、oldschema1 native自动播放、完整3DFX/耳听、A3预算/全部新候选回归、APK/模拟器/设备性能。独立auto QA与title两P2修复独立QA由父端安排；不把原尺寸限定关闭当title整体完成。本checkpoint完成后先交付，不扩FX/A3。
 
 资产接口保持R5固定骨架20骨/socket/3LOD/52语义，角色制作源、GLB、atlas、Blender与manifest均未改/未重跑；WIP未整体并入。不merge、不发布生产、不混高度。网页GPT PLAN/REVIEW unavailable。
