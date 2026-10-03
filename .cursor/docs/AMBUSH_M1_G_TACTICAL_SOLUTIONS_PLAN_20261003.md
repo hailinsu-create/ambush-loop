@@ -32,4 +32,14 @@
 
 外部 GPT 对精确差异的新增 REVIEW、Android/vivo、五位非开发者试玩及设备依赖 AudioTrack 根因继续等待后续人类授权/参与，不由桌面 gate 代替。G 通过后开展 H 整关一致性，再做 I 的渲染证据；即使 D–I 桌面门完成，M1 仍须保留上述人类与设备退出条件。
 
-状态：计划已写入规划 PR；G 实现待开始。
+## M1-G 实现与桌面验证结果（2026-10-03）
+
+源码 Draft PR #21：[`da10638`](https://github.com/hailinsu-create/ambush-loop/pull/21)，分支 `codex/m1-g-tactical-solutions`，以 F 分支为 base。新增隔离 gate `m1_yard_tactical_solutions_gate.gd` 与 PowerShell/shell allowlist；未改生产玩法数据。
+
+最终隔离 run `f13b9dc497df4d1c9e71a10881567c5d`，Godot 4.7.2，wrapper exit 0，`PLAYER_DATA_UNCHANGED=1`。成功标记：`M1_YARD_TACTICAL_SOLUTIONS_OK real_weapons=1 real_ramp=1 plan_a_win=1 plan_b_win=1 same_budget=1 flank_counterexample=1 explained_escape=1 two_waves=1`。A、B 均从真实枪械箱搜索拾取、按合法路线移动；高点队员实际走过坡道；两波各击毙 ID 1/2/3、零逃逸并获胜。主路集中反例由真实东廊 flank route 逃逸，日志记录未交战原因，失败原因是 `escape` 而不是全灭或测试夹具直接写入终局。
+
+A/B 实际枪械弹药签名一致。需校准资源文档：`mg` 补给选择的实枪械为 MG42，模型载弹量为 50；这与早期 ADR 将通用 MG 预算写作 12 不同。G 只验证两案资源完全相同，未改数值；后续规划/截图按真实模型值记录，不将旧 ADR 数值当作 MG42 当前弹量。
+
+## 当前状态
+
+G 本地桌面门通过；外部 GPT 精确差异 REVIEW、Android/vivo、五位非开发者试玩及设备依赖 AudioTrack 继续待人/设备。下一步进入 [M1-H 整关一致性计划](AMBUSH_M1_H_END_TO_END_PLAN_20261003.md)，桌面门全过也不代表 M1 整体退出。
