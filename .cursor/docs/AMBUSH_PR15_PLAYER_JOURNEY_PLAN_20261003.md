@@ -17,3 +17,5 @@ FX/A3待办核对：原FX生命周期30/36只检清实时2D色罩/旧Tween，非
 首次疑点实际未复现：固定test-only c7d01111b24392217cc1e3c5e043dfb72195a5a1，fresh title1600×720/200%→原Main→院子三教学页32/0、actual exit0/ERROR0，6次XTest、3物理PNG、实际看page0。下一步/开始布置均可达，不为源码假设改教学布局。根屏幕额外采样发生在进程退出后是黑图，不当证据。原Main开发入口没有a0_preview时保留2D；之前3D测试直接加载yard_3d。因此后续另建固定源码的隔离PCK，只加已有custom_features=a0_preview，保留原title/main/进度流程，验证自然创建3D presenter，不改原配置/资产输出。
 
 新native旅程driver先限yard，原数字键选人、点击真实匣并等真实引擎走路/开匣、原cover点击与15°朝向、真实警报/暂停/清波/撤离/下一关。策略引用原reference站位但不调用reference授枪或vacuum；全部行为记录实际状态，不能硬套其terminal/event计数。确认yard实际通过后再续其余五关；失败先复现修第一个实际阻碍，当前不能称六关13波已过。
+
+当前正常旅程保全并暂缓：528测试包自然取得kar98k/MG42/kar98k_zf及手雷，但75/1、exit1、engineERROR8；测试lambda直接捕获已释放stash的错误单列，不当生产缺陷证据。原拾取器命中cover5而站在相邻1格的队员未部署，疑似old32px body选择优先于明确3D cover；需修测试后重新独立确认。117只有typed weakref parser失败、exit1/SCRIPT1/ERROR1，旧528 report没有复用。包导入/导出0并不证明其未使用测试脚本可解析。WeakRef已改显式类型。父端新报“历史事件文本读取live log”P2，按要求优先复现修复；此前title两P2父端固定4ba独立限定关闭，独立计数不与作者相加。正常六关13波尚未完成，未新增设备/耳听/FX/A3通过。

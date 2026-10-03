@@ -124,7 +124,7 @@ func _collect(family: String, index: int) -> bool:
 	_check(stash != null, "authored stash exists for " + family)
 	if stash == null: return false
 	var kind: String = stash.kind
-	var stash_reference := weakref(stash)
+	var stash_reference: WeakRef = weakref(stash)
 	var before: Vector2 = main.selected.global_position
 	if not await _world_click(stash.global_position,0.55,"stash_"+kind): return false
 	if not await _wait_until(func() -> bool:
