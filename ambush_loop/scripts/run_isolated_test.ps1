@@ -12,6 +12,7 @@ param(
         'm1_yard_resource_budget_gate.gd',
         'm1_yard_timing_causality_gate.gd',
         'm1_yard_tactical_solutions_gate.gd',
+        'm1_yard_end_to_end_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
         'm1_b2_yard_height_gate.gd',
         'accept_cta_flow_gate.gd',
