@@ -57,7 +57,8 @@ func _boundary_matrix(id: String) -> void:
 					frame.pose_snapshot_delta_s=0.0
 					var mode: String = item.mode
 					var ages := [0.1999,0.2] if mode=="grab" else [0.5,0.5001]
-					for schema in [int(source.corpse_pairing_schema),1]:
+					for policy in ["current","legacy"]:
+						var schema: int = int(source.corpse_pairing_schema) if policy=="current" else 1
 						frame.corpse_pairing_schema=schema
 						var previous := {}
 						var digests := []
@@ -71,7 +72,7 @@ func _boundary_matrix(id: String) -> void:
 							if not previous.is_empty():
 								var delta := _delta(previous,current)
 								var row := {"role":role,"lod":lod,"stance":stance,"mode":mode,"ages":ages,"schema":schema,"delta":delta,"pose_sha256":digests}
-								if schema==int(source.corpse_pairing_schema):
+								if policy=="current":
 									boundary_rows.append(row)
 									_check(maxf(delta.left_m,delta.right_m)<0.001,"both palms continuous within1mm "+str(row))
 									_check(delta.carrier_skin_m<0.001 and delta.body_skin_m<0.001,"both actual LOD skins continuous within1mm "+str(row))
@@ -92,6 +93,8 @@ func _run() -> void:
 	await process_frame
 	main=current_scene
 	view=main.presentation_3d
+	raw_reference.visible=false
+	root.add_child(raw_reference)
 	main.set_process(false)
 	view.set_process(false)
 	await _qa_exact()
