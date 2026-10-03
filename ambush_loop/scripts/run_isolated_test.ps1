@@ -13,6 +13,7 @@ param(
         'm1_yard_timing_causality_gate.gd',
         'm1_yard_tactical_solutions_gate.gd',
         'm1_yard_end_to_end_gate.gd',
+        'm1_yard_visual_evidence_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
         'm1_b2_yard_height_gate.gd',
         'accept_cta_flow_gate.gd',
@@ -33,8 +34,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-if ($Rendered -and ($ImportOnly -or $Entry -ne 'm1_height_coverage_gate.gd')) {
-    throw 'Rendered mode is restricted to the C3 coverage gate.'
+if ($Rendered -and ($ImportOnly -or $Entry -notin @('m1_height_coverage_gate.gd', 'm1_yard_visual_evidence_gate.gd'))) {
+    throw 'Rendered mode is restricted to the C3 coverage and M1-I visual evidence gates.'
 }
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $enginePath = [IO.Path]::GetFullPath($GodotExe)
