@@ -95,6 +95,7 @@ var _hp_pulse: float = 0.0
 var _shield_pulse: float = 0.0
 var _cone_plan_color: Color = Color(0.95, 0.75, 0.25, 0.30)
 var _cone_visual_mul: float = 1.0
+var _direction_guide_visible := true
 var _cover_lean: Vector2 = Vector2.ZERO
 var _outline_boost: bool = false
 var cone_edge: Line2D = null
@@ -862,6 +863,13 @@ func lock_plan() -> void:
 	_tick_sel_ring()
 
 
+func set_direction_guide_visible(show: bool) -> void:
+	if _direction_guide_visible == show:
+		return
+	_direction_guide_visible = show
+	_rebuild_cone()
+
+
 func tick_cooldown(delta: float) -> void:
 	if shot_cd > 0.0:
 		shot_cd = maxf(shot_cd - delta, 0.0)
@@ -928,6 +936,9 @@ func _rebuild_cone() -> void:
 		faded.a *= clampf(_cone_visual_mul, 0.22, 1.0)
 		cone.color = faded
 	_rebuild_cone_edge(pts)
+	cone.visible = cone.visible and _direction_guide_visible
+	if cone_edge:
+		cone_edge.visible = cone_edge.visible and _direction_guide_visible
 	if body:
 		body.rotation = deg_to_rad(facing_deg + 90.0)
 		# Human silhouette: head / shoulders / torso / two legs + kit.
