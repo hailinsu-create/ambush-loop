@@ -1,4 +1,4 @@
-"""Native mouse input for the guarded viewport test on a private X11 display."""
+"""Native mouse/Escape input for guarded tests on an explicit private X11 display."""
 import ctypes
 import os
 import re
@@ -13,11 +13,13 @@ if (not re.fullmatch(r"[0-9a-f]{32}", run_id)
         or data_root.parent.parent.name != "ambush_test_runs"
         or not test_display or os.environ.get("DISPLAY") != test_display):
     raise SystemExit("native input requires isolated storage and an explicit private test display")
-if len(sys.argv) != 4:
-    raise SystemExit("expected physical screen x, y, and mouse button")
-x, y, button = map(int, sys.argv[1:])
-if button not in (1, 4, 5):
-    raise SystemExit("unsupported test mouse button")
+escape = sys.argv[1:] == ["key", "Escape"]
+if not escape:
+    if len(sys.argv) != 4:
+        raise SystemExit("expected physical screen x/y/button or key Escape")
+    x, y, button = map(int, sys.argv[1:])
+    if button not in (1, 4, 5):
+        raise SystemExit("unsupported test mouse button")
 x11 = ctypes.CDLL("libX11.so.6")
 xtst = ctypes.CDLL("libXtst.so.6")
 x11.XOpenDisplay.argtypes = [ctypes.c_char_p]
@@ -26,13 +28,25 @@ x11.XSync.argtypes = [ctypes.c_void_p, ctypes.c_int]
 x11.XCloseDisplay.argtypes = [ctypes.c_void_p]
 xtst.XTestFakeMotionEvent.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_ulong]
 xtst.XTestFakeButtonEvent.argtypes = [ctypes.c_void_p, ctypes.c_uint, ctypes.c_int, ctypes.c_ulong]
+x11.XStringToKeysym.argtypes = [ctypes.c_char_p]
+x11.XStringToKeysym.restype = ctypes.c_ulong
+x11.XKeysymToKeycode.argtypes = [ctypes.c_void_p, ctypes.c_ulong]
+x11.XKeysymToKeycode.restype = ctypes.c_uint
+xtst.XTestFakeKeyEvent.argtypes = [ctypes.c_void_p, ctypes.c_uint, ctypes.c_int, ctypes.c_ulong]
 display = x11.XOpenDisplay(test_display.encode())
 if not display:
     raise SystemExit("private X11 display is unavailable")
 try:
-    xtst.XTestFakeMotionEvent(display, -1, x, y, 0)
-    xtst.XTestFakeButtonEvent(display, button, 1, 0)
-    xtst.XTestFakeButtonEvent(display, button, 0, 0)
+    if escape:
+        code = x11.XKeysymToKeycode(display, x11.XStringToKeysym(b"Escape"))
+        if not code:
+            raise SystemExit("private display has no Escape keycode")
+        xtst.XTestFakeKeyEvent(display, code, 1, 0)
+        xtst.XTestFakeKeyEvent(display, code, 0, 0)
+    else:
+        xtst.XTestFakeMotionEvent(display, -1, x, y, 0)
+        xtst.XTestFakeButtonEvent(display, button, 1, 0)
+        xtst.XTestFakeButtonEvent(display, button, 0, 0)
     x11.XSync(display, 0)
 finally:
     x11.XCloseDisplay(display)

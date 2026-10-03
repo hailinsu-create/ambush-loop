@@ -58,3 +58,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-03 父端独立schema2 IK与北侧原矩阵已限定关闭，原focus文字与0ac终局新修QA待；旧cf77终局15/2及shader-cache错误不算green、不归0ac。继续[连续command切片计划](AMBUSH_PR15_CONTINUOUS_COMMAND_PLAN_20261003.md)：先真实ALERT/SWEEP两波录制与回放，保留原battle tick/seq/terminal统计，SCOUT前段留下一片；资产单写/规则边界保持，FX/A3/radio旅程/同候选最终构建按计划继续。
+
+
+2026-10-03 父端已限定关闭0ac终局两P2；新radio200致谢子层P2优先[独立修复计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)，56/2中presentationclock误判排除。依赖47a645连续command已提交但仅开发98/0，formal/graphical/六关未运行；本片只修credits，再同候选整体formal。

@@ -26,6 +26,7 @@ param(
         'corpse_contact_test.gd',
         'presentation_quality_test.gd',
         'result_viewport_test.gd',
+        'radio_credits_viewport_test.gd',
         'viewport_hud_test.gd',
         'corpse_pairing_boundary_test.gd',
         'smoke_test.gd',
