@@ -39,6 +39,6 @@
 
 目视检查确认坡道/平台、主路与东廊逃逸、队员路线与覆盖、剩余补给点和 A/B 站位差异均可辨；青色离散覆盖与黄色扇形/橙色参考覆盖没有混淆。失败图来自真实 flank 逃逸结果，重试图来自实际 Continue 流程，不是静态伪造状态。
 
-**共享回归：** 本轮已串行通过 D、E、F、G、H 单项隔离 gate；全量 `smoke_test.gd` 隔离回归仍在执行，完成标记与存档守卫结果待补记。外部 GPT 新精确差异 REVIEW、Android/vivo、五人试玩和设备依赖 AudioTrack 仍按用户要求暂缓。
+**共享回归：** D–H 单项隔离 gate 与 I 渲染 gate 全部通过；D–H 后接的全量 `smoke_test.gd` 隔离 run `6aa4327b890741a89270cdea56124d60` 完成，包含 yard、warehouse、pump、railcut、depot、radio 六关循环，出现 `SMOKE_SLICE_COMPLETE`，runner exit 0 且 `PLAYER_DATA_UNCHANGED=1`。外部 GPT 新精确差异 REVIEW、Android/vivo、五人试玩和设备依赖 AudioTrack 仍按用户要求暂缓。
 
-状态：I 桌面 gate 与截图目视证据通过；全量共享 smoke 最终结果待记录；不代表 M1 整体退出。
+状态：D–I 自动化桌面开发和共享 smoke 全部完成；M1 整体仍等待明确列出的人工/设备验收，不把暂缓事项标成完成。

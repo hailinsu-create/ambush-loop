@@ -2,7 +2,7 @@
 
 更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前执行入口：** [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)，承接 [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md)。本轮 D、E、F、G、H 单项隔离复验依次通过（runs `5ffbbb5ba16645c1931a0edf7084f0c5`、`8185a4e0b5f44d40a678d6993a06b56c`、`cafad01d062a4d4fba5ce5e4006213ae`、`b819434421114acd8586a35ee73a58cc`、`6b945b92cb92422fae98ce2ac67985fa`，均 exit 0 并确认玩家数据不变）。I 图形隔离 run `81ca8c1b0c5e45e395cacc3366b103e0` 通过，四张 1280×720 截图已目视并归档；源码 Draft PR #23 / `8bc9a4f`。完整 `smoke_test.gd` 的串行复验 run `6aa4327b890741a89270cdea56124d60` 仍在进行，最终完成标记和玩家数据守卫待记录；故此刻不宣称 M1 整体退出。外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack 按用户要求暂缓。
+**当前执行入口：** [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md) 的完成记录与 [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)。D–H 单项隔离复验依次通过（runs `5ffbbb5ba16645c1931a0edf7084f0c5`、`8185a4e0b5f44d40a678d6993a06b56c`、`cafad01d062a4d4fba5ce5e4006213ae`、`b819434421114acd8586a35ee73a58cc`、`6b945b92cb92422fae98ce2ac67985fa`，均 exit 0 且玩家数据不变）。I 图形隔离 run `81ca8c1b0c5e45e395cacc3366b103e0` 通过，四张 1280×720 截图已目视并归档；源码 Draft PR #23 / `8bc9a4f`。共享全量 smoke run `6aa4327b890741a89270cdea56124d60` 通过六关循环、`SMOKE_SLICE_COMPLETE`、exit 0 和 `PLAYER_DATA_UNCHANGED=1`；D–I 本地自动化桌面工作已完成。M1 整体仍暂缓外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack，不把这些人工/设备证据误记为通过。
 
 **本轮边界：** 用户要求先搁置需人的部分并完成其余 M1 工作。本机按既有正式 D–I 路线推进 E–I 自动化桌面证据；原 GPT 的新逐切片 PLAN/REVIEW、Android/vivo 和 5 人试玩仍明确待办，不宣称完整 M1 通过。
 
