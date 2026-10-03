@@ -6,6 +6,9 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |
+| [北侧HUD修复](AMBUSH_PR15_NORTH_HUD_20261003.md) | 816分开checklist/minimap并稳定镜头边界，7edd追加时间条留白；真实窗口/原生输入/焦点往返证据齐备，原裁切未称关闭。 |
+| [schema2连续抓放边界](AMBUSH_PR15_CORPSE_BOUNDARY_20261003.md) | 固定f7作者边界2978/0、18run exit0；已随cf77正常push，父端cf77独立QA进行中，三个未留存辅助图仍明确缺失。 |
 | [抓放/正浮空品质片](AMBUSH_PR15_CORPSE_PAIRING_20261003.md) | 89fb运行修复、a575仅专项测试元数据/正式REPLAY入口，已推送代码；负向102/15与171/83→正式render2695/0，72hold/864相位、双掌/原骨段/双脚/墙0/暂停/后台/端点/复制历史及旧版；18run全部exit0，9实际图已看，六关10332/合同84042保持。独立自然品质QA待；R03原scope已闭合，真1600/200%HUD及FX/A3/13波视觉/同候选交付继续。 |
 | [depot点击与radio整隐修复](AMBUSH_PR15_PRESENTATION_QUALITY_20261003.md) | c00负向69/14→4741c5f正式106/0；两LOD属性/材质与copied历史/兼容，HUD164/生命周期32/输入23/合同84042/六关10332/contact576/nativeMG25退出0。父端b011独立241/0、19图及复跑关闭原R03，真正1600可用viewport/200%裁切仍待；断握/浮空续片见上一行。 |
 | [原生SWEEP拖尸墙面修复](AMBUSH_PR15_CORPSE_CONTACT_20261003.md) | cd158166实际第二波输入363顶点进砖墙17/1→d7d29156渲染576/0；保留原规则、显式contact版本与纯历史，原尸体1203/合同84042/工具1041退出0。原墙P2父端独立关闭；97.64mm正浮空/约0.56m中段断握及全墙自然品质待优化，FX/A3/13波视觉与同候选交付继续。 |
@@ -66,3 +69,6 @@
 
 
 2026-10-03 最新交付状态：原配置唯一push重试成功并只读核对cf77f4db63605ff1e9846e1149f27ca6d461f458；先前onlylocal/authblocked均为历史状态，不推永久凭据健康。Library恢复未发生，不重试。HUD续片[北侧HUD报告](AMBUSH_PR15_NORTH_HUD_20261003.md)，运行816正式focus1702/0+viewport5081/0exit0，checkbox/minimap已分开，原两张镜头裁切原生133/0未复现仍待独立QA，FAILED/WON200另做。
+
+
+2026-10-03 本轮限定HUD收尾：[终局与北侧叠层报告](AMBUSH_PR15_RESULT_HUD_20261003.md)。f2结果滚动首修后，80ce379补镜头层级745/24exit1与时间条1718/16exit1→固定7edd0db93243e1079d6af3e55da37bf2d5a97df1正式结果449/0、focus1718/0、viewport5081/0、合同84042/0、历史画面164/0、渲染生命周期32/0，全实际exit0/ERROR0，119最终PNG全部留存并核hash，三张最终图已看。原两张focus邻近裁切未复现/独立QA仍待，cf77 IK/HUD独立QA由父端安排；未称全部HUD/完整战场/设备通过。此前onlylocal/authblocked为历史失败，原配置重试成功后，本片普通push及git/connector只读核对7edd成功；Library未恢复不重试。资产接口/单写者/SCOUT→ALERT→SWEEP规则保持；未展开FX/A3，后续仍按父端分配推进。
