@@ -1,0 +1,724 @@
+{
+  "source_sha": "4ba2bfd26a17ebbb1500f04c8fb267d852461f65",
+  "production_fix_sha": "83067064d6add31bd4f15c2d9ea6da2237c4398b",
+  "game_tree": "41daf9c05162538d6d39e5a3d9dcbd66856d4314",
+  "runs": [
+    {
+      "entry": "title_focus_keyboard_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_focus_keyboard_test.gd --render",
+      "label": "title-focus-formal-v3",
+      "uuid": "e5e3777eea77480da3916c431419a024",
+      "actual_exit": 0,
+      "checks": 4476,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0,
+      "log": "title-focus-formal-v3.log",
+      "exit_receipt": "title-focus-formal-v3.exit"
+    },
+    {
+      "entry": "title_menu_viewport_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin AMBUSH_TITLE_EXIT_ONLY=keyboard bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_menu_viewport_test.gd --render",
+      "label": "title-focus-quit-v3",
+      "uuid": "330ce29c4ae54e3aae8e908184bdab5a",
+      "actual_exit": 0,
+      "checks": 7,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0,
+      "log": "title-focus-quit-v3.log",
+      "exit_receipt": "title-focus-quit-v3.exit"
+    },
+    {
+      "entry": "replay_autoplay_test.gd",
+      "mode": "--headless",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot replay_autoplay_test.gd --headless",
+      "label": "title-focus-auto-headless-v3",
+      "uuid": "9baf0e228f244f1282a71e72c9d967a6",
+      "actual_exit": 0,
+      "checks": 29,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0,
+      "log": "title-focus-auto-headless-v3.log",
+      "exit_receipt": "title-focus-auto-headless-v3.exit"
+    },
+    {
+      "entry": "replay_autoplay_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot replay_autoplay_test.gd --render",
+      "label": "title-focus-auto-render-v3",
+      "uuid": "c005122c15f84e8b9c9dfae8a3d45c71",
+      "actual_exit": 0,
+      "checks": 167,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0,
+      "log": "title-focus-auto-render-v3.log",
+      "exit_receipt": "title-focus-auto-render-v3.exit"
+    },
+    {
+      "entry": "presentation_lifecycle_test.gd",
+      "mode": "--headless",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot presentation_lifecycle_test.gd --headless",
+      "label": "title-focus-lifecycle-headless-v3",
+      "uuid": "9dfb3f8379184505b7e2b760b20211ea",
+      "actual_exit": 0,
+      "checks": 30,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0,
+      "log": "title-focus-lifecycle-headless-v3.log",
+      "exit_receipt": "title-focus-lifecycle-headless-v3.exit"
+    },
+    {
+      "entry": "presentation_lifecycle_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot presentation_lifecycle_test.gd --render",
+      "label": "title-focus-lifecycle-render-v3",
+      "uuid": "76a27b63c5494d83bb5903d978209d7c",
+      "actual_exit": 0,
+      "checks": 32,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0,
+      "log": "title-focus-lifecycle-render-v3.log",
+      "exit_receipt": "title-focus-lifecycle-render-v3.exit"
+    }
+  ],
+  "captures": [
+    {
+      "file": "viewport_focus_1280_100_desktop_fresh_settings.png",
+      "sha256": "5c4274e33f364a1194522a419457ae24845c3ca98bd308b7c0326632a7fda2c8",
+      "bytes": 97641,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_fresh_settings_back.png",
+      "sha256": "662b2543140fa57c96e5f572b8dadc146c0dc85cb9e7fa9c3dab56caaf273651",
+      "bytes": 121892,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_fresh_brief_mouse_0.png",
+      "sha256": "01f78ee4711c2fd33014b3ab34362a4b758c167da4f70c0987f0e5b316027f07",
+      "bytes": 80649,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_fresh_brief_back_mouse_0.png",
+      "sha256": "f7a5a76b016d443cd4fe6fc91c33fa3a76164b2fa16b497127fba938e2375839",
+      "bytes": 121486,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_settings.png",
+      "sha256": "501fb22884a5c35cd4c1ba8213dfba20d0830ea6dd6f26e156eefcbfb14e5d64",
+      "bytes": 97701,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_mouse_0.png",
+      "sha256": "e480163a649ed0420b3ee50a00c0b830f8e16387bc28a73b45a7300125fd7a8f",
+      "bytes": 81527,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_mouse_0.png",
+      "sha256": "535269b0f26cbb6e1ab5f83ec15ad98838c98a28b9dc2d69cf24ccb85aaceeb9",
+      "bytes": 124435,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_keyboard_0.png",
+      "sha256": "4991428fd805dc10044b26e6a771a4eacb4e86cea91ae81d75c04b2bbae5c3da",
+      "bytes": 81216,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_keyboard_0.png",
+      "sha256": "038a1c18c301b8bc20b66e8951e422fd2112eb224574d90f80a26c2230bbaa0d",
+      "bytes": 124432,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_keyboard_1.png",
+      "sha256": "320a84afe4de3c63ec034cfd051feea5a7882729eb5fad3766e98cd1f5e388ac",
+      "bytes": 85635,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_keyboard_1.png",
+      "sha256": "75ff4f850c238fb5613d4190f868a355ede6b3c3dc8626d5806e486e8920ec45",
+      "bytes": 124778,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_keyboard_2.png",
+      "sha256": "6c2ce20277a17df81da990927cb29c67d594be9806586fb9d5cadd675f646562",
+      "bytes": 96970,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_keyboard_2.png",
+      "sha256": "733fc03ddac8c64b59c4ffda55c88fb98d6e40175058ec7e648cb220d26d0aa2",
+      "bytes": 125376,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_keyboard_3.png",
+      "sha256": "fa6c8702ed7721e3d19545a9856be023147b781bfb642c51054c4b8b1091133e",
+      "bytes": 87662,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_keyboard_3.png",
+      "sha256": "e5c8fb4469d1435b46707286b2e4ca0f32848a6df07657e3e654d96bb6942a86",
+      "bytes": 125620,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_keyboard_4.png",
+      "sha256": "b5480b79be58cc8b7e2d720b342fdca490150f3910492bde6358a597c88c1437",
+      "bytes": 92428,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_keyboard_4.png",
+      "sha256": "a90d52d7c797bc368a936ceec396f340fe3f0205392780537f2cafb183bf19a6",
+      "bytes": 124778,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_keyboard_5.png",
+      "sha256": "3fb31611379cc0dab82c9c9ed84ac6639d60f4e6b85467a1e0a0e1fe622dd222",
+      "bytes": 87491,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_100_desktop_continue_brief_back_keyboard_5.png",
+      "sha256": "895c7fb7f1fb5113d075908ac968ef99d1f9110ac8da77087a76c1d66c556b21",
+      "bytes": 123675,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_fresh_settings.png",
+      "sha256": "0b4fd729c44895e61a625eac62522ca09cde57d5b42bf7ad7fa0b0a51ae13d75",
+      "bytes": 82186,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_fresh_settings_back.png",
+      "sha256": "d60cb56a45fd682ed875c32de0d57945c72ad91c25c4dcb0d29f3b6f83a2eeea",
+      "bytes": 89193,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_fresh_brief_mouse_0.png",
+      "sha256": "7313955d3a03f284f31abe8192323c9dfab32ac90561f375b12b9d4839805c7f",
+      "bytes": 93879,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_fresh_brief_back_mouse_0.png",
+      "sha256": "d0ff79c67542cac1aa6e377a0571034456963136fc6dc479042f5d4695ab8083",
+      "bytes": 86227,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_settings.png",
+      "sha256": "4c39b83c5a0016f80a70ff99c0b9708a9b72d8d55b3179894e25e122f5b0aa30",
+      "bytes": 82582,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_mouse_0.png",
+      "sha256": "dfaadde7bb528f9dff68895b91970251b3e4f9b9f3dc9799467c1c2d87c8be9d",
+      "bytes": 95204,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_mouse_0.png",
+      "sha256": "7b4a4d545fad724dd1ad6c6b861be2d1ffb37d21dc1f5dee206c18f6b3bbc42d",
+      "bytes": 90918,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_keyboard_0.png",
+      "sha256": "c1017a275c24f0c18c4aa27c29df13ac630ebbe07a009e4a30c4a67590debd4a",
+      "bytes": 94764,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_keyboard_0.png",
+      "sha256": "0bab431687f0fb6f940bc7096443002b462afe7468aa058a63e986de8c6d9456",
+      "bytes": 91085,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_keyboard_1.png",
+      "sha256": "7bb63856e14243340b483ced0a32b4be918f8c7be60fd24d11cd69eaa93ce8bf",
+      "bytes": 92366,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_keyboard_1.png",
+      "sha256": "346a78841223e2b9ae11cd7971f5980e3e0a24901eb0c7d2e8cb2c4f01b116d7",
+      "bytes": 91236,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_keyboard_2.png",
+      "sha256": "b55d54fccd0672ab6c6acf4ac32039237d6c04cb1777350a95e12ca959703f6f",
+      "bytes": 89217,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_keyboard_2.png",
+      "sha256": "b1ad3a05b6dce65e8475ee91b48194e4bbace6d500e280fa3af811911dd1966b",
+      "bytes": 92080,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_keyboard_3.png",
+      "sha256": "5a63edcfc74b833233a8c850fda8d403dbbc86cba500477f3be9f07741d734e8",
+      "bytes": 87528,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_keyboard_3.png",
+      "sha256": "d9ff82c61ecf2f9dc7954a3ce1eeb5319c2dad6dde2c5d1121a85afc9db664f4",
+      "bytes": 90686,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_keyboard_4.png",
+      "sha256": "6eaa051e2a6d56bfec2aacc8b5d7b729cd021b2b55f4322eb7a318a5cd7499d8",
+      "bytes": 85503,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_keyboard_4.png",
+      "sha256": "83655f90841ba43abba7ef7029c7848461f9c7fa74569b0ec730d604aaa35c2b",
+      "bytes": 91352,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_keyboard_5.png",
+      "sha256": "7b57f59c8b6c4dfb868318f4ba64fb3224f1b50aeb8f2615e561fc00c0444ad7",
+      "bytes": 86549,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1280_200_touch_continue_brief_back_keyboard_5.png",
+      "sha256": "a4b55eb0dcb92bc9c965ec66fa8cefa12108151a7b85797dd72742333c5af4fa",
+      "bytes": 92053,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_fresh_settings.png",
+      "sha256": "20361c8db5bfab46c819cdc3dea418f0ca5c3fed3ea60f9e57c9b7196608c26c",
+      "bytes": 100212,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_fresh_settings_back.png",
+      "sha256": "c63efc459df08f7302cbaf3915ad8e226979405f52896b785b4fba4029043972",
+      "bytes": 124444,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_fresh_brief_mouse_0.png",
+      "sha256": "1b73d1a5056a72b4ba5f94e66124a56be03d7a890504dba80cc8b845528d8313",
+      "bytes": 83162,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_fresh_brief_back_mouse_0.png",
+      "sha256": "90a6ed4342f661d5a8a61cb437feba050eaa16f206b01eddd317ccda99dc01af",
+      "bytes": 124822,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_settings.png",
+      "sha256": "9665c487d874d520c8809741035f767e1350586baba64af1b72a46c0fb0fe51d",
+      "bytes": 100351,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_mouse_0.png",
+      "sha256": "8fcf4ac108db6d8aec76af21573055fde7f104dcaf7d2f8036267c33d29e43a2",
+      "bytes": 83690,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_mouse_0.png",
+      "sha256": "b40303a5ab7f860f2553cd91dc6834b700bf5c72ab7e93164c14e963bd4d235d",
+      "bytes": 127362,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_keyboard_0.png",
+      "sha256": "5662ed592ea3c299f336285015958ed56ab9c0ff744267d90e51823572e65e30",
+      "bytes": 83961,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_keyboard_0.png",
+      "sha256": "52e471077e5e9341a9a4105fb360580fcd3b64df3b3ded62b8187899ccdde7cd",
+      "bytes": 127767,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_keyboard_1.png",
+      "sha256": "fba6dbcd2aba22ea8d7b0826001f2b04db970f877626dae7bd8884fc7318d865",
+      "bytes": 88638,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_keyboard_1.png",
+      "sha256": "175f4b7363b7462328057ac2291dc664a8b7c04ea848f85ba1b934d6808562c3",
+      "bytes": 127046,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_keyboard_2.png",
+      "sha256": "2eb4ef936f7c470d887657a0edb02ea2f981f4002a0cedf85d4181619ee0a647",
+      "bytes": 100088,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_keyboard_2.png",
+      "sha256": "2da4d72215c120f31e1b0c67f21e8a395f485e0bc0491591de3e99da10898220",
+      "bytes": 127355,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_keyboard_3.png",
+      "sha256": "779756cf6c699a67fbb05b5a1e502dfd282ef6bc6466af2468eae203bde9229e",
+      "bytes": 90325,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_keyboard_3.png",
+      "sha256": "63fd8c0f4da5d51a6ebfcaff5f7bf927992c151b65c3cf6219481c9627d2ef37",
+      "bytes": 127692,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_keyboard_4.png",
+      "sha256": "256e16e828f8bb09123471ded94e68ac361ed6b159689c385ea9b476f23b6755",
+      "bytes": 94577,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_keyboard_4.png",
+      "sha256": "67b85bcde3bf11c5c4d97e149d0b334b54efbdabd4d36d709319a1e5a6ed9fef",
+      "bytes": 127521,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_keyboard_5.png",
+      "sha256": "c5179a3e8599d460e321a2ae57c3aee509f8dca29969dc6c65f25441c0595d95",
+      "bytes": 90292,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_100_touch_continue_brief_back_keyboard_5.png",
+      "sha256": "8a94f599c5423e8f3c6c0225a619c339e3a88f731bdb09beba996b1bb8c4c16f",
+      "bytes": 126396,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_fresh_settings.png",
+      "sha256": "de941030046352b6c9beacdee04d817a1d04a00816f837b69838e6ffb7462464",
+      "bytes": 84694,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_fresh_settings_back.png",
+      "sha256": "e7c9fb0272be90754414ef5c90214586612ca7c4d9fcc8804c2bde3c57b885cb",
+      "bytes": 91515,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_fresh_brief_mouse_0.png",
+      "sha256": "34bc8f85569d88eb98a67a8558bb6d9aaa01e0899cdcbc0f316b8954ed80959a",
+      "bytes": 96314,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_fresh_brief_back_mouse_0.png",
+      "sha256": "ff5ef2d09df74b377a4d41d4f173aabb3db66e459472b7f2cc50e67b91ba04dc",
+      "bytes": 88617,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_settings.png",
+      "sha256": "5a9c4e91ec9007559bcbac0d151b5e1025fec88475f02ed8e0f95cde405cbaeb",
+      "bytes": 84942,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_mouse_0.png",
+      "sha256": "31d68fa4a63ca26d819191c4d4dd21e59333d2903b45ee2215d84b84ac615182",
+      "bytes": 97414,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_mouse_0.png",
+      "sha256": "a51635eac7294295c01cde419c0f51da00c4f50f2a3a8877728c59ab58a93ac5",
+      "bytes": 93050,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_keyboard_0.png",
+      "sha256": "4616bdac798cda8468ddfd8ff20ab328e26be7580b89a22033728946b1027b5e",
+      "bytes": 97181,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_0.png",
+      "sha256": "6899c6c7ac3df2ca8eaabc08632c40e3a599f7d791ea6fd5157b395e2b96a563",
+      "bytes": 92881,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_keyboard_1.png",
+      "sha256": "e4bc068fe9515b08ca23de9fc98e2a2b6fa189e21cfa8c12b53be647f12a5e3c",
+      "bytes": 95519,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_1.png",
+      "sha256": "a4bdb039a115e9c7b3f6bb5c32e88fe74bfad76ff0780c4b3b0e0bf9bc3507e9",
+      "bytes": 93368,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_keyboard_2.png",
+      "sha256": "406a302edcc60b03f5e4430ef970dc008cff6d8586d868406ce721081ca795b4",
+      "bytes": 91684,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_2.png",
+      "sha256": "f4f4294516b98d9d682873b94bddf396b9964abbd07ec8b21e690289da5879f9",
+      "bytes": 94663,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_keyboard_3.png",
+      "sha256": "a76b5284df8ad4537dfcb0132060f9bf17b906c76923ae11faff79a83271adc5",
+      "bytes": 89823,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_3.png",
+      "sha256": "0a018b4158de0e9bed8e918a2ffbf97dfc0d25492aea426a789e48cc37fc2cde",
+      "bytes": 93610,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_keyboard_4.png",
+      "sha256": "2738f9ea4a707d6d48f62cbc17348304793b6bef0684ddc16435b1b3154abf86",
+      "bytes": 87936,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_4.png",
+      "sha256": "3f8f2a008bd88324620489027e94bf0929e9119c6dc387c4ebca4436276d31ad",
+      "bytes": 94531,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_keyboard_5.png",
+      "sha256": "eaa4cce8bf524938e24dde827f7da3f0fad49493a3940ea31e0d3939429e6ca4",
+      "bytes": 88801,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_5.png",
+      "sha256": "d3fbb853f01f54c8c46ed4df48ddbac2b083047cadbf5147e5b3e85af7f34e27",
+      "bytes": 94811,
+      "report": "title-focus-report.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_auto_100_desktop_entry.png",
+      "sha256": "beac8ad51b300fb16806d5310e453f25721ac9c677512704640e3d98e0e0b66d",
+      "bytes": 698103,
+      "report": "replay-auto-render.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_auto_100_desktop_playing.png",
+      "sha256": "47a77cdcf6ca965d0c478e5e9ed7e12ffa3ed628bb4e4bd2d215e81aac88efab",
+      "bytes": 1023740,
+      "report": "replay-auto-render.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_auto_100_desktop_endpoint.png",
+      "sha256": "9aa3cfef9500e8c5183903214c0e331a00ac10e229e8a8d9f3eebe6874848328",
+      "bytes": 858844,
+      "report": "replay-auto-render.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_auto_200_compact_entry.png",
+      "sha256": "94d4e9091bd4b68e178791fb499266472e23627f3ab70dbb58e2f02256df4922",
+      "bytes": 280594,
+      "report": "replay-auto-render.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_auto_200_compact_playing.png",
+      "sha256": "d8c7377791da39e7855bc4e472a5b8fe2a47bd0bc4fa9b4ac038462f26271eb9",
+      "bytes": 540635,
+      "report": "replay-auto-render.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "viewport_auto_200_compact_endpoint.png",
+      "sha256": "e6117fb0b7ef0a62de85ad493fa6e5227aa15c44ecead22f0c1ea0728d3f7ffb",
+      "bytes": 545894,
+      "report": "replay-auto-render.json",
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "file": "replay_event_focus.png",
+      "sha256": "7777a18be8e30cc6c38b63270c60fe900d4292ad8bb6e9760a2e84c63aa45c99",
+      "bytes": 732940,
+      "capture_source": "root Viewport texture",
+      "run": "title-focus-lifecycle-render-v3"
+    }
+  ],
+  "capture_count": 83,
+  "native_window_capture_count": 82,
+  "root_viewport_capture_count": 1,
+  "visual_inspected": [
+    "viewport_focus_1600_200_desktop_fresh_settings.png",
+    "viewport_focus_1600_200_desktop_fresh_settings_back.png",
+    "viewport_focus_1600_200_desktop_fresh_brief_mouse_0.png",
+    "viewport_focus_1600_200_desktop_fresh_brief_back_mouse_0.png",
+    "viewport_focus_1280_100_desktop_fresh_settings.png",
+    "viewport_focus_1280_200_touch_fresh_settings.png",
+    "viewport_focus_1600_100_touch_fresh_settings.png",
+    "viewport_focus_1600_200_desktop_continue_brief_keyboard_5.png",
+    "viewport_focus_1600_200_desktop_continue_brief_back_keyboard_5.png",
+    "viewport_focus_1280_200_touch_continue_settings.png",
+    "viewport_auto_100_desktop_playing.png",
+    "viewport_auto_100_desktop_endpoint.png",
+    "viewport_auto_200_compact_playing.png",
+    "viewport_auto_200_compact_endpoint.png",
+    "replay_event_focus.png"
+  ],
+  "native_input_count": {
+    "title_focus": 1392,
+    "actual_quit": 4,
+    "auto_replay": 32
+  },
+  "surface_profiles": [
+    "1280x720 scale100 desktop",
+    "1280x720 scale200 force_touch",
+    "1600x720 scale100 force_touch",
+    "1600x720 scale200 desktop"
+  ],
+  "progress_states": [
+    "fresh",
+    "isolated Continue/unlock via original progress API; not gameplay wins"
+  ],
+  "production_asset_edits": false,
+  "independent_qa": "pending",
+  "scope": "Four surface profiles x fresh/Continue = 8 groups, natural XTest Tab/ShiftTab/Return/Escape. Includes modal focus trapping and original brief mouse Start/yard/Escape. Native queue was single-process, all actual exits retained. Older 830 concurrent native runs excluded. Root viewport event focus is not a native window capture. No full player journey, OS application switching, device keyboard/FPS, FX/A3, APK or art acceptance.",
+  "unchanged_runtime_blobs": {
+    "scripts/main.gd": "c4c9b397c40a99dd839aba311954fdc2ba2bb8e7",
+    "scripts/replay/battle_log.gd": "594bc317df8b7c07093042044e347995e504a7b2",
+    "scripts/replay/replay_player.gd": "137066dea357d08fbf1c3a0aee756f3bb476a9a1",
+    "scripts/presentation/presenter_3d.gd": "643b5b1f19d3695a400026bd1db10ae662eceefe",
+    "scripts/presentation/view_state.gd": "8703dba34a65c265cc77a3e1628dd923242fc960"
+  },
+  "evidence_whitespace_check": {
+    "full_cached_exit": 2,
+    "reason": "Raw development-minimal/candidate.patch preserves unified-diff context prefixes, which git whitespace check interprets as whitespace in a new artifact. Raw bytes retained.",
+    "excluding_raw_patch_artifacts_exit": 0
+  }
+}

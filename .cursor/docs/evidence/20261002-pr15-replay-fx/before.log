@@ -1,0 +1,100 @@
+TEST_RUN_ID=d3d07bc8e8a04ad0b8ae8dfa5075fe73
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d3d07bc8e8a04ad0b8ae8dfa5075fe73/data
+TEST_ENTRY=replay_fx_lifecycle_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d3d07bc8e8a04ad0b8ae8dfa5075fe73/data/godot/app_userdata/Ambush Loop run_id=d3d07bc8e8a04ad0b8ae8dfa5075fe73
+ERROR: REPLAY_FX: entering REPLAY clears live wash/rim/static immediately: yard
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:71)
+ERROR: REPLAY_FX: old real tweens cannot repaint the first history frame: yard
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:73)
+ERROR: REPLAY_FX: late historical seek stays clear of live result effects: yard
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:83)
+ERROR: REPLAY_FX: entering REPLAY clears live wash/rim/static immediately: warehouse
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:71)
+ERROR: REPLAY_FX: old real tweens cannot repaint the first history frame: warehouse
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:73)
+ERROR: REPLAY_FX: late historical seek stays clear of live result effects: warehouse
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:83)
+ERROR: REPLAY_FX: entering REPLAY clears live wash/rim/static immediately: pump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:71)
+ERROR: REPLAY_FX: old real tweens cannot repaint the first history frame: pump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:73)
+ERROR: REPLAY_FX: late historical seek stays clear of live result effects: pump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:83)
+ERROR: REPLAY_FX: entering REPLAY clears live wash/rim/static immediately: railcut
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:71)
+ERROR: REPLAY_FX: old real tweens cannot repaint the first history frame: railcut
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:73)
+ERROR: REPLAY_FX: late historical seek stays clear of live result effects: railcut
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:83)
+ERROR: REPLAY_FX: entering REPLAY clears live wash/rim/static immediately: depot
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:71)
+ERROR: REPLAY_FX: old real tweens cannot repaint the first history frame: depot
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:73)
+ERROR: REPLAY_FX: late historical seek stays clear of live result effects: depot
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:83)
+ERROR: REPLAY_FX: entering REPLAY clears live wash/rim/static immediately: radio
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:71)
+ERROR: REPLAY_FX: old real tweens cannot repaint the first history frame: radio
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:73)
+ERROR: REPLAY_FX: late historical seek stays clear of live result effects: radio
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/replay_fx_lifecycle_test.gd:20)
+       [1] _run (res://scripts/replay_fx_lifecycle_test.gd:83)
+REPLAY_FX_FAILED checks=36 failures=18

@@ -1,0 +1,15 @@
+TEST_RUN_ID=127c6ad234e9475fbf9e35fbdc72d425
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/127c6ad234e9475fbf9e35fbdc72d425/data
+TEST_ENTRY=replay_autoplay_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/127c6ad234e9475fbf9e35fbdc72d425/data/godot/app_userdata/Ambush Loop run_id=127c6ad234e9475fbf9e35fbdc72d425
+REPLAY_AUTO_CASE auto_100_desktop
+REPLAY_AUTO_ENTRY { "id": "auto_100_desktop", "entry_signals": [{ "button": 1, "pressed": true, "device": 32 }, { "button": 1, "pressed": false, "device": 32 }, { "signal": "pressed" }], "entry_phase": 4, "entry_tick": 113, "entry_playing": true, "entry_suspended": false, "entry_modal": false, "hovered": "<Object#null>" }
+REPLAY_AUTO_CASE auto_200_compact
+REPLAY_AUTO_ENTRY { "id": "auto_200_compact", "entry_signals": [{ "button": 1, "pressed": true, "device": 32 }, { "button": 1, "pressed": false, "device": 32 }, { "signal": "pressed" }], "entry_phase": 4, "entry_tick": 111, "entry_playing": true, "entry_suspended": false, "entry_modal": false, "hovered": "<Object#null>" }
+REPLAY_AUTO_TEST checks=167 failures=0
+TEST_LOG=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/127c6ad234e9475fbf9e35fbdc72d425/run.log

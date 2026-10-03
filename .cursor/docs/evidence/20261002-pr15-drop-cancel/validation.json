@@ -1,0 +1,218 @@
+{
+  "runtime_source_sha": "47f0634f5e1a5f1dfb94a996037b6ae71c954cfd",
+  "final_test_source_sha": "3e09a82d3df2cb124049449450e80028c72bfd13",
+  "runs": [
+    {
+      "source_sha": "b082540fa930aad2088895dcc438f0b2f273b9cf",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd"
+      ],
+      "environment": {
+        "AMBUSH_UTILITY_TEST_SCOPE": "drop_roundtrip"
+      },
+      "run_id": "2ca26f2b65a74efd9851970fbc00daea",
+      "exit_code": 1,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 6,
+      "failures": 1,
+      "log": "negative.log",
+      "log_sha256": "1128f90f516a6609027aebeaa88953acf1692f17eee5a01d7c2dd64f1336fe30"
+    },
+    {
+      "source_sha": "47f0634f5e1a5f1dfb94a996037b6ae71c954cfd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd"
+      ],
+      "environment": {
+        "AMBUSH_UTILITY_TEST_SCOPE": "drop_roundtrip"
+      },
+      "run_id": "fa4e8edba1054e97854c28a61e27c168",
+      "exit_code": 0,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 6,
+      "failures": 0,
+      "log": "fixed-first.log",
+      "log_sha256": "dd4a589fdb084b21614a451d64960360fb4fc9f5ab3263f03589d8026472f5c0"
+    },
+    {
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd"
+      ],
+      "environment": {
+        "AMBUSH_UTILITY_TEST_SCOPE": "drop_cases"
+      },
+      "run_id": "8f00c538db4d4b048f4cd38aaa5473f9",
+      "exit_code": 0,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 13,
+      "failures": 0,
+      "log": "cases-headless.log",
+      "log_sha256": "62432e773020857b061f4b7dfb89d8e6e26f7626c69ad80af9b87d62dfe9ec6a"
+    },
+    {
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "utility_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {},
+      "run_id": "63932738c0e3400ca4a283eff4c9221e",
+      "exit_code": 0,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 1047,
+      "failures": 0,
+      "log": "utility-render.log",
+      "log_sha256": "7863a037cf050401c96d6220ca02cb91c7aeefdd50426cefbe6d8c5b77494cb6"
+    },
+    {
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "equipment_freeze_test.gd"
+      ],
+      "environment": {},
+      "run_id": "41a8d0fd53d2453b8bc34ede7c26aeb5",
+      "exit_code": 0,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 66,
+      "failures": 0,
+      "log": "freeze.log",
+      "log_sha256": "8f380e15d7171b212280347804d7eeb070569d07aa7286c229ff2e9d042bc7f9"
+    },
+    {
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "corpse_runtime_test.gd"
+      ],
+      "environment": {},
+      "run_id": "4c0b93cf24594bbfb32c1a99a6145c3b",
+      "exit_code": 0,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 1203,
+      "failures": 0,
+      "log": "corpse.log",
+      "log_sha256": "066147538cbaa9086d8129f93680aedd9299653c7ce56b3dfa369e4868841eed"
+    },
+    {
+      "source_sha": "3e09a82d3df2cb124049449450e80028c72bfd13",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "utility_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_UTILITY_TEST_SCOPE": "drop_roundtrip"
+      },
+      "run_id": "ac99ee82d8ce4ef288ae7db4dfc80227",
+      "exit_code": 0,
+      "exit_evidence": "observed unified tool completion plus durable shell exit file",
+      "checks": 7,
+      "failures": 0,
+      "log": "roundtrip-render-final.log",
+      "log_sha256": "5d16b637843b9a35445d7f29e9dafb3a73bfc6b6a7b05cf0a826b010b00f44f6"
+    }
+  ],
+  "captures": [
+    {
+      "file": "r5_scout_grenade_follow.png",
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "sha256": "ca8cb2605359f5b71832cf624da9bf8b9f700909d0baeb22d68dd788f6e6ebdc",
+      "visually_inspected": true
+    },
+    {
+      "file": "r5_scout_knife_hit.png",
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "sha256": "15dc812177b8e7709d06ee2930af810ee7af77d2678645e24c139a86edad26ee",
+      "visually_inspected": true
+    },
+    {
+      "file": "r5_scout_decoy_release.png",
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "sha256": "8aa343285e9cab541d152c6ca5be9ce66849adff976cbc60e85197a5bff3c642",
+      "visually_inspected": true
+    },
+    {
+      "file": "r5_alert_auto_grenade.png",
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "sha256": "bbc6f746f13d912ccfcd5c41b157c9fbad901f4e4300cb815f9dcdcb2f17439c",
+      "visually_inspected": true
+    },
+    {
+      "file": "r5_alert_knife_hit.png",
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "sha256": "43e0cc453fb324a73eb4610e80152316e5610fd3451b66c6dcff6cc9ecb34f52",
+      "visually_inspected": true
+    },
+    {
+      "file": "r5_history_auto_grenade.png",
+      "source_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+      "sha256": "1d6b2f1c25b3f7089d2c3111ae17c645d7895b83ebcd9498d5345e2b7c039f3b",
+      "visually_inspected": true
+    },
+    {
+      "file": "r5_drop_pickup_restored.png",
+      "source_sha": "3e09a82d3df2cb124049449450e80028c72bfd13",
+      "sha256": "8de515506dd89adc7f0ceb1b3c54cd83bb1153c8201db23aa0d9a95a28b92f2b",
+      "visually_inspected": true,
+      "actual_state": "same-frame successful drop and normal auto-pickup restored rifle; old grenade_throw absent"
+    }
+  ],
+  "corpse_prose_correction": {
+    "original_receipt_sha": "518b5d6ddd23a4dcf3b625f0e42923a2a9b7712f",
+    "validation_sha256": "6c7f3640e6f15834a446ca8cc301091b5f750830a1e1fa4cbc3b4d268958d1fb",
+    "raw_report_sha256": "dea22b4e888047d994d9caf4e2c3905b3eff9decdaca7adfbe0d0da625f281a2",
+    "receipt_range_m": [
+      -0.00123487412929535,
+      0.10103178024292
+    ],
+    "minimum_row": {
+      "lod": 2,
+      "min_y_m": -0.00123487412929535,
+      "model": "enemy_flank",
+      "role": "operator_rifle",
+      "stance": 0
+    },
+    "maximum_row": {
+      "lod": 0,
+      "min_y_m": 0.10103178024292,
+      "model": "enemy_patrol",
+      "role": "operator_rifle",
+      "stance": 1
+    },
+    "prose_correction_sha": "6e9ed4c7e26a16518ae4706515e353991859e2b6",
+    "old_receipts_unchanged": true,
+    "limitations": [
+      "minimum >= -15mm gates penetration only",
+      "natural grounding, positive floating clearance upper bound, wall contact and full SWEEP player hauling remain independently unaccepted"
+    ]
+  },
+  "equivalence": "only main.gd successful drop gains cancel_utility; test/header/prose descendants keep runtime byte-identical to47f0634",
+  "retained_warning": "initial6c23e rendered narrow scope exited0 with4 ObjectDB instances warned at quit;3e09a82 only adds existing AudioDirector.pause_for_background before quit and final render7/0 has no ObjectDB warning; not memory/performance approval",
+  "assets": "art and ArtSource diff exit0 against518b5d6; no generator/atlas/GLB edit or rerun",
+  "limits": [
+    "drop P2 slice; desktop HUD/radio issues remain next",
+    "six-level10332/0 remains304 source; no attribution to latest drop fix",
+    "latest technicalPCK91b9bdc predates this drop fix, not current-finalAPK",
+    "full smoke remains7d34867; ear0/45 and0/6; device not started"
+  ]
+}

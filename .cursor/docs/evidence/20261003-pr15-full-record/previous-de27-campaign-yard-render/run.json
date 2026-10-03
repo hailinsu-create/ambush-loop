@@ -1,0 +1,100 @@
+{
+  "actual_source_sha": "de27aa07379624e1e56143c1b23016e3bed4a7f9",
+  "validation_kind": "fixed-source component before final campaign fixture input-order correction",
+  "name": "campaign-yard-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "yard"
+  },
+  "run_id": "ffe85af4075c40f0a07cca1e3ff44b62",
+  "actual_exit_code": 0,
+  "checks": 2521,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "id": "yard_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_scout.png",
+      "sha256": "85f975345ed113e0f717d8162ead519549cf2661761b3007caa7f41430e32ca9",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-campaign-yard-render/00_full_record_yard_scout.png",
+      "hash_verified": true
+    },
+    {
+      "id": "yard_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave0_alert.png",
+      "sha256": "3026ed83d8560139ca8d1e881dcf4f1f5d77923b8c7e84710f0c1593e1bd4c08",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-campaign-yard-render/01_full_record_yard_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "yard_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave0_sweep.png",
+      "sha256": "ccba5b2ac38364dfbfcd455f28463128a1e28e17543ebd4419aafaf6791192c5",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-campaign-yard-render/02_full_record_yard_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "yard_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave1_alert.png",
+      "sha256": "0845e9afe5905f5f3a27b009c05d044af8d5f8cf79fc80c7b8138c72f64a83c0",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-campaign-yard-render/03_full_record_yard_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "yard_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave1_sweep.png",
+      "sha256": "db0ae4b7ea67a2383f501144c2963e6542c212b3d070401c92ba6be8c7224b65",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-campaign-yard-render/04_full_record_yard_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "yard_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_won.png",
+      "sha256": "db0ae4b7ea67a2383f501144c2963e6542c212b3d070401c92ba6be8c7224b65",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-campaign-yard-render/05_full_record_yard_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 6,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ]
+}

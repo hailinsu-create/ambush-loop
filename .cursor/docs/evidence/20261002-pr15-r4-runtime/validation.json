@@ -1,0 +1,230 @@
+{
+  "scope": "R4 runtime technical integration; actual main battle and historical playback. No final art/device/listening approval.",
+  "promoted_pr15_source": "20cdc8ccfe887f6f64eda9fc64769294fa7de371",
+  "fixed_formal_production_source": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+  "fixed_test_and_export_source": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+  "tree_equivalence": {
+    "command": "git diff --exit-code 448ecf0d5e15d693cfba56ce45eaab0a5495771b 20cdc8ccfe887f6f64eda9fc64769294fa7de371 -- ambush_loop",
+    "exit_code": 0,
+    "ambush_loop_tree": "0c0262d1c205b8deadcf910f07b13341a01d7008",
+    "changes_since_base": [
+      "scripts/asset_pack_test.gd",
+      "scripts/firearm_runtime_test.gd",
+      "scripts/firearm_runtime_test.gd.uid"
+    ],
+    "production_bytes_unchanged": true
+  },
+  "candidate_source": "194d9c41aaddbf014f05c70c14d40c09e6d8131b",
+  "candidate_delivery": "c4c21708a2e06d3a7eaefbb8ab6bfeee31f5073d",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "render": "Compatibility Mesa llvmpipe Xorg :99",
+  "audio": "Dummy driver; actual AudioServer effect capture, not ear listening",
+  "runs": [
+    {
+      "label": "import",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 editor_import",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "aad9feda7614422e95698c0d427224cd",
+      "checks": null,
+      "log": "formal-import.log",
+      "log_sha256": "2ce3d5ff26330e05e5964f45bc6d18c5ea2fe078cc298d7dfe0bcb58281e6939"
+    },
+    {
+      "label": "firearm",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture firearm_runtime_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "eab8f21a368548debc31082d1da2867b",
+      "checks": 7681,
+      "log": "formal-firearm.log",
+      "log_sha256": "5764a0c6d24d7e4252dbdd82c057f34e855f83cb6880ab064ba0d23193adc786"
+    },
+    {
+      "label": "actor",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_visual_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "1449149aa61e4912a72b2412b49ffe4a",
+      "checks": 17802,
+      "log": "formal-actor.log",
+      "log_sha256": "6f20fa66c5407bc413870c8c05fa58e10f59fb935fdb7e5d46187ceaf6350399"
+    },
+    {
+      "label": "battle",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_battle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "590ace0fe0664a18b264432d9ad81734",
+      "checks": 231,
+      "log": "formal-battle.log",
+      "log_sha256": "505661aeb76c3d5e415de5daedc511199bb956abd4e1154178270843635ed6d7"
+    },
+    {
+      "label": "hud",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "b5dda08d1b0e4010a3a3023415d2c9ca",
+      "checks": 164,
+      "log": "formal-hud.log",
+      "log_sha256": "aec547546b8cfdc9dc20b1bbf17247ac45377137c0ea5dae4091d88d4ac72d1e"
+    },
+    {
+      "label": "life",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "1a8bcf18849f4b09aa8e8766817c3b55",
+      "checks": 32,
+      "log": "formal-life.log",
+      "log_sha256": "94c36d01a454799664f0ad43d3ba523bbef04bb64221abbd831c66b2b2b27285"
+    },
+    {
+      "label": "static",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture asset_library_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "60db06e8afb444b8873b513606792cfb",
+      "checks": 333,
+      "log": "formal-static.log",
+      "log_sha256": "90ffb4e76c65485f4e1a682463ce763ef07ec4580ad5fad3f26515e07c796535"
+    },
+    {
+      "label": "contract",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 1200 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "381436a021c1400385f85ab39372bfe7",
+      "checks": 84039,
+      "log": "formal-contract.log",
+      "log_sha256": "7cfec443ada5ea6f39141943fce59a3b6e89d240a1f33382c3b82aed56a2c8b9"
+    },
+    {
+      "label": "campaign",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 1200 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "8f13c72c4b3344c5ba3497170ed317d8",
+      "checks": 10296,
+      "log": "formal-campaign.log",
+      "log_sha256": "42af81bca03c4a06de7d4419c0a8b03cece86007ca468f4e7f603e4415c9b9af"
+    },
+    {
+      "label": "freeze",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 1200 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "503e90a3db5c4adbbe530e8b704d83d8",
+      "checks": 66,
+      "log": "formal-freeze.log",
+      "log_sha256": "29027e2a418382a31a54d0c48208daea5ce59159dec5daccb103fe83d8b2a3bd"
+    },
+    {
+      "label": "timeline",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 replay_timeline_test.gd",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "21fc4e690b7648c2819815ca06b79d54",
+      "checks": 66,
+      "log": "formal-timeline.log",
+      "log_sha256": "4b59f065b5e5f66829647e520ab45e9ce571a6a7bb70e9fa20c36e092578542e"
+    },
+    {
+      "label": "audio",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture audio_runtime_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "164061859cfd4cbf8a52569927b1a58b",
+      "checks": 405,
+      "log": "formal-audio.log",
+      "log_sha256": "c90053fade515543be233f1a58a260c57fda71c97a254a88ea1cc09513c5ac46"
+    },
+    {
+      "label": "firearm_capture",
+      "source_sha": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture firearm_runtime_test.gd --render",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "a562f69bc71e41f29175fef55e679805",
+      "checks": 7681,
+      "log": "formal-firearm_capture.log",
+      "log_sha256": "f5369a7f4c3bd32eb3c81689d159fa8dcf02d344e6973027a73185753da83a49"
+    },
+    {
+      "label": "pack",
+      "source_sha": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+      "command": "AMBUSH_TEST_PACK=/tmp/pr15-r4-runtime.pck timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 asset_pack_test.gd",
+      "cwd": "/workspace/ambush-pr15-r4",
+      "exit_code": 0,
+      "run_id": "e390ad263e23477a858bc4174c5f4b83",
+      "checks": 1380,
+      "log": "formal-pack.log",
+      "log_sha256": "37761d5a1a856eb015cf3c37fa3f2ee610053a2f1c09a2cbcdbf1879de025649"
+    }
+  ],
+  "captures": [
+    {
+      "path": "r4_runtime_actual_mg.png",
+      "source_sha": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+      "viewed": true,
+      "sha256": "c03ac8b62e6805037b369c9943f9b473066bb0f5a63edf28be0c1c7a282e83fb"
+    },
+    {
+      "path": "r4_runtime_actual_fallback.png",
+      "source_sha": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+      "viewed": true,
+      "sha256": "47018b241537a75e4a62bec7cc432791a02ca9d8df6900815005401a202de2e2"
+    },
+    {
+      "path": "r4_runtime_actual_history_mg.png",
+      "source_sha": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+      "viewed": true,
+      "sha256": "12ab09279abc909b7b37dc578523be6ef1ef43e25d5eb028a62e7df7ab8f965d"
+    },
+    {
+      "path": "r3_battle_history_close.png",
+      "source_sha": "5ecefe0e3f2c1da119257edcfbfc796783ebfa09",
+      "viewed": true,
+      "sha256": "7248a0950844af984da5e401db162a4f3a3962823196858d756122eeff79dd5e"
+    }
+  ],
+  "pack": {
+    "path": "/tmp/pr15-r4-runtime.pck",
+    "bytes": 21503140,
+    "sha256": "610a641d4d1e5275d03c177298f89578ee7abcec743bacaac57621653878201f",
+    "export_source": "448ecf0d5e15d693cfba56ce45eaab0a5495771b",
+    "exit_code": 0,
+    "command": "XDG_DATA_HOME=/tmp/pr15-r4-export/data XDG_CONFIG_HOME=/tmp/pr15-r4-export/config XDG_CACHE_HOME=/tmp/pr15-r4-export/cache timeout 300 /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_loop --export-pack \"Linux Desktop\" /tmp/pr15-r4-runtime.pck",
+    "empty_project_checks": 1380
+  },
+  "audio_capture": {
+    "cues": 45,
+    "frames": 282624,
+    "minimum_frames": 4096,
+    "stress_frames": 4096,
+    "stress_peak": 0.206930890679359
+  },
+  "not_verified": [
+    "Ear listening 0/45 and 0/6",
+    "Windows wrapper execution",
+    "Final continuous animation artistry or firearm mechanics",
+    "R5 utility interactions",
+    "Complete environment/HUD/FX",
+    "Device FPS or emulator/phone testing",
+    "Latest full smoke remains fixed 7d34867, not this source",
+    "Final APK"
+  ]
+}

@@ -1,0 +1,72 @@
+TEST_RUN_ID=a1fe35325d644fc787b78c8a405d5d0f
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/a1fe35325d644fc787b78c8a405d5d0f/data
+TEST_ENTRY=environment_battle_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/a1fe35325d644fc787b78c8a405d5d0f/data/godot/app_userdata/Ambush Loop run_id=a1fe35325d644fc787b78c8a405d5d0f
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_search_half.png
+ERROR: ENVIRONMENT_BATTLE: decorative empty crate is not an interactive pick target
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/environment_battle_test.gd:27)
+       [1] _stash_contract (res://scripts/environment_battle_test.gd:81)
+       [2] _capture (res://scripts/environment_battle_test.gd:222)
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_search_empty.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_scout.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_alert.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw0.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw90.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw180.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw270.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_sweep_high.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/yard_history.png
+ENVIRONMENT_BATTLE_LEVEL yard waves=2 terminal=1283 events=34
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_scout.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_alert.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw0.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw90.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw180.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw270.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_sweep_high.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/warehouse_history.png
+ENVIRONMENT_BATTLE_LEVEL warehouse waves=2 terminal=1191 events=67
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_scout.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_alert.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw0.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw90.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw180.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw270.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_sweep_high.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/pump_history.png
+ENVIRONMENT_BATTLE_LEVEL pump waves=2 terminal=907 events=34
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_scout.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_alert.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw0.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw90.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw180.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw270.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_sweep_high.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/railcut_history.png
+ENVIRONMENT_BATTLE_LEVEL railcut waves=2 terminal=719 events=38
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_scout.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_alert.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw0.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw90.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw180.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw270.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_sweep_high.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/depot_history.png
+ENVIRONMENT_BATTLE_LEVEL depot waves=2 terminal=957 events=35
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_scout.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_alert.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw0.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw90.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw180.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw270.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_sweep_high.png
+ENVIRONMENT_BATTLE_CAPTURE res://build/asset_review/pr15-environment-battle/radio_history.png
+ENVIRONMENT_BATTLE_LEVEL radio waves=3 terminal=1413 events=51
+ENVIRONMENT_BATTLE_FAILED checks=277 failures=1 levels=6 captures=50

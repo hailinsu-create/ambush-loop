@@ -1,0 +1,218 @@
+{
+  "runtime_source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "actual 45-cue AudioStreamPlayer play and AudioServer mixer/lifecycle/cloud battle regressions; no ear review, final art or device performance",
+  "source_commit": "86df6d0b4af9f30f3f1e670207cc54b22e2f043b",
+  "delivery_commit": "355ea89243451d2c9f1b69ca5b44e8c437fa4555",
+  "original_wav_bytes": 5732600,
+  "original_import_inputs": 45,
+  "runs": [
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "audio_runtime_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture audio_runtime_test.gd --render",
+      "run_id": "556c0a23c18d41cc83cb872d34cf3d73",
+      "exit_code": 0,
+      "checks": 405,
+      "marker": "AUDIO_RUNTIME_OK checks=405 failures=0",
+      "log": "audio.log",
+      "sha256": "1846b441448a81e236df0c09d8a4fb2903d7b137cb9da2a44e714f3126aa613e"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "actor_battle_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_battle_test.gd --render",
+      "run_id": "8093bd8f71044e60a9383f2801e9db47",
+      "exit_code": 0,
+      "checks": 231,
+      "marker": "ACTOR_BATTLE_OK checks=231 failures=0",
+      "log": "battle.log",
+      "sha256": "2dccca67f4c1040827259be80f13cde43f7b76da4256ceda5f9840bf32463912"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "visual_snapshot_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "run_id": "899a87405d36461d837082510d4ae851",
+      "exit_code": 0,
+      "checks": 164,
+      "marker": "VISUAL_SNAPSHOT_OK checks=164 failures=0",
+      "log": "hud.log",
+      "sha256": "9899344e55e7cf88f8fc72514303d4dafa11c4bf1d45d80189a68a6cd3bc257b"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "presentation_lifecycle_test.gd",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "run_id": "c873daf02022408b9efab4b7a4e0d1e1",
+      "exit_code": 0,
+      "checks": 32,
+      "marker": "PRESENTATION_LIFECYCLE_OK checks=32 failures=0",
+      "log": "lifecycle.log",
+      "sha256": "0d9981f52672db35426df011917d647c81ef295d8df7a9db2c96d96d068e5b76"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "campaign_replay_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "run_id": "1de5765275ec441b8dd99e1f1d85fd1a",
+      "exit_code": 0,
+      "checks": 10296,
+      "marker": "CAMPAIGN_REPLAY_OK checks=10296 failures=0",
+      "log": "campaign.log",
+      "sha256": "8bbfaa4758fa2c6fd31ff540bf05819eb3b202c6e2834a48202b390b75d9db62"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "equipment_freeze_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "run_id": "bb65b50eb05b4719b29d57ae6e94143d",
+      "exit_code": 0,
+      "checks": 66,
+      "marker": "EQUIPMENT_FREEZE_OK checks=66",
+      "log": "freeze.log",
+      "sha256": "8fda7af72c4410aa914b302e65465215885ad9b6a4b883298eb0b5c114b3f348"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "replay_timeline_test.gd",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 replay_timeline_test.gd",
+      "run_id": "9ab5acecc561433ca32bbe35e65c5cb7",
+      "exit_code": 0,
+      "checks": 66,
+      "marker": "REPLAY_TIMELINE_OK checks=66",
+      "log": "timeline.log",
+      "sha256": "23e88022bf83f41d093bbf5f1a30b196a3ef294311882a3fd555a3812921fbfc"
+    },
+    {
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "entry": "asset_pack_test.gd",
+      "command": "AMBUSH_TEST_PACK=/tmp/pr15-audio-4a00a91.pck timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 asset_pack_test.gd",
+      "run_id": "47b2ceab5f7544f2a916b2b47c171fbb",
+      "exit_code": 0,
+      "checks": 510,
+      "marker": "ASSET_PACK_OK checks=510 failures=0",
+      "log": "pack.log",
+      "sha256": "52cf8fe286c703d56e929774e0d4c2f376ad10fd1b8b95bd1a6518638a540ffa"
+    }
+  ],
+  "export": {
+    "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+    "command": "XDG_DATA_HOME=/tmp/pr15-audio-export-4a00a91/data XDG_CONFIG_HOME=/tmp/pr15-audio-export-4a00a91/config XDG_CACHE_HOME=/tmp/pr15-audio-export-4a00a91/cache timeout 240 /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_loop --export-pack 'Linux Desktop' /tmp/pr15-audio-4a00a91.pck",
+    "exit_code": 0,
+    "bytes": 18436084,
+    "sha256": "98a3f51b7350c29f1c93685dce04693d57c517f4f57dd74347af60d2e04d1f3a",
+    "path": "/tmp/pr15-audio-4a00a91.pck"
+  },
+  "actual_mixer": {
+    "cue_count": 45,
+    "total_cue_frames": 278528,
+    "minimum_cue_frames": 4096,
+    "stress_frames": 4096,
+    "stress_peak": 0.21602863073349,
+    "mix_rate": 44100.0,
+    "driver": "AudioServer rendered/Dummy",
+    "auditory_review": "NOT_LISTENED 0/45, 0/6"
+  },
+  "failed_development_run": {
+    "log": "dev-empty-capture-failed.log",
+    "exit_code": 1,
+    "checks": 323942,
+    "failures": 1,
+    "reason": "alarm actual play/owner succeeded; first asynchronous capture had zero frames. Wait for real capture installation before cue. Finite sample assertions now aggregate all samples once per buffer."
+  },
+  "artifacts": [
+    {
+      "file": "audio.log",
+      "bytes": 902,
+      "sha256": "1846b441448a81e236df0c09d8a4fb2903d7b137cb9da2a44e714f3126aa613e"
+    },
+    {
+      "file": "audio_v2_actual_mix_stress.wav",
+      "bytes": 16428,
+      "sha256": "6c55645d9612886a6a13c9becf1a47df0cf229fae92f312d35e57dfa8f1a82ad"
+    },
+    {
+      "file": "audio_v2_runtime_mix.json",
+      "bytes": 5012,
+      "sha256": "e01b6209c1f9d0c8562ec9cd53e2f1f9e7be8b2922dfd5c9e332ab4c461dc3f7"
+    },
+    {
+      "file": "battle.log",
+      "bytes": 1778,
+      "sha256": "2dccca67f4c1040827259be80f13cde43f7b76da4256ceda5f9840bf32463912"
+    },
+    {
+      "file": "campaign.log",
+      "bytes": 974,
+      "sha256": "8bbfaa4758fa2c6fd31ff540bf05819eb3b202c6e2834a48202b390b75d9db62"
+    },
+    {
+      "file": "dev-capture-startup-fixed.log",
+      "bytes": 902,
+      "sha256": "923cc16a43f277d081eab1f41b4917a074467753360a08c198f47468509d45c7"
+    },
+    {
+      "file": "dev-empty-capture-failed.log",
+      "bytes": 1095,
+      "sha256": "8e2a2a7c6c3bdb7e760c4e9602b5af1918d229a8130aba1aaab675ef63361b91"
+    },
+    {
+      "file": "export.log",
+      "bytes": 77935,
+      "sha256": "07eca006d580acb00aa6b4b2bf3889c0c3be35fb0ef09115eff3a9f02569cbc3"
+    },
+    {
+      "file": "freeze.log",
+      "bytes": 601,
+      "sha256": "8fda7af72c4410aa914b302e65465215885ad9b6a4b883298eb0b5c114b3f348"
+    },
+    {
+      "file": "hud.log",
+      "bytes": 1076,
+      "sha256": "9899344e55e7cf88f8fc72514303d4dafa11c4bf1d45d80189a68a6cd3bc257b"
+    },
+    {
+      "file": "lifecycle.log",
+      "bytes": 919,
+      "sha256": "0d9981f52672db35426df011917d647c81ef295d8df7a9db2c96d96d068e5b76"
+    },
+    {
+      "file": "pack.log",
+      "bytes": 601,
+      "sha256": "52cf8fe286c703d56e929774e0d4c2f376ad10fd1b8b95bd1a6518638a540ffa"
+    },
+    {
+      "file": "timeline.log",
+      "bytes": 599,
+      "sha256": "23e88022bf83f41d093bbf5f1a30b196a3ef294311882a3fd555a3812921fbfc"
+    }
+  ],
+  "unverified": [
+    "ear listening 0/45 and 0/6",
+    "musical/artistic approval",
+    "Windows wrapper execution",
+    "device FPS/thermal/audio/phone",
+    "latest complete smoke (historical 7d34867 only)",
+    "R4 optional clips / remaining A1.2 actions",
+    "complete environments, HUD/FX, six level artwork, final APK"
+  ],
+  "captures": [
+    {
+      "file": "audio_battle_scout.png",
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "bytes": 284341,
+      "sha256": "2579559ac7d5cd056ccca1913beb631ce95e8b4a540e339f52f2e4b4e4f46f59",
+      "viewed": false,
+      "scope": "unchanged actual R3 battlefield visual regression, buildings graybox"
+    },
+    {
+      "file": "audio_battle_alert.png",
+      "source_sha": "4a00a91fe4004e65ce925f845ac5c48930ba32e4",
+      "bytes": 245903,
+      "sha256": "d3d8d647b388356b9462ee8161d6049df52f7be94f27e508a8f756c4bec6285c",
+      "viewed": true,
+      "scope": "unchanged actual R3 battlefield visual regression, buildings graybox"
+    }
+  ]
+}

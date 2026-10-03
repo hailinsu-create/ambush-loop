@@ -1,12 +1,44 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-02。仅用于本游戏；设计文件不是实现或验收证明。
+更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
 
 ## 当前有效规划
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [代码审计与优化记录](AMBUSH_CODE_AUDIT_20261002.md) | 寻路优化、504 条路径等价/311 个最短代价检查、完整六夜冒烟及实际截图已完成；代码 [PR #11](https://github.com/hailinsu-create/ambush-loop/pull/11) 与审计 [PR #12](https://github.com/hailinsu-create/ambush-loop/pull/12) 已创建，均未合并。记录其余优化建议；不替代设计 v2 或 M0 验收。 |
+| [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持；3ba原配置push/远端HEAD已核对。共享Pause修复后fixed4ba相关H29/R167与生命周期30/32再次实际exit0/ERROR0，单列不相加。独立QA待，FX/A3后置。 |
+| [title焦点/生命周期报告](AMBUSH_PR15_TITLE_FOCUS_20261003.md) / [计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md) | fixed4ba作者正式六次全部actual exit0/ERROR0：自然键盘4476、原Quit7、autoREPLAY29/167、生命周期30/32；四surface profiles×fresh/Continue八组，83PNG核hash/实际看15。129a负向34/4exit1/ERROR1→开发最小36/0→830生产修复；两个830无效native轮次实际143，全部剔除。独立关闭待，先交checkpoint，FX/A3后置。 |
+| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | 历史fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。父端d7b尺寸限定关闭；后发现焦点/生命周期两P2现由830修复、fixed4ba作者专项通过，独立关闭待。d7b原配置push/只读HEAD已核对，formal29未重跑。 |
+| [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；证据交付a218，父端报告fixed15c limitedQA通过，59PNG/看19及其计数单列，新title不在该QA范围。完整3DFX/A3/正常玩家旅程/APK仍待。 |
+| [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
+| [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |
+| [北侧HUD修复](AMBUSH_PR15_NORTH_HUD_20261003.md) | 816分开checklist/minimap并稳定镜头边界，7edd追加时间条留白；真实窗口/原生输入/焦点往返证据齐备，原裁切未称关闭。 |
+| [schema2连续抓放边界](AMBUSH_PR15_CORPSE_BOUNDARY_20261003.md) | 固定f7作者边界2978/0、18run exit0；已随cf77正常push，父端cf77独立QA进行中，三个未留存辅助图仍明确缺失。 |
+| [抓放/正浮空品质片](AMBUSH_PR15_CORPSE_PAIRING_20261003.md) | 89fb运行修复、a575仅专项测试元数据/正式REPLAY入口，已推送代码；负向102/15与171/83→正式render2695/0，72hold/864相位、双掌/原骨段/双脚/墙0/暂停/后台/端点/复制历史及旧版；18run全部exit0，9实际图已看，六关10332/合同84042保持。独立自然品质QA待；R03原scope已闭合，真1600/200%HUD及FX/A3/13波视觉/同候选交付继续。 |
+| [depot点击与radio整隐修复](AMBUSH_PR15_PRESENTATION_QUALITY_20261003.md) | c00负向69/14→4741c5f正式106/0；两LOD属性/材质与copied历史/兼容，HUD164/生命周期32/输入23/合同84042/六关10332/contact576/nativeMG25退出0。父端b011独立241/0、19图及复跑关闭原R03，真正1600可用viewport/200%裁切仍待；断握/浮空续片见上一行。 |
+| [原生SWEEP拖尸墙面修复](AMBUSH_PR15_CORPSE_CONTACT_20261003.md) | cd158166实际第二波输入363顶点进砖墙17/1→d7d29156渲染576/0；保留原规则、显式contact版本与纯历史，原尸体1203/合同84042/工具1041退出0。原墙P2父端独立关闭；97.64mm正浮空/约0.56m中段断握及全墙自然品质待优化，FX/A3/13波视觉与同候选交付继续。 |
+| [PR15 接管与资产接口](AMBUSH_PR15_INTEGRATION_20261002.md) | 主集成代码单写者、独立资产工作者和 Notion 管理边界；首批回放/装备冻结已实际复现并独立修复。继承 v2 顺序，资产 WIP 不整体并入；完整计划仍待实施。 |
+| [PR15 静态装备/loader](AMBUSH_PR15_STATIC_EQUIPMENT_20261002.md) | 固定候选 15 件 / 30 LOD 原字节迁入；a870eb5 实际渲染 257 项、空目录 PCK 35 项退出 0。人物可复现 LOD/握持、战场接入和 APK 待完成；网格 fixture 不作为成品验收。 |
+| [PR15 独立复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md) | 四项P2已实际复现并由dot独立复验关闭：同波未来定位环、旧事件流tick回退、雷点/诱饵入口锁和SWEEP旋转；cc11bb0/71df99a独立切片。历史HUD后续切片见下一行。 |
+| [历史队员HUD/手机时间轴](AMBUSH_PR15_HISTORY_HUD_20261002.md) | a932历史字段/中性兼容与原生手机seek，七项核心回归完成；ed673ed清活体横幅/手机提示分层，164项渲染+32生命周期退出0。dot独立复验关闭原HUD P2；新增C2Help遗漏已由cf61721补片作者验证，dot独立复验已关闭C2Help P2；完整HUD/FX/成品场景另验。 |
+| [C2Help历史隔离补片](AMBUSH_PR15_C2_HISTORY_HINT_20261002.md) | cf61721真实SWEEP/合法技能反例30项16fail→0；HUD164/生命周期32退出0。历史布局/迟到hint清空并停止旧Tween，退出重建live帮助；dotdot独立复验已关闭C2Help P2。 |
+| [R5实际刀/雷/诱饵](AMBUSH_PR15_R5_TOOLS_20261002.md) | c5ec8ff实际事件/格式3与兼容64clip；d53同帧装备取消4/1fail→4/0，工具1034/0；分固定源六关10332/合同84042/枪7681/角色21818及其余回归退出0，新PCK1764/0。尸体配对、HUD/天线quality、FX、A3逐波矩阵/预算/APK继续；原失败日志与混合源码边界保留。 |
+| [R4枪族正式运行切片](AMBUSH_PR15_R4_RUNTIME_20261002.md) | 20cdc8c与固定源工程树相同：十枪90配置7681、52clip17802、实战231、六关10296、合同84039、音频405、空目录PCK1380及其余正式回归退出0；六旧R3枪几何保留。环境与R5交互另验，艺术/设备未验。 |
+| [R3实战角色/历史动作主路径](AMBUSH_PR15_R3_BATTLE_20261002.md) | e7b8cfa接真实yard/六关角色与动画记录格式1；战场231/合同84039/六关10296，f47测试修正后HUD164/时间66/装备66/角色4362/生命周期32退出0。环境仍灰盒；R4 optional/缺动作与audio/environment继续。 |
+| [R3台账/显式骨骼技术接收](AMBUSH_PR15_R3_RUNTIME_20261002.md) | 18dc381采用00b2708/8a1fbe9原字节51GLB/3PNG；角色4362、静态273、空目录PCK329退出0。技术接口已验，实际战场/历史动作主路径见上行；其他枪专用握持与最终美术待验；替代R2候选采用步骤，旧报告保留。 |
+| [R2候选采用计划](AMBUSH_PR15_R2_ADOPTION_20261002.md) | 历史实施计划：R2未落地即由最新R3替代；原只读复核证据保留，不用来验当前R3。 |
+| [音频持续层实际播放](AMBUSH_PR15_AUDIO_RUNTIME_20261002.md) | 4a00a91：45 cue实际play／混音405项，战场231、HUD164、生命周期32、六关10296、装备66／时间66和空目录PCK510退出0。七loop唯一持续层／10路限额／生命周期已验；实际耳听0/45、0/6，最终音乐与设备待验。 |
+| [独立45 cue音频接口](AMBUSH_PR15_AUDIO_INTERFACE_20261002.md) | 已给22050Hz mono PCM16、45用途ID与单写者边界；355ea89候选45 WAV／原import已采用；主作者4a00a91实际持续层和播放验证见上行。耳听0/45、0/6；接口及生产边界保留。 |
+| [SWEEP动作时钟补片](AMBUSH_PR15_COMMAND_POSE_CLOCK_20261002.md) | 3ba263c修命令/结果时钟与复制事件年龄；正确22/11fail反例→正式24/0，c381正常双波撤离/终局记录回放29/0；六关10296/合同84039等退出0。dot于98075独立68/0关闭P2；连续command时间轴与FAILED/abort终局列最终回归。 |
+| [六关实际环境运行](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md) | ffb95a6实际40×22六关13波运行283/0及wave0的50捕获，六关10296/合同84039/HUD164/生命周期32/clock29退出0；2ce只清历史实时色罩，PCK1512/0。保留reference装备/loot fixture限制，完整HUD/FX/艺术/优化/APK另验；draw172–424和逐波视觉矩阵进入A3。 |
+| [REPLAY实时色罩清理](AMBUSH_PR15_REPLAY_FX_20261002.md) | 六关实际源反例36/18fail→2ce6c60固定源36/0；HUD164/生命周期32退出0，真实清理后历史图已看。不是版本化全3DFX或真实FAILED/abort终局验收。 |
+| [独立环境资产包接口](AMBUSH_PR15_ENVIRONMENT_INTERFACE_20261002.md) | 供dot分配：新environment_v2源/导出目录、完整建筑/地表、14类原用途与其余五关地标；不改已有yard/actor/audio或运行代码。dot另派独立生产；九件样本不称六关完整库。 |
+| [PR15 runtime 切片报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md) | 实际多波回放/装备冻结反例、三个修复切片、固定源码与隔离/原生输入/软件渲染证据；首三项修复的完整六夜 smoke、六关多波与历史字段回归已通过；完整历史 HUD/动作/FX 待接。完整角色、院子和五关接入仍待完成。 |
+| [历史画面格式 1](AMBUSH_REPLAY_VISUAL_SCHEMA_20261002.md) | 固定 17aba59 的装备/姿态/工具/环境历史、只读接缝和旧/未知格式兼容；44 项渲染、84,039 项合同和 10,296 项六关回归通过。完整历史 HUD/动画/FX 仍待接入。 |
+| [完整资产执行顺序 v2](AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md) | 最新用户指令：先完成 A1/A2、A3 云端优化、A4 六关与完整构建，再统一模拟器/真机；替代此前设备门槛阻塞生产的顺序。 |
+| [可旋转院子 A0 执行目标与记录](AMBUSH_3D_A0_EXECUTION_20261002.md) | PR #15：灰盒、坐标/输入/回放接缝和独立 APK 已实现，完整六关与定向云端检查通过。A0.3 真机待测，不代表性能/完整资产验收。 |
+| [A1 首批资产样板](AMBUSH_ASSET_A1_SAMPLE_20261002.md) | Blender 可复现源、9 件样板、18 LOD、共享材质与引擎评审已有证据；美术品质继续复核。人物/动作、完整院子与六关推广待实施。 |
+| [代码审计与优化记录](AMBUSH_CODE_AUDIT_20261002.md) | 寻路优化、504 条路径等价/311 个最短代价检查、完整六夜冒烟及实际截图已完成；代码 [PR #11](https://github.com/hailinsu-create/ambush-loop/pull/11) 与审计 [PR #12](https://github.com/hailinsu-create/ambush-loop/pull/12) 已合并至本轮主线基线。记录其余优化建议；不替代设计 v2 或 M0 验收。 |
 | [游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) | 当前开发设计基线：玩法、高点规则、六关、视觉、手机操作、M0–M5。用户已同意以此推进；具体设计仍须逐切片实现、验证。 |
 | [产品方向](AMBUSH_PRODUCT_DIRECTION_20260928.md) | 保留用户需求来源：“搜集弹药 → 占领高点 → 埋伏 → 歼灭”。细化方案以 v2 为准。 |
 | [M0 状态报告](AMBUSH_M0_REPORT.md) | 工程基线与验收缺口。最终修复包真机复验、陌生人首局等未完成项目不得写成通过。 |
@@ -16,9 +48,9 @@
 ## 接手时按这个顺序读
 
 1. 根目录 `README.md`、`AGENTS.md`、`CONTRIBUTING.md`，确认范围、分支及测试规则。
-2. 本索引与当前设计 v2，理解目标体验和阶段优先级。
+2. 本索引、A0 执行记录及其引用的 PR #14 资产执行计划，再读设计 v2。新计划中的写实与旋转要求替代 v2 固定镜头约束，其余玩法与发行门槛仍有效。
 3. M0 报告、最新 Git 提交和相关 PR，核对真实代码与测试证据；旧交接里的本机路径、连接状态、提交状态可能已过时。
-4. 先核实 R45 在制提示切片与 M0 真机缺项，再开展 M1 院子战术样板；M2 做视觉、手机操作、引导与存档闭环。具体退出门见 v2。
+4. 当前按执行顺序 v2 完成角色、完整院子和六关资产；设备验证最后安排。M0 真机缺项继续追踪，高度玩法和其他在制分支不混入纯表现迁移。
 
 2026-09-28 本次仅发布规划和协作规则；不包含 R45 的在制游戏代码，不代表 M1/M2 已完成。后续状态以新的执行报告、提交和验证证据更新。
 
@@ -33,3 +65,29 @@
 - GitHub 同步失败时明确说明“仅本地保存/尚未同步”，保留未完成事项；不能把准备提交、已推送分支、已合并主线混为一谈。
 
 新规划完成后，应更新此索引和下一步，不要求后续开发者重新翻查聊天。
+
+
+2026-10-03 本地HUD续片：[真实窗口/200% HUD报告](AMBUSH_PR15_VIEWPORT_HUD_20261003.md)。固定6a519b3运行5081/0、42样本/51物理PNG/46原生XTest事件，实际exit0/ERROR0；保留aspect keep的1280逻辑宽及1600留黑，200%可用640×360。三正式图已看，其余图保存不冒称逐图验收；FAILED/WON、独立复验/六关完整旅程/fullsmoke/APK待。Git只读与connector成功但写凭证未恢复，停止auth/push重试，仅本地保存；P2抓放内部边界仍独立处理中，资产制作文件未改。
+
+
+2026-10-03 本地P2内部边界续片：[schema2连续抓放报告](AMBUSH_PR15_CORPSE_BOUNDARY_20261003.md)。固定f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3，正式边界2978/0、36关键边界/1350整段probe/72旧schema1精确摘要；旧0/99fallback及history不升级。18正式run均exit0/ERROR0，含品质2695、合同84042、六关13波10332，原终局保留。四关键图+三品质图已看；边界三辅助PNG被后续通用名覆盖未保留，receipt明示，品质9图完整。作者验证通过，独立P2仍待；focus邻近镜头文字裁切、minimap/checklist叠层及FAILED/WON200列待。6a HUD5081限定结论保留，未称全HUD关闭。仅本地保存，Git/Library阻塞不绕过；资产制作diff为空。继续FX/continuouscommand/A3/完整旅程/同候选smoke-QA-APK，耳听/设备后置。
+
+
+2026-10-03 最新交付状态：原配置唯一push重试成功并只读核对cf77f4db63605ff1e9846e1149f27ca6d461f458；先前onlylocal/authblocked均为历史状态，不推永久凭据健康。Library恢复未发生，不重试。HUD续片[北侧HUD报告](AMBUSH_PR15_NORTH_HUD_20261003.md)，运行816正式focus1702/0+viewport5081/0exit0，checkbox/minimap已分开，原两张镜头裁切原生133/0未复现仍待独立QA，FAILED/WON200另做。
+
+
+2026-10-03 本轮限定HUD收尾：[终局与北侧叠层报告](AMBUSH_PR15_RESULT_HUD_20261003.md)。f2结果滚动首修后，80ce379补镜头层级745/24exit1与时间条1718/16exit1→固定7edd0db93243e1079d6af3e55da37bf2d5a97df1正式结果449/0、focus1718/0、viewport5081/0、合同84042/0、历史画面164/0、渲染生命周期32/0，全实际exit0/ERROR0，119最终PNG全部留存并核hash，三张最终图已看。原两张focus邻近裁切未复现/独立QA仍待，cf77 IK/HUD独立QA由父端安排；未称全部HUD/完整战场/设备通过。此前onlylocal/authblocked为历史失败，原配置重试成功后，本片普通push及git/connector只读核对7edd成功；Library未恢复不重试。资产接口/单写者/SCOUT→ALERT→SWEEP规则保持；未展开FX/A3，后续仍按父端分配推进。
+
+
+2026-10-03 父端独立schema2 IK与北侧原矩阵已限定关闭，原focus文字与0ac终局新修QA待；旧cf77终局15/2及shader-cache错误不算green、不归0ac。继续[连续command切片计划](AMBUSH_PR15_CONTINUOUS_COMMAND_PLAN_20261003.md)：先真实ALERT/SWEEP两波录制与回放，保留原battle tick/seq/terminal统计，SCOUT前段留下一片；资产单写/规则边界保持，FX/A3/radio旅程/同候选最终构建按计划继续。
+
+
+2026-10-03 父端已限定关闭0ac终局两P2；新radio200致谢子层P2优先[独立修复计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)，56/2中presentationclock误判排除。依赖47a645连续command已提交但仅开发98/0，formal/graphical/六关未运行；本片只修credits，再同候选整体formal。
+
+2026-10-03 radio credits独立片完成：固定dedc8cf作者正式127/0/11物理图/26XTest、headless共享生命周期30/0均exit0/ERROR0。有效反例cd984a5为106/17exit1且Escape2条脚本错误；修复viewport限高+固定标题/返回+scroll，返回先消费输入再切场景。原radio9个reference波/3nativeCTA、100/200返回及Back200均专项通过，原1413/51、正文/result/footer保持；三正式图已看。47代码保留、证据明确开发98/0非formal；下一片立即同47+credits整体command/recordreplay/graphical/六关13波。独立creditsQA、原两focus裁切、FX/A3/全旅程/同候选APK仍待，资产输出未改、不merge/生产。同步核对状态见交付记录。
+
+
+2026-10-03 同候选正式关作者完成：[完整报告](AMBUSH_PR15_FULL_RECORD_20261003.md)。固定15c0783059bb7c2f9e9cd9b7252a9343e71f4168，runtime d860056f2107836c08dfb375a034ebbe694baff6；29次全部实际exit0/ERROR0、75图核hash。SCOUT身份/真实采样保至报警、schema2播放+原domain不变，旧schema1实际874 fixture兼容。六关39reference波/mode、原terminal/events与30/60/2x camera对照保持；不是正常完整玩家旅程/完整3DFX/设备性能。23项checkpoint后只收session5976既有6项，不重跑有效项。失败/旧候选保全，fixture精确hash与历史源重建已写，无LibraryID/不绕过。父端fixed15c独立QA待；继承title200全菜单/Help返回/退出确认/键盘下一独立片，然后FX/A3。R5制作所有权、SCOUT→ALERT→SWEEP、Draft不merge/生产、height/G隔离保持。
+
+
+2026-10-03 安全checkpoint：完整记录29次/75图已实际结束并push/只读核对a218；父端fixed15c独立limitedpass单列，不与作者数相加。[title全入口修复](AMBUSH_PR15_TITLE_20261003.md) fixed226现完成本片2次正式run2391/0+7/0exit0/ERROR0，72图hash验证并看overview、4native；源码/证据仅本地提交，Git认证失败未恢复，未重试/改凭据/绕过Library。全部测试队列结束；新title独立QA待。下一FX→autoREPLAY2×（未实现）→A3→正常玩家六关旅程/最终同candidate smoke/QA/APK，原两focus裁切与耳听仍待，资产/规则所有权保持。

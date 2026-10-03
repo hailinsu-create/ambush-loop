@@ -1,0 +1,22 @@
+TEST_RUN_ID=4a11a5c45f73418f9417c4b73a5db638
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4a11a5c45f73418f9417c4b73a5db638/data
+TEST_ENTRY=corpse_runtime_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4a11a5c45f73418f9417c4b73a5db638/data/godot/app_userdata/Ambush Loop run_id=4a11a5c45f73418f9417c4b73a5db638
+ERROR: Can't take value from empty array.
+   at: front (core/variant/array.cpp:355)
+   GDScript backtrace (most recent call first):
+       [0] _cancellations (res://scripts/corpse_runtime_test.gd:272)
+       [1] _run (res://scripts/corpse_runtime_test.gd:302)
+SCRIPT ERROR: Invalid call. Nonexistent function 'kill' in base 'Nil'.
+          at: _cancellations (res://scripts/corpse_runtime_test.gd:273)
+          GDScript backtrace (most recent call first):
+              [0] _cancellations (res://scripts/corpse_runtime_test.gd:273)
+              [1] _run (res://scripts/corpse_runtime_test.gd:302)
+ERROR: CORPSE_RUNTIME: actual stage reaches completion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_runtime_test.gd:26)
+       [1] _run (res://scripts/corpse_runtime_test.gd:303)
+CORPSE_RUNTIME_FAILED checks=756 failures=1

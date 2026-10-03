@@ -1,0 +1,518 @@
+{
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "R3 catalog/manual rig controller/equipment/PCK fixture technical checks; not battle/final art/device acceptance",
+  "asset_source_sha": "00b270863ba5a2cd5425abf2a31e78965c72ae45",
+  "asset_evidence_sha": "8a1fbe98e4f00ea5209c38d4e0749b1f992f9326",
+  "candidate_readonly_validation": {
+    "exit_code": 0,
+    "marker": "ACTOR_BINARY_AUDIT 22 51 violations 0",
+    "command": "python3 /tmp/pr15-actor-candidate-8a1fbe/ambush_loop/ArtSource/v2/actor_acceptance/validate.py --project /tmp/pr15-actor-candidate-8a1fbe/ambush_loop --catalog /tmp/pr15-actor-candidate-8a1fbe/ambush_loop/ArtSource/v2/actor_acceptance/catalog_candidate.json --output /tmp/pr15-actor-r3-binary.json",
+    "note": "Read-only binary audit, no generator rerun or independent asset production claim"
+  },
+  "runs": [
+    {
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_visual_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "ACTOR_VISUAL_OK checks=4362 failures=0",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "log": "actor.log",
+      "sha256": "07fce83ec459baa1cde5d52bacf091b78ec72fe4bb150ad50e4a08260ea49926"
+    },
+    {
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture asset_library_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "ASSET_LIBRARY_OK checks=273 failures=0 assets=15 lods=30",
+      "run_id": "b8a90db51266469bb4057cf5360be318",
+      "log": "static.log",
+      "sha256": "d548cfd8df497feb938d726bf1db43c50b91527e9e34bb049222635011edaa3a"
+    },
+    {
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 editor_import",
+      "exit_code": 0,
+      "completion_marker": null,
+      "run_id": "b08c144ae7ff4f2084150fb9b5be67f0",
+      "log": "import.log",
+      "sha256": "bcfeef3b8c64cc40b9f24c4f5a67946ccb759f5dd43acd1684b56f47a72b5a29"
+    },
+    {
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "command": "XDG_DATA_HOME=/tmp/pr15-r3-export-18dc381/data XDG_CONFIG_HOME=/tmp/pr15-r3-export-18dc381/config XDG_CACHE_HOME=/tmp/pr15-r3-export-18dc381/cache /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_loop --export-pack 'Linux Desktop' /tmp/pr15-r3-18dc381.pck",
+      "exit_code": 0,
+      "completion_marker": null,
+      "run_id": null,
+      "log": "export.log",
+      "sha256": "861340b17066aece4dc546b1a6f7a352a5e7192777ff105de448f3779f051925"
+    },
+    {
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "command": "AMBUSH_TEST_PACK=/tmp/pr15-r3-18dc381.pck timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 asset_pack_test.gd",
+      "exit_code": 0,
+      "completion_marker": "ASSET_PACK_OK checks=329 failures=0",
+      "run_id": "c0b3ad45db9641f4b38ce6cd256d41c0",
+      "log": "pack.log",
+      "sha256": "2be01efd44d31ae16f54fecfd5319c3305e4bc0ff464e46ce9c4f5aa62f3100b"
+    }
+  ],
+  "files": [
+    {
+      "path": "art/v2/models/operator_rifle_lod0.glb",
+      "sha256": "b97872f3077d56d6ef4439aac147846e032e6224707196d3a2cfb710ad95eb9f",
+      "asset_id": "operator_rifle",
+      "bytes": 670060
+    },
+    {
+      "path": "art/v2/models/operator_rifle_lod1.glb",
+      "sha256": "451c164ffd09cbbdacf55082d3e25fb95c2bc50ee77195622af37500e66bdcc7",
+      "asset_id": "operator_rifle",
+      "bytes": 483256
+    },
+    {
+      "path": "art/v2/models/operator_rifle_lod2.glb",
+      "sha256": "13db675aa4a6e2197c3ffac473f53b04c8d6aaba580e5faaa76db555dbe86745",
+      "asset_id": "operator_rifle",
+      "bytes": 374076
+    },
+    {
+      "path": "art/v2/models/operator_mg_lod0.glb",
+      "sha256": "b69da06dd74436c8e883d8de6ac040e8cf3cdee71d7808586e496b52125ccd93",
+      "asset_id": "operator_mg",
+      "bytes": 699080
+    },
+    {
+      "path": "art/v2/models/operator_mg_lod1.glb",
+      "sha256": "b1b1c5c1a322aca1063508379ebe2d0e89f806ad1104c135a2393508336bed3b",
+      "asset_id": "operator_mg",
+      "bytes": 512276
+    },
+    {
+      "path": "art/v2/models/operator_mg_lod2.glb",
+      "sha256": "197f5b91e0dfe204ada6486618538a5cbd8107eb324dc44900aee458e624fdc9",
+      "asset_id": "operator_mg",
+      "bytes": 375400
+    },
+    {
+      "path": "art/v2/models/operator_scout_lod0.glb",
+      "sha256": "c29ea25e1f0defab71a88e14bae0cbec7ffd1bd58dd584beb6d11a8ba9fb99cc",
+      "asset_id": "operator_scout",
+      "bytes": 665388
+    },
+    {
+      "path": "art/v2/models/operator_scout_lod1.glb",
+      "sha256": "f568112db333cd234f551023d788606caa5493bcfee9a3476a1ca48fcef6c169",
+      "asset_id": "operator_scout",
+      "bytes": 479076
+    },
+    {
+      "path": "art/v2/models/operator_scout_lod2.glb",
+      "sha256": "be655868fd2f46f9049096ca6998a87ea18d6d59765bb73e53f3b7677c850397",
+      "asset_id": "operator_scout",
+      "bytes": 366552
+    },
+    {
+      "path": "art/v2/models/enemy_patrol_lod0.glb",
+      "sha256": "9fe441b38efbba45f340476e05a6370e3cb6a85bc1d60a10fb3b4cebdea57d51",
+      "asset_id": "enemy_patrol",
+      "bytes": 673628
+    },
+    {
+      "path": "art/v2/models/enemy_patrol_lod1.glb",
+      "sha256": "706d52d58dd314bc39879264cf9a5dfe4125a78fd6b7a65167714914cf00941e",
+      "asset_id": "enemy_patrol",
+      "bytes": 485636
+    },
+    {
+      "path": "art/v2/models/enemy_patrol_lod2.glb",
+      "sha256": "8890ab05b59071354c92587ce333db363c0c59f828ec937300c2d781217a19fe",
+      "asset_id": "enemy_patrol",
+      "bytes": 376456
+    },
+    {
+      "path": "art/v2/models/enemy_flank_lod0.glb",
+      "sha256": "8c766b5018542409428ac0ac6d58b1dd7bbcb1128bef755681bef449bc06beb7",
+      "asset_id": "enemy_flank",
+      "bytes": 663804
+    },
+    {
+      "path": "art/v2/models/enemy_flank_lod1.glb",
+      "sha256": "f83f5eba2a8fd59ae88b6dca15921b71135c6e1ca18dae88e633168ebb494570",
+      "asset_id": "enemy_flank",
+      "bytes": 477024
+    },
+    {
+      "path": "art/v2/models/enemy_flank_lod2.glb",
+      "sha256": "53c68e09aafb3cdda939e9d22beba876468967136dde7826498d91be8326dc6b",
+      "asset_id": "enemy_flank",
+      "bytes": 366548
+    },
+    {
+      "path": "art/v2/models/enemy_sneak_lod0.glb",
+      "sha256": "2316a56ebbdfcd02b0fc167d62dfe623f3c941754031066adc424200e9224a49",
+      "asset_id": "enemy_sneak",
+      "bytes": 684444
+    },
+    {
+      "path": "art/v2/models/enemy_sneak_lod1.glb",
+      "sha256": "ae0e731ca7cd31c5e91aafba170dc88ef184fae972fc3d1a51499a0820710afc",
+      "asset_id": "enemy_sneak",
+      "bytes": 484384
+    },
+    {
+      "path": "art/v2/models/enemy_sneak_lod2.glb",
+      "sha256": "1032932040ba6bc7f3ecded67e0b594beafdae488bf3bd1c661ca7ea75c25af5",
+      "asset_id": "enemy_sneak",
+      "bytes": 371772
+    },
+    {
+      "path": "art/v2/models/enemy_radio_lod0.glb",
+      "sha256": "f04ecc01e15ded7a818fdece5059f8681de83809a7c568c123e5a74e6162d18b",
+      "asset_id": "enemy_radio",
+      "bytes": 672424
+    },
+    {
+      "path": "art/v2/models/enemy_radio_lod1.glb",
+      "sha256": "6ce3efb4c0a91ad92dec7aea7c2082cb1abaf6d878c05ff407acd1da95bf147f",
+      "asset_id": "enemy_radio",
+      "bytes": 485620
+    },
+    {
+      "path": "art/v2/models/enemy_radio_lod2.glb",
+      "sha256": "83c27188fac9b8e6a10ded76be8d74364f431ca7d360a2a3b6f28a234df03398",
+      "asset_id": "enemy_radio",
+      "bytes": 376440
+    },
+    {
+      "path": "art/v2/models/m1911_lod0.glb",
+      "sha256": "9e4359ef0f8d9b8fd2d01f8f4c4eeaf912f34f8fbb221f7efe355c1cb676b76d",
+      "asset_id": "m1911",
+      "bytes": 27432
+    },
+    {
+      "path": "art/v2/models/m1911_lod1.glb",
+      "sha256": "b217c0b6404f8c73a59b0934b7be251eac27729408e6f3ee07bf9ef1b773b144",
+      "asset_id": "m1911",
+      "bytes": 8864
+    },
+    {
+      "path": "art/v2/models/luger_lod0.glb",
+      "sha256": "057873a6511d1cfd52b588fae992dd444e1b29fae58068faf76bce205cdd6a23",
+      "asset_id": "luger",
+      "bytes": 30832
+    },
+    {
+      "path": "art/v2/models/luger_lod1.glb",
+      "sha256": "9b9d6ba143ebc91c13552109fc0e8d4632d83cb79c8f568dec3dca14652158c2",
+      "asset_id": "luger",
+      "bytes": 9704
+    },
+    {
+      "path": "art/v2/models/m1_garand_lod0.glb",
+      "sha256": "56cd21a8751625f3da1ea5322d5be6fed3189bddb87cdf0de9e2872e7efb2e93",
+      "asset_id": "m1_garand",
+      "bytes": 86956
+    },
+    {
+      "path": "art/v2/models/m1_garand_lod1.glb",
+      "sha256": "171aa8d86a38e8a0f7799a0c98f19907ae6e1a4560b5d944195096cba0d009a9",
+      "asset_id": "m1_garand",
+      "bytes": 24008
+    },
+    {
+      "path": "art/v2/models/kar98k_lod0.glb",
+      "sha256": "794fb388cb940c4e471a5cdc00addbb3537098ea3dc917ccdc1bd939575b1ef4",
+      "asset_id": "kar98k",
+      "bytes": 86792
+    },
+    {
+      "path": "art/v2/models/kar98k_lod1.glb",
+      "sha256": "2540f6e4393b0c2b36ac2f33ba187d81913770ee62c5afc592be54d5050a7f4a",
+      "asset_id": "kar98k",
+      "bytes": 24384
+    },
+    {
+      "path": "art/v2/models/thompson_lod0.glb",
+      "sha256": "84ec7e572a363714b6b9820e36149d9fd81096226383a8ffb30d25ff5e8a3834",
+      "asset_id": "thompson",
+      "bytes": 79092
+    },
+    {
+      "path": "art/v2/models/thompson_lod1.glb",
+      "sha256": "bdb5caf36061972fa0a652ee58b33d1e3c23c3926bd71bd7b25fd1232bd236e1",
+      "asset_id": "thompson",
+      "bytes": 22240
+    },
+    {
+      "path": "art/v2/models/mp40_lod0.glb",
+      "sha256": "4c3277a7abe11d3c37830d97bbd2277d2142a39aba0cb92cc7d49e4d380a93c2",
+      "asset_id": "mp40",
+      "bytes": 73988
+    },
+    {
+      "path": "art/v2/models/mp40_lod1.glb",
+      "sha256": "611c887d7997e3a0f6c4bc80e4736e40fc1c69aa992e71a9073b30852a5d741c",
+      "asset_id": "mp40",
+      "bytes": 23008
+    },
+    {
+      "path": "art/v2/models/bar_lod0.glb",
+      "sha256": "c986fbefeb77214f41f04841ebd66335ed4f0248e50e198ab32e25423567ab68",
+      "asset_id": "bar",
+      "bytes": 78832
+    },
+    {
+      "path": "art/v2/models/bar_lod1.glb",
+      "sha256": "edadeb7e566c460e5255f2704a2b3b550dd6b9eb57c83a6c571c1215833a2d7b",
+      "asset_id": "bar",
+      "bytes": 22988
+    },
+    {
+      "path": "art/v2/models/mg42_lod0.glb",
+      "sha256": "d2ab09203f76df93da9b3df672974c93a7987c848d1cf8f151f231ec04f85537",
+      "asset_id": "mg42",
+      "bytes": 126676
+    },
+    {
+      "path": "art/v2/models/mg42_lod1.glb",
+      "sha256": "a111328803a967ae9aac5452f4c22bbf28ac102b498b76ca338b667fe605e6bc",
+      "asset_id": "mg42",
+      "bytes": 38960
+    },
+    {
+      "path": "art/v2/models/springfield_lod0.glb",
+      "sha256": "e965ab6f1cecab8a42a3f9308dd8507eaca92737485d277217850bf7372b9e4f",
+      "asset_id": "springfield",
+      "bytes": 91680
+    },
+    {
+      "path": "art/v2/models/springfield_lod1.glb",
+      "sha256": "0414bfe5b08a9e839430f4adf8af64eb35b51df34045282088bb57de75829d4f",
+      "asset_id": "springfield",
+      "bytes": 27880
+    },
+    {
+      "path": "art/v2/models/kar98k_zf_lod0.glb",
+      "sha256": "2aad84791e6e7f1d6ff6941bfbcb8d1379a2dcfdde1c8d80c41b52bd176b12ad",
+      "asset_id": "kar98k_zf",
+      "bytes": 98720
+    },
+    {
+      "path": "art/v2/models/kar98k_zf_lod1.glb",
+      "sha256": "acb90d3c0adac708cdd425a1b6555eeab8261c4f03028220debe3ea63a18d3a8",
+      "asset_id": "kar98k_zf",
+      "bytes": 29548
+    },
+    {
+      "path": "art/v2/models/knife_lod0.glb",
+      "sha256": "e3f4a53c7e6d78c035e56693d54a7158c2f0dd90c81b35542fadc748df84f857",
+      "asset_id": "knife",
+      "bytes": 9216
+    },
+    {
+      "path": "art/v2/models/knife_lod1.glb",
+      "sha256": "5a886b6c5ec320af153f4142360303ec3c07e2e45c8c47da353a653cf96cc8ca",
+      "asset_id": "knife",
+      "bytes": 4160
+    },
+    {
+      "path": "art/v2/models/grenade_lod0.glb",
+      "sha256": "4d293048d9576cb243e39740869348e1917898e204304c966b2d79267c2d0157",
+      "asset_id": "grenade",
+      "bytes": 14480
+    },
+    {
+      "path": "art/v2/models/grenade_lod1.glb",
+      "sha256": "7dc64818ad2be21fc8db3d4bd31700cb6596e723db178397a497bd6cf9ee8b5c",
+      "asset_id": "grenade",
+      "bytes": 6072
+    },
+    {
+      "path": "art/v2/models/mine_lod0.glb",
+      "sha256": "bddb254756887e327e7155b5b9f211668fc809e9a715444ad9aaad7ec455ad48",
+      "asset_id": "mine",
+      "bytes": 8548
+    },
+    {
+      "path": "art/v2/models/mine_lod1.glb",
+      "sha256": "9ad8f1445c0208f74726ecb2c8b87ffe2971c80ea0389226237a3f3cdf662e73",
+      "asset_id": "mine",
+      "bytes": 6504
+    },
+    {
+      "path": "art/v2/models/decoy_lod0.glb",
+      "sha256": "54540d6c775b94c8d8008b083093a8fe2a38fd6fb366e09ded59176e43e2fdf5",
+      "asset_id": "decoy",
+      "bytes": 22684
+    },
+    {
+      "path": "art/v2/models/decoy_lod1.glb",
+      "sha256": "8ad97f1c0bbb9471de223df2f1327ef9982c326d0732f5df3d01ca4f2091d984",
+      "asset_id": "decoy",
+      "bytes": 8904
+    },
+    {
+      "path": "art/v2/models/ammo_pack_lod0.glb",
+      "sha256": "0762c567a427b786f1997308749d0803f15e2694f7b8386c88f990356d9f6873",
+      "asset_id": "ammo_pack",
+      "bytes": 21588
+    },
+    {
+      "path": "art/v2/models/ammo_pack_lod1.glb",
+      "sha256": "c9b85696c8f42ef26df6fdd7c0ea5261726f80fc46d055607eb3def45492acc6",
+      "asset_id": "ammo_pack",
+      "bytes": 6548
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_albedo.png",
+      "sha256": "9739afae52b182db5c2e9689ff152f7fd3d1c0395d9e2438c2d25b900e33f2c5",
+      "bytes": 1203363
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_normal.png",
+      "sha256": "3a92856dcfe0094bc8c470e2935672041d10d95ff00a4f13eff5516a6f68ab8a",
+      "bytes": 1723537
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_orm.png",
+      "sha256": "25ddbcfd90ba98e86d63a933ff5544e64c7b9dda8f54e815a422406c47c31483",
+      "bytes": 154956
+    }
+  ],
+  "images": [
+    {
+      "path": "r3_priority_yaw000_pitch35.png",
+      "sha256": "79afefebae39f84748e092a41dd8e1aa7f05c489822be1df427af7ad831f33bf",
+      "bytes": 67482,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw000_pitch65.png",
+      "sha256": "d94e8b245a0d2861f1ee72cf2f0bbb2ad118889e1977eedac8761738a9e8e8b7",
+      "bytes": 64757,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw045_pitch35.png",
+      "sha256": "1ae675f88a837003aef9c82590db7d50fa667921d246811ad9e38975cdab744a",
+      "bytes": 60221,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw045_pitch65.png",
+      "sha256": "b44680708cfe00a877a262d4081a65f12d76b786a496816e982cfa179243a7f7",
+      "bytes": 62234,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw090_pitch35.png",
+      "sha256": "71d1d0eda30a3434506c3bebb150efe10656ced9acf6d77f8ad0410a3852a522",
+      "bytes": 54493,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": true
+    },
+    {
+      "path": "r3_priority_yaw090_pitch65.png",
+      "sha256": "213a6eb4615c8203a7ffed591422b3940de46199f240a52aa3be92934a53cc42",
+      "bytes": 62174,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw135_pitch35.png",
+      "sha256": "821bbdb7849bd792edbfd25e66da98bfea7eb377655a7f7384601075479d735c",
+      "bytes": 46820,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw135_pitch65.png",
+      "sha256": "81d535edf870568727bdd9cffee5aa137ba0ea8cfca820d4f1fe5726432b9e55",
+      "bytes": 58410,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw180_pitch35.png",
+      "sha256": "e312eb1cfd9a82206f87f091c5a7d6e7b00e07b8b0d282fd6ea1cdda40c5e01c",
+      "bytes": 50306,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw180_pitch65.png",
+      "sha256": "fef491741dab80ac9220f4206a79e4b85491195bbf6893c182fb8e964ccad812",
+      "bytes": 57080,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw225_pitch35.png",
+      "sha256": "832da08ad42a80839a050475886c2bb627370365b6203021eb267b93374aaa01",
+      "bytes": 54716,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw225_pitch65.png",
+      "sha256": "742d3a3956d1dcb401a0dc80b1b6a44536474fe2863f92f24fe60ffbdd2d094e",
+      "bytes": 58483,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw270_pitch35.png",
+      "sha256": "76beaf0e8df931cb731ec13897e42588b077c88365d9d61eabc0a7ea100d3871",
+      "bytes": 70863,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw270_pitch65.png",
+      "sha256": "82a30a30e635c124a906cd72f7bd5ee97358e23c0aebe60aef1e8115985ac633",
+      "bytes": 67149,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": true
+    },
+    {
+      "path": "r3_priority_yaw315_pitch35.png",
+      "sha256": "304131ec5ca1e9f1f6cb487a1abf47a984a9d2072b821cc361b04f48a91917bb",
+      "bytes": 66279,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    },
+    {
+      "path": "r3_priority_yaw315_pitch65.png",
+      "sha256": "1a10394b6aa8c9b10ed13a741b90ae6bc429319f4bc4a21f578f04a9e83f13b5",
+      "bytes": 60876,
+      "source_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+      "run_id": "4c862567fe374c7781436c453e9dc150",
+      "viewed": false
+    }
+  ],
+  "pck": {
+    "path": "/tmp/pr15-r3-18dc381.pck",
+    "bytes": 12593248,
+    "sha256": "f32dde01d3906c0ccce265d85d1f44ee524b095e018e600f4f319a7359fd81f2"
+  },
+  "protected_source_check": "git diff --quiet 744cb014 HEAD -- ambush_loop/ArtSource exited0; frozen source/evidence revisions have identical model/texture files"
+}

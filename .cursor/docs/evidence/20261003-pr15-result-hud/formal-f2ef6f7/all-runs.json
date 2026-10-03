@@ -1,0 +1,116 @@
+[
+  {
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "entry": "result_viewport_test.gd",
+    "exit": 0,
+    "checks": 671,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "6f65b7cd447c4ac0bd813fef45bcd0b3",
+    "log": "pr15-f2ef6f7-result.log",
+    "mode": "render"
+  },
+  {
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "entry": "presentation_contract_test.gd",
+    "exit": 0,
+    "checks": 84042,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "056445bcbfbc48a1b76d616b51b2e764",
+    "log": "pr15-f2ef6f7-contract.log",
+    "mode": "headless"
+  },
+  {
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "entry": "equipment_freeze_test.gd",
+    "exit": 0,
+    "checks": 66,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "b9e85557285e477a91e4e42d6fccfde1",
+    "log": "pr15-f2ef6f7-equipment.log",
+    "mode": "headless"
+  },
+  {
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "entry": "presentation_lifecycle_test.gd",
+    "exit": 0,
+    "checks": 30,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "c386688d494942a096b9cac8f6521b32",
+    "log": "pr15-f2ef6f7-lifecycle.log",
+    "mode": "headless"
+  },
+  {
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "entry": "camera_input_test.gd",
+    "exit": 0,
+    "checks": 23,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "a8eb6645e18c4d56891abae844030e67",
+    "log": "pr15-f2ef6f7-camera.log",
+    "mode": "headless"
+  },
+  {
+    "entry": "visual_snapshot_test.gd",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "visual_snapshot_test.gd",
+      "--render"
+    ],
+    "environment": {},
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "label": "snapshot-render",
+    "exit": 0,
+    "wall_seconds": 51.119,
+    "checks": 164,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "d08023a82efc48cb9efe4c5e71fcdb84"
+  },
+  {
+    "entry": "presentation_lifecycle_test.gd",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "presentation_lifecycle_test.gd",
+      "--render"
+    ],
+    "environment": {},
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "label": "lifecycle-render",
+    "exit": 0,
+    "wall_seconds": 57.602,
+    "checks": 32,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "1be780e80f6142798bb487cf1efd10e2"
+  },
+  {
+    "entry": "corpse_pairing_boundary_test.gd",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "corpse_pairing_boundary_test.gd",
+      "--render"
+    ],
+    "environment": {
+      "AMBUSH_BOUNDARY_SCOPE": "ui"
+    },
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "label": "native-ui",
+    "exit": 0,
+    "wall_seconds": 83.337,
+    "checks": 133,
+    "failures": 0,
+    "errors": 0,
+    "run_id": "1bc21d84bc5d403bbc3fcd2c95925a34"
+  }
+]

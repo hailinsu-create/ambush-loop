@@ -1,0 +1,38 @@
+{
+  "actual_source_sha": "7b3ffd5f8d75d7499e2f7fd9e0a8859fda8165a6",
+  "validation_kind": "previous-fixed-7b3-component; fixture migration failures retained",
+  "name": "lifecycle-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "presentation_lifecycle_test.gd",
+    "--render"
+  ],
+  "environment": {},
+  "run_id": "e0a9f7be44844eeda59405527fc899b2",
+  "actual_exit_code": 0,
+  "checks": 32,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-lifecycle-render/replay_event_focus.png",
+      "sha256": "6d5dedda74bd56a28349178f462046704d7359641a68cd4a67fd5449417d54ec",
+      "source": "root framebuffer",
+      "hash_verified": true
+    },
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-lifecycle-render/scout_backpack.png",
+      "sha256": "6b9b240f9bf65dc2a0d72f65f6da688298c654688094cafb00d1a9ab55d9b172",
+      "source": "root framebuffer",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 2,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ]
+}

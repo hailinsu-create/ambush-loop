@@ -392,7 +392,7 @@ func _west_operable_worlds() -> Array[Vector2]:
 
 
 func _world_screen_rect(xf: Transform2D, world: Vector2, half: float) -> Rect2:
-	var p: Vector2 = xf * world
+	var p: Vector2 = _project_world(xf, world)
 	var hx := absf(xf.x.x) * half
 	var hy := absf(xf.y.y) * half
 	if hx < 8.0:
@@ -540,7 +540,7 @@ func _apply(actions: Array) -> void:
 	var op_screen := Vector2.INF
 	var op := _op()
 	if op:
-		op_screen = xf * op.global_position
+		op_screen = _project_world(xf, op.global_position)
 	var n: int = mini(actions.size(), 2)
 	for i in _btns.size():
 		var b: Button = _btns[i]
@@ -556,7 +556,7 @@ func _apply(actions: Array) -> void:
 		b.set_meta("world", a["world"])
 		_style(b, a["tint"])
 		var place_world: Vector2 = a.get("anchor", a["world"])
-		var screen: Vector2 = xf * place_world
+		var screen: Vector2 = _project_world(xf, place_world)
 		var blocked: Array = _operable_rects(xf, cmd, a["world"])
 		var pos := _place_hotspot(cmd, screen, op_screen, safe, blocked, i, n)
 		b.position = pos
@@ -600,14 +600,14 @@ func _draw_rings() -> void:
 	var xf: Transform2D = host.get_viewport().get_canvas_transform()
 	var col := Color(0.86, 0.78, 0.38, 0.38)
 	for w in _rings:
-		var p: Vector2 = xf * w
+		var p: Vector2 = _project_world(xf, w)
 		_draw.draw_arc(p, 16.0, 0.0, TAU, 22, col, 1.6, true)
 		_draw.draw_arc(p, 7.0, 0.0, TAU, 14, Color(col.r, col.g, col.b, 0.22), 1.0, true)
 	if _guide.size() >= 2:
 		var gcol := Color(0.92, 0.46, 0.24, 0.90)
 		for i in range(1, _guide.size()):
-			var a: Vector2 = xf * _guide[i - 1]
-			var b: Vector2 = xf * _guide[i]
+			var a: Vector2 = _project_world(xf, _guide[i - 1])
+			var b: Vector2 = _project_world(xf, _guide[i])
 			var v: Vector2 = b - a
 			var len := v.length()
 			if len < 2.0:
@@ -623,5 +623,11 @@ func _draw_rings() -> void:
 				pos = npos
 				on = not on
 			_draw.draw_circle(a, 2.4, Color(0.94, 0.52, 0.22, 0.80))
-		var tip: Vector2 = xf * _guide[_guide.size() - 1]
+		var tip: Vector2 = _project_world(xf, _guide[_guide.size() - 1])
 		_draw.draw_circle(tip, 5.5, Color(0.96, 0.40, 0.18, 0.95))
+
+
+func _project_world(xf: Transform2D, world: Vector2) -> Vector2:
+	if host != null and host.has_method("project_logic_position"):
+		return host.project_logic_position(world)
+	return xf * world

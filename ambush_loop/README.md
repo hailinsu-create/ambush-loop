@@ -2,6 +2,26 @@
 
 当前开发设计以 [设计规划 v2](../.cursor/docs/AMBUSH_DESIGN_V2_20260928.md) 为准；下文保留现有原型的运行与操作说明，不表示新高点或新视觉已实现。
 
+本轮写实/360° 旋转实施见 [A0 执行记录](../.cursor/docs/AMBUSH_3D_A0_EXECUTION_20261002.md)。正式入口仍沿用旧视图；新灰盒用下列隔离入口进入，存档与日常试玩分离：
+
+```bash
+bash ambush_loop/scripts/run_isolated_test.sh /path/to/godot editor_import
+bash ambush_loop/scripts/run_isolated_test.sh /path/to/godot presentation_preview.gd --render
+```
+
+点按选择/移动；双指平移、旋转和缩放；鼠标中键旋转、Shift+中键平移、滚轮缩放，右侧可复位/定位/调俯角。30 秒镜头巡检记录实际帧间隔并可复制报告，不等于持续性能验收。道具与建筑源资产见 [ArtSource/v2](ArtSource/v2/README.md)，仍处于样板评审阶段。
+
+独立 Android 灰盒包在 Linux 云端构建，使用独立包名 `com.ambushloop.game.a0`（不覆盖旧包）、720p、30 FPS 上限；需要匹配工具绝对路径：
+
+```bash
+python3 ambush_loop/scripts/export_a0_preview.py \
+  --godot /path/to/Godot_v4.7.2-stable_linux.x86_64 \
+  --java /path/to/jdk-17 --sdk /path/to/android-sdk \
+  --templates /path/to/templates/4.7.2.stable
+```
+
+导出脚本复制源工程，在隔离配置中构建并用 `aapt`/`apksigner` 验证；输出 APK、哈希与源码 SHA 清单。`--abi x86_64` 仅用于云端 Android 模拟器，给手机的默认包为 arm64。测试签名留在忽略的 `build/a0_exports/`，请保留该本地文件以便后续覆盖安装。
+
 Godot 4.7.2 vertical slice — Commandos-style night raid: scout, loot, ambush, multi-wave alarm, sweep.
 
 **朋友包 / 程序多边形 / 合成音 / 必须横屏。** 不是正式版，不要写成 9.5。  
@@ -59,9 +79,9 @@ Desktop presets: `ambush_loop/export_presets.cfg` (Linux / Windows / **Android A
 3. Project → Export.
 4. **Linux Desktop** → `build/linux/AmbushLoop.x86_64`
 5. **Windows Desktop** → `build/windows/AmbushLoop.exe`
-6. **Android** preset **Android APK**: JDK 17 + Android SDK + matching **Android export templates**. Export → `build/android/AmbushLoop.apk` (arm64, minSdk 24, sideload). Play AAB is later (Gradle + release keystore). This cloud VM usually cannot emit a signed APK.
+6. **Android** preset **Android APK**: JDK 17 + Android SDK + matching **Android export templates**. Export → `build/android/AmbushLoop.apk` (arm64, minSdk 24, sideload). Play AAB is later (Gradle + release keystore).
 
-`build/` is gitignored. You do not need export templates to *play* from the editor. This cloud VM often cannot produce a signed APK; export on a machine with the Android SDK.
+`build/` is gitignored. You do not need export templates to *play* from the editor. The A0 cloud exporter above installs no system-wide settings and has produced a debug-signed APK using the matching SDK/templates.
 
 ## Controls
 

@@ -1,0 +1,35 @@
+TEST_RUN_ID=036a7d4710ca42c6ab0613731170c561
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/036a7d4710ca42c6ab0613731170c561/data
+TEST_ENTRY=radio_credits_viewport_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/036a7d4710ca42c6ab0613731170c561/data/godot/app_userdata/Ambush Loop run_id=036a7d4710ca42c6ab0613731170c561
+RADIO_CREDITS_FAIL radio_credits_1280_200_desktop visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Label@90 [P: (60.0, -34.0), S: (520.0, 39.0)]
+RADIO_CREDITS_FAIL radio_credits_1280_200_desktop visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Button@98 [P: (60.0, 431.0), S: (520.0, 44.0)]
+RADIO_CREDITS_FAIL radio_credits_1280_200_desktop credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1280_200_touch visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Label@90 [P: (60.0, -34.0), S: (520.0, 39.0)]
+RADIO_CREDITS_FAIL radio_credits_1280_200_touch visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Button@98 [P: (60.0, 431.0), S: (520.0, 44.0)]
+RADIO_CREDITS_FAIL radio_credits_1280_200_touch credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Label@90 [P: (60.0, -34.0), S: (520.0, 39.0)]
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Button@98 [P: (60.0, 431.0), S: (520.0, 44.0)]
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Label@90 [P: (60.0, -34.0), S: (520.0, 39.0)]
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch visible control inside actual viewport: /root/Yard3D/@CanvasLayer@85/@PanelContainer@87/@MarginContainer@88/@VBoxContainer@89/@Button@98 [P: (60.0, 431.0), S: (520.0, 44.0)]
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch long credits body has a bounded scroll container
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch native200 return button reaches actual title scene
+SCRIPT ERROR: Cannot call method 'set_input_as_handled' on a null value.
+          at: _unhandled_input (res://scripts/main.gd:3950)
+          GDScript backtrace (most recent call first):
+              [0] _unhandled_input (res://scripts/main.gd:3950)
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop visible control inside actual viewport: /root/Yard3D/@CanvasLayer@2354/@PanelContainer@2356/@MarginContainer@2357/@VBoxContainer@2358/@Label@2359 [P: (60.0, -34.0), S: (520.0, 39.0)]
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop visible control inside actual viewport: /root/Yard3D/@CanvasLayer@2354/@PanelContainer@2356/@MarginContainer@2357/@VBoxContainer@2358/@Button@2367 [P: (60.0, 431.0), S: (520.0, 44.0)]
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop credits title glyph stays inside usable viewport
+SCRIPT ERROR: Cannot call method 'set_input_as_handled' on a null value.
+          at: _unhandled_input (res://scripts/main.gd:3950)
+          GDScript backtrace (most recent call first):
+              [0] _unhandled_input (res://scripts/main.gd:3950)
+RADIO_CREDITS_TEST checks=106 failures=17

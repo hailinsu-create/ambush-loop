@@ -1,0 +1,958 @@
+{
+  "runtime_source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+  "final_test_source_sha": "a575d9ec9b7eed1b934218a727c41c2a6d0ff226",
+  "final_ambush_loop_tree": "aec880f4e14c3b4992b2619830367039c27807e7",
+  "equivalence": {
+    "full_ambush_loop_diff_89_to_a575": [
+      "ambush_loop/scripts/corpse_pose_quality_test.gd"
+    ],
+    "production_delta": [],
+    "note": "a575 only changes corpse_pose_quality_test capture metadata and production replay-entry fixture; regression scripts and all production bytes remain identical to89. Docs/evidence delivery must retain entire a575 ambush_loop tree.",
+    "asset_changes_since_b011": []
+  },
+  "engine": "Godot4.7.2.stable.official.ed1daf0bf",
+  "render_environment": "Xorg99/Compatibility/Mesa25.0.7 llvmpipe/Dummy; cloud only",
+  "formal_run_count": 18,
+  "formal_runs": [
+    {
+      "entry": "actor_visual_test.gd",
+      "exit": 0,
+      "elapsed_s": 1.87,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "actor_visual_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "actors-actor_visual_test.log",
+      "durable_exit": "actors-actor_visual_test.exit",
+      "checks": 21818,
+      "engine_errors": 0,
+      "storage_run_id": "3be26a6a622747e1a60226d650973bdc",
+      "log_sha256": "c33bd529440e192e1098c56918c2ba837f8d70b7ea77c5cc99a7b4b0605ed809",
+      "entry_sha256": "0fce26d79d8087f448a5faf271b7dd5d4cb607fe3ab8e2db2a58f32b7487a6da"
+    },
+    {
+      "entry": "corpse_runtime_test.gd",
+      "exit": 0,
+      "elapsed_s": 56.4,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "corpse_runtime_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-corpse_runtime_test.log",
+      "durable_exit": "contracts-corpse_runtime_test.exit",
+      "checks": 1203,
+      "engine_errors": 0,
+      "storage_run_id": "283fdf884e124f09945701718bb516a2",
+      "log_sha256": "82eefb8e22e16e50ce0e7d4d79e6fbcab83a82f105c297a94eaf61c3555d83bf",
+      "entry_sha256": "65dc4ee32ea438685dec32fefa471b1685e172d7aeb78db18d8ef9d5b9a805e2"
+    },
+    {
+      "entry": "utility_runtime_test.gd",
+      "exit": 0,
+      "elapsed_s": 67.48,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-utility_runtime_test.log",
+      "durable_exit": "contracts-utility_runtime_test.exit",
+      "checks": 1041,
+      "engine_errors": 0,
+      "storage_run_id": "57e2e29780ae489fbf96ac6852086993",
+      "log_sha256": "e9606a8993becc50eb2894f58cca558d0a6880e7c4df149322aaea49d0920abb",
+      "entry_sha256": "f78f4aeb780e07739217bbefe0925b210d17b5af8e8a6f5c7dad5d5c0b5be0d3"
+    },
+    {
+      "entry": "equipment_freeze_test.gd",
+      "exit": 0,
+      "elapsed_s": 230.27,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "equipment_freeze_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-equipment_freeze_test.log",
+      "durable_exit": "contracts-equipment_freeze_test.exit",
+      "checks": 66,
+      "engine_errors": 0,
+      "storage_run_id": "f507a30432614e13aa2f55c1cfa53094",
+      "log_sha256": "25fa3b8aad869da2bcd5d87c783ecfa22a9f80653389e5e3a59970e69c0f0ded",
+      "entry_sha256": "f4291332d0869c153ab193769ea8cc8c2a5e4ab7c1b7c97587f45b6670deb25d"
+    },
+    {
+      "entry": "command_pose_clock_test.gd",
+      "exit": 0,
+      "elapsed_s": 29.44,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "command_pose_clock_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-command_pose_clock_test.log",
+      "durable_exit": "contracts-command_pose_clock_test.exit",
+      "checks": 27,
+      "engine_errors": 0,
+      "storage_run_id": "abb6e970903f48b0be9e2ce2f6875f54",
+      "log_sha256": "04dc2c1c06cfbc3e791de1b6d225441ce8cd184e2ea58ddd0c7406422bccde98",
+      "entry_sha256": "58ada0dc1ab81ed206bcf34ba2b887c6bd25ff3a66505301274c4dcb29634bb0"
+    },
+    {
+      "entry": "replay_timeline_test.gd",
+      "exit": 0,
+      "elapsed_s": 19.53,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "replay_timeline_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-replay_timeline_test.log",
+      "durable_exit": "contracts-replay_timeline_test.exit",
+      "checks": 66,
+      "engine_errors": 0,
+      "storage_run_id": "af76a35460b04600bf007795eeed5895",
+      "log_sha256": "fb39c612b5d3a5b6b87544efeac446d4d47de9906f1b61e0eaf425c74e05f634",
+      "entry_sha256": "61e8d2fb63916becaf553477a4923e0f17b7ab0a21e14a08a968545db1cda294"
+    },
+    {
+      "entry": "presentation_contract_test.gd",
+      "exit": 0,
+      "elapsed_s": 63.73,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_contract_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-presentation_contract_test.log",
+      "durable_exit": "contracts-presentation_contract_test.exit",
+      "checks": 84042,
+      "engine_errors": 0,
+      "storage_run_id": "a25749b3db354c098f76fead768d9092",
+      "log_sha256": "ba109b8bdb2e9d344ee8cd6deea77088c297b3a4ef89b00b909c3538e77a4703",
+      "entry_sha256": "f0d50621587ab5f6c786290847c495574e09b47d70157d6631c98d0ab64b4ba8"
+    },
+    {
+      "entry": "campaign_replay_test.gd",
+      "exit": 0,
+      "elapsed_s": 393.07,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "contracts-campaign_replay_test.log",
+      "durable_exit": "contracts-campaign_replay_test.exit",
+      "checks": 10332,
+      "engine_errors": 0,
+      "storage_run_id": "7448e6cfcb684d8fa40ed279d90faa40",
+      "log_sha256": "8477d29087e288d1e5b450bf07b40d07bfd5cd070533dcb62c026283d3273b19",
+      "entry_sha256": "9c1a4c622d501f9119ea14f9686e0629ccf0a7e035580ec136886ed5854cbc11"
+    },
+    {
+      "entry": "firearm_runtime_test.gd",
+      "exit": 0,
+      "elapsed_s": 37.5,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "firearm_runtime_test.gd",
+        "--render"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "render-firearm_runtime_test.log",
+      "durable_exit": "render-firearm_runtime_test.exit",
+      "checks": 7681,
+      "engine_errors": 0,
+      "storage_run_id": "49189b8a09c24ee299d43f8580810f27",
+      "log_sha256": "b78e74d95a40ba4f6540d06b00e53411fd7f4398c9459cb101eced18ce9f0a3a",
+      "entry_sha256": "c606f8a8c8146a16a603adad8153167cfa694e0c9d6e7acfbb0b49753f86b6dd"
+    },
+    {
+      "entry": "actor_battle_test.gd",
+      "exit": 0,
+      "elapsed_s": 69.41,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "actor_battle_test.gd",
+        "--render"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "render-actor_battle_test.log",
+      "durable_exit": "render-actor_battle_test.exit",
+      "checks": 231,
+      "engine_errors": 0,
+      "storage_run_id": "b8bd3948b4fe46e789c627285fc7ee7a",
+      "log_sha256": "39ea9d41addda1bd6272a8c38a16df29e74215db5caae7ea21f9d2ac5f5d21d1",
+      "entry_sha256": "8071b25b728efef04f34061726c3f82035d4d859b643293f58e09c2a6e04c4cb"
+    },
+    {
+      "entry": "corpse_contact_test.gd",
+      "exit": 0,
+      "elapsed_s": 86.48,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_contact_test.gd",
+        "--render"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "render-corpse_contact_test.log",
+      "durable_exit": "render-corpse_contact_test.exit",
+      "checks": 576,
+      "engine_errors": 0,
+      "storage_run_id": "b05aebe779cf4e6aba34dd0392d9174d",
+      "log_sha256": "11a54da02e86569ab71f819e178cccd62083cb6e39c00770dbdc0ff5d6e5d3ac",
+      "entry_sha256": "b7478d34f49b4222f9d825d26ef758e6557b28a604b12fc68ac393987ffea47d"
+    },
+    {
+      "entry": "visual_snapshot_test.gd",
+      "exit": 0,
+      "elapsed_s": 49.83,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "visual_snapshot_test.gd",
+        "--render"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "render-visual_snapshot_test.log",
+      "durable_exit": "render-visual_snapshot_test.exit",
+      "checks": 164,
+      "engine_errors": 0,
+      "storage_run_id": "0e58a47c7cc84aed9909cc98971287ae",
+      "log_sha256": "94403947737760d037b7f05368ad25d946a69382b97464bb57cff2e2d3602b2f",
+      "entry_sha256": "a284c2a3f99d75d43f233d16bae6f4dc26c03348bafddc908cd40170f30ea6d8"
+    },
+    {
+      "entry": "presentation_lifecycle_test.gd",
+      "exit": 0,
+      "elapsed_s": 59.88,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "presentation_lifecycle_test.gd",
+        "--render"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "render-presentation_lifecycle_test.log",
+      "durable_exit": "render-presentation_lifecycle_test.exit",
+      "checks": 32,
+      "engine_errors": 0,
+      "storage_run_id": "b07d8963a9754090b9a4994f4bdec9a7",
+      "log_sha256": "f54a607c1918b6d270e27f64dd2bce65103675b30dc624b957d0994ca6eb0268",
+      "entry_sha256": "163bedd24b961e534aa424ffa034a7109fdb0af2f0bac0180f9165e37b4ac733"
+    },
+    {
+      "entry": "presentation_quality_test.gd",
+      "exit": 0,
+      "elapsed_s": 79.18,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "presentation_quality_test.gd",
+        "--render"
+      ],
+      "source_sha": "89fb34be2498123651bb7685dc55eb5aff6436f2",
+      "log": "render-presentation_quality_test.log",
+      "durable_exit": "render-presentation_quality_test.exit",
+      "checks": 106,
+      "engine_errors": 0,
+      "storage_run_id": "dc4e75e94d70442898d4c91cc24c2c77",
+      "log_sha256": "e85d683129fce66779eac2320844653e4e64a373419e017286f8f06ae4215a84",
+      "entry_sha256": "3fb1e02c78ff95989beff164b120ded37190adbfd48971e1c32c92c4dae402f1"
+    },
+    {
+      "entry": "corpse_pose_quality_test.gd",
+      "exit": 0,
+      "elapsed_s": 103.01,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_pose_quality_test.gd",
+        "--render"
+      ],
+      "environment": {},
+      "source_sha": "a575d9ec9b7eed1b934218a727c41c2a6d0ff226",
+      "log": "final-corpse_pose_quality_test.log",
+      "durable_exit": "final-corpse_pose_quality_test.exit",
+      "checks": 2695,
+      "engine_errors": 0,
+      "storage_run_id": "12f5b2de85ca424f88d0da9391f4e58b",
+      "log_sha256": "256cf28c7243c26a898b502aefd93aee9412a5ee3343b11b9d5d3087fe299bb9",
+      "entry_sha256": "fe1717b9ef47fe23a948c5133313e6bb6e493bd214da521f63f4d0f4ef84fd18"
+    },
+    {
+      "entry": "corpse_contact_test.gd",
+      "exit": 0,
+      "elapsed_s": 63.5,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_contact_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CONTACT_SCOPE": "qa_exact"
+      },
+      "source_sha": "a575d9ec9b7eed1b934218a727c41c2a6d0ff226",
+      "log": "final-corpse_contact_test-native-exact.log",
+      "durable_exit": "final-corpse_contact_test-native-exact.exit",
+      "checks": 25,
+      "engine_errors": 0,
+      "storage_run_id": "e180fb00b39f4c5a9bd04a4fc8060c51",
+      "log_sha256": "34813a83aebff2f88950f504750d571fa1c6ba472435ba1e530024278b847cfe",
+      "entry_sha256": "b7478d34f49b4222f9d825d26ef758e6557b28a604b12fc68ac393987ffea47d"
+    },
+    {
+      "entry": "c2_history_hint_test.gd",
+      "exit": 0,
+      "elapsed_s": 61.78,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "c2_history_hint_test.gd",
+        "--render"
+      ],
+      "environment": {},
+      "source_sha": "a575d9ec9b7eed1b934218a727c41c2a6d0ff226",
+      "log": "final-c2_history_hint_test.log",
+      "durable_exit": "final-c2_history_hint_test.exit",
+      "checks": 30,
+      "engine_errors": 0,
+      "storage_run_id": "7aa6a7665f2c441f817d5596c9a4c5ad",
+      "log_sha256": "d49424aa48dc6725af0689610970cb56f2d710c29f4c695229989c4f20fc7ee2",
+      "entry_sha256": "512fbd965b02383b0dc24fe0bb701dc78bf589c8c94076dcb63b0f1b9a51aff5"
+    },
+    {
+      "entry": "camera_input_test.gd",
+      "exit": 0,
+      "elapsed_s": 0.6,
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "camera_input_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "source_sha": "a575d9ec9b7eed1b934218a727c41c2a6d0ff226",
+      "log": "final-camera_input_test.log",
+      "durable_exit": "final-camera_input_test.exit",
+      "checks": 23,
+      "engine_errors": 0,
+      "storage_run_id": "ba3e13dfa2e544c59b3dc0530c33f733",
+      "log_sha256": "bea565a0787b282155763e6d1b067dc8c564a92223db20cc1e3482164b9e9aa9",
+      "entry_sha256": "cab7ce3b6ad22d2857c5b43108d7d8fb287c76c5312aa4d2b2db9bab8e702ee2"
+    }
+  ],
+  "metrics": {
+    "native_pose_measurements": 17,
+    "copied_native_command_age_frames": 16,
+    "held_fixture_configurations": 72,
+    "transition_fixture_configurations": 864,
+    "native_active_max_palm_shoulder_m": 4.91512480493839e-07,
+    "transition_active_max_palm_shoulder_m": 2.56801968134823e-07,
+    "body_floor_range_m": [
+      0.00599998235702515,
+      0.00600002706050873
+    ],
+    "carrier_floor_range_m": [
+      -0.000172589730937034,
+      0.000141410695505328
+    ],
+    "legacy_held_floor_range_m": [
+      -0.00123487412929535,
+      0.10103178024292
+    ],
+    "native_body_wall_vertices": 0,
+    "native_carrier_wall_vertices": 0,
+    "arm_segment_error_threshold_m": 0.0001,
+    "endpoint_position_threshold_m": 0.001,
+    "endpoint_angle_threshold_rad": 0.01
+  },
+  "captures": [
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_qa_exact.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "6eede75c49e97676aed00c966065f23e0c4c776400103aecb0c09d7b5a7edc0d",
+      "yaw": 65.0,
+      "evidence_file": "contact_qa_exact.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_release_half.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "6a419a7d23626b03b289800a4c8fb210bd691ef50336012df9fb32afcefc8260",
+      "yaw": 65.0,
+      "evidence_file": "contact_quality_release_half.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "hud": "actual desktop",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_release_desktop_front.png",
+      "pitch": 35.0,
+      "requested_view_size": 4.0,
+      "sha256": "fd7faf1c60f8803bb8383416ae61125327ad5596efb2b52b48f4faa3b5c3528e",
+      "yaw": 65.0,
+      "evidence_file": "contact_quality_release_desktop_front.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "hud": "actual desktop",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_release_desktop_rear.png",
+      "pitch": 35.0,
+      "requested_view_size": 4.0,
+      "sha256": "7224805b32aba0c945d4d373e9daa0c6f60aa1338efb145ba6e562d165547709",
+      "yaw": 245.0,
+      "evidence_file": "contact_quality_release_desktop_rear.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_grab_half.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "678401aad40179ff081d2aad237ec0eb2550ab2f9309b0699871267e81ba0523",
+      "yaw": 65.0,
+      "evidence_file": "contact_quality_grab_half.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "hud": "actual desktop",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_grab_desktop_front.png",
+      "pitch": 35.0,
+      "requested_view_size": 4.0,
+      "sha256": "92512ab51106b30fee13aa3ce9f57179c6755282fa643962126ef081c7b52e14",
+      "yaw": 65.0,
+      "evidence_file": "contact_quality_grab_desktop_front.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "hud": "actual desktop",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_grab_desktop_rear.png",
+      "pitch": 35.0,
+      "requested_view_size": 4.0,
+      "sha256": "d0a9edd431958a592c190313df17ad7778e436784f6dbce05a0e097d00dd6661",
+      "yaw": 245.0,
+      "evidence_file": "contact_quality_grab_desktop_rear.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_history.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "ab8357699bc2ba83fe1ef3c29bc9c50866fa58d085e96bcf47fd20b01fb257b2",
+      "yaw": 65.0,
+      "evidence_file": "contact_quality_history.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "hud": "actual desktop",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_history_desktop.png",
+      "pitch": 35.0,
+      "requested_view_size": 4.0,
+      "sha256": "1c346d90423fefc249bbd2d1017bf65c8976a1c0bb6ff146e0027df78b5eefc0",
+      "yaw": 65.0,
+      "evidence_file": "contact_quality_history_desktop.png",
+      "actual_width": 1280,
+      "actual_height": 720,
+      "viewed": true
+    }
+  ],
+  "negative_sources": [
+    {
+      "sha": "e9c158cde7155e67aceaec134698a23faa2dff55",
+      "checks": 102,
+      "failures": 15,
+      "exit": 1,
+      "log": "negative.log",
+      "receipt": "negative-report.json",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/bin/godot-capture",
+        "corpse_pose_quality_test.gd",
+        "--render"
+      ]
+    },
+    {
+      "sha": "86ea697524eff486812261f650f60dd78b107947",
+      "checks": 171,
+      "failures": 83,
+      "exit": 1,
+      "log": "negative-matrix.log",
+      "receipt": "negative-matrix-report.json",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "corpse_pose_quality_test.gd"
+      ]
+    }
+  ],
+  "excluded": "development1..8 uncommitted; development5 stale phase fixture and6 empty attempt/wave0 fixture. pre-metadata89 render2694/0 was a valid contact check but requested camera size was mislabeled and history entered via direct phase; original receipts/images retained separately, superseded by a575. Headless firearm guard rejectedexit2; correct rendered7681/0 is formal. Editor importexit0/45 original audio imports restored. Parent independentR03 report is not author raw.",
+  "remaining": [
+    "independent natural-pose/corner quality review",
+    "actual1600 viewport and200%HUD cropping",
+    "full3DFX and continuous production command timeline",
+    "A3 budgets/caching/batching",
+    "six-level13-wave visual matrix and normal player journey",
+    "same-final-candidate fullsmoke/QA/APK",
+    "human hearing0/45cue0/6soundscape",
+    "device/emulator after whole production"
+  ],
+  "scope": "native MG uses reference/vacuum/proximity conditions;72hold+864transition are explicit model/position/age stage fixtures, not full battlefield journeys. Only active grip windows enforce contact; initial deaths without anchor unchanged. NoR logic, source assets, merge or production publish changes.",
+  "artifacts": {
+    "pre-metadata-contact_quality_history.png": {
+      "bytes": 1024456,
+      "sha256": "04cde2ede39ab7e3633f850dea885479bd8589c64cd8f964c24e5c399669c215"
+    },
+    "contact_quality_release_desktop_rear.png": {
+      "bytes": 1119004,
+      "sha256": "7224805b32aba0c945d4d373e9daa0c6f60aa1338efb145ba6e562d165547709"
+    },
+    "final-corpse_pose_quality_test.log": {
+      "bytes": 915,
+      "sha256": "256cf28c7243c26a898b502aefd93aee9412a5ee3343b11b9d5d3087fe299bb9"
+    },
+    "contracts-command_pose_clock_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "development-8-report.json": {
+      "bytes": 350021,
+      "sha256": "4d9c9315effbab9f2a6b29d258afd1564d79452c57d7f739aa87f0293419949e"
+    },
+    "final-c2_history_hint_test.log": {
+      "bytes": 987,
+      "sha256": "d49424aa48dc6725af0689610970cb56f2d710c29f4c695229989c4f20fc7ee2"
+    },
+    "negative_contact_quality_release_half.png": {
+      "bytes": 1028149,
+      "sha256": "6804c59b14965112355c727648475322b0904aaf30d087e9e62e5af33a829c30"
+    },
+    "quality.log": {
+      "bytes": 915,
+      "sha256": "256cf28c7243c26a898b502aefd93aee9412a5ee3343b11b9d5d3087fe299bb9"
+    },
+    "render-corpse_contact_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "contracts-campaign_replay_test.log": {
+      "bytes": 974,
+      "sha256": "8477d29087e288d1e5b450bf07b40d07bfd5cd070533dcb62c026283d3273b19"
+    },
+    "render-presentation_lifecycle_test.log": {
+      "bytes": 919,
+      "sha256": "f54a607c1918b6d270e27f64dd2bce65103675b30dc624b957d0994ca6eb0268"
+    },
+    "render-actor_battle_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "actors-actor_visual_test.log": {
+      "bytes": 777,
+      "sha256": "c33bd529440e192e1098c56918c2ba837f8d70b7ea77c5cc99a7b4b0605ed809"
+    },
+    "pre-metadata-contact_quality_release_half.png": {
+      "bytes": 1027788,
+      "sha256": "d760d5119c421eb1c3c934b2361b12ec2ebc0832545b326e5a5b83065075aae6"
+    },
+    "contracts-replay_timeline_test.log": {
+      "bytes": 599,
+      "sha256": "fb39c612b5d3a5b6b87544efeac446d4d47de9906f1b61e0eaf425c74e05f634"
+    },
+    "development-4.log": {
+      "bytes": 914,
+      "sha256": "9260d23bf588c9a775c76da85af444fdc791acf681b2346d2780f153e0cb398b"
+    },
+    "negative-matrix-report.json": {
+      "bytes": 32634,
+      "sha256": "871d4b8aa4a47b662a2aebe53f66677f90a1df86fa8cc43ecf51bfc156aabc45"
+    },
+    "contracts-equipment_freeze_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "contact_quality_grab_half.png": {
+      "bytes": 1027473,
+      "sha256": "678401aad40179ff081d2aad237ec0eb2550ab2f9309b0699871267e81ba0523"
+    },
+    "development-5.log": {
+      "bytes": 139118,
+      "sha256": "e27f116244a1f61a9000ff2060db82e465db01e42ee307e6b42a164fcd6779f8"
+    },
+    "development-6-report.json": {
+      "bytes": 349709,
+      "sha256": "2316aefc5bdb0120dd63724acace031fc415420a1d663fd1a8cde91177d0eef5"
+    },
+    "negative-report.json": {
+      "bytes": 16656,
+      "sha256": "996bda466dad3753b246b8da02b3cfbef433e7304ba3b59c3d71618c2751395f"
+    },
+    "render-corpse_contact_test.log": {
+      "bytes": 904,
+      "sha256": "11a54da02e86569ab71f819e178cccd62083cb6e39c00770dbdc0ff5d6e5d3ac"
+    },
+    "final-corpse_contact_test-native-exact.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "development-1-report.json": {
+      "bytes": 32656,
+      "sha256": "5921086a98cd391d8504ab79731ef8eec7e42881652c50000baa66c1f5f9a31c"
+    },
+    "contact_qa_exact.png": {
+      "bytes": 1029366,
+      "sha256": "6eede75c49e97676aed00c966065f23e0c4c776400103aecb0c09d7b5a7edc0d"
+    },
+    "negative-matrix.log": {
+      "bytes": 44370,
+      "sha256": "a4032823efc44c82265b14418ab11865de45d6beb3c5b43fad2b364204849c5b"
+    },
+    "contact_quality_history_desktop.png": {
+      "bytes": 1133286,
+      "sha256": "1c346d90423fefc249bbd2d1017bf65c8976a1c0bb6ff146e0027df78b5eefc0"
+    },
+    "development-6.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "quality-report.json": {
+      "bytes": 352488,
+      "sha256": "16eec29850f7b273d05cf5bd40be3234c6b850071c34b7801b6f40c726345f04"
+    },
+    "pre-metadata-quality.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "actors-actor_visual_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "contracts-corpse_runtime_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "pre-metadata-contact_quality_grab_desktop_rear.png": {
+      "bytes": 1119307,
+      "sha256": "d0a9edd431958a592c190313df17ad7778e436784f6dbce05a0e097d00dd6661"
+    },
+    "development-3.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "contact_quality_release_desktop_front.png": {
+      "bytes": 1131724,
+      "sha256": "fd7faf1c60f8803bb8383416ae61125327ad5596efb2b52b48f4faa3b5c3528e"
+    },
+    "negative-matrix.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "contact_quality_grab_desktop_rear.png": {
+      "bytes": 1119307,
+      "sha256": "d0a9edd431958a592c190313df17ad7778e436784f6dbce05a0e097d00dd6661"
+    },
+    "excluded-headless-firearm-guard.exit": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "contracts-command_pose_clock_test.log": {
+      "bytes": 707,
+      "sha256": "04dc2c1c06cfbc3e791de1b6d225441ce8cd184e2ea58ddd0c7406422bccde98"
+    },
+    "development-2.log": {
+      "bytes": 619,
+      "sha256": "e6e71978b27b6807ecb6bb9cb412f7b1e3fec3bfd57cb1fd0129c98b64aaa37b"
+    },
+    "pre-metadata-contact_quality_history_desktop.png": {
+      "bytes": 1133599,
+      "sha256": "66cfab239232ea734b82c8ead62d7b8aa6b6980195c3a7641cc8ac67c74f0790"
+    },
+    "development-1.log": {
+      "bytes": 4348,
+      "sha256": "f4066ad7f0fc3406340ee08d7cd83551460e0eede86a6f8efc2ceaa8cd3a51f6"
+    },
+    "contracts-presentation_contract_test.log": {
+      "bytes": 702,
+      "sha256": "ba109b8bdb2e9d344ee8cd6deea77088c297b3a4ef89b00b909c3538e77a4703"
+    },
+    "render-presentation_quality_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "final-corpse_pose_quality_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "render-presentation_lifecycle_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "contact_quality_grab_desktop_front.png": {
+      "bytes": 1131501,
+      "sha256": "92512ab51106b30fee13aa3ce9f57179c6755282fa643962126ef081c7b52e14"
+    },
+    "development-4-report.json": {
+      "bytes": 33011,
+      "sha256": "a53f2bea71e2bde043adb1c6b79fef41b2a5a300a0888e02e1f23457aedd23c0"
+    },
+    "negative_contact_quality_grab_half.png": {
+      "bytes": 1028290,
+      "sha256": "8666ea478470f438a4ff256e33acaf880e8d3d6178a07845c5fef8564cabf770"
+    },
+    "contact_quality_history.png": {
+      "bytes": 1023565,
+      "sha256": "ab8357699bc2ba83fe1ef3c29bc9c50866fa58d085e96bcf47fd20b01fb257b2"
+    },
+    "contracts-utility_runtime_test.log": {
+      "bytes": 623,
+      "sha256": "e9606a8993becc50eb2894f58cca558d0a6880e7c4df149322aaea49d0920abb"
+    },
+    "contracts-presentation_contract_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "editor-import.log": {
+      "bytes": 11410,
+      "sha256": "08224fe6609c17e71a15c0608b3729ded7588d93917a082a91d64b09fd669787"
+    },
+    "contracts-corpse_runtime_test.log": {
+      "bytes": 610,
+      "sha256": "82eefb8e22e16e50ce0e7d4d79e6fbcab83a82f105c297a94eaf61c3555d83bf"
+    },
+    "development-8.log": {
+      "bytes": 915,
+      "sha256": "f79065ec9242bb4fc811a6b9ba159f977bc195c5b57145ab9cfa8e60368c8c9d"
+    },
+    "excluded-headless-firearm-guard.log": {
+      "bytes": 719,
+      "sha256": "0bd5210e8c5aff1636a50688f288e75ab9321e3b4bb4a715dc773cb950119c77"
+    },
+    "contracts-campaign_replay_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "development-1.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "pre-metadata-contact_quality_release_desktop_front.png": {
+      "bytes": 1131724,
+      "sha256": "fd7faf1c60f8803bb8383416ae61125327ad5596efb2b52b48f4faa3b5c3528e"
+    },
+    "contracts-utility_runtime_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "contracts-equipment_freeze_test.log": {
+      "bytes": 601,
+      "sha256": "25fa3b8aad869da2bcd5d87c783ecfa22a9f80653389e5e3a59970e69c0f0ded"
+    },
+    "development-3-report.json": {
+      "bytes": 32998,
+      "sha256": "c62184dec531b8e07669d82e8ec67087ad852feadfe2388d741b6025b65bd02b"
+    },
+    "negative.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "pre-metadata-quality.log": {
+      "bytes": 915,
+      "sha256": "8cde7d2bdf81ee24f7b6d98750f9fa6218301f05f41e317e35654e4dc94b93e0"
+    },
+    "development-7.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "development-4.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "pre-metadata-quality-report.json": {
+      "bytes": 351449,
+      "sha256": "289431fdf81c85d6181dae83b2bb108ef86070e0d149cde8ca6fabbcb0dd7353"
+    },
+    "contact_quality_release_half.png": {
+      "bytes": 1027822,
+      "sha256": "6a419a7d23626b03b289800a4c8fb210bd691ef50336012df9fb32afcefc8260"
+    },
+    "development-8.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "negative.log": {
+      "bytes": 7967,
+      "sha256": "38775bf6c575b54fabf9e901da90f5062c566b2eb598533327e9c76e589bb9a3"
+    },
+    "render-firearm_runtime_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "pre-metadata-contact_quality_grab_half.png": {
+      "bytes": 1027479,
+      "sha256": "3d84913cc7b63cdc5a14f0f799b9f9d11696b49c12de4eba7d478655bf33d316"
+    },
+    "pre-metadata-contact_quality_grab_desktop_front.png": {
+      "bytes": 1131501,
+      "sha256": "92512ab51106b30fee13aa3ce9f57179c6755282fa643962126ef081c7b52e14"
+    },
+    "development-7.log": {
+      "bytes": 620,
+      "sha256": "38a9239dc05efe4f587ca7aa4c46a7cbff14263d92f82279e3f8af177594c4e9"
+    },
+    "development-6.log": {
+      "bytes": 19732,
+      "sha256": "8ca3026b7b2949b395defe31b238ad0ac61c583e95d45f20b7d7cb08d4f99a92"
+    },
+    "development-2.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "negative_contact_qa_exact.png": {
+      "bytes": 1028896,
+      "sha256": "af4b2a85dc2a6931a7347ff552f65bb75a69097cbb35505887bf20c13dfccee1"
+    },
+    "render-firearm_runtime_test.log": {
+      "bytes": 925,
+      "sha256": "b78e74d95a40ba4f6540d06b00e53411fd7f4398c9459cb101eced18ce9f0a3a"
+    },
+    "render-visual_snapshot_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "render-presentation_quality_test.log": {
+      "bytes": 916,
+      "sha256": "e85d683129fce66779eac2320844653e4e64a373419e017286f8f06ae4215a84"
+    },
+    "final-corpse_contact_test-native-exact.log": {
+      "bytes": 903,
+      "sha256": "34813a83aebff2f88950f504750d571fa1c6ba472435ba1e530024278b847cfe"
+    },
+    "development-3.log": {
+      "bytes": 1714,
+      "sha256": "be616b92294afac413622bc57ae894739d6d2c52c86a17929393856630ff12f4"
+    },
+    "pre-metadata-contact_quality_release_desktop_rear.png": {
+      "bytes": 1119004,
+      "sha256": "7224805b32aba0c945d4d373e9daa0c6f60aa1338efb145ba6e562d165547709"
+    },
+    "render-visual_snapshot_test.log": {
+      "bytes": 1076,
+      "sha256": "94403947737760d037b7f05368ad25d946a69382b97464bb57cff2e2d3602b2f"
+    },
+    "development-7-report.json": {
+      "bytes": 349303,
+      "sha256": "25bf5f92dafa4d9379484683534f9164e17743e2c980c57b9c65355a29cc2c5c"
+    },
+    "development-5.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "final-c2_history_hint_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "final-camera_input_test.log": {
+      "bytes": 604,
+      "sha256": "bea565a0787b282155763e6d1b067dc8c564a92223db20cc1e3482164b9e9aa9"
+    },
+    "development-5-report.json": {
+      "bytes": 342750,
+      "sha256": "e7f9099f6ff02cd00aeecdd1ab48fb48a63e1b0ceec862dc5a18799cff5b166f"
+    },
+    "contracts-replay_timeline_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "final-camera_input_test.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "development-2-report.json": {
+      "bytes": 31059,
+      "sha256": "2662170b9d9c27e0c4f1cf36db5bcb8ea3cb9ac82536613be2ad19c6d6d01748"
+    },
+    "quality.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "render-actor_battle_test.log": {
+      "bytes": 1778,
+      "sha256": "39ea9d41addda1bd6272a8c38a16df29e74215db5caae7ea21f9d2ac5f5d21d1"
+    },
+    "editor-import.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "pre-metadata-contact_qa_exact.png": {
+      "bytes": 1029560,
+      "sha256": "d86f9008a9c5fe979ffce5be36a33a38338e3a48f1f92d249e44f344d7011964"
+    }
+  }
+}

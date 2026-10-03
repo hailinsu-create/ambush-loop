@@ -1,0 +1,169 @@
+{
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "Compatibility / Mesa llvmpipe (software)",
+  "entries": [
+    {
+      "file": "replay-baseline.log",
+      "source_sha": "49bdc40ef5f6cb553296a59181c10330a0d87477",
+      "entry": "replay_timeline_test.gd",
+      "run_id": "348ed0f251b4442086606f736ac1e5ca",
+      "exit_code": 1,
+      "sha256": "d27bc7cf6260d597468cafc2b3d4a1d96182dad39dba719116ff56a64aefa7d1"
+    },
+    {
+      "file": "freeze-baseline.log",
+      "source_sha": "49bdc40ef5f6cb553296a59181c10330a0d87477",
+      "entry": "equipment_freeze_test.gd",
+      "run_id": "ee0f71c7cb1345ef80d5e7174bb1c36c",
+      "exit_code": 1,
+      "sha256": "d840031069791cb55b6e2f6acb8dea50a8ebd5e91c3b4e70053ec709865713fd"
+    },
+    {
+      "file": "replay-fixed.log",
+      "source_sha": "a2eb22520eae1347a53096d3cf8b84826d516df9",
+      "entry": "replay_timeline_test.gd",
+      "run_id": "2498d4c27b0249a09d917e71ab669f41",
+      "exit_code": 0,
+      "sha256": "02191be25f82ca1acd9086d5a71fc092792cf6a5d232fc16eeca9953fbccd929"
+    },
+    {
+      "file": "contract-fixed.log",
+      "source_sha": "a2eb22520eae1347a53096d3cf8b84826d516df9",
+      "entry": "presentation_contract_test.gd",
+      "run_id": "c393cba9c25746ab8d15ad46b41719fa",
+      "exit_code": 0,
+      "sha256": "d9fb5a86838999b99bd2cca3b27e50a304f23fac061cb6c42a0041ae265d00e6"
+    },
+    {
+      "file": "freeze-fixed.log",
+      "source_sha": "0267a6d0a3a209f5ee2ec983a66f0a8f44bc7fff",
+      "entry": "equipment_freeze_test.gd",
+      "run_id": "9282dfea66d048c1ba6cbc9a8749cb30",
+      "exit_code": 0,
+      "sha256": "809563c95fa182e8397158c9dff65f23a324a45eb818564a55d947af5e78ca30"
+    },
+    {
+      "file": "input-fixed.log",
+      "source_sha": "0267a6d0a3a209f5ee2ec983a66f0a8f44bc7fff",
+      "entry": "presentation_interaction_test.gd",
+      "run_id": "d9c2456093a34d8a958bd951684167b6",
+      "exit_code": 0,
+      "sha256": "2314181f03a71c8102082a98c8e8efdeee384ac837bc21dd1d9f36e42c9ee3f7"
+    },
+    {
+      "file": "camera-fixed.log",
+      "source_sha": "7d34867eab51f0fddd4b44921a627aa66fe8651d",
+      "entry": "camera_input_test.gd",
+      "run_id": "db52b24721bd40e18988b6d1bc00ca97",
+      "exit_code": 0,
+      "sha256": "2f3a658579fd7ac3a8f3bc9cab1c4d3f9bc607fe8ce0b8465f6764012f40d989"
+    },
+    {
+      "file": "lifecycle-render-fixed.log",
+      "source_sha": "978e27a21025cab50fcc7d18b26f836b868afea8",
+      "entry": "presentation_lifecycle_test.gd --render",
+      "run_id": "bed81da47a6940e1a55f2666c817d5ea",
+      "exit_code": 0,
+      "sha256": "92046e0787466d644dd77c3c2712740f437b5054bc064fc3904bc2af347767ef"
+    },
+    {
+      "file": "replay-final.log",
+      "source_sha": "978e27a21025cab50fcc7d18b26f836b868afea8",
+      "entry": "replay_timeline_test.gd",
+      "run_id": "e180a3338c8243bd8659853f11790bca",
+      "exit_code": 0,
+      "sha256": "770a129a64daea5c9af3852d99e2002d1681c1cf14771204700520eaf41d40cb"
+    },
+    {
+      "file": "replay_event_focus.png",
+      "source_sha": "978e27a21025cab50fcc7d18b26f836b868afea8",
+      "sha256": "24750189d1232e7589810646634c48cddb1bf796b2703e99a6506c556a1a83c0"
+    },
+    {
+      "file": "scout_backpack.png",
+      "source_sha": "978e27a21025cab50fcc7d18b26f836b868afea8",
+      "sha256": "dd922acd1c91a95acbde3a002bd04514785bda114e20c927d063b12ac70d7c7b"
+    },
+    {
+      "file": "campaign-fixed.log",
+      "source_sha": "978e27a21025cab50fcc7d18b26f836b868afea8",
+      "entry": "campaign_replay_test.gd",
+      "run_id": "8fe7544a11634d2884646a62a5739b34",
+      "exit_code": 0,
+      "checks": 10296,
+      "sha256": "78d948a865c93b2400faeeac54af076a70056ad070a028a705e19490577a2073"
+    },
+    {
+      "file": "smoke-runner-error.log",
+      "source_sha": "7d34867eab51f0fddd4b44921a627aa66fe8651d",
+      "entry": "smoke_test.gd",
+      "run_id": "5ae691f94aa9425aafb7a4db505b3893",
+      "exit_code": 127,
+      "sha256": "698e15570a71a6e40c429be110a28eac56511841fb8535e13d788ca9c92ad3d9",
+      "limitation": "Wrapper file was edited while bash was running; completion markers do not constitute a passing run."
+    },
+    {
+      "file": "smoke-fixed.log",
+      "source_sha": "7d34867eab51f0fddd4b44921a627aa66fe8651d",
+      "entry": "smoke_test.gd",
+      "run_id": "1ed3dd3ab66f44dcbca13526cf45caef",
+      "exit_code": 0,
+      "sha256": "16eaf62b2d23487837c43f28120eb88c1d508e028f6dd2ddb9e9b714c445f239",
+      "source_checkout": "Immutable git archive of 7d34867, imported and run at /tmp/ambush-pr15-smoke-7d34867"
+    },
+    {
+      "file": "history-render.log",
+      "source_sha": "17aba59df7a4ddd5c98986f12c07125d0bed8190",
+      "entry": "visual_snapshot_test.gd --render",
+      "run_id": "a2cdc285e9c04d1f86a3e05d73ea0085",
+      "exit_code": 0,
+      "sha256": "e073798d145ec13e2bab18da94a7681737097c40d0f36a5e8dbbcc87d52e4f85"
+    },
+    {
+      "file": "history-contract.log",
+      "source_sha": "17aba59df7a4ddd5c98986f12c07125d0bed8190",
+      "entry": "presentation_contract_test.gd",
+      "run_id": "0a9095953cf741fc8583986597dc6f19",
+      "exit_code": 0,
+      "sha256": "6749350055834db29704555a4ea697c08741f7beae53392801d21cb4f31feea1"
+    },
+    {
+      "file": "history-campaign.log",
+      "source_sha": "17aba59df7a4ddd5c98986f12c07125d0bed8190",
+      "entry": "campaign_replay_test.gd",
+      "run_id": "e186a6f89d32451a89d6ca58e32fe1d2",
+      "exit_code": 0,
+      "sha256": "ea99ed654d4596bd8e574d40b926f96e116b24814047ee3f4a57f1e316835874"
+    },
+    {
+      "file": "history_schema_frame.png",
+      "source_sha": "17aba59df7a4ddd5c98986f12c07125d0bed8190",
+      "sha256": "c71ff217eaa8e85a1bef82d9d475ba719e0b40348f8d20bc64f119cfc8a9846a"
+    },
+    {
+      "file": "history-replay.log",
+      "source_sha": "17aba59df7a4ddd5c98986f12c07125d0bed8190",
+      "entry": "replay_timeline_test.gd",
+      "run_id": "35b0e6b0f63a43fb9f992b882f1ae293",
+      "exit_code": 0,
+      "sha256": "7d24147f1b57bb99e4d6e9ae6f492d93b5b8810b7dc0f22a3728757ddaa7c9ae"
+    },
+    {
+      "file": "history-lifecycle.log",
+      "source_sha": "17aba59df7a4ddd5c98986f12c07125d0bed8190",
+      "entry": "presentation_lifecycle_test.gd --render",
+      "run_id": "bfa3741365cc4036a9d8cc60059daf98",
+      "exit_code": 0,
+      "sha256": "f53120abe41ca433133ceee1b75c30c09ac019acf44f01111870db5f3376350c"
+    }
+  ],
+  "pending": [
+    "accepted/reproducible characters",
+    "historical HUD/animation/FX integration",
+    "A2 complete yard/HUD/audio",
+    "A3 cloud optimization",
+    "A4 five themed missions",
+    "complete APK",
+    "post-production device validation"
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "campaign-warehouse-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "warehouse",
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "5ab79908d1a94c4cbc2086e3f802e4be",
+  "actual_exit_code": 0,
+  "checks": 2671,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+      "frame_seq": 0,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "warehouse_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_scout.png",
+      "playback_tick": 0,
+      "recorded_phase": 0,
+      "sha256": "dcc4bee9e5defe8b02cf5e013324e52acd582c47adea92e9ef0f027f7b9301e8",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/00_full_record_warehouse_scout.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+      "frame_seq": 33,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "warehouse_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave0_alert.png",
+      "playback_tick": 181,
+      "recorded_phase": 1,
+      "sha256": "7e92e6d68987da2a8fb3b1c81350b00ab5512da0fb10cff0f965276c7fe012be",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/01_full_record_warehouse_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+      "frame_seq": 63,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "warehouse_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave0_sweep.png",
+      "playback_tick": 352,
+      "recorded_phase": 5,
+      "sha256": "5640a09696d3e816bc0172b9e3811f0034c781ecaf8fcf9683a247b5161bd380",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/02_full_record_warehouse_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+      "frame_seq": 137,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "warehouse_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave1_alert.png",
+      "playback_tick": 785,
+      "recorded_phase": 1,
+      "sha256": "8e1eb7ec31c213895407d69ac835c70b29782c753c2b270571cf0402d87daa5b",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/03_full_record_warehouse_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+      "frame_seq": 214,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "warehouse_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave1_sweep.png",
+      "playback_tick": 1241,
+      "recorded_phase": 5,
+      "sha256": "6b356aee91d2ecf3ee15906584eab436eced8ac714cfd993dcbc715a438ebf97",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/04_full_record_warehouse_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+      "frame_seq": 215,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "warehouse_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_won.png",
+      "playback_tick": 1242,
+      "recorded_phase": 3,
+      "sha256": "6b356aee91d2ecf3ee15906584eab436eced8ac714cfd993dcbc715a438ebf97",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/05_full_record_warehouse_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 6,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/run.exit"
+}

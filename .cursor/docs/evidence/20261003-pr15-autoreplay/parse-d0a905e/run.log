@@ -1,0 +1,19 @@
+TEST_RUN_ID=9083c15a5fc34b3f8cca0b701dbe6d41
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/9083c15a5fc34b3f8cca0b701dbe6d41/data
+TEST_ENTRY=replay_autoplay_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Cannot infer the type of "start" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/replay_autoplay_test.gd:189)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "paused_tick" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/replay_autoplay_test.gd:210)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "seek" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/replay_autoplay_test.gd:228)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "menu_tick" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/replay_autoplay_test.gd:244)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "focus_tick" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/replay_autoplay_test.gd:252)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "start" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/replay_autoplay_test.gd:283)
+ERROR: Failed to load script "res://scripts/replay_autoplay_test.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
