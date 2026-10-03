@@ -1,6 +1,43 @@
 extends "res://scripts/corpse_contact_test.gd"
 
 var quality_rows := []
+var matrix_rows := []
+
+func _held_matrix() -> void:
+	var stage := Node3D.new()
+	root.add_child(stage)
+	var carrier := Actor.new()
+	stage.add_child(carrier)
+	var visual := preload("res://scripts/presentation/corpse_visual.gd").new()
+	stage.add_child(visual)
+	var frame: Dictionary = view.frame.duplicate(true)
+	for lod in 3:
+		for role in ["operator_rifle","operator_mg","operator_scout"]:
+			carrier.set_asset(role,lod,frame.actor_asset_revision)
+			for stance in 2:
+				var pose := {"action":"corpse_drag","seconds":0.0}
+				if stance==1:
+					pose.merge({"base_action":"crouch","base_seconds":0.0,"upper_action":"corpse_drag","upper_seconds":0.0,"preserve_upper_world_basis":false})
+				for model in ["enemy_patrol","enemy_flank","enemy_sneak","enemy_radio"]:
+					carrier.transform=Transform3D.IDENTITY
+					carrier.sample_layers(pose)
+					var item: Dictionary = frame.corpses.filter(func(value: Dictionary) -> bool: return value.id==rows.back().body_id)[0].duplicate(true)
+					item.model=model
+					item.mode="hold"
+					item.carrier.model=role
+					item.carrier.stance=stance
+					item.carrier.facing=90.0
+					item.carrier.pos=Vector2(640,352)
+					item.pos=Vector2(640,366)
+					carrier.position=Space.logic_to_world(item.carrier.pos)
+					carrier.rotation.y=Space.facing_yaw(90.0)
+					visual.sync(item,frame,lod,carrier)
+					var floor := INF
+					for point in _vertices(visual.body):
+						floor=minf(floor,point.y)
+					matrix_rows.append({"role":role,"model":model,"stance":stance,"lod":lod,"floor_m":floor,"left_m":visual.body.shoulder("L").distance_to(carrier.bone_socket("support_hand").position),"right_m":visual.body.shoulder("R").distance_to(carrier.bone_socket("weapon_hand").position)})
+					_check(floor>=-0.015 and floor<=0.015,"fixture actual LOD floor within15mm "+role+"/"+model+"/"+str(stance)+"/"+str(lod)+": "+str(floor))
+	stage.free()
 
 func _measure(id: String, label: String, paired: bool) -> void:
 	var visual: Node3D = view.corpses[id]
@@ -53,6 +90,7 @@ func _run() -> void:
 		return
 	var id: String = rows.back().body_id
 	_measure(id,"hold",true)
+	_held_matrix()
 	for mode in ["release","grab"]:
 		await _native_key(KEY_H)
 		var duration := 0.7 if mode=="release" else 1.0
@@ -65,6 +103,6 @@ func _run() -> void:
 				await _capture(id,"quality_"+mode+"_half")
 	root.get_node("AudioDirector").pause_for_background()
 	var file := FileAccess.open("res://build/asset_review/pr15-runtime/corpse-pose-quality-report.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"rows":quality_rows,"native_rows":rows,"captures":captures},"  "))
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"rows":quality_rows,"matrix_rows":matrix_rows,"native_rows":rows,"captures":captures},"  "))
 	print("CORPSE_POSE_QUALITY_OK" if failures==0 else "CORPSE_POSE_QUALITY_FAILED"," checks=",checks," failures=",failures)
 	quit(0 if failures==0 else 1)
