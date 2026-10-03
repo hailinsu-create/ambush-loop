@@ -29,6 +29,16 @@
 - 根据用户指示，当前只完成不依赖他人的本机/桌面任务。原 GPT 的逐切片复审未执行，待外部评审授权后补审；本计划不记录 GPT 新评审通过。
 - vivo 真机、5 位非开发者试玩、旧 AudioTrack 根因分别依赖设备/受试者/设备日志，继续暂缓，不能由桌面门替代。
 
+## M1-E 实现与桌面验证结果（2026-10-03）
+
+源码 Draft PR #19：[`720511e`](https://github.com/hailinsu-create/ambush-loop/pull/19)，分支 `codex/m1-e-resource-budget`，以 D 分支为 base。新增独立 gate `m1_yard_resource_budget_gate.gd`，两个隔离 runner 均加入 allowlist；不改伤害、射程或武器数值。
+
+隔离 run `ae585b42f63943728951d94cf864be64`，Godot 4.7.2，exit 0；成功标记 `M1_YARD_RESOURCE_BUDGET_OK real_crates=1 core_without_optional=1 ownership=1 ammo_exhaustion=1 grenade_area_effect=1 retry_reset=1 no_duplicate_stashes=1`，并有 `PLAYER_DATA_UNCHANGED=1`。从真实补给箱搜索/拾取 Kar98k 后，在没有任何投掷物时完成授权开火；打空弹匣后下一发被拒且无隐式补弹。真实手雷箱拾取后，投掷物模拟对范围内两名目标造成伤害并正确消耗一枚。两次真实失败→继续均核对个人资源和九类院子箱子恢复、未复制。
+
+Gate 曾以失败 run `44cdff32e4aa444fb8bfa1cb86e3385d` 发现生产缺陷：`wipe_inventory()` 先清 `ammo_pool`，之后 `apply_weapon("knife")` 又将失败局枪械弹匣写回池（日志可见 `op2:knife:0:{"rifle":7}`）。已把最终清池移到换刀之后；最终 E gate 通过，重试库存打印为空。
+
+库存生产改动后的共享回归也全部通过，均经隔离包装器：C3 `a521e991d4ad408595c9f001c10db493` exit 0；C2 `e137f59508ae4e44914f0e4a86feb260` exit 0；C1 `ecca8278838c4b3b82970bed8700a6c0` exit 0；B2 `c45de369fb3b4d2e94a129f839da6d4d` exit 0；feel `e78da09a55ef49ebb0b4a73b25e5d91e` exit 0；完整 smoke `796c8c24d6c343af8c914223b9e4e819` exit 0、六关全部胜利、`SMOKE_SLICE_COMPLETE`、`PLAYER_DATA_UNCHANGED=1`。全部仍是桌面自动化证据。
+
 ## 当前状态与下一步
 
-状态：计划已入库；E 自动化实现待开始。下一步在源码仓库新建独立 E 分支和 Draft PR，先写资源 gate，再按实际失败决定是否修改生产代码。E 通过后按既有总路线继续 F、G、H；I 尽可能生成并检查桌面原始截图。M1 整体仍未退出。
+E 代码与桌面验收通过，Draft PR #19 已推送。精确差异外部 GPT REVIEW 仍待授权，不把 Draft PR 当成已审或已合并。下一步执行 [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md)，然后按 D–I 总路线继续 G、H、I。Android/vivo、5 位非开发者试玩与设备依赖的 AudioTrack 根因仍暂缓；M1 整体未退出。
