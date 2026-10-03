@@ -63,6 +63,11 @@ func _radio() -> void:
 	rows.append({"stage":"radio_terminal","waves":3,"wave_ends":ends,"battle_terminal_tick":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"result_text":main.result_label.text,"battle_footer":main.result_stats.text})
 	finished_count=0
 	main.credits_overlay.finished.connect(func() -> void: finished_count+=1)
+	# The native target must use the final Container layout and result fade.
+	# Rapid fixture ticks reach WON in one frame, unlike the player journey.
+	for _i in 24: await process_frame
+	await RenderingServer.frame_post_draw
+	_check(main.continue_button.is_visible_in_tree(),"original radio CTA is visible before native click")
 	await _native_click(main.continue_button)
 	_check(main.credits_overlay.is_open(),"native original WON CTA opens real credits")
 
