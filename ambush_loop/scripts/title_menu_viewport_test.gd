@@ -11,6 +11,7 @@ func _check(ok: bool, message: String) -> void:
 		print("TITLE_MENU_FAIL " + sample + " " + message)
 
 func _settle(frames: int = 12) -> void:
+	await create_timer(0.18).timeout # Production modal fades last 0.15 seconds.
 	for i in frames: await process_frame
 	for draw in 2:
 		await process_frame
@@ -65,6 +66,7 @@ func _reach(node: Control) -> void:
 		await _native_click(scroller, 4 if node.get_global_rect().position.y < at.position.y else 5, at.get_center())
 		if scroller.scroll_vertical == before: break
 	_check(_hit_visible(node), "original control becomes fully reachable " + str(node.get_path()) + " " + str(node.get_global_rect()))
+	rows.append({"id": sample + "_reach", "control": str(node.get_path()), "rect": _rect(node.get_global_rect()), "fully_reachable": _hit_visible(node), "scroll": scroller.scroll_vertical if scroller != null else 0})
 
 func _click(node: Control) -> void:
 	if node == null: return
@@ -141,6 +143,10 @@ func _pages() -> void:
 	await _click(_button(main._journal, "关闭"))
 	_check(not main.journal_visible(), "native dossier close returns")
 	_cleanup()
+	await _click(main._journal_btn)
+	await _key("Escape")
+	_check(not main.journal_visible() and not main._quit.visible, "native Escape closes Journal first")
+	_cleanup()
 	await _click(main.start_btn)
 	_check(main.mission_select_visible(), "native Start opens original six missions")
 	if not main.mission_select_visible(): main._show_mission_select()
@@ -169,6 +175,10 @@ func _pages() -> void:
 	await _modal_capture(sample + "_missions_end")
 	await _click(_button(main._mission, "返回"))
 	_check(not main.mission_select_visible(), "native mission Back returns to menu")
+	_cleanup()
+	await _click(main.start_btn)
+	await _key("Escape")
+	_check(not main.mission_select_visible() and not main._quit.visible, "native Escape closes mission selection first")
 	_cleanup()
 	await _click(main.quit_btn)
 	_check(main._quit.visible, "native Quit opens original confirmation")
@@ -213,6 +223,9 @@ func _pages() -> void:
 
 func _game_entry(continue_entry: bool) -> void:
 	if continue_entry:
+		# Accepting Yard legitimately saves Yard; seed the intended Continue fixture again.
+		settings.record_win("depot", 3, false)
+		main._refresh_continue()
 		await _click(main.continue_btn)
 	else:
 		await _click(main.start_btn)
@@ -300,6 +313,9 @@ func _run() -> void:
 		_check(root.size == case[0] and root.content_scale_factor == case[1], "actual requested window and scaling")
 		_check(not main.continue_btn.disabled and settings.progress_level_id() == "radio", "original saved progress enables Continue")
 		await _modal_capture(sample + "_menu")
+		await _scroll_end(main, "menu")
+		await _modal_capture(sample + "_menu_end")
+		print("TITLE_MENU_CASE " + sample)
 		await _pages()
 		await _game_entry(false)
 		await _game_entry(true)

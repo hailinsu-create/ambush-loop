@@ -10,6 +10,10 @@ var _body: Label
 var _kicker: Label
 var _stamp: Label
 var _board: VBoxContainer
+var _panel: PanelContainer
+var _scroll: ScrollContainer
+var _close: Button
+var _previous_focus: Control
 
 
 func _ready() -> void:
@@ -22,6 +26,7 @@ func _ready() -> void:
 	dim.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(dim)
 	var panel := PanelContainer.new()
+	_panel = panel
 	panel.theme = NightOps.theme()
 	panel.set_anchors_preset(Control.PRESET_CENTER)
 	panel.offset_left = -400.0
@@ -44,34 +49,47 @@ func _ready() -> void:
 	word.add_theme_font_size_override("font_size", 22)
 	word.add_theme_color_override("font_color", NightOps.OLIVE_HI)
 	box.add_child(word)
+	_scroll = ScrollContainer.new()
+	_scroll.name = "DossierScroll"
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_scroll.follow_focus = true
+	box.add_child(_scroll)
+	var content := VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 8)
+	_scroll.add_child(content)
 	_kicker = Label.new()
 	_kicker.name = "Kicker"
 	_kicker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_kicker.add_theme_font_size_override("font_size", 13)
 	_kicker.add_theme_color_override("font_color", NightOps.OLIVE_DIM)
 	_kicker.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	box.add_child(_kicker)
+	content.add_child(_kicker)
 	_stamp = Label.new()
 	_stamp.name = "Stamp"
 	_stamp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_stamp.add_theme_font_size_override("font_size", 13)
 	_stamp.add_theme_color_override("font_color", NightOps.OLIVE_HI)
 	_stamp.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	box.add_child(_stamp)
+	content.add_child(_stamp)
 	_board = VBoxContainer.new()
 	_board.name = "Board"
 	_board.add_theme_constant_override("separation", 4)
-	box.add_child(_board)
+	content.add_child(_board)
 	_body = Label.new()
 	_body.name = "Body"
 	_body.visible = false
 	_body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_body)
 	var btn := Button.new()
+	_close = btn
 	btn.text = "关闭"
 	btn.custom_minimum_size = Vector2(0, 44)
 	btn.pressed.connect(_on_done)
 	box.add_child(btn)
+	get_viewport().size_changed.connect(_layout)
+	_layout()
 
 
 func is_open() -> bool:
@@ -85,9 +103,15 @@ func body_text() -> String:
 
 
 func present() -> void:
+	_previous_focus = get_viewport().gui_get_focus_owner()
 	_refresh()
 	_open = true
 	visible = true
+	_layout()
+	_scroll.scroll_vertical = 0
+	_close.grab_focus()
+	_close.focus_next = _close.get_path()
+	_close.focus_previous = _close.get_path()
 
 
 func dismiss() -> void:
@@ -95,7 +119,17 @@ func dismiss() -> void:
 		return
 	_open = false
 	visible = false
+	if is_instance_valid(_previous_focus) and _previous_focus.is_visible_in_tree():
+		_previous_focus.grab_focus()
 	closed.emit()
+
+
+func _layout() -> void:
+	var extent := Vector2(800, 536).min(get_viewport().get_visible_rect().size - Vector2(24, 24))
+	_panel.offset_left = -extent.x * 0.5
+	_panel.offset_right = extent.x * 0.5
+	_panel.offset_top = -extent.y * 0.5
+	_panel.offset_bottom = extent.y * 0.5
 
 
 func _on_done() -> void:
@@ -190,8 +224,7 @@ func _make_night_row(def: LevelDef, state: String, beat: String) -> Control:
 	var title := Label.new()
 	title.text = def.title
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.clip_text = true
-	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	title.add_theme_font_size_override("font_size", 14)
 	title.add_theme_color_override("font_color", NightOps.TEXT)
 	head.add_child(title)
@@ -208,8 +241,7 @@ func _make_night_row(def: LevelDef, state: String, beat: String) -> Control:
 	head.add_child(st)
 	var beat_lab := Label.new()
 	beat_lab.text = beat
-	beat_lab.clip_text = true
-	beat_lab.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	beat_lab.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	beat_lab.add_theme_font_size_override("font_size", 12)
 	beat_lab.add_theme_color_override("font_color", NightOps.MUTED)
 	col.add_child(beat_lab)
