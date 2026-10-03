@@ -16,9 +16,9 @@ class TextProbe extends Node:
 		ticks.append(host.replay.scrub_tick)
 		suite.auto_frames += 1
 
-func _assert_display(label: String) -> void:
+func _assert_display(label: String, max_count: int = 12) -> void:
 	var expected: Array = main.replay.events_up_to(main.replay.scrub_tick)
-	var count := mini(12, expected.size())
+	var count := mini(max_count, expected.size())
 	var valid: bool = main.event_list.item_count == count and main._event_list_items.size() == count
 	for i in count:
 		var ev: Dictionary = expected[expected.size() - count + i]
@@ -38,6 +38,7 @@ func _focus_text(ev: Dictionary, label: String) -> void:
 	_check(main.status_label.text == "定位 · " + source.format_event(ev) and main.replay.scrub_tick == main.replay.playback_time(ev) and not main.replay.playing and view._event_ring.visible, label + " focuses exact saved event/time/text and pauses")
 
 func _exercise_source(label: String) -> void:
+	print("BOUND_TEXT_STAGE ", label)
 	sample = label
 	live = main._snapshot_data().duplicate(true)
 	sim_state = [main.sim.tick, main.sim.speed, main.sim.paused, main.sim._accum]
@@ -83,8 +84,10 @@ func _exercise_source(label: String) -> void:
 		# The normal live branch must retain its own contextual first-shot label.
 		main.phase = main.Phase.WATCHING
 		main._fill_event_list(foreign.events, 12, "现场测试")
-		var last_index: int = main.event_list.item_count - 1
-		_check(main.event_list.get_item_text(last_index) == foreign.format_event(foreign.events.back()), label + " live phase retains live formatter")
+		var live_valid := true
+		for i in main._event_list_items.size():
+			live_valid = live_valid and main.event_list.get_item_text(i) == foreign.format_event(main._event_list_items[i])
+		_check(live_valid, label + " live phase retains live formatter")
 		main.phase = main.Phase.REPLAY
 		for rate in [1.0, 2.0]:
 			main.replay.set_tick(main.replay.playback_time(shot) - 4)
@@ -121,7 +124,7 @@ func _exercise_source(label: String) -> void:
 	main.replay.bind(source)
 	_focus_text(shot, label + " rebound")
 	main._update_event_log()
-	_check(main.event_list.get_item_text(main.event_list.item_count - 1) == source.format_event(shot), label + " general log refresh uses selected historical prefix")
+	_assert_display(label + " general log refresh", 14)
 
 func _run() -> void:
 	var path := OS.get_environment("AMBUSH_LEGACY_RECORD_FIXTURE")
