@@ -124,9 +124,13 @@ func _collect(family: String, index: int) -> bool:
 	_check(stash != null, "authored stash exists for " + family)
 	if stash == null: return false
 	var kind: String = stash.kind
+	var stash_reference := weakref(stash)
 	var before: Vector2 = main.selected.global_position
 	if not await _world_click(stash.global_position,0.55,"stash_"+kind): return false
-	if not await _wait_until(func() -> bool: return not is_instance_valid(stash) or stash.collected,120,"ordinary walking and0.4s search collect "+kind):
+	if not await _wait_until(func() -> bool:
+		var current = stash_reference.get_ref()
+		return current == null or current.collected,
+		120,"ordinary walking and0.4s search collect "+kind):
 		await _modal_capture(sample+"_stash_blocked_"+family)
 		return false
 	journey_rows.append({"level":main.level.level_id,"action":"authored stash collected through original input/process","operator":index,"kind":kind,"start":[before.x,before.y],"end":[main.selected.global_position.x,main.selected.global_position.y],"weapon":main.selected.weapon_id,"ammo":main.selected.ammo})
@@ -137,9 +141,13 @@ func _deploy(plan: Array) -> bool:
 	for index in 3:
 		await _key(str(index+1))
 		var slot = main.cover_slots[plan[1][index]]
+		var before: Vector2 = main.selected.global_position
 		if not await _world_click(slot.global_position,0.08,"cover_"+str(slot.slot_id)): return false
+		rows.append({"action":"native cover outcome","operator":index,"target_slot":slot.slot_id,"selected_id":main.selected.op_id,"before":[before.x,before.y],"target":[slot.global_position.x,slot.global_position.y],"distance_before":before.distance_to(slot.global_position),"after":[main.selected.global_position.x,main.selected.global_position.y],"actual_slot":main.selected.slot.slot_id if main.selected.slot else -1,"status":main.status_label.text})
 		_check(main.selected.slot == slot, "original native cover command mounts intended pad")
-		if main.selected.slot != slot: return false
+		if main.selected.slot != slot:
+			await _modal_capture(sample+"_cover"+str(slot.slot_id)+"_blocked")
+			return false
 		var target: float = plan[2][index]
 		for turn in 24:
 			var diff: float = wrapf(target-main.selected.facing_deg,-180.0,180.0)
