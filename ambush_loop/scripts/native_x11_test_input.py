@@ -16,7 +16,7 @@ if (not re.fullmatch(r"[0-9a-f]{32}", run_id)
 key_event = len(sys.argv) == 3 and sys.argv[1] == "key"
 if key_event:
     key_name = sys.argv[2]
-    if key_name not in {"Escape", "Tab", "shift_tab", "Return", "Up", "Down", "m", "p", "Left", "Right", "space", "equal", "minus"}:
+    if key_name not in {"Escape", "Tab", "shift_tab", "Return", "Up", "Down", "m", "p", "Left", "Right", "space", "equal", "minus", "1", "2", "3", "a", "d", "c", "f", "i", "b", "h", "t"}:
         raise SystemExit("unsupported test UI key")
     reverse_tab = key_name == "shift_tab"
     if reverse_tab:
@@ -25,7 +25,7 @@ else:
     if len(sys.argv) != 4:
         raise SystemExit("expected physical screen x/y/button or an allowed UI key")
     x, y, button = map(int, sys.argv[1:])
-    if button not in (1, 4, 5):
+    if button not in (1, 2, 4, 5):
         raise SystemExit("unsupported test mouse button")
 x11 = ctypes.CDLL("libX11.so.6")
 xtst = ctypes.CDLL("libXtst.so.6")

@@ -13,3 +13,7 @@
 FX/A3待办核对：原FX生命周期30/36只检清实时2D色罩/旧Tween，非完整版本化3D枪口/烟/弹道/命中/爆炸/扬尘；目前presenter源码只有角色姿态、物件和事件定位环，3D事件效果还须实际战斗确认。历史云软件draw172–424、primitives53826–168748及radio部件55/42是A3输入，未测当前source预算、纹理驻留/加载/内存或手机FPS。完整耳听0/45 cue、0/6声景仍待，不改为已完成。
 
 所有权保持：主集成runtime/main/presenter/ViewState/replay/loader/HUD/共享测试；R5源29749157/交付ebedb829的20骨/socket/3LOD/52语义不变。ArtSource/v2/build_yard_kit.py、角色制作、GLB/atlas/Blender与生产manifest不编辑不重跑。无merge/生产、高度/G混入；设备在全计划后。GPT PLAN/REVIEW unavailable。
+
+首次疑点实际未复现：固定test-only c7d01111b24392217cc1e3c5e043dfb72195a5a1，fresh title1600×720/200%→原Main→院子三教学页32/0、actual exit0/ERROR0，6次XTest、3物理PNG、实际看page0。下一步/开始布置均可达，不为源码假设改教学布局。根屏幕额外采样发生在进程退出后是黑图，不当证据。原Main开发入口没有a0_preview时保留2D；之前3D测试直接加载yard_3d。因此后续另建固定源码的隔离PCK，只加已有custom_features=a0_preview，保留原title/main/进度流程，验证自然创建3D presenter，不改原配置/资产输出。
+
+新native旅程driver先限yard，原数字键选人、点击真实匣并等真实引擎走路/开匣、原cover点击与15°朝向、真实警报/暂停/清波/撤离/下一关。策略引用原reference站位但不调用reference授枪或vacuum；全部行为记录实际状态，不能硬套其terminal/event计数。确认yard实际通过后再续其余五关；失败先复现修第一个实际阻碍，当前不能称六关13波已过。
