@@ -85,7 +85,7 @@ func _depot() -> void:
 			continue
 		var screen: Vector2 = view.rig.project_logic(op.global_position,0.9)
 		var foot: Vector2 = view.rig.project_logic(op.global_position,0.15)
-		var free := not view.pointer_over_ui(screen) and not view.pointer_over_ui(foot)
+		var free: bool = not view.pointer_over_ui(screen) and not view.pointer_over_ui(foot)
 		rows.append({"level":"depot","phase":"SWEEP","tick":main.sim.tick,"id":op.op_id,"screen":screen,"foot":foot,"unobscured":free})
 		_check(free,"depot low-angle actor and lower body unobscured "+str(op.op_id))
 		var pick: Dictionary = view.pick_at(screen)
