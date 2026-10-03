@@ -25,6 +25,7 @@ param(
         'corpse_contact_test.gd',
         'presentation_quality_test.gd',
         'viewport_hud_test.gd',
+        'corpse_pairing_boundary_test.gd',
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',
