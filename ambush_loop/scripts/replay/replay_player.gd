@@ -17,8 +17,8 @@ func bind(p_log: BattleLog) -> void:
 	scrub_tick = 0
 	playing = false
 	legacy_ambiguous = false
-	continuous_playback = log != null and log.playback_schema == 1 and not log.playback_snapshots.is_empty()
-	playback_unsupported = log != null and log.playback_schema not in [0, 1]
+	continuous_playback = log != null and log.playback_schema in [1, 2] and not log.playback_snapshots.is_empty()
+	playback_unsupported = log != null and log.playback_schema not in [0, 1, 2]
 	if continuous_playback:
 		for stream_index in 2:
 			var stream: Array = log.playback_snapshots if stream_index == 0 else log.events
@@ -26,7 +26,7 @@ func bind(p_log: BattleLog) -> void:
 			var index := 0
 			for record in stream:
 				var raw: Variant = record.get("playback_tick")
-				if int(record.get("playback_schema", 0)) != 1 or not raw is int or int(raw) < previous or int(raw) < 0 or str(record.get("attempt_id", "")) != log.attempt_id:
+				if int(record.get("playback_schema", 0)) != log.playback_schema or not raw is int or int(raw) < previous or int(raw) < 0 or str(record.get("attempt_id", "")) != log.attempt_id:
 					continuous_playback = false
 					playback_unsupported = true
 					break

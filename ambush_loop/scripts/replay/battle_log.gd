@@ -49,8 +49,28 @@ func begin_wave(index: int) -> void:
 	wave_offset = _last_timeline_tick + 1
 
 
-func enable_continuous_playback() -> void:
-	playback_schema = 1
+func enable_continuous_playback(version: int = 1) -> void:
+	playback_schema = version
+
+
+func advance_phase_boundary() -> void:
+	# Schema2 keeps the last command frame independently seekable from the
+	# next phase. This tick is presentation time, never battle time.
+	if playback_schema == 2 and playback_terminal_tick < 0:
+		_playback_tick += 1
+
+
+func begin_battle_recording() -> void:
+	# Preserve the SCOUT attempt/stream; retain the original first-alarm reset
+	# of domain events/statistics and wave offsets.
+	events.clear()
+	snapshots.clear()
+	terminal_tick = -1
+	terminal_reason = ""
+	wave_id = 0
+	wave_offset = 0
+	_last_timeline_tick = -1
+	advance_phase_boundary()
 
 
 func current_playback_tick() -> int:
@@ -58,12 +78,12 @@ func current_playback_tick() -> int:
 
 
 func advance_simulation_playback() -> void:
-	if playback_schema == 1 and playback_terminal_tick < 0:
+	if playback_schema in [1, 2] and playback_terminal_tick < 0:
 		_playback_tick += 1
 
 
 func advance_command_playback(delta: float) -> void:
-	if playback_schema != 1 or playback_terminal_tick >= 0 or not is_finite(delta) or delta <= 0.0:
+	if playback_schema not in [1, 2] or playback_terminal_tick >= 0 or not is_finite(delta) or delta <= 0.0:
 		return
 	_command_subticks += delta * 60.0
 	var ticks := floori(_command_subticks + 0.000001)
@@ -72,16 +92,16 @@ func advance_command_playback(delta: float) -> void:
 
 
 func _append_playback(snapshot: Dictionary) -> void:
-	if playback_schema != 1:
+	if playback_schema not in [1, 2]:
 		return
-	snapshot["playback_schema"] = 1
+	snapshot["playback_schema"] = playback_schema
 	snapshot["playback_tick"] = _playback_tick
 	snapshot["frame_seq"] = playback_snapshots.size()
 	playback_snapshots.append(snapshot)
 
 
 func add_command_snapshot(tick: int, data: Dictionary) -> void:
-	if playback_schema != 1 or playback_terminal_tick >= 0:
+	if playback_schema not in [1, 2] or playback_terminal_tick >= 0:
 		return
 	# Recording a frozen command tick must not move the next battle-wave offset.
 	_append_playback({"schema":SCHEMA_VERSION,"attempt_id":attempt_id,
@@ -110,8 +130,8 @@ func add_event(tick: int, type: String, actor_id: int = -1, target_id: int = -1,
 	event.merge({"seq": events.size(), "event_id": "%s:%d:%d" % [attempt_id, wave_id, events.size()],
 		"type": type, "actor_id": actor_id, "target_id": target_id,
 		"position": pos, "payload": payload.duplicate(true)})
-	if playback_schema == 1:
-		event["playback_schema"] = 1
+	if playback_schema in [1, 2]:
+		event["playback_schema"] = playback_schema
 		event["playback_tick"] = _playback_tick
 	events.append(event)
 
@@ -128,7 +148,7 @@ func mark_terminal(tick: int, reason: String) -> void:
 		return
 	terminal_tick = timeline_tick(tick)
 	terminal_reason = reason
-	if playback_schema == 1:
+	if playback_schema in [1, 2]:
 		playback_terminal_tick = _playback_tick
 	add_event(tick, "terminal", -1, -1, Vector2.ZERO, {"reason": reason})
 

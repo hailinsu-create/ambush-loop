@@ -25,7 +25,7 @@ static func capture(host: Node) -> Dictionary:
 	var frame := {
 		"run_id": -1 if historical else host.run_id,
 		"tick": (domain_tick if continuous else host.replay.scrub_tick) if historical else host.battle_log.timeline_tick(host.sim.tick),
-		"playback_schema": 1 if continuous else 0,
+		"playback_schema": int(snap.get("playback_schema", 0)) if continuous else 0,
 		"playback_tick": host.replay.scrub_tick if historical else host.battle_log.current_playback_tick(),
 		"frame_seq": int(snap.get("frame_seq", -1)) if historical else -1,
 		"phase": int(host.phase), "recorded_phase": int(data.get("phase", -1)),

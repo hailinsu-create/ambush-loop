@@ -77,7 +77,82 @@ func _run() -> void:
 		_check(frame.events.is_empty(),"SCOUT history cannot reveal future alarm or battle events")
 		_check(_frames(source)==retained and main._snapshot_data()==poisoned,"SCOUT seek preserves full recording and poisoned live state")
 	await _capture_record(main,"full_scout_history_0800")
+	if not scout_samples[0].record.is_empty():
+		main._focus_battle_event(source.events.front())
+		view.refresh()
+		_check(main.replay.scrub_tick==main.replay.playback_time(source.events.front()) and view._event_ring.visible,"actual first alarm event focus uses its saved presentation time")
+		main.replay.set_tick(int(scout_samples[0].record.playback_tick))
+		main._apply_replay_scrub()
+		view.refresh()
+		_check(not view._event_ring.visible,"seeking SCOUT before a same-battle-tick alarm clears the future event ring")
+	await _actual_legacy(main)
+	_malformed_streams(source)
 	rows.append({"stage":"scout_prelude","actual_samples":scout_samples.filter(func(item: Dictionary) -> bool: return not item.record.is_empty()).size(),"seek_checks":actual_seeks,"alarm_playback_tick":alarm.get("playback_tick",0),"boundary_clock":boundary.pose_clock_s,"attempt_survives_alarm":source.attempt_id==attempt})
 	# This inherited production journey also checks all actual SWEEP samples,
 	# original WON/FAILED/abort terminals, copied bones, pause, fallback and seeks.
 	await super._run()
+
+
+func _actual_legacy(main: Node) -> void:
+	var path := OS.get_environment("AMBUSH_LEGACY_RECORD_FIXTURE")
+	_check(not path.is_empty() and FileAccess.file_exists(path),"retained real schema1 production fixture is available")
+	if path.is_empty() or not FileAccess.file_exists(path): return
+	var bytes := FileAccess.get_file_as_bytes(path)
+	var hash_before := FileAccess.get_sha256(path)
+	var values: Dictionary=bytes_to_var(bytes)
+	var legacy:=BattleLog.new()
+	for key in ["attempt_id","events","snapshots","terminal_tick","terminal_reason","playback_schema","playback_snapshots","playback_terminal_tick"]:
+		legacy.set(key,values[key])
+	var player:=ReplayPlayer.new()
+	player.bind(legacy)
+	_check(legacy.playback_schema==1 and player.continuous_playback and not player.playback_unsupported and player.max_tick()==1415,"real older schema1 stream retains its original continuous1415 clock")
+	_check(legacy.terminal_tick==1283 and legacy.events.size()==34,"real older schema1 original battle terminal1283/events34 preserved")
+	var saved=main.replay
+	main.replay=player
+	var frames: Array=legacy.playback_snapshots.duplicate(true)
+	var events: Array=legacy.events.duplicate(true)
+	var command: Array=frames.filter(func(record: Dictionary) -> bool: return int(record.data.phase)==main.Phase.SWEEP)
+	var signatures := {}
+	for record: Dictionary in [frames.front(),command.front(),command.back(),command.front(),frames.front()]:
+		player.set_tick(int(record.playback_tick))
+		main._apply_replay_scrub()
+		main.presentation_3d.refresh()
+		var frame: Dictionary=ViewState.capture(main)
+		var body: Actor=main.presentation_3d.actors["ops:3"].get_node("Body")
+		var signature := _bones(body)
+		var key: String=str(record.frame_seq)
+		_check(frame.attempt_id==legacy.attempt_id and frame.wave_id==record.wave_id and frame.playback_schema==1,"real schema1 seek retains stored identity/schema")
+		if signatures.has(key): _check(signatures[key]==signature,"real schema1 backward/forward root and20 bones repeat exactly")
+		else: signatures[key]=signature
+	_check(legacy.playback_snapshots==frames and legacy.events==events and FileAccess.get_sha256(path)==hash_before,"real older source remains byte-for-byte unchanged")
+	await _capture_record(main,"full_actual_schema1_history")
+	rows.append({"stage":"actual_legacy_schema1","source_binary_sha256":hash_before,"battle_terminal_tick":1283,"playback_terminal_tick":1415,"events":34,"seek_records":5})
+	main.replay=saved
+
+
+func _malformed_streams(source: BattleLog) -> void:
+	var domain := ReplayPlayer.new()
+	var old := BattleLog.new()
+	old.snapshots=source.snapshots.duplicate(true)
+	old.events=source.events.duplicate(true)
+	domain.bind(old)
+	for problem in ["snapshot_attempt","event_attempt","frame_seq","missing_clock","record_schema","event_clock"]:
+		var log:=BattleLog.new()
+		log.attempt_id=source.attempt_id
+		log.playback_schema=2
+		log.snapshots=source.snapshots.duplicate(true)
+		log.events=source.events.duplicate(true)
+		log.playback_snapshots=source.playback_snapshots.duplicate(true)
+		match problem:
+			"snapshot_attempt": log.playback_snapshots[0].attempt_id="foreign"
+			"event_attempt": log.events[0].attempt_id="foreign"
+			"frame_seq": log.playback_snapshots[0].frame_seq=99
+			"missing_clock": log.playback_snapshots[0].erase("playback_tick")
+			"record_schema": log.playback_snapshots[0].playback_schema=1
+			"event_clock": log.events[1].playback_tick=-1
+		var retained: Array=log.playback_snapshots.duplicate(true)
+		var events: Array=log.events.duplicate(true)
+		var player:=ReplayPlayer.new()
+		player.bind(log)
+		_check(player.playback_unsupported and not player.continuous_playback and player.max_tick()==domain.max_tick(),"malformed/foreign actual copied stream refuses expansion "+problem)
+		_check(log.playback_snapshots==retained and log.events==events,"malformed/foreign source stays unmodified "+problem)

@@ -99,7 +99,7 @@ func _actual_command() -> void:
 	var release: Dictionary = main._snapshot_data().duplicate(true)
 	var release_frame: Dictionary = view.frame.duplicate(true)
 	var state: Dictionary = _operator(release_frame).utility_pose.duplicate(true)
-	_check(state.target == grenade.target and state.attempt_id == "" and state.event_id.begins_with(release.utility_scope_id), "record copies actual clamped target and pre-ALERT identity")
+	_check(state.target == grenade.target and state.attempt_id == main.battle_log.attempt_id and not str(state.attempt_id).is_empty() and state.event_id.begins_with(release.utility_scope_id), "record copies actual clamped target and stable pre-ALERT attempt identity")
 	main._process(0.1)
 	body = _body()
 	_check(is_equal_approx(body.sampled_time, 0.6) and grenade._flight > 0.0, "command action and actual flight advance on original clocks")

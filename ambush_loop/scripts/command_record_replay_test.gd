@@ -113,10 +113,11 @@ func _run() -> void:
 		chronological=chronological and int(record.get("frame_seq",-1))==i and int(record.get("playback_tick",-1))>=previous and str(record.attempt_id)==source.attempt_id
 		previous=int(record.get("playback_tick",-1))
 	_check(chronological,"actual cross-wave records retain monotonic playback time and stable attempt/frame sequence")
-	rows.append({"terminal":"won","battle_terminal_tick":source.terminal_tick,"events":source.events.size(),"fingerprint":source.fingerprint(),"frame_count":retained.size()})
-	_check(int(source.get("playback_schema") if source.get("playback_schema")!=null else 0)==1,"actual recording declares supported continuous playback version")
+	var alarm_prefix: int=int(source.snapshots.front().get("playback_tick",0))
+	rows.append({"terminal":"won","battle_terminal_tick":source.terminal_tick,"events":source.events.size(),"fingerprint":source.fingerprint(),"frame_count":retained.size(),"playback_terminal_tick":source.playback_terminal_tick,"first_alarm_playback_tick":alarm_prefix})
+	_check(int(source.get("playback_schema") if source.get("playback_schema")!=null else 0)==2,"actual recording declares complete continuous playback version")
 	if source.get("playback_terminal_tick")!=null:
-		_check(int(source.get("playback_terminal_tick"))==source.terminal_tick+132,"2.2 actual unpaused SWEEP seconds add 132 playback ticks without altering battle terminal")
+		_check(int(source.get("playback_terminal_tick"))==source.terminal_tick+132+alarm_prefix+2,"actual recorded SCOUT prefix,2.2s SWEEP and2 later boundaries expand playback without altering battle terminal")
 	main._on_replay_pressed()
 	_check(main.phase==main.Phase.REPLAY,"normal production REPLAY entry")
 	main.battle_log=BattleLog.new()
@@ -169,7 +170,7 @@ func _run() -> void:
 		malformed.snapshots=source.snapshots.duplicate(true)
 		malformed.events=source.events.duplicate(true)
 		malformed.terminal_tick=source.terminal_tick
-		malformed.set("playback_schema",1)
+		malformed.set("playback_schema",source.playback_schema)
 		var broken: Array=retained.duplicate(true)
 		broken[1].playback_tick=-1
 		malformed.set("playback_snapshots",broken)
@@ -204,7 +205,19 @@ func _run() -> void:
 		_check(main.phase==main.Phase.FAILED and main.fail_reason==("abort" if aborted else "escape"),"actual normal FAILED route "+str(aborted))
 		var terminal: Dictionary=_frames(main.battle_log).back()
 		_check(int(terminal.data.phase)==main.Phase.FAILED,"continuous recording retains real FAILED terminal boundary "+str(aborted))
-		rows.append({"terminal":main.fail_reason,"battle_terminal_tick":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"recorded_phase":terminal.data.phase})
+		_check([main.battle_log.terminal_tick,main.battle_log.events.size()]==([0,3] if aborted else [928,19]),"original fixed FAILED/abort battle statistics retained "+str(aborted))
+		var failed_source: BattleLog=main.battle_log
+		var failed_frames: Array=_frames(failed_source).duplicate(true)
+		main._on_replay_pressed()
+		var failed_live: Dictionary=main._snapshot_data().duplicate(true)
+		_check(ViewState.capture(main).recorded_phase==main.Phase.FAILED,"normal FAILED replay opens actual terminal phase "+str(aborted))
+		main.replay.set_tick(main.replay.playback_time(failed_source.snapshots.front()))
+		_check(ViewState.capture(main).recorded_phase==main.Phase.WATCHING,"first real alarm is independently seekable before FAILED/abort "+str(aborted))
+		main._focus_battle_event(failed_source.last_of_type("terminal"))
+		_check(main.replay.scrub_tick==failed_source.playback_terminal_tick and ViewState.capture(main).recorded_phase==main.Phase.FAILED,"actual failed terminal event seeks its own saved identity/time "+str(aborted))
+		_check(_frames(failed_source)==failed_frames and main._snapshot_data()==failed_live,"FAILED/abort seek preserves recording and live state "+str(aborted))
+		await _capture_record(main,"full_failed_"+("abort" if aborted else "escape"))
+		rows.append({"terminal":"abort" if aborted else "escape","battle_terminal_tick":failed_source.terminal_tick,"playback_terminal_tick":failed_source.playback_terminal_tick,"events":failed_source.events.size(),"recorded_phase":terminal.data.phase})
 	root.get_node("AudioDirector").pause_for_background()
 	# Retain an actual production stream, including typed copied values, for
 	# compatibility checks against later supported playback revisions.

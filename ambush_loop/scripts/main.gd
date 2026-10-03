@@ -3518,7 +3518,8 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	pending_result = ""
 	run_id += 1
 	sim.reset()
-	battle_log.clear()
+	battle_log.begin_attempt()
+	battle_log.enable_continuous_playback(2)
 	pending_spawns.clear()
 	all_spawns_done = false
 	if raid:
@@ -3647,6 +3648,7 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 		c2.begin_scout()
 	_play_mission_ambient()
 	_update_hud()
+	battle_log.add_command_snapshot(0, _snapshot_data())
 
 
 func _on_clear_pressed() -> void:
@@ -5194,6 +5196,7 @@ func _on_alarm_pressed() -> void:
 		if status_label:
 			status_label.text = leak_warn
 	_alarm_pulled_unarmed = not squad_has_firearm()
+	battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 	_capture_plan()
 	frozen_plan = last_plan.duplicate_plan()
 	run_id += 1
@@ -5207,8 +5210,7 @@ func _on_alarm_pressed() -> void:
 	leak_advice_shown = ""
 	_clear_intel_path_ghost()
 	sim.reset()
-	battle_log.begin_attempt()
-	battle_log.enable_continuous_playback()
+	battle_log.begin_battle_recording()
 	_command_record_acc_s = 0.0
 	_watch_first_fire = false
 	_watch_first_return = false
@@ -5452,9 +5454,8 @@ func _process(delta: float) -> void:
 	if phase == Phase.SETUP or phase == Phase.WATCHING or phase == Phase.SWEEP:
 		_night_timer += delta
 	if _is_command_phase():
-		if phase == Phase.SWEEP:
-			battle_log.advance_command_playback(delta)
-			_command_record_acc_s += maxf(delta, 0.0)
+		battle_log.advance_command_playback(delta)
+		_command_record_acc_s += maxf(delta, 0.0)
 		_tick_cover_long_press()
 		_tick_touch_hold()
 		_tick_cover_hold_ring()
@@ -5470,7 +5471,7 @@ func _process(delta: float) -> void:
 		_tick_footsteps(delta)
 		if c2:
 			c2.tick(delta)
-		if phase == Phase.SWEEP and _command_record_acc_s + 0.0000001 >= 0.1:
+		if _command_record_acc_s + 0.0000001 >= 0.1:
 			var periods := floori((_command_record_acc_s + 0.0000001) / 0.1)
 			_command_record_acc_s = maxf(_command_record_acc_s - periods * 0.1, 0.0)
 			battle_log.add_command_snapshot(sim.tick, _snapshot_data())
@@ -5831,6 +5832,7 @@ func _on_enemy_escaped(enemy: EnemyRunner, path: PackedVector2Array) -> void:
 	var lid := int(enemy.label_id)
 	fail_reason = "escape"
 	_wave_fail_index = wave_index() + 1
+	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
 	var hint := _escape_route_hint(enemy)
 	battle_log.add_event(
@@ -5912,6 +5914,7 @@ func _fail_squad_wipe() -> void:
 	if phase != Phase.WATCHING:
 		return
 	fail_reason = "wipe"
+	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
 	battle_log.mark_terminal(sim.tick, "wipe")
 	for e in enemies:
@@ -5984,6 +5987,7 @@ func _on_abort_pressed() -> void:
 	if phase != Phase.WATCHING:
 		return
 	fail_reason = "abort"
+	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
 	battle_log.add_event(sim.tick, "abort", -1, -1, Vector2.ZERO)
 	battle_log.mark_terminal(sim.tick, "abort")
@@ -12411,6 +12415,7 @@ func _begin_next_wave() -> void:
 		backpack_panel.dismiss()
 	if raid:
 		raid.advance_wave()
+	battle_log.advance_phase_boundary()
 	run_id += 1
 	var this_run := run_id
 	phase = Phase.WATCHING
@@ -12442,6 +12447,7 @@ func _begin_next_wave() -> void:
 
 
 func _extract_win() -> void:
+	battle_log.advance_phase_boundary()
 	phase = Phase.WON
 	battle_log.mark_terminal(sim.tick, "win")
 	battle_log.add_snapshot(sim.tick, _snapshot_data())

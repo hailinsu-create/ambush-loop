@@ -38,6 +38,7 @@ var _event_ring: MeshInstance3D
 var _focus_attempt := ""
 var _focus_wave := -1
 var _focus_tick := -1
+var _focus_playback_tick := -1
 var _compass: Label
 var _pitch_slider: HSlider
 var _camera_controls: CanvasLayer
@@ -244,7 +245,7 @@ func refresh() -> void:
 	if not frame.is_empty() and (frame.run_id != next_frame.run_id or frame.phase != next_frame.phase):
 		cancel_input()
 	frame = next_frame
-	if _event_ring.visible and (_focus_attempt != frame.attempt_id or _focus_wave != frame.wave_id or int(frame.tick) < _focus_tick):
+	if _event_ring.visible and (_focus_attempt != frame.attempt_id or _focus_wave != frame.wave_id or int(frame.tick) < _focus_tick or (frame.replay and int(frame.playback_tick) < _focus_playback_tick)):
 		_event_ring.visible = false
 	# Hysteresis avoids rebuilding the static batches while pinching at a boundary.
 	if rig.view_size > 26.0:
@@ -627,6 +628,7 @@ func focus_event(pos: Vector2, event: Dictionary) -> void:
 	_focus_attempt = str(event.get("attempt_id", ""))
 	_focus_wave = int(event.get("wave_id", -1))
 	_focus_tick = BattleLog.record_tick(event)
+	_focus_playback_tick = host.replay.playback_time(event) if host.phase == host.Phase.REPLAY else int(event.get("playback_tick", _focus_tick))
 	_event_ring.position = Space.logic_to_world(pos, 0.065)
 	_event_ring.visible = true
 	rig.focus = Space.logic_to_world(pos)
