@@ -25,3 +25,6 @@
 资产制作作者继续独占 ArtSource、Blender、共享 atlas、角色GLB及制作manifest，本片未编辑/重建这些文件。主作者拥有 main/HUD/presenter/ViewState/replay/运行loader/共享测试，只接验收固定SHA与原字节资产；当前接收接口R5源29749157c5db064bfea626c3ed9d75d9a1791ece、交付ebedb829e3263abbeb6dd266905f24a3869fa281、原20骨/socket/三LOD及旧动作语义不变。可并行独立包：本固定候选只读HUD复验、未来美术动作候选评审；不得并发修改本运行文件。不自行派遣astra或其他代码集成作者。
 
 完整v2计划继续：内部IK连续→剩余HUD/完整3DFX/版本化连续command历史→A3预算和六关视觉旅程→同最终候选fullsmoke/QA/APK。耳听仍0/45、0/6，设备统一后置，网页GPT PLAN/REVIEW unavailable。旧smoke7d34867/PCK91不是本候选交付。
+
+
+2026-10-03 最新交付状态：原配置唯一push重试成功并只读核对cf77f4db63605ff1e9846e1149f27ca6d461f458；先前onlylocal/authblocked均为历史状态，不推永久凭据健康。Library恢复未发生，不重试。HUD续片[北侧HUD报告](AMBUSH_PR15_NORTH_HUD_20261003.md)，运行816正式focus1702/0+viewport5081/0exit0，checkbox/minimap已分开，原两张镜头裁切原生133/0未复现仍待独立QA，FAILED/WON200另做。

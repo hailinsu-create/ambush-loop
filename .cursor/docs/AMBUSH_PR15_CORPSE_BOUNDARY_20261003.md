@@ -39,3 +39,6 @@ AMBUSH_BOUNDARY_REFERENCE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-
 可并行独立包：固定f7fcfdb只读IK边界/全段/历史品质QA、固定6a519b3真实窗口/200%HUD QA、独立资产源动作评审。共享运行文件不得并发写，不自行派遣astra。Notion由父端指定作者维护。
 
 转运阻塞独立于代码：811旧证据bundle已官方Library创建libfile_b28ecbb4edb8819199df33da8dcceea0，但本端/父端官方materialize均失败；不走rawcurl/缓存/token等替代，不称下载内容SHA已复验。本新候选仍本地；需官方GitHub写连接与Library下载恢复后才同步/交付远端。
+
+
+2026-10-03 最新交付状态：原配置唯一push重试成功并只读核对cf77f4db63605ff1e9846e1149f27ca6d461f458；先前onlylocal/authblocked均为历史状态，不推永久凭据健康。Library恢复未发生，不重试。HUD续片[北侧HUD报告](AMBUSH_PR15_NORTH_HUD_20261003.md)，运行816正式focus1702/0+viewport5081/0exit0，checkbox/minimap已分开，原两张镜头裁切原生133/0未复现仍待独立QA，FAILED/WON200另做。
