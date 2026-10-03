@@ -26,14 +26,15 @@ static func choose(bounds: AABB, shoulders: Vector3, palms: Vector3, anchor: Vec
 	return {"resolved":false}
 
 
-static func skin_bounds(actor: Node3D) -> AABB:
+static func skin_bounds(actor: Node3D, local_only: bool = false) -> AABB:
 	var mesh := preload("res://scripts/presentation/actor_visual.gd").find_type(actor.model,"MeshInstance3D") as MeshInstance3D
 	var transforms := []
 	var inverse := actor.global_transform.affine_inverse()
+	var rig: Transform3D = preload("res://scripts/presentation/actor_visual.gd")._local_transform(actor,actor.skeleton) if local_only else inverse*actor.skeleton.global_transform
 	for index in mesh.skin.get_bind_count():
 		var name: String = mesh.skin.get_bind_name(index)
 		var bone: int = actor.skeleton.find_bone(name) if not name.is_empty() else mesh.skin.get_bind_bone(index)
-		transforms.append(inverse*actor.skeleton.global_transform*actor.skeleton.get_bone_global_pose(bone)*mesh.skin.get_bind_pose(index))
+		transforms.append(rig*actor.skeleton.get_bone_global_pose(bone)*mesh.skin.get_bind_pose(index))
 	var bounds := AABB()
 	var first := true
 	for surface in mesh.mesh.get_surface_count():

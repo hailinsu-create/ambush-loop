@@ -17,6 +17,7 @@ var sampled_time := 0.0
 var _record: Dictionary = {}
 var _attachment: BoneAttachment3D
 var _layers: Dictionary = {}
+var _pose_modified := false
 
 
 func set_asset(id: String, level: int, revision: String = "") -> bool:
@@ -63,10 +64,11 @@ func set_asset(id: String, level: int, revision: String = "") -> bool:
 
 
 func sample_pose(action: String, elapsed: float) -> bool:
+	var layered := not _layers.is_empty()
 	_layers.clear()
 	if player == null or not is_finite(elapsed):
 		return false
-	if action == sampled_action and is_equal_approx(maxf(elapsed, 0.0), sampled_time) and player.current_animation == action:
+	if not layered and not _pose_modified and action == sampled_action and is_equal_approx(maxf(elapsed, 0.0), sampled_time) and player.current_animation == action:
 		return true
 	var clip: Dictionary = {}
 	for row in _record.get("animations", []):
@@ -78,6 +80,7 @@ func sample_pose(action: String, elapsed: float) -> bool:
 	var duration: float = player.get_animation(action).length
 	var seconds := fposmod(maxf(elapsed, 0.0), duration) if bool(clip.loop) else clampf(elapsed, 0.0, duration)
 	skeleton.reset_bone_poses()
+	_pose_modified=false
 	player.play(action)
 	player.seek(seconds, true, true)
 	skeleton.force_update_all_bone_transforms()
@@ -92,7 +95,7 @@ func sample_pose(action: String, elapsed: float) -> bool:
 func sample_layers(pose: Dictionary) -> bool:
 	if not pose.has("upper_action"):
 		return sample_pose(str(pose.action), float(pose.seconds))
-	if _layers == pose:
+	if _layers == pose and not _pose_modified:
 		return true
 	if not sample_pose(str(pose.base_action), float(pose.base_seconds)):
 		return false
@@ -130,6 +133,11 @@ func sample_layers(pose: Dictionary) -> bool:
 	sampled_time = float(pose.seconds)
 	_layers = pose.duplicate(true)
 	return true
+
+
+func mark_pose_modified() -> void:
+	_pose_modified=true
+	_sync_attachment()
 
 
 func mount_item(id: String) -> bool:

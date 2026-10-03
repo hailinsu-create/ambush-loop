@@ -87,6 +87,7 @@ func capture(host: Node) -> Dictionary:
 		"utility_scope_id": _utility_scope_id,
 		"corpse_schema": 1,
 		"corpse_contact_schema": 1,
+		"corpse_pairing_schema": 1,
 		"environment_schema": EnvironmentScene.FORMAT, "environment_revision": EnvironmentScene.REVISION,
 		"environment_cutaway_schema": 1,
 		"environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
