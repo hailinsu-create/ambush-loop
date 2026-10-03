@@ -43,3 +43,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-03 接触品质续片：[抓放/正浮空报告](AMBUSH_PR15_CORPSE_PAIRING_20261003.md)。原e9 native MG102/15exit1、86矩阵171/83exit1→89fb34be2498123651bb7685dc55eb5aff6436f2运行修复；a575d9ec9b7eed1b934218a727c41c2a6d0ff226仅改专项测试实际camera参数和正式REPLAY入口，生产等价89，代码已推送核对PR15 Draft/Open/未合并。最终render2695/0/103秒、72hold/864相位、17native测点、双掌<0.001mm、body约6mm/搬运者脚底<0.2mm、原墙skin0、原骨段/端点/暂停/后台/复制历史/旧版通过；18正式run全exit0/ERROR0，9最终图已看，六关13波10332/0/393秒及原终局保持。矩阵/年龄/复制时间轴为明确fixture，不称全墙自然艺术或连续command已完成；独立品质复验待。实际camera size12/viewport1280×720，不将请求4/8写成实际。父端b011 R03原遮挡/整隐已独立闭合，真1600和200%HUD裁切待。下一剩余HUD/完整3DFX/连续command→A3/13波视觉与正常旅程→同最终候选fullsmoke/QA/APK；旧smoke7d34867/PCK91不归本片。资产源/GLB/atlas/manifest和R规则未改，无需新增R取舍；Notion指定作者负责，耳听0/45、0/6与设备后置。
+
+
+2026-10-03 本地HUD续片：[真实窗口/200% HUD报告](AMBUSH_PR15_VIEWPORT_HUD_20261003.md)。固定6a519b3运行5081/0、42样本/51物理PNG/46原生XTest事件，实际exit0/ERROR0；保留aspect keep的1280逻辑宽及1600留黑，200%可用640×360。三正式图已看，其余图保存不冒称逐图验收；FAILED/WON、独立复验/六关完整旅程/fullsmoke/APK待。Git只读与connector成功但写凭证未恢复，停止auth/push重试，仅本地保存；P2抓放内部边界仍独立处理中，资产制作文件未改。
