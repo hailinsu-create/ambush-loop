@@ -60,3 +60,6 @@
 
 
 2026-10-03 本地HUD续片：[真实窗口/200% HUD报告](AMBUSH_PR15_VIEWPORT_HUD_20261003.md)。固定6a519b3运行5081/0、42样本/51物理PNG/46原生XTest事件，实际exit0/ERROR0；保留aspect keep的1280逻辑宽及1600留黑，200%可用640×360。三正式图已看，其余图保存不冒称逐图验收；FAILED/WON、独立复验/六关完整旅程/fullsmoke/APK待。Git只读与connector成功但写凭证未恢复，停止auth/push重试，仅本地保存；P2抓放内部边界仍独立处理中，资产制作文件未改。
+
+
+2026-10-03 本地P2内部边界续片：[schema2连续抓放报告](AMBUSH_PR15_CORPSE_BOUNDARY_20261003.md)。固定f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3，正式边界2978/0、36关键边界/1350整段probe/72旧schema1精确摘要；旧0/99fallback及history不升级。18正式run均exit0/ERROR0，含品质2695、合同84042、六关13波10332，原终局保留。四关键图+三品质图已看；边界三辅助PNG被后续通用名覆盖未保留，receipt明示，品质9图完整。作者验证通过，独立P2仍待；focus邻近镜头文字裁切、minimap/checklist叠层及FAILED/WON200列待。6a HUD5081限定结论保留，未称全HUD关闭。仅本地保存，Git/Library阻塞不绕过；资产制作diff为空。继续FX/continuouscommand/A3/完整旅程/同候选smoke-QA-APK，耳听/设备后置。

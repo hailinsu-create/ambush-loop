@@ -48,3 +48,6 @@ Godot固定4.7.2/ed1daf0bf；每run独立UUID/XDG与StorageGuard。渲染是Xorg
 唯一运行主作者负责main/presenter/ViewState/replay/HUD/loader/运行派生及共享测试。ArtSource/Blender/GLB/共享atlas/制作manifest仍独立资产作者所有；本片未编辑或重跑build_yard_kit.py/build_actors.py或制作输出，未整合资产WIP，也不写Notion。原R5/21角色GLB及20骨架、64clip、30装备/3atlas、ENV85文件/11依赖和45音频原字节保持。本片没有要求重新生产角色包。
 
 可由父端安全并行分配：固定a575只读重现original MG抓/放/角落/LOD/历史的独立品质QA；完整可播放包的45 cue/六关声景耳听。主作者独占共享运行与测试写入，不自行派代理。若独立审图仍发现原rig不可自然达到的姿势，交资产作者最小角色/clip/骨架挂点版本接口，先验兼容再接收有限提交，不整体合WIP。
+
+
+2026-10-03 本地P2内部边界续片：[schema2连续抓放报告](AMBUSH_PR15_CORPSE_BOUNDARY_20261003.md)。固定f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3，正式边界2978/0、36关键边界/1350整段probe/72旧schema1精确摘要；旧0/99fallback及history不升级。18正式run均exit0/ERROR0，含品质2695、合同84042、六关13波10332，原终局保留。四关键图+三品质图已看；边界三辅助PNG被后续通用名覆盖未保留，receipt明示，品质9图完整。作者验证通过，独立P2仍待；focus邻近镜头文字裁切、minimap/checklist叠层及FAILED/WON200列待。6a HUD5081限定结论保留，未称全HUD关闭。仅本地保存，Git/Library阻塞不绕过；资产制作diff为空。继续FX/continuouscommand/A3/完整旅程/同候选smoke-QA-APK，耳听/设备后置。

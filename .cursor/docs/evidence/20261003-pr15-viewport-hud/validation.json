@@ -13,7 +13,11 @@
   "viewed_formal_captures": [
     "viewport_scout_1600_200_desktop_camera.png",
     "viewport_alert_1600_200_desktop_settings.png",
-    "viewport_replay_1600_200_touch.png"
+    "viewport_replay_1600_200_touch.png",
+    "viewport_radio_scout_1600_200_desktop.png",
+    "viewport_depot_scout_1600_200_desktop.png",
+    "viewport_sweep_1600_200_desktop_backpack.png",
+    "viewport_scout_1280_100_desktop.png"
   ],
   "files": [
     {
@@ -356,5 +360,6 @@
       "bytes": 865508,
       "sha256": "93f0ab184a244810990982d2de13ee7afea66ea53270a77ffd68b3085a8a2ffa"
     }
-  ]
+  ],
+  "remaining_visual_issue": "Two focus-adjacent native corpse boundary captures show right camera text clipping; pending focused UI reproduction. Normal minimap/checklist layering also needs visual review; not covered by button bounds."
 }
