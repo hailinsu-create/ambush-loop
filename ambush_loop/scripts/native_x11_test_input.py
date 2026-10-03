@@ -1,4 +1,4 @@
-"""Native mouse/Escape input for guarded tests on an explicit private X11 display."""
+"""Native mouse and limited UI keys for guarded tests on a private X11 display."""
 import ctypes
 import os
 import re
@@ -13,10 +13,14 @@ if (not re.fullmatch(r"[0-9a-f]{32}", run_id)
         or data_root.parent.parent.name != "ambush_test_runs"
         or not test_display or os.environ.get("DISPLAY") != test_display):
     raise SystemExit("native input requires isolated storage and an explicit private test display")
-escape = sys.argv[1:] == ["key", "Escape"]
-if not escape:
+key_event = len(sys.argv) == 3 and sys.argv[1] == "key"
+if key_event:
+    key_name = sys.argv[2]
+    if key_name not in {"Escape", "Tab", "Return", "Up", "Down", "m"}:
+        raise SystemExit("unsupported test UI key")
+else:
     if len(sys.argv) != 4:
-        raise SystemExit("expected physical screen x/y/button or key Escape")
+        raise SystemExit("expected physical screen x/y/button or an allowed UI key")
     x, y, button = map(int, sys.argv[1:])
     if button not in (1, 4, 5):
         raise SystemExit("unsupported test mouse button")
@@ -37,10 +41,10 @@ display = x11.XOpenDisplay(test_display.encode())
 if not display:
     raise SystemExit("private X11 display is unavailable")
 try:
-    if escape:
-        code = x11.XKeysymToKeycode(display, x11.XStringToKeysym(b"Escape"))
+    if key_event:
+        code = x11.XKeysymToKeycode(display, x11.XStringToKeysym(key_name.encode("ascii")))
         if not code:
-            raise SystemExit("private display has no Escape keycode")
+            raise SystemExit("private display has no requested UI keycode")
         xtst.XTestFakeKeyEvent(display, code, 1, 0)
         xtst.XTestFakeKeyEvent(display, code, 0, 0)
     else:

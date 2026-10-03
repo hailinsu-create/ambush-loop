@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotExe,
     [ValidateSet(
+        'title_menu_viewport_test.gd',
         'replay_timeline_test.gd',
         'equipment_freeze_test.gd',
         'phase_tools_test.gd',
