@@ -6,7 +6,7 @@ entry="${2:-smoke_test.gd}"
 render_mode="${3:---headless}"
 case "$entry" in
   replay_timeline_test.gd|equipment_freeze_test.gd|presentation_lifecycle_test.gd|campaign_replay_test.gd|visual_snapshot_test.gd|asset_library_test.gd|asset_pack_test.gd|phase_tools_test.gd|actor_visual_test.gd|c2_history_hint_test.gd|actor_battle_test.gd|audio_runtime_test.gd|firearm_runtime_test.gd|environment_assets_test.gd|environment_battle_test.gd|command_pose_clock_test.gd|utility_runtime_test.gd) ;;
-  editor_import|corpse_pairing_boundary_test.gd|viewport_hud_test.gd|corpse_pose_quality_test.gd|presentation_quality_test.gd|corpse_contact_test.gd|corpse_runtime_test.gd|replay_fx_lifecycle_test.gd|asset_review_capture.gd|presentation_contract_test.gd|presentation_interaction_test.gd|camera_input_test.gd|presentation_capture.gd|presentation_preview.gd) ;;
+  editor_import|corpse_pairing_boundary_test.gd|result_viewport_test.gd|viewport_hud_test.gd|corpse_pose_quality_test.gd|presentation_quality_test.gd|corpse_contact_test.gd|corpse_runtime_test.gd|replay_fx_lifecycle_test.gd|asset_review_capture.gd|presentation_contract_test.gd|presentation_interaction_test.gd|camera_input_test.gd|presentation_capture.gd|presentation_preview.gd) ;;
   smoke_test.gd|pathfinder_test.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
   *) printf 'Unsupported destructive test entry: %s\n' "$entry" >&2; exit 2 ;;
 esac
