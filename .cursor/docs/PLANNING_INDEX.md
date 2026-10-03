@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [正常旅程cover输入计划](AMBUSH_PR15_COVER_INPUT_PLAN_20261003.md) | 接续df4/ddec：先干净固定原生路线和实际回调，区分产品/坐标/时序再修；原528有engine错误不作缺陷证据。正常六关13波仍待。 |
 | [历史事件文字报告](AMBUSH_PR15_EVENT_TEXT_20261003.md) / [计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md) | 原受控换源H6/2/R8/2、exit1/ERROR0→生产fcf修复；fixed ddec正式H373/0、R387/0，均exit0/ERROR0、每轮64自然callback、14 native PNG核hash/看4，独立文字关闭待。普通UI换源可达性未证明，timeline67/装备66亦exit0/ERROR0，正常旅程保留暂停；同步以PR15实际HEAD核对为准。 |
 | [正常玩家旅程计划](AMBUSH_PR15_PLAYER_JOURNEY_PLAN_20261003.md) | 接续a5ba原完整v2：已有reference/vacuum六关不代正常输入；先真实fresh title入口确认200%首次教学是否阻断，再补正常搜刮/补给/13波。FX/A3/耳听仍待，资产制作与R规则保持。 |
 | [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持；3ba原配置push/远端HEAD已核对。共享Pause修复后fixed4ba相关H29/R167与生命周期30/32再次实际exit0/ERROR0，单列不相加。独立QA待，FX/A3后置。 |

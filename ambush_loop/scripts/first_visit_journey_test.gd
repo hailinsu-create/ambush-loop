@@ -12,6 +12,15 @@ const PLAYER_PLANS := [
 ]
 var journey_rows := []
 
+class NativeWorldTrace extends Node:
+	var suite: SceneTree
+	var host: Node
+	var presenter: Node3D
+	func _input(event: InputEvent) -> void:
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+			var pick: Dictionary = presenter.pick_at(event.position)
+			suite.rows.append({"action":"observed native mouse event","pressed":event.pressed,"device":event.device,"at":[event.position.x,event.position.y],"phase":host.phase,"tool":host.tool,"selected_id":host.selected.op_id if host.selected else -1,"ui_blocked":presenter.pointer_over_ui(event.position),"pick_kind":pick.get("kind","invalid"),"pick_id":str(pick.get("id","")),"pick_pos":str(pick.get("pos",Vector2.INF)),"ticks_msec":Time.get_ticks_msec()})
+
 func _settle(frames: int = 3) -> void:
 	await create_timer(0.2).timeout
 	for i in frames: await process_frame
@@ -21,7 +30,7 @@ func _settle(frames: int = 3) -> void:
 
 func _write_journey() -> void:
 	var file := FileAccess.open("res://build/asset_review/pr15-runtime/first-visit-journey-report.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"rows":rows,"journey":journey_rows,"captures":captures,"native_inputs":input_rows,"a0_preview_feature":OS.has_feature("a0_preview"),"scope":"Fresh isolated original title/main flow; real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest."}, "  "))
+	file.store_string(JSON.stringify({"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),"window":[root.size.x,root.size.y],"content_scale_factor":root.content_scale_factor,"checks":checks,"failures":failures,"rows":rows,"journey":journey_rows,"captures":captures,"native_inputs":input_rows,"a0_preview_feature":OS.has_feature("a0_preview"),"scope":"Fresh isolated original title/main flow; real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest."}, "  "))
 
 func _check(ok: bool, message: String) -> void:
 	checks += 1
@@ -68,6 +77,11 @@ func _run() -> void:
 			_save_journey()
 			return
 		view = main.presentation_3d
+		var trace := NativeWorldTrace.new()
+		trace.suite = self
+		trace.host = main
+		trace.presenter = view
+		root.add_child(trace)
 		for plan in PLAYER_PLANS:
 			if not await _mission(plan): break
 			if OS.get_environment("AMBUSH_JOURNEY_SCOPE") == "yard": break
@@ -106,7 +120,8 @@ func _world_click(pos: Vector2, height: float, label: String, button: int = 1) -
 		reachable = root.get_visible_rect().grow(-2).has_point(at) and not view.pointer_over_ui(at)
 		if reachable: break
 		if turn < 12: await _click(_button(view._camera_controls,"↷"))
-	rows.append({"action":label,"target":[pos.x,pos.y],"screen":[at.x,at.y],"camera_yaw":view.rig.yaw_deg,"reachable":reachable,"picked_kind":view.pick_at(at).get("kind","invalid")})
+	var picked: Dictionary = view.pick_at(at)
+	rows.append({"action":label,"target":[pos.x,pos.y],"screen":[at.x,at.y],"camera_yaw":view.rig.yaw_deg,"reachable":reachable,"picked_kind":picked.get("kind","invalid"),"picked_id":str(picked.get("id","")),"picked_pos":str(picked.get("pos",Vector2.INF))})
 	_check(reachable, "native world target is in viewport outside UI " + label)
 	if not reachable: return false
 	await _native_click(main.get_node("HUD/Root"),button,at)
@@ -142,8 +157,11 @@ func _deploy(plan: Array) -> bool:
 		await _key(str(index+1))
 		var slot = main.cover_slots[plan[1][index]]
 		var before: Vector2 = main.selected.global_position
+		if slot.slot_id == 5: await _modal_capture(sample+"_cover5_before")
 		if not await _world_click(slot.global_position,0.08,"cover_"+str(slot.slot_id)): return false
-		rows.append({"action":"native cover outcome","operator":index,"target_slot":slot.slot_id,"selected_id":main.selected.op_id,"before":[before.x,before.y],"target":[slot.global_position.x,slot.global_position.y],"distance_before":before.distance_to(slot.global_position),"after":[main.selected.global_position.x,main.selected.global_position.y],"actual_slot":main.selected.slot.slot_id if main.selected.slot else -1,"status":main.status_label.text})
+		var immediate_slot: int = main.selected.slot.slot_id if main.selected.slot else -1
+		await create_timer(0.8).timeout
+		rows.append({"action":"native cover outcome","operator":index,"target_slot":slot.slot_id,"selected_id":main.selected.op_id,"before":[before.x,before.y],"target":[slot.global_position.x,slot.global_position.y],"distance_before":before.distance_to(slot.global_position),"after":[main.selected.global_position.x,main.selected.global_position.y],"slot_after_settle":immediate_slot,"actual_slot":main.selected.slot.slot_id if main.selected.slot else -1,"additional_wait_s":0.8,"status":main.status_label.text})
 		_check(main.selected.slot == slot, "original native cover command mounts intended pad")
 		if main.selected.slot != slot:
 			await _modal_capture(sample+"_cover"+str(slot.slot_id)+"_blocked")
