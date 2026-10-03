@@ -46,3 +46,22 @@
 **评审状态：** 尚未完成精确工作树的外部 GPT REVIEW。现有 GPT 连接读到的是另一副本，不能将旧副本或此前的 GPT PLAN 当成本次实现批准。D 保持“本地实现与桌面门通过、外部复审待授权/待执行”，不声明切片已获 DONE。收到工作区只读授权并核实准确游戏仓库后，再释放本轮结果并取得 GPT REVIEW；随后进入 E。
 
 **M1 整体状态：** 尚未退出。E–I 桌面门、Android 真机稳定性、五位未参与开发者的首局可理解性试玩、历史 AudioTrack 问题仍未闭环。
+
+## M1-D 至 M1-I 自动化桌面工作结果（2026-10-03）
+
+按用户要求先搁置需要设备、外部审查或真人参与的事项，其余 D–I 桌面实现与验证已经完成；当前正在跑最终共享全量 smoke，故以下只把各切片单门标记为通过，待 smoke 退出后再补最终结果。
+
+| 切片 | 当前隔离证据 | 代码发布状态 |
+| --- | --- | --- |
+| D 冻结/重试合同 | `5ffbbb5ba16645c1931a0edf7084f0c5`，exit 0，`PLAYER_DATA_UNCHANGED=1` | Draft PR #18 |
+| E 资源因果与预算 | `8185a4e0b5f44d40a678d6993a06b56c`，exit 0，`PLAYER_DATA_UNCHANGED=1` | Draft PR #19 |
+| F 火力时机因果 | `cafad01d062a4d4fba5ce5e4006213ae`，exit 0，含立即开火/延迟伏击/重试断言 | Draft PR #20 |
+| G 两种胜利方案与真实失败反例 | `b819434421114acd8586a35ee73a58cc`，exit 0；A/B 两波胜、集中主路导致真实 flank 逃逸 | Draft PR #21 |
+| H 整关因果与倍速一致性 | `6b945b92cb92422fae98ce2ac67985fa`，exit 0；1×/2×同为 1129 ticks、11 次射击、相同胜局/资源；真实回放只读、逃脱后 Continue 重置 | Draft PR #22 |
+| I 桌面可读性 | `81ca8c1b0c5e45e395cacc3366b103e0`，exit 0；实际 viewport 捕获并逐张目视 4 张 1280×720 截图，存档不变 | Draft PR #23；图像证据在规划 PR #9 的 `evidence/m1-i/` |
+
+D–H 同一串行复验随后进入 `smoke_test.gd` 隔离 run `6aa4327b890741a89270cdea56124d60`。已看到触控、补给箱、真实绕背、随队避锥及 FEEL 056/057 等多组断言通过；该 smoke 仍在执行，须等 `SMOKE_SLICE_COMPLETE`、wrapper exit 0 和 `PLAYER_DATA_UNCHANGED=1` 后，才把桌面共享回归标为最终通过并更新本段。
+
+**明确暂缓（需要人或设备）：** 外部 GPT 对精确新差异的独立 REVIEW；vivo X Fold2 上的 Android/触控/性能与长时稳定性验收；五位未参与开发者的首局试玩；依赖真机符号/原生栈的 AudioTrack 根因确认。此前 GPT 的 PLAN/DONE、其他工作树的评审或桌面模拟都不能代替这些证据。
+
+**当前结论：** D–I 单项桌面门均通过，源代码分别在 Draft PR #18–#23；未合并任何 PR。M1 仍不算整体完成，最后的本地自动项是上述全量 smoke 退出与守卫结果；其后仅保留需要人/设备的验收和复审。

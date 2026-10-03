@@ -23,4 +23,22 @@
 
 这组桌面截图证明的是当前桌面 renderer 的可读性，不证明 vivo Fold2 显示比例、触控可达性、性能/热稳定性、音频根因修复或新玩家无需帮助的理解度。外部 GPT 对本轮精确差异的新 REVIEW 仍待后续授权；不得把历史 PLAN/REVIEW 记作 I 批准。
 
-状态：规划已入 GitHub 规划 PR；渲染 gate 与证据待产出。
+## M1-I 实现与目视结果（2026-10-03）
+
+- 源码分支：`codex/m1-i-visual-evidence`；代码只增加可视化证据 gate 和隔离 runner 的精确入口，不修改生产玩法。
+- Godot 4.7.2 图形渲染隔离 run `81ca8c1b0c5e45e395cacc3366b103e0`：exit 0、标记 `M1_YARD_VISUAL_EVIDENCE_OK plan_a=1 plan_b=1 real_flank_failure=1 retry_setup=1 screenshots=4`，并确认 `PLAYER_DATA_UNCHANGED=1`。
+- 四张 PNG 均从实际 viewport 捕获，分辨率 1280×720；已逐张目视检查：A 有效方案 275,411 bytes，B 有效方案 273,202 bytes，真实侧翼失败 176,252 bytes，Continue 后重试准备态 277,219 bytes。
+
+![方案 A：精确手占据高点](evidence/m1-i/plan-a.png)
+
+![方案 B：支援手占据高点](evidence/m1-i/plan-b.png)
+
+![主路集中后的真实侧翼逃逸失败](evidence/m1-i/flank-failure.png)
+
+![Continue 后恢复补给与部署的重试态](evidence/m1-i/retry-setup.png)
+
+目视检查确认坡道/平台、主路与东廊逃逸、队员路线与覆盖、剩余补给点和 A/B 站位差异均可辨；青色离散覆盖与黄色扇形/橙色参考覆盖没有混淆。失败图来自真实 flank 逃逸结果，重试图来自实际 Continue 流程，不是静态伪造状态。
+
+**共享回归：** 本轮已串行通过 D、E、F、G、H 单项隔离 gate；全量 `smoke_test.gd` 隔离回归仍在执行，完成标记与存档守卫结果待补记。外部 GPT 新精确差异 REVIEW、Android/vivo、五人试玩和设备依赖 AudioTrack 仍按用户要求暂缓。
+
+状态：I 桌面 gate 与截图目视证据通过；全量共享 smoke 最终结果待记录；不代表 M1 整体退出。

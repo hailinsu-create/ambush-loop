@@ -2,7 +2,7 @@
 
 更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前执行入口：** [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)，承接 [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md)。D 冻结/重试合同桌面隔离门通过（run `5e9540de7c4c4562bb0676fdbcab1663`，exit 0；源码 Draft PR #18）；E 资源门通过（源码 Draft PR #19 / `720511e`；run `a22ec167913d490bb22fdfe620b28c20` exit 0）；F 时机门通过（源码 Draft PR #20 / `2010829`；run `97aed94aefe94d56bcf673448f3a4fe7` exit 0）；G 双解/真实侧翼逃逸反例通过（源码 Draft PR #21 / `da10638`；run `f13b9dc497df4d1c9e71a10881567c5d` exit 0）；H 整关、倍速等价、回放只读、逃逸重试门通过（源码 Draft PR #22 / `e2c98d2`；run `07c27f6c70a74fd696a74b60b5d089d5` exit 0）。D–H 均为本机桌面隔离证据，M1 整体仍未退出。外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack 按用户要求暂缓。
+**当前执行入口：** [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)，承接 [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md)。本轮 D、E、F、G、H 单项隔离复验依次通过（runs `5ffbbb5ba16645c1931a0edf7084f0c5`、`8185a4e0b5f44d40a678d6993a06b56c`、`cafad01d062a4d4fba5ce5e4006213ae`、`b819434421114acd8586a35ee73a58cc`、`6b945b92cb92422fae98ce2ac67985fa`，均 exit 0 并确认玩家数据不变）。I 图形隔离 run `81ca8c1b0c5e45e395cacc3366b103e0` 通过，四张 1280×720 截图已目视并归档；源码 Draft PR #23 / `8bc9a4f`。完整 `smoke_test.gd` 的串行复验 run `6aa4327b890741a89270cdea56124d60` 仍在进行，最终完成标记和玩家数据守卫待记录；故此刻不宣称 M1 整体退出。外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack 按用户要求暂缓。
 
 **本轮边界：** 用户要求先搁置需人的部分并完成其余 M1 工作。本机按既有正式 D–I 路线推进 E–I 自动化桌面证据；原 GPT 的新逐切片 PLAN/REVIEW、Android/vivo 和 5 人试玩仍明确待办，不宣称完整 M1 通过。
 
@@ -24,7 +24,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [M1-I 渲染可读性与战术差异](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md) | 当前执行切片：桌面渲染 A/B 有效方案、侧翼失败和重试，并目视核对坡道、逃逸、覆盖与资源点。 |
+| [M1-I 渲染可读性与战术差异](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md) | 桌面 gate 与四张 viewport 截图均通过并逐张目视（run `81ca8c1b0c5e45e395cacc3366b103e0`，源码 Draft PR #23）；全量 shared smoke 仍在复验。 |
 | [M1-H 院子整关一致性门](AMBUSH_M1_H_END_TO_END_PLAN_20261003.md) | 桌面整关门通过：1×/2×同权威结果；回放只读；flank 逃逸→Continue 重试。源码 Draft PR #22。 |
 | [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md) | 桌面 gate 通过：A/B 均两波获胜；主路集中反例真实 flank 逃逸并记录未交战原因。源码 Draft PR #21。 |
 | [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md) | 已实现并桌面隔离验收通过；同枪同弹药下，见敌即打在区外开火，入伏再打先记录武装后同 tick 开火。源码 Draft PR #20，D/E 回归 exit 0；外部 GPT 精确差异复审仍待授权。 |
