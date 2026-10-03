@@ -117,13 +117,14 @@ func _actual_command() -> void:
 	_check(_body().sampled_time > float(signature[1]), "command utility resumes on focus return")
 	await _capture("scout_grenade_follow")
 	# Poison every live input relevant to this pose. A copied command record
-	# remains fixed even though its BattleLog attempt identity is still empty.
+	# keeps the recorded SCOUT attempt rather than manufacturing an empty one.
 	var source_scope: String = release.utility_scope_id
+	var source_attempt: String = main.battle_log.attempt_id
 	main.run_id += 500
 	main._pose_command_clock_s = 999.0
 	op.apply_weapon("knife", false)
 	op.global_position += Vector2(64, 64)
-	var historical := _record_copy(release, main.Phase.SETUP, "", 0, 0)
+	var historical := _record_copy(release, main.Phase.SETUP, source_attempt, 0, 0)
 	var historical_bones := _bones(_body())
 	_check(_body().sampled_action == "grenade_throw" and _body().sampled_time == 0.5 and historical.utility_scope_id == source_scope and _operator(historical).utility_pose.event_id == state.event_id, "history uses original event identity/clock/equipment/position")
 	main.replay.set_tick(0)

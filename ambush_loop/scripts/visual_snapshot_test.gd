@@ -104,7 +104,7 @@ func _run() -> void:
 	main.run_id += 200
 	var live: Dictionary = main._snapshot_data().duplicate(true)
 	for snap in [first, second, first, second]:
-		main.replay.set_tick(BattleLog.record_tick(snap))
+		main.replay.set_tick(main.replay.playback_time(snap))
 		main._apply_replay_scrub()
 		main.presentation_3d.refresh()
 		var frame := ViewState.capture(main)

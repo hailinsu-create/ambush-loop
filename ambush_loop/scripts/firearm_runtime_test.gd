@@ -200,11 +200,12 @@ func _actual_battle(main: Node) -> void:
 	main._on_replay_pressed()
 	var live_copy: Dictionary = main._snapshot_data().duplicate(true)
 	var signature: Array = []
-	for tick in [BattleLog.record_tick(recorded), main.replay.max_tick(), BattleLog.record_tick(recorded)]:
+	var recorded_time: int = main.replay.playback_time(recorded)
+	for tick in [recorded_time, main.replay.max_tick(), recorded_time]:
 		main.replay.set_tick(tick)
 		main._apply_replay_scrub()
 		main.presentation_3d.refresh()
-		if tick == BattleLog.record_tick(recorded):
+		if tick == recorded_time:
 			body = main.presentation_3d.actors["ops:2"].get_node("Body")
 			_check(body.equipped_id == "mg42" and body._layers.upper_action == "fire_mg", "actual backward seek restores historical MG rather than current pistol")
 			if signature.is_empty():

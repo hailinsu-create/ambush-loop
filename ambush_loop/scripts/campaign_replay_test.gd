@@ -181,12 +181,18 @@ func _capture_history(main: Node,label: String,tick: int) -> void:
 	main._apply_replay_scrub()
 	main.presentation_3d.rig.reset_view()
 	main.presentation_3d.refresh()
-	await process_frame
-	await RenderingServer.frame_post_draw
+	# Native X11 screen reads the presented front buffer. Give the selected
+	# immutable state two draws so a phase boundary cannot capture its predecessor.
+	for draw in 2:
+		await process_frame
+		await RenderingServer.frame_post_draw
+	var frame: Dictionary=ViewState.capture(main)
+	var source: Dictionary=main.replay.snapshot_at_or_before(tick)
+	_check(frame.playback_tick==tick and frame.frame_seq==source.frame_seq and frame.wave_id==source.wave_id and frame.recorded_phase==source.data.phase,"native capture retains the selected historical frame identity "+label)
 	var image:=DisplayServer.screen_get_image(root.current_screen).get_region(Rect2i(root.position,root.size))
 	var path: String="res://build/asset_review/pr15-runtime/full_record_"+label+".png"
 	_check(image.save_png(path)==OK,"save actual complete history framebuffer "+label)
-	capture_rows.append({"id":label,"path":path,"sha256":FileAccess.get_sha256(path),"image_size":[image.get_width(),image.get_height()],"source":"native Window crop"})
+	capture_rows.append({"id":label,"path":path,"sha256":FileAccess.get_sha256(path),"image_size":[image.get_width(),image.get_height()],"source":"native Window crop after two draws","playback_tick":tick,"frame_seq":frame.frame_seq,"attempt_id":frame.attempt_id,"wave_id":frame.wave_id,"recorded_phase":frame.recorded_phase,"header":main.title_label.text})
 
 
 func _normalize_identity(value: Variant, scope: String, attempt: String) -> void:
