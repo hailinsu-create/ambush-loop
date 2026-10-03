@@ -3,6 +3,7 @@ extends Control
 ## Title: brand, mission select, briefing, continue, how-to, quit confirm.
 
 const CampaignJournalScript := preload("res://scripts/ui/campaign_journal.gd")
+const ModalFocus := preload("res://scripts/ui/modal_focus.gd")
 
 const HOWTO := """北区补给链第三夜：院子 → 仓道 → 泵站 → 信号楼 → 油库 → 电台。
 搜刮组火力，埋伏后拉警报。清波打扫，战利品带进下一波。逃逸或全灭失败。
@@ -170,7 +171,7 @@ func journal_body_text() -> String:
 
 
 func open_journal() -> void:
-	if _journal:
+	if _journal and _top_modal() == null:
 		_journal.present()
 
 
@@ -298,19 +299,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 
+func _top_modal() -> CanvasLayer:
+	var top: CanvasLayer
+	for layer: CanvasLayer in [pause_ui, _journal, _quit, _brief, _howto, _mission]:
+		if is_instance_valid(layer) and layer.visible and (top == null or layer.layer > top.layer):
+			top = layer
+	return top
+
+
 func _on_back() -> void:
-	if _quit != null and _quit.visible:
-		_dismiss_modal(_quit)
-	elif _brief != null and _brief.visible:
-		_dismiss_modal(_brief)
-	elif _howto != null and _howto.visible:
-		_dismiss_modal(_howto)
-	elif _journal != null and _journal.is_open():
-		_journal.dismiss()
-	elif _mission != null and _mission.visible:
-		_dismiss_modal(_mission)
-	elif pause_ui != null and pause_ui.is_open():
+	var top := _top_modal()
+	if top == pause_ui and top != null:
 		pause_ui.dismiss()
+	elif top == _journal and top != null:
+		_journal.dismiss()
+	elif top != null:
+		_dismiss_modal(top)
 	else:
 		_show_quit_confirm()
 
@@ -320,7 +324,7 @@ func _on_start() -> void:
 
 
 func _on_continue() -> void:
-	if not GameSettings.has_progress():
+	if _top_modal() != null or not GameSettings.has_progress():
 		return
 	_enter_mission(GameSettings.progress_level_id())
 
@@ -550,27 +554,30 @@ func _pin_modal_edges(layer: CanvasLayer, box: VBoxContainer, focus: Button) -> 
 
 
 func _focus_loop(node: Node) -> void:
-	var buttons: Array[Button] = []
-	for child in node.find_children("*", "Button", true, false):
-		if child.is_visible_in_tree() and not child.disabled:
-			buttons.append(child)
-	for index in buttons.size():
-		buttons[index].focus_next = buttons[(index + 1) % buttons.size()].get_path()
-		buttons[index].focus_previous = buttons[(index - 1 + buttons.size()) % buttons.size()].get_path()
+	ModalFocus.loop(node)
 
 
 func _restore_menu_focus() -> void:
+	var top := _top_modal()
+	if top != null:
+		ModalFocus.ensure(top)
+		return
 	var focus := get_viewport().gui_get_focus_owner()
-	if focus == null or not focus.is_visible_in_tree():
+	if focus == null or not focus.is_visible_in_tree() or not _menu.is_ancestor_of(focus):
 		start_btn.grab_focus()
 
 
 func _reveal_modal(layer: CanvasLayer) -> void:
 	if layer == null:
 		return
+	var top := _top_modal()
+	if top != null and top != layer:
+		return
 	var previous := get_viewport().gui_get_focus_owner()
-	if previous != null and previous.is_visible_in_tree():
-		layer.set_meta("previous_focus", previous)
+	if is_instance_valid(previous) and previous.is_visible_in_tree():
+		layer.set_meta("previous_focus", weakref(previous))
+	elif layer.has_meta("previous_focus"):
+		layer.remove_meta("previous_focus")
 	layer.visible = true
 	_layout_title()
 	(layer.get_meta("scroll") as ScrollContainer).scroll_vertical = 0
@@ -601,8 +608,12 @@ func _dismiss_modal(layer: CanvasLayer) -> void:
 			_modal_tween.tween_property(c, "modulate:a", 0.0, 0.15)
 	_modal_tween.chain().tween_callback(func() -> void:
 		layer.visible = false
-		var previous: Control = layer.get_meta("previous_focus", null)
-		if is_instance_valid(previous) and previous.is_visible_in_tree():
+		var previous: Control
+		if layer.has_meta("previous_focus"):
+			var reference: WeakRef = layer.get_meta("previous_focus")
+			previous = reference.get_ref() as Control if reference else null
+			layer.remove_meta("previous_focus")
+		if _top_modal() == null and is_instance_valid(previous) and previous.is_visible_in_tree():
 			previous.grab_focus()
 		else:
 			_restore_menu_focus()

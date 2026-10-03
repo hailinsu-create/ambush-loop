@@ -1,5 +1,6 @@
 class_name PauseOverlay
 extends CanvasLayer
+const ModalFocus := preload("res://scripts/ui/modal_focus.gd")
 
 ## Shared pause / settings: mute, Music/SFX volumes, return to title, redeploy (scout/sweep).
 
@@ -26,6 +27,7 @@ var _nade_btn: Button
 var _close_btn: Button
 var _wipe_armed: bool = false
 var _scroll: ScrollContainer
+var _previous_focus: WeakRef
 
 
 func _ready() -> void:
@@ -56,6 +58,7 @@ func _ready() -> void:
 	margin.add_child(shell)
 	_scroll = ScrollContainer.new()
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.follow_focus = true
 	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var box := VBoxContainer.new()
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -174,6 +177,8 @@ func is_open() -> bool:
 
 
 func present(show_redeploy: bool, show_title: bool) -> void:
+	var previous := get_viewport().gui_get_focus_owner()
+	_previous_focus = weakref(previous) if is_instance_valid(previous) and previous.is_visible_in_tree() else null
 	_layout_for_surface()
 	_scroll.scroll_vertical = 0
 	_open = true
@@ -186,6 +191,8 @@ func present(show_redeploy: bool, show_title: bool) -> void:
 	if _wipe_btn:
 		_wipe_btn.visible = show_title
 	_refresh_audio()
+	ModalFocus.loop(self)
+	_close_btn.grab_focus()
 	if _panel:
 		_panel.pivot_offset = _panel.size * 0.5
 		_panel.scale = Vector2(0.92, 0.92)
@@ -211,6 +218,10 @@ func dismiss() -> void:
 		_panel.modulate.a = 1.0
 	if _dim:
 		_dim.modulate.a = 1.0
+	var previous := _previous_focus.get_ref() as Control if _previous_focus else null
+	_previous_focus = null
+	if is_instance_valid(previous) and previous.is_visible_in_tree():
+		previous.grab_focus()
 	closed.emit()
 
 
