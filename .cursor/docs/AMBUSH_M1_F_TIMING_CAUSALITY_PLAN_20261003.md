@@ -29,6 +29,12 @@
 - 本计划沿用原 D–I 总 PLAN。用户要求暂缓需人的部分，因此新的外部 GPT 逐切片 REVIEW 暂未执行；本计划和后续本地通过均不代表外部批准。
 - vivo 真机、5 位非开发者试玩及设备依赖的 AudioTrack 根因仍待补，不能由 F 桌面 gate 替代。
 
-## 状态与下一步
+## M1-F 实现与桌面验证结果（2026-10-03）
 
-状态：计划已入库；F gate 待实现。完成后继续 G 两种有效战术方案与可解释失败反例，再做 H 整关一致性，最后尽可能生成并目视检查 I 的桌面原始截图。M1 整体仍未退出。
+源码 Draft PR #20：[`2010829`](https://github.com/hailinsu-create/ambush-loop/pull/20)，分支 `codex/m1-f-timing-causality`，以 E PR #19 对应分支为 base。只新增隔离 gate 与两种 runner allowlist，没有改生产战斗逻辑、武器伤害或射程。
+
+最终隔离 run `97aed94aefe94d56bcf673448f3a4fe7`，Godot 4.7.2，wrapper exit 0，`PLAYER_DATA_UNCHANGED=1`。标记 `M1_YARD_TIMING_CAUSALITY_OK real_crate=1 same_weapon=1 same_geometry=1 outside_immediate=1 hold_waits=1 armed_before_fire=1 equal_damage=1 equal_range=1 real_retry=1`。同一院子、同一队员/位置/朝向、真实搜索所得同款枪与相同弹药、相同敌人 ID/生命/路线下，即时模式在伏击区外开火；等待模式在进入区前不消耗弹药、不伤敌，入区后权威日志先记 `ambush_armed`、同 tick 再记 `fire`，单发伤害相等。两次试验之间使用真实中止→继续重试清理。
+
+附加隔离回归：D run `11f3ab9f60db45279895db1adea04955` exit 0，E run `a22ec167913d490bb22fdfe620b28c20` exit 0。首次 gate 测试曾因夹具在正常拉警报之前加入敌人而被生产 `_queue_spawns()` 清除；按真实启动顺序将夹具移至警报后，并尊重 60Hz 固定步长；这仅修正了 gate，没有生产缺陷或平衡值变更。
+
+**边界：** 以上是桌面确定性模拟证据，不代表外部 GPT REVIEW、真机或玩家理解度通过。下一切片见 [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md)。vivo、5 位非开发者试玩及设备依赖的 AudioTrack 仍暂缓；M1 整体未退出。

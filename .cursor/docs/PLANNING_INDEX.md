@@ -2,7 +2,7 @@
 
 更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前执行入口：** [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md)，承接 [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md)。D 冻结/重试合同桌面隔离门通过（run `5e9540de7c4c4562bb0676fdbcab1663`，exit 0；源码 Draft PR #18）；E 资源因果门与弹药池重试修复桌面验收通过（源码 Draft PR #19 / `720511e`；E run `ae585b42f63943728951d94cf864be64`、C3/C2/C1/B2/feel/full smoke 回归均 exit 0）。D/E 精确差异的外部 GPT REVIEW 暂缓，不阻止用户授权的本机桌面工作。C3 在 Draft PR #17 / `1de462a` 已 DONE；M1 整体尚未退出。手机、非开发者试玩和设备依赖的 AudioTrack 根因按用户要求暂搁。
+**当前执行入口：** [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md)，承接 [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md)。D 冻结/重试合同桌面隔离门通过（run `5e9540de7c4c4562bb0676fdbcab1663`，exit 0；源码 Draft PR #18）；E 资源因果门与弹药池重试修复桌面验收通过（源码 Draft PR #19 / `720511e`；E run `ae585b42f63943728951d94cf864be64`，本轮复验 `a22ec167913d490bb22fdfe620b28c20` exit 0）；F 火力时机因果门通过（源码 Draft PR #20 / `2010829`；F run `97aed94aefe94d56bcf673448f3a4fe7` exit 0；D run `11f3ab9f60db45279895db1adea04955` exit 0）。E 后 C3/C2/C1/B2/feel/full smoke 回归均 exit 0。D/E/F 精确差异的外部 GPT REVIEW 暂缓，不阻止用户授权的本机桌面工作。C3 在 Draft PR #17 / `1de462a` 已 DONE；M1 整体尚未退出。手机、非开发者试玩和设备依赖的 AudioTrack 根因按用户要求暂搁。
 
 **本轮边界：** 用户要求先搁置需人的部分并完成其余 M1 工作。本机按既有正式 D–I 路线推进 E–I 自动化桌面证据；原 GPT 的新逐切片 PLAN/REVIEW、Android/vivo 和 5 人试玩仍明确待办，不宣称完整 M1 通过。
 
@@ -24,7 +24,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md) | 当前执行切片：固定院子/队员/枪械/路线，仅比较见敌即打与入伏再打；以权威日志、首发 tick、弹药与伤害证明时机差异。 |
+| [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md) | 当前执行切片：按设计 v2 编码 A/B 队员、位置和路线职责，并用真实 flank 逃逸解释“全员守主路”反例；完整两波结果待 gate 证明。 |
+| [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md) | 已实现并桌面隔离验收通过；同枪同弹药下，见敌即打在区外开火，入伏再打先记录武装后同 tick 开火。源码 Draft PR #20，D/E 回归 exit 0；外部 GPT 精确差异复审仍待授权。 |
 | [M1-E 资源因果与预算门](AMBUSH_M1_E_RESOURCE_BUDGET_PLAN_20261003.md) | 已实现并桌面隔离验收通过；修复失败重试残留 ammo_pool。源码 Draft PR #19，外部 GPT 精确差异复审仍待授权。 |
 | [M1-C1 高度视线几何切片](AMBUSH_M1C_GEOMETRY_PLAN_20261002.md) | 既有本地进展：几何 API、四项隔离门、实际 GPT DONE；战斗/预览/回放同源接入已由 C2/C3 后续切片推进。真机仍待补。 |
 | [本地评审恢复与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md) | 当前本地入口：浏览器实际恢复；preflight 精确两文件补审；下一步仅 Vivo 包身份、B2 视觉/玩法与音频生命周期样本。 |
