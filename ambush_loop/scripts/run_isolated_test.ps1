@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotExe,
     [ValidateSet(
-        'title_focus_keyboard_test.gd', 'title_menu_viewport_test.gd',
+        'first_visit_journey_test.gd', 'title_focus_keyboard_test.gd', 'title_menu_viewport_test.gd',
         'replay_autoplay_test.gd',
         'replay_timeline_test.gd',
         'equipment_freeze_test.gd',

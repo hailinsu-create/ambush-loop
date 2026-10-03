@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [正常玩家旅程计划](AMBUSH_PR15_PLAYER_JOURNEY_PLAN_20261003.md) | 接续a5ba原完整v2：已有reference/vacuum六关不代正常输入；先真实fresh title入口确认200%首次教学是否阻断，再补正常搜刮/补给/13波。FX/A3/耳听仍待，资产制作与R规则保持。 |
 | [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持；3ba原配置push/远端HEAD已核对。共享Pause修复后fixed4ba相关H29/R167与生命周期30/32再次实际exit0/ERROR0，单列不相加。独立QA待，FX/A3后置。 |
 | [title焦点/生命周期报告](AMBUSH_PR15_TITLE_FOCUS_20261003.md) / [计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md) | fixed4ba作者正式六次全部actual exit0/ERROR0：自然键盘4476、原Quit7、autoREPLAY29/167、生命周期30/32；四surface profiles×fresh/Continue八组，83PNG核hash/实际看15。129a负向34/4exit1/ERROR1→开发最小36/0→830生产修复；两个830无效native轮次实际143，全部剔除。独立关闭待，先交checkpoint，FX/A3后置。 |
 | [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | 历史fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。父端d7b尺寸限定关闭；后发现焦点/生命周期两P2现由830修复、fixed4ba作者专项通过，独立关闭待。d7b原配置push/只读HEAD已核对，formal29未重跑。 |
