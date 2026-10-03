@@ -72,6 +72,7 @@ const SfxBusScript := preload("res://scripts/sfx/sfx_bus.gd")
 const AmbushZoneFxScript := preload("res://scripts/fx/ambush_zone_fx.gd")
 const MissionSkyScript := preload("res://scripts/fx/mission_sky.gd")
 const TouchHudScript := preload("res://scripts/touch_hud.gd")
+const YardHudScript := preload("res://scripts/ui/yard_hud.gd")
 const IntelPathGhostScript := preload("res://scripts/fx/intel_path_ghost.gd")
 const PayoffCopy := preload("res://scripts/replay/payoff.gd")
 const KillzoneOverlayScript := preload("res://scripts/fx/killzone_overlay.gd")
@@ -337,6 +338,7 @@ var _stealth_avoid_cache: Dictionary = {}
 var _stealth_avoid_msec: int = 0
 var _move_ghost: Line2D = null
 var c2 = null
+var yard_hud = null
 var _c2_sprint_next: bool = false
 
 
@@ -365,6 +367,9 @@ func _ready() -> void:
 	_ensure_presentation_fx()
 	_ensure_touch_hud()
 	_ensure_c2()
+	yard_hud = YardHudScript.new()
+	$HUD/Root.add_child(yard_hud)
+	yard_hud.bind(self)
 	_diag_memory("main.controllers.ready")
 	_load_level(_resolve_start_level(), false, false)
 	_diag_memory("main.level.ready")
@@ -876,6 +881,14 @@ func _want_touch() -> bool:
 	return OS.has_feature("android") or OS.has_feature("mobile")
 
 
+func yard_redesign_active() -> bool:
+	return level != null and str(level.level_id) == "yard"
+
+
+func yard_tactical_details_visible() -> bool:
+	return not yard_redesign_active() or (yard_hud != null and yard_hud.details_open)
+
+
 func _ensure_touch_hud() -> void:
 	if touch_hud == null or not is_instance_valid(touch_hud):
 		touch_hud = TouchHudScript.new()
@@ -966,7 +979,7 @@ func _result_overlay_active() -> bool:
 func _sync_desktop_bars(show: bool) -> void:
 	## Touch HUD owns the command row. Never stack ExtraBar + BottomBar under it.
 	## Fail/win overlays hide the bars so the three-line card / 下一关 CTA is not buried.
-	var bars := show and not _result_overlay_active()
+	var bars := show and not _result_overlay_active() and not yard_redesign_active()
 	var bar: Control = get_node_or_null("HUD/Root/BottomBar") as Control
 	if bar:
 		bar.visible = bars
@@ -1033,7 +1046,7 @@ func _apply_result_rail() -> void:
 	## Phone simplified rail: portraits are identity; left cards stay off.
 	if role_box == null or not is_instance_valid(role_box):
 		return
-	role_box.visible = (not _want_touch()) and not _result_overlay_active()
+	role_box.visible = (not _want_touch()) and not _result_overlay_active() and not yard_redesign_active()
 
 
 func _safe_area_pad() -> Vector4:
@@ -1089,6 +1102,8 @@ func _refresh_touch_hud() -> void:
 				chip = "下一波 %s %.1fs" % [road, float(info.get("remain", 0.0))]
 		touch_hud.set_next_wave(chip, show_wave and chip != "")
 	_refresh_watch_wave_chip()
+	if yard_hud:
+		yard_hud.refresh()
 
 
 func _toggle_event_log() -> void:
@@ -1328,7 +1343,7 @@ func _refresh_mute_button() -> void:
 
 
 func _update_observation_rings() -> void:
-	var show := phase == Phase.SETUP
+	var show := phase == Phase.SETUP and yard_tactical_details_visible()
 	_apply_west_obs_scale()
 	for op in operators:
 		if is_instance_valid(op):
@@ -1570,10 +1585,11 @@ func _apply_watch_layers() -> void:
 			_refresh_selected_coverage()
 	var dim_routes := not _is_command_phase()
 	if routes_draw:
+		routes_draw.visible = yard_tactical_details_visible()
 		routes_draw.modulate = Color(1, 1, 1, 0.32) if dim_routes else Color.WHITE
 	if killzone_draw:
 		killzone_draw.modulate = Color.WHITE
-		killzone_draw.visible = _is_command_phase()
+		killzone_draw.visible = _is_command_phase() and yard_tactical_details_visible()
 	if decision_marker and is_instance_valid(decision_marker):
 		decision_marker.visible = _is_command_phase()
 	if barrel_hint and is_instance_valid(barrel_hint):
@@ -1595,9 +1611,9 @@ func _apply_watch_layers() -> void:
 		if phase == Phase.SETUP:
 			trap_path.modulate.a = 1.0
 	if spawn_ghost_host and is_instance_valid(spawn_ghost_host):
-		spawn_ghost_host.visible = phase == Phase.SETUP
+		spawn_ghost_host.visible = phase == Phase.SETUP and yard_tactical_details_visible()
 	if plan_ghost_host and is_instance_valid(plan_ghost_host):
-		plan_ghost_host.visible = phase == Phase.SETUP
+		plan_ghost_host.visible = phase == Phase.SETUP and yard_tactical_details_visible()
 	if entities:
 		entities.modulate = Color.WHITE
 	if ghosts:
@@ -2262,6 +2278,9 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	if yard_hud:
+		yard_hud.restore_chrome()
+		yard_hud.details_open = false
 	_mission_had_escape = false
 	_door_taught = false
 	_wave_tension_id = -1
@@ -3378,6 +3397,8 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	if yard_hud:
+		yard_hud.details_open = false
 	phase = Phase.SETUP
 	sweep_hint_shown_this_attempt = false
 	tool = Tool.DEPLOY
@@ -4998,7 +5019,7 @@ func _on_pause_pressed() -> void:
 func alarm_leak_warning() -> String:
 	if not has_method("leak_cover_ok") or leak_cover_ok():
 		return ""
-	return "漏网还没罩住 — 拉警报会穿梭"
+	return "漏网风险：仍有路线未被覆盖。" if yard_redesign_active() else "漏网还没罩住 — 拉警报会穿梭"
 
 
 func raid_force_alarm() -> void:
@@ -5019,7 +5040,7 @@ func _on_alarm_pressed() -> void:
 	if not squad_has_firearm():
 		if not _alarm_warned_no_gun:
 			_alarm_warned_no_gun = true
-			var warn := "至少先拾一把枪 — 再按一次才强拉警报"
+			var warn := "先搜集武器；再次确认仍可无枪交战。" if yard_redesign_active() else "至少先拾一把枪 — 再按一次才强拉警报"
 			_flash(warn, Color(1.0, 0.62, 0.28))
 			if status_label:
 				status_label.text = warn
@@ -6066,10 +6087,14 @@ func _fix_one_line() -> String:
 	if fail_reason != "escape":
 		return ""
 	if _alarm_pulled_unarmed:
+		if yard_redesign_active():
+			return "可以尝试：先取得枪械和弹药，再开始交战。"
 		return "改一处就能赢：先搜匣拿到枪再拉警报。刀强拉会漏网。"
 	if level != null:
 		var authored := str(level.fix_one).strip_edges()
 		if authored != "":
+			if yard_redesign_active():
+				return authored.replace("改一处就能赢：", "可以尝试：")
 			return authored
 	return ""
 
@@ -6221,6 +6246,13 @@ func _show_fail_result() -> void:
 	var line1 := leak_line if leak_line != "" else "第 %d 世失败（%s）。" % [loop_index, reason_zh]
 	var line2 := fix if fix != "" else intel_line
 	var line3 := "带着情报穿梭回去"
+	if yard_redesign_active():
+		var observations := YardHudScript.failure_observations(self)
+		line1 = observations[0] if not observations.is_empty() else epitaph
+		line2 = "\n".join(observations.slice(1))
+		line3 = "打开记录查看交战过程；重新部署再试。"
+		if fix != "":
+			_fail_dossier_text += "\n—— 建议（未保证通关）——\n" + fix
 	result_label.text = "%s\n%s\n%s" % [line1, line2, line3]
 	_dossier_open = false
 	if result_dossier:
@@ -6231,6 +6263,11 @@ func _show_fail_result() -> void:
 		dossier_button.text = "卷宗"
 	_refresh_route_timeline(true)
 	continue_button.text = "带着情报穿梭回去"
+	if yard_redesign_active():
+		continue_button.text = "重新部署"
+		continue_button.tooltip_text = "返回准备，恢复上次部署；武器和弹药需要重新搜集。"
+		if dossier_button:
+			dossier_button.text = "记录与建议"
 	if replay_button:
 		replay_button.visible = true
 	status_label.text = "%s — 穿梭或打开时间轴复盘；点击事件定位" % reason_zh
@@ -6692,7 +6729,7 @@ func _refresh_watch_timeline() -> void:
 		return
 	var touch := _want_touch()
 	## Phone SCOUT: hide the timeline so it does not cover the north wall.
-	var show := level != null and (phase == Phase.WATCHING or (phase == Phase.SETUP and not touch))
+	var show := level != null and (phase == Phase.WATCHING or (phase == Phase.SETUP and not touch)) and yard_tactical_details_visible()
 	if touch:
 		watch_timeline.offset_top = 44.0
 		watch_timeline.offset_bottom = 80.0
@@ -7298,6 +7335,13 @@ func _update_hud() -> void:
 	_ensure_touch_hud()
 	_refresh_touch_hud()
 	_apply_phone_world_ink()
+	if yard_hud:
+		yard_hud.refresh()
+	for op in operators:
+		if op:
+			op.set_direction_guide_visible(yard_tactical_details_visible())
+	if yard_redesign_active():
+		_update_cover_previews()
 
 
 func _pending_unspawned() -> int:
@@ -7554,7 +7598,7 @@ func _update_cover_previews() -> void:
 			hot = true
 		elif phase == Phase.WATCHING and s.occupied_by != null and is_instance_valid(s.occupied_by) and s.occupied_by.visible:
 			hot = true
-		s.set_protect_preview(2 if hot else 1)
+		s.set_protect_preview((2 if hot else 1) if yard_tactical_details_visible() else (2 if hot else 0))
 		var occupied := s.occupied_by != null and is_instance_valid(s.occupied_by) and s.occupied_by.visible
 		if s.has_method("set_plan_lock"):
 			s.set_plan_lock(phase == Phase.WATCHING and occupied)

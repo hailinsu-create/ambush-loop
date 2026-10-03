@@ -10,6 +10,17 @@ const SETTINGS_PATH := "user://ambush_loop_settings.cfg"
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
 
 
+func _show_yard_details(main) -> void:
+	if main.has_method("yard_redesign_active") and main.yard_redesign_active():
+		main.yard_hud.details_open = true
+		main._update_hud()
+
+
+func _observation_visible_in_tactical(main, scout) -> bool:
+	_show_yard_details(main)
+	return bool(scout.observation_ring_visible())
+
+
 func _init() -> void:
 	if not TestStorageGuard.check():
 		quit(91)
@@ -85,6 +96,7 @@ func _run() -> void:
 	if not await _assert_checklist(main):
 		return
 	print("LEVEL=", main.level.level_id)
+	_show_yard_details(main)
 	if main.has_method("_refresh_watch_timeline"):
 		main._refresh_watch_timeline()
 	if not main.has_method("setup_spawn_preview_visible") or not bool(main.setup_spawn_preview_visible()):
@@ -166,7 +178,8 @@ func _run() -> void:
 			print("SMOKE_OK_ESCAPE_PANEL_CLEAR")
 			var leak_line_txt := _fail_txt(main)
 			var card_txt := str(main.result_label.text)
-			if card_txt.find("漏网：") < 0 or card_txt.find("改一处") < 0 or card_txt.find("带着情报穿梭回去") < 0:
+			var expected_card: bool = card_txt.contains("越界逃逸") and card_txt.contains("最近记录") and not card_txt.contains("改一处就能赢") if main.yard_redesign_active() else card_txt.contains("漏网：") and card_txt.contains("改一处") and card_txt.contains("带着情报穿梭回去")
+			if not expected_card:
 				push_error("SMOKE_FAIL_CARD_NOT_THREE %s" % card_txt)
 				quit(4)
 				return
@@ -425,7 +438,7 @@ func _run() -> void:
 			main._on_clear_pressed()
 			await process_frame
 			_deploy_ref(main, [1, 2, 5], [90.0, 180.0, 180.0])
-			if not main.operators[2].observation_ring_visible():
+			if not _observation_visible_in_tactical(main, main.operators[2]):
 				push_error("SMOKE_SCOUT_OBS_MISSING_SETUP")
 				quit(37)
 				return
@@ -2656,7 +2669,7 @@ func _assert_roles_and_cover(main) -> bool:
 		return false
 	main._select_op(2)
 	main._deploy_selected_to(main.cover_slots[0], false)
-	if not scout.observation_ring_visible():
+	if not _observation_visible_in_tactical(main, scout):
 		push_error("SMOKE_SCOUT_OBS_NOT_SHOWN")
 		quit(37)
 		return false
@@ -4887,7 +4900,8 @@ func _assert_touch_feel_r44(main) -> bool:
 		quit(44)
 		return false
 	if main.touch_hud and main.touch_hud._btns.has("alarm"):
-		if str(main.touch_hud._btns["alarm"].text).find("拉警报") < 0:
+		var expected_cta := "开始交战" if main.yard_redesign_active() else "拉警报"
+		if not str(main.touch_hud._btns["alarm"].text).contains(expected_cta):
 			push_error("SMOKE_R44_TOUCH %s" % main.touch_hud._btns["alarm"].text)
 			quit(44)
 			return false
@@ -5497,7 +5511,7 @@ func _assert_west_obs_tight(main) -> bool:
 		push_error("SMOKE_WEST_OBS_RAD r=%s kit=%s scale=%s" % [rad, kit, scale])
 		quit(44)
 		return false
-	if b.has_method("observation_ring_visible") and not bool(b.observation_ring_visible()):
+	if b.has_method("observation_ring_visible") and not _observation_visible_in_tactical(main, b):
 		push_error("SMOKE_WEST_OBS_HIDDEN")
 		quit(44)
 		return false

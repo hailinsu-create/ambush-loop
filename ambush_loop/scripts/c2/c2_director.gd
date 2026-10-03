@@ -206,6 +206,13 @@ func _pin_portraits(phone: bool) -> void:
 		portraits.offset_right = 168.0
 		portraits.offset_top = -272.0
 		portraits.offset_bottom = -158.0
+		if host.has_method("yard_redesign_active") and host.yard_redesign_active():
+			portraits.anchor_left = 0.0
+			portraits.anchor_right = 0.0
+			portraits.offset_left = 16.0
+			portraits.offset_right = 352.0
+			portraits.offset_top = -128.0
+			portraits.offset_bottom = -16.0
 		portraits.visible = true
 
 
