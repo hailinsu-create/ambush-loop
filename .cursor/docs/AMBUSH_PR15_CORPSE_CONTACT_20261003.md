@@ -1,6 +1,6 @@
 # PR15 原生 SWEEP 拖尸墙面修复
 
-2026-10-03。R02 作者修复与限定验证，独立复验待结果；不是全部尸体品质验收。继承 [v2执行计划](AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md)，已只读读取 [07玩法设计](https://app.notion.com/p/3eecc07750878107b969ef8df5b7b1ef) 与 [08整改台账](https://app.notion.com/p/3eecc077508781ce9d67f94c601f6ef7)。R保留六关13波数值、路线、占格及SCOUT→ALERT→SWEEP；G0–G5仍另版设计，本片不采用height PR13/16/17/18。父端已报告a325的R01 drop独立关闭，本片不重开该缺陷。
+2026-10-03。R02 作者修复与限定验证；父端已报告原穿墙P2独立闭合，仍不是全部尸体品质验收。继承 [v2执行计划](AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md)，已只读读取 [07玩法设计](https://app.notion.com/p/3eecc07750878107b969ef8df5b7b1ef) 与 [08整改台账](https://app.notion.com/p/3eecc077508781ce9d67f94c601f6ef7)。R保留六关13波数值、路线、占格及SCOUT→ALERT→SWEEP；G0–G5仍另版设计，本片不采用height PR13/16/17/18。父端已报告a325的R01 drop独立关闭，本片不重开该缺陷。
 
 ## 实际反例和固定修复
 
@@ -52,3 +52,6 @@
 | 父端dot/独立QA/Notion维护者 | 可并行只读固定d7d29156原墙反例与品质检视；Notion只由指定维护者写。本作者未自行派代理或重复接资产制作 |
 
 资产无需为本墙反例重导出。接触接口仍使用原20骨、upper_arm.L/R肩点、support_hand/weapon_hand旧socket、R5内嵌20cm偏移一次。若后续发现狭角无法共同转身，由独立资产作者提供可选折腿/紧凑拖尸候选并验旧键/骨架/几何/挂点兼容，运行接口另版本化，不整体并资产WIP。
+
+
+2026-10-03状态更新：父端报告68582原native MG/source #3同序97步401 wall skin→0、独立32/0及全新portable再32/0，MG72配置/16H端点/历史387/0与四合法corner48sample133/0（位置fixture）无新P1/P2，原墙P2scope闭合。父端未入本树的raw不混为本作者新run；最高浮空97.64mm、grab/release中段肩掌约0.56m断握、自然握持/正浮空/全墙/same-candidate构建/设备仍待品质优化。本作者随后4741的默认contact576/0及精确nativeMG25/0实际exit0。具体HUD/radio已由[品质小片](AMBUSH_PR15_PRESENTATION_QUALITY_20261003.md)106/0修复；下一优先可见中段断握，再顶部HUD/FX/A3/13波视觉/最终同候选交付。

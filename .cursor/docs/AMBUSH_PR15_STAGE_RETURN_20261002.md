@@ -49,3 +49,6 @@ R4仅工作树开发验证：52clip真实采样17802；修正蹲姿后真实batt
 2026-10-03 R02限定作者修复：[原生SWEEP墙接触报告](AMBUSH_PR15_CORPSE_CONTACT_20261003.md)。固定cd158166真实第二波H/原鼠标路径/朝+Y有363蒙皮顶点进砖墙17/1exit1，d7d291560a77ce112d3fe5f212e39e2d1143c132显式contact版本/共同显示转身修为render576/0，原尸体1203、合同84042、工具1041、冻结66、六关13波10332全部实际exit0；原终局/规则不变，5张真帧已看。独立墙QA、自然正向高度和全墙品质待验，R01由父端报告a325独立关闭；HUD/radio→FX/耳听/A3/13wave visual→单一候选smoke/QA/APK继续，设备后置。G另版、height PR13/16/17/18不合入；ArtSource/GLB/atlas/manifest未改未重跑。旧PCK91/完整smoke7d34867不归当前版本。
 
 附加固定29898fd精确父端MG/force-touch/原生Space-H抓放再抓-鼠标路径复现25/0 exit0；真实flank#3原source(596.6511,207.7352)，97步后(592.2054,178.353)、逻辑90°，LOD0墙内skin顶点0。仅测试文件不同，生产代码等价d7；新MG帧已看，测试parse诊断22c单列保留不计通过。
+
+
+2026-10-03 R03限定作者修复：[depot点击与radio整隐](AMBUSH_PR15_PRESENTATION_QUALITY_20261003.md)。负向c00ddef69/14实际exit1→4741c5f020965f9a4315fa8993da20474efc04f0正式106/0，桌面重复肖像不再盖depot原SWEEP566目标，radio18姿态保留几何、两LOD逐三角形位置/法线/UV/切线及材质完全保留；copied history/live污染/seek、旧缺失/未知version回退及历史卡片只读已验，四张正式图已看。HUD164/生命周期32/输入23/合同84042/六关13波10332/defaultcontact576/nativeMG25均实际exit0；开发属性重编码失败原日志另存排除验收。R03独立QA与SCOUT顶部文字拥挤仍待；missing/unknown cutaway保留旧整隐行为，55/42部件成本进入A3。父端报告68582原穿墙P2独立闭合但最高浮空97.64mm与中段约0.56m断握仍品质缺口，下一优先修断握，再剩余HUD/FX/A3/13wavevisual/同候选smoke-QA-APK。资产制作源/GLB/atlas/manifest未改未重跑，Notion由指定作者写；耳听0/45、0/6缺实际能力，设备后置。旧PCK91与完整smoke7d34867不能归当前版本，不merge/生产、不混G或height分支。
