@@ -45,6 +45,7 @@ var _camera_panel: VBoxContainer
 var _camera_toggle: Button
 var _camera_plate: ColorRect
 var _compact_camera := false
+var _camera_layout_key := ""
 var _camera_open := false
 var _occlusion_acc := 0.0
 var _last_pose := Transform3D.IDENTITY
@@ -128,6 +129,7 @@ func _make_controls() -> void:
 	_camera_controls.add_child(root)
 	var panel := VBoxContainer.new()
 	_camera_panel = panel
+	panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	panel.offset_left = -204
 	panel.offset_right = -16
@@ -297,10 +299,17 @@ func _layout_camera_controls() -> void:
 	_camera_toggle.text = "收镜头" if _camera_open else "镜头"
 	_camera_panel.visible = not compact or _camera_open
 	_camera_controls.layer = 50 if compact and _camera_open else 4
-	_camera_panel.set_anchors_preset(Control.PRESET_TOP_LEFT if compact else Control.PRESET_TOP_RIGHT)
-	_camera_panel.offset_left = 8 if compact else -204
-	_camera_panel.offset_right = 216 if compact else -16
-	_camera_panel.offset_top = 80 if compact else 132
+	var camera_top := 80 if compact else (196 if not host._use_touch_chrome() else 132)
+	var key := "%s:%d" % [compact,camera_top]
+	if key != _camera_layout_key:
+		_camera_layout_key=key
+		# Let minimum-size changes grow toward the courtyard. Reassigning
+		# horizontal offsets on every frame can queue redundant child layouts.
+		_camera_panel.set_anchors_preset(Control.PRESET_TOP_LEFT if compact else Control.PRESET_TOP_RIGHT)
+		_camera_panel.offset_right = 216 if compact else -16
+		_camera_panel.offset_left = 8 if compact else -204
+		_camera_panel.grow_horizontal = Control.GROW_DIRECTION_END if compact else Control.GROW_DIRECTION_BEGIN
+		_camera_panel.offset_top = camera_top
 	_camera_panel.offset_bottom = _camera_panel.offset_top + _camera_panel.get_combined_minimum_size().y
 	_camera_plate.visible = compact and _camera_open
 	_camera_plate.position = _camera_panel.position - Vector2(4,4)

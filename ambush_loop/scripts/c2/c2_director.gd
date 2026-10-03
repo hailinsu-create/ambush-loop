@@ -117,8 +117,8 @@ func _ensure_hud() -> void:
 		minimap.anchor_right = 1.0
 		minimap.offset_left = -196.0
 		minimap.offset_right = -12.0
-		minimap.offset_top = 44.0
-		minimap.offset_bottom = 148.0
+		minimap.offset_top = 76.0
+		minimap.offset_bottom = 180.0
 		_hud_root.add_child(minimap)
 		minimap.bind(host)
 		minimap.pan_requested.connect(func(world: Vector2) -> void:
