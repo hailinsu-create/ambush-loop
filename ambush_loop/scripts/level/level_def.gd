@@ -45,6 +45,9 @@ var campaign_beat: String = ""
 var insert_cells: Array = []
 ## Raid: authored crates {cell, kind, amount}.
 var stashes: Array = []
+## Explicit-ammo missions: loadout grants are the only authored starting rounds.
+var starting_loadouts: Array = []
+var explicit_ammo: bool = false
 ## Raid: array of spawn_schedule arrays. Empty = one wave from spawn_schedule.
 var waves: Array = []
 
@@ -403,7 +406,7 @@ static func make_yard() -> LevelDef:
 	l.atmosphere_id = "yard"
 	l.title = "第1关 · 院子：交叉封锁"
 	l.teaching = "这关必须带铁砧扫东箱侧翼，灰狼补主路第一枪，夜枭长窄锁南闸。夜巡小队从北门进院子，要在南闸汇合前切断。陷阱：只盯主路，侧翼奔袭会从东廊绕出。青弧朝向才有掩体减免，侧背全伤。失败三种：逃逸、全灭、中止（X 留情报）。"
-	l.tutorial = "三人从西插入点出发，开局只有刀。点选肖像或点地走路，双击奔跑。C 匍匐躲岗哨黄锥，Q 背后割喉。走近匣拾步枪/机枪/手雷/地雷，点掩体趴下。I 开背包。G 放雷点，警报中自动丢。空格拉第一波；清完打扫再拉第二波（橙线侧翼）。逃逸或全灭失败。红线=主路，橙线=侧翼。"
+	l.tutorial = "三人携带基础枪与少量应急弹药。西侧短路的三个弹药箱分别补充步枪、机枪、精准枪；东侧可绕路取一枚手雷。补给不替你换枪。点肖像选人，点地移动，点掩体部署；I 查看背包，G 标记投雷点。当前仍先打主路、再打侧翼；单次接触将在下一切片实施。"
 	l.escape_cell = Vector2i(31, 19)
 	# All covers on open cells (yard crates leave spine / lanes free).
 	l.cover_defs = [
@@ -440,23 +443,24 @@ static func make_yard() -> LevelDef:
 		],
 	]
 	l.insert_cells = [Vector2i(6, 16), Vector2i(7, 17), Vector2i(8, 17)]
+	l.explicit_ammo = true
+	l.starting_loadouts = [
+		{"weapon": "kar98k", "ammo": 1},
+		{"weapon": "mg42", "ammo": 3},
+		{"weapon": "kar98k_zf", "ammo": 1},
+	]
 	l.stashes = [
-		{"cell": Vector2i(6, 12), "kind": "rifle", "amount": 7},
-		{"cell": Vector2i(26, 12), "kind": "mg", "amount": 12},
-		{"cell": Vector2i(29, 16), "kind": "scout", "amount": 6},
-		{"cell": Vector2i(11, 16), "kind": "grenade", "amount": 2},
-		{"cell": Vector2i(10, 13), "kind": "mine", "amount": 1},
-		{"cell": Vector2i(23, 13), "kind": "ammo", "amount": 6},
-		{"cell": Vector2i(8, 13), "kind": "pistol", "amount": 8},
-		{"cell": Vector2i(17, 12), "kind": "smg", "amount": 20},
-		{"cell": Vector2i(21, 17), "kind": "luger", "amount": 8},
+		{"cell": Vector2i(6, 12), "kind": "rifle_ammo", "amount": 6},
+		{"cell": Vector2i(8, 13), "kind": "mg_ammo", "amount": 47},
+		{"cell": Vector2i(11, 16), "kind": "scout_ammo", "amount": 5},
+		{"cell": Vector2i(26, 12), "kind": "grenade", "amount": 1},
 	]
 	l.ambush_zone = Rect2(320, 280, 400, 160)
 	l.has_ammo_pack = false
 	l.beat_kind = "ambush_zone"
 	l.beat_text = "交叉封锁 · 侧翼"
 	l.highlight_hook = "交叉封锁第一枪"
-	l.must_bring = "先搜匣：灰狼步枪、铁砧机枪、夜枭狙。第一波锁主路，打扫后再打东廊。"
+	l.must_bring = "基础枪已携带，应急弹仅 1/3/1 发。西侧弹药补足 7/50/6 发；东侧一枚手雷可选，非开战条件。当前仍分两波，注意主路与东廊。"
 	l.role_why = {
 		"rifle": "本关：主路第一枪",
 		"mg": "本关：东箱扫橙线",

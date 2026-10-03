@@ -1124,7 +1124,8 @@ func _assert_raid_contract(main) -> bool:
 	for op in main.operators:
 		if op.visible and op.alive:
 			visible_ops += 1
-		if str(op.weapon_id) != "knife":
+		var expected_weapon := str(main.level.starting_loadouts[int(op.op_id) - 1].weapon) if main.level.explicit_ammo else "knife"
+		if str(op.weapon_id) != expected_weapon:
 			push_error("SMOKE_NOT_KNIFE_START %s %s" % [op.display_name, op.weapon_id])
 			quit(80)
 			return false
@@ -1134,11 +1135,12 @@ func _assert_raid_contract(main) -> bool:
 		return false
 	main._tick_crate_search(0.5)
 	for op in main.operators:
-		if op and str(op.weapon_id) != "knife":
+		var expected_weapon := str(main.level.starting_loadouts[int(op.op_id) - 1].weapon) if main.level.explicit_ammo else "knife"
+		if op and str(op.weapon_id) != expected_weapon:
 			push_error("SMOKE_INSERT_AUTO_GUN %s %s" % [op.display_name, op.weapon_id])
 			quit(80)
 			return false
-	print("SMOKE_OK_INSERT_KNIVES")
+	print("SMOKE_OK_INSERT_LOADOUT explicit_ammo=", main.level.explicit_ammo)
 	if main.level.wave_count() < 2:
 		push_error("SMOKE_YARD_WAVES %s" % main.level.wave_count())
 		quit(80)
@@ -1155,7 +1157,7 @@ func _assert_raid_contract(main) -> bool:
 		push_error("SMOKE_OP_NOT_MOVING")
 		quit(80)
 		return false
-	if main.stash_count() < 9:
+	if main.stash_count() != (4 if main.level.explicit_ammo else 9):
 		push_error("SMOKE_YARD_STASH_COUNT n=%s" % main.stash_count())
 		quit(80)
 		return false
@@ -1163,7 +1165,8 @@ func _assert_raid_contract(main) -> bool:
 	for s in main.raid_stashes:
 		if s != null and is_instance_valid(s):
 			crate_kinds.append(str(s.kind))
-	if not crate_kinds.has("kar98k") or not crate_kinds.has("m1911"):
+	var required_crates: Array = ["rifle_ammo", "mg_ammo", "scout_ammo", "grenade"] if main.level.explicit_ammo else ["kar98k", "m1911"]
+	if not required_crates.all(func(kind): return crate_kinds.has(kind)):
 		push_error("SMOKE_YARD_NAMED_MISS %s" % " ".join(crate_kinds))
 		quit(80)
 		return false
@@ -1178,7 +1181,8 @@ func _assert_raid_contract(main) -> bool:
 			return false
 	print("SMOKE_OK_NAMED_CRATES n=", main.stash_count(), " ", " ".join(crate_kinds))
 	main._refresh_alarm_cta()
-	if str(main.alarm_button.text) != "需枪":
+	var expected_cta := "拉警报" if main.level.explicit_ammo else "需枪"
+	if str(main.alarm_button.text) != expected_cta:
 		push_error("SMOKE_ALARM_CTA %s" % main.alarm_button.text)
 		quit(80)
 		return false
@@ -1187,11 +1191,12 @@ func _assert_raid_contract(main) -> bool:
 		gs_cta.force_touch_hud = true
 	main._ensure_touch_hud()
 	main._refresh_touch_hud()
-	if main.touch_hud and main.touch_hud._btns.has("alarm") and str(main.touch_hud._btns["alarm"].text) != "需枪":
+	var expected_touch_cta := "开始交战" if main.level.explicit_ammo else "需枪"
+	if main.touch_hud and main.touch_hud._btns.has("alarm") and str(main.touch_hud._btns["alarm"].text) != expected_touch_cta:
 		push_error("SMOKE_TOUCH_CTA %s" % main.touch_hud._btns["alarm"].text)
 		quit(80)
 		return false
-	print("SMOKE_OK_ALARM_CTA 需枪")
+	print("SMOKE_OK_ALARM_CTA ", expected_cta, " touch=", expected_touch_cta)
 	var saved_phase = main.phase
 	main.phase = main.Phase.WATCHING
 	main._apply_watch_layers()
@@ -1350,6 +1355,9 @@ func _assert_raid_contract(main) -> bool:
 	wolf.clear_nade_mark()
 	# Soft alarm gate: knives-only first press does not start the wave.
 	main._start_setup(false, false)
+	# Deliberate no-gun negative fixture; yard now legitimately starts armed.
+	for op in main.operators:
+		op.wipe_inventory()
 	if main.squad_has_firearm():
 		push_error("SMOKE_START_HAS_GUN")
 		quit(80)
@@ -1556,14 +1564,15 @@ func _run_all_waves(main, max_frames: int) -> bool:
 
 
 func _assert_raid_campaign(main) -> bool:
-	# Real pickup: walk/teleport 灰狼 onto the rifle crate (0.4s open channel).
+	# Real pickup: 0.4s search grants typed ammo, not implicit starting ammo.
 	main._start_setup(false, false)
 	await process_frame
 	var rifle_cell := Vector2i(6, 12)
 	main.operators[0].stop_move()
 	main.operators[0].global_position = main.grid.cell_to_world_center(rifle_cell)
+	var ammo_before_search := int(main.operators[0].ammo)
 	main._try_pickup_near_selected()
-	if str(main.operators[0].weapon_id) != "knife":
+	if int(main.operators[0].ammo) != ammo_before_search:
 		push_error("SMOKE_CRATE_INSTANT weapon=%s" % main.operators[0].weapon_id)
 		quit(81)
 		return false
@@ -1572,11 +1581,15 @@ func _assert_raid_campaign(main) -> bool:
 		quit(81)
 		return false
 	main.raid_advance_search(0.2)
-	if str(main.operators[0].weapon_id) != "knife":
+	if int(main.operators[0].ammo) != ammo_before_search:
 		push_error("SMOKE_CRATE_TOO_FAST")
 		quit(81)
 		return false
 	main.raid_advance_search(0.4)
+	if main.level.explicit_ammo and int(main.operators[0].ammo) != ammo_before_search + 6:
+		push_error("SMOKE_TYPED_CRATE_EXACT_AMOUNT")
+		quit(81)
+		return false
 	if str(main.operators[0].weapon_id) != "kar98k":
 		# Force pickup if snap missed the crate.
 		main.raid_grant_and_pickup(0, "kar98k", 5)
@@ -1590,6 +1603,8 @@ func _assert_raid_campaign(main) -> bool:
 	# Knives-only alarm should leak (cannot hold the spine). Soft gate: second press.
 	main._start_setup(false, false)
 	await process_frame
+	for op in main.operators:
+		op.wipe_inventory()
 	main._on_alarm_pressed()
 	if main.phase == main.Phase.SETUP:
 		main._on_alarm_pressed()
@@ -3604,6 +3619,8 @@ func _empty_probe_world(main) -> Vector2:
 
 func _assert_touch_feel_052(main) -> bool:
 	## North-wall fold, gesture split, follow badge.
+	if main.yard_hud != null and main.yard_redesign_active():
+		main.yard_hud.details_open = false
 	main._ensure_touch_hud()
 	main._update_hud()
 	await process_frame
