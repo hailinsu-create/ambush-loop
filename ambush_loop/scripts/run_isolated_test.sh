@@ -4,7 +4,7 @@ set -euo pipefail
 godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 case "$entry" in
-  smoke_test.gd|r45_sweep_gate.gd|m1_height_data_gate.gd|m1_height_los_gate.gd|m1_height_fire_gate.gd|m1_height_coverage_gate.gd|m1_yard_plan_contract_gate.gd|m1_yard_resource_budget_gate.gd|m1_ramp_pathfinder_gate.gd|m1_b2_yard_height_gate.gd|accept_cta_flow_gate.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
+  smoke_test.gd|r45_sweep_gate.gd|m1_height_data_gate.gd|m1_height_los_gate.gd|m1_height_fire_gate.gd|m1_height_coverage_gate.gd|m1_yard_plan_contract_gate.gd|m1_yard_resource_budget_gate.gd|m1_yard_timing_causality_gate.gd|m1_ramp_pathfinder_gate.gd|m1_b2_yard_height_gate.gd|accept_cta_flow_gate.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
   *) printf 'Unsupported destructive test entry: %s\n' "$entry" >&2; exit 2 ;;
 esac
 
