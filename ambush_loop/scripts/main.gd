@@ -7226,10 +7226,18 @@ func _ammo_summary() -> String:
 
 
 func _update_event_log() -> void:
-	_fill_event_list(battle_log.events, 14, "事件日志 · 点击定位")
+	var source := _event_display_log()
+	var evs := replay.events_up_to(replay.scrub_tick) if phase == Phase.REPLAY else (source.events if source != null else [])
+	_fill_event_list(evs, 14, "事件日志 · 点击定位")
+
+
+func _event_display_log() -> BattleLog:
+	# First-shot labels depend on the recording, just like frames and identity.
+	return replay.log if phase == Phase.REPLAY else battle_log
 
 
 func _fill_event_list(evs: Array, max_count: int, title: String) -> void:
+	var source := _event_display_log()
 	if event_log_title:
 		event_log_title.text = title
 	if event_list == null:
@@ -7237,7 +7245,7 @@ func _fill_event_list(evs: Array, max_count: int, title: String) -> void:
 			var lines := PackedStringArray()
 			var start0 := maxi(evs.size() - max_count, 0)
 			for i in range(start0, evs.size()):
-				lines.append(battle_log.format_event(evs[i]))
+				lines.append(source.format_event(evs[i]) if source != null else "")
 			(event_log as RichTextLabel).text = "[b]%s[/b]\n%s" % [title, "\n".join(lines)]
 		return
 	event_list.clear()
@@ -7246,7 +7254,7 @@ func _fill_event_list(evs: Array, max_count: int, title: String) -> void:
 	for i in range(start, evs.size()):
 		var ev: Dictionary = evs[i]
 		_event_list_items.append(ev)
-		event_list.add_item(battle_log.format_event(ev))
+		event_list.add_item(source.format_event(ev) if source != null else "")
 		event_list.set_item_custom_fg_color(_event_list_items.size() - 1, _event_tint(ev))
 	var log_open := _event_log_open and event_log != null and event_log.visible
 	if log_open and _event_list_items.size() > 0:
@@ -7318,11 +7326,13 @@ func _focus_battle_event(ev: Dictionary) -> void:
 	if str(ev["type"]) == "escape":
 		_begin_escape_flash()
 	if status_label:
-		status_label.text = "定位 · %s" % battle_log.format_event(ev)
+		var source := _event_display_log()
+		status_label.text = "定位 · %s" % (source.format_event(ev) if source != null else "")
 
 
 func focus_latest_of_type(type_name: String) -> bool:
-	var ev := battle_log.last_of_type(type_name)
+	var source := _event_display_log()
+	var ev := source.last_of_type(type_name) if source != null else {}
 	if ev.is_empty():
 		return false
 	_focus_battle_event(ev)
