@@ -7,6 +7,10 @@ func _check(ok: bool, message: String) -> void:
 	if not ok:
 		failures += 1
 		print("TITLE_FOCUS_FAIL " + sample + " " + message)
+		if OS.get_environment("AMBUSH_TITLE_FOCUS_SCOPE") != "negative":
+			_save_focus()
+			print("TITLE_FOCUS_TEST checks=%d failures=%d aborted=true" % [checks,failures])
+			quit(1)
 
 func _settle(frames: int = 3) -> void:
 	await create_timer(0.2).timeout
@@ -99,11 +103,11 @@ func _brief_case(index: int, natural: bool) -> void:
 	else: await _click(main._mission_btns[index])
 	_check(main._brief.visible and not main._mission.visible,"original mission action opens briefing")
 	if natural: await _cycle(main._brief,"briefing " + str(index))
-	await _modal_capture(sample + "_brief_" + str(index))
+	await _modal_capture(sample + "_brief_" + ("keyboard_" if natural else "mouse_") + str(index))
 	await _key("Escape")
 	_check(_visible_layers().is_empty() and current_scene == main,"brief Escape keeps original return-to-title route")
 	_focus_in(main._menu,"brief return " + str(index))
-	await _modal_capture(sample + "_brief_back_" + str(index))
+	await _modal_capture(sample + "_brief_back_" + ("keyboard_" if natural else "mouse_") + str(index))
 
 func _pages_case() -> void:
 	await _tab_to(main.help_btn,main._menu)
