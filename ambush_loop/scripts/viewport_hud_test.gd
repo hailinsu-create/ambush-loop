@@ -31,6 +31,8 @@ func _north_text(label: String) -> void:
 		for chip: Label in main._checklist_labels:
 			var glyph := _text_rect(chip)
 			_check(not glyph.intersects(main.c2.minimap.get_global_rect()),"checklist glyph stays outside minimap "+str(glyph))
+	if main.c2.minimap.is_visible_in_tree() and main.watch_timeline.is_visible_in_tree():
+		_check(not main.watch_timeline.get_global_rect().intersects(main.c2.minimap.get_global_rect()),"north route timeline stays outside minimap")
 	north_rows.append(row)
 
 func _focus_case() -> void:

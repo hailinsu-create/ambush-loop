@@ -36,6 +36,8 @@ func _result_bounds(moment: String) -> void:
 	_fits(main.continue_button,controls)
 	if main.dossier_button!=null: _fits(main.dossier_button,controls)
 	_check(not main.desktop_command_bars_visible(),"terminal hides command rails")
+	for control: Control in [view._camera_panel,view._camera_toggle,view._camera_plate]:
+		_check(not control.is_visible_in_tree(),"terminal content is clear of higher-layer camera controls "+str(control.get_path()))
 	result_rows.append({"sample":sample,"moment":moment,"controls":controls,"result_text":main.result_label.text,"dossier_text":main.fail_dossier_text()})
 
 func _terminal_matrix(won: bool) -> void:
@@ -75,6 +77,8 @@ func _terminal_matrix(won: bool) -> void:
 		var loop_before: int = main.loop_index
 		await _native_click(main.continue_button)
 		for _i in 40: await process_frame
+		view.refresh()
+		_check(view._camera_toggle.is_visible_in_tree() or view._camera_panel.is_visible_in_tree(),"camera controls return after native retry/next-level action")
 		_check(main.phase==main.Phase.SETUP and main.level.level_id==("warehouse" if won else "yard"),"native Continue follows original retry/next-level route")
 		if not won: _check(main.loop_index==loop_before+1,"native retry advances original generation exactly once")
 
