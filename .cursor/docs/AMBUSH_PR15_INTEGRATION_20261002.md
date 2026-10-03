@@ -54,3 +54,8 @@
 
 
 最新独立P2：[成功丢弃取消报告](AMBUSH_PR15_DROP_CANCEL_20261002.md)。原518仍同帧投雷→drop rifle→普通更新拾回rifle导致旧throw复活，b082540真实headless6/1exit1；47f0634仅成功drop立即cancel一行修为6/0，6e9ed4c扩失败/同枪kit/ALERT拒绝13/0、完整render1047/0、装备66/0、尸体headless1203/0，3e09a82专项render7/0与恢复枪实际帧。所有实际exit/durable状态和原日志已存。尸体正文按518原receipt改最低−0.001234874m（原误0.003765）、最高0.101031780m，原receipt不改；自然接地/离地上限/墙contact/完整SWEEP玩家路径独立待验。制作资产无修改，既有PCK91早于此修复，最新fullsmoke7d34867；HUD/radio→FX/A3/13wavevisual/fullsmoke/APK继续，未merge/生产/设备。
+
+
+2026-10-03 R02限定作者修复：[原生SWEEP墙接触报告](AMBUSH_PR15_CORPSE_CONTACT_20261003.md)。固定cd158166真实第二波H/原鼠标路径/朝+Y有363蒙皮顶点进砖墙17/1exit1，d7d291560a77ce112d3fe5f212e39e2d1143c132显式contact版本/共同显示转身修为render576/0，原尸体1203、合同84042、工具1041、冻结66、六关13波10332全部实际exit0；原终局/规则不变，5张真帧已看。独立墙QA、自然正向高度和全墙品质待验，R01由父端报告a325独立关闭；HUD/radio→FX/耳听/A3/13wave visual→单一候选smoke/QA/APK继续，设备后置。G另版、height PR13/16/17/18不合入；ArtSource/GLB/atlas/manifest未改未重跑。旧PCK91/完整smoke7d34867不归当前版本。
+
+附加固定29898fd精确父端MG/force-touch/原生Space-H抓放再抓-鼠标路径复现25/0 exit0；真实flank#3原source(596.6511,207.7352)，97步后(592.2054,178.353)、逻辑90°，LOD0墙内skin顶点0。仅测试文件不同，生产代码等价d7；新MG帧已看，测试parse诊断22c单列保留不计通过。

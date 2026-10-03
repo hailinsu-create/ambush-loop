@@ -1,0 +1,301 @@
+{
+  "format": 1,
+  "fixed_source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+  "runtime_tree_sha": "6eaa086f762f9f468a1efbca6d8fb8558f459b6d",
+  "negative": {
+    "source_sha": "cd1581662b8f9cddac7b323e1b536e5eb8a8f040",
+    "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 corpse_contact_test.gd",
+    "run_id": "261c33b329b84c2eb260644053ee2a49",
+    "exit_code": 1,
+    "checks": 17,
+    "failures": 1,
+    "actual_skinned_vertices_inside_brickwall": 363,
+    "log": "negative.log",
+    "report": "negative-report.json"
+  },
+  "tests": [
+    {
+      "source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "entry": "corpse_contact_test.gd",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture corpse_contact_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "b185341978d24bdea3523e094e73f358",
+      "exit_code": 0,
+      "checks": 576,
+      "failures": 0,
+      "log": "contact-render.log",
+      "sha256": "da4da985144dd160daa066a63aff17f5f92e373891a903035c6d858ff81a17a6"
+    },
+    {
+      "source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "entry": "corpse_runtime_test.gd",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 corpse_runtime_test.gd",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "c084903a34e84d76b307f1b0e8b286b9",
+      "exit_code": 0,
+      "checks": 1203,
+      "failures": 0,
+      "log": "contact-corpse.log",
+      "sha256": "bd71d69b51fb511c1f7c90eb171404febca1973c807614c908cac44b24e1da4a"
+    },
+    {
+      "source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "entry": "presentation_contract_test.gd",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "ec97b90b83be470c847fc8fd6c72cd0c",
+      "exit_code": 0,
+      "checks": 84042,
+      "failures": 0,
+      "log": "contact-contract.log",
+      "sha256": "273bf536da716ade91e098be7c3e6cae74d1a8ffce2787784e54e39d06682621"
+    },
+    {
+      "source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "entry": "utility_runtime_test.gd",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 utility_runtime_test.gd",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "ff2f0333c7a5487d82d957c24c70d373",
+      "exit_code": 0,
+      "checks": 1041,
+      "failures": 0,
+      "log": "contact-utility.log",
+      "sha256": "cc981b817eaa7da1cfa4855938af01a4d2a0624573b83741a8897cb8a4613e16"
+    },
+    {
+      "source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "entry": "equipment_freeze_test.gd",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "71137ebadbe745899f7881fdace04e6c",
+      "exit_code": 0,
+      "checks": 66,
+      "failures": 0,
+      "log": "contact-freeze.log",
+      "sha256": "5f87aa70e3f0ce15a1e3bb67277cc34ed296cd475623e00e534857e8171770d1"
+    },
+    {
+      "source_sha": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "entry": "campaign_replay_test.gd",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "8bd6793ec67f4282ad28557b08cedc87",
+      "exit_code": 0,
+      "checks": 10332,
+      "failures": 0,
+      "log": "contact-campaign.log",
+      "sha256": "859f9682678d2ce9ee91cf22d4910d715ab9066c86940cc6c912bbf833035683"
+    },
+    {
+      "source_sha": "29898fdbacdc078038914a066c9bbaf6c1b5bd6b",
+      "runtime_equivalent_to": "d7d291560a77ce112d3fe5f212e39e2d1143c132",
+      "equivalence": "git diff lists only corpse_contact_test.gd; all production code/assets unchanged",
+      "entry": "corpse_contact_test.gd",
+      "command": "AMBUSH_CONTACT_SCOPE=qa_exact bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture corpse_contact_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "run_id": "f0545deca8cc491d809704d27352a41e",
+      "exit_code": 0,
+      "checks": 25,
+      "failures": 0,
+      "log": "qa-exact.log",
+      "sha256": "7637bba2048608750b26450fbf3d3e4df861e27c8519ca9cb38a4520a51b4d1c",
+      "scope": "exact parent queued native MG/H/mouse/force-touch second-wave enemy_flank #3 input sequence",
+      "result": {
+        "logic_pos": [
+          592.2054,
+          178.353
+        ],
+        "gameplay_facing": 90.0000571459915,
+        "visual_facing": 180.000057145992,
+        "path_steps": 97,
+        "body_lod": 0,
+        "skinned_vertices_inside_brickwall_aabb": 0
+      },
+      "capture": "contact_qa_exact.png"
+    }
+  ],
+  "fixtures": [
+    "campaign ref equipment and first-wave original loot vacuum",
+    "explicit six-slot full packs without target gun to preserve original haul instead of automatic collection",
+    "initial surviving-operator proximity; subsequent native H/mouse path and original movement/controllers",
+    "copied command snapshots for poison/live forward/back seek, not continuous SWEEP timeline or full player journey"
+  ],
+  "rendering": "Godot 4.7.2 Compatibility / Mesa 25.0.7 llvmpipe / Xorg99; cloud software only",
+  "contact_contract": {
+    "schema": 1,
+    "actor_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+    "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+    "layout_revision": "six_level_grid_assembly_1",
+    "source_loot_follow_px": [
+      0,
+      14
+    ],
+    "contact_m": 0.015,
+    "floor_min_m": -0.015,
+    "placement": "pure visual common carrier/body turn; original facing and root preserved; immutable LOD0 geometry + copied frame inputs",
+    "unsupported_records": "old/unknown contact schema keeps old placement",
+    "unresolved": "preserve display and mark contact_resolved=false; never count as a passing contact"
+  },
+  "assets": {
+    "mutated_or_regenerated": [],
+    "imports_restored": 45,
+    "manifest_unchanged": true,
+    "git_diff_against_a325_exit_code": 0
+  },
+  "inspected_images": [
+    "contact_held.png",
+    "contact_release_0.png",
+    "contact_release_35.png",
+    "contact_release_70.png",
+    "contact_history.png",
+    "contact_qa_exact.png"
+  ],
+  "campaign": {
+    "yard": [
+      2,
+      1283,
+      34
+    ],
+    "warehouse": [
+      2,
+      1191,
+      67
+    ],
+    "pump": [
+      2,
+      907,
+      34
+    ],
+    "railcut": [
+      2,
+      719,
+      38
+    ],
+    "depot": [
+      2,
+      957,
+      35
+    ],
+    "radio": [
+      3,
+      1413,
+      51
+    ]
+  },
+  "remaining": [
+    "fixed-SHA independent wall QA",
+    "natural grips and positive floating limit, tight-corner/all-wall/ungrabbed death coverage",
+    "HUD/radio quality",
+    "full 3D FX/continuous command timeline",
+    "actual listening 45 cues / 6 soundscapes",
+    "A3 and 13-wave visual matrix",
+    "same-candidate full smoke/QA/APK",
+    "device/emulator after complete production/cloud"
+  ],
+  "historical_delivery": {
+    "full_smoke_source": "7d34867",
+    "pck_source": "91b9bdc038afea5b8edd73f9cacc40ead7c74c5b",
+    "pck_sha256": "52e14b6b4189af54cb28086b0f36ec08f7201ba24a6be8fa2e823da376562378",
+    "new_build_in_this_slice": false
+  },
+  "artifacts": [
+    {
+      "path": "contact-campaign.log",
+      "bytes": 974,
+      "sha256": "859f9682678d2ce9ee91cf22d4910d715ab9066c86940cc6c912bbf833035683"
+    },
+    {
+      "path": "contact-contract.log",
+      "bytes": 702,
+      "sha256": "273bf536da716ade91e098be7c3e6cae74d1a8ffce2787784e54e39d06682621"
+    },
+    {
+      "path": "contact-corpse.log",
+      "bytes": 610,
+      "sha256": "bd71d69b51fb511c1f7c90eb171404febca1973c807614c908cac44b24e1da4a"
+    },
+    {
+      "path": "contact-freeze.log",
+      "bytes": 601,
+      "sha256": "5f87aa70e3f0ce15a1e3bb67277cc34ed296cd475623e00e534857e8171770d1"
+    },
+    {
+      "path": "contact-render.log",
+      "bytes": 904,
+      "sha256": "da4da985144dd160daa066a63aff17f5f92e373891a903035c6d858ff81a17a6"
+    },
+    {
+      "path": "contact-report.json",
+      "bytes": 15702,
+      "sha256": "85b9ae554f69a14fb0d66257d440106c9959e514ddad6e503d400ba3c2fe6655"
+    },
+    {
+      "path": "contact-utility.log",
+      "bytes": 623,
+      "sha256": "cc981b817eaa7da1cfa4855938af01a4d2a0624573b83741a8897cb8a4613e16"
+    },
+    {
+      "path": "contact_held.png",
+      "bytes": 1082127,
+      "sha256": "b5dc75232ff6942f528f5e9e9fc1ea80c9af00d7ccf4b2807b9c7e22769a670d"
+    },
+    {
+      "path": "contact_history.png",
+      "bytes": 1073957,
+      "sha256": "f4e83b0d2525ed2ea534822b89c00cfac47cfa6c8fcb808408ae09892f9ceaa1"
+    },
+    {
+      "path": "contact_qa_exact.png",
+      "bytes": 1029524,
+      "sha256": "d719e06697d7a589fc910743940460f43dfda02a9a0d0d7098dcedbc80da5463"
+    },
+    {
+      "path": "contact_release_0.png",
+      "bytes": 1085831,
+      "sha256": "d973025b7082b61334ba0f79dee3f1c454a08635cb528b08542e6f1d406cf607"
+    },
+    {
+      "path": "contact_release_35.png",
+      "bytes": 1085398,
+      "sha256": "f0fb88a5669d1e293b324cdd5fc5547cd08734be56ca2b4b30648decd74720b9"
+    },
+    {
+      "path": "contact_release_70.png",
+      "bytes": 1086359,
+      "sha256": "cdfb20f41b334b62f400bcc7103e995132162c68600ecdcfb988e3db9501fda9"
+    },
+    {
+      "path": "development-qa-parse.log",
+      "bytes": 902,
+      "sha256": "a54ebd5cd702d5339c87a7c9f4b993b5b736dc63427222f040843329061d751a"
+    },
+    {
+      "path": "negative-report.json",
+      "bytes": 282,
+      "sha256": "92815ae2e2e22a1d2d62cd8a69bc0d436fc169b70ad710ed8c739816a3b4e713"
+    },
+    {
+      "path": "negative.log",
+      "bytes": 881,
+      "sha256": "3b24acc6b19410defa4647fb40f93d7d772c6b68c5fa3ea7c0b5589fe1b436f5"
+    },
+    {
+      "path": "qa-exact-report.json",
+      "bytes": 773,
+      "sha256": "20bb3599832f50c2a4a601991343163fa2bdfc4fd9f81b093f00be9e96b1f0fc"
+    },
+    {
+      "path": "qa-exact.log",
+      "bytes": 903,
+      "sha256": "7637bba2048608750b26450fbf3d3e4df861e27c8519ca9cb38a4520a51b4d1c"
+    }
+  ],
+  "development_excluded": [
+    {
+      "source_sha": "22c9c44c0b5e3b20bc93bc3e0b0eddb3a68125a1",
+      "exit_code": 1,
+      "log": "development-qa-parse.log",
+      "reason": "new test helper screen type inference parse failure; fixed in29898fd, no production code change, excluded from acceptance"
+    }
+  ]
+}
