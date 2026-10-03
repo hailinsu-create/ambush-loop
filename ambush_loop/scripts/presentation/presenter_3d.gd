@@ -41,6 +41,11 @@ var _focus_tick := -1
 var _compass: Label
 var _pitch_slider: HSlider
 var _camera_controls: CanvasLayer
+var _camera_panel: VBoxContainer
+var _camera_toggle: Button
+var _camera_plate: ColorRect
+var _compact_camera := false
+var _camera_open := false
 var _occlusion_acc := 0.0
 var _last_pose := Transform3D.IDENTITY
 var _steel: StandardMaterial3D
@@ -122,12 +127,32 @@ func _make_controls() -> void:
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_camera_controls.add_child(root)
 	var panel := VBoxContainer.new()
+	_camera_panel = panel
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	panel.offset_left = -204
 	panel.offset_right = -16
 	panel.offset_top = 132
 	panel.add_theme_constant_override("separation", 6)
 	root.add_child(panel)
+	_camera_plate = ColorRect.new()
+	_camera_plate.color = Color(0.035, 0.04, 0.045, 0.96)
+	_camera_plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_camera_plate)
+	root.move_child(_camera_plate, 0)
+	_camera_toggle = Button.new()
+	_camera_toggle.text = "镜头"
+	_camera_toggle.custom_minimum_size = Vector2(80, 32)
+	_camera_toggle.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_camera_toggle.offset_left = -192
+	_camera_toggle.offset_right = -112
+	_camera_toggle.offset_top = 112
+	_camera_toggle.offset_bottom = 144
+	root.add_child(_camera_toggle)
+	_camera_toggle.pressed.connect(func() -> void:
+		if host._modal_blocks_input(): return
+		_camera_open = not _camera_open
+		_layout_camera_controls()
+	)
 	_compass = Label.new()
 	_compass.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_compass.add_theme_font_size_override("font_size", 14)
@@ -252,6 +277,7 @@ func refresh() -> void:
 		_occlusion_acc = 0.0
 		_last_pose = rig.camera.global_transform
 	_compass.text = "镜头 %03d° · 俯角 %d°" % [int(rig.yaw_deg), int(rig.pitch_deg)]
+	_layout_camera_controls()
 	_pitch_slider.set_value_no_signal(rig.pitch_deg)
 	# The A0 scene reuses the old HUD, but must describe its actual gestures.
 	if host.touch_hud != null and host.touch_hud._hint.text.contains("短拖"):
@@ -260,6 +286,25 @@ func refresh() -> void:
 		host.touch_hud._hint.position.y = 60.0
 	if host.c2 != null and host.c2.help_chip != null and host.c2.help_chip.text.contains("短拖"):
 		host.c2.help_chip.text = "点选 / 点地移动 · 双指操作镜头 · 近背面出绕背"
+
+
+func _layout_camera_controls() -> void:
+	var compact: bool = host._compact_hud()
+	if compact != _compact_camera:
+		_camera_open = false
+		_compact_camera = compact
+	_camera_toggle.visible = compact
+	_camera_toggle.text = "收镜头" if _camera_open else "镜头"
+	_camera_panel.visible = not compact or _camera_open
+	_camera_controls.layer = 50 if compact and _camera_open else 4
+	_camera_panel.set_anchors_preset(Control.PRESET_TOP_LEFT if compact else Control.PRESET_TOP_RIGHT)
+	_camera_panel.offset_left = 8 if compact else -204
+	_camera_panel.offset_right = 216 if compact else -16
+	_camera_panel.offset_top = 80 if compact else 132
+	_camera_panel.offset_bottom = _camera_panel.offset_top + _camera_panel.get_combined_minimum_size().y
+	_camera_plate.visible = compact and _camera_open
+	_camera_plate.position = _camera_panel.position - Vector2(4,4)
+	_camera_plate.size = _camera_panel.size + Vector2(8,8)
 
 
 func _rebuild_geometry() -> void:

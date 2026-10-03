@@ -158,7 +158,7 @@ func _ensure_hud() -> void:
 
 
 func _is_phone() -> bool:
-	return host != null and host.has_method("_want_touch") and bool(host._want_touch())
+	return host != null and host.has_method("_use_touch_chrome") and bool(host._use_touch_chrome())
 
 
 func layout_chrome(phone: bool) -> void:

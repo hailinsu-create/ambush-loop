@@ -377,6 +377,7 @@ func _ready() -> void:
 		add_child(presentation_3d)
 	if presentation_3d != null:
 		presentation_3d.bind(self)
+	get_viewport().size_changed.connect(_update_hud)
 
 
 func _ensure_c2() -> void:
@@ -859,6 +860,17 @@ func _want_touch() -> bool:
 	return OS.has_feature("android") or OS.has_feature("mobile")
 
 
+func _compact_hud() -> bool:
+	var usable := get_viewport().get_visible_rect().size
+	return usable.x < 1000.0 or usable.y < 600.0
+
+
+func _use_touch_chrome() -> bool:
+	# Presentation only: a small usable viewport gets the existing compact
+	# command/portrait rail. Keyboard and world gesture policy stay unchanged.
+	return _want_touch() or _compact_hud()
+
+
 func _ensure_touch_hud() -> void:
 	if touch_hud == null or not is_instance_valid(touch_hud):
 		touch_hud = TouchHudScript.new()
@@ -866,7 +878,7 @@ func _ensure_touch_hud() -> void:
 		add_child(touch_hud)
 		if touch_hud.has_method("bind_host"):
 			touch_hud.bind_host(self)
-	var on := _want_touch()
+	var on := _use_touch_chrome()
 	touch_hud.visible = on
 	_apply_phone_chrome(on)
 	_refresh_touch_hud()
@@ -899,7 +911,8 @@ func _apply_phone_chrome(on: bool) -> void:
 		# Sit in the phase-chip band, left of the checklist — not on the timeline.
 		route_legend.offset_top = 36.0 if on else 38.0
 		route_legend.offset_bottom = 68.0 if on else 72.0
-		route_legend.offset_right = -280.0
+		route_legend.offset_left = 448.0
+		route_legend.offset_right = -520.0
 	alarm_button.custom_minimum_size = Vector2(180, 48) if on else Vector2(180, 36)
 	clear_button.custom_minimum_size = Vector2(120, 48) if on else Vector2(120, 36)
 	tool_button.custom_minimum_size = Vector2(160, 48) if on else Vector2(160, 36)
@@ -917,9 +930,12 @@ func _fold_phone_north_hud(on: bool) -> void:
 	if top:
 		top.offset_bottom = 48.0 if on else 110.0
 	if title_label:
-		title_label.add_theme_font_size_override("font_size", 18 if on else 26)
+		title_label.add_theme_font_size_override("font_size", 18 if on else 22)
+		title_label.clip_text = true
 	if status_label:
 		status_label.visible = not on
+		status_label.clip_text = true
+		status_label.add_theme_font_size_override("font_size", 14)
 	if level_label:
 		level_label.visible = not on
 	if spawn_teach_label and on:
@@ -927,15 +943,89 @@ func _fold_phone_north_hud(on: bool) -> void:
 	if route_legend and on:
 		route_legend.visible = false
 	if flash_label:
+		flash_label.set_anchors_preset(Control.PRESET_CENTER_TOP)
+		flash_label.offset_left = -280
+		flash_label.offset_right = 280
 		if on:
 			flash_label.offset_top = 4.0
 			flash_label.offset_bottom = 26.0
 			flash_label.add_theme_font_size_override("font_size", 14)
 		else:
+			flash_label.set_anchors_preset(Control.PRESET_CENTER_TOP)
+			flash_label.offset_left = -280
+			flash_label.offset_right = 280
 			flash_label.offset_top = 72.0
 			flash_label.offset_bottom = 104.0
 			flash_label.add_theme_font_size_override("font_size", 18)
+	_layout_compact_chrome()
 	_apply_phone_world_ink()
+
+
+func _layout_compact_chrome() -> void:
+	var compact := _compact_hud()
+	var root: Control = $HUD/Root
+	var menu := root.get_node_or_null("CompactMenu") as Button
+	if menu == null:
+		menu = Button.new()
+		menu.name = "CompactMenu"
+		menu.text = "菜单"
+		menu.custom_minimum_size = Vector2(72, 32)
+		menu.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		menu.offset_left = -80
+		menu.offset_right = -8
+		menu.offset_top = 108
+		menu.offset_bottom = 140
+		menu.pressed.connect(_toggle_pause_menu)
+		root.add_child(menu)
+	menu.visible = compact
+	var top: Control = $HUD/Root/TopBar
+	top.offset_top = 12
+	top.offset_right = 428
+	phase_chip.clip_text = true
+	phase_chip.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	phase_chip.offset_left = -420
+	phase_chip.offset_right = -16
+	phase_chip.offset_top = 10
+	phase_chip.offset_bottom = 36
+	phase_chip.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	phase_chip.add_theme_font_size_override("font_size", 18)
+	if touch_hud and touch_hud._hint:
+		touch_hud._hint.visible = not compact
+	if not compact:
+		return
+	top.offset_right = root.size.x - 8.0
+	top.offset_top = 0
+	top.offset_bottom = 36
+	phase_chip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	phase_chip.offset_left = 8
+	phase_chip.offset_right = -8
+	phase_chip.offset_top = 34
+	phase_chip.offset_bottom = 54
+	phase_chip.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	phase_chip.add_theme_font_size_override("font_size", 14)
+	checklist_strip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	checklist_strip.offset_left = 8
+	checklist_strip.offset_right = -8
+	checklist_strip.offset_top = 56
+	checklist_strip.offset_bottom = 78
+	(checklist_strip as BoxContainer).alignment = BoxContainer.ALIGNMENT_BEGIN
+	if intel_chip:
+		intel_chip.offset_left = 8
+		intel_chip.offset_right = -8
+		intel_chip.offset_top = 80
+		intel_chip.offset_bottom = 100
+		intel_chip.clip_text = true
+		intel_chip.add_theme_font_size_override("font_size", 12)
+	if route_timeline: route_timeline.visible = false
+	if watch_timeline: watch_timeline.visible = false
+	if flash_label:
+		flash_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+		flash_label.offset_left = 8
+		flash_label.offset_right = -96
+		flash_label.offset_top = 108
+		flash_label.offset_bottom = 132
+		flash_label.clip_text = true
+		flash_label.add_theme_font_size_override("font_size", 12)
 
 
 func _result_overlay_active() -> bool:
@@ -949,13 +1039,20 @@ func _result_overlay_active() -> bool:
 func _sync_desktop_bars(show: bool) -> void:
 	## Touch HUD owns the command row. Never stack ExtraBar + BottomBar under it.
 	## Fail/win overlays hide the bars so the three-line card / 下一关 CTA is not buried.
-	var bars := show and not _result_overlay_active()
+	var bars := show and not _use_touch_chrome() and not _result_overlay_active()
 	var bar: Control = get_node_or_null("HUD/Root/BottomBar") as Control
 	if bar:
 		bar.visible = bars
 	if extra_bar:
 		extra_bar.visible = bars
 		extra_bar.z_index = 0
+	if bars and bar and extra_bar:
+		# Theme content can make a 36px row 45px tall. Keep the two real
+		# minimum heights apart instead of stacking fixed offset bands.
+		bar.offset_bottom = -16
+		bar.offset_top = -16 - maxf(36.0,bar.get_combined_minimum_size().y)
+		extra_bar.offset_bottom = bar.offset_top - 8
+		extra_bar.offset_top = extra_bar.offset_bottom - maxf(32.0,extra_bar.get_combined_minimum_size().y)
 
 
 func desktop_command_bars_visible() -> bool:
@@ -1016,7 +1113,7 @@ func _apply_result_rail() -> void:
 	## Phone simplified rail: portraits are identity; left cards stay off.
 	if role_box == null or not is_instance_valid(role_box):
 		return
-	role_box.visible = (not _want_touch()) and not _result_overlay_active()
+	role_box.visible = (not _use_touch_chrome()) and not _result_overlay_active()
 
 
 func _safe_area_pad() -> Vector4:
@@ -2850,7 +2947,7 @@ func _ensure_checklist(root: Control = null) -> void:
 
 
 func _checklist_use_touch_layout() -> bool:
-	return _want_touch()
+	return _use_touch_chrome()
 
 
 func _layout_checklist() -> void:
@@ -7536,7 +7633,8 @@ func _fill_route_chips(chips: Array) -> void:
 
 func _make_route_chip() -> PanelContainer:
 	var p := PanelContainer.new()
-	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	p.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	p.mouse_filter = Control.MOUSE_FILTER_PASS
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 5)
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -7554,6 +7652,9 @@ func _make_route_chip() -> PanelContainer:
 	row.add_child(icon)
 	var lab := Label.new()
 	lab.name = "Lab"
+	lab.clip_text = true
+	lab.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	lab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	lab.add_theme_font_size_override("font_size", 13)
 	lab.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(lab)
@@ -7576,6 +7677,7 @@ func _bind_route_chip(chip: Control, spec: Dictionary) -> void:
 	var lab := chip.find_child("Lab", true, false) as Label
 	if lab:
 		lab.text = str(spec["label"])
+		chip.tooltip_text = lab.text
 		lab.add_theme_color_override("font_color", Color(0.94, 0.90, 0.78))
 
 

@@ -25,6 +25,7 @@ var _close_btn: Button
 var _auto_btn: Button
 var _picked: String = ""
 var _slot_btns: Array = []
+var _scroll: ScrollContainer
 
 
 func _ready() -> void:
@@ -58,9 +59,12 @@ func _ready() -> void:
 	margin.add_theme_constant_override("margin_top", 12)
 	margin.add_theme_constant_override("margin_bottom", 12)
 	_panel.add_child(margin)
+	var shell := VBoxContainer.new()
+	shell.add_theme_constant_override("separation", 8)
+	margin.add_child(shell)
 	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 8)
-	margin.add_child(box)
 	_title = Label.new()
 	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_title.add_theme_font_size_override("font_size", 18)
@@ -68,12 +72,17 @@ func _ready() -> void:
 	_title.add_theme_color_override("font_color", NightOps.OLIVE_HI)
 	_title.text = "背包"
 	var heading := HBoxContainer.new()
-	box.add_child(heading)
+	shell.add_child(heading)
 	heading.add_child(_title)
 	_auto_btn = _act("自动雷 开")
 	_auto_btn.size_flags_horizontal = Control.SIZE_SHRINK_END
 	_auto_btn.pressed.connect(func() -> void: auto_grenade_requested.emit())
 	heading.add_child(_auto_btn)
+	_scroll = ScrollContainer.new()
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	shell.add_child(_scroll)
+	_scroll.add_child(box)
 	_grid = GridContainer.new()
 	_grid.columns = 3
 	_grid.add_theme_constant_override("h_separation", 8)
@@ -126,7 +135,8 @@ func _ready() -> void:
 	row.add_child(_drop_btn)
 	_close_btn = _act("关闭 (I)")
 	_close_btn.pressed.connect(dismiss)
-	box.add_child(_close_btn)
+	shell.add_child(_close_btn)
+	get_viewport().size_changed.connect(_layout_for_surface)
 
 
 func _act(txt: String) -> Button:
@@ -145,6 +155,7 @@ func is_open() -> bool:
 
 func present(op: OperatorUnit) -> void:
 	_layout_for_surface()
+	_scroll.scroll_vertical = 0
 	_open = true
 	visible = true
 	refresh(op)
@@ -179,6 +190,14 @@ func _layout_for_surface() -> void:
 		for b in _slot_btns:
 			if b:
 				b.custom_minimum_size = Vector2(118, 72)
+	var usable := get_viewport().get_visible_rect().size
+	if usable.y < 600.0 or usable.x < 1000.0:
+		var half := Vector2(minf(504.0 if touch else 420.0,usable.x-16.0),usable.y-16.0)*0.5
+		_panel.set_anchors_preset(Control.PRESET_CENTER)
+		_panel.offset_left = -half.x
+		_panel.offset_right = half.x
+		_panel.offset_top = -half.y
+		_panel.offset_bottom = half.y
 
 
 func dismiss() -> void:
