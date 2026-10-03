@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=c:/users/23170/documents/codex/2026-09-27/cursor-docs-ambush-handover-20260927-md/work/ambush-loop-m2-b1/ambush_loop/build/ambush_test_runs/30fe548a4a9442e39b5d66d46e55bad5/data/godot/app_userdata/ambush loop run_id=30fe548a4a9442e39b5d66d46e55bad5
+AMBL_MEM stage=audio.ready.begin static_bytes=34800511 static_peak_bytes=115361870 objects=1512
+AMBL_MEM stage=audio.sfx_pool.ready static_bytes=35531823 static_peak_bytes=115361870 objects=1647
+AMBL_MEM stage=audio.music_beds.ready static_bytes=35689251 static_peak_bytes=115361870 objects=1653
+AMBL_MEM stage=audio.ready.done static_bytes=35690255 static_peak_bytes=115361870 objects=1653
+SMOKE_GAME_VERSION 0.6.29
+AMBL_MEM stage=title.ready.begin static_bytes=57187997 static_peak_bytes=115361870 objects=1698
+AMBL_MEM stage=title.theme.ready static_bytes=62027133 static_peak_bytes=115361870 objects=1712
+AMBL_MEM stage=title.modals.ready static_bytes=64056487 static_peak_bytes=115361870 objects=1899
+AMBL_MEM stage=title.pause_and_intro.ready static_bytes=64794037 static_peak_bytes=115361870 objects=1978
+AMBL_MEM stage=title.ready.done static_bytes=65208225 static_peak_bytes=115361870 objects=2034
+SMOKE_OK_JOURNAL
+SMOKE_OK_LAUNCH_BAR title+GameSettings+AudioDirector+missions+android_preset
+AMBL_MEM stage=main.ready.begin static_bytes=90107574 static_peak_bytes=167696069 objects=1884
+AMBL_MEM stage=main.hud.ready static_bytes=93322016 static_peak_bytes=167696069 objects=2428
+AMBL_MEM stage=main.controllers.ready static_bytes=99411480 static_peak_bytes=167696069 objects=3277
+AMBL_MEM stage=main.mission_audio.started static_bytes=99485090 static_peak_bytes=167696069 objects=3282
+AMBL_MEM stage=main.level.ready static_bytes=117384677 static_peak_bytes=167696069 objects=3840
+SMOKE_OK_ATMO yard wall=brick kit=crate
+SMOKE_OK_CLOCK 1x=60 2x=120 hitch=104
+SMOKE_OK_WEAPON_MODELS n=10
+SMOKE_OK_ROLES mg_cone=48.0 scout_range=280.0 protect=西
+SMOKE_OK_IDENTITY rifle=灰狼 mg=铁砧 scout=夜枭 glyph=1
+SMOKE_OK_LOS wall=80.0 open=220.0
+SMOKE_OK_SFX_BODY fire=0.34 tension=0.4 echo=0.3
+SMOKE_OK_SFX_MODELS bolt=0.31 smg=0.08 mg=0.26 mg42=0.42
+SMOKE_OK_SFX cues=role_fire muted=false every_shot=1 ui=1 hit=1
+SMOKE_OK_ENGAGE_HELPERS killzone=3
+SMOKE_OK_KILLZONE_UNION n=3
+SMOKE_OK_KEEP_FACING
+SMOKE_OK_SLOT_SWAP
+SMOKE_OK_TRIPWIRE_TOOLING relocate=1 touch_ghost=1
+SMOKE_OK_ANDROID_BACK_DEBOUNCE
+SMOKE_OK_TOUCH_NO_DESKTOP_BARS
+SMOKE_OK_TOUCH_RESIDENT crouch bag rotate_ccw rotate_cw alarm
+SMOKE_OK_TOUCH_WATCH_3 abort pause speed
+SMOKE_OK_LEFT_CARDS_OFF
+SMOKE_OK_SKILLBAR_OFF
+SMOKE_OK_MINIMAP_OFF
+SMOKE_OK_PORTRAIT_THUMB off_top=-120.0 y=600.0
+SMOKE_OK_HOTSPOT_CRATE n=1
+SMOKE_OK_HOTSPOT_KNIFE
+SMOKE_OK_HOTSPOT_WHISTLE
+SMOKE_OK_HOTSPOT_FLANK
+SMOKE_OK_FLANK_RANGE
+ERROR: SMOKE_NORTH_TIMELINE_ON_SCOUT
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _assert_touch_feel_052 (res://scripts/smoke_test.gd:3640)
