@@ -13,6 +13,8 @@ var _row_setup: HBoxContainer = null
 var _row_watch: HBoxContainer = null
 var _replay_controls: VBoxContainer = null
 var _replay_time: Label = null
+var _replay_pause: Button = null
+var _replay_speed: Button = null
 var _replay_scrub: HSlider = null
 var _stack_secondary: VBoxContainer = null
 var _twist_pair: HBoxContainer = null
@@ -208,10 +210,26 @@ func _build() -> void:
 	_replay_controls.name = "ReplayControls"
 	_replay_controls.visible = false
 	col.add_child(_replay_controls)
+	var transport := HBoxContainer.new()
+	transport.add_theme_constant_override("separation", 4)
+	_replay_controls.add_child(transport)
 	_replay_time = Label.new()
 	_replay_time.theme = NightOps.theme()
 	_replay_time.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_replay_controls.add_child(_replay_time)
+	_replay_time.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_replay_time.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_replay_time.add_theme_font_size_override("font_size", 12)
+	transport.add_child(_replay_time)
+	_replay_pause = Button.new()
+	_replay_pause.custom_minimum_size = Vector2(52, 32)
+	_replay_pause.focus_mode = Control.FOCUS_NONE
+	_replay_pause.pressed.connect(func() -> void: _host.apply_touch_command("pause"))
+	transport.add_child(_replay_pause)
+	_replay_speed = Button.new()
+	_replay_speed.custom_minimum_size = Vector2(44, 32)
+	_replay_speed.focus_mode = Control.FOCUS_NONE
+	_replay_speed.pressed.connect(func() -> void: _host.apply_touch_command("speed"))
+	transport.add_child(_replay_speed)
 	_replay_scrub = HSlider.new()
 	_replay_scrub.name = "ReplayScrub"
 	_replay_scrub.min_value = 0.0
@@ -588,7 +606,12 @@ func refresh_phase(
 		_row_watch.visible = phase_name not in ["SETUP", "SWEEP", "REPLAY"]
 	_replay_controls.visible = phase_name == "REPLAY"
 	if _replay_controls.visible and _host != null:
-		_replay_time.text = "复盘 %.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
+		_replay_time.text = "%.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
+		var ended: bool = _host.replay.scrub_tick >= _host.replay.max_tick()
+		_replay_pause.text = "暂停" if _host.replay.playing else ("重播" if ended else "继续")
+		_replay_speed.text = "2×" if speed_hi else "1×"
+		_replay_pause.disabled = _host.replay.max_tick() <= 0 or _host.replay.legacy_ambiguous
+		_replay_speed.disabled = _replay_pause.disabled
 		_replay_scrub.set_value_no_signal(float(_host.replay.scrub_tick) / maxf(float(_host.replay.max_tick()), 1.0))
 	match phase_name:
 		"SETUP":
@@ -598,7 +621,7 @@ func refresh_phase(
 		"WATCHING":
 			set_hint("警报：暂停·倍速·中止 · 自动开火")
 		"REPLAY":
-			set_hint("复盘只读 — 拖时间轴；警报钮返回搜刮")
+			set_hint("复盘只读 · 暂停/倍速 · 拖时间轴后暂停 · 返回")
 		_:
 			set_hint("点继续。菜单可清空记忆或回标题")
 	if _btns.has("pause"):

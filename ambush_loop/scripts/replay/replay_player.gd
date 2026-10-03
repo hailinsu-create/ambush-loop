@@ -7,6 +7,8 @@ extends RefCounted
 var log: BattleLog = null
 var scrub_tick: int = 0
 var playing: bool = false
+var speed: float = 2.0
+var _subticks: float = 0.0
 var legacy_ambiguous: bool = false
 var continuous_playback: bool = false
 var playback_unsupported: bool = false
@@ -16,6 +18,8 @@ func bind(p_log: BattleLog) -> void:
 	log = p_log
 	scrub_tick = 0
 	playing = false
+	speed = 2.0
+	_subticks = 0.0
 	legacy_ambiguous = false
 	continuous_playback = log != null and log.playback_schema in [1, 2] and not log.playback_snapshots.is_empty()
 	playback_unsupported = log != null and log.playback_schema not in [0, 1, 2]
@@ -73,7 +77,39 @@ func max_tick() -> int:
 
 
 func set_tick(t: int) -> void:
+	# A seek selects a stable historical frame; old playback debt cannot follow it.
+	playing = false
+	_subticks = 0.0
 	scrub_tick = clampi(t, 0, max_tick())
+
+
+func set_speed(value: float) -> void:
+	speed = 1.0 if value < 1.5 else 2.0
+
+
+func play(restart: bool = false) -> void:
+	if restart or scrub_tick >= max_tick():
+		set_tick(0)
+	playing = log != null and not legacy_ambiguous and max_tick() > 0 and not _snapshots().is_empty()
+
+
+func pause() -> void:
+	playing = false
+
+
+func advance(real_delta: float) -> bool:
+	if not playing or not is_finite(real_delta) or real_delta <= 0.0:
+		return false
+	var previous := scrub_tick
+	# Independent display time. Never step combat or mutate the bound recording.
+	_subticks += minf(real_delta * speed * 60.0, float(max_tick() - scrub_tick))
+	var ticks := floori(_subticks + 0.000001)
+	_subticks = maxf(_subticks - ticks, 0.0)
+	scrub_tick = mini(scrub_tick + ticks, max_tick())
+	if scrub_tick >= max_tick():
+		playing = false
+		_subticks = 0.0
+	return scrub_tick != previous
 
 
 func seek_ratio(r: float) -> void:

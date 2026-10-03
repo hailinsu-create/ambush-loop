@@ -166,8 +166,14 @@ func _native_case(touch: bool) -> void:
 	root.content_scale_factor = 2.0 if touch else 1.0
 	root.get_node("GameSettings").set_force_touch_hud(touch)
 	sample = "auto_200_compact" if touch else "auto_100_desktop"
+	print("REPLAY_AUTO_CASE " + sample)
 	main._update_hud()
 	await _draw()
+	_check(main.replay_button.is_visible_in_tree(), "original terminal replay button is reachable through normal UI")
+	if not main.replay_button.is_visible_in_tree():
+		rows.append({"id":sample,"entry":"blocked by hidden original BottomBar", "button":_rect(main.replay_button.get_global_rect())})
+		await _modal_capture(sample + "_entry_blocked")
+		return
 	# Before REPLAY, the reference fixture is idle; only the real replay is processed.
 	var probe := ClockProbe.new()
 	probe.host = main
@@ -175,12 +181,7 @@ func _native_case(touch: bool) -> void:
 	root.add_child(probe)
 	probe.armed = true
 	main.set_process(true)
-	if touch:
-		main._event_log_open = false
-		main._update_hud()
-		await _native_click(main.touch_hud._btns.replay)
-	else:
-		await _native_click(main.replay_button)
+	await _native_click(main.replay_button)
 	await _draw()
 	_check(main.phase == main.Phase.REPLAY and main.replay.log == source, "native production button binds the original recording")
 	_check(main.replay.playing and main.replay.scrub_tick > 0 and float(main.replay.get("speed")) == 2.0, "ordinary native entry automatically advances at2x")

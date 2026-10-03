@@ -1152,8 +1152,8 @@ func _refresh_touch_hud() -> void:
 			phase_name = "SWEEP"
 		_:
 			phase_name = "SETUP"
-	var paused := phase == Phase.WATCHING and sim.paused
-	var hi := phase == Phase.WATCHING and sim.speed >= 1.5
+	var paused := not replay.playing if phase == Phase.REPLAY else phase == Phase.WATCHING and sim.paused
+	var hi := replay.speed >= 1.5 if phase == Phase.REPLAY else phase == Phase.WATCHING and sim.speed >= 1.5
 	var has_pack := level != null and bool(level.has_ammo_pack)
 	var has_door := level != null and level.door_cell.x >= 0
 	_refresh_alarm_cta()
@@ -1325,6 +1325,11 @@ func handle_app_focus_out() -> void:
 	_presentation_suspended = true
 	_cancel_world_input(true)
 	_gate_scene_audio(true)
+	if phase == Phase.REPLAY:
+		replay.pause()
+		_refresh_replay_transport()
+		_refresh_touch_hud()
+		return
 	# Freeze the sim clock whenever it can still step. Result panels are idle.
 	if phase == Phase.WATCHING and not sim.paused:
 		sim.paused = true
@@ -3507,6 +3512,7 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	replay.pause()
 	_cancel_world_input()
 	if sfx and sfx.has_method("stop_mission_audio"):
 		sfx.stop_mission_audio()
@@ -3978,6 +3984,16 @@ func _unhandled_input(event: InputEvent) -> void:
 					_apply_replay_scrub()
 				KEY_SPACE:
 					_exit_replay_to_setup()
+				KEY_P:
+					_on_pause_pressed()
+				KEY_EQUAL, KEY_KP_ADD:
+					replay.set_speed(2.0)
+					_refresh_replay_transport()
+					_refresh_touch_hud()
+				KEY_MINUS, KEY_KP_SUBTRACT:
+					replay.set_speed(1.0)
+					_refresh_replay_transport()
+					_refresh_touch_hud()
 			get_viewport().set_input_as_handled()
 		return
 
@@ -5136,6 +5152,13 @@ func _on_door_pressed() -> void:
 
 
 func _on_speed_pressed() -> void:
+	if phase == Phase.REPLAY:
+		if _modal_blocks_input() or _presentation_suspended:
+			return
+		replay.set_speed(1.0 if replay.speed >= 1.5 else 2.0)
+		_refresh_replay_transport()
+		_refresh_touch_hud()
+		return
 	if phase != Phase.WATCHING:
 		return
 	sim.set_speed(1.0 if sim.speed >= 1.5 else 2.0)
@@ -5146,6 +5169,16 @@ func _on_speed_pressed() -> void:
 
 
 func _on_pause_pressed() -> void:
+	if phase == Phase.REPLAY:
+		if _modal_blocks_input() or _presentation_suspended:
+			return
+		if replay.playing:
+			replay.pause()
+		else:
+			replay.play()
+		_refresh_replay_transport()
+		_refresh_touch_hud()
+		return
 	if phase != Phase.WATCHING:
 		return
 	sim.toggle_pause()
@@ -5445,6 +5478,10 @@ func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 
 func _process(delta: float) -> void:
 	var presentation_paused := _presentation_suspended or (pause_overlay != null and pause_overlay.is_open())
+	if phase == Phase.REPLAY:
+		if not _presentation_suspended and not _modal_blocks_input() and replay.advance(delta):
+			_apply_replay_scrub()
+		return
 	# Command movement and presentation share the pause menu/focus gate. The
 	# battle clock remains authoritative in ALERT, including its existing 2x.
 	if _is_command_phase() and presentation_paused:
@@ -6532,9 +6569,10 @@ func _on_replay_pressed() -> void:
 	_reset_presentation_fx()
 	result_panel.visible = false
 	replay.bind(battle_log)
+	replay.play(true)
 	if scrub_slider:
 		scrub_slider.visible = true
-		scrub_slider.value = 1.0
+		scrub_slider.set_value_no_signal(0.0)
 	if replay_button:
 		replay_button.visible = false
 	# Hide live combat nodes; do not copy snapshot hp/ammo/alive onto them.
@@ -6559,6 +6597,19 @@ func _on_scrub_changed(v: float) -> void:
 	_apply_replay_scrub()
 
 
+func _refresh_replay_transport() -> void:
+	if phase != Phase.REPLAY:
+		return
+	var available := replay.max_tick() > 0 and not replay.legacy_ambiguous
+	if pause_button:
+		pause_button.disabled = not available
+		pause_button.text = "暂停" if replay.playing else ("重播" if replay.scrub_tick >= replay.max_tick() else "继续")
+	if speed_button:
+		speed_button.disabled = not available
+		speed_button.text = "速度 2×" if replay.speed >= 1.5 else "速度 1×"
+	_refresh_phase_chip()
+
+
 func _apply_replay_scrub() -> void:
 	if phase != Phase.REPLAY:
 		return
@@ -6569,6 +6620,7 @@ func _apply_replay_scrub() -> void:
 	var clock_label := "播放" if replay.continuous_playback else "复盘"
 	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "%s t=%.1fs · 点击定位" % [clock_label, float(replay.scrub_tick) / 60.0])
 	_update_replay_status()
+	_refresh_replay_transport()
 	_update_hud()
 
 
@@ -6588,7 +6640,7 @@ func _update_replay_status() -> void:
 	elif not preload("res://scripts/presentation/actor_pose.gd").supported(data):
 		status_label.text = "历史动作版本暂不支持，使用简化人物显示；原记录保留。空格返回"
 	else:
-		status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
+		status_label.text = "只读复盘 · P 暂停/继续 · +/- 倍速 · 滑条/←→/事件定位后暂停 · 空格返回"
 
 
 func _paint_replay_snapshot(snap: Dictionary) -> void:
@@ -6722,6 +6774,13 @@ func _clear_replay_layer() -> void:
 
 
 func _exit_replay_to_setup() -> void:
+	replay.pause()
+	if pause_button:
+		pause_button.disabled = true
+		pause_button.text = "暂停"
+	if speed_button:
+		speed_button.disabled = true
+		speed_button.text = "速度 2×" if sim.speed >= 1.5 else "速度 1×"
 	_clear_replay_layer()
 	if scrub_slider:
 		scrub_slider.visible = false
@@ -7651,7 +7710,7 @@ func _refresh_phase_chip() -> void:
 			phase_chip.text = "阶段 · 封锁成功"
 			phase_chip.add_theme_color_override("font_color", Color(0.55, 0.92, 0.48))
 		Phase.REPLAY:
-			phase_chip.text = "阶段 · 只读复盘"
+			phase_chip.text = "复盘 %s %s t=%.1fs" % ["播放" if replay.playing else "暂停", "2×" if replay.speed >= 1.5 else "1×", float(replay.scrub_tick) / 60.0]
 			phase_chip.add_theme_color_override("font_color", Color(0.78, 0.70, 0.48))
 		_:
 			phase_chip.text = ""
