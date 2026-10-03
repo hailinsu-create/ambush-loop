@@ -186,7 +186,7 @@ func _native_case(touch: bool) -> void:
 	_check(main.replay.playing and main.replay.scrub_tick > 0 and float(main.replay.get("speed")) == 2.0, "ordinary native entry automatically advances at2x")
 	live = main._snapshot_data().duplicate(true)
 	sim_state = [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum]
-	var start := main.replay.scrub_tick
+	var start: int = main.replay.scrub_tick
 	await create_timer(0.4).timeout
 	await _draw()
 	probe.armed = false
@@ -207,7 +207,7 @@ func _native_case(touch: bool) -> void:
 	_fits(speed,controls)
 	await _native_click(pause)
 	await _draw()
-	var paused_tick := main.replay.scrub_tick
+	var paused_tick: int = main.replay.scrub_tick
 	var paused_bones := _bones()
 	await create_timer(0.25).timeout
 	await _draw()
@@ -225,7 +225,7 @@ func _native_case(touch: bool) -> void:
 	var at := slider.get_global_rect()
 	await _native_click(slider,1, Vector2(at.position.x + at.size.x * 0.7, at.get_center().y))
 	await _draw()
-	var seek := main.replay.scrub_tick
+	var seek: int = main.replay.scrub_tick
 	_check(not main.replay.playing and seek > paused_tick and seek < main.replay.max_tick(), "native slider seeks retained clock and remains paused")
 	await _key("Right")
 	_check(main.replay.scrub_tick == seek + 6 and not main.replay.playing, "original right step remains6 ticks and pauses")
@@ -241,7 +241,7 @@ func _native_case(touch: bool) -> void:
 	await _key("p")
 	await _key("Escape")
 	_check(main.pause_overlay.is_open(), "native Escape opens original settings")
-	var menu_tick := main.replay.scrub_tick
+	var menu_tick: int = main.replay.scrub_tick
 	await create_timer(0.25).timeout
 	await _draw()
 	_check(main.replay.scrub_tick == menu_tick, "original settings gate auto-play without time debt")
@@ -249,7 +249,7 @@ func _native_case(touch: bool) -> void:
 	await _draw()
 	_check(not main.pause_overlay.is_open() and main.replay.playing and main.replay.scrub_tick > menu_tick, "closing original menu resumes prior playback state")
 	main.handle_app_focus_out()
-	var focus_tick := main.replay.scrub_tick
+	var focus_tick: int = main.replay.scrub_tick
 	await create_timer(0.25).timeout
 	await _draw()
 	main.handle_app_focus_in()
@@ -280,7 +280,7 @@ func _run() -> void:
 	await _prepare()
 	if DisplayServer.get_name() == "headless":
 		main._on_replay_pressed()
-		var start := main.replay.scrub_tick
+		var start: int = main.replay.scrub_tick
 		main._process(0.5)
 		_check(main.replay.playing and main.replay.scrub_tick == start + 60, "production REPLAY process drives independent2x clock")
 	else:
