@@ -1,7 +1,6 @@
 extends "res://scripts/replay_autoplay_test.gd"
 ## Controlled API source replacement; ordinary UI reachability is not asserted.
 var auto_frames := 0
-var baseline_only := false
 
 class TextProbe extends Node:
 	var suite: SceneTree
@@ -18,7 +17,7 @@ class TextProbe extends Node:
 		suite.auto_frames += 1
 
 func _assert_display(label: String) -> void:
-	var expected := main.replay.events_up_to(main.replay.scrub_tick)
+	var expected: Array = main.replay.events_up_to(main.replay.scrub_tick)
 	var count := mini(12, expected.size())
 	var valid: bool = main.event_list.item_count == count and main._event_list_items.size() == count
 	for i in count:
