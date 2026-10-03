@@ -130,6 +130,7 @@ var _alarm_pulled_unarmed: bool = false
 var _night_hp_lost: bool = false
 var _night_timer: float = 0.0
 var _pose_command_clock_s: float = 0.0
+var _command_record_acc_s: float = 0.0
 var _presentation_suspended := false
 var _wave_fail_index: int = 0
 var _hold_move_acc: float = 0.0
@@ -3528,6 +3529,7 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	_night_hp_lost = false
 	_night_timer = 0.0
 	_pose_command_clock_s = 0.0
+	_command_record_acc_s = 0.0
 	_wave_fail_index = 0
 	_watch_first_fire = false
 	_watch_first_return = false
@@ -5205,6 +5207,8 @@ func _on_alarm_pressed() -> void:
 	_clear_intel_path_ghost()
 	sim.reset()
 	battle_log.begin_attempt()
+	battle_log.enable_continuous_playback()
+	_command_record_acc_s = 0.0
 	_watch_first_fire = false
 	_watch_first_return = false
 	_kill_combo = 0
@@ -5447,6 +5451,9 @@ func _process(delta: float) -> void:
 	if phase == Phase.SETUP or phase == Phase.WATCHING or phase == Phase.SWEEP:
 		_night_timer += delta
 	if _is_command_phase():
+		if phase == Phase.SWEEP:
+			battle_log.advance_command_playback(delta)
+			_command_record_acc_s += maxf(delta, 0.0)
 		_tick_cover_long_press()
 		_tick_touch_hold()
 		_tick_cover_hold_ring()
@@ -5462,6 +5469,10 @@ func _process(delta: float) -> void:
 		_tick_footsteps(delta)
 		if c2:
 			c2.tick(delta)
+		if phase == Phase.SWEEP and _command_record_acc_s + 0.0000001 >= 0.1:
+			var periods := floori((_command_record_acc_s + 0.0000001) / 0.1)
+			_command_record_acc_s = maxf(_command_record_acc_s - periods * 0.1, 0.0)
+			battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 		hud_tick += delta
 		if hud_tick >= 0.20:
 			hud_tick = 0.0
@@ -5627,6 +5638,7 @@ func _finish_sim_tick() -> void:
 		if phase == Phase.WATCHING:
 			_update_role_cards()
 	sim.advance()
+	battle_log.advance_simulation_playback()
 	_flush_pending_result()
 
 
@@ -6503,6 +6515,8 @@ func _show_win_result() -> void:
 func _on_replay_pressed() -> void:
 	if battle_log.events.is_empty() and battle_log.snapshots.is_empty():
 		return
+	if phase == Phase.SWEEP:
+		battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 	replay_return_phase = phase
 	_cancel_world_input()
 	if backpack_panel:
@@ -6547,7 +6561,8 @@ func _apply_replay_scrub() -> void:
 	if scrub_slider and replay.max_tick() > 0:
 		scrub_slider.set_value_no_signal(float(replay.scrub_tick) / float(replay.max_tick()))
 	_paint_replay_snapshot(snap)
-	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "复盘 t=%.1fs · 点击定位" % (float(replay.scrub_tick) / 60.0))
+	var clock_label := "播放" if replay.continuous_playback else "复盘"
+	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "%s t=%.1fs · 点击定位" % [clock_label, float(replay.scrub_tick) / 60.0])
 	_update_replay_status()
 	_update_hud()
 
@@ -6557,6 +6572,8 @@ func _update_replay_status() -> void:
 	var format := int(data.get("visual_schema", 0))
 	if replay.legacy_ambiguous:
 		status_label.text = "旧记录缺少波次边界，无法可靠复盘；原记录保留。空格返回"
+	elif replay.playback_unsupported:
+		status_label.text = "命令播放时间版本暂不支持，保留原战斗时间轴。空格返回"
 	elif format > VisualSnapshotScript.FORMAT_VERSION or format < 0:
 		status_label.text = "暂不支持此历史画面版本；原记录保留。空格返回"
 	elif format == 0:
@@ -7208,7 +7225,7 @@ func _focus_battle_event(ev: Dictionary) -> void:
 	replay_focus_actor = int(ev.get("actor_id", -1))
 	replay_focus_type = str(ev.get("type", ""))
 	if phase == Phase.REPLAY:
-		replay.set_tick(BattleLog.record_tick(ev))
+		replay.set_tick(replay.playback_time(ev))
 		_apply_replay_scrub()
 	var pos := _event_focus_position(ev) if phase != Phase.REPLAY else Vector2(ev.get("position", escape_world))
 	if phase == Phase.REPLAY:
@@ -12379,6 +12396,8 @@ func _enter_sweep() -> void:
 func _on_sweep_commit() -> void:
 	if phase != Phase.SWEEP:
 		return
+	battle_log.add_command_snapshot(sim.tick, _snapshot_data())
+	_command_record_acc_s = 0.0
 	if raid != null and raid.is_last_wave(level):
 		_extract_win()
 		return

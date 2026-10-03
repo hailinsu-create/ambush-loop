@@ -8,6 +8,8 @@ var log: BattleLog = null
 var scrub_tick: int = 0
 var playing: bool = false
 var legacy_ambiguous: bool = false
+var continuous_playback: bool = false
+var playback_unsupported: bool = false
 
 
 func bind(p_log: BattleLog) -> void:
@@ -15,6 +17,25 @@ func bind(p_log: BattleLog) -> void:
 	scrub_tick = 0
 	playing = false
 	legacy_ambiguous = false
+	continuous_playback = log != null and log.playback_schema == 1 and not log.playback_snapshots.is_empty()
+	playback_unsupported = log != null and log.playback_schema not in [0, 1]
+	if continuous_playback:
+		for stream_index in 2:
+			var stream: Array = log.playback_snapshots if stream_index == 0 else log.events
+			var previous := -1
+			var index := 0
+			for record in stream:
+				var raw: Variant = record.get("playback_tick")
+				if int(record.get("playback_schema", 0)) != 1 or not raw is int or int(raw) < previous or int(raw) < 0 or str(record.get("attempt_id", "")) != log.attempt_id:
+					continuous_playback = false
+					playback_unsupported = true
+					break
+				if stream_index == 0 and int(record.get("frame_seq", -1)) != index:
+					continuous_playback = false
+					playback_unsupported = true
+					break
+				previous = int(raw)
+				index += 1
 	# An unversioned recording with a reset clock has no trustworthy mapping
 	# between its snapshot segments and events. Keep the source, refuse mixed scrub.
 	if log != null:
@@ -28,12 +49,22 @@ func bind(p_log: BattleLog) -> void:
 					legacy_ambiguous = true
 				previous = t
 	if log != null and not legacy_ambiguous and log.terminal_tick >= 0:
-		scrub_tick = log.terminal_tick
+		scrub_tick = max_tick()
+
+
+func playback_time(record: Dictionary) -> int:
+	return int(record.playback_tick) if continuous_playback else BattleLog.record_tick(record)
+
+
+func _snapshots() -> Array:
+	return log.playback_snapshots if continuous_playback else log.snapshots
 
 
 func max_tick() -> int:
 	if log == null or legacy_ambiguous:
 		return 0
+	if continuous_playback:
+		return log.playback_terminal_tick if log.playback_terminal_tick >= 0 else playback_time(_snapshots().back())
 	if log.terminal_tick >= 0:
 		return log.terminal_tick
 	if not log.snapshots.is_empty():
@@ -50,11 +81,11 @@ func seek_ratio(r: float) -> void:
 
 
 func snapshot_at_or_before(tick: int) -> Dictionary:
-	if log == null or legacy_ambiguous or log.snapshots.is_empty():
+	if log == null or legacy_ambiguous or _snapshots().is_empty():
 		return {}
-	var best: Dictionary = log.snapshots[0]
-	for s in log.snapshots:
-		if BattleLog.record_tick(s) <= tick:
+	var best: Dictionary = _snapshots()[0]
+	for s in _snapshots():
+		if playback_time(s) <= tick:
 			best = s
 		else:
 			break
@@ -66,7 +97,7 @@ func events_up_to(tick: int) -> Array:
 	if log == null or legacy_ambiguous:
 		return out
 	for ev in log.events:
-		if BattleLog.record_tick(ev) <= tick:
+		if playback_time(ev) <= tick:
 			out.append(ev)
 	return out
 

@@ -15,13 +15,19 @@ static func capture(host: Node) -> Dictionary:
 	var unsupported := visual_schema > VisualSnapshot.FORMAT_VERSION or visual_schema < 0
 	if unsupported:
 		data = {}
-	var snapshot_delta := maxf(float(host.replay.scrub_tick - BattleLog.record_tick(snap)) / 60.0, 0.0) if historical else 0.0
+	var continuous: bool = historical and host.replay.continuous_playback
+	var snapshot_delta := maxf(float(host.replay.scrub_tick - host.replay.playback_time(snap)) / 60.0, 0.0) if historical else 0.0
 	var simulation_clock: bool = str(data.get("pose_clock_domain", "")) == "simulation"
+	var advance_pose: bool = simulation_clock or (continuous and str(data.get("pose_clock_domain", "")) == "command")
+	var domain_tick: int = BattleLog.record_tick(snap) + (int(round(snapshot_delta * 60.0)) if simulation_clock else 0)
 	var raw_event_clock: Variant = data.get("event_pose_clock_s")
 	var event_clock_valid: bool = int(data.get("event_pose_schema", 0)) == 1 and (raw_event_clock is int or raw_event_clock is float) and is_finite(float(raw_event_clock)) and float(raw_event_clock) >= 0.0
 	var frame := {
 		"run_id": -1 if historical else host.run_id,
-		"tick": host.replay.scrub_tick if historical else host.battle_log.timeline_tick(host.sim.tick),
+		"tick": (domain_tick if continuous else host.replay.scrub_tick) if historical else host.battle_log.timeline_tick(host.sim.tick),
+		"playback_schema": 1 if continuous else 0,
+		"playback_tick": host.replay.scrub_tick if historical else host.battle_log.current_playback_tick(),
+		"frame_seq": int(snap.get("frame_seq", -1)) if historical else -1,
 		"phase": int(host.phase), "recorded_phase": int(data.get("phase", -1)),
 		"schema": int(snap.get("schema", 1)) if historical else BattleLog.SCHEMA_VERSION,
 		"attempt_id": str(snap.get("attempt_id", "")) if historical else host.battle_log.attempt_id,
@@ -44,10 +50,10 @@ static func capture(host: Node) -> Dictionary:
 		"environment_revision": str(data.get("environment_revision", "")),
 		"environment_layout_revision": str(data.get("environment_layout_revision", "")),
 		"environment_supported": EnvironmentScene.supported(data),
-		"pose_snapshot_delta_s": snapshot_delta if simulation_clock else 0.0,
-		"pose_clock_s": float(data.get("pose_clock_s", 0.0)) + (snapshot_delta if simulation_clock else 0.0),
+		"pose_snapshot_delta_s": snapshot_delta if advance_pose else 0.0,
+		"pose_clock_s": float(data.get("pose_clock_s", 0.0)) + (snapshot_delta if advance_pose else 0.0),
 		"event_pose_schema": 1 if event_clock_valid else 0,
-		"event_pose_clock_s": float(raw_event_clock) + (snapshot_delta if simulation_clock else 0.0) if event_clock_valid else 0.0,
+		"event_pose_clock_s": float(raw_event_clock) + (snapshot_delta if advance_pose else 0.0) if event_clock_valid else 0.0,
 		"level_id": str(data.get("level_id", "")), "blocked": data.get("blocked", PackedByteArray()).duplicate(),
 		"selected_id": int(data.get("selected_id", -1)), "escape": data.get("escape", Vector2.ZERO),
 		"door_locked": bool(data.get("door_locked", false)), "replay": historical,

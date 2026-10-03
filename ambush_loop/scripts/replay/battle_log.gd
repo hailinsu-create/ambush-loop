@@ -12,6 +12,12 @@ var attempt_id: String = ""
 var wave_id: int = 0
 var wave_offset: int = 0
 var _last_timeline_tick: int = -1
+## Optional presentation clock. Original battle stamps/statistics stay intact.
+var playback_schema: int = 0
+var playback_snapshots: Array = []
+var playback_terminal_tick: int = -1
+var _playback_tick: int = 0
+var _command_subticks: float = 0.0
 
 
 func clear() -> void:
@@ -23,6 +29,11 @@ func clear() -> void:
 	wave_id = 0
 	wave_offset = 0
 	_last_timeline_tick = -1
+	playback_schema = 0
+	playback_snapshots.clear()
+	playback_terminal_tick = -1
+	_playback_tick = 0
+	_command_subticks = 0.0
 
 
 func begin_attempt(id: String = "") -> void:
@@ -36,6 +47,46 @@ func begin_wave(index: int) -> void:
 		return
 	wave_id = index
 	wave_offset = _last_timeline_tick + 1
+
+
+func enable_continuous_playback() -> void:
+	playback_schema = 1
+
+
+func current_playback_tick() -> int:
+	return _playback_tick
+
+
+func advance_simulation_playback() -> void:
+	if playback_schema == 1 and playback_terminal_tick < 0:
+		_playback_tick += 1
+
+
+func advance_command_playback(delta: float) -> void:
+	if playback_schema != 1 or playback_terminal_tick >= 0 or not is_finite(delta) or delta <= 0.0:
+		return
+	_command_subticks += delta * 60.0
+	var ticks := floori(_command_subticks + 0.000001)
+	_playback_tick += ticks
+	_command_subticks = maxf(_command_subticks - ticks, 0.0)
+
+
+func _append_playback(snapshot: Dictionary) -> void:
+	if playback_schema != 1:
+		return
+	snapshot["playback_schema"] = 1
+	snapshot["playback_tick"] = _playback_tick
+	snapshot["frame_seq"] = playback_snapshots.size()
+	playback_snapshots.append(snapshot)
+
+
+func add_command_snapshot(tick: int, data: Dictionary) -> void:
+	if playback_schema != 1 or playback_terminal_tick >= 0:
+		return
+	# Recording a frozen command tick must not move the next battle-wave offset.
+	_append_playback({"schema":SCHEMA_VERSION,"attempt_id":attempt_id,
+		"wave_id":wave_id,"tick":tick,"timeline_tick":timeline_tick(tick),
+		"data":data.duplicate(true)})
 
 
 func timeline_tick(local_tick: int) -> int:
@@ -59,6 +110,9 @@ func add_event(tick: int, type: String, actor_id: int = -1, target_id: int = -1,
 	event.merge({"seq": events.size(), "event_id": "%s:%d:%d" % [attempt_id, wave_id, events.size()],
 		"type": type, "actor_id": actor_id, "target_id": target_id,
 		"position": pos, "payload": payload.duplicate(true)})
+	if playback_schema == 1:
+		event["playback_schema"] = 1
+		event["playback_tick"] = _playback_tick
 	events.append(event)
 
 
@@ -66,6 +120,7 @@ func add_snapshot(tick: int, data: Dictionary) -> void:
 	var snapshot := _stamp(tick)
 	snapshot["data"] = data.duplicate(true)
 	snapshots.append(snapshot)
+	_append_playback(snapshot)
 
 
 func mark_terminal(tick: int, reason: String) -> void:
@@ -73,6 +128,8 @@ func mark_terminal(tick: int, reason: String) -> void:
 		return
 	terminal_tick = timeline_tick(tick)
 	terminal_reason = reason
+	if playback_schema == 1:
+		playback_terminal_tick = _playback_tick
 	add_event(tick, "terminal", -1, -1, Vector2.ZERO, {"reason": reason})
 
 
