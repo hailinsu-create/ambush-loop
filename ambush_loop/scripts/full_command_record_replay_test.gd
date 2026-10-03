@@ -14,6 +14,10 @@ func _run() -> void:
 	main.set_process(false)
 	var view=main.presentation_3d
 	view.set_process(false)
+	# Start a normal fresh attempt after taking manual ownership of frame time;
+	# the scene's startup delta is real, but not part of this .1s cadence fixture.
+	main._start_setup(false,false)
+	await process_frame
 	var attempt: String=main.battle_log.attempt_id
 	_check(not attempt.is_empty(),"SCOUT starts its stored attempt identity before any alarm")
 	_check(not _frames(main.battle_log).is_empty(),"production SCOUT retains its real initial frame")
