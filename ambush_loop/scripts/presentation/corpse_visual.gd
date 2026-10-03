@@ -38,7 +38,9 @@ func sync(item: Dictionary, frame: Dictionary, lod: int, carrier: Actor, walls: 
 	if mode == "release" and age >= 0.7:
 		mode = "ground"
 	var clip := "corpse_lift" if mode == "grab" else ("corpse_lower" if mode == "release" else ("corpse_dragged" if mode == "hold" else "corpse_prone"))
-	var pairing_policy: bool = int(frame.get("corpse_pairing_schema",0))==Pairing.FORMAT and int(frame.get("corpse_contact_schema",0))==Contact.FORMAT and bool(frame.get("environment_supported",false))
+	var pairing_schema: int = int(frame.get("corpse_pairing_schema",0))
+	var pairing_policy: bool = pairing_schema in [Pairing.LEGACY_FORMAT,Pairing.FORMAT] and int(frame.get("corpse_contact_schema",0))==Contact.FORMAT and bool(frame.get("environment_supported",false))
+	var continuous := pairing_schema==Pairing.FORMAT
 	var seconds := Pairing.clip_seconds(mode,age) if pairing_policy else (age if mode in ["grab","release"] else 0.0)
 	var anchor: Dictionary = item.carrier if bool(item.pairing) else item.ground_anchor
 	if anchor.is_empty() and bool(item.ever_grabbed):
@@ -86,12 +88,14 @@ func sync(item: Dictionary, frame: Dictionary, lod: int, carrier: Actor, walls: 
 	set_meta("pairing_supported",pairing_policy)
 	set_meta("pairing_active",pairing_policy and Pairing.gripping(mode,age))
 	set_meta("pairing_resolved",not bool(get_meta("pairing_active")))
+	var weight := Pairing.contact_weight(mode,age) if continuous else (1.0 if bool(get_meta("pairing_active")) else 0.0)
+	set_meta("pairing_weight",weight)
 	if pairing_policy and carrier != null and mode in ["hold","grab","release"]:
-		var prepared := Pairing.prepare(carrier,reference,anchor,mode,age,float(get_meta("contact_facing",anchor.facing)),_pairing_cache,frame)
-		if prepared and bool(get_meta("pairing_active")):
-			var left := Pairing.hand(carrier,"L","support_hand",body.shoulder("L"))
-			var right := Pairing.hand(carrier,"R","weapon_hand",body.shoulder("R"))
-			set_meta("pairing_resolved",left and right)
+		var prepared := Pairing.prepare(carrier,reference,anchor,mode,age,float(get_meta("contact_facing",anchor.facing)),_pairing_cache,frame,continuous)
+		if prepared and weight>0.0:
+			var left := Pairing.hand(carrier,"L","support_hand",body.shoulder("L"),weight,continuous)
+			var right := Pairing.hand(carrier,"R","weapon_hand",body.shoulder("R"),weight,continuous)
+			set_meta("pairing_resolved",not bool(get_meta("pairing_active")) or (left and right))
 	set_meta("mode", mode)
 	set_meta("source_wave_id", item.source_wave_id)
 	return true

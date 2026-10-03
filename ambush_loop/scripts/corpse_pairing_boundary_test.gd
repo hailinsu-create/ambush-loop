@@ -3,6 +3,7 @@ extends "res://scripts/corpse_pose_quality_test.gd"
 ## 3-role x 3-LOD x 2-stance fixture. No endpoint-only continuity oracle.
 var boundary_rows := []
 var legacy_rows := []
+var dense_rows := []
 
 func _check(ok: bool, message: String) -> void:
 	checks+=1
@@ -24,12 +25,20 @@ func _delta(previous: Dictionary, current: Dictionary) -> Dictionary:
 	var body_skin := 0.0
 	var bones := 0.0
 	var angle := 0.0
+	var position_index := -1
+	var angle_index := -1
 	for index in current.skin.size(): skin=maxf(skin,current.skin[index].distance_to(previous.skin[index]))
 	for index in current.body_skin.size(): body_skin=maxf(body_skin,current.body_skin[index].distance_to(previous.body_skin[index]))
 	for index in current.bones.size():
-		bones=maxf(bones,current.bones[index].origin.distance_to(previous.bones[index].origin))
-		angle=maxf(angle,current.bones[index].basis.get_rotation_quaternion().angle_to(previous.bones[index].basis.get_rotation_quaternion()))
-	return {"left_m":current.left.distance_to(previous.left),"right_m":current.right.distance_to(previous.right),"carrier_skin_m":skin,"body_skin_m":body_skin,"bone_position_m":bones,"bone_angle_rad":angle,"body_root_m":current.body.origin.distance_to(previous.body.origin)}
+		var distance: float = current.bones[index].origin.distance_to(previous.bones[index].origin)
+		var rotation: float = current.bones[index].basis.get_rotation_quaternion().angle_to(previous.bones[index].basis.get_rotation_quaternion())
+		if distance>bones:
+			bones=distance
+			position_index=index
+		if rotation>angle:
+			angle=rotation
+			angle_index=index
+	return {"left_m":current.left.distance_to(previous.left),"right_m":current.right.distance_to(previous.right),"carrier_skin_m":skin,"body_skin_m":body_skin,"bone_position_m":bones,"bone_angle_rad":angle,"bone_position_index":position_index,"bone_angle_index":angle_index,"body_root_m":current.body.origin.distance_to(previous.body.origin)}
 
 func _boundary_matrix(id: String) -> void:
 	var stage := Node3D.new()
@@ -80,6 +89,43 @@ func _boundary_matrix(id: String) -> void:
 									_check(delta.body_root_m<0.001,"body root never jumps at internal contact boundary")
 								else: legacy_rows.append(row)
 							previous=current
+					# Check small dt throughout the complete transition, including
+					# both internal boundaries and the original start/end times.
+					frame.corpse_pairing_schema=int(source.corpse_pairing_schema)
+					var duration := 1.0 if mode=="grab" else 0.7
+					var probes := [0.1999,0.2,0.5,0.6999,0.9999] if mode=="grab" else [0.4999,0.5,0.6999]
+					for step in range(int(duration/0.025)):
+						probes.append(float(step)*0.025)
+					for probe: float in probes:
+						if probe+0.0001>duration+0.000000001: continue
+						var previous := {}
+						var full_delta := {}
+						var full_signature := {}
+						for age: float in [probe,probe+0.0001,probe+0.00005]:
+							item.transition_age_s=age
+							carrier.transform=Transform3D(Basis(Vector3.UP,Space.facing_yaw(item.carrier.facing)),Space.logic_to_world(item.carrier.pos))
+							carrier.sample_layers(preload("res://scripts/presentation/actor_pose.gd").sample(op,frame,"ops"))
+							visual.sync(item,frame,lod,carrier,view._environment_scene.contact_bounds())
+							var current := _sample_signature(carrier,visual)
+							if not previous.is_empty():
+								var delta := _delta(previous,current)
+								if full_delta.is_empty():
+									full_delta=delta
+									full_signature=current
+								else:
+									var remaining := _delta(current,full_signature)
+									var row := {"role":role,"lod":lod,"stance":stance,"mode":mode,"age":probe,"dt_s":0.0001,"delta":full_delta,"half_delta":delta,"remaining_half_delta":remaining}
+									dense_rows.append(row)
+									# The 0.2s reach has finite motion exceeding 1mm per
+									# 100us away from a boundary. Check convergence as
+									# dt halves, plus a 20m/s outer bound. Critical
+									# contact boundaries retain the stricter 1mm gate.
+									var converges := true
+									for key in ["left_m","right_m","carrier_skin_m","body_skin_m","bone_position_m"]:
+										converges=converges and maxf(delta[key],remaining[key])<=full_delta[key]*0.65+0.000005 and full_delta[key]<0.002
+									_check(converges,"complete transition displacement converges when dt halves "+str(row))
+									_check(full_delta.bone_angle_rad<0.01,"complete transition all40 bone rotations bounded "+str(row))
+							else: previous=current
 	stage.free()
 
 func _run() -> void:
@@ -131,9 +177,15 @@ func _run() -> void:
 		main._process((0.7 if mode=="release" else 1.0)-previous_age+0.001)
 		view.refresh()
 	_boundary_matrix(id)
+	var reference_path := OS.get_environment("AMBUSH_BOUNDARY_REFERENCE")
+	if not reference_path.is_empty():
+		var reference: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(reference_path))
+		_check(reference.legacy_rows.size()==legacy_rows.size(),"legacy reference has same36 cases")
+		for index in legacy_rows.size():
+			_check(legacy_rows[index].pose_sha256==reference.legacy_rows[index].pose_sha256,"schema1 exact72 original roots/40-bone pose signatures preserved "+str(index))
 	await _history(id)
 	root.get_node("AudioDirector").pause_for_background()
 	var file := FileAccess.open("res://build/asset_review/pr15-runtime/corpse-boundary-report.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"boundary_rows":boundary_rows,"legacy_rows":legacy_rows,"native_quality_rows":quality_rows,"captures":captures},"  "))
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"boundary_rows":boundary_rows,"dense_rows":dense_rows,"legacy_rows":legacy_rows,"native_quality_rows":quality_rows,"captures":captures},"  "))
 	print("CORPSE_BOUNDARY_TEST checks=%d failures=%d cases=%d" % [checks,failures,boundary_rows.size()])
 	quit(0 if failures==0 else 1)

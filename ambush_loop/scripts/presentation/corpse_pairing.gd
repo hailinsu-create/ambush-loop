@@ -2,7 +2,8 @@ extends RefCounted
 
 ## Optional visual policy. The approach and return intervals are ungripped;
 ## the lift/lower interval uses a crouched torso and two unstretched arms.
-const FORMAT := 1
+const FORMAT := 2
+const LEGACY_FORMAT := 1
 const FLOOR_Y := 0.006
 const REACH_SECONDS := 0.2
 const LET_GO_SECONDS := 0.5
@@ -18,9 +19,19 @@ static func clip_seconds(mode: String, age: float) -> float:
 static func gripping(mode: String, age: float) -> bool:
 	return mode=="hold" or (mode=="grab" and age+EDGE_EPSILON>=REACH_SECONDS) or (mode=="release" and age<=LET_GO_SECONDS+EDGE_EPSILON)
 
+
+static func contact_weight(mode: String, age: float) -> float:
+	# Approach and return use the same smooth amount as the torso. A contact
+	# promise is still made only during lift/lower; the rendered arms reach
+	# and leave that pose continuously on both sides of the internal boundary.
+	if mode=="grab": return smoothstep(0.0,REACH_SECONDS,age)
+	if mode=="release": return 1.0-smoothstep(LET_GO_SECONDS,0.7,age)
+	return 1.0 if mode=="hold" else 0.0
+
 static func _poses(reference: Node3D, anchor: Dictionary, lod: int, kind: String, cache: Dictionary, frame: Dictionary) -> Array:
 	var key := "%s:%d:%d:%s" % [anchor.model,lod,int(anchor.stance),kind]
-	if kind=="neutral" or not cache.has(key):
+	var dynamic_held := kind=="held" and int(frame.get("corpse_pairing_schema",0))==FORMAT
+	if kind=="neutral" or dynamic_held or not cache.has(key):
 		if not reference.set_asset(str(anchor.model),lod,preload("res://scripts/presentation/corpse_pose.gd").REVISION):
 			return []
 		var stance: int = int(anchor.stance)
@@ -38,17 +49,18 @@ static func _poses(reference: Node3D, anchor: Dictionary, lod: int, kind: String
 			pose={"action":"corpse_drag","seconds":0.0}
 			if kind=="deep" or stance==1:
 				pose.merge({"base_action":"crouch","base_seconds":0.0,"upper_action":"corpse_drag","upper_seconds":0.0,"preserve_upper_world_basis":false})
+				if dynamic_held: pose.base_seconds=float(frame.pose_clock_s)
 		if not reference.sample_layers(pose):
 			return []
 		var bones := []
 		for index in reference.skeleton.get_bone_count():
 			bones.append(reference.skeleton.get_bone_pose(index))
-		if kind=="neutral":
+		if kind=="neutral" or dynamic_held:
 			return bones # A changing weapon/clock must not grow a pose cache.
 		cache[key]=bones
 	return cache[key]
 
-static func prepare(carrier: Node3D, reference: Node3D, anchor: Dictionary, mode: String, age: float, contact_facing: float, cache: Dictionary, frame: Dictionary) -> bool:
+static func prepare(carrier: Node3D, reference: Node3D, anchor: Dictionary, mode: String, age: float, contact_facing: float, cache: Dictionary, frame: Dictionary, continuous: bool = false) -> bool:
 	if mode not in ["grab","release"]:
 		return true
 	var feet := []
@@ -92,7 +104,21 @@ static func prepare(carrier: Node3D, reference: Node3D, anchor: Dictionary, mode
 		var side: String = ["L","R"][index]
 		var skeleton: Skeleton3D = carrier.skeleton
 		var target: Transform3D = feet[index]
-		planted=_limb(skeleton,skeleton.find_bone("thigh."+side),skeleton.find_bone("shin."+side),skeleton.find_bone("foot."+side),target.origin,target.basis) and planted
+		var joints := [skeleton.find_bone("thigh."+side),skeleton.find_bone("shin."+side),skeleton.find_bone("foot."+side)]
+		var original := []
+		if continuous:
+			for bone in joints: original.append(skeleton.get_bone_pose(bone))
+		planted=_limb(skeleton,joints[0],joints[1],joints[2],target.origin,target.basis) and planted
+		if continuous:
+			# At an authored endpoint the original feet already match. Avoid
+			# amplifying float error into a finite knee bend on a straight leg.
+			# The solve reaches full weight well before the deep contact pose.
+			var leg_weight := smoothstep(0.0,0.02,amount)
+			for joint in 3:
+				var blended: Transform3D = original[joint].interpolate_with(skeleton.get_bone_pose(joints[joint]),leg_weight)
+				blended.origin=original[joint].origin
+				skeleton.set_bone_pose(joints[joint],blended)
+			skeleton.force_update_all_bone_transforms()
 	carrier.mark_pose_modified()
 	return planted
 
@@ -112,7 +138,7 @@ static func _turn(skeleton: Skeleton3D, bone: int, from: Vector3, to: Vector3) -
 	skeleton.set_bone_global_pose(bone,pose)
 	skeleton.force_update_all_bone_transforms()
 
-static func hand(carrier: Node3D, side: String, socket: String, target: Vector3) -> bool:
+static func hand(carrier: Node3D, side: String, socket: String, target: Vector3, weight: float = 1.0, continuous: bool = false) -> bool:
 	var skeleton: Skeleton3D = carrier.skeleton
 	var upper := skeleton.find_bone("upper_arm."+side)
 	var lower := skeleton.find_bone("forearm."+side)
@@ -121,18 +147,41 @@ static func hand(carrier: Node3D, side: String, socket: String, target: Vector3)
 		return false
 	var c := skeleton.get_bone_global_pose(wrist).origin
 	var palm: Vector3 = skeleton.global_transform.affine_inverse()*carrier.bone_socket(socket).position
-	var goal := skeleton.global_transform.affine_inverse()*target-(palm-c)
-	var solved := _limb(skeleton,upper,lower,wrist,goal,skeleton.get_bone_global_pose(wrist).basis)
+	var destination: Vector3 = skeleton.global_transform.affine_inverse()*target
+	var original := []
+	if continuous and weight<1.0:
+		for bone in [upper,lower,wrist]: original.append(skeleton.get_bone_pose(bone))
+	var goal := destination-(palm-c)
+	var solved := _limb(skeleton,upper,lower,wrist,goal,skeleton.get_bone_global_pose(wrist).basis,continuous)
+	if not original.is_empty():
+		# Blend rotations, not the desired wrist. Solving a nearly straight
+		# arm at weight zero can still choose a different elbow plane. Local
+		# rotation interpolation gives the ordinary pose exactly at zero and
+		# the contact pose exactly at one without changing bone lengths.
+		for index in 3:
+			var bone: int = [upper,lower,wrist][index]
+			var blended: Transform3D = original[index].interpolate_with(skeleton.get_bone_pose(bone),clampf(weight,0.0,1.0))
+			blended.origin=original[index].origin
+			skeleton.set_bone_pose(bone,blended)
+		skeleton.force_update_all_bone_transforms()
 	carrier.mark_pose_modified()
-	return solved and carrier.bone_socket(socket).position.distance_to(target)<0.001
+	return solved and (weight<1.0 or carrier.bone_socket(socket).position.distance_to(target)<0.001)
 
-static func _limb(skeleton: Skeleton3D, upper: int, lower: int, endpoint: int, goal: Vector3, endpoint_basis: Basis) -> bool:
+static func _limb(skeleton: Skeleton3D, upper: int, lower: int, endpoint: int, goal: Vector3, endpoint_basis: Basis, project_reachable: bool = false) -> bool:
 	var a := skeleton.get_bone_global_pose(upper).origin
 	var b := skeleton.get_bone_global_pose(lower).origin
 	var c := skeleton.get_bone_global_pose(endpoint).origin
 	var first := a.distance_to(b)
 	var second := b.distance_to(c)
 	var distance := a.distance_to(goal)
+	if project_reachable:
+		# During approach a desired wrist can be outside the unstretched arm.
+		# Projection onto its reachable shell is continuous, so reaching the
+		# shell no longer suddenly enables a previously rejected full solve.
+		var reachable := clampf(distance,absf(first-second)+0.00001,first+second-0.00001)
+		if reachable!=distance:
+			goal=a+(goal-a).normalized()*reachable
+			distance=reachable
 	if distance>first+second+0.00001 or distance<absf(first-second)+0.00001:
 		return false
 	var direction := (goal-a).normalized()
