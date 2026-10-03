@@ -36,6 +36,7 @@ static func capture(host: Node) -> Dictionary:
 		"pose_clock_domain": str(data.get("pose_clock_domain", "")),
 		"utility_scope_id": str(data.get("utility_scope_id", "")),
 		"corpse_schema": int(data.get("corpse_schema", 0)),
+		"corpse_contact_schema": int(data.get("corpse_contact_schema", 0)),
 		"animation_supported": ActorPose.supported(data),
 		"environment_schema": int(data.get("environment_schema", 0)),
 		"environment_revision": str(data.get("environment_revision", "")),

@@ -451,10 +451,13 @@ func _sync_corpses() -> void:
 			var visual: Node3D = corpses[id]
 			var carrier: ActorVisual = null
 			var key := "ops:%d" % int(item.carrier_id)
-			if bool(item.pairing) and actors.has(key):
+			if str(item.mode)=="release" and CorpsePose.transition_valid(item,frame):
+				key="ops:%d" % int(item.transition.actor_id)
+			if (bool(item.pairing) or str(item.mode)=="release") and actors.has(key):
 				carrier = actors[key].get_node("Body") as ActorVisual
 			var lod := ActorPose.choose_lod(1.85 * get_viewport().get_visible_rect().size.y / rig.view_size, visual.body.lod)
-			visual.visible = bool(item.active) and visual.sync(item, frame, lod, carrier)
+			var contact_walls: Array = _environment_scene.contact_bounds() if _environment_scene != null and int(frame.corpse_contact_schema)==1 else []
+			visual.visible = bool(item.active) and visual.sync(item, frame, lod, carrier, contact_walls)
 	for id in corpses.keys():
 		if not seen.has(id):
 			corpses[id].free()

@@ -15,6 +15,11 @@ var door_leaf: Node3D
 var _door_locked := false
 var _batches := {}
 var _detail := 0
+var _contact_sources: Array = []
+var _contact_batches: Array = []
+var _contact_assets := {}
+var _contact_bounds: Array = []
+var _contact_dirty := true
 
 
 static func supported(data: Dictionary) -> bool:
@@ -143,6 +148,7 @@ func _build_block(theme: String, rect: Rect2i, center: Vector3, main_rect: bool)
 func set_door(locked: bool) -> bool:
 	var changed := _door_locked != locked
 	_door_locked = locked
+	_contact_dirty = _contact_dirty or changed
 	if door_leaf != null:
 		door_leaf.rotation_degrees.y = 0.0 if locked else -90.0
 	return changed
@@ -169,10 +175,52 @@ func _place(id: String, at: Vector3, yaw: float = 0.0) -> Node3D:
 
 
 func _register_cutaway(node: Node, moving: bool = false) -> void:
+	_contact_sources.append(node)
+	_register_wall_meshes(node,moving)
+
+
+func _register_wall_meshes(node: Node, moving: bool) -> void:
 	if node is MeshInstance3D:
 		walls.append({"mesh": node, "bounds": node.global_transform * node.get_aabb(), "mode": "hide", "moving": moving})
 	for child in node.get_children():
-		_register_cutaway(child, moving)
+		_register_wall_meshes(child, moving)
+
+
+func contact_bounds() -> Array:
+	# Fixed LOD0 geometry from this frame's versioned assembly. Cutaway visibility
+	# and camera LOD never remove a solid surface or change body placement.
+	if _contact_dirty:
+		_contact_bounds = _contact_batches.duplicate()
+		for node: Node3D in _contact_sources:
+			for bounds: AABB in _asset_contact_bounds(str(node.get_meta("asset_id",""))):
+				_contact_bounds.append(node.global_transform*bounds)
+		_contact_dirty = false
+	return _contact_bounds
+
+
+func _asset_contact_bounds(id: String) -> Array:
+	var key := id+(":"+str(_door_locked) if id=="env_door_leaf" else "")
+	if not _contact_assets.has(key):
+		var source := Assets.instantiate(id,0)
+		var bounds: Array = []
+		if source != null:
+			if id=="env_door_leaf":
+				var pivot := source.find_child("env_door_leaf__leaf_pivot",true,false) as Node3D
+				if pivot != null:
+					pivot.rotation_degrees.y=0.0 if _door_locked else -90.0
+			_collect_bounds(source,source.transform.affine_inverse(),bounds)
+			source.free()
+		_contact_assets[key]=bounds
+	return _contact_assets[key]
+
+
+func _collect_bounds(node: Node, transform: Transform3D, result: Array) -> void:
+	if node is Node3D:
+		transform=transform*node.transform
+	if node is MeshInstance3D:
+		result.append(transform*node.get_aabb())
+	for child in node.get_children():
+		_collect_bounds(child,transform,result)
 
 
 func _batch(id: String, at: Vector3, yaw: float = 0.0) -> void:
@@ -210,6 +258,9 @@ func _flush_batches() -> void:
 		add_child(display)
 		if id == "env_yard_crate":
 			walls.append({"mesh": display, "bounds": multi.get_aabb(), "mode": "hide"})
+			for pose: Transform3D in poses:
+				for bounds: AABB in _asset_contact_bounds(id):
+					_contact_batches.append(pose*bounds)
 		source.free()
 	_batches.clear()
 

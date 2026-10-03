@@ -86,6 +86,7 @@ func capture(host: Node) -> Dictionary:
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
 		"utility_scope_id": _utility_scope_id,
 		"corpse_schema": 1,
+		"corpse_contact_schema": 1,
 		"environment_schema": EnvironmentScene.FORMAT, "environment_revision": EnvironmentScene.REVISION,
 		"environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
