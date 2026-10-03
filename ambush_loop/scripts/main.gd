@@ -3946,8 +3946,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		handle_android_back()
+		# Credits Back can detach this scene immediately. Consume input first.
 		get_viewport().set_input_as_handled()
+		handle_android_back()
 		return
 	if _handle_touch_gestures(event):
 		get_viewport().set_input_as_handled()

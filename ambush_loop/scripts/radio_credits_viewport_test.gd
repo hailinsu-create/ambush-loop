@@ -1,6 +1,7 @@
 extends "res://scripts/viewport_hud_test.gd"
 ## Reference radio fixture, actual three waves, native original CTA and exit.
 var finished_count := 0
+var journey_round := 0
 
 func _check(ok: bool, message: String) -> void:
 	checks+=1
@@ -29,6 +30,7 @@ func _native_escape(label: String) -> void:
 	for _i in 10: await process_frame
 
 func _radio() -> void:
+	journey_round+=1
 	root.content_scale_factor=1.0
 	root.size=Vector2i(1280,720)
 	root.position=Vector2i.ZERO
@@ -72,7 +74,7 @@ func _radio() -> void:
 	_check(main.credits_overlay.is_open(),"native original WON CTA opens real credits")
 
 func _layout_credits(physical: Vector2i,factor: float,touch: bool) -> void:
-	sample="radio_credits_"+str(physical.x)+"_"+str(int(factor*100))+"_"+("touch" if touch else "desktop")
+	sample="radio_credits_journey"+str(journey_round)+"_"+str(physical.x)+"_"+str(int(factor*100))+"_"+("touch" if touch else "desktop")
 	var before: Dictionary=main._snapshot_data().duplicate(true)
 	var text: String=main.result_label.text
 	var footer: String=main.result_stats.text
