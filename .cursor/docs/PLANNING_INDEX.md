@@ -6,7 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [同候选完整记录正式关](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 父端续派六关/完整SCOUT→ALERT→SWEEP/recordreplay/graphical/失败身份取消兼容；67f521 SCOUT缺失先实际负向，新schema2保原battle与schema1兼容，固定源后正式验；不扩UI/制作资产。 |
+| [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；六关完整reference/三phase/真实schema1/身份seek/取消已验。父端fixed15c独立QA待；下一title200全菜单独立片，完整3DFX/A3/正常玩家旅程/APK仍待。 |
 | [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
 | [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |
 | [北侧HUD修复](AMBUSH_PR15_NORTH_HUD_20261003.md) | 816分开checklist/minimap并稳定镜头边界，7edd追加时间条留白；真实窗口/原生输入/焦点往返证据齐备，原裁切未称关闭。 |
@@ -82,3 +82,6 @@
 2026-10-03 父端已限定关闭0ac终局两P2；新radio200致谢子层P2优先[独立修复计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)，56/2中presentationclock误判排除。依赖47a645连续command已提交但仅开发98/0，formal/graphical/六关未运行；本片只修credits，再同候选整体formal。
 
 2026-10-03 radio credits独立片完成：固定dedc8cf作者正式127/0/11物理图/26XTest、headless共享生命周期30/0均exit0/ERROR0。有效反例cd984a5为106/17exit1且Escape2条脚本错误；修复viewport限高+固定标题/返回+scroll，返回先消费输入再切场景。原radio9个reference波/3nativeCTA、100/200返回及Back200均专项通过，原1413/51、正文/result/footer保持；三正式图已看。47代码保留、证据明确开发98/0非formal；下一片立即同47+credits整体command/recordreplay/graphical/六关13波。独立creditsQA、原两focus裁切、FX/A3/全旅程/同候选APK仍待，资产输出未改、不merge/生产。同步核对状态见交付记录。
+
+
+2026-10-03 同候选正式关作者完成：[完整报告](AMBUSH_PR15_FULL_RECORD_20261003.md)。固定15c0783059bb7c2f9e9cd9b7252a9343e71f4168，runtime d860056f2107836c08dfb375a034ebbe694baff6；29次全部实际exit0/ERROR0、75图核hash。SCOUT身份/真实采样保至报警、schema2播放+原domain不变，旧schema1实际874 fixture兼容。六关39reference波/mode、原terminal/events与30/60/2x camera对照保持；不是正常完整玩家旅程/完整3DFX/设备性能。23项checkpoint后只收session5976既有6项，不重跑有效项。失败/旧候选保全，fixture精确hash与历史源重建已写，无LibraryID/不绕过。父端fixed15c独立QA待；继承title200全菜单/Help返回/退出确认/键盘下一独立片，然后FX/A3。R5制作所有权、SCOUT→ALERT→SWEEP、Draft不merge/生产、height/G隔离保持。

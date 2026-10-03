@@ -1,0 +1,52 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "lifecycle-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "presentation_lifecycle_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "e7b8eda8cafc43a1b52d3fa6cf88ba20",
+  "actual_exit_code": 0,
+  "checks": 32,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/replay_event_focus.png",
+      "sha256": "a1581e2bd36f889d49f2a25113e097670b6144fff00b97e7aa511ab4951b73b3",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    },
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/scout_backpack.png",
+      "sha256": "5d6d94bdd0d8469d1e52ade278117674336a8bcf3420b10b12ea53474ea9a421",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 2,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/run.exit"
+}

@@ -1,0 +1,62 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "firearm_runtime-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "firearm_runtime_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "eb22bccf1aa7418f82c0bbc19615198e",
+  "actual_exit_code": 0,
+  "checks": 7681,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/r4_runtime_actual_mg.png",
+      "sha256": "269811c9a9eca4c53fd4eb3d003bac782d1ea8955daee92f255da2dba5c8263c",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    },
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/r4_runtime_actual_fallback.png",
+      "sha256": "25acb2ce66d3844e408d3f21fd009551fb3e14aa489ce91829657589c7f31912",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    },
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/r4_runtime_actual_history_mg.png",
+      "sha256": "ff5b5713d2cbc99fb65dc46301bdc33bcb4e465069403cf79b58155b5dbd6d9b",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 3,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/run.exit"
+}

@@ -1,0 +1,52 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "visual_snapshot-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "visual_snapshot_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "2e7aa57a23a5424388b135542461e299",
+  "actual_exit_code": 0,
+  "checks": 164,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/history_hud_desktop.png",
+      "sha256": "0a0d5bf21a5984ae9a04dfd4935d871ebf444cee2ac8e913678e374fecd1e49c",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    },
+    {
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/history_hud_phone.png",
+      "sha256": "441011157bd4efc60ee67abc39a6bec7960087e93cee8b00a61e40766279c640",
+      "image_size": [
+        1280,
+        720
+      ],
+      "source": "root framebuffer",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 2,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/run.exit"
+}

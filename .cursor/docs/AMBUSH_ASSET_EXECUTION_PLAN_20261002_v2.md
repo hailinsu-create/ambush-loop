@@ -62,3 +62,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 2026-10-03 父端已限定关闭0ac终局两P2；新radio200致谢子层P2优先[独立修复计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)，56/2中presentationclock误判排除。依赖47a645连续command已提交但仅开发98/0，formal/graphical/六关未运行；本片只修credits，再同候选整体formal。
 2026-10-03 radio credits专项：源dedc8cfdcfd5662eb86fe337cfd80812234904ab，负向cd984a5 106/17exit1/引擎错误2→正式127/0exit0/ERROR0，11物理图与26原生输入，三次原radio三波fixture经原WON CTA进入、滚到底及100/200返回/Back200。原正文/终局footer/1413tick/51events保持，headless lifecycle30/0通过；[报告](AMBUSH_PR15_CREDITS_20261003.md)。独立QA待；继承47a645连续command仍仅开发98/0，下一片同47+credits整体formal，不能以本专项替代六关战场/设备通过。资产接口/制作所有权保持，Draft不merge/生产。
+
+
+2026-10-03 同候选正式关作者完成：[完整报告](AMBUSH_PR15_FULL_RECORD_20261003.md)。固定15c0783059bb7c2f9e9cd9b7252a9343e71f4168，runtime d860056f2107836c08dfb375a034ebbe694baff6；29次全部实际exit0/ERROR0、75图核hash。SCOUT身份/真实采样保至报警、schema2播放+原domain不变，旧schema1实际874 fixture兼容。六关39reference波/mode、原terminal/events与30/60/2x camera对照保持；不是正常完整玩家旅程/完整3DFX/设备性能。23项checkpoint后只收session5976既有6项，不重跑有效项。失败/旧候选保全，fixture精确hash与历史源重建已写，无LibraryID/不绕过。父端fixed15c独立QA待；继承title200全菜单/Help返回/退出确认/键盘下一独立片，然后FX/A3。R5制作所有权、SCOUT→ALERT→SWEEP、Draft不merge/生产、height/G隔离保持。

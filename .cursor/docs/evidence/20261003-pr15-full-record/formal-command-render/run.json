@@ -1,0 +1,75 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "command-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "full_command_record_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "394b462e2968411e9c867179518b9adf",
+  "actual_exit_code": 0,
+  "checks": 224,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_live_0800.png",
+      "sha256": "d043357bda8b527a326fc77e32614f2254980a10a32bb0275507add172770f61",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/00_command_record_full_scout_live_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_history_0800.png",
+      "sha256": "18794505c38fd1f40a5290633bfbc2e8c7d640f50349950c2468b6aa75fd68be",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/01_command_record_full_scout_history_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_actual_schema1_history.png",
+      "sha256": "33bacd859660a77f0ecf075b976d7b91700695e247d8e81d491c27db462d5c8c",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/02_command_record_full_actual_schema1_history.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_live_sweep_0800.png",
+      "sha256": "120dfdbe35d3a355c54ad2cab6a54f7a12bf79688ba24f9688ca92400f032a5f",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/03_command_record_live_sweep_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_history_sweep_0800.png",
+      "sha256": "2b787862020c5c9ba50c280d920d939fae50cd992c1859af0bd21d32f721f102",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/04_command_record_history_sweep_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_escape.png",
+      "sha256": "df3fc27163ebb6da37397d4b2b5b7397ebc5c82b6a54e618e8d8e965e733ed07",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/05_command_record_full_failed_escape.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_abort.png",
+      "sha256": "4fed104b63bb90951bd59fb58906efe6f2306576f50c6952c4f3a99739a13088",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/06_command_record_full_failed_abort.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 7,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/run.exit"
+}

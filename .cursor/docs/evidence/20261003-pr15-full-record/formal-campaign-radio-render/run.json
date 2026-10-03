@@ -1,0 +1,177 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "campaign-radio-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "radio",
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "ddef8fa0a2d34d459134207ed4193c7d",
+  "actual_exit_code": 0,
+  "checks": 3179,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 0,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/3",
+      "id": "radio_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_scout.png",
+      "playback_tick": 0,
+      "recorded_phase": 0,
+      "sha256": "dade50ebddb501232280c6119a71d557005c18aa7a963bee25a6664c9287964b",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/00_full_record_radio_scout.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 54,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/3",
+      "id": "radio_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave0_alert.png",
+      "playback_tick": 307,
+      "recorded_phase": 1,
+      "sha256": "2fa92f39ddefa1ec0469c450b4ea3438479928e780bc7cf4fa4f91fc3a4ed3c9",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/01_full_record_radio_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 106,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/3",
+      "id": "radio_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave0_sweep.png",
+      "playback_tick": 611,
+      "recorded_phase": 5,
+      "sha256": "6bf95d150aa49a7d52b8e501f449cf1be7abf1155e54abaa837431113227c155",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/02_full_record_radio_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 140,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/3",
+      "id": "radio_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave1_alert.png",
+      "playback_tick": 804,
+      "recorded_phase": 1,
+      "sha256": "d2b596d3ce328f908c2e91719f81b683940bc3f174a8cad72331888163eba4fb",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/03_full_record_radio_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 176,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/3",
+      "id": "radio_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave1_sweep.png",
+      "playback_tick": 1015,
+      "recorded_phase": 5,
+      "sha256": "4560172bca5dd718560e737377ab7322eada640f5e389d9cda07d7d3d72e1941",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/04_full_record_radio_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 215,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 3/3",
+      "id": "radio_wave2_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave2_alert.png",
+      "playback_tick": 1238,
+      "recorded_phase": 1,
+      "sha256": "265e3c236c9f1bdbe8831db19eeb72986266712b1049a687c14b884f77909676",
+      "source": "native Window crop after two draws",
+      "wave_id": 2,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/05_full_record_radio_wave2_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 256,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 3/3",
+      "id": "radio_wave2_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave2_sweep.png",
+      "playback_tick": 1476,
+      "recorded_phase": 5,
+      "sha256": "6446e4eaf2ab54b68a678043fc4e9dd762a61dd0ea8be80ac25c0139daa30de1",
+      "source": "native Window crop after two draws",
+      "wave_id": 2,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/06_full_record_radio_wave2_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+      "frame_seq": 257,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 3/3",
+      "id": "radio_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_won.png",
+      "playback_tick": 1477,
+      "recorded_phase": 3,
+      "sha256": "6446e4eaf2ab54b68a678043fc4e9dd762a61dd0ea8be80ac25c0139daa30de1",
+      "source": "native Window crop after two draws",
+      "wave_id": 2,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/07_full_record_radio_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 8,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/run.exit"
+}

@@ -1,0 +1,1 @@
+本目录保留15c固定29次正式运行与所有旧SHA失败/开发/部分结果。正式范围只取formal-*及validation.json，不合计旧候选。checkpoint记录当时23项安全边界，后续同一session既有6项才补齐。旧schema1来源及重建说明见actual-schema1-874d350/README.md。所有原log/exit/旧PNG保全；file-manifest.json核对留存文件字节，visual-review仅contact overview。
