@@ -4,6 +4,18 @@ extends "res://scripts/corpse_pose_quality_test.gd"
 var boundary_rows := []
 var legacy_rows := []
 var dense_rows := []
+var ui_rows := []
+
+func _capture(id: String, label: String) -> void:
+	await super._capture(id,label)
+	var controls := []
+	for node in view._camera_panel.get_children():
+		if node is Control:
+			var rect: Rect2 = node.get_global_rect()
+			controls.append({"path":str(node.get_path()),"rect":str(rect),"visible":node.is_visible_in_tree()})
+			if node.is_visible_in_tree():
+				_check(root.get_visible_rect().grow(0.5).encloses(rect),"first native capture camera child fits "+label+" "+str(rect))
+	ui_rows.append({"label":label,"panel":str(view._camera_panel.get_global_rect()),"panel_minimum":str(view._camera_panel.get_combined_minimum_size()),"root_visible":str(root.get_visible_rect()),"controls":controls})
 
 func _check(ok: bool, message: String) -> void:
 	checks+=1
@@ -176,7 +188,7 @@ func _run() -> void:
 			await _capture(id,"boundary_"+mode+"_"+str(age))
 		main._process((0.7 if mode=="release" else 1.0)-previous_age+0.001)
 		view.refresh()
-	_boundary_matrix(id)
+	if OS.get_environment("AMBUSH_BOUNDARY_SCOPE")!="ui": _boundary_matrix(id)
 	var reference_path := OS.get_environment("AMBUSH_BOUNDARY_REFERENCE")
 	if not reference_path.is_empty():
 		var reference: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(reference_path))
@@ -186,6 +198,6 @@ func _run() -> void:
 	await _history(id)
 	root.get_node("AudioDirector").pause_for_background()
 	var file := FileAccess.open("res://build/asset_review/pr15-runtime/corpse-boundary-report.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"boundary_rows":boundary_rows,"dense_rows":dense_rows,"legacy_rows":legacy_rows,"native_quality_rows":quality_rows,"captures":captures},"  "))
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"boundary_rows":boundary_rows,"dense_rows":dense_rows,"legacy_rows":legacy_rows,"native_quality_rows":quality_rows,"captures":captures,"ui_rows":ui_rows},"  "))
 	print("CORPSE_BOUNDARY_TEST checks=%d failures=%d cases=%d" % [checks,failures,boundary_rows.size()])
 	quit(0 if failures==0 else 1)
