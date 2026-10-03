@@ -20,6 +20,13 @@ static func dispatch(host: Node, command: String, pick: Dictionary) -> bool:
 						host._select_op(i)
 						return true
 				return false
+			if str(pick.get("kind", "")) == "covers" and host.tool == host.Tool.DEPLOY:
+				# The ray picked a cover anchor; nearby bodies must not retarget it.
+				var slot = host._nearest_slot(pos, 1.0)
+				if slot == null:
+					return false
+				host._deploy_selected_to(slot, true)
+				return true
 			host._handle_setup_click(pos)
 			return true
 		"face":
