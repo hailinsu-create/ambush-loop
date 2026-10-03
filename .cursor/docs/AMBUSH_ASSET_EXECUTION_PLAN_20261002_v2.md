@@ -55,3 +55,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-03 本轮限定HUD收尾：[终局与北侧叠层报告](AMBUSH_PR15_RESULT_HUD_20261003.md)。f2结果滚动首修后，80ce379补镜头层级745/24exit1与时间条1718/16exit1→固定7edd0db93243e1079d6af3e55da37bf2d5a97df1正式结果449/0、focus1718/0、viewport5081/0、合同84042/0、历史画面164/0、渲染生命周期32/0，全实际exit0/ERROR0，119最终PNG全部留存并核hash，三张最终图已看。原两张focus邻近裁切未复现/独立QA仍待，cf77 IK/HUD独立QA由父端安排；未称全部HUD/完整战场/设备通过。此前onlylocal/authblocked为历史失败，原配置重试成功后，本片普通push及git/connector只读核对7edd成功；Library未恢复不重试。资产接口/单写者/SCOUT→ALERT→SWEEP规则保持；未展开FX/A3，后续仍按父端分配推进。
+
+
+2026-10-03 父端独立schema2 IK与北侧原矩阵已限定关闭，原focus文字与0ac终局新修QA待；旧cf77终局15/2及shader-cache错误不算green、不归0ac。继续[连续command切片计划](AMBUSH_PR15_CONTINUOUS_COMMAND_PLAN_20261003.md)：先真实ALERT/SWEEP两波录制与回放，保留原battle tick/seq/terminal统计，SCOUT前段留下一片；资产单写/规则边界保持，FX/A3/radio旅程/同候选最终构建按计划继续。
