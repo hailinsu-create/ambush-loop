@@ -98,11 +98,14 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 		if main.phase != main.Phase.SWEEP:
 			return {"failed": case[0], "wave": wave, "reason": main.fail_reason}
 		wave_ends.append(main.sim.tick)
+		# Use the original reference loot helper before waiting. Otherwise an
+		# ordinary timed auto-pickup adds a real extra event (radio loot:448),
+		# making the input sequence differ from the fixed domain baseline.
+		main.raid_vacuum_loot()
 		for i in 2: main._process(0.1)
 		_check(main.battle_log.playback_snapshots.any(func(snap: Dictionary) -> bool: return int(snap.data.phase)==main.Phase.SWEEP and int(snap.wave_id)==wave),"actual unpaused SWEEP interval records each authored wave")
 		# Same sweep helper as the full smoke: consume authored drops, never grant
 		# extra resources. This is a simulation fixture, not a physical pickup test.
-		main.raid_vacuum_loot()
 		main._on_sweep_commit()
 	_check(main.phase == main.Phase.WON and main.raid.waves_cleared == main.level.wave_count(), case[0] + " all authored waves extract")
 	var log = main.battle_log
