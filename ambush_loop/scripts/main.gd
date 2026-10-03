@@ -6890,6 +6890,9 @@ func _refresh_watch_timeline() -> void:
 	var touch := _want_touch()
 	## Phone SCOUT: hide the timeline so it does not cover the north wall.
 	var show := level != null and (phase == Phase.WATCHING or (phase == Phase.SETUP and not touch))
+	# Desktop minimap owns the north-right column; the route strip must end
+	# before it. Compact chrome hides the minimap and can use the full strip.
+	watch_timeline.offset_right = -16.0 if _use_touch_chrome() else -220.0
 	if touch:
 		watch_timeline.offset_top = 44.0
 		watch_timeline.offset_bottom = 80.0

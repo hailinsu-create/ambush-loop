@@ -291,6 +291,13 @@ func refresh() -> void:
 
 
 func _layout_camera_controls() -> void:
+	# Camera chrome lives above the HUD CanvasLayer. Terminal reports must
+	# retain the entire area for their scroll content and original actions.
+	if host._result_overlay_active():
+		_camera_panel.hide()
+		_camera_toggle.hide()
+		_camera_plate.hide()
+		return
 	var compact: bool = host._compact_hud()
 	if compact != _compact_camera:
 		_camera_open = false
