@@ -20,6 +20,7 @@ param(
         'replay_fx_lifecycle_test.gd',
         'command_pose_clock_test.gd',
         'command_record_replay_test.gd',
+        'full_command_record_replay_test.gd',
         'utility_runtime_test.gd',
         'corpse_runtime_test.gd',
         'corpse_pose_quality_test.gd',
