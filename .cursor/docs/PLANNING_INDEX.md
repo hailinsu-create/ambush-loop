@@ -1,15 +1,46 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-01。仅用于本游戏；设计文件不是实现或验收证明。
+更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
 
-**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；ChatGPT 连接器配对与外部 GPT 精确 SHA 评审仍受浏览器控制超时阻塞，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
+**B2 前待采纳的操作提案：** [M2 触屏操作重做](AMBUSH_M2_TOUCH_CONTROL_REDESIGN_20261003.md)。响应用户误触反馈，基于当前 B1 源码核查，建议采用“选人 → 点目标预览 → 固定按钮执行”，先做 M2-T 手势归属与触屏原型再继续 M2-B2。当前只有设计文档，未实施、未真机复验、待外部 GPT 评审；尚未替换已确认的主规划，B1 成果保留。
+
+**最新源码与续做入口：** [M2-B1 现场弹药与基础装备契约](AMBUSH_M2_B1_SUPPLY_EXECUTION_20261003.md)。资源子切片已实现，源码 Draft PR #25 / `42ba583e2ce88203543678280b905acb2cda63dd`；图形/headless、共享资源组和最终 M2-A HUD 定向回归均 exit 0 且玩家数据不变，两张实际游戏图归档。六关全量 smoke 有界中断，尚未通过。单次主接触和无高点爆破解留给 B2；外部 GPT 为 unavailable，设备/真人继续待补，不合并依赖链、不沿用旧批准。
+
+**当前 M2 执行入口：** [M2-A 信息减负与真实失败反馈](AMBUSH_M2_A_HUD_EXECUTION_20261003.md)。用户已采纳 [玩法重做规划](AMBUSH_M2_PREPARATION_GAMEPLAY_REDESIGN_20261003.md)。A 已实现，源码 Draft PR #24 / `26528ddca855ae0f8c61ea9688feff3677a55817`；图形 run `0d81726909c4471baa91e0931c90e35b`、Windows headless run `63f072d44b23451884b1351442de7b92` 均 wrapper exit 0 且玩家数据不变，四张真实 viewport 图已检查归档。共享 smoke 本轮只编译检查，未重跑全量；下一步 B→C→D，B–F 未实现。外部 GPT 精确版本评审为 unavailable，真机和真人体验继续待补；源码/依赖链未合并，不宣称完整 M2 通过。
+
+**M1 桌面完成基线：** [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md) 的完成记录与 [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)。D–H 单项隔离复验依次通过（runs `5ffbbb5ba16645c1931a0edf7084f0c5`、`8185a4e0b5f44d40a678d6993a06b56c`、`cafad01d062a4d4fba5ce5e4006213ae`、`b819434421114acd8586a35ee73a58cc`、`6b945b92cb92422fae98ce2ac67985fa`，均 exit 0 且玩家数据不变）。I 图形隔离 run `81ca8c1b0c5e45e395cacc3366b103e0` 通过，四张 1280×720 截图已目视并归档；源码 Draft PR #23 / `8bc9a4f`。共享全量 smoke run `6aa4327b890741a89270cdea56124d60` 通过六关循环、`SMOKE_SLICE_COMPLETE`、exit 0 和 `PLAYER_DATA_UNCHANGED=1`；D–I 本地自动化桌面工作已完成。M1 整体仍暂缓外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack，不把这些人工/设备证据误记为通过。
+
+**上一轮 M1 边界：** 用户要求先搁置需人的部分并完成其余 M1 工作。本机按既有正式 D–I 路线推进 E–I 自动化桌面证据；原 GPT 的新逐切片 PLAN/REVIEW、Android/vivo 和 5 人试玩仍明确待办，不宣称完整 M1 通过。
+
+**已被实施计划替代的预研：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)。其离散世界目标覆盖方向已按正式 PLAN 实现并验收；保留历史提案，不将其当作下一待开工切片。
+
+**M1-C2 完成记录：** [M1-C2 枪械高度视线接入计划](AMBUSH_M1C2_FIRE_PLAN_20261002.md)，已实现并获实际 GPT DONE。继承 C1 几何，仅接入枪械目标资格/覆盖与记录事件；非枪械视线/音频不改。真机继续暂缓，不取消历史验收门。
+
+**C2 最新证据：** Draft PR #16 / `e55a521`，五项定向隔离门通过；原 uninterrupted full smoke `4a70428c…` 已完成六关循环、`SMOKE_SLICE_COMPLETE`、wrapper exit 0 / `PLAYER_DATA_UNCHANGED=1`，原 GPT iteration 2 实际 DONE。准确连续高度射界不在本切片，黄色扇形保留 legacy 方向参考；目标点资格/覆盖共享高度规则，近战不迁移。代码/依赖 PR 尚未合并，完整 M1 与 Android 未验收。
+
+**最新执行顺序调整与进展：** 用户明确暂缓真机，设备插入后再补。[M1-C1 高度视线几何切片](AMBUSH_M1C_GEOMETRY_PLAN_20261002.md) 已按原 GPT 修订 PLAN 实现：新几何 API 与四项定向隔离门通过、GPT iteration 12 实际 REVIEW / DONE，无阻断项。代码在 Draft PR #13 / `e2550b7`，尚未合并；原 LOS 和战斗/预览/音频未改，新查询未接入生产消费者。下一步独立规划同源接入；完整 smoke 本轮未重跑。真机待补不再阻塞桌面原型，但完整 M1/B2/Android 退出门不取消。
+
+**本地续做入口：** [本地浏览器恢复、preflight 补审与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md)，补充 [本地主开发与设备验收续做](AMBUSH_LOCAL_CONTINUATION_20261002.md)。用户选择本地主开发、云端辅助。原开发任务已实际验证浏览器读/操作/结果，原项目 GPT iteration 11 对精确镜像的两份 preflight 文件完成补审，无阻断项，并规划下一 Vivo 设备取证切片。10 项离线测试通过，实机列表仍为空；包版本预检查不证明签名、B2 或音频稳定性。原镜像已有诊断差异未覆盖；设备门仍 pending，桌面 M1-D 至 M1-I 继续推进。程序更新构建与 199 项串行复查通过，不把连接恢复当作游戏验收。
+
+**云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；当时 ChatGPT 连接器配对与外部 GPT 精确 SHA 评审受浏览器超时阻塞。本轮只恢复并验证原本地评审，未重新验收云工作区配对或该 SHA 的外部评审，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
 
 ## 当前有效规划
 
-**当前执行入口：** [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。原六小时窗口已结束，用户要求继续处理未完成工作。后续 code80 记录确认 Accept → Yard 与至少三分钟存活；此前 CTA 未证实状态已被更新，但 Android 长时稳定性、旧 AudioTrack 根因仍未闭环。新符号构建成功但 Build ID `f4a54bf1…1526` 仍不匹配原库，未接受行号结果。当前 vivo 不可用，按外部 GPT iteration 7 规划，仅补桌面双向随队和断坡反例，再完成回归、评审与交接。评审工作区有诊断改动，已不是 clean `340b819`；后续评审须确认精确差异。
+**B2 既有证据入口：** [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。原六小时窗口已结束。code80 已有 Accept → Yard 与至少三分钟存活的短样本；Android 长时稳定性、旧 AudioTrack 根因仍未闭环。桌面双向随队/断坡反例已补，fresh full isolated smoke 已取得六关循环、完成标记、exit 0 和玩家数据不变，并获 GPT iteration 10 核对。iteration 11 已补审设备预检查，下一步只有 Vivo 设备取证；当前 ADB 无设备，不再扩桌面测试。新符号 Build ID `f4a54bf1…1526` 仍不匹配原库，未接受行号结果。评审镜像仍是 `340b819` 加诊断差异及两份新镜像文件，不是 clean；后续评审须核对精确差异。
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [M2 触屏操作重做提案](AMBUSH_M2_TOUCH_CONTROL_REDESIGN_20261003.md) | 待采纳；建议 B2 前先做 M2-T，固定命令面板与明确预览/确认。仅静态分析与官方参考，未实现/未真机/待外部评审。 |
+| [M2-B1 现场弹药与基础装备](AMBUSH_M2_B1_SUPPLY_EXECUTION_20261003.md) | 已实现，PR #25，定向资源/共享资源组/HUD 回归通过；六关全量 smoke 待补，B2 战术编排尚未实现。 |
+| [M2-A 信息减负与失败反馈](AMBUSH_M2_A_HUD_EXECUTION_20261003.md) | 已实现，Draft PR #24；图形/headless 定向 gate 通过，四张截图归档；共享 smoke 仅编译检查，GPT/真机/真人仍待补。 |
+| [M2 前玩法评估与体验重做提案](AMBUSH_M2_PREPARATION_GAMEPLAY_REDESIGN_20261003.md) | 用户已采纳方向：A 已实现，B–F 待实施；资源、触发、重试的契约变更仍逐切片验证。 |
+| [M1-I 渲染可读性与战术差异](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md) | 桌面 gate 与四张 viewport 截图均通过并逐张目视（run `81ca8c1b0c5e45e395cacc3366b103e0`，源码 Draft PR #23）；全量 smoke 六关循环、完成标记、exit 0、玩家数据不变均已确认。 |
+| [M1-H 院子整关一致性门](AMBUSH_M1_H_END_TO_END_PLAN_20261003.md) | 桌面整关门通过：1×/2×同权威结果；回放只读；flank 逃逸→Continue 重试。源码 Draft PR #22。 |
+| [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md) | 桌面 gate 通过：A/B 均两波获胜；主路集中反例真实 flank 逃逸并记录未交战原因。源码 Draft PR #21。 |
+| [M1-F 火力时机因果门](AMBUSH_M1_F_TIMING_CAUSALITY_PLAN_20261003.md) | 已实现并桌面隔离验收通过；同枪同弹药下，见敌即打在区外开火，入伏再打先记录武装后同 tick 开火。源码 Draft PR #20，D/E 回归 exit 0；外部 GPT 精确差异复审仍待授权。 |
+| [M1-E 资源因果与预算门](AMBUSH_M1_E_RESOURCE_BUDGET_PLAN_20261003.md) | 已实现并桌面隔离验收通过；修复失败重试残留 ammo_pool。源码 Draft PR #19，外部 GPT 精确差异复审仍待授权。 |
+| [M1-C1 高度视线几何切片](AMBUSH_M1C_GEOMETRY_PLAN_20261002.md) | 既有本地进展：几何 API、四项隔离门、实际 GPT DONE；战斗/预览/回放同源接入已由 C2/C3 后续切片推进。真机仍待补。 |
+| [本地评审恢复与下一设备切片](AMBUSH_LOCAL_REVIEW_RECOVERY_20261002.md) | 当前本地入口：浏览器实际恢复；preflight 精确两文件补审；下一步仅 Vivo 包身份、B2 视觉/玩法与音频生命周期样本。 |
 | [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md) | 当前窗口外续做切片：真实双向随队、双向断坡反例、隔离回归和 GPT 评审；完整 B2/Android 验收仍待真机证据。 |
 | [6 小时开发与修复计划](AMBUSH_6H_DEV_REPAIR_PLAN_20260929.md) | 原窗口已结束，后续状态见第 13 节及当前补验报告。code80 已有 Accept → Yard 短时样本；AudioTrack 根因、长时稳定性及完整 B2 真机验收仍未闭环。 |
 | [游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) | 当前开发设计基线：玩法、高点规则、六关、视觉、手机操作、M0–M5。用户已同意以此推进；具体设计仍须逐切片实现、验证。 |
