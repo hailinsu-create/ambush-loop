@@ -10,6 +10,62 @@ var rows := []
 var captures := []
 var sample := ""
 var input_rows := []
+var north_rows := []
+
+func _north_text(label: String) -> void:
+	var viewport := root.get_visible_rect().grow(0.5)
+	var row := {"sample":sample,"moment":label,"panel":_rect(view._camera_panel.get_global_rect()),"minimum":str(view._camera_panel.get_combined_minimum_size()),"texts":[]}
+	if view._camera_panel.is_visible_in_tree():
+		var controls := []
+		_buttons(view._camera_controls,controls)
+		var glyph := _text_rect(view._compass)
+		_check(viewport.encloses(glyph),"camera compass glyph fits after "+label+" "+str(glyph))
+		row.texts.append({"path":str(view._compass.get_path()),"glyph":_rect(glyph)})
+		for node in view._camera_panel.get_children():
+			if node is Button:
+				var font: Font = node.get_theme_font("font")
+				var size: int = node.get_theme_font_size("font_size")
+				var extent := font.get_string_size(node.text,HORIZONTAL_ALIGNMENT_LEFT,-1,size)
+				_check(extent.x<=node.size.x,"camera button text fits its hit rectangle after "+label)
+	if main.c2.minimap.is_visible_in_tree() and main.checklist_strip.is_visible_in_tree():
+		for chip: Label in main._checklist_labels:
+			var glyph := _text_rect(chip)
+			_check(not glyph.intersects(main.c2.minimap.get_global_rect()),"checklist glyph stays outside minimap "+str(glyph))
+	north_rows.append(row)
+
+func _focus_case() -> void:
+	for touch in [false,true]:
+		for physical in [Vector2i(1280,720),Vector2i(1600,720)]:
+			for factor in [1.0,2.0]:
+				await _layout(physical,factor,touch,"focus_scout")
+				if main._compact_hud():
+					await _native_click(view._camera_toggle)
+				for yaw in [65.0,245.0,35.0,65.0]:
+					var before: Dictionary = main._snapshot_data().duplicate(true)
+					main._toggle_pause_menu()
+					main._process(0.4)
+					view.refresh()
+					main.pause_overlay.dismiss()
+					main.handle_app_focus_out()
+					main._process(0.4)
+					view.refresh()
+					main.handle_app_focus_in()
+					view.rig.yaw_deg=yaw
+					view.rig.apply_pose()
+					main._update_hud()
+					view.refresh()
+					await process_frame
+					await RenderingServer.frame_post_draw
+					_north_text("first_draw_yaw"+str(yaw))
+					_check(main._snapshot_data()==before,"focus/pause/camera display keeps complete command state")
+					await _modal_capture(sample+"_yaw"+str(int(yaw))+"_"+str(north_rows.size()))
+					await process_frame
+					_north_text("second_draw_yaw"+str(yaw))
+	root.get_node("AudioDirector").pause_for_background()
+	var file := FileAccess.open("res://build/asset_review/pr15-runtime/north-focus-report.json",FileAccess.WRITE)
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"rows":north_rows,"captures":captures,"native_inputs":input_rows},"  "))
+	print("NORTH_FOCUS_TEST checks=%d failures=%d samples=%d" % [checks,failures,north_rows.size()])
+	quit(0 if failures==0 else 1)
 
 func _native_click(node: Control, button: int = 1, point: Vector2 = Vector2(INF,INF)) -> void:
 	var logical := node.get_global_rect().get_center() if not point.is_finite() else point
@@ -196,6 +252,9 @@ func _run() -> void:
 	view=main.presentation_3d
 	main.set_process(false)
 	view.set_process(false)
+	if OS.get_environment("AMBUSH_VIEWPORT_SCOPE")=="focus":
+		await _focus_case()
+		return
 	await _matrix("scout")
 	root.content_scale_factor=1.0
 	settings.set_force_touch_hud(false)
