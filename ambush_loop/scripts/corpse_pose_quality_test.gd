@@ -8,6 +8,16 @@ var phases := []
 var copied_frames := []
 var copied_signatures := []
 
+func _capture(id: String, name: String) -> void:
+	await super._capture(id,name)
+	if DisplayServer.get_name()!="headless":
+		var capture: Dictionary = captures.back()
+		capture.requested_view_size=8.0
+		capture.actual_view_size=view.rig.view_size
+		capture.actual_viewport_size=root.get_texture().get_image().get_size()
+		capture.yaw=view.rig.yaw_deg
+		capture.pitch=view.rig.pitch_deg
+
 func _held_matrix() -> void:
 	var stage := Node3D.new()
 	root.add_child(stage)
@@ -103,7 +113,7 @@ func _detail_capture(id: String, label: String, yaw: float) -> void:
 	await RenderingServer.frame_post_draw
 	var path := "res://build/asset_review/pr15-runtime/contact_"+label+".png"
 	_check(root.get_texture().get_image().save_png(path)==OK,"capture "+label)
-	captures.append({"path":path,"sha256":FileAccess.get_sha256(path),"hud":"actual desktop","view_size":4.0,"yaw":yaw,"pitch":35.0})
+	captures.append({"path":path,"sha256":FileAccess.get_sha256(path),"hud":"actual desktop","requested_view_size":4.0,"actual_view_size":view.rig.view_size,"actual_viewport_size":root.get_texture().get_image().get_size(),"yaw":view.rig.yaw_deg,"pitch":view.rig.pitch_deg})
 	settings.set_force_touch_hud(true)
 	view.rig.view_size=8.0
 	view.rig.yaw_deg=65.0
@@ -122,7 +132,8 @@ func _history(id: String) -> void:
 	for index in copied_frames.size(): log.add_snapshot(index*60,copied_frames[index])
 	log.mark_terminal((copied_frames.size()-1)*60,"copied-native-pairing")
 	var original: Array = log.snapshots.duplicate(true)
-	main.phase=main.Phase.REPLAY
+	main._on_replay_pressed()
+	_check(main.phase==main.Phase.REPLAY,"actual replay entry clears transient live HUD before copied fixture seeks")
 	main.replay.bind(log)
 	main.grid.blocked.fill(0)
 	main.selected.global_position+=Vector2(320,224)
