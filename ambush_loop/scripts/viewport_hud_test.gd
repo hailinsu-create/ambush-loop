@@ -59,6 +59,7 @@ func _inspect(touch: bool, physical: Vector2i, scale_factor: float) -> void:
 	if main.status_label.is_visible_in_tree() and main.route_legend.is_visible_in_tree():
 		for chip: Control in main.route_legend.get_children():
 			_check(not _text_rect(main.status_label).intersects(chip.get_global_rect()),"SCOUT status glyphs do not overlap route chips")
+			_check(not _text_rect(main.title_label).intersects(chip.get_global_rect()),"SCOUT title glyphs do not overlap route chips")
 	if main.title_label.is_visible_in_tree() and main.phase_chip.is_visible_in_tree():
 		_check(not _text_rect(main.title_label).intersects(_text_rect(main.phase_chip)),"title glyphs do not overlap phase glyphs")
 	rows.append({"id":sample,"phase":main.phase_id(),"touch":touch,"requested_window":[physical.x,physical.y],"actual_window":[root.size.x,root.size.y],"content_scale_factor":root.content_scale_factor,"content_scale_size":root.content_scale_size,"usable_viewport":_rect(root.get_visible_rect()),"stretch_transform":str(root.get_stretch_transform()),"controls":controls})
@@ -67,6 +68,7 @@ func _layout(physical: Vector2i, scale_factor: float, touch: bool, label: String
 	sample=label+"_"+str(physical.x)+"_"+str(int(scale_factor*100))+"_"+("touch" if touch else "desktop")
 	var before: Dictionary = main._snapshot_data().duplicate(true)
 	root.size=physical
+	root.position=Vector2i(0,0)
 	root.content_scale_factor=scale_factor
 	root.get_node("GameSettings").set_force_touch_hud(touch)
 	for _i in 4: await process_frame
@@ -76,11 +78,15 @@ func _layout(physical: Vector2i, scale_factor: float, touch: bool, label: String
 	_inspect(touch,physical,scale_factor)
 	_check(main._snapshot_data()==before,"resize/200%/input-mode never changes simulation")
 	await RenderingServer.frame_post_draw
-	var image := root.get_texture().get_image()
+	# Root texture can retain the project base size under stretch/aspect keep.
+	# Capture the actual private X11 screen and crop only the native window.
+	var screen := DisplayServer.screen_get_image(root.current_screen)
+	_check(screen!=null and not screen.is_empty(),"actual display capture available")
+	var image := screen.get_region(Rect2i(root.position,root.size))
 	_check(image.get_size()==physical,"captured image has actual physical dimensions "+str(image.get_size()))
 	var path := "res://build/asset_review/pr15-runtime/viewport_"+sample+".png"
 	_check(image.save_png(path)==OK,"capture saved")
-	captures.append({"id":sample,"path":path,"sha256":FileAccess.get_sha256(path),"image_size":[image.get_width(),image.get_height()]})
+	captures.append({"id":sample,"path":path,"sha256":FileAccess.get_sha256(path),"image_size":[image.get_width(),image.get_height()],"capture_source":"DisplayServer.screen_get_image native Window crop","root_texture_size":root.get_texture().get_image().get_size()})
 
 func _matrix(label: String) -> void:
 	for physical in [Vector2i(1280,720),Vector2i(1600,720)]:
