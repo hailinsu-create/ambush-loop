@@ -59,12 +59,18 @@ func _terminal_matrix(won: bool) -> void:
 	var scroll = main.result_panel.find_child("ResultScroll",true,false)
 	_check(scroll is ScrollContainer,"bounded result content has a real scroll container")
 	if scroll is ScrollContainer:
+		if not won:
+			await _native_click(main.dossier_button)
+			_check(main._dossier_open,"native opens the long dossier before testing its scroll")
 		var before: Dictionary = main._snapshot_data().duplicate(true)
 		var rect: Rect2 = scroll.get_global_rect()
 		for _i in 10: await _native_click(scroll,5,Vector2(rect.end.x-6,rect.get_center().y))
 		_check(scroll.scroll_vertical>0,"native wheel reaches long terminal content")
 		_check(main._snapshot_data()==before,"result scrolling preserves complete terminal state")
 		await _modal_capture(sample+"_scrolled")
+		if not won:
+			await _native_click(main.dossier_button)
+			_check(not main._dossier_open,"fixed footer closes dossier after scrolling")
 	if root.get_visible_rect().encloses(main.continue_button.get_global_rect()):
 		var loop_before: int = main.loop_index
 		await _native_click(main.continue_button)

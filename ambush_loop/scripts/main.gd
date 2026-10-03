@@ -155,6 +155,9 @@ var trap_path: Node2D = null
 var result_dossier: Label = null
 var dossier_button: Button = null
 var _dossier_open: bool = false
+var _result_scroll: ScrollContainer
+var _result_body: VBoxContainer
+var _result_footer: HBoxContainer
 var _fail_dossier_text: String = ""
 var _wave_tension_id: int = -1
 var spawn_ghost_host: Node2D = null
@@ -879,7 +882,7 @@ func _ensure_touch_hud() -> void:
 		if touch_hud.has_method("bind_host"):
 			touch_hud.bind_host(self)
 	var on := _use_touch_chrome()
-	touch_hud.visible = on
+	touch_hud.visible = on and not _result_overlay_active()
 	_apply_phone_chrome(on)
 	_refresh_touch_hud()
 
@@ -922,6 +925,8 @@ func _apply_phone_chrome(on: bool) -> void:
 	if c2 and c2.has_method("layout_chrome"):
 		c2.layout_chrome(on)
 	_fold_phone_north_hud(on)
+	if _result_overlay_active():
+		_apply_result_columns()
 
 
 func _fold_phone_north_hud(on: bool) -> void:
@@ -1594,6 +1599,51 @@ func _apply_result_columns() -> void:
 	if result_stats:
 		result_stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		result_stats.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_fit_result_dialog()
+
+
+func _fit_result_dialog() -> void:
+	if not _result_overlay_active():
+		return
+	var shell := result_panel.get_node("Margin/VBox") as VBoxContainer
+	if _result_scroll == null:
+		_result_scroll=ScrollContainer.new()
+		_result_scroll.name="ResultScroll"
+		_result_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
+		_result_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
+		_result_scroll.follow_focus=true
+		shell.add_child(_result_scroll)
+		_result_body=VBoxContainer.new()
+		_result_body.name="Content"
+		_result_body.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		_result_body.add_theme_constant_override("separation",10)
+		_result_scroll.add_child(_result_body)
+		_result_footer=HBoxContainer.new()
+		_result_footer.name="ResultActions"
+		_result_footer.add_theme_constant_override("separation",8)
+		shell.add_child(_result_footer)
+	for child in shell.get_children():
+		if child in [_result_scroll,_result_footer]: continue
+		if child in [continue_button,dossier_button,title_return_button]:
+			child.reparent(_result_footer)
+			child.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+			child.custom_minimum_size=Vector2(0,44)
+		else:
+			child.reparent(_result_body)
+	shell.move_child(_result_scroll,0)
+	shell.move_child(_result_footer,1)
+	result_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	result_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	var usable := get_viewport().get_visible_rect().size
+	var width := minf(560.0 if phase==Phase.FAILED else 640.0,usable.x-32.0)
+	var height := minf(340.0 if phase==Phase.FAILED else 460.0,usable.y-24.0)
+	result_panel.set_anchors_preset(Control.PRESET_CENTER_BOTTOM if phase==Phase.FAILED else Control.PRESET_CENTER)
+	result_panel.offset_left=-width*0.5
+	result_panel.offset_right=width*0.5
+	result_panel.offset_top=-height-12.0 if phase==Phase.FAILED else -height*0.5
+	result_panel.offset_bottom=-12.0 if phase==Phase.FAILED else height*0.5
+	result_panel.grow_horizontal=Control.GROW_DIRECTION_BOTH
+	result_panel.grow_vertical=Control.GROW_DIRECTION_BEGIN if phase==Phase.FAILED else Control.GROW_DIRECTION_BOTH
 
 
 func _fill_result_stats() -> void:
@@ -7330,6 +7380,7 @@ func _raise_result_overlay() -> void:
 		continue_button.add_theme_font_size_override("font_size", 18)
 	_apply_result_rail()
 	_sync_desktop_bars(not _want_touch())
+	_fit_result_dialog()
 
 
 func _dock_fail_result_panel(_keep_escape_visible: bool) -> void:
