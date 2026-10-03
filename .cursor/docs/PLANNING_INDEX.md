@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
 | [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |
 | [北侧HUD修复](AMBUSH_PR15_NORTH_HUD_20261003.md) | 816分开checklist/minimap并稳定镜头边界，7edd追加时间条留白；真实窗口/原生输入/焦点往返证据齐备，原裁切未称关闭。 |
 | [schema2连续抓放边界](AMBUSH_PR15_CORPSE_BOUNDARY_20261003.md) | 固定f7作者边界2978/0、18run exit0；已随cf77正常push，父端cf77独立QA进行中，三个未留存辅助图仍明确缺失。 |
@@ -78,3 +79,5 @@
 
 
 2026-10-03 父端已限定关闭0ac终局两P2；新radio200致谢子层P2优先[独立修复计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)，56/2中presentationclock误判排除。依赖47a645连续command已提交但仅开发98/0，formal/graphical/六关未运行；本片只修credits，再同候选整体formal。
+
+2026-10-03 radio credits独立片完成：固定dedc8cf作者正式127/0/11物理图/26XTest、headless共享生命周期30/0均exit0/ERROR0。有效反例cd984a5为106/17exit1且Escape2条脚本错误；修复viewport限高+固定标题/返回+scroll，返回先消费输入再切场景。原radio9个reference波/3nativeCTA、100/200返回及Back200均专项通过，原1413/51、正文/result/footer保持；三正式图已看。47代码保留、证据明确开发98/0非formal；下一片立即同47+credits整体command/recordreplay/graphical/六关13波。独立creditsQA、原两focus裁切、FX/A3/全旅程/同候选APK仍待，资产输出未改、不merge/生产。同步核对状态见交付记录。

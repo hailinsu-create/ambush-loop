@@ -7,3 +7,5 @@
 独立改动为CreditsOverlay限实际可用viewport、固定可达标题/返回按钮、长正文滚动、resize重排；保持原CHAIN/六夜标签/recap文字/finished→title绑定和原Back语义。测试经原radio部署/tripwire/三波/原vacuum helper/撤离，保留terminal1413/51events，再原生点击CTA、实际两窗口/100-200/两偏好、wheel到底、button100/200及Escape200返回真实title。测试helper只补隔离私有X11的Escape。radio referencefixture不称正常六关玩家旅程或真机触控。
 
 先提交实际反例固定SHA，再提交UI生产修复，正式渲染/功能验证与原base字节/结果对照，保存命令/实际exit/UUID/PNG/hash与未验项。原两张focus文字、command整体formal、完整FX/六关13波visual/正常journey/A3/同候选smoke-QA-APK仍待。单writer、资产接口保持，制作源/GLB/atlas/manifest无修改重跑，Draft不merge/生产；耳听/设备后置。GPT PLAN/REVIEW unavailable。
+
+完成状态：固定cd984a5实际负向106/17exit1及2条旧Escape返回错误→固定dedc8cfdcfd5662eb86fe337cfd80812234904ab正式127/0exit0/ERROR0、11物理图/26XTest、三次原radio3波CTA及100/200button/200Escape，原正文/footer/terminal1413与51events保持，另共享headless lifecycle30/0。已看三张正式图；[报告/证据](AMBUSH_PR15_CREDITS_20261003.md)。按父端要求此片返回供独立QA，47继承command仍只开发98/0，整体formal下一片立即执行。

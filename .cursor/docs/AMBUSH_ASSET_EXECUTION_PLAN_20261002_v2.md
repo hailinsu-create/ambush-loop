@@ -61,3 +61,4 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-03 父端已限定关闭0ac终局两P2；新radio200致谢子层P2优先[独立修复计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)，56/2中presentationclock误判排除。依赖47a645连续command已提交但仅开发98/0，formal/graphical/六关未运行；本片只修credits，再同候选整体formal。
+2026-10-03 radio credits专项：源dedc8cfdcfd5662eb86fe337cfd80812234904ab，负向cd984a5 106/17exit1/引擎错误2→正式127/0exit0/ERROR0，11物理图与26原生输入，三次原radio三波fixture经原WON CTA进入、滚到底及100/200返回/Back200。原正文/终局footer/1413tick/51events保持，headless lifecycle30/0通过；[报告](AMBUSH_PR15_CREDITS_20261003.md)。独立QA待；继承47a645连续command仍仅开发98/0，下一片同47+credits整体formal，不能以本专项替代六关战场/设备通过。资产接口/制作所有权保持，Draft不merge/生产。

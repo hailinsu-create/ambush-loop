@@ -14,4 +14,6 @@ ALERT播放时钟随原_sim_tick逐tick推进，保持1×/2×；SWEEP随未暂�
 
 父端独立checkpoint登记（主作者未冒称重跑）：cf77f4db63605ff1e9846e1149f27ca6d461f458的schema2 IK原P2关闭，116/0、36关键maxskin0.02138mm、1350样本6488/0、72schema1 hash同a575、pause/clock/history4321/0，全ERROR0；eb1531475d190b656f57a2e4c7cd098b0e3f30df北侧原重叠矩阵关闭2187/0/72时刻，cf77负向729/16exit1，focus1702/viewport5081通过。旧cf77终局15/2exit1并有3 shader-cache错误，不算green，也不据此断言0ac失败；0ac独立终局结论待。原两张focus文字/radio终章/完整旅程仍待。
 
-当前状态：计划及实际生产反例待运行；下一步按固定源码验证并接独立QA。
+当前状态（2026-10-03 后续 checkpoint）：实际固定 c668e2dc3773262f3dc0c6fbca3b26631a9461a1 负向25/10、exit1/ERROR0，八个真实SWEEP中间点缺失及resume/版本字段失败。生产代码已固定47a6454ed745c96a6da0b89867c37cf54c79d83d；提交前开发52/0与扩展98/0均exit0/ERROR0，八个中间采样/16次根与20骨seek、暂停后台、legacy/unknown/malformed fallback及原WON1283/34、FAILED928/19、abort0/3统计已开发检查。证据归档在[evidence](evidence/20261003-pr15-command-record/README.md)，明确不作为固定源formal。父端要求先完成radio credits独立修复再返回，因此47的正式command/图形/六关13波验证尚未运行，不能称验收。下一片在47+credits同一候选立即完成整体formal，再继续FX/A3/构建。
+
+父端0ac终局两P2已限定关闭（15/0及result449/focus1718/viewport5081/history133全ERROR0）；新增radio credits真实P2另见[credits计划](AMBUSH_PR15_CREDITS_PLAN_20261003.md)。56/2中presentationclock误判不计第二个真实缺陷。以上独立结果登记不冒称主作者重跑。
