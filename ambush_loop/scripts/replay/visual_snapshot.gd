@@ -88,6 +88,7 @@ func capture(host: Node) -> Dictionary:
 		"corpse_schema": 1,
 		"corpse_contact_schema": 1,
 		"environment_schema": EnvironmentScene.FORMAT, "environment_revision": EnvironmentScene.REVISION,
+		"environment_cutaway_schema": 1,
 		"environment_layout_revision": EnvironmentScene.LAYOUT_REVISION,
 		"animation_schema": ActorPose.FORMAT, "actor_asset_revision": ActorPose.ASSET_REVISION,
 		"pose_clock_domain": "simulation" if simulation_time else "command",

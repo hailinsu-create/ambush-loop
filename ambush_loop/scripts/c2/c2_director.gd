@@ -198,7 +198,7 @@ func _pin_portraits(phone: bool) -> void:
 		portraits.offset_top = 0.0
 		portraits.offset_right = 0.0
 		portraits.offset_bottom = 0.0
-		portraits.visible = true
+		portraits.visible = _portraits_needed(phone)
 	else:
 		if _hud_root == null:
 			return
@@ -211,7 +211,13 @@ func _pin_portraits(phone: bool) -> void:
 		portraits.offset_right = 168.0
 		portraits.offset_top = -272.0
 		portraits.offset_bottom = -158.0
-		portraits.visible = true
+		portraits.visible = _portraits_needed(phone)
+
+
+func _portraits_needed(phone: bool) -> bool:
+	# The 3D desktop already has selectable/historical left-rail cards.
+	# Keep the original strip for the phone rail and the legacy 2D desktop.
+	return phone or host==null or host.get("presentation_3d")==null
 
 
 func _on_portrait_long(idx: int) -> void:
@@ -845,7 +851,7 @@ func refresh_hud() -> void:
 		minimap.bind(host)
 		minimap.visible = not phone
 	if portraits:
-		portraits.visible = true
+		portraits.visible = _portraits_needed(phone)
 	if cursor:
 		cursor.visible = not phone
 

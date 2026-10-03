@@ -225,7 +225,7 @@ func refresh() -> void:
 	elif rig.view_size < 22.0:
 		_environment_lod = 0
 	var layout_hash: int = hash([frame.level_id, frame.blocked, frame.environment_supported,
-		frame.environment_revision, frame.environment_layout_revision, frame.has_door, frame.door_pos, _environment_lod])
+		frame.environment_revision, frame.environment_layout_revision, frame.environment_cutaway_schema, frame.has_door, frame.door_pos, _environment_lod])
 	if layout_hash != _layout_hash:
 		_layout_hash = layout_hash
 		_rebuild_geometry()

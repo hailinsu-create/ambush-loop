@@ -8,6 +8,7 @@ const LAYOUT_REVISION := "six_level_grid_assembly_1"
 const Assets := preload("res://scripts/presentation/asset_library.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
 const Geometry := preload("res://scripts/presentation/graybox_geometry.gd")
+const LandmarkCutaway := preload("res://scripts/presentation/landmark_cutaway.gd")
 const LANDMARKS := {"yard": "env_warehouse_shell", "warehouse": "env_warehouse_gantry", "pump": "env_pump_skid", "railcut": "env_signal_mast", "depot": "env_depot_tank_pair", "radio": "env_radio_antenna"}
 var walls: Array = []
 var footprint_rectangles: Array = []
@@ -20,6 +21,7 @@ var _contact_batches: Array = []
 var _contact_assets := {}
 var _contact_bounds: Array = []
 var _contact_dirty := true
+var _cutaway_schema := 0
 
 
 static func supported(data: Dictionary) -> bool:
@@ -28,6 +30,7 @@ static func supported(data: Dictionary) -> bool:
 
 func build(frame: Dictionary, detail: int) -> void:
 	_detail = detail
+	_cutaway_schema=int(frame.get("environment_cutaway_schema",0))
 	set_meta("environment_revision", REVISION)
 	set_meta("environment_layout_revision", LAYOUT_REVISION)
 	set_meta("recorded_layout_hash", hash(frame.blocked))
@@ -176,12 +179,14 @@ func _place(id: String, at: Vector3, yaw: float = 0.0) -> Node3D:
 
 func _register_cutaway(node: Node, moving: bool = false) -> void:
 	_contact_sources.append(node)
+	if _cutaway_schema==LandmarkCutaway.FORMAT and node.get_meta("asset_id","")=="env_radio_antenna":
+		node.set_meta("cutaway_parts",LandmarkCutaway.split(node))
 	_register_wall_meshes(node,moving)
 
 
 func _register_wall_meshes(node: Node, moving: bool) -> void:
 	if node is MeshInstance3D:
-		walls.append({"mesh": node, "bounds": node.global_transform * node.get_aabb(), "mode": "hide", "moving": moving})
+		walls.append({"mesh": node, "bounds": node.global_transform * node.get_meta("cutaway_bounds",node.get_aabb()), "mode": "hide", "moving": moving})
 	for child in node.get_children():
 		_register_wall_meshes(child, moving)
 
