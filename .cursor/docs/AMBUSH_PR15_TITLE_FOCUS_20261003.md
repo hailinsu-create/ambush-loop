@@ -1,6 +1,6 @@
 # PR15 title 自然键盘焦点与brief返回生命周期
 
-固定测试源码 `4ba2bfd26a17ebbb1500f04c8fb267d852461f65`，生产title/pause/helper修复 `83067064d6add31bd4f15c2d9ea6da2237c4398b`，二者差异只有新title_focus_keyboard_test.gd的唯一截图路径与失败早停。六次作者正式命令全部实际结束，exit0、SCRIPT ERROR0、engine ERROR0。工程树 `41daf9c05162538d6d39e5a3d9dcbd66856d4314`；后续证据交付仅改文档。独立title/autoREPLAY QA仍待，作者通过不等于独立关闭。同步结果以实际push收据和GitHub只读HEAD核对为准。
+固定测试源码 `4ba2bfd26a17ebbb1500f04c8fb267d852461f65`，生产title/pause/helper修复 `83067064d6add31bd4f15c2d9ea6da2237c4398b`，二者差异只有新title_focus_keyboard_test.gd的唯一截图路径与失败早停。六次作者正式命令全部实际结束，exit0、SCRIPT ERROR0、engine ERROR0。工程树 `41daf9c05162538d6d39e5a3d9dcbd66856d4314`；后续证据交付仅改文档。作者通过与独立QA分开；父端后续已限定关闭原title两P2及共享专项，见文末补记。同步结果以实际push收据和GitHub只读HEAD核对为准。
 
 父端d7b独立QA限定关闭Help/Quit原200尺寸P2；title整体仍两P2待。T1 exact fresh1600×720、scale2、logical640×360，原生Escape→Tab→Return→Tab×5→Return→Escape，Settings无focus、Tab到后台主menu、Return打开被遮Mission、Back关错层。父端24/7exit1；T2原native mouse Start→yard→Escape，12/0exit0但ERROR1；完整自然keyboard715/24exit1ERROR6。父端计数不与作者相加。
 
@@ -28,3 +28,5 @@
 AutoREPLAY回归沿用原yard两波1056/227、终局1283/34事件与现代历史末端1430，真实schema1字节/旧端点1415保持。fixed4ba的main/BattleLog/ReplayPlayer/presenter/ViewState与fixed770相同；没有重跑原正式29项或旧title2391，历史证据仍限定各自固定源码。
 
 下一步由父端安排固定4ba的独立title焦点/生命周期和autoREPLAY QA。本checkpoint不展开FX/A3。自然OS app切换/设备键盘、全部正常玩家旅程、真实schema1原生自动播放、完整3DFX/耳听/A3/最终smoke/APK仍未验；设备/模拟器在全计划完成后。资产接口继续固定R5源 `29749157c5db064bfea626c3ed9d75d9a1791ece` / 交付 `ebedb829e3263abbeb6dd266905f24a3869fa281`，20骨/socket/3LOD/52语义不变；GLB/atlas/制作源/Blender/生产manifest全部未改/未重跑。主集成继续独占runtime/presenter/replay/HUD/loader/共享测试，资产制作归独立作者，未整体合并WIP。高度/G、merge/生产仍排除，网页GPT PLAN/REVIEW unavailable。
+
+父端后续fixed4ba独立QA已限定关闭上述原title两项P2。父端实际原反例24/0、12/0，自然键盘740/0、八组反向Tab/slider1003/0，均exit0/ERROR0；共享autoH29/R167、生命周期H30/R32和Quit7同时通过。该状态来自父端回传，未在本工作区重跑，不与作者4476或原旧失败715相加。独立新P2为历史文字受控API换源，另见[来源绑定计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md)，普通UI换源可达性未证明。

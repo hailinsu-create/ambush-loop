@@ -6,11 +6,11 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [历史事件文字来源计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md) | 父端fixed4ba title两P2已限定关闭；新旧记录文字受控换源P2优先复现修复，普通UI换源可达性未证明。正常旅程保留暂停；当前仅本地。 |
+| [历史事件文字报告](AMBUSH_PR15_EVENT_TEXT_20261003.md) / [计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md) | 原受控换源H6/2/R8/2、exit1/ERROR0→生产fcf修复；fixed ddec正式H373/0、R387/0，均exit0/ERROR0、每轮64自然callback、14 native PNG核hash/看4，独立文字关闭待。普通UI换源可达性未证明，timeline67/装备66亦exit0/ERROR0，正常旅程保留暂停；同步以PR15实际HEAD核对为准。 |
 | [正常玩家旅程计划](AMBUSH_PR15_PLAYER_JOURNEY_PLAN_20261003.md) | 接续a5ba原完整v2：已有reference/vacuum六关不代正常输入；先真实fresh title入口确认200%首次教学是否阻断，再补正常搜刮/补给/13波。FX/A3/耳听仍待，资产制作与R规则保持。 |
 | [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持；3ba原配置push/远端HEAD已核对。共享Pause修复后fixed4ba相关H29/R167与生命周期30/32再次实际exit0/ERROR0，单列不相加。独立QA待，FX/A3后置。 |
-| [title焦点/生命周期报告](AMBUSH_PR15_TITLE_FOCUS_20261003.md) / [计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md) | fixed4ba作者正式六次全部actual exit0/ERROR0：自然键盘4476、原Quit7、autoREPLAY29/167、生命周期30/32；四surface profiles×fresh/Continue八组，83PNG核hash/实际看15。129a负向34/4exit1/ERROR1→开发最小36/0→830生产修复；两个830无效native轮次实际143，全部剔除。独立关闭待，先交checkpoint，FX/A3后置。 |
-| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | 历史fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。父端d7b尺寸限定关闭；后发现焦点/生命周期两P2现由830修复、fixed4ba作者专项通过，独立关闭待。d7b原配置push/只读HEAD已核对，formal29未重跑。 |
+| [title焦点/生命周期报告](AMBUSH_PR15_TITLE_FOCUS_20261003.md) / [计划](AMBUSH_PR15_TITLE_FOCUS_PLAN_20261003.md) | fixed4ba作者正式六次全部actual exit0/ERROR0：自然键盘4476、原Quit7、autoREPLAY29/167、生命周期30/32；四surface profiles×fresh/Continue八组，83PNG核hash/实际看15。129a负向34/4exit1/ERROR1→开发最小36/0→830生产修复；两个830无效native轮次实际143，全部剔除。父端fixed4ba独立限定关闭原两P2，740/0、八组1003/0与共享专项单列；新历史文字P2另片，FX/A3后置。 |
+| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | 历史fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。父端d7b尺寸限定关闭；后发现焦点/生命周期两P2现由830修复、fixed4ba作者专项通过、父端独立限定关闭。d7b原配置push/只读HEAD已核对，formal29未重跑。 |
 | [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；证据交付a218，父端报告fixed15c limitedQA通过，59PNG/看19及其计数单列，新title不在该QA范围。完整3DFX/A3/正常玩家旅程/APK仍待。 |
 | [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
 | [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |

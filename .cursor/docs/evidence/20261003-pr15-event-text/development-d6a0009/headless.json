@@ -1,0 +1,177 @@
+{
+  "captures": [],
+  "checks": 371,
+  "controlled_api_swap": true,
+  "failures": 2,
+  "legacy_file_sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+  "minimal": {
+    "actual_list": "3.8s  ★ 第一枪是灰狼 → 敌1",
+    "actual_status": "定位 · 3.8s  ★ 第一枪是灰狼 → 敌1",
+    "attempt": "5238b2984c35e9db437210547b996879",
+    "checks": 6,
+    "cursor": 227,
+    "event_id": "5238b2984c35e9db437210547b996879:0:13",
+    "expected": "3.8s  ★ 第一枪是灰狼 → 敌1",
+    "failures": 0
+  },
+  "natural_callback_frames": 64,
+  "ordinary_ui_swap_reachability": "unproven",
+  "reference_battle_is_player_victory": false,
+  "rows": [
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 286,
+      "live": "no_fire",
+      "natural_ticks": [
+        231,
+        238,
+        246,
+        254,
+        262,
+        270,
+        278,
+        286
+      ],
+      "origin": 223,
+      "rate": 1.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 351,
+      "live": "no_fire",
+      "natural_ticks": [
+        239,
+        256,
+        270,
+        286,
+        303,
+        319,
+        335,
+        351
+      ],
+      "origin": 223,
+      "rate": 2.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 286,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        231,
+        238,
+        246,
+        254,
+        262,
+        270,
+        278,
+        286
+      ],
+      "origin": 223,
+      "rate": 1.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 350,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        238,
+        255,
+        269,
+        285,
+        301,
+        317,
+        333,
+        350
+      ],
+      "origin": 223,
+      "rate": 2.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "21bdc92ccaf84b5efba0084337f62583",
+      "events": 34,
+      "playback_terminal": 1430,
+      "record_fixture": "original reference deployments and legal command movement, not normal player victories",
+      "terminal": 1283,
+      "wave_ticks": [
+        1056,
+        227
+      ]
+    },
+    {
+      "attempt": "21bdc92ccaf84b5efba0084337f62583",
+      "endpoint": 332,
+      "live": "no_fire",
+      "natural_ticks": [
+        276,
+        285,
+        292,
+        300,
+        308,
+        316,
+        324,
+        332
+      ],
+      "origin": 272,
+      "rate": 1.0,
+      "source": "actual_schema2_reference"
+    },
+    {
+      "attempt": "21bdc92ccaf84b5efba0084337f62583",
+      "endpoint": 400,
+      "live": "no_fire",
+      "natural_ticks": [
+        288,
+        305,
+        320,
+        336,
+        353,
+        369,
+        384,
+        400
+      ],
+      "origin": 272,
+      "rate": 2.0,
+      "source": "actual_schema2_reference"
+    },
+    {
+      "attempt": "21bdc92ccaf84b5efba0084337f62583",
+      "endpoint": 336,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        280,
+        289,
+        296,
+        304,
+        312,
+        320,
+        328,
+        336
+      ],
+      "origin": 272,
+      "rate": 1.0,
+      "source": "actual_schema2_reference"
+    },
+    {
+      "attempt": "21bdc92ccaf84b5efba0084337f62583",
+      "endpoint": 400,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        287,
+        304,
+        318,
+        334,
+        351,
+        367,
+        383,
+        400
+      ],
+      "origin": 272,
+      "rate": 2.0,
+      "source": "actual_schema2_reference"
+    }
+  ]
+}

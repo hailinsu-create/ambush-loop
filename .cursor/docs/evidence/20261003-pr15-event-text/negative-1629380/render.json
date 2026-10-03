@@ -1,0 +1,34 @@
+{
+  "actual_list": "3.8s  灰狼 开火 → 敌1",
+  "actual_status": "定位 · 3.8s  灰狼 开火 → 敌1",
+  "attempt": "5238b2984c35e9db437210547b996879",
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "bound_text_original",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_bound_text_original.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "bound_text_live_replaced",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_bound_text_live_replaced.png",
+      "sha256": "7da09d8f667c21f0bd88889ac876de6d878a0788676b781e4ce809fd9bdf734a"
+    }
+  ],
+  "checks": 8,
+  "controlled_api_swap": true,
+  "cursor": 227,
+  "event_id": "5238b2984c35e9db437210547b996879:0:13",
+  "expected": "3.8s  ★ 第一枪是灰狼 → 敌1",
+  "failures": 2,
+  "ordinary_ui_swap_reachability": "unproven"
+}
