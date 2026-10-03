@@ -221,5 +221,11 @@ func _mission(plan: Array) -> bool:
 	if id == "radio":
 		_check(main.credits_overlay.is_open(),"ordinary final CTA opens original campaign credits")
 		return true
-	if not await _wait_until(func() -> bool: return not main.night_handoff.is_open(),15,"original night handoff finishes"): return false
+	_check(main.night_handoff.is_open(), "original Continue opens authored next-night handoff")
+	if not main.night_handoff.is_open(): return false
+	await _modal_capture(sample+"_next_night_handoff")
+	await _click(main.night_handoff._cta)
+	_check(not main.night_handoff.is_open(), "original native handoff CTA enters next night")
+	if main.night_handoff.is_open(): return false
+	sample = "player_"+main.level.level_id+"_1280_100_desktop"
 	return await _tutorial()
