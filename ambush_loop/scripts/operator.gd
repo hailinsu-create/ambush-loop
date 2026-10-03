@@ -275,7 +275,6 @@ func wipe_inventory() -> void:
 	decoys = 0
 	has_ammo_pack = false
 	ammo_pack_used = false
-	ammo_pool.clear()
 	grenade_cd = 0.0
 	clear_nade_mark()
 	cancel_search()
@@ -285,6 +284,10 @@ func wipe_inventory() -> void:
 	hidden_in_shadow = false
 	apply_stance_speed()
 	apply_weapon("knife", true)
+	# apply_weapon stashes the previously held magazine before switching.
+	# A retry must clear that value too, otherwise re-equipping the same family
+	# after retry can silently recover ammunition from the failed attempt.
+	ammo_pool.clear()
 
 
 func _ammo_family() -> String:
