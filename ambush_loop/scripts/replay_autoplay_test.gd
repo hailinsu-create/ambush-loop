@@ -161,14 +161,37 @@ func _pause_control(touch: bool) -> Control:
 func _speed_control(touch: bool) -> Control:
 	return main.touch_hud.get("_replay_speed") if touch else main.speed_button
 
+func _bound_record_case() -> void:
+	# Controlled host callback: swapping the live log must not rebind playback.
+	main._on_replay_pressed()
+	live = main._snapshot_data().duplicate(true)
+	sim_state = [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum]
+	var foreign := BattleLog.new()
+	foreign.begin_attempt("unrelated-live-record")
+	foreign.add_snapshot(0,{"phase":0})
+	foreign.add_snapshot(4,{"phase":3})
+	foreign.mark_terminal(4,"won")
+	var saved := _state(foreign)
+	main.battle_log = foreign
+	main._process(0.5)
+	_check(main.replay.log == source and main.replay.scrub_tick == 60 and main.replay.max_tick() == source.playback_terminal_tick, "automatic host playback retains bound record clock after live log replacement")
+	_check(_state(foreign) == saved, "automatic playback never modifies the unrelated live recording")
+	main.battle_log = source
+	_unchanged("bound source clock")
+	main._exit_replay_to_setup()
+
 func _native_case(touch: bool) -> void:
 	root.size = Vector2i(1600,720) if touch else Vector2i(1280,720)
+	# Shared native helper uses viewport screen_transform on a window at origin,
+	# matching viewport_hud_test._layout and title_menu_viewport_test.
+	root.position = Vector2i.ZERO
 	root.content_scale_factor = 2.0 if touch else 1.0
 	root.get_node("GameSettings").set_force_touch_hud(touch)
 	sample = "auto_200_compact" if touch else "auto_100_desktop"
 	print("REPLAY_AUTO_CASE " + sample)
 	main._update_hud()
 	await _draw()
+	_check(root.position == Vector2i.ZERO, "native window origin matches physical input coordinates")
 	_check(main.replay_button.is_visible_in_tree(), "original terminal replay button is reachable through normal UI")
 	if not main.replay_button.is_visible_in_tree():
 		rows.append({"id":sample,"entry":"blocked by hidden original BottomBar", "button":_rect(main.replay_button.get_global_rect())})
@@ -181,9 +204,21 @@ func _native_case(touch: bool) -> void:
 	root.add_child(probe)
 	probe.armed = true
 	main.set_process(true)
+	var entry_signals := []
+	main.replay_button.gui_input.connect(func(event):
+		if event is InputEventMouseButton: entry_signals.append({"button":event.button_index,"pressed":event.pressed,"device":event.device})
+	)
+	main.replay_button.pressed.connect(func(): entry_signals.append({"signal":"pressed"}))
+	await _modal_capture(sample + "_entry")
 	await _native_click(main.replay_button)
 	await _draw()
+	rows.append({"id":sample,"entry_signals":entry_signals.duplicate(true),"entry_phase":main.phase,"entry_tick":main.replay.scrub_tick,"entry_playing":main.replay.playing,"entry_suspended":main._presentation_suspended,"entry_modal":main._modal_blocks_input(),"hovered":str(root.gui_get_hovered_control())})
+	print("REPLAY_AUTO_ENTRY ",rows.back())
 	_check(main.phase == main.Phase.REPLAY and main.replay.log == source, "native production button binds the original recording")
+	if main.phase != main.Phase.REPLAY:
+		probe.queue_free()
+		main.set_process(false)
+		return
 	_check(main.replay.playing and main.replay.scrub_tick > 0 and float(main.replay.get("speed")) == 2.0, "ordinary native entry automatically advances at2x")
 	live = main._snapshot_data().duplicate(true)
 	sim_state = [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum]
@@ -228,7 +263,11 @@ func _native_case(touch: bool) -> void:
 	await _draw()
 	var seek: int = main.replay.scrub_tick
 	_check(not main.replay.playing and seek > paused_tick and seek < main.replay.max_tick(), "native slider seeks retained clock and remains paused")
+	# Existing unhandled global shortcuts operate outside HSlider GUI focus.
+	slider.release_focus()
+	var step_focus := str(root.gui_get_focus_owner())
 	await _key("Right")
+	rows.append({"id":sample,"step_seek":seek,"right_tick":main.replay.scrub_tick,"focus_before":step_focus,"focus_after":str(root.gui_get_focus_owner())})
 	_check(main.replay.scrub_tick == seek + 6 and not main.replay.playing, "original right step remains6 ticks and pauses")
 	await _key("Left")
 	_check(main.replay.scrub_tick == seek and not main.replay.playing, "original left step reverses exactly")
@@ -259,10 +298,14 @@ func _native_case(touch: bool) -> void:
 	_unchanged("focus gate")
 	await _native_click(pause)
 	# Run all remaining frames under the real engine callback; no manual cursor samples.
-	var deadline := Time.get_ticks_msec() + 30000
+	# Software rendering can cap engine delta during slow frames. Wait for the
+	# source endpoint; this deadline is a test budget, not a performance gate.
+	var end_started := Time.get_ticks_msec()
+	var deadline := end_started + 120000
 	while main.replay.playing and Time.get_ticks_msec() < deadline:
 		await process_frame
 	await _draw()
+	rows.append({"id":sample,"endpoint_tick":main.replay.scrub_tick,"max_tick":main.replay.max_tick(),"playing":main.replay.playing,"recorded_phase":view.frame.recorded_phase,"elapsed_wall_ms":Time.get_ticks_msec()-end_started})
 	_check(main.phase == main.Phase.REPLAY and not main.replay.playing and main.replay.scrub_tick == main.replay.max_tick(), "native automatic playback reaches the actual recorded endpoint and stops")
 	_check(view.frame.recorded_phase == main.Phase.WON and view.frame.attempt_id == source.attempt_id, "terminal presentation retains original WON identity")
 	_unchanged("native endpoint")
@@ -270,6 +313,8 @@ func _native_case(touch: bool) -> void:
 	await _native_click(pause)
 	_check(main.replay.playing and main.replay.scrub_tick < main.replay.max_tick(), "native terminal control restarts the same recording")
 	await _key("p")
+	# Space retains the existing global return route, outside button GUI focus.
+	if root.gui_get_focus_owner(): root.gui_get_focus_owner().release_focus()
 	await _key("space")
 	_check(main.phase == main.Phase.WON and not main.replay.playing, "original space binding returns to WON and stops history transport")
 	main.set_process(false)
@@ -279,6 +324,7 @@ func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://build/asset_review/pr15-runtime"))
 	_clock_cases()
 	await _prepare()
+	_bound_record_case()
 	if DisplayServer.get_name() == "headless":
 		main._on_replay_pressed()
 		var start: int = main.replay.scrub_tick

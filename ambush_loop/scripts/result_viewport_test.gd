@@ -34,6 +34,8 @@ func _result_bounds(moment: String) -> void:
 	var controls := []
 	_fits(main.result_panel,controls)
 	_fits(main.continue_button,controls)
+	_fits(main.replay_button,controls)
+	_check(main.replay_button.is_visible_in_tree(),"original replay button remains reachable in the terminal footer")
 	if main.dossier_button!=null: _fits(main.dossier_button,controls)
 	_check(not main.desktop_command_bars_visible(),"terminal hides command rails")
 	for control: Control in [view._camera_panel,view._camera_toggle,view._camera_plate]:

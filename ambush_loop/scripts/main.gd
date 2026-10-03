@@ -1638,6 +1638,12 @@ func _fit_result_dialog() -> void:
 			child.reparent(_result_body)
 	shell.move_child(_result_scroll,0)
 	shell.move_child(_result_footer,1)
+	# The terminal overlay hides BottomBar. Keep its original replay button and
+	# pressed binding reachable alongside the terminal actions.
+	if replay_button and replay_button.get_parent() != _result_footer:
+		replay_button.reparent(_result_footer)
+		replay_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		replay_button.custom_minimum_size = Vector2(0,44)
 	result_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	result_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	var usable := get_viewport().get_visible_rect().size
@@ -1650,6 +1656,16 @@ func _fit_result_dialog() -> void:
 	result_panel.offset_bottom=-12.0 if phase==Phase.FAILED else height*0.5
 	result_panel.grow_horizontal=Control.GROW_DIRECTION_BOTH
 	result_panel.grow_vertical=Control.GROW_DIRECTION_BEGIN if phase==Phase.FAILED else Control.GROW_DIRECTION_BOTH
+
+
+func _restore_replay_button() -> void:
+	if replay_button == null:
+		return
+	var bar := get_node("HUD/Root/BottomBar")
+	if replay_button.get_parent() != bar:
+		replay_button.reparent(bar)
+		replay_button.size_flags_horizontal = Control.SIZE_FILL
+		replay_button.custom_minimum_size = Vector2(128,48) if _want_touch() else Vector2(120,32)
 
 
 func _fill_result_stats() -> void:
@@ -3513,6 +3529,7 @@ func door_slam_dust_active() -> bool:
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	replay.pause()
+	_restore_replay_button()
 	_cancel_world_input()
 	if sfx and sfx.has_method("stop_mission_audio"):
 		sfx.stop_mission_audio()
@@ -6560,6 +6577,7 @@ func _on_replay_pressed() -> void:
 	if phase == Phase.SWEEP:
 		battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 	replay_return_phase = phase
+	_restore_replay_button()
 	_cancel_world_input()
 	if backpack_panel:
 		backpack_panel.dismiss()
