@@ -305,12 +305,21 @@ func _find_stash(main, kind: String):
 	for stash in main.raid_stashes:
 		if stash == null or not is_instance_valid(stash) or stash.collected:
 			continue
-		if WeaponCatalogScript.family_of(str(stash.kind)) == wanted_family:
+		if (main.level.explicit_ammo and str(stash.kind) == wanted_family + "_ammo") or (not main.level.explicit_ammo and WeaponCatalogScript.family_of(str(stash.kind)) == wanted_family):
 			return stash
 	return null
 
 
 func _inventory_empty(main) -> bool:
+	if main.level.explicit_ammo:
+		for i in main.operators.size():
+			var op = main.operators[i]
+			var kit: Dictionary = main.level.starting_loadouts[i]
+			if str(op.weapon_id) != str(kit.weapon) or int(op.ammo) != int(kit.ammo) or op.pack.occupied() != 1:
+				return false
+			if op.grenades != 0 or op.mines != 0 or op.decoys != 0 or op.ammo_pool.size() != 1:
+				return false
+		return true
 	for op in main.operators:
 		if str(op.weapon_id) != "knife" or int(op.ammo) != 0 or int(op.pack.occupied()) != 0:
 			return false

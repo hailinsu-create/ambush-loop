@@ -55,6 +55,7 @@ var half_angle_deg: float = 28.0
 var damage_per_shot: float = 34.0
 var shot_interval: float = 0.18
 var start_ammo: int = 7
+var explicit_ammo: bool = false
 var max_ammo: int = 14
 var body_color: Color = Color(0.35, 0.65, 0.95)
 var role_short: String = "步"
@@ -296,7 +297,7 @@ func _ammo_family() -> String:
 
 
 func _stash_mag() -> void:
-	if Weapons.is_firearm(weapon_id) and ammo > 0:
+	if Weapons.is_firearm(weapon_id) and (ammo > 0 or explicit_ammo):
 		ammo_pool[_ammo_family()] = ammo
 
 
@@ -324,13 +325,17 @@ func apply_weapon(id: String, reset_ammo: bool = false) -> void:
 	else:
 		var fam := _ammo_family()
 		var stored := int(ammo_pool.get(fam, 0))
-		if reset_ammo:
+		if explicit_ammo:
+			# Equipping is not a grant. Even an empty stored magazine is valid.
+			ammo = maxi(stored, 0)
+		elif reset_ammo:
 			ammo = maxi(start_ammo, stored)
 		elif stored > 0:
 			ammo = stored
 		elif ammo <= 0:
 			ammo = start_ammo
-		ammo = mini(maxi(ammo, 0), maxi(max_ammo, start_ammo))
+		if not explicit_ammo:
+			ammo = mini(maxi(ammo, 0), maxi(max_ammo, start_ammo))
 		ammo_pool[fam] = ammo
 	if Weapons.is_firearm(weapon_id) and pack != null:
 		pack.ensure_firearm(weapon_id, ammo)
@@ -424,6 +429,12 @@ func drop_from_pack(kind: String) -> Dictionary:
 	else:
 		var rec := pack.remove_kind(kind)
 		amt = int(rec.get("amount", 1))
+		if explicit_ammo and Weapons.is_firearm(kind):
+			var dropped_family := Weapons.family_of(kind)
+			amt = ammo if _ammo_family() == dropped_family else int(ammo_pool.get(dropped_family, 0))
+			ammo_pool.erase(dropped_family)
+			if _ammo_family() == dropped_family:
+				ammo = 0
 		if str(weapon_id) == kind:
 			var rest := pack.firearms()
 			if rest.size() > 0:
@@ -436,6 +447,8 @@ func drop_from_pack(kind: String) -> Dictionary:
 
 func receive_item(kind: String, amount: int = 1) -> Dictionary:
 	var n := maxi(amount, 1)
+	if explicit_ammo and (Weapons.is_firearm(kind) or Weapons.is_typed_ammo(kind) or kind == "ammo"):
+		n = maxi(amount, 0)
 	if pack == null:
 		pack = RaidBackpackScript.new()
 	match kind:
@@ -462,6 +475,8 @@ func receive_item(kind: String, amount: int = 1) -> Dictionary:
 			return {"ok": true, "text": "+%d诱饵  包%s" % [n, pack.line()]}
 		"ammo":
 			if melee:
+				if explicit_ammo:
+					return {"ok": false, "text": "先装备枪，再拾通用弹药", "gained": 0}
 				if not pack.can_fit("pistol", 1):
 					return {"ok": false, "full": true, "text": "背包满"}
 				apply_weapon("pistol", true)
@@ -480,6 +495,15 @@ func receive_item(kind: String, amount: int = 1) -> Dictionary:
 			return receive_item("decoy", 1)
 		_:
 			if Weapons.is_firearm(kind):
+				if explicit_ammo:
+					if not pack.can_fit(kind, 1):
+						return {"ok": false, "full": true, "text": "背包满"}
+					var family := Weapons.family_of(kind)
+					pack.add_item(kind, 1)
+					var received := receive_ammo(n, family)
+					if melee:
+						apply_weapon(kind, false)
+					return {"ok": true, "gained": received, "text": "取得%s及%d发弹药" % [Weapons.display_name(kind), received]}
 				if pack.has_kind(kind):
 					if melee:
 						apply_weapon(kind, true)
@@ -735,6 +759,8 @@ func inventory_line() -> String:
 	var pack_bit := " 包%s" % (pack.line() if pack else "0/6")
 	if melee:
 		return "%s  雷%d 手雷%d 饵%d%s%s" % [gun, mines, grenades, decoys, pool_bit, pack_bit]
+	if explicit_ammo:
+		return "%s 携行弹%d  雷%d 手雷%d%s%s" % [gun, ammo, mines, grenades, pool_bit, pack_bit]
 	return "%s 弹%d/%d  雷%d 手雷%d%s%s" % [gun, ammo, max_ammo, mines, grenades, pool_bit, pack_bit]
 
 
@@ -789,12 +815,19 @@ func transfer_to(other: OperatorUnit, kind: String = "auto") -> Dictionary:
 		_:
 			if Weapons.is_firearm(k):
 				var mag := ammo if weapon_id == k else 1
+				if explicit_ammo:
+					mag = ammo if weapon_id == k else int(ammo_pool.get(Weapons.family_of(k), 0))
 				var in_hand := weapon_id == k
 				if pack == null or not pack.has_kind(k):
 					if not in_hand:
 						return {"ok": false, "text": "没拿这把"}
 				if pack != null:
 					pack.remove_kind(k)
+				if explicit_ammo:
+					var transfer_family := Weapons.family_of(k)
+					ammo_pool.erase(transfer_family)
+					if _ammo_family() == transfer_family:
+						ammo = 0
 				if in_hand:
 					var fam := _ammo_family()
 					ammo = 0
@@ -805,7 +838,7 @@ func transfer_to(other: OperatorUnit, kind: String = "auto") -> Dictionary:
 						apply_weapon(rest[0], false)
 					else:
 						apply_weapon("knife", true)
-				other.receive_item(k, maxi(mag, 1))
+				other.receive_item(k, mag if explicit_ammo else maxi(mag, 1))
 				return {"ok": true, "text": "%s→%s" % [Weapons.display_name(k), other.display_name], "kind": k}
 			return {"ok": false, "text": ""}
 
@@ -1733,6 +1766,14 @@ func receive_ammo(amount: int, ammo_kind: String = "") -> int:
 		return amount
 	var room := maxi(max_ammo - ammo, 0)
 	var gained := mini(amount, room)
+	if explicit_ammo:
+		# Ammo is the carried family budget, not a magazine plus hidden reserve.
+		# Do not discard excess rounds or regenerate them on re-equipping.
+		ammo += amount
+		ammo_pool[k] = ammo
+		_refresh_tag()
+		_rebuild_cone()
+		return amount
 	ammo += gained
 	var overflow := amount - gained
 	if overflow > 0:

@@ -7681,9 +7681,15 @@ func wave_total() -> int:
 
 
 func _wipe_squad_inventory() -> void:
-	for op in operators:
+	for i in operators.size():
+		var op = operators[i]
 		if op:
+			op.explicit_ammo = level != null and level.explicit_ammo
 			op.wipe_inventory()
+			if level != null and i < level.starting_loadouts.size():
+				var kit: Dictionary = level.starting_loadouts[i]
+				op.apply_weapon(str(kit.get("weapon", "knife")), false)
+				op.receive_ammo(int(kit.get("ammo", 0)))
 			op.reset_loadout()
 
 
