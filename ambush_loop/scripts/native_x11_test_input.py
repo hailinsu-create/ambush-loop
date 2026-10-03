@@ -16,7 +16,7 @@ if (not re.fullmatch(r"[0-9a-f]{32}", run_id)
 key_event = len(sys.argv) == 3 and sys.argv[1] == "key"
 if key_event:
     key_name = sys.argv[2]
-    if key_name not in {"Escape", "Tab", "Return", "Up", "Down", "m"}:
+    if key_name not in {"Escape", "Tab", "Return", "Up", "Down", "m", "p", "Left", "Right", "space", "equal", "minus"}:
         raise SystemExit("unsupported test UI key")
 else:
     if len(sys.argv) != 4:

@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。所有队列结束，独立title QA待；Git认证失败后本地未同步，formal29未重跑。 |
+| [autoREPLAY2× 小片](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | 当前实施：原生历史自动播放/独立时钟/暂停倍速/seek/记录绑定；先负向，保持R与旧记录，FX/A3另片。 |
+| [title200 全入口报告](AMBUSH_PR15_TITLE_20261003.md) / [计划](AMBUSH_PR15_TITLE_PLAN_20261003.md) | fixed226作者8组2391/0+keyboard7/0、2次真实exit0/ERROR0、72物理图；主菜单/六关简报/帮助/档案/设置/实际入场及退出。所有队列结束，独立title QA待；d7b本轮唯一原配置正常push重试成功并GitHub只读核对，formal29未重跑。 |
 | [完整记录正式报告](AMBUSH_PR15_FULL_RECORD_20261003.md) / [计划](AMBUSH_PR15_FULL_RECORD_PLAN_20261003.md) | 固定15c作者29次exit0/ERROR0、75图；证据交付a218，父端报告fixed15c limitedQA通过，59PNG/看19及其计数单列，新title不在该QA范围。完整3DFX/A3/正常玩家旅程/APK仍待。 |
 | [radio致谢专项](AMBUSH_PR15_CREDITS_20261003.md) | 固定dedc8cf负向106/17→正式127/0、exit0/ERROR0；原生CTA/scroll/button100-200/Back200及原radio3波统计保持，11物理图核hash、三图已看；继承47连续command仅开发98/0，整体formal/独立QA待。 |
 | [终局HUD与北侧叠层收尾](AMBUSH_PR15_RESULT_HUD_20261003.md) | 固定7edd已push/只读核对；结果449、focus1718、viewport5081、合同84042、历史164、生命周期32全exit0。原两张镜头裁切未复现/独立QA待，资产/规则保持；本轮限定HUD。 |
