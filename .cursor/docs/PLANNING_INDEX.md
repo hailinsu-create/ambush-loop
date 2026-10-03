@@ -2,15 +2,15 @@
 
 更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
 
-**最新待确认设计提案：** [M2 前玩法评估与院子体验重做](AMBUSH_M2_PREPARATION_GAMEPLAY_REDESIGN_20261003.md)。用户要求先评价玩法并允许大调整；建议 M2 先做默认信息减负、资源/单次接触灰盒、同步发动对比与快速修改方案，再做最终视觉。当前仅规划，v2 仍为已确认设计基线；M1 通过记录与人工/设备待办继续有效。此提案未改变代码，也未获得本轮外部 GPT 评审。
+**当前 M2 执行入口：** [M2-A 信息减负与真实失败反馈](AMBUSH_M2_A_HUD_EXECUTION_20261003.md)。用户已采纳 [玩法重做规划](AMBUSH_M2_PREPARATION_GAMEPLAY_REDESIGN_20261003.md)。A 已实现，源码 Draft PR #24 / `26528ddca855ae0f8c61ea9688feff3677a55817`；图形 run `0d81726909c4471baa91e0931c90e35b`、Windows headless run `63f072d44b23451884b1351442de7b92` 均 wrapper exit 0 且玩家数据不变，四张真实 viewport 图已检查归档。共享 smoke 本轮只编译检查，未重跑全量；下一步 B→C→D，B–F 未实现。外部 GPT 精确版本评审为 unavailable，真机和真人体验继续待补；源码/依赖链未合并，不宣称完整 M2 通过。
 
-**当前执行入口：** [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md) 的完成记录与 [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)。D–H 单项隔离复验依次通过（runs `5ffbbb5ba16645c1931a0edf7084f0c5`、`8185a4e0b5f44d40a678d6993a06b56c`、`cafad01d062a4d4fba5ce5e4006213ae`、`b819434421114acd8586a35ee73a58cc`、`6b945b92cb92422fae98ce2ac67985fa`，均 exit 0 且玩家数据不变）。I 图形隔离 run `81ca8c1b0c5e45e395cacc3366b103e0` 通过，四张 1280×720 截图已目视并归档；源码 Draft PR #23 / `8bc9a4f`。共享全量 smoke run `6aa4327b890741a89270cdea56124d60` 通过六关循环、`SMOKE_SLICE_COMPLETE`、exit 0 和 `PLAYER_DATA_UNCHANGED=1`；D–I 本地自动化桌面工作已完成。M1 整体仍暂缓外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack，不把这些人工/设备证据误记为通过。
+**M1 桌面完成基线：** [M1-D 至 M1-I 院子战术核心续做](AMBUSH_M1_D_TO_I_ROADMAP_20261002.md) 的完成记录与 [M1-I 渲染可读性证据](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md)。D–H 单项隔离复验依次通过（runs `5ffbbb5ba16645c1931a0edf7084f0c5`、`8185a4e0b5f44d40a678d6993a06b56c`、`cafad01d062a4d4fba5ce5e4006213ae`、`b819434421114acd8586a35ee73a58cc`、`6b945b92cb92422fae98ce2ac67985fa`，均 exit 0 且玩家数据不变）。I 图形隔离 run `81ca8c1b0c5e45e395cacc3366b103e0` 通过，四张 1280×720 截图已目视并归档；源码 Draft PR #23 / `8bc9a4f`。共享全量 smoke run `6aa4327b890741a89270cdea56124d60` 通过六关循环、`SMOKE_SLICE_COMPLETE`、exit 0 和 `PLAYER_DATA_UNCHANGED=1`；D–I 本地自动化桌面工作已完成。M1 整体仍暂缓外部 GPT 新精确差异 REVIEW、Android/vivo、5 人试玩和设备依赖 AudioTrack，不把这些人工/设备证据误记为通过。
 
-**本轮边界：** 用户要求先搁置需人的部分并完成其余 M1 工作。本机按既有正式 D–I 路线推进 E–I 自动化桌面证据；原 GPT 的新逐切片 PLAN/REVIEW、Android/vivo 和 5 人试玩仍明确待办，不宣称完整 M1 通过。
+**上一轮 M1 边界：** 用户要求先搁置需人的部分并完成其余 M1 工作。本机按既有正式 D–I 路线推进 E–I 自动化桌面证据；原 GPT 的新逐切片 PLAN/REVIEW、Android/vivo 和 5 人试玩仍明确待办，不宣称完整 M1 通过。
 
 **已被实施计划替代的预研：** [M1-C3 选中队员高度覆盖候选方案](AMBUSH_M1C3_PREVIEW_PROPOSAL_20261002.md)。其离散世界目标覆盖方向已按正式 PLAN 实现并验收；保留历史提案，不将其当作下一待开工切片。
 
-**最新完成切片：** [M1-C2 枪械高度视线接入计划](AMBUSH_M1C2_FIRE_PLAN_20261002.md)，已实现并获实际 GPT DONE。继承 C1 几何，仅接入枪械目标资格/覆盖与记录事件；非枪械视线/音频不改。真机继续暂缓，不取消历史验收门。
+**M1-C2 完成记录：** [M1-C2 枪械高度视线接入计划](AMBUSH_M1C2_FIRE_PLAN_20261002.md)，已实现并获实际 GPT DONE。继承 C1 几何，仅接入枪械目标资格/覆盖与记录事件；非枪械视线/音频不改。真机继续暂缓，不取消历史验收门。
 
 **C2 最新证据：** Draft PR #16 / `e55a521`，五项定向隔离门通过；原 uninterrupted full smoke `4a70428c…` 已完成六关循环、`SMOKE_SLICE_COMPLETE`、wrapper exit 0 / `PLAYER_DATA_UNCHANGED=1`，原 GPT iteration 2 实际 DONE。准确连续高度射界不在本切片，黄色扇形保留 legacy 方向参考；目标点资格/覆盖共享高度规则，近战不迁移。代码/依赖 PR 尚未合并，完整 M1 与 Android 未验收。
 
@@ -26,7 +26,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [M2 前玩法评估与体验重做提案](AMBUSH_M2_PREPARATION_GAMEPLAY_REDESIGN_20261003.md) | 最新待确认提案：按现有源码/截图评估趣味风险，提出 M2-A 至 F；涉及资源、触发、重试的契约变更独立实施，尚未修改玩法。 |
+| [M2-A 信息减负与失败反馈](AMBUSH_M2_A_HUD_EXECUTION_20261003.md) | 已实现，Draft PR #24；图形/headless 定向 gate 通过，四张截图归档；共享 smoke 仅编译检查，GPT/真机/真人仍待补。 |
+| [M2 前玩法评估与体验重做提案](AMBUSH_M2_PREPARATION_GAMEPLAY_REDESIGN_20261003.md) | 用户已采纳方向：A 已实现，B–F 待实施；资源、触发、重试的契约变更仍逐切片验证。 |
 | [M1-I 渲染可读性与战术差异](AMBUSH_M1_I_VISUAL_EVIDENCE_PLAN_20261003.md) | 桌面 gate 与四张 viewport 截图均通过并逐张目视（run `81ca8c1b0c5e45e395cacc3366b103e0`，源码 Draft PR #23）；全量 smoke 六关循环、完成标记、exit 0、玩家数据不变均已确认。 |
 | [M1-H 院子整关一致性门](AMBUSH_M1_H_END_TO_END_PLAN_20261003.md) | 桌面整关门通过：1×/2×同权威结果；回放只读；flank 逃逸→Continue 重试。源码 Draft PR #22。 |
 | [M1-G 两种有效方案与失败反例](AMBUSH_M1_G_TACTICAL_SOLUTIONS_PLAN_20261003.md) | 桌面 gate 通过：A/B 均两波获胜；主路集中反例真实 flank 逃逸并记录未交战原因。源码 Draft PR #21。 |
