@@ -1,5 +1,6 @@
 extends "res://scripts/viewport_hud_test.gd"
 ## Native title journey; progress unlocks are isolated API fixtures, not wins.
+var settings
 var quit_received := false
 var exit_kind := "button"
 
@@ -104,7 +105,7 @@ func _title() -> void:
 	await _settle()
 
 func _progress_hash() -> String:
-	return FileAccess.get_sha256(GameSettings.PROGRESS_PATH) if FileAccess.file_exists(GameSettings.PROGRESS_PATH) else "absent"
+	return FileAccess.get_sha256(settings.PROGRESS_PATH) if FileAccess.file_exists(settings.PROGRESS_PATH) else "absent"
 
 func _pages() -> void:
 	var before := _progress_hash()
@@ -147,7 +148,7 @@ func _pages() -> void:
 	_layout_note(main._mission, "missions")
 	_check(main.mission_row_count() == 6, "all six original mission buttons retained")
 	for index in 6:
-		var expected_id: String = GameSettings.LEVEL_ORDER[index]
+		var expected_id: String = settings.LEVEL_ORDER[index]
 		await _click(main._mission_btns[index])
 		_check(main.briefing_visible() and main.pending_mission_id() == expected_id, "native mission row opens its original briefing " + expected_id)
 		if not main.briefing_visible():
@@ -190,10 +191,10 @@ func _pages() -> void:
 	await _click(main.pause_ui._close_btn)
 	_check(not main.pause_ui.is_open() and not main._quit.visible, "native settings Continue returns without quit")
 	_cleanup()
-	var muted: bool = GameSettings.muted
+	var muted: bool = settings.muted
 	await _key("m")
 	await _key("m")
-	_check(GameSettings.muted == muted, "native M toggles and restores mute")
+	_check(settings.muted == muted, "native M toggles and restores mute")
 	main.start_btn.grab_focus() # Explicit initial keyboard-focus fixture.
 	for step in 8:
 		if root.gui_get_focus_owner() == main.help_btn: break
@@ -264,6 +265,7 @@ func _actual_quit() -> void:
 	quit(1)
 
 func _run() -> void:
+	settings = root.get_node("GameSettings")
 	if DisplayServer.get_name() == "headless":
 		print("TITLE_MENU requires native rendered verification")
 		quit(2)
@@ -278,11 +280,11 @@ func _run() -> void:
 		sample = "exit_keyboard_1600_200"
 		await _actual_quit()
 		return
-	_check(main.continue_btn.disabled and not GameSettings.has_progress(), "fresh isolated title disables Continue")
+	_check(main.continue_btn.disabled and not settings.has_progress(), "fresh isolated title disables Continue")
 	await _click(main.continue_btn)
 	_check(current_scene == main, "disabled original Continue cannot enter gameplay")
-	GameSettings.record_win("depot", 3, false) # Original API unlock fixture, not actual six-level wins.
-	for id in GameSettings.LEVEL_ORDER: GameSettings.mark_tutorial_seen(id)
+	settings.record_win("depot", 3, false) # Original API unlock fixture, not actual six-level wins.
+	for id in settings.LEVEL_ORDER: settings.mark_tutorial_seen(id)
 	await _title()
 	var cases := []
 	for physical in [Vector2i(1280, 720), Vector2i(1600, 720)]:
@@ -292,11 +294,11 @@ func _run() -> void:
 	for case in cases:
 		root.size = case[0]
 		root.content_scale_factor = case[1]
-		GameSettings.set_force_touch_hud(case[2])
+		settings.set_force_touch_hud(case[2])
 		sample = "title_" + str(root.size.x) + "_" + str(int(root.content_scale_factor * 100)) + "_" + ("touch" if case[2] else "desktop")
 		await _settle()
 		_check(root.size == case[0] and root.content_scale_factor == case[1], "actual requested window and scaling")
-		_check(not main.continue_btn.disabled and GameSettings.progress_level_id() == "radio", "original saved progress enables Continue")
+		_check(not main.continue_btn.disabled and settings.progress_level_id() == "radio", "original saved progress enables Continue")
 		await _modal_capture(sample + "_menu")
 		await _pages()
 		await _game_entry(false)
