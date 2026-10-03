@@ -16,8 +16,11 @@ if (not re.fullmatch(r"[0-9a-f]{32}", run_id)
 key_event = len(sys.argv) == 3 and sys.argv[1] == "key"
 if key_event:
     key_name = sys.argv[2]
-    if key_name not in {"Escape", "Tab", "Return", "Up", "Down", "m", "p", "Left", "Right", "space", "equal", "minus"}:
+    if key_name not in {"Escape", "Tab", "shift_tab", "Return", "Up", "Down", "m", "p", "Left", "Right", "space", "equal", "minus"}:
         raise SystemExit("unsupported test UI key")
+    reverse_tab = key_name == "shift_tab"
+    if reverse_tab:
+        key_name = "Tab"
 else:
     if len(sys.argv) != 4:
         raise SystemExit("expected physical screen x/y/button or an allowed UI key")
@@ -45,8 +48,17 @@ try:
         code = x11.XKeysymToKeycode(display, x11.XStringToKeysym(key_name.encode("ascii")))
         if not code:
             raise SystemExit("private display has no requested UI keycode")
-        xtst.XTestFakeKeyEvent(display, code, 1, 0)
-        xtst.XTestFakeKeyEvent(display, code, 0, 0)
+        shift_code = x11.XKeysymToKeycode(display, x11.XStringToKeysym(b"Shift_L")) if reverse_tab else 0
+        if reverse_tab and not shift_code:
+            raise SystemExit("private display has no Shift keycode")
+        if shift_code:
+            xtst.XTestFakeKeyEvent(display, shift_code, 1, 0)
+        try:
+            xtst.XTestFakeKeyEvent(display, code, 1, 0)
+            xtst.XTestFakeKeyEvent(display, code, 0, 0)
+        finally:
+            if shift_code:
+                xtst.XTestFakeKeyEvent(display, shift_code, 0, 0)
     else:
         xtst.XTestFakeMotionEvent(display, -1, x, y, 0)
         xtst.XTestFakeButtonEvent(display, button, 1, 0)
