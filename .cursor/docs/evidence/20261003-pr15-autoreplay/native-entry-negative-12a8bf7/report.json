@@ -1,0 +1,60 @@
+{
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "auto_100_desktop_entry_blocked",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_auto_100_desktop_entry_blocked.png",
+      "sha256": "e114e3b245724e47ca1f591dbd790190c1a5af417d5060e6b6dea350f22b682b"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "auto_200_compact_entry_blocked",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_auto_200_compact_entry_blocked.png",
+      "sha256": "ca0c94e68238363f60dc52563e7a4c9cd8efc441f25c512eaefe1d5d5570c4ba"
+    }
+  ],
+  "checks": 27,
+  "failures": 2,
+  "native_inputs": [],
+  "rows": [
+    {
+      "attempt": "21256bb849fa19ca1dd858c75bc59740",
+      "events": 34,
+      "playback_terminal": 1430,
+      "record_fixture": "original reference deployments and legal command movement, not normal player victories",
+      "terminal": 1283,
+      "wave_ticks": [
+        1056,
+        227
+      ]
+    },
+    {
+      "button": [
+        200.0,
+        651.0,
+        120.0,
+        44.0
+      ],
+      "entry": "blocked by hidden original BottomBar",
+      "id": "auto_100_desktop"
+    },
+    {
+      "button": [
+        -120.0,
+        291.0,
+        120.0,
+        44.0
+      ],
+      "entry": "blocked by hidden original BottomBar",
+      "id": "auto_200_compact"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "auto_100_desktop_entry",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_auto_100_desktop_entry.png",
+      "sha256": "02629b5fd54470304beae185cb444d75d5767dbc7e25505ff9c40b73fa150253"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "auto_200_compact_entry",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_auto_200_compact_entry.png",
+      "sha256": "f27e963c86e72cadf18398425f9c4a1103547757507ead209ed3db02b887be9d"
+    }
+  ],
+  "checks": 36,
+  "failures": 2,
+  "native_inputs": [
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "auto_100_desktop",
+      "path": "/root/Yard3D/HUD/Root/ResultPanel/Margin/VBox/ResultActions/ReplayButton",
+      "physical_screen": [
+        840.0,
+        540.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "auto_200_compact",
+      "path": "/root/Yard3D/HUD/Root/ResultPanel/Margin/VBox/ResultActions/ReplayButton",
+      "physical_screen": [
+        1178.0,
+        597.0
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "attempt": "f0bf7f14e795c34df886c8d1bba9aed8",
+      "events": 34,
+      "playback_terminal": 1430,
+      "record_fixture": "original reference deployments and legal command movement, not normal player victories",
+      "terminal": 1283,
+      "wave_ticks": [
+        1056,
+        227
+      ]
+    },
+    {
+      "entry_modal": false,
+      "entry_phase": 3,
+      "entry_playing": false,
+      "entry_signals": [],
+      "entry_suspended": false,
+      "entry_tick": 60,
+      "hovered": "Content:<VBoxContainer#415571648435>",
+      "id": "auto_100_desktop"
+    },
+    {
+      "entry_modal": false,
+      "entry_phase": 3,
+      "entry_playing": false,
+      "entry_signals": [],
+      "entry_suspended": false,
+      "entry_tick": 60,
+      "hovered": "ResultColumns:<GridContainer#100612966928>",
+      "id": "auto_200_compact"
+    }
+  ]
+}
