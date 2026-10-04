@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [A2封存/A3仪器安全checkpoint](AMBUSH_PR15_A2_A3_CHECKPOINT_20261004.md) | 父端要求最近安全点先交：A2远端4484作者有界blast/dust已封，父端两个reader/render门待；b429仅test-only仪器，3秒Window4/0、20raw、actual0 E0/S0，11文件全hash，八生产blob与4484同。自有engine全部收取/Xorg122实际0关闭；六关A3未启动。append计时/缓冲内存/unsupported counters/冷帧/来源需先补，性能engine与QA串行；后实测优化→FINAL fullsmoke/newnormal13/新六完整1×2×→APK。失败/无效probe保留，R5制作不改，非全计划完成。 |
 | [A2保存移动尘cue报告](AMBUSH_PR15_MOVEMENT_DUST_20261004.md) / [A3采集计划](AMBUSH_PR15_A3_COLLECTION_PLAN_20261004.md) | 生产f9/formal71五blob同；planned7/2、rawphase3/1→3aa3/0，111 raw35/0 S1与pool132/2错误同log假设保全；71 H35/132/130、Window184各0 actual0 E0/S0，21原图全hash/看，七off全0。24槽省电6/48节点/保存pose clock，非footfall/持久尾迹；原phase移动/pause/history/old7/Title已验有界。所有engine收尾/Xorg121实际0关闭。父端blast source119/19/7/7独立限定另列。下一A3实际raw metrics→FINAL同source/fullsmoke/newnormal13/full1×2×→APK；A3只读提案不代指标，制作不动。 |
 | [A2保存移动尘cue计划](AMBUSH_PR15_MOVEMENT_DUST_PLAN_20261004.md) | 待执行：新独立movement_fx1/原保存移动姿态/严格typed raw fields/绑定clock；有限24槽省电6/纯确定性cue，非原落脚事件或持久尾迹。先原SCOUT真实移动与缺接口负向，再H/R/pause/seek/source/旧raw/实际Window；生产与性能尚未验，R5制作不改。 |
 | [A2保存爆炸与有界烟池](AMBUSH_PR15_TOOL_FX_POOL_20261004.md) | 生产a9/像素测试f2四blob一致，原源/HP/库存/统计不改；负环254/18、mine3/1→a9 H255/3与R268各0 actual0 E0/S0，13图全看；f2 Window75/0、30图全hash/看，五yaw blast/smoke off/on/off十off均0。三次探针134/134/139无套件和早期S1保全；明确开放摆位/age/API非normal13/FINAL/A3，43原PNG有界证据。自有engine结束、Xorg120实际0关闭。父端b563独立205/305、53独立144/160各0限定关闭，单列不相加。下一dust→A3→FINAL/fullsmoke/新13波/全1×2×→APK；R5制作不动。 |
