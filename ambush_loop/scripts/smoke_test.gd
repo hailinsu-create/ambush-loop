@@ -14252,6 +14252,21 @@ func _assert_launch_bar() -> bool:
 		inst.free()
 		quit(54)
 		return false
+	# Original Title denies opening another modal over the mission briefing.
+	inst.open_journal()
+	await process_frame
+	if inst.journal_visible() or not inst.briefing_visible():
+		push_error("SMOKE_JOURNAL_BYPASSES_BRIEF_MODAL")
+		inst.free()
+		quit(54)
+		return false
+	inst._on_back()
+	await process_frame
+	if inst.briefing_visible() or inst._top_modal() != null:
+		push_error("SMOKE_BACK_DID_NOT_CLOSE_BRIEF_MODAL")
+		inst.free()
+		quit(54)
+		return false
 	inst.open_journal()
 	await process_frame
 	if not inst.journal_visible() or str(inst.journal_body_text()).find("电台") < 0:
