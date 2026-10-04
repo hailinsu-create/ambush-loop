@@ -3391,14 +3391,16 @@ func _leak_result_line() -> String:
 	var lid := int(rec.get("leaker_id", -1))
 	if lid < 1:
 		return ""
-	var delay := 0.0
-	if level != null and level.has_method("delay_for_actor"):
-		delay = float(level.delay_for_actor(lid))
+	var context: Dictionary = intel.validated_escape_context(rec, str(level.level_id) if level != null else "")
+	if context.is_empty():
+		return "漏网记录：%s · 敌%d（波次/入场未确认）" % [_route_zh_short(route) if route in IntelStore.ROUTES else "路线", lid]
+	var delay := float(context.spawn.tick) / 60.0
+	var escaped := float(context.escape.tick) / 60.0
 	var road := str(PayoffCopy.leak_road_name(level, route, false))
-	var wave_n := _wave_fail_index if _wave_fail_index > 0 else (wave_index() + 1)
+	var wave_n := int(context.wave_id) + 1
 	if road != "" and road != _route_zh_short(route):
-		return "第%d波漏网：%s · 敌%d · %.1fs出发 · %s" % [wave_n, _route_zh_short(route), lid, delay, road]
-	return "第%d波漏网：%s · 敌%d · %.1fs出发" % [wave_n, _route_zh_short(route), lid, delay]
+		return "第%d波漏网：%s · 敌%d · %.1fs出发 · %.1fs逃逸 · %s" % [wave_n, _route_zh_short(route), lid, delay, escaped, road]
+	return "第%d波漏网：%s · 敌%d · %.1fs出发 · %.1fs逃逸" % [wave_n, _route_zh_short(route), lid, delay, escaped]
 
 
 func leak_advice_text() -> String:
@@ -5890,16 +5892,17 @@ func _on_enemy_escaped(enemy: EnemyRunner, path: PackedVector2Array) -> void:
 	_wave_fail_index = wave_index() + 1
 	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
-	var hint := _escape_route_hint(enemy)
 	battle_log.add_event(
 		sim.tick, "escape", lid, -1, enemy.global_position,
 		{"route": route, "kind": enemy.kind_short()}
 	)
 	battle_log.mark_terminal(sim.tick, "escape")
+	var context := _escape_source_context(lid)
+	var hint := _escape_route_hint(enemy, context)
 	for e in enemies:
 		if e != null and is_instance_valid(e) and e != enemy:
 			e.active = false
-	_remember_path(path, "escape", hint, route, lid)
+	_remember_path(path, "escape", hint, route, lid, context)
 	_mission_had_escape = true
 	_flash("逃逸！%s" % hint, Color(1.0, 0.35, 0.25))
 	_sfx("escape")
@@ -5984,35 +5987,42 @@ func _fail_squad_wipe() -> void:
 	pending_result = "fail"
 
 
-func _remember_path(path: PackedVector2Array, reason: String, hint: String = "", route: String = "", leaker_id: int = -1) -> void:
-	intel.add_path(loop_index, path, sim.time_sec(), reason, hint, route, sim.tick, leaker_id)
+func _remember_path(path: PackedVector2Array, reason: String, hint: String = "", route: String = "", leaker_id: int = -1, source_context: Dictionary = {}) -> void:
+	intel.add_path(loop_index, path, sim.time_sec(), reason, hint, route, sim.tick, leaker_id, source_context)
 	intel_paths.clear()
 	for rec in intel.records:
 		intel_paths.append(rec["path"])
 
 
-func _escape_route_hint(enemy: EnemyRunner) -> String:
+func _escape_source_context(leaker_id: int) -> Dictionary:
+	var escape: Dictionary = battle_log.last_of_type("escape")
+	if escape.get("actor_id", -1) != leaker_id or escape.get("attempt_id", "") != battle_log.attempt_id or escape.get("wave_id", -1) != battle_log.wave_id:
+		return {}
+	for index in range(battle_log.events.size() - 1, -1, -1):
+		var spawn: Dictionary = battle_log.events[index]
+		if spawn.get("type", "") == "spawn" and spawn.get("actor_id", -1) == leaker_id and spawn.get("attempt_id", "") == escape.attempt_id and spawn.get("wave_id", -1) == escape.wave_id:
+			return intel.make_escape_context(str(level.level_id), spawn, escape)
+	return {}
+
+
+func _escape_route_hint(enemy: EnemyRunner, source_context: Dictionary = {}) -> String:
 	if enemy == null:
 		return "漏网路线已标在地图上"
 	if bool(enemy.did_branch):
 		return "锁门后从西侧紫备用接近漏出"
 	var lid := int(enemy.label_id)
-	var delay := 0.0
-	if level != null and level.has_method("delay_for_actor") and lid >= 1:
-		delay = float(level.delay_for_actor(lid))
+	var suffix := "（敌%d）" % lid
+	if not source_context.is_empty():
+		suffix = "（敌%d · %.1fs出发）" % [lid, float(source_context.spawn.tick) / 60.0]
 	match enemy.spawn_route:
 		"flank":
-			if level != null and str(level.level_id) == "railcut":
-				return "侧翼奔袭从东廊漏出（晚 3.8 秒）"
-			if delay > 0.05:
-				return "侧翼奔袭从东廊漏出（敌%d · %.1fs出发）" % [lid, delay]
-			return "侧翼奔袭从东廊漏出"
+			return "侧翼奔袭从东廊漏出" + suffix
 		"sneak":
-			if delay > 0.05:
-				return "西暗道影探从夹缝漏出（敌%d · %.1fs出发）" % [lid, delay]
-			return "西暗道影探从夹缝漏出"
+			return "西暗道影探从夹缝漏出" + suffix
+		"echo":
+			return "回波从碟台夹缝漏出" + suffix
 		_:
-			return "主路巡卫从南闸漏出"
+			return "主路巡卫从南闸漏出" + suffix
 
 
 func _set_watch_view_buttons(on: bool) -> void:

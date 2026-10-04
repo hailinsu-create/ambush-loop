@@ -253,10 +253,8 @@ static func leak_road_name(level: Variant, route: String, branched: bool = false
 		"sneak":
 			return "西暗道"
 		"echo":
-			return "碟台夹缝（晚 5.2 秒回波）"
+			return "碟台夹缝"
 		"flank":
-			if level != null and str(level.level_id) == "railcut":
-				return "东廊（晚 3.8 秒）"
 			return "东廊"
 		"alt":
 			return "西侧紫备用接近"
