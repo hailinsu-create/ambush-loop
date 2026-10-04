@@ -81,20 +81,30 @@ func _capture(label: String) -> void:
     _check(picture.get_size()==Vector2i(1280,720) and picture.save_png(path)==OK,"actual original Window capture " + label)
     captures.append({"path":path,"sha256":FileAccess.get_sha256(path),"scope":"untimed actual Window API/reference/historical view"})
 
-func _dwell(label: String, seconds: float, receipt: Dictionary, immutable: bool = false) -> void:
+func _dwell(label: String, seconds: float, receipt: Dictionary, immutable: bool = false, command_seconds: float = 0.0) -> void:
     var before: String = Context.digest(_log_bytes(main.battle_log)) if immutable else ""
     receipt["configuration"] = Context.workload(main)
     receipt["level_id"]=main.level.level_id
     receipt["attempt_id"]=main.battle_log.attempt_id
     receipt["wave"]=main.battle_log.wave_id
+    receipt["required_original_command_seconds"]=command_seconds
+    var command_start: float=main._pose_command_clock_s
     collector.mark(label,true,"",receipt)
     var begin := Time.get_ticks_usec()
-    await _wait(seconds)
+    if command_seconds>0.0:
+        var deadline := begin+30_000_000
+        while (Time.get_ticks_usec()<begin+int(seconds*1_000_000) or main._pose_command_clock_s-command_start<command_seconds) and Time.get_ticks_usec()<deadline:
+            await process_frame # Observe original automatic command delta; wall time can exceed Godot's clamped domain delta.
+    else:
+        await _wait(seconds)
     var end := Time.get_ticks_usec()
     _untimed(label+"-boundary")
+    var command_elapsed: float=main._pose_command_clock_s-command_start
+    if command_seconds>0.0:_check(command_elapsed>=command_seconds,"original automatic command clock completes required source interval " + label)
     if immutable: _check(Context.digest(_log_bytes(main.battle_log))==before,"original recorded source immutable " + label)
     segments.append({"label":label,"requested_seconds":seconds,"actual_seconds":float(end-begin)/1_000_000,
         "receipt":receipt,"source_immutable":immutable})
+    segments.back()["original_command_seconds"]=command_elapsed
 
 func _command_walk() -> bool:
     var receipt := {"level_id":main.level.level_id,"attempt_id":main.battle_log.attempt_id,
@@ -293,7 +303,7 @@ func _tool_attempt(case: Array) -> Dictionary:
     _check(main._throw_grenade_from(owner,target),"actual original throw consumes explicit fixture inventory " + id)
     main.set_process(true)
     await _dwell(id+"-live-original-grenade-fuse",2.0,
-        {"kind":"original SCOUT grenade fuse/boom callbacks","phase":0,"scope":"explicit one-grenade API/resource fixture, not natural battle peak"})
+        {"kind":"original SCOUT grenade fuse/boom callbacks","phase":0,"scope":"explicit one-grenade API/resource fixture; at least2 original commandseconds via automatic callbacks, bounded30 wallseconds, not natural battle peak"},false,2.0)
     main.set_process(false)
     var confirmed: Array=main.battle_log.playback_snapshots.filter(func(snap:Dictionary)->bool:return not snap.data.get("tool_fx",[]).is_empty())
     _check(not confirmed.is_empty(),"actual fuse recorded confirmed tool source " + id)
