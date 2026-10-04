@@ -1,11 +1,12 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-03。仅用于本游戏；设计文件不是实现或验收证明。
+更新日期：2026-10-04。仅用于本游戏；设计文件不是实现或验收证明。
 
 ## 当前有效规划
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [正常接续旅程计划](AMBUSH_PR15_REMAINING_JOURNEY_PLAN_20261004.md) | 接续d7真实yard胜利存档，以原生title Continue推进其余五关11波；先warehouse SWEEP真实搜刮/补给与走近埋雷，有界记录失败并小片修复，待执行。资产/R与已关title/auto/text保持。 |
 | [正常旅程cover报告](AMBUSH_PR15_COVER_INPUT_20261003.md) / [计划](AMBUSH_PR15_COVER_INPUT_PLAN_20261003.md) | 361干净77/1、exit1/ERROR0证实明确cover被32px body选择覆盖；124修路由，d7正式H25/R输入38均exit0/ERROR0，原生yard→下一夜教学135/0/exit0/ERROR0，32 XTest/14图核hash/看6。124开发WON675/27但漏CTA整轮113/1不算正式；其余11波/SWEEP搜刮仍待。 |
 | [历史事件文字报告](AMBUSH_PR15_EVENT_TEXT_20261003.md) / [计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md) | 原受控换源H6/2/R8/2、exit1/ERROR0→生产fcf修复；fixed ddec正式H373/0、R387/0，均exit0/ERROR0、每轮64自然callback、14 native PNG核hash/看4，父端fixed ddec独立限定关闭P2-R1，无新P1/P2，7552/7560各128callback与原6/8全部exit0/ERROR0单列。普通UI换源可达性未证明，timeline67/装备66亦exit0/ERROR0，正常旅程保留暂停；同步以PR15实际HEAD核对为准。 |
 | [正常玩家旅程计划](AMBUSH_PR15_PLAYER_JOURNEY_PLAN_20261003.md) | 接续a5ba原完整v2：已有reference/vacuum六关不代正常输入；先真实fresh title入口确认200%首次教学是否阻断，再补正常搜刮/补给/13波。FX/A3/耳听仍待，资产制作与R规则保持。 |
