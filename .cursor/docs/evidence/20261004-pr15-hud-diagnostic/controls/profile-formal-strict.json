@@ -1,0 +1,3509 @@
+{
+  "format": 1,
+  "status": "valid_script_profiler_observer_control",
+  "order": [
+    "OFF",
+    "ON",
+    "ON",
+    "OFF"
+  ],
+  "fixture_sha256": "651a177878b3e03289a137c428c680160e7a3e271abcf63640f82ab457a5daf5",
+  "import_metadata_sha256": "513aba6cd0bd41c141fd5c53603fd0d541ea63bf4032634848c21d3b867f552d",
+  "runs": [
+    {
+      "variant": "OFF",
+      "label": "profile-formal-01-OFF",
+      "uuid": "9975a3544066454e84160c22bdd4fab0",
+      "source_sha": "f275178c0f60a7579685f9823894cafc3386f6da",
+      "tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+      "checks": 476,
+      "start": "2026-10-04T22:26:35.853571+00:00",
+      "end": "2026-10-04T22:27:50.334839+00:00",
+      "raw_rows": 169,
+      "accepted": 84,
+      "pair_input": {
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "rig_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340"
+      },
+      "windows": [
+        {
+          "label": "yard-static-confirmed-shot",
+          "accepted": 60,
+          "actual_seconds": 8.57339,
+          "end_tick": 253,
+          "counters": {
+            "interval_usec": {
+              "n": 60,
+              "min": 132452.0,
+              "median": 136638.0,
+              "p95": 154582.15,
+              "p99": 199567.51999999976,
+              "max": 242503.0
+            },
+            "collector_usec": {
+              "n": 60,
+              "min": 192.0,
+              "median": 240.0,
+              "p95": 300.0999999999999,
+              "p99": 333.42999999999995,
+              "max": 347.0
+            },
+            "render_setup_ms": {
+              "n": 60,
+              "min": 0.034,
+              "median": 0.04,
+              "p95": 0.046049999999999994,
+              "p99": 0.059249999999999914,
+              "max": 0.074
+            },
+            "TIME_PROCESS": {
+              "n": 60,
+              "min": 0.13469,
+              "median": 0.142435,
+              "p95": 0.314301,
+              "p99": 0.314301,
+              "max": 0.314301
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 60,
+              "min": 0.000133,
+              "median": 0.000223,
+              "p95": 0.003999,
+              "p99": 0.003999,
+              "max": 0.003999
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 60,
+              "min": 342.0,
+              "median": 342.0,
+              "p95": 342.0,
+              "p99": 342.0,
+              "max": 342.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 60,
+              "min": 83747.0,
+              "median": 83747.0,
+              "p95": 83747.0,
+              "p99": 83747.0,
+              "max": 83747.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 60,
+              "min": 890.0,
+              "median": 890.0,
+              "p95": 890.0,
+              "p99": 890.0,
+              "max": 890.0
+            },
+            "MEMORY_STATIC": {
+              "n": 60,
+              "min": 309604205.0,
+              "median": 309604205.0,
+              "p95": 309604205.0,
+              "p99": 309604205.0,
+              "max": 309604205.0
+            },
+            "OBJECT_COUNT": {
+              "n": 60,
+              "min": 5442.0,
+              "median": 5442.0,
+              "p95": 5442.0,
+              "p99": 5442.0,
+              "max": 5442.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 60,
+              "min": 1366.0,
+              "median": 1366.0,
+              "p95": 1366.0,
+              "p99": 1366.0,
+              "max": 1366.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 60,
+              "min": 473.0,
+              "median": 473.0,
+              "p95": 473.0,
+              "p99": 473.0,
+              "max": 473.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 60,
+              "min": 74293456.0,
+              "median": 74293456.0,
+              "p95": 74293456.0,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 60,
+              "min": 34766836.0,
+              "median": 34766836.0,
+              "p95": 34766836.0,
+              "p99": 34766836.0,
+              "max": 34766836.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 60,
+              "min": 109060292.0,
+              "median": 109060292.0,
+              "p95": 109060292.0,
+              "p99": 109060292.0,
+              "max": 109060292.0
+            },
+            "shot_active": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "tool_active": {
+              "n": 60,
+              "min": 1.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 60,
+              "min": 43.0,
+              "median": 43.0,
+              "p95": 43.0,
+              "p99": 43.0,
+              "max": 43.0
+            },
+            "playback_tick": {
+              "n": 60,
+              "min": 253.0,
+              "median": 253.0,
+              "p95": 253.0,
+              "p99": 253.0,
+              "max": 253.0
+            },
+            "local_tick": {
+              "n": 60,
+              "min": 204.0,
+              "median": 204.0,
+              "p95": 204.0,
+              "p99": 204.0,
+              "max": 204.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 927064064
+        },
+        {
+          "label": "yard-advancing-original-replay",
+          "accepted": 24,
+          "actual_seconds": 18.651326,
+          "end_tick": 452,
+          "counters": {
+            "interval_usec": {
+              "n": 24,
+              "min": 697039.0,
+              "median": 709678.0,
+              "p95": 786336.5,
+              "p99": 818652.39,
+              "max": 827854.0
+            },
+            "collector_usec": {
+              "n": 24,
+              "min": 228.0,
+              "median": 235.0,
+              "p95": 261.85,
+              "p99": 302.80999999999995,
+              "max": 315.0
+            },
+            "render_setup_ms": {
+              "n": 24,
+              "min": 0.036,
+              "median": 0.0415,
+              "p95": 0.05609999999999999,
+              "p99": 0.06085,
+              "max": 0.062
+            },
+            "TIME_PROCESS": {
+              "n": 24,
+              "min": 0.135142,
+              "median": 0.7077869999999999,
+              "p95": 0.776958,
+              "p99": 1.1124269799999997,
+              "max": 1.212632
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 24,
+              "min": 0.000123,
+              "median": 0.000204,
+              "p95": 0.00398055,
+              "p99": 0.00401026,
+              "max": 0.004019
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 24,
+              "min": 329.0,
+              "median": 332.0,
+              "p95": 341.85,
+              "p99": 344.31,
+              "max": 345.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 24,
+              "min": 81217.0,
+              "median": 81409.0,
+              "p95": 83585.2,
+              "p99": 83827.12,
+              "max": 83863.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 24,
+              "min": 876.0,
+              "median": 879.0,
+              "p95": 889.85,
+              "p99": 892.31,
+              "max": 893.0
+            },
+            "MEMORY_STATIC": {
+              "n": 24,
+              "min": 309665017.0,
+              "median": 309882711.0,
+              "p95": 309897492.4,
+              "p99": 309902471.96,
+              "max": 309903909.0
+            },
+            "OBJECT_COUNT": {
+              "n": 24,
+              "min": 5443.0,
+              "median": 5462.0,
+              "p95": 5464.0,
+              "p99": 5464.0,
+              "max": 5464.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 24,
+              "min": 1366.0,
+              "median": 1383.0,
+              "p95": 1383.0,
+              "p99": 1383.0,
+              "max": 1383.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 24,
+              "min": 473.0,
+              "median": 476.0,
+              "p95": 476.0,
+              "p99": 476.0,
+              "max": 476.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 24,
+              "min": 74253862.0,
+              "median": 74253862.0,
+              "p95": 74287516.9,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 24,
+              "min": 34765100.0,
+              "median": 34985142.0,
+              "p95": 34990412.0,
+              "p99": 34990412.0,
+              "max": 34990412.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 24,
+              "min": 109058556.0,
+              "median": 109239004.0,
+              "p95": 109244274.0,
+              "p99": 109244274.0,
+              "max": 109244274.0
+            },
+            "shot_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 1.8499999999999979,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 24,
+              "min": 4.0,
+              "median": 9.0,
+              "p95": 9.0,
+              "p99": 9.0,
+              "max": 9.0
+            },
+            "tool_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "shot_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 24,
+              "min": 45.0,
+              "median": 60.5,
+              "p95": 73.85,
+              "p99": 75.53999999999999,
+              "max": 76.0
+            },
+            "playback_tick": {
+              "n": 24,
+              "min": 268.0,
+              "median": 360.5,
+              "p95": 442.79999999999995,
+              "p99": 450.15999999999997,
+              "max": 452.0
+            },
+            "local_tick": {
+              "n": 24,
+              "min": 216.0,
+              "median": 309.0,
+              "p95": 389.09999999999997,
+              "p99": 399.24,
+              "max": 402.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 933552128
+        }
+      ],
+      "rss_ready_bytes": 268173312,
+      "rss_save_bytes": 962387968,
+      "environment": {
+        "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+        "audio_driver": "Dummy",
+        "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cpu_count": 5,
+        "debug_build": true,
+        "display": "X11",
+        "driver": "opengl3",
+        "engine": {
+          "build": "official",
+          "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "hex": 263938,
+          "major": 4,
+          "minor": 7,
+          "patch": 2,
+          "status": "stable",
+          "string": "4.7.2-stable (official)",
+          "timestamp": 0
+        },
+        "method": "gl_compatibility",
+        "os": "Linux",
+        "os_version": "13",
+        "pid": 128130,
+        "scope": "controlled archived original frame/advancing transport; main/presenter automatic callbacks; same production; scripts OFF/ON observer comparison, not new normal/whole/device",
+        "vendor": "Mesa",
+        "visible_cpu_effective": "0-4",
+        "visible_cpu_max": "400000 100000",
+        "visible_memory_max": "17179869184"
+      },
+      "monitor_support": {
+        "MEMORY_STATIC": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_ORPHAN_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_RESOURCE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "PIPELINE_COMPILATIONS_CANVAS": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_DRAW": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_MESH": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SURFACE": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PHYSICS_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        }
+      }
+    },
+    {
+      "variant": "ON",
+      "label": "profile-formal-02-ON",
+      "uuid": "eca8e75123d34f599a586c7785541860",
+      "source_sha": "f275178c0f60a7579685f9823894cafc3386f6da",
+      "tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+      "checks": 475,
+      "start": "2026-10-04T22:27:50.456469+00:00",
+      "end": "2026-10-04T22:29:06.134203+00:00",
+      "raw_rows": 168,
+      "accepted": 84,
+      "pair_input": {
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "rig_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340"
+      },
+      "windows": [
+        {
+          "label": "yard-static-confirmed-shot",
+          "accepted": 60,
+          "actual_seconds": 8.623322,
+          "end_tick": 253,
+          "counters": {
+            "interval_usec": {
+              "n": 60,
+              "min": 131363.0,
+              "median": 140642.0,
+              "p95": 153938.6,
+              "p99": 160526.85,
+              "max": 161344.0
+            },
+            "collector_usec": {
+              "n": 60,
+              "min": 229.0,
+              "median": 246.5,
+              "p95": 277.05,
+              "p99": 282.46,
+              "max": 286.0
+            },
+            "render_setup_ms": {
+              "n": 60,
+              "min": 0.033,
+              "median": 0.038,
+              "p95": 0.04504999999999999,
+              "p99": 0.07537999999999993,
+              "max": 0.086
+            },
+            "TIME_PROCESS": {
+              "n": 60,
+              "min": 0.138828,
+              "median": 0.144351,
+              "p95": 0.31684,
+              "p99": 0.31684,
+              "max": 0.31684
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 60,
+              "min": 0.000168,
+              "median": 0.000268,
+              "p95": 0.003988,
+              "p99": 0.003988,
+              "max": 0.003988
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 60,
+              "min": 342.0,
+              "median": 342.0,
+              "p95": 342.0,
+              "p99": 342.0,
+              "max": 342.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 60,
+              "min": 83747.0,
+              "median": 83747.0,
+              "p95": 83747.0,
+              "p99": 83747.0,
+              "max": 83747.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 60,
+              "min": 890.0,
+              "median": 890.0,
+              "p95": 890.0,
+              "p99": 890.0,
+              "max": 890.0
+            },
+            "MEMORY_STATIC": {
+              "n": 60,
+              "min": 309604205.0,
+              "median": 309604205.0,
+              "p95": 309604205.0,
+              "p99": 309604205.0,
+              "max": 309604205.0
+            },
+            "OBJECT_COUNT": {
+              "n": 60,
+              "min": 5442.0,
+              "median": 5442.0,
+              "p95": 5442.0,
+              "p99": 5442.0,
+              "max": 5442.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 60,
+              "min": 1366.0,
+              "median": 1366.0,
+              "p95": 1366.0,
+              "p99": 1366.0,
+              "max": 1366.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 60,
+              "min": 473.0,
+              "median": 473.0,
+              "p95": 473.0,
+              "p99": 473.0,
+              "max": 473.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 60,
+              "min": 74293456.0,
+              "median": 74293456.0,
+              "p95": 74293456.0,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 60,
+              "min": 34766836.0,
+              "median": 34766836.0,
+              "p95": 34766836.0,
+              "p99": 34766836.0,
+              "max": 34766836.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 60,
+              "min": 109060292.0,
+              "median": 109060292.0,
+              "p95": 109060292.0,
+              "p99": 109060292.0,
+              "max": 109060292.0
+            },
+            "shot_active": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "tool_active": {
+              "n": 60,
+              "min": 1.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 60,
+              "min": 43.0,
+              "median": 43.0,
+              "p95": 43.0,
+              "p99": 43.0,
+              "max": 43.0
+            },
+            "playback_tick": {
+              "n": 60,
+              "min": 253.0,
+              "median": 253.0,
+              "p95": 253.0,
+              "p99": 253.0,
+              "max": 253.0
+            },
+            "local_tick": {
+              "n": 60,
+              "min": 204.0,
+              "median": 204.0,
+              "p95": 204.0,
+              "p99": 204.0,
+              "max": 204.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 924184576
+        },
+        {
+          "label": "yard-advancing-original-replay",
+          "accepted": 24,
+          "actual_seconds": 19.025913,
+          "end_tick": 453,
+          "counters": {
+            "interval_usec": {
+              "n": 24,
+              "min": 690506.0,
+              "median": 725427.0,
+              "p95": 783021.85,
+              "p99": 884833.1599999999,
+              "max": 915057.0
+            },
+            "collector_usec": {
+              "n": 24,
+              "min": 242.0,
+              "median": 253.5,
+              "p95": 326.7,
+              "p99": 331.62,
+              "max": 333.0
+            },
+            "render_setup_ms": {
+              "n": 24,
+              "min": 0.038,
+              "median": 0.045,
+              "p95": 0.06955,
+              "p99": 0.07231,
+              "max": 0.073
+            },
+            "TIME_PROCESS": {
+              "n": 24,
+              "min": 0.697466,
+              "median": 0.7287030000000001,
+              "p95": 0.8897875999999998,
+              "p99": 1.1949375699999998,
+              "max": 1.280208
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 24,
+              "min": 0.00012,
+              "median": 0.00015749999999999998,
+              "p95": 0.0039926,
+              "p99": 0.003998,
+              "max": 0.003998
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 24,
+              "min": 329.0,
+              "median": 332.0,
+              "p95": 341.85,
+              "p99": 344.31,
+              "max": 345.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 24,
+              "min": 81217.0,
+              "median": 81409.0,
+              "p95": 83585.2,
+              "p99": 83827.12,
+              "max": 83863.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 24,
+              "min": 876.0,
+              "median": 879.0,
+              "p95": 889.85,
+              "p99": 892.31,
+              "max": 893.0
+            },
+            "MEMORY_STATIC": {
+              "n": 24,
+              "min": 309665017.0,
+              "median": 309882639.0,
+              "p95": 309897420.4,
+              "p99": 309902399.96,
+              "max": 309903837.0
+            },
+            "OBJECT_COUNT": {
+              "n": 24,
+              "min": 5443.0,
+              "median": 5462.0,
+              "p95": 5464.0,
+              "p99": 5464.0,
+              "max": 5464.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 24,
+              "min": 1366.0,
+              "median": 1383.0,
+              "p95": 1383.0,
+              "p99": 1383.0,
+              "max": 1383.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 24,
+              "min": 473.0,
+              "median": 476.0,
+              "p95": 476.0,
+              "p99": 476.0,
+              "max": 476.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 24,
+              "min": 74253862.0,
+              "median": 74253862.0,
+              "p95": 74287516.9,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 24,
+              "min": 34765100.0,
+              "median": 34985142.0,
+              "p95": 34990412.0,
+              "p99": 34990412.0,
+              "max": 34990412.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 24,
+              "min": 109058556.0,
+              "median": 109239004.0,
+              "p95": 109244274.0,
+              "p99": 109244274.0,
+              "max": 109244274.0
+            },
+            "shot_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 1.8499999999999979,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 24,
+              "min": 4.0,
+              "median": 9.0,
+              "p95": 9.0,
+              "p99": 9.0,
+              "max": 9.0
+            },
+            "tool_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "shot_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 24,
+              "min": 45.0,
+              "median": 60.5,
+              "p95": 73.85,
+              "p99": 75.53999999999999,
+              "max": 76.0
+            },
+            "playback_tick": {
+              "n": 24,
+              "min": 269.0,
+              "median": 360.5,
+              "p95": 442.95,
+              "p99": 450.93,
+              "max": 453.0
+            },
+            "local_tick": {
+              "n": 24,
+              "min": 216.0,
+              "median": 309.0,
+              "p95": 389.09999999999997,
+              "p99": 399.24,
+              "max": 402.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 927588352
+        }
+      ],
+      "rss_ready_bytes": 267923456,
+      "rss_save_bytes": 966496256,
+      "environment": {
+        "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+        "audio_driver": "Dummy",
+        "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cpu_count": 5,
+        "debug_build": true,
+        "display": "X11",
+        "driver": "opengl3",
+        "engine": {
+          "build": "official",
+          "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "hex": 263938,
+          "major": 4,
+          "minor": 7,
+          "patch": 2,
+          "status": "stable",
+          "string": "4.7.2-stable (official)",
+          "timestamp": 0
+        },
+        "method": "gl_compatibility",
+        "os": "Linux",
+        "os_version": "13",
+        "pid": 128223,
+        "scope": "controlled archived original frame/advancing transport; main/presenter automatic callbacks; same production; scripts OFF/ON observer comparison, not new normal/whole/device",
+        "vendor": "Mesa",
+        "visible_cpu_effective": "0-4",
+        "visible_cpu_max": "400000 100000",
+        "visible_memory_max": "17179869184"
+      },
+      "monitor_support": {
+        "MEMORY_STATIC": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_ORPHAN_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_RESOURCE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "PIPELINE_COMPILATIONS_CANVAS": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_DRAW": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_MESH": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SURFACE": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PHYSICS_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        }
+      }
+    },
+    {
+      "variant": "ON",
+      "label": "profile-formal-03-ON",
+      "uuid": "721aa166aa58429ca75803e98540db5a",
+      "source_sha": "f275178c0f60a7579685f9823894cafc3386f6da",
+      "tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+      "checks": 476,
+      "start": "2026-10-04T22:29:06.273385+00:00",
+      "end": "2026-10-04T22:30:18.425742+00:00",
+      "raw_rows": 169,
+      "accepted": 84,
+      "pair_input": {
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "rig_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340"
+      },
+      "windows": [
+        {
+          "label": "yard-static-confirmed-shot",
+          "accepted": 60,
+          "actual_seconds": 8.665898,
+          "end_tick": 253,
+          "counters": {
+            "interval_usec": {
+              "n": 60,
+              "min": 132519.0,
+              "median": 140892.5,
+              "p95": 153096.05,
+              "p99": 158646.46,
+              "max": 159653.0
+            },
+            "collector_usec": {
+              "n": 60,
+              "min": 186.0,
+              "median": 251.5,
+              "p95": 302.74999999999994,
+              "p99": 335.2499999999999,
+              "max": 350.0
+            },
+            "render_setup_ms": {
+              "n": 60,
+              "min": 0.033,
+              "median": 0.039,
+              "p95": 0.05554999999999997,
+              "p99": 0.07186999999999998,
+              "max": 0.076
+            },
+            "TIME_PROCESS": {
+              "n": 60,
+              "min": 0.139741,
+              "median": 0.1452985,
+              "p95": 0.343831,
+              "p99": 0.343831,
+              "max": 0.343831
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 60,
+              "min": 0.000162,
+              "median": 0.000204,
+              "p95": 0.005856,
+              "p99": 0.005856,
+              "max": 0.005856
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 60,
+              "min": 342.0,
+              "median": 342.0,
+              "p95": 342.0,
+              "p99": 342.0,
+              "max": 342.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 60,
+              "min": 83747.0,
+              "median": 83747.0,
+              "p95": 83747.0,
+              "p99": 83747.0,
+              "max": 83747.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 60,
+              "min": 890.0,
+              "median": 890.0,
+              "p95": 890.0,
+              "p99": 890.0,
+              "max": 890.0
+            },
+            "MEMORY_STATIC": {
+              "n": 60,
+              "min": 309604205.0,
+              "median": 309604205.0,
+              "p95": 309604205.0,
+              "p99": 309604205.0,
+              "max": 309604205.0
+            },
+            "OBJECT_COUNT": {
+              "n": 60,
+              "min": 5442.0,
+              "median": 5442.0,
+              "p95": 5442.0,
+              "p99": 5442.0,
+              "max": 5442.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 60,
+              "min": 1366.0,
+              "median": 1366.0,
+              "p95": 1366.0,
+              "p99": 1366.0,
+              "max": 1366.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 60,
+              "min": 473.0,
+              "median": 473.0,
+              "p95": 473.0,
+              "p99": 473.0,
+              "max": 473.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 60,
+              "min": 74293456.0,
+              "median": 74293456.0,
+              "p95": 74293456.0,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 60,
+              "min": 34766836.0,
+              "median": 34766836.0,
+              "p95": 34766836.0,
+              "p99": 34766836.0,
+              "max": 34766836.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 60,
+              "min": 109060292.0,
+              "median": 109060292.0,
+              "p95": 109060292.0,
+              "p99": 109060292.0,
+              "max": 109060292.0
+            },
+            "shot_active": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "tool_active": {
+              "n": 60,
+              "min": 1.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 60,
+              "min": 43.0,
+              "median": 43.0,
+              "p95": 43.0,
+              "p99": 43.0,
+              "max": 43.0
+            },
+            "playback_tick": {
+              "n": 60,
+              "min": 253.0,
+              "median": 253.0,
+              "p95": 253.0,
+              "p99": 253.0,
+              "max": 253.0
+            },
+            "local_tick": {
+              "n": 60,
+              "min": 204.0,
+              "median": 204.0,
+              "p95": 204.0,
+              "p99": 204.0,
+              "max": 204.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 927887360
+        },
+        {
+          "label": "yard-advancing-original-replay",
+          "accepted": 24,
+          "actual_seconds": 19.023457,
+          "end_tick": 452,
+          "counters": {
+            "interval_usec": {
+              "n": 24,
+              "min": 688511.0,
+              "median": 731656.0,
+              "p95": 802081.35,
+              "p99": 887775.59,
+              "max": 913183.0
+            },
+            "collector_usec": {
+              "n": 24,
+              "min": 198.0,
+              "median": 258.5,
+              "p95": 298.2,
+              "p99": 301.54,
+              "max": 302.0
+            },
+            "render_setup_ms": {
+              "n": 24,
+              "min": 0.035,
+              "median": 0.0405,
+              "p95": 0.0617,
+              "p99": 0.06739,
+              "max": 0.069
+            },
+            "TIME_PROCESS": {
+              "n": 24,
+              "min": 0.142097,
+              "median": 0.7276225000000001,
+              "p95": 1.1500357499999991,
+              "p99": 1.212258,
+              "max": 1.212258
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 24,
+              "min": 0.000131,
+              "median": 0.000184,
+              "p95": 0.003958,
+              "p99": 0.00397802,
+              "max": 0.003984
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 24,
+              "min": 329.0,
+              "median": 332.0,
+              "p95": 341.85,
+              "p99": 344.31,
+              "max": 345.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 24,
+              "min": 81217.0,
+              "median": 81409.0,
+              "p95": 83585.2,
+              "p99": 83827.12,
+              "max": 83863.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 24,
+              "min": 876.0,
+              "median": 879.0,
+              "p95": 889.85,
+              "p99": 892.31,
+              "max": 893.0
+            },
+            "MEMORY_STATIC": {
+              "n": 24,
+              "min": 309665017.0,
+              "median": 309882711.0,
+              "p95": 309897492.4,
+              "p99": 309902471.96,
+              "max": 309903909.0
+            },
+            "OBJECT_COUNT": {
+              "n": 24,
+              "min": 5443.0,
+              "median": 5462.0,
+              "p95": 5464.0,
+              "p99": 5464.0,
+              "max": 5464.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 24,
+              "min": 1366.0,
+              "median": 1383.0,
+              "p95": 1383.0,
+              "p99": 1383.0,
+              "max": 1383.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 24,
+              "min": 473.0,
+              "median": 476.0,
+              "p95": 476.0,
+              "p99": 476.0,
+              "max": 476.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 24,
+              "min": 74253862.0,
+              "median": 74253862.0,
+              "p95": 74287516.9,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 24,
+              "min": 34765100.0,
+              "median": 34985142.0,
+              "p95": 34990412.0,
+              "p99": 34990412.0,
+              "max": 34990412.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 24,
+              "min": 109058556.0,
+              "median": 109239004.0,
+              "p95": 109244274.0,
+              "p99": 109244274.0,
+              "max": 109244274.0
+            },
+            "shot_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 1.8499999999999979,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 24,
+              "min": 4.0,
+              "median": 9.0,
+              "p95": 9.0,
+              "p99": 9.0,
+              "max": 9.0
+            },
+            "tool_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "shot_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 24,
+              "min": 45.0,
+              "median": 60.5,
+              "p95": 73.85,
+              "p99": 75.53999999999999,
+              "max": 76.0
+            },
+            "playback_tick": {
+              "n": 24,
+              "min": 269.0,
+              "median": 360.0,
+              "p95": 442.79999999999995,
+              "p99": 450.15999999999997,
+              "max": 452.0
+            },
+            "local_tick": {
+              "n": 24,
+              "min": 216.0,
+              "median": 309.0,
+              "p95": 389.09999999999997,
+              "p99": 399.24,
+              "max": 402.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 933015552
+        }
+      ],
+      "rss_ready_bytes": 268914688,
+      "rss_save_bytes": 963969024,
+      "environment": {
+        "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+        "audio_driver": "Dummy",
+        "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cpu_count": 5,
+        "debug_build": true,
+        "display": "X11",
+        "driver": "opengl3",
+        "engine": {
+          "build": "official",
+          "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "hex": 263938,
+          "major": 4,
+          "minor": 7,
+          "patch": 2,
+          "status": "stable",
+          "string": "4.7.2-stable (official)",
+          "timestamp": 0
+        },
+        "method": "gl_compatibility",
+        "os": "Linux",
+        "os_version": "13",
+        "pid": 128345,
+        "scope": "controlled archived original frame/advancing transport; main/presenter automatic callbacks; same production; scripts OFF/ON observer comparison, not new normal/whole/device",
+        "vendor": "Mesa",
+        "visible_cpu_effective": "0-4",
+        "visible_cpu_max": "400000 100000",
+        "visible_memory_max": "17179869184"
+      },
+      "monitor_support": {
+        "MEMORY_STATIC": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_ORPHAN_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_RESOURCE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "PIPELINE_COMPILATIONS_CANVAS": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_DRAW": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_MESH": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SURFACE": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PHYSICS_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        }
+      }
+    },
+    {
+      "variant": "OFF",
+      "label": "profile-formal-04-OFF",
+      "uuid": "eb0a1218a28c455eafeb259946414183",
+      "source_sha": "f275178c0f60a7579685f9823894cafc3386f6da",
+      "tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+      "checks": 473,
+      "start": "2026-10-04T22:30:18.569433+00:00",
+      "end": "2026-10-04T22:31:30.079406+00:00",
+      "raw_rows": 166,
+      "accepted": 84,
+      "pair_input": {
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "rig_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340"
+      },
+      "windows": [
+        {
+          "label": "yard-static-confirmed-shot",
+          "accepted": 60,
+          "actual_seconds": 8.381965,
+          "end_tick": 253,
+          "counters": {
+            "interval_usec": {
+              "n": 60,
+              "min": 124846.0,
+              "median": 134535.5,
+              "p95": 157804.85,
+              "p99": 161652.66999999998,
+              "max": 163179.0
+            },
+            "collector_usec": {
+              "n": 60,
+              "min": 224.0,
+              "median": 239.0,
+              "p95": 286.54999999999995,
+              "p99": 321.9699999999999,
+              "max": 332.0
+            },
+            "render_setup_ms": {
+              "n": 60,
+              "min": 0.033,
+              "median": 0.036,
+              "p95": 0.043,
+              "p99": 0.056329999999999956,
+              "max": 0.064
+            },
+            "TIME_PROCESS": {
+              "n": 60,
+              "min": 0.129714,
+              "median": 0.1425415,
+              "p95": 0.331117,
+              "p99": 0.331117,
+              "max": 0.331117
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 60,
+              "min": 0.000157,
+              "median": 0.0021185,
+              "p95": 0.004365,
+              "p99": 0.004365,
+              "max": 0.004365
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 60,
+              "min": 342.0,
+              "median": 342.0,
+              "p95": 342.0,
+              "p99": 342.0,
+              "max": 342.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 60,
+              "min": 83747.0,
+              "median": 83747.0,
+              "p95": 83747.0,
+              "p99": 83747.0,
+              "max": 83747.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 60,
+              "min": 890.0,
+              "median": 890.0,
+              "p95": 890.0,
+              "p99": 890.0,
+              "max": 890.0
+            },
+            "MEMORY_STATIC": {
+              "n": 60,
+              "min": 309604205.0,
+              "median": 309604205.0,
+              "p95": 309604205.0,
+              "p99": 309604205.0,
+              "max": 309604205.0
+            },
+            "OBJECT_COUNT": {
+              "n": 60,
+              "min": 5442.0,
+              "median": 5442.0,
+              "p95": 5442.0,
+              "p99": 5442.0,
+              "max": 5442.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 60,
+              "min": 1366.0,
+              "median": 1366.0,
+              "p95": 1366.0,
+              "p99": 1366.0,
+              "max": 1366.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 60,
+              "min": 473.0,
+              "median": 473.0,
+              "p95": 473.0,
+              "p99": 473.0,
+              "max": 473.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 60,
+              "min": 74293456.0,
+              "median": 74293456.0,
+              "p95": 74293456.0,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 60,
+              "min": 34766836.0,
+              "median": 34766836.0,
+              "p95": 34766836.0,
+              "p99": 34766836.0,
+              "max": 34766836.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 60,
+              "min": 109060292.0,
+              "median": 109060292.0,
+              "p95": 109060292.0,
+              "p99": 109060292.0,
+              "max": 109060292.0
+            },
+            "shot_active": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 60,
+              "min": 2.0,
+              "median": 2.0,
+              "p95": 2.0,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "tool_active": {
+              "n": 60,
+              "min": 1.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 60,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 60,
+              "min": 43.0,
+              "median": 43.0,
+              "p95": 43.0,
+              "p99": 43.0,
+              "max": 43.0
+            },
+            "playback_tick": {
+              "n": 60,
+              "min": 253.0,
+              "median": 253.0,
+              "p95": 253.0,
+              "p99": 253.0,
+              "max": 253.0
+            },
+            "local_tick": {
+              "n": 60,
+              "min": 204.0,
+              "median": 204.0,
+              "p95": 204.0,
+              "p99": 204.0,
+              "max": 204.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 920432640
+        },
+        {
+          "label": "yard-advancing-original-replay",
+          "accepted": 24,
+          "actual_seconds": 18.751314,
+          "end_tick": 452,
+          "counters": {
+            "interval_usec": {
+              "n": 24,
+              "min": 677260.0,
+              "median": 712378.0,
+              "p95": 803359.45,
+              "p99": 867105.46,
+              "max": 884953.0
+            },
+            "collector_usec": {
+              "n": 24,
+              "min": 231.0,
+              "median": 240.0,
+              "p95": 272.4,
+              "p99": 283.01,
+              "max": 286.0
+            },
+            "render_setup_ms": {
+              "n": 24,
+              "min": 0.034,
+              "median": 0.0415,
+              "p95": 0.06,
+              "p99": 0.07616999999999999,
+              "max": 0.081
+            },
+            "TIME_PROCESS": {
+              "n": 24,
+              "min": 0.320948,
+              "median": 0.7116115000000001,
+              "p95": 0.79058815,
+              "p99": 1.1146334599999999,
+              "max": 1.210842
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "n": 24,
+              "min": 0.000116,
+              "median": 0.000143,
+              "p95": 0.0034212999999999926,
+              "p99": 0.00396209,
+              "max": 0.003966
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "n": 24,
+              "min": 329.0,
+              "median": 332.0,
+              "p95": 341.85,
+              "p99": 344.31,
+              "max": 345.0
+            },
+            "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+              "n": 24,
+              "min": 81217.0,
+              "median": 81409.0,
+              "p95": 83585.2,
+              "p99": 83827.12,
+              "max": 83863.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "n": 24,
+              "min": 876.0,
+              "median": 879.0,
+              "p95": 889.85,
+              "p99": 892.31,
+              "max": 893.0
+            },
+            "MEMORY_STATIC": {
+              "n": 24,
+              "min": 309665017.0,
+              "median": 309882711.0,
+              "p95": 309897492.4,
+              "p99": 309902471.96,
+              "max": 309903909.0
+            },
+            "OBJECT_COUNT": {
+              "n": 24,
+              "min": 5443.0,
+              "median": 5462.0,
+              "p95": 5464.0,
+              "p99": 5464.0,
+              "max": 5464.0
+            },
+            "OBJECT_NODE_COUNT": {
+              "n": 24,
+              "min": 1366.0,
+              "median": 1383.0,
+              "p95": 1383.0,
+              "p99": 1383.0,
+              "max": 1383.0
+            },
+            "OBJECT_RESOURCE_COUNT": {
+              "n": 24,
+              "min": 473.0,
+              "median": 476.0,
+              "p95": 476.0,
+              "p99": 476.0,
+              "max": 476.0
+            },
+            "OBJECT_ORPHAN_NODE_COUNT": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "n": 24,
+              "min": 74253862.0,
+              "median": 74253862.0,
+              "p95": 74287516.9,
+              "p99": 74293456.0,
+              "max": 74293456.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "n": 24,
+              "min": 34765100.0,
+              "median": 34985142.0,
+              "p95": 34990412.0,
+              "p99": 34990412.0,
+              "max": 34990412.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "n": 24,
+              "min": 109058556.0,
+              "median": 109239004.0,
+              "p95": 109244274.0,
+              "p99": 109244274.0,
+              "max": 109244274.0
+            },
+            "shot_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 1.8499999999999979,
+              "p99": 2.0,
+              "max": 2.0
+            },
+            "shot_cache": {
+              "n": 24,
+              "min": 4.0,
+              "median": 9.0,
+              "p95": 9.0,
+              "p99": 9.0,
+              "max": 9.0
+            },
+            "tool_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "dust_active": {
+              "n": 24,
+              "min": 0.0,
+              "median": 1.0,
+              "p95": 1.0,
+              "p99": 1.0,
+              "max": 1.0
+            },
+            "shot_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "shot_reject_socket": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "tool_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "dust_reject_geometry": {
+              "n": 24,
+              "min": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "frame_seq": {
+              "n": 24,
+              "min": 45.0,
+              "median": 60.5,
+              "p95": 73.85,
+              "p99": 75.53999999999999,
+              "max": 76.0
+            },
+            "playback_tick": {
+              "n": 24,
+              "min": 269.0,
+              "median": 360.0,
+              "p95": 442.79999999999995,
+              "p99": 450.15999999999997,
+              "max": 452.0
+            },
+            "local_tick": {
+              "n": 24,
+              "min": 216.0,
+              "median": 309.0,
+              "p95": 389.09999999999997,
+              "p99": 399.24,
+              "max": 402.0
+            }
+          },
+          "over_33_333ms_fraction": 1.0,
+          "over_16_667ms_fraction": 1.0,
+          "rss_mark_bytes": 934133760
+        }
+      ],
+      "rss_ready_bytes": 268300288,
+      "rss_save_bytes": 966942720,
+      "environment": {
+        "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+        "audio_driver": "Dummy",
+        "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "cpu_count": 5,
+        "debug_build": true,
+        "display": "X11",
+        "driver": "opengl3",
+        "engine": {
+          "build": "official",
+          "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "hex": 263938,
+          "major": 4,
+          "minor": 7,
+          "patch": 2,
+          "status": "stable",
+          "string": "4.7.2-stable (official)",
+          "timestamp": 0
+        },
+        "method": "gl_compatibility",
+        "os": "Linux",
+        "os_version": "13",
+        "pid": 128439,
+        "scope": "controlled archived original frame/advancing transport; main/presenter automatic callbacks; same production; scripts OFF/ON observer comparison, not new normal/whole/device",
+        "vendor": "Mesa",
+        "visible_cpu_effective": "0-4",
+        "visible_cpu_max": "400000 100000",
+        "visible_memory_max": "17179869184"
+      },
+      "monitor_support": {
+        "MEMORY_STATIC": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_ORPHAN_NODE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "OBJECT_RESOURCE_COUNT": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "PIPELINE_COMPILATIONS_CANVAS": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_DRAW": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_MESH": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "PIPELINE_COMPILATIONS_SURFACE": {
+          "backend": "gl_compatibility",
+          "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+          "status": "unknown_backend_support",
+          "supported": null
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PHYSICS_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        },
+        "TIME_PROCESS": {
+          "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+          "status": "documented_monitor_api",
+          "supported": true
+        }
+      }
+    }
+  ],
+  "aggregates": {
+    "yard-static-confirmed-shot": {
+      "OFF": {
+        "accepted": 120,
+        "counters": {
+          "interval_usec": {
+            "n": 120,
+            "min": 124846.0,
+            "median": 136193.5,
+            "p95": 157804.85,
+            "p99": 168486.12000000002,
+            "max": 242503.0
+          },
+          "collector_usec": {
+            "n": 120,
+            "min": 192.0,
+            "median": 239.0,
+            "p95": 297.1,
+            "p99": 330.48,
+            "max": 347.0
+          },
+          "render_setup_ms": {
+            "n": 120,
+            "min": 0.033,
+            "median": 0.038,
+            "p95": 0.04504999999999999,
+            "p99": 0.06153000000000003,
+            "max": 0.074
+          },
+          "TIME_PROCESS": {
+            "n": 120,
+            "min": 0.129714,
+            "median": 0.142435,
+            "p95": 0.31514179999999997,
+            "p99": 0.331117,
+            "max": 0.331117
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "n": 120,
+            "min": 0.000133,
+            "median": 0.000256,
+            "p95": 0.004365,
+            "p99": 0.004365,
+            "max": 0.004365
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "n": 120,
+            "min": 342.0,
+            "median": 342.0,
+            "p95": 342.0,
+            "p99": 342.0,
+            "max": 342.0
+          },
+          "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+            "n": 120,
+            "min": 83747.0,
+            "median": 83747.0,
+            "p95": 83747.0,
+            "p99": 83747.0,
+            "max": 83747.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "n": 120,
+            "min": 890.0,
+            "median": 890.0,
+            "p95": 890.0,
+            "p99": 890.0,
+            "max": 890.0
+          },
+          "MEMORY_STATIC": {
+            "n": 120,
+            "min": 309604205.0,
+            "median": 309604205.0,
+            "p95": 309604205.0,
+            "p99": 309604205.0,
+            "max": 309604205.0
+          },
+          "OBJECT_COUNT": {
+            "n": 120,
+            "min": 5442.0,
+            "median": 5442.0,
+            "p95": 5442.0,
+            "p99": 5442.0,
+            "max": 5442.0
+          },
+          "OBJECT_NODE_COUNT": {
+            "n": 120,
+            "min": 1366.0,
+            "median": 1366.0,
+            "p95": 1366.0,
+            "p99": 1366.0,
+            "max": 1366.0
+          },
+          "OBJECT_RESOURCE_COUNT": {
+            "n": 120,
+            "min": 473.0,
+            "median": 473.0,
+            "p95": 473.0,
+            "p99": 473.0,
+            "max": 473.0
+          },
+          "OBJECT_ORPHAN_NODE_COUNT": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "n": 120,
+            "min": 74293456.0,
+            "median": 74293456.0,
+            "p95": 74293456.0,
+            "p99": 74293456.0,
+            "max": 74293456.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "n": 120,
+            "min": 34766836.0,
+            "median": 34766836.0,
+            "p95": 34766836.0,
+            "p99": 34766836.0,
+            "max": 34766836.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "n": 120,
+            "min": 109060292.0,
+            "median": 109060292.0,
+            "p95": 109060292.0,
+            "p99": 109060292.0,
+            "max": 109060292.0
+          },
+          "shot_active": {
+            "n": 120,
+            "min": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "p99": 2.0,
+            "max": 2.0
+          },
+          "shot_cache": {
+            "n": 120,
+            "min": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "p99": 2.0,
+            "max": 2.0
+          },
+          "tool_active": {
+            "n": 120,
+            "min": 1.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "p99": 1.0,
+            "max": 1.0
+          },
+          "dust_active": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "shot_reject_geometry": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "shot_reject_socket": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "tool_reject_geometry": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "dust_reject_geometry": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "frame_seq": {
+            "n": 120,
+            "min": 43.0,
+            "median": 43.0,
+            "p95": 43.0,
+            "p99": 43.0,
+            "max": 43.0
+          },
+          "playback_tick": {
+            "n": 120,
+            "min": 253.0,
+            "median": 253.0,
+            "p95": 253.0,
+            "p99": 253.0,
+            "max": 253.0
+          },
+          "local_tick": {
+            "n": 120,
+            "min": 204.0,
+            "median": 204.0,
+            "p95": 204.0,
+            "p99": 204.0,
+            "max": 204.0
+          }
+        },
+        "over_33_333ms_fraction": 1.0,
+        "over_16_667ms_fraction": 1.0
+      },
+      "ON": {
+        "accepted": 120,
+        "counters": {
+          "interval_usec": {
+            "n": 120,
+            "min": 131363.0,
+            "median": 140785.0,
+            "p95": 153837.05,
+            "p99": 159900.86000000002,
+            "max": 161344.0
+          },
+          "collector_usec": {
+            "n": 120,
+            "min": 186.0,
+            "median": 250.0,
+            "p95": 286.54999999999995,
+            "p99": 323.48,
+            "max": 350.0
+          },
+          "render_setup_ms": {
+            "n": 120,
+            "min": 0.033,
+            "median": 0.039,
+            "p95": 0.04644999999999997,
+            "p99": 0.07467000000000001,
+            "max": 0.086
+          },
+          "TIME_PROCESS": {
+            "n": 120,
+            "min": 0.138828,
+            "median": 0.144351,
+            "p95": 0.343831,
+            "p99": 0.343831,
+            "max": 0.343831
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "n": 120,
+            "min": 0.000162,
+            "median": 0.000213,
+            "p95": 0.005856,
+            "p99": 0.005856,
+            "max": 0.005856
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "n": 120,
+            "min": 342.0,
+            "median": 342.0,
+            "p95": 342.0,
+            "p99": 342.0,
+            "max": 342.0
+          },
+          "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+            "n": 120,
+            "min": 83747.0,
+            "median": 83747.0,
+            "p95": 83747.0,
+            "p99": 83747.0,
+            "max": 83747.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "n": 120,
+            "min": 890.0,
+            "median": 890.0,
+            "p95": 890.0,
+            "p99": 890.0,
+            "max": 890.0
+          },
+          "MEMORY_STATIC": {
+            "n": 120,
+            "min": 309604205.0,
+            "median": 309604205.0,
+            "p95": 309604205.0,
+            "p99": 309604205.0,
+            "max": 309604205.0
+          },
+          "OBJECT_COUNT": {
+            "n": 120,
+            "min": 5442.0,
+            "median": 5442.0,
+            "p95": 5442.0,
+            "p99": 5442.0,
+            "max": 5442.0
+          },
+          "OBJECT_NODE_COUNT": {
+            "n": 120,
+            "min": 1366.0,
+            "median": 1366.0,
+            "p95": 1366.0,
+            "p99": 1366.0,
+            "max": 1366.0
+          },
+          "OBJECT_RESOURCE_COUNT": {
+            "n": 120,
+            "min": 473.0,
+            "median": 473.0,
+            "p95": 473.0,
+            "p99": 473.0,
+            "max": 473.0
+          },
+          "OBJECT_ORPHAN_NODE_COUNT": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "n": 120,
+            "min": 74293456.0,
+            "median": 74293456.0,
+            "p95": 74293456.0,
+            "p99": 74293456.0,
+            "max": 74293456.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "n": 120,
+            "min": 34766836.0,
+            "median": 34766836.0,
+            "p95": 34766836.0,
+            "p99": 34766836.0,
+            "max": 34766836.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "n": 120,
+            "min": 109060292.0,
+            "median": 109060292.0,
+            "p95": 109060292.0,
+            "p99": 109060292.0,
+            "max": 109060292.0
+          },
+          "shot_active": {
+            "n": 120,
+            "min": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "p99": 2.0,
+            "max": 2.0
+          },
+          "shot_cache": {
+            "n": 120,
+            "min": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "p99": 2.0,
+            "max": 2.0
+          },
+          "tool_active": {
+            "n": 120,
+            "min": 1.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "p99": 1.0,
+            "max": 1.0
+          },
+          "dust_active": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "shot_reject_geometry": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "shot_reject_socket": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "tool_reject_geometry": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "dust_reject_geometry": {
+            "n": 120,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "frame_seq": {
+            "n": 120,
+            "min": 43.0,
+            "median": 43.0,
+            "p95": 43.0,
+            "p99": 43.0,
+            "max": 43.0
+          },
+          "playback_tick": {
+            "n": 120,
+            "min": 253.0,
+            "median": 253.0,
+            "p95": 253.0,
+            "p99": 253.0,
+            "max": 253.0
+          },
+          "local_tick": {
+            "n": 120,
+            "min": 204.0,
+            "median": 204.0,
+            "p95": 204.0,
+            "p99": 204.0,
+            "max": 204.0
+          }
+        },
+        "over_33_333ms_fraction": 1.0,
+        "over_16_667ms_fraction": 1.0
+      }
+    },
+    "yard-advancing-original-replay": {
+      "OFF": {
+        "accepted": 48,
+        "counters": {
+          "interval_usec": {
+            "n": 48,
+            "min": 677260.0,
+            "median": 709678.0,
+            "p95": 800527.2,
+            "p99": 858116.4700000001,
+            "max": 884953.0
+          },
+          "collector_usec": {
+            "n": 48,
+            "min": 228.0,
+            "median": 236.0,
+            "p95": 271.6,
+            "p99": 301.37,
+            "max": 315.0
+          },
+          "render_setup_ms": {
+            "n": 48,
+            "min": 0.034,
+            "median": 0.0415,
+            "p95": 0.06,
+            "p99": 0.07207000000000002,
+            "max": 0.081
+          },
+          "TIME_PROCESS": {
+            "n": 48,
+            "min": 0.135142,
+            "median": 0.7079489999999999,
+            "p95": 0.78798035,
+            "p99": 1.2117906999999999,
+            "max": 1.212632
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "n": 48,
+            "min": 0.000116,
+            "median": 0.00015099999999999998,
+            "p95": 0.003978,
+            "p99": 0.00400114,
+            "max": 0.004019
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "n": 48,
+            "min": 329.0,
+            "median": 332.0,
+            "p95": 342.0,
+            "p99": 345.0,
+            "max": 345.0
+          },
+          "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+            "n": 48,
+            "min": 81217.0,
+            "median": 81409.0,
+            "p95": 83707.0,
+            "p99": 83863.0,
+            "max": 83863.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "n": 48,
+            "min": 876.0,
+            "median": 879.0,
+            "p95": 890.0,
+            "p99": 893.0,
+            "max": 893.0
+          },
+          "MEMORY_STATIC": {
+            "n": 48,
+            "min": 309665017.0,
+            "median": 309882711.0,
+            "p95": 309897661.0,
+            "p99": 309903909.0,
+            "max": 309903909.0
+          },
+          "OBJECT_COUNT": {
+            "n": 48,
+            "min": 5443.0,
+            "median": 5462.0,
+            "p95": 5464.0,
+            "p99": 5464.0,
+            "max": 5464.0
+          },
+          "OBJECT_NODE_COUNT": {
+            "n": 48,
+            "min": 1366.0,
+            "median": 1383.0,
+            "p95": 1383.0,
+            "p99": 1383.0,
+            "max": 1383.0
+          },
+          "OBJECT_RESOURCE_COUNT": {
+            "n": 48,
+            "min": 473.0,
+            "median": 476.0,
+            "p95": 476.0,
+            "p99": 476.0,
+            "max": 476.0
+          },
+          "OBJECT_ORPHAN_NODE_COUNT": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "n": 48,
+            "min": 74253862.0,
+            "median": 74253862.0,
+            "p95": 74293456.0,
+            "p99": 74293456.0,
+            "max": 74293456.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "n": 48,
+            "min": 34765100.0,
+            "median": 34985142.0,
+            "p95": 34990412.0,
+            "p99": 34990412.0,
+            "max": 34990412.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "n": 48,
+            "min": 109058556.0,
+            "median": 109239004.0,
+            "p95": 109244274.0,
+            "p99": 109244274.0,
+            "max": 109244274.0
+          },
+          "shot_active": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 2.0,
+            "p99": 2.0,
+            "max": 2.0
+          },
+          "shot_cache": {
+            "n": 48,
+            "min": 4.0,
+            "median": 9.0,
+            "p95": 9.0,
+            "p99": 9.0,
+            "max": 9.0
+          },
+          "tool_active": {
+            "n": 48,
+            "min": 0.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "p99": 1.0,
+            "max": 1.0
+          },
+          "dust_active": {
+            "n": 48,
+            "min": 0.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "p99": 1.0,
+            "max": 1.0
+          },
+          "shot_reject_geometry": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "shot_reject_socket": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "tool_reject_geometry": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "dust_reject_geometry": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "frame_seq": {
+            "n": 48,
+            "min": 45.0,
+            "median": 60.5,
+            "p95": 74.0,
+            "p99": 76.0,
+            "max": 76.0
+          },
+          "playback_tick": {
+            "n": 48,
+            "min": 268.0,
+            "median": 360.0,
+            "p95": 444.0,
+            "p99": 452.0,
+            "max": 452.0
+          },
+          "local_tick": {
+            "n": 48,
+            "min": 216.0,
+            "median": 309.0,
+            "p95": 390.0,
+            "p99": 402.0,
+            "max": 402.0
+          }
+        },
+        "over_33_333ms_fraction": 1.0,
+        "over_16_667ms_fraction": 1.0
+      },
+      "ON": {
+        "accepted": 48,
+        "counters": {
+          "interval_usec": {
+            "n": 48,
+            "min": 688511.0,
+            "median": 728026.5,
+            "p95": 801235.15,
+            "p99": 914176.22,
+            "max": 915057.0
+          },
+          "collector_usec": {
+            "n": 48,
+            "min": 198.0,
+            "median": 256.5,
+            "p95": 320.09999999999997,
+            "p99": 330.18,
+            "max": 333.0
+          },
+          "render_setup_ms": {
+            "n": 48,
+            "min": 0.035,
+            "median": 0.042,
+            "p95": 0.0683,
+            "p99": 0.07159,
+            "max": 0.073
+          },
+          "TIME_PROCESS": {
+            "n": 48,
+            "min": 0.142097,
+            "median": 0.7278185,
+            "p95": 1.1062811499999996,
+            "p99": 1.2482715000000002,
+            "max": 1.280208
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "n": 48,
+            "min": 0.00012,
+            "median": 0.000182,
+            "p95": 0.0039762999999999995,
+            "p99": 0.003998,
+            "max": 0.003998
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "n": 48,
+            "min": 329.0,
+            "median": 332.0,
+            "p95": 342.0,
+            "p99": 345.0,
+            "max": 345.0
+          },
+          "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+            "n": 48,
+            "min": 81217.0,
+            "median": 81409.0,
+            "p95": 83707.0,
+            "p99": 83863.0,
+            "max": 83863.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "n": 48,
+            "min": 876.0,
+            "median": 879.0,
+            "p95": 890.0,
+            "p99": 893.0,
+            "max": 893.0
+          },
+          "MEMORY_STATIC": {
+            "n": 48,
+            "min": 309665017.0,
+            "median": 309882675.0,
+            "p95": 309897635.8,
+            "p99": 309903875.16,
+            "max": 309903909.0
+          },
+          "OBJECT_COUNT": {
+            "n": 48,
+            "min": 5443.0,
+            "median": 5462.0,
+            "p95": 5464.0,
+            "p99": 5464.0,
+            "max": 5464.0
+          },
+          "OBJECT_NODE_COUNT": {
+            "n": 48,
+            "min": 1366.0,
+            "median": 1383.0,
+            "p95": 1383.0,
+            "p99": 1383.0,
+            "max": 1383.0
+          },
+          "OBJECT_RESOURCE_COUNT": {
+            "n": 48,
+            "min": 473.0,
+            "median": 476.0,
+            "p95": 476.0,
+            "p99": 476.0,
+            "max": 476.0
+          },
+          "OBJECT_ORPHAN_NODE_COUNT": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "n": 48,
+            "min": 74253862.0,
+            "median": 74253862.0,
+            "p95": 74293456.0,
+            "p99": 74293456.0,
+            "max": 74293456.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "n": 48,
+            "min": 34765100.0,
+            "median": 34985142.0,
+            "p95": 34990412.0,
+            "p99": 34990412.0,
+            "max": 34990412.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "n": 48,
+            "min": 109058556.0,
+            "median": 109239004.0,
+            "p95": 109244274.0,
+            "p99": 109244274.0,
+            "max": 109244274.0
+          },
+          "shot_active": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 2.0,
+            "p99": 2.0,
+            "max": 2.0
+          },
+          "shot_cache": {
+            "n": 48,
+            "min": 4.0,
+            "median": 9.0,
+            "p95": 9.0,
+            "p99": 9.0,
+            "max": 9.0
+          },
+          "tool_active": {
+            "n": 48,
+            "min": 0.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "p99": 1.0,
+            "max": 1.0
+          },
+          "dust_active": {
+            "n": 48,
+            "min": 0.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "p99": 1.0,
+            "max": 1.0
+          },
+          "shot_reject_geometry": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "shot_reject_socket": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "tool_reject_geometry": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "dust_reject_geometry": {
+            "n": 48,
+            "min": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "frame_seq": {
+            "n": 48,
+            "min": 45.0,
+            "median": 60.5,
+            "p95": 74.0,
+            "p99": 76.0,
+            "max": 76.0
+          },
+          "playback_tick": {
+            "n": 48,
+            "min": 269.0,
+            "median": 360.0,
+            "p95": 444.0,
+            "p99": 452.53,
+            "max": 453.0
+          },
+          "local_tick": {
+            "n": 48,
+            "min": 216.0,
+            "median": 309.0,
+            "p95": 390.0,
+            "p99": 402.0,
+            "max": 402.0
+          }
+        },
+        "over_33_333ms_fraction": 1.0,
+        "over_16_667ms_fraction": 1.0
+      }
+    }
+  },
+  "adjacent_pairs": [
+    {
+      "window": "yard-static-confirmed-shot",
+      "order": [
+        "OFF",
+        "ON"
+      ],
+      "labels": [
+        "profile-formal-01-OFF",
+        "profile-formal-02-ON"
+      ],
+      "median_change_percent": 2.930370760696155,
+      "a_median_usec": 136638.0,
+      "b_median_usec": 140642.0
+    },
+    {
+      "window": "yard-static-confirmed-shot",
+      "order": [
+        "ON",
+        "OFF"
+      ],
+      "labels": [
+        "profile-formal-03-ON",
+        "profile-formal-04-OFF"
+      ],
+      "median_change_percent": 4.725146894314136,
+      "a_median_usec": 134535.5,
+      "b_median_usec": 140892.5
+    },
+    {
+      "window": "yard-advancing-original-replay",
+      "order": [
+        "OFF",
+        "ON"
+      ],
+      "labels": [
+        "profile-formal-01-OFF",
+        "profile-formal-02-ON"
+      ],
+      "median_change_percent": 2.2191754570382694,
+      "a_median_usec": 709678.0,
+      "b_median_usec": 725427.0
+    },
+    {
+      "window": "yard-advancing-original-replay",
+      "order": [
+        "ON",
+        "OFF"
+      ],
+      "labels": [
+        "profile-formal-03-ON",
+        "profile-formal-04-OFF"
+      ],
+      "median_change_percent": 2.706147578953866,
+      "a_median_usec": 712378.0,
+      "b_median_usec": 731656.0
+    }
+  ],
+  "drift": [
+    {
+      "window": "yard-static-confirmed-shot",
+      "variant": "OFF",
+      "run_median_usec": [
+        136638.0,
+        134535.5
+      ],
+      "last_vs_first_percent": -1.5387373936972093,
+      "max_vs_min_percent": 1.5627845438564547
+    },
+    {
+      "window": "yard-static-confirmed-shot",
+      "variant": "ON",
+      "run_median_usec": [
+        140642.0,
+        140892.5
+      ],
+      "last_vs_first_percent": 0.1781118015955485,
+      "max_vs_min_percent": 0.1781118015955485
+    },
+    {
+      "window": "yard-advancing-original-replay",
+      "variant": "OFF",
+      "run_median_usec": [
+        709678.0,
+        712378.0
+      ],
+      "last_vs_first_percent": 0.3804542341738104,
+      "max_vs_min_percent": 0.3804542341738104
+    },
+    {
+      "window": "yard-advancing-original-replay",
+      "variant": "ON",
+      "run_median_usec": [
+        725427.0,
+        731656.0
+      ],
+      "last_vs_first_percent": 0.8586666887226313,
+      "max_vs_min_percent": 0.8586666887226313
+    }
+  ],
+  "limitations": "59 scalar collector unchanged; frame interval wall postdraw includes all work and instrumentation; monitors may lag; pipeline support unknown/GPU time unavailable; llvmpipe not mobile. Static exact archived input; advancing host-dependent trajectory is separately bounded, not frame-paired/whole replay. Descriptive tails and 4 pairs per variant, no significance/causal/subtractive attribution."
+}

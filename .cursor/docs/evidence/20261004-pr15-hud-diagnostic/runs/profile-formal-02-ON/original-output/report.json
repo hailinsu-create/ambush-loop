@@ -1,0 +1,319 @@
+{
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-static-confirmed-shot.png",
+      "scope": "untimed actual Window API/reference/historical view",
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-advancing-original-replay.png",
+      "scope": "untimed actual Window API/reference/historical view",
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1"
+    }
+  ],
+  "checks": 475,
+  "chunks": [
+    {
+      "accepted": 84,
+      "collector_instance_id": 194145945208,
+      "first_usec": 26575358,
+      "last_usec": 70775574,
+      "path": "res://build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-hud-profile-metrics",
+      "raw_sha256": "e4327db4e77726861e353798fedf339f860b32f6777050be8e22185936ed5c39",
+      "rows": 168,
+      "run_overflow_rows": 0.0,
+      "save_error": 0,
+      "segment_capacity": 512,
+      "segment_receipts": 11,
+      "segment_summaries": [
+        {
+          "accepted": 60,
+          "label": "yard-static-confirmed-shot",
+          "requested_phase_samples": 60,
+          "transition_phase_rows_retained": 0
+        },
+        {
+          "accepted": 24,
+          "label": "yard-advancing-original-replay",
+          "requested_phase_samples": 24,
+          "transition_phase_rows_retained": 0
+        }
+      ],
+      "symbol_overflow": 0.0,
+      "valid": true
+    }
+  ],
+  "environment": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "audio_driver": "Dummy",
+    "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "driver": "opengl3",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "method": "gl_compatibility",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 128223,
+    "scope": "controlled archived original frame/advancing transport; main/presenter automatic callbacks; same production; scripts OFF/ON observer comparison, not new normal/whole/device",
+    "vendor": "Mesa",
+    "visible_cpu_effective": "0-4",
+    "visible_cpu_max": "400000 100000",
+    "visible_memory_max": "17179869184"
+  },
+  "external_fixture_sha256": "651a177878b3e03289a137c428c680160e7a3e271abcf63640f82ab457a5daf5",
+  "failures": 0,
+  "format": 1,
+  "import_metadata_sha256": "513aba6cd0bd41c141fd5c53603fd0d541ea63bf4032634848c21d3b867f552d",
+  "pair_rows": [
+    {
+      "advancing": false,
+      "bound_source_instance": -9223371573400955821,
+      "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "end_tick": 253,
+      "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+      "initial_backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+      "initial_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "initial_tick": 253,
+      "label": "yard-static-confirmed-shot",
+      "process_token_normalization": [
+        "shot_fx_source_token",
+        "tool_fx_source_token",
+        "movement_fx_source_token"
+      ],
+      "process_token_values": {
+        "movement_fx_source_token": -9223371573400955821,
+        "shot_fx_source_token": -9223371573400955821,
+        "tool_fx_source_token": -9223371573400955821
+      },
+      "restored_canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "restored_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "restored_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+      "source_unchanged": true
+    },
+    {
+      "advancing": true,
+      "bound_source_instance": -9223371573400955821,
+      "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "end_tick": 453,
+      "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+      "initial_backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+      "initial_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "initial_tick": 253,
+      "label": "yard-advancing-original-replay",
+      "process_token_normalization": [
+        "shot_fx_source_token",
+        "tool_fx_source_token",
+        "movement_fx_source_token"
+      ],
+      "process_token_values": {
+        "movement_fx_source_token": -9223371573400955821,
+        "shot_fx_source_token": -9223371573400955821,
+        "tool_fx_source_token": -9223371573400955821
+      },
+      "restored_canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "restored_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "restored_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+      "source_unchanged": true
+    }
+  ],
+  "profile_on": true,
+  "profile_segments": [
+    {
+      "label": "yard-static-confirmed-shot",
+      "scripts_active": true
+    },
+    {
+      "label": "yard-advancing-original-replay",
+      "scripts_active": true
+    }
+  ],
+  "receipt_sha256": "e996046e0a9de86487cbdfc4792620661b574a71a81fa5fe0b2b3d60824104aa",
+  "scope": "same production; profiler OFF/ON/ON/OFF; local frame samples and segment accumulations kept separate; observer cost retained; no mobile FPS claim",
+  "segments": [
+    {
+      "actual_measured_phase_rows": 60,
+      "actual_seconds": 8.623322,
+      "label": "yard-static-confirmed-shot",
+      "receipt": {
+        "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+        "initial_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+        "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "kind": "paused exact saved frame with automatic callbacks",
+        "level_id": "yard",
+        "minimum_measured_phase_rows": 60,
+        "phase": 4,
+        "policy": "standard",
+        "process_token_normalization": [
+          "shot_fx_source_token",
+          "tool_fx_source_token",
+          "movement_fx_source_token"
+        ],
+        "requested_seconds": 5.0,
+        "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+        "selected_source": {
+          "active_saved_candidates": 2,
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "feature": "shot",
+          "frame_seq": 43,
+          "frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+          "recorded_phase": 1,
+          "tick": 253,
+          "wave": 0
+        },
+        "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "wall_limit_seconds": 30.0,
+        "warmup_seconds": 5.0,
+        "wave": 0
+      },
+      "requested_seconds": 5.0
+    },
+    {
+      "actual_measured_phase_rows": 24,
+      "actual_seconds": 19.025913,
+      "label": "yard-advancing-original-replay",
+      "receipt": {
+        "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+        "initial_frame_sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+        "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "kind": "advancing original replay callbacks",
+        "level_id": "yard",
+        "minimum_measured_phase_rows": 24,
+        "phase": 4,
+        "process_token_normalization": [
+          "shot_fx_source_token",
+          "tool_fx_source_token",
+          "movement_fx_source_token"
+        ],
+        "requested_seconds": 5.0,
+        "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+        "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "speed": 1.0,
+        "wall_limit_seconds": 30.0,
+        "warmup_seconds": 5.0,
+        "wave": 0
+      },
+      "requested_seconds": 5.0
+    }
+  ],
+  "source_game_tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+  "source_proof_after": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "f275178c0f60a7579685f9823894cafc3386f6da",
+    "consumer_game_tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5589224.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+        "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+        "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+      }
+    ],
+    "receipt_sha256": "e996046e0a9de86487cbdfc4792620661b574a71a81fa5fe0b2b3d60824104aa",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 988,
+    "verified": true,
+    "window_control_verified": true
+  },
+  "source_proof_before": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "f275178c0f60a7579685f9823894cafc3386f6da",
+    "consumer_game_tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5589224.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+        "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+        "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+      }
+    ],
+    "receipt_sha256": "e996046e0a9de86487cbdfc4792620661b574a71a81fa5fe0b2b3d60824104aa",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 988,
+    "verified": true,
+    "window_control_verified": true
+  },
+  "source_sha": "f275178c0f60a7579685f9823894cafc3386f6da"
+}

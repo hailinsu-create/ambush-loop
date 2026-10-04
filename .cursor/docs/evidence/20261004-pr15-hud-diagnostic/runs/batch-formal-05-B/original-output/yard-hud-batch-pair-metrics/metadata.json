@@ -1,0 +1,615 @@
+{
+  "chunk_source_and_buffer_valid": true,
+  "complete_buffer": true,
+  "extra": {
+    "scope": "controlled actual source A3; not native normal/device/FINAL",
+    "segments": [
+      {
+        "actual_measured_phase_rows": 60,
+        "actual_seconds": 8.709547,
+        "label": "yard-static-confirmed-shot",
+        "receipt": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "configuration": {
+            "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+            "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+            "content_scale": 1.0,
+            "focus": "(-6.5, 0.0, -0.155217)",
+            "level_id": "yard",
+            "main_auto_process": true,
+            "max_fps": 0,
+            "phase": 4,
+            "pitch_deg": 35.0,
+            "policy": "standard",
+            "presenter_auto_process": true,
+            "presenter_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+            "tree_paused": false,
+            "view_size": 12.0,
+            "vsync": 0,
+            "window_height": 720,
+            "window_width": 1280,
+            "yaw_deg": 0.0
+          },
+          "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+          "initial_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+          "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+          "kind": "paused exact saved frame with automatic callbacks",
+          "level_id": "yard",
+          "minimum_measured_phase_rows": 60,
+          "phase": 4,
+          "policy": "standard",
+          "process_token_normalization": [
+            "shot_fx_source_token",
+            "tool_fx_source_token",
+            "movement_fx_source_token"
+          ],
+          "requested_seconds": 5.0,
+          "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+          "selected_source": {
+            "active_saved_candidates": 2,
+            "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+            "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+            "feature": "shot",
+            "frame_seq": 43,
+            "frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+            "recorded_phase": 1,
+            "tick": 253,
+            "wave": 0
+          },
+          "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+          "wall_limit_seconds": 30.0,
+          "warmup_seconds": 5.0,
+          "wave": 0
+        },
+        "requested_seconds": 5.0
+      },
+      {
+        "actual_measured_phase_rows": 24,
+        "actual_seconds": 9.783142,
+        "label": "yard-advancing-original-replay",
+        "receipt": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "configuration": {
+            "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+            "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+            "content_scale": 1.0,
+            "focus": "(-6.5, 0.0, -0.155217)",
+            "level_id": "yard",
+            "main_auto_process": true,
+            "max_fps": 0,
+            "phase": 4,
+            "pitch_deg": 35.0,
+            "policy": "standard",
+            "presenter_auto_process": true,
+            "presenter_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+            "tree_paused": false,
+            "view_size": 12.0,
+            "vsync": 0,
+            "window_height": 720,
+            "window_width": 1280,
+            "yaw_deg": 0.0
+          },
+          "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+          "initial_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+          "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+          "kind": "advancing original replay callbacks",
+          "level_id": "yard",
+          "minimum_measured_phase_rows": 24,
+          "phase": 4,
+          "process_token_normalization": [
+            "shot_fx_source_token",
+            "tool_fx_source_token",
+            "movement_fx_source_token"
+          ],
+          "requested_seconds": 5.0,
+          "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+          "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+          "speed": 1.0,
+          "wall_limit_seconds": 30.0,
+          "warmup_seconds": 5.0,
+          "wave": 0
+        },
+        "requested_seconds": 5.0
+      }
+    ]
+  },
+  "metadata": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "buffer": {
+      "allocation_delta_including_tables": 15492388,
+      "capacity": 32768,
+      "columns": 59,
+      "payload_bytes": 15466496,
+      "scope": "fixed numeric payload; metadata/symbol strings/allocator overhead also resident; never subtract payload as total instrumentation memory",
+      "static_after_allocate": 56524972,
+      "static_before_allocate": 41032584,
+      "symbol_capacity": 1024
+    },
+    "cold_scope": "hook exists before caller changes production scene; engine boot/autoloads before script are not captured",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "format": 2,
+    "monitor_ids": [
+      1,
+      2,
+      13,
+      12,
+      11,
+      15,
+      16,
+      14,
+      4,
+      7,
+      9,
+      8,
+      10,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "monitor_names": [
+      "TIME_PROCESS",
+      "TIME_PHYSICS_PROCESS",
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME",
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME",
+      "RENDER_TOTAL_OBJECTS_IN_FRAME",
+      "RENDER_TEXTURE_MEM_USED",
+      "RENDER_BUFFER_MEM_USED",
+      "RENDER_VIDEO_MEM_USED",
+      "MEMORY_STATIC",
+      "OBJECT_COUNT",
+      "OBJECT_NODE_COUNT",
+      "OBJECT_RESOURCE_COUNT",
+      "OBJECT_ORPHAN_NODE_COUNT",
+      "PIPELINE_COMPILATIONS_CANVAS",
+      "PIPELINE_COMPILATIONS_MESH",
+      "PIPELINE_COMPILATIONS_SURFACE",
+      "PIPELINE_COMPILATIONS_DRAW",
+      "PIPELINE_COMPILATIONS_SPECIALIZATION"
+    ],
+    "monitor_support": {
+      "MEMORY_STATIC": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_ORPHAN_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_RESOURCE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "PIPELINE_COMPILATIONS_CANVAS": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_DRAW": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_MESH": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_SURFACE": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "RENDER_BUFFER_MEM_USED": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TEXTURE_MEM_USED": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_VIDEO_MEM_USED": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "TIME_PHYSICS_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "TIME_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      }
+    },
+    "monitor_update_scope": "some engine monitors lag up to one second; early render counters need two drawn frames",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 129532,
+    "pipeline_zero_scope": "unknown backend support is not proof of no compilation; exclude unknown from supported summaries",
+    "render_setup_supported": true,
+    "rendering_driver": "opengl3",
+    "rendering_method": "gl_compatibility",
+    "rss_ready_bytes": 267038720,
+    "run_id": "0d5a868805c348cb9d335de23557dae5",
+    "scope": "wall post-draw intervals, engine counters and explicit workload receipts; not Android performance",
+    "source_proof_before": {
+      "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+      "complete_source_tree_verified": true,
+      "consumer_commit": "541d06440a97dd77f8c484a8de2a0ce364a8d91e",
+      "consumer_game_tree": "53ffc88566b1ce7bd40daa1ce847c838f04fbd85",
+      "engine": {
+        "bytes": 146414384.0,
+        "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+      },
+      "imported_cache_files_verified": 986,
+      "loaded_resource_scope": "complete existing warm imported inventory",
+      "producer_records": [
+        {
+          "attribution": "caller-declared producer commit; actual original bytes verified",
+          "bytes": 5589224.0,
+          "level_id": "yard",
+          "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+          "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+          "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+        }
+      ],
+      "receipt_sha256": "d8e2bfb6cd64a7627a0384979681807a9ac91d6fae30cdadcdfda97ced244f1d",
+      "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+      "source_files_verified": 988,
+      "verified": true
+    },
+    "source_sha": "541d06440a97dd77f8c484a8de2a0ce364a8d91e",
+    "timer_scope": "callback entry through scalar table/counter writes and row_count increment; final timestamp field store and return excluded; not whole frame CPU/GPU time",
+    "vendor": "Mesa",
+    "xdg_cache": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/0d5a868805c348cb9d335de23557dae5/cache"
+  },
+  "overflow_rows": 0,
+  "raw_sha256": "3388bf01a3b5b8594438d72f5cc8ae18ec592a8266b920266cf548c01cf0fcc1",
+  "receipt_stable": true,
+  "rows": 160,
+  "rss_save_bytes": 971735040,
+  "run_incomplete": false,
+  "run_overflow_rows": 0,
+  "segments": [
+    {
+      "frame_boundary": 0,
+      "label": "cold-production-scene",
+      "max_fps": 0,
+      "reason": "cold_scene_loading",
+      "row_boundary": 0,
+      "rss_bytes": 267046912,
+      "scale": 1.0,
+      "ticks_usec": 13297812,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 1,
+      "label": "original-replay-entry",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 1,
+      "rss_bytes": 888827904,
+      "scale": 1.0,
+      "ticks_usec": 22720249,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 1,
+      "label": "yard-static-confirmed-shot-warmup",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 1,
+      "rss_bytes": 888897536,
+      "scale": 1.0,
+      "ticks_usec": 23365545,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 34,
+      "label": "yard-static-confirmed-shot",
+      "max_fps": 0,
+      "reason": "",
+      "row_boundary": 34,
+      "rss_bytes": 921636864,
+      "scale": 1.0,
+      "ticks_usec": 28767601,
+      "timed": true,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {
+        "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+        "initial_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+        "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "kind": "paused exact saved frame with automatic callbacks",
+        "level_id": "yard",
+        "minimum_measured_phase_rows": 60,
+        "phase": 4,
+        "policy": "standard",
+        "process_token_normalization": [
+          "shot_fx_source_token",
+          "tool_fx_source_token",
+          "movement_fx_source_token"
+        ],
+        "requested_seconds": 5.0,
+        "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+        "selected_source": {
+          "active_saved_candidates": 2,
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+          "feature": "shot",
+          "frame_seq": 43,
+          "frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+          "recorded_phase": 1,
+          "tick": 253,
+          "wave": 0
+        },
+        "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "wall_limit_seconds": 30.0,
+        "warmup_seconds": 5.0,
+        "wave": 0
+      }
+    },
+    {
+      "frame_boundary": 95,
+      "label": "yard-static-confirmed-shot-boundary",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 95,
+      "rss_bytes": 917815296,
+      "scale": 1.0,
+      "ticks_usec": 37477285,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 95,
+      "label": "yard-static-confirmed-shot-capture",
+      "max_fps": 0,
+      "reason": "screenshot",
+      "row_boundary": 95,
+      "rss_bytes": 921636864,
+      "scale": 1.0,
+      "ticks_usec": 37677890,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 97,
+      "label": "yard-advancing-original-replay-warmup",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 97,
+      "rss_bytes": 929992704,
+      "scale": 1.0,
+      "ticks_usec": 38600045,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 133,
+      "label": "yard-advancing-original-replay",
+      "max_fps": 0,
+      "reason": "",
+      "row_boundary": 133,
+      "rss_bytes": 929992704,
+      "scale": 1.0,
+      "ticks_usec": 44146009,
+      "timed": true,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {
+        "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+        "canonical_frame_sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "289c587be0ff1b767df035d75d35e972d69fec5905d75ee006273b4d0f62d340",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "formal_a3_process_raw_frame_reference": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+        "initial_frame_sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+        "initial_signature_sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+        "kind": "advancing original replay callbacks",
+        "level_id": "yard",
+        "minimum_measured_phase_rows": 24,
+        "phase": 4,
+        "process_token_normalization": [
+          "shot_fx_source_token",
+          "tool_fx_source_token",
+          "movement_fx_source_token"
+        ],
+        "requested_seconds": 5.0,
+        "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+        "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "speed": 1.0,
+        "wall_limit_seconds": 30.0,
+        "warmup_seconds": 5.0,
+        "wave": 0
+      }
+    },
+    {
+      "frame_boundary": 158,
+      "label": "yard-advancing-original-replay-boundary",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 158,
+      "rss_bytes": 961568768,
+      "scale": 1.0,
+      "ticks_usec": 53929307,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 158,
+      "label": "yard-advancing-original-replay-capture",
+      "max_fps": 0,
+      "reason": "screenshot",
+      "row_boundary": 158,
+      "rss_bytes": 961568768,
+      "scale": 1.0,
+      "ticks_usec": 54070414,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 160,
+      "label": "yard-hud-batch-pair-metrics-seal",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 160,
+      "rss_bytes": 971730944,
+      "scale": 1.0,
+      "ticks_usec": 55036078,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    }
+  ],
+  "source_proof_after": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "541d06440a97dd77f8c484a8de2a0ce364a8d91e",
+    "consumer_game_tree": "53ffc88566b1ce7bd40daa1ce847c838f04fbd85",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5589224.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+        "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+        "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+      }
+    ],
+    "receipt_sha256": "d8e2bfb6cd64a7627a0384979681807a9ac91d6fae30cdadcdfda97ced244f1d",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 988,
+    "verified": true
+  },
+  "symbol_overflow": 0,
+  "warm_import_proof_complete": true
+}
