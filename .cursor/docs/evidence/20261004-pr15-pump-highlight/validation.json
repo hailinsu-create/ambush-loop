@@ -1,0 +1,245 @@
+{
+  "formal_source_sha": "b89297ea249628e20c4674d4c776421a35ee50cd",
+  "production_fix_sha": "7a3eac6353e863dfe8d216cebef190d63f39d716",
+  "game_tree": "e597127be0c49a9b1a9c28424142088ce6fd51e4",
+  "negative": {
+    "source_sha": "60af18172b7cbb5640001e5b89611870d08b0e92",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-highlight-headless-godot",
+      "result_highlight_test.gd",
+      "--headless"
+    ],
+    "env": {
+      "AMBUSH_TEST_SOURCE_SHA": "60af18172b7cbb5640001e5b89611870d08b0e92",
+      "AMBUSH_NATIVE_RECORD": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/native-player-pump-record.bin"
+    },
+    "run_id": "a189e611892a46ec9871ec4f4daf51c8",
+    "checks": 34,
+    "failures": 14,
+    "actual_exit": 1,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0,
+    "guard_passed": true,
+    "scope": "Bounded reference domain SCOUT door command, grants/cover snaps, direct tick and vacuum fixtures reach original terminal UI; not normal input, not native journey, not closed-route performance/art QA. Authentic030 source only read by formatter. No replay mutation."
+  },
+  "formal_H": {
+    "source_sha": "b89297ea249628e20c4674d4c776421a35ee50cd",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-highlight-headless-godot",
+      "result_highlight_test.gd",
+      "--headless"
+    ],
+    "env": {
+      "AMBUSH_TEST_SOURCE_SHA": "b89297ea249628e20c4674d4c776421a35ee50cd",
+      "AMBUSH_NATIVE_RECORD": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/native-player-pump-record.bin"
+    },
+    "run_id": "e977e9917e7a4a72abf90826cae41249",
+    "checks": 34,
+    "failures": 0,
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0,
+    "guard_passed": true,
+    "scope": "Bounded reference domain SCOUT door command, grants/cover snaps, direct tick and vacuum fixtures reach original terminal UI; not normal input, not native journey, not closed-route performance/art QA. Authentic030 source only read by formatter. No replay mutation."
+  },
+  "formal_R": {
+    "source_sha": "b89297ea249628e20c4674d4c776421a35ee50cd",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-highlight-b892-godot",
+      "result_highlight_test.gd",
+      "--render"
+    ],
+    "env": {
+      "AMBUSH_NATIVE_RECORD": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/native-player-pump-record.bin"
+    },
+    "run_id": "c6d24100a79042abb7940e703f9f12a4",
+    "checks": 41,
+    "failures": 0,
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0,
+    "guard_passed": true,
+    "scope": "Bounded reference domain SCOUT door command, grants/cover snaps, direct tick and vacuum fixtures reach original terminal UI; not normal input, not native journey, not closed-route performance/art QA. Authentic030 source only read by formatter. No replay mutation.",
+    "native_dossier_open_asserted": true,
+    "native_dossier_preserves_complete_battle_state": true,
+    "native_input_coordinates_persisted": false
+  },
+  "visual": {
+    "png": 4,
+    "all_hashes_checked": true,
+    "actually_viewed": [
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "pump_highlight_open_won",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_pump_highlight_open_won.png",
+        "sha256": "d2ecf18e697f7c281e034ac9c0adc52670b292955389f4081dbc57ce8bf9ca98"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "pump_highlight_locked_won",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_pump_highlight_locked_won.png",
+        "sha256": "f7dab0f4d637ed9b7381180c40445e22ffa4d778689d3ac85e3b4c45aca2376a"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "pump_highlight_locked_failed",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_pump_highlight_locked_failed.png",
+        "sha256": "63013a83305856749f6c5389fe365a99a09fc9f5366b705324c4c409f06981ee"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "pump_highlight_locked_failed_dossier",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_pump_highlight_locked_failed_dossier.png",
+        "sha256": "e3cd9367ec826ee6153f6c4c11ba718e89160d73f947759bf116780bdd1d3e88"
+      }
+    ],
+    "scope": "WON neutral line visible in open/locked screenshots. FAILED native dossier opens and shows actual escape facts; neutral line is checked in its content field but not yet scrolled into the captured view. No normal input journey/closed route/art/device certification."
+  },
+  "domains": [
+    {
+      "case": "pump_highlight_open_won",
+      "phase": 3,
+      "door_locked": false,
+      "terminal": 907,
+      "route_choice": []
+    },
+    {
+      "case": "pump_highlight_locked_won",
+      "phase": 3,
+      "door_locked": true,
+      "terminal": 953,
+      "route_choice": [
+        {
+          "actor_id": 2,
+          "attempt_id": "0b366e4171be6ae4f48d51e37dbd1a0c",
+          "event_id": "0b366e4171be6ae4f48d51e37dbd1a0c:1:23",
+          "payload": {
+            "covered": true
+          },
+          "playback_schema": 2,
+          "playback_tick": 290,
+          "position": "(432.0, 158.6668)",
+          "schema": 2,
+          "seq": 23,
+          "target_id": -1,
+          "tick": 57,
+          "timeline_tick": 288,
+          "type": "route_choice",
+          "wave_id": 1
+        }
+      ]
+    },
+    {
+      "case": "pump_highlight_locked_failed",
+      "phase": 2,
+      "door_locked": true,
+      "terminal": 1489,
+      "route_choice": [
+        {
+          "actor_id": 2,
+          "attempt_id": "395f3ba68b18dde14ab60cbe7bf2f6ae",
+          "event_id": "395f3ba68b18dde14ab60cbe7bf2f6ae:1:23",
+          "payload": {
+            "covered": false
+          },
+          "playback_schema": 2,
+          "playback_tick": 290,
+          "position": "(432.0, 158.6668)",
+          "schema": 2,
+          "seq": 23,
+          "target_id": -1,
+          "tick": 57,
+          "timeline_tick": 288,
+          "type": "route_choice",
+          "wave_id": 1
+        }
+      ]
+    }
+  ],
+  "reference_terminals_equal_negative_and_formal_H_and_R": true,
+  "actual030_record_sha256": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+  "actual030_readonly_scope": "Formatter only, no replay binding/playback/render. Original native record bytes remain unchanged.",
+  "development_H": {
+    "source_sha": "7a3eac6353e863dfe8d216cebef190d63f39d716",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-highlight-headless-godot",
+      "result_highlight_test.gd",
+      "--headless"
+    ],
+    "env": {
+      "AMBUSH_TEST_SOURCE_SHA": "7a3eac6353e863dfe8d216cebef190d63f39d716",
+      "AMBUSH_NATIVE_RECORD": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/native-player-pump-record.bin"
+    },
+    "run_id": "6ba6c234888a450bb0100a8a2ec4d087",
+    "checks": 34,
+    "failures": 0,
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0,
+    "guard_passed": true,
+    "scope": "Bounded reference domain SCOUT door command, grants/cover snaps, direct tick and vacuum fixtures reach original terminal UI; not normal input, not native journey, not closed-route performance/art QA. Authentic030 source only read by formatter. No replay mutation."
+  },
+  "development_R": {
+    "source_sha": "7a3eac6353e863dfe8d216cebef190d63f39d716",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-highlight-7a3-godot",
+      "result_highlight_test.gd",
+      "--render"
+    ],
+    "env": {
+      "AMBUSH_NATIVE_RECORD": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/native-player-pump-record.bin"
+    },
+    "run_id": "e68cbe545f754fd18400a0edabb1fa89",
+    "checks": 37,
+    "failures": 0,
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0,
+    "guard_passed": true,
+    "classification": "Development fixed7a3 rendered copy passed 37/0,3 PNG hash/view3. Failed dossier only checked by API/data. Add actual native dossier opening/capture for final source; do not aggregate counts."
+  },
+  "ownership": {
+    "production_changes": [
+      "scripts/main.gd:_fill_result_stats",
+      "scripts/replay/payoff.gd:highlight_result_line"
+    ],
+    "rules_changed": false,
+    "asset_generators_run": false,
+    "asset_source": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+    "asset_delivery": "ebedb829e3263abbeb6dd266905f24a3869fa281"
+  },
+  "xorg": {
+    "pid": 85409,
+    "display": ":112",
+    "actual_exit": 0,
+    "raw_log_sha256": "e474859de5bb550a9df531089c7bb4c01be7200edc10e1737610767ad9fc14ef",
+    "raw_stdout_sha256": "57cd43f69f7677e9b8df86b707f742cd1440f3966327f16fba087738ba7e0d27"
+  },
+  "next": "Actual030 railcut progress for normal native railcut2 waves; depot2/radio3 remain. Pack exhaustion only counts if truly observed; staged native rifle-pack/no-auto-grenade/scout-loot strategy pending. Full3DFX/A3/ears/APK/device remain pending."
+}

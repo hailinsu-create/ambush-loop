@@ -37,3 +37,5 @@
 完整3D FX、A3云预算/优化、艺术、耳听0/45 cue与0/6声景、同候选最终fullsmoke/可追溯APK待；llvmpipe/Dummy不代设备FPS/耳听，全计划后设备顺序保持。网页GPT PLAN/REVIEW unavailable。本轮自己的Godot均实际退出，仅精确匹配Xorg112/PID84196/原日志路径关闭、actual exit0；原Xorg日志lossless gzip/配置/退出收据在上述清单。无现存环境阻碍。
 
 证据写入Git后的全diff --check首次实际2：原Xorg stdout版本行自带尾随空白；改为无损gzip保留原stdout SHA256，不裁剪原字节。随后全diff检查以实际退出收据确认，测试源/工程树未变，无额外native运行。
+
+后续父端要求的固定高光文案已在生产7a3修为pump中性实际结局，fixed b892作者H34/R41均actual exit0/ERROR0；开门/锁门/失败reference及真实030纯formatter范围见[pump高光专项](AMBUSH_PR15_PUMP_HIGHLIGHT_20261004.md)。未重写本轮030正常证据或将reference闭门算正常输入路线通过，独立QA待。

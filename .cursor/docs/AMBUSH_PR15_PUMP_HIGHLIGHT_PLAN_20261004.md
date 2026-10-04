@@ -9,3 +9,5 @@
 主集成单写main/presenter/ViewState/replay/HUD/loader/共享测试；R5源29749157/交付ebedb829资产接口不变，制作源/GLB/atlas/Blender/生产manifest不改不重跑，WIP不全并。普通push Draft PR15，不merge/生产/height/G。小片后接自然railcut2波，再depot2/radio3；真正耗尽自动ammo pack未触发仍不计通过。FX/A3/耳听/最终APK/设备全计划后待验。可并行固定本片只读结果文案QA，不写主集成文件；当前无需新资产包。
 
 实际开发：60af负向34/14、exit1/ERROR0；7a3生产最小片后H34/0、实际窗口37/0均exit0/ERROR0，三图核/看3。追加test-only原生打开FAILED卷宗与第四图，避免将隐藏卷宗字段当可见画面验收；须按新固定源再验H/R，旧计数单列不相加。
+
+正式完成：fixed b892 H34/0、R41/0均actual exit0/ERROR0，4图核/看4，原生FAILED卷宗打开/state保持；FAILED中性内容核验但该行尚未滚入实际截图。生产7a3仅两处pump中性结局，47证据已固定，独立QA待；三个域的907/953/1489与原记录hash保持，详情按正式报告。随后接030实际自然railcut存档，不用reference进度。
