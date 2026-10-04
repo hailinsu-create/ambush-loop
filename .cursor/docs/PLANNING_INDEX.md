@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [A2保存移动尘cue计划](AMBUSH_PR15_MOVEMENT_DUST_PLAN_20261004.md) | 待执行：新独立movement_fx1/原保存移动姿态/严格typed raw fields/绑定clock；有限24槽省电6/纯确定性cue，非原落脚事件或持久尾迹。先原SCOUT真实移动与缺接口负向，再H/R/pause/seek/source/旧raw/实际Window；生产与性能尚未验，R5制作不改。 |
 | [A2保存爆炸与有界烟池](AMBUSH_PR15_TOOL_FX_POOL_20261004.md) | 生产a9/像素测试f2四blob一致，原源/HP/库存/统计不改；负环254/18、mine3/1→a9 H255/3与R268各0 actual0 E0/S0，13图全看；f2 Window75/0、30图全hash/看，五yaw blast/smoke off/on/off十off均0。三次探针134/134/139无套件和早期S1保全；明确开放摆位/age/API非normal13/FINAL/A3，43原PNG有界证据。自有engine结束、Xorg120实际0关闭。父端b563独立205/305、53独立144/160各0限定关闭，单列不相加。下一dust→A3→FINAL/fullsmoke/新13波/全1×2×→APK；R5制作不动。 |
 | [A2实际确认爆炸源](AMBUSH_PR15_TOOL_FX_SOURCE_20261004.md) / [reader烟池待执行](AMBUSH_PR15_TOOL_FX_FRAME_POOL_PLAN_20261004.md) | 生产d75真实grenade/mine source、稳定tool/effect/created-wave-confirmation-wave、actual HP与原统计；同blob640 H46/参考5607/冻结66、ac boundary263各0actual0 E0/S0。原负2a21/4、5fa S1无效249、640坏矩阵无正control保全，ac合法one-frame对照修正。七旧raw中性不升级，source-only无blast render；随后严格reader/有限烟尘/A3/FINAL/APK。父端9f actor3/0+副作用10/0限定闭合；后续a9 reader/render与父端b563/53独立限定结果见新A2池报告，原本片仍source-only。R5制作不动。 |
 | [父端FX/source安全checkpoint](AMBUSH_PR15_FX_SOURCE_CHECKPOINT_20261004.md) | 父端要求先交：actorfix9f/20f新H3/45/5607各0actual0；池b563/b9 H224/R236/Window47各0、28图全hash/view；flight53/fec H119/R128各0、9图全hash/view，各scope独立。新A2 planned-source test2a负H21/4actual1 E0/S0已封，四缺接口非原HP/统计产品回归，生产module尚未实现；全部本作者engine/Xorg已结束，无待poll，不重起负轮。可并行固定source只读QA；后A2/A3/FINAL/APK，制作/R5边界不变。 |
