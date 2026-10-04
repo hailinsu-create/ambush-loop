@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [FX-A1a成功源接口计划](AMBUSH_PR15_SHOT_FX_DESCRIPTOR_PLAN_20261004.md) | 原真实成功callback→末弹换枪前原pose/gun→原伤害调用返回后actual HP差，独立payload.fx schema1不改原事件身份/时钟/玩法。先原reference六关负向→同步源记录固定H，source-only不代3D效果；随后只读R5枪口/finite池/时钟回归，资产接口保持。INITIAL六raw消费仍冻结d9cPCK独立运行。 |
 | [INITIAL独立QA checkpoint](AMBUSH_PR15_INITIAL_QA_CHECKPOINT_20261004.md) | 固定a05/证据4d0f正常1193/0、六新raw/自然cfg及metadata独立；教学fcf/a3df、escape877/4b82、smoke8906/2d4b完整SHA/范围/保留54与62。有界testfixactual0不代fullsmoke；原a05新yard3D真实arrow失败与d9c最小修H26/0、真实R在跑。QA可先验INITIAL，不等FINAL FX；旧closed scope不重开。 |
 | [原生REPLAY箭头报告](AMBUSH_PR15_REPLAY_ARROW_20261004.md) / [计划](AMBUSH_PR15_REPLAY_ARROW_PLAN_20261004.md) | fixed d9c：synthetic H26/4→26/0actual1→0；同9aceae外部harness/fixed PCK真正XTest R4140/0actual0 E0/S0，physical0 Right2971→2977/Left返回2971；8图hash/看1。原a05 R4404/1与diag4140/2actual1保留；fixed短轮明确没whole，六新原件whole另轮运行。producer_a05与consumer_d9c分列，不补a05或FINAL绿。 |
 | [旧smoke fixture修正报告](AMBUSH_PR15_SMOKE_FIXTURES_20261004.md) | fixed8906有界原launch-modal/radio-SCOUT合同actual0/E0/S0；原a05完整54、9f等一帧54、b62完整到radio-SCOUT62各E1/S0保留。只修测试顺序/tween等待与SCOUT预览预期，不改生产锁/timeline，不称full smoke green；六新3D/FXA3/最终完整smoke仍待。 |
