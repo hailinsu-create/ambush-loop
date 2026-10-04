@@ -19,3 +19,5 @@ FX/A3待办核对：原FX生命周期30/36只检清实时2D色罩/旧Tween，非
 新native旅程driver先限yard，原数字键选人、点击真实匣并等真实引擎走路/开匣、原cover点击与15°朝向、真实警报/暂停/清波/撤离/下一关。策略引用原reference站位但不调用reference授枪或vacuum；全部行为记录实际状态，不能硬套其terminal/event计数。确认yard实际通过后再续其余五关；失败先复现修第一个实际阻碍，当前不能称六关13波已过。
 
 当前正常旅程保全并暂缓：528测试包自然取得kar98k/MG42/kar98k_zf及手雷，但75/1、exit1、engineERROR8；测试lambda直接捕获已释放stash的错误单列，不当生产缺陷证据。原拾取器命中cover5而站在相邻1格的队员未部署，疑似old32px body选择优先于明确3D cover；需修测试后重新独立确认。117只有typed weakref parser失败、exit1/SCRIPT1/ERROR1，旧528 report没有复用。包导入/导出0并不证明其未使用测试脚本可解析。WeakRef已改显式类型。父端新报“历史事件文本读取live log”P2，按要求优先复现修复；此前title两P2父端固定4ba独立限定关闭，独立计数不与作者相加。正常六关13波尚未完成，未新增设备/耳听/FX/A3通过。
+
+2026-10-04正常旅程检查点：fixed361干净77/1、exit1/ERROR0确认cover5明确picker命中仍被旧32px body选择覆盖；124修仅3D显式cover路由。正式d7通过原新档title/教学/实际四匣搜刮/三cover/原ALERT两波450/225/SWEEP撤离/WON675/27/下一夜CTA/warehouse三教学页，135/0、exit0/ERROR0；专项H25/合成输入render38亦exit0/ERROR0。32 XTest、14 native Window图核hash/看6；完整scope见[cover报告](AMBUSH_PR15_COVER_INPUT_20261003.md)。124开发113/1是漏点原handoff CTA，非产品新P2；dev整轮不列正式。原文字P2父端fixed ddec独立限定关闭，计数另列不重跑。后续继续余五关11波、SWEEP实际搜刮/补給、depot/radio工具和走近埋雷；当前无环境阻塞，不称六关13波/FX/A3/艺术/耳听/设备/APK完成。

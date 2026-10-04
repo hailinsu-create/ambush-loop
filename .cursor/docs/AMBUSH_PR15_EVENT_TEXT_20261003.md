@@ -21,3 +21,5 @@
 资产接口固定R5源 `29749157c5db064bfea626c3ed9d75d9a1791ece` / 交付 `ebedb829e3263abbeb6dd266905f24a3869fa281`，20骨/socket/3LOD/52语义保持；所有ArtSource/Blender/GLB/atlas/制作manifest不编辑不重跑。主集成main/presenter/ViewState/replay/HUD/loader/共享测试仍单写，独立资产工作者拥有制作源与输出，不全并WIP。可并行包为固定ddec来源文字独立read-only QA；本轮无需新资产生产包。
 
 证据文档完整diff --check实际exit2，仅原始Xorg日志三处尾空白；原字节保留。排除该单一raw日志后实际exit0，详见validation.json；所有源码切片check0。四正式验证全部结束后无该worktree Godot残留，自有Xorg112实际退出0。
+
+父端后续独立fixed ddec86实际复验已限定关闭历史文字P2-R1，无新P1/P2。原H6/0、实际3D R8/0；独立扩展H7552/0、R7560/0，每轮128自然callback，全部actual exit0/ERROR0。无fire/同seq碰撞live换源、1×/2×、正反seek/list/status/fallback/真实旧schema1与生产WON退出恢复live文案均通过。来源为父端线程01a0efe8-604e-7249-8093-d7921d952020回传，未在本工作区重跑/读取独立artifact；与作者373/387、64callback分开。普通UI混源可达性仍UNPROVEN，正常全玩家/设备/耳听未验，已关title/auto不重开。
