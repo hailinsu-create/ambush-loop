@@ -14261,6 +14261,9 @@ func _assert_launch_bar() -> bool:
 		quit(54)
 		return false
 	inst._on_back()
+	# Wait for the original 0.15s dismissal tween, not one headless frame.
+	if inst._modal_tween != null and inst._modal_tween.is_running():
+		await inst._modal_tween.finished
 	await process_frame
 	if inst.briefing_visible() or inst._top_modal() != null:
 		push_error("SMOKE_BACK_DID_NOT_CLOSE_BRIEF_MODAL")
