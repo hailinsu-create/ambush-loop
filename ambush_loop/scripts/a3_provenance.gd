@@ -78,7 +78,7 @@ static func _git_blob_sha1(path: String) -> String:
 	var file := FileAccess.open(path,FileAccess.READ)
 	var context := HashingContext.new()
 	context.start(HashingContext.HASH_SHA1)
-	context.update(("blob "+str(file.get_length())+"\u0000").to_utf8_buffer())
+	context.update(_nul_terminated("blob "+str(file.get_length())))
 	while file.get_position()<file.get_length():
 		context.update(file.get_buffer(mini(65536,file.get_length()-file.get_position())))
 	file.close()
@@ -108,16 +108,22 @@ static func _git_tree_sha1(tree: Dictionary) -> String:
 	for name: String in names:
 		if name.ends_with("/"):
 			var plain := name.trim_suffix("/")
-			body.append_array(("40000 "+plain+"\u0000").to_utf8_buffer())
+			body.append_array(_nul_terminated("40000 "+plain))
 			body.append_array(_git_tree_sha1(tree.directories[plain]).hex_decode())
 		else:
-			body.append_array((str(tree.files[name].mode)+" "+name+"\u0000").to_utf8_buffer())
+			body.append_array(_nul_terminated(str(tree.files[name].mode)+" "+name))
 			body.append_array(str(tree.files[name].blob).hex_decode())
 	var context := HashingContext.new()
 	context.start(HashingContext.HASH_SHA1)
-	context.update(("tree "+str(body.size())+"\u0000").to_utf8_buffer())
+	context.update(_nul_terminated("tree "+str(body.size())))
 	context.update(body)
 	return context.finish().hex_encode()
+
+
+static func _nul_terminated(text: String) -> PackedByteArray:
+	var bytes := text.to_utf8_buffer()
+	bytes.append(0) # Git tree/blob separator is a byte, not a NUL-containing Godot String.
+	return bytes
 
 
 static func _list_imported(path: String, result: PackedStringArray) -> void:
