@@ -259,7 +259,10 @@ func _deploy(plan: Array) -> bool:
 		var slot = main.cover_slots[plan[1][index]]
 		var before: Vector2 = main.selected.global_position
 		if slot.slot_id == 5: await _modal_capture(sample+"_cover5_before_deploy"+str(deploy_round))
-		if not await _world_click(slot.global_position,0.08,"cover_"+str(slot.slot_id),1,"covers"): return false
+		if main.selected.slot != slot:
+			if not await _world_click(slot.global_position,0.08,"cover_"+str(slot.slot_id),1,"covers"): return false
+		else:
+			rows.append({"action":"retain actual unmoved operator on original cover","operator":index,"slot":slot.slot_id,"pos":str(main.selected.global_position)})
 		var immediate_slot: int = main.selected.slot.slot_id if main.selected.slot else -1
 		await create_timer(0.8).timeout
 		rows.append({"action":"native cover outcome","operator":index,"target_slot":slot.slot_id,"selected_id":main.selected.op_id,"before":[before.x,before.y],"target":[slot.global_position.x,slot.global_position.y],"distance_before":before.distance_to(slot.global_position),"after":[main.selected.global_position.x,main.selected.global_position.y],"slot_after_settle":immediate_slot,"actual_slot":main.selected.slot.slot_id if main.selected.slot else -1,"additional_wait_s":0.8,"status":main.status_label.text})
@@ -275,7 +278,7 @@ func _deploy(plan: Array) -> bool:
 		for turn in 24:
 			var diff: float = wrapf(target-main.selected.facing_deg,-180.0,180.0)
 			if absf(diff) <= tolerance: break
-			await _key("d" if diff > 0.0 else "a")
+			await _turn_key("d" if diff > 0.0 else "a")
 			key_count += 1
 		var oriented: bool = absf(wrapf(target-main.selected.facing_deg,-180.0,180.0)) <= tolerance
 		rows.append({"action":"original native keyboard facing","operator":index,"initial_facing":initial_facing,"intended_facing":target,"actual_facing":main.selected.facing_deg,"original_quantum_deg":quantum,"keys":key_count,"tolerance_deg":tolerance,"nearest_reachable":oriented})
@@ -284,6 +287,15 @@ func _deploy(plan: Array) -> bool:
 			await _modal_capture(sample+"_facing_blocked_deploy"+str(deploy_round))
 			return false
 	return true
+
+func _turn_key(name: String) -> void:
+	# Turning has no modal fade. Keep real XTest and real event-processing frames.
+	var output := []
+	var before: float = main.selected.facing_deg
+	var status := OS.execute("python3", [ProjectSettings.globalize_path("res://scripts/native_x11_test_input.py"), "key", name], output, true)
+	_check(status == 0, "native turn key helper exit0 " + name + " " + str(output))
+	for frame in 2: await process_frame
+	input_rows.append({"id":sample,"key":name,"helper_exit":status,"wait":"two actual process frames; no modal fade","facing_before":before,"facing_after":main.selected.facing_deg})
 
 func _mission(plan: Array) -> bool:
 	var id: String = plan[0]

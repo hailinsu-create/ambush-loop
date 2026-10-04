@@ -21,3 +21,6 @@
 2026-10-04验收归档补记：本片2026-10-03立项并固定源码，三正式命令均已实际结束；[完整验证收据](evidence/20261003-pr15-cover-input/formal-d7e6fe1/validation.json)包含源码/命令/UUID/实际退出、输入与图hash及目检清单。交付后同步以实际PR15 HEAD核对为准。
 
 证据环境自有Godot均已退出，Xorg112实际exit0；原Xorg日志以lossless gzip保存，解压SHA与gzip SHA在收据中，可还原原始字节。65文件manifest全部核对。完整文档与源码diff --check0；未复跑原正式29/title/文字已关矩阵。
+
+
+2026-10-04 父端独立fixed d7回传已限定关闭原cover5 P2，无新P1/P2。独立新档原生142/0：自然32px相邻，实际(754,589)命中covers:5正确部署；yard两波WON675tick/27events→原CTA→warehouse初教学通过。独立矩阵H76/0、实际窗口86/0，三次actual exit0/ERROR0，合成触控与原生输入分列；16图核验看9，943 tracked文件与运行副本逐字节一致。父端回传与作者135/H25/R38分别记录，不相加，本工作区未重跑已关cover或自行读取独立artifact。余五关11波、SWEEP/设备/全FXA3仍不由此验收；SWEEP接续见20261004正常旅程计划。

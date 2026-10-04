@@ -7,7 +7,7 @@
 | 文档 | 定位与状态 |
 | --- | --- |
 | [正常接续旅程计划](AMBUSH_PR15_REMAINING_JOURNEY_PLAN_20261004.md) | 接续d7真实yard胜利存档，以原生title Continue推进其余五关11波；先warehouse SWEEP真实搜刮/补给与走近埋雷，有界记录失败并小片修复，待执行。资产/R与已关title/auto/text保持。 |
-| [正常旅程cover报告](AMBUSH_PR15_COVER_INPUT_20261003.md) / [计划](AMBUSH_PR15_COVER_INPUT_PLAN_20261003.md) | 361干净77/1、exit1/ERROR0证实明确cover被32px body选择覆盖；124修路由，d7正式H25/R输入38均exit0/ERROR0，原生yard→下一夜教学135/0/exit0/ERROR0，32 XTest/14图核hash/看6。124开发WON675/27但漏CTA整轮113/1不算正式；其余11波/SWEEP搜刮仍待。 |
+| [正常旅程cover报告](AMBUSH_PR15_COVER_INPUT_20261003.md) / [计划](AMBUSH_PR15_COVER_INPUT_PLAN_20261003.md) | 361干净77/1、exit1/ERROR0证实明确cover被32px body选择覆盖；124修路由，d7正式H25/R输入38均exit0/ERROR0，原生yard→下一夜教学135/0/exit0/ERROR0，32 XTest/14图核hash/看6。124开发WON675/27但漏CTA整轮113/1不算正式；父端fixed d7独立限定关闭cover5，无新P1/P2：native142/H76/实际窗口86三次exit0/ERROR0，16图核/看9；其余旅程及SWEEP另片。 |
 | [历史事件文字报告](AMBUSH_PR15_EVENT_TEXT_20261003.md) / [计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md) | 原受控换源H6/2/R8/2、exit1/ERROR0→生产fcf修复；fixed ddec正式H373/0、R387/0，均exit0/ERROR0、每轮64自然callback、14 native PNG核hash/看4，父端fixed ddec独立限定关闭P2-R1，无新P1/P2，7552/7560各128callback与原6/8全部exit0/ERROR0单列。普通UI换源可达性未证明，timeline67/装备66亦exit0/ERROR0，正常旅程保留暂停；同步以PR15实际HEAD核对为准。 |
 | [正常玩家旅程计划](AMBUSH_PR15_PLAYER_JOURNEY_PLAN_20261003.md) | 接续a5ba原完整v2：已有reference/vacuum六关不代正常输入；先真实fresh title入口确认200%首次教学是否阻断，再补正常搜刮/补给/13波。FX/A3/耳听仍待，资产制作与R规则保持。 |
 | [autoREPLAY2×报告](AMBUSH_PR15_AUTOREPLAY_20261003.md) / [计划](AMBUSH_PR15_AUTOREPLAY_PLAN_20261003.md) | fixed770作者正式7次实际exit0/ERROR0：H29/R168、timeline67、装备66、生命周期30/32、result553；33图hash/看9，R1283/34与真实schema1字节保持；3ba原配置push/远端HEAD已核对。共享Pause修复后fixed4ba相关H29/R167与生命周期30/32再次实际exit0/ERROR0，单列不相加。父端fixed4ba共享auto限定通过，新增文字P2已独立关闭；FX/A3后置。 |
