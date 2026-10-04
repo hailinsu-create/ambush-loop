@@ -13,6 +13,8 @@ const PLAYER_PLANS := [
 var journey_rows := []
 var progress_seed := {}
 var deploy_round := 0
+var last_fired := {}
+var ammo_repack_observations := []
 
 class NativeWorldTrace extends Node:
 	var suite: SceneTree
@@ -32,7 +34,7 @@ func _settle(frames: int = 3) -> void:
 
 func _write_journey() -> void:
 	var file := FileAccess.open("res://build/asset_review/pr15-runtime/first-visit-journey-report.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),"window":[root.size.x,root.size.y],"content_scale_factor":root.content_scale_factor,"checks":checks,"failures":failures,"rows":rows,"journey":journey_rows,"captures":captures,"native_inputs":input_rows,"progress_seed":progress_seed,"a0_preview_feature":OS.has_feature("a0_preview"),"scope":"Isolated original title/main flow; fresh start or byte-identical pinned actual player save and native Continue. Real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest."}, "  "))
+	file.store_string(JSON.stringify({"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),"window":[root.size.x,root.size.y],"content_scale_factor":root.content_scale_factor,"checks":checks,"failures":failures,"rows":rows,"journey":journey_rows,"captures":captures,"native_inputs":input_rows,"progress_seed":progress_seed,"ammo_repack_observations":ammo_repack_observations,"a0_preview_feature":OS.has_feature("a0_preview"),"scope":"Isolated original title/main flow; fresh start or byte-identical pinned actual player save and native Continue. Real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest."}, "  "))
 
 func _check(ok: bool, message: String) -> void:
 	checks += 1
@@ -55,11 +57,13 @@ func _run() -> void:
 	root.position = Vector2i.ZERO
 	var scope := OS.get_environment("AMBUSH_JOURNEY_SCOPE")
 	var resumed := OS.get_environment("AMBUSH_JOURNEY_START") == "resume"
-	var gameplay := scope in ["yard","all","warehouse","remaining"]
+	var level_order: Array = PLAYER_PLANS.map(func(plan: Array) -> String: return plan[0])
+	var gameplay := scope in level_order or scope in ["all","remaining"]
+	var entry_id := "yard"
 	root.size = Vector2i(1280, 720) if gameplay else Vector2i(1600, 720)
 	root.content_scale_factor = 1.0 if gameplay else 2.0
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://build/asset_review/pr15-runtime"))
-	sample = "player_warehouse_1280_100_desktop" if resumed else ("player_yard_1280_100_desktop" if gameplay else "first_visit_yard_1600_200_desktop")
+	sample = "player_resume_1280_100_desktop" if resumed else ("player_yard_1280_100_desktop" if gameplay else "first_visit_yard_1600_200_desktop")
 	await _title()
 	if resumed:
 		var receipt_path := OS.get_environment("AMBUSH_JOURNEY_SEED_RECEIPT")
@@ -69,9 +73,15 @@ func _run() -> void:
 			return
 		progress_seed = JSON.parse_string(FileAccess.get_file_as_string(receipt_path))
 		_check(progress_seed.run_id == OS.get_environment("AMBUSH_TEST_RUN_ID"), "seed belongs to this guarded run")
+		# Older real-save manifests omit next_level_id; read the pinned ConfigFile.
+		entry_id = str(progress_seed.origin.get("next_level_id", settings.progress_level_id()))
+		_check(entry_id in level_order, "actual player receipt pins a known next mission")
+		if entry_id not in level_order:
+			_save_journey()
+			return
 		for name in progress_seed.files:
 			_check(FileAccess.get_sha256("user://"+name) == progress_seed.files[name].sha256, "original player ConfigFile retained byte for byte " + name)
-		_check(settings.has_progress() and settings.progress_level_id() == "warehouse" and settings.has_seen_tutorial("warehouse"), "inherited actual yard win naturally exposes warehouse Continue")
+		_check(settings.has_progress() and settings.progress_level_id() == entry_id and settings.has_seen_tutorial(entry_id), "actual pinned player win/teaching naturally exposes Continue for " + entry_id)
 		await _click(main.continue_btn)
 	else:
 		_check(not settings.has_progress() and not settings.has_seen_tutorial("yard"), "fresh isolated player has no progress or completed tutorial")
@@ -82,7 +92,7 @@ func _run() -> void:
 		await _click(main._brief_go)
 	await _settle()
 	main = current_scene
-	_check(main.scene_file_path == "res://scenes/main.tscn" and main.level.level_id == ("warehouse" if resumed else "yard") and main.phase == main.Phase.SETUP, "ordinary original title entry reaches actual SCOUT")
+	_check(main.scene_file_path == "res://scenes/main.tscn" and main.level.level_id == entry_id and main.phase == main.Phase.SETUP, "ordinary original title entry reaches actual SCOUT " + entry_id)
 	_check(main.tutorial_overlay.is_open() == (not resumed), "original tutorial state matches actual player history")
 	_check(main.operators.all(func(op) -> bool: return op.weapon_id == "knife"), "first visit retains authored knife-only loadouts")
 	if not resumed and not await _tutorial():
@@ -100,9 +110,9 @@ func _run() -> void:
 		trace.presenter = view
 		root.add_child(trace)
 		for plan in PLAYER_PLANS:
-			if resumed and plan[0] == "yard": continue
+			if level_order.find(plan[0]) < level_order.find(entry_id): continue
 			if not await _mission(plan): break
-			if scope in ["yard","warehouse"]: break
+			if scope in level_order: break
 	_save_journey()
 
 func _set_tool(wanted: int) -> bool:
@@ -113,7 +123,19 @@ func _set_tool(wanted: int) -> bool:
 	return main.tool == wanted
 
 func _inventory() -> Array:
-	return main.operators.map(func(op) -> Dictionary: return {"id":op.op_id,"alive":op.alive,"pos":[op.global_position.x,op.global_position.y],"ammo":op.ammo,"pool":op.ammo_pool.duplicate(true),"pack":op.pack.slots.duplicate(true),"mines":op.mines,"ammo_pack_used":op.ammo_pack_used})
+	return main.operators.map(func(op) -> Dictionary: return {"id":op.op_id,"alive":op.alive,"hp":op.hp,"weapon":op.weapon_id,"pos":[op.global_position.x,op.global_position.y],"ammo":op.ammo,"start_ammo":op.start_ammo,"pool":op.ammo_pool.duplicate(true),"pack":op.pack.slots.duplicate(true),"mines":op.mines,"has_ammo_pack":op.has_ammo_pack,"ammo_pack_used":op.ammo_pack_used})
+
+func _observe_fired(op: Node2D, target: Vector2) -> void:
+	# Signal arrives after the real shot decrements ammo, before original refill.
+	last_fired[op.op_id] = {"level":main.level.level_id,"wave":main.raid.wave_index,"phase":main.phase,"tick":main.sim.tick,"weapon":op.weapon_id,"ammo":op.ammo,"has_ammo_pack":op.has_ammo_pack,"ammo_pack_used":op.ammo_pack_used,"target":[target.x,target.y]}
+
+func _observe_repacked(op: Node2D) -> void:
+	var shot: Dictionary = last_fired.get(op.op_id, {}).duplicate(true)
+	var actual_pack: bool = not shot.is_empty() and shot.ammo == 0 and shot.has_ammo_pack and not shot.ammo_pack_used and op.ammo_pack_used and op.weapon_id == shot.weapon and op.ammo == op.start_ammo
+	var repack_events: Array = main.battle_log.events.filter(func(event: Dictionary) -> bool: return event.type == "repack")
+	var observation := {"level":main.level.level_id,"wave":main.raid.wave_index,"operator":op.op_id,"phase":main.phase,"tick":main.sim.tick,"last_real_shot":shot,"after":{"weapon":op.weapon_id,"ammo":op.ammo,"start_ammo":op.start_ammo,"has_ammo_pack":op.has_ammo_pack,"ammo_pack_used":op.ammo_pack_used},"actual_exhaustion_pack_refill":actual_pack,"latest_original_repack_event":repack_events.back() if not repack_events.is_empty() else {}}
+	ammo_repack_observations.append(observation)
+	journey_rows.append({"level":main.level.level_id,"action":"observe original automatic ammo repack signal","observation":observation})
 
 func _place_mine(cell: Vector2i) -> bool:
 	await _key("1")
@@ -165,9 +187,11 @@ func _sweep(plan: Array, wave: int) -> bool:
 		_check(not loot_events.is_empty(), "actual nearby collection records original loot events")
 		journey_rows.append({"level":main.level.level_id,"wave":wave,"action":"native SWEEP drop collected","kind":kind,"amount":amount,"target":str(at),"before":before_pickup,"after":_inventory(),"loot_events":loot_events,"status":main.status_label.text})
 		_write_journey()
-	if main.level.level_id == "warehouse" and wave == 0:
+	if main.level.level_id in ["warehouse","pump"] and wave == 0:
+		var before_resupply := _inventory()
 		if not await _collect("ammo",1): return false
-		journey_rows.append({"level":"warehouse","wave":wave,"action":"SWEEP original authored ammo resupply","inventory":_inventory()})
+		journey_rows.append({"level":main.level.level_id,"wave":wave,"action":"SWEEP original authored ammo resupply","before":before_resupply,"inventory":_inventory()})
+	if main.level.level_id == "warehouse" and wave == 0:
 		if not await _collect("mine",0): return false
 		if not await _place_mine(Vector2i(24,5)): return false
 	await _modal_capture(sample+"_wave"+str(wave)+"_sweep_looted")
@@ -302,6 +326,10 @@ func _mission(plan: Array) -> bool:
 	sample = "player_"+id+"_1280_100_desktop"
 	_check(main.level.level_id == id and main.phase == main.Phase.SETUP,"original progression reaches next SCOUT "+id)
 	print("PLAYER_JOURNEY_MISSION ",id)
+	last_fired.clear()
+	for op in main.operators:
+		if not op.fired_shot.is_connected(_observe_fired): op.fired_shot.connect(_observe_fired)
+		if not op.ammo_repacked.is_connected(_observe_repacked): op.ammo_repacked.connect(_observe_repacked)
 	for index in 3:
 		if not await _collect(["rifle","mg","scout"][index],index): return false
 		_check(Weapons.family_of(main.selected.weapon_id)==["rifle","mg","scout"][index],"ordinary firearm pickup equips authored family")
@@ -319,6 +347,7 @@ func _mission(plan: Array) -> bool:
 		if not await _place_mine(Vector2i(7,11)): return false
 		if not await _deploy(plan): return false
 	await _modal_capture(sample+"_armed_scout")
+	journey_rows.append({"level":id,"action":"original SCOUT armed inventory","strategy_slots":plan[1],"strategy_facing":plan[2],"inventory":_inventory(),"strategy_provenance":"source-derived original authored stash/cover/routes; real native inputs; not stranger playtest"})
 	for wave in main.level.wave_count():
 		await _click(main.alarm_button)
 		_check(main.phase == main.Phase.WATCHING and main.raid.wave_index == wave,"ordinary alarm/next-wave enters authored ALERT")
@@ -337,7 +366,7 @@ func _mission(plan: Array) -> bool:
 	await _click(main.alarm_button)
 	_check(main.phase==main.Phase.WON and main.raid.waves_cleared==main.level.wave_count(),"ordinary final SWEEP extract wins "+id)
 	await _modal_capture(sample+"_won")
-	journey_rows.append({"level":id,"action":"original WON/progress","waves":main.raid.waves_cleared,"terminal":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"progress":settings.progress_level_id()})
+	journey_rows.append({"level":id,"action":"original WON/progress","waves":main.raid.waves_cleared,"terminal":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"progress":settings.progress_level_id(),"inventory":_inventory()})
 	var source = main.battle_log
 	var stream_path := "res://build/asset_review/pr15-runtime/native-player-"+id+"-record.bin"
 	var stream_file := FileAccess.open(stream_path,FileAccess.WRITE)

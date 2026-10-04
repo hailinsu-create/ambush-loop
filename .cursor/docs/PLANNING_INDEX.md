@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [pump有界接续计划](AMBUSH_PR15_PUMP_JOURNEY_PLAN_20261004.md) / [warehouse标签勘误](AMBUSH_PR15_WAREHOUSE_RECEIPT_ERRATA_20261004.md) | 实际b27自然pump存档接原Continue；通用resume与只读耗尽补弹观察已实现，待固定源码实际原生两波/SWEEP/后续教学。warehouse原两收据pump3pages标签追加勘误为实际两页，原字节保留。剩四关9波、自动弹药包真正耗尽触发及FX/A3/耳听/APK/设备仍待。 |
 | [正常warehouse旅程报告](AMBUSH_PR15_WAREHOUSE_JOURNEY_20261004.md) / [接续计划](AMBUSH_PR15_REMAINING_JOURNEY_PLAN_20261004.md) | 固定b27正式native270/0、exit0/ERROR0，124 XTest/14图核/看8，实际两波339/863/global1203、62event，SWEEP五loot/原ammo pool20→28/携带mine次波触发→原CTA→pump两教学页；只读metadata4574/0另列，未验新录制3D播放。三开发失败分别45/1、155/2、250/1均exit1/ERROR0保全，test-only修操作/判据，生产/资产/R无diff。其余四关9波待以真实pump存档接续，FX/A3/耳听/APK/设备仍待。 |
 | [正常旅程cover报告](AMBUSH_PR15_COVER_INPUT_20261003.md) / [计划](AMBUSH_PR15_COVER_INPUT_PLAN_20261003.md) | 361干净77/1、exit1/ERROR0证实明确cover被32px body选择覆盖；124修路由，d7正式H25/R输入38均exit0/ERROR0，原生yard→下一夜教学135/0/exit0/ERROR0，32 XTest/14图核hash/看6。124开发WON675/27但漏CTA整轮113/1不算正式；父端fixed d7独立限定关闭cover5，无新P1/P2：native142/H76/实际窗口86三次exit0/ERROR0，16图核/看9；其余旅程及SWEEP另片。 |
 | [历史事件文字报告](AMBUSH_PR15_EVENT_TEXT_20261003.md) / [计划](AMBUSH_PR15_EVENT_TEXT_PLAN_20261003.md) | 原受控换源H6/2/R8/2、exit1/ERROR0→生产fcf修复；fixed ddec正式H373/0、R387/0，均exit0/ERROR0、每轮64自然callback、14 native PNG核hash/看4，父端fixed ddec独立限定关闭P2-R1，无新P1/P2，7552/7560各128callback与原6/8全部exit0/ERROR0单列。普通UI换源可达性未证明，timeline67/装备66亦exit0/ERROR0，正常旅程保留暂停；同步以PR15实际HEAD核对为准。 |
