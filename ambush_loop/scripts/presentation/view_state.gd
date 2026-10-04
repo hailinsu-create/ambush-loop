@@ -117,7 +117,8 @@ static func _actor_defaults(item: Dictionary) -> void:
 	item["facing"] = float(item.get("facing", 90.0))
 	item["weapon"] = str(item.get("weapon", ""))
 	item["role"] = int(item.get("role", 0))
-	item["moving"] = bool(item.get("moving", false))
+	var raw_moving: Variant = item.get("moving",false)
+	item["moving"] = raw_moving if typeof(raw_moving) == TYPE_BOOL else false
 	item["stance"] = int(item.get("stance", 0))
 	item["action"] = str(item.get("action", "idle" if bool(item.get("alive", true)) else "death"))
 	item["visual_model"] = str(item.get("visual_model", ""))
