@@ -54,6 +54,12 @@ func _domain_case(locked: bool, wins: bool) -> void:
 		await process_frame
 		await create_timer(0.5).timeout
 		await _modal_capture(sample)
+		if not wins:
+			var before: Dictionary = main._snapshot_data().duplicate(true)
+			await _native_click(main.dossier_button)
+			_check(main._dossier_open, "native original dossier button opens failure copy")
+			_check(main._snapshot_data() == before, "native dossier opening leaves failed battle state unchanged")
+			await _modal_capture(sample + "_dossier")
 
 func _run() -> void:
 	root.size = Vector2i(1280,720)
