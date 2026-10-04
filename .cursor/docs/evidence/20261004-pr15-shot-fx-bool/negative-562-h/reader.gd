@@ -84,8 +84,6 @@ static func _valid_pose(raw: Variant, profile: Dictionary) -> bool:
 		return false
 	if pose.has("visual_facing") and not _number(pose.visual_facing):
 		return false
-	if pose.has("preserve_upper_world_basis") and typeof(pose.preserve_upper_world_basis) != TYPE_BOOL:
-		return false
 	if pose.has("upper_yaw_rad") and not _number(pose.upper_yaw_rad):
 		return false
 	if pose.has("upper_action"):

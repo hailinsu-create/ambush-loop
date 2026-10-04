@@ -11,3 +11,5 @@ tracer到descriptor保存二维target位置映射的展示躯干高度；impact�
 共享隔离测试明确实际后端fixtures（授枪/位置/HP/直接API）与consumer/history复制：末弹pack/pistol仍取旧枪、敌人return实际伤害、false/no-context拒绝、ALERT暂停、原REPLAY1x/2x/pause/负向/重复seek、跨wave/source（含同身份不同source/descriptor）、缺unknown/原schema1真实原bytes/old a05新原件缺fx中性、reset/leave/abort/focus、标准/省电满池/稳态资源、三LOD muzzle。保存source/live/sim/ammo/HP/原bytes不变，真实3D原Window PNG/数值采样，覆盖shot实际帧而非只样本。新FX六关source/reference与最终native新13波/newrecord另阶段；单包结果不能拼FINAL。
 
 P2独立QA可先只读f0ed44311775fa87ee63ebb911c7b11e12e65ab1；APK工具链只读包已交6.1-sol独立盘点，报告仅/tmp，未装SDK/导出/设备测试。A1b完成后A2工具/爆炸/烟/脚尘→A3实际指标/优化→FINAL同source全门/fullsmoke/正常13波/新六record→可追溯APK。网页GPT PLAN/REVIEW unavailable，Draft不merge/发布/height/G，设备耳听按原用户顺序后置。
+
+可选pose布尔字段接续：固定56207c5保留实际负向H100/7、actual1、E0/S0；已知FX1/R5 pose缺字段默认true及合法true/false原20骨骼采样通过。原reader接受字符串、整数、null、字典、数组共7错误类型。最小修复只在ShotFxFrame._valid_pose有字段时要求TYPE_BOOL，不改ActorVisual、原事件、旧schema或缺字段默认值；固定修复源码后同命令正式复验。c9c开发静态bool(String)解析失败actual1/E1/S1亦保留，不称生产复现。资产所有权不变。
