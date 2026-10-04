@@ -46,3 +46,9 @@ bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/
 3. INITIAL QA可并行独立只读；静态教学/escape与六新原件各固定source，不能拼FINAL FX。父端已closed cdb/392/旧railcut等不重开。old schema1真实yard raw兼容、最终完整smoke、FINAL正常旅程/FX-A3/APK仍未验。
 
 资产所有权/接口：R5source29749157c5db064bfea626c3ed9d75d9a1791ece、交付ebedb829e3263abbeb6dd266905f24a3869fa281、20骨/socket/3LOD/52语义保持；ArtSource/v2/build_yard_kit.py/共享atlas/角色GLB/Blender/生产manifest不编辑或重跑，未全并WIPf7c30。主集成仍唯一main/input/HUD/presenter/ViewState/replay/runtime-loader/shared test写者，未自行派astra。没有权限/外部阻塞；Android工具链仅只读审查，未安装/导出/签名/APK、未改个人配置/凭据。耳听与设备按全部计划后置。PR15 Open Draft、unmerged；普通push授权，不merge/生产/height/G。网页GPT PLAN/REVIEW unavailable。
+
+## 交接前最后实际更新
+
+2026-10-04 08:52:22 UTC：原source负例session39946/PID100567已经自然结束，**4783/103 actualexit1 E0/S0**。全部103 FAIL为尚未实现payload.fx，其他原reference断言没有失败；6参考关已完成，非正常native/FX画面。完整log/exit/report/fixture/命令/sha已封[evidence](evidence/20261004-pr15-shot-fx-source/file-manifest.json)，不再poll已结束session、不重跑负例。
+
+六新原件consumer_d9c长轮session46384/PID100120仍在运行；elapsed808s，实际日志阶段yard,warehouse,pump，最新为pump。最终exit仍不存在、不能称六记录整矩阵通过。自有:116仍为PID98510。此前08:49:16进程snapshot是历史实测快照，以上自然结束/新阶段为最新事实；保全长轮、继续直接接管。
