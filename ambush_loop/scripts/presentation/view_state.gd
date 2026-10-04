@@ -28,6 +28,10 @@ static func capture(host: Node) -> Dictionary:
 	var raw_tool_schema: Variant = data.get("tool_fx_schema")
 	var raw_tools: Variant = data.get("tool_fx", [])
 	var tool_supported: bool = typeof(raw_tool_schema) == TYPE_INT and raw_tool_schema == 1 and typeof(raw_tools) == TYPE_ARRAY and fx_playback_schema == 2 and not unsupported and (int(snap.get("schema", 1)) if historical else BattleLog.SCHEMA_VERSION) == BattleLog.SCHEMA_VERSION
+	# Validate the original saved tool envelope before legacy/default casts.
+	tool_supported = tool_supported and typeof(data.get("visual_schema")) == TYPE_INT and data.visual_schema == VisualSnapshot.FORMAT_VERSION and typeof(data.get("phase")) == TYPE_INT and data.phase in [0,1,2,3,5] and typeof(data.get("wave_count")) == TYPE_INT and data.wave_count > 0 and typeof(data.get("level_id")) == TYPE_STRING
+	if historical:
+		tool_supported = tool_supported and typeof(snap.get("schema")) == TYPE_INT and snap.schema == BattleLog.SCHEMA_VERSION and typeof(snap.get("playback_schema")) == TYPE_INT and snap.playback_schema == 2 and typeof(snap.get("wave_id")) == TYPE_INT and snap.wave_id >= 0 and snap.wave_id < data.wave_count and typeof(snap.get("attempt_id")) == TYPE_STRING and source != null and snap.attempt_id == source.attempt_id and typeof(snap.get("frame_seq")) == TYPE_INT and snap.frame_seq >= 0
 	var raw_movement_schema: Variant = data.get("movement_fx_schema")
 	var raw_movement_clock: Variant = data.get("pose_clock_s")
 	var movement_supported: bool = typeof(raw_movement_schema) == TYPE_INT and raw_movement_schema == 1 and typeof(data.get("visual_schema")) == TYPE_INT and data.visual_schema == VisualSnapshot.FORMAT_VERSION and typeof(data.get("animation_schema")) == TYPE_INT and data.animation_schema == ActorPose.FORMAT and data.get("actor_asset_revision") == ActorPose.ASSET_REVISION and fx_playback_schema == 2 and not unsupported and typeof(raw_movement_clock) in [TYPE_INT,TYPE_FLOAT] and is_finite(float(raw_movement_clock)) and float(raw_movement_clock) >= 0.0
