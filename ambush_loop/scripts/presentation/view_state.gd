@@ -22,6 +22,9 @@ static func capture(host: Node) -> Dictionary:
 	var domain_tick: int = BattleLog.record_tick(snap) + (int(round(snapshot_delta * 60.0)) if simulation_clock else 0)
 	var raw_event_clock: Variant = data.get("event_pose_clock_s")
 	var event_clock_valid: bool = int(data.get("event_pose_schema", 0)) == 1 and (raw_event_clock is int or raw_event_clock is float) and is_finite(float(raw_event_clock)) and float(raw_event_clock) >= 0.0
+	var source: BattleLog = host.replay.log if historical else host.battle_log
+	var fx_playback_schema: int = int(snap.get("playback_schema",0)) if continuous else (source.playback_schema if not historical and source != null else 0)
+	var fx_supported: bool = fx_playback_schema == 2 and ActorPose.supported(data) and str(data.get("actor_asset_revision","")) == ActorPose.ASSET_REVISION and int(data.get("animation_schema",0)) == ActorPose.FORMAT
 	var frame := {
 		"run_id": -1 if historical else host.run_id,
 		"tick": (domain_tick if continuous else host.replay.scrub_tick) if historical else host.battle_log.timeline_tick(host.sim.tick),
@@ -59,6 +62,10 @@ static func capture(host: Node) -> Dictionary:
 		"door_locked": bool(data.get("door_locked", false)), "replay": historical,
 		"has_door": bool(data.get("has_door", false)), "door_pos": data.get("door_pos", Vector2.ZERO),
 		"events": host.replay.events_up_to(host.replay.scrub_tick).duplicate(true) if historical else host.battle_log.events.duplicate(true),
+		"shot_fx_schema": 1 if fx_supported else 0,
+		"shot_fx_playback_schema": fx_playback_schema,
+		# A cache invalidation token only; never replaces saved factual identity.
+		"shot_fx_source_token": source.get_instance_id() if source != null else 0,
 	}
 	for group in GROUPS:
 		frame[group] = data.get(group, []).duplicate(true)
