@@ -11,3 +11,5 @@
 实际开发轮次：b467原生45/1、exit1、SCRIPT/ERROR0，掩体1投影被原铁砧身体遮挡，picker正确op:2，driver改用原镜头UI露出cover（区别于已关yard显式cover误路由）。bfc155/2、exit1、SCRIPT/ERROR0，原生第一波339tick/18event、两堆4/32ammo通过一次走近领取、原弹药匣MG pool20→28。两个测试操作/判据错误：原MG rotate_by上限8°，180→0的量化值落在4°，不能按uniform15要求精确0；埋雷浮点预览ground，实际整数XTest(697,527)落在自己的body射线边界，正确op:1选择重置工具。修driver按原8/15°最近可达朝向、以实际整数像素及1px余量探测后原镜头按钮露出空地；不改生产旋转/工具/拾取/R。两轮证据分别保全，不算正式整轮通过。
 
 父端独立fixed d7复验已限定关闭cover5，无新P1/P2：新档原生142/0、yard WON675tick/27events→原CTA→warehouse教学；独立矩阵H76/0、实际窗口86/0，三次exit0/ERROR0，16图核hash/看9，943tracked文件与副本逐字节一致。合成触控与原生分列，未验余11波/SWEEP/设备/FXA3保持，作者未重跑已关cover。
+
+有界warehouse已完成：b27正式270/0、actual exit0/SCRIPT0/ERROR0，实际两波339/863/global1203、62事件，SWEEP原loot五条/补给/MG量化朝向/携带雷次波触发、原extract/Continue/CTA/pump两教学页。14图全部hash/看8（不是此前预估15图/3教学页）；record元数据4574/0独立退出0，不代3D回放显示验收。e37整轮250/1自站cover误操作保全；b27只改driver保留未移动pad/两真实帧转向等待。详细源/命令/边界以20261004warehouse报告为准。下一段真实pump存档扩展通用resume，剩余四关9波；主集成及资产所有权保持。
