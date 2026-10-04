@@ -1,0 +1,46 @@
+{
+  "source_sha": "ebe38a1651e46bd239c8c37ba761d9a73897f579",
+  "checks": 141,
+  "failures": 80,
+  "actual_exit": 1,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "record": {
+    "bytes": 7737780,
+    "sha256": "4191f346b34444dc50909035a3e9005c60c86c4a9b6d2cc913d262a788cd984e"
+  },
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "teaching_radio_first_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_first_scout.png",
+      "sha256": "be3a24bb1c8ea54c46e6232b7eb20addb469572bcb2cd742f7ed1e0401e6d472"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "teaching_radio_actual_last_escape",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_actual_last_escape.png",
+      "sha256": "d975d0b366f007027298dc3620c2a4ce66d2b1b240360cbef7d8d641414f7437"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "teaching_radio_retry_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_retry_scout.png",
+      "sha256": "f4b0d1a45f1cb7af0919c24a232085d6e2c861fb0e6b641c64199179b8c744bb"
+    }
+  ],
+  "guard": true,
+  "scope": "Static teaching preview/legend/map tag/advice/background only. Matrix assigns wave/fail flags; actual radio reference grants/snaps/directticks/vacuum/legal SWEEP clear ->late escape/retry. Actual leak timing is audit only, unresolved here. Not26 battles/normal/full recording3D/FX/A3/audio/device acceptance."
+}

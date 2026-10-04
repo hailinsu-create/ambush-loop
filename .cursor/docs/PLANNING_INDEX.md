@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [教学语境报告](AMBUSH_PR15_TEACHING_CONTEXT_20261004.md) / [真实逃逸Intel下一片](AMBUSH_PR15_ESCAPE_INTEL_PLAN_20261004.md) / [统一候选证据清单](AMBUSH_PR15_UNIFIED_CANDIDATE_EVIDENCE_PLAN_20261004.md) | fixed fcf教学预览/总表/静态建议/背景五入口，ebe负H138/R141各80fail exit1→fixed同checks各0fail actual0 E0/S0；两dev失败保留、六物理图核/看6无XTest。26 display fixtures非实战，另原radio reference真实第三波escape0.5s却写5.2/mainhint/10.8建议，明确另片未验；原49事件/快照双射身份只读比较actual0，两个不全身份归一fail保留。父端a794/0bfe P2限定关闭、radio原record3D10855/focus2992/pause3277各0归因另列，cdb/392待QA。统一candidate先隔离新normal输出、后新13波/六record3D/FX-A3，R5保持、耳听/设备后置。 |
 | [静态教学语境计划](AMBUSH_PR15_TEACHING_CONTEXT_PLAN_20261004.md) | 接父端1adec后授权；guard显示矩阵/原radio late escape reference负向→明确全关教学/预览/静态建议/背景台词→固定H/R。真实逃逸时间/身份错误先实际审查、另片，不称本片green覆盖；cdb/392 QA新缺陷优先。后统一candidate证据矩阵/13波/newrecord3D与FX-A3，耳听/设备后置，资产保持。 |
 | [拾取文字报告](AMBUSH_PR15_LOOT_TEXT_20261004.md) / [有界接续](AMBUSH_PR15_NEXT_SLICES_20261004.md) | fixed392只改保存kind/amount文本，a190负H85/45exit1→H85/R86各0exit0/E0/S0，原depot mine1/库存0→1且ammo8只读、28kind/7边界、history foreign-live/ItemList/fallback，1PNG核/看1。16证据、无native旅程/库存/fullR声明，独立QA待；原fixed3b两P2失败保全，不混a794，cdb live独立。下一静态IntelStore语境审→同候选基线/成功射击FX-A1/A3，资产/R5不变，APK/设备验收后置。 |
 | [拾取文字独立计划](AMBUSH_PR15_LOOT_TEXT_PLAN_20261004.md) | live d363已推送/读回，fixed cdb H1159/R1164限定交QA；随后原depot mine1误+1弹先作者guard只读negative→中央kind/amount文本→固定H/R，原bytes/库存保持。未知/缺字段中性，枪amount携弹，不混RESULTgate，不代normal/完整3D。 |

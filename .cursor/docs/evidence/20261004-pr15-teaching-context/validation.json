@@ -1,0 +1,218 @@
+{
+  "production_and_formal_source": "fcf40a97606c148ec6dcb87a2b20dfa39100458e",
+  "game_tree": "fa8ea37ed09d37c537a044f99f079aa9684ad325",
+  "runs": [
+    {
+      "source_sha": "1221ccd836ccdab43ed327e902cd934bc2b6f182",
+      "actual_exit": 1,
+      "checks": 139,
+      "failures": 79,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "scope": "78 static display oracle failures plus1 reference terminal fixture failure; did not reach required late escape, so no actual leak timing acceptance/counterexample. Original after-drop terminal/event payload was not saved before early return. Actor knife can still attack by source; no claim that this unrecorded cause was observed. Preserve development run separately.",
+      "stage": "dev-1221-fixture",
+      "run_id": "2aed05b8c1e34ea5ad60fc2de5e4c566",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=1221ccd836ccdab43ed327e902cd934bc2b6f182 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 static_teaching_context_test.gd --headless"
+    },
+    {
+      "source_sha": "2da1647ec3b52d07f169f183139cc97cdf4f16ab",
+      "checks": 138,
+      "failures": 81,
+      "actual_exit": 1,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "37edd8a4cd40e992b0ba48d7a57bd4e9ca2f4f2ed00cdfc38c24ffbc857d29c3"
+      },
+      "captures": [],
+      "guard": true,
+      "scope": "Static teaching preview/legend/map tag/advice/background only. Matrix assigns wave/fail flags; actual radio reference grants/snaps/directticks/vacuum/legal SWEEP clear ->late escape/retry. Actual leak timing is audit only, unresolved here. Not26 battles/normal/full recording3D/FX/A3/audio/device acceptance.",
+      "classification": "Development only: 80 static display oracle failures + 1 incorrect test expectation that clear removes guns. Real original third-wave escape observed. No inventory production defect.",
+      "stage": "dev-2da-fixture",
+      "run_id": "d9ead4c7deb545ada095967137aa232a",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=2da1647ec3b52d07f169f183139cc97cdf4f16ab bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 static_teaching_context_test.gd --headless"
+    },
+    {
+      "source_sha": "fcf40a97606c148ec6dcb87a2b20dfa39100458e",
+      "checks": 138,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "19ce54e19baf94a4fb8e7bc02cbfb6d8db598fdc1e946d6bb995c70425eca1de"
+      },
+      "captures": [],
+      "guard": true,
+      "scope": "Static teaching preview/legend/map tag/advice/background only. Matrix assigns wave/fail flags; actual radio reference grants/snaps/directticks/vacuum/legal SWEEP clear ->late escape/retry. Actual leak timing is audit only, unresolved here. Not26 battles/normal/full recording3D/FX/A3/audio/device acceptance.",
+      "stage": "fixed-fcf-h",
+      "run_id": "c87bcf42d45e427fb37aaa58a00887af",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=fcf40a97606c148ec6dcb87a2b20dfa39100458e bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 static_teaching_context_test.gd --headless"
+    },
+    {
+      "source_sha": "fcf40a97606c148ec6dcb87a2b20dfa39100458e",
+      "checks": 141,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "4e4acfd7d5476331393925216ec12b91b892c61ba1848cc5a9b223f628c29bbf"
+      },
+      "captures": [
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_first_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_first_scout.png",
+          "sha256": "3b1be80af6166ebe41c76ffa42d20b6c2dfc59bc189860c7fabaeda5c2d2240f"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_actual_last_escape",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_actual_last_escape.png",
+          "sha256": "ee9fce0d980c87b37fb2f9c40ae0bc125b7187dac6ba1c63c7ab516209ae5e57"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_retry_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_retry_scout.png",
+          "sha256": "3d9f31cfd286603c33a541623c67a09e963ac777ddd003bafdedb9c3065aa7e4"
+        }
+      ],
+      "guard": true,
+      "scope": "Static teaching preview/legend/map tag/advice/background only. Matrix assigns wave/fail flags; actual radio reference grants/snaps/directticks/vacuum/legal SWEEP clear ->late escape/retry. Actual leak timing is audit only, unresolved here. Not26 battles/normal/full recording3D/FX/A3/audio/device acceptance.",
+      "stage": "fixed-fcf-r",
+      "run_id": "e75e7873e7e545a88a24dda219c99a86",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=fcf40a97606c148ec6dcb87a2b20dfa39100458e DISPLAY=:113 AMBUSH_TEST_X11_DISPLAY=:113 LIBGL_ALWAYS_SOFTWARE=1 bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-teach-godot static_teaching_context_test.gd --render"
+    },
+    {
+      "source_sha": "ebe38a1651e46bd239c8c37ba761d9a73897f579",
+      "checks": 138,
+      "failures": 80,
+      "actual_exit": 1,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "73d10c4a531be354181b2f21bc0e80cbd37f61a17488152e9385b0e32cec9222"
+      },
+      "captures": [],
+      "guard": true,
+      "scope": "Static teaching preview/legend/map tag/advice/background only. Matrix assigns wave/fail flags; actual radio reference grants/snaps/directticks/vacuum/legal SWEEP clear ->late escape/retry. Actual leak timing is audit only, unresolved here. Not26 battles/normal/full recording3D/FX/A3/audio/device acceptance.",
+      "stage": "negative-ebe-h",
+      "run_id": "78e0b1ffe4724cf68729c06dcae40b18",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=ebe38a1651e46bd239c8c37ba761d9a73897f579 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 static_teaching_context_test.gd --headless"
+    },
+    {
+      "source_sha": "ebe38a1651e46bd239c8c37ba761d9a73897f579",
+      "checks": 141,
+      "failures": 80,
+      "actual_exit": 1,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "4191f346b34444dc50909035a3e9005c60c86c4a9b6d2cc913d262a788cd984e"
+      },
+      "captures": [
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_first_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_first_scout.png",
+          "sha256": "be3a24bb1c8ea54c46e6232b7eb20addb469572bcb2cd742f7ed1e0401e6d472"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_actual_last_escape",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_actual_last_escape.png",
+          "sha256": "d975d0b366f007027298dc3620c2a4ce66d2b1b240360cbef7d8d641414f7437"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_retry_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_retry_scout.png",
+          "sha256": "f4b0d1a45f1cb7af0919c24a232085d6e2c861fb0e6b641c64199179b8c744bb"
+        }
+      ],
+      "guard": true,
+      "scope": "Static teaching preview/legend/map tag/advice/background only. Matrix assigns wave/fail flags; actual radio reference grants/snaps/directticks/vacuum/legal SWEEP clear ->late escape/retry. Actual leak timing is audit only, unresolved here. Not26 battles/normal/full recording3D/FX/A3/audio/device acceptance.",
+      "stage": "negative-ebe-r",
+      "run_id": "989f8aba77da411699908fba4fc2b2f0",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=ebe38a1651e46bd239c8c37ba761d9a73897f579 DISPLAY=:113 AMBUSH_TEST_X11_DISPLAY=:113 LIBGL_ALWAYS_SOFTWARE=1 bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-teach-godot static_teaching_context_test.gd --render"
+    }
+  ],
+  "images_hashed_and_viewed": {
+    "negative-ebe-r": 3,
+    "fixed-fcf-r": 3
+  },
+  "native_XTest_inputs": 0,
+  "readonly_compare": {
+    "after_sha256": "19ce54e19baf94a4fb8e7bc02cbfb6d8db598fdc1e946d6bb995c70425eca1de",
+    "before_sha256": "73d10c4a531be354181b2f21bc0e80cbd37f61a17488152e9385b0e32cec9222",
+    "comparisons": {
+      "events": true,
+      "playback_schema": true,
+      "playback_snapshots": true,
+      "playback_terminal_tick": true,
+      "snapshots": true,
+      "terminal_reason": true,
+      "terminal_tick": true
+    },
+    "differences": [],
+    "events": 49,
+    "failures": 0,
+    "identity_counts": [
+      2,
+      2
+    ],
+    "normalization": "Bijective traversal mapping of independent32hex attempt/utility scope tokens and derived identity prefixes only; identity equality/distinctness/suffix retained. No time/state/payload value normalization.",
+    "read_only": true
+  },
+  "readonly_command": "XDG_DATA_HOME=/tmp/pr15-teaching-compare/data XDG_CONFIG_HOME=/tmp/pr15-teaching-compare/config XDG_CACHE_HOME=/tmp/pr15-teaching-compare/cache /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path /tmp/pr15-teaching-compare -s /tmp/pr15-teaching-compare/compare.gd -- /tmp/pr15-teaching-compare/before.bin /tmp/pr15-teaching-compare/after.bin",
+  "readonly_actual_exit": 0,
+  "readonly_initial_and_diagnostic_exits": [
+    1,
+    1
+  ],
+  "readonly_false_assertion_reason": "Only attempt/event_id initially normalized; independent utility_scope_id, derived corpse_id/id/scope_id/source_attempt_id also differ naturally. Preserved both fails. Formal bijective32hex token mapping2 identities per source; no times/values normalized.",
+  "owned_display": {
+    "display": ":113",
+    "pid": 93966,
+    "matched_exact_display_and_log": true,
+    "close_actual_exit": 0
+  },
+  "remaining": "Real echo5 wave2 spawnlocal30 incorrectly displayed5.2s/hintmain/retry10.8s still unresolved and recorded. Tutorial/briefing/role_why static timing not all covered. New13 normal/sixnewrecord3D/FX/A3/audio/device/APK pending. R5 assets unchanged."
+}
