@@ -1,6 +1,6 @@
 # PR15 A2工具、烟、尘接续计划
 
-2026-10-04，承接A1b固定b563有界作者验证。本计划尚未实现或运行。主集成唯一代码写者，制作资源所有权不变；不改变SCOUT→ALERT→SWEEP、BattleLog原events/seq/event_id/统计、伤害或手雷归因玩法。
+2026-10-04，承接A1b固定b563有界作者验证。flight单位子片已实证并修复，确认blast保存接口/烟尘爆炸池尚未实现或运行。主集成唯一代码写者，制作资源所有权不变；不改变SCOUT→ALERT→SWEEP、BattleLog原events/seq/event_id/统计、伤害或手雷归因玩法。
 
 只读6.1-sol源审计（f953、无引擎/编辑）与主作者核对：RaidGrenade._flight本身为0–1进度，presenter又除flight_duration；先以实际原sim_step/保存snapshot/3D位置做负向，证实后最小修展示单位并测试0/中段/落地/弹跳/旧记录。不能把源码推导记为已复现。
 
@@ -15,3 +15,5 @@
 实际源正反例待验：无victim的真实爆炸、bounce后落点、友伤/掩体/过杀、多工具同tick、mine victim归因与spent单次、command期及ALERT暂停、terminal snapshot、跨wave/seek/source、旧原件中性、全部派生finite、资源撤场。每片固定SHA/actual exits/hash及未验范围；样本不代战场集成，库存在不代耳听，云llvmpipe不代安卓30/60 FPS。
 
 A2之后A3先收同环境六关各phase/方向/实际峰值的raw frame intervals、draw/primitives/纹理/RAM/shader warmup/FX驻留，再预算与单片优化；最后统一fixed source全门/fullsmoke、正常fresh六关13波、六新原件实际3D全段1×/2×、再可追溯APK。工具链缺项后置，不阻代码；全部计划之后才安排设备。可并行b563固定只读FX QA/28实帧艺术评审，优先6.1-sol；不自行派astra，不让其写主文件或制作输出。网页GPT PLAN/REVIEW unavailable。
+
+已完成有界flight子片：[fixed53报告](AMBUSH_PR15_GRENADE_FLIGHT_20261004.md)。负102 H119/R128各15fail actual1→53同原测试各0actual0 E0/S0、9正式Window图核/看9；仅一行presentation单位修复，原投掷/库存/轨迹/bounce/四authentic old midflight及六raw hashes不改。下一仍先确认blast source与终局snapshot时序、稳定tool/effect ID/actual victim HP，再有界烟尘池；不把flight片当blast或FINAL。
