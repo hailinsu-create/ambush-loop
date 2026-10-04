@@ -92,7 +92,8 @@ func _render_cases(cases: Array) -> void:
 	root.content_scale_factor = 1.0
 	var settings = root.get_node("GameSettings")
 	settings.pending_level_id = "radio"
-	settings.mark_tutorial_seen("radio") # Cold consumer only.
+	for id: String in ["radio","yard"]:
+		settings.mark_tutorial_seen(id) # Cold consumers only; no modal over evidence.
 	settings.set_force_touch_hud(false)
 	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
 	await process_frame
