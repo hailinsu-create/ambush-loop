@@ -423,11 +423,14 @@ func _apply_btn_style(b: Button, tint: Color, locked: bool) -> void:
 	var hover := NightOps.flat(bg.lightened(0.18), border.lightened(0.2), 2, 10, 6)
 	var pressed := NightOps.flat(bg.darkened(0.18), border, 2, 10, 6)
 	var disabled := NightOps.flat(Color(0.09, 0.09, 0.08, 0.82), Color(0.22, 0.20, 0.18), 1, 10, 6)
+	# Apply this button's fresh overrides with one theme notification.
+	b.begin_bulk_theme_override()
 	b.add_theme_stylebox_override("normal", normal)
 	b.add_theme_stylebox_override("hover", hover)
 	b.add_theme_stylebox_override("pressed", pressed)
 	b.add_theme_stylebox_override("disabled", disabled)
 	b.add_theme_color_override("font_color", Color(0.94, 0.92, 0.78) if not locked else Color(0.42, 0.40, 0.38))
+	b.end_bulk_theme_override()
 	b.modulate = Color.WHITE if not locked else Color(0.62, 0.60, 0.58)
 
 
