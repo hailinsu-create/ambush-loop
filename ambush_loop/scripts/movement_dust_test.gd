@@ -198,6 +198,7 @@ func _history_and_phases() -> void:
 		main.replay.set_tick(seek);main._apply_replay_scrub();main.presentation_3d.refresh()
 		_check(pool.diagnostics().active==signature if seek==target else pool.diagnostics().active.is_empty(),"actual backward/restore seek deterministic tick="+str(seek))
 	rows.append({"case":"actual-reference-ALERT-SWEEP-REPLAY","domain_tick":tick,"seek_playback_tick":target,"source":moving_snaps.back(),"cue":signature,"scope":"original reference first wave and legal command/API transport, not normal13/fullautoplay"})
+	main.battle_log=BattleLog.new() # Explicit independent foreign source; normal setup reuses/clears its log.
 	root.get_node("GameSettings").mark_tutorial_seen("warehouse")
 	main._load_level("warehouse",false,false)
 	await process_frame
@@ -207,7 +208,7 @@ func _history_and_phases() -> void:
 	for index in 20:main._process(1.0/60.0)
 	main.presentation_3d.refresh()
 	var foreign:BattleLog=main.battle_log
-	_check(foreign!=saved and foreign.attempt_id!=saved.attempt_id and not pool.diagnostics().active.is_empty(),"actual fresh warehouse source has its own original moving cue")
+	_check(foreign!=saved and foreign.attempt_id!=saved.attempt_id and not pool.diagnostics().active.is_empty(),"explicit independent log plus original fresh warehouse movement has its own cue")
 	var foreign_bytes:=_log_state(foreign)
 	main.phase=main.Phase.REPLAY # Explicit foreign-source consumer boundary.
 	main.replay.bind(saved);main.replay.set_tick(target);main._apply_replay_scrub();main.presentation_3d.refresh()
