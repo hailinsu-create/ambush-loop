@@ -25,6 +25,11 @@ def prepare(args: argparse.Namespace) -> dict:
     consumer = git("rev-parse", "HEAD")
     engine = pathlib.Path(args.engine).resolve(strict=True)
     files = []
+    modes = {}
+    for item in subprocess.check_output(["git","ls-tree","-rz","HEAD","--","ambush_loop"],cwd=root).decode().split("\0"):
+        if item:
+            info, name = item.split("\t",1)
+            modes[name] = info.split(" ",1)[0]
     tracked = subprocess.check_output(["git", "ls-files", "-z", "--", "ambush_loop"], cwd=root)
     for item in tracked.decode().split("\0"):
         if not item:
@@ -32,7 +37,15 @@ def prepare(args: argparse.Namespace) -> dict:
         path = root / item
         if path.is_symlink() or not path.is_file():
             raise ValueError(f"Expected regular tracked project file: {item}")
-        files.append({"path": path.relative_to(project).as_posix(), "bytes": path.stat().st_size, "sha256": digest(path)})
+        files.append({"path": path.relative_to(project).as_posix(), "mode": modes[item],
+                      "bytes": path.stat().st_size, "sha256": digest(path)})
+    imported = []
+    if args.include_import_cache:
+        for path in sorted((project/".godot/imported").rglob("*")):
+            if path.is_file():
+                imported.append({"path":str(path),"bytes":path.stat().st_size,"sha256":digest(path)})
+        if not imported:
+            raise ValueError("Requested imported cache proof but no imported files exist")
     records = []
     if args.record and not args.producer_sha:
         raise ValueError("--record requires explicit --producer-sha; filenames do not prove producer identity")
@@ -50,12 +63,13 @@ def prepare(args: argparse.Namespace) -> dict:
         ["git", "diff", "--quiet", "HEAD", "--", "ambush_loop"], cwd=root
     ).returncode:
         raise ValueError("Source changed during receipt creation")
-    return {"format": 1, "consumer_commit": consumer, "consumer_game_tree": git("rev-parse", "HEAD:ambush_loop"),
+    return {"format": 2, "consumer_commit": consumer, "consumer_game_tree": git("rev-parse", "HEAD:ambush_loop"),
             "consumer_build": "loose tracked source, official executable; no PCK",
             "tracked_project_clean": True, "source_root": str(project), "source_files": files,
             "engine": {"path": str(engine), "bytes": engine.stat().st_size, "sha256": digest(engine)},
             "producer_records": records,
-            "cache_scope": "tracked source and all tracked game asset bytes verified; generated .godot import cache is excluded",
+            "imported_cache": imported,
+            "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim" if imported else "generated .godot import cache excluded; formal loaded-resource proof incomplete",
             "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest"}
 
 
@@ -65,13 +79,16 @@ def main() -> None:
     parser.add_argument("--output", required=True)
     parser.add_argument("--record", action="append", default=[])
     parser.add_argument("--producer-sha", default="")
+    parser.add_argument("--include-import-cache", action="store_true")
     args = parser.parse_args()
     result = prepare(args)
     output = pathlib.Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({"receipt": str(output), "consumer_commit": result["consumer_commit"],
+                      "game_tree": result["consumer_game_tree"],
                       "source_files": len(result["source_files"]), "records": len(result["producer_records"]),
+                      "imported_cache_files":len(result["imported_cache"]),
                       "receipt_sha256": digest(output)}))
 
 

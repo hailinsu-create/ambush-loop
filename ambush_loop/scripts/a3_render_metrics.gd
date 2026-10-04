@@ -21,6 +21,7 @@ const SEGMENT_CAPACITY := 512
 var capacity := 32768 # Fixed allocation before production scene creation.
 var row_count := 0
 var overflow_rows := 0
+var run_overflow_rows := 0
 var symbol_overflow := 0
 var metadata: Dictionary = {}
 var monitors: Array = []
@@ -41,6 +42,9 @@ var _frame := 0
 var _collecting := false
 var _proof: Dictionary = {}
 var _receipt_path := ""
+var _sealed_row_count := -1
+var _raw_sealed := false
+var _run_incomplete := false
 
 
 func _ready() -> void:
@@ -183,7 +187,11 @@ func _sample() -> void:
 	_frame+=1
 	if row_count>=capacity:
 		overflow_rows+=1
+		run_overflow_rows+=1
+		_run_incomplete=true
+		_raw_sealed=false
 		return # Preserve first/cold rows, never silently overwrite.
+	_raw_sealed=false
 	var base := row_count*column_count()
 	var first := _first_segment_frame
 	_first_segment_frame=false
@@ -254,13 +262,15 @@ func row_at(index: int) -> Array:
 	return result # Reconstruction only outside timed windows.
 
 
-func reset_buffer() -> bool:
-	if _collecting or measured: return false
+func reset_buffer(acknowledge_incomplete: bool = false) -> bool:
+	if _collecting or measured or not _raw_sealed or _sealed_row_count!=row_count: return false
+	if _run_incomplete and not acknowledge_incomplete:return false
 	_table.fill(-1.0)
 	row_count=0
 	overflow_rows=0
 	_first_segment_frame=true
-	return true # Caller must seal old raw before reset; symbols/absolute frame counter retained.
+	_raw_sealed=false
+	return true # Lifetime overflow/incomplete and absolute frame counter NEVER reset.
 
 
 static func own_rss_bytes() -> int:
@@ -279,7 +289,8 @@ static func own_rss_bytes() -> int:
 
 
 func save(path: String, extra: Dictionary = {}) -> Error:
-	if measured: return ERR_BUSY
+	if measured or _collecting: return ERR_BUSY
+	if FileAccess.file_exists(path+"/raw.csv"):return ERR_ALREADY_IN_USE
 	var file := FileAccess.open(path+"/raw.csv",FileAccess.WRITE)
 	if file==null: return FileAccess.get_open_error()
 	var header: Array = COLUMNS.duplicate()
@@ -289,12 +300,22 @@ func save(path: String, extra: Dictionary = {}) -> Error:
 		var values := PackedStringArray()
 		for value: Variant in row_at(index): values.append(str(value))
 		file.store_csv_line(values)
+	var raw_error := file.get_error()
 	file.close()
+	var after := Provenance.verify(_receipt_path,OS.get_environment("AMBUSH_TEST_SOURCE_SHA"))
+	var complete: bool = overflow_rows==0 and symbol_overflow==0 and _proof.get("verified",false) and after.get("verified",false)
+	_run_incomplete=_run_incomplete or not complete
 	var report := FileAccess.open(path+"/metadata.json",FileAccess.WRITE)
 	if report==null: return FileAccess.get_open_error()
 	report.store_string(JSON.stringify({"metadata":metadata,"rows":row_count,"overflow_rows":overflow_rows,
 		"symbol_overflow":symbol_overflow,"complete_buffer":overflow_rows==0 and symbol_overflow==0,
-		"rss_save_bytes":own_rss_bytes(),"segments":_segments,"source_proof_after":Provenance.verify(_receipt_path,OS.get_environment("AMBUSH_TEST_SOURCE_SHA")),
+		"run_overflow_rows":run_overflow_rows,"run_incomplete":_run_incomplete,
+		"chunk_source_and_buffer_valid":complete,"raw_sha256":FileAccess.get_sha256(path+"/raw.csv"),
+		"rss_save_bytes":own_rss_bytes(),"segments":_segments,"source_proof_after":after,
 		"extra":extra},"  "))
+	var report_error := report.get_error()
 	report.close()
-	return OK
+	_raw_sealed=raw_error==OK and report_error==OK
+	_sealed_row_count=row_count if _raw_sealed else -1
+	if not _raw_sealed:return ERR_FILE_CANT_WRITE
+	return OK if complete and not _run_incomplete else ERR_INVALID_DATA
