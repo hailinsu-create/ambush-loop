@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [A3 Window新驱动/前置待实跑](AMBUSH_PR15_A3_WINDOW_CONTROL_20261004.md) | b832 source只读发现两项，42249 test-only修正；新Context/public16列cadence/三chunk-Title正控制/16条件buffer与resident ABBA+BAAB已实现未运行。QA已全部结束交回唯一Window时段、本机容量检查足；先新proof与actual前置再正式六关A3，不重跑67、不计手机或normal性能。 |
 | [A3 readiness/receipt功能候选](AMBUSH_PR15_A3_READY_RECEIPT_20261004.md) | fixed8b37仅test-only两文件，Guard H67/0 actual0 E0/S0；20raw/59列全measured0，合法双chunk/reset保持原CSV，空warm与前后有效receipt换版拒绝。982tracked/986warm/engine/oldraw匹配、九productionblob与b63同；34证据全hash。actualWindow-ready/reconnect及paired开销待，最小Window计划已列、driver未扩，父端QA结束通知前不开Window/perf；正式A3未起，制作不改。 |
 | [typed P2/collector安全checkpoint](AMBUSH_PR15_P2_COLLECTOR_CHECKPOINT_20261004.md) | 父端要求先交：productionaa8/证据c3a6已push/lsremote/PRbody读回，probe22/6→22/0与H255/R268/H130/H35全部actual0 E0/S0；68文件/13图全hash/逐图看。仪器f81/63cd只有48/0headless故意overflow功能，正式A3未启；新Window-ready草稿未运行/未应用，paired driver待。无自有Godot/Xorg待poll，常驻环境:99不动；后QA→有效Window控制→明确START/END串行A3→FINAL/APK，资产制作与设备后置保持。 |
 | [A3 Window有效控制](AMBUSH_PR15_A3_WINDOW_CONTROL_20261004.md) | test-only计划/未运行补丁已封而未应用：actualready/稳定非空warmreceipt、有效seal/reset/restart/Title解绑；paired driver/publiccadence未实现，拟同冻结yardbuffer有无及驻留attached/unattached两对ABBA/BAAB。非正常战场/正式六关性能；blast P2交付c3a6已核远端，先本控制再A3串行，制作不改。 |

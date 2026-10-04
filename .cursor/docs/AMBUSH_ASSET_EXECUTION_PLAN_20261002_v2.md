@@ -116,3 +116,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 2026-10-04 16:15 UTC父端要求当前安全点交[typed P2/collector checkpoint](AMBUSH_PR15_P2_COLLECTOR_CHECKPOINT_20261004.md)：aa8/c3a6 fixedtyped已push/readback可先QA；正式A3从未启动，无自有engine/display待poll。f81/63cd仅headless48功能，新的Window-ready/receipt未运行草稿封存且未应用，paired cadence driver/有效seal-reset还待，不能冒称collector全完善。后新固定provenance与Window开销控制→START/END通知串行A3→最终同source/new13/new6full1×2×/smoke→APK。资产R5边界/耳听设备后置保持，不merge生产height/G。
 
 2026-10-04 16:28 UTC父端当前Window留aa8独立QA，仅授权本轮readiness/receipt代码+headless轻检：[固定8b37报告](AMBUSH_PR15_A3_READY_RECEIPT_20261004.md)。已应用test-only门，H67/0 actual0 E0/S0；20raw全measured0，合法双chunk/reset、空warm与换版有效receipt拒绝，982tracked/986warm/engine/oldraw前后同、九productionblob与b63同；34证据全hash，无新Window/A3。最小Window计划列好但原probe/restart与publiccadence driver未扩，等父端QA结束通知才串行控制与正式A3 START/END，不用headless功能冒称through。后FINAL同source全门/fullsmoke/new13/六新全1×2×/APK仍待，R5制作及耳听设备后置/不merge生产height-G保持。
+
+
+2026-10-04 QA结束后接续：[Window前置驱动](AMBUSH_PR15_A3_WINDOW_CONTROL_20261004.md)。新test-only b832经source-only审查修为42249，公共cadence/原Window有效三chunk与Title生命周期/16条件两对ABBA+BAAB已实现未运行；原H67不重跑。父端QA所有engine/display实际结束交回唯一时段，root容量只读足。新固定source/完整warm proof后先actual Window前置，全部通过再正式六关A3 START/END；stationary控制非normal战场/手机性能，失败原件保留。FINAL/APK仍待，R5资产制作单写/设备耳听最后/不merge生产height-G保持。
