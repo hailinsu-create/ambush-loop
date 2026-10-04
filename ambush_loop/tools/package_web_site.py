@@ -2,7 +2,7 @@
 """Package an existing full Godot Web export for a 25 MiB static-file host.
 
 Only transport changes: PCK chunks reassemble to the original SHA-256 before
-Godot preloads the pack; WASM uses HTTP gzip. Never exports or builds art.
+Godot preloads the pack; WASM decompresses in the browser. Never builds art.
 """
 import argparse
 import gzip
@@ -37,7 +37,7 @@ def package(export, destination, source_sha, game_tree):
             raw = path.read_bytes()
             data = gzip.compress(raw, compresslevel=9, mtime=0)
             assert gzip.decompress(data) == raw
-            (destination / path.name).write_bytes(data)
+            (destination / (path.name + ".gz")).write_bytes(data)
         elif path.is_file():
             shutil.copy2(path, destination / path.name)
 
@@ -47,8 +47,24 @@ def package(export, destination, source_sha, game_tree):
     assert text.count(marker) == 1
     # Keep the official startGame path, progress/error UI and main-pack argument.
     # Its public preloadFile API accepts a buffer; intercept just this pack URL.
+    wasm_info = {"bytes": (export / "index.wasm").stat().st_size,
+                 "sha256": digest((export / "index.wasm").read_bytes())}
     loader = """
 \tconst packTransport = __PACK_INFO__;
+\tconst wasmTransport = __WASM_INFO__;
+\tconst originalFetch = window.fetch.bind(window);
+\tconst wasmURL = new URL('index.wasm', document.baseURI).href;
+\twindow.fetch = async function (input, init) {
+\t\tconst url = new URL(input instanceof Request ? input.url : input, document.baseURI).href;
+\t\tif (url !== wasmURL) return originalFetch(input, init);
+\t\tif (typeof DecompressionStream === 'undefined') throw new Error('This game needs a browser with gzip DecompressionStream support.');
+\t\tconst response = await originalFetch('index.wasm.gz', init);
+\t\tif (!response.ok) throw new Error('Engine download failed (' + response.status + ')');
+\t\tconst bytes = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+\t\tconst hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), b => b.toString(16).padStart(2, '0')).join('');
+\t\tif (bytes.byteLength !== wasmTransport.bytes || hash !== wasmTransport.sha256) throw new Error('Engine download integrity check failed. Please reload.');
+\t\treturn new Response(bytes, {headers: {'Content-Type': 'application/wasm', 'Content-Length': String(bytes.byteLength)}});
+\t};
 \tconst originalPreloadFile = engine.preloadFile.bind(engine);
 \tengine.preloadFile = async function (file, path) {
 \t\tif (file !== 'index.pck') return originalPreloadFile(file, path);
@@ -66,10 +82,11 @@ def package(export, destination, source_sha, game_tree):
 \t\tif (offset !== packTransport.bytes || hash !== packTransport.sha256) throw new Error('Game download integrity check failed. Please reload.');
 \t\treturn originalPreloadFile(pack.buffer, path);
 \t};
-""".replace("__PACK_INFO__", json.dumps(pack_info, separators=(",", ":")))
+""".replace("__PACK_INFO__", json.dumps(pack_info, separators=(",", ":"))).replace(
+        "__WASM_INFO__", json.dumps(wasm_info, separators=(",", ":")))
     html.write_text(text.replace(marker, marker + loader))
     (destination / "_headers").write_text(
-        "/index.wasm\n  Content-Type: application/wasm\n  Content-Encoding: gzip\n"
+        "/index.wasm.gz\n  Content-Type: application/gzip\n"
         "/index.pck.part*\n  Content-Type: application/octet-stream\n"
         "/index.html\n  Cache-Control: no-cache\n"
     )
