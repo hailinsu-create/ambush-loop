@@ -88,23 +88,31 @@ func _dwell(label: String, seconds: float, receipt: Dictionary, immutable: bool 
     receipt["attempt_id"]=main.battle_log.attempt_id
     receipt["wave"]=main.battle_log.wave_id
     receipt["required_original_command_seconds"]=command_seconds
+    receipt["minimum_measured_phase_rows"]=3
+    receipt["wall_limit_seconds"]=30.0
     var command_start: float=main._pose_command_clock_s
     collector.mark(label,true,"",receipt)
+    var row_cursor: int=collector.row_count
+    var phase_samples := 0
     var begin := Time.get_ticks_usec()
-    if command_seconds>0.0:
-        var deadline := begin+30_000_000
-        while (Time.get_ticks_usec()<begin+int(seconds*1_000_000) or main._pose_command_clock_s-command_start<command_seconds) and Time.get_ticks_usec()<deadline:
-            await process_frame # Observe original automatic command delta; wall time can exceed Godot's clamped domain delta.
-    else:
-        await _wait(seconds)
+    var deadline := begin+30_000_000
+    while (Time.get_ticks_usec()<begin+int(seconds*1_000_000) or main._pose_command_clock_s-command_start<command_seconds or phase_samples<3) and Time.get_ticks_usec()<deadline:
+        await RenderingServer.frame_post_draw
+        # Collector is connected before this await. Only inspect completed scalars;
+        # preserve the excluded first frame and original automatic main/presenter callbacks.
+        while row_cursor<collector.row_count:
+            if collector.numeric_at(row_cursor,"measured")==1.0 and collector.numeric_at(row_cursor,"phase")==receipt.get("phase",-1):phase_samples+=1
+            row_cursor+=1
     var end := Time.get_ticks_usec()
     _untimed(label+"-boundary")
     var command_elapsed: float=main._pose_command_clock_s-command_start
+    _check(float(end-begin)/1_000_000>=seconds and phase_samples>=3,"bounded original postdraw window reaches wall/sample minimum " + label)
     if command_seconds>0.0:_check(command_elapsed>=command_seconds,"original automatic command clock completes required source interval " + label)
     if immutable: _check(Context.digest(_log_bytes(main.battle_log))==before,"original recorded source immutable " + label)
     segments.append({"label":label,"requested_seconds":seconds,"actual_seconds":float(end-begin)/1_000_000,
         "receipt":receipt,"source_immutable":immutable})
     segments.back()["original_command_seconds"]=command_elapsed
+    segments.back()["measured_phase_rows_at_boundary"]=phase_samples
 
 func _command_walk() -> bool:
     var receipt := {"level_id":main.level.level_id,"attempt_id":main.battle_log.attempt_id,
@@ -252,7 +260,7 @@ func _matrix(level_id: String, label: String, choice: Dictionary, archive: Dicti
             var frame: Dictionary=main.presentation_3d.frame
             _check(frame.frame_seq==choice.frame_seq and frame.attempt_id==archive.attempt_id and Context.digest(var_to_bytes(frame))==choice.frame_sha256,"same original selected frame and source at every policy/pose " + label)
             var segment := "%s-%s-yaw%d" % [label,policy,index*45]
-            await _dwell(segment,2.0,{"kind":"paused exact historical source render with original main/presenter processing",
+            await _dwell(segment,2.0,{"kind":"paused exact historical source render with original main/presenter processing","phase":4,
                 "source_archive":archive,"selected_source":choice,"policy":policy,
                 "coverage":"16 representative poses: eight yaw at alternating35/65 pitch and12/36 extent, both policies; not64 Cartesian views"},true)
             if index==0 and policy=="standard":await _capture(level_id+"-"+label+"-source")

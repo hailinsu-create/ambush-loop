@@ -71,6 +71,8 @@ def analyze(report,root,proof):
    require(label in by_label and declared==by_label[label] and label not in analyzed_labels,'exact report/metadata declared segment binding');analyzed_labels.add(label)
    spec=declared['receipt'];required=spec.get('required_original_command_seconds',0);require(declared.get('original_command_seconds',0)>=required,'original automatic command duration '+label);rr=group.get(label,[]);phase=[r for r in rr if r['phase']==spec['phase']] if 'phase' in spec else rr
    require(len(phase)>=3,'phase sample count '+label)
+   if 'minimum_measured_phase_rows' in spec:
+    require(spec['minimum_measured_phase_rows']==3 and len(phase)==declared['measured_phase_rows_at_boundary'] and declared['actual_seconds']>=declared['requested_seconds'],'bounded postdraw wall/sample receipt '+label)
    require(all(r['level_id']==spec['level_id'] and r['attempt_id']==spec['attempt_id'] and (r['phase']==4 or r['wave_id']==spec['wave']) for r in rr),'live source identity '+label)
    if spec.get('phase')==4 and 'speed' in spec:require(all(r['replay']==1 and r['replay_speed']==spec['speed'] for r in phase),'replay transport '+label)
    if 'selected_source' in spec:

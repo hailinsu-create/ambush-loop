@@ -255,6 +255,12 @@ func _sample() -> void:
 	_put(base,"collector_usec",Time.get_ticks_usec()-now) # After every row/counter write and row index update.
 
 
+func numeric_at(index: int, name: String) -> float:
+	# Read one already-written scalar without reconstructing a row in a timed window.
+	if index<0 or index>=row_count or not _columns.has(name) or name in TEXT_COLUMNS: return NAN
+	return _table[index*column_count()+int(_columns[name])]
+
+
 func row_at(index: int) -> Array:
 	if index<0 or index>=row_count: return []
 	var result: Array = []
