@@ -44,8 +44,17 @@ func _seal(label: String, require_measured: bool) -> Dictionary:
 	_check(rows.slice(1).all(func(row:Array)->bool:return row[2]>0 and is_finite(row[30]) and row[30]>=0),"actual monotonic intervals and finite callback usecs "+label)
 	_check(included.size()>=3 if require_measured else true,"actual measured Window rows exist "+label)
 	_check(included.all(func(row:Array)->bool:return row[31]==1 and row[34]==1 and row[2]>0 and row[5]=="" and row[32]==0),"accepted rows ready/presenter-valid/frozen and free of exclusions "+label)
-	_check(collector.save(path,{"scope":"actual Window stationary chunk/lifecycle; no six-level performance acceptance"})==OK,"valid nonoverflow Window chunk seals outside timing "+label)
-	var saved: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(path+"/metadata.json"))
+	var save_error: Error=collector.save(path,{"scope":"actual Window stationary chunk/lifecycle; no six-level performance acceptance"})
+	_check(save_error==OK,"valid nonoverflow Window chunk seals outside timing "+label)
+	if not FileAccess.file_exists(path+"/metadata.json"):
+		chunks.append({"label":label,"path":path,"valid":false,"save_error":save_error})
+		return {}
+	var parsed: Variant=JSON.parse_string(FileAccess.get_file_as_string(path+"/metadata.json"))
+	if not parsed is Dictionary:
+		_check(false,"valid JSON receipt exists "+label)
+		chunks.append({"label":label,"path":path,"valid":false,"save_error":save_error})
+		return {}
+	var saved: Dictionary=parsed
 	_check(saved.chunk_source_and_buffer_valid and not saved.run_incomplete and saved.run_overflow_rows==0 and saved.receipt_stable and saved.warm_import_proof_complete,"complete lifetime/buffer/fixed-loaded-proof receipt "+label)
 	_check(saved.metadata.source_proof_before.receipt_sha256==receipt_sha and saved.source_proof_after.receipt_sha256==receipt_sha and saved.raw_sha256==FileAccess.get_sha256(path+"/raw.csv"),"original receipt and raw hash exact before/after "+label)
 	if rows.is_empty():return {}

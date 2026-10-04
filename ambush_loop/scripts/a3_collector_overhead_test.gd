@@ -55,8 +55,28 @@ func _condition(family: String, index: int, attached: bool, resident: Node) -> v
 	_check(before==canonical,"same original backend/presenter/camera/config before "+label)
 	if failures>failures_before:
 		sampler.stop()
-		if is_instance_valid(active_collector):active_collector.stop()
-		sampler.save(path,{"label":label,"invalid_before_timing":true,"workload":before})
+		var partial_collector: Dictionary={}
+		if is_instance_valid(active_collector):
+			active_collector.mark(label+"-failed-before-timing",false)
+			active_collector.stop()
+			if active_collector.row_count>0:
+				var partial_path := path+"/collector"
+				DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(partial_path))
+				var partial_error: Error=active_collector.save(partial_path,{"invalid_before_timing":true,"scope":"preserved partial warm raw; not an accepted control window"})
+				partial_collector={"path":partial_path,"rows":active_collector.row_count,
+					"save_error":partial_error,"raw_sha256":FileAccess.get_sha256(partial_path+"/raw.csv")}
+		var partial: Dictionary={"label":label,"family":family,"index":index,"attached":attached,
+			"invalid_before_timing":true,"valid":false,"workload_before":before,"canonical":canonical,
+			"collector":partial_collector,"receipt_sha256":receipt_sha,"path":path}
+		var partial_cadence_error: Error=sampler.save(path,partial)
+		partial["cadence_save_error"]=partial_cadence_error
+		partial["cadence_sha256"]=FileAccess.get_sha256(path+"/cadence.csv")
+		conditions.append(partial) # Failed controls are explicit, never disappear from the run.
+		if family=="full_buffer" and is_instance_valid(active_collector):
+			active_collector.queue_free()
+			await process_frame
+			await process_frame
+			active_collector=null
 		return
 	var rss_start: int=Collector.own_rss_bytes()
 	var static_start: float=Performance.get_monitor(Performance.MEMORY_STATIC) if OS.is_debug_build() else -1

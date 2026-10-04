@@ -26,7 +26,7 @@ static func freeze(main: Node) -> void:
 
 static func backend_bytes(main: Node) -> PackedByteArray:
 	var log: BattleLog = main.battle_log
-	return var_to_bytes([main.phase,main.level_id,main.run_id,main._presentation_suspended,
+	return var_to_bytes([main.phase,main.level.level_id,main.run_id,main._presentation_suspended,
 		main._pose_command_clock_s,main._night_timer,main.sim.tick,main.sim.paused,main.sim.speed,main.sim._accum,
 		log.attempt_id,log.wave_id,log.wave_offset,log.events,log.snapshots,log.playback_snapshots,
 		log.terminal_tick,log.terminal_reason,log.playback_schema,log.playback_terminal_tick,log.current_playback_tick(),
@@ -46,7 +46,7 @@ static func digest(bytes: PackedByteArray) -> String:
 static func workload(main: Node) -> Dictionary:
 	var view: Node3D = main.presentation_3d
 	return {"backend_sha256":digest(backend_bytes(main)),"presenter_frame_sha256":digest(var_to_bytes(view.frame)),
-		"level_id":main.level_id,"attempt_id":main.battle_log.attempt_id,"phase":main.phase,
+		"level_id":main.level.level_id,"attempt_id":main.battle_log.attempt_id,"phase":main.phase,
 		"main_auto_process":main.is_processing(),"presenter_auto_process":view.is_processing(),
 		"tree_paused":main.get_tree().paused,"policy":main.get_tree().root.get_node("GameSettings").quality_tier,
 		"window_width":main.get_window().size.x,"window_height":main.get_window().size.y,
