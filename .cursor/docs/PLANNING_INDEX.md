@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [INITIAL独立QA checkpoint](AMBUSH_PR15_INITIAL_QA_CHECKPOINT_20261004.md) | 固定a05/证据4d0f正常1193/0、六新raw/自然cfg及metadata独立；教学fcf/a3df、escape877/4b82、smoke8906/2d4b完整SHA/范围/保留54与62。有界testfixactual0不代fullsmoke；原a05新yard3D真实arrow失败与d9c最小修H26/0、真实R在跑。QA可先验INITIAL，不等FINAL FX；旧closed scope不重开。 |
 | [原生REPLAY箭头计划](AMBUSH_PR15_REPLAY_ARROW_PLAN_20261004.md) | 原a05PCK yard R4404/1与短trace4140/2 actual1；真实XTest箭头logical有效/physical0、GUI无focus、两键不动，生产边界失败。先共享synthetic负向→只REPLAY缺physical箭头logical回退→固定H/新PCK真实XTest，保留旧raw/source/失败，不拼a05最终绿。 |
 | [旧smoke fixture修正报告](AMBUSH_PR15_SMOKE_FIXTURES_20261004.md) | fixed8906有界原launch-modal/radio-SCOUT合同actual0/E0/S0；原a05完整54、9f等一帧54、b62完整到radio-SCOUT62各E1/S0保留。只修测试顺序/tween等待与SCOUT预览预期，不改生产锁/timeline，不称full smoke green；六新3D/FXA3/最终完整smoke仍待。 |
 | [六新原件实际3D计划](AMBUSH_PR15_NATIVE_RECORD3D_PLAN_20261004.md) | 原a05PCK只读外部固定harness/独立Guard/display/output；先prototype保留parse1/停止143/H5022-4，last-frame-wins修oracle不改source。实际a05PCK yard R运行中、一条Right步长待诊断，未称whole green；之后六原件auto1x/2x/seek/focus/bytes保持，headless不代图。 |
