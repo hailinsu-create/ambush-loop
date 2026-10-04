@@ -121,7 +121,7 @@ func _metadata_contract(lifecycle: String) -> void:
 	var actor_revisions := ["", "29749157c5db064bfea626c3ed9d75d9a1791ece", "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "00b270863ba5a2cd5425abf2a31e78965c72ae45"]
 	for path in ["res://art/v2/manifest.json", "res://art/v2/actors_manifest.json", "res://art/environment_v2/manifest.json"]:
 		var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
-		var environment: bool = path.contains("environment_v2/")
+		var environment := path.contains("environment_v2/")
 		for original: Dictionary in manifest.assets:
 			var id: String = original.asset_id
 			_check(Assets.is_character_asset(id) == (original.get("category", "") == "character"), lifecycle + " category " + id)

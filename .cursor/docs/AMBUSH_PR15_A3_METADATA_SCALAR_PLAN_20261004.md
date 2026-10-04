@@ -1,5 +1,7 @@
 # PR15 A3 窄元数据访问切片
 
+实际状态更新：实现consumer `cd352bfb3ad1f7b7c7863a115c5dec29fc02042a` 首次Guard headless asset_library_test UUID003c759a0a6c4900a4548dc235fc6ad9自然actual1、anchoredSCRIPT ERROR1/ERROR1；新增测试line124从untyped path推断environment失败，尚无checks/场景/资源/parity执行，不称生产回归或绿。已在修复前封[原source/log/exit](evidence/20261004-pr15-metadata-scalar/negative-cd352-test-parse/manifest.json)，下一独立test-only一行显式bool，生产两blob不变；修正后fresh运行，性能仍待。
+
 2026-10-04，接六关实际来源报告/证据交付 `41ff06cf8d01ce01b0d6ca1e33247daac9210bc1`。正式原轮 consumer a90、23559/0 actual0 E0/S0、strict0/13波/576代表性历史窗口/60原PNG全核并查看已封并正常push/readback。预算未达；本切片不以先前结果代优化验证。
 
 唯一生产改动：`asset_library.model_path` 在原 revision拒绝门之后直接只读已验证内部catalog，新增返回bool的 `is_character_asset` 保留原类别严格比较；presenter只替换原公开deep copy类别查询，保animation_supported→has_asset→category短路与次序。公开 `asset_record`继续recursive duplicate，ActorVisual metadata与socket/clips、asset validation、revision/legacy/LOD行为、resource/material/释放、ViewState、pose/FX/record/sim与全部资产文件不改。内部可变Dictionary/Array不通过新接口返回，无额外cache或失效路径。
