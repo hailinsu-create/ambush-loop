@@ -37,6 +37,8 @@ static func ui_font() -> Font:
 	var f := SystemFont.new()
 	f.font_names = PackedStringArray(["WenQuanYi Micro Hei", "Droid Sans Fallback", "Noto Sans Display"])
 	f.font_weight = 600
+	if OS.has_feature("web"):
+		f.fallbacks = [load("res://ui/fonts/NotoSansCJKsc-Regular.woff2")]
 	return f
 
 
@@ -44,6 +46,8 @@ static func ui_font_bold() -> Font:
 	var f := SystemFont.new()
 	f.font_names = PackedStringArray(["WenQuanYi Micro Hei", "Droid Sans Fallback", "Noto Sans Display"])
 	f.font_weight = 800
+	if OS.has_feature("web"):
+		f.fallbacks = [load("res://ui/fonts/NotoSansCJKsc-Regular.woff2")]
 	return f
 
 
