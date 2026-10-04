@@ -123,7 +123,7 @@ func update_frame(frame: Dictionary, power_saving: bool = false) -> void:
 			tracer.transform = tracer_transform
 		var hit: MeshInstance3D = slot.impact
 		hit.position = target
-		hit.scale = Vector3.ONE*(0.16+0.015*age)
+		hit.scale = Vector3.ONE*(0.44+0.02*age)
 		hit.visible = float(shot.damage)>0.0
 		_active.append({"event_id":shot.event_id,"seq":shot.seq,"age_ticks":age,"visual_weapon":shot.visual_weapon,"muzzle":muzzle,"target":target,"damage":shot.damage,"muzzle_visible":flash.visible,"tracer_visible":tracer.visible,"impact_visible":hit.visible})
 
