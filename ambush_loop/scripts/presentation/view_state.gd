@@ -72,6 +72,7 @@ static func capture(host: Node) -> Dictionary:
 		"tool_fx_schema": 1 if tool_supported else 0,
 		"tool_fx_playback_schema": fx_playback_schema,
 		"tool_fx_source_token": source.get_instance_id() if source != null else 0,
+		"tool_fx_terminal_reason": source.terminal_reason if source != null and int(data.get("phase",-1)) in [2,3] else "",
 		"tool_fx": raw_tools.duplicate(true) if tool_supported else [],
 	}
 	for group in GROUPS:
