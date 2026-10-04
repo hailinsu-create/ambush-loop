@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [当前波待入场提示报告](AMBUSH_PR15_CURRENT_WAVE_HINT_20261004.md) / [同候选六关/FX/A3计划](AMBUSH_PR15_SAME_CANDIDATE_FX_A3_PLAN_20261004.md) | 生产480/current queue，formal0bfe H971/R975各exit0/E0/S0；a091负968/271exit1，480R972早green的旧0.0s/transport图保留为dev漏断言，最终2图核/看2显示paused wave3/3 t1.4/pending0，2原生输入。36证据/原normal3b只读/reference52事件与终局843比较一致。六关13波矩阵是display fixtures，不代26实战；live观战条仍总表3.6/5.2已确认、payoff跨波仅source审查，另片前置，不全关P2。完整samecandidate13/FX/A3/APK未验、R5保持。 |
 | [六关结果事实报告](AMBUSH_PR15_RESULT_FACTS_20261004.md) / [审查](AMBUSH_PR15_RESULT_FACTS_AUDIT_20261004.md) | fixed a794统一真实中性结局；9918负向H193/80 exit1/E0/S0→H193/R221各0/exit0/E0/S0。五原记录只读、六关formatter、六reference终局、旧2D仅结果，14图核/看7、8原生输入，FAILED完整句真实滚到。36证据/开发弱fixture与126启动另存。当前波提示另片待；原静态教学/总表建议未修，非全部HUD/正常同候选/fullFX/A3/device通过。R5所有权保持。 |
 | [六关结果事实审查](AMBUSH_PR15_RESULT_FACTS_AUDIT_20261004.md) / [分片修复计划](AMBUSH_PR15_FACTUAL_DISPLAY_PLAN_20261004.md) | de599/运行3b49基线，实际warehouse未续包/depot-radio未触雷的假高光保全，yard/railcut事件绑定不足明确只作源码审计。计划统一中性结果、保留教学/实际摘要，先negative→最小修复→固定H/R/旧2D结果/未变state；当前波提示另片，非已验。 |
 | [正常radio报告](AMBUSH_PR15_RADIO_JOURNEY_20261004.md) / [展示事实修复计划](AMBUSH_PR15_FACTUAL_DISPLAY_PLAN_20261004.md) | fixed3b49复用PCK native210/0、actual0/ERROR0、57 XTest/16图核/看10，三波591/123/129/global845/57event、五loot/原CTA致谢open断言、自然complete=true；metadata3766/0与原事件另读actual0分开，实际record3D待QA、致谢后未留图。原mine/trip0/MG未开火，静态高光与当前波倒计时新缺陷待分片修，分段13波有证据≠同候选全smoke。父端030 pump1110/1旧文案fail保留、作者原件3D6716/0；b892反例3/三结局47均0且原生FAILED句看见，相关P2限定关闭。46证据，R/资产保持；全装备触控/旧2D/FX/A3/艺术/耳听/APK/device仍待。 |

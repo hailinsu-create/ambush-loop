@@ -1,0 +1,5017 @@
+{
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "wave_hint_actual_radio_paused_final_wave_1_4s",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_wave_hint_actual_radio_paused_final_wave_1_4s.png",
+      "sha256": "6c077b18dc48ec6db9f23500043dd25c1aec6e914072fa6cf07a9f2a4b6f6929"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "wave_hint_reference_history_no_live_hint",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_wave_hint_reference_history_no_live_hint.png",
+      "sha256": "2336228eb80641abefcdf0749cb51566e9c63d15316dfa65eef61a66b286cf0c"
+    }
+  ],
+  "checks": 972,
+  "failures": 0,
+  "native_inputs": [
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "actual_domain_reference_radio",
+      "path": "/root/Yard3D/HUD/Root/BottomBar/PauseButton",
+      "physical_screen": [
+        822.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "actual_domain_reference_radio",
+      "path": "/root/Yard3D/HUD/Root/BottomBar/PauseButton",
+      "physical_screen": [
+        822.0,
+        673.5
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "case": "reference_3d_yard_wave0",
+      "desktop": "下一波：主路 还有 0.6s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.6,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_yard_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_yard_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_yard_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.5,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_yard_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_yard_wave1",
+      "desktop": "下一波：侧翼 还有 0.2s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.2,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_yard_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.183333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 11,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_yard_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.183333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 11,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_yard_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.1,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_yard_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_warehouse_wave0",
+      "desktop": "下一波：主路 还有 0.8s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.8,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_warehouse_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.783333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 47,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_warehouse_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.783333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 47,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_warehouse_wave0",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.7,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_warehouse_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_warehouse_wave1",
+      "desktop": "下一波：侧翼 还有 0.3s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_warehouse_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_warehouse_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_warehouse_wave1",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.2,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_warehouse_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_pump_wave0",
+      "desktop": "下一波：主路 还有 0.7s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.7,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_pump_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.683333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 41,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_pump_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.683333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 41,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_pump_wave0",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.6,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_pump_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_pump_wave1",
+      "desktop": "下一波：侧翼 还有 0.3s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_pump_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_pump_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_pump_wave1",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.2,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_pump_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_railcut_wave0",
+      "desktop": "下一波：主路 还有 0.6s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.6,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_railcut_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_railcut_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_railcut_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.5,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_railcut_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_railcut_wave1",
+      "desktop": "下一波：侧翼 还有 0.4s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_railcut_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_railcut_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_railcut_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_railcut_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_depot_wave0",
+      "desktop": "下一波：侧翼 还有 0.4s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_depot_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_depot_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_depot_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_depot_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_depot_wave1",
+      "desktop": "下一波：暗道 还有 0.4s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "sneak"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_depot_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_depot_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_depot_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "sneak"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_depot_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": true,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_radio_wave0",
+      "desktop": "下一波：侧翼 还有 0.4s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_radio_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_radio_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_radio_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_radio_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_3d_radio_wave1",
+      "desktop": "下一波：暗道 还有 0.4s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "sneak"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_radio_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_radio_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_radio_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "sneak"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_radio_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": true,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_3d_radio_wave2",
+      "desktop": "下一波：回波 还有 0.5s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.5,
+        "route": "echo"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "case": "reference_3d_radio_wave2",
+      "desktop": "下一波：回波 还有 0.0s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.483333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "echo"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 29,
+      "wave": 2
+    },
+    {
+      "case": "reference_3d_radio_wave2",
+      "desktop": "下一波：回波 还有 0.0s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.483333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "echo"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 29,
+      "wave": 2
+    },
+    {
+      "case": "reference_3d_radio_wave2",
+      "desktop": "",
+      "info": {
+        "id": 5,
+        "intel_cut": 0.05,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.4,
+        "route": "echo"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 6,
+      "wave": 2
+    },
+    {
+      "case": "reference_3d_radio_wave2",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": true,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 84,
+      "wave": 2
+    },
+    {
+      "case": "reference_legacy2d_yard_wave0",
+      "desktop": "下一波：主路 还有 0.6s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.6,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_yard_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_yard_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_yard_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.5,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_yard_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 2,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_yard_wave1",
+      "desktop": "下一波：侧翼 还有 0.2s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.2,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_yard_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.183333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 11,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_yard_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.183333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 11,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_yard_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "东廊绕出",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.1,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_yard_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "东廊绕出"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave0",
+      "desktop": "下一波：主路 还有 0.8s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.8,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.783333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 47,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.783333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 47,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave0",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.7,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave1",
+      "desktop": "下一波：侧翼 还有 0.3s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave1",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "东廊侧翼",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.2,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_warehouse_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "东廊侧翼"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_pump_wave0",
+      "desktop": "下一波：主路 还有 0.7s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.7,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_pump_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.683333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 41,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_pump_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.683333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 41,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_pump_wave0",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.6,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_pump_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_pump_wave1",
+      "desktop": "下一波：侧翼 还有 0.3s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_pump_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_pump_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.283333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 17,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_pump_wave1",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "锁门改线",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.2,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_pump_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "锁门改线"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave0",
+      "desktop": "下一波：主路 还有 0.6s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.6,
+        "route": "main"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave0",
+      "desktop": "下一波：主路 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.583333333333333,
+        "pending": true,
+        "remain": 0.0166666666666666,
+        "route": "main"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 35,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.5,
+        "route": "main"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave1",
+      "desktop": "下一波：侧翼 还有 0.4s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave1",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "晚到东廊",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_railcut_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "晚到东廊"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_depot_wave0",
+      "desktop": "下一波：侧翼 还有 0.4s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_depot_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_depot_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_depot_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_depot_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": ""
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_depot_wave1",
+      "desktop": "下一波：暗道 还有 0.4s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "sneak"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_depot_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_depot_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_depot_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "sneak"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_depot_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": true,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_radio_wave0",
+      "desktop": "下一波：侧翼 还有 0.4s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "flank"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_radio_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_radio_wave0",
+      "desktop": "下一波：侧翼 还有 0.0s",
+      "info": {
+        "id": 2,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "flank"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 23,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_radio_wave0",
+      "desktop": "",
+      "info": {
+        "id": 2,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "东廊先到",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "flank"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": false,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": false,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 6,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_radio_wave0",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "kit": "",
+          "loot": 1,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "kit": "",
+          "loot": 0,
+          "route": "main",
+          "spawned": true,
+          "teaching_note": ""
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "kit": "",
+          "loot": 0,
+          "route": "flank",
+          "spawned": true,
+          "teaching_note": "东廊先到"
+        }
+      ],
+      "tick": 84,
+      "wave": 0
+    },
+    {
+      "case": "reference_legacy2d_radio_wave1",
+      "desktop": "下一波：暗道 还有 0.4s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.4,
+        "route": "sneak"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_radio_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_radio_wave1",
+      "desktop": "下一波：暗道 还有 0.0s",
+      "info": {
+        "id": 3,
+        "intel_cut": -1.0,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.383333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "sneak"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 23,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_radio_wave1",
+      "desktop": "",
+      "info": {
+        "id": 3,
+        "intel_cut": 0.05,
+        "kit": "",
+        "note": "西夹缝",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.3,
+        "route": "sneak"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": false,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 6,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_radio_wave1",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "kit": "",
+          "loot": 2,
+          "route": "sneak",
+          "spawned": true,
+          "teaching_note": "西夹缝"
+        }
+      ],
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "case": "reference_legacy2d_radio_wave2",
+      "desktop": "下一波：回波 还有 0.5s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.5,
+        "route": "echo"
+      },
+      "moment": "local_zero",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "case": "reference_legacy2d_radio_wave2",
+      "desktop": "下一波：回波 还有 0.0s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.483333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "echo"
+      },
+      "moment": "one_tick_before_actual_spawn",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 29,
+      "wave": 2
+    },
+    {
+      "case": "reference_legacy2d_radio_wave2",
+      "desktop": "下一波：回波 还有 0.0s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.483333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "echo"
+      },
+      "moment": "paused_one_tick_before",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 29,
+      "wave": 2
+    },
+    {
+      "case": "reference_legacy2d_radio_wave2",
+      "desktop": "",
+      "info": {
+        "id": 5,
+        "intel_cut": 0.05,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.1,
+        "pending": true,
+        "remain": 0.4,
+        "route": "echo"
+      },
+      "moment": "terminal_cut_reference",
+      "paused": false,
+      "phase": 2,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 6,
+      "wave": 2
+    },
+    {
+      "case": "reference_legacy2d_radio_wave2",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "all_current_wave_spawned_at_1_4s",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": true,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 84,
+      "wave": 2
+    },
+    {
+      "case": "actual_domain_reference_radio",
+      "desktop": "下一波：回波 还有 0.5s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.0,
+        "pending": true,
+        "remain": 0.5,
+        "route": "echo"
+      },
+      "moment": "actual_final_wave_start",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "case": "actual_domain_reference_radio",
+      "desktop": "下一波：回波 还有 0.0s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.483333333333333,
+        "pending": true,
+        "remain": 0.0166666666666667,
+        "route": "echo"
+      },
+      "moment": "actual_tick29_before_echo",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 29,
+      "wave": 2
+    },
+    {
+      "case": "actual_domain_reference_radio",
+      "desktop": "下一波：回波 还有 0.0s",
+      "info": {
+        "id": 5,
+        "intel_cut": -1.0,
+        "kit": "echo",
+        "note": "灯塔回波",
+        "now": 0.5,
+        "pending": true,
+        "remain": 0.0,
+        "route": "echo"
+      },
+      "moment": "actual_due_tick30_not_spawned_yet",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": false,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "case": "actual_domain_reference_radio",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 0.516666666666667,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "actual_echo_spawned",
+      "paused": false,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": true,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 31,
+      "wave": 2
+    },
+    {
+      "case": "actual_domain_reference_radio",
+      "desktop": "",
+      "info": {
+        "intel_cut": -1.0,
+        "now": 1.4,
+        "pending": false,
+        "remain": 0.0,
+        "route": ""
+      },
+      "moment": "actual_paused_final_wave_1_4s",
+      "paused": true,
+      "phase": 1,
+      "queue": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "kit": "echo",
+          "loot": 2,
+          "route": "echo",
+          "spawned": true,
+          "teaching_note": "灯塔回波"
+        }
+      ],
+      "tick": 84,
+      "wave": 2
+    },
+    {
+      "attempt": "ed81aa931577dfff3fccc66c2bd55b4b",
+      "case": "reference_record_history_boundary",
+      "events": 52,
+      "playback_schema": 2,
+      "record_sha256": "099a1bce0dbc0e216f588b2d1d287841067ea48f640f4320b779e35e541adab3",
+      "scope": "Reference authored-firearm grants/cover snap/direct tick/vacuum; not a normal input source or full replay acceptance.",
+      "terminal_tick": 843
+    }
+  ],
+  "scope": "Six-level13-wave timing display matrix in3D/legacy2D is explicitly synthetic phase/index/tick/spawned data; not actual26 battles. Actual radio reference uses original transitions/spawn event/pause/WON/history, with grants/snap/direct ticks/vacuum. Original normal3b source is read-only. No normal fresh fullsmoke, full replay, FX/performance/device acceptance.",
+  "source_sha": "480c2c4c14c72dc254d6d513f0985ac5505a99a4"
+}
