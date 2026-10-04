@@ -492,7 +492,7 @@ func _sync_objects() -> void:
 				elif group in ["stashes", "environment_objects"]:
 					visual.scale = Vector3.ONE * 0.8
 				if group == "grenades":
-					var flight: float = clampf(float(item.get("flight", 0.0)) / maxf(float(item.get("flight_duration", 0.18)), 0.001), 0.0, 1.0)
+					var flight: float = clampf(float(item.get("flight", 0.0)), 0.0, 1.0)
 					visual.position.y = sin(flight * PI) * 1.25
 			if group == "barrels":
 				objects[key].scale.y = 0.3 if bool(item.get("spent", false)) else 1.0
