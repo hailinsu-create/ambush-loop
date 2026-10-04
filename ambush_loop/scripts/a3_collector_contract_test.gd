@@ -117,7 +117,7 @@ func _run() -> void:
 	_check(saved.metadata.rss_ready_bytes>0 and saved.rss_save_bytes>0,"owned Linux process RSS endpoints distinguished from numeric payload/static memory")
 	_check(collector.reset_buffer(),"stopped, untimed table can reuse fixed allocation after raw seal")
 	_check(collector.row_count==0 and collector.storage_bytes()==payload_bytes,"explicit reset reuses payload without growth")
-	var weak := weakref(main)
+	var weak: WeakRef = weakref(main)
 	main._return_to_title()
 	await process_frame
 	await process_frame

@@ -190,7 +190,7 @@ func _sample() -> void:
 	if follow_current_scene: host=get_tree().current_scene
 	var view: Variant = host.get("presentation_3d") if is_instance_valid(host) else null
 	var frame: Variant = view.get("frame") if is_instance_valid(view) else null
-	var valid := frame is Dictionary and not frame.is_empty()
+	var valid: bool = frame is Dictionary and not frame.is_empty()
 	var reason := exclusion
 	if first: reason="first_frame_after_segment_transition"
 	if not valid: reason="presenter_unavailable"
