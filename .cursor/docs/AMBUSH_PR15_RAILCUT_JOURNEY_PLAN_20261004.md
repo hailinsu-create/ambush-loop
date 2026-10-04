@@ -6,6 +6,6 @@
 
 只改test-only原生driver操作/库存观测：railcut弹包角色/原背包auto按钮、railcut SWEEP拾取角色/原ammo6匣；ALERT/暂停不编辑装备，SCOUT→ALERT→SWEEP/R保持。每波实际警报/暂停/恢复/engine清波、真实掉落与归位，最终原撤离/WON/Continue/handoff/depot实际教学。1280×720/100%、固定source/PCK/原XTest与私有display，记录实际输入、phase/wave/tick、真实fire最后一发与repack信号、原事件身份/物品前后、actual exit/SCRIPT/ERROR、图hash/目检、真实schema2及自然depot存档。失败轮次保全再有界修正，常规搜刮/补给不等于弹包耗尽通过。
 
-本片源码待实现，前置pump高光正式验证/推送待完成；旧cover/title/auto/text不重跑，pump高光reference域与正常玩家记录分别记，不混用进度。部署策略非陌生人试玩，实际窗口/llvmpipe不代艺术/完整FX/设备性能；A3预算/耳听45cue与六声景/同候选fullsmoke/可追溯APK及全计划后设备保持待验。网页GPT PLAN/REVIEW unavailable。
+执行状态：前置pump高光2d5已推送/fixed b892作者H34/R41实际0；本片3b49正式native185/0、actual0/ERROR0，第二波58tick原射击耗尽0→5/usedtrue及原同武器repack实际触发，两波/原CTA/depot两教学页与自然存档齐备。只读metadata3906/0独立列，实际新记录3D播放待QA。详见[正式报告](AMBUSH_PR15_RAILCUT_JOURNEY_20261004.md)，下一片[depot/radio五波](AMBUSH_PR15_DEPOT_RADIO_JOURNEY_PLAN_20261004.md)。旧cover/title/auto/text不重跑，pump高光reference域与正常玩家记录分别记，不混用进度。部署策略非陌生人试玩，实际窗口/llvmpipe不代艺术/完整FX/设备性能；A3预算/耳听45cue与六声景/同候选fullsmoke/可追溯APK及全计划后设备保持待验。网页GPT PLAN/REVIEW unavailable。
 
 单写所有权保持，资产R5源29749157/交付ebedb829接口不变，制作源/GLB/atlas/Blender/生产manifest不改不重跑、WIP不全并，无新资产包需求。普通push Draft PR15、不merge/生产/height/G。可独立并行固定高光文案QA、正常railcut及其原生record只读3D历史QA，使用独立副本/display/XDG，不写主集成代码。

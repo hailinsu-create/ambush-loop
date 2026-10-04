@@ -1,0 +1,363 @@
+{
+  "formal_source_sha": "3b4976d1f4348d828a95bb627b2fb57c8501934d",
+  "game_tree": "10ec85c1676785cd9a3938d9707db5c82b9f1ad1",
+  "native_run": {
+    "source_sha": "3b4976d1f4348d828a95bb627b2fb57c8501934d",
+    "archived_at_utc": "2026-10-04T02:42:22.548869+00:00",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-railcut-3b49-godot",
+      "first_visit_journey_test.gd",
+      "--render"
+    ],
+    "env": {
+      "AMBUSH_JOURNEY_START": "resume",
+      "AMBUSH_JOURNEY_SCOPE": "railcut"
+    },
+    "actual_exit": 0,
+    "uuid": "c24f91de73034aeeacf8edf277b4fd9e",
+    "guard_passed": true,
+    "checks": 185,
+    "failures": 0,
+    "native_inputs": 49,
+    "script_errors": 0,
+    "engine_errors": 0,
+    "window": [
+      1280,
+      720
+    ],
+    "scale": 1.0,
+    "pngs": 14,
+    "records": [
+      {
+        "action": "archive actual native player battle and command recording",
+        "attempt": "93d07e8fdaa687f28d8e05c9432f4724",
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-runtime/native-player-railcut-record.bin",
+        "playback_frames": 896,
+        "playback_schema": 2,
+        "playback_terminal_tick": 6641,
+        "sha256": "154c69778d82b3d7a35b32d7d5ebd8782cd792cb9edad82544495a125af86e53",
+        "raw_bytes": 13717064,
+        "archive": "native-player-railcut-record.bin.gz",
+        "gzip_sha256": "5386154b073847f2e03855ac467cd6e7dc6063856a17455801175f8ec013c2a6"
+      }
+    ],
+    "classification": "Formal native title Continue from authentic030 progress; railcut two waves, actual exhaustion pack refill, SWEEP and original CTA/depot two teaching pages; no grants/reference/fast-forward."
+  },
+  "official_pack": {
+    "source_sha": "3b4976d1f4348d828a95bb627b2fb57c8501934d",
+    "game_tree": "10ec85c1676785cd9a3938d9707db5c82b9f1ad1",
+    "commands": [
+      {
+        "command": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--headless",
+          "--editor",
+          "--path",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/3b4976d1f434/source",
+          "--import"
+        ],
+        "actual_exit": 0
+      },
+      {
+        "command": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--headless",
+          "--path",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/3b4976d1f434/source",
+          "--export-pack",
+          "Linux Desktop",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/3b4976d1f434/player-journey.pck"
+        ],
+        "actual_exit": 0
+      }
+    ],
+    "pack": "/workspace/ambush-pr15/ambush_loop/build/player_journey/3b4976d1f434/player-journey.pck",
+    "sha256": "f7601be2a9a60fc1dda5d2c36bb880cc3ec67d335efbae2d1d05f4c1556c8d1e",
+    "bytes": 23435080,
+    "staging_changes": "Only Linux Desktop custom_features=a0_preview; original title/main scene and rendering configuration kept",
+    "asset_generators_run": false,
+    "shell_actual_exit": 0,
+    "engine_log": {
+      "raw_bytes": 193346,
+      "raw_sha256": "592ed9287bd4ae1794253ee551878ca9ce75f7c40cef39b8caddb196c3424503",
+      "gzip_sha256": "e0451b1124bc526bbdebb98f96cdaf6bffd8686919f3778a037e853fe2aa33b5",
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0
+    }
+  },
+  "native_record_metadata": {
+    "attempt": "93d07e8fdaa687f28d8e05c9432f4724",
+    "checks": 3906,
+    "event_counts": {
+      "door": 1,
+      "fire": 12,
+      "kill": 4,
+      "loot": 4,
+      "no_engage": 14,
+      "repack": 1,
+      "return_fire": 4,
+      "spawn": 4,
+      "terminal": 1
+    },
+    "events": 45,
+    "failures": 0,
+    "frames": 896,
+    "global_wave_offsets": {
+      "0": 0,
+      "1": 196
+    },
+    "mine_events": [],
+    "phase_sequence": [
+      0,
+      1,
+      5,
+      1,
+      5,
+      3
+    ],
+    "playback_terminal_tick": 6641,
+    "raw_sha256": "154c69778d82b3d7a35b32d7d5ebd8782cd792cb9edad82544495a125af86e53",
+    "repack_events": [
+      {
+        "actor_id": 1,
+        "attempt_id": "93d07e8fdaa687f28d8e05c9432f4724",
+        "event_id": "93d07e8fdaa687f28d8e05c9432f4724:1:28",
+        "payload": {
+          "animation_schema": 2,
+          "name": "灰狼",
+          "reload_s": 1.15,
+          "repack_kind": "same_weapon",
+          "source_visual_weapon": "kar98k",
+          "visual_weapon": "kar98k"
+        },
+        "playback_schema": 2,
+        "playback_tick": 4749,
+        "position": "(432.0, 400.0)",
+        "schema": 2,
+        "seq": 28,
+        "target_id": -1,
+        "tick": 58,
+        "timeline_tick": 254,
+        "type": "repack",
+        "wave_id": 1
+      }
+    ],
+    "scope": "Read-only original native serialized record metadata; no gameplay scene, simulation, replay rendering or fixture mutation.",
+    "terminal_tick": 1345,
+    "wave_event_counts": {
+      "0": 23,
+      "1": 22
+    },
+    "command_receipt": "native-record-inspect-receipt.json",
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0
+  },
+  "visual": {
+    "total_formal_png": 14,
+    "unique_id": 14,
+    "unique_sha256": 14,
+    "all_hashes_checked": true,
+    "actually_viewed": [
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_scout_backpack_auto_off",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_scout_backpack_auto_off.png",
+        "sha256": "0aac27a007c00ff874910ad7be31215468fd2d50ad8627884323b0382a380f3b"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_armed_scout",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_armed_scout.png",
+        "sha256": "ffac423d5bb5e2dc66454e6a2241c72680e02151bb4de79ea16ec819d9c57a80"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_wave0_sweep",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_wave0_sweep.png",
+        "sha256": "3e2f795b1591943a8f7ebc1fb1b116e9a5a7364747ef3be7bf7bafb581086aa4"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_wave0_sweep_looted",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_wave0_sweep_looted.png",
+        "sha256": "fc4fcdbce4fd9d5fd8243691a08440f5dad8c5259f0f0b949e6f536083ab61de"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_wave1_alert",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_wave1_alert.png",
+        "sha256": "878282b6fe7a8dd619f8fa6cdf60eb1288c4f180d1ca125027dca3e6d42ef15f"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_wave1_sweep",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_wave1_sweep.png",
+        "sha256": "ffea7513342e0f503710eae6cbeb822a26b2ab804bf262773d1aeb7eda984ef4"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_wave1_sweep_looted",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_wave1_sweep_looted.png",
+        "sha256": "169821401b5af23bde9c62144605d23b51a38793fd29258ffc016aa7f11093e0"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_won",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_won.png",
+        "sha256": "d3510f1a6e55d427dd1e3db98bd03080e8d3bf6b3b327c0293d83629202e0ef8"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_next_night_handoff",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_next_night_handoff.png",
+        "sha256": "19aeb334531bef2f4ec912c0d19b959bfa5dcf2b327dfabde83a57151d925184"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_depot_1280_100_desktop_tutorial_page1",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_depot_1280_100_desktop_tutorial_page1.png",
+        "sha256": "8f0b9c58d378778d9563a870ab70c44fa2a7354059c05d922140b6e513b404c8"
+      }
+    ],
+    "scope": "Bounded native input/behavior/UI. No whole-art, FX, device performance or newcomer usability certification."
+  },
+  "automatic_ammo_pack": {
+    "actual_exhaustion_refill_verified": true,
+    "observations": [
+      {
+        "actual_exhaustion_pack_refill": true,
+        "after": {
+          "ammo": 5,
+          "ammo_pack_used": true,
+          "has_ammo_pack": true,
+          "start_ammo": 5,
+          "weapon": "kar98k"
+        },
+        "last_real_shot": {
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "has_ammo_pack": true,
+          "level": "railcut",
+          "phase": 1,
+          "target": [
+            432.0,
+            152.833404541016
+          ],
+          "tick": 58,
+          "wave": 1,
+          "weapon": "kar98k"
+        },
+        "latest_original_repack_event": {
+          "actor_id": 1,
+          "attempt_id": "93d07e8fdaa687f28d8e05c9432f4724",
+          "event_id": "93d07e8fdaa687f28d8e05c9432f4724:1:28",
+          "payload": {
+            "animation_schema": 2,
+            "name": "灰狼",
+            "reload_s": 1.15,
+            "repack_kind": "same_weapon",
+            "source_visual_weapon": "kar98k",
+            "visual_weapon": "kar98k"
+          },
+          "playback_schema": 2,
+          "playback_tick": 4749,
+          "position": "(432.0, 400.0)",
+          "schema": 2,
+          "seq": 28,
+          "target_id": -1,
+          "tick": 58,
+          "timeline_tick": 254,
+          "type": "repack",
+          "wave_id": 1
+        },
+        "level": "railcut",
+        "operator": 1,
+        "phase": 1,
+        "tick": 58,
+        "wave": 1
+      }
+    ],
+    "boundary": "Natural original rifle last shot ammo0 then original same-weapon refill5/usedtrue. No synthetic ammo assignment, forced shot, grants or custom enemies. Loot/resupply are separately recorded."
+  },
+  "ownership": {
+    "production_runtime_changed_since_2d5": false,
+    "changed_game_files": [
+      "scripts/first_visit_journey_test.gd"
+    ],
+    "asset_generators_run": false,
+    "asset_source_sha": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+    "asset_delivery_sha": "ebedb829e3263abbeb6dd266905f24a3869fa281"
+  },
+  "xorg": {
+    "display": ":112",
+    "owned_pid": 86974,
+    "actual_exit": 0,
+    "raw_log_sha256": "6d7f7937f4fd6ebb6d00f302b31d796873e5087cb564a9309dadea804963745f",
+    "log_lossless_archive": "../xorg.log.gz",
+    "raw_stdout_sha256": "7891ac5736732cf096a1f3630ab0eceb285a107f35ec2db731ac893b03f5dbc1",
+    "stdout_lossless_archive": "../xorg.stdout.gz"
+  },
+  "prior_history": [
+    {
+      "manifest": "../20261004-pr15-remaining-journey/file-manifest.json",
+      "files": 84,
+      "original_bytes_rechecked": true
+    },
+    {
+      "manifest": "../20261004-pr15-pump-journey/file-manifest.json",
+      "files": 38,
+      "original_bytes_rechecked": true
+    },
+    {
+      "manifest": "../20261004-pr15-pump-highlight/file-manifest.json",
+      "files": 47,
+      "original_bytes_rechecked": true
+    }
+  ],
+  "prior_development_runs": [],
+  "next": "Resume this authentic ending-player-progress/depot via original title Continue; depot2/radio3 remain. Actual readonly 3D replay QA for this record pending. FullFX/A3/ears/APK/device remain pending."
+}
