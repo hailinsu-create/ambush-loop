@@ -265,9 +265,16 @@ func reset_buffer() -> bool:
 
 static func own_rss_bytes() -> int:
 	if OS.get_name()!="Linux" or not FileAccess.file_exists("/proc/self/status"): return -1
-	for line: String in FileAccess.get_file_as_string("/proc/self/status").split("\n"):
+	# procfs reports file length zero; get_file_as_string uses that length.
+	var status := FileAccess.open("/proc/self/status",FileAccess.READ)
+	if status==null: return -1
+	while not status.eof_reached():
+		var line := status.get_line()
 		if line.begins_with("VmRSS:"):
-			return int(line.substr(6).strip_edges().get_slice(" ",0))*1024
+			var rss := int(line.substr(6).strip_edges().get_slice(" ",0))*1024
+			status.close()
+			return rss
+	status.close()
 	return -1
 
 
