@@ -27,6 +27,13 @@ var captures: Array = []
 var outcomes: Array = []
 var stopped := false
 var selected_levels := 0
+var collector_lifetimes: Array = []
+
+func _new_collector() -> void:
+    collector=Collector.new();root.add_child(collector)
+    collector_lifetimes.append({"chunk_index":collector_lifetimes.size(),"collector_instance_id":collector.get_instance_id(),
+        "engine_frames_at_hook":Engine.get_frames_drawn(),"ticks_usec_at_hook":Time.get_ticks_usec(),
+        "identity_scope":"raw frame is this collector's monotonic callback sequence; join chunks by unique instance/chunk and global ticks_usec, not a reused run_id"})
 
 func _init() -> void:
     if not Guard.check(): quit(91); return
@@ -53,6 +60,7 @@ func _archive(label: String) -> Dictionary:
     var path := directory+"/"+label+"-record.bin"
     _check(not FileAccess.file_exists(path),"unique original source archive " + label)
     var file := FileAccess.open(path,FileAccess.WRITE)
+    if file==null:_check(false,"source archive opens " + label);return {}
     file.store_buffer(_log_bytes(main.battle_log));file.close()
     var result := {"label":label,"path":path,"sha256":FileAccess.get_sha256(path),
         "level_id":main.level.level_id,"attempt_id":main.battle_log.attempt_id,
@@ -124,17 +132,19 @@ func _live_reference(case: Array) -> bool:
         main.sim.set_speed(1.0)
         main.set_process(true)
         if wave==0:
-            await _dwell(id+"-live-ALERT-entry",2.0,{"kind":"original live simulation callbacks","wave":wave,"speed":1.0})
+            await _dwell(id+"-live-ALERT-entry",2.0,{"kind":"original live simulation callbacks","phase":1,"wave":wave,"speed":1.0})
             _check(main.phase==main.Phase.WATCHING,"reference still ALERT for pause control " + id)
             main._on_pause_pressed()
             var pause_tick: int=main.sim.tick
             var pause_source := Context.digest(_log_bytes(main.battle_log))
-            await _dwell(id+"-paused-ALERT",2.0,{"kind":"original pause API; main/presenter still process","wave":wave},true)
+            await _dwell(id+"-paused-ALERT",2.0,{"kind":"original pause API; main/presenter still process","phase":1,"wave":wave},true)
             _check(main.sim.paused and main.sim.tick==pause_tick and Context.digest(_log_bytes(main.battle_log))==pause_source,"pause freezes original sim/source " + id)
             await _capture(id+"-paused-ALERT")
             main._on_pause_pressed()
         var label := id+"-live-ALERT-wave%d" % wave
-        collector.mark(label,true,"",{"kind":"original live simulation callbacks, no direct ticks","wave":wave,"speed":1.0})
+        var live_receipt := {"kind":"original live simulation callbacks, no direct ticks","phase":1,"wave":wave,"speed":1.0,
+            "configuration":Context.workload(main),"boundary_scope":"actual transition-phase rows retained; phase summaries select actual phase1"}
+        collector.mark(label,true,"",live_receipt)
         var start := Time.get_ticks_usec()
         var timeout := start+180_000_000
         while main.phase==main.Phase.WATCHING and Time.get_ticks_usec()<timeout:await process_frame
@@ -142,14 +152,14 @@ func _live_reference(case: Array) -> bool:
         _untimed(label+"-finish")
         main.set_process(false)
         segments.append({"label":label,"actual_seconds":float(end-start)/1_000_000,
-            "receipt":{"kind":"original live simulation callbacks","wave":wave,"speed":1.0},"source_immutable":false})
+            "receipt":live_receipt,"source_immutable":false})
         _check(main.phase==main.Phase.SWEEP,"original live wave reaches SWEEP " + id+" "+str(wave))
         if failures>0:return false
         wave_ends.append(main.sim.tick)
         main.raid_vacuum_loot() # Original reference helper, outside timing; never called a normal pickup.
         if wave==main.level.wave_count()-1:_check(_command_walk(),"legal last SWEEP command starts movement " + id)
         main.set_process(true)
-        await _dwell(id+"-live-SWEEP-wave%d" % wave,2.0,{"kind":"original live SWEEP command callbacks","wave":wave,"vacuum_before_window":true})
+        await _dwell(id+"-live-SWEEP-wave%d" % wave,2.0,{"kind":"original live SWEEP command callbacks","phase":5,"wave":wave,"vacuum_before_window":true})
         main.set_process(false)
         main._on_sweep_commit()
     _check(main.phase==main.Phase.WON and main.raid.waves_cleared==main.level.wave_count(),"all authored reference waves reach original WON " + id)
@@ -157,7 +167,7 @@ func _live_reference(case: Array) -> bool:
         "terminal":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"reason":main.battle_log.terminal_reason})
     await _capture(id+"-original-WON")
     main.set_process(true)
-    await _dwell(id+"-live-WON",2.0,{"kind":"original terminal presentation callbacks"},true)
+    await _dwell(id+"-live-WON",2.0,{"kind":"original terminal presentation callbacks","phase":3},true)
     main.set_process(false)
     return failures==0
 
@@ -177,6 +187,8 @@ func _select_source(phase: int, feature: String) -> Dictionary:
         if int(snap.data.phase)!=phase:continue
         main.replay.set_tick(snap.playback_tick)
         var frame: Dictionary=View.capture(main)
+        _check(frame.recorded_phase==phase,"actual selected last-at-tick frame retains requested recorded phase")
+        if frame.recorded_phase!=phase:continue
         var active: Array = Shot.active(frame) if feature=="shot" else (Tool.active(frame) if feature=="tool" else (Dust.active(frame) if feature=="dust" else []))
         if active.size()>score:
             score=active.size()
@@ -270,7 +282,7 @@ func _tool_attempt(case: Array) -> Dictionary:
     _check(main.phase==main.Phase.FAILED and main.battle_log.terminal_reason=="abort","original API abort records FAILED " + id)
     await _capture(id+"-original-FAILED-abort")
     main.set_process(true)
-    await _dwell(id+"-live-FAILED-abort",2.0,{"kind":"actual original abort terminal presentation, not natural firefight loss"},true)
+    await _dwell(id+"-live-FAILED-abort",2.0,{"kind":"actual original abort terminal presentation, not natural firefight loss","phase":2},true)
     main.set_process(false)
     return _archive(id+"-tool-and-abort-reference")
 
@@ -284,18 +296,41 @@ func _seal(label: String) -> void:
     var receipt: Variant=JSON.parse_string(FileAccess.get_file_as_string(path+"/metadata.json"))
     if not receipt is Dictionary:_check(false,"actual chunk metadata exists " + label);return
     _check(receipt.chunk_source_and_buffer_valid and receipt.receipt_stable and receipt.warm_import_proof_complete and not receipt.run_incomplete and receipt.run_overflow_rows==0,"actual complete valid metric chunk " + label)
+    _check(receipt.raw_sha256==FileAccess.get_sha256(path+"/raw.csv") and receipt.rows==collector.row_count and receipt.metadata.source_proof_before.receipt_sha256==receipt_sha and receipt.source_proof_after.receipt_sha256==receipt_sha,"actual raw/count/fixed receipt hashes exact " + label)
     var accepted := 0
+    var by_segment: Dictionary={}
     for index: int in collector.row_count:
         var row: Array=collector.row_at(index)
+        _check(row.size()==59,"actual exact raw protocol width " + label)
         if row[4]==1:
             accepted+=1
             _check(row[31]==1 and row[34]==1 and row[2]>0 and row[5]=="" and is_finite(row[30]) and row[30]>=0,"actual accepted source row ready/finite " + label)
+            if not by_segment.has(row[3]):by_segment[row[3]]=[]
+            by_segment[row[3]].append(row)
+    var summaries: Array=[]
+    for declared: Dictionary in segments:
+        if not str(declared.label).begins_with(main.level.level_id+"-"):continue
+        var measured_rows: Array=by_segment.get(declared.label,[])
+        var spec: Dictionary=declared.receipt
+        var phase_rows: Array=measured_rows.filter(func(row:Array)->bool:return row[9]==spec.phase) if spec.has("phase") else measured_rows
+        _check(phase_rows.size()>=3,"every declared timed window has actual phase samples " + str(declared.label))
+        if spec.has("selected_source"):
+            var selected: Dictionary=spec.selected_source
+            var configuration: Dictionary=spec.configuration
+            _check(measured_rows.all(func(row:Array)->bool:return row[9]==4 and row[10]==selected.recorded_phase and row[7]==selected.attempt_id and row[8]==selected.wave and row[11]==selected.frame_seq and row[13]==selected.tick and row[20]==spec.policy and row[17]==configuration.yaw_deg and row[18]==configuration.pitch_deg and row[19]==configuration.view_size and row[32]==1),"actual matrix raw exact source/phase/pose/policy " + str(declared.label))
+            var column: int=21 if selected.feature=="shot" else (25 if selected.feature=="tool" else (27 if selected.feature=="dust" else -1))
+            if column>=0:_check(measured_rows.any(func(row:Array)->bool:return row[column]>0),"actual rendered pool positive for selected original source " + str(declared.label))
+        summaries.append({"label":declared.label,"accepted":measured_rows.size(),"requested_phase_samples":phase_rows.size(),
+            "transition_phase_rows_retained":measured_rows.size()-phase_rows.size()})
     _check(accepted>=3,"actual accepted metric rows exist " + label)
+    var first_usec: int=int(collector.row_at(0)[1]) if collector.row_count>0 else -1
+    var last_usec: int=int(collector.row_at(collector.row_count-1)[1]) if collector.row_count>0 else -1
+    if not chunks.is_empty():_check(first_usec>chunks.back().last_usec,"different collector chunks advance global monotonic time")
     chunks.append({"path":path,"raw_sha256":FileAccess.get_sha256(path+"/raw.csv"),"rows":collector.row_count,
-        "accepted":accepted,"save_error":error,"valid":failures==0 and error==OK})
-    if failures==0 and not stopped:
-        _check(collector.reset_buffer(),"accepted source chunk reset " + label)
-        collector.start()
+        "accepted":accepted,"save_error":error,"valid":failures==0 and error==OK,"segment_summaries":summaries,
+        "first_usec":first_usec,"last_usec":last_usec,"collector_instance_id":collector.get_instance_id(),
+        "segment_receipts":receipt.segments.size(),"segment_capacity":Collector.SEGMENT_CAPACITY,
+        "symbol_overflow":receipt.symbol_overflow,"run_overflow_rows":receipt.run_overflow_rows})
 
 func _run() -> void:
     if DisplayServer.get_name()=="headless":quit(2);return
@@ -307,14 +342,14 @@ func _run() -> void:
     source_before=Context.proof(receipt_sha)
     _check(source_before.get("window_control_verified",false),"complete fixed loaded-source receipt before scene")
     if failures>0:_finish();return
-    collector=Collector.new();root.add_child(collector)
+    _new_collector()
     change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
     await process_frame
     await process_frame
     main=current_scene
     var scope := OS.get_environment("AMBUSH_A3_LEVEL")
     _check(scope.is_empty() or CASES.any(func(case:Array)->bool:return str(case[0])==scope),"requested actual level scope exists")
-    if failures>0:_finish();return
+    if failures>0:await _seal("invalid-scope");_finish();return
     for case: Array in CASES:
         if not scope.is_empty() and scope!=case[0]:continue
         selected_levels+=1
@@ -323,6 +358,7 @@ func _run() -> void:
             await _seal(str(case[0])+"-partial")
             break
         var original := _archive(str(case[0])+"-primary-reference")
+        if original.is_empty():await _seal(str(case[0])+"-archive-failure");break
         await _primary_history(case[0],original)
         if failures==0 and not stopped:
             var tools := await _tool_attempt(case)
@@ -335,6 +371,15 @@ func _run() -> void:
         await _seal(str(case[0])+"-actual-source-metrics")
         print("A3_CAMPAIGN_LEVEL_END level=%s checks=%d failures=%d stopped=%s" % [case[0],checks,failures,stopped])
         if failures>0 or stopped:break
+        if case!=CASES.back() and (scope.is_empty()):
+            var old_id: int=collector.get_instance_id()
+            var old: WeakRef=weakref(collector)
+            collector.queue_free()
+            await process_frame
+            await process_frame
+            _check(not is_instance_valid(old.get_ref()) and RenderingServer.frame_post_draw.get_connections().all(func(item:Dictionary)->bool:return item.callable.get_object_id()!=old_id),"accepted sealed collector releases lifetime tables/disconnects before next level")
+            if failures>0:break
+            _new_collector() # New lifetime only after previous raw+metadata archived; no overflow/reset erasure.
     source_after=Context.proof(receipt_sha)
     _check(source_after.get("window_control_verified",false),"same fixed source/engine/warm receipt after source workload")
     if scope.is_empty() and not stopped:_check(outcomes.size()==6 and outcomes.reduce(func(total:int,item:Dictionary)->int:return total+item.waves,0)==13,"all six original reference levels/thirteen waves measured")
@@ -350,6 +395,7 @@ func _finish() -> void:
         "checks":checks,"failures":failures,"stopped":stopped,"level_scope":OS.get_environment("AMBUSH_A3_LEVEL"),
         "complete":failures==0 and not stopped and outcomes.size()==selected_levels and selected_levels>0,
         "environment":Context.environment(),"chunks":chunks,"segments":segments,"records":records,"captures":captures,"outcomes":outcomes,
+        "collector_lifetimes":collector_lifetimes,
         "scope":"original live callback reference/API sources + exact paused recorded16-pose/policy views, bounded3s natural1x/2x; no whole/native normal/device/FINAL acceptance",
         "limitations":"post-draw FX peaks can miss between-frame simulation events; representative16 views omit48 Cartesian combinations; warm imports not cold boot; llvmpipe/GPUtime unavailable/pipeline unknown"},"  "))
     file.close()
