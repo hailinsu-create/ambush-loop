@@ -165,7 +165,7 @@ func _history_cases() -> void:
 	main.presentation_3d.refresh()
 	_check(main.phase==main.Phase.FAILED and _diag().active.is_empty(),"original abort clears saved blast visuals")
 	var nodes:=pool.get_children().map(func(node:Node)->WeakRef:return weakref(node))
-	var pool_ref:=weakref(pool)
+	var pool_ref: WeakRef=weakref(pool)
 	main._return_title()
 	await process_frame
 	await process_frame
