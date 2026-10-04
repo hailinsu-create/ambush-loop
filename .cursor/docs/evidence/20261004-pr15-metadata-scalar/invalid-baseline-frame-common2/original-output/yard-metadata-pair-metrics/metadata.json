@@ -1,0 +1,312 @@
+{
+  "chunk_source_and_buffer_valid": true,
+  "complete_buffer": true,
+  "extra": {
+    "scope": "controlled actual source A3; not native normal/device/FINAL",
+    "segments": []
+  },
+  "metadata": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "buffer": {
+      "allocation_delta_including_tables": 15492388,
+      "capacity": 32768,
+      "columns": 59,
+      "payload_bytes": 15466496,
+      "scope": "fixed numeric payload; metadata/symbol strings/allocator overhead also resident; never subtract payload as total instrumentation memory",
+      "static_after_allocate": 56503999,
+      "static_before_allocate": 41011611,
+      "symbol_capacity": 1024
+    },
+    "cold_scope": "hook exists before caller changes production scene; engine boot/autoloads before script are not captured",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "format": 2,
+    "monitor_ids": [
+      1,
+      2,
+      13,
+      12,
+      11,
+      15,
+      16,
+      14,
+      4,
+      7,
+      9,
+      8,
+      10,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "monitor_names": [
+      "TIME_PROCESS",
+      "TIME_PHYSICS_PROCESS",
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME",
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME",
+      "RENDER_TOTAL_OBJECTS_IN_FRAME",
+      "RENDER_TEXTURE_MEM_USED",
+      "RENDER_BUFFER_MEM_USED",
+      "RENDER_VIDEO_MEM_USED",
+      "MEMORY_STATIC",
+      "OBJECT_COUNT",
+      "OBJECT_NODE_COUNT",
+      "OBJECT_RESOURCE_COUNT",
+      "OBJECT_ORPHAN_NODE_COUNT",
+      "PIPELINE_COMPILATIONS_CANVAS",
+      "PIPELINE_COMPILATIONS_MESH",
+      "PIPELINE_COMPILATIONS_SURFACE",
+      "PIPELINE_COMPILATIONS_DRAW",
+      "PIPELINE_COMPILATIONS_SPECIALIZATION"
+    ],
+    "monitor_support": {
+      "MEMORY_STATIC": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_ORPHAN_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_RESOURCE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "PIPELINE_COMPILATIONS_CANVAS": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_DRAW": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_MESH": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "PIPELINE_COMPILATIONS_SURFACE": {
+        "backend": "gl_compatibility",
+        "scope": "enum readable; zero is unproven. Raw retained, exclude from supported budgets",
+        "status": "unknown_backend_support",
+        "supported": null
+      },
+      "RENDER_BUFFER_MEM_USED": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TEXTURE_MEM_USED": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "RENDER_VIDEO_MEM_USED": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "TIME_PHYSICS_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "TIME_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      }
+    },
+    "monitor_update_scope": "some engine monitors lag up to one second; early render counters need two drawn frames",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 124644,
+    "pipeline_zero_scope": "unknown backend support is not proof of no compilation; exclude unknown from supported summaries",
+    "render_setup_supported": true,
+    "rendering_driver": "opengl3",
+    "rendering_method": "gl_compatibility",
+    "rss_ready_bytes": 266641408,
+    "run_id": "be6330ed7d454a77bbd15daf2d3a5da3",
+    "scope": "wall post-draw intervals, engine counters and explicit workload receipts; not Android performance",
+    "source_proof_before": {
+      "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+      "complete_source_tree_verified": true,
+      "consumer_commit": "41ff06cf8d01ce01b0d6ca1e33247daac9210bc1",
+      "consumer_game_tree": "ec73ed78833b5608919ae98e39ba7a58c4e03f41",
+      "engine": {
+        "bytes": 146414384.0,
+        "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+      },
+      "imported_cache_files_verified": 986,
+      "loaded_resource_scope": "complete existing warm imported inventory",
+      "producer_records": [
+        {
+          "attribution": "caller-declared producer commit; actual original bytes verified",
+          "bytes": 5589224.0,
+          "level_id": "yard",
+          "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+          "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+          "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+        }
+      ],
+      "receipt_sha256": "afe135c7e0ea78addfa710d71395e1fc17aaab6a795e659a0b322a7572ba32bb",
+      "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+      "source_files_verified": 988,
+      "verified": true
+    },
+    "source_sha": "41ff06cf8d01ce01b0d6ca1e33247daac9210bc1",
+    "timer_scope": "callback entry through scalar table/counter writes and row_count increment; final timestamp field store and return excluded; not whole frame CPU/GPU time",
+    "vendor": "Mesa",
+    "xdg_cache": "/workspace/pr15-metadata-baseline-41ff/ambush_loop/build/ambush_test_runs/be6330ed7d454a77bbd15daf2d3a5da3/cache"
+  },
+  "overflow_rows": 0,
+  "raw_sha256": "6baba8c4523bf02f02550b0d698df19b155e0f8a1d0a132e9c377e79efc2f070",
+  "receipt_stable": true,
+  "rows": 34,
+  "rss_save_bytes": 920895488,
+  "run_incomplete": false,
+  "run_overflow_rows": 0,
+  "segments": [
+    {
+      "frame_boundary": 0,
+      "label": "cold-production-scene",
+      "max_fps": 0,
+      "reason": "cold_scene_loading",
+      "row_boundary": 0,
+      "rss_bytes": 266649600,
+      "scale": 1.0,
+      "ticks_usec": 13305750,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 1,
+      "label": "original-replay-entry",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 1,
+      "rss_bytes": 877334528,
+      "scale": 1.0,
+      "ticks_usec": 23767442,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 1,
+      "label": "yard-static-confirmed-shot-warmup",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 1,
+      "rss_bytes": 877404160,
+      "scale": 1.0,
+      "ticks_usec": 25512823,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 34,
+      "label": "yard-metadata-pair-metrics-seal",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 34,
+      "rss_bytes": 920887296,
+      "scale": 1.0,
+      "ticks_usec": 31300939,
+      "timed": false,
+      "vsync": 0,
+      "window": "(1280, 720)",
+      "workload": {}
+    }
+  ],
+  "source_proof_after": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "41ff06cf8d01ce01b0d6ca1e33247daac9210bc1",
+    "consumer_game_tree": "ec73ed78833b5608919ae98e39ba7a58c4e03f41",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5589224.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+        "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+        "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+      }
+    ],
+    "receipt_sha256": "afe135c7e0ea78addfa710d71395e1fc17aaab6a795e659a0b322a7572ba32bb",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 988,
+    "verified": true
+  },
+  "symbol_overflow": 0,
+  "warm_import_proof_complete": true
+}
