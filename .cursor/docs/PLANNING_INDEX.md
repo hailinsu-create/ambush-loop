@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [初始单候选六关正常基线报告](AMBUSH_PR15_UNIFIED_BASELINE_20261004.md) | 固定a05/单次官方PCK23493668 SHA313cf；fresh整轮native六关13波1193/0 actual0 E0/S0、致谢0→81滚动/返回、六新raw/自然cfg封存166files；92图核/11图看、五旧raw不变。metadata15807/0不代3D；初始15807/6诊断保留。H装备66/生命周期30/时间67/旧FX30/参考campaign14028各0；完整smoke actual54/ERROR1早停journal锁，待test fixture修、六新record3D及完整FX/A3/最终candidate/APK/耳听设备。R5保持、父端cdb/392闭不重开。 |
 | [统一云基线接续](AMBUSH_PR15_UNIFIED_BASELINE_PLAN_20261004.md) | static fcf/Intel877作者专项已交4b；先只改正常旅程输出独立label/UUID、逐关自然cfg原件、实际radio致谢open/scroll/return收据，all必给label防旧native覆盖→固定初始单SHA/PCK正常新13波及六newrecord实际3D。此为待执行初始基线，不代FX源变化后的最终candidate/完整FX-A3/设备；父端cdb/392已闭不重开，R5资产保持。 |
 | [父端最新QA归因](AMBUSH_PR15_ESCAPE_INTEL_20261004.md) | QA pwd actual0恢复/六旧包hash不变；cdb timeline minimal50/0、修正expect后3D114/0、旧字段payoff12/0各actual0限定闭合，首814/1 actual1保留、不子矩阵当整绿；392 loot原sameevent4/1→4/0、history/3D41/0 actual0限定闭合。四新包hash/图看、无新prodP1/P2，无QA运行/阻塞；两scope不重开，fcf/877/统一candidate13波/设备待；来讯未给E/S计数不补推。 |
 | [真实逃逸Intel报告](AMBUSH_PR15_ESCAPE_INTEL_20261004.md) / [统一候选清单](AMBUSH_PR15_UNIFIED_CANDIDATE_EVIDENCE_PLAN_20261004.md) | fixed877追加保存spawn/escape context1/原attempt-wave-actor/local-global-playback，实际echo5第三波0.5s入场/15.9s逃逸、retry仍历史3波，不猜总表/当前run；5ca负H18/R21各8fail actual1→fixed H70/R73各0actual0 E0/S0，缺接口guard52边界；25坏/缺context及外关/旧8参数/MAX5/复制回退，六物理图核/看6无XTest。49事件/快照/终端只读双射身份比较0，五native旧原件SHA保持，完整smoke/旧2D/normal13/六newrecord3D/FX-A3待。更新smoke契约未跑，后先隔离旅程输出→FX→冻结，R5/资产保持、耳听/设备后置。cdb/392/fcf/877独立QA待，父端a794/0bfe限定关闭与radio原件3D归因保持。 |

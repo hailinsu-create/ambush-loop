@@ -85,3 +85,5 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 ## 2026-10-04 真实逃逸Intel及父端QA接续
 
 作者fixed877decb0ea14d6c3c0a833e4d6948c7ee549514f新记忆追加保存spawn/escape事件身份及wave/local/global/playback context1，实际第三波echo5 0.5s出发/15.9s逃逸、原retry仍历史第3波；旧8参数/坏context中性回退不升级bytes，negative5ca H18/R21各8fail actual1→fixed H70/R73各0actual0 E0/S0，6物理图核/看6无XTest，49事件/快照/终端只读比较actual0，五旧native SHA不变。37证据及未验项见[报告](AMBUSH_PR15_ESCAPE_INTEL_20261004.md)，完整smoke/旧2D/统一新13波/六record3D/完整FX/A3/APK仍待。父端随后QA pwd exit0恢复、六旧包hash保持，cdb50/114/12三限定各0actual0（首814/1 actual1保全）、392原sameevent4/1→4/0/history3D41/0actual0限定关闭，无新prodP1/P2、无QA运行/阻塞；两scope不重开，fcf/877与统一candidate待独立接受，未给E/S计数不补推。资产/R5/单写边界保持、耳听/设备后置。
+
+2026-10-04 初始单candidate a05云基线完成：官方单次PCK/hash固定，fresh六关13波原生旅程1193/0 actual0 E0/S0、六新record/自然cfg/实际credits scroll0→81/return封存166files，92图核/11图看，五旧raw不变。独立H装备66/生命周期30/时间67/旧FX30/六关reference14028各0；完整smoke actual54/ERROR1 journal模态fixture早停原失败保留。只读metadata15807/0不代六record真实3D。下一test-only修smoke流程及新记录3D→FX-A1/A2/A3→最终candidate全部门/完整normal13→可追溯APK，耳听设备后置；该初始基线不代最终FX/A3接受。详[报告](AMBUSH_PR15_UNIFIED_BASELINE_20261004.md)，R5/制作所有权/SCOUT→ALERT→SWEEP保持，不merge/生产/height/G。
