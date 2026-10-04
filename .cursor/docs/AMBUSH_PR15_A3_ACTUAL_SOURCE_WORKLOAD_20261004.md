@@ -2,7 +2,7 @@
 
 2026-10-04，接Window前置交付c80d3f17a0d37cdb0049c48cf3f97a319106e1da（37/0、168/0/16windows各actual0 E0/S0；仅stationary仪器控制）。新候选7c46264165861bf5b2abea380800f1b041ffa297仅新增test-only a3_campaign_metrics_test.gd与双Guard exactentry/Dummy allowlist。尚未Godot运行，bash-n/diffcheck actual0；PS1未运行。生产/asset source全部保持。source-only API map见前置证据，不能代新workload结果。
 
-先AMBUSHA3_LEVEL=yard（实际变量名AMBUSH_A3_LEVEL）运行有界原Window集成预检、核原source/帧/camera/分段/PNG，不称六关A3已通过。候选若失败保原source/log/raw/exit后独立修；只在预检实际通过后同固定candidate/source/engine/warm proof运行正式all scope。每次唯一owned display/单engine，明确START/END与actualsource/config/support；原67不重跑，不并行另一perf/QA engine。
+先AMBUSH_A3_LEVEL=yard运行有界原Window集成预检、核原source/帧/camera/分段/PNG，不称六关A3已通过。候选若失败保原source/log/raw/exit后独立修；只在预检实际通过后同固定candidate/source/engine/warm proof运行正式all scope。每次唯一owned display/单engine，明确START/END与actualsource/config/support；原67不重跑，不并行另一perf/QA engine。
 
 原域producer：tutorialseen/_load_level API、SCOUT合法_command_move_selected并originalmain/presenter自动callbacks；随后原raid_prepare_ref授枪/工具和cover snap（warehouse hold-pack/depot-radio tripwire），alarm原API。timed ALERT完全original process/_sim_tick callbacks，自然直到SWEEP，不在timed直接tick；第一波另原pause控制，source/sim tick不动，_night_timer原wall更新不冒称所有backend不变。原vacuum helper在untimed，最后SWEEP合法move自然记录，commit原API进入下一波或WON。完整六关13波原referenceWON来源与终端/events全封，不叫fresh native normal/自然progress验收。
 
@@ -15,3 +15,6 @@
 下一actual：准备固定provenance，用官方4.7.2和Guard a3_campaign_metrics_test.gd --render、1280×720/scale1/actualvsync与max_fps0/Compatibility/Dummy，先yard预检再all START/END；后离线严格raw/proof/segment source/分布/observedFX/资源峰值及原PNG核验，按云实测选择独立优化。GPUtime unavailable/pipeline unknown/llvmpipe/cgroup visible非Android30/60FPS或热稳定。旧INITIAL与schema1只兼容，不用旧record作新FX负载；整轮1×2×与新normal13在FINAL另验。
 
 此计划替代A3_COLLECTION_PLAN中尚无驱动的状态，保留原性能/来源/最终门；不替代全资产/十枪姿态LOD/艺术/长期驻留或FINAL/API/设备接受。窗口前置已验范围与新workload未运行范围分开。资产侧可并行制作/姿态LOD艺术独立验交，主作者不改R5/ArtSource/build_yard_kit/GLB/Blender/atlas/manifest，不merge生产height-G，耳听/模拟器/真机依用户顺序最后。
+
+
+运行前只读审查发现7c462共享collector跨reset保留segment/symbol表，六关会在第二关超512；尚未任何engine运行，非实际Godot反例。固定a31abb8a09196f4e9b6ce4d5f6a455dc78bf389d改为每关accepted封存后实际free/disconnect再newcollector，失败不重置/掩盖；每实例生命周期hash/容量单独封，overall任一failure不通过。rawframe按chunk/instance局部callbackseq+全局ticks_usec联合身份，不把新实例seq当同实例绝对engineframe。每声明segment>=3实际phase样本；matrix raw必须currentREPLAY4/实际recordedphase/frame/attempt-wave/PBtick/pose-policy/mainauto1与selectedFXpool>0；正常live ALERT→SWEEP boundary行保原raw，phase预算按actualphase筛选。exact59/count/源与raw/固定receipt hash全部核，choice phase由实际last-at-tick frame确认。当前准备新proof/唯一ownedXorg125，开始yard真实集成预检，through后同fixedcandidate正式all。原前置c80已封/push/readback，formal仍未START。
