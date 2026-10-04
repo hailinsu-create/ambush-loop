@@ -8,6 +8,7 @@ var snapshots: Array = [] # every ~0.1s
 var terminal_tick: int = -1
 var terminal_reason: String = ""
 const SCHEMA_VERSION := 2
+const Weapons := preload("res://scripts/raid/weapon_catalog.gd")
 var attempt_id: String = ""
 var wave_id: int = 0
 var wave_offset: int = 0
@@ -182,7 +183,7 @@ func format_event(ev: Dictionary) -> String:
 		"kill":
 			return "%.1fs  敌%d 被击毙" % [t, ev["actor_id"]]
 		"loot":
-			return "%.1fs  队员%d 拾取 +%s弹" % [t, ev["actor_id"], str(ev["payload"].get("amount", "?"))]
+			return "%.1fs  队员%d 拾取 %s" % [t, ev["actor_id"], _loot_description(ev.get("payload", {}))]
 		"empty":
 			return "%.1fs  队员%d 弹药耗尽" % [t, ev["actor_id"]]
 		"op_down":
@@ -225,6 +226,17 @@ func format_event(ev: Dictionary) -> String:
 			return "%.1fs  终局：%s" % [t, str(ev["payload"].get("reason", "?"))]
 		_:
 			return "%.1fs  %s" % [t, typ]
+
+
+func _loot_description(payload: Dictionary) -> String:
+	# Describe the saved pickup, never infer an item or gained ammo from live
+	# equipment. Firearm crate amounts are carried ammo; other items are counts.
+	var kind: String = str(payload.get("kind", ""))
+	var known: bool = kind in Weapons.all_ids() or Weapons.is_typed_ammo(kind) or kind == "radio_part"
+	var label: String = Weapons.display_name(kind) if known else ("物品（类型未记录）" if kind == "" else "物品（%s）" % kind)
+	var amount: Variant = payload.get("amount")
+	var quantity: String = "?" if amount == null else str(amount)
+	return "%s（%s %s）" % [label, "携弹" if Weapons.is_firearm(kind) else "数量", quantity]
 
 
 func _no_engage_reason_zh(reason: String) -> String:
