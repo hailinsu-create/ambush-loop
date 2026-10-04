@@ -30,12 +30,12 @@ func _run() -> void:
 	var pair: Array=await _reset()
 	var owner: OperatorUnit=pair[0]
 	var enemy: EnemyRunner=pair[1]
-	owner.global_position=main.grid.cell_to_world_center(Vector2i(25,13))
+	owner.global_position=main.grid.cell_to_world_center(Vector2i(25,12))
 	enemy.global_position=Vector2(960,576)
 	for op: OperatorUnit in main.operators:
 		if op!=owner:op.global_position=Vector2(1024,640)
-	var destination: Vector2=main.grid.cell_to_world_center(Vector2i(25,18))
-	_check(not main.grid.is_blocked(25,13) and not main.grid.is_blocked(25,18),"explicit source fixture uses authored open-ground cells")
+	var destination: Vector2=main.grid.cell_to_world_center(Vector2i(25,17))
+	_check(not main.grid.is_blocked(25,12) and not main.grid.is_blocked(25,17),"explicit source fixture uses authored open-ground cells")
 	var grenade:=_throw(owner,destination)
 	await _blast([grenade])
 	main._on_pause_pressed() # Original paused ALERT; main automatic process already disabled.
@@ -43,9 +43,9 @@ func _run() -> void:
 	main._update_hud()
 	var frame:=ViewState.capture(main)
 	pool=main.presentation_3d.get_node("ToolFx")
-	reader=load(READER_PATH) # Retain the Script throughout its static call and lambdas.
-	var actual: Array=reader.active(frame)
-	_check(grenade.spent() and actual.size()==1 and actual.front().victims.is_empty() and main.sim.paused,"real original empty blast confirmed and original ALERT pause reached")
+	pool.update_frame(frame,false) # Exercise the original presenter reader and pool path.
+	var actual: Array=_diag().active
+	_check(grenade.spent() and actual.size()==1 and frame.tool_fx.front().victims.is_empty() and main.sim.paused,"real original empty blast confirmed and original ALERT pause reached")
 	var original:=_state(main.battle_log)
 	var live: Dictionary=main._snapshot_data().duplicate(true)
 	var backend:=var_to_bytes([main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum,main.operators.map(func(op:OperatorUnit)->Array:return [op.global_position,op.hp,op.ammo,op.grenades]),enemy.global_position,enemy.hp])
