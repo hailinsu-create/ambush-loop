@@ -105,10 +105,18 @@ func _pool_cases(frame: Dictionary, label: String) -> void:
 		record.effect_id=frame.attempt_id+":tool_fx:"+str(index)
 		record.tool_id=frame.attempt_id+":tool:"+str(index)
 		capacity.tool_fx.append(record)
-	pool.update_frame(capacity,false)
-	_check(_diag().capacity==8 and _diag().mesh_nodes==40 and _diag().active.size()==8 and _diag().active.front().seq==40,"explicit48 saved copies choose latest8 without growing40 fixed meshes")
-	pool.update_frame(capacity,true)
-	_check(_diag().active.size()==2 and _diag().active.front().seq==46 and _diag().active.all(func(item:Dictionary)->bool:return item.smoke_count<=1),"explicit capacity fixture power saving limits2 sources/1 puff")
+	if effect.kind=="grenade":
+		pool.update_frame(capacity,false)
+		_check(_diag().capacity==8 and _diag().mesh_nodes==40 and _diag().active.size()==8 and _diag().active.front().seq==40,"explicit48 saved copies choose latest8 without growing40 fixed meshes")
+		var ordered: Array=_diag().active
+		capacity.tool_fx.reverse()
+		pool.update_frame(capacity,false)
+		_check(_diag().active==ordered,"explicit reordered saved copies still choose latest confirmation seq deterministically")
+		pool.update_frame(capacity,true)
+		_check(_diag().active.size()==2 and _diag().active.front().seq==46 and _diag().active.all(func(item:Dictionary)->bool:return item.smoke_count<=1),"explicit capacity fixture power saving limits2 sources/1 puff")
+	else:
+		pool.update_frame(frame,true)
+		_check(_diag().active.size()==1 and _diag().active.front().smoke_count<=1,"actual one mine remains one saved source in power saving")
 	var enormous:=frame.duplicate(true)
 	enormous.tool_fx.front().position=Vector2(1e38,-1e38)
 	pool.update_frame(enormous,false)

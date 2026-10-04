@@ -74,7 +74,7 @@ func update_frame(frame: Dictionary, power_saving: bool = false) -> void:
 		var radius: float = float(source.radius) / Space.PIXELS_PER_METRE
 		var age: int = source.age_ticks
 		var flash_size := 0.65 + float(age) * 0.09
-		var ring_size := radius * 2.0 * minf(float(age + 1) / 12.0,1.0)
+		var ring_size := radius * minf(float(age + 1) / 12.0,1.0)
 		var puff_size := (0.35 + radius * 0.28 + float(age) * 0.005)
 		if not _geometry(center) or not is_finite(radius) or not _size(flash_size) or not _size(ring_size) or not _size(puff_size):
 			_rejected_geometry += 1

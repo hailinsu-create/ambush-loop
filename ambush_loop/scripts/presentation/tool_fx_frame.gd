@@ -21,8 +21,13 @@ static func active(frame: Dictionary) -> Array:
 		samples.append(result)
 		for identity: String in [result.effect_id, result.tool_id]:
 			counts[identity] = int(counts.get(identity, 0)) + 1
-	return samples.filter(func(item: Dictionary) -> bool:
-		return counts[item.effect_id] == 1 and counts[item.tool_id] == 1)
+		if result.kind == "mine":
+			var identity: String = result.original_event.event_id
+			counts[identity] = int(counts.get(identity,0)) + 1
+	var unique := samples.filter(func(item: Dictionary) -> bool:
+		return counts[item.effect_id] == 1 and counts[item.tool_id] == 1 and (item.kind != "mine" or counts[item.original_event.event_id] == 1))
+	unique.sort_custom(func(left: Dictionary, right: Dictionary) -> bool: return left.seq < right.seq)
+	return unique
 
 
 static func sample(frame: Dictionary, effect: Dictionary) -> Dictionary:
