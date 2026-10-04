@@ -9,3 +9,5 @@
 验收记录固定source/PCK（仅staging已有a0_preview）、1280×720/100%独占Xorg112/XTest、UUID/原输入/事件/弹池前后、实际exit/SCRIPT/ERROR、图hash与目检、真实schema2录制及自然railcut存档。失败轮次保全，区分driver操作、期望与产品，再有界修复。只读录制元数据不代3D回放显示/独立QA。当前代码片已实现，尚未实际运行；官方导入/导出与原生两波为下一步。网页GPT PLAN/REVIEW unavailable。
 
 单写所有权、R/SCOUT→ALERT→SWEEP及Draft不merge/生产/height/G保持。资产接口固定R5源29749157c5db064bfea626c3ed9d75d9a1791ece/交付ebedb829e3263abbeb6dd266905f24a3869fa281，不改不重跑制作源、atlas/GLB/Blender、生产manifest。此片无新资产需求，可将固定源码pump及实际录制交父端独立QA并行；FX/A3预算、艺术、耳听0/45与0/6、同候选全六关/可追溯APK仍待，设备全计划后。warehouse原分类3页标签勘误独立追加保留历史，实际两页已验，不需重跑。
+
+实际完成：固定030原生187/0、exit0/ERROR0、65 XTest/13图hash/看10，两波253/681、global935/34event、原SWEEP三loot/ammo6、WON→原CTA→railcut两教学页；只读metadata2978/0另列。未触发自动耗尽包，原固定WON闭门高光与实际开门不符列后续文案片。自然railcut存档已固定，余三关7波继续，详情以pump正式报告及38文件证据为准。

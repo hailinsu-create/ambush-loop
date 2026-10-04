@@ -13,3 +13,5 @@
 父端独立fixed d7复验已限定关闭cover5，无新P1/P2：新档原生142/0、yard WON675tick/27events→原CTA→warehouse教学；独立矩阵H76/0、实际窗口86/0，三次exit0/ERROR0，16图核hash/看9，943tracked文件与副本逐字节一致。合成触控与原生分列，未验余11波/SWEEP/设备/FXA3保持，作者未重跑已关cover。
 
 有界warehouse已完成：b27正式270/0、actual exit0/SCRIPT0/ERROR0，实际两波339/863/global1203、62事件，SWEEP原loot五条/补给/MG量化朝向/携带雷次波触发、原extract/Continue/CTA/pump两教学页。14图全部hash/看8（不是此前预估15图/3教学页）；record元数据4574/0独立退出0，不代3D回放显示验收。e37整轮250/1自站cover误操作保全；b27只改driver保留未移动pad/两真实帧转向等待。详细源/命令/边界以20261004warehouse报告为准。下一段真实pump存档扩展通用resume，剩余四关9波；主集成及资产所有权保持。
+
+下一有界pump已实际完成：固定030真实接b27存档，native187/0、exit0/ERROR0，两波253/681/global935/34event、原SWEEP三loot/ammo6、原CTA→railcut两教学页；13图hash/看10，metadata2978/0独立只读。自动耗尽包仍未触发，静态高光闭门文案与实际开门不符保留待后续措辞片；余railcut/depot/radio三关7波接自然railcut存档。具体以pump20261004报告为准，未扩大为同候选13波/全FX/设备通过。
