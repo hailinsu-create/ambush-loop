@@ -18,6 +18,7 @@ const CorpsePose := preload("res://scripts/presentation/corpse_pose.gd")
 const CorpseVisual := preload("res://scripts/presentation/corpse_visual.gd")
 const ShotFxPool := preload("res://scripts/presentation/shot_fx_pool.gd")
 const ToolFxPool := preload("res://scripts/presentation/tool_fx_pool.gd")
+const MovementDustPool := preload("res://scripts/presentation/movement_dust_pool.gd")
 
 var host: Node
 var rig: Node3D
@@ -30,6 +31,7 @@ var actors: Dictionary = {}
 var corpses: Dictionary = {}
 var shot_fx: Node3D
 var tool_fx: Node3D
+var movement_dust: Node3D
 var _actor_scope: Array = []
 var objects: Dictionary = {}
 var _object_scope: Array = []
@@ -78,6 +80,9 @@ func bind(main: Node) -> void:
 	tool_fx = ToolFxPool.new()
 	tool_fx.name = "ToolFx"
 	add_child(tool_fx)
+	movement_dust = MovementDustPool.new()
+	movement_dust.name = "MovementDust"
+	add_child(movement_dust)
 	rig = Rig.new()
 	rig.name = "CameraRig"
 	add_child(rig)
@@ -274,6 +279,7 @@ func refresh() -> void:
 	_sync_objects()
 	shot_fx.update_frame(frame,host._is_power_saving())
 	tool_fx.update_frame(frame,host._is_power_saving())
+	movement_dust.update_frame(frame,host._is_power_saving())
 	_sync_cones()
 	_selected_ring.visible = false
 	for op in frame.ops:

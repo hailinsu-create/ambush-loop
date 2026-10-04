@@ -28,6 +28,9 @@ static func capture(host: Node) -> Dictionary:
 	var raw_tool_schema: Variant = data.get("tool_fx_schema")
 	var raw_tools: Variant = data.get("tool_fx", [])
 	var tool_supported: bool = typeof(raw_tool_schema) == TYPE_INT and raw_tool_schema == 1 and typeof(raw_tools) == TYPE_ARRAY and fx_playback_schema == 2 and not unsupported and (int(snap.get("schema", 1)) if historical else BattleLog.SCHEMA_VERSION) == BattleLog.SCHEMA_VERSION
+	var raw_movement_schema: Variant = data.get("movement_fx_schema")
+	var raw_movement_clock: Variant = data.get("pose_clock_s")
+	var movement_supported: bool = typeof(raw_movement_schema) == TYPE_INT and raw_movement_schema == 1 and typeof(data.get("visual_schema")) == TYPE_INT and data.visual_schema == VisualSnapshot.FORMAT_VERSION and typeof(data.get("animation_schema")) == TYPE_INT and data.animation_schema == ActorPose.FORMAT and data.get("actor_asset_revision") == ActorPose.ASSET_REVISION and fx_playback_schema == 2 and not unsupported and typeof(raw_movement_clock) in [TYPE_INT,TYPE_FLOAT] and is_finite(float(raw_movement_clock)) and float(raw_movement_clock) >= 0.0
 	var frame := {
 		"run_id": -1 if historical else host.run_id,
 		"tick": (domain_tick if continuous else host.replay.scrub_tick) if historical else host.battle_log.timeline_tick(host.sim.tick),
@@ -74,6 +77,12 @@ static func capture(host: Node) -> Dictionary:
 		"tool_fx_source_token": source.get_instance_id() if source != null else 0,
 		"tool_fx_terminal_reason": source.terminal_reason if source != null and int(data.get("phase",-1)) in [2,3] else "",
 		"tool_fx": raw_tools.duplicate(true) if tool_supported else [],
+		"movement_fx_schema": 1 if movement_supported else 0,
+		"movement_fx_playback_schema": fx_playback_schema,
+		"movement_fx_source_token": source.get_instance_id() if source != null else 0,
+		"movement_fx_clock_s": float(raw_movement_clock) + (snapshot_delta if advance_pose else 0.0) if movement_supported else 0.0,
+		"movement_fx_clock_domain": data.get("pose_clock_domain") if movement_supported else "",
+		"movement_fx_actors": _movement_actors(data) if movement_supported else [],
 	}
 	for group in GROUPS:
 		frame[group] = data.get(group, []).duplicate(true)
@@ -83,6 +92,20 @@ static func capture(host: Node) -> Dictionary:
 				_actor_defaults(item)
 	_freeze(frame)
 	return frame
+
+
+static func _movement_actors(data: Dictionary) -> Array:
+	var result: Array = []
+	for group: String in ["ops","enemies"]:
+		var actors: Variant = data.get(group)
+		if not actors is Array: return []
+		for actor: Variant in actors:
+			if not actor is Dictionary: continue
+			var item := {"group":group}
+			for key: String in ["id","pos","active","alive","moving","facing","action","stance","sprinting"]:
+				if actor.has(key): item[key] = actor[key]
+			result.append(item)
+	return result
 
 
 static func _actor_defaults(item: Dictionary) -> void:

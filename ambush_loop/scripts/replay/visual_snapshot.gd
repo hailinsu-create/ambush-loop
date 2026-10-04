@@ -87,6 +87,7 @@ func capture(host: Node) -> Dictionary:
 		_pose_scope = scope
 		_pose_states.clear()
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
+		"movement_fx_schema": 1,
 		"tool_fx_schema": ToolFxRecording.SCHEMA, "tool_fx": tool_fx.capture(host),
 		"utility_scope_id": _utility_scope_id,
 		"corpse_schema": 1,
