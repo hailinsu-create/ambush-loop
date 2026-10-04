@@ -1,0 +1,6460 @@
+{
+  "captures": [],
+  "checks": 1158,
+  "failures": 463,
+  "native_inputs": [],
+  "rows": [
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.2,
+          "id": 3,
+          "route": "main"
+        },
+        {
+          "delay": 1.6,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 2.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 2,
+          "route": "main"
+        },
+        {
+          "delay": 3.8,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 4.6,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 2.2,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "前",
+          "t": 0.1
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.133333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_wave_start_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 9.85,
+      "moment": "actual_sweep_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 591,
+      "wave": 0
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_wave_start_1",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "灰",
+          "t": 0.566666666666667
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.05,
+      "moment": "actual_sweep_1",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 123,
+      "wave": 1
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_wave_start_2",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "灰",
+          "t": 0.566666666666667
+        },
+        {
+          "kind": "combo",
+          "label": "连",
+          "t": 2.03333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "actual_echo_due_tick30",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "灰",
+          "t": 0.566666666666667
+        },
+        {
+          "kind": "combo",
+          "label": "连",
+          "t": 2.03333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.516666666666667,
+      "moment": "actual_echo_event_tick30_done",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "灰",
+          "t": 0.566666666666667
+        },
+        {
+          "kind": "combo",
+          "label": "连",
+          "t": 2.03333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 31,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "actual_paused_final_wave_1_4s",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "灰",
+          "t": 0.566666666666667
+        },
+        {
+          "kind": "combo",
+          "label": "连",
+          "t": 2.03333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.15,
+      "moment": "actual_sweep_2",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.15,
+      "moment": "history_seek_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.15,
+      "moment": "history_seek_846",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.15,
+      "moment": "history_seek_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.15,
+      "moment": "history_seek_423",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 2.15,
+      "moment": "history_seek_846",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": null,
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.5,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 3.6,
+          "id": 3,
+          "route": "sneak"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 5.2,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_exit_to_new_scout",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "attempt": "78a46e22b2f15878f40b9d5eb677ab0c",
+      "case": "saved_reference_boundary",
+      "raw_sha256": "c66ab76333e7c6956f18daf699bd0e47b347293072778e414b1b083610c1e5da",
+      "scope": "Original3-wave radio reference reaches last SWEEP; history seeks are original callbacks. Exit resets old active log by existing begin_attempt, never rewrites saved bytes. Not normal input, terminal WON or full replay acceptance."
+    }
+  ],
+  "scope": "13-wave matrix in2modes assigns phase/index/tick/spawned/events explicitly. One actual radio reference grants authored guns/snaps/direct tick/vacuum, reaches3 SWEEP/seek/exit SCOUT. No26 real battles, normal fresh13, full equipment/replay/FX/A3/device/terminal acceptance.",
+  "source_sha": "ee151102dd2af5ee7f4dc235a8a3bfde4685eac1"
+}

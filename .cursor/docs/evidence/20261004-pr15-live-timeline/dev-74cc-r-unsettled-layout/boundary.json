@@ -1,0 +1,10 @@
+{
+  "actual_exit": 1,
+  "source_sha": "74cc8b8e62339e86bf8b1a3987e4cc721a1afc62",
+  "checks": 1127,
+  "failures": 2,
+  "SCRIPT_ERROR": 0,
+  "ERROR": 0,
+  "captures_viewed": 1,
+  "cause": "Original _update_hud changes button visibility but Container layout is deferred. No engine frame before native helper computed coordinates, so again original abort was hit. Preserve failed run; explicit engine layout frames needed. No paused/history R acceptance or new reference binary."
+}

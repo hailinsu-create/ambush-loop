@@ -1,0 +1,4282 @@
+{
+  "captures": [],
+  "checks": 1159,
+  "failures": 0,
+  "native_inputs": [],
+  "rows": [
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_yard_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_yard_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_warehouse_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_warehouse_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_pump_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_pump_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_railcut_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_railcut_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_3d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_depot_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_3d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_depot_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 下一波",
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_3d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_radio_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 下一波",
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_3d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_radio_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 下一波",
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_3d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "reference_3d_radio_wave2",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_yard_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.2,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 12,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [
+        {
+          "delay": 0.2,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_yard_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.8,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 48,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.8,
+          "id": 3,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_warehouse_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank"
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank"
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 0.9,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.4,
+          "id": 5,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_warehouse_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.7,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 42,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.7,
+          "id": 3,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_pump_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.3,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 18,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [
+        {
+          "delay": 0.3,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_pump_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 2,
+          "route": "main",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_railcut_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank"
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": false
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 1.0,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 60,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "flank",
+          "spawned": true
+        },
+        {
+          "delay": 1.0,
+          "id": 4,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_railcut_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 下一波",
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_depot_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 下一波",
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/2波 · 观战",
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_depot_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 下一波",
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.6,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [],
+      "phase": 1,
+      "tick": 36,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": true
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_radio_wave0",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 下一波",
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.4,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 24,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_radio_wave1",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 下一波",
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "scout_wave_preview",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "alarm_before_any_spawn",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "due_last_actor_not_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "paused_due",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": true
+        }
+      ],
+      "elapsed": 2.0,
+      "moment": "all_current_wave_spawned",
+      "paused": false,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "本",
+          "t": 0.2
+        },
+        {
+          "kind": "repack",
+          "label": "包",
+          "t": 0.233333333333333
+        }
+      ],
+      "phase": 1,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "reference_legacy2d_radio_wave2",
+      "dots": [],
+      "elapsed": 2.0,
+      "moment": "sweep_hidden",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 120,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 观战",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main",
+          "spawned": false
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_wave_start_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 0.0,
+      "moment": "actual_sweep_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 591,
+      "wave": 0
+    },
+    {
+      "caption": "路线时间轴 · 第2/3波 · 观战",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.4,
+          "id": 3,
+          "route": "sneak",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_wave_start_1",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 1
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 0.0,
+      "moment": "actual_sweep_1",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 123,
+      "wave": 1
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_wave_start_2",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 0,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": false
+        }
+      ],
+      "elapsed": 0.5,
+      "moment": "actual_echo_due_tick30",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 30,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": true
+        }
+      ],
+      "elapsed": 0.516666666666667,
+      "moment": "actual_echo_event_tick30_done",
+      "paused": false,
+      "payoff": [],
+      "phase": 1,
+      "tick": 31,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第3/3波 · 观战",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.5,
+          "id": 5,
+          "route": "echo",
+          "spawned": true
+        }
+      ],
+      "elapsed": 1.4,
+      "moment": "actual_paused_final_wave_1_4s",
+      "paused": true,
+      "payoff": [
+        {
+          "kind": "first_fire",
+          "label": "灰",
+          "t": 1.06666666666667
+        }
+      ],
+      "phase": 1,
+      "tick": 84,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 1.4,
+      "moment": "actual_sweep_2",
+      "paused": false,
+      "payoff": [],
+      "phase": 5,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 1.4,
+      "moment": "history_seek_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 1.4,
+      "moment": "history_seek_846",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 1.4,
+      "moment": "history_seek_0",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 1.4,
+      "moment": "history_seek_423",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": "",
+      "case": "actual_radio_reference",
+      "dots": [],
+      "elapsed": 1.4,
+      "moment": "history_seek_846",
+      "paused": false,
+      "payoff": [],
+      "phase": 4,
+      "tick": 129,
+      "wave": 2
+    },
+    {
+      "caption": "路线时间轴 · 第1/3波 · 下一波",
+      "case": "actual_radio_reference",
+      "dots": [
+        {
+          "delay": 0.0,
+          "id": 1,
+          "route": "main"
+        },
+        {
+          "delay": 0.6,
+          "id": 4,
+          "route": "main"
+        },
+        {
+          "delay": 0.4,
+          "id": 2,
+          "route": "flank"
+        }
+      ],
+      "elapsed": 0.0,
+      "moment": "actual_exit_to_new_scout",
+      "paused": false,
+      "payoff": [],
+      "phase": 0,
+      "tick": 0,
+      "wave": 0
+    },
+    {
+      "attempt": "6eba20a6534693caa9e6535217ba5707",
+      "case": "saved_reference_boundary",
+      "raw_sha256": "71d0a25b58068b49560003ca3bd0819516a3fdca4655bf5f03e0ced5880aacaa",
+      "scope": "Original3-wave radio reference reaches last SWEEP; history seeks are original callbacks. Exit resets old active log by existing begin_attempt, never rewrites saved bytes. Not normal input, terminal WON or full replay acceptance."
+    }
+  ],
+  "scope": "13-wave matrix in2modes assigns phase/index/tick/spawned/events explicitly. One actual radio reference grants authored guns/snaps/direct tick/vacuum, reaches3 SWEEP/seek/exit SCOUT. No26 real battles, normal fresh13, full equipment/replay/FX/A3/device/terminal acceptance.",
+  "source_sha": "74cc8b8e62339e86bf8b1a3987e4cc721a1afc62"
+}
