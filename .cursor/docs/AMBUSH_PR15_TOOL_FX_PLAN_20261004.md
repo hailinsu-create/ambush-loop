@@ -1,6 +1,6 @@
 # PR15 A2工具、烟、尘接续计划
 
-2026-10-04，承接A1b固定b563有界作者验证。flight单位子片已实证并修复，确认blast保存接口/烟尘爆炸池尚未实现或运行。主集成唯一代码写者，制作资源所有权不变；不改变SCOUT→ALERT→SWEEP、BattleLog原events/seq/event_id/统计、伤害或手雷归因玩法。
+2026-10-04，承接A1b固定b563有界作者验证。flight单位子片已实证并修复，确认blast保存接口已生产d75、正式640/ac验证；烟尘爆炸池仍未实现或运行。主集成唯一代码写者，制作资源所有权不变；不改变SCOUT→ALERT→SWEEP、BattleLog原events/seq/event_id/统计、伤害或手雷归因玩法。
 
 只读6.1-sol源审计（f953、无引擎/编辑）与主作者核对：RaidGrenade._flight本身为0–1进度，presenter又除flight_duration；先以实际原sim_step/保存snapshot/3D位置做负向，证实后最小修展示单位并测试0/中段/落地/弹跳/旧记录。不能把源码推导记为已复现。
 
@@ -17,3 +17,5 @@
 A2之后A3先收同环境六关各phase/方向/实际峰值的raw frame intervals、draw/primitives/纹理/RAM/shader warmup/FX驻留，再预算与单片优化；最后统一fixed source全门/fullsmoke、正常fresh六关13波、六新原件实际3D全段1×/2×、再可追溯APK。工具链缺项后置，不阻代码；全部计划之后才安排设备。可并行b563固定只读FX QA/28实帧艺术评审，优先6.1-sol；不自行派astra，不让其写主文件或制作输出。网页GPT PLAN/REVIEW unavailable。
 
 已完成有界flight子片：[fixed53报告](AMBUSH_PR15_GRENADE_FLIGHT_20261004.md)。负102 H119/R128各15fail actual1→53同原测试各0actual0 E0/S0、9正式Window图核/看9；仅一行presentation单位修复，原投掷/库存/轨迹/bounce/四authentic old midflight及六raw hashes不改。下一仍先确认blast source与终局snapshot时序、稳定tool/effect ID/actual victim HP，再有界烟尘池；不把flight片当blast或FINAL。
+
+确认源片已完成[正式报告](AMBUSH_PR15_TOOL_FX_SOURCE_20261004.md)：640 H46/参考5607/冻结66、ac边界263各0actual0 E0/S0，生产blob一致；原2a21/4和5fa SCRIPT ERROR无效轮/640坏矩阵control不足全部保留。下一按[reader/池计划](AMBUSH_PR15_TOOL_FX_FRAME_POOL_PLAN_20261004.md)实际实现与render，source-only不算视觉/FINAL/A3。

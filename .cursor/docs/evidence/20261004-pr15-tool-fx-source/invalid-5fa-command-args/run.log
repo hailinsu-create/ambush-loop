@@ -1,0 +1,14 @@
+TEST_RUN_ID=4af067d05f7b4e39bd33fecffe71322b
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4af067d05f7b4e39bd33fecffe71322b/data
+TEST_ENTRY=tool_fx_source_boundary_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4af067d05f7b4e39bd33fecffe71322b/data/godot/app_userdata/Ambush Loop run_id=4af067d05f7b4e39bd33fecffe71322b
+SCRIPT ERROR: Invalid call to function '_start_setup' in base 'Node2D (main.gd)'. Expected 2 argument(s).
+          at: _command_and_pause (res://scripts/tool_fx_source_boundary_test.gd:80)
+          GDScript backtrace (most recent call first):
+              [0] _command_and_pause (res://scripts/tool_fx_source_boundary_test.gd:80)
+              [1] _quiet (res://scripts/tool_fx_source_boundary_test.gd:18)
+              [2] _reset (res://scripts/shot_fx_boundary_test.gd:39)
+TOOL_FX_SOURCE_BOUNDARY_TEST checks=249 failures=0 output=res://build/asset_review/pr15-runtime/tool-fx-source-boundary-4af067d05f7b4e39bd33fecffe71322b
+TEST_LOG=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4af067d05f7b4e39bd33fecffe71322b/run.log

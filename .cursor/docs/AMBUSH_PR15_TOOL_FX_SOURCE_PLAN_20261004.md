@@ -1,6 +1,8 @@
 # PR15 A2 确认爆炸源接口独立计划
 
-2026-10-04，父端射手P2作者9f修复已交20f、flight源53/H119/R128已交fec。此源接口尚未实现/实证。主集成单写main/VisualSnapshot/ViewState/回放/shared tests，不动制作源/GLB/Blender/atlas/生产manifest。
+2026-10-04最新：源生产d75已实现，640实际H46/参考5607/冻结66与ac边界263各0actual0 E0/S0，详[源报告](AMBUSH_PR15_TOOL_FX_SOURCE_20261004.md)。后严格reader/烟池仍未实现。
+
+以下为原封负时计划：父端射手P2作者9f修复已交20f、flight源53/H119/R128已交fec，当时此源接口尚未实现/实证。主集成单写main/VisualSnapshot/ViewState/回放/shared tests，不动制作源/GLB/Blender/atlas/生产manifest。
 
 来源边界：真实RaidGrenade._detonate先_done=true再同步detonated；只绑定此确认信号，投掷/缺节点/消失/kill都不生成blast。创建时注册稳定attempt-wide tool_id、kind/variant/原owner ID、creation wave；爆炸时冻结实际level/attempt/wave/playback2 tick/phase/位置/半径，creation-wave与confirmation-wave分别保存，不能将旧事实绑当前run_id。登记只保存弱tool link/纯值source，original object snapshot ID不作tool identity。登记上限64，recent48、180ticks，未知/失效/foreign log/重发信号fail-closed且不影响原攻击。没有BattleLog新事件/seq或修改旧mine payload。
 
@@ -15,3 +17,5 @@ mine为独立kind：创建时登记owner，原sim_check仍决定actual first vic
 先Guard实际负向接口测试证明原攻击/HP/ammo/count但缺descriptor，再最小source实现；固定源实际无victim/bounce/友伤cover-MG/overkill、多工具同tick、spent单次、SCOUT/SWEEP/ALERT pause、terminal snapshot、跨wave/foreign-log/old字节及参考campaign不变。未实证项目保持待验。后source reader/有界blast烟尘池与实际Window图，再A3/FINAL/APK。Draft不merge/生产/height/G，耳听/设备后置，网页GPT PLAN/REVIEW unavailable。
 
 父端要求安全checkpoint已停在负向封存点：test2a H21/4 actual1 E0/S0，UUIDa8f6d4ac75bb440fa29c9f81a694b703自然结束，四fail仅尚缺tool_fx descriptor；原HP/库存/统计/selected/mine/wipe断言保持，深入schema分支未执行。详[checkpoint](AMBUSH_PR15_FX_SOURCE_CHECKPOINT_20261004.md)，无需重跑原负向。生产module/VisualSnapshot/ViewState/main均未开始本片改动。
+
+父端随后明确恢复生产授权；已完成d75源与640/ac实际验证。原2a负向自然结束且不重跑。后续严格reader/有限烟池详[独立计划](AMBUSH_PR15_TOOL_FX_FRAME_POOL_PLAN_20261004.md)，不把本source通过称3D render。

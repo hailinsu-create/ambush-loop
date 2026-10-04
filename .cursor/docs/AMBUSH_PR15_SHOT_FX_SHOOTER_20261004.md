@@ -22,3 +22,5 @@ AMBUSH_TEST_SOURCE_SHA=9f6f83ead818993114b8519266e1a7131acc5f05 bash ambush_loop
 父端独立QA归因：可选bool866同原测试148/0、38/0 actual0、missing/true/false及原20骨等价限定关闭，旧577的148/7、38/8保留；escape f0ed限定关闭不重开。以上是父端运行计数，不混入作者100/45/5607。b563池224/236/可见47原结果只属b563，不覆盖本P2或代最终全FX接受。
 
 未验：新source的3D FX独立运行QA、普通玩家错配可达性、同射手旧event/错误clock/重复覆盖、全部武器/自然长驻留、A2/A3/FINAL13波/六新record/full1×/最新fullsmoke/APK。源H不代窗口或设备表现。后续A2先实证flight单位，再独立确认blast保存接口及烟尘池；6.1-sol可并行固定源只读QA、主作者独占代码和引擎。R5制作源/GLB/atlas/manifest未改、未重跑；Draft不merge/生产/height/G；耳听/设备后置，网页GPT PLAN/REVIEW unavailable。
+
+2026-10-04 后续父端独立限定关闭收据：同字节原183最小3/1→9f3/0，另副作用10/0 actual0 E0/S0；实际A成功ammo3→2、HP100→52、原callback唯一且先于伤害，B ammo与错误PREevent bytes不变，仅拒badFX且合法A metadata正确。正常玩家错配可达仍未证；作者45/5607只核证据，不计独立运行。父端963files/旧20packs一致。b563 pool与53 flight仍待独立render，不能借此源关闭算通过；本scope不重开。
