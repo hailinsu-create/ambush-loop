@@ -195,6 +195,8 @@ func _sample() -> void:
 	var base := row_count*column_count()
 	var first := _first_segment_frame
 	_first_segment_frame=false
+	var counters_ready: bool = DisplayServer.get_name()!="headless" and Engine.get_frames_drawn()>=2
+	var loaded_proof: bool = _proof.get("verified",false) and _proof.get("imported_cache_files_verified",0)>0
 	if follow_current_scene: host=get_tree().current_scene
 	var view: Variant = host.get("presentation_3d") if is_instance_valid(host) else null
 	var frame: Variant = view.get("frame") if is_instance_valid(view) else null
@@ -204,16 +206,18 @@ func _sample() -> void:
 	if not valid: reason="presenter_unavailable"
 	if DisplayServer.get_name()=="headless": reason="headless_functional_only"
 	if not _proof.get("verified",false): reason="provenance_unverified"
+	elif not loaded_proof: reason="warm_import_proof_incomplete"
+	elif DisplayServer.get_name()!="headless" and not counters_ready: reason="render_counters_not_ready"
 	_put(base,"frame",_frame)
 	_put(base,"ticks_usec",now)
 	_put(base,"interval_usec",interval)
 	_text(base,"segment",segment)
 	_text(base,"exclusion",reason)
-	_put(base,"measured",1 if measured and not first and valid and DisplayServer.get_name()!="headless" and _proof.get("verified",false) and symbol_overflow==0 else 0)
+	_put(base,"measured",1 if measured and not first and valid and counters_ready and loaded_proof and symbol_overflow==0 else 0)
 	_put(base,"presenter_valid",1 if valid else 0)
 	_put(base,"tree_paused",1 if get_tree().paused else 0)
 	_put(base,"main_auto_process",1 if is_instance_valid(host) and host.is_processing() else 0)
-	_put(base,"render_counters_ready",1 if DisplayServer.get_name()!="headless" and Engine.get_frames_drawn()>=2 else 0)
+	_put(base,"render_counters_ready",1 if counters_ready else 0)
 	_put(base,"collector_storage_bytes",storage_bytes())
 	_put(base,"window_width",get_window().size.x)
 	_put(base,"window_height",get_window().size.y)
@@ -303,14 +307,16 @@ func save(path: String, extra: Dictionary = {}) -> Error:
 	var raw_error := file.get_error()
 	file.close()
 	var after := Provenance.verify(_receipt_path,OS.get_environment("AMBUSH_TEST_SOURCE_SHA"))
-	var complete: bool = overflow_rows==0 and symbol_overflow==0 and _proof.get("verified",false) and after.get("verified",false)
+	var receipt_stable: bool = _proof.get("receipt_sha256","")!="" and _proof.get("receipt_sha256")==after.get("receipt_sha256")
+	var warm_proof: bool = _proof.get("imported_cache_files_verified",0)>0 and after.get("imported_cache_files_verified",0)>0
+	var complete: bool = overflow_rows==0 and symbol_overflow==0 and _proof.get("verified",false) and after.get("verified",false) and receipt_stable and warm_proof
 	_run_incomplete=_run_incomplete or not complete
 	var report := FileAccess.open(path+"/metadata.json",FileAccess.WRITE)
 	if report==null: return FileAccess.get_open_error()
 	report.store_string(JSON.stringify({"metadata":metadata,"rows":row_count,"overflow_rows":overflow_rows,
 		"symbol_overflow":symbol_overflow,"complete_buffer":overflow_rows==0 and symbol_overflow==0,
 		"run_overflow_rows":run_overflow_rows,"run_incomplete":_run_incomplete,
-		"chunk_source_and_buffer_valid":complete,"raw_sha256":FileAccess.get_sha256(path+"/raw.csv"),
+		"chunk_source_and_buffer_valid":complete,"receipt_stable":receipt_stable,"warm_import_proof_complete":warm_proof,"raw_sha256":FileAccess.get_sha256(path+"/raw.csv"),
 		"rss_save_bytes":own_rss_bytes(),"segments":_segments,"source_proof_after":after,
 		"extra":extra},"  "))
 	var report_error := report.get_error()

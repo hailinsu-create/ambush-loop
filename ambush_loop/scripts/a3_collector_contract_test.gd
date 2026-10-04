@@ -30,6 +30,79 @@ func _backend_bytes(main: Node) -> PackedByteArray:
 		main.operators.map(func(op:OperatorUnit)->Array:return [op.global_position,op.hp,op.ammo,op.grenades,op.mines])])
 
 
+func _collector_for_receipt(path: String, main: Node) -> Node:
+	var original_path := OS.get_environment("AMBUSH_A3_PROVENANCE_FILE")
+	OS.set_environment("AMBUSH_A3_PROVENANCE_FILE",path) # Owned explicit receipt clone only.
+	var target := Collector.new();target.capacity=8;root.add_child(target);target.stop()
+	OS.set_environment("AMBUSH_A3_PROVENANCE_FILE",original_path)
+	target.follow_current_scene=false;target.host=main
+	return target
+
+
+func _seal_receipt_cases(main: Node, receipt: Dictionary, receipt_path: String) -> void:
+	var original_bytes := _backend_bytes(main)
+	var original_receipt_hash := FileAccess.get_sha256(receipt_path)
+	var consumer := OS.get_environment("AMBUSH_TEST_SOURCE_SHA")
+	var positive: Node = _collector_for_receipt(receipt_path,main)
+	positive.mark("headless-manual-valid-first-chunk",true)
+	positive._sample();positive._sample()
+	var first_path := directory+"/valid-first-chunk"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(first_path))
+	positive.mark("headless-valid-flush",false)
+	_check(positive.save(first_path)==OK,"nonoverflow headless functional chunk seals with unchanged full source/warm receipt")
+	var first_hash := FileAccess.get_sha256(first_path+"/raw.csv")
+	var first_saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(first_path+"/metadata.json"))
+	_check(first_saved.receipt_stable and first_saved.warm_import_proof_complete and first_saved.chunk_source_and_buffer_valid and not first_saved.run_incomplete,"positive functional seal distinguishes valid buffer/proof from render measurement")
+	_check(first_saved.metadata.source_proof_before.receipt_sha256==original_receipt_hash and first_saved.source_proof_after.receipt_sha256==original_receipt_hash,"both positive proofs pin original receipt bytes")
+	var last_frame: int = int(positive.row_at(positive.row_count-1)[0])
+	var last_usec: int = int(positive.row_at(positive.row_count-1)[1])
+	_check(positive.reset_buffer(),"valid stopped/untimed sealed functional chunk can reset without incomplete acknowledgement")
+	_check(positive.row_count==0 and positive.storage_bytes()==8*positive.column_count()*8 and positive.run_overflow_rows==0 and not positive._run_incomplete,"valid reset retains fixed allocation and complete lifetime state")
+	positive.mark("headless-manual-valid-second-chunk",true)
+	positive._sample();positive._sample()
+	var second_path := directory+"/valid-second-chunk"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(second_path))
+	positive.mark("headless-second-flush",false)
+	_check(positive.save(second_path)==OK,"second unique functional chunk seals after reset")
+	_check(positive.row_at(0)[0]>last_frame and positive.row_at(0)[1]>last_usec and FileAccess.get_sha256(first_path+"/raw.csv")==first_hash,"absolute frames/time advance across reset and first raw CSV remains exact")
+	_check(positive.row_at(0)[4]==0 and positive.row_at(1)[4]==0 and positive.row_at(1)[34]==0,"headless valid chunks remain unmeasured with render counters unavailable")
+	positive.queue_free()
+
+	var empty_receipt: Dictionary = receipt.duplicate(true);empty_receipt.imported_cache=[]
+	empty_receipt.cache_scope="explicit functional clone excluding loaded imported resources"
+	var empty_path := _receipt_copy(empty_receipt,"valid-source-empty-warm-inventory")
+	var empty_proof := Provenance.verify(empty_path,consumer)
+	_check(empty_proof.get("verified",false) and empty_proof.imported_cache_files_verified==0,"empty warm inventory clone verifies only source, not loaded-resource performance")
+	var empty: Node = _collector_for_receipt(empty_path,main)
+	empty.mark("headless-empty-warm-proof",true);empty._sample();empty._sample()
+	_check(empty.row_at(1)[4]==0 and empty.row_at(1)[5]=="warm_import_proof_incomplete","actual empty loaded-resource proof is preserved but excluded in raw")
+	var empty_chunk := directory+"/empty-warm-rejected";DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(empty_chunk))
+	empty.mark("empty-warm-flush",false)
+	_check(empty.save(empty_chunk)==ERR_INVALID_DATA,"source-only receipt cannot seal accepted loaded-resource performance chunk")
+	var empty_saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(empty_chunk+"/metadata.json"))
+	_check(empty_saved.receipt_stable and not empty_saved.warm_import_proof_complete and not empty_saved.chunk_source_and_buffer_valid and empty_saved.run_incomplete,"empty inventory rejection receipt preserves distinct stable-source and missing-load facts")
+	_check(not empty.reset_buffer(),"empty loaded-resource proof cannot reset as an accepted chunk")
+	empty.queue_free()
+
+	var changed_path := _receipt_copy(receipt,"valid-source-receipt-changed-after-hook")
+	var changed: Node = _collector_for_receipt(changed_path,main)
+	changed.mark("headless-receipt-stability",true);changed._sample();changed._sample()
+	var before_hash: String = changed.metadata.source_proof_before.receipt_sha256
+	var changed_receipt: Dictionary = receipt.duplicate(true)
+	changed_receipt.functional_receipt_note="same source/engine/record/cache, changed receipt after hook"
+	_check(_receipt_copy(changed_receipt,"valid-source-receipt-changed-after-hook")==changed_path,"only owned receipt clone replaced outside manual sampling")
+	var changed_proof := Provenance.verify(changed_path,consumer)
+	_check(changed_proof.get("verified",false) and changed_proof.receipt_sha256!=before_hash,"changed receipt still individually verifies identical source bytes, demonstrating stability gate necessity")
+	var changed_chunk := directory+"/changed-receipt-rejected";DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(changed_chunk))
+	changed.mark("changed-receipt-flush",false)
+	_check(changed.save(changed_chunk)==ERR_INVALID_DATA,"individually valid before/after receipts cannot substitute for one fixed receipt")
+	var changed_saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(changed_chunk+"/metadata.json"))
+	_check(changed_saved.metadata.source_proof_before.verified and changed_saved.source_proof_after.verified and changed_saved.warm_import_proof_complete and not changed_saved.receipt_stable and not changed_saved.chunk_source_and_buffer_valid,"changed-receipt raw/metadata retains both valid proofs and explicit mismatch")
+	_check(not changed.reset_buffer(),"changed provenance cannot reset as accepted chunk")
+	changed.queue_free()
+	_check(_backend_bytes(main)==original_bytes and FileAccess.get_sha256(receipt_path)==original_receipt_hash and OS.get_environment("AMBUSH_A3_PROVENANCE_FILE")==receipt_path,"all functional seal/receipt clones preserve original source/backend/receipt/env")
+
+
 func _run() -> void:
 	if DisplayServer.get_name()!="headless": quit(2);return
 	directory="res://build/asset_review/pr15-runtime/a3-collector-contract-"+OS.get_environment("AMBUSH_TEST_RUN_ID")
@@ -128,6 +201,7 @@ func _run() -> void:
 	_check(collector.row_count==0 and collector.storage_bytes()==payload_bytes,"explicit reset reuses payload without growth")
 	_check(collector.run_overflow_rows==11 and collector._run_incomplete,"reset never erases lifetime overflow or invalid-run state")
 	_check(collector.save(directory)==ERR_ALREADY_IN_USE,"reuse cannot overwrite previously sealed cold raw file")
+	_seal_receipt_cases(main,receipt,receipt_path)
 	var weak: WeakRef = weakref(main)
 	main._return_to_title()
 	await process_frame
