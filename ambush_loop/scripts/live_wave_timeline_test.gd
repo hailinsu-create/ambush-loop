@@ -67,10 +67,10 @@ func _matrix(mode: String) -> void:
 			for p in main.pending_spawns: p.spawned = true
 			main.sim.tick = 120
 			_assert_strip("all_current_wave_spawned")
-			var attempt := "display-fixture-" + id
+			var attempt: String = "display-fixture-" + str(id)
 			main.battle_log.begin_attempt(attempt)
 			main.battle_log.wave_id = wave
-			var other := (wave+1)%main.level.wave_count()
+			var other: int = (wave+1)%main.level.wave_count()
 			main.battle_log.events = [
 				{"type":"fire","tick":6,"timeline_tick":4006,"wave_id":other,"attempt_id":attempt,"event_id":attempt+":other:0","seq":0,"payload":{"name":"前波"}},
 				{"type":"repack","tick":8,"wave_id":other,"attempt_id":attempt,"event_id":attempt+":other:1","seq":1},
