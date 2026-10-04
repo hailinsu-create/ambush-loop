@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [拾取文字独立计划](AMBUSH_PR15_LOOT_TEXT_PLAN_20261004.md) | live d363已推送/读回，fixed cdb H1159/R1164限定交QA；随后原depot mine1误+1弹先作者guard只读negative→中央kind/amount文本→固定H/R，原bytes/库存保持。未知/缺字段中性，枪amount携弹，不混RESULTgate，不代normal/完整3D。 |
 | [本波路线条报告](AMBUSH_PR15_LIVE_TIMELINE_20261004.md) | 生产f020、本波dots/原attempt-wave payoff/明确全关预览；ee15负1158/463exit1→formal cdb H1159/R1164各0exit0/E0/S0，3正式PNG核/看3及2native输入。两轮按钮布局误中abort失败保全；六关13波矩阵是display fixtures，另radio3SWEEP/seek/exit原域reference，不代normal/fullR。51事件只读比较另列，SCOUT IntelStore5.2静态另审；父端railcut限定通过不重开，depot1201/2与两P2保留。下一独立loot formatter，不混RESULTgate，之后同候选/FX-A3。资产/R5保持。 |
 | [live时间条独立计划](AMBUSH_PR15_LIVE_TIMELINE_PLAN_20261004.md) | 914f观战条总表矛盾已确认；新guard六关13wave display数据/一radio原域reference负向→本波dots/attempt-wave payoff/明确全关教学预览→固定H/R/seek-exit；不代normal/fullR，同候选/FX-A3后续。父端另有P2-DEPOT-LOOT-1 mine1误+1弹，先本片后独立formatter，不称inventory修，不混a794gate。 |
 | [当前波待入场提示报告](AMBUSH_PR15_CURRENT_WAVE_HINT_20261004.md) / [同候选六关/FX/A3计划](AMBUSH_PR15_SAME_CANDIDATE_FX_A3_PLAN_20261004.md) | 生产480/current queue，formal0bfe H971/R975各exit0/E0/S0；a091负968/271exit1，480R972早green的旧0.0s/transport图保留为dev漏断言，最终2图核/看2显示paused wave3/3 t1.4/pending0，2原生输入。36证据/原normal3b只读/reference52事件与终局843比较一致。六关13波矩阵是display fixtures，不代26实战；live观战条仍总表3.6/5.2已确认、payoff跨波仅source审查，另片前置，不全关P2。完整samecandidate13/FX/A3/APK未验、R5保持。 |
