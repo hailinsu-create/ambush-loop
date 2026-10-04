@@ -28,6 +28,7 @@ var outcomes: Array = []
 var stopped := false
 var selected_levels := 0
 var collector_lifetimes: Array = []
+var command_receipts: Array = []
 
 func _new_collector() -> void:
     collector=Collector.new();root.add_child(collector)
@@ -83,6 +84,9 @@ func _capture(label: String) -> void:
 func _dwell(label: String, seconds: float, receipt: Dictionary, immutable: bool = false) -> void:
     var before: String = Context.digest(_log_bytes(main.battle_log)) if immutable else ""
     receipt["configuration"] = Context.workload(main)
+    receipt["level_id"]=main.level.level_id
+    receipt["attempt_id"]=main.battle_log.attempt_id
+    receipt["wave"]=main.battle_log.wave_id
     collector.mark(label,true,"",receipt)
     var begin := Time.get_ticks_usec()
     await _wait(seconds)
@@ -93,15 +97,29 @@ func _dwell(label: String, seconds: float, receipt: Dictionary, immutable: bool 
         "receipt":receipt,"source_immutable":immutable})
 
 func _command_walk() -> bool:
-    main._select_op(0)
-    var origin: Vector2i = main.grid.world_to_cell(main.selected.global_position)
-    for offset: Vector2i in [Vector2i(3,0),Vector2i(-3,0),Vector2i(0,3),Vector2i(0,-3),Vector2i(1,0),Vector2i(0,1)]:
-        var destination := origin+offset
-        if main.grid.is_blocked(destination.x,destination.y): continue
-        var point: Vector2 = main.grid.cell_to_world_center(destination)
-        if not main.grid.has_los(main.selected.global_position,point): continue
-        main._command_move_selected(point)
-        if main.selected.is_moving(): return true
+    var receipt := {"level_id":main.level.level_id,"attempt_id":main.battle_log.attempt_id,
+        "wave":main.battle_log.wave_id,"phase":main.phase,"candidates":[],"accepted":false}
+    command_receipts.append(receipt)
+    if not main._is_command_phase():return false
+    for index: int in [0,2,1]:
+        var op: OperatorUnit=main.operators[index]
+        var candidate := {"operator_index":index,"id":op.op_id,"alive":op.alive,
+            "visible":op.visible,"locked":op.locked,"position_before":op.global_position,"destinations":[]}
+        receipt.candidates.append(candidate)
+        if not op.alive or not op.visible or op.locked:continue
+        main._select_op(index)
+        var origin: Vector2i = main.grid.world_to_cell(op.global_position)
+        for offset: Vector2i in [Vector2i(3,0),Vector2i(-3,0),Vector2i(0,3),Vector2i(0,-3),Vector2i(1,0),Vector2i(0,1)]:
+            var destination := origin+offset
+            if main.grid.is_blocked(destination.x,destination.y):continue
+            var point: Vector2 = main.grid.cell_to_world_center(destination)
+            main._command_move_selected(point) # Original A* API may route around an obstacle; no artificial LOS gate.
+            candidate.destinations.append({"cell":destination,"moving_after":op.is_moving()})
+            if op.is_moving():
+                receipt.accepted=true
+                receipt.selected_id=op.op_id
+                receipt.destination=destination
+                return true
     return false
 
 func _live_reference(case: Array) -> bool:
@@ -143,6 +161,7 @@ func _live_reference(case: Array) -> bool:
             main._on_pause_pressed()
         var label := id+"-live-ALERT-wave%d" % wave
         var live_receipt := {"kind":"original live simulation callbacks, no direct ticks","phase":1,"wave":wave,"speed":1.0,
+            "level_id":id,"attempt_id":main.battle_log.attempt_id,
             "configuration":Context.workload(main),"boundary_scope":"actual transition-phase rows retained; phase summaries select actual phase1"}
         collector.mark(label,true,"",live_receipt)
         var start := Time.get_ticks_usec()
@@ -154,6 +173,7 @@ func _live_reference(case: Array) -> bool:
         segments.append({"label":label,"actual_seconds":float(end-start)/1_000_000,
             "receipt":live_receipt,"source_immutable":false})
         _check(main.phase==main.Phase.SWEEP,"original live wave reaches SWEEP " + id+" "+str(wave))
+        print("A3_CAMPAIGN_STAGE level=%s wave=%d phase=%d tick=%d" % [id,wave,main.phase,main.sim.tick])
         if failures>0:return false
         wave_ends.append(main.sim.tick)
         main.raid_vacuum_loot() # Original reference helper, outside timing; never called a normal pickup.
@@ -235,6 +255,7 @@ func _primary_history(level_id: String, archive: Dictionary) -> void:
     for spec: Array in [[0,"dust","SCOUT-saved-move"],[1,"shot","ALERT-confirmed-shot"],[5,"dust","SWEEP-saved-move"],[3,"none","WON-original-source"]]:
         var choice := _select_source(spec[0],spec[1])
         await _matrix(level_id,level_id+"-"+str(spec[2]),choice,archive)
+        print("A3_CAMPAIGN_STAGE level=%s historical_source=%s failures=%d" % [level_id,spec[2],failures])
         if failures>0 or stopped:return
     _untimed(level_id+"-replay-speed-transport")
     main.presentation_3d.rig.reset_view()
@@ -243,7 +264,7 @@ func _primary_history(level_id: String, archive: Dictionary) -> void:
         main.replay.set_speed(speed);main.replay.play(true)
         main._apply_replay_scrub()
         await _dwell(level_id+"-REPLAY-live-%dx" % int(speed),3.0,
-            {"kind":"original natural replay advance, bounded3s only; not whole playback","speed":speed,"source_archive":archive},true)
+            {"kind":"original natural replay advance, bounded3s only; not whole playback","phase":4,"speed":speed,"source_archive":archive},true)
         _check(main.replay.scrub_tick>0,"original replay naturally advances " + level_id+" "+str(speed))
         main.replay.pause()
     _check(Context.digest(_log_bytes(main.battle_log))==archive.sha256,"primary source archive exact after all history controls " + level_id)
@@ -272,7 +293,7 @@ func _tool_attempt(case: Array) -> Dictionary:
     _check(main._throw_grenade_from(owner,target),"actual original throw consumes explicit fixture inventory " + id)
     main.set_process(true)
     await _dwell(id+"-live-original-grenade-fuse",2.0,
-        {"kind":"original SCOUT grenade fuse/boom callbacks","scope":"explicit one-grenade API/resource fixture, not natural battle peak"})
+        {"kind":"original SCOUT grenade fuse/boom callbacks","phase":0,"scope":"explicit one-grenade API/resource fixture, not natural battle peak"})
     main.set_process(false)
     var confirmed: Array=main.battle_log.playback_snapshots.filter(func(snap:Dictionary)->bool:return not snap.data.get("tool_fx",[]).is_empty())
     _check(not confirmed.is_empty(),"actual fuse recorded confirmed tool source " + id)
@@ -314,6 +335,9 @@ func _seal(label: String) -> void:
         var spec: Dictionary=declared.receipt
         var phase_rows: Array=measured_rows.filter(func(row:Array)->bool:return row[9]==spec.phase) if spec.has("phase") else measured_rows
         _check(phase_rows.size()>=3,"every declared timed window has actual phase samples " + str(declared.label))
+        _check(measured_rows.all(func(row:Array)->bool:return row[6]==spec.level_id and row[7]==spec.attempt_id and (row[9]==4 or row[8]==spec.wave) and row[32]==1),"actual timed rows retain original level/attempt and live wave with automatic main callbacks " + str(declared.label))
+        if spec.has("speed") and spec.get("phase",-1)==4:
+            _check(phase_rows.all(func(row:Array)->bool:return row[15]==spec.speed),"actual requested transport speed " + str(declared.label))
         if spec.has("selected_source"):
             var selected: Dictionary=spec.selected_source
             var configuration: Dictionary=spec.configuration
@@ -389,12 +413,14 @@ func _run() -> void:
 
 func _finish() -> void:
     if is_instance_valid(collector):collector.stop()
+    var environment := Context.environment()
+    environment.scope="original live callback/API-reference and exact historical source workload; main/presenter process automatically during timed windows; not stationary controls/native normal/device/FINAL"
     var file := FileAccess.open(directory+"/report.json",FileAccess.WRITE)
     file.store_string(JSON.stringify({"format":1,"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),
         "receipt_sha256":receipt_sha,"source_proof_before":source_before,"source_proof_after":source_after,
         "checks":checks,"failures":failures,"stopped":stopped,"level_scope":OS.get_environment("AMBUSH_A3_LEVEL"),
         "complete":failures==0 and not stopped and outcomes.size()==selected_levels and selected_levels>0,
-        "environment":Context.environment(),"chunks":chunks,"segments":segments,"records":records,"captures":captures,"outcomes":outcomes,
+        "environment":environment,"chunks":chunks,"segments":segments,"records":records,"captures":captures,"outcomes":outcomes,"command_receipts":command_receipts,
         "collector_lifetimes":collector_lifetimes,
         "scope":"original live callback reference/API sources + exact paused recorded16-pose/policy views, bounded3s natural1x/2x; no whole/native normal/device/FINAL acceptance",
         "limitations":"post-draw FX peaks can miss between-frame simulation events; representative16 views omit48 Cartesian combinations; warm imports not cold boot; llvmpipe/GPUtime unavailable/pipeline unknown"},"  "))
