@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [FX-A1b frame/pool计划](AMBUSH_PR15_SHOT_FX_FRAME_POOL_PLAN_20261004.md) | 持续实施：先A1b.1严格只读frame/descriptor gate与playback生命周期，再A1b.2保存R5枪/pose muzzle采样及12/省电4有限池、source/seek/旧neutral/actual3D。A1a源metadata与P2已封，未称3D FX完成；制作源/GLB/atlas不改。P2可独立QA，6.1-sol只读APK工具链包并行，不设备。后A2/A3/FINAL全门/APK。 |
 | [P2 escape坏context报告](AMBUSH_PR15_ESCAPE_CONTEXT_BOUNDARY_20261004.md) / [计划](AMBUSH_PR15_ESCAPE_CONTEXT_BOUNDARY_PLAN_20261004.md) | fixed f0ed443：负23c H3/2/有效572 R18/4actual1 E0/S0→正式H57/R82及原referenceH70/R73各0actual0 E0/S0；saved level wave_count上界/明确playback2 Δplay>=Δsim，真实原927/928/local0.5→15.9/第三波/retry保持，六关边界/旧missingunknownneutral/外关/live/原bytes只读。正式8图hash/看8，开发audio/Callable/遮层另存，不冒称native/fullrecord/FX/A3/FINAL。P2独立QA可先验；fcf限定29/0/R40/0四图看两包另列。后FX-A1b/A2/A3/FINAL全门/APK继续。 |
 | [INITIAL六新原件实际3D报告](AMBUSH_PR15_NATIVE_RECORD3D_20261004.md) | 原session直接收尾、未重启：producer_a05 / consumer_d9c固定官方PCK+9aceae外部fixture，整轮29976/0actual0 E0/S0 records6；whole2x各原0→terminal、76seek/78native、56图hash/看6、原raw/source/live/sim保持。完整1x/appfocus-native/oldschema1/FX-A1b/A2/A3/FINAL全门未验；旧a05 R4404/1/diag4140/2、smoke54/62不取消。自有:116 exact关闭actual0。 |
 | [安全点接续checkpoint](AMBUSH_PR15_SAFE_RESUME_CHECKPOINT_20261004.md) | 父端要求本turn有界交接：source f3a（仅FX-A1a计划/test）已推；INITIAL a05/4d0f、教学fcf/a3df、escape877/4b82、smoke8906/2d4b、箭头d9c/5766完整固定SHA与实际结果。保全六新3D长轮session46384/PID100120、source负例f3a已自然结束4783/103actual1 E0/S0并封（缺planned FX，非新生产bug）；Xorg:116/PID98510与长轮保全，续任务poll46384不重跑。fullsmoke/六原件整矩阵/FINALFX-A3/APK未完，旧scope不重开。 |
