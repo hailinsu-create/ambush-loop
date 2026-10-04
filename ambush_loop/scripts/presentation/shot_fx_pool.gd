@@ -17,6 +17,7 @@ var _sampler: Node3D
 var _active: Array = []
 var _sample_calls := 0
 var _rejected_sockets := 0
+var _rejected_geometry := 0
 
 
 func _ready() -> void:
@@ -100,16 +101,26 @@ func update_frame(frame: Dictionary, power_saving: bool = false) -> void:
 		var target := Space.logic_to_world(shot.target_pos,TARGET_HEIGHT)
 		var age: int = shot.age_ticks
 		var delta := target-muzzle
+		var length := delta.length()
+		if not target.is_finite() or not delta.is_finite() or not is_finite(length):
+			_rejected_geometry += 1
+			continue
+		var tracer_transform := Transform3D.IDENTITY
+		if length>0.0001:
+			var direction := delta/length
+			var across := direction.cross(Vector3.UP if absf(direction.y)<0.99 else Vector3.RIGHT).normalized()
+			tracer_transform = Transform3D(Basis(across,direction*length,across.cross(direction)),(muzzle+target)*0.5)
+			if not tracer_transform.origin.is_finite() or not tracer_transform.basis.is_finite():
+				_rejected_geometry += 1
+				continue
 		var flash: MeshInstance3D = slot.muzzle
 		flash.position = muzzle
 		flash.scale = Vector3.ONE*(0.22-0.04*age)
 		flash.visible = age<3
 		var tracer: MeshInstance3D = slot.tracer
-		tracer.visible = not power_saving and age<6 and delta.length()>0.0001
+		tracer.visible = not power_saving and age<6 and length>0.0001
 		if tracer.visible:
-			var direction := delta.normalized()
-			var across := direction.cross(Vector3.UP if absf(direction.y)<0.99 else Vector3.RIGHT).normalized()
-			tracer.transform = Transform3D(Basis(across,direction*delta.length(),across.cross(direction)),(muzzle+target)*0.5)
+			tracer.transform = tracer_transform
 		var hit: MeshInstance3D = slot.impact
 		hit.position = target
 		hit.scale = Vector3.ONE*(0.16+0.015*age)
@@ -144,4 +155,4 @@ func _saved_muzzle(saved: Dictionary) -> Dictionary:
 
 
 func diagnostics() -> Dictionary:
-	return {"capacity":CAPACITY,"mesh_nodes":_slots.size()*3,"cache_size":_cache.size(),"cache_capacity":CACHE_CAPACITY,"sample_lod":SAMPLE_LOD,"sample_calls":_sample_calls,"rejected_sockets":_rejected_sockets,"scope":_scope.duplicate(true),"active":_active.duplicate(true)}
+	return {"capacity":CAPACITY,"mesh_nodes":_slots.size()*3,"cache_size":_cache.size(),"cache_capacity":CACHE_CAPACITY,"sample_lod":SAMPLE_LOD,"sample_calls":_sample_calls,"rejected_sockets":_rejected_sockets,"rejected_geometry":_rejected_geometry,"scope":_scope.duplicate(true),"active":_active.duplicate(true)}

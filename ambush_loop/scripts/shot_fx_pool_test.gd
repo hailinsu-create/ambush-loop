@@ -279,6 +279,7 @@ func _history_cases() -> void:
 	main.presentation_3d.refresh()
 	_check(not main.replay.playing and _diag().active==stable,"original focus lifecycle keeps replay paused and saved FX unchanged")
 	_check(_state(saved)==before and main._snapshot_data()==live and [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum,op.ammo,enemy.hp]==sim_tuple,"original transport/seek/cold samples do not mutate saved source/live/sim/HP/ammo")
+	main.battle_log=BattleLog.new() # Detach finished source before original reset clears the current log.
 	pair=await _reset()
 	_bind_pool()
 	var foreign_op: OperatorUnit=pair[0]
