@@ -3,6 +3,7 @@ extends "res://scripts/shot_fx_boundary_test.gd"
 const ViewState := preload("res://scripts/presentation/view_state.gd")
 const ActorVisual := preload("res://scripts/presentation/actor_visual.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
+const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
 const POOL_PATH := "res://scripts/presentation/shot_fx_pool.gd"
 var pool: Node3D
 var captures := []
@@ -177,6 +178,18 @@ func _boundary_cases(original: Dictionary) -> void:
 	samples_before=_diag().sample_calls
 	pool.update_frame(copy)
 	_check(_diag().sample_calls==samples_before+1 and _diag().active[0].muzzle.is_equal_approx(first+Vector3(3,0,0)),"same source/identity changed complete descriptor cannot reuse cached muzzle")
+	copy.events.back().payload.visual_weapon="m1911"
+	copy.events.back().payload.fx.visual_weapon="m1911"
+	copy.events.back().payload.fx.pose.upper_action=FirearmPose.profile("m1911").clips.fire
+	samples_before=_diag().sample_calls
+	pool.update_frame(copy)
+	_check(_diag().sample_calls==samples_before+1 and _diag().active.size()==1 and _diag().active[0].visual_weapon=="m1911" and _diag().active[0].muzzle.is_equal_approx(_sample_socket(copy.events.back().payload.fx,0)),"same identity changed saved gun/pose samples exact new descriptor without stale rifle socket")
+	copy=frame.duplicate(true)
+	copy.events.back().payload.fx.target_pos=Vector2(1e38,-1e38)
+	var malformed_delta: Vector3=Space.logic_to_world(copy.events.back().payload.fx.target_pos,1.05)-first
+	pool.update_frame(copy)
+	_check(copy.events.back().payload.fx.target_pos.is_finite() and not is_finite(malformed_delta.length()) and _diag().active.is_empty(),"finite saved coordinate with overflowed derived tracer length fails closed")
+	rows.append({"case":"explicit-finite-derived-overflow","input_vector_is_finite":copy.events.back().payload.fx.target_pos.is_finite(),"derived_length":str(malformed_delta.length()),"pool":_diag(),"scope":"synthetic corrupt saved target, not an actual gameplay position"})
 	pool.update_frame(frame)
 	pool._cache.clear() # Explicit missing saved-asset marker fixture, no production mutation.
 	var marker: Node3D=pool._sampler.equipped.find_child(event.payload.fx.visual_weapon+"__socket_muzzle",true,false)
@@ -266,12 +279,20 @@ func _history_cases() -> void:
 	main.presentation_3d.refresh()
 	_check(not main.replay.playing and _diag().active==stable,"original focus lifecycle keeps replay paused and saved FX unchanged")
 	_check(_state(saved)==before and main._snapshot_data()==live and [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum,op.ammo,enemy.hp]==sim_tuple,"original transport/seek/cold samples do not mutate saved source/live/sim/HP/ammo")
-	var foreign:=BattleLog.new()
-	foreign.begin_attempt("foreign-live-log")
-	foreign.enable_continuous_playback(2)
-	main.battle_log=foreign
+	pair=await _reset()
+	_bind_pool()
+	var foreign_op: OperatorUnit=pair[0]
+	var foreign_enemy: EnemyRunner=pair[1]
+	foreign_op.apply_weapon("pistol",true)
+	var foreign_event:=_event(foreign_op,foreign_enemy)
+	_check(main._try_fire_with_recorded_fx(foreign_op,foreign_enemy,foreign_event) and foreign_event.payload.has("fx"),"foreign current log has an actual new successful pistol shot")
+	var foreign: BattleLog=main.battle_log
+	var foreign_before:=_state(foreign)
+	main.phase=main.Phase.REPLAY # Explicit old-record consumer over actual foreign live shot.
+	main.replay.bind(saved)
+	main.replay.set_tick(event.playback_tick)
 	main.presentation_3d.refresh()
-	_check(_diag().active==stable and main.replay.log==saved,"foreign current live log cannot replace bound original history")
+	_check(_diag().active==stable and main.replay.log==saved and foreign.attempt_id!=saved.attempt_id and foreign_op.weapon_id=="pistol","foreign current live shot/gun cannot replace bound original history")
 	for id: String in ["schema1"]+INITIAL.keys():
 		var path: String=OS.get_environment("AMBUSH_LEGACY_RECORD_FIXTURE") if id=="schema1" else OS.get_environment("AMBUSH_INITIAL_RECORD_ROOT")+"/native-player-"+id+"-record.bin"
 		var expected: String=LEGACY_SHA if id=="schema1" else INITIAL[id]
@@ -296,7 +317,7 @@ func _history_cases() -> void:
 	main.replay.bind(saved)
 	main.replay.set_tick(event.playback_tick)
 	main.presentation_3d.refresh()
-	_check(_diag().active==stable and _state(saved)==before,"restoring original modern bound log restores exact saved shot after all old sources")
+	_check(_diag().active==stable and _state(saved)==before and _state(foreign)==foreign_before,"restoring original modern bound log restores exact saved shot after all old sources and preserves actual foreign live shot")
 	main.phase=main.Phase.WATCHING # Explicit cold consumer phase restoration fixture.
 	main.battle_log=saved
 	main.presentation_3d.refresh()
