@@ -1,0 +1,3660 @@
+{
+  "format": 1,
+  "source_sha": "a44a33ee348fa53e1b1c6d539d7ffcf114e4283c",
+  "strict_analysis_sha256": "e43a87bd856486feaacdea17850d65739fc09549da0431cca6de895b8f84a2a5",
+  "segments": [
+    {
+      "label": "yard-live-SCOUT-command",
+      "samples": 3,
+      "actual_seconds": 2.725672,
+      "interval_ms": {
+        "median": 863.988,
+        "p95": 888.2574,
+        "p99": 890.41468,
+        "max": 890.954
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1574234827335563,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-ALERT-entry",
+      "samples": 3,
+      "actual_seconds": 2.666739,
+      "interval_ms": {
+        "median": 909.262,
+        "p95": 922.3993,
+        "p99": 923.5670600000001,
+        "max": 923.859
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.099793018953833,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-paused-ALERT",
+      "samples": 3,
+      "actual_seconds": 2.172999,
+      "interval_ms": {
+        "median": 834.739,
+        "p95": 882.5758,
+        "p99": 886.82796,
+        "max": 887.891
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1979792486034557,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-ALERT-wave0",
+      "samples": 127,
+      "actual_seconds": 75.018888,
+      "interval_ms": {
+        "median": 834.717,
+        "p95": 976.1990999999998,
+        "p99": 1161.8832399999994,
+        "max": 1540.111
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1980108228297734,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-SWEEP-wave0",
+      "samples": 3,
+      "actual_seconds": 2.133392,
+      "interval_ms": {
+        "median": 202.08,
+        "p95": 744.3525,
+        "p99": 792.5545,
+        "max": 804.605
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 4.948535233570863,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-ALERT-wave1",
+      "samples": 27,
+      "actual_seconds": 18.299378,
+      "interval_ms": {
+        "median": 325.089,
+        "p95": 951.2313999999999,
+        "p99": 1098.6000999999997,
+        "max": 1146.067
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 3.0760807040533518,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-SWEEP-wave1",
+      "samples": 3,
+      "actual_seconds": 2.351387,
+      "interval_ms": {
+        "median": 865.438,
+        "p95": 913.3441,
+        "p99": 917.60242,
+        "max": 918.667
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1554842750145013,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-WON",
+      "samples": 11,
+      "actual_seconds": 2.014151,
+      "interval_ms": {
+        "median": 164.038,
+        "p95": 178.7505,
+        "p99": 185.79410000000001,
+        "max": 187.555
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.096148453407137,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw0",
+      "samples": 13,
+      "actual_seconds": 2.067464,
+      "interval_ms": {
+        "median": 148.323,
+        "p95": 158.1736,
+        "p99": 160.92831999999999,
+        "max": 161.617
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.742042704098488,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw45",
+      "samples": 12,
+      "actual_seconds": 2.053445,
+      "interval_ms": {
+        "median": 156.848,
+        "p95": 167.76635,
+        "p99": 174.38527,
+        "max": 176.04
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.375599306334795,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw90",
+      "samples": 14,
+      "actual_seconds": 2.099985,
+      "interval_ms": {
+        "median": 139.3965,
+        "p95": 151.13905,
+        "p99": 155.47741,
+        "max": 156.562
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.173781264235472,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw135",
+      "samples": 14,
+      "actual_seconds": 2.142595,
+      "interval_ms": {
+        "median": 142.0325,
+        "p95": 152.51785,
+        "p99": 154.82197,
+        "max": 155.398
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.040642106560118,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw180",
+      "samples": 12,
+      "actual_seconds": 2.076805,
+      "interval_ms": {
+        "median": 158.962,
+        "p95": 173.79645,
+        "p99": 175.33689,
+        "max": 175.722
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.29081164051786,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw225",
+      "samples": 12,
+      "actual_seconds": 2.106417,
+      "interval_ms": {
+        "median": 163.058,
+        "p95": 173.2449,
+        "p99": 177.90098,
+        "max": 179.065
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.132787106428387,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.031851,
+      "interval_ms": {
+        "median": 142.085,
+        "p95": 155.5946,
+        "p99": 156.34292,
+        "max": 156.53
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.038040609494316,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-standard-yaw315",
+      "samples": 13,
+      "actual_seconds": 2.062458,
+      "interval_ms": {
+        "median": 148.332,
+        "p95": 154.7182,
+        "p99": 155.09403999999998,
+        "max": 155.188
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.741633632661867,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw0",
+      "samples": 13,
+      "actual_seconds": 2.07582,
+      "interval_ms": {
+        "median": 144.1,
+        "p95": 165.43699999999998,
+        "p99": 170.3738,
+        "max": 171.608
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.939625260235948,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw45",
+      "samples": 13,
+      "actual_seconds": 2.157237,
+      "interval_ms": {
+        "median": 152.93,
+        "p95": 158.3898,
+        "p99": 158.59956,
+        "max": 158.652
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.538939384031909,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw90",
+      "samples": 14,
+      "actual_seconds": 2.097131,
+      "interval_ms": {
+        "median": 137.7615,
+        "p95": 153.5194,
+        "p99": 155.21668,
+        "max": 155.641
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.258922122654006,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw135",
+      "samples": 14,
+      "actual_seconds": 2.109556,
+      "interval_ms": {
+        "median": 137.80700000000002,
+        "p95": 159.1695,
+        "p99": 159.4451,
+        "max": 159.514
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.256525430493371,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw180",
+      "samples": 12,
+      "actual_seconds": 2.071579,
+      "interval_ms": {
+        "median": 156.3185,
+        "p95": 171.3159,
+        "p99": 173.73678,
+        "max": 174.342
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.397195469506168,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw225",
+      "samples": 12,
+      "actual_seconds": 2.025506,
+      "interval_ms": {
+        "median": 152.973,
+        "p95": 166.71795,
+        "p99": 170.24279,
+        "max": 171.124
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.5371013185333355,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.003819,
+      "interval_ms": {
+        "median": 142.756,
+        "p95": 153.3196,
+        "p99": 154.86472,
+        "max": 155.251
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.004959511334024,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SCOUT-saved-move-power_saving-yaw315",
+      "samples": 13,
+      "actual_seconds": 2.000041,
+      "interval_ms": {
+        "median": 143.702,
+        "p95": 153.09679999999997,
+        "p99": 158.36336,
+        "max": 159.68
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.958845388373161,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw0",
+      "samples": 12,
+      "actual_seconds": 2.088925,
+      "interval_ms": {
+        "median": 158.619,
+        "p95": 177.75459999999998,
+        "p99": 183.79492000000002,
+        "max": 185.305
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.304414981811763,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw45",
+      "samples": 11,
+      "actual_seconds": 2.096112,
+      "interval_ms": {
+        "median": 168.854,
+        "p95": 186.25900000000001,
+        "p99": 187.6038,
+        "max": 187.94
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.922276049131201,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw90",
+      "samples": 15,
+      "actual_seconds": 2.095454,
+      "interval_ms": {
+        "median": 130.932,
+        "p95": 135.8372,
+        "p99": 135.87304,
+        "max": 135.882
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.637552317233374,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw135",
+      "samples": 14,
+      "actual_seconds": 2.140461,
+      "interval_ms": {
+        "median": 143.202,
+        "p95": 148.00555,
+        "p99": 148.38671,
+        "max": 148.482
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.9831426935378,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw180",
+      "samples": 11,
+      "actual_seconds": 2.10404,
+      "interval_ms": {
+        "median": 170.204,
+        "p95": 200.755,
+        "p99": 205.49980000000002,
+        "max": 206.686
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.875302578082771,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw225",
+      "samples": 11,
+      "actual_seconds": 2.153214,
+      "interval_ms": {
+        "median": 180.065,
+        "p95": 189.082,
+        "p99": 190.58599999999998,
+        "max": 190.962
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.553550106905839,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.021846,
+      "interval_ms": {
+        "median": 144.172,
+        "p95": 153.9398,
+        "p99": 154.43516,
+        "max": 154.559
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.936159587159781,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-standard-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.062227,
+      "interval_ms": {
+        "median": 154.007,
+        "p95": 174.90495,
+        "p99": 175.75459,
+        "max": 175.967
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.493211347536151,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.086374,
+      "interval_ms": {
+        "median": 172.483,
+        "p95": 181.737,
+        "p99": 186.5514,
+        "max": 187.755
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.797672814132407,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw45",
+      "samples": 11,
+      "actual_seconds": 2.176559,
+      "interval_ms": {
+        "median": 180.244,
+        "p95": 189.153,
+        "p99": 190.4394,
+        "max": 190.761
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.5480348860433635,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw90",
+      "samples": 14,
+      "actual_seconds": 2.07014,
+      "interval_ms": {
+        "median": 136.56900000000002,
+        "p95": 146.32305,
+        "p99": 152.61660999999998,
+        "max": 154.19
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.3223059405868085,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw135",
+      "samples": 13,
+      "actual_seconds": 2.094292,
+      "interval_ms": {
+        "median": 150.363,
+        "p95": 162.6294,
+        "p99": 163.07147999999998,
+        "max": 163.182
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.650572281744844,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw180",
+      "samples": 11,
+      "actual_seconds": 2.018607,
+      "interval_ms": {
+        "median": 167.205,
+        "p95": 177.22899999999998,
+        "p99": 179.4354,
+        "max": 179.987
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.9806823958613675,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw225",
+      "samples": 11,
+      "actual_seconds": 2.147359,
+      "interval_ms": {
+        "median": 175.169,
+        "p95": 194.9505,
+        "p99": 196.5469,
+        "max": 196.946
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.708772670963469,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw270",
+      "samples": 14,
+      "actual_seconds": 2.142858,
+      "interval_ms": {
+        "median": 139.71949999999998,
+        "p95": 152.4205,
+        "p99": 156.67929999999998,
+        "max": 157.744
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.157197098472297,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-ALERT-confirmed-shot-power_saving-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.010502,
+      "interval_ms": {
+        "median": 151.668,
+        "p95": 175.78855,
+        "p99": 183.16251,
+        "max": 185.006
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.593348629902154,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.099596,
+      "interval_ms": {
+        "median": 160.846,
+        "p95": 202.87650000000002,
+        "p99": 212.2913,
+        "max": 214.645
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.217126941297887,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw45",
+      "samples": 11,
+      "actual_seconds": 2.104315,
+      "interval_ms": {
+        "median": 167.08,
+        "p95": 203.97699999999998,
+        "p99": 208.4794,
+        "max": 209.605
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.9851568111084505,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.102675,
+      "interval_ms": {
+        "median": 152.192,
+        "p95": 165.53779999999998,
+        "p99": 170.57876,
+        "max": 171.839
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.570647603027754,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw135",
+      "samples": 13,
+      "actual_seconds": 2.07086,
+      "interval_ms": {
+        "median": 143.346,
+        "p95": 160.0974,
+        "p99": 165.14508,
+        "max": 166.407
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.976127691041257,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw180",
+      "samples": 12,
+      "actual_seconds": 2.101423,
+      "interval_ms": {
+        "median": 163.28500000000003,
+        "p95": 168.24995,
+        "p99": 170.38439,
+        "max": 170.918
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.124261260985393,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw225",
+      "samples": 11,
+      "actual_seconds": 2.004774,
+      "interval_ms": {
+        "median": 165.212,
+        "p95": 182.098,
+        "p99": 188.2892,
+        "max": 189.837
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.05282909231775,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw270",
+      "samples": 14,
+      "actual_seconds": 2.083539,
+      "interval_ms": {
+        "median": 137.0315,
+        "p95": 156.11245,
+        "p99": 162.67848999999998,
+        "max": 164.32
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.297592159466984,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-standard-yaw315",
+      "samples": 13,
+      "actual_seconds": 2.135058,
+      "interval_ms": {
+        "median": 147.658,
+        "p95": 170.47059999999996,
+        "p99": 181.97091999999998,
+        "max": 184.846
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.7724065069281725,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.133348,
+      "interval_ms": {
+        "median": 174.887,
+        "p95": 200.3225,
+        "p99": 200.9461,
+        "max": 201.102
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.71797789429746,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw45",
+      "samples": 11,
+      "actual_seconds": 2.019598,
+      "interval_ms": {
+        "median": 162.904,
+        "p95": 186.35750000000002,
+        "p99": 192.6323,
+        "max": 194.201
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.138584687914355,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.118523,
+      "interval_ms": {
+        "median": 148.685,
+        "p95": 172.4728,
+        "p99": 172.80976,
+        "max": 172.894
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.725628005515015,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.03448,
+      "interval_ms": {
+        "median": 150.90249999999997,
+        "p95": 172.9968,
+        "p99": 174.20416,
+        "max": 174.506
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.626795447391529,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw180",
+      "samples": 11,
+      "actual_seconds": 2.063162,
+      "interval_ms": {
+        "median": 165.581,
+        "p95": 201.4205,
+        "p99": 218.21450000000002,
+        "max": 222.413
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.039340262469728,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw225",
+      "samples": 11,
+      "actual_seconds": 2.060177,
+      "interval_ms": {
+        "median": 171.975,
+        "p95": 181.014,
+        "p99": 182.4028,
+        "max": 182.75
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.814798662596308,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.057537,
+      "interval_ms": {
+        "median": 144.433,
+        "p95": 164.35979999999998,
+        "p99": 168.96156,
+        "max": 170.112
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.923625487250144,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-SWEEP-saved-move-power_saving-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.073162,
+      "interval_ms": {
+        "median": 158.5005,
+        "p95": 170.2464,
+        "p99": 173.63968,
+        "max": 174.488
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.309128362371097,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.137176,
+      "interval_ms": {
+        "median": 170.389,
+        "p95": 200.9105,
+        "p99": 204.3421,
+        "max": 205.2
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.868923463369114,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw45",
+      "samples": 11,
+      "actual_seconds": 2.116409,
+      "interval_ms": {
+        "median": 172.166,
+        "p95": 197.453,
+        "p99": 202.1138,
+        "max": 203.279
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.808347757396931,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw90",
+      "samples": 14,
+      "actual_seconds": 2.131621,
+      "interval_ms": {
+        "median": 139.7955,
+        "p95": 151.34765,
+        "p99": 152.60553,
+        "max": 152.92
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.153306079237171,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.072086,
+      "interval_ms": {
+        "median": 156.88400000000001,
+        "p95": 182.43665,
+        "p99": 189.25533000000001,
+        "max": 190.96
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.374136304530736,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw180",
+      "samples": 11,
+      "actual_seconds": 2.123483,
+      "interval_ms": {
+        "median": 173.224,
+        "p95": 190.30700000000002,
+        "p99": 192.8958,
+        "max": 193.543
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.772872119336813,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw225",
+      "samples": 11,
+      "actual_seconds": 2.146499,
+      "interval_ms": {
+        "median": 177.349,
+        "p95": 197.546,
+        "p99": 198.3708,
+        "max": 198.577
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.638599597403989,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.055689,
+      "interval_ms": {
+        "median": 145.04,
+        "p95": 160.93259999999998,
+        "p99": 169.03931999999998,
+        "max": 171.066
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.89464975179261,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-standard-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.09871,
+      "interval_ms": {
+        "median": 156.6205,
+        "p95": 187.81295,
+        "p99": 193.23859000000002,
+        "max": 194.595
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.3848602194476465,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.09858,
+      "interval_ms": {
+        "median": 171.048,
+        "p95": 194.8485,
+        "p99": 200.9353,
+        "max": 202.457
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.846312146298115,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw45",
+      "samples": 10,
+      "actual_seconds": 2.149487,
+      "interval_ms": {
+        "median": 195.3895,
+        "p95": 210.4406,
+        "p99": 210.97772,
+        "max": 211.112
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.117982286663306,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.021296,
+      "interval_ms": {
+        "median": 144.706,
+        "p95": 159.07439999999997,
+        "p99": 170.12927999999997,
+        "max": 172.893
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.910563487346759,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.029217,
+      "interval_ms": {
+        "median": 153.4125,
+        "p95": 171.26164999999997,
+        "p99": 177.86912999999998,
+        "max": 179.521
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.51837366577039,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw180",
+      "samples": 11,
+      "actual_seconds": 2.121252,
+      "interval_ms": {
+        "median": 177.3,
+        "p95": 189.19400000000002,
+        "p99": 195.1484,
+        "max": 196.637
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.640157924421883,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw225",
+      "samples": 10,
+      "actual_seconds": 2.008956,
+      "interval_ms": {
+        "median": 179.3275,
+        "p95": 200.85135,
+        "p99": 201.66387,
+        "max": 201.867
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.576389566575122,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.106149,
+      "interval_ms": {
+        "median": 147.405,
+        "p95": 167.0388,
+        "p99": 168.94296,
+        "max": 169.419
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.784030392456158,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-WON-original-source-power_saving-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.038825,
+      "interval_ms": {
+        "median": 153.501,
+        "p95": 187.14594999999997,
+        "p99": 203.72999000000004,
+        "max": 207.876
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.514615539963909,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-REPLAY-live-1x",
+      "samples": 3,
+      "actual_seconds": 3.28623,
+      "interval_ms": {
+        "median": 781.782,
+        "p95": 791.0169,
+        "p99": 791.83778,
+        "max": 792.043
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.2791289643404427,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-REPLAY-live-2x",
+      "samples": 3,
+      "actual_seconds": 3.180468,
+      "interval_ms": {
+        "median": 802.662,
+        "p95": 819.5946,
+        "p99": 821.09972,
+        "max": 821.476
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.245854419419382,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-original-grenade-fuse",
+      "samples": 15,
+      "actual_seconds": 8.696666,
+      "interval_ms": {
+        "median": 882.005,
+        "p95": 959.2841999999999,
+        "p99": 984.97924,
+        "max": 991.403
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1337804207459141,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-live-FAILED-abort",
+      "samples": 13,
+      "actual_seconds": 2.072483,
+      "interval_ms": {
+        "median": 144.473,
+        "p95": 163.2082,
+        "p99": 165.18484,
+        "max": 165.679
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.9217085545396015,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw0",
+      "samples": 14,
+      "actual_seconds": 2.102486,
+      "interval_ms": {
+        "median": 138.3495,
+        "p95": 152.73515,
+        "p99": 160.18623,
+        "max": 162.049
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.2280709362881685,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw45",
+      "samples": 13,
+      "actual_seconds": 2.057199,
+      "interval_ms": {
+        "median": 145.497,
+        "p95": 152.0216,
+        "p99": 152.74352,
+        "max": 152.924
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.872993944892334,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.010334,
+      "interval_ms": {
+        "median": 117.7485,
+        "p95": 123.93674999999999,
+        "p99": 133.81455,
+        "max": 136.284
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.492677189093703,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw135",
+      "samples": 15,
+      "actual_seconds": 2.03762,
+      "interval_ms": {
+        "median": 128.184,
+        "p95": 141.0827,
+        "p99": 146.97894,
+        "max": 148.453
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.801285651875429,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw180",
+      "samples": 14,
+      "actual_seconds": 2.075473,
+      "interval_ms": {
+        "median": 139.808,
+        "p95": 143.63155,
+        "p99": 145.99911,
+        "max": 146.591
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.152666514076448,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw225",
+      "samples": 14,
+      "actual_seconds": 2.136991,
+      "interval_ms": {
+        "median": 144.66649999999998,
+        "p95": 149.60555,
+        "p99": 151.14111,
+        "max": 151.525
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.912450359965853,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw270",
+      "samples": 16,
+      "actual_seconds": 2.031539,
+      "interval_ms": {
+        "median": 119.50800000000001,
+        "p95": 123.82075,
+        "p99": 124.27615,
+        "max": 124.39
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.367640660039495,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-standard-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.053551,
+      "interval_ms": {
+        "median": 127.438,
+        "p95": 139.4091,
+        "p99": 144.35222,
+        "max": 145.588
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.846953028139174,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw0",
+      "samples": 14,
+      "actual_seconds": 2.023379,
+      "interval_ms": {
+        "median": 133.462,
+        "p95": 141.0363,
+        "p99": 141.18086000000002,
+        "max": 141.217
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.4927694774542575,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw45",
+      "samples": 13,
+      "actual_seconds": 2.082347,
+      "interval_ms": {
+        "median": 145.71,
+        "p95": 167.042,
+        "p99": 167.48839999999998,
+        "max": 167.6
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.86294694942008,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.12469,
+      "interval_ms": {
+        "median": 123.2285,
+        "p95": 138.02525,
+        "p99": 140.06105,
+        "max": 140.57
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.115005863091737,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw135",
+      "samples": 15,
+      "actual_seconds": 2.053299,
+      "interval_ms": {
+        "median": 123.971,
+        "p95": 143.1101,
+        "p99": 152.05161999999999,
+        "max": 154.287
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.066402626420695,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw180",
+      "samples": 15,
+      "actual_seconds": 2.107509,
+      "interval_ms": {
+        "median": 130.856,
+        "p95": 146.06879999999998,
+        "p99": 148.18895999999998,
+        "max": 148.719
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.641988139634408,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw225",
+      "samples": 13,
+      "actual_seconds": 2.011978,
+      "interval_ms": {
+        "median": 143.756,
+        "p95": 154.7394,
+        "p99": 155.73828,
+        "max": 155.988
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.956231392081026,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw270",
+      "samples": 16,
+      "actual_seconds": 2.05984,
+      "interval_ms": {
+        "median": 121.53200000000001,
+        "p95": 129.4875,
+        "p99": 130.5903,
+        "max": 130.866
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.22828555442188,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-confirmed-tool-source-power_saving-yaw315",
+      "samples": 16,
+      "actual_seconds": 2.123236,
+      "interval_ms": {
+        "median": 121.7415,
+        "p95": 141.84775000000002,
+        "p99": 147.75115,
+        "max": 149.227
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.214125832193623,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw0",
+      "samples": 14,
+      "actual_seconds": 2.095217,
+      "interval_ms": {
+        "median": 138.72899999999998,
+        "p95": 147.4476,
+        "p99": 148.85992,
+        "max": 149.213
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.208298192879644,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw45",
+      "samples": 12,
+      "actual_seconds": 2.040705,
+      "interval_ms": {
+        "median": 155.677,
+        "p95": 160.2373,
+        "p99": 161.22906,
+        "max": 161.477
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.4235564662731175,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.003471,
+      "interval_ms": {
+        "median": 118.0065,
+        "p95": 123.21975,
+        "p99": 128.10795000000002,
+        "max": 129.33
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.474109477020333,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw135",
+      "samples": 15,
+      "actual_seconds": 2.00395,
+      "interval_ms": {
+        "median": 125.635,
+        "p95": 132.10569999999998,
+        "p99": 136.00834,
+        "max": 136.984
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.959565407728737,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw180",
+      "samples": 14,
+      "actual_seconds": 2.149632,
+      "interval_ms": {
+        "median": 140.9385,
+        "p95": 156.32365,
+        "p99": 163.92552999999998,
+        "max": 165.826
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.095293337164792,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw225",
+      "samples": 13,
+      "actual_seconds": 2.116349,
+      "interval_ms": {
+        "median": 149.333,
+        "p95": 165.80599999999998,
+        "p99": 175.154,
+        "max": 177.491
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.696443518847141,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw270",
+      "samples": 16,
+      "actual_seconds": 2.019126,
+      "interval_ms": {
+        "median": 116.4495,
+        "p95": 130.822,
+        "p99": 139.7644,
+        "max": 142.0
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.587413428138378,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-standard-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.117107,
+      "interval_ms": {
+        "median": 133.106,
+        "p95": 139.0474,
+        "p99": 140.02068,
+        "max": 140.264
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.512809339924572,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw0",
+      "samples": 14,
+      "actual_seconds": 2.073374,
+      "interval_ms": {
+        "median": 137.74200000000002,
+        "p95": 143.9023,
+        "p99": 147.07326,
+        "max": 147.866
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.259949761147652,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw45",
+      "samples": 12,
+      "actual_seconds": 2.004365,
+      "interval_ms": {
+        "median": 154.9345,
+        "p95": 167.17565,
+        "p99": 169.66473000000002,
+        "max": 170.287
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.454340382548754,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.081693,
+      "interval_ms": {
+        "median": 118.35900000000001,
+        "p95": 143.6395,
+        "p99": 144.2887,
+        "max": 144.451
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.448871653190716,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw135",
+      "samples": 16,
+      "actual_seconds": 2.122172,
+      "interval_ms": {
+        "median": 125.02250000000001,
+        "p95": 128.99575000000002,
+        "p99": 129.28075,
+        "max": 129.352
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.998560259153352,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw180",
+      "samples": 14,
+      "actual_seconds": 2.106534,
+      "interval_ms": {
+        "median": 136.619,
+        "p95": 159.682,
+        "p99": 171.02839999999998,
+        "max": 173.865
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.319626113498122,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw225",
+      "samples": 13,
+      "actual_seconds": 2.015821,
+      "interval_ms": {
+        "median": 142.641,
+        "p95": 149.9926,
+        "p99": 151.63852,
+        "max": 152.05
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.010607048464327,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw270",
+      "samples": 17,
+      "actual_seconds": 2.117462,
+      "interval_ms": {
+        "median": 119.438,
+        "p95": 126.0488,
+        "p99": 126.08336,
+        "max": 126.092
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.372544751251695,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "yard-FAILED-abort-source-power_saving-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.060021,
+      "interval_ms": {
+        "median": 127.64,
+        "p95": 136.0289,
+        "p99": 139.55298,
+        "max": 140.434
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.834534628643058,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    }
+  ],
+  "chunks": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-182e94a8c5d2437aadaf72eeba8189c9/yard-actual-source-metrics",
+      "collector_storage_bytes": 15466496.0,
+      "rss_ready_bytes": 263553024,
+      "rss_save_bytes": 973545472,
+      "raw_supported_counter_extrema": {
+        "MEMORY_STATIC": {
+          "first": 266298393.0,
+          "last": 273219847.0,
+          "max": 288202392.0
+        },
+        "OBJECT_COUNT": {
+          "first": 5335.0,
+          "last": 5342.0,
+          "max": 5924.0
+        },
+        "OBJECT_NODE_COUNT": {
+          "first": 1278.0,
+          "last": 1306.0,
+          "max": 1545.0
+        },
+        "OBJECT_RESOURCE_COUNT": {
+          "first": 469.0,
+          "last": 398.0,
+          "max": 614.0
+        },
+        "OBJECT_ORPHAN_NODE_COUNT": {
+          "first": 0.0,
+          "last": 0.0,
+          "max": 0.0
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "first": 73498834.0,
+          "last": 77863802.0,
+          "max": 77867898.0
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "first": 22515432.0,
+          "last": 41974450.0,
+          "max": 44665850.0
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "first": 96014266.0,
+          "last": 119838252.0,
+          "max": 122533748.0
+        }
+      },
+      "original_rss_marks": [
+        {
+          "label": "cold-production-scene",
+          "timed": false,
+          "ticks_usec": 16290241,
+          "rss_bytes": 263561216
+        },
+        {
+          "label": "yard-original-load",
+          "timed": false,
+          "ticks_usec": 26890060,
+          "rss_bytes": 857120768
+        },
+        {
+          "label": "yard-live-SCOUT-command",
+          "timed": true,
+          "ticks_usec": 29720083,
+          "rss_bytes": 876109824
+        },
+        {
+          "label": "yard-live-SCOUT-command-boundary",
+          "timed": false,
+          "ticks_usec": 32445875,
+          "rss_bytes": 897978368
+        },
+        {
+          "label": "yard-live-SCOUT-capture",
+          "timed": false,
+          "ticks_usec": 32446019,
+          "rss_bytes": 897978368
+        },
+        {
+          "label": "yard-reference-resource-snap",
+          "timed": false,
+          "ticks_usec": 33745071,
+          "rss_bytes": 906977280
+        },
+        {
+          "label": "yard-live-ALERT-entry",
+          "timed": true,
+          "ticks_usec": 40362413,
+          "rss_bytes": 907022336
+        },
+        {
+          "label": "yard-live-ALERT-entry-boundary",
+          "timed": false,
+          "ticks_usec": 43029278,
+          "rss_bytes": 907157504
+        },
+        {
+          "label": "yard-paused-ALERT",
+          "timed": true,
+          "ticks_usec": 43283475,
+          "rss_bytes": 907157504
+        },
+        {
+          "label": "yard-paused-ALERT-boundary",
+          "timed": false,
+          "ticks_usec": 45456598,
+          "rss_bytes": 907165696
+        },
+        {
+          "label": "yard-paused-ALERT-capture",
+          "timed": false,
+          "ticks_usec": 45462370,
+          "rss_bytes": 907165696
+        },
+        {
+          "label": "yard-live-ALERT-wave0",
+          "timed": true,
+          "ticks_usec": 47148185,
+          "rss_bytes": 902643712
+        },
+        {
+          "label": "yard-live-ALERT-wave0-finish",
+          "timed": false,
+          "ticks_usec": 122167197,
+          "rss_bytes": 936345600
+        },
+        {
+          "label": "yard-live-SWEEP-wave0",
+          "timed": true,
+          "ticks_usec": 122882832,
+          "rss_bytes": 940314624
+        },
+        {
+          "label": "yard-live-SWEEP-wave0-boundary",
+          "timed": false,
+          "ticks_usec": 125016388,
+          "rss_bytes": 940425216
+        },
+        {
+          "label": "yard-live-ALERT-wave1",
+          "timed": true,
+          "ticks_usec": 125682867,
+          "rss_bytes": 940425216
+        },
+        {
+          "label": "yard-live-ALERT-wave1-finish",
+          "timed": false,
+          "ticks_usec": 143982416,
+          "rss_bytes": 950288384
+        },
+        {
+          "label": "yard-live-SWEEP-wave1",
+          "timed": true,
+          "ticks_usec": 145329681,
+          "rss_bytes": 955297792
+        },
+        {
+          "label": "yard-live-SWEEP-wave1-boundary",
+          "timed": false,
+          "ticks_usec": 147681219,
+          "rss_bytes": 955490304
+        },
+        {
+          "label": "yard-original-WON-capture",
+          "timed": false,
+          "ticks_usec": 148427549,
+          "rss_bytes": 955506688
+        },
+        {
+          "label": "yard-live-WON",
+          "timed": true,
+          "ticks_usec": 149228029,
+          "rss_bytes": 961290240
+        },
+        {
+          "label": "yard-live-WON-boundary",
+          "timed": false,
+          "ticks_usec": 151242333,
+          "rss_bytes": 961290240
+        },
+        {
+          "label": "original-replay-entry",
+          "timed": false,
+          "ticks_usec": 151373298,
+          "rss_bytes": 961294336
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 152538345,
+          "rss_bytes": 961298432
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 153744474,
+          "rss_bytes": 961359872
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 155812138,
+          "rss_bytes": 961359872
+        },
+        {
+          "label": "yard-yard-SCOUT-saved-move-source-capture",
+          "timed": false,
+          "ticks_usec": 155878768,
+          "rss_bytes": 961359872
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 156442811,
+          "rss_bytes": 949391360
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 157660507,
+          "rss_bytes": 956215296
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 159714119,
+          "rss_bytes": 956215296
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 159777776,
+          "rss_bytes": 956215296
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 160954225,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 163054372,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 163122029,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 164262468,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 166405220,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 166467700,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 167701550,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 169778534,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 169847456,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 171054699,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 173161275,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 173228856,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 174422357,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 176454371,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 176520554,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 177702713,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 179765355,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 179832317,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 181382460,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 183458447,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 183524819,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 184670449,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 186827844,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 186896600,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 188077144,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 190174442,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 190241156,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 191316814,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 193426528,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 193498925,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 194802462,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 196874205,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 196939667,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 198176308,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 200201969,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 200270466,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 201485838,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 203489815,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 203558833,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 204701097,
+          "rss_bytes": 956878848
+        },
+        {
+          "label": "yard-SCOUT-saved-move-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 206701322,
+          "rss_bytes": 956878848
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 206958252,
+          "rss_bytes": 956878848
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 208521867,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 210610947,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-yard-ALERT-confirmed-shot-source-capture",
+          "timed": false,
+          "ticks_usec": 210676494,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 211367383,
+          "rss_bytes": 949686272
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 212599723,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 214695987,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 214763785,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 215915117,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 218010751,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 218079038,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 219245880,
+          "rss_bytes": 963960832
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 221386507,
+          "rss_bytes": 951398400
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 221454534,
+          "rss_bytes": 952172544
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 222775012,
+          "rss_bytes": 959569920
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 224879210,
+          "rss_bytes": 959569920
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 224952360,
+          "rss_bytes": 959569920
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 226273812,
+          "rss_bytes": 959569920
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 228427220,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 228500773,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 229760347,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 231782367,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 231851626,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 233032813,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 235095221,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 235158853,
+          "rss_bytes": 960405504
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 236581312,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 238667851,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 238730987,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 239850095,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 242026852,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 242092880,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 243313149,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 245383470,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 245450203,
+          "rss_bytes": 956223488
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 246587340,
+          "rss_bytes": 957276160
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 248681793,
+          "rss_bytes": 957276160
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 248746319,
+          "rss_bytes": 957276160
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 250097809,
+          "rss_bytes": 958586880
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 252116645,
+          "rss_bytes": 958586880
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 252182972,
+          "rss_bytes": 958586880
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 253328821,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 255476346,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 255545400,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 256755408,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 258898437,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 258967981,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 260111531,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-ALERT-confirmed-shot-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 262122191,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 262206913,
+          "rss_bytes": 961142784
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 263738570,
+          "rss_bytes": 960229376
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 265838343,
+          "rss_bytes": 960229376
+        },
+        {
+          "label": "yard-yard-SWEEP-saved-move-source-capture",
+          "timed": false,
+          "ticks_usec": 265913498,
+          "rss_bytes": 960229376
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 266611577,
+          "rss_bytes": 953548800
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 267858192,
+          "rss_bytes": 960196608
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 269962699,
+          "rss_bytes": 960196608
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 270033366,
+          "rss_bytes": 962342912
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 271276906,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 273379739,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 273449212,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 274699200,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 276770250,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 276845112,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 278204671,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 280306250,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 280372947,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 281558669,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 283563597,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 283628169,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 284832972,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 286916667,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 286984407,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 288169039,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 290304255,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 290378550,
+          "rss_bytes": 967933952
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 291905516,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 294039028,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 294106453,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 295363190,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 297382946,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 297452834,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 298715892,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 300834594,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 300901388,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 302084798,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 304119468,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 304189944,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 305499619,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 307562961,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 307625460,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 308882507,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 310942857,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 311013369,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 312273715,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 314331410,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 314399021,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 315585685,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-SWEEP-saved-move-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 317659000,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 317726140,
+          "rss_bytes": 961273856
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 319348960,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 321486298,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-yard-WON-original-source-source-capture",
+          "timed": false,
+          "ticks_usec": 321555695,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 322270795,
+          "rss_bytes": 956645376
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 323361073,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 325477635,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 325545490,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 326770354,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 328902166,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 328970703,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 330205144,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 332277388,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 332344536,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 333561884,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 335685551,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 335757778,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 336915260,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 339061918,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 339128803,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 340379041,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 342434885,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 342504137,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 343761234,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 345860107,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 345929968,
+          "rss_bytes": 966860800
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 347539639,
+          "rss_bytes": 971034624
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 349638382,
+          "rss_bytes": 971038720
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 349708647,
+          "rss_bytes": 971038720
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 351033267,
+          "rss_bytes": 971059200
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 353182913,
+          "rss_bytes": 971059200
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 353246553,
+          "rss_bytes": 971059200
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 354579532,
+          "rss_bytes": 971239424
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 356601005,
+          "rss_bytes": 971239424
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 356666485,
+          "rss_bytes": 971239424
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 357826777,
+          "rss_bytes": 971239424
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 359856157,
+          "rss_bytes": 971239424
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 359922845,
+          "rss_bytes": 971239424
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 361135536,
+          "rss_bytes": 971251712
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 363256979,
+          "rss_bytes": 960655360
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 363325801,
+          "rss_bytes": 966242304
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 364583161,
+          "rss_bytes": 969834496
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 366592270,
+          "rss_bytes": 969834496
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 366657674,
+          "rss_bytes": 969834496
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 367912640,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 370018961,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 370086931,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 371294601,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-WON-original-source-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 373333609,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-replay-speed-transport",
+          "timed": false,
+          "ticks_usec": 373404582,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-REPLAY-live-1x",
+          "timed": true,
+          "ticks_usec": 374500077,
+          "rss_bytes": 969875456
+        },
+        {
+          "label": "yard-REPLAY-live-1x-boundary",
+          "timed": false,
+          "ticks_usec": 377786575,
+          "rss_bytes": 960778240
+        },
+        {
+          "label": "yard-REPLAY-live-2x",
+          "timed": true,
+          "ticks_usec": 378588502,
+          "rss_bytes": 966856704
+        },
+        {
+          "label": "yard-REPLAY-live-2x-boundary",
+          "timed": false,
+          "ticks_usec": 381769154,
+          "rss_bytes": 966856704
+        },
+        {
+          "label": "yard-separate-tool-reference",
+          "timed": false,
+          "ticks_usec": 381896118,
+          "rss_bytes": 966856704
+        },
+        {
+          "label": "yard-live-original-grenade-fuse",
+          "timed": true,
+          "ticks_usec": 384952037,
+          "rss_bytes": 966443008
+        },
+        {
+          "label": "yard-live-original-grenade-fuse-boundary",
+          "timed": false,
+          "ticks_usec": 393648836,
+          "rss_bytes": 965414912
+        },
+        {
+          "label": "yard-original-FAILED-abort-capture",
+          "timed": false,
+          "ticks_usec": 394991672,
+          "rss_bytes": 965926912
+        },
+        {
+          "label": "yard-live-FAILED-abort",
+          "timed": true,
+          "ticks_usec": 395626159,
+          "rss_bytes": 968196096
+        },
+        {
+          "label": "yard-live-FAILED-abort-boundary",
+          "timed": false,
+          "ticks_usec": 397698759,
+          "rss_bytes": 968253440
+        },
+        {
+          "label": "original-replay-entry",
+          "timed": false,
+          "ticks_usec": 397706881,
+          "rss_bytes": 968253440
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 398921557,
+          "rss_bytes": 968253440
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 400057115,
+          "rss_bytes": 968491008
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 402159754,
+          "rss_bytes": 968912896
+        },
+        {
+          "label": "yard-yard-confirmed-tool-source-source-capture",
+          "timed": false,
+          "ticks_usec": 402163341,
+          "rss_bytes": 968912896
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 402737274,
+          "rss_bytes": 968364032
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 403751448,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 405808789,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 405812546,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 406821096,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 408831575,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 408835582,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 409816233,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 411854093,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 411858063,
+          "rss_bytes": 968466432
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 412948420,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 415024043,
+          "rss_bytes": 968540160
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 415027820,
+          "rss_bytes": 968540160
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 416057330,
+          "rss_bytes": 968540160
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 418194472,
+          "rss_bytes": 968622080
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 418198609,
+          "rss_bytes": 968622080
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 419329322,
+          "rss_bytes": 968622080
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 421361011,
+          "rss_bytes": 969940992
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 421365124,
+          "rss_bytes": 969940992
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 422340808,
+          "rss_bytes": 972668928
+        },
+        {
+          "label": "yard-confirmed-tool-source-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 424394524,
+          "rss_bytes": 972668928
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 424398502,
+          "rss_bytes": 972668928
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 425732163,
+          "rss_bytes": 975040512
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 427755686,
+          "rss_bytes": 975831040
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 427760226,
+          "rss_bytes": 975831040
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 428825037,
+          "rss_bytes": 975843328
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 430907536,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 430911730,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 432058454,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 434183298,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 434187222,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 435178227,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 437231675,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 437235806,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 438271510,
+          "rss_bytes": 978415616
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 440379168,
+          "rss_bytes": 978755584
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 440389087,
+          "rss_bytes": 978755584
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 441425465,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 443437586,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 443441648,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 444534034,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 446594015,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 446597672,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 447554088,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-confirmed-tool-source-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 449677465,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 449682459,
+          "rss_bytes": 978890752
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 451034550,
+          "rss_bytes": 974577664
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 453129914,
+          "rss_bytes": 975421440
+        },
+        {
+          "label": "yard-yard-FAILED-abort-source-source-capture",
+          "timed": false,
+          "ticks_usec": 453133897,
+          "rss_bytes": 975421440
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 453786076,
+          "rss_bytes": 973594624
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 454846197,
+          "rss_bytes": 973594624
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 456887056,
+          "rss_bytes": 973795328
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 456891540,
+          "rss_bytes": 973795328
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 457956675,
+          "rss_bytes": 973795328
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 459960296,
+          "rss_bytes": 973795328
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 459964457,
+          "rss_bytes": 973795328
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 460942303,
+          "rss_bytes": 973795328
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 462946403,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 462950639,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 464070468,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 466220300,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 466224807,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 467339892,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 469456451,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 469460553,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 470491969,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 472511246,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 472516104,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 473550469,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 475667773,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 475672385,
+          "rss_bytes": 973815808
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 476974498,
+          "rss_bytes": 972517376
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 479048058,
+          "rss_bytes": 972517376
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 479052371,
+          "rss_bytes": 972517376
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 480082289,
+          "rss_bytes": 972517376
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 482086799,
+          "rss_bytes": 972906496
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 482090758,
+          "rss_bytes": 972906496
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 483205718,
+          "rss_bytes": 973008896
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 485287558,
+          "rss_bytes": 973008896
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 485291840,
+          "rss_bytes": 973008896
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 486266135,
+          "rss_bytes": 973008896
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 488388462,
+          "rss_bytes": 973148160
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 488392691,
+          "rss_bytes": 973148160
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 489474754,
+          "rss_bytes": 973148160
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 491581442,
+          "rss_bytes": 973357056
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 491585417,
+          "rss_bytes": 973357056
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 492629434,
+          "rss_bytes": 973438976
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 494645399,
+          "rss_bytes": 973438976
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 494649319,
+          "rss_bytes": 973438976
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 495664202,
+          "rss_bytes": 973438976
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 497781814,
+          "rss_bytes": 973447168
+        },
+        {
+          "label": "yard-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 497785760,
+          "rss_bytes": 973447168
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 498839091,
+          "rss_bytes": 973447168
+        },
+        {
+          "label": "yard-FAILED-abort-source-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 500899259,
+          "rss_bytes": 973541376
+        },
+        {
+          "label": "yard-actual-source-metrics-seal",
+          "timed": false,
+          "ticks_usec": 500905767,
+          "rss_bytes": 973541376
+        }
+      ]
+    }
+  ],
+  "scope": "Same original strict-validated raw; cloud interval thresholds describe this llvmpipe workload, not Android performance. RSS marks include collector/driver/archives/cache and sampling/metadata overhead; no leak or isolated-GPU claim."
+}
