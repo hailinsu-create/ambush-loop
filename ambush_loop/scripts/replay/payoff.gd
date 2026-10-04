@@ -207,6 +207,9 @@ static func timeline_marks(log: Variant) -> Array:
 static func highlight_result_line(level: Variant, log: Variant, won: bool) -> String:
 	if level == null:
 		return ""
+	if str(level.level_id) == "pump":
+		# The authored hook is a teaching goal, not proof of door/route actions.
+		return "泵站封锁完成" if won else "泵站尚未封锁"
 	var hook := str(level.highlight_hook).strip_edges()
 	if hook == "":
 		return ""
