@@ -70,10 +70,10 @@ func _radio_reference() -> void:
 		if main.phase != main.Phase.SWEEP: return
 		main.raid_vacuum_loot()
 		if wave == 1:
-			# Original clear callback in legal SWEEP; knife at the mouth could
-			# still kill echo. Original insertion positions leave this path open.
+			# Original clear callback in legal SWEEP returns insertion deployment.
+			# reset_loadout preserves equipped guns; no invented inventory/HP/phase.
 			main._on_clear_pressed()
-			_check(main.phase == main.Phase.SWEEP and main.operators.all(func(op) -> bool: return op.weapon_id == "knife"),"reference original SWEEP clear leaves knife insertion squad")
+			_check(main.phase == main.Phase.SWEEP and main.operators.all(func(op) -> bool: return op.slot == null),"reference original SWEEP clear returns insertion deployment")
 		main._on_sweep_commit()
 	while main.phase == main.Phase.WATCHING and main.sim.tick < 12000: main._sim_tick()
 	context_rows.append({"scope":"observed original reference terminal before guard","phase":main.phase,"reason":main.fail_reason,"tick":main.sim.tick,"events":main.battle_log.events.duplicate(true)})
@@ -85,7 +85,7 @@ func _radio_reference() -> void:
 	_check(int(spawn.actor_id) == 5 and int(spawn.tick) == 30 and escape.actor_id == spawn.actor_id and escape.wave_id == spawn.wave_id,"actual late escape belongs to original echo5/spawnlocal30")
 	_check(main._fix_one_line().begins_with("全关教学建议 · ") and main.result_label.text.contains("全关教学建议"),"actual fail panel distinguishes authored advice from event facts")
 	_check(main.fail_dossier_text().contains("关卡背景 · ") and not main.fail_dossier_text().contains("截获 · "),"preset dialogue is background, not an intercepted actual event")
-	var audit := {"scope":"actual original reference3waves, authored gun grants/cover snaps/directticks/vacuum/legal SWEEP clear callback; not normal input","spawn":spawn,"escape":escape,"intel":main.intel.records.duplicate(true),"actual_fail_body":main.result_label.text,"actual_advice":main._leak_advice_line(),"actual_hint":main.intel.latest_hint(),"static_context_fixed_only":true,"live_escape_timing_audit_pending":true}
+	var audit := {"scope":"actual original reference3waves, authored gun grants/cover snaps/directticks/vacuum/legal SWEEP clear callback; not normal input","spawn":spawn,"escape":escape,"intel":main.intel.records.duplicate(true),"actual_fail_body":main.result_label.text,"actual_advice":main._leak_advice_line(),"actual_hint":main.intel.latest_hint(),"static_context_scope_only":true,"live_escape_timing_audit_pending":true}
 	context_rows.append(audit)
 	var path := "res://build/asset_review/pr15-runtime/teaching-radio-late-escape-record.bin"
 	var file := FileAccess.open(path,FileAccess.WRITE)

@@ -2,7 +2,7 @@
 
 2026-10-04，接父端1adec后的授权。只处理SCOUT静态beat/总表路线秒数/旧2D echo标签，以及FAILED静态fix_one/chatter的语境：全关教学/预览明确区分当前wave dots与保存的真实逃逸事实。保留原spawn_schedule/waves/关卡文案数据、剧情、R与装备锁/模拟，不把教学目标当当次已发生事实，不随意改战斗规则。
 
-先guard固定负向：六关13wave×3D/旧2D明确display wave/fail flag fixtures、text refresh/state/log/schedule保持；不是26实战。另原radio授本关枪/cover snaps/direct ticks/vacuum清前两波、合法SWEEP actor drop所有枪，原第三波echo逃逸→原FAILED/重开SCOUT，实际原图/记录/事件身份保全。若reference不是escape需先调整fixture、不得将失败判成文案缺陷。该实际逃逸是reference，不是normal输入。
+先guard固定负向：六关13wave×3D/旧2D明确display wave/fail flag fixtures、text refresh/state/log/schedule保持；不是26实战。另原radio授本关枪/cover snaps/direct ticks/vacuum清前两波、合法SWEEP原收回部署回调返回插入位置（保留装备枪），原第三波echo逃逸→原FAILED/重开SCOUT，实际原图/记录/事件身份保全。1221开发轮139/79有1项未到escape；2da开发轮138/81有1项错误地要求收回时卸枪，实际escape已发生。两轮保留，纠正测试断言后再建正式负向，不改原clear规则。该实际逃逸是reference，不是normal输入。
 
 本片只做教学标签：全关教学预览/全关预览；静态建议标全关教学建议、去除“改一处就能赢”的绝对承诺；预设对白标关卡背景，保留原内容。先negative H/R→最小source→固定H/R与实际PNG/hash/目检/退出/guard，不将确认的另一个真实逃逸时间/路线错误纳入本片green。首次SCOUT原图文字实际为“灯塔回波5.2s · 绊索封暗道”；此前手写报告“继续封暗道”为转述误读，原PNG/source不改，也不是两个runtime变体。
 
