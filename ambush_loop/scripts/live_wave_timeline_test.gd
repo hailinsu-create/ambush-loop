@@ -120,6 +120,8 @@ func _radio_reference() -> void:
 			main._sim_tick()
 			_assert_strip("actual_echo_event_tick30_done")
 			while main.sim.tick < 84: main._sim_tick()
+			main._update_hud() # Reference direct ticks leave command layout stale.
+			_check(main.phase == main.Phase.WATCHING and main.sim.tick == 84 and main.pause_button.is_visible_in_tree(),"reference reaches ALERT1.4s with current native pause layout")
 			if DisplayServer.get_name() != "headless": await _native_click(main.pause_button)
 			else: main._on_pause_pressed()
 			main._update_hud()
