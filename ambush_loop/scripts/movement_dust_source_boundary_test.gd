@@ -44,6 +44,15 @@ func _run() -> void:
 	var bad_bytes:=var_to_bytes(bad.playback_snapshots)
 	var result:=_sample(bad)
 	_check(result.active.is_empty(),"explicit non-int raw saved phase is neutral before ViewState coerces it")
+	for row in [["data","phase","0"],["data","phase",true],["data","wave_count",float(data.wave_count)],["data","wave_count",0],["data","level_id",StringName(data.level_id)],["data","actor_asset_revision",StringName(data.actor_asset_revision)],["data","pose_clock_domain",StringName(data.pose_clock_domain)],["data","animation_schema",float(data.animation_schema)],["data","movement_fx_schema",1.0],["data","pose_clock_s",true],["snapshot","schema",2.0],["snapshot","playback_schema",2.0],["snapshot","wave_id",0.0],["snapshot","attempt_id",StringName(legal.attempt_id)],["snapshot","frame_seq",0.0],["actor","moving","true"]]:
+		var candidate:=_record(data)
+		if row[0]=="snapshot":candidate.playback_snapshots.front()[row[1]]=row[2]
+		elif row[0]=="actor":candidate.playback_snapshots.front().data.ops.front()[row[1]]=row[2]
+		else:candidate.playback_snapshots.front().data[row[1]]=row[2]
+		var before:=var_to_bytes(candidate.playback_snapshots)
+		var rejected:=_sample(candidate)
+		_check(rejected.active.is_empty(),"explicit raw movement envelope/actor neutral "+str(row))
+		_check(var_to_bytes(candidate.playback_snapshots)==before and _state()==actual,"raw rejected source/backend remain byte-identical "+str(row))
 	_check(_state()==actual and var_to_bytes(legal.playback_snapshots)==legal_bytes and var_to_bytes(bad.playback_snapshots)==bad_bytes,"legal/corrupt historical controls keep original source and backend bytes")
 	root.get_node("AudioDirector").pause_for_background()
 	directory="res://build/asset_review/pr15-runtime/movement-dust-source-boundary-"+OS.get_environment("AMBUSH_TEST_RUN_ID")
