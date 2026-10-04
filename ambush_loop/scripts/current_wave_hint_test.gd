@@ -124,6 +124,13 @@ func _actual_radio_reference() -> void:
 	else: main._on_pause_pressed()
 	_query("actual_paused_final_wave_1_4s",-1,0.0)
 	_check(main.sim.paused,"original pause command freezes actual final wave")
+	var before_draw: Dictionary = main._snapshot_data().duplicate(true)
+	var draw_log: String = main.battle_log.fingerprint()
+	main._update_hud() # Auto process is disabled in this reference fixture.
+	var banner: Label = main._watch_letterbox.get_node("WatchBanner")
+	_check(main.watch_clock_text() == "t=1.4s" and banner.text.contains("第3/3波") and banner.text.contains("暂停") and banner.text.contains("t=1.4s") and banner.text.contains("待0"),"actual visible HUD is paused final wave1.4s with zero pending")
+	_check(main._snapshot_data() == before_draw and main.battle_log.fingerprint() == draw_log,"original full HUD refresh preserves paused state/log")
+	hint_rows.append({"case":"actual_draw_clock","clock":main.watch_clock_text(),"banner":banner.text,"tick":main.sim.tick,"paused":main.sim.paused,"scope":"Original HUD explicitly refreshed because reference driver disables automatic process; asserted before physical capture."})
 	if DisplayServer.get_name() != "headless":
 		view.refresh()
 		for _i in 5: await process_frame
@@ -143,7 +150,7 @@ func _actual_radio_reference() -> void:
 	file.close()
 	var bytes_hash := FileAccess.get_sha256(path)
 	main._on_replay_pressed()
-	main.replay.pause()
+	main._on_pause_pressed()
 	var fingerprint: String = source.fingerprint()
 	# Explicit live host contamination must never become historical hint data.
 	main.pending_spawns.append({"id":99,"delay":20.0,"route":"sneak","spawned":false})
@@ -152,6 +159,8 @@ func _actual_radio_reference() -> void:
 		main._refresh_touch_hud()
 		_check(not main.watch_wave_chip.visible and not main.touch_hud._wave_chip.visible and not bool(main._next_wave_info().pending),"bound history never reads live pending wave")
 	_check(source.fingerprint() == fingerprint and FileAccess.get_sha256(path) == bytes_hash,"replay hint isolation preserves bound source/bytes")
+	main._update_hud()
+	_check(not main.replay.playing and main.phase_chip.text.contains("暂停"),"history visible transport agrees with original paused command")
 	hint_rows.append({"case":"reference_record_history_boundary","record_sha256":bytes_hash,"attempt":source.attempt_id,"terminal_tick":source.terminal_tick,"events":source.events.size(),"playback_schema":source.playback_schema,"scope":"Reference authored-firearm grants/cover snap/direct tick/vacuum; not a normal input source or full replay acceptance."})
 	if DisplayServer.get_name() != "headless":
 		view.refresh()
