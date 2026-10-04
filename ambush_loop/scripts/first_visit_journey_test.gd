@@ -119,12 +119,13 @@ func _place_mine(cell: Vector2i) -> bool:
 	await _key("1")
 	if not await _set_tool(main.Tool.DEPLOY): return false
 	var at: Vector2 = main.grid.cell_to_world_center(cell)
-	if not await _world_click(at,0.02,"walk_near_mine_site"): return false
+	var standing: Vector2 = main.grid.cell_to_world_center(cell+Vector2i(1,0))
+	if not await _world_click(standing,0.02,"walk_near_mine_site",1,"ground"): return false
 	if not await _wait_until(func() -> bool: return not main.selected.is_moving() and main.selected.global_position.distance_to(at)<=64.0,120,"original walk reaches mine placement range"): return false
 	if not await _set_tool(main.Tool.TRIPWIRE): return false
 	var before: int = main.selected.mines
 	var placed: int = main.raid_mines.size()
-	if not await _world_click(at,0.02,"place_carried_mine"): return false
+	if not await _world_click(at,0.02,"place_carried_mine",1,"ground"): return false
 	var ok: bool = main.selected.mines == before-1 and main.raid_mines.size() == placed+1
 	_check(ok, "native mine tool consumes exactly one carried mine and creates one raid mine")
 	journey_rows.append({"level":main.level.level_id,"action":"native walked and planted carried mine","phase":main.phase,"site":[at.x,at.y],"operator_pos":str(main.selected.global_position),"before":before,"after":main.selected.mines,"mines_before":placed,"mines_after":main.raid_mines.size(),"status":main.status_label.text})
@@ -195,17 +196,23 @@ func _wait_until(predicate: Callable, seconds: float, label: String) -> bool:
 	_check(ok, label + " actual phase=" + str(main.phase) + " status=" + str(main.status_label.text))
 	return ok
 
-func _world_click(pos: Vector2, height: float, label: String, button: int = 1) -> bool:
+func _world_click(pos: Vector2, height: float, label: String, button: int = 1, wanted_kind: String = "") -> bool:
 	var at: Vector2
 	var reachable := false
+	var picked: Dictionary
 	for turn in 13:
 		at = view.rig.project_logic(pos,height)
 		reachable = root.get_visible_rect().grow(-2).has_point(at) and not view.pointer_over_ui(at)
+		picked = view.pick_at(at)
+		if wanted_kind != "":
+			reachable = reachable and picked.get("kind","") == wanted_kind
+			if wanted_kind != "ground":
+				reachable = reachable and pos.distance_to(picked.get("pos",Vector2.INF)) < 1.0
 		if reachable: break
+		rows.append({"action":"original camera UI reveal target","target_action":label,"wanted_kind":wanted_kind,"observed_kind":picked.get("kind","invalid"),"observed_pos":str(picked.get("pos",Vector2.INF)),"yaw":view.rig.yaw_deg})
 		if turn < 12: await _click(_button(view._camera_controls,"↷"))
-	var picked: Dictionary = view.pick_at(at)
 	rows.append({"action":label,"target":[pos.x,pos.y],"screen":[at.x,at.y],"camera_yaw":view.rig.yaw_deg,"reachable":reachable,"picked_kind":picked.get("kind","invalid"),"picked_id":str(picked.get("id","")),"picked_pos":str(picked.get("pos",Vector2.INF))})
-	_check(reachable, "native world target is in viewport outside UI " + label)
+	_check(reachable, "native world target is in viewport outside UI with intended visible pick " + label)
 	if not reachable: return false
 	await _native_click(main.get_node("HUD/Root"),button,at)
 	await _settle()
@@ -224,7 +231,7 @@ func _collect(family: String, index: int) -> bool:
 	var kind: String = stash.kind
 	var stash_reference: WeakRef = weakref(stash)
 	var before: Vector2 = main.selected.global_position
-	if not await _world_click(stash.global_position,0.55,"stash_"+kind): return false
+	if not await _world_click(stash.global_position,0.55,"stash_"+kind,1,"stashes"): return false
 	if not await _wait_until(func() -> bool:
 		var current = stash_reference.get_ref()
 		return current == null or current.collected,
@@ -242,7 +249,7 @@ func _deploy(plan: Array) -> bool:
 		var slot = main.cover_slots[plan[1][index]]
 		var before: Vector2 = main.selected.global_position
 		if slot.slot_id == 5: await _modal_capture(sample+"_cover5_before_deploy"+str(deploy_round))
-		if not await _world_click(slot.global_position,0.08,"cover_"+str(slot.slot_id)): return false
+		if not await _world_click(slot.global_position,0.08,"cover_"+str(slot.slot_id),1,"covers"): return false
 		var immediate_slot: int = main.selected.slot.slot_id if main.selected.slot else -1
 		await create_timer(0.8).timeout
 		rows.append({"action":"native cover outcome","operator":index,"target_slot":slot.slot_id,"selected_id":main.selected.op_id,"before":[before.x,before.y],"target":[slot.global_position.x,slot.global_position.y],"distance_before":before.distance_to(slot.global_position),"after":[main.selected.global_position.x,main.selected.global_position.y],"slot_after_settle":immediate_slot,"actual_slot":main.selected.slot.slot_id if main.selected.slot else -1,"additional_wait_s":0.8,"status":main.status_label.text})
