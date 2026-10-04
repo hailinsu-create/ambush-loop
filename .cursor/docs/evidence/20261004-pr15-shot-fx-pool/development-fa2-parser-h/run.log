@@ -1,0 +1,15 @@
+TEST_RUN_ID=8b3143ab209e41489a36d7dbf5c95980
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/8b3143ab209e41489a36d7dbf5c95980/data
+TEST_ENTRY=shot_fx_pool_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Cannot infer the type of "neutral" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/shot_fx_pool_test.gd:89)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "clock_before" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/shot_fx_pool_test.gd:107)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "stable" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/shot_fx_pool_test.gd:250)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "model_id" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/shot_fx_pool_test.gd:333)
+ERROR: Failed to load script "res://scripts/shot_fx_pool_test.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)

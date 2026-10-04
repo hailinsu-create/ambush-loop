@@ -86,7 +86,7 @@ func _original_shots() -> Dictionary:
 		var sim_before := [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum,op.ammo,op.hp,enemy.hp]
 		main.presentation_3d.refresh()
 		var active: Array=_diag().active
-		var neutral: bool = label in ["knife","false-hold","enemy-cooldown"]
+		var neutral := label in ["knife","false-hold","enemy-cooldown"]
 		_check(active.is_empty() if neutral else active.size()==1,label+" actual presenter shot visibility / knife and failed/cooldown neutral")
 		if not neutral and active.size()==1:
 			var fx: Dictionary=event.payload.fx
@@ -104,7 +104,7 @@ func _original_shots() -> Dictionary:
 				main.presentation_3d.rig.apply_pose()
 				await _capture("ordinary-age0")
 				main.sim.paused=true
-				var clock_before: int = main.battle_log.current_playback_tick()
+				var clock_before := main.battle_log.current_playback_tick()
 				var stable: Array=_diag().active
 				for index in 30:
 					await process_frame
@@ -247,7 +247,7 @@ func _history_cases() -> void:
 	main.replay.set_tick(event.playback_tick)
 	main.replay.pause()
 	main.presentation_3d.refresh()
-	var stable: Array=_diag().active
+	var stable:=_diag().active
 	for index in 30:
 		await process_frame
 		main.replay.advance(1.0/60.0)
@@ -330,7 +330,7 @@ func _run_cases() -> void:
 			mesh_rids.append(mesh.get_instance_id())
 			resources.append(weakref(mesh.mesh))
 			resources.append(weakref(mesh.material_override))
-	var model_id: int=pool._sampler.get_instance_id()
+	var model_id:=pool._sampler.get_instance_id()
 	main._return_to_title()
 	await process_frame
 	await process_frame
