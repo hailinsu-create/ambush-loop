@@ -80,3 +80,8 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 ## 2026-10-04 教学语境接续收据
 
 作者固定fcf40a97606c148ec6dcb87a2b20dfa39100458e五显示入口仅明确全关教学/预览/静态建议/关卡背景，负ebe H138/80、R141/80 actual1→fixed H138/0、R141/0各actual0 E0/S0；六PNG核/看6、无XTest，display fixtures与原radio lateescape reference边界见[报告](AMBUSH_PR15_TEACHING_CONTEXT_20261004.md)。真实echo5第三波0.5s被写5.2s与mainhint已实际证实，另[Intel片](AMBUSH_PR15_ESCAPE_INTEL_PLAN_20261004.md)待修，不借教学green覆盖。父端a794/0bfe与radio原record3D最新限定QA归因见报告，cdb/392待独立QA。最终[统一候选证据清单](AMBUSH_PR15_UNIFIED_CANDIDATE_EVIDENCE_PLAN_20261004.md)为待执行门，旧各SHA计数不拼验收；完整FX/A3/新13波/sixnewrecord3D/APK仍待，R5/资产单写边界与耳听/设备后置不变。
+
+
+## 2026-10-04 真实逃逸Intel及父端QA接续
+
+作者fixed877decb0ea14d6c3c0a833e4d6948c7ee549514f新记忆追加保存spawn/escape事件身份及wave/local/global/playback context1，实际第三波echo5 0.5s出发/15.9s逃逸、原retry仍历史第3波；旧8参数/坏context中性回退不升级bytes，negative5ca H18/R21各8fail actual1→fixed H70/R73各0actual0 E0/S0，6物理图核/看6无XTest，49事件/快照/终端只读比较actual0，五旧native SHA不变。37证据及未验项见[报告](AMBUSH_PR15_ESCAPE_INTEL_20261004.md)，完整smoke/旧2D/统一新13波/六record3D/完整FX/A3/APK仍待。父端随后QA pwd exit0恢复、六旧包hash保持，cdb50/114/12三限定各0actual0（首814/1 actual1保全）、392原sameevent4/1→4/0/history3D41/0actual0限定关闭，无新prodP1/P2、无QA运行/阻塞；两scope不重开，fcf/877与统一candidate待独立接受，未给E/S计数不补推。资产/R5/单写边界保持、耳听/设备后置。

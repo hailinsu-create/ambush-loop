@@ -1,0 +1,208 @@
+{
+  "production_and_formal_source": "877decb0ea14d6c3c0a833e4d6948c7ee549514f",
+  "game_tree": "64c347294bbcec18096b435243ce0d1e486d6ec0",
+  "runs": [
+    {
+      "source_sha": "877decb0ea14d6c3c0a833e4d6948c7ee549514f",
+      "checks": 70,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7739088,
+        "sha256": "c640d5b4cfeef855282cdb67488816eae8d79fc25fba89595d1b352a8297623a"
+      },
+      "captures": [],
+      "guard": true,
+      "scope": "Original radio3wave late escape/retry reference and explicit legacy/corrupt saved context fixtures. Not normal13/fullrecord3D/legacy2D/FX/A3/audio/device acceptance.",
+      "stage": "fixed-877-h",
+      "run_id": "e8952a2118a94f8d8e902812fa1c3837",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=877decb0ea14d6c3c0a833e4d6948c7ee549514f bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 escape_intel_source_test.gd --headless"
+    },
+    {
+      "source_sha": "877decb0ea14d6c3c0a833e4d6948c7ee549514f",
+      "checks": 73,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7739088,
+        "sha256": "cf77a08654aff89561723944176e38dcb7aa8b1b8d0a897cf77f39685b7a6c09"
+      },
+      "captures": [
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_first_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_first_scout.png",
+          "sha256": "b87c957573c81f74ac0b2592062f58125e51061f019761e0def4ea972255370b"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_actual_last_escape",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_actual_last_escape.png",
+          "sha256": "6b90d0f6ffb1046623a4a645a757ac57769fdd07f1a354f2ad82339be618d41a"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_retry_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_retry_scout.png",
+          "sha256": "bb1cdd320703a52a65b965d7c231c7f0d45694b7d0d235967336dc4843d5484f"
+        }
+      ],
+      "guard": true,
+      "scope": "Original radio3wave late escape/retry reference and explicit legacy/corrupt saved context fixtures. Not normal13/fullrecord3D/legacy2D/FX/A3/audio/device acceptance.",
+      "stage": "fixed-877-r",
+      "run_id": "df373cd772e344e28f9077be0af0bc14",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=877decb0ea14d6c3c0a833e4d6948c7ee549514f DISPLAY=:114 AMBUSH_TEST_X11_DISPLAY=:114 LIBGL_ALWAYS_SOFTWARE=1 bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-teach-godot escape_intel_source_test.gd --render"
+    },
+    {
+      "source_sha": "5ca6bc966f2b3a89044d1a95208bedba4cfeb912",
+      "checks": 18,
+      "failures": 8,
+      "actual_exit": 1,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "6ceba5e149daa1ef48f5fabdfaa6729c1f8121cc27b1df79aa3f41372d742a05"
+      },
+      "captures": [],
+      "guard": true,
+      "scope": "Original radio3wave late escape/retry reference and explicit legacy/corrupt saved context fixtures. Not normal13/fullrecord3D/legacy2D/FX/A3/audio/device acceptance.",
+      "stage": "negative-5ca-h",
+      "run_id": "2119180a749f4d0793f9860c8df8a697",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=5ca6bc966f2b3a89044d1a95208bedba4cfeb912 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 escape_intel_source_test.gd --headless"
+    },
+    {
+      "source_sha": "5ca6bc966f2b3a89044d1a95208bedba4cfeb912",
+      "checks": 21,
+      "failures": 8,
+      "actual_exit": 1,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "record": {
+        "bytes": 7737780,
+        "sha256": "8930fc052984a68a7d41fede2afcde4d5f788b2d4035af0ccf96abb3b25067bd"
+      },
+      "captures": [
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_first_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_first_scout.png",
+          "sha256": "b87c957573c81f74ac0b2592062f58125e51061f019761e0def4ea972255370b"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_actual_last_escape",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_actual_last_escape.png",
+          "sha256": "87f3855e61eb7b0d149a748173ebd4c55fbe7cf981ea76ec794478d9c006fc93"
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "teaching_radio_retry_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_retry_scout.png",
+          "sha256": "634e1c0bbb27ebbc7e59a70c2c8085a9e60f610e069b255f4ed08127fd241e7e"
+        }
+      ],
+      "guard": true,
+      "scope": "Original radio3wave late escape/retry reference and explicit legacy/corrupt saved context fixtures. Not normal13/fullrecord3D/legacy2D/FX/A3/audio/device acceptance.",
+      "stage": "negative-5ca-r",
+      "run_id": "aae97031b0da4e9eb8822c474f0b4ded",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=5ca6bc966f2b3a89044d1a95208bedba4cfeb912 DISPLAY=:114 AMBUSH_TEST_X11_DISPLAY=:114 LIBGL_ALWAYS_SOFTWARE=1 bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-teach-godot escape_intel_source_test.gd --render"
+    }
+  ],
+  "images_hashed_and_viewed": {
+    "negative-5ca-r": 3,
+    "fixed-877-r": 3
+  },
+  "native_XTest_inputs": 0,
+  "readonly_compare": {
+    "after_sha256": "c640d5b4cfeef855282cdb67488816eae8d79fc25fba89595d1b352a8297623a",
+    "before_sha256": "6ceba5e149daa1ef48f5fabdfaa6729c1f8121cc27b1df79aa3f41372d742a05",
+    "comparisons": {
+      "events": true,
+      "playback_schema": true,
+      "playback_snapshots": true,
+      "playback_terminal_tick": true,
+      "snapshots": true,
+      "terminal_reason": true,
+      "terminal_tick": true
+    },
+    "differences": [],
+    "events": 49,
+    "failures": 0,
+    "identity_counts": [
+      2,
+      2
+    ],
+    "normalization": "Bijective traversal mapping of independent32hex attempt/utility scope tokens and derived identity prefixes only; identity equality/distinctness/suffix retained. No time/state/payload value normalization.",
+    "read_only": true
+  },
+  "readonly_command": "XDG_DATA_HOME=/tmp/pr15-intel-compare/data XDG_CONFIG_HOME=/tmp/pr15-intel-compare/config XDG_CACHE_HOME=/tmp/pr15-intel-compare/cache /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path /tmp/pr15-intel-compare -s /tmp/pr15-intel-compare/compare.gd -- /tmp/pr15-intel-compare/before.bin /tmp/pr15-intel-compare/after.bin",
+  "readonly_actual_exit": 0,
+  "old_native_originals_sha256_readonly_verified": {
+    "warehouse": "63fccaa28ed9ff9f90729f458ebf695f05bac57cac9be0d58ec28c54ef17a08c",
+    "pump": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+    "railcut": "154c69778d82b3d7a35b32d7d5ebd8782cd792cb9edad82544495a125af86e53",
+    "depot": "ec232057b98e04262fd60f4e44933c7545f396ded83be68a05cdea26b4ebb3e0",
+    "radio": "e584a89d86b60c2931e5d947b3ab2dba416801a4ea499f5b5685507ef8d7128f"
+  },
+  "owned_display": {
+    "pid": 94792,
+    "display": ":114",
+    "signal": "SIGTERM",
+    "matched_exact_display_and_log": true,
+    "close_actual_exit": 0
+  },
+  "coverage": "Original radio three-wave escape/retry reference, source identity/local/global/playback fields, legacy8args no bytes upgrade/path copy/MAX5,25 malformed/missing context cases and foreignlevel, display preserves snapshot/HP/ammo/log/memory. Negative18/21 versus fixed70/73 because missing interface guarded52 boundary checks. Counts are assertions, not independent vulnerabilities.",
+  "remaining": "No XTest/legacy2D/normal13/full newrecord3D/FX/A3/ear/device/APK acceptance; full updated smoke not executed in this slice. Explicit foreign live log collision, alt/flank/sneak/main full actual escape variants and full visual scroll/focus lifecycle remain final candidate gates. R5/asset ownership unchanged.",
+  "parent_QA_later_update": {
+    "source": "parent thread01a0efe8-604e-7249-8093-d7921d952020,2026-10-04 followup",
+    "pwd_actual_exit": 0,
+    "six_old_package_hashes_unchanged": true,
+    "cdbed_limited_closed": {
+      "minimal": "50/0 actual0",
+      "corrected_expect_3D": "114/0 actual0",
+      "legacy_payoff_fields": "12/0 actual0",
+      "first_failed_whole_run_retained": "814/1 actual1"
+    },
+    "392_limited_closed": {
+      "same_event": "4/1 ->4/0",
+      "history_3D": "41/0 actual0"
+    },
+    "E_S_counts": "not provided in this followup; do not infer",
+    "new_production_P1_P2": "none reported",
+    "QA_running_or_blocking": false,
+    "scope": "Parent independent result only; do not reopen closed cdb/392 scopes; fcf/877/newcandidate13/device not accepted."
+  }
+}

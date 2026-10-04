@@ -21,3 +21,5 @@
 父端可以并行固定只读QA/艺术评审/A3量测，必须独立checkout/display/XDG/output，返回自己的SHA、actual退出、原图hash、覆盖边界；唯一主集成作者继续单写main/input/HUD/presenter/ViewState/replay/loader/共享测试，不自行派astra，优先6.1-sol。R5 source29749157c5db064bfea626c3ed9d75d9a1791ece/交付ebedb829e3263abbeb6dd266905f24a3869fa281，20骨/socket/3LOD/52语义保持；不编辑或重跑ArtSource/v2/build_yard_kit.py/共享atlas/角色GLB/Blender/生产资产manifest，不全并WIP。Draft PR15普通push可执行，不merge/生产/height/G。网页GPT PLAN/REVIEW unavailable。
 
 父端2026-10-04最新独立QA来讯归因：a794 result原3b 8/4→8/0、窗口82/0 actual0 E0/S0、10图已看；0bfe chip原a794 41/14→41/0、3D reference621/0 actual0、2native/2图；fixed3b radio原record实际3D10855/0、417自然callbacks、2x终端6344，末波聚焦2992/0与nativepause3277/0、11图已看，原3277/1断言假阳性保留。result/chip P2只限定关闭。cdb live与392 loot待独立QA；这些不是作者自跑、也不是本清单同candidate13波通过。QA pwd环境恢复不阻碍作者。
+
+2026-10-04 随后QA实际pwd exit0恢复、六旧包hash保持；cdb timeline minimal50/0/修正expect后3D114/0/旧字段payoff12/0各actual0限定关闭，首814/1 actual1失败保留；392 loot原sameevent4/1→4/0与history/3D41/0 actual0限定关闭。父端报告四新包hash/截图复核，无新prodP1/P2、无QA运行/阻塞；未提供E/S计数不补推。替代前段cdb/392待QA，两个scope不重开；fcf教学/877Intel作者专项不代独立接受，更不代本清单同candidate验收。
