@@ -30,3 +30,6 @@
 实际依赖顺序：同固定候选新全tree/986 warm receipt→Guard a3_collector_probe_test.gd --render，原yard冻结main和presenter/有效三chunk/双reset/真实restart/Title freedhost/rebind/退出disconnect，三原Window crop均untimed→只有actual0/E0/S0且全部有效才运行a3_collector_overhead_test.gd --render。后者完整buffer有无与同buffer resident callback有无两family，每组ABBA+BAAB八窗口，共16个2s settle/4s timed条件，公共sampler先于collector；同source/backend/fullframe/camera/config/hash，原CSV/metadata/exit/log全封。离线summarizer核matched median counters、真实interval与配对block spread/RSS，不能把callback_usec相减制造FPS。已有probe原本就是Dummy audio；wrapper本次只新增overhead entry，纠正先前未实查的probe音频假设。
 
 唯一自有显示计划:124，旧环境:99不动。每轮记录START/END、actualexit和E/S、receipt/配置实际值；code/HEAD冻结，单engine、无另一个benchmark。OpenGL GPU memory unavailable/pipeline未知，llvmpipe/可见cgroup只代表本云环境。以上是stationary原yard控制，非正常SCOUT/动态FX/正式六关A3/Android30或60FPS。若失败先保存原source/log/raw/actualexit再做独立修正。通过这两个前置后才正式六关A3；后优化、FINAL同source/fullsmoke/newnormal13/六新全1×2×和APK仍待，制作/R5/设备后置边界不变。
+
+
+实际前置已完成：[固定结果](AMBUSH_PR15_A3_WINDOW_RESULTS_20261004.md)，consumer1dab/42249同tree，Window37/0与16条件168/0各actual0 E0/S0；3chunk/reset/Title/rebind、441accepted公共cadence和8collector chunks、原3PNG全核/看，99证据条目全hash。callback221µs，paired delta跨0且RSS漂移，不能说零开销/更快/手机through。离线7c只硬化解析同原raw，无新增engine；全部ownengine及Xorg124实际结束0。原未运行状态是历史，当前driver已实跑；正式六关A3仍未启动，下一真实source workload。
