@@ -128,7 +128,18 @@ func _history() -> void:
 	frame=ViewState.capture(main)
 	_check(frame.tool_fx==expected and frame.tool_fx_source_token==saved_token and frame.tool_fx.front().attempt_id==saved.attempt_id,"bound saved descriptors never borrow actual foreign live blast")
 	var raw: Dictionary=saved.playback_snapshots.back().duplicate(true)
-	for schema: Variant in [null,0,2,true,"1"]:
+	# This explicit one-frame fixture must be a valid continuous record before
+	# testing the adjunct gate, rather than failing the transport sequence gate.
+	raw.frame_seq=0
+	var control:=BattleLog.new()
+	control.begin_attempt(saved.attempt_id)
+	control.enable_continuous_playback(2)
+	control.playback_snapshots=[raw.duplicate(true)]
+	main.replay.bind(control)
+	main.replay.set_tick(raw.playback_tick)
+	frame=ViewState.capture(main)
+	_check(main.replay.continuous_playback and not main.replay.playback_unsupported and frame.tool_fx_schema==1 and frame.tool_fx==expected,"legal explicit one-frame control retains actual saved descriptor before corrupt adjunct cases")
+	for schema: Variant in [null,0,2,true,"1",1.0]:
 		var copy:=BattleLog.new()
 		copy.begin_attempt(saved.attempt_id)
 		copy.enable_continuous_playback(2)
@@ -139,7 +150,7 @@ func _history() -> void:
 		main.replay.bind(copy)
 		main.replay.set_tick(snap.playback_tick)
 		frame=ViewState.capture(main)
-		_check(frame.tool_fx_schema==0 and frame.tool_fx.is_empty(),"explicit corrupt adjunct version is structurally neutral "+str(schema))
+		_check(main.replay.continuous_playback and not main.replay.playback_unsupported and frame.tool_fx_schema==0 and frame.tool_fx.is_empty(),"explicit corrupt adjunct version is structurally neutral with valid transport "+str(schema))
 	for malformed: Variant in [{},null,"bad"]:
 		var copy:=BattleLog.new()
 		copy.begin_attempt(saved.attempt_id)
@@ -150,7 +161,7 @@ func _history() -> void:
 		main.replay.bind(copy)
 		main.replay.set_tick(snap.playback_tick)
 		frame=ViewState.capture(main)
-		_check(frame.tool_fx_schema==0 and frame.tool_fx.is_empty(),"explicit corrupt adjunct container is structurally neutral "+str(malformed))
+		_check(main.replay.continuous_playback and not main.replay.playback_unsupported and frame.tool_fx_schema==0 and frame.tool_fx.is_empty(),"explicit corrupt adjunct container is structurally neutral with valid transport "+str(malformed))
 	for id: String in ["schema1"]+OldSources.INITIAL.keys():
 		var path: String=OS.get_environment("AMBUSH_LEGACY_RECORD_FIXTURE") if id=="schema1" else OS.get_environment("AMBUSH_INITIAL_RECORD_ROOT")+"/native-player-"+id+"-record.bin"
 		var expected_hash: String=OldSources.LEGACY_SHA if id=="schema1" else OldSources.INITIAL[id]
