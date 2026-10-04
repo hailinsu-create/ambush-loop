@@ -1,0 +1,475 @@
+{
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-cd10249808f647faa03046cb99993dda/yard-live-SCOUT.png",
+      "scope": "untimed actual Window API/reference/historical view",
+      "sha256": "6c4298c427b7baa51417cd78d12340912ddb9a8ad1e4dacd8302a624b9c01670"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-cd10249808f647faa03046cb99993dda/yard-paused-ALERT.png",
+      "scope": "untimed actual Window API/reference/historical view",
+      "sha256": "336840bf8b967744c9453a3f22286cde93d948ba4f29d2f2a1e97f1c11cf01da"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-cd10249808f647faa03046cb99993dda/yard-original-WON.png",
+      "scope": "untimed actual Window API/reference/historical view",
+      "sha256": "4df3ba101813bfd1b65453a4e61a408f15d69eb451dd13b3b530640590fec3c4"
+    }
+  ],
+  "checks": 410,
+  "chunks": [
+    {
+      "accepted": 181,
+      "collector_instance_id": 183593076338,
+      "first_usec": 23790129,
+      "last_usec": 147374985,
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-cd10249808f647faa03046cb99993dda/yard-partial",
+      "raw_sha256": "df3447630328103bc29c73328ccc12c5a0b79ce913202c7e04ccad83f553f6b6",
+      "rows": 198,
+      "run_overflow_rows": 0.0,
+      "save_error": 0,
+      "segment_capacity": 512,
+      "segment_receipts": 23,
+      "segment_summaries": [
+        {
+          "accepted": 3,
+          "label": "yard-live-SCOUT-command",
+          "requested_phase_samples": 3,
+          "transition_phase_rows_retained": 0
+        },
+        {
+          "accepted": 3,
+          "label": "yard-live-ALERT-entry",
+          "requested_phase_samples": 3,
+          "transition_phase_rows_retained": 0
+        },
+        {
+          "accepted": 3,
+          "label": "yard-paused-ALERT",
+          "requested_phase_samples": 3,
+          "transition_phase_rows_retained": 0
+        },
+        {
+          "accepted": 127,
+          "label": "yard-live-ALERT-wave0",
+          "requested_phase_samples": 126,
+          "transition_phase_rows_retained": 1
+        },
+        {
+          "accepted": 3,
+          "label": "yard-live-SWEEP-wave0",
+          "requested_phase_samples": 3,
+          "transition_phase_rows_retained": 0
+        },
+        {
+          "accepted": 28,
+          "label": "yard-live-ALERT-wave1",
+          "requested_phase_samples": 27,
+          "transition_phase_rows_retained": 1
+        },
+        {
+          "accepted": 3,
+          "label": "yard-live-SWEEP-wave1",
+          "requested_phase_samples": 3,
+          "transition_phase_rows_retained": 0
+        },
+        {
+          "accepted": 11,
+          "label": "yard-live-WON",
+          "requested_phase_samples": 11,
+          "transition_phase_rows_retained": 0
+        }
+      ],
+      "symbol_overflow": 0.0,
+      "valid": false
+    }
+  ],
+  "collector_lifetimes": [
+    {
+      "chunk_index": 0,
+      "collector_instance_id": 183593076338,
+      "engine_frames_at_hook": 0,
+      "identity_scope": "raw frame is this collector's monotonic callback sequence; join chunks by unique instance/chunk and global ticks_usec, not a reused run_id",
+      "ticks_usec_at_hook": 13323984
+    }
+  ],
+  "complete": false,
+  "environment": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "audio_driver": "Dummy",
+    "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "driver": "opengl3",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "method": "gl_compatibility",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 118860,
+    "scope": "stationary original yard with main AND presenter automatic process stopped; not normal SCOUT/dynamic FX/mobile FPS",
+    "vendor": "Mesa",
+    "visible_cpu_effective": "0-4",
+    "visible_cpu_max": "400000 100000",
+    "visible_memory_max": "17179869184"
+  },
+  "failures": 2,
+  "format": 1,
+  "level_scope": "yard",
+  "limitations": "post-draw FX peaks can miss between-frame simulation events; representative16 views omit48 Cartesian combinations; warm imports not cold boot; llvmpipe/GPUtime unavailable/pipeline unknown",
+  "outcomes": [
+    {
+      "events": 34,
+      "level_id": "yard",
+      "phase": 3,
+      "reason": "win",
+      "terminal": 1283,
+      "wave_ends": [
+        1056,
+        227
+      ],
+      "waves": 2
+    }
+  ],
+  "receipt_sha256": "c4ab66149161270d77dd1a0dee814112621314b154179e9991f68fb2846cea19",
+  "records": [
+    {
+      "attempt_id": "e908860e460af718551b68ee11abf397",
+      "events": 34,
+      "frames": 237,
+      "label": "yard-partial-reference",
+      "level_id": "yard",
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-cd10249808f647faa03046cb99993dda/yard-partial-reference-record.bin",
+      "playback_terminal": 1398,
+      "reason": "win",
+      "scope": "original controlled API/reference recording; no native normal/progress acceptance",
+      "sha256": "ac389bcf6bbf4965c582cabfeeb8f74166a0b5f6031b4fa1e97a30f8bf06a187",
+      "terminal": 1283
+    }
+  ],
+  "scope": "original live callback reference/API sources + exact paused recorded16-pose/policy views, bounded3s natural1x/2x; no whole/native normal/device/FINAL acceptance",
+  "segments": [
+    {
+      "actual_seconds": 2.780653,
+      "label": "yard-live-SCOUT-command",
+      "receipt": {
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "e10eb4a6b2e5f775ae143a0a0f5ed9124a08e5af37376dec62b1e6f51501a1ca",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 0,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "7844c3f1c0014b94aece012b1995bbc21c6c650a9a30f778129abb817aeab0e4",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original live command callbacks",
+        "phase": 0,
+        "scope": "API command, not native input"
+      },
+      "requested_seconds": 2.0,
+      "source_immutable": false
+    },
+    {
+      "actual_seconds": 2.729758,
+      "label": "yard-live-ALERT-entry",
+      "receipt": {
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "fdec2aab69ed12635c34655876e66dce434f9ca07217aabbf63297a31e584a3d",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 1,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "f6914d64fbb04f70a8453b8782594a1e97fc588bd1576220d3f8664d9a241f89",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original live simulation callbacks",
+        "phase": 1,
+        "speed": 1.0,
+        "wave": 0
+      },
+      "requested_seconds": 2.0,
+      "source_immutable": false
+    },
+    {
+      "actual_seconds": 2.189277,
+      "label": "yard-paused-ALERT",
+      "receipt": {
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "230aedcb8aa14c614859cb8e0b392bd5a2bada55262987a860eb496495a0f6de",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 1,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "61d463acfd8f12405295be6d34b11fa7a5ef7d39d1de3f725789619c3158ff1a",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original pause API; main/presenter still process",
+        "phase": 1,
+        "wave": 0
+      },
+      "requested_seconds": 2.0,
+      "source_immutable": true
+    },
+    {
+      "actual_seconds": 75.034452,
+      "label": "yard-live-ALERT-wave0",
+      "receipt": {
+        "boundary_scope": "actual transition-phase rows retained; phase summaries select actual phase1",
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "72e5d2c61186673ae88bf4b8af8ade166d9ada1d4d78f3bb7f076ff3cd6855cf",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 1,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "61d463acfd8f12405295be6d34b11fa7a5ef7d39d1de3f725789619c3158ff1a",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original live simulation callbacks, no direct ticks",
+        "phase": 1,
+        "speed": 1.0,
+        "wave": 0
+      },
+      "source_immutable": false
+    },
+    {
+      "actual_seconds": 2.143643,
+      "label": "yard-live-SWEEP-wave0",
+      "receipt": {
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "5fe729ea1ce7ae9a3dfb774b036005380de4672876f1b8ebe71bfada2cad96da",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 5,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "888571a750e24b2ed57f68db6f320f3ee7e0f767523ba2065cac15d16475c9c6",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original live SWEEP command callbacks",
+        "phase": 5,
+        "vacuum_before_window": true,
+        "wave": 0
+      },
+      "requested_seconds": 2.0,
+      "source_immutable": false
+    },
+    {
+      "actual_seconds": 17.722365,
+      "label": "yard-live-ALERT-wave1",
+      "receipt": {
+        "boundary_scope": "actual transition-phase rows retained; phase summaries select actual phase1",
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "6afe4ddf75a94ff685e900dc857abaf7ba0b19e2fb632e4a163cfc2ad8009e72",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 1,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "9be0e5d248818f71054fdf29930681f37c3caac4dddbb8ea41c1d61d39b04abb",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original live simulation callbacks, no direct ticks",
+        "phase": 1,
+        "speed": 1.0,
+        "wave": 1
+      },
+      "source_immutable": false
+    },
+    {
+      "actual_seconds": 2.073188,
+      "label": "yard-live-SWEEP-wave1",
+      "receipt": {
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "42377c3c2004ed72ead5ec0ac443d0a7265894cc251e9f8b0c1593232aaafc2d",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 5,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "9ab0aa68ccd9071e1513960f6289bd25e2436a969de98803e5690d84fc1a3e7d",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original live SWEEP command callbacks",
+        "phase": 5,
+        "vacuum_before_window": true,
+        "wave": 1
+      },
+      "requested_seconds": 2.0,
+      "source_immutable": false
+    },
+    {
+      "actual_seconds": 2.006389,
+      "label": "yard-live-WON",
+      "receipt": {
+        "configuration": {
+          "attempt_id": "e908860e460af718551b68ee11abf397",
+          "backend_sha256": "38d361080990df00a7cd0afaf7999db8d23b46d90dcb9e71bf32212b2d930095",
+          "content_scale": 1.0,
+          "focus": "(0.0, 0.0, 0.0)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 3,
+          "pitch_deg": 55.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "d02047591f7042ac36a44361423a53d4ffbcb6f2c7e75fd05ae019f547f27cdb",
+          "tree_paused": false,
+          "view_size": 24.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 35.0
+        },
+        "kind": "original terminal presentation callbacks",
+        "phase": 3
+      },
+      "requested_seconds": 2.0,
+      "source_immutable": true
+    }
+  ],
+  "source_proof_after": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "5b305ddd861baa914e32b043d4eaa4e1d95209b2",
+    "consumer_game_tree": "24d2c4a73694999be238c845195eb46a75ee9b11",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5418800.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+        "producer_commit": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+        "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+      }
+    ],
+    "receipt_sha256": "c4ab66149161270d77dd1a0dee814112621314b154179e9991f68fb2846cea19",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 987,
+    "verified": true,
+    "window_control_verified": true
+  },
+  "source_proof_before": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "5b305ddd861baa914e32b043d4eaa4e1d95209b2",
+    "consumer_game_tree": "24d2c4a73694999be238c845195eb46a75ee9b11",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5418800.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+        "producer_commit": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+        "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+      }
+    ],
+    "receipt_sha256": "c4ab66149161270d77dd1a0dee814112621314b154179e9991f68fb2846cea19",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 987,
+    "verified": true,
+    "window_control_verified": true
+  },
+  "source_sha": "5b305ddd861baa914e32b043d4eaa4e1d95209b2",
+  "stopped": false
+}
