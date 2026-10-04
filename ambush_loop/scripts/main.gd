@@ -3994,7 +3994,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if phase == Phase.REPLAY:
 		if event is InputEventKey and event.pressed and not event.echo:
-			match event.physical_keycode:
+			var replay_key: int = event.physical_keycode
+			# Some native arrow events provide only the logical keycode.
+			if replay_key == 0 and event.keycode in [KEY_LEFT, KEY_RIGHT]:
+				replay_key = event.keycode
+			match replay_key:
 				KEY_LEFT:
 					replay.set_tick(replay.scrub_tick - 6)
 					_apply_replay_scrub()
