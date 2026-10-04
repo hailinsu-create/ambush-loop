@@ -61,7 +61,10 @@ func _saved_history(grenade: RaidGrenade) -> void:
 		main.replay.set_tick(sample.tick)
 		main.presentation_3d.refresh()
 		var items: Array=main.presentation_3d.frame.grenades
-		_check(items.size()==1 and items.front().flight==sample.item.flight,"original seek retains exact saved flight "+sample.label)
+		var latest: Dictionary=sample
+		for candidate: Dictionary in saved_samples:
+			if candidate.tick==sample.tick: latest=candidate
+		_check(items.size()==1 and items.front().flight==latest.item.flight,"original seek retains latest exact saved frame at tick "+str(sample.tick))
 		if not items.is_empty(): _height(items.front(),"replay-"+sample.label)
 	main.replay.set_tick(saved_samples[2].tick)
 	main.presentation_3d.refresh()
