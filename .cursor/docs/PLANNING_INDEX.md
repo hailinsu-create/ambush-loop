@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [旧smoke fixture修正报告](AMBUSH_PR15_SMOKE_FIXTURES_20261004.md) | fixed8906有界原launch-modal/radio-SCOUT合同actual0/E0/S0；原a05完整54、9f等一帧54、b62完整到radio-SCOUT62各E1/S0保留。只修测试顺序/tween等待与SCOUT预览预期，不改生产锁/timeline，不称full smoke green；六新3D/FXA3/最终完整smoke仍待。 |
 | [六新原件实际3D计划](AMBUSH_PR15_NATIVE_RECORD3D_PLAN_20261004.md) | 原a05PCK只读外部固定harness/独立Guard/display/output；先prototype保留parse1/停止143/H5022-4，last-frame-wins修oracle不改source。实际a05PCK yard R运行中、一条Right步长待诊断，未称whole green；之后六原件auto1x/2x/seek/focus/bytes保持，headless不代图。 |
 | [完整smoke模态fixture计划](AMBUSH_PR15_SMOKE_MODAL_FIXTURE_PLAN_20261004.md) | 已封a05原actual54/ERROR1；只修共享测试：简报时journal拒绝→原Back关闭→原journal正文，再固定source实际完整smoke。Title产品锁不改、不重开旧TitleQA，后段新失败先封后修；a05normal不代fullsmoke/新record3D/FXA3。 |
 | [初始单候选六关正常基线报告](AMBUSH_PR15_UNIFIED_BASELINE_20261004.md) | 固定a05/单次官方PCK23493668 SHA313cf；fresh整轮native六关13波1193/0 actual0 E0/S0、致谢0→81滚动/返回、六新raw/自然cfg封存166files；92图核/11图看、五旧raw不变。metadata15807/0不代3D；初始15807/6诊断保留。H装备66/生命周期30/时间67/旧FX30/参考campaign14028各0；完整smoke actual54/ERROR1早停journal锁，待test fixture修、六新record3D及完整FX/A3/最终candidate/APK/耳听设备。R5保持、父端cdb/392闭不重开。 |
