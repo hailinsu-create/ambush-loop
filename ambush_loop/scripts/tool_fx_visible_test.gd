@@ -43,7 +43,8 @@ func _run() -> void:
 	main._update_hud()
 	var frame:=ViewState.capture(main)
 	pool=main.presentation_3d.get_node("ToolFx")
-	var actual: Array=reader.active(frame) if reader!=null else load(READER_PATH).active(frame)
+	reader=load(READER_PATH) # Retain the Script throughout its static call and lambdas.
+	var actual: Array=reader.active(frame)
 	_check(grenade.spent() and actual.size()==1 and actual.front().victims.is_empty() and main.sim.paused,"real original empty blast confirmed and original ALERT pause reached")
 	var original:=_state(main.battle_log)
 	var live: Dictionary=main._snapshot_data().duplicate(true)
