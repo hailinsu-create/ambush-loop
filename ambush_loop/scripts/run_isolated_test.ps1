@@ -110,7 +110,7 @@ try {
     else {
         Write-Output "TEST_ENTRY=$Entry"
         $engineFlags = if ($Rendered) { @('--rendering-method', 'gl_compatibility') } else { @('--headless') }
-        if ($Entry -like '*capture.gd') { $engineFlags += @('--audio-driver', 'Dummy') }
+        if ($Entry -like '*capture.gd' -or $Entry -in @('escape_context_boundary_test.gd', 'escape_intel_source_test.gd')) { $engineFlags += @('--audio-driver', 'Dummy') }
         $launchRoot = $projectRoot
         if ($Entry -eq 'asset_pack_test.gd') {
             if (-not (Test-Path -LiteralPath $TestPack -PathType Leaf)) {

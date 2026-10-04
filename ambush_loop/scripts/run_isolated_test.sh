@@ -16,7 +16,7 @@ case "$render_mode" in
   --render) engine_flags=(--rendering-method gl_compatibility) ;;
   *) printf 'Unsupported rendering mode: %s\n' "$render_mode" >&2; exit 2 ;;
 esac
-if [[ "$entry" == *capture.gd ]]; then
+if [[ "$entry" == *capture.gd || "$entry" == escape_context_boundary_test.gd || "$entry" == escape_intel_source_test.gd ]]; then
   engine_flags+=(--audio-driver Dummy)
 fi
 

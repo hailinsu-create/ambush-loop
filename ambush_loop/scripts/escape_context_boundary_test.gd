@@ -61,8 +61,14 @@ func _render_cases(cases: Array) -> void:
 	main.presentation_3d.set_process(false)
 	for row: Dictionary in cases:
 		main.intel.records = [row.record.duplicate(true)]
+		# Explicit FAILED fixture invokes the original retry callback, which fills
+		# the actual historical HUD label. Cold SCOUT alone never sets that label.
+		main.phase = main.Phase.FAILED
+		main.fail_reason = "escape"
+		main._on_continue_pressed()
 		main._update_hud()
 		main.presentation_3d.refresh()
+		_check(main.phase == main.Phase.SETUP and main.wave_index == 0 and main.battle_log.attempt_id != row.record.escape_context.attempt_id, "original retry uses fresh live attempt/wave without rebinding history "+str(row.label))
 		var before: Dictionary = main._snapshot_data().duplicate(true)
 		var sim_state := [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum]
 		var memory := var_to_bytes(main.intel.records)
