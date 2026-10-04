@@ -1,0 +1,51 @@
+{
+  "captured_utc": "2026-10-04T08:49:14Z",
+  "processes": [
+    {
+      "pid": 98510,
+      "argv": [
+        "/usr/lib/xorg/Xorg",
+        ":116",
+        "-config",
+        "/tmp/pr15-full-xorg.conf",
+        "-nolisten",
+        "tcp",
+        "-noreset",
+        "-logfile",
+        "/tmp/pr15-a05-record3d-Xorg.log"
+      ],
+      "ps_pid_elapsed_seconds_stat_percentcpu_percentmem": "98510    2536 Sl    0.1  0.2"
+    },
+    {
+      "pid": 100120,
+      "argv": [
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--display-driver",
+        "x11",
+        "--audio-driver",
+        "Dummy",
+        "--main-pack",
+        "/workspace/ambush-pr15/ambush_loop/build/player_journey/d9c67256545a/player-journey.pck",
+        "--rendering-method",
+        "gl_compatibility",
+        "--path",
+        "/tmp/pr15-d9c-record3d/ambush_loop",
+        "-s",
+        "/tmp/pr15-d9c-record3d/native_record_replay_test.gd"
+      ],
+      "ps_pid_elapsed_seconds_stat_percentcpu_percentmem": "100120     620 Rl    128  6.2"
+    },
+    {
+      "pid": 100567,
+      "argv": [
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/workspace/ambush-pr15/ambush_loop",
+        "-s",
+        "res://scripts/shot_fx_source_test.gd"
+      ],
+      "ps_pid_elapsed_seconds_stat_percentcpu_percentmem": "100567     116 Rl   99.9  2.4"
+    }
+  ]
+}
