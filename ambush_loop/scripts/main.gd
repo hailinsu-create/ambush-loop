@@ -6864,7 +6864,7 @@ func _route_zh_short(route: String) -> String:
 
 
 func _next_wave_info() -> Dictionary:
-	## Shared pending-wave clock for fail panel and the WATCHING touch chip.
+	## Current-wave queued spawn clock for fail panel and WATCHING chips.
 	var out := {
 		"pending": false,
 		"remain": 0.0,
@@ -6872,7 +6872,7 @@ func _next_wave_info() -> Dictionary:
 		"intel_cut": -1.0,
 		"now": 0.0,
 	}
-	if level == null:
+	if level == null or phase == Phase.REPLAY:
 		return out
 	var now := sim.time_sec()
 	out["now"] = now
@@ -6890,16 +6890,13 @@ func _next_wave_info() -> Dictionary:
 	var next_kit := ""
 	var next_note := ""
 	var next_id := -1
-	for spec in level.spawn_schedule:
+	for spec in pending_spawns:
 		var d := float(spec.get("delay", 0.0))
-		var spawned := false
-		for p in pending_spawns:
-			if int(p.get("id", -1)) == int(spec.get("id", -2)) and bool(p.get("spawned", false)):
-				spawned = true
-				break
-		if spawned:
+		if bool(spec.get("spawned", false)):
 			continue
-		if d > ref_t + 0.05 and d < next_d:
+		# ALERT stays pending until the original spawn event actually happens,
+		# including the due tick. Terminal/intel cut eligibility is preserved.
+		if (phase == Phase.WATCHING or d > ref_t + 0.05) and d < next_d:
 			next_d = d
 			next_route = str(spec.get("route", "main"))
 			next_kit = str(spec.get("kit", "")).strip_edges()
@@ -6917,7 +6914,7 @@ func _next_wave_info() -> Dictionary:
 
 
 func _next_wave_line() -> String:
-	## Seconds until the next authored spawn after now / last intel cut.
+	## Seconds until the next queued spawn in this wave / last intel cut.
 	var info := _next_wave_info()
 	if level == null:
 		return "下一波：—"
