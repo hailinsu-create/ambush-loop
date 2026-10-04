@@ -2335,13 +2335,21 @@ func _assert_radio_contract(main) -> bool:
 		push_error("SMOKE_RADIO_ECHO_CALLOUT %s" % (echo_tag.text if echo_tag else "null"))
 		quit(62)
 		return false
-	if main.has_method("echo_wait_breathing") and not bool(main.echo_wait_breathing()):
-		push_error("SMOKE_RADIO_NO_ECHO_BREATH")
+	if main.phase != main.Phase.SETUP:
+		push_error("SMOKE_RADIO_CONTRACT_NOT_SCOUT")
+		quit(62)
+		return false
+	if not str(echo_tag.text).begins_with("全关教学预览"):
+		push_error("SMOKE_RADIO_ECHO_PREVIEW_UNLABELED %s" % echo_tag.text)
+		quit(62)
+		return false
+	if main.has_method("echo_wait_breathing") and bool(main.echo_wait_breathing()):
+		push_error("SMOKE_RADIO_SCOUT_HAS_LIVE_ECHO_PENDING")
 		quit(62)
 		return false
 	print(
 		"SMOKE_OK_RADIO_CONTRACT covers=6 routes=4 sneak=", min_sneak,
-		" echo=", echo_d, " dish_pad kit=echo hall breath=1"
+		" echo=", echo_d, " dish_pad kit=echo hall scout_preview=1 live_echo_pending=0"
 	)
 	return true
 
