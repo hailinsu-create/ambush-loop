@@ -12185,6 +12185,7 @@ func _try_place_inventory_mine(world_pos: Vector2) -> void:
 	var mine = RaidMineScript.new()
 	entities.add_child(mine)
 	mine.global_position = world_pos
+	visual_snapshot.tool_fx.register(self, mine, selected, "mine")
 	raid_mines.append(mine)
 	status_label.text = "%s 埋雷 剩余%d" % [selected.display_name, selected.mines]
 	_sfx("trip")
@@ -12225,7 +12226,8 @@ func _throw_grenade_from(op: OperatorUnit, world_pos: Vector2) -> bool:
 	var night := str(level.level_id) if level else ""
 	var gvar := WeaponCatalogScript.grenade_variant_for(str(op.weapon_id), night)
 	g.setup(op.global_position, dest, float(d.get("fuse", 0.55)), float(d.get("radius", 78.0)), float(d.get("damage", 78.0)), gvar)
-	g.detonated.connect(_on_grenade_boom)
+	visual_snapshot.tool_fx.register(self, g, op, "grenade")
+	g.detonated.connect(_on_recorded_grenade_boom.bind(g))
 	raid_grenades.append(g)
 	_record_utility_action(op, "grenade_throw", dest)
 	if op == selected:
@@ -12417,19 +12419,32 @@ func _on_pack_drop(kind: String) -> void:
 	_update_hud()
 
 
-func _on_grenade_boom(pos: Vector2, radius: float, damage: float) -> void:
+func _on_recorded_grenade_boom(pos: Vector2, radius: float, damage: float, grenade: RaidGrenade) -> void:
+	var source: Dictionary = visual_snapshot.tool_fx.begin_grenade(self, grenade, pos, radius)
+	_on_grenade_boom(pos, radius, damage, source, grenade)
+
+
+func _on_grenade_boom(pos: Vector2, radius: float, damage: float, fx_source: Dictionary = {}, fx_tool: Node2D = null) -> void:
 	_sfx("barrel")
 	_shake_for_explosion(pos)
 	if entities:
 		CombatFxScript.grenade_scorch(entities, pos)
+	var victims: Array = []
 	for e in enemies:
 		if e != null and is_instance_valid(e) and e.alive:
 			if e.global_position.distance_to(pos) <= radius:
+				var hp_before: float = e.hp
 				e.apply_fire(damage, selected)
+				if not fx_source.is_empty():
+					victims.append(visual_snapshot.tool_fx.victim(e, "enemies", hp_before))
 	for op in operators:
 		if op != null and op.alive and op.global_position.distance_to(pos) <= radius * 0.55:
+			var hp_before: float = op.hp
 			op.take_damage(damage * 0.35, pos)
+			if not fx_source.is_empty():
+				victims.append(visual_snapshot.tool_fx.victim(op, "ops", hp_before))
 			_night_hp_lost = true
+	visual_snapshot.tool_fx.finish(self, fx_tool, fx_source, victims)
 	if phase == Phase.WATCHING:
 		_check_win()
 
@@ -12477,9 +12492,18 @@ func _record_utility_action(op: OperatorUnit, action: String, target: Vector2) -
 func _tick_raid_mines() -> void:
 	for m in raid_mines:
 		if m != null and is_instance_valid(m) and m.has_method("sim_check"):
+			var source: Dictionary = visual_snapshot.tool_fx.begin_mine(self, m)
+			var hp_before := {}
+			if not source.is_empty():
+				for enemy in enemies:
+					if is_instance_valid(enemy):
+						hp_before[enemy.get_instance_id()] = float(enemy.hp)
 			var victim: EnemyRunner = m.sim_check(enemies)
 			if victim != null:
 				battle_log.add_event(sim.tick, "mine", victim.label_id, -1, m.global_position)
+				if not source.is_empty() and hp_before.has(victim.get_instance_id()):
+					var target: Dictionary = visual_snapshot.tool_fx.victim(victim, "enemies", hp_before[victim.get_instance_id()])
+					visual_snapshot.tool_fx.finish(self, m, source, [target], battle_log.events.back())
 				_sfx("trip")
 				_announce_payoff("trip", {"enemy_id": victim.label_id}, m.global_position)
 	raid_mines = raid_mines.filter(func(n) -> bool: return n != null and is_instance_valid(n) and not bool(n.spent))

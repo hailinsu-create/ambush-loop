@@ -7,6 +7,7 @@ const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const FirearmPose := preload("res://scripts/presentation/firearm_pose.gd")
 const UtilityPose := preload("res://scripts/presentation/utility_pose.gd")
 const CorpseRecording := preload("res://scripts/replay/corpse_recording.gd")
+const ToolFxRecording := preload("res://scripts/replay/tool_fx_recording.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 var _identity := ""
 var _objects := {}
@@ -21,6 +22,7 @@ var _utility_scope_id := ""
 var _utility_seq := 0
 var _utility_states := {}
 var corpses := CorpseRecording.new()
+var tool_fx := ToolFxRecording.new()
 
 
 func reset_environment() -> void:
@@ -31,6 +33,7 @@ func reset_environment() -> void:
 	_utility_seq = 0
 	_utility_states.clear()
 	corpses.reset(_utility_scope_id)
+	tool_fx.reset()
 
 
 func record_utility(host: Node, op: Node, action: String, target: Vector2) -> void:
@@ -84,6 +87,7 @@ func capture(host: Node) -> Dictionary:
 		_pose_scope = scope
 		_pose_states.clear()
 	var data := {"visual_schema": FORMAT_VERSION, "hud_schema": 1, "phase": int(host.phase),
+		"tool_fx_schema": ToolFxRecording.SCHEMA, "tool_fx": tool_fx.capture(host),
 		"utility_scope_id": _utility_scope_id,
 		"corpse_schema": 1,
 		"corpse_contact_schema": 1,

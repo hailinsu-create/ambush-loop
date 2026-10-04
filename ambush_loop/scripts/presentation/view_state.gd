@@ -25,6 +25,9 @@ static func capture(host: Node) -> Dictionary:
 	var source: BattleLog = host.replay.log if historical else host.battle_log
 	var fx_playback_schema: int = int(snap.get("playback_schema",0)) if continuous else (source.playback_schema if not historical and source != null else 0)
 	var fx_supported: bool = fx_playback_schema == 2 and ActorPose.supported(data) and str(data.get("actor_asset_revision","")) == ActorPose.ASSET_REVISION and int(data.get("animation_schema",0)) == ActorPose.FORMAT
+	var raw_tool_schema: Variant = data.get("tool_fx_schema")
+	var raw_tools: Variant = data.get("tool_fx", [])
+	var tool_supported: bool = typeof(raw_tool_schema) == TYPE_INT and raw_tool_schema == 1 and typeof(raw_tools) == TYPE_ARRAY and fx_playback_schema == 2 and not unsupported and (int(snap.get("schema", 1)) if historical else BattleLog.SCHEMA_VERSION) == BattleLog.SCHEMA_VERSION
 	var frame := {
 		"run_id": -1 if historical else host.run_id,
 		"tick": (domain_tick if continuous else host.replay.scrub_tick) if historical else host.battle_log.timeline_tick(host.sim.tick),
@@ -66,6 +69,10 @@ static func capture(host: Node) -> Dictionary:
 		"shot_fx_playback_schema": fx_playback_schema,
 		# A cache invalidation token only; never replaces saved factual identity.
 		"shot_fx_source_token": source.get_instance_id() if source != null else 0,
+		"tool_fx_schema": 1 if tool_supported else 0,
+		"tool_fx_playback_schema": fx_playback_schema,
+		"tool_fx_source_token": source.get_instance_id() if source != null else 0,
+		"tool_fx": raw_tools.duplicate(true) if tool_supported else [],
 	}
 	for group in GROUPS:
 		frame[group] = data.get(group, []).duplicate(true)
