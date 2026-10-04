@@ -13,3 +13,5 @@ mine为独立kind：创建时登记owner，原sim_check仍决定actual first vic
 保存接口：VisualSnapshot独立tool_fx_schema=1/tool_fx近期纯值列表，descriptor schema1/confirmed/tool_id/effect_id/seq、kind/variant、born level/attempt/wave/owner、原确认clock_domain=playback/playback_schema2/clock_tick/phase/position/radius/victims。mine另explicit original_event identity，grenade不伪造BattleLog event_id。ViewState从bound snapshot复制本列表、原source opaque token用于cache invalidation，旧缺/future明确neutral；本片只保存源，没有3D blast/smoke/dust视觉通过。
 
 先Guard实际负向接口测试证明原攻击/HP/ammo/count但缺descriptor，再最小source实现；固定源实际无victim/bounce/友伤cover-MG/overkill、多工具同tick、spent单次、SCOUT/SWEEP/ALERT pause、terminal snapshot、跨wave/foreign-log/old字节及参考campaign不变。未实证项目保持待验。后source reader/有界blast烟尘池与实际Window图，再A3/FINAL/APK。Draft不merge/生产/height/G，耳听/设备后置，网页GPT PLAN/REVIEW unavailable。
+
+父端要求安全checkpoint已停在负向封存点：test2a H21/4 actual1 E0/S0，UUIDa8f6d4ac75bb440fa29c9f81a694b703自然结束，四fail仅尚缺tool_fx descriptor；原HP/库存/统计/selected/mine/wipe断言保持，深入schema分支未执行。详[checkpoint](AMBUSH_PR15_FX_SOURCE_CHECKPOINT_20261004.md)，无需重跑原负向。生产module/VisualSnapshot/ViewState/main均未开始本片改动。
