@@ -77,7 +77,7 @@ func _command_and_pause() -> void:
 	for wanted in [main.Phase.SETUP,main.Phase.SWEEP]:
 		var pair: Array=await _quiet()
 		if wanted==main.Phase.SETUP:
-			main._start_setup() # Actual original reset; explicitly grant/place the tool afterward.
+			main._start_setup(false,false) # Actual original reset; explicitly grant/place the tool afterward.
 			for op: OperatorUnit in main.operators:
 				op.stop_move()
 				op.slot=null
