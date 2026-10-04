@@ -122,3 +122,6 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-04 Window前置作者实际完成：[结果](AMBUSH_PR15_A3_WINDOW_RESULTS_20261004.md)。代码42249/consumer1dab同tree，37/0与paired168/0/16windows各actual0 E0/S0；3有效chunk/reset/Title-rebind、688cadence/441accepted与346collector raw、原3图全核/看，99证据条目全hash，source/warm/engine/oldraw不变。7c仅offlineanalysis，median负载589/89533/1400一致而paired spread/RSS漂移明确，不作零开销/动态战场/Android性能接受；全部ownengine/displayactual0收尾无poll。正式六关A3未启，下一固定test-only真实source workload再START/END采集；后必要优化/FINAL同source全门/new13/new6完整1×2×/fullsmoke/APK，R5制作与设备后置/不merge生产height-G保持。
+
+
+2026-10-04 新A3实际来源workload：[计划](AMBUSH_PR15_A3_ACTUAL_SOURCE_WORKLOAD_20261004.md)。test-only7c462新driver/双Guard allowlist，尚未Godot运行；原live callbacks/reference API与exact PB2历史source（六来源/每16代表性view/每关96），另真实grenade-fuse+abort FAILED原source，bounded3s1×2×非whole。Window仪器前置c80已验范围独立；先fixed yard原Window集成预检through再all六关正式START/END，保全fail/raw/source/unsupported与llvmpipe云范围。无生产/资产改动，十枪姿态LOD/战场艺术由独立资产包验交，FINAL同source/fullsmoke/new13/new6whole1×2×/APK/设备后置仍待。
