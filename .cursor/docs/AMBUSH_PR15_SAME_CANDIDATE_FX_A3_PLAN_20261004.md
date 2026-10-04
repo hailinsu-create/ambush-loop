@@ -44,3 +44,5 @@
 所有包返回固定提交/接口后由唯一主集成验收有界接入。当前两项展示切片无需新增制作件；R5源29749157c5db064bfea626c3ed9d75d9a1791ece/交付ebedb829e3263abbeb6dd266905f24a3869fa281、20骨/socket/3LOD/52语义保持，ArtSource/v2/build_yard_kit.py/共享atlas/角色GLB/Blender输出不编辑或重跑。runtime loader与build provenance归主作者；制作revision清单先只读接收验收提交。网页GPT PLAN/REVIEW unavailable，不臆造approval；普通push Draft PR15，不merge/生产/height/G。
 
 其他已识别展示审查边界保留：总表route_spawn_marks→route timeline、IntelStore.delay_for_actor/first_route_delay、SCOUT echo callout与静态教学/fix_one/chatter的旧秒数；当前波chip修复不自动验收它们。先判其声明语义和实际波事件，发现运行时当前波/事实矛盾则独立negative→fix，保留教学目标但不把目标时间等同当前波入场。正式完整smoke不能对这些未验内容隐藏在green中。
+
+2026-10-04 接续状态：live条生产f020/formal cdb H1159/R1164各actual0，已交d363/远端PR读回；loot392 H85/R86各actual0文本专项，原事件/库存不改，不拼不同source最终全smoke。static IntelStore/fix_one总表5.2仍另审，后续优先与并行固定包见[有界接续](AMBUSH_PR15_NEXT_SLICES_20261004.md)。完整samecandidate/FX-A3/艺术耳听/最终APK仍未完成。

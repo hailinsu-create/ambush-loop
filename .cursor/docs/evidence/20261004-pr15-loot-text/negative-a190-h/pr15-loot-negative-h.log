@@ -1,0 +1,52 @@
+TEST_RUN_ID=864814ebb33a43a9b3ca4954cada3ec5
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/864814ebb33a43a9b3ca4954cada3ec5/data
+TEST_ENTRY=loot_event_text_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/864814ebb33a43a9b3ca4954cada3ec5/data/godot/app_userdata/Ambush Loop run_id=864814ebb33a43a9b3ca4954cada3ec5
+LOOT_EVENT_TEXT_FAIL original depot mine text says actual item/quantity, not +1 bullet
+LOOT_EVENT_TEXT_FAIL all four original depot loot events use saved type/quantity
+LOOT_EVENT_TEXT_FAIL all four original depot loot events use saved type/quantity
+LOOT_EVENT_TEXT_FAIL all four original depot loot events use saved type/quantity
+LOOT_EVENT_TEXT_FAIL all four original depot loot events use saved type/quantity
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mine", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "grenade", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "decoy", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "radio_part", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "knife", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "pistol_ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "rifle_ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mg_ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "scout_ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "shotgun_ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "smg_ammo", "amount": 2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "pistol", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "rifle", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mg", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "scout", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "shotgun", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "smg", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "m1911", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "luger", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "m1_garand", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "kar98k", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "thompson", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mp40", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "bar", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mg42", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "springfield", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "kar98k_zf", "amount": 7 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "future_crate", "amount": 4 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "amount": 1 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mine" }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mine", "amount": <null> }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mine", "amount": 0 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: { "kind": "mine", "amount": -2 }
+LOOT_EVENT_TEXT_FAIL source kind/quantity/global time: {  }
+LOOT_EVENT_TEXT_FAIL legacy local tick still formats without rebinding identity or weapon
+LOOT_EVENT_TEXT_FAIL live ItemList central text leaves inventory/state unchanged
+LOOT_EVENT_TEXT_FAIL history focus uses exact saved mine event rather than foreign live ammo
+LOOT_EVENT_TEXT_FAIL history ItemList retains saved event identity and text
+LOOT_EVENT_TEXT_FAIL history RichText fallback uses same original type/quantity
+LOOT_EVENT_TEXT_TEST checks=85 failures=45
