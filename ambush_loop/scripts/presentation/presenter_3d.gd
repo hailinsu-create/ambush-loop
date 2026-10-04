@@ -16,6 +16,7 @@ const EnvironmentScene := preload("res://scripts/presentation/environment_scene.
 const EnvironmentVisual := preload("res://scripts/presentation/environment_visual.gd")
 const CorpsePose := preload("res://scripts/presentation/corpse_pose.gd")
 const CorpseVisual := preload("res://scripts/presentation/corpse_visual.gd")
+const ShotFxPool := preload("res://scripts/presentation/shot_fx_pool.gd")
 
 var host: Node
 var rig: Node3D
@@ -26,6 +27,7 @@ var proxies := Node3D.new()
 var walls: Array = []
 var actors: Dictionary = {}
 var corpses: Dictionary = {}
+var shot_fx: Node3D
 var _actor_scope: Array = []
 var objects: Dictionary = {}
 var _object_scope: Array = []
@@ -68,6 +70,9 @@ func bind(main: Node) -> void:
 	proxies.name = "Proxies"
 	add_child(geometry)
 	add_child(proxies)
+	shot_fx = ShotFxPool.new()
+	shot_fx.name = "ShotFx"
+	add_child(shot_fx)
 	rig = Rig.new()
 	rig.name = "CameraRig"
 	add_child(rig)
@@ -262,6 +267,7 @@ func refresh() -> void:
 	_sync_actors()
 	_sync_corpses()
 	_sync_objects()
+	shot_fx.update_frame(frame,host._is_power_saving())
 	_sync_cones()
 	_selected_ring.visible = false
 	for op in frame.ops:

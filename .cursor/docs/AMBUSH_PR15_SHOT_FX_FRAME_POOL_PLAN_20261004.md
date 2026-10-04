@@ -13,3 +13,5 @@ tracer到descriptor保存二维target位置映射的展示躯干高度；impact�
 P2独立QA可先只读f0ed44311775fa87ee63ebb911c7b11e12e65ab1；APK工具链只读包已交6.1-sol独立盘点，报告仅/tmp，未装SDK/导出/设备测试。A1b完成后A2工具/爆炸/烟/脚尘→A3实际指标/优化→FINAL同source全门/fullsmoke/正常13波/新六record→可追溯APK。网页GPT PLAN/REVIEW unavailable，Draft不merge/发布/height/G，设备耳听按原用户顺序后置。
 
 可选pose布尔字段接续：固定56207c5保留实际负向H100/7、actual1、E0/S0；已知FX1/R5 pose缺字段默认true及合法true/false原20骨骼采样通过。原reader接受字符串、整数、null、字典、数组共7错误类型。最小修复只在ShotFxFrame._valid_pose有字段时要求TYPE_BOOL，不改ActorVisual、原事件、旧schema或缺字段默认值；固定修复源码后同命令正式复验。c9c开发静态bool(String)解析失败actual1/E1/S1亦保留，不称生产复现。资产所有权不变。
+
+A1b.2实施切片：Guard固定544接口负向H1/1 actual1 E0/S0，仅planned module未存在；随后固定12槽/36mesh、三shared低面mesh/material、48纯值cache、隐藏单R5 sampler与presenter接入。固定采样LOD0以原记录资产/pose定义枪口，LOD012实际测量另列，不随观察镜头LOD改变事实枪口。hash只预筛且完整descriptor相等才复用；所有原set_asset/mount_item/sample_layers成功且身份/muzzle finite才显示。phase/source/unsupported清cache及采样model，纯到期隐藏并可seek原样恢复；pool随原场景释放。共享测试明确原后端授枪/HP/位置/API和synthetic容量/时钟/缺marker，不称正常战场或A3。正式渲染前冻结fixed source；原schema1与a05六raw精确hash只读，不改写。
