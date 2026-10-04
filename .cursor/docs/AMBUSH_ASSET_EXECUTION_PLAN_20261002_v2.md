@@ -68,3 +68,5 @@ A0 云端坐标/镜头/输入/冻结与六关基线已通过，灰盒 APK 已构
 
 
 2026-10-03 checkpoint：[title200全入口报告](AMBUSH_PR15_TITLE_20261003.md)，fixed226505fb7cc424fb8ff955e94f98f086835b2423：原menu+6brief/help/journal/settings/真实SCOUT入场/真实button与keyboard退出，8组2391/0+7/0、2runexit0/ERROR0、72PNGhash核对；作者通过，独立title QA待，Git认证失败后尚仅本地保存。fixed15c fullrecord29/75证据a218已推送，父端另报告limited QA通过（59PNG看19及其计数不相加）。完成队列已结束。继续完整3DFX/autoREPLAY2×（尚未实现）/A3与正常六关玩家旅程、最终同候选smoke-QA-APK；不把controlled2×fixture当auto功能、XTest当手机、llvmpipe当设备性能。资产制作输出未改，Notion/Library仍未写，不merge/生产，高度/G隔离，设备全计划后。
+
+2026-10-04 六关结果事实独立片：[报告](AMBUSH_PR15_RESULT_FACTS_20261004.md)。原warehouse未续包/depot-radio未触雷正常反例保留；yard/railcut复合事件绑定不足仅源码审查。9918负向H193/80 exit1/E0/S0→固定a794正式H193/R221各0/exit0/E0/S0，统一中性结果不改规则/R/资产。五原bytes只读、六reference终局/旧2D仅结果，14PNG核/看7，FAILED原生滚到完整句；不能代正常同候选13波/历史3D/FX/艺术/A3/耳听/APK/device。radio末波提示的实际缺陷与其他总表教学/建议审查边界另片待，green不隐藏已知展示错。R5接口与单写者保持。

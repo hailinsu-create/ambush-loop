@@ -1,0 +1,373 @@
+{
+  "captures": [],
+  "checks": 193,
+  "failures": 80,
+  "native_inputs": [],
+  "rows": [
+    {
+      "attempt": "2a53f1c40c480b06c4b12c24c9416bbb",
+      "case": "original_native_warehouse",
+      "formatter": "打中了：入伏再打，弹包续上",
+      "scope": "Original native source read only. No playback binding/rendering, source rewrite or new journey.",
+      "source_sha256": "63fccaa28ed9ff9f90729f458ebf695f05bac57cac9be0d58ec28c54ef17a08c",
+      "terminal_tick": 1203
+    },
+    {
+      "attempt": "894a6545a9d49ac514f40adbad264e06",
+      "case": "original_native_pump",
+      "formatter": "泵站封锁完成",
+      "scope": "Original native source read only. No playback binding/rendering, source rewrite or new journey.",
+      "source_sha256": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+      "terminal_tick": 935
+    },
+    {
+      "attempt": "93d07e8fdaa687f28d8e05c9432f4724",
+      "case": "original_native_railcut",
+      "formatter": "打中了：3.8s 东廊迟到，铁砧等住",
+      "scope": "Original native source read only. No playback binding/rendering, source rewrite or new journey.",
+      "source_sha256": "154c69778d82b3d7a35b32d7d5ebd8782cd792cb9edad82544495a125af86e53",
+      "terminal_tick": 1345
+    },
+    {
+      "attempt": "f3bbcc8550a908a5e5740cfa16df238b",
+      "case": "original_native_depot",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "scope": "Original native source read only. No playback binding/rendering, source rewrite or new journey.",
+      "source_sha256": "ec232057b98e04262fd60f4e44933c7545f396ded83be68a05cdea26b4ebb3e0",
+      "terminal_tick": 639
+    },
+    {
+      "attempt": "dd6ac61197ad62d444517e1a34f728e9",
+      "case": "original_native_radio",
+      "formatter": "本关高光：5.2s 灯塔回波，绊索抽中",
+      "scope": "Original native source read only. No playback binding/rendering, source rewrite or new journey.",
+      "source_sha256": "e584a89d86b60c2931e5d947b3ab2dba416801a4ea499f5b5685507ef8d7128f",
+      "terminal_tick": 845
+    },
+    {
+      "case": "yard_empty_false",
+      "formatter": "没打中：交叉封锁第一枪",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_empty_true",
+      "formatter": "本关高光：交叉封锁第一枪",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_unrelated_false",
+      "formatter": "打中过：交叉封锁第一枪（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_unrelated_true",
+      "formatter": "打中了：交叉封锁第一枪",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_action_fixture_false",
+      "formatter": "打中过：交叉封锁第一枪（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_action_fixture_true",
+      "formatter": "打中了：交叉封锁第一枪",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_legacy_sparse_false",
+      "formatter": "没打中：交叉封锁第一枪",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "yard_legacy_sparse_true",
+      "formatter": "本关高光：交叉封锁第一枪",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_empty_false",
+      "formatter": "没打中：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_empty_true",
+      "formatter": "本关高光：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_unrelated_false",
+      "formatter": "没打中：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_unrelated_true",
+      "formatter": "本关高光：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_action_fixture_false",
+      "formatter": "打中过：入伏再打，弹包续上（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_action_fixture_true",
+      "formatter": "打中了：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_legacy_sparse_false",
+      "formatter": "没打中：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "warehouse_legacy_sparse_true",
+      "formatter": "本关高光：入伏再打，弹包续上",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_empty_false",
+      "formatter": "泵站尚未封锁",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_empty_true",
+      "formatter": "泵站封锁完成",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_unrelated_false",
+      "formatter": "泵站尚未封锁",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_unrelated_true",
+      "formatter": "泵站封锁完成",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_action_fixture_false",
+      "formatter": "泵站尚未封锁",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_action_fixture_true",
+      "formatter": "泵站封锁完成",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_legacy_sparse_false",
+      "formatter": "泵站尚未封锁",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "pump_legacy_sparse_true",
+      "formatter": "泵站封锁完成",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_empty_false",
+      "formatter": "没打中：3.8s 东廊迟到，铁砧等住",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_empty_true",
+      "formatter": "本关高光：3.8s 东廊迟到，铁砧等住",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_unrelated_false",
+      "formatter": "打中过：3.8s 东廊迟到，铁砧等住（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_unrelated_true",
+      "formatter": "打中了：3.8s 东廊迟到，铁砧等住",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_action_fixture_false",
+      "formatter": "打中过：3.8s 东廊迟到，铁砧等住（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_action_fixture_true",
+      "formatter": "打中了：3.8s 东廊迟到，铁砧等住",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_legacy_sparse_false",
+      "formatter": "没打中：3.8s 东廊迟到，铁砧等住",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "railcut_legacy_sparse_true",
+      "formatter": "本关高光：3.8s 东廊迟到，铁砧等住",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_empty_false",
+      "formatter": "没打中：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_empty_true",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_unrelated_false",
+      "formatter": "没打中：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_unrelated_true",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_action_fixture_false",
+      "formatter": "打中过：2.2s 西暗道绊索抽中（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_action_fixture_true",
+      "formatter": "打中了：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_legacy_sparse_false",
+      "formatter": "没打中：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "depot_legacy_sparse_true",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_empty_false",
+      "formatter": "没打中：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_empty_true",
+      "formatter": "本关高光：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_unrelated_false",
+      "formatter": "没打中：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_unrelated_true",
+      "formatter": "本关高光：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_action_fixture_false",
+      "formatter": "打中过：5.2s 灯塔回波，绊索抽中（还没封锁）",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_action_fixture_true",
+      "formatter": "打中了：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_legacy_sparse_false",
+      "formatter": "没打中：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "case": "radio_legacy_sparse_true",
+      "formatter": "本关高光：5.2s 灯塔回波，绊索抽中",
+      "scope": "Explicit synthetic formatter fixture; action_fixture is not an actual trigger."
+    },
+    {
+      "body": "任务完成。\n+解锁下一关 · 「终夜」\n本关用了 1 世。\n终局摘要：零逃逸，封锁成功；第一枪是灰狼；连击×2。\n第一枪是灰狼 → 敌1\n本关高光：2.2s 西暗道绊索抽中\n油库熄火。电台还能把下一班叫回来——灯塔还在扫。\n初阵✓  深仓✓  闸站✓  信号✓  油库✓  下一夜：终夜\n★ 完美封锁：零逃逸\n★ 无人受伤\n\n—— 关键事件 ——\n10.2s  灰狼 开火 → 敌3\n10.4s  灰狼 开火 → 敌3\n10.6s  灰狼 开火 → 敌3\n10.6s  敌3 被击毙\n10.6s  终局：win",
+      "case": "facts_3d_depot_won_no_mine",
+      "dossier": "",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "mine_events": [],
+      "phase": 3,
+      "scope": "Reference grants/cover snaps/direct ticks/vacuum reach original terminal; not normal player input.",
+      "stats": "世数  1\n第一枪是  灰狼\n逃逸  无\n用时  10.6s\n高光  2.2s 西暗道绊索抽中",
+      "terminal_tick": 638
+    },
+    {
+      "body": "第1波漏网：主路 · 敌1 · 0.0s出发 · 主路南闸\n改一处就能赢：Tab 绊索铺西暗道（7,11），等 3.6 秒影探自己踩上。\n带着情报穿梭回去",
+      "case": "facts_3d_radio_failed_no_mine",
+      "dossier": "情报已记录 · 主路巡卫从南闸漏出\n终局摘要：敌军沿主路从逃逸口越界。\n第一枪：本世无人开火\n下一波：已全部进场（情报截止 15.0s）\n没打中：5.2s 灯塔回波，绊索抽中\n截获 · 电台：灯塔已扫过。回波按 5.2 走碟缝。西暗道没人守。\n本世罩住：暗道  ·  缺口：主路、侧翼、回波\n—— 情报墙 ——\n第1世 · 逃逸 · 15.0s · 主路巡卫从南闸漏出\n逃逸口已在地图上闪烁。\n—— 事件摘要（点击右侧日志定位）——\n2.6s  队员3 无法交战 敌1（射界）\n3.2s  队员3 无法交战 敌4（射界）\n5.4s  队员2 无法交战 敌1（射界）\n6.0s  队员2 无法交战 敌4（射界）\n6.0s  队员2 无法交战 敌1（射程）\n6.7s  队员2 无法交战 敌4（射程）\n7.6s  队员3 无法交战 敌1（射程）\n8.2s  队员3 无法交战 敌4（射程）\n15.0s  敌1 沿主路越界逃逸\n15.0s  终局：escape",
+      "formatter": "没打中：5.2s 灯塔回波，绊索抽中",
+      "mine_events": [],
+      "phase": 2,
+      "scope": "Reference grants/cover snaps/direct ticks/vacuum reach original terminal; not normal player input.",
+      "stats": "",
+      "terminal_tick": 902
+    },
+    {
+      "body": "任务完成。\n+解锁下一关 · 「终夜」\n本关用了 1 世。\n终局摘要：零逃逸，封锁成功；第一枪是灰狼；连击×2。\n第一枪是灰狼 → 敌1\n本关高光：2.2s 西暗道绊索抽中\n油库熄火。电台还能把下一班叫回来——灯塔还在扫。\n初阵✓  深仓✓  闸站✓  信号✓  油库✓  下一夜：终夜\n★ 完美封锁：零逃逸\n★ 无人受伤\n\n—— 关键事件 ——\n9.8s  队员2 无法交战 敌3（射程）\n9.8s  队员3 无法交战 敌3（射程）\n15.9s  敌3 被击毙\n15.9s  mine\n15.9s  终局：win",
+      "case": "facts_3d_depot_won_mine",
+      "dossier": "",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "mine_events": [
+        {
+          "actor_id": 3,
+          "attempt_id": "08116c451951924e46408f40ad0a1cae",
+          "event_id": "08116c451951924e46408f40ad0a1cae:1:32",
+          "payload": {},
+          "playback_schema": 2,
+          "playback_tick": 956,
+          "position": "(240.0, 368.0)",
+          "schema": 2,
+          "seq": 32,
+          "target_id": -1,
+          "tick": 388,
+          "timeline_tick": 954,
+          "type": "mine",
+          "wave_id": 1
+        }
+      ],
+      "phase": 3,
+      "scope": "Reference grants/cover snaps/direct ticks/vacuum reach original terminal; not normal player input.",
+      "stats": "世数  1\n第一枪是  灰狼\n逃逸  无\n用时  15.9s\n高光  2.2s 西暗道绊索抽中",
+      "terminal_tick": 955
+    },
+    {
+      "body": "全部关卡封锁完成。\n院子 / 仓道 / 泵站 / 信号楼 / 油库 / 电台\n本关用了 1 世。\n终局摘要：零逃逸，封锁成功；第一枪是灰狼。\n第一枪是灰狼 → 敌1\n本关高光：5.2s 灯塔回波，绊索抽中\n灯塔停转。北区补给链这一夜被切断。\n★ 完美封锁：零逃逸\n\n—— 关键事件 ——\n13.0s  灰狼 开火 → 敌5\n13.5s  灰狼 开火 → 敌5\n14.0s  灰狼 开火 → 敌5\n14.0s  敌5 被击毙\n14.1s  终局：win",
+      "case": "facts_3d_radio_won_no_mine",
+      "dossier": "",
+      "formatter": "本关高光：5.2s 灯塔回波，绊索抽中",
+      "mine_events": [],
+      "phase": 3,
+      "scope": "Reference grants/cover snaps/direct ticks/vacuum reach original terminal; not normal player input.",
+      "stats": "世数  1\n第一枪是  灰狼\n逃逸  无\n用时  14.1s\n高光  5.2s 灯塔回波，绊索抽中",
+      "terminal_tick": 843
+    },
+    {
+      "body": "任务完成。\n+解锁下一关 · 「终夜」\n本关用了 1 世。\n终局摘要：零逃逸，封锁成功；第一枪是灰狼；连击×2。\n第一枪是灰狼 → 敌1\n本关高光：2.2s 西暗道绊索抽中\n油库熄火。电台还能把下一班叫回来——灯塔还在扫。\n初阵✓  深仓✓  闸站✓  信号✓  油库✓  下一夜：终夜\n★ 完美封锁：零逃逸\n★ 无人受伤\n\n—— 关键事件 ——\n10.2s  灰狼 开火 → 敌3\n10.4s  灰狼 开火 → 敌3\n10.6s  灰狼 开火 → 敌3\n10.6s  敌3 被击毙\n10.6s  终局：win",
+      "case": "facts_legacy2d_depot_won_no_mine",
+      "dossier": "",
+      "formatter": "本关高光：2.2s 西暗道绊索抽中",
+      "mine_events": [],
+      "phase": 3,
+      "scope": "Reference grants/cover snaps/direct ticks/vacuum reach original terminal; not normal player input.",
+      "stats": "世数  1\n第一枪是  灰狼\n逃逸  无\n用时  10.6s\n高光  2.2s 西暗道绊索抽中",
+      "terminal_tick": 638
+    },
+    {
+      "body": "第1波漏网：主路 · 敌1 · 0.0s出发 · 主路南闸\n改一处就能赢：Tab 绊索铺西暗道（7,11），等 3.6 秒影探自己踩上。\n带着情报穿梭回去",
+      "case": "facts_legacy2d_radio_failed_no_mine",
+      "dossier": "情报已记录 · 主路巡卫从南闸漏出\n终局摘要：敌军沿主路从逃逸口越界。\n第一枪：本世无人开火\n下一波：已全部进场（情报截止 15.0s）\n没打中：5.2s 灯塔回波，绊索抽中\n截获 · 电台：灯塔已扫过。回波按 5.2 走碟缝。西暗道没人守。\n本世罩住：暗道  ·  缺口：主路、侧翼、回波\n—— 情报墙 ——\n第1世 · 逃逸 · 15.0s · 主路巡卫从南闸漏出\n逃逸口已在地图上闪烁。\n—— 事件摘要（点击右侧日志定位）——\n2.6s  队员3 无法交战 敌1（射界）\n3.2s  队员3 无法交战 敌4（射界）\n5.4s  队员2 无法交战 敌1（射界）\n6.0s  队员2 无法交战 敌4（射界）\n6.0s  队员2 无法交战 敌1（射程）\n6.7s  队员2 无法交战 敌4（射程）\n7.6s  队员3 无法交战 敌1（射程）\n8.2s  队员3 无法交战 敌4（射程）\n15.0s  敌1 沿主路越界逃逸\n15.0s  终局：escape",
+      "formatter": "没打中：5.2s 灯塔回波，绊索抽中",
+      "mine_events": [],
+      "phase": 2,
+      "scope": "Reference grants/cover snaps/direct ticks/vacuum reach original terminal; not normal player input.",
+      "stats": "",
+      "terminal_tick": 902
+    }
+  ],
+  "scope": "Bounded factual result copy only; original records read-only, all new battles are explicit reference fixtures. Legacy2D covers result UI only. No replay rendering, normal journey, performance or device claim.",
+  "source_sha": "99186ec1a4e8f0a173c630fb5eddde41b4eff373"
+}
