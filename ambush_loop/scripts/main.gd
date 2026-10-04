@@ -92,6 +92,7 @@ const RaidDecoyScript := preload("res://scripts/raid/decoy.gd")
 const BackpackPanelScript := preload("res://scripts/ui/backpack_panel.gd")
 const C2DirectorScript := preload("res://scripts/c2/c2_director.gd")
 const VisualSnapshotScript := preload("res://scripts/replay/visual_snapshot.gd")
+const ShotFxRecordingScript := preload("res://scripts/replay/shot_fx_recording.gd")
 const ViewStateScript := preload("res://scripts/presentation/view_state.gd")
 const HudRecord := preload("res://scripts/replay/hud_record.gd")
 
@@ -110,6 +111,7 @@ var level_index: int = 0
 var sim: SimClock = SimClock.new()
 var battle_log: BattleLog = BattleLog.new()
 var visual_snapshot := VisualSnapshotScript.new()
+var shot_fx_recording := ShotFxRecordingScript.new()
 var last_plan: PlanState = PlanState.new()
 var door_locked: bool = false
 
@@ -5493,6 +5495,7 @@ func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 	if phase == Phase.WATCHING or pending_result != "":
 		battle_log.add_event(sim.tick, "return_fire", from.label_id, to.op_id, from.global_position,
 			{"animation_schema": 2, "visual_weapon": {"main": "kar98k", "flank": "mp40", "sneak": "kar98k", "echo": "luger"}.get(from.kind_id(), ""), "shot_interval_s": EnemyRunner.RETURN_INTERVAL})
+		shot_fx_recording.confirm(self, from, to, battle_log.events.back())
 	_sfx("return_fire")
 	_night_hp_lost = true
 	if not _watch_first_return:
@@ -5657,7 +5660,7 @@ func _sim_tick() -> void:
 						"visual_weapon": WeaponCatalog.resolve_crate_kind(op.weapon_id, str(level.level_id), op.op_id),
 						"shot_interval_s": op.shot_interval, "reload_s": op.reload_s, "sfx_cue": shot_cue}
 				)
-				if op.try_fire(best, grid):
+				if _try_fire_with_recorded_fx(op, best, battle_log.events.back()):
 					_sfx_every_shot(op, shot_cue)
 					if not _watch_first_fire:
 						_watch_first_fire = true
@@ -5678,7 +5681,7 @@ func _sim_tick() -> void:
 	if phase == Phase.WATCHING:
 		for enemy in enemies:
 			if enemy.alive and enemy.active:
-				enemy.resolve_return_fire()
+				_resolve_return_with_recorded_fx(enemy)
 			if phase != Phase.WATCHING:
 				_finish_sim_tick()
 				return
@@ -5691,6 +5694,19 @@ func _sim_tick() -> void:
 		_tick_raid_decoys(SimClock.TICK_DT)
 
 	_finish_sim_tick()
+
+
+func _try_fire_with_recorded_fx(op: OperatorUnit, target: EnemyRunner, event: Dictionary) -> bool:
+	shot_fx_recording.begin(self, op, target, "ops", event)
+	var fired := op.try_fire(target, grid)
+	shot_fx_recording.finish()
+	return fired
+
+
+func _resolve_return_with_recorded_fx(enemy: EnemyRunner) -> void:
+	shot_fx_recording.begin(self, enemy, enemy.focus_target, "enemies")
+	enemy.resolve_return_fire()
+	shot_fx_recording.finish()
 
 
 func _finish_sim_tick() -> void:
@@ -6079,6 +6095,7 @@ func _on_op_fired_shot(op: OperatorUnit, target_pos: Vector2) -> void:
 			_record_utility_action(op, "knife_stab", target_pos)
 		else:
 			visual_snapshot.cancel_utility(op.op_id)
+	shot_fx_recording.confirm(self, op)
 	var col := Color(1.0, 0.96, 0.62, 0.95)
 	var w := 2.15
 	if op != null:
