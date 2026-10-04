@@ -88,7 +88,7 @@ func _optional_bool_cases(frame: Dictionary, event: Dictionary) -> void:
 			_check(equivalent,"absent default and explicit true retain all original20 bone transforms")
 	for value in ["false","true",0,1,null,{},[]]:
 		_bad(frame,event,"pose","preserve_upper_world_basis",value)
-	var legacy_casts := {"string_false":bool("false"),"integer_zero":bool(0),"integer_one":bool(1)}
+	var legacy_casts := {"integer_zero":bool(0),"integer_one":bool(1)}
 	rows.append({"scope":"explicit optional flag compatibility/corrupt fixtures; original R5 sample_layers actual hidden sampler, no rendered claim","original_saved_flag_present":event.payload.fx.pose.has("preserve_upper_world_basis"),"original_legacy_bool_casts":legacy_casts,"all20_absent_true_bones_compared":true})
 	_check(var_to_bytes([frame,event])==original,"optional boolean checks never rewrite original saved event/frame")
 	body.free()
