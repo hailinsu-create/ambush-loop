@@ -88,6 +88,11 @@ func _pool_cases(frame: Dictionary, label: String) -> void:
 		_check(active.is_empty() if age<0 or age>=180 else active.size()==1 and active.front().age_ticks==age and active.front().center==Space.logic_to_world(effect.position),label+" original saved source world point/lifetime age="+str(age))
 		if active.is_empty(): continue
 		_check(active.front().flash_visible==(age<8) and active.front().ring_visible==(age<18) and active.front().smoke_count==(3 if age>=5 else 0),label+" finite flash/ring/smoke contract age="+str(age))
+		var ring: MeshInstance3D=pool._slots[0].ring
+		var vertices: PackedVector3Array=ring.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		var extent:=0.0
+		for vertex: Vector3 in vertices: extent=maxf(extent,vertex.length())
+		_check(is_equal_approx(extent*ring.scale.x,float(effect.radius)/Space.PIXELS_PER_METRE*minf(float(age+1)/12.0,1.0)),label+" actual ring vertex extent/scale follows saved radius age="+str(age))
 		if age in [0,6,60]:
 			main.presentation_3d.rig.yaw_deg=35.0
 			main.presentation_3d.rig.apply_pose()
@@ -166,7 +171,7 @@ func _history_cases() -> void:
 	_check(main.phase==main.Phase.FAILED and _diag().active.is_empty(),"original abort clears saved blast visuals")
 	var nodes:=pool.get_children().map(func(node:Node)->WeakRef:return weakref(node))
 	var pool_ref: WeakRef=weakref(pool)
-	main._return_title()
+	main._return_to_title()
 	await process_frame
 	await process_frame
 	_check(pool_ref.get_ref()==null and nodes.all(func(ref:WeakRef)->bool:return ref.get_ref()==null),"original Title exit releases pool and all fixed mesh nodes")
