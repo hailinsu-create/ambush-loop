@@ -1,0 +1,15 @@
+TEST_RUN_ID=433ae4780c8d4878862620071b75f747
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/433ae4780c8d4878862620071b75f747/data
+TEST_ENTRY=movement_dust_source_boundary_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/433ae4780c8d4878862620071b75f747/data/godot/app_userdata/Ambush Loop run_id=433ae4780c8d4878862620071b75f747
+SCRIPT ERROR: Invalid call. Nonexistent 'bool' constructor.
+          at: _actor_defaults (res://scripts/presentation/view_state.gd:120)
+          GDScript backtrace (most recent call first):
+              [0] _actor_defaults (res://scripts/presentation/view_state.gd:120)
+              [1] capture (res://scripts/presentation/view_state.gd:96)
+              [2] _sample (res://scripts/movement_dust_source_boundary_test.gd:14)
+              [3] _run (res://scripts/movement_dust_source_boundary_test.gd:53)
+MOVEMENT_DUST_SOURCE_BOUNDARY_TEST checks=35 failures=0 output=res://build/asset_review/pr15-runtime/movement-dust-source-boundary-433ae4780c8d4878862620071b75f747
+TEST_LOG=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/433ae4780c8d4878862620071b75f747/run.log

@@ -11,3 +11,5 @@
 先正向原SCOUT command_move/_process及原位置/path实际变化，planned schema/presenter两缺口负向保原HP/库存/log。再原SCOUT与reference自然清波SWEEP合法移动、ALERT敌人原sim_step、原ALERT pause/background/REPLAY pause/seek/foreign source、不 moving/haul/search/death中性、typed/corrupt/version/overflow/重复/cap/省电/资源释放。真实Window off/on/off原cue ROI与多yaw代表性样本，保存hash/全部目检，记录actual exits/E/S。显式摆位/授reference/直tick/clock复制与正常13波分开，后者只在FINAL同source接受。
 
 制作接口沿用R5的20骨/socket/3LOD/52语义；本cue不需要改骨/GLB/atlas/Blender/ArtSource/production manifest。主作者拥有VisualSnapshot/ViewState/presenter/纯reader/pool/共享测试。只读A3并行包只返回现存指标接口与采集提案，不启动engine或冒称实际性能；本片后A3 raw量测→必要单片优化→FINAL/fullsmoke/newnormal13/六新原件full1×2×→APK，耳听与设备最后。
+
+2026-10-04执行状态：生产00→3aa raw门→f9 malformed moving门，正式71 H35/132/130与Window184各0 actual0 E0/S0，21图全部hash/实际查看；原planned7/2、rawphase3/1、11135带S1和132/2错误foreignlog假设保全。详情见[实际报告](AMBUSH_PR15_MOVEMENT_DUST_20261004.md)。本片非normal13/全autoplay/A3；下一[A3实际采集](AMBUSH_PR15_A3_COLLECTION_PLAN_20261004.md)，制作与设备后置边界保持。
