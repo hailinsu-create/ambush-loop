@@ -1,0 +1,41 @@
+TEST_RUN_ID=4ed2417e7e174ce8ad2e2490fbbbf99e
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4ed2417e7e174ce8ad2e2490fbbbf99e/data
+TEST_ENTRY=tool_fx_visible_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4ed2417e7e174ce8ad2e2490fbbbf99e/data/godot/app_userdata/Ambush Loop run_id=4ed2417e7e174ce8ad2e2490fbbbf99e
+TOOL_FX_POOL_FAIL explicit source fixture uses authored open-ground cells
+
+================================================================
+handle_crash: Program crashed with signal 11
+Engine version: Godot Engine v4.7.2.stable.official (ed1daf0bf001b61586d9930840f2f1394092c079)
+Dumping the backtrace. Please include this when reporting the bug on: https://github.com/godotengine/godot/issues
+Load address: 400000
+
+[1] 7fbf25662df0 (libc.so.6+3fdf0) - /lib/x86_64-linux-gnu/libc.so.6(+0x3fdf0) [0x7fbf25662df0]
+[2] 46ada17 (main+42ada17) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x46ada17]
+[3] af6c08 (main+6f6c08) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0xaf6c08]
+[4] 9b9ec4 (main+5b9ec4) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x9b9ec4]
+[5] 9be642 (main+5be642) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x9be642]
+[6] 9d4363 (main+5d4363) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x9d4363]
+[7] 48f714b (main+44f714b) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x48f714b]
+[8] 468c83d (main+428c83d) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x468c83d]
+[9] 468cbc4 (main+428cbc4) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x468cbc4]
+[10] 497f6e4 (main+457f6e4) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x497f6e4]
+[11] 2b51224 (main+2751224) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x2b51224]
+[12] 5661f9 (main+1661f9) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x5661f9]
+[13] 42c157 (main+2c157) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x42c157]
+[14] 7fbf2564cca8 (libc.so.6+29ca8) - /lib/x86_64-linux-gnu/libc.so.6(+0x29ca8) [0x7fbf2564cca8]
+[15] 7fbf2564cd65 (libc.so.6+29d65) - /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x85) [0x7fbf2564cd65]
+[16] 48a6da (main+8a6da) - /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64() [0x48a6da]
+-- END OF C++ BACKTRACE --
+================================================================
+GDScript backtrace (most recent call first):
+    [0] _run (res://scripts/tool_fx_visible_test.gd:47)
+-- END OF GDSCRIPT BACKTRACE --
+================================================================
+ambush_loop/scripts/run_isolated_test.sh: line 49: 110579 Aborted                 "$godot_bin" "${engine_flags[@]}" --path "$launch_root" -s "res://scripts/$entry" 2>&1
+     110580 Done                    | tee "$run_dir/run.log"
