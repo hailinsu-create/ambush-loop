@@ -26,6 +26,7 @@ func _check(ok: bool, message: String) -> void:
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	root.get_node("AudioDirector").pause_for_background()
+	_metadata_contract("initial catalog")
 	var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://art/v2/actors_manifest.json"))
 	_check(doc.assets.size() == 22 and doc.source_commit == "29749157c5db064bfea626c3ed9d75d9a1791ece", "R5 runtime catalog has frozen provenance")
 	doc.assets = doc.assets.filter(func(row: Dictionary) -> bool: return row.category != "character")
@@ -106,10 +107,49 @@ func _run() -> void:
 	root.get_node("AudioDirector")._stop_music_hard()
 	studio.free()
 	Assets.release_materials()
+	_metadata_contract("released/reloaded catalog")
+	Assets.release_materials()
 	# Allow the Dummy audio driver's outstanding WAV mix to release its playback.
 	await create_timer(0.1).timeout
 	print("ASSET_LIBRARY_OK" if failures == 0 else "ASSET_LIBRARY_FAILED", " checks=", checks, " failures=", failures, " assets=15 lods=30")
 	quit(0 if failures == 0 else 1)
+
+
+func _metadata_contract(lifecycle: String) -> void:
+	# Expected metadata comes from independently read accepted artifacts, never
+	# from the accessor under test. Public nested copies must remain detached.
+	var actor_revisions := ["", "29749157c5db064bfea626c3ed9d75d9a1791ece", "194d9c41aaddbf014f05c70c14d40c09e6d8131b", "00b270863ba5a2cd5425abf2a31e78965c72ae45"]
+	for path in ["res://art/v2/manifest.json", "res://art/v2/actors_manifest.json", "res://art/environment_v2/manifest.json"]:
+		var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
+		var environment := path.contains("environment_v2/")
+		for original: Dictionary in manifest.assets:
+			var id: String = original.asset_id
+			_check(Assets.is_character_asset(id) == (original.get("category", "") == "character"), lifecycle + " category " + id)
+			_check(var_to_bytes(Assets.asset_record(id)) == var_to_bytes(original), lifecycle + " full accepted metadata " + id)
+			var revisions: Array = ["", Assets.ENVIRONMENT_REVISION] if environment else actor_revisions
+			for revision: String in revisions:
+				var expected: Array = original.get("legacy_r3_lods", original.lods) if revision == actor_revisions[3] else original.lods
+				for lod in expected.size():
+					var model: String = "res://" + expected[lod].path
+					_check(Assets.model_path(id, lod, revision) == model and Assets.has_asset(id, lod, revision), lifecycle + " exact accepted path %s/%d/%s" % [id, lod, revision])
+					_check(FileAccess.get_sha256(model) == expected[lod].sha256, lifecycle + " original resource bytes %s/%d/%s" % [id, lod, revision])
+				for lod in [-1, expected.size(), 999]:
+					_check(Assets.model_path(id, lod, revision).is_empty() and not Assets.has_asset(id, lod, revision), lifecycle + " refused LOD %s/%d/%s" % [id, lod, revision])
+			for revision: String in actor_revisions.slice(1) if environment else [Assets.ENVIRONMENT_REVISION, "unknown"]:
+				_check(Assets.model_path(id, 0, revision).is_empty() and not Assets.has_asset(id, 0, revision), lifecycle + " refused cross namespace/revision " + id)
+			var copy := Assets.asset_record(id)
+			copy.category = "caller-only"
+			copy.lods[0].path = "../caller-only.glb"
+			if not copy.get("animations", []).is_empty():
+				copy.animations[0].name = "caller-only"
+			for socket in copy.get("sockets", {}).values():
+				if socket is Array and not socket.is_empty():
+					socket[0] = 999.0
+				elif socket is Dictionary and socket.has("position_bone_local_m"):
+					socket.position_bone_local_m[0] = 999.0
+			_check(var_to_bytes(Assets.asset_record(id)) == var_to_bytes(original) and Assets.is_character_asset(id) == (original.get("category", "") == "character") and Assets.model_path(id) == "res://" + original.lods[0].path, lifecycle + " nested public mutation isolated " + id)
+	for id in ["", "unknown", "../main", "env_../main", "enemy_heavy"]:
+		_check(not Assets.is_character_asset(id) and Assets.asset_record(id).is_empty() and Assets.model_path(id).is_empty() and not Assets.has_asset(id), lifecycle + " unknown identity " + id)
 
 
 func _triangles(node: Node) -> int:

@@ -419,7 +419,7 @@ func _sync_actors() -> void:
 
 func _sync_body(proxy: Node3D, item: Dictionary, group: String) -> void:
 	var model_id: String = item.visual_model
-	var rigged: bool = frame.animation_supported and Assets.has_asset(model_id) and Assets.asset_record(model_id).get("category", "") == "character"
+	var rigged: bool = frame.animation_supported and Assets.has_asset(model_id) and Assets.is_character_asset(model_id)
 	var body := proxy.get_node_or_null("Body") as Node3D
 	if body != null and (body is ActorVisual) != rigged:
 		body.free()
