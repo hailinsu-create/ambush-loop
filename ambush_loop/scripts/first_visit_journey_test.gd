@@ -123,7 +123,7 @@ func _set_tool(wanted: int) -> bool:
 	return main.tool == wanted
 
 func _inventory() -> Array:
-	return main.operators.map(func(op) -> Dictionary: return {"id":op.op_id,"alive":op.alive,"hp":op.hp,"weapon":op.weapon_id,"pos":[op.global_position.x,op.global_position.y],"ammo":op.ammo,"start_ammo":op.start_ammo,"pool":op.ammo_pool.duplicate(true),"pack":op.pack.slots.duplicate(true),"mines":op.mines,"has_ammo_pack":op.has_ammo_pack,"ammo_pack_used":op.ammo_pack_used})
+	return main.operators.map(func(op) -> Dictionary: return {"id":op.op_id,"alive":op.alive,"hp":op.hp,"weapon":op.weapon_id,"pos":[op.global_position.x,op.global_position.y],"ammo":op.ammo,"start_ammo":op.start_ammo,"pool":op.ammo_pool.duplicate(true),"pack":op.pack.slots.duplicate(true),"mines":op.mines,"has_ammo_pack":op.has_ammo_pack,"ammo_pack_used":op.ammo_pack_used,"auto_grenade":op.auto_grenade})
 
 func _observe_fired(op: Node2D, target: Vector2) -> void:
 	# Signal arrives after the real shot decrements ammo, before original refill.
@@ -136,6 +136,26 @@ func _observe_repacked(op: Node2D) -> void:
 	var observation := {"level":main.level.level_id,"wave":main.raid.wave_index,"operator":op.op_id,"phase":main.phase,"tick":main.sim.tick,"last_real_shot":shot,"after":{"weapon":op.weapon_id,"ammo":op.ammo,"start_ammo":op.start_ammo,"has_ammo_pack":op.has_ammo_pack,"ammo_pack_used":op.ammo_pack_used},"actual_exhaustion_pack_refill":actual_pack,"latest_original_repack_event":repack_events.back() if not repack_events.is_empty() else {}}
 	ammo_repack_observations.append(observation)
 	journey_rows.append({"level":main.level.level_id,"action":"observe original automatic ammo repack signal","observation":observation})
+	if actual_pack:
+		var event: Dictionary = observation.latest_original_repack_event
+		_check(not event.is_empty() and event.actor_id == op.op_id and event.wave_id == shot.wave and event.tick == shot.tick and event.payload.get("repack_kind", "") == "same_weapon", "actual ammo-zero pack refill retains matching original repack event identity and weapon")
+		print("PLAYER_ACTUAL_AMMO_PACK_REFILL ", JSON.stringify(observation))
+	_write_journey()
+
+func _native_rifle_pack_strategy() -> bool:
+	await _key("1")
+	var before := _inventory()
+	await _key("i")
+	_check(main.backpack_panel.is_open(), "original native I opens SCOUT rifle backpack")
+	if not main.backpack_panel.is_open(): return false
+	if main.selected.auto_grenade: await _click(main.backpack_panel._auto_btn)
+	_check(not main.selected.auto_grenade, "original backpack button disables rifle automatic grenade in SCOUT")
+	await _modal_capture(sample + "_scout_backpack_auto_off")
+	await _click(main.backpack_panel._close_btn)
+	var ok: bool = not main.backpack_panel.is_open() and not main._modal_blocks_input() and not main.selected.auto_grenade
+	_check(ok, "original backpack close returns to SCOUT with chosen strategy retained")
+	journey_rows.append({"level":main.level.level_id,"action":"native SCOUT rifle pack and no automatic grenade strategy","before":before,"after":_inventory(),"scope":"Original pack/UI policy choice; no ammo/HP/weapon grants or forced shots. Scout collects SWEEP loot to preserve rifle remaining ammunition for a real exhaustion observation."})
+	return ok
 
 func _place_mine(cell: Vector2i) -> bool:
 	await _key("1")
@@ -173,7 +193,7 @@ func _sweep(plan: Array, wave: int) -> bool:
 		var amount: int = loot.ammo_amount
 		var at: Vector2 = loot.global_position
 		var ref: WeakRef = weakref(loot)
-		await _key("1")
+		await _key("3" if main.level.level_id == "railcut" else "1")
 		if not await _set_tool(main.Tool.DEPLOY): return false
 		var before_pickup := _inventory()
 		var event_start: int = main.battle_log.events.size()
@@ -187,7 +207,7 @@ func _sweep(plan: Array, wave: int) -> bool:
 		_check(not loot_events.is_empty(), "actual nearby collection records original loot events")
 		journey_rows.append({"level":main.level.level_id,"wave":wave,"action":"native SWEEP drop collected","kind":kind,"amount":amount,"target":str(at),"before":before_pickup,"after":_inventory(),"loot_events":loot_events,"status":main.status_label.text})
 		_write_journey()
-	if main.level.level_id in ["warehouse","pump"] and wave == 0:
+	if main.level.level_id in ["warehouse","pump","railcut"] and wave == 0:
 		var before_resupply := _inventory()
 		if not await _collect("ammo",1): return false
 		journey_rows.append({"level":main.level.level_id,"wave":wave,"action":"SWEEP original authored ammo resupply","before":before_resupply,"inventory":_inventory()})
@@ -337,9 +357,10 @@ func _mission(plan: Array) -> bool:
 	if id in ["depot","radio"] and not await _collect("mine",0): return false
 	if not await _deploy(plan): return false
 	if main.level.has_ammo_pack:
-		await _key("2")
+		await _key("1" if id == "railcut" else "2")
 		await _click(main.pack_button)
 		_check(main.selected.has_ammo_pack,"original native UI assigns authored single ammo pack")
+	if id == "railcut" and not await _native_rifle_pack_strategy(): return false
 	if id == "warehouse":
 		await _key("2")
 		await _key("f")
