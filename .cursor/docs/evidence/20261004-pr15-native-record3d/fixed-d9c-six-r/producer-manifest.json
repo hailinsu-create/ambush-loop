@@ -1,0 +1,854 @@
+{
+  "source_sha": "a05fa959093ef5b6733466091a04fbb46647f97b",
+  "game_tree": "af63a0ba77a8c9e9a84af6e39d1ee4f0087f639a",
+  "run_id": "7b50d8a62bfd48dc9f741796d2ce9e75",
+  "command": "DISPLAY=:115 AMBUSH_TEST_X11_DISPLAY=:115 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=a05fa959093ef5b6733466091a04fbb46647f97b AMBUSH_JOURNEY_SCOPE=all AMBUSH_JOURNEY_OUTPUT_LABEL=baseline-a05fa959093e bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-a05-godot first_visit_journey_test.gd --render",
+  "actual_exit": 0,
+  "checks": 1193,
+  "failures": 0,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "guard": true,
+  "waves": [
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        5,
+        50,
+        6
+      ],
+      "events": 13,
+      "level": "yard",
+      "tick": 450,
+      "wave": 0
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        10,
+        44,
+        6
+      ],
+      "events": 28,
+      "level": "yard",
+      "tick": 225,
+      "wave": 1
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        5,
+        20,
+        6
+      ],
+      "events": 18,
+      "level": "warehouse",
+      "tick": 339,
+      "wave": 0
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        10,
+        12,
+        6
+      ],
+      "events": 58,
+      "level": "warehouse",
+      "tick": 863,
+      "wave": 1
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        6,
+        20,
+        6
+      ],
+      "events": 14,
+      "level": "pump",
+      "tick": 253,
+      "wave": 0
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        11,
+        16,
+        6
+      ],
+      "events": 32,
+      "level": "pump",
+      "tick": 681,
+      "wave": 1
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        1,
+        50,
+        6
+      ],
+      "events": 21,
+      "level": "railcut",
+      "tick": 195,
+      "wave": 0
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        1,
+        49,
+        10
+      ],
+      "events": 42,
+      "level": "railcut",
+      "tick": 1149,
+      "wave": 1
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        2,
+        16,
+        6
+      ],
+      "events": 27,
+      "level": "depot",
+      "tick": 536,
+      "wave": 0
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        8,
+        16,
+        6
+      ],
+      "events": 38,
+      "level": "depot",
+      "tick": 102,
+      "wave": 1
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        1,
+        50,
+        4
+      ],
+      "events": 35,
+      "level": "radio",
+      "tick": 591,
+      "wave": 0
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        7,
+        50,
+        4
+      ],
+      "events": 46,
+      "level": "radio",
+      "tick": 123,
+      "wave": 1
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        4,
+        50,
+        4
+      ],
+      "events": 55,
+      "level": "radio",
+      "tick": 129,
+      "wave": 2
+    }
+  ],
+  "won": [
+    {
+      "action": "original WON/progress",
+      "events": 30,
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 10,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 15
+          },
+          "pos": [
+            591.948547363281,
+            209.169067382812
+          ],
+          "start_ammo": 5,
+          "weapon": "kar98k"
+        },
+        {
+          "alive": true,
+          "ammo": 44,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 77.8,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 50,
+              "kind": "mg42"
+            }
+          ],
+          "pool": {
+            "mg": 44
+          },
+          "pos": [
+            784.0,
+            240.0
+          ],
+          "start_ammo": 50,
+          "weapon": "mg42"
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "kar98k_zf"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            912.0,
+            528.0
+          ],
+          "start_ammo": 5,
+          "weapon": "kar98k_zf"
+        }
+      ],
+      "level": "yard",
+      "progress": "warehouse",
+      "terminal": 676,
+      "waves": 2
+    },
+    {
+      "action": "original WON/progress",
+      "events": 62,
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 10,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 49
+          },
+          "pos": [
+            1040.0,
+            400.0
+          ],
+          "start_ammo": 5,
+          "weapon": "kar98k"
+        },
+        {
+          "alive": true,
+          "ammo": 12,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": true,
+          "hp": 87.6,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 12
+          },
+          "pos": [
+            912.0,
+            464.0
+          ],
+          "start_ammo": 20,
+          "weapon": "bar"
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ],
+          "start_ammo": 5,
+          "weapon": "springfield"
+        }
+      ],
+      "level": "warehouse",
+      "progress": "pump",
+      "terminal": 1203,
+      "waves": 2
+    },
+    {
+      "action": "original WON/progress",
+      "events": 34,
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 11,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 78.7,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 8,
+              "kind": "m1_garand"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            },
+            {
+              "amount": 20,
+              "kind": "thompson"
+            }
+          ],
+          "pool": {
+            "rifle": 11
+          },
+          "pos": [
+            1040.0,
+            304.0
+          ],
+          "start_ammo": 8,
+          "weapon": "m1_garand"
+        },
+        {
+          "alive": true,
+          "ammo": 16,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": true,
+          "hp": 77.8,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 16
+          },
+          "pos": [
+            880.0,
+            400.0
+          ],
+          "start_ammo": 20,
+          "weapon": "bar"
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ],
+          "start_ammo": 5,
+          "weapon": "springfield"
+        }
+      ],
+      "level": "pump",
+      "progress": "railcut",
+      "terminal": 935,
+      "waves": 2
+    },
+    {
+      "action": "original WON/progress",
+      "events": 45,
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 1,
+          "ammo_pack_used": true,
+          "auto_grenade": false,
+          "has_ammo_pack": true,
+          "hp": 97.6,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 2,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 1
+          },
+          "pos": [
+            432.0,
+            400.0
+          ],
+          "start_ammo": 5,
+          "weapon": "kar98k"
+        },
+        {
+          "alive": true,
+          "ammo": 49,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 50,
+              "kind": "mg42"
+            }
+          ],
+          "pool": {
+            "mg": 49
+          },
+          "pos": [
+            1040.0,
+            368.0
+          ],
+          "start_ammo": 50,
+          "weapon": "mg42"
+        },
+        {
+          "alive": true,
+          "ammo": 10,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "kar98k_zf"
+            }
+          ],
+          "pool": {
+            "mg": 6,
+            "scout": 13
+          },
+          "pos": [
+            976.0,
+            176.0
+          ],
+          "start_ammo": 5,
+          "weapon": "kar98k_zf"
+        }
+      ],
+      "level": "railcut",
+      "progress": "depot",
+      "terminal": 1345,
+      "waves": 2
+    },
+    {
+      "action": "original WON/progress",
+      "events": 40,
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 8,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 1,
+          "mines": 1,
+          "pack": [
+            {
+              "amount": 8,
+              "kind": "m1_garand"
+            },
+            {
+              "amount": 2,
+              "kind": "grenade"
+            },
+            {
+              "amount": 1,
+              "kind": "mine"
+            }
+          ],
+          "pool": {
+            "rifle": 8
+          },
+          "pos": [
+            432.0,
+            176.0
+          ],
+          "start_ammo": 8,
+          "weapon": "m1_garand"
+        },
+        {
+          "alive": true,
+          "ammo": 16,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": true,
+          "hp": 100.0,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 16
+          },
+          "pos": [
+            1040.0,
+            368.0
+          ],
+          "start_ammo": 20,
+          "weapon": "bar"
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ],
+          "start_ammo": 5,
+          "weapon": "springfield"
+        }
+      ],
+      "level": "depot",
+      "progress": "radio",
+      "terminal": 639,
+      "waves": 2
+    },
+    {
+      "action": "original WON/progress",
+      "events": 57,
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 4,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            },
+            {
+              "amount": 2,
+              "kind": "decoy"
+            }
+          ],
+          "pool": {
+            "rifle": 4
+          },
+          "pos": [
+            432.0,
+            176.0
+          ],
+          "start_ammo": 5,
+          "weapon": "kar98k"
+        },
+        {
+          "alive": true,
+          "ammo": 50,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": true,
+          "hp": 100.0,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 50,
+              "kind": "mg42"
+            }
+          ],
+          "pool": {
+            "mg": 50
+          },
+          "pos": [
+            784.0,
+            208.0
+          ],
+          "start_ammo": 50,
+          "weapon": "mg42"
+        },
+        {
+          "alive": true,
+          "ammo": 4,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "has_ammo_pack": false,
+          "hp": 100.0,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 4
+          },
+          "pos": [
+            1040.0,
+            368.0
+          ],
+          "start_ammo": 5,
+          "weapon": "springfield"
+        }
+      ],
+      "level": "radio",
+      "progress": "radio",
+      "terminal": 845,
+      "waves": 3
+    }
+  ],
+  "records": [
+    {
+      "level": "yard",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75/native-player-yard-record.bin",
+      "bytes": 7400892,
+      "sha256": "4e27b9af88ad72199489ee11e987e1ab0e8200c47bc963e831f4c9eb1883c164",
+      "attempt": "ae19123d74887f21dfa1cd8d0c8aab22",
+      "playback_schema": 2,
+      "playback_terminal_tick": 4126,
+      "playback_frames": 553
+    },
+    {
+      "level": "warehouse",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75/native-player-warehouse-record.bin",
+      "bytes": 15956844,
+      "sha256": "cba97cc34446a384d1853a6b7c7224afbd32c5c456ee215fbf5afffdc0015cfd",
+      "attempt": "94179739d8d8d7d0314e7cc05d5e9647",
+      "playback_schema": 2,
+      "playback_terminal_tick": 8317,
+      "playback_frames": 1099
+    },
+    {
+      "level": "pump",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75/native-player-pump-record.bin",
+      "bytes": 9769396,
+      "sha256": "e0faee3000b85ae795737dfd7b39e510e4a0670560d40a0a01890e5acfba2b46",
+      "attempt": "ad7e19c4f9abdd5c887d8e25ed0443b9",
+      "playback_schema": 2,
+      "playback_terminal_tick": 5376,
+      "playback_frames": 720
+    },
+    {
+      "level": "railcut",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75/native-player-railcut-record.bin",
+      "bytes": 13658628,
+      "sha256": "19919a17225308894332b5cf9a849b4bc004792afa02f3c5e27d25b0f08f9628",
+      "attempt": "80476d518907a35e66f2d5dee84e2535",
+      "playback_schema": 2,
+      "playback_terminal_tick": 6640,
+      "playback_frames": 896
+    },
+    {
+      "level": "depot",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75/native-player-depot-record.bin",
+      "bytes": 11172104,
+      "sha256": "1720fe0dc83bfa2647d22c0dcc74b5bea35ac11db2ce25a141e3fb734d156d6d",
+      "attempt": "c04cdc0f03e4f5202c335d5b94233c37",
+      "playback_schema": 2,
+      "playback_terminal_tick": 6313,
+      "playback_frames": 825
+    },
+    {
+      "level": "radio",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75/native-player-radio-record.bin",
+      "bytes": 12985312,
+      "sha256": "69926921f672c941f66bc2885ba15e0484f37923e7addae0670047cae0653d22",
+      "attempt": "f3b17c147694ad05454fdca046cb41a7",
+      "playback_schema": 2,
+      "playback_terminal_tick": 6798,
+      "playback_frames": 898
+    }
+  ],
+  "credits": [
+    {
+      "action": "original native credits open and scroll",
+      "is_open": true,
+      "level": "radio",
+      "scroll_after": 81,
+      "scroll_before": 0
+    },
+    {
+      "action": "original native credits returned Title",
+      "level": "radio",
+      "record_sha256": "69926921f672c941f66bc2885ba15e0484f37923e7addae0670047cae0653d22",
+      "scene": "res://scenes/title.tscn"
+    }
+  ],
+  "capture_count": 92,
+  "native_input_count": 386,
+  "ammo_repack_observations": [
+    {
+      "actual_exhaustion_pack_refill": true,
+      "after": {
+        "ammo": 5,
+        "ammo_pack_used": true,
+        "has_ammo_pack": true,
+        "start_ammo": 5,
+        "weapon": "kar98k"
+      },
+      "last_real_shot": {
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "has_ammo_pack": true,
+        "level": "railcut",
+        "phase": 1,
+        "target": [
+          432.0,
+          152.833404541016
+        ],
+        "tick": 58,
+        "wave": 1,
+        "weapon": "kar98k"
+      },
+      "latest_original_repack_event": {
+        "actor_id": 1,
+        "attempt_id": "80476d518907a35e66f2d5dee84e2535",
+        "event_id": "80476d518907a35e66f2d5dee84e2535:1:28",
+        "payload": {
+          "animation_schema": 2,
+          "name": "\u7070\u72fc",
+          "reload_s": 1.15,
+          "repack_kind": "same_weapon",
+          "source_visual_weapon": "kar98k",
+          "visual_weapon": "kar98k"
+        },
+        "playback_schema": 2,
+        "playback_tick": 4749,
+        "position": "(432.0, 400.0)",
+        "schema": 2,
+        "seq": 28,
+        "target_id": -1,
+        "tick": 58,
+        "timeline_tick": 254,
+        "type": "repack",
+        "wave_id": 1
+      },
+      "level": "railcut",
+      "operator": 1,
+      "phase": 1,
+      "tick": 58,
+      "wave": 1
+    }
+  ],
+  "scope": "Isolated original title/main flow; fresh start or byte-identical pinned actual player save and native Continue. Real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest.",
+  "not_covered": "Full saved record3D, full3D FX/A3, ears/devices/final APK. Whole smoke failed independently; does not cancel this native run. glxinfo unavailable; no GPU metrics claim."
+}

@@ -27,3 +27,5 @@ a05整轮actual54 E1/S0：简报仍打开而fixture直接开journal，现有产�
 共享synthetic seam负例source **83f29577af1026177ebb668808deabf717c0a25c** H26/4actual1→生产最小箭头fix **d9c67256545a227c78bf5c3264818b8ad86b2c78** H26/0actual0 E0/S0。physical优先，缺physical时仅Left/Right logical fallback；±6、pause/clamp、modal gate/其他shortcut规则保持。新PCK真实short R4140/0 actual0 E0/S0，Right2971→2977/Left返回2971，原件/live/sim保持；短轮明确没whole，六原件完整R另轮正在跑。新PCK bytes23497556/SHA256 **b133a1c8aac17fb46ba1455ba1585768c65bb82fbca5d5c0131f7d8004a731ab**，import/export各actual0；consumer_d9c与producer_a05分列，不拿新绿补a05最终接受。
 
 因此六新原件可立即并行QA只读，六关实际3D整矩阵作者尚未通过。优先INITIAL原source/PCK/原件验证；箭头P2独立复验新d9c，不重开父端已闭cdb/392/旧railcut/其他历史scope。完整3D记录消费者、FX-A1/A2、A3优化、FINAL同source全门/新normal13/新六record、可追溯APK继续待完成；耳听/模拟器/真机按用户顺序后置。没有设备性能或全计划通过声明。Draft普通push，不merge/生产/height/G；网页GPT PLAN/REVIEW unavailable。
+
+最新接续：原六newrecord consumer_d9c长轮已自然结束29976/0actual0 E0/S0 records6、56hash/6view、whole2x各原0→terminal，完整命令与跨source限制见[新报告](AMBUSH_PR15_NATIVE_RECORD3D_20261004.md)。FX-A1a正式183同source H5607/0/boundary45/0各actual0另见[源接口报告](AMBUSH_PR15_SHOT_FX_SOURCE_20261004.md)，不代3D池/FINAL。原运行中描述均属历史快照，当前两个源H与该长轮已完成，自有116已关闭actual0；旧失败仍保留。
