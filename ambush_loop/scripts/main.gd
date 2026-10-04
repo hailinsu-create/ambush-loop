@@ -4614,7 +4614,7 @@ func _build_echo_callout() -> void:
 	if not level.route_cells.has("echo"):
 		return
 	var pos := grid.cell_to_world_center(Vector2i(24, 12)) + Vector2(8, -22)
-	echo_callout = _make_map_callout("EchoCallout", "回波 5.2s", pos, Color(0.72, 0.58, 0.28))
+	echo_callout = _make_map_callout("EchoCallout", "全关教学预览 · 回波 5.2s", pos, Color(0.72, 0.58, 0.28))
 
 
 func echo_callout_visible() -> bool:
@@ -4844,6 +4844,8 @@ func _refresh_spawn_teach() -> void:
 		text = str(level.beat_text).strip_edges()
 		if text == "" and not level.spawn_teaching.is_empty():
 			text = str(level.spawn_teaching[0]).strip_edges()
+		if text != "":
+			text = "全关教学预览 · " + text
 	spawn_teach_label.visible = text != "" and not _want_touch()
 	spawn_teach_label.text = text
 	_refresh_intel_chip()
@@ -6312,7 +6314,7 @@ func _fix_one_line() -> String:
 	if level != null:
 		var authored := str(level.fix_one).strip_edges()
 		if authored != "":
-			return authored
+			return "全关教学建议 · " + authored.trim_prefix("改一处就能赢：")
 	return ""
 
 
@@ -6448,7 +6450,7 @@ func _show_fail_result() -> void:
 	if hook != "":
 		dossier_bits.append(hook)
 	if chatter != "":
-		dossier_bits.append("截获 · %s" % chatter)
+		dossier_bits.append("关卡背景 · %s" % chatter)
 	if cover_line != "":
 		dossier_bits.append(cover_line)
 	if trap_miss != "":
@@ -7787,7 +7789,7 @@ func _route_chip_label(route: String, base: String) -> String:
 	if level != null and level.has_method("first_route_delay"):
 		var delay := float(level.first_route_delay(route))
 		if delay >= 1.0:
-			lab = "%s %.1fs" % [base, delay]
+			lab = "全关预览 · %s %.1fs" % [base, delay]
 	if level != null and level.has_method("teaching_note_for"):
 		var note := str(level.teaching_note_for(route))
 		if note != "":
