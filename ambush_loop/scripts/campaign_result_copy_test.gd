@@ -87,6 +87,15 @@ func _assert_copy(won: bool) -> void:
 func _domain_case(id: String, wins: bool, mine: bool, mode: String) -> void:
 	sample = "facts_" + mode + "_" + id + ("_won" if wins else "_failed") + ("_mine" if mine else "_no_mine")
 	main._load_level(id,false,false)
+	await process_frame
+	if wins and not mine:
+		# Reference grants use this map's authored firearms, like normal crates.
+		# Generic role guns without utilities cannot guarantee these terminals.
+		for index in 3:
+			for stash in main.raid_stashes:
+				if main.WeaponCatalogScript.family_of(stash.kind) == ["rifle","mg","scout"][index]:
+					main.operators[index].receive_item(stash.kind,stash.amount)
+					break
 	main.raid_prepare_ref([1,4,5] if wins else [], ([270.0,270.0,180.0] if id == "depot" else [270.0,90.0,270.0]) if wins else [], {"grenades":0,"mines":1 if mine else 0})
 	if mine:
 		main._select_op(0)
