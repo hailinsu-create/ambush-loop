@@ -45,11 +45,14 @@ func _reader_cases(frame: Dictionary, event: Dictionary) -> void:
 	var repeated := true
 	for index in 100: repeated = repeated and reader.sample(frame,event)==actual
 	_check(repeated and var_to_bytes([frame,event])==retained,"repeat reads/seek-back return original result without spawning/upgrading or mutating frames/events")
-	for row in [["shot_fx_schema",0],["shot_fx_schema",99],["shot_fx_playback_schema",1],["shot_fx_playback_schema",99],["shot_fx_source_token",-1],["playback_tick",-1],["playback_tick",float(frame.playback_tick)],["attempt_id","foreign"],["wave_id",int(frame.wave_id)+1],["level_id","radio"],["recorded_phase",0],["recorded_phase",2],["recorded_phase",3],["animation_supported",false],["actor_asset_revision","unknown"],["animation_schema",99],["visual_unsupported",true]]:
+	for row in [["shot_fx_schema",0],["shot_fx_schema",99],["shot_fx_playback_schema",1],["shot_fx_playback_schema",99],["shot_fx_source_token",0],["playback_tick",-1],["playback_tick",float(frame.playback_tick)],["attempt_id","foreign"],["wave_id",int(frame.wave_id)+1],["wave_count",0],["level_id","radio"],["recorded_phase",0],["recorded_phase",2],["recorded_phase",3],["animation_supported",false],["actor_asset_revision","unknown"],["animation_schema",99],["visual_unsupported",true]]:
 		_bad(frame,event,"frame",row[0],row[1])
 	for row in [["schema",1],["schema",99],["playback_schema",1],["playback_schema",99],["event_id","foreign"],["actor_id",999],["target_id",999],["type","kill"],["position",Vector2.INF]]:
 		_bad(frame,event,"event",row[0],row[1])
 	for key in ["schema","playback_schema"]: _bad(frame,event,"event",key,null,true)
+	_bad(frame,event,"event","wave_id",float(event.wave_id))
+	_bad(frame,event,"fx","wave_id",float(event.wave_id))
+	_bad(frame,event,"fx","seq",float(event.seq))
 	for row in [["schema",99],["confirmed",false],["confirmed","true"],["level_id","radio"],["attempt_id","foreign"],["wave_id",99],["seq",99],["event_id","foreign"],["clock_domain","simulation"],["playback_schema",1],["clock_tick",int(event.playback_tick)+1],["source_group","sentries"],["source_id",999],["target_group","ops"],["target_id",999],["source_pos",Vector2.INF],["target_pos",Vector2.INF],["source_facing",NAN],["actor_asset_revision","unknown"],["animation_schema",99],["visual_model","unknown"],["visual_weapon","unknown"],["projectile",false],["damage",-1.0],["damage",INF],["hp_before",INF],["hp_after",INF],["hp_after",float(event.payload.fx.hp_after)+1.0],["pose",{}]]:
 		_bad(frame,event,"fx",row[0],row[1])
 	for row in [["action","unknown"],["seconds",NAN],["seconds",-1.0],["upper_action","unknown"],["upper_seconds",INF],["base_seconds",-1.0],["visual_facing",NAN]]:

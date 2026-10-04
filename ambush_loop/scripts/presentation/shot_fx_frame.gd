@@ -24,7 +24,8 @@ static func active(frame: Dictionary) -> Array:
 
 
 static func sample(frame: Dictionary, event: Dictionary) -> Dictionary:
-	if not _equal_int(frame,"shot_fx_schema",FORMAT) or not _equal_int(frame,"shot_fx_playback_schema",2) or not _positive_int(frame,"shot_fx_source_token"):
+	# RefCounted instance IDs can be negative. The token is opaque, not a fact.
+	if not _equal_int(frame,"shot_fx_schema",FORMAT) or not _equal_int(frame,"shot_fx_playback_schema",2) or typeof(frame.get("shot_fx_source_token")) != TYPE_INT or frame.shot_fx_source_token == 0:
 		return {}
 	if not _equal_int(frame,"schema",BattleLog.SCHEMA_VERSION) or not _equal_int(frame,"recorded_phase",1) or not _equal_int(frame,"animation_schema",ActorPose.FORMAT):
 		return {}
@@ -32,11 +33,13 @@ static func sample(frame: Dictionary, event: Dictionary) -> Dictionary:
 		return {}
 	if not _nonnegative_int(frame,"playback_tick") or not _nonnegative_int(frame,"wave_id") or typeof(frame.get("attempt_id")) != TYPE_STRING or frame.attempt_id.is_empty() or frame.get("level_id") not in LEVELS:
 		return {}
+	if not _positive_int(frame,"wave_count") or frame.wave_id >= frame.wave_count:
+		return {}
 	if not _equal_int(event,"schema",BattleLog.SCHEMA_VERSION) or not _equal_int(event,"playback_schema",2) or event.get("type") not in ["fire","return_fire"]:
 		return {}
 	if not _nonnegative_int(event,"seq") or not _nonnegative_int(event,"tick") or not _nonnegative_int(event,"timeline_tick") or not _nonnegative_int(event,"playback_tick") or not _positive_int(event,"actor_id") or not _positive_int(event,"target_id"):
 		return {}
-	if event.get("attempt_id") != frame.attempt_id or event.get("wave_id") != frame.wave_id or event.get("event_id") != "%s:%d:%d" % [frame.attempt_id,frame.wave_id,event.seq]:
+	if typeof(event.get("attempt_id")) != TYPE_STRING or typeof(event.get("event_id")) != TYPE_STRING or event.attempt_id != frame.attempt_id or not _equal_int(event,"wave_id",frame.wave_id) or event.event_id != "%s:%d:%d" % [frame.attempt_id,frame.wave_id,event.seq]:
 		return {}
 	var age: int = frame.playback_tick-event.playback_tick
 	if age < 0 or age >= LIFETIME_TICKS:
@@ -47,8 +50,10 @@ static func sample(frame: Dictionary, event: Dictionary) -> Dictionary:
 	var fx: Dictionary = payload.fx
 	if not _equal_int(fx,"schema",FORMAT) or not _equal_bool(fx,"confirmed",true) or not _equal_bool(fx,"projectile",true) or not _equal_int(fx,"playback_schema",2) or fx.get("clock_domain") != "playback" or not _equal_int(fx,"clock_tick",event.playback_tick):
 		return {}
-	for key in ["event_id","attempt_id","wave_id","seq"]:
-		if fx.get(key) != event.get(key): return {}
+	for key in ["event_id","attempt_id"]:
+		if typeof(fx.get(key)) != TYPE_STRING or fx.get(key) != event.get(key): return {}
+	for key in ["wave_id","seq"]:
+		if not _equal_int(fx,key,event[key]): return {}
 	var source_group := "ops" if event.type == "fire" else "enemies"
 	var target_group := "enemies" if source_group == "ops" else "ops"
 	if fx.get("level_id") != frame.level_id or fx.get("source_group") != source_group or fx.get("target_group") != target_group or not _equal_int(fx,"source_id",event.actor_id) or not _equal_int(fx,"target_id",event.target_id):
