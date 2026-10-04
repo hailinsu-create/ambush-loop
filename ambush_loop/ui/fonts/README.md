@@ -6,3 +6,5 @@ Source: https://github.com/notofonts/noto-cjk
 License: SIL Open Font License 1.1, included as `OFL.txt`.
 
 The Web platform cannot load the system Chinese fonts used by the native UI. NightOps uses this bundled face as a Web fallback, and the default Web GUI font uses it for controls outside that theme. Native font selection stays in the existing system-font path. The export evidence records the source, face, transformation, version and file hashes.
+
+`DejaVuSans.ttf` is the complete, unchanged DejaVu Sans 2.37 face (Bitstream Vera license; DejaVu changes in public domain), with its notice in `DejaVu-LICENSE.txt`. It covers UI symbols such as ↺/↻/☷/✕ absent from the CJK face. `web_ui_font.tres` provides the same symbol fallback for default controls.
