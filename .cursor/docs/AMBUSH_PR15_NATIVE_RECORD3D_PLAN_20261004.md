@@ -9,3 +9,5 @@ Render真实原生按钮进入REPLAY、2x与1x短段实际engine回调/速率、
 开发失败全保留：检查器parse1类型推断失败actual1；独立b62副本初始H停在等待render-only draw信号，作者只SIGTERM自有prototype actual143/无完整结果；随后覆盖headless draw后实际yard H5022/4 actual1，whole2x实际到原4126/259callbacks，但四条seek expected敌数/shot_cd误差不能拿子段称整绿。原件只读核查：first ALERT tick2657 frame334/335共clock，frame335已有enemy1；next ALERT3740 frame491/492共clock，shot_cd0.52→0.50333；源码原last-frame-wins解释四fail。只修测试oracle，保留记录/ReplayPlayer/生产代码，不称生产缺陷。正式版仍待执行/封source/log/exit/图，不能把临时副本开发结果拼a05 candidate。
 
 依赖/所有权：主集成唯一作者共享测试/main/presenter/ViewState/replay/loader；R5/制作源/GLB/Blender/atlas/生产manifest不改、不跑制作器。父端固定只读QA可并行，优先6.1-sol不自行astra；不重开闭cdb/392/旧railcut。首成功FX源审计只建议，不计实现/验证；之后FX-A1/A2/A3→最终source同候选全门/正常13→可追溯APK。耳听设备后置、不merge/生产/height/G；网页GPT PLAN/REVIEW unavailable。
+
+接续实际：a05原R4404/1与diag4140/2actual1保留，真正native logical arrow physical0使原physical-only REPLAY入口失败。共享H83f26/4→d9c26/0；fixed d9c新PCK/同9aceae检查器/原a05yard真实short4140/0actual0 E0/S0，Right2971→2977/Left返回2971。short不含whole。当前完整六原件由固定consumer_d9c、producer_a05分别显式加载，同9aceae检查器/新Guard运行；source/hash/bytes不可写。结果待实际封存，INITIAL正常a05与FINAL FX保持独立。
