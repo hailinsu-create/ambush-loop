@@ -6346,12 +6346,13 @@ func _announce_payoff(kind: String, payload: Dictionary = {}, pos: Vector2 = Vec
 
 
 func _sync_payoff_timelines() -> void:
-	var marks: Array = PayoffCopy.timeline_marks(battle_log)
+	var marks: Array = PayoffCopy.timeline_marks(battle_log, battle_log.wave_id, battle_log.attempt_id) if phase == Phase.WATCHING else []
 	if watch_timeline != null and is_instance_valid(watch_timeline):
 		watch_timeline.set("payoff_marks", marks)
 		watch_timeline.queue_redraw()
 	if route_timeline != null and is_instance_valid(route_timeline) and route_timeline.visible:
-		route_timeline.set("payoff_marks", marks)
+		# This strip is the teaching total-table preview, not a battle clock.
+		route_timeline.set("payoff_marks", [])
 		route_timeline.queue_redraw()
 
 
@@ -6948,7 +6949,8 @@ func _refresh_route_timeline(show: bool) -> void:
 	if level.has_method("route_spawn_marks"):
 		marks = level.route_spawn_marks()
 	route_timeline.set("marks", marks)
-	route_timeline.set("payoff_marks", PayoffCopy.timeline_marks(battle_log))
+	route_timeline.set("context_label", "路线时间轴 · 全关预览（教学总表）")
+	route_timeline.set("payoff_marks", [])
 	var tmax := 1.0
 	for m in marks:
 		tmax = maxf(tmax, float(m.get("delay", 0.0)) + 0.5)
@@ -6996,11 +6998,24 @@ func _refresh_watch_timeline() -> void:
 		watch_timeline.offset_top = 76.0
 		watch_timeline.offset_bottom = 120.0
 	watch_timeline.visible = show
+	if not show:
+		watch_timeline.set("marks", [])
+		watch_timeline.set("payoff_marks", [])
+		watch_timeline.set("context_label", "")
+		watch_timeline.set_live(false)
+		watch_timeline.queue_redraw()
+		_refresh_watch_wave_chip()
+		return
 	var marks: Array = []
-	if level != null and level.has_method("route_spawn_marks"):
-		marks = level.route_spawn_marks()
+	var specs: Array = pending_spawns if phase == Phase.WATCHING else (raid.current_spawns(level) if raid else level.spawn_schedule)
+	for spec in specs:
+		var mark := {"id":int(spec.get("id", -1)), "route":str(spec.get("route", "main")), "delay":float(spec.get("delay", 0.0))}
+		if phase == Phase.WATCHING:
+			mark["spawned"] = bool(spec.get("spawned", false))
+		marks.append(mark)
 	watch_timeline.set("marks", marks)
-	watch_timeline.set("payoff_marks", PayoffCopy.timeline_marks(battle_log) if phase == Phase.WATCHING else [])
+	watch_timeline.set("context_label", "路线时间轴 · 第%d/%d波 · %s" % [wave_index()+1, wave_total(), "观战" if phase == Phase.WATCHING else "下一波"])
+	watch_timeline.set("payoff_marks", PayoffCopy.timeline_marks(battle_log, battle_log.wave_id, battle_log.attempt_id) if phase == Phase.WATCHING else [])
 	var tmax := 1.0
 	for m in marks:
 		tmax = maxf(tmax, float(m.get("delay", 0.0)) + 0.5)

@@ -174,11 +174,17 @@ static func timeline_tag(kind: String) -> String:
 			return "★"
 
 
-static func timeline_marks(log: Variant) -> Array:
+static func timeline_marks(log: Variant, wave_id: int = -1, attempt_id: String = "") -> Array:
 	var out: Array = []
 	if log == null or not log.has_method("first_of_type"):
 		return out
-	var first_fire: Dictionary = log.first_of_type("fire")
+	# A live local-clock strip uses only this stored attempt/wave. Filtering
+	# never rewrites identities or gives legacy events a new run owner.
+	var events: Array = log.events
+	if wave_id >= 0:
+		events = events.filter(func(event: Dictionary) -> bool:
+			return int(event.get("wave_id", 0)) == wave_id and (attempt_id == "" or str(event.get("attempt_id", "")) == attempt_id))
+	var first_fire: Dictionary = _first_event(events, "fire")
 	if not first_fire.is_empty():
 		var nm := str(first_fire.get("payload", {}).get("name", "")).strip_edges()
 		out.append({
@@ -186,11 +192,11 @@ static func timeline_marks(log: Variant) -> Array:
 			"kind": "first_fire",
 			"label": "枪" if nm == "" else nm.substr(0, 1),
 		})
-	var combo_ticks: Array = _combo_peak_ticks(log)
+	var combo_ticks: Array = _combo_peak_ticks(events)
 	for t in combo_ticks:
 		out.append({"t": float(t) / 60.0, "kind": "combo", "label": "连"})
 	for typ in ["trip", "barrel", "ambush_armed", "repack", "route_choice"]:
-		var ev: Dictionary = log.first_of_type(str(typ))
+		var ev: Dictionary = _first_event(events, str(typ))
 		if ev.is_empty():
 			continue
 		var kind: String = str(typ)
@@ -202,6 +208,13 @@ static func timeline_marks(log: Variant) -> Array:
 			"label": timeline_tag(kind),
 		})
 	return out
+
+
+static func _first_event(events: Array, type_name: String) -> Dictionary:
+	for event in events:
+		if str(event.get("type", "")) == type_name:
+			return event
+	return {}
 
 
 static func highlight_result_line(level: Variant, log: Variant, won: bool) -> String:
@@ -260,14 +273,12 @@ static func max_kill_combo(log: Variant, window_ticks: int = -1) -> int:
 	return 0
 
 
-static func _combo_peak_ticks(log: Variant) -> Array:
+static func _combo_peak_ticks(events: Array) -> Array:
 	var ticks: Array = []
-	if log == null:
-		return ticks
 	var win := combo_window_ticks()
 	var run := 0
 	var last := -99999
-	for raw in log.events:
+	for raw in events:
 		var ev: Dictionary = raw
 		if str(ev.get("type", "")) != "kill":
 			continue
