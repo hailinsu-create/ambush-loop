@@ -164,6 +164,7 @@ func _battle(main: Node, rotate: bool, fps: int, speed: float) -> Dictionary:
 		frames += 1
 	_check(main.phase == main.Phase.SWEEP, "reference wave clears")
 	var events: Array = main.battle_log.events.duplicate(true)
+	_check(events.all(func(ev: Dictionary) -> bool: return _fx_identity_matches(ev)), "original FX identities bind to their recording event before normalization")
 	# Independent recordings have independent identities, but identical combat.
 	for ev in events:
 		ev.erase("attempt_id")
@@ -173,8 +174,16 @@ func _battle(main: Node, rotate: bool, fps: int, speed: float) -> Dictionary:
 	_check(not scope.is_empty() and main.battle_log.snapshots.all(func(snap: Dictionary) -> bool: return str(snap.data.get("utility_scope_id", "")) == scope), "real wave preserves its independent utility recording identity")
 	# All gameplay/visual values still participate in cross-FPS/2x equivalence.
 	final.erase("utility_scope_id")
+	_normalize_identity(events, scope, main.battle_log.attempt_id)
 	_normalize_identity(final, scope, main.battle_log.attempt_id)
 	return {"phase": int(main.phase), "tick": main.sim.tick, "state": final, "events": events}
+
+
+func _fx_identity_matches(event: Dictionary) -> bool:
+	var fx: Dictionary = event.get("payload", {}).get("fx", {})
+	if fx.is_empty():
+		return true
+	return fx.get("attempt_id") == event.get("attempt_id") and fx.get("wave_id") == event.get("wave_id") and fx.get("seq") == event.get("seq") and fx.get("event_id") == event.get("event_id")
 
 
 func _normalize_identity(value: Variant, scope: String, attempt: String) -> void:

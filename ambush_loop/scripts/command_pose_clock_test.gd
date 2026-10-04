@@ -201,8 +201,13 @@ func _run() -> void:
 		var recording: Dictionary = main.battle_log.snapshots.back().duplicate(true)
 		_check(main.phase == main.Phase.WON and recording.data.event_pose_schema == 1 and recording.data.pose_clock_domain == "command", "normal extraction saves the command clock/age in its actual record")
 		main._on_replay_pressed()
+		_check(main.replay.scrub_tick == 0 and main.replay.playing, "normal replay entry starts playback at the beginning")
+		# The app plays from the beginning. Explicitly seek the saved terminal
+		# command frame before checking its second-wave actor and bones.
+		main.replay.set_tick(main.replay.max_tick())
+		main._apply_replay_scrub()
 		view.refresh()
-		_check(_bones(view.actors[final_key].get_node("Body") as Actor) == expected, "normal app terminal replay reproduces the exact saved command bones")
+		_check(_bones(view.actors[final_key].get_node("Body") as Actor) == expected, "normal app terminal seek reproduces the exact saved command bones")
 		main._pose_command_clock_s += 100.0
 		main._night_timer += 100.0
 		main._apply_replay_scrub()
