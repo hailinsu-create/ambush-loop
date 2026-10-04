@@ -28,3 +28,5 @@ source/reference与边界均明确授枪/snap/directtick/vacuum/直接API fixtur
 下一A1b只读R5 muzzle marker+保存原pose取样、muzzle/tracer/真实HP差impact有限池；严格source-clock/phase与old/missing/future中性、ALERT pause/seek/repeat/换源/reset/1x2x/LOD、实际R图/行为不变，不能从现body换后枪补旧shot。A2→A3实际指标/优化→FINAL同source全门/newnormal13/new6record3D→可追溯APK继续待。INITIAL正常a05/六newrecord只读消费另列，不拼183 FX-A1a成FINAL。
 
 所有权接口：main/replay/sharedtests唯一主集成作者；R5source29749157c5db064bfea626c3ed9d75d9a1791ece/交付ebedb829e3263abbeb6dd266905f24a3869fa281、20骨/socket/3LOD/52语义保持；制作源/build_yard_kit/GLB/Blender/atlas/生产asset manifest未编辑/重跑，未全并WIP。父端旧closed scope不重开；Draft普通push，不merge/生产/height/G；耳听设备后置，网页GPT PLAN/REVIEW unavailable。
+
+2026-10-04 来源边界后续替代：父端发现source183未校验真实shooter ID；作者50b exact负H3/1 actual1，fixed9f最小TYPE_INT/group-specific身份门后H3/0、合法boundary45/0、六关source5607/0均actual0 E0/S0，详[独立修复报告](AMBUSH_PR15_SHOT_FX_SHOOTER_20261004.md)。本页183原计数保留，只属原覆盖，不能称曾覆盖此错配；新9f也不代3D池/独立FX QA或FINAL。
