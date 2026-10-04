@@ -95,6 +95,12 @@ func _valid_source() -> bool:
 		return false
 	if str(_host.level.level_id) != _level_id or _log.attempt_id != _attempt_id or _log.wave_id != _wave_id:
 		return false
+	if not is_instance_valid(_shooter):
+		return false
+	var shooter_id: Variant = _shooter.get("op_id" if _group == "ops" else "label_id")
+	var actor_id: Variant = _event.get("actor_id")
+	if typeof(shooter_id) != TYPE_INT or typeof(actor_id) != TYPE_INT or actor_id != shooter_id:
+		return false
 	var seq := int(_event.get("seq", -1))
 	if seq < 0 or seq >= _log.events.size() or _log.events[seq] != _event:
 		return false
