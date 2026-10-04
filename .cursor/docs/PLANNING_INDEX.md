@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [P2 escape坏context计划](AMBUSH_PR15_ESCAPE_CONTEXT_BOUNDARY_PLAN_20261004.md) | 父端877 min3/2/R49/2actual1 E0/S0：radio不存在wave3却确认第4波、Δsim927却Δplayback0确认。优先原877 raw只读复现→saved level wave_count上界/明确playback2 Δplay>=Δsim，不硬等原合法928或固定+1，旧8参/缺未知schema中性、原事件/真实第三波/retry保持。fcf静态教学limited QA29/0及R40/0另列，四图看两包封存，不拼INITIAL/FX。 |
 | [INITIAL六新原件实际3D报告](AMBUSH_PR15_NATIVE_RECORD3D_20261004.md) | 原session直接收尾、未重启：producer_a05 / consumer_d9c固定官方PCK+9aceae外部fixture，整轮29976/0actual0 E0/S0 records6；whole2x各原0→terminal、76seek/78native、56图hash/看6、原raw/source/live/sim保持。完整1x/appfocus-native/oldschema1/FX-A1b/A2/A3/FINAL全门未验；旧a05 R4404/1/diag4140/2、smoke54/62不取消。自有:116 exact关闭actual0。 |
 | [安全点接续checkpoint](AMBUSH_PR15_SAFE_RESUME_CHECKPOINT_20261004.md) | 父端要求本turn有界交接：source f3a（仅FX-A1a计划/test）已推；INITIAL a05/4d0f、教学fcf/a3df、escape877/4b82、smoke8906/2d4b、箭头d9c/5766完整固定SHA与实际结果。保全六新3D长轮session46384/PID100120、source负例f3a已自然结束4783/103actual1 E0/S0并封（缺planned FX，非新生产bug）；Xorg:116/PID98510与长轮保全，续任务poll46384不重跑。fullsmoke/六原件整矩阵/FINALFX-A3/APK未完，旧scope不重开。 |
 | [FX-A1a成功源接口报告](AMBUSH_PR15_SHOT_FX_SOURCE_20261004.md) / [计划](AMBUSH_PR15_SHOT_FX_DESCRIPTOR_PLAN_20261004.md) | 正式183：负f3a4783/103actual1→same candidate source5607/0、boundary45/0各actual0 E0/S0；103真实reference shots/原事件identity-clock/R5 pose/末弹pack-pistol/刀/actual HP/false-cooldown/no-context/old-wave/foreign-log，六原terminal/count/type-local-tick fingerprint保持。仅payload.fx schema1 source，未实现3D池/视觉，不拼INITIAL或FINAL；后A1b/A2/A3，全smoke54/62仍保留。 |
