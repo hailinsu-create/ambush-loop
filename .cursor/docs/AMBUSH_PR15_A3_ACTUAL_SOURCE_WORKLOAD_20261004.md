@@ -1,5 +1,7 @@
 # PR15 A3实际来源workload与分段门
 
+当前状态更新（2026-10-04）：4a8采样窗修复已在冻结a90实际warehouse预检4064/0 actual0后，同source完成独立全六关新轮23559/0 actual0 E0/S0，START19:06:43/naturalEND19:54:21UTC，strict离线0、13波/10047raw/7782accepted/650segments/576代表性历史窗口/60原PNG全核并逐张查看。正式结果及原件见[六关A3实际报告](AMBUSH_PR15_A3_FORMAL_RESULTS_20261004.md)。下面是保留的计划与失败演进历史；“尚未运行/START”等旧阶段描述不再是当前状态。生产优化、FINAL、全资产、APK仍待，原失败不撤销。
+
 2026-10-04，接Window前置交付c80d3f17a0d37cdb0049c48cf3f97a319106e1da（37/0、168/0/16windows各actual0 E0/S0；仅stationary仪器控制）。新候选7c46264165861bf5b2abea380800f1b041ffa297仅新增test-only a3_campaign_metrics_test.gd与双Guard exactentry/Dummy allowlist。尚未Godot运行，bash-n/diffcheck actual0；PS1未运行。生产/asset source全部保持。source-only API map见前置证据，不能代新workload结果。
 
 先AMBUSH_A3_LEVEL=yard运行有界原Window集成预检、核原source/帧/camera/分段/PNG，不称六关A3已通过。候选若失败保原source/log/raw/exit后独立修；只在预检实际通过后同固定candidate/source/engine/warm proof运行正式all scope。每次唯一owned display/单engine，明确START/END与actualsource/config/support；原67不重跑，不并行另一perf/QA engine。
