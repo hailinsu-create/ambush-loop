@@ -53,3 +53,5 @@ P2独立QA待；此片不证明native input、新正常13波、完整录制/旧s
 下一主集成片 FX-A1b：只读保存R5 pose/枪与muzzle socket采样、有限muzzle/tracer/actualhit池、绑定playback时间，补pause/seek/source/旧missing-neutral与真实R。随后A2工具FX→A3实际指标/优化→最终固定source全门/正常13波/新六record/fullsmoke→可追溯APK。独立并行包：父端现在可只读QA f0e此P2，不需等待全FX/APK；后实际FX帧供资产工作者艺术评审、固定FX候选供独立A3量测。
 
 资产接口保持 R5 source29749157c5db064bfea626c3ed9d75d9a1791ece / deliveryebedb829e3263abbeb6dd266905f24a3869fa281，20骨/socket/3LOD/52语义。主作者main/input/HUD/presenter/ViewState/replay/runtime-loader/shared tests唯一写者；ArtSource/v2/build_yard_kit.py、atlas、GLB/Blender、生产asset manifest由独立资产作者拥有，未编辑/重跑/全并WIP。Draft普通push，不merge/发布/height/G；网页GPT PLAN/REVIEW unavailable。
+
+2026-10-04父端独立QA最新限定关闭f0ed context：父端报告同合法版本旧877最小3/2 actual1→f0最小3/0 actual0、原3D脚本49/2→49/0，117边界/八参及27冷3D坏ctx/foreign-yard-return-radio均actual0 E0/S0；7图已看、两包all-read及旧12 hash保持。合法927/928与额外tick确认，wave4/stalled playback中性，retry历史第三波不借live。此为父端报告归因，非作者新增运行；无newcontextP1/P2，本scope保持关闭。FX183/reader/visualpool及FINAL不在该QA范围，不相加。
