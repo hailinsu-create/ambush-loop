@@ -38,6 +38,7 @@ func _run() -> void:
 	_check(not main.grid.is_blocked(25,12) and not main.grid.is_blocked(25,17),"explicit source fixture uses authored open-ground cells")
 	var grenade:=_throw(owner,destination)
 	await _blast([grenade])
+	var actual_spent:=grenade.spent() # Original removal queues this tool for deletion.
 	main._on_pause_pressed() # Original paused ALERT; main automatic process already disabled.
 	for index in 30:await process_frame # Settle original presentation tweens before off controls.
 	main._update_hud()
@@ -45,7 +46,7 @@ func _run() -> void:
 	pool=main.presentation_3d.get_node("ToolFx")
 	pool.update_frame(frame,false) # Exercise the original presenter reader and pool path.
 	var actual: Array=_diag().active
-	_check(grenade.spent() and actual.size()==1 and frame.tool_fx.front().victims.is_empty() and main.sim.paused,"real original empty blast confirmed and original ALERT pause reached")
+	_check(actual_spent and actual.size()==1 and frame.tool_fx.front().victims.is_empty() and main.sim.paused,"real original empty blast confirmed and original ALERT pause reached")
 	var original:=_state(main.battle_log)
 	var live: Dictionary=main._snapshot_data().duplicate(true)
 	var backend:=var_to_bytes([main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum,main.operators.map(func(op:OperatorUnit)->Array:return [op.global_position,op.hp,op.ammo,op.grenades]),enemy.global_position,enemy.hp])
