@@ -265,7 +265,9 @@
     "owned_pid": 84196,
     "actual_exit": 0,
     "raw_log_sha256": "a0c6fae14602e78a76b56c08db34460dea84f9da9e97bccd2b61f4327fa79610",
-    "lossless_archive": "../xorg.log.gz"
+    "lossless_archive": "../xorg.log.gz",
+    "raw_stdout_sha256": "195aad426a7a24ea410368e9bf7282cf65a36db0eaa41a002b0d17f037aad671",
+    "stdout_lossless_archive": "../xorg.stdout.gz"
   },
   "warehouse_history": {
     "manifest": "../20261004-pr15-remaining-journey/file-manifest.json",
@@ -274,5 +276,10 @@
     "original_receipts_changed": false,
     "actual_pump_tutorial_pages": 2
   },
-  "next": "Resume authentic ending-player-progress/railcut via original title Continue, bounded railcut2waves next; depot2/radio3 remain. Current pump Native record available for independent readonly 3D replay QA. FullFX/A3/ears/APK/device and actual ammo exhaustion pack refill remain pending."
+  "next": "Resume authentic ending-player-progress/railcut via original title Continue, bounded railcut2waves next; depot2/radio3 remain. Current pump Native record available for independent readonly 3D replay QA. FullFX/A3/ears/APK/device and actual ammo exhaustion pack refill remain pending.",
+  "archive_diff_check": {
+    "initial_result": 2,
+    "cause": "Original raw Xorg stdout contains a trailing space in its version line",
+    "correction": "Store stdout as lossless gzip and retain original raw hash; no bytes trimmed, no runtime/source changes or native rerun"
+  }
 }

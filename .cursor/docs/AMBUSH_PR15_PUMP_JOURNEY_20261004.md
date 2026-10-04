@@ -35,3 +35,5 @@
 可独立并行包：固定030正常pump旅程复验及此真实record的只读3D绑定/事件/阶段/自动播放QA，独立副本、display/XDG、不写主集成文件。自动耗尽补弹需后续合法正常输入实际触发才补验；若原三关正常路线未触发，单开真实低弹匣/合法策略专项，不伪造ammo=0或赠枪/自造敌人。本片无新增资产件。R5源29749157c5db064bfea626c3ed9d75d9a1791ece/交付ebedb829e3263abbeb6dd266905f24a3869fa281接口保持，主集成代码单写；资产制作源/GLB/atlas/Blender/生产manifest不改不重跑、WIP不全并。
 
 完整3D FX、A3云预算/优化、艺术、耳听0/45 cue与0/6声景、同候选最终fullsmoke/可追溯APK待；llvmpipe/Dummy不代设备FPS/耳听，全计划后设备顺序保持。网页GPT PLAN/REVIEW unavailable。本轮自己的Godot均实际退出，仅精确匹配Xorg112/PID84196/原日志路径关闭、actual exit0；原Xorg日志lossless gzip/配置/退出收据在上述清单。无现存环境阻碍。
+
+证据写入Git后的全diff --check首次实际2：原Xorg stdout版本行自带尾随空白；改为无损gzip保留原stdout SHA256，不裁剪原字节。随后全diff检查以实际退出收据确认，测试源/工程树未变，无额外native运行。
