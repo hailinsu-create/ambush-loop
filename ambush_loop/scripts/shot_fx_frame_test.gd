@@ -21,6 +21,9 @@ func _bad(frame: Dictionary, event: Dictionary, target: String, key: String, val
 
 func _reader_cases(frame: Dictionary, event: Dictionary) -> void:
 	var retained := var_to_bytes([frame,event])
+	var domain := {}
+	for key in ["shot_fx_schema","shot_fx_playback_schema","shot_fx_source_token","schema","recorded_phase","animation_schema","animation_supported","actor_asset_revision","visual_unsupported","level_id","attempt_id","wave_id","playback_tick"]: domain[key] = frame.get(key)
+	print("SHOT_FX_FRAME_DOMAIN "+JSON.stringify(domain))
 	var descriptor: Dictionary = event.payload.fx
 	var actual: Dictionary = reader.sample(frame,event)
 	_check(not actual.is_empty() and actual.event_id == event.event_id and actual.age_ticks == 0 and actual.visual_weapon == descriptor.visual_weapon and actual.pose == descriptor.pose and actual.target_pos == descriptor.target_pos, "real successful source/pose/old gun/target retained at playback tick")
@@ -56,7 +59,7 @@ func _reader_cases(frame: Dictionary, event: Dictionary) -> void:
 	old.payload.erase("fx")
 	var before := var_to_bytes(old)
 	_check(reader.sample(frame,old).is_empty() and var_to_bytes(old)==before,"old missing descriptor stays neutral and bytes are never upgraded")
-	rows.append({"scope":"actual original backend shot plus explicit reader version/identity/time/corrupt fixtures, not rendered/native/fullrecord","source_event":event,"reader_sample":actual,"original_bytes_unchanged":var_to_bytes([frame,event])==retained})
+	rows.append({"scope":"actual original backend shot plus explicit reader version/identity/time/corrupt fixtures, not rendered/native/fullrecord","frame_domain":domain,"source_event":event,"reader_sample":actual,"original_bytes_unchanged":var_to_bytes([frame,event])==retained})
 
 func _run() -> void:
 	_check(ResourceLoader.exists(READER_PATH),"planned pure frame decoder interface exists")
