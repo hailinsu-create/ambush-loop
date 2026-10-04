@@ -10,15 +10,15 @@ const LEVELS := ["yard","warehouse","pump","railcut","depot","radio"]
 static func active(frame: Dictionary) -> Array:
 	if not _int_eq(frame,"movement_fx_schema",FORMAT) or not _int_eq(frame,"movement_fx_playback_schema",2) or typeof(frame.get("movement_fx_source_token")) != TYPE_INT or frame.movement_fx_source_token == 0:
 		return []
-	if not _int_eq(frame,"schema",BattleLog.SCHEMA_VERSION) or typeof(frame.get("visual_unsupported")) != TYPE_BOOL or frame.visual_unsupported or not _int_eq(frame,"animation_schema",ActorPose.FORMAT) or frame.get("actor_asset_revision") != ActorPose.ASSET_REVISION:
+	if not _int_eq(frame,"schema",BattleLog.SCHEMA_VERSION) or typeof(frame.get("visual_unsupported")) != TYPE_BOOL or frame.visual_unsupported or not _int_eq(frame,"animation_schema",ActorPose.FORMAT) or typeof(frame.get("actor_asset_revision")) != TYPE_STRING or frame.actor_asset_revision != ActorPose.ASSET_REVISION:
 		return []
 	if typeof(frame.get("phase")) != TYPE_INT or frame.phase not in [0,1,4,5] or typeof(frame.get("recorded_phase")) != TYPE_INT or frame.recorded_phase not in [0,1,5] or (frame.phase != 4 and frame.phase != frame.recorded_phase):
 		return []
-	if typeof(frame.get("attempt_id")) != TYPE_STRING or frame.attempt_id.is_empty() or frame.get("level_id") not in LEVELS or not _nonnegative(frame,"wave_id") or not _positive(frame,"wave_count") or frame.wave_id >= frame.wave_count:
+	if typeof(frame.get("attempt_id")) != TYPE_STRING or frame.attempt_id.is_empty() or typeof(frame.get("level_id")) != TYPE_STRING or frame.level_id not in LEVELS or not _nonnegative(frame,"wave_id") or not _positive(frame,"wave_count") or frame.wave_id >= frame.wave_count:
 		return []
 	var clock: Variant = frame.get("movement_fx_clock_s")
 	var domain: Variant = frame.get("movement_fx_clock_domain")
-	if not _number(clock) or float(clock) < 0.0 or domain != ("simulation" if frame.recorded_phase == 1 else "command"):
+	if not _number(clock) or float(clock) < 0.0 or typeof(domain) != TYPE_STRING or domain != ("simulation" if frame.recorded_phase == 1 else "command"):
 		return []
 	var raw: Variant = frame.get("movement_fx_actors")
 	if not raw is Array or raw.size() > MAX_ACTORS:
@@ -40,7 +40,7 @@ static func active(frame: Dictionary) -> Array:
 
 static func _sample(actor: Dictionary) -> Dictionary:
 	var group: Variant = actor.get("group")
-	if group not in ["ops","enemies"] or not _positive(actor,"id") or (group == "ops" and actor.id > 3):
+	if typeof(group) != TYPE_STRING or group not in ["ops","enemies"] or not _positive(actor,"id") or (group == "ops" and actor.id > 3) or typeof(actor.get("action")) != TYPE_STRING:
 		return {}
 	for flag: String in ["active","alive","moving"]:
 		if typeof(actor.get(flag)) != TYPE_BOOL or not actor[flag]: return {}
