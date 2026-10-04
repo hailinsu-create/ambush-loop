@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [blast原envelope P2](AMBUSH_PR15_BLAST_RAW_ENVELOPE_20261004.md) | 父端f2/71同probe22/6 actual1E0/S0，六原字段float强转绕typed；作者准备真实空爆/合法PB2 control复现，仅tool_supported加转换前gate，保旧schema/actor画面和原bytes。仪器63cd交付48/0功能非A3，正式performance未起，优先此P2后串行A3。 |
 | [A3仪器修正切片](AMBUSH_PR15_A3_INSTRUMENTATION_20261004.md) | fixedf81 Guard headless48/0 actual0E0/S0，981 tracked完整Git tree+986 warm imports+engine/旧raw前后匹配；59列预分配/写入计时/支持未知/提前钩子/reset须封存。容量12故意overflow11，raw12全measured0并被ERR_INVALID_DATA拒绝，非性能数据；旧失败/限定40/0/只读b2保留。74证据全hash，无Window/A3。父端QA已停但新blast raw-envelope22/6优先，ViewState未修；随后Window有效chunk/开销→A3单engine，制作不改。 |
 | [A2封存/A3仪器安全checkpoint](AMBUSH_PR15_A2_A3_CHECKPOINT_20261004.md) | 父端要求最近安全点先交：A2远端4484作者有界blast/dust已封，父端两个reader/render门待；b429仅test-only仪器，3秒Window4/0、20raw、actual0 E0/S0，11文件全hash，八生产blob与4484同。自有engine全部收取/Xorg122实际0关闭；六关A3未启动。append计时/缓冲内存/unsupported counters/冷帧/来源需先补，性能engine与QA串行；后实测优化→FINAL fullsmoke/newnormal13/新六完整1×2×→APK。失败/无效probe保留，R5制作不改，非全计划完成。 |
 | [A2保存移动尘cue报告](AMBUSH_PR15_MOVEMENT_DUST_20261004.md) / [A3采集计划](AMBUSH_PR15_A3_COLLECTION_PLAN_20261004.md) | 生产f9/formal71五blob同；planned7/2、rawphase3/1→3aa3/0，111 raw35/0 S1与pool132/2错误同log假设保全；71 H35/132/130、Window184各0 actual0 E0/S0，21原图全hash/看，七off全0。24槽省电6/48节点/保存pose clock，非footfall/持久尾迹；原phase移动/pause/history/old7/Title已验有界。所有engine收尾/Xorg121实际0关闭。父端blast source119/19/7/7独立限定另列。下一A3实际raw metrics→FINAL同source/fullsmoke/newnormal13/full1×2×→APK；A3只读提案不代指标，制作不动。 |
