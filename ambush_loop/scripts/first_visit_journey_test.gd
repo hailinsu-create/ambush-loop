@@ -128,8 +128,8 @@ func _place_mine(cell: Vector2i) -> bool:
 	if not await _world_click(at,0.02,"place_carried_mine",1,"ground"): return false
 	var ok: bool = main.selected.mines == before-1 and main.raid_mines.size() == placed+1
 	_check(ok, "native mine tool consumes exactly one carried mine and creates one raid mine")
-	journey_rows.append({"level":main.level.level_id,"action":"native walked and planted carried mine","phase":main.phase,"site":[at.x,at.y],"operator_pos":str(main.selected.global_position),"before":before,"after":main.selected.mines,"mines_before":placed,"mines_after":main.raid_mines.size(),"status":main.status_label.text})
-	await _modal_capture(sample+"_mine_placed_wave"+str(main.raid.wave_index))
+	journey_rows.append({"level":main.level.level_id,"action":"native carried mine attempt","ok":ok,"phase":main.phase,"site":[at.x,at.y],"operator_pos":str(main.selected.global_position),"before":before,"after":main.selected.mines,"mines_before":placed,"mines_after":main.raid_mines.size(),"status":main.status_label.text})
+	await _modal_capture(sample+("_mine_placed_wave" if ok else "_mine_blocked_wave")+str(main.raid.wave_index))
 	if not await _set_tool(main.Tool.DEPLOY): return false
 	return ok
 
@@ -154,13 +154,16 @@ func _sweep(plan: Array, wave: int) -> bool:
 		await _key("1")
 		if not await _set_tool(main.Tool.DEPLOY): return false
 		var before_pickup := _inventory()
+		var event_start: int = main.battle_log.events.size()
 		if not await _world_click(at,0.12,"SWEEP_loot_"+kind): return false
 		if not await _wait_until(func() -> bool:
 			var current = ref.get_ref()
 			return current == null or current.collected,
 			120,"original SWEEP walk and automatic nearby loot " + kind): return false
 		if not await _wait_until(func() -> bool: return not main.selected.is_moving(),120,"original SWEEP walking finishes"): return false
-		journey_rows.append({"level":main.level.level_id,"wave":wave,"action":"native SWEEP drop collected","kind":kind,"amount":amount,"target":str(at),"before":before_pickup,"after":_inventory(),"status":main.status_label.text})
+		var loot_events: Array = main.battle_log.events.slice(event_start).filter(func(event: Dictionary) -> bool: return event.type == "loot")
+		_check(not loot_events.is_empty(), "actual nearby collection records original loot events")
+		journey_rows.append({"level":main.level.level_id,"wave":wave,"action":"native SWEEP drop collected","kind":kind,"amount":amount,"target":str(at),"before":before_pickup,"after":_inventory(),"loot_events":loot_events,"status":main.status_label.text})
 		_write_journey()
 	if main.level.level_id == "warehouse" and wave == 0:
 		if not await _collect("ammo",1): return false
@@ -202,12 +205,19 @@ func _world_click(pos: Vector2, height: float, label: String, button: int = 1, w
 	var picked: Dictionary
 	for turn in 13:
 		at = view.rig.project_logic(pos,height)
+		# XTest receives integer physical pixels. Probe the same pixel it sends.
+		var transform: Transform2D = root.get_screen_transform()
+		var physical := Vector2(Vector2i(transform*at))
+		at = transform.affine_inverse()*physical
 		reachable = root.get_visible_rect().grow(-2).has_point(at) and not view.pointer_over_ui(at)
 		picked = view.pick_at(at)
 		if wanted_kind != "":
 			reachable = reachable and picked.get("kind","") == wanted_kind
 			if wanted_kind != "ground":
 				reachable = reachable and pos.distance_to(picked.get("pos",Vector2.INF)) < 1.0
+			else:
+				for offset in [Vector2(-1,0),Vector2(1,0),Vector2(0,-1),Vector2(0,1)]:
+					reachable = reachable and view.pick_at(at+offset).get("kind","") == "ground"
 		if reachable: break
 		rows.append({"action":"original camera UI reveal target","target_action":label,"wanted_kind":wanted_kind,"observed_kind":picked.get("kind","invalid"),"observed_pos":str(picked.get("pos",Vector2.INF)),"yaw":view.rig.yaw_deg})
 		if turn < 12: await _click(_button(view._camera_controls,"↷"))
@@ -258,11 +268,21 @@ func _deploy(plan: Array) -> bool:
 			await _modal_capture(sample+"_cover"+str(slot.slot_id)+"_blocked")
 			return false
 		var target: float = plan[2][index]
+		var initial_facing: float = main.selected.facing_deg
+		var quantum := 8.0 if main.selected.role == main.selected.Role.MG else 15.0
+		var tolerance := quantum*0.5+0.01
+		var key_count := 0
 		for turn in 24:
 			var diff: float = wrapf(target-main.selected.facing_deg,-180.0,180.0)
-			if absf(diff) < 0.1: break
+			if absf(diff) <= tolerance: break
 			await _key("d" if diff > 0.0 else "a")
-		_check(absf(wrapf(target-main.selected.facing_deg,-180.0,180.0))<0.1,"native15deg rotation reaches intended world facing")
+			key_count += 1
+		var oriented: bool = absf(wrapf(target-main.selected.facing_deg,-180.0,180.0)) <= tolerance
+		rows.append({"action":"original native keyboard facing","operator":index,"initial_facing":initial_facing,"intended_facing":target,"actual_facing":main.selected.facing_deg,"original_quantum_deg":quantum,"keys":key_count,"tolerance_deg":tolerance,"nearest_reachable":oriented})
+		_check(oriented,"native original8deg MG/15deg other rotation reaches nearest lawful facing")
+		if not oriented:
+			await _modal_capture(sample+"_facing_blocked_deploy"+str(deploy_round))
+			return false
 	return true
 
 func _mission(plan: Array) -> bool:
