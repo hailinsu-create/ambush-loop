@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [P2/FX纯reader安全checkpoint](AMBUSH_PR15_CONTEXT_FX_READER_CHECKPOINT_20261004.md) | 父端要求先交固定P2，不等全FX：f0e/e379 H57/R82/原ref70/73各0，A1a183/f012与INITIAL29976/0/a323独立可QA。当前577纯readerH87/现history seamH130各0actual0 E0/S0，无3D池；只读审计optional preserve_upper_world_basis非bool仍待复现/最小gate，后池严格取样返回/LOD缓存/实际R。所有自有engine自然结束、116/117关闭0，无待poll。6.1-sol APK只读报告/工具链待设置，源/资产不改。下一继续A1b/A2/A3/FINAL/APK，非全计划完成。 |
 | [FX-A1b frame/pool计划](AMBUSH_PR15_SHOT_FX_FRAME_POOL_PLAN_20261004.md) | 持续实施：先A1b.1严格只读frame/descriptor gate与playback生命周期，再A1b.2保存R5枪/pose muzzle采样及12/省电4有限池、source/seek/旧neutral/actual3D。A1a源metadata与P2已封，未称3D FX完成；制作源/GLB/atlas不改。P2可独立QA，6.1-sol只读APK工具链包并行，不设备。后A2/A3/FINAL全门/APK。 |
 | [P2 escape坏context报告](AMBUSH_PR15_ESCAPE_CONTEXT_BOUNDARY_20261004.md) / [计划](AMBUSH_PR15_ESCAPE_CONTEXT_BOUNDARY_PLAN_20261004.md) | fixed f0ed443：负23c H3/2/有效572 R18/4actual1 E0/S0→正式H57/R82及原referenceH70/R73各0actual0 E0/S0；saved level wave_count上界/明确playback2 Δplay>=Δsim，真实原927/928/local0.5→15.9/第三波/retry保持，六关边界/旧missingunknownneutral/外关/live/原bytes只读。正式8图hash/看8，开发audio/Callable/遮层另存，不冒称native/fullrecord/FX/A3/FINAL。P2独立QA可先验；fcf限定29/0/R40/0四图看两包另列。后FX-A1b/A2/A3/FINAL全门/APK继续。 |
 | [INITIAL六新原件实际3D报告](AMBUSH_PR15_NATIVE_RECORD3D_20261004.md) | 原session直接收尾、未重启：producer_a05 / consumer_d9c固定官方PCK+9aceae外部fixture，整轮29976/0actual0 E0/S0 records6；whole2x各原0→terminal、76seek/78native、56图hash/看6、原raw/source/live/sim保持。完整1x/appfocus-native/oldschema1/FX-A1b/A2/A3/FINAL全门未验；旧a05 R4404/1/diag4140/2、smoke54/62不取消。自有:116 exact关闭actual0。 |

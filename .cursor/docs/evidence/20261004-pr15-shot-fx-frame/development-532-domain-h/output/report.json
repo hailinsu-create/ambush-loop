@@ -1,0 +1,87 @@
+{
+  "checks": 83,
+  "failures": 5,
+  "rows": [
+    {
+      "frame_domain": {
+        "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+        "animation_schema": 3,
+        "animation_supported": true,
+        "attempt_id": "7b6ee9048b4ac4850b4f71a1fb8cd460",
+        "level_id": "yard",
+        "playback_tick": 1,
+        "recorded_phase": 1,
+        "schema": 2,
+        "shot_fx_playback_schema": 2,
+        "shot_fx_schema": 1,
+        "shot_fx_source_token": -9223371953941772632,
+        "visual_unsupported": false,
+        "wave_id": 0
+      },
+      "original_bytes_unchanged": true,
+      "reader_sample": {},
+      "scope": "actual original backend shot plus explicit reader version/identity/time/corrupt fixtures, not rendered/native/fullrecord",
+      "source_event": {
+        "actor_id": 1,
+        "attempt_id": "7b6ee9048b4ac4850b4f71a1fb8cd460",
+        "event_id": "7b6ee9048b4ac4850b4f71a1fb8cd460:0:2",
+        "payload": {
+          "animation_schema": 2,
+          "fx": {
+            "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+            "animation_schema": 3,
+            "attempt_id": "7b6ee9048b4ac4850b4f71a1fb8cd460",
+            "clock_domain": "playback",
+            "clock_tick": 1,
+            "confirmed": true,
+            "damage": 48.0,
+            "event_id": "7b6ee9048b4ac4850b4f71a1fb8cd460:0:2",
+            "hp_after": 52.0,
+            "hp_before": 100.0,
+            "level_id": "yard",
+            "playback_schema": 2,
+            "pose": {
+              "action": "fire",
+              "base_action": "idle",
+              "base_seconds": 0.0,
+              "event_id": "7b6ee9048b4ac4850b4f71a1fb8cd460:0:2",
+              "fallback": "",
+              "seconds": 0.0,
+              "upper_action": "fire_rifle",
+              "upper_seconds": 0.0
+            },
+            "projectile": true,
+            "schema": 1,
+            "seq": 2,
+            "source_facing": 90.0,
+            "source_group": "ops",
+            "source_id": 1,
+            "source_pos": "(80.0, 80.0)",
+            "target_group": "enemies",
+            "target_id": 1,
+            "target_pos": "(80.0, 112.0)",
+            "visual_model": "operator_rifle",
+            "visual_weapon": "kar98k",
+            "wave_id": 0
+          },
+          "reload_s": 1.15,
+          "shot_interval_s": 0.52,
+          "visual_weapon": "kar98k",
+          "weapon": "kar98k"
+        },
+        "playback_schema": 2,
+        "playback_tick": 1,
+        "position": "(80.0, 80.0)",
+        "schema": 2,
+        "seq": 2,
+        "target_id": 1,
+        "tick": 0,
+        "timeline_tick": 0,
+        "type": "fire",
+        "wave_id": 0
+      }
+    }
+  ],
+  "scope": "Pure reader plus explicit original attack fixture; no 3D pool/native/new battles/FX integrated/A3/FINAL/device acceptance.",
+  "source_sha": "532811f028b6ffc799b3778a9696669838143181"
+}
