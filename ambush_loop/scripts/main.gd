@@ -1687,7 +1687,7 @@ func _fill_result_stats() -> void:
 	var secs := float(ticks) / 60.0
 	var hook := ""
 	if level != null:
-		hook = highlight_result_text() if level.level_id == "pump" else str(level.highlight_hook).strip_edges()
+		hook = highlight_result_text()
 	var shot_line := "第一枪是  %s" % shot
 	if hook != "":
 		result_stats.text = "世数  %d\n%s\n逃逸  %s\n用时  %.1fs\n高光  %s" % [loop_index, shot_line, esc, secs, hook]

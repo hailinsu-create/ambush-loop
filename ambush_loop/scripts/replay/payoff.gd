@@ -207,20 +207,12 @@ static func timeline_marks(log: Variant) -> Array:
 static func highlight_result_line(level: Variant, log: Variant, won: bool) -> String:
 	if level == null:
 		return ""
-	if str(level.level_id) == "pump":
-		# The authored hook is a teaching goal, not proof of door/route actions.
-		return "泵站封锁完成" if won else "泵站尚未封锁"
-	var hook := str(level.highlight_hook).strip_edges()
-	if hook == "":
-		return ""
-	var hit := hook_hit(level, log)
-	if won and hit:
-		return "打中了：%s" % hook
-	if won:
-		return "本关高光：%s" % hook
-	if hit:
-		return "打中过：%s（还没封锁）" % hook
-	return "没打中：%s" % hook
+	# Teaching hooks and isolated event types cannot prove a compound tactic.
+	# Actual shots/loot/traps remain in the event summary; this is the outcome.
+	var names := {"yard":"院子", "warehouse":"仓库", "pump":"泵站",
+		"railcut":"信号楼", "depot":"油库", "radio":"电台"}
+	var name := str(names.get(str(level.level_id), ""))
+	return name + ("封锁完成" if won else "尚未封锁")
 
 
 static func hook_hit(level: Variant, log: Variant) -> bool:
