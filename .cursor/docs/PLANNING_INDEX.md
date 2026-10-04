@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [原生REPLAY箭头计划](AMBUSH_PR15_REPLAY_ARROW_PLAN_20261004.md) | 原a05PCK yard R4404/1与短trace4140/2 actual1；真实XTest箭头logical有效/physical0、GUI无focus、两键不动，生产边界失败。先共享synthetic负向→只REPLAY缺physical箭头logical回退→固定H/新PCK真实XTest，保留旧raw/source/失败，不拼a05最终绿。 |
 | [旧smoke fixture修正报告](AMBUSH_PR15_SMOKE_FIXTURES_20261004.md) | fixed8906有界原launch-modal/radio-SCOUT合同actual0/E0/S0；原a05完整54、9f等一帧54、b62完整到radio-SCOUT62各E1/S0保留。只修测试顺序/tween等待与SCOUT预览预期，不改生产锁/timeline，不称full smoke green；六新3D/FXA3/最终完整smoke仍待。 |
 | [六新原件实际3D计划](AMBUSH_PR15_NATIVE_RECORD3D_PLAN_20261004.md) | 原a05PCK只读外部固定harness/独立Guard/display/output；先prototype保留parse1/停止143/H5022-4，last-frame-wins修oracle不改source。实际a05PCK yard R运行中、一条Right步长待诊断，未称whole green；之后六原件auto1x/2x/seek/focus/bytes保持，headless不代图。 |
 | [完整smoke模态fixture计划](AMBUSH_PR15_SMOKE_MODAL_FIXTURE_PLAN_20261004.md) | 已封a05原actual54/ERROR1；只修共享测试：简报时journal拒绝→原Back关闭→原journal正文，再固定source实际完整smoke。Title产品锁不改、不重开旧TitleQA，后段新失败先封后修；a05normal不代fullsmoke/新record3D/FXA3。 |

@@ -5,7 +5,7 @@ param(
         'first_visit_journey_test.gd', 'title_focus_keyboard_test.gd', 'title_menu_viewport_test.gd',
         'replay_autoplay_test.gd', 'replay_event_text_source_test.gd', 'cover_command_test.gd',
         'escape_intel_source_test.gd', 'static_teaching_context_test.gd', 'loot_event_text_test.gd', 'live_wave_timeline_test.gd', 'current_wave_hint_test.gd', 'campaign_result_copy_test.gd', 'result_highlight_test.gd',
-        'smoke_contract_test.gd',
+        'replay_arrow_input_test.gd', 'smoke_contract_test.gd',
         'replay_timeline_test.gd',
         'equipment_freeze_test.gd',
         'phase_tools_test.gd',
