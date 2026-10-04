@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [pump高光事实修复计划](AMBUSH_PR15_PUMP_HIGHLIGHT_PLAN_20261004.md) | 已证030开门WON却套用固定闭门紫线高光；先补真实源只读反例及开门赢/锁门赢/锁门失败reference窄域，待最小pump中性结果文案修复/H及实际窗口验证。此片不改R/资产，随后自然railcut接余三关7波；自动耗尽包仍待实际触发。 |
 | [正常pump旅程报告](AMBUSH_PR15_PUMP_JOURNEY_20261004.md) / [计划](AMBUSH_PR15_PUMP_JOURNEY_PLAN_20261004.md) / [warehouse标签勘误](AMBUSH_PR15_WAREHOUSE_RECEIPT_ERRATA_20261004.md) | fixed030 native187/0、exit0/ERROR0、65 XTest、13图hash/看10，实际开门两波253/681/global935/34event，三loot/原ammo6池20→26→WON/CTA/railcut两教学页；metadata2978/0另列，3D播放未验。自动耗尽包未触发、新WON固定闭门高光与实际开门不符单列。真实railcut存档续余三关7波；warehouse两原收据分类勘误实际两页、84历史hash不变。FX/A3/耳听/APK/设备保持待验。 |
 | [正常warehouse旅程报告](AMBUSH_PR15_WAREHOUSE_JOURNEY_20261004.md) / [接续计划](AMBUSH_PR15_REMAINING_JOURNEY_PLAN_20261004.md) | 固定b27正式native270/0、exit0/ERROR0，124 XTest/14图核/看8，实际两波339/863/global1203、62event，SWEEP五loot/原ammo pool20→28/携带mine次波触发→原CTA→pump两教学页；只读metadata4574/0另列，未验新录制3D播放。三开发失败分别45/1、155/2、250/1均exit1/ERROR0保全，test-only修操作/判据，生产/资产/R无diff。其余四关9波待以真实pump存档接续，FX/A3/耳听/APK/设备仍待。 |
 | [正常旅程cover报告](AMBUSH_PR15_COVER_INPUT_20261003.md) / [计划](AMBUSH_PR15_COVER_INPUT_PLAN_20261003.md) | 361干净77/1、exit1/ERROR0证实明确cover被32px body选择覆盖；124修路由，d7正式H25/R输入38均exit0/ERROR0，原生yard→下一夜教学135/0/exit0/ERROR0，32 XTest/14图核hash/看6。124开发WON675/27但漏CTA整轮113/1不算正式；父端fixed d7独立限定关闭cover5，无新P1/P2：native142/H76/实际窗口86三次exit0/ERROR0，16图核/看9；其余旅程及SWEEP另片。 |
