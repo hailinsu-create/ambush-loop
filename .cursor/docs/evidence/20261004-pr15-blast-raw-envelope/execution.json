@@ -1,0 +1,82 @@
+{
+  "runs": [
+    {
+      "label": "negative-04c-h",
+      "source_sha": "04c06758d7f09face58cef68d10b36a4be27c534",
+      "checks": 22,
+      "failures": 6,
+      "actual_exit": 1,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "run_id": "3c38d96a629343adb5ed893de9691008",
+      "wrapper": "ambush_loop/scripts/run_isolated_test.sh",
+      "guard": true
+    },
+    {
+      "label": "fixed-aa8-h",
+      "source_sha": "aa8e0b650fabe75dd12ddbc23fa110e782bb83fd",
+      "checks": 22,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "run_id": "1bcc40efb6824031bddace097981ae0d",
+      "wrapper": "ambush_loop/scripts/run_isolated_test.sh",
+      "guard": true
+    },
+    {
+      "label": "tool_fx_pool_test-aa8-h",
+      "source_sha": "aa8e0b650fabe75dd12ddbc23fa110e782bb83fd",
+      "checks": 255,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "run_id": "197d10cf52884dd79c9e68f2ec1641b4",
+      "wrapper": "ambush_loop/scripts/run_isolated_test.sh",
+      "guard": true
+    },
+    {
+      "label": "visual_snapshot_test-aa8-h",
+      "source_sha": "aa8e0b650fabe75dd12ddbc23fa110e782bb83fd",
+      "checks": 130,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "run_id": "7c693bd49983403d9c55e24b6fa1a03b",
+      "wrapper": "ambush_loop/scripts/run_isolated_test.sh",
+      "guard": true
+    },
+    {
+      "label": "movement_dust_source_boundary_test-aa8-h",
+      "source_sha": "aa8e0b650fabe75dd12ddbc23fa110e782bb83fd",
+      "checks": 35,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "run_id": "f14cf93432714c68a0b82d44aad1d46a",
+      "wrapper": "ambush_loop/scripts/run_isolated_test.sh",
+      "guard": true
+    },
+    {
+      "label": "tool_fx_pool_test-aa8-r",
+      "source_sha": "aa8e0b650fabe75dd12ddbc23fa110e782bb83fd",
+      "checks": 268,
+      "failures": 0,
+      "actual_exit": 0,
+      "ERROR": 0,
+      "SCRIPT_ERROR": 0,
+      "run_id": "b6d7afc10374486e991bd3c49e3aeae2",
+      "wrapper": "ambush_loop/scripts/run_isolated_test.sh",
+      "guard": true
+    }
+  ],
+  "engine": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+  "engine_sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e",
+  "legacy_sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+  "formal_A3_started": false,
+  "engine_actual_ended": true,
+  "Xorg_actual_exit": 0
+}
