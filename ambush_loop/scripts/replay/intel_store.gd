@@ -146,6 +146,8 @@ func validated_escape_context(record: Dictionary, level_id: String = "") -> Dict
 		return {}
 	if typeof(context.get("wave_id")) != TYPE_INT or context.wave_id < 0:
 		return {}
+	if context.wave_id >= LevelDef.by_id(str(context.level_id)).wave_count():
+		return {}
 	if typeof(context.get("actor_id")) != TYPE_INT or context.actor_id < 1 or context.actor_id != record.get("leaker_id", -1):
 		return {}
 	if not _context_event(context.get("spawn"), "spawn", context) or not _context_event(context.get("escape"), "escape", context):
@@ -158,6 +160,10 @@ func validated_escape_context(record: Dictionary, level_id: String = "") -> Dict
 		return {}
 	if escape.timeline_tick - escape.tick != spawn.timeline_tick - spawn.tick:
 		return {}
+	# Explicit continuous playback2 may include additional phase boundaries.
+	# It cannot consume less time than the same-wave simulation interval.
+	if escape.playback_tick - spawn.playback_tick < escape.tick - spawn.tick:
+		return {}
 	return context.duplicate(true)
 
 
@@ -165,7 +171,9 @@ func _context_event(raw: Variant, kind: String, context: Dictionary) -> bool:
 	if not raw is Dictionary:
 		return false
 	var event: Dictionary = raw
-	if event.get("schema", -1) != BattleLog.SCHEMA_VERSION or event.get("type", "") != kind or event.get("attempt_id", "") != context.attempt_id:
+	if typeof(event.get("schema")) != TYPE_INT or event.schema != BattleLog.SCHEMA_VERSION or event.get("type", "") != kind or event.get("attempt_id", "") != context.attempt_id:
+		return false
+	if typeof(event.get("playback_schema")) != TYPE_INT or event.playback_schema != 2:
 		return false
 	if event.get("wave_id", -1) != context.wave_id or event.get("actor_id", -1) != context.actor_id:
 		return false
