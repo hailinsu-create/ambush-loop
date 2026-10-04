@@ -1,0 +1,107 @@
+{
+  "formal_source_sha": "f0ed44311775fa87ee63ebb911c7b11e12e65ab1",
+  "production_validator_sha": "3d30b1309ebcf09a01d17e344b4d900942b67bca",
+  "game_tree": "b1e484937f6014f0959a71f1a8a53dd2d8443581",
+  "runs": [
+    {
+      "label": "fixed-3d3-h",
+      "actual_exit": 0,
+      "test_checks": 57,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "fixed-3d3-r",
+      "actual_exit": 0,
+      "test_checks": 82,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "fixed-3d3-reference-h",
+      "actual_exit": 0,
+      "test_checks": 70,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "formal-f0e-h",
+      "actual_exit": 0,
+      "test_checks": 57,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "formal-f0e-r",
+      "actual_exit": 0,
+      "test_checks": 82,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "formal-f0e-reference-h",
+      "actual_exit": 0,
+      "test_checks": 70,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "formal-f0e-reference-r",
+      "actual_exit": 0,
+      "test_checks": 73,
+      "test_failures": 0,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "negative-23c-h",
+      "actual_exit": 1,
+      "test_checks": 3,
+      "test_failures": 2,
+      "errors": 0,
+      "script_errors": 0
+    },
+    {
+      "label": "negative-23c-r-fixture-dev",
+      "actual_exit": 1,
+      "test_checks": 15,
+      "test_failures": 5,
+      "errors": 1,
+      "script_errors": 0
+    },
+    {
+      "label": "negative-349-retry-call-dev",
+      "actual_exit": 1,
+      "test_checks": 3,
+      "test_failures": 2,
+      "errors": 0,
+      "script_errors": 1
+    },
+    {
+      "label": "negative-572-valid-r",
+      "actual_exit": 1,
+      "test_checks": 18,
+      "test_failures": 4,
+      "errors": 0,
+      "script_errors": 0
+    }
+  ],
+  "formal_images_hash_verified_and_viewed": 8,
+  "formal_fixture_labels": [
+    "original_third",
+    "invalid_fourth",
+    "invalid_stalled_playback",
+    "foreign_current_yard",
+    "original_radio_after_foreign"
+  ],
+  "formal_reference_images_viewed": 3,
+  "original877_raw_sha256": "cf77a08654aff89561723944176e38dcb7aa8b1b8d0a897cf77f39685b7a6c09",
+  "scope": "Saved escape-context validator + original3D advice/result and original reference3wave escape/retry. Not native inputs, full record3D, new normal battles, FX/A3/FINAL/device.",
+  "retained_development": "23c cold missing-label/audio fallback;349 wrong accessor Callable;3d3 foreign tutorial overlay despite82/0. Original snapshots/tests kept, never production acceptance."
+}

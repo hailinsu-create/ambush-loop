@@ -9,3 +9,5 @@
 父端fcf静态教学limited QA：旧29/22→29/0、实际3D40/0actual0，四图看/两包封存；未提供额外包SHA不补造。只归fcf范围，不涉及INITIAL箭头/FX/FINAL。
 
 原长轮已自然结束29976/0actual0 E0/S0 consumer_d9c/producer_a05，证据a323c3ae19dea041d69d65f197777502c170e934，未kill/重跑；自有116实际关闭0。FX-A1a正式183 H5607/0+boundary45/0actual0已交f012，生产源模块/原R/资产不改。此P2完成后A1b/A2/A3/FINAL全门/newnormal13/new6record/fullsmoke/APK继续；smoke54/62与bounded8906actual0保留。Draft普通push、不merge/生产/height/G，耳听设备后置，网页GPT PLAN/REVIEW unavailable。
+
+已实现并作者有界验证：生产3d30b1309ebcf09a01d17e344b4d900942b67bca、正式f0ed44311775fa87ee63ebb911c7b11e12e65ab1，负3/2与有效R18/4→H57/R82及原reference70/73各0actual0 E0/S0，实际原Δ927/928/第三波/retry保持；正式8图看/核hash、原bytes只读、开发失败/遮层保留，自有117最终实际关闭0。详[报告](AMBUSH_PR15_ESCAPE_CONTEXT_BOUNDARY_20261004.md)，独立QA待，不拼FINAL。

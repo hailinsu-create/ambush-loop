@@ -1,0 +1,16 @@
+TEST_RUN_ID=d3277f467e9449a2acc960203514666a
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d3277f467e9449a2acc960203514666a/data
+TEST_ENTRY=escape_context_boundary_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d3277f467e9449a2acc960203514666a/data/godot/app_userdata/Ambush Loop run_id=d3277f467e9449a2acc960203514666a
+ESCAPE_CONTEXT_BOUNDARY_FAIL invalid_fourth valid=false actual=历史第4波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界
+ESCAPE_CONTEXT_BOUNDARY_FAIL invalid_stalled_playback valid=false actual=历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界
+SCRIPT ERROR: Invalid operands 'Callable' and 'int' in operator '=='.
+          at: _render_cases (res://scripts/escape_context_boundary_test.gd:71)
+          GDScript backtrace (most recent call first):
+              [0] _render_cases (res://scripts/escape_context_boundary_test.gd:71)
+ESCAPE_CONTEXT_BOUNDARY_TEST checks=3 failures=2 output=res://build/asset_review/pr15-runtime/escape-context-boundary-d3277f467e9449a2acc960203514666a
