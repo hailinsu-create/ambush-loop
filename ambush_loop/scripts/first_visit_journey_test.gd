@@ -15,12 +15,14 @@ var progress_seed := {}
 var deploy_round := 0
 var last_fired := {}
 var ammo_repack_observations := []
+var journey_output := "res://build/asset_review/pr15-runtime"
 
 class NativeWorldTrace extends Node:
 	var suite: SceneTree
 	var host: Node
 	var presenter: Node3D
 	func _input(event: InputEvent) -> void:
+		if not is_instance_valid(host) or not is_instance_valid(presenter): return
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 			var pick: Dictionary = presenter.pick_at(event.position)
 			suite.rows.append({"action":"observed native mouse event","pressed":event.pressed,"device":event.device,"at":[event.position.x,event.position.y],"phase":host.phase,"tool":host.tool,"selected_id":host.selected.op_id if host.selected else -1,"ui_blocked":presenter.pointer_over_ui(event.position),"pick_kind":pick.get("kind","invalid"),"pick_id":str(pick.get("id","")),"pick_pos":str(pick.get("pos",Vector2.INF)),"ticks_msec":Time.get_ticks_msec()})
@@ -33,7 +35,7 @@ func _settle(frames: int = 3) -> void:
 		await RenderingServer.frame_post_draw
 
 func _write_journey() -> void:
-	var file := FileAccess.open("res://build/asset_review/pr15-runtime/first-visit-journey-report.json", FileAccess.WRITE)
+	var file := FileAccess.open(journey_output + "/first-visit-journey-report.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify({"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),"window":[root.size.x,root.size.y],"content_scale_factor":root.content_scale_factor,"checks":checks,"failures":failures,"rows":rows,"journey":journey_rows,"captures":captures,"native_inputs":input_rows,"progress_seed":progress_seed,"ammo_repack_observations":ammo_repack_observations,"a0_preview_feature":OS.has_feature("a0_preview"),"scope":"Isolated original title/main flow; fresh start or byte-identical pinned actual player save and native Continue. Real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest."}, "  "))
 
 func _check(ok: bool, message: String) -> void:
@@ -56,6 +58,9 @@ func _run() -> void:
 		return
 	root.position = Vector2i.ZERO
 	var scope := OS.get_environment("AMBUSH_JOURNEY_SCOPE")
+	if not _configure_output(scope):
+		quit(2)
+		return
 	var resumed := OS.get_environment("AMBUSH_JOURNEY_START") == "resume"
 	var level_order: Array = PLAYER_PLANS.map(func(plan: Array) -> String: return plan[0])
 	var gameplay := scope in level_order or scope in ["all","remaining"]
@@ -114,6 +119,54 @@ func _run() -> void:
 			if not await _mission(plan): break
 			if scope in level_order: break
 	_save_journey()
+
+func _configure_output(scope: String) -> bool:
+	var label := OS.get_environment("AMBUSH_JOURNEY_OUTPUT_LABEL")
+	if label == "":
+		if scope == "all":
+			print("FIRST_VISIT_OUTPUT_REFUSED all requires an independent output label")
+			return false
+		return true # Preserve the previous single-level fixture interface.
+	var allowed := RegEx.create_from_string("^[A-Za-z0-9_.-]{1,64}$")
+	if allowed.search(label) == null or label in [".",".."]:
+		print("FIRST_VISIT_OUTPUT_REFUSED invalid label")
+		return false
+	journey_output += "/" + label + "-" + OS.get_environment("AMBUSH_TEST_RUN_ID")
+	if DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(journey_output)):
+		print("FIRST_VISIT_OUTPUT_REFUSED candidate directory already exists")
+		return false
+	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(journey_output)) != OK:
+		print("FIRST_VISIT_OUTPUT_REFUSED cannot create candidate directory")
+		return false
+	print("JOURNEY_OUTPUT=" + journey_output)
+	return true
+
+func _modal_capture(label: String) -> void:
+	await RenderingServer.frame_post_draw
+	var image := DisplayServer.screen_get_image(root.current_screen).get_region(Rect2i(root.position,root.size))
+	var path := journey_output + "/viewport_" + label + ".png"
+	_check(image.save_png(path)==OK,"actual candidate modal capture saved")
+	captures.append({"id":label,"path":path,"sha256":FileAccess.get_sha256(path),"image_size":[image.get_width(),image.get_height()],"capture_source":"DisplayServer.screen_get_image native Window crop"})
+
+func _checkpoint_progress(id: String) -> void:
+	var directory := journey_output + "/player-progress-" + id
+	_check(DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory))==OK,"create independent natural progress archive " + id)
+	var files := {}
+	for name in ["ambush_loop.cfg","ambush_loop_settings.cfg"]:
+		_check(FileAccess.file_exists("user://"+name),"original natural player ConfigFile exists " + id + "/" + name)
+		if not FileAccess.file_exists("user://"+name): continue
+		var original := FileAccess.get_file_as_bytes("user://"+name)
+		var saved := FileAccess.open(directory+"/"+name,FileAccess.WRITE)
+		saved.store_buffer(original)
+		saved.close()
+		var sha := FileAccess.get_sha256("user://"+name)
+		_check(FileAccess.get_sha256(directory+"/"+name)==sha,"natural player ConfigFile copy is byte identical " + id + "/" + name)
+		files[name] = {"sha256":sha,"bytes":original.size()}
+	var manifest := {"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),"run_id":OS.get_environment("AMBUSH_TEST_RUN_ID"),"level_checkpoint":id,"progress_level":settings.progress_level_id(),"files":files,"scope":"Read-only copy of original naturally written user ConfigFiles. No progress/seen/unlock/resource grants."}
+	var file := FileAccess.open(directory+"/manifest.json",FileAccess.WRITE)
+	file.store_string(JSON.stringify(manifest,"  "))
+	file.close()
+	journey_rows.append({"level":id,"action":"seal original natural player ConfigFiles","directory":directory,"manifest":manifest})
 
 func _set_tool(wanted: int) -> bool:
 	for step in 4:
@@ -389,16 +442,40 @@ func _mission(plan: Array) -> bool:
 	await _modal_capture(sample+"_won")
 	journey_rows.append({"level":id,"action":"original WON/progress","waves":main.raid.waves_cleared,"terminal":main.battle_log.terminal_tick,"events":main.battle_log.events.size(),"progress":settings.progress_level_id(),"inventory":_inventory()})
 	var source = main.battle_log
-	var stream_path := "res://build/asset_review/pr15-runtime/native-player-"+id+"-record.bin"
+	var stream_path := journey_output + "/native-player-"+id+"-record.bin"
 	var stream_file := FileAccess.open(stream_path,FileAccess.WRITE)
 	stream_file.store_buffer(var_to_bytes({"attempt_id":source.attempt_id,"events":source.events,"snapshots":source.snapshots,"terminal_tick":source.terminal_tick,"terminal_reason":source.terminal_reason,"playback_schema":source.playback_schema,"playback_snapshots":source.playback_snapshots,"playback_terminal_tick":source.playback_terminal_tick}))
 	stream_file.close()
 	journey_rows.append({"level":id,"action":"archive actual native player battle and command recording","path":stream_path,"sha256":FileAccess.get_sha256(stream_path),"attempt":source.attempt_id,"playback_schema":source.playback_schema,"playback_terminal_tick":source.playback_terminal_tick,"playback_frames":source.playback_snapshots.size()})
+	_checkpoint_progress(id)
 	_write_journey()
 	await _click(main.continue_button)
 	if id == "radio":
 		_check(main.credits_overlay.is_open(),"ordinary final CTA opens original campaign credits")
-		return true
+		if not main.credits_overlay.is_open(): return false
+		await _modal_capture(sample+"_credits_open")
+		var scroll := main.credits_overlay.find_child("CreditsScroll",true,false) as ScrollContainer
+		_check(scroll != null,"original credits scroll exists")
+		if scroll == null: return false
+		var before := scroll.scroll_vertical
+		for i in 5: await _native_click(scroll,5)
+		_check(scroll.scroll_vertical>before,"native credits wheel scroll reaches original recap")
+		await _modal_capture(sample+"_credits_scrolled")
+		var back: Button
+		for button in main.credits_overlay.find_children("*","Button",true,false):
+			if button.text == "返回标题": back = button
+		_check(back != null,"original credits return button exists")
+		if back == null: return false
+		journey_rows.append({"level":id,"action":"original native credits open and scroll","is_open":main.credits_overlay.is_open(),"scroll_before":before,"scroll_after":scroll.scroll_vertical})
+		await _click(back)
+		await _settle()
+		main = current_scene
+		_check(main.scene_file_path=="res://scenes/title.tscn","original native credits button returns to Title")
+		await _modal_capture(sample+"_credits_return_title")
+		_checkpoint_progress("radio-credits-return")
+		journey_rows.append({"level":id,"action":"original native credits returned Title","scene":main.scene_file_path,"record_sha256":FileAccess.get_sha256(stream_path)})
+		_write_journey()
+		return main.scene_file_path=="res://scenes/title.tscn"
 	_check(main.night_handoff.is_open(), "original Continue opens authored next-night handoff")
 	if not main.night_handoff.is_open(): return false
 	await _modal_capture(sample+"_next_night_handoff")
