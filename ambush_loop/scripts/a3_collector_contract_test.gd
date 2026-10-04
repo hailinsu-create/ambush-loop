@@ -95,7 +95,7 @@ func _run() -> void:
 	_check(live[Collector.COLUMNS.find("main_auto_process")]==0,"explicit frozen source process is recorded")
 	_check(live[Collector.COLUMNS.find("collector_usec")]>=0,"timer covers counters and completed table storage")
 	_check(_backend_bytes(main)==before,"manual collector callbacks preserve actual original log/HP/ammo/inventory/positions")
-	var scope := collector.row_at(0).duplicate(true)
+	var scope: Array = collector.row_at(0).duplicate(true)
 	for ignored: int in 20: collector._sample()
 	_check(collector.row_count==12 and collector.overflow_rows==11,"bounded full table rejects exact overflow and keeps earlier rows")
 	_check(collector.row_at(0)==scope,"capacity cannot silently overwrite first/cold raw row")
