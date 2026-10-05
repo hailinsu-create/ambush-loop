@@ -14,6 +14,6 @@
 
 每阶段timely START/检查点/END，actual requests/最终PTY码分别收取；异常不覆盖原loaded script/receipt/原记录、截图同名覆盖不补造。最终所有engine/browser/serverEND/端口closed/原profile安全保存后封存normal Git push+远端readback，并替换PR当前顶段（正文已64622字符，不再无限追加）。必要纯reader审计只能在BrowserEND后单engine+unique private user://，不当真实战场或whole。
 
-当前RUNNING：原profile实际核对0，新railcut da8原双波WON producer0/463.152s/cap900、原binb50/15,373,004/1017frames/45events/t7610先封。28文件/7图producer检查点已保存，唯一PID159645/session17172原scene whole1×自然进行；whole2/depot交接保存/END待，首browser恢复错误页方法1保留。其余状态以 `AMBUSH_PR15_WEB_RAILCUT_PRODUCER_CHECKPOINT_20261005.md` 为准。
+当前 **PASS_BOUNDED_FUNCTIONAL_END**：原profile实际核对0，da8双波自然WON producer0/463.152s/cap900；同原bin完整whole1×/2× actual0，callbackwall469.5659/235.7332s、cap791/410.5，原record/domain保持；depot首次两页教学/解锁/精确cfg与checkpoint reload/Continue新刀具SCOUT/安全Title实际通过。browser/controller11:46:52 UTC END actual0，之后唯一native原bin纯reader16350/0 actual0 E0/S0/guard通过，最终live0/portsclosed/profilelock absent。28+48证据/16原PNG已看；首browser恢复错误页及finish全局变量误写边界receipt endpoint损失保留。当前有效结果见 [railcut功能END](AMBUSH_PR15_WEB_RAILCUT_FUNCTIONAL_END_20261005.md)，原producer检查点仅历史RUNNING快照。
 
-本片未验：真实railcut两波/新bin/whole/depot教学保存；后depot/radio5波、yard当前whole、全候选正常13波/六关全1×2×/A3/fullsmoke/FINAL/触控世界锁门/正式origin/+128B/设备/APK保留。原父QA143/1/+128B/一PNG损失、预算None负例及rawJS whitespace2、producer旧PTY未知码均不改。资产所有权/版本化manifest-clip-socket-LOD接口保持，无author源或生成输出编辑。GPT PLAN/REVIEW unavailable。
+本片已验与未验以上述END分列：后depot/radio5波、yard当前whole、全候选正常13波/六关全1×2×/A3/fullsmoke/FINAL/触控世界锁门/正式origin/+128B/设备/APK保留。原父QA143/1/+128B/一PNG损失、预算None负例及rawJS whitespace2、producer旧PTY未知码均不改。下一真实depot存档独立有界包；私有v3保持。资产所有权/版本化manifest-clip-socket-LOD接口保持，无author源或生成输出编辑。GPT PLAN/REVIEW unavailable。

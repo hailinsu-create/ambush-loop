@@ -1,0 +1,18 @@
+{
+  "status": "METHOD_EVIDENCE_LOSS_RETAINED",
+  "scope": "first finish script used global label and receipt loop variables colliding with exec controller globals; overwrote boundary request receipt end; original boundary request returned actual0 at 11:45:26.957743 UTC in observed stdout, original stored receipt no longer exact. Saved raw overwritten receipt and loaded faulty script; original profile/input/PNGs/record intact. Subsequent finish uses proof_label/proof_receipt. Do not classify overwritten receipt original endpoint as exact or reconstruct original bytes.",
+  "observed_boundary_stdout": {
+    "RAILCUT_PROGRESS_END": "2026-10-05T11:45:26.957743+00:00",
+    "status": "PASS",
+    "next": "depot",
+    "cleared": [
+      "yard",
+      "warehouse",
+      "pump",
+      "railcut"
+    ],
+    "whole": "PASS",
+    "owned_pages": 1,
+    "actual_exit": 0
+  }
+}
