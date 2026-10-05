@@ -1,0 +1,247 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+  "head_at_start": "3a0e8abfa1958b964fdedfa2f76a10c2e161ff65",
+  "status": "PRODUCER_PROGRESS_PASS_WHOLE_PENDING",
+  "record_sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf",
+  "file_count": 47,
+  "total_bytes": 19578581,
+  "files": [
+    {
+      "path": "browser_controller.py",
+      "bytes": 3530,
+      "sha256": "3aca5cffc051dd51578ff0cb01a2d7e8d0c3c20f3533d1bf970353bf2f3f50d0"
+    },
+    {
+      "path": "driver_core.py",
+      "bytes": 11106,
+      "sha256": "8d94e14b85e3d9dcb063eebb342e8b374d0cf91a127b9662b5dcb5f7c623431b"
+    },
+    {
+      "path": "driver_whole_and_progress.py",
+      "bytes": 8602,
+      "sha256": "f5e98ffeed1e0453354b3603ee759450e3fc32384d5f78ececc667ce4f5a44c4"
+    },
+    {
+      "path": "expected-profile-before.json",
+      "bytes": 3348,
+      "sha256": "5c672c7309baa8bca2140c03b44b2a0baf851765f625e6afc756488d72ae6c81"
+    },
+    {
+      "path": "initialize.py",
+      "bytes": 1666,
+      "sha256": "db5229819ca03a2882007cd41bbf2a5d4ecbd44cbb28ce668ec04287a33fd297"
+    },
+    {
+      "path": "negative-budget-clock/loaded-script.py",
+      "bytes": 1737,
+      "sha256": "4ddac8adc2ca1af8c4489fcc942079fb19b8ce18a1bf053b7719982c4839b670"
+    },
+    {
+      "path": "negative-budget-clock/method-note.json",
+      "bytes": 394,
+      "sha256": "a64542a27147982f4443679a6938201648b5fe65a223323118e167768d29d468"
+    },
+    {
+      "path": "negative-budget-clock/receipt.json",
+      "bytes": 2243,
+      "sha256": "7bbcc7b3c4b0652c73b6a7f9c737f820fa99feeb68aa86acaf7f2cdbe358bddd"
+    },
+    {
+      "path": "produce_pump.py",
+      "bytes": 1737,
+      "sha256": "4ddac8adc2ca1af8c4489fcc942079fb19b8ce18a1bf053b7719982c4839b670"
+    },
+    {
+      "path": "produce_pump_v2.py",
+      "bytes": 1782,
+      "sha256": "899ee04609f1467eba8b19de86921eb2f816c071fdebd08e2cc652e01344d894"
+    },
+    {
+      "path": "producer-end.json",
+      "bytes": 2572,
+      "sha256": "9e6e60dda51e1049ddef09bb5998d3d23d6415574e69ffb3c62c3df5ba74dcd6"
+    },
+    {
+      "path": "pump_boundary.py",
+      "bytes": 2725,
+      "sha256": "9bf036099881503eb52b027adc28ea701ea90d6b7cec14e7936720b9ce4d3391"
+    },
+    {
+      "path": "run/driver-actions.jsonl",
+      "bytes": 1071513,
+      "sha256": "6785e54fde1bc9fbd9a3ab2b436a1b19b07989fc0a917b59aa4e43925fc91897"
+    },
+    {
+      "path": "run/http.log",
+      "bytes": 1122,
+      "sha256": "e3afc72e4602bef9e3093a520084a42eea34af676e1645717ca4dfe00fed0a48"
+    },
+    {
+      "path": "run/initialize-pump-profile.json",
+      "bytes": 1670,
+      "sha256": "c8f50034ba07c6afc116589bd7ad1fe6866482de45e8fe639dbb271d2cb83f9a"
+    },
+    {
+      "path": "run/owned-pages-startup.json",
+      "bytes": 261,
+      "sha256": "e4fbf0e6105920645b835f7daa059a2b64aa62894fa881db235b501539326908"
+    },
+    {
+      "path": "run/produce-pump-natural-v2.json",
+      "bytes": 1675,
+      "sha256": "01673be234f0bd0ba7c4f52370c171a520e3020c24cdafc45d5992073ede9d24"
+    },
+    {
+      "path": "run/produce-pump-natural.json",
+      "bytes": 2243,
+      "sha256": "7bbcc7b3c4b0652c73b6a7f9c737f820fa99feeb68aa86acaf7f2cdbe358bddd"
+    },
+    {
+      "path": "run/profile-after-pump.json",
+      "bytes": 4867,
+      "sha256": "11ff876b2d773dde105218ac75e72cbb8393746f26e1f11c9af7ca6559e96bec"
+    },
+    {
+      "path": "run/profile-before.json",
+      "bytes": 3477,
+      "sha256": "ab17d7f3bdfb4982730c594850dbbdf170336d9955228f0a75f00d3d1becb675"
+    },
+    {
+      "path": "run/pump-boundary-final-browser.json",
+      "bytes": 1158,
+      "sha256": "e43ee0f3700261147002eb42b9a41763efa7f6e5959c4a269b44cb5f664c00f3"
+    },
+    {
+      "path": "run/pump-boundary-final-fingerprints.json",
+      "bytes": 2969,
+      "sha256": "e6cbf3bb390f038df1bca8e5071aa2002394779b7ccafef0252fa359db019b46"
+    },
+    {
+      "path": "run/pump-browser-trusted.json",
+      "bytes": 14338,
+      "sha256": "0ddc61232d97e79f5536c87002f7e802637c66bd7f9a2c504fcfb8064baa2bea"
+    },
+    {
+      "path": "run/pump-original-fingerprints.json",
+      "bytes": 42594,
+      "sha256": "13d862d9eb67e8f17672bc24b155be59ed0ffe3c8d8987a55eb45f2ef1c10d67"
+    },
+    {
+      "path": "run/pump-producer.json",
+      "bytes": 8677,
+      "sha256": "d722a12b6fa2785e584e7f3f027878795d4be70ad00be86f56d8a187dfc40af9"
+    },
+    {
+      "path": "run/pump-record.bin",
+      "bytes": 11203052,
+      "sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf"
+    },
+    {
+      "path": "run/pump-save-unlock-railcut-reload.json",
+      "bytes": 2196,
+      "sha256": "92f17c66cb38ba52b5074473466f7c9cc7eef87ebd5c552bfac040563f6596db"
+    },
+    {
+      "path": "run/pump-start-checkpoint.json",
+      "bytes": 8485,
+      "sha256": "474a640da9ec161cd039840296c5bdb21b1917ecd7e8a8ad5deaf7ee5dd1d039"
+    },
+    {
+      "path": "run/pump_armed_scout.png",
+      "bytes": 733999,
+      "sha256": "a14af587497e52924ad31639d801ed3a49366aabd9630389c4b801f06faf6b83"
+    },
+    {
+      "path": "run/pump_before_continue_title.png",
+      "bytes": 110090,
+      "sha256": "eb255e7d0dae3a6f5960da0b9d83133e88b2ee55fc004bc06d9090df2069a9d7"
+    },
+    {
+      "path": "run/pump_cleared_mission_rows.png",
+      "bytes": 90586,
+      "sha256": "2b051dd7f350a4c4f00d5fb9e9e9bb55245951431ee2ddbbf9d99797a8c6592e"
+    },
+    {
+      "path": "run/pump_next_handoff.png",
+      "bytes": 206014,
+      "sha256": "100459952e44656ad75c7a7ee59e276fa1b713155cab239ecc7ec5af9f6431c8"
+    },
+    {
+      "path": "run/pump_reload-after-reload.json",
+      "bytes": 3743,
+      "sha256": "cff8ef7fd13a332ce832cab6ed6be0a8bdece5392de0a9ee20b3fdea93a91ca6"
+    },
+    {
+      "path": "run/pump_reload-before-reload.json",
+      "bytes": 4437,
+      "sha256": "962c33bc35390cb6fe135a5e8ad590704454bd5f6baa06d05b1cf53a63d9b9ba"
+    },
+    {
+      "path": "run/pump_reload-browser-before-reload.json",
+      "bytes": 16166,
+      "sha256": "582d79ae808afa67330c052a2c68805f0e6b62dce2b2e47ddfd7e5813cc0e823"
+    },
+    {
+      "path": "run/pump_reload-engine-before-reload.json",
+      "bytes": 42234,
+      "sha256": "1631e2fdebb014bc339488764343fd637719a3bc9bd84277aeea7a4bf522d32f"
+    },
+    {
+      "path": "run/pump_reload_reloaded_mission_rows.png",
+      "bytes": 87960,
+      "sha256": "e39e918212025d6a27b625e596d9403bd2efe05c4d7a8a9d42df868390288328"
+    },
+    {
+      "path": "run/pump_saved_railcut_next_title.png",
+      "bytes": 112557,
+      "sha256": "6ca3316dabcb38f580ac86a905e6925c2591a33c87d155cccc1002019a07c3f1"
+    },
+    {
+      "path": "run/pump_wave0_alert.png",
+      "bytes": 682258,
+      "sha256": "95c948f37c3c1731ecea963f399617f799d53f413a76bf92c9218478815c9fd2"
+    },
+    {
+      "path": "run/pump_wave0_sweep.png",
+      "bytes": 713539,
+      "sha256": "fdf43a7dfa20b699cacc19f62303e85bdd245d4ea4e2fb7eb21692a69502a11d"
+    },
+    {
+      "path": "run/pump_wave1_alert.png",
+      "bytes": 675714,
+      "sha256": "8a799b15364cb705e7fd4c879143a560e02b5773d7e0da0051f504daf9e3f6a9"
+    },
+    {
+      "path": "run/pump_wave1_sweep.png",
+      "bytes": 1037180,
+      "sha256": "13e992510a1b6307f0dbee1a538ff9b6431bff8af81b170ddf515082334bf957"
+    },
+    {
+      "path": "run/pump_won.png",
+      "bytes": 761029,
+      "sha256": "ab1420eacdbe62f8ce41408e2ff4be6d6cea1fccdce44b10c6bd0b3955e79ae5"
+    },
+    {
+      "path": "run/railcut_continued_knife_scout.png",
+      "bytes": 960344,
+      "sha256": "45608e14e4e21b96821a832c5e7dad47388f6ba71d7076e7b3a58b10f6259fb3"
+    },
+    {
+      "path": "run/railcut_tutorial_0.png",
+      "bytes": 438924,
+      "sha256": "c3be5b573774378bc15d38659382b7d67986f5e71f3ecb01ff481231a60cc9ed"
+    },
+    {
+      "path": "run/railcut_tutorial_1.png",
+      "bytes": 469474,
+      "sha256": "3861c4e376611ef90316a9aa1f9fe46c897e8b6c64fe1a6ee88940bc237840ff"
+    },
+    {
+      "path": "spec.json",
+      "bytes": 20594,
+      "sha256": "a9a32ced347c0594795a836bee6fff7d13bf1c9d0ae0caef8e32bef5d23e2476"
+    }
+  ],
+  "scope": "same preserved original campaign profile, no fixture query; new knife-only pump attempt natural two waves and WON; railcut handoff first tutorial and same-origin reload; no producer replay or railcut producer yet"
+}
