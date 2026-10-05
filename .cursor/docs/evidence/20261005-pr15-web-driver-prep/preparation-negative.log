@@ -1,0 +1,9 @@
+Source-only preparation method failures, not runtime/product checks:
+1. git sparse-checkout add --no-cone ...: actual exit129, unknown option no-cone.
+   Corrected to add --stdin in the existing non-cone worktree: actual exit0.
+2. First python3 prepare_spec.py: actual exit1 before any generated output.
+  File "/workspace/ambush-pr15-web-plan/.cursor/docs/evidence/20261005-pr15-web-driver-prep/prepare_spec.py", line 98
+    })
+    ^
+SyntaxError: closing parenthesis '}' does not match opening parenthesis '[' on line 78
+   Corrected the missing closing list-comprehension bracket; next invocation recorded separately.

@@ -1,0 +1,24 @@
+{
+  "kind": "source_only_light_verification",
+  "date": "2026-10-05",
+  "command": "python3 stdin: ast.parse generator; json.loads spec; verify spec SHA and 14 Git-source pins; assert 6 missions/13 waves/8 archive fields/UNRUN statuses/frozen window/game tree",
+  "actual_exit": 0,
+  "json_syntax": true,
+  "python_ast": true,
+  "spec_hash_verified": true,
+  "source_pins_verified": 14,
+  "source_missions": 6,
+  "source_waves": 13,
+  "runtime_status": "UNRUN",
+  "game_tree_unchanged": true,
+  "git_diff_check_exit": 0,
+  "qa_worktree_head": "b46c31c008ae8dea700b3c36ad9b514e68b7e1ac",
+  "qa_worktree_clean": true,
+  "github_before_push": {
+    "head_sha": "b46c31c008ae8dea700b3c36ad9b514e68b7e1ac",
+    "draft": true,
+    "state": "open",
+    "merged": false,
+    "body_chars": 49464
+  }
+}
