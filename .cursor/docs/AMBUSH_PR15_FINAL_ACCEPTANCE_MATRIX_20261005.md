@@ -1,5 +1,8 @@
 # PR15 最终候选剩余验收矩阵与合批顺序
 
+2026-10-05追加：[最小REPLAY touch候选END](AMBUSH_PR15_REPLAY_TOUCH_CANDIDATE_END_20261005.md)固定runtime95daa05/tree e331，较下文基线1ec仅main省相邻第二刷新；已有producer/whole cohort不拼成此候选最终13。已完成有界子诊断与fresh ABBA/原消费者最终HUD等价，源码调用2→1/style50→25；不利p95、约1%漂移与两原monolithic cap60失败保留，两个对应行为变体通过，不称原时间门通过。owned engines/browser END18:46:54/live0，下一父端独立QA；production release新包/Site更新尚无，独立合格前不发布。原samecandidate13/核心fullsmoke/全艺术/听感/A3/APK/设备与archive身份门仍待，下文历史入口保留。
+
+
 2026-10-05。父端已读 radio 作者完整终态 `6cbb71ade950238f9a55e1f2ec8c4c3285980cb4`，接管唯一引擎窗口，独立验证 `1ec` 普通回放存档修复及真实刷新/关闭重开。**本片只有只读盘点、文档和未运行 spec；没有启动 Godot、浏览器、HTTP、导出、采样、音频或设备，也没有新增功能、资产、部署。必须收到父端 QA END 与明确归还窗口后才执行下一包。** 时间流逝、agent idle 或旧 END 不代表归还。
 
 盘点对象的产品 source 为 `1ec3198e9c0db367af96fc264604c5a286003b5e`，game tree 为 `1e8af45ee23098f763acc139b56f8f7e0f41665a`。它是当前候选，尚不是全部门通过的 FINAL。后续 docs HEAD 与实际运行 source 分列；QA 若产生产品修复，先锁定新 source/tree/PCK，再启动受影响包。继承[执行 v2](AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md)、[统一候选契约](AMBUSH_PR15_UNIFIED_CANDIDATE_EVIDENCE_PLAN_20261004.md)和[同候选/FX/A3计划](AMBUSH_PR15_SAME_CANDIDATE_FX_A3_PLAN_20261004.md)。本文更新剩余工作顺序和证据复用方法，未降低原验收门槛。

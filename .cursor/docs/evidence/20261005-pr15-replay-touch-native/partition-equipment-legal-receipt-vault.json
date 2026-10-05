@@ -1,0 +1,29 @@
+{
+  "label": "partition-equipment-legal",
+  "start": "2026-10-05T18:30:22.601815+00:00",
+  "argv": [
+    "bash",
+    "/workspace/pr15-replay-touch-candidate-95daa-20261005/scripts/run_isolated_test.sh",
+    "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/godot-part",
+    "equipment_freeze_test.gd",
+    "--headless"
+  ],
+  "cap_s": 60,
+  "part": {
+    "part": "legal",
+    "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-legal.gd",
+    "sha256": "6f24cb7c02c5b0d4a017da9190f2bdea08f10bc5463ae79682014fb80e2fff33"
+  },
+  "process_group_owned": true,
+  "pid": 175281,
+  "timeout": false,
+  "end": "2026-10-05T18:30:46.234467+00:00",
+  "actual_exit": 0,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "guard": true,
+  "summary": [
+    "TEST_RUN_ID=4116a512d7d44353bfcfc7380a2ab0ee",
+    "EQUIPMENT_FREEZE_OK checks=12"
+  ]
+}

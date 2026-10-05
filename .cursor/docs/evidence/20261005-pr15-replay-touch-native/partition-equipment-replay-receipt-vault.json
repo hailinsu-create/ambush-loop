@@ -1,0 +1,29 @@
+{
+  "label": "partition-equipment-replay",
+  "start": "2026-10-05T18:29:38.812655+00:00",
+  "argv": [
+    "bash",
+    "/workspace/pr15-replay-touch-candidate-95daa-20261005/scripts/run_isolated_test.sh",
+    "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/godot-part",
+    "equipment_freeze_test.gd",
+    "--headless"
+  ],
+  "cap_s": 60,
+  "part": {
+    "part": "replay",
+    "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-replay.gd",
+    "sha256": "f88b1a754e51ae56265976da64d2048de44b844628357d1423f9a9b0ba423e8a"
+  },
+  "process_group_owned": true,
+  "pid": 175259,
+  "timeout": false,
+  "end": "2026-10-05T18:30:22.601334+00:00",
+  "actual_exit": 0,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "guard": true,
+  "summary": [
+    "TEST_RUN_ID=7f4d9ec5d17e484ebae081af1da3fb62",
+    "EQUIPMENT_FREEZE_OK checks=18"
+  ]
+}
