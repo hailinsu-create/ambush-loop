@@ -141,15 +141,15 @@ func _create_browser_save_feedback() -> void:
 	layer.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(layer)
 	_browser_save_label = Label.new()
-	_browser_save_label.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	_browser_save_label.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	_browser_save_label.offset_left = -180
 	_browser_save_label.offset_right = 180
-	_browser_save_label.offset_top = 3
-	_browser_save_label.offset_bottom = 23
+	_browser_save_label.offset_top = -20
+	_browser_save_label.offset_bottom = -2
 	_browser_save_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_browser_save_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_browser_save_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_browser_save_label.add_theme_font_size_override("font_size", 14)
+	_browser_save_label.add_theme_font_size_override("font_size", 12)
 	layer.add_child(_browser_save_label)
 
 
