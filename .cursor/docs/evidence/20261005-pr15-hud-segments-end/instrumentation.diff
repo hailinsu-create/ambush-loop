@@ -1,0 +1,206 @@
+--- yard-QA/scripts/main.gd
++++ HUD-QA/scripts/main.gd
+@@ -6670,15 +6670,29 @@
+ func _apply_replay_scrub() -> void:
+ 	if phase != Phase.REPLAY:
+ 		return
++	var qa = get_node("/root/EventLogObserver")
++	if qa.active: qa.root_calls += 1
++	var measured: bool = qa.active and qa.measure_enabled
++	var q0: int = Time.get_ticks_usec() if measured else 0
+ 	var snap: Dictionary = replay.snapshot_at_or_before(replay.scrub_tick)
+ 	if scrub_slider and replay.max_tick() > 0:
+ 		scrub_slider.set_value_no_signal(float(replay.scrub_tick) / float(replay.max_tick()))
++	var q1: int = Time.get_ticks_usec() if measured else 0
+ 	_paint_replay_snapshot(snap)
++	var q2: int = Time.get_ticks_usec() if measured else 0
+ 	var clock_label := "播放" if replay.continuous_playback else "复盘"
+-	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "%s t=%.1fs · 点击定位" % [clock_label, float(replay.scrub_tick) / 60.0])
++	var qa_events: Array = replay.events_up_to(replay.scrub_tick)
++	var qa_title: String = "%s t=%.1fs · 点击定位" % [clock_label, float(replay.scrub_tick) / 60.0]
++	var q3: int = Time.get_ticks_usec() if measured else 0
++	_fill_event_list(qa_events, 12, qa_title)
++	var q4: int = Time.get_ticks_usec() if measured else 0
+ 	_update_replay_status()
++	var q5: int = Time.get_ticks_usec() if measured else 0
+ 	_refresh_replay_transport()
++	var q6: int = Time.get_ticks_usec() if measured else 0
+ 	_update_hud()
++	var q7: int = Time.get_ticks_usec() if measured else 0
++	if measured: qa.record_root(q7-q0,q1-q0,q2-q1,q3-q2,q4-q3,q5-q4,q6-q5,q7-q6)
+ 
+ 
+ func _update_replay_status() -> void:
+--- yard-QA/scripts/presentation/presenter_3d.gd
++++ HUD-QA/scripts/presentation/presenter_3d.gd
+@@ -258,6 +258,10 @@
+ func refresh() -> void:
+ 	if host.level == null:
+ 		return
++	var qa = get_node("/root/EventLogObserver")
++	if qa.active: qa.presenter_calls += 1
++	var measured: bool = qa.active and qa.measure_enabled
++	var qa_start: int = Time.get_ticks_usec() if measured else 0
+ 	# Hide only the RenderingServer canvas branch. Node visibility and all
+ 	# simulation participation checks retain their original values.
+ 	RenderingServer.canvas_item_set_visible(host.get_node("World").get_canvas_item(), false)
+@@ -312,6 +316,8 @@
+ 		host.touch_hud._hint.position.y = 60.0
+ 	if host.c2 != null and host.c2.help_chip != null and host.c2.help_chip.text.contains("短拖"):
+ 		host.c2.help_chip.text = "点选 / 点地移动 · 双指操作镜头 · 近背面出绕背"
++
++	if measured: qa.presenter_usec += Time.get_ticks_usec()-qa_start
+ 
+ 
+ func _layout_camera_controls() -> void:
+--- yard-QA/qa/event_log_observer.gd
++++ HUD-QA/qa/event_log_observer.gd
+@@ -7,7 +7,7 @@
+ var callback: JavaScriptObject
+ var presents: int = 0
+ var input_rows: Array = []
+-var replay_rows: Array = []
++var replay_rows: Array = [] # deliberately empty: no unbounded per-frame dict sampler
+ var record_bytes: PackedByteArray
+ var record_meta: Dictionary = {}
+ var observed_usec: int = 0
+@@ -18,6 +18,8 @@
+ 	process_priority = 10000
+ 	callback = JavaScriptBridge.create_callback(_receive)
+ 	JavaScriptBridge.get_interface("window").pr15Observer = callback
++	samples.resize(2048*WIDTH)
++	posts.resize(2048*3)
+ 	RenderingServer.frame_post_draw.connect(_presented)
+ 	call_deferred("_cold_fixture")
+ 
+@@ -56,6 +58,15 @@
+ 
+ func _presented() -> void:
+ 	presents += 1
++	var now: int = Time.get_ticks_usec()
++	if active and now >= collect_start and now < collect_end:
++		if post_count >= 2048: overflow = true; active = false; done = true; return
++		var k: int = post_count*3
++		posts[k] = Engine.get_process_frames()
++		posts[k+1] = now
++		posts[k+2] = now-last_post if last_post > 0 else 0
++		post_count += 1
++	last_post = now
+ 
+ func _receive(args: Array) -> void:
+ 	var request: Variant = JSON.parse_string(str(args[0]))
+@@ -242,6 +253,10 @@
+ 	var value: Variant
+ 	var started: int = Time.get_ticks_usec()
+ 	match str(r.action):
++		"meter_begin": value = _meter_begin(r)
++		"meter_status": value = {"done":done,"active":active,"rows":row_count,"overflow":overflow}
++		"meter_result": value = _meter_result()
++		"canonical": value = _canonical()
+ 		"state": value = _state()
+ 		"controls": value = _controls()
+ 		"project_targets": value = _project(r)
+@@ -265,6 +280,100 @@
+ 		input_rows.append(row)
+ 
+ func _process(delta: float) -> void:
+-	var m = get_tree().current_scene
+-	if m != null and "phase" in m and m.phase == m.Phase.REPLAY:
+-		replay_rows.append({"us":Time.get_ticks_usec(),"tick":m.replay.scrub_tick,"rate":m.replay.speed,"playing":m.replay.playing,"delta":delta,"view_tick":m.presentation_3d.frame.get("playback_tick",-1),"attempt":m.battle_log.attempt_id})
++	var start: int = Time.get_ticks_usec()
++	var m = get_tree().current_scene
++	if active and start >= collect_end: active = false; done = true
++	if active and start >= collect_start and m != null and "phase" in m:
++		if row_count >= 2048: overflow = true; active = false; done = true
++		else:
++			var k: int = row_count*WIDTH
++			samples[k] = Engine.get_process_frames()
++			samples[k+1] = start
++			samples[k+2] = m.replay.scrub_tick
++			samples[k+3] = int(m.presentation_3d.frame.get("playback_tick",-1))
++			samples[k+4] = 1 if m.replay.playing else 0
++			samples[k+5] = int(delta*1000000)
++			samples[k+6] = root_calls
++			samples[k+7] = presenter_calls
++			for i in 8: samples[k+8+i] = root_values[i]
++			samples[k+16] = presenter_usec
++			samples[k+17] = m._event_list_items.size()
++			samples[k+18] = 1 if m.event_log != null and m.event_log.is_visible_in_tree() else 0
++			samples[k+19] = Time.get_ticks_usec()-start
++			row_count += 1
++	root_calls = 0
++	presenter_calls = 0
++	presenter_usec = 0
++	root_values.fill(0)
++
++const WIDTH := 20
++const COLS = ["engine_frame","observer_us","tick","view_tick","playing","delta_us","root_calls","presenter_calls","root_us","select_slider_us","paint_us","event_select_title_us","list_us","status_us","transport_us","hud_us","presenter_us","list_rows","list_visible","sampler_us"]
++var active := false
++var measure_enabled := false
++var done := false
++var overflow := false
++var collect_start: int = 0
++var collect_end: int = 0
++var last_post: int = 0
++var row_count := 0
++var post_count := 0
++var root_calls := 0
++var presenter_calls := 0
++var presenter_usec := 0
++var root_values := PackedInt64Array([0,0,0,0,0,0,0,0])
++var samples := PackedInt64Array()
++var posts := PackedInt64Array()
++var meter_label := ""
++
++func record_root(a: int,b: int,c: int,d: int,e: int,f: int,g: int,h: int) -> void:
++	root_values[0] += a
++	root_values[1] += b
++	root_values[2] += c
++	root_values[3] += d
++	root_values[4] += e
++	root_values[5] += f
++	root_values[6] += g
++	root_values[7] += h
++
++func _meter_begin(r: Dictionary) -> Dictionary:
++	if active: return {"error":"measurement already active"}
++	var m = get_tree().current_scene
++	if m == null or m.phase != m.Phase.REPLAY: return {"error":"REPLAY required"}
++	var collect_s: float = float(r.get("seconds",20.0))
++	var warm_s: float = float(r.get("warm",2.0))
++	if collect_s <= 0 or collect_s > 20 or warm_s < 0 or warm_s > 2: return {"error":"bounded interval rejected"}
++	measure_enabled = bool(r.get("enabled",false))
++	meter_label = str(r.get("label",""))
++	row_count = 0; post_count = 0; root_calls = 0; presenter_calls = 0; presenter_usec = 0
++	root_values.fill(0); samples.fill(0); posts.fill(0)
++	last_post = 0; done = false; overflow = false
++	collect_start = Time.get_ticks_usec()+int(warm_s*1000000)
++	collect_end = collect_start+int(collect_s*1000000)
++	active = true
++	return {"label":meter_label,"enabled":measure_enabled,"collect_start_us":collect_start,"collect_end_us":collect_end,"warm_s":warm_s,"collect_s":collect_s,"capacity":2048}
++
++func _meter_result() -> Dictionary:
++	if active: return {"error":"cannot flush active measurement"}
++	var out: Array = []
++	for i in row_count:
++		var row: Array = []
++		for j in WIDTH: row.append(samples[i*WIDTH+j])
++		out.append(row)
++	var draw: Array = []
++	for i in post_count: draw.append([posts[i*3],posts[i*3+1],posts[i*3+2]])
++	return {"schema":1,"label":meter_label,"enabled":measure_enabled,"done":done,"overflow":overflow,"columns":COLS,"rows":out,"post_columns":["engine_frame","postdraw_us","interval_us"],"posts":draw,"collect_start_us":collect_start,"collect_end_us":collect_end,"capacity":2048,"scope":"fixed rows, no per-frame output/RPC; elapsed inclusive, software WebGL; OFF retains branches/lookup/counters/sampler; nested tags cannot be added"}
++
++func _canonical() -> Dictionary:
++	var m = get_tree().current_scene
++	if m == null or m.phase != m.Phase.REPLAY: return {"error":"canonical requires REPLAY"}
++	var v = m.presentation_3d
++	var snap: Dictionary = m.replay.snapshot_at_or_before(m.replay.scrub_tick)
++	var actors: Array = []
++	for group: String in ["ops","enemies","sentries"]:
++		for item: Dictionary in v.frame.get(group,[]):
++			var proxy = v.actors.get(group+":"+str(item.id))
++			var body = proxy.get_node_or_null("Body")
++			var bones: Array = []
++			for i in body.skeleton.get_bone_count(): bones.append(body.skeleton.get_bone_pose(i))
++			actors.append({"group":group,"id":item.id,"weapon":item.weapon,"root":_plain(proxy.position),"bone_count":bones.size(),"bone_sha256":_hash(var_to_bytes(bones)),"hand_socket":_plain(body.bone_socket("weapon_hand"))})
++	return {"tick":m.replay.scrub_tick,"attempt":m.battle_log.attempt_id,"wave_id":snap.wave_id,"frame_seq":snap.frame_seq,"recorded_phase":snap.data.phase,"snapshot_sha256":_hash(var_to_bytes(snap)),"actors":actors,"checks":_frame_checks(m),"view_size":v.rig.view_size,"yaw_deg":v.rig.yaw_deg,"pitch_deg":v.rig.pitch_deg,"event_count":m.replay.events_up_to(m.replay.scrub_tick).size(),"list_rows":m._event_list_items.size(),"list_visible":m.event_log.is_visible_in_tree()}

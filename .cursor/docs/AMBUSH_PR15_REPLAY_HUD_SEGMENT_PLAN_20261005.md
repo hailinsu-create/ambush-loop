@@ -1,5 +1,7 @@
 # PR15 有限REPLAY HUD分段测量计划（未运行）
 
+> 后续状态：父端47445后已授权执行，[实际测量END](AMBUSH_PR15_REPLAY_HUD_SEGMENTS_END_20261005.md)四轮actual0/总561.11秒；原P0超120秒actual1保留、补充方法门0。HUD root占比重复但ON/OFF推进方向混合，净开销/具体子热点未明；[下一子诊断/条件候选](AMBUSH_PR15_REPLAY_HUD_CAPTURE_CANDIDATE_PLAN_20261005.md)仍未实现/运行。下文保持启动前计划及当时“未运行”事实，不作为当前状态。
+
 2026-10-05，按父端“同私有Site更新之后先给有限分段计划”准备。当前source **1ec3198e9c0db367af96fc264604c5a286003b5e** / game tree **1e8af45ee23098f763acc139b56f8f7e0f41665a**，同私有Site v4已成功。**本计划没有实现timer补丁、导出instrumented包、启动profiler或采样；当前没有函数热点数据，更没有唯一瓶颈结论。** 原yard两速完整播放已独立END，软件功能墙时约3.18×记录长度不等于HUD耗时。
 
 下一包只回答：当前REPLAY一次advance驱动的主刷新中，各声明区间的elapsed时间/call count分布是什么，计时器是否改变原行为或显著扰动帧墙时。它不是优化提案、六关A3正式验收或设备FPS测试；不先删旧2D、跳HUD、降角色/FX/视距、改advance或加缓存。
