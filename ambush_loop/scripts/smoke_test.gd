@@ -1141,10 +1141,15 @@ func _assert_raid_contract(main) -> bool:
 			quit(80)
 			return false
 	print("SMOKE_OK_INSERT_LOADOUT explicit_ammo=", main.level.explicit_ammo)
-	if main.level.wave_count() < 2:
+	if main.level.wave_count() != 1:
 		push_error("SMOKE_YARD_WAVES %s" % main.level.wave_count())
 		quit(80)
 		return false
+	for legacy_level in ["warehouse", "pump", "railcut", "depot"]:
+		if LevelDef.by_id(legacy_level).wave_count() < 2:
+			push_error("SMOKE_LEGACY_WAVES " + legacy_level)
+			quit(80)
+			return false
 	if int(LevelDef.by_id("radio").wave_count()) != 3:
 		push_error("SMOKE_RADIO_WAVES %s" % LevelDef.by_id("radio").wave_count())
 		quit(80)

@@ -1,5 +1,7 @@
 # Ambush Loop 规划与续开发入口
 
+2026-10-06 最新 B2 状态：院子实际主路/侧翼交火重叠，两参考、邻近容错、朝向反例及干净无雷反事实七场景通过（run `80ff478056a549d4a18f9b0eea95ed1c`）。最新有效部署与侧翼入口见 [B2 执行记录](AMBUSH_M2_B2_EXECUTION_PLAN_20261006.md) 的最新候选节。外部 GPT 已恢复并给出真实 PLAN，独立源码验收/最终集成仍待完成；旧历史 M1 两波门保留原语义。下一步 D1 → C → E → F，真机/真人暂缓。
+
 当前执行入口：[M2 玩法与协作 3D 整合规划](AMBUSH_M2_INTEGRATION_REPLAN_20261005.md)。顺序仍为 I0 → T3 → B2 → D1 → C → E → F。M2-I0 独立分支的选择性院子 3D 桌面接入、真实 B1 箱子 3D 点选至搜索拾取接缝、定向门、共享回归、六关 smoke 与真实渲染均通过；GPT 已对精确差异与 iteration-2 输出给出 DONE。[Draft PR #29](https://github.com/hailinsu-create/ambush-loop/pull/29) 已推送，依赖 Draft PR #28。下一切片进入 M2-T3 触屏目标尺寸与输入归属。真机/真人暂缓，不合并 PR #15 整分支。
 
 [M2-T3 触屏目标尺寸与界面输入归属](AMBUSH_M2_T3_TOUCH_TARGET_PLAN_20261005.md) 是当前实施切片的有效规格。[T3 执行记录](AMBUSH_M2_T3_EXECUTION_20261006.md)：真实两尺寸/两场景的目标矩形与触摸归属门已通过，修正小按钮、隐藏确认/取消、肖像直接触摸和底栏空白穿透；GPT 已复审代码/定向回归，无修正项，完整六关 smoke 尚在执行，尚未 DONE。手机/真人门仍暂缓。
@@ -7,6 +9,8 @@
 2026-10-06 当前在 M2 阶段：[游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) 是玩法与验收基线；T1/T2 桌面检查、M2-I0 桌面接入和 GPT 复审已通过，手机验收、首局盲测及 M2 全阶段退出条件仍未完成。执行证据见 T2 与 M2-I0 报告，M2-T3 是下一待实施切片。
 
 更新日期：2026-10-06。仅用于本游戏；设计文件不是实现或验收证明。
+
+最新实现切片：[M2-B2 单次接触与两种打法](AMBUSH_M2_B2_EXECUTION_PLAN_20261006.md)。基于 T3 `a818664` 独立工作区，六场景专项通过、场景切换回调修复；供给/共享/完整回归仍待闭环，外部评审 unavailable。随后按 D1→C→E→F，真机/真人暂缓。
 
 **云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；ChatGPT 连接器配对与外部 GPT 精确 SHA 评审仍受浏览器控制超时阻塞，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
 
