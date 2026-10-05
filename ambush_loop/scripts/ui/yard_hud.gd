@@ -10,6 +10,7 @@ var details_button: Button
 var menu_button: Button
 var commands: HBoxContainer
 var result_replay: Button
+var permission_mode_button: Button
 var buttons: Dictionary = {}
 var hidden_chrome: Dictionary = {}
 
@@ -33,6 +34,14 @@ func bind(main: Node) -> void:
 	details_button.pressed.connect(toggle_details)
 	menu_button = _top_button("菜单", -104, -16)
 	menu_button.pressed.connect(func(): host._toggle_pause_menu())
+	permission_mode_button = Button.new()
+	permission_mode_button.position = Vector2(16, 80)
+	permission_mode_button.size = Vector2(220, 48)
+	permission_mode_button.custom_minimum_size = Vector2(220, 48)
+	permission_mode_button.focus_mode = Control.FOCUS_NONE
+	permission_mode_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	permission_mode_button.pressed.connect(func(): host.apply_touch_command("permission_mode"))
+	add_child(permission_mode_button)
 	commands = HBoxContainer.new()
 	commands.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	commands.offset_left = -884
@@ -43,7 +52,7 @@ func bind(main: Node) -> void:
 	commands.add_theme_constant_override("separation", 8)
 	commands.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(commands)
-	for spec in [["rotate_ccw", "↺", 54], ["rotate_cw", "↻", 54], ["fire", "开火模式", 160], ["bag", "背包", 76], ["pause", "暂停", 88], ["speed", "1×", 64], ["abort", "中止", 76], ["replay", "时间轴复盘", 120], ["alarm", "开始交战", 156]]:
+	for spec in [["rotate_ccw", "↺", 54], ["rotate_cw", "↻", 54], ["fire", "开火模式", 160], ["bag", "背包", 76], ["pause", "暂停", 88], ["speed", "1×", 64], ["abort", "中止", 76], ["team_fire", "全队开火", 120], ["replay", "时间轴复盘", 120], ["alarm", "开始交战", 156]]:
 		var button := Button.new()
 		var cmd := str(spec[0])
 		button.text = str(spec[1])
@@ -130,6 +139,9 @@ func refresh() -> void:
 	var command_phase: bool = host._is_command_phase()
 	var watching: bool = host.phase == host.Phase.WATCHING
 	var replaying: bool = host.phase == host.Phase.REPLAY
+	permission_mode_button.visible = details_open and not result_open and host.phase == host.Phase.SETUP
+	permission_mode_button.text = "发动：手动许可（实验）" if host.yard_manual_permission else "发动：入伏自动（默认）"
+	permission_mode_button.tooltip_text = "仅待伏队员：自动在黄色区入伏许可；手动在交战中许可一次。不改变随遇开火或自动投雷。"
 	var phase_text := "准备"
 	if watching:
 		phase_text = "交战 · %.1fs" % host.sim.time_sec()
@@ -159,6 +171,9 @@ func refresh() -> void:
 	buttons["fire"].text = host.selected.fire_mode_label() if host.selected else "开火模式"
 	buttons["pause"].text = "继续" if host.sim.paused else "暂停"
 	buttons["speed"].text = "2×" if host.sim.speed >= 1.5 else "1×"
+	buttons["team_fire"].visible = not result_open and host.team_permission_visible()
+	buttons["team_fire"].text = host.team_permission_text()
+	buttons["team_fire"].disabled = host._manual_permission_queued or host._manual_permission_used
 	for node in [host.title_label.get_parent(), host.role_box, host.help_label, host.extra_bar, host.get_node("HUD/Root/BottomBar"), host.plan_readout, host.phase_chip, host.intel_chip, host.route_legend, host.spawn_teach_label]:
 		if node:
 			if not hidden_chrome.has(node):

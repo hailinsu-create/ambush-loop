@@ -7,6 +7,10 @@ enum Phase { SETUP, WATCHING, FAILED, WON, REPLAY, SWEEP }
 enum Tool { DEPLOY, TRIPWIRE, GRENADE, DECOY }
 
 var preparation_checkpoint = preload("res://scripts/raid/preparation_checkpoint.gd").new()
+const YARD_PERMISSION_CONTRACT := 1
+var yard_manual_permission := false
+var _manual_permission_queued := false
+var _manual_permission_used := false
 var restart_preparation_button: Button = null
 var result_replay_button: Button = null
 var _checkpoint_restoring := false
@@ -1161,6 +1165,7 @@ func _refresh_touch_hud() -> void:
 		phase_name, paused, hi, sfx_muted, _event_log_open and event_log != null and event_log.visible,
 		has_pack, has_door
 	)
+	touch_hud.set_team_permission(team_permission_visible(), team_permission_text(), _manual_permission_queued or _manual_permission_used)
 	if touch_hud.has_method("set_world_intent_pending"):
 		touch_hud.set_world_intent_pending(_is_command_phase() and not _touch_intent.is_empty(), str(_touch_intent.get("label", "")))
 	if touch_hud.has_method("set_alarm_cta") and alarm_button:
@@ -1209,6 +1214,12 @@ func apply_touch_command(cmd: String) -> void:
 	if _modal_blocks_input():
 		return
 	match cmd:
+		"permission_mode":
+			if level != null and level.level_id == "yard" and phase == Phase.SETUP:
+				yard_manual_permission = not yard_manual_permission
+				_update_hud()
+		"team_fire":
+			_queue_team_permission()
 		"alarm":
 			if phase == Phase.REPLAY:
 				_exit_replay_to_setup()
@@ -2371,6 +2382,7 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	yard_manual_permission = false
 	preparation_checkpoint.clear()
 	_cancel_touch_intent()
 	if yard_hud:
@@ -3494,6 +3506,10 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool, from_checkpoint: bool = false) -> void:
+	_manual_permission_queued = false
+	_manual_permission_used = false
+	if not keep_intel:
+		yard_manual_permission = false
 	if not keep_intel:
 		preparation_checkpoint.clear()
 	if restart_preparation_button:
@@ -5746,8 +5762,11 @@ func _sim_tick() -> void:
 		if op.visible and op.alive:
 			op.tick_cooldown(SimClock.TICK_DT)
 
-	# 3) Ambush zone arming
-	_tick_ambush_zone()
+	# 3) Permission source only; existing fire authority remains below.
+	if level.level_id == "yard" and yard_manual_permission:
+		_consume_team_permission()
+	else:
+		_tick_ambush_zone()
 
 	# 4) Enemy move — branch at decision. Mouth escape is resolved after every
 	#    runner has stepped so spawn-order cannot beat the first body at the cell.
@@ -5972,6 +5991,32 @@ func _tick_ambush_zone() -> void:
 			op.arm_ambush()
 			battle_log.add_event(sim.tick, "ambush_armed", op.op_id, -1, op.global_position, {"name": op.display_name})
 			_announce_payoff("ambush", {"name": op.display_name}, op.global_position)
+
+
+func team_permission_visible() -> bool:
+	return level != null and level.level_id == "yard" and phase == Phase.WATCHING and yard_manual_permission
+
+func team_permission_text() -> String:
+	if _manual_permission_used: return "已发动"
+	if _manual_permission_queued: return "已请求"
+	return "全队开火"
+
+func _queue_team_permission() -> void:
+	if not team_permission_visible() or _manual_permission_used or _manual_permission_queued: return
+	_manual_permission_queued = true
+	_refresh_touch_hud()
+
+func _consume_team_permission() -> void:
+	if not _manual_permission_queued or _manual_permission_used: return
+	_manual_permission_queued = false
+	_manual_permission_used = true
+	var armed: Array[int] = []
+	for op in operators:
+		if op.visible and op.alive and op.fire_mode == OperatorUnit.FireMode.HOLD_FOR_AMBUSH and not op.fire_permitted:
+			op.arm_ambush()
+			armed.append(op.op_id)
+	battle_log.add_event(sim.tick, "team_fire_permission", -1, -1, Vector2.ZERO, {"mode": "manual", "armed_ids": armed})
+	_refresh_touch_hud()
 
 
 func _snapshot_data() -> Dictionary:
