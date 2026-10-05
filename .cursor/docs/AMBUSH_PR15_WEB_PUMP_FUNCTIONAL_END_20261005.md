@@ -54,6 +54,8 @@ Site source commit **`87cccf2152ce112c36a704efa332f16e7692867b`**，normal push/
 
 前半片 `evidence/20261005-pr15-web-pump-producer/manifest.json` 47files/19,578,581bytes，固定819893b；后半片 `evidence/20261005-pr15-web-pump-consumer-site/manifest.json` 48files/3,899,677bytes，包含逐文件size/SHA、全部加载controller/桥/原命令receipts/whole观察输入、两终点PNG、原bin只读审计与Site隐私/deploy/精确archive收据，引用同原bin不重建。producer14与consumer2原图均实际逐张看；不包含旧独立QA丢失PNG。全部ownerGodot/Chromium/browser/HTTP已END，ports12815/12816closed、live engines0；consumer实际PTY0、native audit0；既存defunct非live。Git工作树应以本片正常push/readback的最终docs SHA为准。
 
+最终辅助检查：`git diff --check HEAD^ HEAD` 在证据提交4b5449f实际 **2**，唯一报告是原HTML提取的 `site-inline-1.js:138` tab空行/EOF空白；该原始JS和SHA证据保持未normalize，`node --check`已actual0。以明确pathspec排除此一原始artifact的 `git diff --check 3a0e8ab... HEAD -- . ':(exclude).cursor/docs/evidence/20261005-pr15-web-pump-consumer-site/site-inline-1.js'` 实际 **0**；`git diff --name-only 3a0e8ab... HEAD -- ambush_loop` 实际0/空，生产源码未改。没有把整个raw证据提交的whitespace检查称全绿。
+
 父端独立UI QA END10:02:32.356684 UTC及其包SHA `91a9c573d9cc21711a824a77adf5b28e3d5756f7243ec56ed049ae1fcae9e934`按父端交付单列：旧中心fail→candidate10482、no-touchdesktop72、PageUp18/0、native200+landscape68/0，没有新产品fail；**原143/1仍保留、普通PCK作者+128B未解、横屏wave0一PNG被覆盖仅hash**。本作者没有本机解包或复验该父包，不把各scope相加、没有猜padding、更不称所有像素完整。
 
 未验：railcut/depot/radio新producer（后7波）、yard本新schema完整whole、六关共同最终candidate/正常13波、全6×1×/2×、完整fullsmoke/FINAL、实时速率/A3、完整世界触控取消与锁门分支、正式origin浏览器、普通PCK+128B、设备及可追溯APK。已验pump不等于全计划完成。网页GPT PLAN/REVIEW unavailable。
