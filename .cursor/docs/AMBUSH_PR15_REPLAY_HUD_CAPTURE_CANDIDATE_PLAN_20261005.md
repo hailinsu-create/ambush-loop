@@ -1,5 +1,7 @@
 # PR15 HUD子诊断与条件最小候选（提案，未实施/未运行）
 
+2026-10-05 更新：本提案的诊断已由[HUD子诊断END](AMBUSH_PR15_HUD_SUBSEGMENTS_END_20261005.md)完成。实测8次capture/2次touch/50次style，选择仅REPLAY省相邻第二次touch refresh；历史frame复用未实施，候选以新END中的冻结合同为准。下文保留启动前提案，不代表候选实际结果。
+
 2026-10-05，[有限测量END](AMBUSH_PR15_REPLAY_HUD_SEGMENTS_END_20261005.md)已知：两个ON的HUD占root累计90.12%/89.53%，而postdraw OFF/ON推进方向混合，净采样开销未稳定。**下一优先级是HUD内实际成本与方法修正；尚无具体子热点/稳定净性能收益，不直接提交优化。** 1ec source/tree1e8、原yard bin、paired consumer、资产/规则/同Sitev4保持。本文件不是已经实现的cache或性能提升。
 
 ## 下一有限诊断
