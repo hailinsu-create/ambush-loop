@@ -39,3 +39,9 @@ Native测试保留已结算WON重复返回幂等、原record字节、M改变音�
 上述引擎及browser/HTTP均END；封存实际核live0/ports12815、12816、12817 closed。原活动profile保持depot END的真实radio续关存档，不与冷夹具profile合并。Site v3、R5源29749157c5db064bfea626c3ed9d75d9a1791ece/交付ebedb829e3263abbeb6dd266905f24a3869fa281及制作独占接口保持，无新资产请求。
 
 继续原profile radio3波：明确新的fixed1ec/sourcepins与QA-PCK，先精确旧cfg/checkpoint核对；原producer900/UI120/波300预算、原八字段先封，再1×/2×完整前后指纹与原回执；短波pause只按真实phase判定；credits开启/滚动/六关完成保存/reload/reopen、安全Title END。不得把前五关旧源已验拼成同最终候选full13。radio/yard whole、完整同源13/六关全回放/3D全事件/所有武器工具自然专项/A3/fullsmoke/FINAL/正式origin/PCK+128B/耳听/设备/APK仍待；冷历史全过程档隔离未通过。GPT PLAN/REVIEW unavailable。
+
+## 原Title刷新持久边界补验（14:21 END）
+
+父端要求补实测刷新后的回退。新隔离profile负轮 `python3 /tmp/pr15-web-controls/replay-save-classification-20261005/browser_refresh_negative_v2.py` source8532：已结算WON→原Replay→M→原设置Title→无fixture参数原URL重新载入→原Continue，错误warehouse指针仍持久、Continue确实warehouse；actual0，14:18:15.212148→14:19:38.297508，10+6trusted，成功复現负例而非product pass。正轮 `python3 …/browser_refresh_fixed.py` source1ec同一路实际pump，静音仍true并持久、两cfg全文/公开checkpoint刷新精确保持、清关/stats/complete保持；实际Continue pump及原两页教学→安全Title，actual0，14:20:07.458535→14:21:53.337877，10+10trusted，console errors0/pageerrors0，各4ReadPixels警告。所有自有引擎/browser/HTTP END/live0/portsclosed；原活动profile未打开。不是浏览器关闭重开、fresh胜利或whole接受。
+
+首刷新方法仍带cold query，刷新再次触发原冷夹具而非Title，120秒等待超时 actual1，14:14:54.513893→14:18:02.352292，原loaded-script/request/log/receipt/vault与5未审方法PNG保留。新轮 canonical URL重新载入，不写storage/phase/tick。负轮部分PNG沿用模板文件名含correct/pump，实际画面/状态为warehouse，不能根据命名称pass。新增[独立补充manifest](evidence/20261005-pr15-replay-save-refresh/manifest.json)，16接受PNG全部逐张已看，前片100文件重新逐size/SHA核仍保持；profiles/缓存/凭证排除。最小生产代码仍1ec，配置偏好可写与campaign进度保护分别证实；radio仍未开始。

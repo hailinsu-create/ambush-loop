@@ -1,0 +1,58 @@
+{
+  "start": "2026-10-05T14:14:54.513893+00:00",
+  "pid": 164834,
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "url": "http://127.0.0.1:12817/index.html?fixture=warehouse&tick=10788&scale=1&touch=0",
+  "profile": "/tmp/pr15-web-controls/replay-save-classification-20261005/refresh-negative/owned-profile",
+  "browser": "Chromium/Playwright, Browser plugin not available",
+  "scope": "declared cold warehouse setup; first Space settlement classified separately; thereafter original trusted replay/M/pause Title route, no original activity profile",
+  "exception": "original Title refresh persisted M and campaign pointer wall cap 120",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/replay-save-classification-20261005/browser_refresh_negative.py\", line 48, in <module>\n    states['refresh']=d.wait(lambda x:x['scene']=='res://scenes/title.tscn' and x['presents']>3,'original Title refresh persisted M and campaign pointer',120)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 35, in wait\nTimeoutError: original Title refresh persisted M and campaign pointer wall cap 120\n",
+  "end": "2026-10-05T14:18:02.352292+00:00",
+  "actual_exit": 1,
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org"
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL"
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x254c05dc0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x254c05dc0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x254c05dc0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x254c05dc0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org"
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL"
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support."
+    }
+  ],
+  "page_errors": [],
+  "browser_closed": true,
+  "server_closed": true
+}

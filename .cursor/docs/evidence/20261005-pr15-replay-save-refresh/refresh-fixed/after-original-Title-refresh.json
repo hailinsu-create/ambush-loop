@@ -1,0 +1,121 @@
+{
+  "state": {
+    "briefing": false,
+    "continue_disabled": false,
+    "engine_frames": 5,
+    "fixture_ready": false,
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 0,
+    "input_tail": null,
+    "mission_select": false,
+    "observer_usec": 13900,
+    "pending": "yard",
+    "presents": 5,
+    "scale": 1,
+    "scene": "res://scenes/title.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "48d853b04522fc5d9ebbb7c3e0733882b8d325d42f39fd51260d9cf31d82e181",
+          "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "0476769ee28086f1e969a18ddfc89ecf58611c84888ab02f007c91a3461ba272",
+          "text": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 0,
+          "perfect": false,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": true,
+      "next": "pump",
+      "persistence_error": "",
+      "persistence_status": "",
+      "quality": "standard",
+      "seen": {
+        "warehouse": true
+      },
+      "sfx_volume": 1
+    },
+    "ticks_usec": 2570500,
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"pump\\\"\\nlevel_index=2\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"warehouse\\\", \\\"yard\\\")\\n\\n[audio]\\n\\nmuted=true\\n\\n[stats]\\n\\nwarehouse_loops=1\\nwarehouse_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=true\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_warehouse=true\\n\"},\"schema\":1}",
+  "two_cfg_and_public_checkpoint_exact": true,
+  "audio_preference_changed_and_persisted": true
+}
