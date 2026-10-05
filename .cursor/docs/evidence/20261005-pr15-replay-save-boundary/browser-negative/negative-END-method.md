@@ -1,0 +1,1 @@
+原交互result保存且safe Title已到，但with sync_playwright退出后finally重复ctx.close抛Event loop is closed，wrapper actual1，未写original END receipt、精确END未知；不可回填或计actual0。原loaded代码/输入/PNG/result/工具stderr保留；v2改显式start，先关闭context再stop owner/HTTP，独立新profile重跑同负例。

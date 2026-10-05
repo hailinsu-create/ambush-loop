@@ -1,0 +1,1 @@
+隔离reader v1实际StorageGuard通过，误调用不存在的continue_level_id，产生SCRIPT_ERROR，45秒timeout由subprocess.run终止。wrapper actual1，未产有效result/原END receipt；native退出码及精确END时间未留存，不回填。原request/log/loaded脚本保留，仅方法失败，不计产品结论。未启动browser，原profile保持。

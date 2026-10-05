@@ -20,4 +20,4 @@
 
 方法负例保留：首预检误把Z僵尸认作活动进程，未启动引擎；reader误调用不存在函数导致45秒timeout，原script/request/log保留、native退出码及精确END回执未留存；首browser交互结果到safeTitle但with结束后重复ctx.close导致wrapper1，原END receipt缺失不回填。新轮独立命名，不覆盖旧原件。
 
-当前：IMPLEMENTED_FIX_PENDING_VERIFICATION；radio仍UNRUN。
+当前：PASS_BOUNDED_CLASSIFICATION_AND_SAVE_FIX，实际范围以[分类/修复END](AMBUSH_PR15_REPLAY_SAVE_BOUNDARY_END_20261005.md)为准。fixed1ec paired15/0、store22/0、官方两导出0、可信browser M→Title→Continuepump0/END；14接受原图已看、100证据实封。冷首Space结算及方法损失保持。原profile radio仍UNRUN，继续新候选原包，不扩大为同源全13。
