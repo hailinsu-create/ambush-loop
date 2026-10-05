@@ -383,6 +383,9 @@ func _ready() -> void:
 	_diag_memory("main.controllers.ready")
 	_load_level(_resolve_start_level(), false, false)
 	_diag_memory("main.level.ready")
+	var i0_presenter := get_node_or_null("I0YardPresentation")
+	if i0_presenter != null and i0_presenter.has_method("bind"):
+		i0_presenter.bind(self)
 
 
 func _diag_memory(stage: String) -> void:
@@ -4011,21 +4014,43 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_cancel_touch_intent()
-		_handle_setup_click(get_global_mouse_position())
+		var screen := get_viewport().get_mouse_position()
+		var i0_presenter := _active_i0_presenter()
+		if i0_presenter != null:
+			var candidate: Dictionary = i0_presenter.pick_at(screen)
+			if str(candidate.get("kind", "")) == "operator":
+				for index in operators.size():
+					if int(operators[index].op_id) == int(candidate.get("id", -1)):
+						_select_op(index)
+						break
+			elif not candidate.is_empty():
+				_begin_touch_intent(candidate.get("pos", Vector2.INF))
+		else:
+			_handle_setup_click(_screen_to_world(screen))
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		if selected and selected.visible and not selected.locked:
-			var v := get_global_mouse_position() - selected.global_position
-			selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
-			_announce_plan_edit()
-			_refresh_killzone_preview()
+			var pointer := _screen_to_world(get_viewport().get_mouse_position())
+			if pointer.is_finite():
+				var v := pointer - selected.global_position
+				selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
+				_announce_plan_edit()
+				_refresh_killzone_preview()
 		get_viewport().set_input_as_handled()
 		return
 
 
 func _screen_to_world(screen_pos: Vector2) -> Vector2:
+	var i0_presenter := _active_i0_presenter()
+	if i0_presenter != null:
+		return i0_presenter.screen_to_logic(screen_pos)
 	return get_viewport().get_canvas_transform().affine_inverse() * screen_pos
+
+
+func _active_i0_presenter() -> Node:
+	var presenter := get_node_or_null("I0YardPresentation")
+	return presenter if presenter != null and bool(presenter.get("active")) else null
 
 
 func _touch_span() -> Dictionary:
@@ -4265,6 +4290,24 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 				_touch_ate_click = true
 				return true
 			if _is_command_phase() or phase == Phase.WATCHING:
+				if _is_command_phase():
+					var i0_presenter := _active_i0_presenter()
+					if i0_presenter != null:
+						var picked: Dictionary = i0_presenter.pick_at(st.position)
+						if str(picked.get("kind", "")) == "operator":
+							for index in operators.size():
+								if int(operators[index].op_id) != int(picked.get("id", -1)):
+									continue
+								_select_op(index)
+								_pending_setup_touch = false
+								_pending_touch_world = picked.get("pos", operators[index].global_position)
+								_touch_start_screen = st.position
+								_touch_dragged = false
+								_touch_panning = false
+								_facing_touch = st.index if not selected.locked else -1
+								_touch_ate_click = true
+								_last_touch_gesture = "select_operator"
+								return true
 				var world := _screen_to_world(st.position)
 				_cancel_touch_intent()
 				_touch_preview_slot = null

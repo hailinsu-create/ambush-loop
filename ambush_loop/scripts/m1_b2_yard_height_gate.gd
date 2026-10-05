@@ -1,6 +1,6 @@
 extends SceneTree
 
-## M1-B2 integration gate: authored yard height, real click route to the SMG,
+## M1-B2 integration gate: authored yard height, real platform routing,
 ## world-space movement/follow safety, and cache invalidation.
 
 const GridScript := preload("res://scripts/grid.gd")
@@ -12,7 +12,7 @@ const PLATFORM_MIN := Vector2i(15, 10)
 const PLATFORM_MAX := Vector2i(17, 12)
 const RAMP_GROUND := Vector2i(15, 13)
 const RAMP_PLATFORM := Vector2i(15, 12)
-const STASH_CELL := Vector2i(17, 12)
+const PLATFORM_TARGET_CELL := Vector2i(17, 12)
 
 
 func _init() -> void:
@@ -38,13 +38,13 @@ func _run() -> void:
 		return
 	if not _check_cache_signature(main):
 		return
-	if not _check_real_click_move_and_pickup(main):
+	if not _check_real_click_move_and_platform_route(main):
 		return
 	if not _check_real_follow_crossing(main):
 		return
 	if not _check_no_ramp_bypass(main):
 		return
-	print("M1_B2_YARD_HEIGHT_GATE_OK topology=1 click_move=1 stash_pickup=1 ascend=1 descend=1 follow_up=1 follow_down=1 follow_up_disconnected=1 follow_down_disconnected=1 no_bypass=1 cache=1")
+	print("M1_B2_YARD_HEIGHT_GATE_OK topology=1 click_move=1 platform_route=1 ascend=1 descend=1 follow_up=1 follow_down=1 follow_up_disconnected=1 follow_down_disconnected=1 no_bypass=1 cache=1")
 	quit(0)
 
 
@@ -78,29 +78,33 @@ func _check_authored_yard(main) -> bool:
 					crossings += 1
 	if crossings != 1 or not grid.can_traverse_height(RAMP_GROUND, RAMP_PLATFORM):
 		return _fail("M1_B2_UNIQUE_RAMP_IS_BIDIRECTIONAL", 9)
-	var smg_found := false
-	for spec in level.stashes:
-		if spec is Dictionary and spec.get("cell", Vector2i(-1, -1)) == STASH_CELL and str(spec.get("kind", "")) == "smg":
-			smg_found = true
+	# This regression owns the B2 height/path fixture, not the yard's supply
+	# roster. M2-B1 replaced the historical SMG stash with four typed pickups;
+	# keep the ramp target as an open authored platform cell without coupling
+	# the height gate to that superseded item placement.
+	if (
+		not grid.in_bounds(PLATFORM_TARGET_CELL.x, PLATFORM_TARGET_CELL.y)
+		or grid.is_blocked(PLATFORM_TARGET_CELL.x, PLATFORM_TARGET_CELL.y)
+		or grid.get_elevation_tier(PLATFORM_TARGET_CELL.x, PLATFORM_TARGET_CELL.y) != GridScript.HEIGHT_PLATFORM
+	):
+		return _fail("M1_B2_HEIGHT_TARGET_REMAINS_OPEN_PLATFORM_CELL", 11)
 	for cell_def in level.cover_defs:
 		var cover_cell: Vector2i = cell_def.get("cell", Vector2i(-1, -1))
 		if grid.get_elevation_tier(cover_cell.x, cover_cell.y) == GridScript.HEIGHT_PLATFORM:
 			return _fail("M1_B2_NO_INSTANT_DEPLOY_PAD_ON_PLATFORM", 10)
-	if not smg_found:
-		return _fail("M1_B2_EXISTING_SMG_REMAINS_ON_PLATFORM", 11)
 	var geometry_errors: PackedStringArray = grid.validate_level_geometry(
 		level.cover_defs, level.route_cells, level.alternate_route_cells,
 		level.door_blocks_route, level.barrel_cell
 	)
 	if not geometry_errors.is_empty():
 		return _fail("M1_B2_YARD_ROUTES_COVERS_VALID %s" % ";".join(geometry_errors), 12)
-	var path: Array[Vector2i] = PathfinderScript.find_path(grid, Vector2i(6, 16), STASH_CELL)
+	var path: Array[Vector2i] = PathfinderScript.find_path(grid, Vector2i(6, 16), PLATFORM_TARGET_CELL)
 	if path.is_empty() or not _path_contains_edge(path, RAMP_GROUND, RAMP_PLATFORM):
-		return _fail("M1_B2_STASH_PATH_USES_SOUTH_RAMP", 13)
+		return _fail("M1_B2_PLATFORM_PATH_USES_SOUTH_RAMP", 13)
 	if not grid.set_ramp_link(RAMP_GROUND, RAMP_PLATFORM, false):
 		return _fail("M1_B2_REMOVE_RAMP_FOR_NEGATIVE", 14)
-	if not PathfinderScript.find_path(grid, Vector2i(6, 16), STASH_CELL).is_empty():
-		return _fail("M1_B2_NO_RAMP_NO_STASH_PATH", 15)
+	if not PathfinderScript.find_path(grid, Vector2i(6, 16), PLATFORM_TARGET_CELL).is_empty():
+		return _fail("M1_B2_NO_RAMP_NO_PLATFORM_PATH", 15)
 	grid.set_ramp_link(RAMP_GROUND, RAMP_PLATFORM)
 	return true
 
@@ -127,32 +131,19 @@ func _check_cache_signature(main) -> bool:
 	return true
 
 
-func _check_real_click_move_and_pickup(main) -> bool:
+func _check_real_click_move_and_platform_route(main) -> bool:
 	var grid = main.grid
 	var op = main.operators[0]
-	var stash = null
-	for candidate in main.raid_stashes:
-		if is_instance_valid(candidate) and candidate.cell == STASH_CELL:
-			stash = candidate
-			break
-	if stash == null:
-		return _fail("M1_B2_REAL_SMG_STASH_SPAWNED", 18)
 	op.stop_move()
 	op.global_position = grid.cell_to_world_center(Vector2i(6, 16))
 	main.selected = op
-	if not main._command_move_op(op, stash.global_position):
-		return _fail("M1_B2_CLICK_TO_STASH_ACCEPTED", 19)
+	if not main._command_move_op(op, grid.cell_to_world_center(PLATFORM_TARGET_CELL)):
+		return _fail("M1_B2_CLICK_TO_PLATFORM_ACCEPTED", 19)
 	if not _world_path_is_safe(grid, op.move_path) or not _world_path_contains_edge(grid, op.move_path, RAMP_GROUND, RAMP_PLATFORM):
 		return _fail("M1_B2_CLICK_ROUTE_USES_ONLY_RAMP", 20)
-	var trace := _trace_to_target(main, op, STASH_CELL, RAMP_GROUND, RAMP_PLATFORM)
+	var trace := _trace_to_target(main, op, PLATFORM_TARGET_CELL, RAMP_GROUND, RAMP_PLATFORM)
 	if not bool(trace.get("ok", false)) or not bool(trace.get("crossed", false)):
 		return _fail("M1_B2_PLAYER_ASCENDS_VIA_RAMP", 21)
-	if not stash.collected:
-		main.raid_advance_search(1.0)
-	if not stash.collected:
-		return _fail("M1_B2_PLAYER_OPENS_PLATFORM_SMG", 22)
-	if not op.pack.has_kind(str(stash.kind)):
-		return _fail("M1_B2_SMG_PICKUP_REACHES_INVENTORY", 23)
 	var return_trace := _trace_to_target(main, op, Vector2i(6, 16), RAMP_PLATFORM, RAMP_GROUND)
 	if not bool(return_trace.get("ok", false)) or not bool(return_trace.get("crossed", false)):
 		return _fail("M1_B2_PLAYER_DESCENDS_VIA_RAMP", 24)

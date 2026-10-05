@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/main.tscn" id="1_main"]
+[ext_resource type="Script" path="res://scripts/m2_i0_yard_presentation.gd" id="2_i0"]
+
+[node name="YardI03D" instance=ExtResource("1_main")]
+
+[node name="I0YardPresentation" type="Node3D" parent="." index="2"]
+script = ExtResource("2_i0")
