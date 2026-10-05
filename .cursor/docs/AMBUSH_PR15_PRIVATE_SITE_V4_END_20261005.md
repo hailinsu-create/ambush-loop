@@ -1,6 +1,6 @@
 # PR15 同私有Site v4必要修复更新 END
 
-2026-10-05，父端明确授权在原yard consumer包END后同站一次必要更新，现 **succeeded**。原yard END交付 **05469c5e74649eda10b174baf547a7ca4f35cfaa**，source1ec/tree1e8保持；本次不增加产品代码或资产、不新站/preview、不merge/公开。采用[Sites skill](skill://plugin_connector_1p_689987207de08191979cf68eca2941c6/sites/SKILL.md)同站source/publish流程，packaged helper资源在此环境不可读取，沿用此前已验的精确Git fallback，凭证只在隐藏stdin/进程内存，未写token/签名URL/owner联系方式。
+2026-10-05，父端明确授权在原yard consumer包END后同站一次必要更新，现 **succeeded**。原yard END交付 **05469c5e74649eda10b174baf547a7ca4f35cfaa**，source1ec/tree1e8保持；本次不增加产品代码或资产、不新站/preview、不merge/公开。采用[Sites skill](skill://plugin_connector_1p_689987207de08191979cf68eca2941c6/sites/SKILL.md)同站source/publish流程，packaged helper资源在此环境不可读取，沿用此前已验的精确Git fallback，凭证只在隐藏stdin/进程内存，最终入库证据不含token/签名URL/owner联系方式。
 
 | 实际交付字段 | 回执 |
 | --- | --- |
