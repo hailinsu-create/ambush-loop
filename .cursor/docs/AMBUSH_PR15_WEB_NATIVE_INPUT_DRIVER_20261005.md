@@ -1,5 +1,7 @@
 # PR15 fresh Web 原输入 driver 契约
 
+2026-10-05 最新授权：[实际操作恢复](AMBUSH_PR15_FRESH_WEB_RESUME_20261005.md)取代先前暂停。当前[warehouse900负例/同步只读修正回归](AMBUSH_PR15_WAREHOUSE_WEB_CAP_FIX_20261005.md)，后续按原预算逐关，生产dab/4f49/私有v2不变；下方暂停/source-only均为历史快照，不阻断此次明确恢复指令。
+
 2026-10-05 后续实际结果：[yard有界包与用户暂停](AMBUSH_PR15_FRESH_WEB_YARD_PAUSE_20261005.md)。只读桥/实际输入driver已在隔离fixture用于yard自然双波WON和Title解锁reload/reopen；本文件及JSON仍保留原source-plan快照/未执行连续方案。用户要求完成已开始工作后暂停，warehouse/其他关/whole没有启动；后续不得自动续跑。唯一新原record/SHA/62证据已封存，生产dab/4f49及私有version2不变。
 
 2026-10-05。**SOURCE_PLAN；driver/观察桥实现、导出和实际 campaign 全部 UNRUN。** 父端将重活窗口交独立 QA 复验小配置存储，本包只读原代码、整理输入契约并做 Git/JSON 轻检；不启动 engine/browser/HTTP，不移动主 QA 工作树 `b46c31c008ae8dea700b3c36ad9b514e68b7e1ac`。网页 GPT PLAN/REVIEW unavailable。

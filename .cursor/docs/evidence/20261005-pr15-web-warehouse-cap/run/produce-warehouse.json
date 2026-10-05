@@ -1,0 +1,45 @@
+{
+  "start": "2026-10-05T05:58:37.390638+00:00",
+  "pid": 149581,
+  "request": {
+    "label": "produce-warehouse",
+    "script": "/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/produce_warehouse.py"
+  },
+  "actual_exit": 1,
+  "exception": "level producer wall cap900 reached",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/browser_controller.py\", line 27, in <module>\n    exec(Path(r['script']).read_text(),globals());receipt['actual_exit']=0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 4, in <module>\n  File \"<string>\", line 151, in mission\n  File \"<string>\", line 25, in wait\n  File \"<string>\", line 18, in check_budget\nTimeoutError: level producer wall cap900 reached\n",
+  "end": "2026-10-05T06:13:41.561568+00:00",
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 234241.20909913
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 234241.209367289
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 234241.209541834
+    },
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 234242.254013931
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 234242.436834828
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 234243.031615204
+    }
+  ],
+  "page_errors": []
+}

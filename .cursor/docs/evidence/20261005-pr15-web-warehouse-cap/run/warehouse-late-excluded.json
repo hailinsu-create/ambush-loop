@@ -1,0 +1,363 @@
+{
+  "status": "FAIL_PRODUCER_WALL_CAP_LATE_ORIGINAL_WIN_EXCLUDED",
+  "record": {
+    "attempt": "1c9e6cb757ca36a5f3950bf67d6acb0e",
+    "bytes": 38525548,
+    "level": "warehouse",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "77d7ed59d580de4a4cf98c292cd858542218e4834db8c94c4a90d868f950c30a",
+    "terminal": 21867,
+    "validation": {
+      "attempt": "1c9e6cb757ca36a5f3950bf67d6acb0e",
+      "events": 59,
+      "failures": [],
+      "frames": 2793,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/run/warehouse-late-excluded-record.bin"
+  },
+  "state": {
+    "attempt": "1c9e6cb757ca36a5f3950bf67d6acb0e",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          368.0,
+          272.0
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          496.0,
+          400.0
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          720.0,
+          240.0
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          912.0,
+          464.0
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          592.0,
+          528.0
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          944.0,
+          560.0
+        ]
+      }
+    ],
+    "engine_frames": 2863,
+    "fail_reason": "",
+    "input_count": 238,
+    "level": "warehouse",
+    "log": {
+      "events": 59,
+      "playback_frames": 2793,
+      "playback_terminal": 21867,
+      "playback_tick": 21867,
+      "snapshots": 206,
+      "terminal": 1203,
+      "terminal_reason": "win"
+    },
+    "loot": [
+      {
+        "amount": 2,
+        "collected": false,
+        "id": 5250496861318,
+        "kind": "ammo",
+        "pos": [
+          764.499572753906,
+          175.999099731445
+        ]
+      },
+      {
+        "amount": 2,
+        "collected": false,
+        "id": 5406239757610,
+        "kind": "ammo",
+        "pos": [
+          1039.99450683594,
+          401.860473632812
+        ]
+      },
+      {
+        "amount": 4,
+        "collected": false,
+        "id": 5432663873068,
+        "kind": "rifle_ammo",
+        "pos": [
+          1039.99450683594,
+          401.860473632812
+        ]
+      }
+    ],
+    "mines_count": 0,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "\u4e1c\u5eca\u6a59\u8272\u6cb9\u6876\u662f\u5173\u5361\u9884\u7f6e\u6740\u5668\uff1a\u654c\u4eba\u9760\u8fd1\u624d\u5728\u6a21\u62df\u7ed3\u7b97\u91cc\u5f15\u7206\uff08\u51c6\u5907\u671f\u5730\u56fe\u4e0a\u6709\u300c\u7206\u5fc3\u300d\u63d0\u793a\uff09\uff0c\u6267\u884c\u4e2d\u4e0d\u80fd\u70b9\u51fb\u5f15\u7206\u3002\u522b\u628a\u7070\u72fc/\u94c1\u7827\u653e\u8fdb\u7206\u7834\u5708\u3002\u9677\u9631\u8def\u7ebf\uff1a\u6a59\u7ebf\u4fa7\u7ffc\u8d70\u4e1c\u5eca\u3002\u865a\u7ebf\u662f\u4fa7\u7ffc\uff1b\u8bfe\u662f F \u5165\u4f0f\u7b49\u9ec4\u533a\uff0c\u4e0d\u662f\u7ad9\u7206\u5fc3\u5916\u3002",
+      "tutorial_page": 2
+    },
+    "observer_usec": 1802900,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 10,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180.0,
+        "family": "rifle",
+        "has_ammo_pack": false,
+        "hp": 100.0,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 7,
+            "kind": "kar98k"
+          },
+          {
+            "amount": 1,
+            "kind": "grenade"
+          }
+        ],
+        "pool": {
+          "rifle": 41
+        },
+        "pos": [
+          496.0,
+          400.0
+        ],
+        "role": 0,
+        "slot": 1,
+        "start_ammo": 5,
+        "weapon": "kar98k"
+      },
+      {
+        "alive": true,
+        "ammo": 12,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 4.0,
+        "family": "mg",
+        "has_ammo_pack": true,
+        "hp": 87.6,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 20,
+            "kind": "bar"
+          }
+        ],
+        "pool": {
+          "mg": 12
+        },
+        "pos": [
+          912.0,
+          464.0
+        ],
+        "role": 1,
+        "slot": 3,
+        "start_ammo": 20,
+        "weapon": "bar"
+      },
+      {
+        "alive": true,
+        "ammo": 6,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180.0,
+        "family": "scout",
+        "has_ammo_pack": false,
+        "hp": 100.0,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 6,
+            "kind": "springfield"
+          }
+        ],
+        "pool": {
+          "scout": 6
+        },
+        "pos": [
+          944.0,
+          560.0
+        ],
+        "role": 2,
+        "slot": 5,
+        "start_ammo": 5,
+        "weapon": "springfield"
+      }
+    ],
+    "phase": 3,
+    "presents": 2863,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2.0,
+      "tick": 0
+    },
+    "run_id": 3,
+    "scene": "res://scenes/main.tscn",
+    "selected": 3,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+          "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c1\u5173 \u00b7 \u9662\u5b50\uff1a\u4ea4\u53c9\u5c01\u9501",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c2\u5173 \u00b7 \u4ed3\u9053\uff1a\u5f39\u836f\u7a97\u53e3",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c3\u5173 \u00b7 \u6cf5\u7ad9\uff1a\u5173\u95e8\u4e4b\u540e",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c4\u5173 \u00b7 \u4fe1\u53f7\u697c\uff1a\u53cc\u8d70\u5eca\u5ef6\u8fdf",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c5\u5173 \u00b7 \u6cb9\u5e93\uff1a\u4e09\u8def\u5408\u56f4",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c6\u5173 \u00b7 \u7535\u53f0\uff1a\u706f\u5854\u56de\u6ce2",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1.0,
+      "muted": false,
+      "next": "pump",
+      "persistence_error": "",
+      "persistence_status": "\u5df2\u4fdd\u5b58\u5230\u6b64\u6d4f\u89c8\u5668",
+      "quality": "standard",
+      "seen": {
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1.0
+    },
+    "sim": {
+      "accum": 0.0077000000000007,
+      "paused": false,
+      "speed": 1.0,
+      "tick": 863
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "decoy",
+        "id": 138042936971,
+        "kind": "decoy",
+        "pos": [
+          720.0,
+          304.0
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 138193931924,
+        "kind": "mp40",
+        "pos": [
+          464.0,
+          528.0
+        ]
+      }
+    ],
+    "status": "\u8ba1\u5212\u594f\u6548",
+    "ticks_usec": 1456377100,
+    "tool": 0,
+    "view": {
+      "attempt": "1c9e6cb757ca36a5f3950bf67d6acb0e",
+      "level": "warehouse",
+      "recorded_phase": 3,
+      "roots": 6,
+      "seq": -1,
+      "tick": 21867,
+      "wave": 1,
+      "yaw": 125.0
+    },
+    "viewport": [
+      0.0,
+      0.0,
+      1280.0,
+      720.0
+    ],
+    "wave": 1,
+    "wave_count": 2,
+    "waves_cleared": 2
+  },
+  "renderer": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "unmasked_renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "unmasked_vendor": "Google Inc. (Google)"
+  }
+}
