@@ -1,0 +1,80 @@
+{
+  "candidate": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "original_profile_checkpoint": "/tmp/pr15-final-fresh13-1ec-20261005/run/yard_packet_final_Title-checkpoint.json",
+  "plan": {
+    "level": "warehouse",
+    "wave_count": 2,
+    "wave_ids": [
+      0,
+      1
+    ],
+    "cover_array_indices_by_operator": [
+      1,
+      3,
+      5
+    ],
+    "facing_degrees_by_operator": [
+      180,
+      0,
+      180
+    ],
+    "collect": [
+      {
+        "family": "rifle",
+        "operator_index": 0
+      },
+      {
+        "family": "mg",
+        "operator_index": 1
+      },
+      {
+        "family": "scout",
+        "operator_index": 2
+      },
+      {
+        "family": "grenade",
+        "operator_index": 0
+      },
+      {
+        "family": "mine",
+        "operator_index": 0
+      }
+    ],
+    "ammo_pack_operator": 1,
+    "scout_policy_inputs": [
+      {
+        "operator_index": 1,
+        "input": "F"
+      }
+    ],
+    "scout_mine_cell": [
+      13,
+      5
+    ],
+    "sweep_loot_operator": 0,
+    "first_sweep_authored_ammo_operator": 1,
+    "first_sweep_mine_cell": null,
+    "next_level": "pump",
+    "expected_after_natural_win": {
+      "cleared": [
+        "yard",
+        "warehouse"
+      ],
+      "unlocked": [
+        "yard",
+        "warehouse",
+        "pump"
+      ],
+      "continue_level": "pump",
+      "complete": false
+    },
+    "producer_status": "UNRUN",
+    "whole_1x_status": "UNRUN",
+    "whole_2x_status": "UNRUN",
+    "progress_reload_status": "UNRUN"
+  },
+  "scope": "legitimate original UI inputs only; no seeded tool/win/sim state; coverage only after saved actual events"
+}
