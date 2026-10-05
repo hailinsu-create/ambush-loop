@@ -7674,7 +7674,9 @@ func _update_hud() -> void:
 		_update_cover_previews()
 	_apply_watch_layers()
 	_ensure_touch_hud()
-	_refresh_touch_hud()
+	# Ensure already refreshes the touch HUD with this selected replay frame.
+	if phase != Phase.REPLAY:
+		_refresh_touch_hud()
 	_apply_phone_world_ink()
 
 
