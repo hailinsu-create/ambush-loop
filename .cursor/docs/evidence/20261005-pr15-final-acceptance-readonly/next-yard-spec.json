@@ -1,0 +1,55 @@
+{
+  "status": "NOT_RUN_WAIT_PARENT_QA_END_AND_EXPLICIT_ENGINE_WINDOW_RETURN",
+  "title": "yard original archive whole1x2x consumer only",
+  "reviewed_delivery": "6cbb71ade950238f9a55e1f2ec8c4c3285980cb4",
+  "candidate_production_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "candidate_game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "candidate_is_conditional_on_parent_qa": true,
+  "input_record": {
+    "level": "yard",
+    "producer_source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+    "producer_game_tree": "4f49a7c9cb5a789fbb570bceb947eab7df2eb54a",
+    "producer_json": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/run/yard-producer.json",
+    "manifest": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/manifest.json",
+    "path": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/run/yard-record.bin",
+    "bytes": 19025696,
+    "sha256": "e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5",
+    "schema_from_producer_receipt": 2,
+    "attempt_from_producer_receipt": "93a9671c444c749f102a04a728c963a5",
+    "terminal_from_producer_receipt": 12678,
+    "reason_from_producer_receipt": "win",
+    "binary_hash_check": "PASS",
+    "runtime_decode_this_turn": "NOT_RUN"
+  },
+  "record_duration_seconds": 211.3,
+  "caps_seconds": {
+    "ui_transition": 120,
+    "whole1": 1297.8,
+    "whole2": 663.9
+  },
+  "cap_formula": "max(180,6*(12678/60)/rate+30)",
+  "producer_repeated": false,
+  "production_code_assets_deployment_changes_now": false,
+  "consumer_fixture_pending": "Current warehouse-only fixture is insufficient. Declare isolated yard-level loader and settled-victory paired configuration; audit QA-vs-production payloads before launch. No fixture implementation in this turn.",
+  "profile": "New disposable consumer UUID/profile; never modify the original completed campaign profile. Any fixture configuration is declared consumer setup, not fresh/natural progress.",
+  "save_side_effect_classification": "Paired settled WON must remain exact after Replay/Space; otherwise first Space settlement is a declared cold-fixture side effect, not evidence of save isolation.",
+  "required_evidence": [
+    "source/game tree/official engine/PCK/QA payload delta pins",
+    "original raw SHA/bytes/attempt/wave/seq/local/global/terminal immutable",
+    "original Replay/Home/pause/speed/resume from zero through natural terminal without final seek",
+    "full record/domain/config fingerprints before resume, at terminal, after return WON",
+    "request wall/helper wall/actual input-to-terminal callback wall reported separately",
+    "monotonic observer rows and bound source/view clock; sampled 3D bones/poses/source boundaries stated precisely",
+    "readonly native original-bin audit only after browser/controller END, through isolated Guard",
+    "unique immutable START/END/request/helper/owner receipts; preserve failures and actual exits",
+    "individual PNG review and manifest byte/hash checks",
+    "final controller/native actual END and release of owned engine window"
+  ],
+  "excluded": [
+    "fresh producer",
+    "other five producer reruns",
+    "final same-candidate six13 acceptance",
+    "device or performance acceptance",
+    "new functionality/assets/deployment"
+  ]
+}
