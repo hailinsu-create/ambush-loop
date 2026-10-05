@@ -1,0 +1,409 @@
+{
+  "status": "PASS_BOUNDED_ORIGINAL_YARD_CONSUMER_END",
+  "consumer_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "producer_source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+  "file_count": 78,
+  "total_bytes": 8845211,
+  "original_raw_referenced_unchanged": {
+    "path": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/run/yard-record.bin",
+    "bytes": 19025696,
+    "sha256": "e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5",
+    "attempt": "93a9671c444c749f102a04a728c963a5",
+    "frames": 1622,
+    "events": 30,
+    "terminal": 12678
+  },
+  "files": [
+    {
+      "path": "browser-end-tool-receipt.json",
+      "bytes": 1025,
+      "sha256": "bd13b0fcc492dff436f3f12daae6bd5496c0cef9adcc233caaf6a6d242160874"
+    },
+    {
+      "path": "browser_controller.py",
+      "bytes": 6867,
+      "sha256": "44afa03f5c4c79f2f56b5c5d7443d7409ae89caa71d27eff35b1565decd9119d"
+    },
+    {
+      "path": "driver_core.py",
+      "bytes": 12085,
+      "sha256": "56e0bf7b813a7982b7de6a67e2aed14c5d7429e03ce2bf6af0b22487efed8bca"
+    },
+    {
+      "path": "event_log_observer.gd",
+      "bytes": 19636,
+      "sha256": "ea3e03a9e347a4182528ee5b3092bfc7915bfb4c8cf61ec49a5c9d2a5cb49cd1"
+    },
+    {
+      "path": "export-receipt-seal.json",
+      "bytes": 157,
+      "sha256": "4a760c38b40d35f3c39dc739972cbca73c8b2efb165d36958e27b008b5433acc"
+    },
+    {
+      "path": "export-receipt-vault.json",
+      "bytes": 2313,
+      "sha256": "d32462003b1d84ecc62b71d5a188ed9a34275f2622de8f79855681a62ca07434"
+    },
+    {
+      "path": "export-receipt.json",
+      "bytes": 2313,
+      "sha256": "d32462003b1d84ecc62b71d5a188ed9a34275f2622de8f79855681a62ca07434"
+    },
+    {
+      "path": "export-request.json",
+      "bytes": 784,
+      "sha256": "b84f418959d9459f9e224b8b5b44915945a040d516fdb5ab05368310a3b4ff9f"
+    },
+    {
+      "path": "export.log",
+      "bytes": 109146,
+      "sha256": "0a8d32649420639384450414702aea3f9abd2f3c631d9ad171ff81e68d9158e5"
+    },
+    {
+      "path": "export_yard.py",
+      "bytes": 2783,
+      "sha256": "08240e2203b16458c2b8ad36ddc56a3fcb23203a24e73fea4d0d98d22079f736"
+    },
+    {
+      "path": "final_proof.py",
+      "bytes": 1353,
+      "sha256": "751a32d0d72bf11709dfe30962abc102374c6b63da4008e604692d5e2af8ef28"
+    },
+    {
+      "path": "initialize.py",
+      "bytes": 1464,
+      "sha256": "1043a016b56ca9f11f17c40db58e4592bf29b5cf5a52468e2b7b0ef5280e741e"
+    },
+    {
+      "path": "native-end-tool-receipt.json",
+      "bytes": 2222,
+      "sha256": "b308ef7b5a55ecb153650c462587324eb11a29848c6def34cb529a36e40f30d6"
+    },
+    {
+      "path": "negative-stage-preflight.json",
+      "bytes": 240,
+      "sha256": "a924e093bd3dcf90dbad7934a8ebfc125abb3190549596b215d2fedc8edfcce5"
+    },
+    {
+      "path": "original-producer-meta.json",
+      "bytes": 8970,
+      "sha256": "974d0145aadb6e23482257d722e7274fc952850704e212b42947ace3d1007854"
+    },
+    {
+      "path": "paired-original-settings.json",
+      "bytes": 664,
+      "sha256": "4c32d461a0fbcb920ad707a50c5a7a6ad324b6dc9964827ac9bf6b2e31bba7e0"
+    },
+    {
+      "path": "run/controller-events.jsonl",
+      "bytes": 2964,
+      "sha256": "b2583b8829f100c498a1cb11bd8c68c535680be97eaa222f84656d48e21a7e6e"
+    },
+    {
+      "path": "run/driver-actions.jsonl",
+      "bytes": 1336159,
+      "sha256": "64be1df5d3b69da6e8c781eb9df055b23c5d81d198501fa6453603105dec2fa6"
+    },
+    {
+      "path": "run/engine-window-lifecycle.json",
+      "bytes": 497,
+      "sha256": "2f831dc7e171048609a1b5c8091af2e80fdd333c3b07220a3012e79eb5da8cae"
+    },
+    {
+      "path": "run/final-browser-proof.json",
+      "bytes": 549411,
+      "sha256": "d199196c7ab0db0074b01063481ba3c32205e3e14c35d90e7c2e33b33a63f86a"
+    },
+    {
+      "path": "run/http.log",
+      "bytes": 574,
+      "sha256": "48d4e5600681311fd4f0619b36a03aa0c725c911cda71f3797aa47258030195d"
+    },
+    {
+      "path": "run/initial-paired-WON-full-fingerprint.json",
+      "bytes": 13399,
+      "sha256": "d9308422732c6644cb142efa9c35dc0c985797b34e9430f9bcad14399e4bea1a"
+    },
+    {
+      "path": "run/loaded-controls/initialize-yard-paired-consumer.py",
+      "bytes": 1464,
+      "sha256": "1043a016b56ca9f11f17c40db58e4592bf29b5cf5a52468e2b7b0ef5280e741e"
+    },
+    {
+      "path": "run/loaded-controls/yard-final-browser-proof.py",
+      "bytes": 1353,
+      "sha256": "751a32d0d72bf11709dfe30962abc102374c6b63da4008e604692d5e2af8ef28"
+    },
+    {
+      "path": "run/loaded-controls/yard-whole-1x-helper.py",
+      "bytes": 4731,
+      "sha256": "e093a1ba6cf30d5b0989b1588d600750feb8d25073d003e51fc6ee62f1d681e0"
+    },
+    {
+      "path": "run/loaded-controls/yard-whole-2x-helper.py",
+      "bytes": 4731,
+      "sha256": "e093a1ba6cf30d5b0989b1588d600750feb8d25073d003e51fc6ee62f1d681e0"
+    },
+    {
+      "path": "run/loaded-controls/yard-whole-natural-1x.py",
+      "bytes": 371,
+      "sha256": "43c10b2a329952155fe5b1308f83fe68c5e8cde3f938004d2e9a9bdf5f8022d3"
+    },
+    {
+      "path": "run/loaded-controls/yard-whole-natural-2x.py",
+      "bytes": 371,
+      "sha256": "047c85606679a6710c79820efe9ccffe3bd4607211d07270599a47df3488d0e2"
+    },
+    {
+      "path": "run/owned-pages-startup.json",
+      "bytes": 166,
+      "sha256": "4b1d4190cdc3da46db9e66dd880174c224a434e7a4a587cd39c06b7657ad3e49"
+    },
+    {
+      "path": "run/receipt-vault/initialize-yard-paired-consumer.json",
+      "bytes": 1772,
+      "sha256": "a80664f5b8b4d5c8214a7f79e2f88bb442ff3fc7fadd12d69d8fd8fbbe01c4f1"
+    },
+    {
+      "path": "run/receipt-vault/initialize-yard-paired-consumer.seal.json",
+      "bytes": 267,
+      "sha256": "b1e8e182fa0fea7756dc36ef83065140827cb779694b74f03feba2fc08744555"
+    },
+    {
+      "path": "run/receipt-vault/yard-browser-window-END.json",
+      "bytes": 1608,
+      "sha256": "6f8097e9ee98945dedfa43da9aac0497c89ece458105c838e7d189b783f3bbb1"
+    },
+    {
+      "path": "run/receipt-vault/yard-browser-window-END.seal.json",
+      "bytes": 259,
+      "sha256": "742b6cfd2c4cb1ebcc0d98934b2e2cf89be8867faba7e9e7b7e99b7c8527b67c"
+    },
+    {
+      "path": "run/receipt-vault/yard-final-browser-proof.json",
+      "bytes": 1766,
+      "sha256": "d171b61440283b3222d6ce2244e108aeccf28b7a7ff88cffece127b8d734b26b"
+    },
+    {
+      "path": "run/receipt-vault/yard-final-browser-proof.seal.json",
+      "bytes": 260,
+      "sha256": "1484bfac24f8ad5cffc9aaadb7b15569fb020b6e4580cb24cd4c4cbdf20c0447"
+    },
+    {
+      "path": "run/receipt-vault/yard-whole-natural-1x.json",
+      "bytes": 1760,
+      "sha256": "876b2486b6dbea3ed44dbbbf50030793cb5a922e90b7e9f75e262c56af040888"
+    },
+    {
+      "path": "run/receipt-vault/yard-whole-natural-1x.seal.json",
+      "bytes": 257,
+      "sha256": "7cc7f2a83e4d3bf0476971d88509c14f0f0e2ba726bf13d67480335d4dde785f"
+    },
+    {
+      "path": "run/receipt-vault/yard-whole-natural-2x.json",
+      "bytes": 1760,
+      "sha256": "da9b0876abd8a676e932e9a22f1b4a3e76bf93d47a37883d9a1e065119c14b79"
+    },
+    {
+      "path": "run/receipt-vault/yard-whole-natural-2x.seal.json",
+      "bytes": 257,
+      "sha256": "d12beed8749cab5f29fac157aa025148c198067d42d084d34053fc5cfdd98e7a"
+    },
+    {
+      "path": "run/receipts/initialize-yard-paired-consumer.json",
+      "bytes": 1772,
+      "sha256": "a80664f5b8b4d5c8214a7f79e2f88bb442ff3fc7fadd12d69d8fd8fbbe01c4f1"
+    },
+    {
+      "path": "run/receipts/yard-browser-window-END.json",
+      "bytes": 1608,
+      "sha256": "6f8097e9ee98945dedfa43da9aac0497c89ece458105c838e7d189b783f3bbb1"
+    },
+    {
+      "path": "run/receipts/yard-final-browser-proof.json",
+      "bytes": 1766,
+      "sha256": "d171b61440283b3222d6ce2244e108aeccf28b7a7ff88cffece127b8d734b26b"
+    },
+    {
+      "path": "run/receipts/yard-whole-natural-1x.json",
+      "bytes": 1760,
+      "sha256": "876b2486b6dbea3ed44dbbbf50030793cb5a922e90b7e9f75e262c56af040888"
+    },
+    {
+      "path": "run/receipts/yard-whole-natural-2x.json",
+      "bytes": 1760,
+      "sha256": "da9b0876abd8a676e932e9a22f1b4a3e76bf93d47a37883d9a1e065119c14b79"
+    },
+    {
+      "path": "run/requests/initialize-yard-paired-consumer.json",
+      "bytes": 215,
+      "sha256": "10018d1a77f205062b7cbed0142550979854f64d41dce9bef344024a69b763c9"
+    },
+    {
+      "path": "run/requests/yard-browser-window-END.json",
+      "bytes": 145,
+      "sha256": "965bf7793257a2e69eb80ab4705ba565a1519229b18bd94033082c7a98966ea3"
+    },
+    {
+      "path": "run/requests/yard-final-browser-proof.json",
+      "bytes": 209,
+      "sha256": "641d22a52bde5ecb7d6ba692859cb00b12db8e0a8fc905a123d51519ef081c53"
+    },
+    {
+      "path": "run/requests/yard-whole-natural-1x.json",
+      "bytes": 203,
+      "sha256": "d01e6c4d3d0991a9b65522b85316085a1794a1ab24ca48bfc5d6c6bab9267753"
+    },
+    {
+      "path": "run/requests/yard-whole-natural-2x.json",
+      "bytes": 203,
+      "sha256": "d639f336d67824f36e34c4105db0f60bbb0657d5715c09964cbe729c62a1d428"
+    },
+    {
+      "path": "run/yard-whole-1x-after-terminal-full-fingerprint.json",
+      "bytes": 354311,
+      "sha256": "84eea39dc46407c730588be9d8b0d26ed6aa47c226b49099961007436faba58b"
+    },
+    {
+      "path": "run/yard-whole-1x-before-natural-full-fingerprint.json",
+      "bytes": 26392,
+      "sha256": "cc7693a985ca2ce14af676f52df1cc67b9c9c1cee4b718ce70d22937c9d75106"
+    },
+    {
+      "path": "run/yard-whole-1x-post-WON-full-fingerprint.json",
+      "bytes": 361056,
+      "sha256": "2c9d03a5d09a94f4ea45870eaf28280701fe8971069ee39f9748ed26c35042b2"
+    },
+    {
+      "path": "run/yard-whole-1x.json",
+      "bytes": 328708,
+      "sha256": "c4aaa541f684602cd0ff4aea1f09f8e2bfa490dc4a64e8e1c5fd5d46db14b8e9"
+    },
+    {
+      "path": "run/yard-whole-2x-after-terminal-full-fingerprint.json",
+      "bytes": 536686,
+      "sha256": "5247bbf5fd9a8163265ef7416cf531babf06ca134ce290346db6c20fe3d9e8ba"
+    },
+    {
+      "path": "run/yard-whole-2x-before-natural-full-fingerprint.json",
+      "bytes": 370633,
+      "sha256": "6d8e04da3e2f3b65e63cf4f18b9ba176fa74f7897cba463fe8cdca4aec3028b5"
+    },
+    {
+      "path": "run/yard-whole-2x-post-WON-full-fingerprint.json",
+      "bytes": 543518,
+      "sha256": "83b8a993b8d783726f1f44c0190385c9939d183160797700cee04372c73807f6"
+    },
+    {
+      "path": "run/yard-whole-2x.json",
+      "bytes": 166845,
+      "sha256": "b57e52c89b322aa9164a94aa2d75ff9f827c3f052de5bdc5caff47409f645cf7"
+    },
+    {
+      "path": "run/yard_initial_paired_WON.png",
+      "bytes": 640037,
+      "sha256": "c42ad1e6c2b85801dcb682cc99801c29a5aa14d15e3699024063ee6a5d395d8b"
+    },
+    {
+      "path": "run/yard_whole_1x_returned_WON.png",
+      "bytes": 634112,
+      "sha256": "d0eb7530e7a134840f2a0c26ae35b42f3e05cc0ed6b68b8fae6419635768e521"
+    },
+    {
+      "path": "run/yard_whole_1x_terminal.png",
+      "bytes": 892481,
+      "sha256": "a63ec5d61767f03fb88b84b76bcf381213319a46df6b973e51fa4ae983d42f49"
+    },
+    {
+      "path": "run/yard_whole_2x_returned_WON.png",
+      "bytes": 634121,
+      "sha256": "5cd4c05d453aa21ddfdc764ed89bcf30eea456df13a5e3fc8b910aa00a5c6510"
+    },
+    {
+      "path": "run/yard_whole_2x_terminal.png",
+      "bytes": 892770,
+      "sha256": "8513bb799fa6afb2e23fd22d1d8428740cc43024e0e132ae2c16bcaaa6cab490"
+    },
+    {
+      "path": "run_yard_offline_audit.py",
+      "bytes": 3181,
+      "sha256": "104631ada3ccadc3414a53f0f8dce0c559b27155819487eba3d116904d2fbb4d"
+    },
+    {
+      "path": "site-helper-unavailable.json",
+      "bytes": 360,
+      "sha256": "8681a9b6bc4438f783173c162fe6ff6a3f7122e86ad6b57977f539b8317dac45"
+    },
+    {
+      "path": "spec.json",
+      "bytes": 3269,
+      "sha256": "2dad5273f035873de2f63c009f2460d092257ce900c16df769b79dbf15949f1d"
+    },
+    {
+      "path": "stage-proof.json",
+      "bytes": 2661,
+      "sha256": "2df93366093a44149b5aceec695e8469b28bf708a2b79863cefdaddc6dda560b"
+    },
+    {
+      "path": "whole_1x.py",
+      "bytes": 371,
+      "sha256": "43c10b2a329952155fe5b1308f83fe68c5e8cde3f938004d2e9a9bdf5f8022d3"
+    },
+    {
+      "path": "whole_2x.py",
+      "bytes": 371,
+      "sha256": "047c85606679a6710c79820efe9ccffe3bd4607211d07270599a47df3488d0e2"
+    },
+    {
+      "path": "whole_helper.py",
+      "bytes": 4731,
+      "sha256": "e093a1ba6cf30d5b0989b1588d600750feb8d25073d003e51fc6ee62f1d681e0"
+    },
+    {
+      "path": "yard-offline-audit-receipt-seal.json",
+      "bytes": 83,
+      "sha256": "0da14d1c4421cb2b347b4ff4ec0152dada19a47a521724484a56c28a9a706caa"
+    },
+    {
+      "path": "yard-offline-audit-receipt-vault.json",
+      "bytes": 1042,
+      "sha256": "f9dc3047744fce1be179e8987129a9f1fa1032637ddf60cb54b6ba2f4569d168"
+    },
+    {
+      "path": "yard-offline-audit-receipt.json",
+      "bytes": 1042,
+      "sha256": "f9dc3047744fce1be179e8987129a9f1fa1032637ddf60cb54b6ba2f4569d168"
+    },
+    {
+      "path": "yard-offline-audit-request.json",
+      "bytes": 859,
+      "sha256": "ed86225d7969f1f4c034b460fcab04d02e23a203ce57744e369c670979c4be10"
+    },
+    {
+      "path": "yard-offline-audit-result.json",
+      "bytes": 1103,
+      "sha256": "8d8e26994f148c0956aa7d69f5679f939f99e571b2eaf3bc0cd66f700499995c"
+    },
+    {
+      "path": "yard-offline-audit.log",
+      "bytes": 1176,
+      "sha256": "b730beb31306ac28bfa9ae27fc585ae7b4a856f7399a30a8803e6b96fcfd26b8"
+    },
+    {
+      "path": "yard-payload-audit.json",
+      "bytes": 326819,
+      "sha256": "bd3550bfd4d942f43f1f62e0cc55a37ce688917020b606db5ad1d2231c09b7dd"
+    },
+    {
+      "path": "yard_record_readonly_audit.gd",
+      "bytes": 6735,
+      "sha256": "dc4b42a293bc849a405426f2f084d7f6595bbb7fe2bb1e55acca3a913a785cef"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 1918,
+      "sha256": "cde21e3e2d64be0f91ab67ee593f00ee6f9ea295e1a1ac661b676f59d66e95c8"
+    }
+  ]
+}
