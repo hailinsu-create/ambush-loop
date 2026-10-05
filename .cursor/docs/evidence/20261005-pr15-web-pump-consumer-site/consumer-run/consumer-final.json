@@ -1,0 +1,1187 @@
+{
+  "status": "PASS",
+  "state": {
+    "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          336,
+          272
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          464,
+          240
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          752,
+          272
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          688,
+          464
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          880,
+          400
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          944,
+          560
+        ]
+      }
+    ],
+    "engine_frames": 1587,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "fixture_ready": true,
+    "focus_actor": -1,
+    "focus_type": "",
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 34,
+    "input_tail": {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1462,
+      "keycode": 32,
+      "kind": "key",
+      "phase": 3,
+      "presents": 1462,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 696875700
+    },
+    "level": "pump",
+    "log": {
+      "events": 34,
+      "playback_frames": 820,
+      "playback_terminal": 6178,
+      "playback_tick": 0,
+      "snapshots": 161,
+      "terminal": 935,
+      "terminal_reason": "win"
+    },
+    "loot": [],
+    "mines_count": 0,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "",
+      "tutorial_page": 0
+    },
+    "observer_usec": 5240500,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 0,
+        "family": "knife",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [],
+        "pool": {},
+        "pos": [
+          336,
+          528
+        ],
+        "role": 0,
+        "slot": -1,
+        "start_ammo": 0,
+        "weapon": "knife"
+      },
+      {
+        "alive": true,
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 90,
+        "family": "knife",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [],
+        "pool": {},
+        "pos": [
+          368,
+          560
+        ],
+        "role": 1,
+        "slot": -1,
+        "start_ammo": 0,
+        "weapon": "knife"
+      },
+      {
+        "alive": true,
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180,
+        "family": "knife",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [],
+        "pool": {},
+        "pos": [
+          400,
+          528
+        ],
+        "role": 2,
+        "slot": -1,
+        "start_ammo": 0,
+        "weapon": "knife"
+      }
+    ],
+    "phase": 3,
+    "presents": 1587,
+    "replay": {
+      "max": 6178,
+      "playing": false,
+      "speed": 2,
+      "tick": 6178
+    },
+    "run_id": 1,
+    "scale": 1,
+    "scene": "res://scenes/presentation/yard_3d.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "selected": 1,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "3a527ffa2bdb88f5c7ed811f891f36edd839f40fb47e8445d6ae109c1ff227f7",
+          "text": "[progress]\n\nlevel_id=\"railcut\"\nlevel_index=3\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"pump\", \"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\npump_loops=1\npump_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "1e2c3614f2baaf839d0220508fda5eeb9ce1d37aa112fd259e5aa0d548e34087",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_pump=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 0,
+          "perfect": false,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 0,
+          "perfect": false,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "pump",
+          "loops": 1,
+          "perfect": true,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "railcut",
+      "persistence_error": "",
+      "persistence_status": "已保存到此浏览器",
+      "quality": "standard",
+      "seen": {
+        "pump": true
+      },
+      "sfx_volume": 1
+    },
+    "sim": {
+      "accum": 0,
+      "paused": false,
+      "speed": 1,
+      "tick": 0
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "rifle",
+        "id": 140005871044,
+        "kind": "m1_garand",
+        "pos": [
+          336,
+          400
+        ]
+      },
+      {
+        "collected": false,
+        "family": "mg",
+        "id": 140190420608,
+        "kind": "bar",
+        "pos": [
+          720,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "scout",
+        "id": 140374969994,
+        "kind": "springfield",
+        "pos": [
+          944,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "grenade",
+        "id": 140559519380,
+        "kind": "grenade",
+        "pos": [
+          528,
+          272
+        ]
+      },
+      {
+        "collected": false,
+        "family": "mine",
+        "id": 140710514333,
+        "kind": "mine",
+        "pos": [
+          304,
+          400
+        ]
+      },
+      {
+        "collected": false,
+        "family": "ammo",
+        "id": 140861509286,
+        "kind": "ammo",
+        "pos": [
+          752,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 141012504239,
+        "kind": "thompson",
+        "pos": [
+          464,
+          528
+        ]
+      }
+    ],
+    "status": "计划奏效",
+    "ticks_usec": 751626700,
+    "tool": 0,
+    "view": {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "gesture": {
+        "contacts": 0,
+        "middle_down": false,
+        "pending_id": -1,
+        "suppressed": 0,
+        "ui_contacts": 0
+      },
+      "level": "pump",
+      "pitch": 55,
+      "recorded_phase": 3,
+      "roots": 4,
+      "seq": -1,
+      "tick": 0,
+      "wave": 0,
+      "yaw": 35
+    },
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "wave": 0,
+    "wave_count": 2,
+    "waves_cleared": 0,
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "record_sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf",
+  "trusted_browser_inputs": [
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 34695.20000001788
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 34698.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 41072.70000001788
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 41073.40000000596
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 46755.20000001788
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 46756.30000001192
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 52018
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 52041.70000001788
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Home",
+      "button": null,
+      "t": 52463.30000001192
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Home",
+      "button": null,
+      "t": 52915.59999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 59192.20000001788
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 59192.90000000596
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "ArrowLeft",
+      "button": null,
+      "t": 432558.90000000596
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "ArrowLeft",
+      "button": null,
+      "t": 433059.7000000179
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "ArrowRight",
+      "button": null,
+      "t": 435353.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "ArrowRight",
+      "button": null,
+      "t": 435802
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Space",
+      "button": null,
+      "t": 438080.3000000119
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Space",
+      "button": null,
+      "t": 438626.7000000179
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 482302.7000000179
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 482303.7000000179
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 488366.5
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 488367.3000000119
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 494109.59999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 494127.7000000179
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Home",
+      "button": null,
+      "t": 494568.40000000596
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Home",
+      "button": null,
+      "t": 495008.2000000179
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 501487.3000000119
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 501488
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "ArrowLeft",
+      "button": null,
+      "t": 691359.099999994
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "ArrowLeft",
+      "button": null,
+      "t": 691869.7000000179
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "ArrowRight",
+      "button": null,
+      "t": 694096.099999994
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "ArrowRight",
+      "button": null,
+      "t": 694514.900000006
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Space",
+      "button": null,
+      "t": 696683
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Space",
+      "button": null,
+      "t": 697209.8000000119
+    }
+  ],
+  "engine_inputs": [
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 59,
+      "kind": "mouse",
+      "phase": 3,
+      "pos": [
+        790,
+        542
+      ],
+      "presents": 59,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 34361300
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 59,
+      "kind": "mouse",
+      "phase": 3,
+      "pos": [
+        790,
+        542
+      ],
+      "presents": 59,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 34363200
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 72,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 72,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 40737800
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 72,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 72,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 40738200
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 85,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        706,
+        674
+      ],
+      "presents": 85,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 46420600
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 85,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        706,
+        674
+      ],
+      "presents": 85,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 46421100
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 97,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        911,
+        664
+      ],
+      "presents": 97,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 51683400
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 97,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        911,
+        664
+      ],
+      "presents": 97,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 51706500
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 98,
+      "keycode": 4194317,
+      "kind": "key",
+      "phase": 4,
+      "presents": 98,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 52129200
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 99,
+      "keycode": 4194317,
+      "kind": "key",
+      "phase": 4,
+      "presents": 99,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 52581300
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 113,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 113,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 58857400
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 113,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 113,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 58857700
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 898,
+      "keycode": 4194319,
+      "kind": "key",
+      "phase": 4,
+      "presents": 898,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 432225900
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 899,
+      "keycode": 4194319,
+      "kind": "key",
+      "phase": 4,
+      "presents": 899,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 432725000
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 904,
+      "keycode": 4194321,
+      "kind": "key",
+      "phase": 4,
+      "presents": 904,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 435018900
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 905,
+      "keycode": 4194321,
+      "kind": "key",
+      "phase": 4,
+      "presents": 905,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 435467200
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 910,
+      "keycode": 32,
+      "kind": "key",
+      "phase": 4,
+      "presents": 910,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 437745700
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 911,
+      "keycode": 32,
+      "kind": "key",
+      "phase": 3,
+      "presents": 911,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 438292900
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1008,
+      "kind": "mouse",
+      "phase": 3,
+      "pos": [
+        840,
+        540
+      ],
+      "presents": 1008,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 481968100
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1008,
+      "kind": "mouse",
+      "phase": 3,
+      "pos": [
+        840,
+        540
+      ],
+      "presents": 1008,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 481968400
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1021,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 1021,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 488031800
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1021,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 1021,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 488032100
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1034,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        911,
+        664
+      ],
+      "presents": 1034,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 493774700
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1034,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        911,
+        664
+      ],
+      "presents": 1034,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 493792500
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1035,
+      "keycode": 4194317,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1035,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 494233800
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1036,
+      "keycode": 4194317,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1036,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 494673600
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1050,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 1050,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 501152400
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1050,
+      "kind": "mouse",
+      "phase": 4,
+      "pos": [
+        838,
+        674
+      ],
+      "presents": 1050,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 501152800
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1449,
+      "keycode": 4194319,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1449,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 691024300
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1450,
+      "keycode": 4194319,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1450,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 691534900
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1455,
+      "keycode": 4194321,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1455,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 693761400
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1456,
+      "keycode": 4194321,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1456,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 694180200
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1461,
+      "keycode": 32,
+      "kind": "key",
+      "phase": 4,
+      "presents": 1461,
+      "pressed": true,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 696348200
+    },
+    {
+      "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "echo": false,
+      "engine_frame": 1462,
+      "keycode": 32,
+      "kind": "key",
+      "phase": 3,
+      "presents": 1462,
+      "pressed": false,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "us": 696875700
+    }
+  ],
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 251291.891857999
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 251292.201537379
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 251292.837020594
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x171404cfcc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 251300.087420386
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x171404cfcc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 251300.583211879
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x171404cfcc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 251301.043622724
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x171404cfcc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "wall": 251301.529227596
+    }
+  ],
+  "page_errors": [],
+  "whole1": {
+    "status": "PASS",
+    "level": "pump",
+    "rate": 1,
+    "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "record_sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf",
+    "terminal_tick": 6178,
+    "record_duration": 102.96666666666667,
+    "deadline_wall": 647.8,
+    "controller_total_wall": 372.3180356719822,
+    "input_to_terminal_callback_wall": 367.1996,
+    "record_unchanged": true,
+    "domain_unchanged": true,
+    "frame_checks": {
+      "checks": 15,
+      "failures": [],
+      "tick": 6178
+    },
+    "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance"
+  },
+  "whole2": {
+    "status": "PASS",
+    "level": "pump",
+    "rate": 2,
+    "attempt": "f9bfc48ef5288e4bfb4305a942b73546",
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "record_sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf",
+    "terminal_tick": 6178,
+    "record_duration": 102.96666666666667,
+    "deadline_wall": 338.9,
+    "controller_total_wall": 188.99394560500514,
+    "input_to_terminal_callback_wall": 183.8657,
+    "record_unchanged": true,
+    "domain_unchanged": true,
+    "frame_checks": {
+      "checks": 15,
+      "failures": [],
+      "tick": 6178
+    },
+    "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance"
+  },
+  "rate_callback_wall_ratio": 1.997107671523291,
+  "scope": "isolated history consumer, original UI two bounded complete natural playbacks and arrows/Space; no fresh producer/performance acceptance; Space return may save only disposable consumer profile",
+  "production_campaign_profile_not_used": true,
+  "owned_pages": 1
+}

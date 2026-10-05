@@ -1,0 +1,258 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+  "producer_evidence_commit": "819893b86235524943035b3eee4955b33773586e",
+  "original_record": {
+    "path": "../20261005-pr15-web-pump-producer/run/pump-record.bin",
+    "bytes": 11203052,
+    "sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf"
+  },
+  "status": "PUMP_BOUNDED_FUNCTIONAL_END_PRIVATE_SITE_VERSION3_SUCCEEDED",
+  "sealed_at": "2026-10-05T10:59:38.816529+00:00",
+  "file_count": 48,
+  "total_bytes": 3899677,
+  "files": [
+    {
+      "path": "all-runtime-end.json",
+      "bytes": 368,
+      "sha256": "c9d253ced08ab4427267ea71948a7541b80195c09022734a3bcda26d3c7a9e57"
+    },
+    {
+      "path": "consumer-end.json",
+      "bytes": 2613,
+      "sha256": "641805f6fc31192a8cdf4dee201a56527c2b41c0baade3af668f104176ab0eea"
+    },
+    {
+      "path": "consumer-evidence-audit.json",
+      "bytes": 1450,
+      "sha256": "f4e1274c9f74325f76e8cc4109d50a324b5cb4275d5ee38bbbf206fe0c9fd103"
+    },
+    {
+      "path": "consumer-run/consumer-final.json",
+      "bytes": 26966,
+      "sha256": "cb7bbffb320b88e2d180bf22607522b02344162d6bc910529d91f9825bf78c5a"
+    },
+    {
+      "path": "consumer-run/consumer-start.json",
+      "bytes": 8002,
+      "sha256": "a37abb76ad5e9096b17863d41511566a39e85230a5487f0b9442e81ea2d0ede8"
+    },
+    {
+      "path": "consumer-run/driver-actions.jsonl",
+      "bytes": 762152,
+      "sha256": "f4ba127c7930fc9eb5cb362261ca5d5609e3e375e4102657defb7f0978338602"
+    },
+    {
+      "path": "consumer-run/http.log",
+      "bytes": 574,
+      "sha256": "758ada21d0e1778d5b4ca1c9524b9a1895a6994fd5b5b1282b98736678eabae3"
+    },
+    {
+      "path": "consumer-run/initialize-pump-cold-consumer.json",
+      "bytes": 1686,
+      "sha256": "49bb71af519fad61eff21abe85dc53017513bdbb30d9ea01baf4e53fff1b6d64"
+    },
+    {
+      "path": "consumer-run/owned-pages-startup.json",
+      "bytes": 220,
+      "sha256": "d1487f7826164498f28620e51a2d107ba5bb544a814de2729e7b5f94037ffc1e"
+    },
+    {
+      "path": "consumer-run/pump-consumer-final-proof.json",
+      "bytes": 1678,
+      "sha256": "4f5094d307d1a2f56451327ca04c6618ee7a083a347a34f0d1ee6dadb323ca67"
+    },
+    {
+      "path": "consumer-run/pump-whole-1x-browser.json",
+      "bytes": 2114,
+      "sha256": "aad44c981fdeb6ba70f0fcec162306bb1a32b91e48707b9f9e1827f3aa311753"
+    },
+    {
+      "path": "consumer-run/pump-whole-1x-fingerprints.json",
+      "bytes": 184321,
+      "sha256": "636f5db60fc673214dd7163c045c49e270a3486cbbac92229f14f08b6296cf05"
+    },
+    {
+      "path": "consumer-run/pump-whole-1x.json",
+      "bytes": 161351,
+      "sha256": "7fe518db6c93c250bc238603aa23841831d418c9e13996549398d72443e180e8"
+    },
+    {
+      "path": "consumer-run/pump-whole-2x-browser.json",
+      "bytes": 4002,
+      "sha256": "e8eb7447a4357354f3dad384d2a68bc4799f78f98b52c495d79539255f08d212"
+    },
+    {
+      "path": "consumer-run/pump-whole-2x-fingerprints.json",
+      "bytes": 282117,
+      "sha256": "5f78f94356ae2d828821ca77255eadbb5b5a011599e862a69b5892e293ff41b3"
+    },
+    {
+      "path": "consumer-run/pump-whole-2x.json",
+      "bytes": 82574,
+      "sha256": "7451c616346f126e8483a2a31877a4492d367ee9890126ac27322e3c17a102e0"
+    },
+    {
+      "path": "consumer-run/pump-whole-natural-1x.json",
+      "bytes": 1676,
+      "sha256": "10785fe7040a49e501c8cd7c88e3bfdd43bcc4e267c311141d4f78422988e0e2"
+    },
+    {
+      "path": "consumer-run/pump-whole-natural-2x.json",
+      "bytes": 1676,
+      "sha256": "fb9fa191caeae0e027d1fc0a13548bff3629eefea3daa3e6cae49772d7809533"
+    },
+    {
+      "path": "consumer-run/pump_whole_1x_terminal.png",
+      "bytes": 998223,
+      "sha256": "2ced2a2ddd87a4712dc3d4d4c6a7b94d385d96f7d4ff9b46139fdb2d8ce9b797"
+    },
+    {
+      "path": "consumer-run/pump_whole_2x_terminal.png",
+      "bytes": 998589,
+      "sha256": "cf7301cba44a58f6acd51b4ee77c76c5554bd38dab8a4a5d82ac12ada5359442"
+    },
+    {
+      "path": "consumer_controller.py",
+      "bytes": 3568,
+      "sha256": "d3ec1cb8a009ebb862c5eb781e3e5196cebedab79936a23c42fff568d6fe712b"
+    },
+    {
+      "path": "consumer_finish.py",
+      "bytes": 1550,
+      "sha256": "1ff7e49d109684f54a31ff099e260dcc0987d8790ef54c65d4a8ce225fd8ba28"
+    },
+    {
+      "path": "consumer_initialize.py",
+      "bytes": 1250,
+      "sha256": "564c3ae220655841fdbc0b124b2487bc93c40839385f5e7bc40db3fa15eab51f"
+    },
+    {
+      "path": "consumer_whole_1x.py",
+      "bytes": 506,
+      "sha256": "b389d07d1f7e1b39e3416805e08d7b5f9e18a3233062750a817a5dbd192732ca"
+    },
+    {
+      "path": "consumer_whole_2x.py",
+      "bytes": 506,
+      "sha256": "25897f69b296c4099e461f60752580402c651206bac9f983f7f99f049393b568"
+    },
+    {
+      "path": "driver_core.py",
+      "bytes": 11106,
+      "sha256": "8d94e14b85e3d9dcb063eebb342e8b374d0cf91a127b9662b5dcb5f7c623431b"
+    },
+    {
+      "path": "driver_whole_and_progress.py",
+      "bytes": 8602,
+      "sha256": "f5e98ffeed1e0453354b3603ee759450e3fc32384d5f78ececc667ce4f5a44c4"
+    },
+    {
+      "path": "export_pump_consumer.py",
+      "bytes": 6822,
+      "sha256": "5f35334ca76266399d4b6befd7ab78bb7a8bb4c73bea350723f31e8eec050e8f"
+    },
+    {
+      "path": "package_site_candidate.py",
+      "bytes": 3736,
+      "sha256": "493d26e0c247fa7269122941e16180402a51cacc41207aa52eee2b8aea8fa7b4"
+    },
+    {
+      "path": "prepare_consumer_controls.py",
+      "bytes": 3124,
+      "sha256": "976bbd5ebe115c2294bb0a1cc5eb04da66cceb40f16655200d14d9fdcf5f90e7"
+    },
+    {
+      "path": "pump-consumer-export.json",
+      "bytes": 2605,
+      "sha256": "70968bf6f751e66c392f13f41bea327a3fcbd51c85b0ccccf1da2266daf70e6b"
+    },
+    {
+      "path": "pump-consumer-export.log",
+      "bytes": 108847,
+      "sha256": "2fece8c2f7f3888f907dcfd3f5110e65f0d2f954a88ef6a0d9d181b7e48b0f49"
+    },
+    {
+      "path": "pump-consumer-observer.gd",
+      "bytes": 18922,
+      "sha256": "8eb1cabbdcbf3e682fe61d12d43c887e08e3a82a916b12088460086ff23ac505"
+    },
+    {
+      "path": "pump-consumer-payload-audit.json",
+      "bytes": 163683,
+      "sha256": "e714720b7a0f0acb7e4c43859f299b6b35ef5287ddfa9d15530605204d6270a7"
+    },
+    {
+      "path": "pump-offline-audit-receipt.json",
+      "bytes": 910,
+      "sha256": "e04b02102a22c8701b3cd3879b8f3dd557acad75d7290d80a78f437cd5872468"
+    },
+    {
+      "path": "pump-offline-audit-result.json",
+      "bytes": 583,
+      "sha256": "8dce5f80a5b20bd0c843b50fa11ab0a5ddda3047a9a216c2d2d8ef858342aa0c"
+    },
+    {
+      "path": "pump-offline-audit.log",
+      "bytes": 821,
+      "sha256": "05630507a8592836e92fc92f54dcd31d67f3fb1209108612ecf68fc3b4346ebe"
+    },
+    {
+      "path": "pump_record_readonly_audit.gd",
+      "bytes": 6004,
+      "sha256": "dbfbcd91066f6551ec2d8d5c8f9d79047021048728b2d491ea899e6b0104b891"
+    },
+    {
+      "path": "run_pump_offline_audit.py",
+      "bytes": 2441,
+      "sha256": "dabadc0ff0a0731e09687fd8fd7ce688268a1130fdac2afb3ad0d3dca86e28ac"
+    },
+    {
+      "path": "site-api-receipt.json",
+      "bytes": 1476,
+      "sha256": "b507faa313e515299a0716c6b44ba01a568b57449655f1c457c13962891d8b8f"
+    },
+    {
+      "path": "site-inline-1.js",
+      "bytes": 6078,
+      "sha256": "d3cd9d67b28c82872257487cd03f7bb277de994e4985879f57124b1497261f48"
+    },
+    {
+      "path": "site-package.json",
+      "bytes": 3401,
+      "sha256": "f24aea9013e921ca9c97bcda318e589adec648a37999a293d5fc98ae59a68559"
+    },
+    {
+      "path": "site-package.log",
+      "bytes": 2440,
+      "sha256": "22e4792410d7a368dc73ddb699e748080711df126af1d8fe1c660d0e2a3da936"
+    },
+    {
+      "path": "site-prepare.json",
+      "bytes": 3084,
+      "sha256": "3f6dca780411f3a603ea69abf41335003a3d981855c094807788bfe3895a9c21"
+    },
+    {
+      "path": "site-source-open.json",
+      "bytes": 1409,
+      "sha256": "b366b6505d2c614c144b5e68215af8ad353cd3ccbff146bce095a2c80130b639"
+    },
+    {
+      "path": "site-source-package.json",
+      "bytes": 5575,
+      "sha256": "009b5741e834f9419157cb269a000c020b2b95413f2f2c670b0f3e8625f27b5c"
+    },
+    {
+      "path": "site_source_workflow.py",
+      "bytes": 4653,
+      "sha256": "c40871c7c72567ad52d4128022c98130d11d4433926af4f83b6d4f21c610cc54"
+    },
+    {
+      "path": "source14-final.json",
+      "bytes": 3623,
+      "sha256": "e58f64db613b1ba451d38848406e9402fc4e0c1fe05e98d3858dff587988c97d"
+    }
+  ],
+  "scope": "same original archived pump history in isolated disposable consumer; actual original UI natural whole1x/2x, offline pure reader12,595/0, one necessary same owner-private production release Site update; no fresh railcut producer, source/asset edits, merge/APK, performance/onlineReady claim",
+  "credentials_profiles_binaries_not_included": true
+}
