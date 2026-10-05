@@ -38,4 +38,6 @@ main.gd 的 InputEventScreenTouch 原路径只检查 pressed，不检查 cancele
 
 原外部 GPT c2c_ba05 iteration1 实际读取输出 37–39 和精确两文件差异，返回 DONE，无专项阻断项。此 DONE 仅针对取消触摸专项，不等于新完整回归、Android 或整个 M2 验收。
 
-2026-10-05 已启动新代码完整隔离 smoke，执行会话 34607，捕获文件 %TEMP%/ambush_m2_t2_full_smoke.txt；结果尚未获得。下一步收集真实退出码、完成标记和存档后验，再提交外部 GPT 复核。手机继续暂缓，PR 保持 Draft。
+2026-10-05 新代码完整隔离 smoke 已结束。run ID `1c56f9deac944a879250e161de0a0579`，Godot 4.7.2，实际退出码 0；六关 yard/warehouse/pump/railcut/depot/radio 均通过，`SMOKE_SLICE_COMPLETE`、`SMOKE_OK_SWEEP_FIRST_HINT` 与 `PLAYER_DATA_UNCHANGED=1` 存在，stderr 为空。完整日志在 `ambush_loop/build/ambush_test_runs/1c56f9deac944a879250e161de0a0579/`；摘要捕获于 `%TEMP%/ambush_m2_t2_full_smoke.txt`。
+
+T2 的定向取消触摸门与完整桌面回归均通过；GPT c2c_ba05 iteration1 实际 DONE 仅覆盖取消触摸专项，未复核本次新完整 smoke。下一步按用户要求规划 M2 后续切片，并让外部 GPT 基于当前代码、差异和完整回归证据给出方案。Android/真机仍暂缓，PR #28 保持 Draft；不据此宣称 M2 完成。
