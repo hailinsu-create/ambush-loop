@@ -6043,21 +6043,27 @@ func _snapshot_data() -> Dictionary:
 				"pos": op.global_position,
 				"facing": op.facing_deg,
 				"role": op.role,
+				"tier": grid.get_elevation_tier(op.grid_cell().x, op.grid_cell().y),
+				"visible": op.visible,
 			})
 	var ens := []
 	for e in enemies:
+		var enemy_cell: Vector2i = grid.world_to_cell(e.global_position)
 		ens.append({
 			"id": e.label_id,
 			"hp": e.hp,
 			"alive": e.alive,
 			"pos": e.global_position,
 			"route": e.spawn_route,
+			"facing": e.facing_deg,
+			"tier": grid.get_elevation_tier(enemy_cell.x, enemy_cell.y),
+			"active": e.active,
 		})
 	var bars := []
 	for b in barrels:
 		if is_instance_valid(b):
 			bars.append({"pos": b.global_position, "spent": bool(b.spent)})
-	return {"ops": ops, "enemies": ens, "barrels": bars}
+	return {"presentation_schema": 2, "ops": ops, "enemies": ens, "barrels": bars}
 
 
 func _try_assign_loot(loot: LootPickup) -> void:
