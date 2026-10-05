@@ -85,7 +85,7 @@ func _run() -> void:
 		return
 	if not _assert_unit_anim(main):
 		return
-	if not _assert_feel_presence(main):
+	if not await _assert_feel_presence(main):
 		return
 	if not _assert_props(main):
 		return
@@ -1616,10 +1616,35 @@ func _assert_raid_campaign(main) -> bool:
 		return false
 	print("SMOKE_OK_KNIFE_LEAK tick=", main.sim.tick)
 	var fail_card := str(main.result_label.text) if main.result_label else ""
-	if fail_card.find("先搜") < 0:
-		push_error("SMOKE_KNIFE_FAIL_COPY %s" % fail_card.replace("\n", " / "))
-		quit(81)
-		return false
+	if main.yard_redesign_active():
+		if fail_card.find("逃逸") < 0 or fail_card.find("打开记录") < 0 or fail_card.find("重新部署再试") < 0:
+			push_error("SMOKE_KNIFE_FAIL_OBSERVATION_COPY %s" % fail_card.replace("\n", " / "))
+			quit(81)
+			return false
+		var fail_dossier := str(main.fail_dossier_text()) if main.has_method("fail_dossier_text") else ""
+		if fail_dossier.find("建议") < 0 or fail_dossier.find("枪械和弹药") < 0 or fail_dossier.find("再开始交战") < 0:
+			push_error("SMOKE_KNIFE_FAIL_DOSSIER_COPY %s" % fail_dossier.replace("\n", " / "))
+			quit(81)
+			return false
+		if main.dossier_button == null or not is_instance_valid(main.dossier_button) or not bool(main.dossier_button.visible):
+			push_error("SMOKE_KNIFE_FAIL_DOSSIER_BUTTON_MISSING")
+			quit(81)
+			return false
+		main._toggle_fail_dossier()
+		if main.result_dossier == null or not is_instance_valid(main.result_dossier) or not bool(main.result_dossier.visible) or str(main.result_dossier.text) != fail_dossier:
+			push_error("SMOKE_KNIFE_FAIL_DOSSIER_NOT_REACHABLE")
+			quit(81)
+			return false
+		main._toggle_fail_dossier()
+		if bool(main.result_dossier.visible):
+			push_error("SMOKE_KNIFE_FAIL_DOSSIER_NOT_RESTORED")
+			quit(81)
+			return false
+	else:
+		if fail_card.find("先搜") < 0:
+			push_error("SMOKE_KNIFE_FAIL_COPY %s" % fail_card.replace("\n", " / "))
+			quit(81)
+			return false
 	print("SMOKE_OK_KNIFE_FAIL_COPY")
 	main._on_continue_pressed()
 	await process_frame
@@ -3298,6 +3323,18 @@ func _assert_touch_parity(main) -> bool:
 	ev2.pressed = false
 	ev2.position = ev.position
 	main._unhandled_input(ev2)
+	if not main.touch_intent_pending() or main.selected.slot == main.cover_slots[1]:
+		push_error("SMOKE_TOUCH_TAP_DID_NOT_STAGE_COVER")
+		quit(44)
+		return false
+	if main.touch_hud == null or not bool(main.touch_hud._world_intent_panel.visible):
+		push_error("SMOKE_TOUCH_CONFIRM_AFFORDANCE_HIDDEN")
+		quit(44)
+		return false
+	if not main.confirm_touch_intent():
+		push_error("SMOKE_TOUCH_CONFIRM_REJECTED")
+		quit(44)
+		return false
 	if main.selected == null or main.selected.slot != main.cover_slots[1]:
 		push_error("SMOKE_TOUCH_DEPLOY_FAIL pos=%s screen=%s" % [slot_pos, ev.position])
 		quit(44)
@@ -3448,38 +3485,83 @@ func _assert_simplified_touch(main) -> bool:
 		return false
 	if not await _assert_touch_feel_055(main):
 		return false
-	if not await _assert_touch_feel_056(main):
+	var time_056 := _smoke_progress_begin("touch_feel_056")
+	var pass_056: bool = await _assert_touch_feel_056(main)
+	_smoke_progress_end("touch_feel_056", time_056, pass_056)
+	if not pass_056:
 		return false
-	if not await _assert_touch_feel_057(main):
+	var time_057 := _smoke_progress_begin("touch_feel_057")
+	var pass_057: bool = await _assert_touch_feel_057(main)
+	_smoke_progress_end("touch_feel_057", time_057, pass_057)
+	if not pass_057:
 		return false
-	if not await _assert_touch_feel_058(main):
+	var time_058 := _smoke_progress_begin("touch_feel_058")
+	var pass_058: bool = await _assert_touch_feel_058(main)
+	_smoke_progress_end("touch_feel_058", time_058, pass_058)
+	if not pass_058:
 		return false
-	if not await _assert_touch_feel_059(main):
+	var time_059 := _smoke_progress_begin("touch_feel_059")
+	var pass_059: bool = await _assert_touch_feel_059(main)
+	_smoke_progress_end("touch_feel_059", time_059, pass_059)
+	if not pass_059:
 		return false
-	if not await _assert_touch_feel_0510(main):
+	var time_0510 := _smoke_progress_begin("touch_feel_0510")
+	var pass_0510: bool = await _assert_touch_feel_0510(main)
+	_smoke_progress_end("touch_feel_0510", time_0510, pass_0510)
+	if not pass_0510:
 		return false
-	if not await _assert_touch_feel_0511(main):
+	var time_0511 := _smoke_progress_begin("touch_feel_0511")
+	var pass_0511: bool = await _assert_touch_feel_0511(main)
+	_smoke_progress_end("touch_feel_0511", time_0511, pass_0511)
+	if not pass_0511:
 		return false
 	## leftover feel 0512–0538: facing/blend/arc/dest re-sims. 0511 holds
 	## badge+west combo; 0539 holds dest span 6 + south + compact + settle.
 	print("SMOKE_OK_TOUCH_FEEL_LEFTOVER_0512_0538_SLIM")
-	if not await _assert_touch_feel_0539(main):
+	var time_0539 := _smoke_progress_begin("touch_feel_0539")
+	var pass_0539: bool = await _assert_touch_feel_0539(main)
+	_smoke_progress_end("touch_feel_0539", time_0539, pass_0539)
+	if not pass_0539:
 		return false
-	if not await _assert_touch_feel_0540(main):
+	var time_0540 := _smoke_progress_begin("touch_feel_0540")
+	var pass_0540: bool = await _assert_touch_feel_0540(main)
+	_smoke_progress_end("touch_feel_0540", time_0540, pass_0540)
+	if not pass_0540:
 		return false
-	if not await _assert_touch_feel_0541(main):
+	var time_0541 := _smoke_progress_begin("touch_feel_0541")
+	var pass_0541: bool = await _assert_touch_feel_0541(main)
+	_smoke_progress_end("touch_feel_0541", time_0541, pass_0541)
+	if not pass_0541:
 		return false
-	if not await _assert_touch_feel_0542(main):
+	var time_0542 := _smoke_progress_begin("touch_feel_0542")
+	var pass_0542: bool = await _assert_touch_feel_0542(main)
+	_smoke_progress_end("touch_feel_0542", time_0542, pass_0542)
+	if not pass_0542:
 		return false
-	if not await _assert_touch_feel_0601(main):
+	var time_0601 := _smoke_progress_begin("touch_feel_0601")
+	var pass_0601: bool = await _assert_touch_feel_0601(main)
+	_smoke_progress_end("touch_feel_0601", time_0601, pass_0601)
+	if not pass_0601:
 		return false
-	if not await _assert_touch_feel_0603(main):
+	var time_0603 := _smoke_progress_begin("touch_feel_0603")
+	var pass_0603: bool = await _assert_touch_feel_0603(main)
+	_smoke_progress_end("touch_feel_0603", time_0603, pass_0603)
+	if not pass_0603:
 		return false
-	if not await _assert_touch_feel_0605(main):
+	var time_0605 := _smoke_progress_begin("touch_feel_0605")
+	var pass_0605: bool = await _assert_touch_feel_0605(main)
+	_smoke_progress_end("touch_feel_0605", time_0605, pass_0605)
+	if not pass_0605:
 		return false
-	if not await _assert_touch_feel_0607(main):
+	var time_0607 := _smoke_progress_begin("touch_feel_0607")
+	var pass_0607: bool = await _assert_touch_feel_0607(main)
+	_smoke_progress_end("touch_feel_0607", time_0607, pass_0607)
+	if not pass_0607:
 		return false
-	if not await _assert_touch_feel_0611(main):
+	var time_0611 := _smoke_progress_begin("touch_feel_0611")
+	var pass_0611: bool = await _assert_touch_feel_0611(main)
+	_smoke_progress_end("touch_feel_0611", time_0611, pass_0611)
+	if not pass_0611:
 		return false
 	if not await _assert_touch_feel_0613(main):
 		return false
@@ -3737,8 +3819,12 @@ func _assert_touch_feel_052(main) -> bool:
 		push_error("SMOKE_GESTURE_NOT_SPRINT got=%s" % main._last_touch_gesture)
 		quit(44)
 		return false
-	if main.selected == null or not bool(main.selected.sprinting):
-		push_error("SMOKE_SPRINT_NOT_SET")
+	if main.selected == null or not main.touch_intent_pending() or bool(main.selected.sprinting) or main.selected.is_moving():
+		push_error("SMOKE_SPRINT_RELEASE_COMMITTED_WITHOUT_CONFIRM")
+		quit(44)
+		return false
+	if not main.confirm_touch_intent() or not bool(main.selected.sprinting):
+		push_error("SMOKE_SPRINT_CONFIRM_NOT_SET")
 		quit(44)
 		return false
 	print("SMOKE_OK_GESTURE_SPRINT")
@@ -4043,6 +4129,16 @@ func _assert_touch_feel_055(main) -> bool:
 		return false
 	print("SMOKE_OK_TOUCH_FEEL_055")
 	return true
+
+
+func _smoke_progress_begin(section: String) -> int:
+	var started_msec := Time.get_ticks_msec()
+	print("SMOKE_PROGRESS_BEGIN section=", section, " tick_msec=", started_msec)
+	return started_msec
+
+
+func _smoke_progress_end(section: String, started_msec: int, passed: bool) -> void:
+	print("SMOKE_PROGRESS_END section=", section, " elapsed_msec=", Time.get_ticks_msec() - started_msec, " passed=", passed)
 
 
 func _assert_touch_feel_056(main) -> bool:
@@ -4629,11 +4725,35 @@ func _assert_touch_feel_0539(main) -> bool:
 
 func _assert_touch_feel_0540(main) -> bool:
 	## v0.5.40: obs fill fade/clip at 1.0 scale. Dest/zoom/body/kit_range stay.
+	var details_were_open := true
+	if main.has_method("yard_redesign_active") and main.yard_redesign_active() and main.yard_hud != null:
+		details_were_open = bool(main.yard_hud.details_open)
+	_show_yard_details(main)
 	main._ensure_touch_hud()
 	main._update_hud()
+	if main.has_method("_update_observation_rings"):
+		main._update_observation_rings()
 	await process_frame
 	await process_frame
-	if not await _assert_west_obs_fill_0540(main):
+	var details_visible := bool(main.yard_tactical_details_visible()) if main.has_method("yard_tactical_details_visible") else true
+	var scout = main.operators[2] if main.operators.size() > 2 else null
+	var scout_ring_visible: bool = scout != null and scout.has_method("observation_ring_visible") and bool(scout.observation_ring_visible())
+	if not details_visible or not scout_ring_visible:
+		push_error("SMOKE_WEST_FILL_0540_VISUALIZATION_PRECONDITION details=%s scout_ring=%s" % [details_visible, scout_ring_visible])
+		if not details_were_open and main.has_method("yard_redesign_active") and main.yard_redesign_active() and main.yard_hud != null:
+			main.yard_hud.details_open = false
+			main._update_hud()
+			if main.has_method("_update_observation_rings"):
+				main._update_observation_rings()
+		quit(44)
+		return false
+	var fill_passed: bool = await _assert_west_obs_fill_0540(main)
+	if not details_were_open and main.has_method("yard_redesign_active") and main.yard_redesign_active() and main.yard_hud != null:
+		main.yard_hud.details_open = false
+		main._update_hud()
+		if main.has_method("_update_observation_rings"):
+			main._update_observation_rings()
+	if not fill_passed:
 		return false
 	print("SMOKE_OK_TOUCH_FEEL_0540")
 	return true
@@ -4984,6 +5104,9 @@ func _assert_follow_behind_stagger(main) -> bool:
 		return false
 	var walk_d1 := Vector2i(-1, -1)
 	var walk_d2 := Vector2i(-1, -1)
+	var resume_main_processing := bool(main.is_processing())
+	if resume_main_processing:
+		main.set_process(false)
 	for _i in 90:
 		if main.has_method("_tick_command_moves"):
 			main._tick_command_moves(0.05)
@@ -5001,6 +5124,8 @@ func _assert_follow_behind_stagger(main) -> bool:
 			main._tick_command_moves(0.05)
 		main._tick_squad_follow()
 		await process_frame
+	if resume_main_processing:
+		main.set_process(true)
 	var end_d1: Vector2i = main._follow_dest.get(int(a.op_id), Vector2i(-1, -1))
 	var end_d2: Vector2i = main._follow_dest.get(int(b.op_id), Vector2i(-1, -1))
 	var side_n := int(main.follow_side_rear_hits()) if main.has_method("follow_side_rear_hits") else 99
@@ -10477,7 +10602,8 @@ func _assert_west_file_0541(main) -> bool:
 
 func _assert_first_session_0542(main) -> bool:
 	## 跟 chip is thumb-sized. 开匣 sits above the crate, not in the west soap.
-	## 需枪 CTA stays 需枪 until a gun is held.
+	## The legacy alarm CTA stays 需枪; yard touch CTA uses the yard-specific
+	## weapon-collection copy, then warns once before any unarmed engagement.
 	if main.operators.is_empty() or main.c2 == null or main.c2.portraits == null:
 		push_error("SMOKE_SESSION_0542_NO_UI")
 		quit(44)
@@ -10543,18 +10669,60 @@ func _assert_first_session_0542(main) -> bool:
 	for o in main.operators:
 		if o != null and o.has_method("wipe_inventory"):
 			o.wipe_inventory()
+	var warned_before: bool = bool(main._alarm_warned_no_gun)
+	## Normalize the initial CTA so this assertion is independent of earlier smoke
+	## sections; restore the actual state after exercising the one-tap warning.
+	main._alarm_warned_no_gun = false
 	main._refresh_alarm_cta()
 	main._refresh_touch_hud()
 	var armed: bool = main.has_method("squad_has_firearm") and bool(main.squad_has_firearm())
 	if not armed:
-		if str(main.alarm_button.text) != "需枪":
-			push_error("SMOKE_SESSION_0542_CTA %s" % main.alarm_button.text)
+		var legacy_cta: String = str(main.alarm_button.text)
+		var touch_cta: String = ""
+		if main.touch_hud and main.touch_hud._btns.has("alarm"):
+			touch_cta = str(main.touch_hud._btns["alarm"].text)
+		var yard_cta: String = ""
+		if main.yard_redesign_active() and main.yard_hud != null:
+			yard_cta = str(main.yard_hud.primary_text())
+		var yard_initial_ok: bool = not main.yard_redesign_active() or yard_cta == "先搜集武器"
+		var touch_initial_ok: bool = touch_cta == (yard_cta if main.yard_redesign_active() else "需枪")
+		if legacy_cta != "需枪" or not yard_initial_ok or not touch_initial_ok:
+			main._alarm_warned_no_gun = warned_before
+			main._update_hud()
+			push_error(
+				"SMOKE_SESSION_0542_CTA legacy=%s yard=%s touch=%s"
+				% [legacy_cta, yard_cta, touch_cta]
+			)
 			quit(44)
 			return false
-		if main.touch_hud and main.touch_hud._btns.has("alarm") and str(main.touch_hud._btns["alarm"].text) != "需枪":
-			push_error("SMOKE_SESSION_0542_TOUCH_CTA %s" % main.touch_hud._btns["alarm"].text)
-			quit(44)
-			return false
+		if main.yard_redesign_active():
+			var phase_before: int = int(main.phase)
+			var run_before: int = int(main.run_id)
+			main._on_alarm_pressed()
+			main._update_hud()
+			var phase_after: int = int(main.phase)
+			var run_after: int = int(main.run_id)
+			var warned_after: bool = bool(main._alarm_warned_no_gun)
+			var yard_warning_cta: String = str(main.yard_hud.primary_text())
+			var touch_warning_cta: String = ""
+			if main.touch_hud and main.touch_hud._btns.has("alarm"):
+				touch_warning_cta = str(main.touch_hud._btns["alarm"].text)
+			main._alarm_warned_no_gun = warned_before
+			main._update_hud()
+			if (
+				phase_before != main.Phase.SETUP
+				or phase_after != main.Phase.SETUP
+				or run_after != run_before
+				or not warned_after
+				or yard_warning_cta != "确认无枪交战"
+				or touch_warning_cta != yard_warning_cta
+			):
+				push_error(
+					"SMOKE_SESSION_0542_UNARMED_WARNING phase=%s->%s run=%s->%s warned=%s yard=%s touch=%s"
+					% [phase_before, phase_after, run_before, run_after, warned_after, yard_warning_cta, touch_warning_cta]
+				)
+				quit(44)
+				return false
 	print(
 		"SMOKE_OK_SESSION_0542 chip=", hit,
 		" crate=", crate_rect,
@@ -10859,6 +11027,9 @@ func _assert_follow_settle_no_drop(main) -> bool:
 		return false
 	var walk_d1 := Vector2i(-1, -1)
 	var walk_d2 := Vector2i(-1, -1)
+	var resume_main_processing := bool(main.is_processing())
+	if resume_main_processing:
+		main.set_process(false)
 	for _i in 90:
 		if main.has_method("_tick_command_moves"):
 			main._tick_command_moves(0.05)
@@ -10876,6 +11047,8 @@ func _assert_follow_settle_no_drop(main) -> bool:
 			main._tick_command_moves(0.05)
 		main._tick_squad_follow()
 		await process_frame
+	if resume_main_processing:
+		main.set_process(true)
 	var end_d1: Vector2i = main._follow_dest.get(int(a.op_id), Vector2i(-1, -1))
 	var end_d2: Vector2i = main._follow_dest.get(int(b.op_id), Vector2i(-1, -1))
 	var drops := int(main.follow_settle_drops()) if main.has_method("follow_settle_drops") else 99
@@ -11206,6 +11379,9 @@ func _assert_follow_walk_continuity(main) -> bool:
 	var hop := 0
 	var walk_flips := 0
 	var saw_walk := false
+	var resume_main_processing := bool(main.is_processing())
+	if resume_main_processing:
+		main.set_process(false)
 	for _i in 90:
 		if main.has_method("_tick_command_moves"):
 			main._tick_command_moves(0.05)
@@ -11238,6 +11414,8 @@ func _assert_follow_walk_continuity(main) -> bool:
 			prev_d2 = d2
 		if not lead.is_moving() and not a.is_moving() and not b.is_moving() and _i > 12:
 			break
+	if resume_main_processing:
+		main.set_process(true)
 	var flips := walk_flips if saw_walk else (int(main.follow_dest_flips()) if main.has_method("follow_dest_flips") else hop)
 	var d1f: Vector2i = main._follow_dest.get(int(a.op_id), Vector2i(-1, -1))
 	var d2f: Vector2i = main._follow_dest.get(int(b.op_id), Vector2i(-1, -1))
@@ -11966,6 +12144,12 @@ func _freeze_sentry(sent) -> void:
 
 
 func _tick_follow_steps(main, n: int = 20) -> void:
+	## The smoke explicitly drives these deterministic ticks below. Leaving the
+	## live main loop enabled duplicates the same path/avoidance work on every
+	## rendered frame and makes headless path suites take minutes per fixture.
+	var resume_main_process := bool(main.is_processing())
+	if resume_main_process:
+		main.set_process(false)
 	for _step in n:
 		if main.has_method("_tick_command_moves"):
 			main._tick_command_moves(0.05)
@@ -11974,6 +12158,8 @@ func _tick_follow_steps(main, n: int = 20) -> void:
 		if main.has_method("_follow_selected_cam"):
 			main._follow_selected_cam(0.05)
 		await process_frame
+	if resume_main_process:
+		main.set_process(true)
 
 
 func _assert_follow_cone_margin(main) -> bool:
@@ -12651,6 +12837,22 @@ func _assert_watch_juice(main) -> bool:
 		gs.set_quality_tier("standard")
 	if main.phase != main.Phase.SETUP:
 		main._start_setup(false, false)
+	if main.has_method("yard_redesign_active") and main.yard_redesign_active():
+		## The redesigned yard intentionally hides its tactical timeline while
+		## details are folded. Establish the presentation this watch-juice check
+		## actually needs instead of asserting against the default folded state.
+		_show_yard_details(main)
+		var details_open: bool = main.yard_hud != null and bool(main.yard_hud.details_open)
+		var details_visible: bool = main.has_method("yard_tactical_details_visible") and bool(main.yard_tactical_details_visible())
+		var touch_mode: bool = main.has_method("_want_touch") and bool(main._want_touch())
+		var setup_timeline_visible: bool = main.watch_timeline != null and bool(main.watch_timeline.visible)
+		if not details_open or not details_visible or (not touch_mode and not setup_timeline_visible):
+			push_error(
+				"SMOKE_WATCH_JUICE_DETAILS_PRECONDITION details=%s tactical=%s timeline=%s touch=%s"
+				% [details_open, details_visible, setup_timeline_visible, touch_mode]
+			)
+			quit(53)
+			return false
 	main._select_op(0)
 	main._deploy_selected_to(main.cover_slots[0], false)
 	main.raid_force_alarm()
@@ -12662,6 +12864,22 @@ func _assert_watch_juice(main) -> bool:
 		push_error("SMOKE_WATCH_TIMELINE_HIDDEN")
 		quit(53)
 		return false
+	if main.has_method("yard_redesign_active") and main.yard_redesign_active():
+		var watch_tick: int = int(main.sim.tick)
+		var watch_run: int = int(main.run_id)
+		main.yard_hud.toggle_details()
+		var folded_timeline_hidden: bool = main.watch_timeline != null and not bool(main.watch_timeline.visible)
+		var folding_view_only: bool = main.phase == main.Phase.WATCHING and int(main.sim.tick) == watch_tick and int(main.run_id) == watch_run
+		main.yard_hud.toggle_details()
+		var reopened_timeline_visible: bool = main.watch_timeline != null and bool(main.watch_timeline.visible)
+		var reopening_view_only: bool = main.phase == main.Phase.WATCHING and int(main.sim.tick) == watch_tick and int(main.run_id) == watch_run
+		if not folded_timeline_hidden or not reopened_timeline_visible or not folding_view_only or not reopening_view_only:
+			push_error(
+				"SMOKE_WATCH_JUICE_DETAILS_TOGGLE hidden=%s reopened=%s fold_view_only=%s reopen_view_only=%s"
+				% [folded_timeline_hidden, reopened_timeline_visible, folding_view_only, reopening_view_only]
+			)
+			quit(53)
+			return false
 	var watch_op: OperatorUnit = main.operators[0]
 	if not watch_op.has_method("watching_cone_frozen") or not bool(watch_op.watching_cone_frozen()):
 		push_error(
@@ -13039,11 +13257,14 @@ func _assert_readability(main) -> bool:
 		push_error("SMOKE_READABILITY_NOT_SETUP phase=%s" % main.phase)
 		quit(50)
 		return false
-	if main.route_legend == null or not main.route_legend.visible:
-		push_error("SMOKE_LEGEND_HIDDEN")
+	var touch_controls := bool(main._want_touch()) if main.has_method("_want_touch") else false
+	var yard_hud_owns_chrome: bool = main.has_method("yard_redesign_active") and bool(main.yard_redesign_active())
+	var legend_should_be_visible := not touch_controls and not yard_hud_owns_chrome
+	if main.route_legend == null or bool(main.route_legend.visible) != legend_should_be_visible:
+		push_error("SMOKE_LEGEND_MODE touch=%s yard_hud=%s visible=%s expected=%s" % [touch_controls, yard_hud_owns_chrome, main.route_legend.visible if main.route_legend != null else "missing", legend_should_be_visible])
 		quit(50)
 		return false
-	if main.route_legend.get_child_count() < 2:
+	if legend_should_be_visible and main.route_legend.get_child_count() < 2:
 		push_error("SMOKE_LEGEND_NO_CHIPS n=%s" % main.route_legend.get_child_count())
 		quit(50)
 		return false
@@ -13052,7 +13273,7 @@ func _assert_readability(main) -> bool:
 		push_error("SMOKE_NO_TRACER_POOL")
 		quit(50)
 		return false
-	print("SMOKE_OK_READABILITY outlines=3 legend_chips=", main.route_legend.get_child_count())
+	print("SMOKE_OK_READABILITY outlines=3 touch=%s legend_visible=%s legend_chips=%s" % [touch_controls, main.route_legend.visible, main.route_legend.get_child_count()])
 	return true
 
 
@@ -13161,15 +13382,52 @@ func _assert_props(main) -> bool:
 
 
 func _assert_checklist(main) -> bool:
-	if not main.has_method("checklist_visible") or not bool(main.checklist_visible()):
-		push_error("SMOKE_NO_CHECKLIST")
+	var yard_presentation: bool = main.has_method("yard_redesign_active") and bool(main.yard_redesign_active())
+	if main.checklist_strip == null or not is_instance_valid(main.checklist_strip):
+		push_error("SMOKE_CHECKLIST_DATA_MISSING")
 		quit(56)
 		return false
-	var txt := str(main.checklist_strip_text()) if main.has_method("checklist_strip_text") else ""
-	if txt.find("已部署") < 0 or txt.find("射界覆盖主路") < 0 or txt.find("侧翼") < 0:
-		push_error("SMOKE_CHECKLIST_LABELS %s" % txt)
+	if not main.has_method("_refresh_checklist"):
+		push_error("SMOKE_CHECKLIST_REFRESH_MISSING")
 		quit(56)
 		return false
+	main._refresh_checklist()
+	if main.has_method("_update_hud"):
+		main._update_hud()
+	var txt := ""
+	if yard_presentation:
+		if not main.has_method("checklist_visible") or bool(main.checklist_visible()):
+			push_error("SMOKE_YARD_CHECKLIST_NOT_HIDDEN")
+			quit(56)
+			return false
+		var checklist_labels: Array = main._checklist_labels
+		if checklist_labels.size() < 3:
+			push_error("SMOKE_YARD_CHECKLIST_LABEL_COUNT %s" % checklist_labels.size())
+			quit(56)
+			return false
+		var checklist_parts := PackedStringArray()
+		for label_node in checklist_labels:
+			var chip := label_node as Label
+			if chip == null or not is_instance_valid(chip):
+				push_error("SMOKE_YARD_CHECKLIST_LABEL_INVALID")
+				quit(56)
+				return false
+			checklist_parts.append(str(chip.text))
+		txt = " / ".join(checklist_parts)
+		if txt.find("部署") < 0 or txt.find("主路") < 0 or txt.find("侧翼") < 0:
+			push_error("SMOKE_YARD_CHECKLIST_DATA %s" % txt)
+			quit(56)
+			return false
+	else:
+		if not main.has_method("checklist_visible") or not bool(main.checklist_visible()):
+			push_error("SMOKE_NO_CHECKLIST")
+			quit(56)
+			return false
+		txt = str(main.checklist_strip_text()) if main.has_method("checklist_strip_text") else ""
+		if txt.find("已部署") < 0 or txt.find("射界覆盖主路") < 0 or txt.find("侧翼") < 0:
+			push_error("SMOKE_CHECKLIST_LABELS %s" % txt)
+			quit(56)
+			return false
 	if main.intel == null or not main.intel.has_method("latest_leak_tick"):
 		push_error("SMOKE_NO_LEAK_TICK_API")
 		quit(56)
@@ -13233,6 +13491,12 @@ func _assert_checklist(main) -> bool:
 		main._layout_checklist()
 	if main.has_method("_refresh_checklist"):
 		main._refresh_checklist()
+	if main.has_method("_update_hud"):
+		main._update_hud()
+	if yard_presentation and main.has_method("checklist_visible") and bool(main.checklist_visible()):
+		push_error("SMOKE_YARD_CHECKLIST_RESTORE_VISIBLE")
+		quit(56)
+		return false
 	print("SMOKE_OK_CHECKLIST ", txt.replace("\n", " | "))
 	return true
 
@@ -13349,12 +13613,26 @@ func _assert_teaching(main) -> bool:
 		push_error("SMOKE_DUP_TRAP_CALLOUT")
 		quit(52)
 		return false
-	if main.spawn_teach_label == null or not main.spawn_teach_label.visible:
-		push_error("SMOKE_NO_SPAWN_TEACH_HUD")
+	if main.spawn_teach_label == null or str(main.spawn_teach_label.text).find("侧翼") < 0:
+		push_error("SMOKE_SPAWN_TEACH_NOT_BEAT %s" % (main.spawn_teach_label.text if main.spawn_teach_label else "missing"))
 		quit(52)
 		return false
-	if str(main.spawn_teach_label.text).find("侧翼") < 0:
-		push_error("SMOKE_SPAWN_TEACH_NOT_BEAT %s" % main.spawn_teach_label.text)
+	if main.yard_redesign_active():
+		var yard_teach_owned: bool = (
+			main.yard_hud != null
+			and main.yard_hud.visible
+			and not main.spawn_teach_label.visible
+			and str(main.yard_hud.objective.text).find("侧巷") >= 0
+		)
+		if not yard_teach_owned:
+			push_error(
+				"SMOKE_YARD_TEACH_HUD_OWNERSHIP label=%s yard_visible=%s objective=%s"
+				% [main.spawn_teach_label.visible, main.yard_hud.visible if main.yard_hud else false, main.yard_hud.objective.text if main.yard_hud else "missing"]
+			)
+			quit(52)
+			return false
+	elif not main.spawn_teach_label.visible:
+		push_error("SMOKE_NO_SPAWN_TEACH_HUD")
 		quit(52)
 		return false
 	if str(main.spawn_teach_label.text).find("第二层") >= 0:
@@ -13475,6 +13753,19 @@ func _assert_iteration_slice(main) -> bool:
 		push_error("SMOKE_NO_SPAWN_GHOST_SCRIPT")
 		quit(71)
 		return false
+	var yard_active: bool = main.has_method("yard_redesign_active") and bool(main.yard_redesign_active())
+	var details_were_open := true
+	if yard_active:
+		if main.yard_hud == null:
+			push_error("SMOKE_SPAWN_GHOSTS_NO_YARD_HUD")
+			quit(71)
+			return false
+		details_were_open = bool(main.yard_hud.details_open)
+		_show_yard_details(main)
+		if not main.has_method("yard_tactical_details_visible") or not bool(main.yard_tactical_details_visible()):
+			push_error("SMOKE_SPAWN_GHOSTS_DETAILS_PRECONDITION")
+			quit(71)
+			return false
 	if not main.has_method("setup_spawn_ghosts_visible") or not bool(main.setup_spawn_ghosts_visible()):
 		push_error("SMOKE_NO_SPAWN_GHOSTS")
 		quit(71)
@@ -13496,6 +13787,9 @@ func _assert_iteration_slice(main) -> bool:
 		quit(71)
 		return false
 	print("SMOKE_OK_SPAWN_GHOSTS n=", n_ghost)
+	if yard_active and not details_were_open:
+		main.yard_hud.details_open = false
+		main._update_hud()
 	var cfx: Variant = load("res://scripts/fx/combat_fx.gd")
 	if cfx == null or not (cfx as GDScript).has_method("hit_tick"):
 		push_error("SMOKE_NO_HIT_TICK")
@@ -13743,6 +14037,18 @@ func _assert_iteration_slice(main) -> bool:
 		quit(71)
 		return false
 	print("SMOKE_OK_KILL_STAMP")
+	var compass_details_were_open := true
+	if yard_active:
+		if main.yard_hud == null:
+			push_error("SMOKE_COMPASS_NO_YARD_HUD")
+			quit(71)
+			return false
+		compass_details_were_open = bool(main.yard_hud.details_open)
+		_show_yard_details(main)
+		if not main.has_method("yard_tactical_details_visible") or not bool(main.yard_tactical_details_visible()):
+			push_error("SMOKE_COMPASS_DETAILS_PRECONDITION")
+			quit(71)
+			return false
 	main._select_op(0)
 	main._deploy_selected_to(main.cover_slots[0], false)
 	if not main.operators[0].has_method("facing_compass_visible"):
@@ -13774,6 +14080,9 @@ func _assert_iteration_slice(main) -> bool:
 		quit(71)
 		return false
 	main._on_clear_pressed()
+	if yard_active and not compass_details_were_open:
+		main.yard_hud.details_open = false
+		main._update_hud()
 	print("SMOKE_OK_COMPASS")
 	print("SMOKE_OK_FACING_WORDS")
 	gs_stats.record_clear_stats("warehouse", 1, true)
@@ -13820,6 +14129,18 @@ func _assert_iteration_slice(main) -> bool:
 		return false
 	main.phase = main.Phase.SETUP
 	print("SMOKE_OK_WATCH_CLOCK")
+	var hold_details_were_open := true
+	if yard_active:
+		if main.yard_hud == null:
+			push_error("SMOKE_HOLD_NO_YARD_HUD")
+			quit(71)
+			return false
+		hold_details_were_open = bool(main.yard_hud.details_open)
+		_show_yard_details(main)
+		if not main.has_method("yard_tactical_details_visible") or not bool(main.yard_tactical_details_visible()):
+			push_error("SMOKE_HOLD_DETAILS_PRECONDITION")
+			quit(71)
+			return false
 	main._select_op(0)
 	main._deploy_selected_to(main.cover_slots[0], false)
 	var hold_op: OperatorUnit = main.operators[0]
@@ -13834,6 +14155,9 @@ func _assert_iteration_slice(main) -> bool:
 	hold_op.fire_permitted = true
 	hold_op._rebuild_cone()
 	main._on_clear_pressed()
+	if yard_active and not hold_details_were_open:
+		main.yard_hud.details_open = false
+		main._update_hud()
 	print("SMOKE_OK_HOLD_PULSE")
 	var cfx3: Variant = load("res://scripts/fx/combat_fx.gd")
 	if cfx3 == null or not (cfx3 as GDScript).has_method("loot_streak"):
@@ -14000,7 +14324,7 @@ func _assert_feel_presence(main) -> bool:
 		push_error("SMOKE_FEEL_GATE %s" % ",".join(fails))
 		quit(70)
 		return false
-	if not _assert_desktop_hud_chrome(main):
+	if not await _assert_desktop_hud_chrome(main):
 		return false
 	print("SMOKE_OK_FEEL_GATE")
 	return true
@@ -14013,6 +14337,35 @@ func _assert_desktop_hud_chrome(main) -> bool:
 		main._ensure_touch_hud()
 	if main.has_method("_update_hud"):
 		main._update_hud()
+	## Touch mode can be toggled late in the suite. The dock refit is deferred
+	## and itself waits for layout frames, so synchronize on its completion and
+	## two stable measurements instead of assuming a fixed two-frame delay.
+	var dock_layout_settled := false
+	var previous_measurement := Vector2(-1.0, -1.0)
+	for _frame in 6:
+		await process_frame
+		if main.role_box == null or not (main.role_box is Container):
+			break
+		var dock_h := float(main.role_box.offset_bottom - main.role_box.offset_top)
+		var content_h := float((main.role_box as Container).get_combined_minimum_size().y)
+		var refit_pending := bool(main.get("_role_box_pin_pending"))
+		var measurement := Vector2(dock_h, content_h)
+		if (
+			not refit_pending
+			and previous_measurement.x >= 0.0
+			and absf(measurement.x - previous_measurement.x) <= 0.5
+			and absf(measurement.y - previous_measurement.y) <= 0.5
+		):
+			dock_layout_settled = true
+			break
+		previous_measurement = measurement
+	if main.role_box is Container and not dock_layout_settled:
+		push_error(
+			"SMOKE_ROLE_DOCK_LAYOUT_NOT_SETTLED pending=%s dock=%s content=%s"
+			% [main.get("_role_box_pin_pending"), previous_measurement.x, previous_measurement.y]
+		)
+		quit(70)
+		return false
 	if main.tut_label != null and bool(main.tut_label.visible):
 		push_error("SMOKE_DUP_TUT_VISIBLE")
 		quit(70)

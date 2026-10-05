@@ -47,6 +47,15 @@ func _run() -> void:
 	await _capture_if_rendered(main, "touch-plan-a")
 	gs.set_force_touch_hud(false)
 	main._update_hud()
+	var legend_should_be_visible: bool = int(main.phase) == int(main.Phase.SETUP) and main.level != null and not main._want_touch() and not main.yard_redesign_active()
+	print(
+		"M2_A_LEGEND_STATE force=%s touch=%s yard_hud=%s visible=%s expected=%s phase=%s level=%s"
+		% [gs.force_touch_hud, main._want_touch(), main.yard_redesign_active(), main.route_legend.visible if main.route_legend != null else "missing", legend_should_be_visible, main.phase, main.level.level_id if main.level != null else "missing"]
+	)
+	_expect(
+		main.route_legend != null and bool(main.route_legend.visible) == legend_should_be_visible,
+		"M2_A_TOUCH_MODE_LEGEND_RESTORES"
+	)
 	await _click(main.yard_hud.buttons["alarm"])
 	_expect(main.phase == main.Phase.WATCHING, "M2_A_REAL_GUI_STARTS_AUTHORITATIVE_BATTLE")
 	before = _state_signature(main)

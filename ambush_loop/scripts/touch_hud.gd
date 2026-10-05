@@ -18,6 +18,8 @@ var _btns: Dictionary = {}
 var _wave_chip: PanelContainer = null
 var _wave_lab: Label = null
 var _portrait_slot: Control = null
+var _world_intent_panel: PanelContainer = null
+var _world_intent_label: Label = null
 var _abort_armed: bool = false
 var _abort_msec: int = 0
 var _hold_cmd: String = ""
@@ -254,8 +256,77 @@ func _build() -> void:
 	_add(_row_watch, "mute", "静音", Color(0.35, 0.38, 0.42))
 	_add(_row_watch, "log", "日志", Color(0.32, 0.42, 0.44))
 	_add(_row_watch, "settings", "菜单", Color(0.32, 0.36, 0.40))
+	_add_world_intent_controls(root)
 	_layout_compact()
 	_hide_overflow()
+
+
+func _add_world_intent_controls(root: Control) -> void:
+	## Commands on the map are staged first. This compact, modal affordance is
+	## shown only while a touch intent is pending and sits above the resident rail.
+	_world_intent_panel = PanelContainer.new()
+	_world_intent_panel.name = "WorldIntentPanel"
+	_world_intent_panel.visible = false
+	_world_intent_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	_world_intent_panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	_world_intent_panel.anchor_left = 1.0
+	_world_intent_panel.anchor_right = 1.0
+	_world_intent_panel.anchor_top = 1.0
+	_world_intent_panel.anchor_bottom = 1.0
+	_world_intent_panel.offset_left = -340.0
+	_world_intent_panel.offset_right = -8.0
+	_world_intent_panel.offset_top = -198.0
+	_world_intent_panel.offset_bottom = -138.0
+	_world_intent_panel.custom_minimum_size = Vector2(232.0, 58.0)
+	var panel_style := NightOps.flat(Color(0.07, 0.075, 0.05, 0.97), Color(0.80, 0.70, 0.30, 0.96), 2, 10, 8)
+	_world_intent_panel.add_theme_stylebox_override("panel", panel_style)
+	root.add_child(_world_intent_panel)
+
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 6)
+	row.mouse_filter = Control.MOUSE_FILTER_STOP
+	_world_intent_panel.add_child(row)
+	_world_intent_label = Label.new()
+	_world_intent_label.name = "IntentLabel"
+	_world_intent_label.text = "确认这项操作？"
+	_world_intent_label.custom_minimum_size = Vector2(106.0, 46.0)
+	_world_intent_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_world_intent_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_world_intent_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_world_intent_label.add_theme_font_size_override("font_size", 12)
+	_world_intent_label.add_theme_color_override("font_color", Color(0.94, 0.90, 0.72))
+	_world_intent_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(_world_intent_label)
+
+	var confirm := _make_intent_button("确认", Color(0.42, 0.62, 0.34), Vector2(72.0, 46.0))
+	confirm.name = "WorldIntentConfirm"
+	confirm.pressed.connect(func() -> void:
+		if _host != null and _host.has_method("confirm_touch_intent"):
+			_host.call("confirm_touch_intent")
+	)
+	row.add_child(confirm)
+	_btns["world_confirm"] = confirm
+
+	var cancel := _make_intent_button("取消", Color(0.54, 0.34, 0.28), Vector2(64.0, 46.0))
+	cancel.name = "WorldIntentCancel"
+	cancel.pressed.connect(func() -> void:
+		if _host != null and _host.has_method("cancel_touch_intent"):
+			_host.call("cancel_touch_intent")
+	)
+	row.add_child(cancel)
+	_btns["world_cancel"] = cancel
+
+
+func _make_intent_button(label: String, tint: Color, minimum: Vector2) -> Button:
+	var button := Button.new()
+	button.text = label
+	button.custom_minimum_size = minimum
+	button.theme = NightOps.theme()
+	button.focus_mode = Control.FOCUS_NONE
+	button.mouse_filter = Control.MOUSE_FILTER_STOP
+	button.add_theme_font_size_override("font_size", 13)
+	_apply_btn_style(button, tint, false)
+	return button
 
 
 func _add_spacer(row: HBoxContainer) -> void:
@@ -403,21 +474,36 @@ func _apply_safe_area() -> void:
 	var sa := DisplayServer.get_display_safe_area()
 	var wsz := DisplayServer.window_get_size()
 	if wsz.x <= 0 or wsz.y <= 0 or _safe == null:
+		_position_world_intent_panel(8.0, 8.0)
 		_layout_compact()
 		return
 	var vis := get_viewport().get_visible_rect().size
 	var left := sa.position.x * vis.x / float(wsz.x)
 	var right := (float(wsz.x) - sa.end.x) * vis.x / float(wsz.x)
 	var bottom := (float(wsz.y) - sa.end.y) * vis.y / float(wsz.y)
+	var safe_right := maxi(8, int(round(right)))
+	var safe_bottom := maxi(8, int(round(bottom)))
 	_safe.add_theme_constant_override("margin_left", int(maxi(8, int(round(left)))) + PORTRAIT_INSET)
-	_safe.add_theme_constant_override("margin_right", int(maxi(8, int(round(right)))))
-	_safe.add_theme_constant_override("margin_bottom", int(maxi(8, int(round(bottom)))))
+	_safe.add_theme_constant_override("margin_right", safe_right)
+	_safe.add_theme_constant_override("margin_bottom", safe_bottom)
+	_position_world_intent_panel(float(safe_right), float(safe_bottom))
 	if _portrait_slot:
 		_portrait_slot.offset_left = 8.0 + left
 		_portrait_slot.offset_right = 8.0 + left + 336.0
 	if _hint:
 		_hint.position = Vector2(12.0 + left, 6.0)
 	_layout_compact()
+
+
+func _position_world_intent_panel(right_inset: float, bottom_inset: float) -> void:
+	if _world_intent_panel == null:
+		return
+	var safe_right := maxf(8.0, right_inset)
+	var safe_bottom := maxf(8.0, bottom_inset)
+	_world_intent_panel.offset_left = -340.0 - safe_right
+	_world_intent_panel.offset_right = -8.0 - safe_right
+	_world_intent_panel.offset_top = -198.0 - safe_bottom
+	_world_intent_panel.offset_bottom = -138.0 - safe_bottom
 
 
 func _layout_compact(avail_override: float = -1.0) -> void:
@@ -544,6 +630,14 @@ func set_alarm_cta(text: String) -> void:
 	b.custom_minimum_size = Vector2(w, maxf(52.0, b.custom_minimum_size.y))
 
 
+func set_world_intent_pending(pending: bool, label: String = "") -> void:
+	if _world_intent_panel == null:
+		return
+	_world_intent_panel.visible = pending
+	if _world_intent_label != null:
+		_world_intent_label.text = label.strip_edges() if label.strip_edges() != "" else "确认这项操作？"
+
+
 func refresh_phase(
 	phase_name: String,
 	watching_paused: bool,
@@ -554,13 +648,15 @@ func refresh_phase(
 	has_door: bool = true
 ) -> void:
 	_apply_safe_area()
+	if phase_name != "SETUP" and phase_name != "SWEEP":
+		set_world_intent_pending(false)
 	if _row_setup:
 		_row_setup.visible = phase_name == "SETUP" or phase_name == "SWEEP"
 	if _row_watch:
 		_row_watch.visible = phase_name != "SETUP" and phase_name != "SWEEP"
 	match phase_name:
 		"SETUP":
-			set_hint("点地走 · 短拖拖图 · 长按跑 · 近背面绕背/割喉 · 角标跟上 · 匍匐 · 按住↺/↻或左右滑拧射界 · 拉警报")
+			set_hint("点地预览再确认 · 拖动地图 · 长按预览奔跑 · 长按掩体看保护 · 近背面绕背/割喉 · 匍匐 · 拧射界 · 拉警报")
 		"SWEEP":
 			set_hint("打扫：走近尸体热区搜刮/拖尸 → 背包换枪 → 下一波或撤离")
 		"WATCHING":
