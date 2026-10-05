@@ -1,5 +1,7 @@
 # PR15 fresh Web六关13波与同Site更新计划
 
+2026-10-05 当前终态：[fresh yard有限实际结果/用户暂停](AMBUSH_PR15_FRESH_WEB_YARD_PAUSE_20261005.md)。固定dab仅完成已实际启动的yard原输入2波WON/1新记录和Title解锁reload/reopen；用户明确停止后续，后五关/六新whole/handoff链/额外QA未启动，不继续执行下面完整计划。自有engine/browser/HTTP已全部END，线上private version2不变；未完成清单按暂停记录，需新续工指令。
+
 2026-10-05 当前 source-only driver 入口：[原输入契约](AMBUSH_PR15_WEB_NATIVE_INPUT_DRIVER_20261005.md) / [机器 spec](AMBUSH_PR15_WEB_NATIVE_INPUT_DRIVER_20261005.json)。固定 dab8705/game tree4f49/同Site version2；明确 Continue 先加载 next 再 handoff、原 replay 默认2×、六新 record 无旧 a05 依赖、教学 preview attempt 与获胜 attempt 不拼接。当前独立 QA 持有存储复验重活窗口，root只做本包轻检，driver/bridge/export/fresh13/六新whole全UNRUN；主 QA 工作树冻结b46。正文旧1d17/未部署段落保留为历史，不作为当前执行身份。原八件 Library helper发现入口阻塞与支持但不适用本批的单文件 schema见[精确阻塞报告](AMBUSH_PR15_LIBRARY_TRANSFER_BLOCKER_20261005.md)。
 
 2026-10-05 后续状态：独立 QA 已 END 释放窗口；800ms 保存失败已按 [storage repair](AMBUSH_PR15_WEB_STORAGE_REPAIR_20261005.md) 封存修复/有界实际浏览器结果。**最终 dab8705 / 游戏树4f49a7c / 同 Site version2 已发布**，取代本计划最初的固定1d17候选/未部署状态。以下 fresh13 自然玩家流程与预算仍有效、尚未执行；Library 原件交接与独立 PCK32B 尚有 blocker，不将本地路径当交接。
