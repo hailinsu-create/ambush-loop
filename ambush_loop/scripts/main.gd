@@ -6,6 +6,11 @@ extends Node2D
 enum Phase { SETUP, WATCHING, FAILED, WON, REPLAY, SWEEP }
 enum Tool { DEPLOY, TRIPWIRE, GRENADE, DECOY }
 
+var preparation_checkpoint = preload("res://scripts/raid/preparation_checkpoint.gd").new()
+var restart_preparation_button: Button = null
+var result_replay_button: Button = null
+var _checkpoint_restoring := false
+
 const MAX_TRIPWIRES := 1
 const TRIPWIRE_ROUTE_DIST := 24.0
 const SNAPSHOT_EVERY := 6
@@ -1129,6 +1134,10 @@ func _safe_area_pad() -> Vector4:
 func _refresh_touch_hud() -> void:
 	if touch_hud == null or not touch_hud.has_method("refresh_phase"):
 		return
+	var result_modal := result_panel != null and result_panel.visible and phase in [Phase.FAILED, Phase.WON]
+	touch_hud.visible = _want_touch() and not result_modal
+	if result_replay_button:
+		result_replay_button.visible = _want_touch() and result_modal
 	var phase_name := "SETUP"
 	match phase:
 		Phase.WATCHING:
@@ -1452,6 +1461,21 @@ func _ensure_debrief_buttons() -> void:
 	var vbox := result_panel.get_node_or_null("Margin/VBox") as VBoxContainer
 	if vbox == null:
 		return
+	continue_button.custom_minimum_size.y = maxf(48.0, continue_button.custom_minimum_size.y)
+	restart_preparation_button = Button.new()
+	restart_preparation_button.name = "RestartPreparationButton"
+	restart_preparation_button.text = "重新搜集"
+	restart_preparation_button.custom_minimum_size = Vector2(120, 48)
+	restart_preparation_button.visible = false
+	restart_preparation_button.pressed.connect(_on_restart_preparation_pressed)
+	vbox.add_child(restart_preparation_button)
+	result_replay_button = Button.new()
+	result_replay_button.name = "ResultReplayButton"
+	result_replay_button.text = "时间轴复盘"
+	result_replay_button.custom_minimum_size = Vector2(120, 48)
+	result_replay_button.visible = false
+	result_replay_button.pressed.connect(_on_replay_pressed)
+	vbox.add_child(result_replay_button)
 	title_return_button = Button.new()
 	title_return_button.name = "TitleReturnButton"
 	title_return_button.text = "返回标题"
@@ -1470,6 +1494,7 @@ func _ensure_dossier_ui() -> void:
 			dossier_button = Button.new()
 			dossier_button.name = "DossierButton"
 			dossier_button.text = "卷宗"
+			dossier_button.custom_minimum_size = Vector2(120, 48)
 			dossier_button.visible = false
 			dossier_button.pressed.connect(_toggle_fail_dossier)
 			vbox.add_child(dossier_button)
@@ -2346,6 +2371,7 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	preparation_checkpoint.clear()
 	_cancel_touch_intent()
 	if yard_hud:
 		yard_hud.restore_chrome()
@@ -2488,6 +2514,8 @@ func _killzone_ops() -> Array[OperatorUnit]:
 
 
 func _refresh_killzone_preview() -> void:
+	if _checkpoint_restoring:
+		return
 	_refresh_selected_coverage()
 	if killzone_draw == null:
 		return
@@ -3465,7 +3493,13 @@ func door_slam_dust_active() -> bool:
 	return false
 
 
-func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+func _start_setup(keep_intel: bool, restore_plan: bool, from_checkpoint: bool = false) -> void:
+	if not keep_intel:
+		preparation_checkpoint.clear()
+	if restart_preparation_button:
+		restart_preparation_button.visible = false
+	if result_replay_button:
+		result_replay_button.visible = false
 	_cancel_touch_intent()
 	_follow_anchor_cache.clear()
 	if yard_hud:
@@ -3512,7 +3546,9 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 		last_plan.clear()
 		door_locked = false
 		leak_advice_shown = ""
-	if restore_plan and not last_plan.deployments.is_empty():
+	if from_checkpoint:
+		_clear_deployments()
+	elif restore_plan and not last_plan.deployments.is_empty():
 		_restore_last_plan()
 		_wipe_squad_inventory()
 	else:
@@ -3520,7 +3556,8 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 		_wipe_squad_inventory()
 		_place_squad_insert()
 		door_locked = last_plan.door_locked if restore_plan else false
-	_spawn_level_stashes()
+	if not from_checkpoint:
+		_spawn_level_stashes()
 	if level != null and level.door_cell.x >= 0:
 		grid.set_door_state(level.door_cell, door_locked)
 	_redraw_ghosts()
@@ -5392,6 +5429,7 @@ func _on_alarm_pressed() -> void:
 			status_label.text = leak_warn
 	_alarm_pulled_unarmed = not squad_has_firearm()
 	_capture_plan()
+	preparation_checkpoint.capture(self)
 	frozen_plan = last_plan.duplicate_plan()
 	run_id += 1
 	var this_run := run_id
@@ -6615,8 +6653,10 @@ func _show_fail_result() -> void:
 	_refresh_route_timeline(true)
 	continue_button.text = "带着情报穿梭回去"
 	if yard_redesign_active():
-		continue_button.text = "重新部署"
-		continue_button.tooltip_text = "返回准备，恢复上次部署；武器和弹药需要重新搜集。"
+		continue_button.text = "调整伏击" if preparation_checkpoint_available() else "重新部署"
+		continue_button.tooltip_text = "恢复开战前补给和站位；也可选择重新搜集。" if preparation_checkpoint_available() else "返回准备，武器和弹药需要重新搜集。"
+		if restart_preparation_button:
+			restart_preparation_button.visible = preparation_checkpoint_available()
 		if dossier_button:
 			dossier_button.text = "记录与建议"
 	if replay_button:
@@ -7191,7 +7231,11 @@ func _on_continue_pressed() -> void:
 		var advice := _leak_advice_line() if was_escape else ""
 		leak_advice_shown = advice
 		loop_index += 1
-		_start_setup(true, true)
+		if not preparation_checkpoint.restore(self):
+			_start_setup(true, true)
+		else:
+			plan_restore_hint = "准备检查点已恢复 · 可调整站位与射界"
+			status_label.text = plan_restore_hint
 		if was_escape:
 			_play_intel_path_ghost()
 		if leak != "":
@@ -7228,6 +7272,19 @@ func _on_continue_pressed() -> void:
 
 func intel_path_ghost_active() -> bool:
 	return _intel_ghost != null and is_instance_valid(_intel_ghost)
+
+
+func preparation_checkpoint_available() -> bool:
+	return preparation_checkpoint.available(self)
+
+
+func _on_restart_preparation_pressed() -> void:
+	if level == null or level.level_id != "yard" or phase not in [Phase.FAILED, Phase.SETUP]:
+		return
+	preparation_checkpoint.clear()
+	loop_index += 1
+	_start_setup(true, false)
+	status_label.text = "重新准备 · 基础装备与四处补给已重置"
 
 
 func _clear_intel_path_ghost() -> void:
@@ -7560,7 +7617,7 @@ func _raise_result_overlay() -> void:
 	result_panel.z_index = 50
 	result_panel.move_to_front()
 	if continue_button:
-		continue_button.custom_minimum_size = Vector2(0, 44)
+		continue_button.custom_minimum_size = Vector2(0, 48)
 		continue_button.add_theme_font_size_override("font_size", 18)
 	_apply_result_rail()
 	_sync_desktop_bars(not _want_touch())
@@ -7621,6 +7678,8 @@ func result_cta_buried_by_bars() -> bool:
 
 
 func _update_hud() -> void:
+	if _checkpoint_restoring:
+		return
 	var lv_title := level.title if level else "AMBUSH LOOP"
 	title_label.text = "AMBUSH LOOP  ·  第 %d 世  ·  波 %d/%d" % [loop_index, wave_index() + 1, wave_total()]
 	if level_label:
@@ -7929,6 +7988,8 @@ func _tick_cover_hold_ring() -> void:
 
 
 func _update_cover_previews() -> void:
+	if _checkpoint_restoring:
+		return
 	if cover_slots.is_empty():
 		return
 	var show := phase == Phase.SETUP or phase == Phase.WATCHING or phase == Phase.REPLAY or phase == Phase.FAILED
@@ -7965,6 +8026,8 @@ func _update_cover_previews() -> void:
 
 
 func _update_role_cards() -> void:
+	if _checkpoint_restoring:
+		return
 	_apply_result_rail()
 	if role_box:
 		role_box.modulate = Color(1, 1, 1, 0.45) if phase == Phase.REPLAY else Color.WHITE
