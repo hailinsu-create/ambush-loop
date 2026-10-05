@@ -1,5 +1,7 @@
 # PR15 单页面 warehouse 原输入检查点
 
+后续已完成[warehouse功能包END](AMBUSH_PR15_WEB_WAREHOUSE_FUNCTIONAL_END_20261005.md)：原whole1/2自然终点actual0、两波露出文字focus与原save/handoff/reload/profile重开通过；全部自有流程END。中央日志遮挡已复现待修、实时wall速率未验收。下方07:19为原封存检查点，不能当当前运行状态。
+
 2026-10-05 07:19:16 UTC，**PRODUCER PASS / 原 UI whole1 RUNNING，尚未通过**。本包是仓库有界检查点；用户恢复实际操作的授权持续有效，QA 保持 idle，root 独占引擎窗口。模型容量恢复未替换环境、重启浏览器或重跑已完成动作。
 
 生产固定 `dab870595175eed37a6d2a012bc69a76062d48b0`，game tree `4f49a7c9cb5a789fbb570bceb947eab7df2eb54a`。本切片仅证据/文档；私有 Site v2、所有资产、生产源/PCK不变。现有隔离只读 QA 桥 SHA256 `433d191181b311d09d011f8ba319b91aaee11833b2416a1c7124f924554d5b18`，QA PCK `17711fe6f3677316cb8bddf4368a6c66063ca3d7d1c4e2a8c65f2f906fd707bd`，不同于生产 PCK。

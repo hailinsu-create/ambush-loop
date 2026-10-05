@@ -1,0 +1,50 @@
+{
+  "start": "2026-10-05T07:45:33.368696+00:00",
+  "pid": 151305,
+  "request": {
+    "label": "warehouse-original-event-focus-hit-index",
+    "script": "/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/warehouse_original_event_focus.hit-index.py"
+  },
+  "actual_exit": 1,
+  "exception": "({'max': 16102, 'playing': False, 'speed': 2, 'tick': 10788}, {'actor_id': 1, 'attempt_id': '1289c65c34af63cf62707bf18ddc4cca', 'event_id': '1289c65c34af63cf62707bf18ddc4cca:0:14', 'payload': {'animation_schema': 2, 'codename': '\u7070\u72fc', 'fx': {'actor_asset_revision': '29749157c5db064bfea626c3ed9d75d9a1791ece', 'animation_schema': 3, 'attempt_id': '1289c65c34af63cf62707bf18ddc4cca', 'clock_domain': 'playback', 'clock_tick': 10482, 'confirmed': True, 'damage': 48, 'event_id': '1289c65c34af63cf62707bf18ddc4cca:0:14', 'hp_after': -26, 'hp_before': 22, 'level_id': 'warehouse', 'playback_schema': 2, 'pose': {'action': 'fire', 'base_action': 'idle', 'base_seconds': 3.88333333333333, 'event_id': '1289c65c34af63cf62707bf18ddc4cca:0:14', 'fallback': '', 'seconds': 0, 'upper_action': 'fire_rifle', 'upper_seconds': 0}, 'projectile': True, 'schema': 1, 'seq': 14, 'source_facing': 180, 'source_group': 'ops', 'source_id': 1, 'source_pos': [496, 400], 'target_group': 'enemies', 'target_id': 1, 'target_pos': [432, 379.299407958984], 'visual_model': 'operator_rifle', 'visual_weapon': 'kar98k', 'wave_id': 0}, 'name': '\u7070\u72fc', 'reload_s': 1.15, 'role': '\u6b65', 'sfx_cue': 'fire_bolt', 'shot_interval_s': 0.52, 'visual_weapon': 'kar98k', 'weapon': 'kar98k'}, 'playback_schema': 2, 'playback_tick': 10482, 'position': [496, 400], 'schema': 2, 'seq': 14, 'target_id': 1, 'tick': 233, 'timeline_tick': 233, 'type': 'fire', 'wave_id': 0})",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/browser_controller_single.py\", line 34, in <module>\n    exec(Path(r['script']).read_text(),globals());receipt['actual_exit']=0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 39, in <module>\nAssertionError: ({'max': 16102, 'playing': False, 'speed': 2, 'tick': 10788}, {'actor_id': 1, 'attempt_id': '1289c65c34af63cf62707bf18ddc4cca', 'event_id': '1289c65c34af63cf62707bf18ddc4cca:0:14', 'payload': {'animation_schema': 2, 'codename': '\u7070\u72fc', 'fx': {'actor_asset_revision': '29749157c5db064bfea626c3ed9d75d9a1791ece', 'animation_schema': 3, 'attempt_id': '1289c65c34af63cf62707bf18ddc4cca', 'clock_domain': 'playback', 'clock_tick': 10482, 'confirmed': True, 'damage': 48, 'event_id': '1289c65c34af63cf62707bf18ddc4cca:0:14', 'hp_after': -26, 'hp_before': 22, 'level_id': 'warehouse', 'playback_schema': 2, 'pose': {'action': 'fire', 'base_action': 'idle', 'base_seconds': 3.88333333333333, 'event_id': '1289c65c34af63cf62707bf18ddc4cca:0:14', 'fallback': '', 'seconds': 0, 'upper_action': 'fire_rifle', 'upper_seconds': 0}, 'projectile': True, 'schema': 1, 'seq': 14, 'source_facing': 180, 'source_group': 'ops', 'source_id': 1, 'source_pos': [496, 400], 'target_group': 'enemies', 'target_id': 1, 'target_pos': [432, 379.299407958984], 'visual_model': 'operator_rifle', 'visual_weapon': 'kar98k', 'wave_id': 0}, 'name': '\u7070\u72fc', 'reload_s': 1.15, 'role': '\u6b65', 'sfx_cue': 'fire_bolt', 'shot_interval_s': 0.52, 'visual_weapon': 'kar98k', 'weapon': 'kar98k'}, 'playback_schema': 2, 'playback_tick': 10482, 'position': [496, 400], 'schema': 2, 'seq': 14, 'target_id': 1, 'tick': 233, 'timeline_tick': 233, 'type': 'fire', 'wave_id': 0})\n",
+  "end": "2026-10-05T07:46:07.189289+00:00",
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 237741.058617988
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 237741.328378856
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 237742.244887462
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 237743.844789218
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 237744.009808917
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 237744.171915502
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "wall": 237744.280653681
+    }
+  ],
+  "page_errors": []
+}

@@ -1,0 +1,972 @@
+{
+  "status": "PASS",
+  "scope": "original UI seek/log/visible event row click on both original waves, separate from whole; original row y verified via readonly hit index, exposed left text clicked inside visible single-column ItemList bounds; camera-center occlusion negative retained, preserves get_item_rect scroll mismatch negative; no focus_latest/set_tick callback",
+  "record_sha256": "28c90902016e3a0323081c756ddde215ea2ec228223147231eed7ef66af33266",
+  "results": [
+    {
+      "wave": 0,
+      "selected_control": {
+        "disabled": false,
+        "event": {
+          "actor_id": 1,
+          "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+          "event_id": "1289c65c34af63cf62707bf18ddc4cca:0:14",
+          "payload": {
+            "animation_schema": 2,
+            "codename": "灰狼",
+            "fx": {
+              "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+              "animation_schema": 3,
+              "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+              "clock_domain": "playback",
+              "clock_tick": 10482,
+              "confirmed": true,
+              "damage": 48,
+              "event_id": "1289c65c34af63cf62707bf18ddc4cca:0:14",
+              "hp_after": -26,
+              "hp_before": 22,
+              "level_id": "warehouse",
+              "playback_schema": 2,
+              "pose": {
+                "action": "fire",
+                "base_action": "idle",
+                "base_seconds": 3.88333333333333,
+                "event_id": "1289c65c34af63cf62707bf18ddc4cca:0:14",
+                "fallback": "",
+                "seconds": 0,
+                "upper_action": "fire_rifle",
+                "upper_seconds": 0
+              },
+              "projectile": true,
+              "schema": 1,
+              "seq": 14,
+              "source_facing": 180,
+              "source_group": "ops",
+              "source_id": 1,
+              "source_pos": [
+                496,
+                400
+              ],
+              "target_group": "enemies",
+              "target_id": 1,
+              "target_pos": [
+                432,
+                379.299407958984
+              ],
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "wave_id": 0
+            },
+            "name": "灰狼",
+            "reload_s": 1.15,
+            "role": "步",
+            "sfx_cue": "fire_bolt",
+            "shot_interval_s": 0.52,
+            "visual_weapon": "kar98k",
+            "weapon": "kar98k"
+          },
+          "playback_schema": 2,
+          "playback_tick": 10482,
+          "position": [
+            496,
+            400
+          ],
+          "schema": 2,
+          "seq": 14,
+          "target_id": 1,
+          "tick": 233,
+          "timeline_tick": 233,
+          "type": "fire",
+          "wave_id": 0
+        },
+        "name": "event_row:6",
+        "path": "/root/Main/HUD/Root/EventLog/EventList",
+        "readonly_hit_index": 9,
+        "rect": [
+          1097,
+          376,
+          2,
+          2
+        ],
+        "text": "3.9s  ★ 第一枪是灰狼 → 敌1",
+        "visible": false
+      },
+      "clicked_point_source": {
+        "disabled": false,
+        "event": {
+          "actor_id": 2,
+          "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+          "event_id": "1289c65c34af63cf62707bf18ddc4cca:0:11",
+          "payload": {
+            "name": "铁砧"
+          },
+          "playback_schema": 2,
+          "playback_tick": 10411,
+          "position": [
+            912,
+            464
+          ],
+          "schema": 2,
+          "seq": 11,
+          "target_id": -1,
+          "tick": 162,
+          "timeline_tick": 162,
+          "type": "ambush_armed",
+          "wave_id": 0
+        },
+        "name": "event_row:3",
+        "path": "/root/Main/HUD/Root/EventLog/EventList",
+        "readonly_hit_index": 6,
+        "rect": [
+          1097,
+          310,
+          2,
+          2
+        ],
+        "text": "2.7s  ★ 铁砧 入伏许可 — 现在打",
+        "visible": false
+      },
+      "state": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "covers": [
+          {
+            "id": 0,
+            "pos": [
+              368,
+              272
+            ]
+          },
+          {
+            "id": 1,
+            "pos": [
+              496,
+              400
+            ]
+          },
+          {
+            "id": 2,
+            "pos": [
+              720,
+              240
+            ]
+          },
+          {
+            "id": 3,
+            "pos": [
+              912,
+              464
+            ]
+          },
+          {
+            "id": 4,
+            "pos": [
+              592,
+              528
+            ]
+          },
+          {
+            "id": 5,
+            "pos": [
+              944,
+              560
+            ]
+          }
+        ],
+        "engine_frames": 7129,
+        "event_log_open": true,
+        "event_ring_visible": true,
+        "fail_reason": "",
+        "focus_actor": 1,
+        "focus_type": "fire",
+        "input_count": 310,
+        "input_tail": {
+          "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+          "button": 1,
+          "engine_frame": 7125,
+          "kind": "mouse",
+          "phase": 4,
+          "pos": [
+            956,
+            311
+          ],
+          "presents": 7125,
+          "pressed": false,
+          "scene": "res://scenes/main.tscn",
+          "us": 3301803500
+        },
+        "level": "warehouse",
+        "log": {
+          "events": 62,
+          "playback_frames": 2072,
+          "playback_terminal": 16102,
+          "playback_tick": 16102,
+          "snapshots": 206,
+          "terminal": 1203,
+          "terminal_reason": "win"
+        },
+        "loot": [],
+        "mines_count": 0,
+        "modal": {
+          "backpack": false,
+          "credits": false,
+          "handoff": false,
+          "handoff_from": "",
+          "handoff_to": "",
+          "pause": false,
+          "tutorial": false,
+          "tutorial_body": "",
+          "tutorial_page": 0
+        },
+        "observer_usec": 18135300,
+        "operators": [
+          {
+            "alive": true,
+            "ammo": 10,
+            "ammo_pack_used": false,
+            "auto_grenade": true,
+            "facing": 90,
+            "family": "rifle",
+            "has_ammo_pack": false,
+            "hp": 100,
+            "id": 1,
+            "mines": 0,
+            "moving": false,
+            "pack": [
+              {
+                "amount": 7,
+                "kind": "kar98k"
+              },
+              {
+                "amount": 1,
+                "kind": "grenade"
+              }
+            ],
+            "pool": {
+              "rifle": 49
+            },
+            "pos": [
+              1040,
+              397.606353759766
+            ],
+            "role": 0,
+            "slot": -1,
+            "start_ammo": 5,
+            "weapon": "kar98k"
+          },
+          {
+            "alive": true,
+            "ammo": 12,
+            "ammo_pack_used": false,
+            "auto_grenade": true,
+            "facing": 4,
+            "family": "mg",
+            "has_ammo_pack": true,
+            "hp": 87.6,
+            "id": 2,
+            "mines": 0,
+            "moving": false,
+            "pack": [
+              {
+                "amount": 20,
+                "kind": "bar"
+              }
+            ],
+            "pool": {
+              "mg": 12
+            },
+            "pos": [
+              912,
+              464
+            ],
+            "role": 1,
+            "slot": 3,
+            "start_ammo": 20,
+            "weapon": "bar"
+          },
+          {
+            "alive": true,
+            "ammo": 6,
+            "ammo_pack_used": false,
+            "auto_grenade": true,
+            "facing": 180,
+            "family": "scout",
+            "has_ammo_pack": false,
+            "hp": 100,
+            "id": 3,
+            "mines": 0,
+            "moving": false,
+            "pack": [
+              {
+                "amount": 6,
+                "kind": "springfield"
+              }
+            ],
+            "pool": {
+              "scout": 6
+            },
+            "pos": [
+              944,
+              560
+            ],
+            "role": 2,
+            "slot": 5,
+            "start_ammo": 5,
+            "weapon": "springfield"
+          }
+        ],
+        "phase": 4,
+        "presents": 7129,
+        "replay": {
+          "max": 16102,
+          "playing": false,
+          "speed": 2,
+          "tick": 10482
+        },
+        "run_id": 3,
+        "scene": "res://scenes/main.tscn",
+        "selected": 1,
+        "settings": {
+          "complete": false,
+          "configs": {
+            "ambush_loop.cfg": {
+              "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+              "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+            },
+            "ambush_loop_settings.cfg": {
+              "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+              "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+            }
+          },
+          "force_touch_hud": false,
+          "has_progress": true,
+          "missions": [
+            {
+              "cleared": true,
+              "id": "yard",
+              "loops": 1,
+              "perfect": true,
+              "title": "第1关 · 院子：交叉封锁",
+              "unlocked": true
+            },
+            {
+              "cleared": true,
+              "id": "warehouse",
+              "loops": 1,
+              "perfect": true,
+              "title": "第2关 · 仓道：弹药窗口",
+              "unlocked": true
+            },
+            {
+              "cleared": false,
+              "id": "pump",
+              "loops": 0,
+              "perfect": false,
+              "title": "第3关 · 泵站：关门之后",
+              "unlocked": true
+            },
+            {
+              "cleared": false,
+              "id": "railcut",
+              "loops": 0,
+              "perfect": false,
+              "title": "第4关 · 信号楼：双走廊延迟",
+              "unlocked": false
+            },
+            {
+              "cleared": false,
+              "id": "depot",
+              "loops": 0,
+              "perfect": false,
+              "title": "第5关 · 油库：三路合围",
+              "unlocked": false
+            },
+            {
+              "cleared": false,
+              "id": "radio",
+              "loops": 0,
+              "perfect": false,
+              "title": "第6关 · 电台：灯塔回波",
+              "unlocked": false
+            }
+          ],
+          "music_volume": 1,
+          "muted": false,
+          "next": "pump",
+          "persistence_error": "",
+          "persistence_status": "已保存到此浏览器",
+          "quality": "standard",
+          "seen": {
+            "warehouse": true,
+            "yard": true
+          },
+          "sfx_volume": 1
+        },
+        "sim": {
+          "accum": 0.0242666666666723,
+          "paused": false,
+          "speed": 1,
+          "tick": 863
+        },
+        "stashes": [
+          {
+            "collected": false,
+            "family": "decoy",
+            "id": 163997290130,
+            "kind": "decoy",
+            "pos": [
+              720,
+              304
+            ]
+          },
+          {
+            "collected": false,
+            "family": "smg",
+            "id": 164148285083,
+            "kind": "mp40",
+            "pos": [
+              464,
+              528
+            ]
+          }
+        ],
+        "status": "定位 · 3.9s  ★ 第一枪是灰狼 → 敌1",
+        "ticks_usec": 3303667500,
+        "tool": 0,
+        "view": {
+          "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+          "level": "warehouse",
+          "recorded_phase": 1,
+          "roots": 5,
+          "seq": 1322,
+          "tick": 10482,
+          "wave": 0,
+          "yaw": 155
+        },
+        "viewport": [
+          0,
+          0,
+          1280,
+          720
+        ],
+        "wave": 1,
+        "wave_count": 2,
+        "waves_cleared": 2
+      },
+      "frame_checks": {
+        "checks": 17,
+        "failures": [],
+        "tick": 10482
+      },
+      "record_unchanged": true,
+      "domain_unchanged": true
+    },
+    {
+      "wave": 1,
+      "selected_control": {
+        "disabled": false,
+        "event": {
+          "actor_id": 2,
+          "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+          "event_id": "1289c65c34af63cf62707bf18ddc4cca:1:49",
+          "payload": {
+            "animation_schema": 2,
+            "codename": "铁砧",
+            "fx": {
+              "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+              "animation_schema": 3,
+              "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+              "clock_domain": "playback",
+              "clock_tick": 15054,
+              "confirmed": true,
+              "damage": 28,
+              "event_id": "1289c65c34af63cf62707bf18ddc4cca:1:49",
+              "hp_after": -12,
+              "hp_before": 16,
+              "level_id": "warehouse",
+              "playback_schema": 2,
+              "pose": {
+                "action": "fire",
+                "base_action": "idle",
+                "base_seconds": 19.5333333333333,
+                "event_id": "1289c65c34af63cf62707bf18ddc4cca:1:49",
+                "fallback": "",
+                "seconds": 0,
+                "upper_action": "fire_mg",
+                "upper_seconds": 0
+              },
+              "projectile": true,
+              "schema": 1,
+              "seq": 49,
+              "source_facing": 4,
+              "source_group": "ops",
+              "source_id": 2,
+              "source_pos": [
+                912,
+                464
+              ],
+              "target_group": "enemies",
+              "target_id": 4,
+              "target_pos": [
+                1039.99450683594,
+                401.860473632812
+              ],
+              "visual_model": "operator_mg",
+              "visual_weapon": "bar",
+              "wave_id": 1
+            },
+            "name": "铁砧",
+            "reload_s": 0.95,
+            "role": "机",
+            "sfx_cue": "fire_mg",
+            "shot_interval_s": 0.115,
+            "visual_weapon": "bar",
+            "weapon": "bar"
+          },
+          "playback_schema": 2,
+          "playback_tick": 15054,
+          "position": [
+            912,
+            464
+          ],
+          "schema": 2,
+          "seq": 49,
+          "target_id": 4,
+          "tick": 832,
+          "timeline_tick": 1172,
+          "type": "fire",
+          "wave_id": 1
+        },
+        "name": "event_row:3",
+        "path": "/root/Main/HUD/Root/EventLog/EventList",
+        "readonly_hit_index": 6,
+        "rect": [
+          1097,
+          310,
+          2,
+          2
+        ],
+        "text": "19.5s  铁砧 开火 → 敌4",
+        "visible": false
+      },
+      "clicked_point_source": {
+        "disabled": false,
+        "event": {
+          "actor_id": 2,
+          "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+          "event_id": "1289c65c34af63cf62707bf18ddc4cca:1:46",
+          "payload": {
+            "animation_schema": 2,
+            "codename": "铁砧",
+            "fx": {
+              "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+              "animation_schema": 3,
+              "attempt_id": "1289c65c34af63cf62707bf18ddc4cca",
+              "clock_domain": "playback",
+              "clock_tick": 15040,
+              "confirmed": true,
+              "damage": 28,
+              "event_id": "1289c65c34af63cf62707bf18ddc4cca:1:46",
+              "hp_after": 44,
+              "hp_before": 72,
+              "level_id": "warehouse",
+              "playback_schema": 2,
+              "pose": {
+                "action": "fire",
+                "base_action": "idle",
+                "base_seconds": 19.3,
+                "event_id": "1289c65c34af63cf62707bf18ddc4cca:1:46",
+                "fallback": "",
+                "seconds": 0,
+                "upper_action": "fire_mg",
+                "upper_seconds": 0
+              },
+              "projectile": true,
+              "schema": 1,
+              "seq": 46,
+              "source_facing": 4,
+              "source_group": "ops",
+              "source_id": 2,
+              "source_pos": [
+                912,
+                464
+              ],
+              "target_group": "enemies",
+              "target_id": 4,
+              "target_pos": [
+                1039.99450683594,
+                394.393920898438
+              ],
+              "visual_model": "operator_mg",
+              "visual_weapon": "bar",
+              "wave_id": 1
+            },
+            "name": "铁砧",
+            "reload_s": 0.95,
+            "role": "机",
+            "sfx_cue": "fire_mg",
+            "shot_interval_s": 0.115,
+            "visual_weapon": "bar",
+            "weapon": "bar"
+          },
+          "playback_schema": 2,
+          "playback_tick": 15040,
+          "position": [
+            912,
+            464
+          ],
+          "schema": 2,
+          "seq": 46,
+          "target_id": 4,
+          "tick": 818,
+          "timeline_tick": 1158,
+          "type": "fire",
+          "wave_id": 1
+        },
+        "name": "event_row:0",
+        "path": "/root/Main/HUD/Root/EventLog/EventList",
+        "readonly_hit_index": 3,
+        "rect": [
+          1097,
+          244,
+          2,
+          2
+        ],
+        "text": "19.3s  铁砧 开火 → 敌4",
+        "visible": false
+      },
+      "state": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "covers": [
+          {
+            "id": 0,
+            "pos": [
+              368,
+              272
+            ]
+          },
+          {
+            "id": 1,
+            "pos": [
+              496,
+              400
+            ]
+          },
+          {
+            "id": 2,
+            "pos": [
+              720,
+              240
+            ]
+          },
+          {
+            "id": 3,
+            "pos": [
+              912,
+              464
+            ]
+          },
+          {
+            "id": 4,
+            "pos": [
+              592,
+              528
+            ]
+          },
+          {
+            "id": 5,
+            "pos": [
+              944,
+              560
+            ]
+          }
+        ],
+        "engine_frames": 7165,
+        "event_log_open": true,
+        "event_ring_visible": true,
+        "fail_reason": "",
+        "focus_actor": 2,
+        "focus_type": "fire",
+        "input_count": 314,
+        "input_tail": {
+          "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+          "button": 1,
+          "engine_frame": 7161,
+          "kind": "mouse",
+          "phase": 4,
+          "pos": [
+            956,
+            245
+          ],
+          "presents": 7161,
+          "pressed": false,
+          "scene": "res://scenes/main.tscn",
+          "us": 3318754900
+        },
+        "level": "warehouse",
+        "log": {
+          "events": 62,
+          "playback_frames": 2072,
+          "playback_terminal": 16102,
+          "playback_tick": 16102,
+          "snapshots": 206,
+          "terminal": 1203,
+          "terminal_reason": "win"
+        },
+        "loot": [],
+        "mines_count": 0,
+        "modal": {
+          "backpack": false,
+          "credits": false,
+          "handoff": false,
+          "handoff_from": "",
+          "handoff_to": "",
+          "pause": false,
+          "tutorial": false,
+          "tutorial_body": "",
+          "tutorial_page": 0
+        },
+        "observer_usec": 18499100,
+        "operators": [
+          {
+            "alive": true,
+            "ammo": 10,
+            "ammo_pack_used": false,
+            "auto_grenade": true,
+            "facing": 90,
+            "family": "rifle",
+            "has_ammo_pack": false,
+            "hp": 100,
+            "id": 1,
+            "mines": 0,
+            "moving": false,
+            "pack": [
+              {
+                "amount": 7,
+                "kind": "kar98k"
+              },
+              {
+                "amount": 1,
+                "kind": "grenade"
+              }
+            ],
+            "pool": {
+              "rifle": 49
+            },
+            "pos": [
+              1040,
+              397.606353759766
+            ],
+            "role": 0,
+            "slot": -1,
+            "start_ammo": 5,
+            "weapon": "kar98k"
+          },
+          {
+            "alive": true,
+            "ammo": 12,
+            "ammo_pack_used": false,
+            "auto_grenade": true,
+            "facing": 4,
+            "family": "mg",
+            "has_ammo_pack": true,
+            "hp": 87.6,
+            "id": 2,
+            "mines": 0,
+            "moving": false,
+            "pack": [
+              {
+                "amount": 20,
+                "kind": "bar"
+              }
+            ],
+            "pool": {
+              "mg": 12
+            },
+            "pos": [
+              912,
+              464
+            ],
+            "role": 1,
+            "slot": 3,
+            "start_ammo": 20,
+            "weapon": "bar"
+          },
+          {
+            "alive": true,
+            "ammo": 6,
+            "ammo_pack_used": false,
+            "auto_grenade": true,
+            "facing": 180,
+            "family": "scout",
+            "has_ammo_pack": false,
+            "hp": 100,
+            "id": 3,
+            "mines": 0,
+            "moving": false,
+            "pack": [
+              {
+                "amount": 6,
+                "kind": "springfield"
+              }
+            ],
+            "pool": {
+              "scout": 6
+            },
+            "pos": [
+              944,
+              560
+            ],
+            "role": 2,
+            "slot": 5,
+            "start_ammo": 5,
+            "weapon": "springfield"
+          }
+        ],
+        "phase": 4,
+        "presents": 7165,
+        "replay": {
+          "max": 16102,
+          "playing": false,
+          "speed": 2,
+          "tick": 15054
+        },
+        "run_id": 3,
+        "scene": "res://scenes/main.tscn",
+        "selected": 1,
+        "settings": {
+          "complete": false,
+          "configs": {
+            "ambush_loop.cfg": {
+              "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+              "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+            },
+            "ambush_loop_settings.cfg": {
+              "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+              "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+            }
+          },
+          "force_touch_hud": false,
+          "has_progress": true,
+          "missions": [
+            {
+              "cleared": true,
+              "id": "yard",
+              "loops": 1,
+              "perfect": true,
+              "title": "第1关 · 院子：交叉封锁",
+              "unlocked": true
+            },
+            {
+              "cleared": true,
+              "id": "warehouse",
+              "loops": 1,
+              "perfect": true,
+              "title": "第2关 · 仓道：弹药窗口",
+              "unlocked": true
+            },
+            {
+              "cleared": false,
+              "id": "pump",
+              "loops": 0,
+              "perfect": false,
+              "title": "第3关 · 泵站：关门之后",
+              "unlocked": true
+            },
+            {
+              "cleared": false,
+              "id": "railcut",
+              "loops": 0,
+              "perfect": false,
+              "title": "第4关 · 信号楼：双走廊延迟",
+              "unlocked": false
+            },
+            {
+              "cleared": false,
+              "id": "depot",
+              "loops": 0,
+              "perfect": false,
+              "title": "第5关 · 油库：三路合围",
+              "unlocked": false
+            },
+            {
+              "cleared": false,
+              "id": "radio",
+              "loops": 0,
+              "perfect": false,
+              "title": "第6关 · 电台：灯塔回波",
+              "unlocked": false
+            }
+          ],
+          "music_volume": 1,
+          "muted": false,
+          "next": "pump",
+          "persistence_error": "",
+          "persistence_status": "已保存到此浏览器",
+          "quality": "standard",
+          "seen": {
+            "warehouse": true,
+            "yard": true
+          },
+          "sfx_volume": 1
+        },
+        "sim": {
+          "accum": 0.0242666666666723,
+          "paused": false,
+          "speed": 1,
+          "tick": 863
+        },
+        "stashes": [
+          {
+            "collected": false,
+            "family": "decoy",
+            "id": 163997290130,
+            "kind": "decoy",
+            "pos": [
+              720,
+              304
+            ]
+          },
+          {
+            "collected": false,
+            "family": "smg",
+            "id": 164148285083,
+            "kind": "mp40",
+            "pos": [
+              464,
+              528
+            ]
+          }
+        ],
+        "status": "定位 · 19.5s  铁砧 开火 → 敌4",
+        "ticks_usec": 3320428300,
+        "tool": 0,
+        "view": {
+          "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+          "level": "warehouse",
+          "recorded_phase": 1,
+          "roots": 6,
+          "seq": 1936,
+          "tick": 15054,
+          "wave": 1,
+          "yaw": 155
+        },
+        "viewport": [
+          0,
+          0,
+          1280,
+          720
+        ],
+        "wave": 1,
+        "wave_count": 2,
+        "waves_cleared": 2
+      },
+      "frame_checks": {
+        "checks": 19,
+        "failures": [],
+        "tick": 15054
+      },
+      "record_unchanged": true,
+      "domain_unchanged": true
+    }
+  ]
+}
