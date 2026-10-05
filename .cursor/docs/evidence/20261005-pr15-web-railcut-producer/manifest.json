@@ -1,0 +1,172 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+  "plan_head": "eb50a736da09038bda49d96a3e15c33389a83317",
+  "sealed_at": "2026-10-05T11:28:01.709733+00:00",
+  "status": "PRODUCER_PASS_WHOLE_PROGRESS_PENDING_ACTIVE_SINGLE_ENGINE",
+  "original_record": {
+    "attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+    "bytes": 15373004,
+    "level": "railcut",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+    "terminal": 7610,
+    "validation": {
+      "attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+      "events": 45,
+      "failures": [],
+      "frames": 1017,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/railcut-native-8532-20261005/run-v2/railcut-record.bin",
+    "producer_wall": 463.15195600601146
+  },
+  "browser_inputs": 90,
+  "engine_inputs": 90,
+  "file_count": 28,
+  "total_bytes": 20199029,
+  "files": [
+    {
+      "path": "browser_controller.py",
+      "bytes": 3745,
+      "sha256": "d003c1a87ae32d7fa3ecff1a1de2408256b44d9fde5f578529384c5fbe1af2c0"
+    },
+    {
+      "path": "browser_controller_v2.py",
+      "bytes": 4011,
+      "sha256": "eb0146f3c0b3a9ccaecbbe425b5d9e47011480627b8f47970432fa7afb208043"
+    },
+    {
+      "path": "driver_core.py",
+      "bytes": 11106,
+      "sha256": "8d94e14b85e3d9dcb063eebb342e8b374d0cf91a127b9662b5dcb5f7c623431b"
+    },
+    {
+      "path": "driver_whole_and_progress.py",
+      "bytes": 8602,
+      "sha256": "f5e98ffeed1e0453354b3603ee759450e3fc32384d5f78ececc667ce4f5a44c4"
+    },
+    {
+      "path": "expected-profile-before.json",
+      "bytes": 4867,
+      "sha256": "11ff876b2d773dde105218ac75e72cbb8393746f26e1f11c9af7ca6559e96bec"
+    },
+    {
+      "path": "initialize.py",
+      "bytes": 1920,
+      "sha256": "71077ae570fca648daac957765166d02b984c19b8a1798d6c8594722180201e8"
+    },
+    {
+      "path": "negative-restored-error-page/loaded-controller.py",
+      "bytes": 3745,
+      "sha256": "d003c1a87ae32d7fa3ecff1a1de2408256b44d9fde5f578529384c5fbe1af2c0"
+    },
+    {
+      "path": "negative-restored-error-page/receipt.json",
+      "bytes": 477,
+      "sha256": "95123faf267a233de343415bc8faaaff29761aff612f1fc6787ad3a4a3938100"
+    },
+    {
+      "path": "preflight.json",
+      "bytes": 4007,
+      "sha256": "cc128b96d9cbcdceb08cfbe05c150b10412aea63df4efe951402722ba3961164"
+    },
+    {
+      "path": "prepare_controls.py",
+      "bytes": 4090,
+      "sha256": "83f2b58519930c889cddd45b5af78a6e167704e188ccc55a1c26021ffb2e5b56"
+    },
+    {
+      "path": "produce_railcut.py",
+      "bytes": 2578,
+      "sha256": "43623442f3fdfd3fcbc568e463a42d6b38bf454440385f4bb938ff194e00c5a6"
+    },
+    {
+      "path": "run-v2/initialize-railcut-original-profile.json",
+      "bytes": 1685,
+      "sha256": "9d5f9e8f60459961158c92d0c6e3171411e9444466212754176c5e27c7745a4b"
+    },
+    {
+      "path": "run-v2/owned-pages-startup.json",
+      "bytes": 276,
+      "sha256": "224a695e5477fae41673f19df2cb59b200a1f73a1ea46e0644b10d36c4b3786a"
+    },
+    {
+      "path": "run-v2/produce-railcut-natural.json",
+      "bytes": 1678,
+      "sha256": "f572209dd6eb6814838509401cba13c307e9182b47b8a19bd8ad279749796eac"
+    },
+    {
+      "path": "run-v2/profile-before.json",
+      "bytes": 3567,
+      "sha256": "439d584349f329078c3c5876660dd892b08b76b3d11423b5136510672e2ccfea"
+    },
+    {
+      "path": "run-v2/railcut-browser-trusted.json",
+      "bytes": 10536,
+      "sha256": "4f549da073c645519f3dfb5641ebcb59ff4c6bfe90068b5c3dddd43438f5cc22"
+    },
+    {
+      "path": "run-v2/railcut-original-fingerprints.json",
+      "bytes": 33834,
+      "sha256": "aba15045b0ac063c9462fddf1846d84b396aef04f89e6a695e6af221c21efadf"
+    },
+    {
+      "path": "run-v2/railcut-producer.json",
+      "bytes": 8696,
+      "sha256": "a2b7722cd90a2657a823bb8ed13a026707453b9dcf27e58827fbf3f3d47156e1"
+    },
+    {
+      "path": "run-v2/railcut-record.bin",
+      "bytes": 15373004,
+      "sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f"
+    },
+    {
+      "path": "run-v2/railcut-start-checkpoint.json",
+      "bytes": 8566,
+      "sha256": "14f05ff391791e264e3349131a09174f3722d8d3b2486a871dcc5fe8a5c17902"
+    },
+    {
+      "path": "run-v2/railcut_armed_scout.png",
+      "bytes": 682962,
+      "sha256": "34897aa5c5c9d0c74fc08af159fddd6c81e69f16688b04857953bcebe160fadd"
+    },
+    {
+      "path": "run-v2/railcut_before_continue_title.png",
+      "bytes": 110201,
+      "sha256": "aac3baeda801654a09a8012feb501092ec4a89d5baa82edbb34cb79e59fbf697"
+    },
+    {
+      "path": "run-v2/railcut_wave0_alert.png",
+      "bytes": 629776,
+      "sha256": "8ad3be4b65a57af0765e26654c219a5d26669d8599659ada540c53fff376b5b9"
+    },
+    {
+      "path": "run-v2/railcut_wave0_sweep.png",
+      "bytes": 663729,
+      "sha256": "143ca66b4251602e05cfe6bc9f8fcd6a990b8fe6669fefffa65aa0219e672b0a"
+    },
+    {
+      "path": "run-v2/railcut_wave1_alert.png",
+      "bytes": 929709,
+      "sha256": "569cb876cc72d49f7b0528d967aa019a344a507babd952dafb65e0e01700595d"
+    },
+    {
+      "path": "run-v2/railcut_wave1_sweep.png",
+      "bytes": 944552,
+      "sha256": "d7ccc373048c684b576c8f23a3e2e302564b37e45d942c05cdb807df0e7205c9"
+    },
+    {
+      "path": "run-v2/railcut_won.png",
+      "bytes": 727046,
+      "sha256": "4a69610343aae989bbc8c23584ffc067b32597b2088ae5fab1c35a7cca955f0e"
+    },
+    {
+      "path": "spec.json",
+      "bytes": 20064,
+      "sha256": "271ddd3a23fcb6852396f21997485c5d24d572f556e2cb8945796f76a2a713bd"
+    }
+  ],
+  "scope": "immutable producer-stage files only; live driver-actions/HTTP logs excluded here and will be sealed at END; no reclassification of pending whole/progress; first browser-start method1 retained"
+}
