@@ -218,10 +218,12 @@ func _run() -> void:
 	main._cancel_touch_intent()
 	main._touch_preview_slot = null
 	main._update_cover_previews()
+	_assert_system_cancellations(main, op, cover)
 
 	if not failures.is_empty():
 		quit(1)
 		return
+	print("M2_TOUCH_CANCEL_OK scenarios=8 canceled_touch_inert=1 stale_events_inert=1 fresh_press_recovers=1")
 	print("M2_TOUCH_INTENT_OK preview_first=1 explicit_confirm=1 no_double_command=1 pan_pinch_facing_inert=1 longpress_preview=1 cancel_stale=1")
 	quit(0)
 
@@ -236,11 +238,12 @@ func _world_to_screen(main, world: Vector2) -> Vector2:
 	return main.get_viewport().get_canvas_transform() * world
 
 
-func _screen_touch(index: int, pressed: bool, position: Vector2) -> InputEventScreenTouch:
+func _screen_touch(index: int, pressed: bool, position: Vector2, canceled: bool = false) -> InputEventScreenTouch:
 	var event := InputEventScreenTouch.new()
 	event.index = index
 	event.pressed = pressed
 	event.position = position
+	event.canceled = canceled
 	return event
 
 
@@ -293,6 +296,79 @@ func _expect(ok: bool, label: String) -> void:
 func _frames(count: int) -> void:
 	for _i in count:
 		await process_frame
+
+
+func _assert_system_cancellations(main, op, cover) -> void:
+	for scenario in ["press", "staged", "camera", "facing", "cover", "pinch", "sprint", "tool"]:
+		main._cancel_touch_intent()
+		main._touch_preview_slot = null
+		main._touches.clear()
+		main._pending_setup_touch = false
+		main._facing_touch = -1
+		main.tool = main.Tool.DEPLOY
+		var world := _find_open_move_target(main, op)
+		var screen := _world_to_screen(main, world)
+		if scenario == "staged" or scenario == "tool":
+			if scenario == "tool":
+				main.tool = main.Tool.DECOY
+				op.decoys = 1
+			_tap(main, world)
+			_expect(main.touch_intent_pending(), "M2_T2_CANCEL_%s_FIXTURE" % scenario)
+		else:
+			if scenario == "facing":
+				screen = _world_to_screen(main, op.global_position)
+			elif scenario == "cover":
+				screen = _world_to_screen(main, cover.global_position)
+			main._unhandled_input(_screen_touch(0, true, screen))
+			if scenario == "camera" or scenario == "facing":
+				main._unhandled_input(_screen_drag(0, screen + Vector2(64.0, 8.0), Vector2(64.0, 8.0)))
+			elif scenario == "cover":
+				main._cover_hold_msec = Time.get_ticks_msec() - int(main.COVER_LONGPRESS_MS) - 1
+				main._tick_cover_long_press()
+				_expect(main._touch_preview_slot != null, "M2_T2_CANCEL_COVER_FIXTURE")
+			elif scenario == "pinch":
+				main._unhandled_input(_screen_touch(1, true, screen + Vector2(56.0, 0.0)))
+				main._unhandled_input(_screen_drag(1, screen + Vector2(82.0, 0.0), Vector2(26.0, 0.0)))
+				_expect(main._touches.size() == 2 and main._pinch_start_dist > 0.0, "M2_T2_CANCEL_PINCH_FIXTURE")
+			elif scenario == "sprint":
+				main._sprint_hold_armed = true
+		var before_pos: Vector2 = op.global_position
+		var before_slot = op.slot
+		var before_path: PackedVector2Array = op.move_path.duplicate()
+		var before_ammo := int(op.ammo)
+		var before_decoys := int(op.decoys)
+		var before_decoy_count: int = main.raid_decoys.size()
+		var before_tick := int(main.sim.tick)
+		var before_face := float(op.facing_deg)
+		var before_pan: Vector2 = main._cam_pan
+		var before_zoom := float(main._cam_zoom)
+		main._unhandled_input(_screen_touch(0, false, screen, true))
+		_expect(not main.touch_intent_pending() and not main.touch_intent_preview_active() and main._touch_preview_slot == null,
+			"M2_T2_CANCEL_%s_NO_INTENT_OR_PREVIEW" % scenario)
+		_expect(not main._pending_setup_touch and main._cover_hold_slot == null and not main._sprint_hold_armed
+			and not main._touch_panning and main._facing_touch != 0 and not main._touches.has(0)
+			and is_zero_approx(float(main._pinch_start_dist)), "M2_T2_CANCEL_%s_CLEARS_TRANSIENTS" % scenario)
+		main._unhandled_input(_screen_drag(0, screen + Vector2(96.0, 0.0), Vector2(32.0, 0.0)))
+		main._unhandled_input(_screen_touch(0, false, screen))
+		_expect(not main._touches.has(0) and not main._pending_setup_touch and not main._touch_panning
+			and not main.touch_intent_pending(), "M2_T2_CANCEL_%s_STALE_EVENTS_INERT" % scenario)
+		_expect(main._cam_pan == before_pan and is_equal_approx(float(main._cam_zoom), before_zoom)
+			and is_equal_approx(float(op.facing_deg), before_face), "M2_T2_CANCEL_%s_NO_LATE_CAMERA_OR_FACE" % scenario)
+		if scenario == "pinch":
+			main._unhandled_input(_screen_touch(1, false, screen + Vector2(82.0, 0.0)))
+			_expect(not main.touch_intent_pending(), "M2_T2_CANCEL_PINCH_SURVIVOR_RELEASE_INERT")
+		_expect(op.global_position == before_pos and op.slot == before_slot and op.move_path == before_path
+			and int(op.ammo) == before_ammo and int(op.decoys) == before_decoys
+			and main.raid_decoys.size() == before_decoy_count and int(main.sim.tick) == before_tick,
+			"M2_T2_CANCEL_%s_NO_WORLD_MUTATION" % scenario)
+		main.tool = main.Tool.DEPLOY
+		# A fresh press with the reused finger index must work after cancellation.
+		_tap(main, _find_open_move_target(main, op))
+		_expect(main.touch_intent_pending(), "M2_T2_CANCEL_%s_FRESH_PRESS_RECOVERS" % scenario)
+		main.cancel_touch_intent()
+	main._touches.clear()
+	main._touch_preview_slot = null
+	main._update_cover_previews()
 
 
 func _assert_intent_panel_safe_area(main) -> void:
