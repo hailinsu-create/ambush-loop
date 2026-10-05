@@ -1,6 +1,6 @@
 # PR15 自有浏览器多标签发现与单页控制修正
 
-2026-10-05，**RUNNING / 原warehouse单页回归**。当前生产仍dab870595175eed37a6d2a012bc69a76062d48b0/game tree4f49a7c9cb5a789fbb570bceb947eab7df2eb54a；私有Site v2不变，未改生产/制作资产/paid/merge/APK。
+2026-10-05，**RUNNING / 单页warehouse producer已PASS，原whole1正在运行**。最新[单页原输入检查点](AMBUSH_PR15_WEB_WAREHOUSE_SINGLE_PRODUCER_20261005.md)封存542.211s/26,554,792bytes/SHA28c909/62events/2072frames/原actual0；whole未到终点，未计通过。下方START为历史观察。当前生产仍dab870595175eed37a6d2a012bc69a76062d48b0/game tree4f49a7c9cb5a789fbb570bceb947eab7df2eb54a；私有Site v2不变，未改生产/制作资产/paid/merge/APK。
 
 ## 已完成原输入事实与环境更正
 
