@@ -1,0 +1,5 @@
+page.mouse.click(440,409);page.wait_for_timeout(200);page.mouse.click(830,465)
+page.wait_for_function("JSON.parse(localStorage.getItem('ambush-loop.config.v1')).files['ambush_loop_settings.cfg'].includes('seen_yard=true')",timeout=5000)
+page.screenshot(path=str(base/'fixed-yard-original-scout-complete.png'))
+page.keyboard.press('Space');page.wait_for_timeout(500);page.keyboard.press('Space');page.wait_for_timeout(900);page.screenshot(path=str(base/'fixed-yard-alert-original.png'))
+print(json.dumps({'checkpoint':page.evaluate("JSON.parse(localStorage.getItem('ambush-loop.config.v1'))"),'console_errors':[x for x in console if x['type']=='error'],'page_errors':errors[:]}),flush=True)
