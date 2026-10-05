@@ -1,0 +1,51 @@
+{
+  "actual_exit": 0,
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "original_record_sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf",
+  "whole": [
+    {
+      "rate": 1,
+      "actual_exit": 0,
+      "observer_rows": 783,
+      "input_rows": 2,
+      "tick_first": 0,
+      "tick_last": 6178,
+      "terminal": 6178,
+      "all_observed_ticks_monotonic": true,
+      "all_observed_view_ticks_equal": true,
+      "frame_checks": {
+        "checks": 15,
+        "failures": [],
+        "tick": 6178
+      },
+      "callback_wall": 367.1996,
+      "controller_wall": 372.3180356719822,
+      "deadline": 647.8
+    },
+    {
+      "rate": 2,
+      "actual_exit": 0,
+      "observer_rows": 397,
+      "input_rows": 2,
+      "tick_first": 0,
+      "tick_last": 6178,
+      "terminal": 6178,
+      "all_observed_ticks_monotonic": true,
+      "all_observed_view_ticks_equal": true,
+      "frame_checks": {
+        "checks": 15,
+        "failures": [],
+        "tick": 6178
+      },
+      "callback_wall": 183.8657,
+      "controller_wall": 188.99394560500514,
+      "deadline": 338.9
+    }
+  ],
+  "rate_wall_ratio": 1.997107671523291,
+  "engine_inputs": 34,
+  "browser_inputs": 34,
+  "warnings": 4,
+  "gpu_readpixels_warnings": 4,
+  "scope": "offline evidence consistency check; actor/bone renderer checks at terminals only, view tick consistency covers observed frames; not all pixels/device/performance acceptance"
+}

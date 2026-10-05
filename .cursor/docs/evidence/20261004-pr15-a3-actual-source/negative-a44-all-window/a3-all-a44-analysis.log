@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/ambush-pr15/ambush_loop/scripts/summarize_a3_campaign.py", line 86, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--report',type=pathlib.Path,required=True);p.add_argument('--root',type=pathlib.Path,default=pathlib.Path(__file__).resolve().parents[2]);p.add_argument('--proof',type=pathlib.Path,required=True);p.add_argument('--output',type=pathlib.Path,required=True);a=p.parse_args();j=analyze(a.report,a.root,a.proof);a.output.write_text(json.dumps(j,indent=2)+'\n');print(json.dumps({k:j[k] for k in ['status','source_sha','levels','waves','raw_rows','accepted_rows','segments','matrix_views','captures']}))
+                                                                                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ambush-pr15/ambush_loop/scripts/summarize_a3_campaign.py", line 20, in analyze
+    require(j['complete'] and j['failures']==0 and not j['stopped'],'workload incomplete/failed/stopped')
+  File "/workspace/ambush-pr15/ambush_loop/scripts/summarize_a3_campaign.py", line 7, in require
+    if not ok:raise ValueError(msg)
+              ^^^^^^^^^^^^^^^^^^^^^
+ValueError: workload incomplete/failed/stopped

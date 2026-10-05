@@ -1,0 +1,60 @@
+{
+  "audit_actual_exit": 0,
+  "checks": 198,
+  "failures": 0,
+  "scope": "offline exact audit of completed desktop/200% cases inside preserved actual1 v2 plus separate actual0 phone v3; does not relabel v2 as overall PASS, no fresh producer or whole/performance/device acceptance",
+  "production_source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "rows": [
+    {
+      "case": "desktop",
+      "raw_driver": "browser-v2",
+      "raw_driver_actual_exit": 1,
+      "complete_case_end": true,
+      "glyph_focus": 6,
+      "browser_trusted": 22,
+      "engine_inputs": 22,
+      "record_domain_unchanged": true,
+      "frame_checks": {
+        "checks": 19,
+        "failures": [],
+        "tick": 15163
+      },
+      "console_warning_count_whole_raw_driver": 4,
+      "ReadPixels_whole_raw_driver": 4
+    },
+    {
+      "case": "scale200",
+      "raw_driver": "browser-v2",
+      "raw_driver_actual_exit": 1,
+      "complete_case_end": true,
+      "glyph_focus": 10,
+      "browser_trusted": 40,
+      "engine_inputs": 66,
+      "record_domain_unchanged": true,
+      "frame_checks": {
+        "checks": 19,
+        "failures": [],
+        "tick": 15084
+      },
+      "console_warning_count_whole_raw_driver": 4,
+      "ReadPixels_whole_raw_driver": 4
+    },
+    {
+      "case": "phone_landscape",
+      "raw_driver": "browser-v3-phone",
+      "raw_driver_actual_exit": 0,
+      "complete_case_end": true,
+      "glyph_focus": 10,
+      "browser_trusted": 42,
+      "engine_inputs": 70,
+      "record_domain_unchanged": true,
+      "frame_checks": {
+        "checks": 19,
+        "failures": [],
+        "tick": 15084
+      },
+      "console_warning_count_whole_raw_driver": 4,
+      "ReadPixels_whole_raw_driver": 4
+    }
+  ]
+}

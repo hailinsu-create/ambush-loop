@@ -1,0 +1,800 @@
+commit b832587e9097acc78f69be4486cdf8587a014385
+Author:     Liu Ning <lning@prepop.net>
+AuthorDate: Sun Oct 4 17:01:25 2026 +0000
+Commit:     Liu Ning <lning@prepop.net>
+CommitDate: Sun Oct 4 17:01:25 2026 +0000
+
+    test: add actual Window lifecycle and matched collector overhead drivers
+
+diff --git a/ambush_loop/scripts/a3_cadence_sampler.gd b/ambush_loop/scripts/a3_cadence_sampler.gd
+new file mode 100644
+index 0000000..abb425c
+--- /dev/null
++++ b/ambush_loop/scripts/a3_cadence_sampler.gd
+@@ -0,0 +1,118 @@
++extends RefCounted
++## Shared, bounded post-draw sampler in BOTH baseline/instrumented conditions.
++const CAPACITY := 32768
++const COLUMNS := ["engine_frame","sample_seq","ticks_usec","interval_usec","included","exclusion_code",
++	"render_counters_ready","draw_calls","primitives","render_objects","static_bytes","object_count",
++	"node_count","resource_count","process_seconds","sampler_usec"]
++var row_count := 0
++var overflow_rows := 0
++var _sequence := 0
++var _previous_usec := 0
++var _timed := false
++var _first := true
++var _running := false
++var _sealed := false
++var _run_incomplete := false
++var _table := PackedFloat64Array()
++
++
++func _init() -> void:
++	_table.resize(CAPACITY*COLUMNS.size())
++	_table.fill(-1.0)
++
++
++func begin() -> bool:
++	if _running or _run_incomplete or (row_count>0 and not _sealed):return false
++	_table.fill(-1.0)
++	row_count=0
++	overflow_rows=0
++	_previous_usec=0
++	_timed=false
++	_first=true
++	_sealed=false
++	RenderingServer.frame_post_draw.connect(_sample)
++	_running=true
++	return true
++
++
++func mark_timed(value: bool) -> void:
++	_timed=value
++	_first=true
++
++
++func stop() -> void:
++	if RenderingServer.frame_post_draw.is_connected(_sample):RenderingServer.frame_post_draw.disconnect(_sample)
++	_running=false
++	_timed=false
++
++
++func storage_bytes() -> int:
++	return _table.size()*8
++
++
++func _sample() -> void:
++	var now := Time.get_ticks_usec()
++	var interval := now-_previous_usec if _previous_usec>0 else -1
++	_previous_usec=now
++	_sequence+=1
++	if row_count>=CAPACITY:
++		overflow_rows+=1;_run_incomplete=true;_sealed=false;return
++	var base := row_count*COLUMNS.size()
++	var drawn := Engine.get_frames_drawn()
++	var ready: bool = DisplayServer.get_name()!="headless" and drawn>=2
++	var exclusion := 0
++	if not _timed:exclusion=1
++	elif _first:exclusion=2
++	elif not ready:exclusion=3
++	_table[base]=drawn
++	_table[base+1]=_sequence
++	_table[base+2]=now
++	_table[base+3]=interval
++	_table[base+4]=1 if exclusion==0 and interval>0 else 0
++	_table[base+5]=exclusion
++	_table[base+6]=1 if ready else 0
++	_table[base+7]=Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
++	_table[base+8]=Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)
++	_table[base+9]=Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME)
++	_table[base+10]=Performance.get_monitor(Performance.MEMORY_STATIC) if OS.is_debug_build() else -1
++	_table[base+11]=Performance.get_monitor(Performance.OBJECT_COUNT)
++	_table[base+12]=Performance.get_monitor(Performance.OBJECT_NODE_COUNT)
++	_table[base+13]=Performance.get_monitor(Performance.OBJECT_RESOURCE_COUNT)
++	_table[base+14]=Performance.get_monitor(Performance.TIME_PROCESS)
++	_first=false
++	row_count+=1
++	_table[base+15]=Time.get_ticks_usec()-now
++
++
++func row_at(index: int) -> Array:
++	if index<0 or index>=row_count:return []
++	var result: Array=[]
++	for column: int in COLUMNS.size():result.append(_table[index*COLUMNS.size()+column])
++	return result
++
++
++func save(path: String, receipt: Dictionary) -> Error:
++	if _running or _timed:return ERR_BUSY
++	if FileAccess.file_exists(path+"/cadence.csv"):return ERR_ALREADY_IN_USE
++	var file := FileAccess.open(path+"/cadence.csv",FileAccess.WRITE)
++	if file==null:return FileAccess.get_open_error()
++	file.store_csv_line(PackedStringArray(COLUMNS))
++	for index: int in row_count:
++		var values := PackedStringArray()
++		for value: Variant in row_at(index):values.append(str(value))
++		file.store_csv_line(values)
++	var raw_error := file.get_error();file.close()
++	var metadata := FileAccess.open(path+"/cadence-metadata.json",FileAccess.WRITE)
++	if metadata==null:return FileAccess.get_open_error()
++	metadata.store_string(JSON.stringify({"format":1,"rows":row_count,"overflow_rows":overflow_rows,
++		"run_incomplete":_run_incomplete,"capacity":CAPACITY,"payload_bytes":storage_bytes(),
++		"raw_sha256":FileAccess.get_sha256(path+"/cadence.csv"),"receipt":receipt,
++		"exclusion_codes":{"0":"included","1":"untimed_settle","2":"first_interval_after_transition","3":"render_counters_not_ready"},
++		"support":{"static_bytes":OS.is_debug_build(),"render_counters":"Window after two engine draws; may lag",
++			"GPU_time":"unavailable Compatibility/OpenGL","pipeline":"not sampled; unknown backend support"},
++		"timer_scope":"callback entry through all scalar/counter writes and row count; final duration store/return excluded",
++		"scope":"same minimal sampler paid in both controls; warm/transition raw retained, no corrected FPS subtraction"},"  "))
++	var metadata_error := metadata.get_error();metadata.close()
++	_sealed=raw_error==OK and metadata_error==OK
++	if not _sealed:return ERR_FILE_CANT_WRITE
++	return ERR_INVALID_DATA if _run_incomplete else OK
+diff --git a/ambush_loop/scripts/a3_collector_overhead_test.gd b/ambush_loop/scripts/a3_collector_overhead_test.gd
+new file mode 100644
+index 0000000..c0a9e42
+--- /dev/null
++++ b/ambush_loop/scripts/a3_collector_overhead_test.gd
+@@ -0,0 +1,167 @@
++extends SceneTree
++## Stationary paired instrumentation controls; all proof/IO/assertions are untimed.
++const Guard := preload("res://scripts/test_storage_guard.gd")
++const Collector := preload("res://scripts/a3_render_metrics.gd")
++const Sampler := preload("res://scripts/a3_cadence_sampler.gd")
++const Context := preload("res://scripts/a3_window_context.gd")
++const ORDER := [false,true,true,false,true,false,false,true] # ABBA then BAAB.
++var checks:=0
++var failures:=0
++var directory: String
++var receipt_sha: String
++var main: Node
++var active_collector: Node
++var sampler: RefCounted
++var canonical: Dictionary={}
++var conditions: Array=[]
++var source_before: Dictionary={}
++var source_after: Dictionary={}
++var monitor_support: Dictionary={}
++
++
++func _init() -> void:
++	if not Guard.check():quit(91);return
++	call_deferred("_run")
++
++
++func _check(ok: bool, message: String) -> void:
++	checks+=1
++	if not ok:failures+=1;print("A3_OVERHEAD_FAIL "+message)
++
++
++func _wait_seconds(seconds: float) -> void:
++	var start := Time.get_ticks_usec()
++	while Time.get_ticks_usec()-start<int(seconds*1_000_000):await process_frame
++
++
++func _condition(family: String, index: int, attached: bool, resident: Node) -> void:
++	var failures_before := failures
++	var label := "%s-%02d-%s" % [family,index,"attached" if attached else "baseline"]
++	var path := directory+"/"+label
++	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path))
++	active_collector=resident
++	if family=="full_buffer" and attached:
++		active_collector=Collector.new();root.add_child(active_collector);active_collector.stop()
++	if is_instance_valid(active_collector):
++		active_collector.stop() # Sampler always reconnects FIRST in both controls.
++		monitor_support=active_collector.metadata.monitor_support.duplicate(true)
++		_check(active_collector.metadata.source_proof_before.get("receipt_sha256")==receipt_sha,"collector pins original receipt outside timing "+label)
++	_check(sampler.begin(),"shared fixed sampler starts only after previous raw seal "+label)
++	if is_instance_valid(active_collector) and attached:
++		active_collector.mark(label+"-untimed-settle",false,"fixture_or_transition")
++		active_collector.start()
++	await _wait_seconds(2.0) # Retained by sampler/attached collector, explicitly excluded.
++	var before := Context.workload(main)
++	_check(before==canonical,"same original backend/presenter/camera/config before "+label)
++	if failures>failures_before:
++		sampler.stop()
++		if is_instance_valid(active_collector):active_collector.stop()
++		sampler.save(path,{"label":label,"invalid_before_timing":true,"workload":before})
++		return
++	var rss_start: int=Collector.own_rss_bytes()
++	var static_start: float=Performance.get_monitor(Performance.MEMORY_STATIC) if OS.is_debug_build() else -1
++	sampler.mark_timed(true)
++	if is_instance_valid(active_collector) and attached:active_collector.mark(label,true,"",before)
++	var timed_start := Time.get_ticks_usec()
++	await _wait_seconds(4.0)
++	var timed_end := Time.get_ticks_usec()
++	sampler.mark_timed(false);sampler.stop()
++	if is_instance_valid(active_collector):
++		active_collector.mark(label+"-outside-timing",false)
++		active_collector.stop()
++	var rss_end: int=Collector.own_rss_bytes()
++	var static_end: float=Performance.get_monitor(Performance.MEMORY_STATIC) if OS.is_debug_build() else -1
++	var after := Context.workload(main)
++	_check(after==before and after==canonical,"same original backend/presenter/camera/config after "+label)
++	var rows: Array=[]
++	for row_index: int in sampler.row_count:rows.append(sampler.row_at(row_index))
++	var included: Array=rows.filter(func(row:Array)->bool:return row[4]==1)
++	_check(sampler.overflow_rows==0 and included.size()>=3,"bounded real post-draw cadence with at least3 accepted frames "+label)
++	_check(included.all(func(row:Array)->bool:return row[6]==1 and row[3]>0 and row[5]==0 and is_finite(row[15]) and row[15]>=0),"accepted cadence ready/finite/positive with no transition rows "+label)
++	var payload: int=active_collector.storage_bytes() if is_instance_valid(active_collector) else 0
++	var collector_receipt: Dictionary={}
++	if attached:
++		var collector_path := path+"/collector"
++		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(collector_path))
++		var collector_rows: Array=[]
++		for row_index: int in active_collector.row_count:collector_rows.append(active_collector.row_at(row_index))
++		var measured: Array=collector_rows.filter(func(row:Array)->bool:return row[4]==1)
++		_check(measured.size()>=3 and measured.all(func(row:Array)->bool:return row[31]==1 and row[34]==1 and row[32]==0 and row[5]=="" and row[2]>0),"actual collector accepted rows ready/valid/frozen "+label)
++		_check(active_collector.save(collector_path,{"family":family,"label":label,"scope":"stationary paired overhead; not six-level gameplay/Android"})==OK,"actual collector raw sealed outside timing "+label)
++		var saved: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(collector_path+"/metadata.json"))
++		_check(saved.chunk_source_and_buffer_valid and saved.receipt_stable and saved.warm_import_proof_complete and not saved.run_incomplete and saved.run_overflow_rows==0,"collector raw complete lifetime/fixed loaded-source proof "+label)
++		_check(saved.metadata.source_proof_before.receipt_sha256==receipt_sha and saved.source_proof_after.receipt_sha256==receipt_sha and saved.raw_sha256==FileAccess.get_sha256(collector_path+"/raw.csv"),"collector raw and original provenance hashes exact "+label)
++		collector_receipt={"path":collector_path,"raw_sha256":saved.raw_sha256,"rows":collector_rows.size(),"measured_rows":measured.size()}
++		if family=="resident_callback":_check(active_collector.reset_buffer(),"resident buffer reused only after successful accepted raw seal "+label)
++	elif is_instance_valid(active_collector):
++		_check(not RenderingServer.frame_post_draw.is_connected(active_collector._sample) and active_collector.row_count==0,"resident baseline retains buffer but performs no collector callback "+label)
++	var receipt: Dictionary={"label":label,"family":family,"index":index,"attached":attached,
++		"collector_present":is_instance_valid(active_collector),"collector_payload_bytes":payload,
++		"common_sampler_payload_bytes":sampler.storage_bytes(),"sampler_callback_order":"first, collector second when attached",
++		"workload_before":before,"workload_after":after,"receipt_sha256":receipt_sha,
++		"rss_start_bytes":rss_start,"rss_end_bytes":rss_end,"static_start_bytes":static_start,"static_end_bytes":static_end,
++		"timed_start_usec":timed_start,"timed_end_usec":timed_end,"actual_wall_seconds":float(timed_end-timed_start)/1_000_000.0,
++		"settle_seconds":2.0,"requested_timed_seconds":4.0,"included_rows":included.size(),"collector":collector_receipt}
++	_check(sampler.save(path,receipt)==OK,"shared cadence raw seals outside timing "+label)
++	var cadence_meta: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(path+"/cadence-metadata.json"))
++	_check(cadence_meta.raw_sha256==FileAccess.get_sha256(path+"/cadence.csv") and not cadence_meta.run_incomplete,"shared cadence raw hash exact/complete "+label)
++	receipt["path"]=path
++	receipt["cadence_sha256"]=cadence_meta.raw_sha256
++	receipt["valid"]=failures==failures_before
++	conditions.append(receipt)
++	if family=="full_buffer" and is_instance_valid(active_collector):
++		active_collector.queue_free()
++		await process_frame
++		await process_frame
++		active_collector=null
++
++
++func _run() -> void:
++	if DisplayServer.get_name()=="headless":quit(2);return
++	directory="res://build/asset_review/pr15-runtime/a3-overhead-window-"+OS.get_environment("AMBUSH_TEST_RUN_ID")
++	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory))
++	Context.configure(self)
++	receipt_sha=FileAccess.get_sha256(OS.get_environment("AMBUSH_A3_PROVENANCE_FILE"))
++	source_before=Context.proof(receipt_sha)
++	_check(source_before.get("window_control_verified",false),"fixed source/engine/nonempty warm/receipt before workload")
++	if failures>0:_finish();return
++	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
++	await process_frame
++	await process_frame
++	main=current_scene
++	Context.freeze(main)
++	await _wait_seconds(3.0)
++	canonical=Context.workload(main)
++	sampler=Sampler.new() # Same numeric allocation lives through EVERY condition.
++	for index: int in ORDER.size():
++		await _condition("full_buffer",index,ORDER[index],null)
++		if failures>0:break
++	if failures==0:
++		var resident: Node=Collector.new();root.add_child(resident);resident.stop()
++		for index: int in ORDER.size():
++			await _condition("resident_callback",index,ORDER[index],resident)
++			if failures>0:break
++		resident.stop();resident.queue_free()
++		await process_frame
++		active_collector=null
++	source_after=Context.proof(receipt_sha)
++	_check(source_after.get("window_control_verified",false),"same source/engine/warm receipt after BOTH control families")
++	_check(conditions.size()==16 and conditions.all(func(condition:Dictionary)->bool:return condition.valid),"all sixteen ABBA/BAAB control windows completed without discarded failures")
++	_check(Context.workload(main)==canonical,"entire paired control preserves original source/frame/config")
++	_finish()
++
++
++func _finish() -> void:
++	if is_instance_valid(sampler):sampler.stop()
++	if is_instance_valid(active_collector):active_collector.stop()
++	var file := FileAccess.open(directory+"/report.json",FileAccess.WRITE)
++	file.store_string(JSON.stringify({"format":1,"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),
++		"receipt_sha256":receipt_sha,"checks":checks,"failures":failures,"complete":failures==0 and conditions.size()==16,
++		"source_proof_before":source_before,"source_proof_after":source_after,"environment":Context.environment(),
++		"canonical_workload":canonical,"order":ORDER,"conditions":conditions,"monitor_support":monitor_support,
++		"scope":"stationary yard/main+presenter stopped; common sampler in both conditions; callback-only and total buffer controls distinct",
++		"limitations":"preloaded collector script shared even baseline; allocator/RSS retention and monitor lag retained; no corrected FPS, dynamic FX, sustained six-level or Android conclusion"},"  "))
++	file.close()
++	print("A3_COLLECTOR_OVERHEAD_TEST checks=%d failures=%d windows=%d output=%s" % [checks,failures,conditions.size(),directory])
++	root.get_node("AudioDirector").pause_for_background()
++	quit(0 if failures==0 else 1)
+diff --git a/ambush_loop/scripts/a3_collector_probe_test.gd b/ambush_loop/scripts/a3_collector_probe_test.gd
+index ff229af..0288b84 100644
+--- a/ambush_loop/scripts/a3_collector_probe_test.gd
++++ b/ambush_loop/scripts/a3_collector_probe_test.gd
+@@ -1,8 +1,14 @@
+ extends SceneTree
+ const Guard := preload("res://scripts/test_storage_guard.gd")
+ const Collector := preload("res://scripts/a3_render_metrics.gd")
++const Context := preload("res://scripts/a3_window_context.gd")
+ var checks:=0
+ var failures:=0
++var directory: String
++var chunks: Array=[]
++var captures: Array=[]
++var receipt_sha: String
++var collector: Node
+ 
+ func _init() -> void:
+ 	if not Guard.check():quit(91);return
+@@ -12,36 +18,137 @@ func _check(ok: bool, message: String) -> void:
+ 	checks+=1
+ 	if not ok:failures+=1;print("A3_COLLECTOR_PROBE_FAIL "+message)
+ 
++func _wait_seconds(seconds: float) -> void:
++	var start := Time.get_ticks_usec()
++	while Time.get_ticks_usec()-start<int(seconds*1_000_000):await process_frame
++
++
++func _capture(label: String) -> void:
++	await RenderingServer.frame_post_draw
++	await RenderingServer.frame_post_draw
++	var image := DisplayServer.screen_get_image(root.current_screen).get_region(Rect2i(root.position,root.size))
++	var path := directory+"/"+label+".png"
++	_check(image.get_size()==Vector2i(1280,720) and image.save_png(path)==OK,"original Window crop outside timed segment "+label)
++	captures.append({"path":path,"sha256":FileAccess.get_sha256(path),"scope":"DisplayServer crop outside timing; explicit frozen/API lifecycle control"})
++
++
++func _seal(label: String, require_measured: bool) -> Dictionary:
++	collector.mark(label+"-flush",false)
++	collector.stop()
++	var path := directory+"/"+label
++	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path))
++	var rows: Array=[]
++	for index: int in collector.row_count:rows.append(collector.row_at(index))
++	var included: Array=rows.filter(func(row:Array)->bool:return row[4]==1)
++	_check(rows.size()>0 and rows.all(func(row:Array)->bool:return row.size()==59),"all actual retained post-draw rows have exact59 columns "+label)
++	_check(rows.slice(1).all(func(row:Array)->bool:return row[2]>0 and is_finite(row[30]) and row[30]>=0),"actual monotonic intervals and finite callback usecs "+label)
++	_check(included.size()>=3 if require_measured else true,"actual measured Window rows exist "+label)
++	_check(included.all(func(row:Array)->bool:return row[31]==1 and row[34]==1 and row[2]>0 and row[5]=="" and row[32]==0),"accepted rows ready/presenter-valid/frozen and free of exclusions "+label)
++	_check(collector.save(path,{"scope":"actual Window stationary chunk/lifecycle; no six-level performance acceptance"})==OK,"valid nonoverflow Window chunk seals outside timing "+label)
++	var saved: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(path+"/metadata.json"))
++	_check(saved.chunk_source_and_buffer_valid and not saved.run_incomplete and saved.run_overflow_rows==0 and saved.receipt_stable and saved.warm_import_proof_complete,"complete lifetime/buffer/fixed-loaded-proof receipt "+label)
++	_check(saved.metadata.source_proof_before.receipt_sha256==receipt_sha and saved.source_proof_after.receipt_sha256==receipt_sha and saved.raw_sha256==FileAccess.get_sha256(path+"/raw.csv"),"original receipt and raw hash exact before/after "+label)
++	if rows.is_empty():return {}
++	var result: Dictionary={"label":label,"path":path,"raw_sha256":saved.raw_sha256,"row_count":rows.size(),
++		"included_count":included.size(),"first_frame":rows.front()[0],"last_frame":rows.back()[0],
++		"first_usec":rows.front()[1],"last_usec":rows.back()[1]}
++	chunks.append(result)
++	return result
++
++
+ func _run() -> void:
+ 	if DisplayServer.get_name()=="headless":quit(2);return
+-	root.size=Vector2i(1280,720);root.position=Vector2i.ZERO;root.content_scale_factor=1.0
+-	var collector:=Collector.new();root.add_child(collector) # Hook and source verification BEFORE scene creation.
+-	collector.mark("cold-production-scene-first-load",false,"cold_scene_loading")
++	directory="res://build/asset_review/pr15-runtime/a3-collector-probe-"+OS.get_environment("AMBUSH_TEST_RUN_ID")
++	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory))
++	Context.configure(self)
++	receipt_sha=FileAccess.get_sha256(OS.get_environment("AMBUSH_A3_PROVENANCE_FILE"))
++	var proof := Context.proof(receipt_sha)
++	_check(proof.get("window_control_verified",false),"fixed complete source/engine/warm inventory proof before scene creation")
++	if failures>0:_finish();return
++	collector=Collector.new();root.add_child(collector) # Real hook BEFORE original scene load.
++	collector.mark("cold-original-yard-scene",false,"cold_scene_loading")
++	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
++	await process_frame
++	await process_frame
++	var main: Node=current_scene
++	Context.freeze(main)
++	collector.mark("first-warm-settle",false,"fixture_or_transition")
++	await _wait_seconds(2.0)
++	var original := Context.workload(main)
++	collector.mark("first-actual-frozen-yard",true,"",original)
++	await _wait_seconds(3.0)
++	collector.mark("first-check-outside-timing",false)
++	_check(Context.workload(main)==original,"first real render window leaves exact backend/frame/camera/config unchanged")
++	var first := _seal("first",true)
++	if failures>0:_finish();return
++	await _capture("original-frozen-yard-first")
++	_check(collector.reset_buffer(),"first valid raw seal permits reset")
++	collector.mark("second-reconnect-settle",false,"fixture_or_transition")
++	collector.start();collector.start()
++	_check(RenderingServer.frame_post_draw.get_connections().filter(func(c:Dictionary)->bool:return c.callable==collector._sample).size()==1,"restart stays one actual post-draw subscription")
++	await _wait_seconds(1.0)
++	collector.mark("second-actual-frozen-yard",true,"",original)
++	await _wait_seconds(3.0)
++	collector.mark("second-check-outside-timing",false)
++	_check(Context.workload(main)==original,"restarted actual window preserves original source and rendered frame")
++	var second := _seal("second",true)
++	if failures>0:_finish();return
++	_check(second.first_frame>first.last_frame and second.first_usec>first.last_usec and FileAccess.get_sha256(first.path+"/raw.csv")==first.raw_sha256,"restart advances absolute frames/time and never overwrites first cold raw")
++	_check(collector.reset_buffer(),"second valid raw seal permits lifecycle chunk reset")
++	collector.mark("original-Title-transition",false,"fixture_or_transition")
++	collector.start()
++	var old_host: WeakRef=weakref(main)
++	main._return_to_title()
++	await process_frame
++	await process_frame
++	collector.mark("original-Title-unbound",false,"presenter_unavailable")
++	await _wait_seconds(1.0)
++	var title_rows: Array=[]
++	for index: int in collector.row_count:
++		var row: Array=collector.row_at(index)
++		if row[3]=="original-Title-unbound":title_rows.append(row)
++	_check(not is_instance_valid(old_host.get_ref()) and not title_rows.is_empty() and title_rows.all(func(row:Array)->bool:return row[31]==0 and row[4]==0 and row[9]==-1),"original Title frees host; real callbacks remain unavailable rather than fabricated phase0")
++	collector.mark("Title-screenshot-excluded",false,"screenshot")
++	await _capture("original-Title-unbound")
+ 	root.get_node("GameSettings").pending_level_id="yard"
+-	root.get_node("GameSettings").mark_tutorial_seen("yard")
+ 	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
+ 	await process_frame
+ 	await process_frame
+-	var main:Node=current_scene
+-	main.set_process(false) # Explicit frozen-render instrumentation control.
+-	var before:=var_to_bytes([main.battle_log.events,main.battle_log.playback_snapshots,main.sim.tick,main.operators.map(func(op:OperatorUnit)->Array:return [op.global_position,op.hp,op.ammo,op.grenades,op.mines])])
+-	collector.host=main
+-	collector.mark("actual-SCOUT-frozen-render-probe",true)
+-	var start:=Time.get_ticks_usec()
+-	while Time.get_ticks_usec()-start<3_000_000:await process_frame
+-	collector.mark("flush",false)
+-	collector.stop()
+-	var directory:="res://build/asset_review/pr15-runtime/a3-collector-probe-"+OS.get_environment("AMBUSH_TEST_RUN_ID")
+-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory))
+-	_check(collector.row_count>5,"actual post-draw collector receives original rendered frames")
+-	var rows:Array=[]
+-	for index:int in collector.row_count:rows.append(collector.row_at(index))
+-	_check(rows.all(func(row:Array)->bool:return row.size()==collector.column_count()),"all raw rows carry exact scalar header width")
+-	_check(rows.slice(1).all(func(row:Array)->bool:return row[2]>0 and row[30]>=0),"actual intervals and write-inclusive instrumentation usecs are positive/finite")
+-	_check(var_to_bytes([main.battle_log.events,main.battle_log.playback_snapshots,main.sim.tick,main.operators.map(func(op:OperatorUnit)->Array:return [op.global_position,op.hp,op.ammo,op.grenades,op.mines])])==before,"collector never mutates frozen original battle/inventory/positions/record")
+-	_check(collector.metadata.source_proof_before.get("verified",false),"tracked source/engine/record proof verified before timing")
+-	_check(collector.overflow_rows==0 and collector.symbol_overflow==0,"all original raw rows retained without buffer overflow")
+-	_check(collector.save(directory,{"scope":"cold-first-scene plus three-second explicit frozen SCOUT instrumentation probe; not six-phase/A3 sustained/device acceptance"})==OK,"flush outside timing succeeds")
+-	print("A3_COLLECTOR_PROBE_TEST checks=%d failures=%d rows=%d output=%s" % [checks,failures,collector.row_count,directory])
++	var rebound: Node=current_scene
++	Context.freeze(rebound)
++	collector.mark("rebound-yard-settle",false,"fixture_or_transition")
++	await _wait_seconds(1.0)
++	var rebound_source := Context.workload(rebound)
++	collector.mark("original-yard-rebound",true,"",rebound_source)
++	await _wait_seconds(2.0)
++	collector.mark("rebound-check-outside-timing",false)
++	_check(Context.workload(rebound)==rebound_source,"new actual host/frame/source remains immutable under rebound callback")
++	var rebound_rows: Array=[]
++	for index: int in collector.row_count:
++		var row: Array=collector.row_at(index)
++		if row[3]=="original-yard-rebound" and row[4]==1:rebound_rows.append(row)
++	_check(not rebound_rows.is_empty() and rebound_rows.all(func(row:Array)->bool:return row[7]==rebound.battle_log.attempt_id and row[31]==1 and row[34]==1),"rebound actual callbacks read the new host rather than freed source")
++	var third := _seal("Title-and-rebound",true)
++	if failures>0:_finish();return
++	_check(third.first_frame>second.last_frame and third.first_usec>second.last_usec and FileAccess.get_sha256(first.path+"/raw.csv")==first.raw_sha256,"lifecycle third raw advances and original first bytes remain exact")
++	await _capture("original-frozen-yard-rebound")
++	var collector_id: int=collector.get_instance_id()
++	var old_collector: WeakRef=weakref(collector)
++	collector.start();collector.queue_free()
++	await process_frame
++	await process_frame
++	_check(not is_instance_valid(old_collector.get_ref()) and RenderingServer.frame_post_draw.get_connections().all(func(c:Dictionary)->bool:return c.callable.get_object_id()!=collector_id),"freed collector disconnects actual source without stale callback")
++	_check(Context.proof(receipt_sha).get("window_control_verified",false),"final source/cache/engine/receipt remain pinned after lifecycle")
++	_finish()
++
++
++func _finish() -> void:
++	if is_instance_valid(collector):collector.stop()
++	var file := FileAccess.open(directory+"/report.json",FileAccess.WRITE)
++	file.store_string(JSON.stringify({"format":1,"source_sha":OS.get_environment("AMBUSH_TEST_SOURCE_SHA"),
++		"receipt_sha256":receipt_sha,"checks":checks,"failures":failures,"chunks":chunks,"captures":captures,
++		"environment":Context.environment(),"scope":"actual stationary Window positive seal/reset/restart/Title/rebind control only; not six-level A3/device/normal13"},"  "))
++	file.close()
++	print("A3_COLLECTOR_PROBE_TEST checks=%d failures=%d output=%s" % [checks,failures,directory])
+ 	root.get_node("AudioDirector").pause_for_background()
+ 	quit(0 if failures==0 else 1)
+diff --git a/ambush_loop/scripts/a3_window_context.gd b/ambush_loop/scripts/a3_window_context.gd
+new file mode 100644
+index 0000000..20e3525
+--- /dev/null
++++ b/ambush_loop/scripts/a3_window_context.gd
+@@ -0,0 +1,84 @@
++extends RefCounted
++## Test-only shared frozen workload and provenance receipts; call outside timing.
++const Provenance := preload("res://scripts/a3_provenance.gd")
++
++
++static func configure(tree: SceneTree) -> void:
++	tree.root.size=Vector2i(1280,720)
++	tree.root.position=Vector2i.ZERO
++	tree.root.content_scale_factor=1.0
++	Engine.max_fps=0
++	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # Record actual mode even if driver refuses.
++	var settings: Node = tree.root.get_node("GameSettings")
++	settings.set_quality_tier("standard")
++	settings.pending_level_id="yard"
++	settings.mark_tutorial_seen("yard")
++
++
++static func freeze(main: Node) -> void:
++	main.set_process(false)
++	var view: Node3D = main.presentation_3d
++	view.rig.reset_view()
++	main._update_hud()
++	view.refresh()
++	view.set_process(false) # Both controls use this same explicit stationary render workload.
++
++
++static func backend_bytes(main: Node) -> PackedByteArray:
++	var log: BattleLog = main.battle_log
++	return var_to_bytes([main.phase,main.level_id,main.run_id,main._presentation_suspended,
++		main._pose_command_clock_s,main._night_timer,main.sim.tick,main.sim.paused,main.sim.speed,main.sim._accum,
++		log.attempt_id,log.wave_id,log.wave_offset,log.events,log.snapshots,log.playback_snapshots,
++		log.terminal_tick,log.terminal_reason,log.playback_schema,log.playback_terminal_tick,log.current_playback_tick(),
++		main.raid.wave_index,main.raid.waves_cleared,main.raid.awaiting_extract,
++		main.operators.map(func(op:OperatorUnit)->Array:return [op.op_id,op.global_position,op.hp,op.ammo,
++			op.grenades,op.mines,op.weapon_id,op.ammo_pool,op.pack.slots,op.stance,op.sprinting,op.move_path,op._path_i]),
++		main.enemies.map(func(enemy:EnemyRunner)->Array:return [enemy.global_position,enemy.hp,enemy.alive,enemy.active])])
++
++
++static func digest(bytes: PackedByteArray) -> String:
++	var hashing := HashingContext.new()
++	hashing.start(HashingContext.HASH_SHA256)
++	hashing.update(bytes)
++	return hashing.finish().hex_encode()
++
++
++static func workload(main: Node) -> Dictionary:
++	var view: Node3D = main.presentation_3d
++	return {"backend_sha256":digest(backend_bytes(main)),"presenter_frame_sha256":digest(var_to_bytes(view.frame)),
++		"level_id":main.level_id,"attempt_id":main.battle_log.attempt_id,"phase":main.phase,
++		"main_auto_process":main.is_processing(),"presenter_auto_process":view.is_processing(),
++		"tree_paused":main.get_tree().paused,"policy":main.get_tree().root.get_node("GameSettings").quality_tier,
++		"window_width":main.get_window().size.x,"window_height":main.get_window().size.y,
++		"content_scale":main.get_window().content_scale_factor,"max_fps":Engine.max_fps,
++		"vsync":DisplayServer.window_get_vsync_mode(),"focus":view.rig.focus,
++		"yaw_deg":view.rig.yaw_deg,"pitch_deg":view.rig.pitch_deg,"view_size":view.rig.view_size}
++
++
++static func proof(receipt_sha: String) -> Dictionary:
++	var result := Provenance.verify(OS.get_environment("AMBUSH_A3_PROVENANCE_FILE"),OS.get_environment("AMBUSH_TEST_SOURCE_SHA"))
++	result["window_control_verified"]=result.get("verified",false) and result.get("complete_source_tree_verified",false) and result.get("imported_cache_files_verified",0)>0 and result.get("receipt_sha256")==receipt_sha
++	return result
++
++
++static func _visible_limit(path: String) -> String:
++	if not FileAccess.file_exists(path):return "unavailable"
++	var file := FileAccess.open(path,FileAccess.READ)
++	if file==null:return "unavailable"
++	var lines := PackedStringArray()
++	while not file.eof_reached():lines.append(file.get_line())
++	file.close()
++	return "\n".join(lines).strip_edges()
++
++
++static func environment() -> Dictionary:
++	return {"engine":Engine.get_version_info(),"pid":OS.get_process_id(),"os":OS.get_name(),"os_version":OS.get_version(),
++		"cpu":OS.get_processor_name(),"cpu_count":OS.get_processor_count(),"display":DisplayServer.get_name(),
++		"adapter":RenderingServer.get_video_adapter_name(),"vendor":RenderingServer.get_video_adapter_vendor(),
++		"api_version":RenderingServer.get_video_adapter_api_version(),"method":RenderingServer.get_current_rendering_method(),
++		"driver":RenderingServer.get_current_rendering_driver_name(),"audio_driver":AudioServer.get_driver_name(),
++		"debug_build":OS.is_debug_build(),"visible_cpu_max":_visible_limit("/sys/fs/cgroup/cpu.max"),
++		"visible_memory_max":_visible_limit("/sys/fs/cgroup/memory.max"),
++		"visible_cpu_effective":_visible_limit("/sys/fs/cgroup/cpuset.cpus.effective"),
++		"cgroup_scope":"visible mount-root limits; not proof of exclusive host CPU",
++		"scope":"stationary original yard with main AND presenter automatic process stopped; not normal SCOUT/dynamic FX/mobile FPS"}
+diff --git a/ambush_loop/scripts/run_isolated_test.ps1 b/ambush_loop/scripts/run_isolated_test.ps1
+index 701162f..a6a641f 100644
+--- a/ambush_loop/scripts/run_isolated_test.ps1
++++ b/ambush_loop/scripts/run_isolated_test.ps1
+@@ -5,7 +5,7 @@ param(
+         'first_visit_journey_test.gd', 'title_focus_keyboard_test.gd', 'title_menu_viewport_test.gd',
+         'replay_autoplay_test.gd', 'replay_event_text_source_test.gd', 'cover_command_test.gd',
+         'escape_intel_source_test.gd', 'static_teaching_context_test.gd', 'loot_event_text_test.gd', 'live_wave_timeline_test.gd', 'current_wave_hint_test.gd', 'campaign_result_copy_test.gd', 'result_highlight_test.gd',
+-        'tool_fx_raw_envelope_test.gd', 'a3_collector_contract_test.gd', 'a3_collector_probe_test.gd', 'movement_dust_source_boundary_test.gd', 'movement_dust_test.gd', 'tool_fx_visible_test.gd', 'tool_fx_mine_reference_test.gd', 'tool_fx_pool_test.gd', 'tool_fx_source_boundary_test.gd', 'tool_fx_source_test.gd', 'grenade_flight_height_test.gd', 'shot_fx_shooter_binding_test.gd', 'shot_fx_visible_test.gd', 'shot_fx_pool_test.gd', 'shot_fx_frame_test.gd', 'escape_context_boundary_test.gd', 'shot_fx_boundary_test.gd', 'shot_fx_source_test.gd', 'replay_arrow_input_test.gd', 'smoke_contract_test.gd',
++        'tool_fx_raw_envelope_test.gd', 'a3_collector_contract_test.gd', 'a3_collector_probe_test.gd', 'a3_collector_overhead_test.gd', 'movement_dust_source_boundary_test.gd', 'movement_dust_test.gd', 'tool_fx_visible_test.gd', 'tool_fx_mine_reference_test.gd', 'tool_fx_pool_test.gd', 'tool_fx_source_boundary_test.gd', 'tool_fx_source_test.gd', 'grenade_flight_height_test.gd', 'shot_fx_shooter_binding_test.gd', 'shot_fx_visible_test.gd', 'shot_fx_pool_test.gd', 'shot_fx_frame_test.gd', 'escape_context_boundary_test.gd', 'shot_fx_boundary_test.gd', 'shot_fx_source_test.gd', 'replay_arrow_input_test.gd', 'smoke_contract_test.gd',
+         'replay_timeline_test.gd',
+         'equipment_freeze_test.gd',
+         'phase_tools_test.gd',
+@@ -110,7 +110,7 @@ try {
+     else {
+         Write-Output "TEST_ENTRY=$Entry"
+         $engineFlags = if ($Rendered) { @('--rendering-method', 'gl_compatibility') } else { @('--headless') }
+-        if ($Entry -like '*capture.gd' -or $Entry -in @('tool_fx_raw_envelope_test.gd', 'a3_collector_contract_test.gd', 'a3_collector_probe_test.gd', 'movement_dust_source_boundary_test.gd', 'movement_dust_test.gd', 'tool_fx_visible_test.gd', 'tool_fx_mine_reference_test.gd', 'tool_fx_pool_test.gd', 'tool_fx_source_boundary_test.gd', 'tool_fx_source_test.gd', 'grenade_flight_height_test.gd', 'shot_fx_shooter_binding_test.gd', 'shot_fx_visible_test.gd', 'shot_fx_pool_test.gd', 'shot_fx_frame_test.gd', 'escape_context_boundary_test.gd', 'escape_intel_source_test.gd')) { $engineFlags += @('--audio-driver', 'Dummy') }
++        if ($Entry -like '*capture.gd' -or $Entry -in @('tool_fx_raw_envelope_test.gd', 'a3_collector_contract_test.gd', 'a3_collector_probe_test.gd', 'a3_collector_overhead_test.gd', 'movement_dust_source_boundary_test.gd', 'movement_dust_test.gd', 'tool_fx_visible_test.gd', 'tool_fx_mine_reference_test.gd', 'tool_fx_pool_test.gd', 'tool_fx_source_boundary_test.gd', 'tool_fx_source_test.gd', 'grenade_flight_height_test.gd', 'shot_fx_shooter_binding_test.gd', 'shot_fx_visible_test.gd', 'shot_fx_pool_test.gd', 'shot_fx_frame_test.gd', 'escape_context_boundary_test.gd', 'escape_intel_source_test.gd')) { $engineFlags += @('--audio-driver', 'Dummy') }
+         $launchRoot = $projectRoot
+         if ($Entry -eq 'asset_pack_test.gd') {
+             if (-not (Test-Path -LiteralPath $TestPack -PathType Leaf)) {
+diff --git a/ambush_loop/scripts/run_isolated_test.sh b/ambush_loop/scripts/run_isolated_test.sh
+index 7b185f2..fbcf80e 100644
+--- a/ambush_loop/scripts/run_isolated_test.sh
++++ b/ambush_loop/scripts/run_isolated_test.sh
+@@ -5,7 +5,7 @@ godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
+ entry="${2:-smoke_test.gd}"
+ render_mode="${3:---headless}"
+ case "$entry" in
+-  tool_fx_raw_envelope_test.gd|a3_collector_contract_test.gd|a3_collector_probe_test.gd|movement_dust_source_boundary_test.gd|movement_dust_test.gd|tool_fx_visible_test.gd|tool_fx_mine_reference_test.gd|tool_fx_pool_test.gd|tool_fx_source_boundary_test.gd|tool_fx_source_test.gd|grenade_flight_height_test.gd|shot_fx_shooter_binding_test.gd|shot_fx_visible_test.gd|shot_fx_pool_test.gd|shot_fx_frame_test.gd|escape_context_boundary_test.gd|shot_fx_boundary_test.gd|shot_fx_source_test.gd|replay_arrow_input_test.gd|smoke_contract_test.gd|escape_intel_source_test.gd|static_teaching_context_test.gd|loot_event_text_test.gd|live_wave_timeline_test.gd|current_wave_hint_test.gd|campaign_result_copy_test.gd|result_highlight_test.gd|cover_command_test.gd|replay_event_text_source_test.gd|first_visit_journey_test.gd|title_focus_keyboard_test.gd|title_menu_viewport_test.gd|replay_autoplay_test.gd) ;;
++  tool_fx_raw_envelope_test.gd|a3_collector_contract_test.gd|a3_collector_probe_test.gd|a3_collector_overhead_test.gd|movement_dust_source_boundary_test.gd|movement_dust_test.gd|tool_fx_visible_test.gd|tool_fx_mine_reference_test.gd|tool_fx_pool_test.gd|tool_fx_source_boundary_test.gd|tool_fx_source_test.gd|grenade_flight_height_test.gd|shot_fx_shooter_binding_test.gd|shot_fx_visible_test.gd|shot_fx_pool_test.gd|shot_fx_frame_test.gd|escape_context_boundary_test.gd|shot_fx_boundary_test.gd|shot_fx_source_test.gd|replay_arrow_input_test.gd|smoke_contract_test.gd|escape_intel_source_test.gd|static_teaching_context_test.gd|loot_event_text_test.gd|live_wave_timeline_test.gd|current_wave_hint_test.gd|campaign_result_copy_test.gd|result_highlight_test.gd|cover_command_test.gd|replay_event_text_source_test.gd|first_visit_journey_test.gd|title_focus_keyboard_test.gd|title_menu_viewport_test.gd|replay_autoplay_test.gd) ;;
+   full_command_record_replay_test.gd|replay_timeline_test.gd|equipment_freeze_test.gd|presentation_lifecycle_test.gd|campaign_replay_test.gd|visual_snapshot_test.gd|asset_library_test.gd|asset_pack_test.gd|phase_tools_test.gd|actor_visual_test.gd|c2_history_hint_test.gd|actor_battle_test.gd|audio_runtime_test.gd|firearm_runtime_test.gd|environment_assets_test.gd|environment_battle_test.gd|command_pose_clock_test.gd|command_record_replay_test.gd|utility_runtime_test.gd) ;;
+   editor_import|corpse_pairing_boundary_test.gd|result_viewport_test.gd|radio_credits_viewport_test.gd|viewport_hud_test.gd|corpse_pose_quality_test.gd|presentation_quality_test.gd|corpse_contact_test.gd|corpse_runtime_test.gd|replay_fx_lifecycle_test.gd|asset_review_capture.gd|presentation_contract_test.gd|presentation_interaction_test.gd|camera_input_test.gd|presentation_capture.gd|presentation_preview.gd) ;;
+   smoke_test.gd|pathfinder_test.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
+@@ -16,7 +16,7 @@ case "$render_mode" in
+   --render) engine_flags=(--rendering-method gl_compatibility) ;;
+   *) printf 'Unsupported rendering mode: %s\n' "$render_mode" >&2; exit 2 ;;
+ esac
+-if [[ "$entry" == *capture.gd || "$entry" == tool_fx_raw_envelope_test.gd || "$entry" == a3_collector_contract_test.gd || "$entry" == a3_collector_probe_test.gd || "$entry" == movement_dust_source_boundary_test.gd || "$entry" == movement_dust_test.gd || "$entry" == tool_fx_visible_test.gd || "$entry" == tool_fx_mine_reference_test.gd || "$entry" == tool_fx_pool_test.gd || "$entry" == tool_fx_source_boundary_test.gd || "$entry" == tool_fx_source_test.gd || "$entry" == grenade_flight_height_test.gd || "$entry" == shot_fx_shooter_binding_test.gd || "$entry" == shot_fx_visible_test.gd || "$entry" == shot_fx_pool_test.gd || "$entry" == shot_fx_frame_test.gd || "$entry" == escape_context_boundary_test.gd || "$entry" == escape_intel_source_test.gd ]]; then
++if [[ "$entry" == *capture.gd || "$entry" == tool_fx_raw_envelope_test.gd || "$entry" == a3_collector_contract_test.gd || "$entry" == a3_collector_probe_test.gd || "$entry" == a3_collector_overhead_test.gd || "$entry" == movement_dust_source_boundary_test.gd || "$entry" == movement_dust_test.gd || "$entry" == tool_fx_visible_test.gd || "$entry" == tool_fx_mine_reference_test.gd || "$entry" == tool_fx_pool_test.gd || "$entry" == tool_fx_source_boundary_test.gd || "$entry" == tool_fx_source_test.gd || "$entry" == grenade_flight_height_test.gd || "$entry" == shot_fx_shooter_binding_test.gd || "$entry" == shot_fx_visible_test.gd || "$entry" == shot_fx_pool_test.gd || "$entry" == shot_fx_frame_test.gd || "$entry" == escape_context_boundary_test.gd || "$entry" == escape_intel_source_test.gd ]]; then
+   engine_flags+=(--audio-driver Dummy)
+ fi
+ 
+diff --git a/ambush_loop/scripts/summarize_a3_window_controls.py b/ambush_loop/scripts/summarize_a3_window_controls.py
+new file mode 100644
+index 0000000..652f582
+--- /dev/null
++++ b/ambush_loop/scripts/summarize_a3_window_controls.py
+@@ -0,0 +1,173 @@
++#!/usr/bin/env python3
++"""Validate sealed Window controls and report raw cadence/block spread outside timing."""
++import argparse
++import csv
++import hashlib
++import json
++import math
++import pathlib
++import re
++import statistics
++
++CADENCE_COLUMNS = ["engine_frame", "sample_seq", "ticks_usec", "interval_usec", "included",
++                   "exclusion_code", "render_counters_ready", "draw_calls", "primitives",
++                   "render_objects", "static_bytes", "object_count", "node_count",
++                   "resource_count", "process_seconds", "sampler_usec"]
++ORDER = [False, True, True, False, True, False, False, True]
++
++
++def digest(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def distribution(values):
++    values = sorted(values)
++    if not values:
++        raise ValueError("No accepted raw samples")
++    def percentile(q):
++        rank = (len(values) - 1) * q
++        low, high = math.floor(rank), math.ceil(rank)
++        return values[low] + (values[high] - values[low]) * (rank - low)
++    return {"n": len(values), "min": values[0], "median": statistics.median(values),
++            "p95": percentile(.95), "p99": percentile(.99), "max": values[-1]}
++
++
++def analyze(args):
++    report_path = pathlib.Path(args.report).resolve(strict=True)
++    root = report_path.parent
++    project = pathlib.Path(args.project).resolve(strict=True)
++    report = json.loads(report_path.read_text())
++    log = pathlib.Path(args.log).read_text()
++    if int(pathlib.Path(args.exit_file).read_text()) != 0 or re.search(r"^(?:ERROR:|SCRIPT ERROR:)", log, re.M):
++        raise ValueError("Actual engine exit/E/S gate failed")
++    if not re.search(r"A3_COLLECTOR_OVERHEAD_TEST checks=\d+ failures=0 windows=16", log):
++        raise ValueError("Missing complete actual suite marker")
++    if not report.get("complete") or report["failures"] or len(report["conditions"]) != 16:
++        raise ValueError("Incomplete paired run")
++    receipt_sha = report["receipt_sha256"]
++    for proof in [report["source_proof_before"], report["source_proof_after"]]:
++        if not proof.get("window_control_verified") or proof.get("receipt_sha256") != receipt_sha:
++            raise ValueError("Fixed complete loaded-source provenance gate failed")
++
++    def artifact(raw):
++        path = (project / raw.removeprefix("res://")) if raw.startswith("res://") else pathlib.Path(raw)
++        path = path.resolve(strict=True)
++        if not path.is_relative_to(root):
++            raise ValueError("Artifact escaped this immutable run root")
++        return path
++
++    families = {}
++    all_receipts = []
++    for family in ["full_buffer", "resident_callback"]:
++        blocks = sorted((c for c in report["conditions"] if c["family"] == family), key=lambda c: c["index"])
++        if len(blocks) != 8 or [c["attached"] for c in blocks] != ORDER:
++            raise ValueError("Missing ABBA/BAAB order")
++        block_results = []
++        collector_usec = []
++        on_intervals, off_intervals = [], []
++        on_sampler, off_sampler = [], []
++        counter_signatures = []
++        for block in blocks:
++            if not block["valid"] or block["workload_before"] != report["canonical_workload"] or block["workload_after"] != report["canonical_workload"]:
++                raise ValueError("Stationary source/camera/config mismatch")
++            if block["receipt_sha256"] != receipt_sha:
++                raise ValueError("Block receipt changed")
++            raw = artifact(block["path"] + "/cadence.csv")
++            metadata_path = artifact(block["path"] + "/cadence-metadata.json")
++            metadata = json.loads(metadata_path.read_text())
++            if digest(raw) != block["cadence_sha256"] or digest(raw) != metadata["raw_sha256"] or metadata["run_incomplete"] or metadata["overflow_rows"]:
++                raise ValueError("Cadence raw hash/completeness failed")
++            with raw.open() as stream:
++                reader = csv.DictReader(stream)
++                if reader.fieldnames != CADENCE_COLUMNS:
++                    raise ValueError("Cadence protocol header differs")
++                rows = [{k: float(v) for k, v in row.items()} for row in reader]
++            if len(rows) != metadata["rows"] or not all(math.isfinite(v) for row in rows for v in row.values()):
++                raise ValueError("Raw width/count/finite gate failed")
++            included = [r for r in rows if r["included"] == 1]
++            if len(included) < 3 or len(included) != block["included_rows"]:
++                raise ValueError("Insufficient accepted samples")
++            if not all(r["render_counters_ready"] == 1 and r["exclusion_code"] == 0 and r["interval_usec"] > 0 for r in included):
++                raise ValueError("Accepted unready/transition cadence")
++            if not all(right["engine_frame"] > left["engine_frame"] and right["ticks_usec"] > left["ticks_usec"] for left, right in zip(rows, rows[1:])):
++                raise ValueError("Nonmonotonic actual rendered frames")
++            counters = {name: distribution([r[name] for r in included]) for name in ["draw_calls", "primitives", "render_objects"]}
++            if any(stats["min"] <= 0 for stats in counters.values()):
++                raise ValueError("Rendered scene counters require positive actual calibration")
++            counter_signatures.append(tuple(stats["median"] for stats in counters.values()))
++            intervals = [r["interval_usec"] for r in included]
++            sampler_times = [r["sampler_usec"] for r in included]
++            (on_intervals if block["attached"] else off_intervals).extend(intervals)
++            (on_sampler if block["attached"] else off_sampler).extend(sampler_times)
++            if block["attached"]:
++                collector_raw = artifact(block["collector"]["path"] + "/raw.csv")
++                collector_meta_path = artifact(block["collector"]["path"] + "/metadata.json")
++                collector_meta = json.loads(collector_meta_path.read_text())
++                if digest(collector_raw) != block["collector"]["raw_sha256"] or digest(collector_raw) != collector_meta["raw_sha256"]:
++                    raise ValueError("Collector raw SHA mismatch")
++                if not collector_meta["chunk_source_and_buffer_valid"] or collector_meta["run_incomplete"] or not collector_meta["receipt_stable"] or not collector_meta["warm_import_proof_complete"]:
++                    raise ValueError("Collector chunk rejected")
++                with collector_raw.open() as stream:
++                    reader = csv.DictReader(stream)
++                    if len(reader.fieldnames) != 59:
++                        raise ValueError("Collector raw width differs")
++                    collector_rows = list(reader)
++                measured = [r for r in collector_rows if float(r["measured"]) == 1]
++                if len(measured) != block["collector"]["measured_rows"] or not all(float(r["render_counters_ready"]) == 1 and float(r["presenter_valid"]) == 1 and r["exclusion"] == "" for r in measured):
++                    raise ValueError("Collector measured-row readiness gate failed")
++                collector_usec.extend(float(r["collector_usec"]) for r in measured)
++                all_receipts.extend([{"path": str(collector_raw), "sha256": digest(collector_raw)}, {"path": str(collector_meta_path), "sha256": digest(collector_meta_path)}])
++            expected_payload = 32768 * 59 * 8 if (family == "resident_callback" or block["attached"]) else 0
++            if block["collector_payload_bytes"] != expected_payload or block["common_sampler_payload_bytes"] != 32768 * 16 * 8:
++                raise ValueError("Matched resident-buffer configuration differs")
++            block_results.append({"index": block["index"], "attached": block["attached"], "raw_rows": len(rows),
++                                  "interval_usec": distribution(intervals), "sampler_usec": distribution(sampler_times),
++                                  "counters": counters, "rss_start_bytes": block["rss_start_bytes"],
++                                  "rss_end_bytes": block["rss_end_bytes"], "static_start_bytes": block["static_start_bytes"],
++                                  "actual_wall_seconds": block["actual_wall_seconds"]})
++            all_receipts.extend([{"path": str(raw), "sha256": digest(raw)}, {"path": str(metadata_path), "sha256": digest(metadata_path)}])
++        if len(set(counter_signatures)) != 1:
++            raise ValueError("Paired median draw/primitives/objects differ; no matched-load inference")
++        pairs = []
++        for low in range(0, 8, 2):
++            left, right = block_results[low:low + 2]
++            on, off = (left, right) if left["attached"] else (right, left)
++            delta = on["interval_usec"]["median"] - off["interval_usec"]["median"]
++            pairs.append({"on_index": on["index"], "off_index": off["index"],
++                          "median_interval_delta_usec": delta,
++                          "delta_percent": 100 * delta / off["interval_usec"]["median"],
++                          "rss_start_delta_bytes": on["rss_start_bytes"] - off["rss_start_bytes"]})
++        families[family] = {"baseline_interval_usec": distribution(off_intervals),
++                            "attached_interval_usec": distribution(on_intervals),
++                            "baseline_sampler_usec": distribution(off_sampler),
++                            "attached_sampler_usec": distribution(on_sampler),
++                            "collector_callback_usec": distribution(collector_usec),
++                            "blocks": block_results, "adjacent_on_off_pairs": pairs,
++                            "pair_delta_usec_spread": distribution([p["median_interval_delta_usec"] for p in pairs]),
++                            "scope": "resident callback cost" if family == "resident_callback" else "buffer allocation plus callback; collector script preloaded in baseline"}
++    return {"format": 1, "source_sha": report["source_sha"], "receipt_sha256": receipt_sha,
++            "report_sha256": digest(report_path), "environment": report["environment"], "families": families,
++            "artifacts": all_receipts,
++            "quantiles": "linear interpolation at (n-1)q; adjacent block deltas preserve order spread, not independent-frame confidence intervals",
++            "limitations": "stationary short warm controls only; monitor lag and allocator/RSS retention remain; sampler paid in both; never subtract callback usecs from intervals or infer Android FPS"}
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--project", required=True)
++    parser.add_argument("--report", required=True)
++    parser.add_argument("--log", required=True)
++    parser.add_argument("--exit-file", required=True)
++    parser.add_argument("--output", required=True)
++    args = parser.parse_args()
++    result = analyze(args)
++    output = pathlib.Path(args.output)
++    output.parent.mkdir(parents=True, exist_ok=True)
++    with output.open("x") as stream:
++        json.dump(result, stream, indent=2)
++        stream.write("\n")
++    print(json.dumps({"source_sha": result["source_sha"], "families": list(result["families"]), "output": str(output), "matched_load_validated": True}))
++
++
++if __name__ == "__main__":
++    main()

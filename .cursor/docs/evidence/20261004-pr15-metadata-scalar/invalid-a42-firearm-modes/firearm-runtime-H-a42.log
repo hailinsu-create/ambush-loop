@@ -1,0 +1,10 @@
+TEST_RUN_ID=958cfda550374004abc9aa63e2d88c2b
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/958cfda550374004abc9aa63e2d88c2b/data
+TEST_ENTRY=firearm_runtime_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/958cfda550374004abc9aa63e2d88c2b/data/godot/app_userdata/Ambush Loop run_id=958cfda550374004abc9aa63e2d88c2b
+ERROR: FIREARM_RUNTIME requires actual rendered bone/marker and battlefield capture checks
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/firearm_runtime_test.gd:221)

@@ -1,0 +1,1208 @@
+{
+  "utc": "2026-10-05T20:38:09.695303+00:00",
+  "source": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "state": {
+    "attempt": "66c9939c44165e01cf7cf13de3d75028",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          240,
+          368
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          496,
+          240
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          784,
+          240
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          816,
+          432
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          400,
+          496
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          912,
+          528
+        ]
+      }
+    ],
+    "credits_scroll": {
+      "max": 8124,
+      "page": 0,
+      "vertical": 0
+    },
+    "engine_frames": 164,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "fixture_ready": false,
+    "focus_actor": -1,
+    "focus_type": "",
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 12,
+    "input_tail": {
+      "attempt": "66c9939c44165e01cf7cf13de3d75028",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 158,
+      "kind": "mouse",
+      "phase": 0,
+      "pos": [
+        830,
+        465
+      ],
+      "presents": 158,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 50929500
+    },
+    "level": "yard",
+    "log": {
+      "events": 0,
+      "playback_frames": 76,
+      "playback_terminal": -1,
+      "playback_tick": 599,
+      "snapshots": 0,
+      "terminal": -1,
+      "terminal_reason": ""
+    },
+    "loot": [],
+    "mines_count": 0,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "空格拉警报。本波敌人按作者路线冲逃逸口，队员按射界自动开火；有手雷则在锥面/雷点自动丢（友伤圈内不丢，冷却 3.6 秒）。清波后进入打扫：走近尸体搜刮，空格拉下一波。最后一波打扫后撤离才算封锁。逃逸或全灭失败，装备重置，情报留下。陷阱路线：橙线侧翼第二波从东廊绕出。虚线箭头标第二层。",
+      "tutorial_page": 2
+    },
+    "observer_usec": 488500,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 0,
+        "family": "knife",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [],
+        "pool": {},
+        "pos": [
+          208,
+          528
+        ],
+        "role": 0,
+        "slot": -1,
+        "start_ammo": 0,
+        "weapon": "knife"
+      },
+      {
+        "alive": true,
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 90,
+        "family": "knife",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [],
+        "pool": {},
+        "pos": [
+          240,
+          560
+        ],
+        "role": 1,
+        "slot": -1,
+        "start_ammo": 0,
+        "weapon": "knife"
+      },
+      {
+        "alive": true,
+        "ammo": 0,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180,
+        "family": "knife",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [],
+        "pool": {},
+        "pos": [
+          272,
+          560
+        ],
+        "role": 2,
+        "slot": -1,
+        "start_ammo": 0,
+        "weapon": "knife"
+      }
+    ],
+    "phase": 0,
+    "presents": 164,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2,
+      "tick": 0
+    },
+    "run_id": 1,
+    "scale": 1,
+    "scene": "res://scenes/main.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "selected": 1,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "915e9b2315ff5281f068446ffbfae555f99939fd4a7e78d2a636b4b1a73c09dc",
+          "text": "[progress]\n\nlevel_id=\"yard\"\nlevel_index=0\ncomplete=false\nloop_index=1\n\n[audio]\n\nmuted=false\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "b3d5532b4fe14c2a7c1db1351b4138367a2a6c4357873b473a129899571371ea",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": false,
+          "id": "yard",
+          "loops": 0,
+          "perfect": false,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "warehouse",
+          "loops": 0,
+          "perfect": false,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "yard",
+      "persistence_error": "",
+      "persistence_status": "已保存到此浏览器",
+      "quality": "standard",
+      "seen": {
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "sim": {
+      "accum": 0,
+      "paused": false,
+      "speed": 1,
+      "tick": 0
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "rifle",
+        "id": 170943057320,
+        "kind": "kar98k",
+        "pos": [
+          208,
+          400
+        ]
+      },
+      {
+        "collected": false,
+        "family": "mg",
+        "id": 171127606858,
+        "kind": "mg42",
+        "pos": [
+          848,
+          400
+        ]
+      },
+      {
+        "collected": false,
+        "family": "scout",
+        "id": 171312156244,
+        "kind": "kar98k_zf",
+        "pos": [
+          944,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "grenade",
+        "id": 171496705630,
+        "kind": "grenade",
+        "pos": [
+          368,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "mine",
+        "id": 171647700583,
+        "kind": "mine",
+        "pos": [
+          336,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "ammo",
+        "id": 171798695536,
+        "kind": "ammo",
+        "pos": [
+          752,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "pistol",
+        "id": 171949690489,
+        "kind": "m1911",
+        "pos": [
+          272,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 172134239875,
+        "kind": "thompson",
+        "pos": [
+          560,
+          400
+        ]
+      },
+      {
+        "collected": false,
+        "family": "pistol",
+        "id": 172318789261,
+        "kind": "luger",
+        "pos": [
+          688,
+          560
+        ]
+      }
+    ],
+    "status": "点选队员 · 点地走 · C匍匐 · Q技能 · 岗哨有黄锥",
+    "ticks_usec": 53577500,
+    "tool": 0,
+    "view": {
+      "attempt": "66c9939c44165e01cf7cf13de3d75028",
+      "gesture": {
+        "contacts": 0,
+        "middle_down": false,
+        "pending_id": -1,
+        "suppressed": 0,
+        "ui_contacts": 0
+      },
+      "level": "yard",
+      "pitch": 55,
+      "recorded_phase": 0,
+      "roots": 4,
+      "seq": -1,
+      "tick": 599,
+      "wave": 0,
+      "yaw": 35
+    },
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "wave": 0,
+    "wave_count": 2,
+    "waves_cleared": 0,
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "full_fingerprints": {
+    "domain": {
+      "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+      "decoys": 0,
+      "door_locked": false,
+      "enemies": [],
+      "grenades": 0,
+      "loot": 0,
+      "mines": 0,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 0,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            208,
+            528
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 90,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            240,
+            560
+          ],
+          "role": 1,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            272,
+            560
+          ],
+          "role": 2,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        }
+      ],
+      "raid_wave": 0,
+      "selected": 1,
+      "sim": [
+        0,
+        1,
+        false,
+        0,
+        1
+      ],
+      "stashes": 9,
+      "waves_cleared": 0
+    },
+    "frame_checks": {
+      "status": "not replay"
+    },
+    "full_snapshot": {
+      "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+      "animation_schema": 3,
+      "attempt_number": 1,
+      "barrels": [],
+      "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+      "corpse_contact_schema": 1,
+      "corpse_pairing_schema": 2,
+      "corpse_schema": 1,
+      "corpses": [],
+      "covers": [
+        {
+          "active": true,
+          "facing": 0,
+          "id": "covers:0",
+          "pos": [
+            240,
+            368
+          ]
+        },
+        {
+          "active": true,
+          "facing": 90,
+          "id": "covers:1",
+          "pos": [
+            496,
+            240
+          ]
+        },
+        {
+          "active": true,
+          "facing": 180,
+          "id": "covers:2",
+          "pos": [
+            784,
+            240
+          ]
+        },
+        {
+          "active": true,
+          "facing": 90,
+          "id": "covers:3",
+          "pos": [
+            816,
+            432
+          ]
+        },
+        {
+          "active": true,
+          "facing": 0,
+          "id": "covers:4",
+          "pos": [
+            400,
+            496
+          ]
+        },
+        {
+          "active": true,
+          "facing": 180,
+          "id": "covers:5",
+          "pos": [
+            912,
+            528
+          ]
+        }
+      ],
+      "decoys": [],
+      "door_locked": false,
+      "door_pos": [
+        0,
+        0
+      ],
+      "enemies": [],
+      "environment_cutaway_schema": 1,
+      "environment_layout_revision": "six_level_grid_assembly_1",
+      "environment_objects": [],
+      "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+      "environment_schema": 1,
+      "escape": [
+        1008,
+        624
+      ],
+      "event_pose_clock_s": 10.2574666666667,
+      "event_pose_schema": 1,
+      "grenades": [],
+      "has_door": false,
+      "hud_schema": 1,
+      "level_id": "yard",
+      "level_title": "第1关 · 院子：交叉封锁",
+      "loot": [],
+      "mines": [],
+      "movement_fx_schema": 1,
+      "ops": [
+        {
+          "action": "idle",
+          "active": true,
+          "alive": true,
+          "ammo": 0,
+          "ammo_pool": {},
+          "auto_grenade": true,
+          "cone": "[(0.0, 0.0), (27.5776, -23.14035), (29.74459, -20.27952), (31.61598, -17.21714), (33.17314, -13.98365), (34.40062, -10.61119), (35.28621, -7.133261), (35.82111, -3.584442), (36.0, 0.0), (35.82111, 3.584442), (35.28621, 7.133261), (34.40062, 10.61119), (33.17314, 13.98365), (31.61598, 17.21714), (29.74459, 20.27952), (27.5776, 23.14035)]",
+          "cover_label": "机动",
+          "decoys": 0,
+          "display_name": "灰狼",
+          "facing": 0,
+          "fire_mode": 0,
+          "fire_mode_label": "见敌即打",
+          "fire_permitted": true,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 0,
+            "weapon": "knife"
+          },
+          "follow_lead": false,
+          "grenades": 0,
+          "has_nade_mark": false,
+          "hauling": false,
+          "hidden": false,
+          "hp": 100,
+          "id": 1,
+          "inventory": [],
+          "inventory_line": "刀  雷0 手雷0 饵0 包0/6",
+          "locked": false,
+          "max_ammo": 0,
+          "max_hp": 100,
+          "mines": 0,
+          "moving": false,
+          "nade_mark": [
+            0,
+            0
+          ],
+          "pos": [
+            208,
+            528
+          ],
+          "role": 0,
+          "role_label": "步枪手",
+          "search_t": 0,
+          "searching": false,
+          "shot_cd": 0,
+          "shot_interval": 0.42,
+          "sprinting": false,
+          "stance": 0,
+          "start_ammo": 0,
+          "visual_model": "operator_rifle",
+          "visual_weapon": "knife",
+          "weapon": "knife",
+          "weapon_label": "匕首"
+        },
+        {
+          "action": "idle",
+          "active": true,
+          "alive": true,
+          "ammo": 0,
+          "ammo_pool": {},
+          "auto_grenade": true,
+          "cone": "[(0.0, 0.0), (10.2846, 12.25671), (9.013121, 13.21982), (7.652064, 14.05155), (6.214957, 14.74362), (4.716083, 15.28916), (3.170338, 15.68276), (1.593086, 15.92049), (0.0, 16.0), (-1.593086, 15.92049), (-3.170338, 15.68276), (-4.716083, 15.28916), (-6.214957, 14.74362), (-7.652064, 14.05155), (-9.013121, 13.21982), (-10.2846, 12.25671)]",
+          "cover_label": "机动",
+          "decoys": 0,
+          "display_name": "铁砧",
+          "facing": 90,
+          "fire_mode": 0,
+          "fire_mode_label": "见敌即打",
+          "fire_permitted": true,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 0,
+            "weapon": "knife"
+          },
+          "follow_lead": false,
+          "grenades": 0,
+          "has_nade_mark": false,
+          "hauling": false,
+          "hidden": false,
+          "hp": 100,
+          "id": 2,
+          "inventory": [],
+          "inventory_line": "刀  雷0 手雷0 饵0 包0/6",
+          "locked": false,
+          "max_ammo": 0,
+          "max_hp": 100,
+          "mines": 0,
+          "moving": false,
+          "nade_mark": [
+            0,
+            0
+          ],
+          "pos": [
+            240,
+            560
+          ],
+          "role": 1,
+          "role_label": "机枪手",
+          "search_t": 0,
+          "searching": false,
+          "shot_cd": 0,
+          "shot_interval": 0.42,
+          "sprinting": false,
+          "stance": 0,
+          "start_ammo": 0,
+          "visual_model": "operator_mg",
+          "visual_weapon": "knife",
+          "weapon": "knife",
+          "weapon_label": "匕首"
+        },
+        {
+          "action": "idle",
+          "active": true,
+          "alive": true,
+          "ammo": 0,
+          "ammo_pool": {},
+          "auto_grenade": true,
+          "cone": "[(0.0, 0.0), (-12.25671, 10.2846), (-13.21982, 9.013121), (-31.61598, 17.21714), (-33.17314, 13.98365), (-34.40062, 10.61119), (-35.28621, 7.133261), (-35.82111, 3.584442), (-36.0, 0.0), (-35.82111, -3.584442), (-35.28621, -7.133261), (-34.40062, -10.61119), (-33.17314, -13.98365), (-31.61598, -17.21714), (-29.74459, -20.27952), (-27.5776, -23.14035)]",
+          "cover_label": "机动",
+          "decoys": 0,
+          "display_name": "夜枭",
+          "facing": 180,
+          "fire_mode": 0,
+          "fire_mode_label": "见敌即打",
+          "fire_permitted": true,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 0,
+            "weapon": "knife"
+          },
+          "follow_lead": false,
+          "grenades": 0,
+          "has_nade_mark": false,
+          "hauling": false,
+          "hidden": false,
+          "hp": 100,
+          "id": 3,
+          "inventory": [],
+          "inventory_line": "刀  雷0 手雷0 饵0 包0/6",
+          "locked": false,
+          "max_ammo": 0,
+          "max_hp": 100,
+          "mines": 0,
+          "moving": false,
+          "nade_mark": [
+            0,
+            0
+          ],
+          "pos": [
+            272,
+            560
+          ],
+          "role": 2,
+          "role_label": "侦察兵",
+          "search_t": 0,
+          "searching": false,
+          "shot_cd": 0,
+          "shot_interval": 0.42,
+          "sprinting": false,
+          "stance": 0,
+          "start_ammo": 0,
+          "visual_model": "operator_scout",
+          "visual_weapon": "knife",
+          "weapon": "knife",
+          "weapon_label": "匕首"
+        }
+      ],
+      "phase": 0,
+      "pose_clock_domain": "command",
+      "pose_clock_s": 10.2574666666667,
+      "selected_id": 1,
+      "sentries": [
+        {
+          "action": "walk",
+          "active": true,
+          "alive": true,
+          "cone": "[(0.0, 0.0), (21.04181, 43.14211), (17.72189, 44.60868), (14.30065, 45.82021), (10.79765, 46.76976), (7.232912, 47.45192), (3.626823, 47.86279), (-0.000001, 32.0), (-3.626827, 47.86279), (-7.232916, 47.45192), (-10.79765, 46.76976), (-14.30066, 45.82021), (-17.7219, 44.60868), (-21.04182, 43.14211)]",
+          "corpse_id": "",
+          "facing": 90.0000025044782,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 0,
+            "weapon": "kar98k"
+          },
+          "frozen": false,
+          "id": 1,
+          "pos": [
+            432,
+            560
+          ],
+          "state": 0,
+          "suspicion": 0,
+          "visual_model": "enemy_patrol",
+          "visual_weapon": "kar98k"
+        }
+      ],
+      "stashes": [
+        {
+          "active": true,
+          "amount": 7,
+          "id": "stashes:0",
+          "kind": "kar98k",
+          "pos": [
+            208,
+            400
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 12,
+          "id": "stashes:1",
+          "kind": "mg42",
+          "pos": [
+            848,
+            400
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 6,
+          "id": "stashes:2",
+          "kind": "kar98k_zf",
+          "pos": [
+            944,
+            528
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 2,
+          "id": "stashes:3",
+          "kind": "grenade",
+          "pos": [
+            368,
+            528
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 1,
+          "id": "stashes:4",
+          "kind": "mine",
+          "pos": [
+            336,
+            432
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 6,
+          "id": "stashes:5",
+          "kind": "ammo",
+          "pos": [
+            752,
+            432
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 8,
+          "id": "stashes:6",
+          "kind": "m1911",
+          "pos": [
+            272,
+            432
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 20,
+          "id": "stashes:7",
+          "kind": "thompson",
+          "pos": [
+            560,
+            400
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 8,
+          "id": "stashes:8",
+          "kind": "luger",
+          "pos": [
+            688,
+            560
+          ],
+          "progress": 0
+        }
+      ],
+      "tool_fx": [],
+      "tool_fx_schema": 1,
+      "tripwires": [],
+      "utility_scope_id": "7f9633df144bc5ef7dae76d2f76e4625",
+      "visual_schema": 1,
+      "wave_count": 2
+    },
+    "inputs": [
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 33,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          336
+        ],
+        "presents": 33,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 6709200
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 33,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          336
+        ],
+        "presents": 33,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 6710000
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 60,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          622,
+          182
+        ],
+        "presents": 60,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 10204700
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 60,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          622,
+          182
+        ],
+        "presents": 60,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 10205000
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 88,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          852,
+          614
+        ],
+        "presents": 88,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 13801700
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 88,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          852,
+          614
+        ],
+        "presents": 88,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 13801900
+      },
+      {
+        "attempt": "66c9939c44165e01cf7cf13de3d75028",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 112,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          830,
+          437
+        ],
+        "presents": 112,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 30271100
+      },
+      {
+        "attempt": "66c9939c44165e01cf7cf13de3d75028",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 112,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          830,
+          437
+        ],
+        "presents": 112,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 30271500
+      },
+      {
+        "attempt": "66c9939c44165e01cf7cf13de3d75028",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 135,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          830,
+          406
+        ],
+        "presents": 135,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 40788200
+      },
+      {
+        "attempt": "66c9939c44165e01cf7cf13de3d75028",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 135,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          830,
+          406
+        ],
+        "presents": 135,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 40788500
+      },
+      {
+        "attempt": "66c9939c44165e01cf7cf13de3d75028",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 158,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          830,
+          465
+        ],
+        "presents": 158,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 50929400
+      },
+      {
+        "attempt": "66c9939c44165e01cf7cf13de3d75028",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 158,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          830,
+          465
+        ],
+        "presents": 158,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 50929500
+      }
+    ],
+    "record_sha256": "b6e2b80084601be3fabee44eb519a543741f9dad94c6762eed97592dc37f5310",
+    "record_validation": {
+      "attempt": "66c9939c44165e01cf7cf13de3d75028",
+      "events": 0,
+      "failures": [],
+      "frames": 78,
+      "terminal_reason": ""
+    },
+    "replay_rows": []
+  },
+  "browser_trusted_inputs": [
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 7182.100000023842
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 7185.400000035763
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 10679.699999988079
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 10680.400000035763
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 14276.900000035763
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 14277.400000035763
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 30746.19999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 30746.900000035763
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 41263.40000003576
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 41264
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 51404.5
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 51405
+    }
+  ],
+  "public_checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"yard\\\"\\nlevel_index=0\\ncomplete=false\\nloop_index=1\\n\\n[audio]\\n\\nmuted=false\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=true\\nseen_yard=true\\n\"},\"schema\":1}",
+  "public_checkpoint_sha256": "7345073a922053e3a9e2cf4487cb3dcc09415ac08597a597856ea8039ec74a0b",
+  "record": null
+}

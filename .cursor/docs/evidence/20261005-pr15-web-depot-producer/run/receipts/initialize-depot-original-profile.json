@@ -1,0 +1,15 @@
+{
+  "start": "2026-10-05T12:01:29.084879+00:00",
+  "pid": 160947,
+  "request": {
+    "label": "initialize-depot-original-profile",
+    "script": "/tmp/pr15-web-controls/depot-native-8532-20261005/initialize.py"
+  },
+  "loaded_script_sha256": "6cafd01c87a5719773a86f06ba5d19c168b74466e3be828eb783b31d1c82dfcd",
+  "actual_exit": 1,
+  "exception": "name 'Path' is not defined",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/depot-native-8532-20261005/browser_controller.py\", line 57, in main\n    exec(compile(loaded,str(script_path),'exec'),runtime);request_receipt['actual_exit']=0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pr15-web-controls/depot-native-8532-20261005/initialize.py\", line 1, in <module>\n    ROOT=Path('/tmp/pr15-web-controls/depot-native-8532-20261005')\n         ^^^^\nNameError: name 'Path' is not defined\n",
+  "end": "2026-10-05T12:01:29.086628+00:00",
+  "console": [],
+  "page_errors": []
+}

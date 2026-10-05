@@ -1,0 +1,18 @@
+{
+  "actual_exit": 1,
+  "tool_chunk_id": "a4ab9e",
+  "reason": "asserted delta main.gdc only, omitted newly compiled regression test/remap and cache entries",
+  "observed_delta": {
+    "added": [
+      "scripts/replay_progress_save_test.gd.remap",
+      "scripts/replay_progress_save_test.gdc"
+    ],
+    "removed": [],
+    "changed": [
+      ".godot/global_script_class_cache.cfg",
+      ".godot/uid_cache.bin",
+      "scripts/main.gdc"
+    ]
+  },
+  "scope": "pure offline payload audit method; no engine or deployment; corrected declared allowlist passed0"
+}

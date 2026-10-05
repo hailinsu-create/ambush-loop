@@ -1,0 +1,1 @@
+print(json.dumps({'startup_page_title':page.title(),'url':page.url,'observer_present':page.evaluate('typeof window.pr15Observer'),'trusted_count':page.evaluate('window.pr15TrustedInputs.length')}),flush=True)

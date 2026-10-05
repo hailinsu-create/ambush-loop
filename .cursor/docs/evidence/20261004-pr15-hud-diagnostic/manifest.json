@@ -1,0 +1,2723 @@
+{
+  "format": 1,
+  "created_utc": "2026-10-04T23:02:28.950642+00:00",
+  "baseline_sha": "f275178c0f60a7579685f9823894cafc3386f6da",
+  "candidate_sha": "541d06440a97dd77f8c484a8de2a0ce364a8d91e",
+  "manifest_excludes_itself": true,
+  "files": [
+    {
+      "path": "controls/Xorg-127.log",
+      "bytes": 99814,
+      "sha256": "f676a5e9fe483322d461d6cf27bed22d0072a15287594bebd41802e545777e8f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/Xorg-127.log"
+    },
+    {
+      "path": "controls/Xorg-127.stdout",
+      "bytes": 1423,
+      "sha256": "0e4e01945882b3a0c41c725697553572bccca2aad373374c671aa9e85bac23c7",
+      "copied_from": "/tmp/pr15-hud-diagnostic/Xorg-127.stdout"
+    },
+    {
+      "path": "controls/analyze_batch_pair.py",
+      "bytes": 15690,
+      "sha256": "26285473f05f274e334496e52bd08a7f0e1c3b00e8529c6e2d1494bd9688bc2f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/analyze_batch_pair.py"
+    },
+    {
+      "path": "controls/analyze_profile_control.py",
+      "bytes": 15799,
+      "sha256": "2690f2a5d665ab90a023f5e4328181d2ba8e21e7a7db35122486a521e631ed80",
+      "copied_from": "/tmp/pr15-hud-diagnostic/analyze_profile_control.py"
+    },
+    {
+      "path": "controls/baseline-clock-owned-stop.json",
+      "bytes": 673,
+      "sha256": "bc24b3a3a0f2a955dc57623708a9ce72c3e72cb8d2712ba60564e3d5ebcb2770",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-clock-owned-stop.json"
+    },
+    {
+      "path": "controls/baseline-clock.json",
+      "bytes": 816,
+      "sha256": "bcbc837af5492ef73f599d513cb62e5bb4d11d348ab3db0f33f2825e80434f71",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-clock.json"
+    },
+    {
+      "path": "controls/baseline-clock.log",
+      "bytes": 889,
+      "sha256": "4f44902c23e284d8ec27147ed91d32ea15cfd377acfcada0623170765e859d33",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-clock.log"
+    },
+    {
+      "path": "controls/baseline-contract-dump.json",
+      "bytes": 894,
+      "sha256": "0f83894901db0640026f8eaeda7c915fb63b64be59f4c50bb46b747541bec53e",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-contract-dump.json"
+    },
+    {
+      "path": "controls/baseline-contract-dump.log",
+      "bytes": 1812,
+      "sha256": "88bf354563313c3fbcbe1b8aefde443825413d57474b1feb520eb8f6a671fc27",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-contract-dump.log"
+    },
+    {
+      "path": "controls/baseline-f275-proof.json",
+      "bytes": 443178,
+      "sha256": "aa375d8864544113275a06822852e480c965ce45b5e4926f3297d21bd128f81d",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-f275-proof.json"
+    },
+    {
+      "path": "controls/baseline-presentation.json",
+      "bytes": 886,
+      "sha256": "c857f92d2c99c16a93799ea4522479fc6d6b7206fba106255edddd7cf1ed67cc",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-presentation.json"
+    },
+    {
+      "path": "controls/baseline-presentation.log",
+      "bytes": 1293,
+      "sha256": "1464ef8bddbb7d9a9b4901693b1b84163a6337609c4591fcdedecaf79206096a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-presentation.log"
+    },
+    {
+      "path": "controls/baseline-style-H-fixed.json",
+      "bytes": 625,
+      "sha256": "c27a49c3e8be6eea040752646e04d1d65e3d1c2914da2540a166d376e257b2a2",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-style-H-fixed.json"
+    },
+    {
+      "path": "controls/baseline-style-H-fixed.log",
+      "bytes": 879,
+      "sha256": "0c88beeebadd311c6383c72cc06632e3989ecf879c16c437dd2bd56c5abff08c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-style-H-fixed.log"
+    },
+    {
+      "path": "controls/baseline-style-H.json",
+      "bytes": 942,
+      "sha256": "c4c1f78bbbb7ead8bc080217fff9efdab4b7906bed4f124a32ae2307701484d7",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-style-H.json"
+    },
+    {
+      "path": "controls/baseline-style-H.log",
+      "bytes": 624,
+      "sha256": "77da91404589d5e3dfc3e7b1c924cce44be679055fc24b2211e959e70fc06c9b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/baseline-style-H.log"
+    },
+    {
+      "path": "controls/batch-formal-01-A-runner.log",
+      "bytes": 970,
+      "sha256": "293aeb0711587c5eabb195c8818bf69924f0d3a2d978e6c84c3d78f888cd27d9",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-01-A-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-01-A-strict.json",
+      "bytes": 20343,
+      "sha256": "0c598e3d3440241521dd79438619d01c4b1183284b62ce623fad92819205b988",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-01-A-strict.log",
+      "bytes": 107,
+      "sha256": "6e85c16fa4996189dd3c625a9dbec4ec37ee59d80a866cbe62a8bdeb64aa9734",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-01-A.end",
+      "bytes": 33,
+      "sha256": "70bd6a8074f12a8a74f2807914b1b0ddeaf7f747a18c8e7af652ca2a1101f9f2",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.end"
+    },
+    {
+      "path": "controls/batch-formal-01-A.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.exit"
+    },
+    {
+      "path": "controls/batch-formal-01-A.json",
+      "bytes": 970,
+      "sha256": "293aeb0711587c5eabb195c8818bf69924f0d3a2d978e6c84c3d78f888cd27d9",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.json"
+    },
+    {
+      "path": "controls/batch-formal-01-A.log",
+      "bytes": 1047,
+      "sha256": "f88e06ab457b5993c19cf9caa031c85c9f2b638e1a5c586f58b626b02b9a2f78",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.log"
+    },
+    {
+      "path": "controls/batch-formal-01-A.pid",
+      "bytes": 7,
+      "sha256": "869fc928dcfae1462b679c1089cb35740a4ea01055c6d588b66cb87831f1c93a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.pid"
+    },
+    {
+      "path": "controls/batch-formal-01-A.source",
+      "bytes": 149,
+      "sha256": "3a1502d4742ee2b5474b7089419c1951b6a4f210615a64e9097a64f5675f34c3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.source"
+    },
+    {
+      "path": "controls/batch-formal-01-A.start",
+      "bytes": 33,
+      "sha256": "879c74896d4fd2711170a87f0dcc8793bc325cfd30e035ac532d651f0b074b52",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-01-A.start"
+    },
+    {
+      "path": "controls/batch-formal-02-B-runner.log",
+      "bytes": 959,
+      "sha256": "e03bf51b743f62366cab3414412dbd78f32951065a2c357fbdcf5a4bc07ffdf6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-02-B-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-02-B-strict.json",
+      "bytes": 20297,
+      "sha256": "61e9a8e1b19f9498e92f7cc5db5020151eece3283751015f59c0c74fe037655c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-02-B-strict.log",
+      "bytes": 107,
+      "sha256": "e447494cb426793fa098be6d5c853d9ea31386457e2ae563b02b990549483360",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-02-B.end",
+      "bytes": 33,
+      "sha256": "ea8025fae691ffcd71cbbef94777550a58f815eebbb72df339a56ecdee48e986",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.end"
+    },
+    {
+      "path": "controls/batch-formal-02-B.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.exit"
+    },
+    {
+      "path": "controls/batch-formal-02-B.json",
+      "bytes": 959,
+      "sha256": "e03bf51b743f62366cab3414412dbd78f32951065a2c357fbdcf5a4bc07ffdf6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.json"
+    },
+    {
+      "path": "controls/batch-formal-02-B.log",
+      "bytes": 1014,
+      "sha256": "1a5b4bba174579f9e4d566f9cea1aab094c0a0fd7152f938b6f54b1be39eb089",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.log"
+    },
+    {
+      "path": "controls/batch-formal-02-B.pid",
+      "bytes": 7,
+      "sha256": "b14213ae68380493b078e09fe451643f0ed95a38e03bcd63a55303eeacf3a5fb",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.pid"
+    },
+    {
+      "path": "controls/batch-formal-02-B.source",
+      "bytes": 149,
+      "sha256": "7e1f9847c0c3874c0f678b5b396002b2dc9f0747f7b8b5ae1ca72a4aa0584fc8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.source"
+    },
+    {
+      "path": "controls/batch-formal-02-B.start",
+      "bytes": 33,
+      "sha256": "03c7cc95d35dfcca60f923c27a503b5ca3c2ab3671aab093379bddc4f06bcb41",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-02-B.start"
+    },
+    {
+      "path": "controls/batch-formal-03-B-runner.log",
+      "bytes": 959,
+      "sha256": "ebb381379a738f9fd7c287229f7d5d4957da403c0f5f543b9ecf78babac22a1b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-03-B-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-03-B-strict.json",
+      "bytes": 20329,
+      "sha256": "fd37633210cfaeef339bcd4446f0ef24f0ce4071274648459d2cf84b77a5759c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-03-B-strict.log",
+      "bytes": 107,
+      "sha256": "e447494cb426793fa098be6d5c853d9ea31386457e2ae563b02b990549483360",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-03-B.end",
+      "bytes": 33,
+      "sha256": "68d01b3202b2bbce67bc2bea25acdc53565c8ed66f44bb9922cbfe5ba4232533",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.end"
+    },
+    {
+      "path": "controls/batch-formal-03-B.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.exit"
+    },
+    {
+      "path": "controls/batch-formal-03-B.json",
+      "bytes": 959,
+      "sha256": "ebb381379a738f9fd7c287229f7d5d4957da403c0f5f543b9ecf78babac22a1b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.json"
+    },
+    {
+      "path": "controls/batch-formal-03-B.log",
+      "bytes": 1014,
+      "sha256": "946b106964e7d8e9a89b6e2c11f53b23886139e95e5e3db520f5552e59c7ebb6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.log"
+    },
+    {
+      "path": "controls/batch-formal-03-B.pid",
+      "bytes": 7,
+      "sha256": "ecc47088edaf7a4b31bd2cd4b697374f24f837870a021c5ff07437af297c38a1",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.pid"
+    },
+    {
+      "path": "controls/batch-formal-03-B.source",
+      "bytes": 149,
+      "sha256": "7e1f9847c0c3874c0f678b5b396002b2dc9f0747f7b8b5ae1ca72a4aa0584fc8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.source"
+    },
+    {
+      "path": "controls/batch-formal-03-B.start",
+      "bytes": 33,
+      "sha256": "d815a30fe8744c2df24803da26be997e46fdbb1444ba6ba6edf16278c34234c5",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-03-B.start"
+    },
+    {
+      "path": "controls/batch-formal-04-A-runner.log",
+      "bytes": 970,
+      "sha256": "ecfc957635c6e84e82251156d64608c1067b95985de48ed224bfc9c0f0d25462",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-04-A-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-04-A-strict.json",
+      "bytes": 20344,
+      "sha256": "3e5d367454325a7e789ee018f25edf027572706a1214eb836f837ed804f29c5c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-04-A-strict.log",
+      "bytes": 107,
+      "sha256": "6e85c16fa4996189dd3c625a9dbec4ec37ee59d80a866cbe62a8bdeb64aa9734",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-04-A.end",
+      "bytes": 33,
+      "sha256": "33627396b59dd0b6a85daa56d21d04532116bb0eac0314dd1b9cac7be9f416b2",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.end"
+    },
+    {
+      "path": "controls/batch-formal-04-A.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.exit"
+    },
+    {
+      "path": "controls/batch-formal-04-A.json",
+      "bytes": 970,
+      "sha256": "ecfc957635c6e84e82251156d64608c1067b95985de48ed224bfc9c0f0d25462",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.json"
+    },
+    {
+      "path": "controls/batch-formal-04-A.log",
+      "bytes": 1047,
+      "sha256": "27ceffb71070ac79426e54f8eb59908324b54d189293265ddebf53d6e5914f5f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.log"
+    },
+    {
+      "path": "controls/batch-formal-04-A.pid",
+      "bytes": 7,
+      "sha256": "a3bed5ad2305511f629ec7b7c333461e448aeea8d71590365e978f1edf736dec",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.pid"
+    },
+    {
+      "path": "controls/batch-formal-04-A.source",
+      "bytes": 149,
+      "sha256": "3a1502d4742ee2b5474b7089419c1951b6a4f210615a64e9097a64f5675f34c3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.source"
+    },
+    {
+      "path": "controls/batch-formal-04-A.start",
+      "bytes": 33,
+      "sha256": "b239c29563f8c1595c9bb530b77ea5f99de921146eba1226e521e98bea482a6e",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-04-A.start"
+    },
+    {
+      "path": "controls/batch-formal-05-B-runner.log",
+      "bytes": 959,
+      "sha256": "61967d97ac290c2a38d6a991440b65e2e91c346db0445054927c068636b2087f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-05-B-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-05-B-strict.json",
+      "bytes": 20358,
+      "sha256": "7641abd3779552accacdc62f324cf71ba0771fa97a728c19a7b290b700757c62",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-05-B-strict.log",
+      "bytes": 107,
+      "sha256": "e447494cb426793fa098be6d5c853d9ea31386457e2ae563b02b990549483360",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-05-B.end",
+      "bytes": 33,
+      "sha256": "052a76d3aa4248402e0ed55137eed612c5d924f13da3c06482fc4d12cc3a41fb",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.end"
+    },
+    {
+      "path": "controls/batch-formal-05-B.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.exit"
+    },
+    {
+      "path": "controls/batch-formal-05-B.json",
+      "bytes": 959,
+      "sha256": "61967d97ac290c2a38d6a991440b65e2e91c346db0445054927c068636b2087f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.json"
+    },
+    {
+      "path": "controls/batch-formal-05-B.log",
+      "bytes": 1014,
+      "sha256": "731aa58994556cddc6cb9f36052f85f779d364eb77e15dd7e2a8d535bdebabbf",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.log"
+    },
+    {
+      "path": "controls/batch-formal-05-B.pid",
+      "bytes": 7,
+      "sha256": "c3a9c186a54ae33b6ac23db8f8850fb4a95e57f0ed10bcb5d47ee7b24c59670a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.pid"
+    },
+    {
+      "path": "controls/batch-formal-05-B.source",
+      "bytes": 149,
+      "sha256": "7e1f9847c0c3874c0f678b5b396002b2dc9f0747f7b8b5ae1ca72a4aa0584fc8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.source"
+    },
+    {
+      "path": "controls/batch-formal-05-B.start",
+      "bytes": 33,
+      "sha256": "97b5a0fd19e3ab9e06617844bb508e7f87f77d96ceaae26ccbf514c68d577162",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-05-B.start"
+    },
+    {
+      "path": "controls/batch-formal-06-A-runner.log",
+      "bytes": 970,
+      "sha256": "541e24c4528726c0d189072a9fd9091cb8711f04b62407ffef0e6207b5e33e01",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-06-A-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-06-A-strict.json",
+      "bytes": 20348,
+      "sha256": "51256497ee29d27e250fb3350ddebabefab159434c997a43fec36154e20a6d36",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-06-A-strict.log",
+      "bytes": 107,
+      "sha256": "9daff75ba7aa7fc9ec4a7e0d8e4bdb4178c15c5e74c74a3c7c9caae9230dec07",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-06-A.end",
+      "bytes": 33,
+      "sha256": "dc4b15e0159a7e5b66096f2af0f53a3f424dd3210292f5a489a593bbaa57eead",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.end"
+    },
+    {
+      "path": "controls/batch-formal-06-A.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.exit"
+    },
+    {
+      "path": "controls/batch-formal-06-A.json",
+      "bytes": 970,
+      "sha256": "541e24c4528726c0d189072a9fd9091cb8711f04b62407ffef0e6207b5e33e01",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.json"
+    },
+    {
+      "path": "controls/batch-formal-06-A.log",
+      "bytes": 1047,
+      "sha256": "c3ee8033fdb53c7d0cee62d33de6f66ad6d046c8870fa3bc3e47a9c17852fec3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.log"
+    },
+    {
+      "path": "controls/batch-formal-06-A.pid",
+      "bytes": 7,
+      "sha256": "2158c35d3bbc357fd93b931bb112f29cf431c346c05106b208390a636545a687",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.pid"
+    },
+    {
+      "path": "controls/batch-formal-06-A.source",
+      "bytes": 149,
+      "sha256": "3a1502d4742ee2b5474b7089419c1951b6a4f210615a64e9097a64f5675f34c3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.source"
+    },
+    {
+      "path": "controls/batch-formal-06-A.start",
+      "bytes": 33,
+      "sha256": "677b13eab96fa79f024eef1858643985afb0d283879265e1e1ed90f018976324",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-06-A.start"
+    },
+    {
+      "path": "controls/batch-formal-07-A-runner.log",
+      "bytes": 970,
+      "sha256": "7bdf6d57f0f1a9aa1c9d19090d3966fabf5b37c2574701c8ff6fee2dae9b0bdd",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-07-A-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-07-A-strict.json",
+      "bytes": 20340,
+      "sha256": "e3f74973e6684b0a4e90cc2518d39bfc2561eea888b9c5acc1c65ad2c4debebf",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-07-A-strict.log",
+      "bytes": 107,
+      "sha256": "0fc0613018b621420020715203ad0a165116c458a6794e68e3d9de0f21b5f9f5",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-07-A.end",
+      "bytes": 33,
+      "sha256": "1fd0e66a96c95ca603af2f7c1405ab5df96cbdbdde59e6bbe9226c71bcac5f09",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.end"
+    },
+    {
+      "path": "controls/batch-formal-07-A.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.exit"
+    },
+    {
+      "path": "controls/batch-formal-07-A.json",
+      "bytes": 970,
+      "sha256": "7bdf6d57f0f1a9aa1c9d19090d3966fabf5b37c2574701c8ff6fee2dae9b0bdd",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.json"
+    },
+    {
+      "path": "controls/batch-formal-07-A.log",
+      "bytes": 1047,
+      "sha256": "c7a5ea4dccdb422485f1a645ea32c1e2e24610fa08a8aab281cf6ee7765c58a7",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.log"
+    },
+    {
+      "path": "controls/batch-formal-07-A.pid",
+      "bytes": 7,
+      "sha256": "1560268ec6ae811dd7ec4e01a6310a65472c3d6ee3067537e110110cc25528af",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.pid"
+    },
+    {
+      "path": "controls/batch-formal-07-A.source",
+      "bytes": 149,
+      "sha256": "3a1502d4742ee2b5474b7089419c1951b6a4f210615a64e9097a64f5675f34c3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.source"
+    },
+    {
+      "path": "controls/batch-formal-07-A.start",
+      "bytes": 33,
+      "sha256": "c473fb0068b8b0e2db2844648a224a88fe4478693669280f77703fa165bcc7b9",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-07-A.start"
+    },
+    {
+      "path": "controls/batch-formal-08-B-runner.log",
+      "bytes": 959,
+      "sha256": "92e781a48bdc382bf783d73ddfb3cd2b652a12f9d3e618695b8db3cd136d58f8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B-runner.log"
+    },
+    {
+      "path": "controls/batch-formal-08-B-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-08-B-strict.json",
+      "bytes": 20292,
+      "sha256": "3228bea0d002983ca6b37d15cb056a33e08a82a430e4162dae6f22b1d437b099",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-08-B-strict.log",
+      "bytes": 107,
+      "sha256": "e24ae0c9ea7ce84aea7793c78ac68e3790a84e6c2322c5a26563a3848f307520",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B-strict.log"
+    },
+    {
+      "path": "controls/batch-formal-08-B.end",
+      "bytes": 33,
+      "sha256": "a53cd1cf08d697e6c0a54966dfb6e71bcaa246385a928ebacc6d5a95b1c11850",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.end"
+    },
+    {
+      "path": "controls/batch-formal-08-B.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.exit"
+    },
+    {
+      "path": "controls/batch-formal-08-B.json",
+      "bytes": 959,
+      "sha256": "92e781a48bdc382bf783d73ddfb3cd2b652a12f9d3e618695b8db3cd136d58f8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.json"
+    },
+    {
+      "path": "controls/batch-formal-08-B.log",
+      "bytes": 1014,
+      "sha256": "55b1e28e966b2a1b5785981ec94cad83bf3ded3b63e634e5306f7331dc556a84",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.log"
+    },
+    {
+      "path": "controls/batch-formal-08-B.pid",
+      "bytes": 7,
+      "sha256": "24eb166818c4f6549496419f5469712d9df76f1b356e36bb2cc1d3142fb2ff12",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.pid"
+    },
+    {
+      "path": "controls/batch-formal-08-B.source",
+      "bytes": 149,
+      "sha256": "7e1f9847c0c3874c0f678b5b396002b2dc9f0747f7b8b5ae1ca72a4aa0584fc8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.source"
+    },
+    {
+      "path": "controls/batch-formal-08-B.start",
+      "bytes": 33,
+      "sha256": "d66c26b239af0ad620bce76f0b43691c5b511766717119bfe08ba08367ef69ef",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-08-B.start"
+    },
+    {
+      "path": "controls/batch-formal-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-strict.exit"
+    },
+    {
+      "path": "controls/batch-formal-strict.json",
+      "bytes": 183909,
+      "sha256": "546ce04b92934b1aa2790245829dee3118dce2d654555774edbc44893f103957",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-strict.json"
+    },
+    {
+      "path": "controls/batch-formal-strict.log",
+      "bytes": 2732,
+      "sha256": "a92479060a0032a7ecb5f39fe28559f329d09509c97340bd9c096bbf528f52d3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal-strict.log"
+    },
+    {
+      "path": "controls/batch-formal.end",
+      "bytes": 33,
+      "sha256": "da9ca3694249be8000228fc2862dd8c149e2703461580d9c7f991dd12359e3e6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal.end"
+    },
+    {
+      "path": "controls/batch-formal.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal.exit"
+    },
+    {
+      "path": "controls/batch-formal.start",
+      "bytes": 33,
+      "sha256": "b221fe934ea303bca1fb3ae978fe0c45c4d82587566ed4af658b5bb8fac1a1b8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-formal.start"
+    },
+    {
+      "path": "controls/batch-preflight-A-strict.json",
+      "bytes": 20335,
+      "sha256": "643c939bb2faf00e2027d3f486422a5e7fd2e77359bff55010035b8fd0e45317",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A-strict.json"
+    },
+    {
+      "path": "controls/batch-preflight-A-strict.log",
+      "bytes": 107,
+      "sha256": "0fc0613018b621420020715203ad0a165116c458a6794e68e3d9de0f21b5f9f5",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A-strict.log"
+    },
+    {
+      "path": "controls/batch-preflight-A.end",
+      "bytes": 33,
+      "sha256": "490fcb3deef81465a5d0b090a68c6888bdbf82d2badeda36d80a3bb47f53ebaf",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.end"
+    },
+    {
+      "path": "controls/batch-preflight-A.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.exit"
+    },
+    {
+      "path": "controls/batch-preflight-A.json",
+      "bytes": 970,
+      "sha256": "de6aa5eb1e023dba4a1910c0d7a9af14be248cbb4bfd230ed5ea7ad41786c2a9",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.json"
+    },
+    {
+      "path": "controls/batch-preflight-A.log",
+      "bytes": 1047,
+      "sha256": "e517b08a914e417e2caeeef819bcf29b0f3a5d4e63f0cb5e95f674b66deff7c4",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.log"
+    },
+    {
+      "path": "controls/batch-preflight-A.pid",
+      "bytes": 7,
+      "sha256": "daea68eac9507df7e9ccd4f2a4cf8b8f3b2756db1ed4c56e3e6a0808a7ff1dd4",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.pid"
+    },
+    {
+      "path": "controls/batch-preflight-A.source",
+      "bytes": 149,
+      "sha256": "3a1502d4742ee2b5474b7089419c1951b6a4f210615a64e9097a64f5675f34c3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.source"
+    },
+    {
+      "path": "controls/batch-preflight-A.start",
+      "bytes": 33,
+      "sha256": "bda9f0c763090c2ff46b1ffa3dce1c40565ea989d7690c87a81e6040dbd6e865",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-A.start"
+    },
+    {
+      "path": "controls/batch-preflight-B.end",
+      "bytes": 33,
+      "sha256": "60a5d9099bbb55756023b5ff7628af4f1d778a65a4f2cbd7663a77b8bdb5a2b0",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.end"
+    },
+    {
+      "path": "controls/batch-preflight-B.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.exit"
+    },
+    {
+      "path": "controls/batch-preflight-B.json",
+      "bytes": 959,
+      "sha256": "40efb42dada5c0507d374a8e79c3e533b74561220f3c71cc7e3ae864936593cd",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.json"
+    },
+    {
+      "path": "controls/batch-preflight-B.log",
+      "bytes": 1014,
+      "sha256": "68f47fbe3879615b20704aff3769499a0a1691368fdda6a207fdf8c1b08c3844",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.log"
+    },
+    {
+      "path": "controls/batch-preflight-B.pid",
+      "bytes": 7,
+      "sha256": "00a4b8f9146e0794e573d2069e4d4bb6eee09efeb64934fbb81a7c51cf524fdd",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.pid"
+    },
+    {
+      "path": "controls/batch-preflight-B.source",
+      "bytes": 149,
+      "sha256": "7e1f9847c0c3874c0f678b5b396002b2dc9f0747f7b8b5ae1ca72a4aa0584fc8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.source"
+    },
+    {
+      "path": "controls/batch-preflight-B.start",
+      "bytes": 33,
+      "sha256": "5b34d4ed9a9b06bbc10834226f196237c6d28f85856f1c708045aefced4f7f01",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-B.start"
+    },
+    {
+      "path": "controls/batch-preflight-common-strict.json",
+      "bytes": 39931,
+      "sha256": "64f7cc070200728df6a34e7a7eef5ea618fcbea32854a499e96924241ee158d5",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-common-strict.json"
+    },
+    {
+      "path": "controls/batch-preflight-common-strict.log",
+      "bytes": 113,
+      "sha256": "a3d66aa9b5583d9cc3db93ec6b7e4fb126d7830e6ee4a6a75e0906f2e7f25029",
+      "copied_from": "/tmp/pr15-hud-diagnostic/batch-preflight-common-strict.log"
+    },
+    {
+      "path": "controls/candidate-541d-proof.json",
+      "bytes": 432321,
+      "sha256": "d8e2bfb6cd64a7627a0384979681807a9ac91d6fae30cdadcdfda97ced244f1d",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-541d-proof.json"
+    },
+    {
+      "path": "controls/candidate-clock-H.json",
+      "bytes": 669,
+      "sha256": "0a7299b65a77f015b5d83e21fcaf8b65b7a6ef3bc1c345923e760449dbf86102",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-clock-H.json"
+    },
+    {
+      "path": "controls/candidate-clock-H.log",
+      "bytes": 707,
+      "sha256": "130a5b6f0664b49b1dc3f62412a0e89b3de50f77cbdf30fe0c3f853f28e5bdfb",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-clock-H.log"
+    },
+    {
+      "path": "controls/candidate-equipment-H.json",
+      "bytes": 654,
+      "sha256": "58df9cb4136ebd0eadb5fee97876bd2192a0d767e593a575fe90c6c68f34b590",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-equipment-H.json"
+    },
+    {
+      "path": "controls/candidate-equipment-H.log",
+      "bytes": 601,
+      "sha256": "6bd7c0d195523b8dfbe0e066ce6933dc2a80c2123c61631fc6cef89563adaf16",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-equipment-H.log"
+    },
+    {
+      "path": "controls/candidate-history-H.json",
+      "bytes": 667,
+      "sha256": "a4860b29e20c7af8e477102ac5c6fb540f8f80196186007bf1fbf38dc2d0a2cf",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-history-H.json"
+    },
+    {
+      "path": "controls/candidate-history-H.log",
+      "bytes": 702,
+      "sha256": "a79718368838a97a0b54e5234e0ac12261e9f9d7659998d25eaee5f75e10aec4",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-history-H.log"
+    },
+    {
+      "path": "controls/candidate-lifecycle-R.json",
+      "bytes": 675,
+      "sha256": "35e81a0423293d5c69c04210d86f80b101d362d15a9873b8c67c0b508b646ff0",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-lifecycle-R.json"
+    },
+    {
+      "path": "controls/candidate-lifecycle-R.log",
+      "bytes": 919,
+      "sha256": "69f798b1e24acf22d6ca0d1c855b5becba5ffed62e7a1bbc13cc9f3868aec21f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-lifecycle-R.log"
+    },
+    {
+      "path": "controls/candidate-old-record-H.json",
+      "bytes": 623,
+      "sha256": "8698144a78717a2129bbfc0416bcdcb5d55c2b695238d04f7ccd512f242853b4",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-old-record-H.json"
+    },
+    {
+      "path": "controls/candidate-old-record-H.log",
+      "bytes": 700,
+      "sha256": "0b731473e5568e86c176429aeed4c6fa5a0d73c282261c8f010407c4cacd2308",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-old-record-H.log"
+    },
+    {
+      "path": "controls/candidate-style-H.json",
+      "bytes": 614,
+      "sha256": "4a046c585b32c00bb6bf8cb662f86c9cb0a428ea36817ad25d9c9cc2313bd215",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-style-H.json"
+    },
+    {
+      "path": "controls/candidate-style-H.log",
+      "bytes": 835,
+      "sha256": "22e9ac2a9667c9c862359aa71a3166aa0d5864daeb65cd4e355ee16c00d0f174",
+      "copied_from": "/tmp/pr15-hud-diagnostic/candidate-style-H.log"
+    },
+    {
+      "path": "controls/clock-entry-terminal-diag.json",
+      "bytes": 690,
+      "sha256": "75dcff15e5aefde06fbb2eaaa32959756018f85ed24400d63317877aa8622a6e",
+      "copied_from": "/tmp/pr15-hud-diagnostic/clock-entry-terminal-diag.json"
+    },
+    {
+      "path": "controls/clock-entry-terminal-diag.log",
+      "bytes": 1008,
+      "sha256": "22301bf1b4714a6e7fc95c4645119d3ce3d727fad69f38c4a270c1994c9e1d04",
+      "copied_from": "/tmp/pr15-hud-diagnostic/clock-entry-terminal-diag.log"
+    },
+    {
+      "path": "controls/clock_diag_external.gd",
+      "bytes": 11014,
+      "sha256": "c2f1b99c0922e769923a8e5ef9161c8f59f49321d02d63610d43815aefa4090a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/clock_diag_external.gd"
+    },
+    {
+      "path": "controls/contract-diff-reader.json",
+      "bytes": 631,
+      "sha256": "8bc01d5a1ea44f6656e5c3043324994daa5696d03dcc93f8ae9f339edf85b003",
+      "copied_from": "/tmp/pr15-hud-diagnostic/contract-diff-reader.json"
+    },
+    {
+      "path": "controls/contract-diff-reader.log",
+      "bytes": 897,
+      "sha256": "f5a6c88eb8c6a4097ef48a2e190b8b03446aed4d004cc5b496cb768bc66d4a4f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/contract-diff-reader.log"
+    },
+    {
+      "path": "controls/contract-differences.json",
+      "bytes": 13572,
+      "sha256": "82ff172e9c3133d042bd9ef5286d5146b7503fdf7facd08c8f1c4975876a2c97",
+      "copied_from": "/tmp/pr15-hud-diagnostic/contract-differences.json"
+    },
+    {
+      "path": "controls/contract_diag_external.gd",
+      "bytes": 667,
+      "sha256": "f854fe2b4f28c62781640eb88aaf7f2345dbbfddb8eb0c0d1677e88b6e30ad45",
+      "copied_from": "/tmp/pr15-hud-diagnostic/contract_diag_external.gd"
+    },
+    {
+      "path": "controls/contract_diff_reader.gd",
+      "bytes": 2589,
+      "sha256": "6fd8c75b9143bf608910ac8fa573b8d7655981007ce164f01af69f51ea6b7aba",
+      "copied_from": "/tmp/pr15-hud-diagnostic/contract_diff_reader.gd"
+    },
+    {
+      "path": "controls/direct-toggle-P0-original/godot-hud-profile",
+      "bytes": 526,
+      "sha256": "7f8b02f520ba3b7cb489c5e87dbdacddba629197504da8cf39dc784080c9b050",
+      "copied_from": "/tmp/pr15-hud-diagnostic/direct-toggle-P0-original/godot-hud-profile"
+    },
+    {
+      "path": "controls/direct-toggle-P0-original/hud_profile_external.gd",
+      "bytes": 15441,
+      "sha256": "d0bc88b808a557032cc7920ee00b1f6a5622a1202be5e949691f14f8fcbcf5b4",
+      "copied_from": "/tmp/pr15-hud-diagnostic/direct-toggle-P0-original/hud_profile_external.gd"
+    },
+    {
+      "path": "controls/direct-toggle-P0-original/run-profile.py",
+      "bytes": 2587,
+      "sha256": "b34b85ef1a2a08e60f72e8fe39d25df7d750a105877fc5b23e1c3eba6d563905",
+      "copied_from": "/tmp/pr15-hud-diagnostic/direct-toggle-P0-original/run-profile.py"
+    },
+    {
+      "path": "controls/extract_script_profile.py",
+      "bytes": 3996,
+      "sha256": "42e488cf8a22884b7c69b4176c4eef4607beab60a579c7286de8ff14d86dd481",
+      "copied_from": "/tmp/pr15-hud-diagnostic/extract_script_profile.py"
+    },
+    {
+      "path": "controls/f275-proof.json",
+      "bytes": 432321,
+      "sha256": "e996046e0a9de86487cbdfc4792620661b574a71a81fa5fe0b2b3d60824104aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/f275-proof.json"
+    },
+    {
+      "path": "controls/fixed-clock-H.json",
+      "bytes": 669,
+      "sha256": "d9ad99a97b9b70bdef24574c3d220c0a02f22e2ae5bad45843da967fb68b67c3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/fixed-clock-H.json"
+    },
+    {
+      "path": "controls/fixed-clock-H.log",
+      "bytes": 707,
+      "sha256": "10cfd1abb988d415caa49bd8f11a6d6d720be37cfc72ccb87ccf85d8fbf294a8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/fixed-clock-H.log"
+    },
+    {
+      "path": "controls/fixed-history-H.json",
+      "bytes": 667,
+      "sha256": "cf881744495347918b94ea31c70153451aeee468afc86f3cd453c66085d485be",
+      "copied_from": "/tmp/pr15-hud-diagnostic/fixed-history-H.json"
+    },
+    {
+      "path": "controls/fixed-history-H.log",
+      "bytes": 702,
+      "sha256": "2f92fe584270da16cfca291f5574437cefa1a6f98adafb7bdf64b5a01cb5cead",
+      "copied_from": "/tmp/pr15-hud-diagnostic/fixed-history-H.log"
+    },
+    {
+      "path": "controls/godot-clock-diag",
+      "bytes": 381,
+      "sha256": "7d4d068a1ce38e0a515c7879ee7a2e595adbe8cdb31952a933711d7e6f6970f3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-clock-diag"
+    },
+    {
+      "path": "controls/godot-contract-diag",
+      "bytes": 387,
+      "sha256": "13576e432d2d1d672dd3f059471f47ac473d17c967e7983408c903bddd9ef4ff",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-contract-diag"
+    },
+    {
+      "path": "controls/godot-contract-diff",
+      "bytes": 372,
+      "sha256": "0c791e22e5596df90555cdfc652e11288827516eb21112c8283a67d1d21a0d8e",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-contract-diff"
+    },
+    {
+      "path": "controls/godot-dummy",
+      "bytes": 142,
+      "sha256": "6e9dcc56836837680c1a5c6edeca8ed69666deb929aee156076804bfe1046c9d",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-dummy"
+    },
+    {
+      "path": "controls/godot-hud-batch-pair",
+      "bytes": 521,
+      "sha256": "d271ab6e13621f166b11471f2a135b0d1a649d6442b424f212f15c484cedc3cb",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-hud-batch-pair"
+    },
+    {
+      "path": "controls/godot-hud-old-record",
+      "bytes": 382,
+      "sha256": "598987612d6eb25154f50f9f13222306c33b7a0d289c450dbc7170b040e109b1",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-hud-old-record"
+    },
+    {
+      "path": "controls/godot-hud-profile",
+      "bytes": 526,
+      "sha256": "7f8b02f520ba3b7cb489c5e87dbdacddba629197504da8cf39dc784080c9b050",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-hud-profile"
+    },
+    {
+      "path": "controls/godot-hud-style",
+      "bytes": 382,
+      "sha256": "ef26c53a6f34c6117176a7c22665ba8b7c619be19a431efd346ea08c67fe169c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/godot-hud-style"
+    },
+    {
+      "path": "controls/hud_batch_pair_external.gd",
+      "bytes": 13743,
+      "sha256": "876e53dcc4fd2ce90c6bed20c8010d9996eeebae0d50fbe241c6ffe6f9fbc204",
+      "copied_from": "/tmp/pr15-hud-diagnostic/hud_batch_pair_external.gd"
+    },
+    {
+      "path": "controls/hud_old_record_external.gd",
+      "bytes": 3600,
+      "sha256": "1f8c3e3940b56c5cb59f30e961b7a513ad51631d02ffee00cac534341f0d5465",
+      "copied_from": "/tmp/pr15-hud-diagnostic/hud_old_record_external.gd"
+    },
+    {
+      "path": "controls/hud_profile_external.gd",
+      "bytes": 15605,
+      "sha256": "651a177878b3e03289a137c428c680160e7a3e271abcf63640f82ab457a5daf5",
+      "copied_from": "/tmp/pr15-hud-diagnostic/hud_profile_external.gd"
+    },
+    {
+      "path": "controls/hud_style_boundary_external.gd",
+      "bytes": 5689,
+      "sha256": "ce8309a9011a25e40160c40bd2bfb7cf724c1120b364405672e72abfdb1073f1",
+      "copied_from": "/tmp/pr15-hud-diagnostic/hud_style_boundary_external.gd"
+    },
+    {
+      "path": "controls/import-sidecars-manifest.json",
+      "bytes": 88348,
+      "sha256": "513aba6cd0bd41c141fd5c53603fd0d541ea63bf4032634848c21d3b867f552d",
+      "copied_from": "/tmp/pr15-hud-diagnostic/import-sidecars-manifest.json"
+    },
+    {
+      "path": "controls/negative-style-fixture-mixed-indent.gd",
+      "bytes": 5640,
+      "sha256": "9a1d1d1a17816f719bd28e685af0afd591b7322afbf752b452ab37b5817b799c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/negative-style-fixture-mixed-indent.gd"
+    },
+    {
+      "path": "controls/output-inventory.json",
+      "bytes": 42314,
+      "sha256": "22f7df809aad0bba78da4e3579508e8ac099cb2b9b9c771057bd260e414cc961",
+      "copied_from": "/tmp/pr15-hud-diagnostic/output-inventory.json"
+    },
+    {
+      "path": "controls/owned-display-closure.json",
+      "bytes": 499,
+      "sha256": "7f8cd441dfc43c59bf4f2b168758545cdc3d6fb21ec692f37236386b67420030",
+      "copied_from": "/tmp/pr15-hud-diagnostic/owned-display-closure.json"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred-functions.json",
+      "bytes": 130743,
+      "sha256": "0286746f427d611d8b111d7422f7974bad8cf88be582641d12ad4f62f0526916",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred-functions.json"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred-functions.log",
+      "bytes": 6610,
+      "sha256": "e9b268cef0ee93bda86d65cb991e33410e280bac0253f343fa49cf9c596ba07c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred-functions.log"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred-strict.json",
+      "bytes": 20392,
+      "sha256": "44d2be4bee8c4967091f27d40016b1980dbb35dc966c2c0332d767d97be3e517",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred-strict.json"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred-strict.log",
+      "bytes": 108,
+      "sha256": "f60c4cc627d23f7bff8b6da582d2da4bed8b81e08627f2d70a3de7d6c918b889",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred-strict.log"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.end",
+      "bytes": 33,
+      "sha256": "3f50bfc94a2ff15ad49d10e49250b806bc1ced2b4428d9a6ee60703ca4b07c5f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.end"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.exit"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.json",
+      "bytes": 948,
+      "sha256": "2ba0063b39391fafbf1a67eed27ec7443146b880e46b8505b1f918348a75e0cd",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.json"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.log",
+      "bytes": 1402416,
+      "sha256": "c7146b7be252815f5a480ff843e7a75500d335c9df52e07b08c75c5d74bacc6a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.log"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.pid",
+      "bytes": 7,
+      "sha256": "6b207f1f0b64e0afb8f5152856d92ac1ad19d88a264584b74af3d5faad657aeb",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.pid"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.source",
+      "bytes": 150,
+      "sha256": "4be1914a052cc8ddfd90d03f4781107ac818290c0958f129146f1093d2167350",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.source"
+    },
+    {
+      "path": "controls/profile-capability-P0-deferred.start",
+      "bytes": 33,
+      "sha256": "2608687e093695559e6c97a0c14c5d0b62c8111957d0f109e225fa4323f17038",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.start"
+    },
+    {
+      "path": "controls/profile-capability-P0.end",
+      "bytes": 33,
+      "sha256": "959451e62042cc452bf5915a914f6b32246e6af0d8f709f295b075ab065edd03",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.end"
+    },
+    {
+      "path": "controls/profile-capability-P0.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.exit"
+    },
+    {
+      "path": "controls/profile-capability-P0.json",
+      "bytes": 948,
+      "sha256": "2dd31958389800bf3c9dce78d469f8cdf13c83dc3848266257128198928df410",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.json"
+    },
+    {
+      "path": "controls/profile-capability-P0.log",
+      "bytes": 1348274,
+      "sha256": "b1372904d7588ab982dce649fff5c39d607164de2cd24a374b8231a144dde890",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.log"
+    },
+    {
+      "path": "controls/profile-capability-P0.pid",
+      "bytes": 7,
+      "sha256": "655d65cffec4f551445b726e47d61662eba5d5e448671b369b310501fd5e1cf8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.pid"
+    },
+    {
+      "path": "controls/profile-capability-P0.source",
+      "bytes": 150,
+      "sha256": "29d81ada62f84bf9de0a4bf2093bf9c204480fcb0c95307ab2bfb719a6fa78ed",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.source"
+    },
+    {
+      "path": "controls/profile-capability-P0.start",
+      "bytes": 33,
+      "sha256": "893189586770921ea6a46229fb5863334fddcdc16707f2019629d71c3ddee41b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-capability-P0.start"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF-runner.log",
+      "bytes": 947,
+      "sha256": "833df86cbbf2044d20411a480f3b912616e94e1c6f7f0cec10d682e2368b218b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF-runner.log"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF-strict.exit"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF-strict.json",
+      "bytes": 20397,
+      "sha256": "18605e0d42f974ab4ba8553ca73a970c9d92c4d4e421f9b90b7cb06aabda3268",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF-strict.json"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF-strict.log",
+      "bytes": 109,
+      "sha256": "a2aec044a45cdfbcba4dd1fb3920603e09e83c76c0777f4e25c4372988cf14f6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF-strict.log"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.end",
+      "bytes": 33,
+      "sha256": "26b434386b933393ddbaa02b231c2a48128a36701f62de0de92db7fc67546d8b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.end"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.exit"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.json",
+      "bytes": 947,
+      "sha256": "833df86cbbf2044d20411a480f3b912616e94e1c6f7f0cec10d682e2368b218b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.json"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.log",
+      "bytes": 269744,
+      "sha256": "5f4d3337d3ed955b0c63cf38e1096cce810c84a89ca7fdac0cbefba242faebd9",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.log"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.pid",
+      "bytes": 7,
+      "sha256": "3278714618097a21ae66f1682cc35df7d3d878827f2426a4f366983259043d3c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.pid"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.source",
+      "bytes": 151,
+      "sha256": "db3f1ecb237d22d135e74b70435fe66274c743f85a7d4a230fb1f7b75e1dd289",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.source"
+    },
+    {
+      "path": "controls/profile-formal-01-OFF.start",
+      "bytes": 33,
+      "sha256": "edf79720ef91f999b7195f2efd34b840d465610e7f2851bd694ffa295ae201da",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-01-OFF.start"
+    },
+    {
+      "path": "controls/profile-formal-02-ON-functions.json",
+      "bytes": 130592,
+      "sha256": "2a53ebb6bc56be66213639464e377013658e4fd96d938ec810cb0f3a7fe45ab2",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON-functions.json"
+    },
+    {
+      "path": "controls/profile-formal-02-ON-functions.log",
+      "bytes": 6602,
+      "sha256": "5fec6dc26a2488ef93be76b42c34e0d8b901f56b37242e340f763cd61768d2f3",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON-functions.log"
+    },
+    {
+      "path": "controls/profile-formal-02-ON-runner.log",
+      "bytes": 948,
+      "sha256": "ad866142ab99d155236f217243d935b6620079370b288f315d175f11f258ba48",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON-runner.log"
+    },
+    {
+      "path": "controls/profile-formal-02-ON-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON-strict.exit"
+    },
+    {
+      "path": "controls/profile-formal-02-ON-strict.json",
+      "bytes": 20338,
+      "sha256": "b6e1db55c8315a759cc66547116836a59e5ef52aa7a7d952ea417584dd68798a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON-strict.json"
+    },
+    {
+      "path": "controls/profile-formal-02-ON-strict.log",
+      "bytes": 108,
+      "sha256": "f60c4cc627d23f7bff8b6da582d2da4bed8b81e08627f2d70a3de7d6c918b889",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON-strict.log"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.end",
+      "bytes": 33,
+      "sha256": "81d9392dd4f0f9e6d0e25ff0257add88d1b57526a7d5e0b972fffed2137ff9c7",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.end"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.exit"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.json",
+      "bytes": 948,
+      "sha256": "ad866142ab99d155236f217243d935b6620079370b288f315d175f11f258ba48",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.json"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.log",
+      "bytes": 1383482,
+      "sha256": "355a56e56d6a961f8745fc804c4e3ad48e1e0648a1f6a98b4dbfe876ae711823",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.log"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.pid",
+      "bytes": 7,
+      "sha256": "f0a2ebeea728d92bd35f12a6058403eea573fee21c6706797055a6334decae4b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.pid"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.source",
+      "bytes": 150,
+      "sha256": "4be1914a052cc8ddfd90d03f4781107ac818290c0958f129146f1093d2167350",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.source"
+    },
+    {
+      "path": "controls/profile-formal-02-ON.start",
+      "bytes": 33,
+      "sha256": "1d6d26ad156a5ca5abc341d3add72408617f67efebbe68cae8fe87c23ae390b7",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-02-ON.start"
+    },
+    {
+      "path": "controls/profile-formal-03-ON-functions.json",
+      "bytes": 130720,
+      "sha256": "7bd88963f9caf16ebf70457b95d665ce56663aaefd1d900e01e70e954cb9e6f7",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON-functions.json"
+    },
+    {
+      "path": "controls/profile-formal-03-ON-functions.log",
+      "bytes": 6605,
+      "sha256": "215dd78197372cf84472375874b2ec04b7033e782630d3ea2fe2c28ffc61dfa9",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON-functions.log"
+    },
+    {
+      "path": "controls/profile-formal-03-ON-runner.log",
+      "bytes": 948,
+      "sha256": "3d7ef3733843ccf5fb994fec2367977868bfbd559102b35de9396d87cc4635f8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON-runner.log"
+    },
+    {
+      "path": "controls/profile-formal-03-ON-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON-strict.exit"
+    },
+    {
+      "path": "controls/profile-formal-03-ON-strict.json",
+      "bytes": 20360,
+      "sha256": "c5cd739125e061dfd8d2a5fd9e8a43e1d0997f1c88649befb55209c38300d21c",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON-strict.json"
+    },
+    {
+      "path": "controls/profile-formal-03-ON-strict.log",
+      "bytes": 108,
+      "sha256": "64ca750a6d8344066a08ad9664fb329da8dbd60a1ef38fe6a1739ae7f0c16283",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON-strict.log"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.end",
+      "bytes": 33,
+      "sha256": "3fd910403af066f665bc947671727b1190dac3ec2bc6ac85b4a4b9e47cc4a984",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.end"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.exit"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.json",
+      "bytes": 948,
+      "sha256": "3d7ef3733843ccf5fb994fec2367977868bfbd559102b35de9396d87cc4635f8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.json"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.log",
+      "bytes": 1402861,
+      "sha256": "81e1cdfb11b1a6bb846bb37f4c4ddb3b2d621d38ee6f4e2316106f63264090bf",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.log"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.pid",
+      "bytes": 7,
+      "sha256": "017f1637fb92aa85ef365fcbcfb6b1793272171853b3c40a59ae9f3c8a9083af",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.pid"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.source",
+      "bytes": 150,
+      "sha256": "4be1914a052cc8ddfd90d03f4781107ac818290c0958f129146f1093d2167350",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.source"
+    },
+    {
+      "path": "controls/profile-formal-03-ON.start",
+      "bytes": 33,
+      "sha256": "e029ae54260ba78eb41b8a14074cd4799f5b1bab3caf3aca2d908aa3d2b7fee1",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-03-ON.start"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF-runner.log",
+      "bytes": 947,
+      "sha256": "5af79b7663b070c309ca770ba6d0d37bdc87510ffa557d2f5b7d325b884b920f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF-runner.log"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF-strict.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF-strict.exit"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF-strict.json",
+      "bytes": 20385,
+      "sha256": "6bdfb81ca84603974d0e5a9091e377266fc1e28a8dd2e871422cf2c64ebdbe5f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF-strict.json"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF-strict.log",
+      "bytes": 109,
+      "sha256": "b744aa5cce075b0b6466ad2d3e38e3f0bcd8efaad8c5abe231db77ace1bd478a",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF-strict.log"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.end",
+      "bytes": 33,
+      "sha256": "9994a24efcd6108432a08328664d80b83fbe8693d363a86cd99d91f12c594f36",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.end"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.exit"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.json",
+      "bytes": 947,
+      "sha256": "5af79b7663b070c309ca770ba6d0d37bdc87510ffa557d2f5b7d325b884b920f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.json"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.log",
+      "bytes": 269607,
+      "sha256": "a553d94fd852ac5ec417aefd12d0ce0ec382ff79213a8c9e46ea0a704944ae0b",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.log"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.pid",
+      "bytes": 7,
+      "sha256": "843b288a671e04ca5830de73b608a294c4b5c28c3265ba038542a8c96e14d9e6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.pid"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.source",
+      "bytes": 151,
+      "sha256": "db3f1ecb237d22d135e74b70435fe66274c743f85a7d4a230fb1f7b75e1dd289",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.source"
+    },
+    {
+      "path": "controls/profile-formal-04-OFF.start",
+      "bytes": 33,
+      "sha256": "0a3ed3ed7b9f802d7b95d64f4ae697d4ae468321ca712ba996f21714c3223194",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-04-OFF.start"
+    },
+    {
+      "path": "controls/profile-formal-strict.json",
+      "bytes": 104419,
+      "sha256": "efdf022b87546ba0f7241f081e91017626688c610a940d811b4b5db3ccbf4a84",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-strict.json"
+    },
+    {
+      "path": "controls/profile-formal-strict.log",
+      "bytes": 1809,
+      "sha256": "24c945f9a34912268641e57e5c245d41c388e520bca445c68ff25b2831d78f27",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal-strict.log"
+    },
+    {
+      "path": "controls/profile-formal.end",
+      "bytes": 33,
+      "sha256": "f7d37868c3123ee0bee0b08e62e113dbe88d3ae365f7feaeb06913813020bad8",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal.end"
+    },
+    {
+      "path": "controls/profile-formal.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal.exit"
+    },
+    {
+      "path": "controls/profile-formal.start",
+      "bytes": 33,
+      "sha256": "01fae8626ec82a2c2d405f52c1275fbc19a2c06b4c35338cab5bd13a38b57ee1",
+      "copied_from": "/tmp/pr15-hud-diagnostic/profile-formal.start"
+    },
+    {
+      "path": "controls/run-batch-formal.py",
+      "bytes": 1753,
+      "sha256": "84cf1366d9a565c521c7f0066f20c9742fa566406def3148c2615c89c4346a10",
+      "copied_from": "/tmp/pr15-hud-diagnostic/run-batch-formal.py"
+    },
+    {
+      "path": "controls/run-batch-pair.py",
+      "bytes": 2568,
+      "sha256": "8bd20db11bb8deca272657b49cb155005aa0e43d208c18540c46e986dff30d33",
+      "copied_from": "/tmp/pr15-hud-diagnostic/run-batch-pair.py"
+    },
+    {
+      "path": "controls/run-candidate-regressions.py",
+      "bytes": 1138,
+      "sha256": "4258e910b0166b2b78e7a8272707f7a11f7f3e06b5d08216c418c4e5474a21e1",
+      "copied_from": "/tmp/pr15-hud-diagnostic/run-candidate-regressions.py"
+    },
+    {
+      "path": "controls/run-functional.py",
+      "bytes": 1774,
+      "sha256": "e000a27923709da6e6e2a6ec6a738103eda8b7fc3b40d8e98c6a23307432cc7f",
+      "copied_from": "/tmp/pr15-hud-diagnostic/run-functional.py"
+    },
+    {
+      "path": "controls/run-profile-control.py",
+      "bytes": 1243,
+      "sha256": "5d00914cb6854a01157cd8bfd2316a4bca218296ad50dd77911d50c38aca9fa6",
+      "copied_from": "/tmp/pr15-hud-diagnostic/run-profile-control.py"
+    },
+    {
+      "path": "controls/run-profile.py",
+      "bytes": 2587,
+      "sha256": "b34b85ef1a2a08e60f72e8fe39d25df7d750a105877fc5b23e1c3eba6d563905",
+      "copied_from": "/tmp/pr15-hud-diagnostic/run-profile.py"
+    },
+    {
+      "path": "controls/seal-hud-evidence.py",
+      "bytes": 5212,
+      "sha256": "5f87d891be3fbe7c7ad0cd482e66fa7b7b73ac98aa6b48b8d47e0bfa4cc7e888",
+      "copied_from": "/tmp/pr15-hud-diagnostic/seal-hud-evidence.py"
+    },
+    {
+      "path": "runs/baseline-clock/guard-run.log",
+      "bytes": 668,
+      "sha256": "a23f1b56dcb8a263a9ac8c3426707d58c52206dac0800257de4c46522714ccf3",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/7f1f6520a1b44c3a9d70e553e3997b7d/run.log"
+    },
+    {
+      "path": "runs/baseline-contract-dump/guard-run.log",
+      "bytes": 1599,
+      "sha256": "473b16a2f7df834b1a842fb2c579e88175c0b77efcdf97ebe4243a1406e08502",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/run.log"
+    },
+    {
+      "path": "runs/baseline-contract-dump/original-userdata/battle-0.bin",
+      "bytes": 57012,
+      "sha256": "25cc9d01af850e3eeac1783ba27ea8fc47fb4722344aae5360947cb70d9550ea",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop/battle-0.bin"
+    },
+    {
+      "path": "runs/baseline-contract-dump/original-userdata/battle-1.bin",
+      "bytes": 57012,
+      "sha256": "e711917fea4d0091d621e2ba97cfc7ebbadb6e6c672d3d9768ba655d22c0fa38",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop/battle-1.bin"
+    },
+    {
+      "path": "runs/baseline-contract-dump/original-userdata/battle-2.bin",
+      "bytes": 57012,
+      "sha256": "d9853e0bd0459023128045defe7b2d88d482bd18c5a71d02544b9b725762219e",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop/battle-2.bin"
+    },
+    {
+      "path": "runs/baseline-presentation/guard-run.log",
+      "bytes": 1080,
+      "sha256": "6837665392981a5af8addf7ad24d7e3f594c9fbacaa56011f3231241c5b23681",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/c3125df1a3504b138ba44384b85aad4f/run.log"
+    },
+    {
+      "path": "runs/baseline-style-H/guard-run.log",
+      "bytes": 426,
+      "sha256": "04b6acbf3819e174b5ae79fdae8720f343134acff6fbd6f861697533d707c7e8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/ambush_test_runs/6776304874c44118ba4868929d75d0b7/run.log"
+    },
+    {
+      "path": "runs/baseline-style-H-fixed/guard-run.log",
+      "bytes": 562,
+      "sha256": "229e8da69f7a5a01b372a2337e41184cf52c215dfa405c64f7e8331ce8909847",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/ambush_test_runs/76793ffc20254368a477266a9ed136cd/run.log"
+    },
+    {
+      "path": "runs/baseline-style-H-fixed/original-userdata/style-phase-values.bin",
+      "bytes": 2596024,
+      "sha256": "c7f725987dd2c063edfacfe1c881091e4157e88740d92452ecd1a58776e58fec",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/ambush_test_runs/76793ffc20254368a477266a9ed136cd/data/godot/app_userdata/Ambush Loop/style-phase-values.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/report.json",
+      "bytes": 13928,
+      "sha256": "96f5f6482fa0d426d8b2dca8e3c43ef6455b6ea3c27f7ed1da8c0090dfa52d79",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/report.json"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23246,
+      "sha256": "4edbc37a71a77e888645fb6c1dfa3fc2b357798dbc24ec1f4e9a595dfa391fe4",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64636,
+      "sha256": "5502321bf5d0b174cce3a65f0c0120cf4b25e720f7fa2fb4a3642b1d03abef1b",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-01-A/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-fcc05300788d4e35b4196236d0062afd/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/report.json",
+      "bytes": 13928,
+      "sha256": "a86e175f37f01908cd531d333bdbeacf455fd0d99f7d1c24befe683971aaed56",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/report.json"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-advancing-original-replay.png",
+      "bytes": 918082,
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23235,
+      "sha256": "f138f5f1e805976da3a8cb6a944dfb861029f15b0bd17dd263caba5a60f16d98",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64648,
+      "sha256": "f789fe767cc68eeb5363eff8cd4bac58f01876140ac573f337829221e38dc3ef",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-02-B/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-e1947e30750e4fb983cedfe562aeacf0/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/report.json",
+      "bytes": 13926,
+      "sha256": "9c5fcd478f70a7281b42b4f04ef924e8ca891ca520d054dec75b172317c89665",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/report.json"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-advancing-original-replay.png",
+      "bytes": 918082,
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23233,
+      "sha256": "3aeab1099e49553ae51dcc2f64f71a9bf802f980b5b928e62b802f357b5209de",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64646,
+      "sha256": "93c9d3fb2f07da13c44eb4fa16779d8c0ad4a9c6b9aa965aa6b3ba160566df07",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-03-B/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-cfe7f722a55a422d926e42cc97d2db65/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/report.json",
+      "bytes": 13929,
+      "sha256": "6bfaa74a1c58ac464a95168738739e8aaf44873b2c7e29d2c140744ca64c2447",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/report.json"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23247,
+      "sha256": "dae7fab74047021614b24c022cb4004bb01202d566444c1c9ebe89be5f89c5ac",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64659,
+      "sha256": "ed23527c818d1e925c5b384a953ebe87e52d2cc1b091d2d573005866d5161252",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-04-A/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-41af4983f8f948d58c7184ad4dd2ed78/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/report.json",
+      "bytes": 13928,
+      "sha256": "445b162c96a5b20540663c4fa8fe1a3f01c63de901b36f3097996118770b65ad",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/report.json"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-advancing-original-replay.png",
+      "bytes": 918082,
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23235,
+      "sha256": "ea7fc7ecd3b6cea4d0c47bcd940f264d38c2c1a539ffa7cf19e47a93bbba79f6",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64644,
+      "sha256": "3388bf01a3b5b8594438d72f5cc8ae18ec592a8266b920266cf548c01cf0fcc1",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-05-B/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-0d5a868805c348cb9d335de23557dae5/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/report.json",
+      "bytes": 13929,
+      "sha256": "1e43063bd87deb0bfa86d0541b0b762ac49be825e9be86ef5617ed1b75ed33ce",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/report.json"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-advancing-original-replay.png",
+      "bytes": 918082,
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23247,
+      "sha256": "d5af6b48277aa3a281d7aead37da47021b32f599484405e9cbee1724ab95d658",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 62990,
+      "sha256": "101d1f670d085992f4f9e1e0ef5505bb4796aeb984df176c959577e39c465e91",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-06-A/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-f9f6980bdc2145b698b3875cc3f654f0/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/report.json",
+      "bytes": 13928,
+      "sha256": "926ea3faa8e4fbddd3d5b069504d12c45db85e97d69f90441c2669ea7dc5d3f7",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/report.json"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-advancing-original-replay.png",
+      "bytes": 918082,
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23246,
+      "sha256": "c8533599d984ffb5cc27c1bda399f832b2d2ff99b19d5edf61a6758f64fe549f",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 63405,
+      "sha256": "cea8ea6fd97a9b440bf3c9c677e301fcf5548e86a61dc98a0161ea62f393fc88",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-07-A/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-2c6dee36542143c2899b4c11b91583b5/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/report.json",
+      "bytes": 13928,
+      "sha256": "b58cdaac693313620d1712cf3b2eaf3ee2de035020396b72be37727ec7abaefa",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/report.json"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23235,
+      "sha256": "c86f20bdf0a605127a0942777011c0c255b5aa4ddeb2b3b040d44a2fdd341dbf",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64226,
+      "sha256": "d19832a2d23215ef6e4892864ab4b55140835ed25fd9a3efcaedb8af56225200",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-formal-08-B/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-aa9eee15651345c4a7ba7fbc22174e2f/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/report.json",
+      "bytes": 13929,
+      "sha256": "3be40b211b72759fff5f07d1424c6754ba17df854d46a36a790ddc06faae3863",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/report.json"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23247,
+      "sha256": "e8c2189c36cc5fe2665f7ffb28f729c18a449a6242bb310e6eb7931436d52da2",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 63414,
+      "sha256": "44c03327b55a50865bc7f475aa2db99360f7e829057d20ea0a2dfe11352d7af8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-A/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/pr15-hud-baseline-f275/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-02b2eac7b886407199fedfa7f8a19d4e/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/report.json",
+      "bytes": 13928,
+      "sha256": "e84df38aee711da57dd6a293907bb388f929bd0ae5fd45e289cec321fd7057ab",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/report.json"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-hud-batch-pair-metrics/metadata.json",
+      "bytes": 23235,
+      "sha256": "71e2db29a801af9f1c6b9aad4425717d0630085a70cdc63d97ee5b1604e361af",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-hud-batch-pair-metrics/metadata.json"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-hud-batch-pair-metrics/raw.csv",
+      "bytes": 64224,
+      "sha256": "94be5cc48ee4984100e591c5069c55d79bf077a24c4fb5649ec3b9b25f6e7ed0",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-hud-batch-pair-metrics/raw.csv"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4e20143ce26631776574b94da3673f4897a93aa9eccb09521eda1f6721a0dda8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/batch-preflight-B/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-batch-pair-b2800939abfe468c8748a5212e7749a0/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/candidate-clock-H/guard-run.log",
+      "bytes": 405,
+      "sha256": "283c825ebb986683d1bcdfd5a8db440397c5ecb2e9b0df721fdc62ccd3bb1398",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/bb7f235a02794a6593d0f31a8df5239a/run.log"
+    },
+    {
+      "path": "runs/candidate-equipment-H/guard-run.log",
+      "bytes": 301,
+      "sha256": "6f93b7669abc254b106edb4ed90e15d3cf56f9076991b87770db1cac31fc3449",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/1529c5b6c5b94aaea6b47856793babdc/run.log"
+    },
+    {
+      "path": "runs/candidate-history-H/guard-run.log",
+      "bytes": 397,
+      "sha256": "7f3615f4214558ff9d88c9e031cb1da25ee7ab27e7e30ff38689ee53eb57db61",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/c3c8ca4be7464693a5f1705ae130fe28/run.log"
+    },
+    {
+      "path": "runs/candidate-lifecycle-R/guard-run.log",
+      "bytes": 613,
+      "sha256": "5ee1170d02f3dc8f5c8083ca6eeb5f8664aaa9d21f1b8264a2ce9a032bd6e0a9",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/a9b3c5c5fef047aaa29cb7eb4972e6c6/run.log"
+    },
+    {
+      "path": "runs/candidate-lifecycle-R/original-output/replay_event_focus.png",
+      "bytes": 733321,
+      "sha256": "68565eed7ef5ff40971ff445691c5a41f7cf5ada671564b5b43d1a70e9db01e1",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/replay_event_focus.png"
+    },
+    {
+      "path": "runs/candidate-lifecycle-R/original-output/scout_backpack.png",
+      "bytes": 389787,
+      "sha256": "9f9706a3c2fbc531ffe7dabe24763f0127890c71bb17a28bad7eb39151314d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/scout_backpack.png"
+    },
+    {
+      "path": "runs/candidate-old-record-H/guard-run.log",
+      "bytes": 401,
+      "sha256": "ec2fcff2d55a24573f92e40b78f2f7ac8c4ab30cadfccbf1d94f437abe7983cc",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/faea7a2a15bf4a488ac5bef5c890a66b/run.log"
+    },
+    {
+      "path": "runs/candidate-style-H/guard-run.log",
+      "bytes": 540,
+      "sha256": "7c6689cb41b67c243bcb8d052ba21ad1c1dfa477e8ff1eeb437e8b8106369564",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4398b55956654b48bab160748e74503a/run.log"
+    },
+    {
+      "path": "runs/candidate-style-H/original-userdata/style-phase-values.bin",
+      "bytes": 2596024,
+      "sha256": "c7f725987dd2c063edfacfe1c881091e4157e88740d92452ecd1a58776e58fec",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/4398b55956654b48bab160748e74503a/data/godot/app_userdata/Ambush Loop/style-phase-values.bin"
+    },
+    {
+      "path": "runs/clock-entry-terminal-diag/guard-run.log",
+      "bytes": 674,
+      "sha256": "3ffe940267d15ea2c73d3fb3a902621f6f23cb3c7d5907c2e240f0576a821c52",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/94a91f021fdd4050ae0e55a260da6862/run.log"
+    },
+    {
+      "path": "runs/clock-entry-terminal-diag/original-userdata/clock-entry-terminal.bin",
+      "bytes": 80844,
+      "sha256": "de5a605677987a1650786d4ccddbd677e64c528ce2af120a8e88446f01ee293f",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/94a91f021fdd4050ae0e55a260da6862/data/godot/app_userdata/Ambush Loop/clock-entry-terminal.bin"
+    },
+    {
+      "path": "runs/contract-diff-reader/guard-run.log",
+      "bytes": 573,
+      "sha256": "4301744ddb9dca8b5640231b9b0278f878fb9ff275dd0970ec70258407b211fd",
+      "copied_from": "/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/7229c3b3d68f4104b24500bcc40c8ad1/run.log"
+    },
+    {
+      "path": "runs/fixed-clock-H/guard-run.log",
+      "bytes": 405,
+      "sha256": "b76805756e4c78e2a68327adb8b41fda2382ed867e5feb2e789b8bf3c5b15397",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/7f22d74aaeed41b2aba85a2c88e42894/run.log"
+    },
+    {
+      "path": "runs/fixed-history-H/guard-run.log",
+      "bytes": 397,
+      "sha256": "a8d3814a05fcc70b270b93f1767fd552d39f9e15e0886ccf694918a42451285d",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/a6d5f5a6859943588709f808213daed3/run.log"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/report.json",
+      "bytes": 14192,
+      "sha256": "15507a23b6941ff59481a737826b923f92f675e860743289826375f091797f43",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/report.json"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-hud-profile-metrics/metadata.json",
+      "bytes": 23238,
+      "sha256": "004f7847aae0b902e3a8c68feeefec5cf03592f3d5fb31390f85a6dd8446c342",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-hud-profile-metrics/metadata.json"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-hud-profile-metrics/raw.csv",
+      "bytes": 66282,
+      "sha256": "b5c08ac0ce0454ed380e6533a674d7108cc21d5a42b733a901be09f62313a6a6",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-hud-profile-metrics/raw.csv"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-69ec9e6f9fff4eff9cdbc7348d9ce1c2/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/report.json",
+      "bytes": 14193,
+      "sha256": "389d7b54b566eca336ce832d5e9099b63eb7d377ba6d117929074656379b5894",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/report.json"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-hud-profile-metrics/metadata.json",
+      "bytes": 23239,
+      "sha256": "7f9fef783b5de1976bcfaf02766df8ed09d214a383a404fb11af4b5bd9fc910a",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-hud-profile-metrics/metadata.json"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-hud-profile-metrics/raw.csv",
+      "bytes": 67875,
+      "sha256": "d3959cd74f2d40940a730646eb4ba322275650da627b68a9b54f3f70bb5654f5",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-hud-profile-metrics/raw.csv"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-capability-P0-deferred/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-f9cad980fe324785abbeea6c836c0cd8/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/report.json",
+      "bytes": 14195,
+      "sha256": "69cfb4f317813b79957abfcf25155af149b00f898d63574d8da76e69b5613fdd",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/report.json"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-hud-profile-metrics/metadata.json",
+      "bytes": 23238,
+      "sha256": "ba36184ef812a29d566a21c0692df77fb8b4a96e3334b4cf2e5e984b79e12438",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-hud-profile-metrics/metadata.json"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-hud-profile-metrics/raw.csv",
+      "bytes": 68329,
+      "sha256": "86257cd69ddf1647b1aa414ce284f8cca0ae9723b00e5f63472ef0b2b1d31639",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-hud-profile-metrics/raw.csv"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-01-OFF/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-9975a3544066454e84160c22bdd4fab0/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/report.json",
+      "bytes": 14193,
+      "sha256": "f5f2f496511a84e1c36141e97a84e8e3c7fd65c454d28fe2b6b93629186d2e4e",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/report.json"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-advancing-original-replay.png",
+      "bytes": 918082,
+      "sha256": "9eecb0cd893b59744b4c4473af285a4fac73cb24b4e74c045a301d6520900ad1",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-hud-profile-metrics/metadata.json",
+      "bytes": 23239,
+      "sha256": "011de5cc3c43d9dba6e5decef9109bf3bdab03186f74f3450f4bf9069d30e529",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-hud-profile-metrics/metadata.json"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-hud-profile-metrics/raw.csv",
+      "bytes": 67931,
+      "sha256": "e4327db4e77726861e353798fedf339f860b32f6777050be8e22185936ed5c39",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-hud-profile-metrics/raw.csv"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-02-ON/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eca8e75123d34f599a586c7785541860/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/report.json",
+      "bytes": 14193,
+      "sha256": "ba02631020354320cf42dc375a9fba32470a695c5aeb0ad00fe5274dcd42bcbc",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/report.json"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-hud-profile-metrics/metadata.json",
+      "bytes": 23239,
+      "sha256": "1b30ab5fe665174709ce71f2840717fca526080700962a7afbbb55c7899ca554",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-hud-profile-metrics/metadata.json"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-hud-profile-metrics/raw.csv",
+      "bytes": 68309,
+      "sha256": "8bc04928937f53031923c0c0db30df98a7da8c95c525c02aa5e219d88f51ece9",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-hud-profile-metrics/raw.csv"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-03-ON/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-721aa166aa58429ca75803e98540db5a/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/report.json",
+      "bytes": 14196,
+      "sha256": "1ae016874abad7618f523b747e323874f0091ffc9d7d477264f9ed9e5d9bf0d2",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/report.json"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-advancing-original-replay-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-advancing-original-replay-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-advancing-original-replay-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-advancing-original-replay-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-advancing-original-replay-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-advancing-original-replay-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-advancing-original-replay.png",
+      "bytes": 918150,
+      "sha256": "37843a1c9f5c8a09f796ac46ffe787c8870a732d7e244b981de742cff600a559",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-advancing-original-replay.png"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-hud-profile-metrics/metadata.json",
+      "bytes": 23239,
+      "sha256": "750dcb7fd08c2a71d3c3679988ee01217758d324b44f1af3b201d35b84aa47c8",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-hud-profile-metrics/metadata.json"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-hud-profile-metrics/raw.csv",
+      "bytes": 67106,
+      "sha256": "2b1b5a31a212b9d8e805566858ddb0fc1e10fb29df4af36aa4ef399e2c31d6eb",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-hud-profile-metrics/raw.csv"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-static-confirmed-shot-actual-rig-signature.bin",
+      "bytes": 10544,
+      "sha256": "0937d3202f1796dfc57bfda88e18af4852d2540aa0f0a3a49b5c79217e07a663",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-static-confirmed-shot-actual-rig-signature.bin"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-static-confirmed-shot-canonical-frame.bin",
+      "bytes": 22200,
+      "sha256": "c4cbba4f6fe5621f36af4b67930363daf38ab7654937b6a20ec77eb801ef4d05",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-static-confirmed-shot-canonical-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-static-confirmed-shot-raw-frame.bin",
+      "bytes": 22212,
+      "sha256": "4f9c71b50f3f7c5fdc01494120ffb2b3ee2427dbe1114d555551d278f048e9e4",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-static-confirmed-shot-raw-frame.bin"
+    },
+    {
+      "path": "runs/profile-formal-04-OFF/original-output/yard-static-confirmed-shot.png",
+      "bytes": 947170,
+      "sha256": "69c85767300562d2b6b9ea041023aeecbcc01c24e7ff58ad2d167663b74af675",
+      "copied_from": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/hud-profile-eb0a1218a28c455eafeb259946414183/yard-static-confirmed-shot.png"
+    },
+    {
+      "path": "visual-equivalence.json",
+      "bytes": 13862,
+      "sha256": "19ae1bff15aca9718eb0fd3eb918256a309d489ff05972f5eab135690d8a4950",
+      "generated_summary": true
+    }
+  ],
+  "file_count": 452,
+  "total_bytes": 48695690
+}

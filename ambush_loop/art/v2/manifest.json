@@ -1,0 +1,388 @@
+{
+  "schema": 1,
+  "seed": 194406,
+  "generator_sha256": "c859e1f14c046db57a02539001b11f88150400ed0b2f2962af90c3b7ee073c34",
+  "assets": [
+    {
+      "asset_id": "supply_crate",
+      "category": "prop",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        1.0833,
+        0.7375,
+        0.65
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/supply_crate_lod0.glb",
+          "sha256": "96932ddbb83c5f9ed7bef95a58da37a45d2dc6cd51b21158590c71d8639f93ac",
+          "triangles": 1604,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/supply_crate_lod1.glb",
+          "sha256": "4d181397d261ca6fbd4daa3ef644229d5ff53e45ae6942881790ed786cceafc8",
+          "triangles": 882,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "sandbag_stack",
+      "category": "prop",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        1.5488,
+        0.525,
+        0.4513
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/sandbag_stack_lod0.glb",
+          "sha256": "51b23a282c1a84b840cc83a3959742c9a7b9929b958ab866f77639189458cf3c",
+          "triangles": 1620,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/sandbag_stack_lod1.glb",
+          "sha256": "04cc139719ac3fad656cbc26547a20846e2ac7d42bd007fa3e2182df9691215d",
+          "triangles": 858,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "oil_drum",
+      "category": "prop",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        0.606,
+        0.939,
+        0.606
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/oil_drum_lod0.glb",
+          "sha256": "eba777e00afd5953d95c6f16a00b6cfaa6ed43ef61ee696b9689c9cb438c61bd",
+          "triangles": 844,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/oil_drum_lod1.glb",
+          "sha256": "c658033c8f3916a13a0992245a634237ba1386b379c13aa4f68309ac6d8e2066",
+          "triangles": 463,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "field_radio",
+      "category": "prop",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        0.55,
+        0.9304,
+        0.3665
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/field_radio_lod0.glb",
+          "sha256": "f4cc81dfacdc038e24224b27a36ed45800c36120962ee9089e5036471ff944db",
+          "triangles": 812,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/field_radio_lod1.glb",
+          "sha256": "3af11d8eeaf89a39c058ad1bdd6b87e28a54859d3bf929386d006e4013f9102f",
+          "triangles": 446,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "yard_lamp",
+      "category": "prop",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        0.54,
+        3.6877,
+        0.975
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/yard_lamp_lod0.glb",
+          "sha256": "c44af28ea08b7f25c6a5ac979c5ffa3f848f1dec53843ba1a77862f5a162192d",
+          "triangles": 572,
+          "surfaces": 2
+        },
+        {
+          "path": "art/v2/models/yard_lamp_lod1.glb",
+          "sha256": "f1af6917d6484f472cc3c2f5264a4c2eb34f8b7f2a86fa520637915b9978db50",
+          "triangles": 310,
+          "surfaces": 2
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas",
+        "lamp emission"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {
+        "warm_light": [
+          0,
+          3.28,
+          -0.53
+        ]
+      },
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "warehouse_fragment",
+      "category": "building",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        6.4305,
+        3.85,
+        4.44
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/warehouse_fragment_lod0.glb",
+          "sha256": "e7994a920c13d571b68441c52df858020858e9587f91ef28f0586ac8e268a703",
+          "triangles": 2828,
+          "surfaces": 7
+        },
+        {
+          "path": "art/v2/models/warehouse_fragment_lod1.glb",
+          "sha256": "27ff24bb4efb09de542f520882eeab25f7b969f6b1ba88f52f7dc208c058d1bc",
+          "triangles": 1550,
+          "surfaces": 7
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "ground_concrete",
+      "category": "ground",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/ground_concrete_lod0.glb",
+          "sha256": "1f67f08ad5742506e6cfab3c47d525e55d4c8e1ba7c2548415bf0df72864149f",
+          "triangles": 44,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/ground_concrete_lod1.glb",
+          "sha256": "a02c1f915270e029de6f255abe6120d2395b59a0109e726e81a48d67cae36aad",
+          "triangles": 24,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "ground_asphalt",
+      "category": "ground",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/ground_asphalt_lod0.glb",
+          "sha256": "f02c7c3151e268ba2978f7254846fc618971e4e36b4cbb080a841acb7293e78b",
+          "triangles": 44,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/ground_asphalt_lod1.glb",
+          "sha256": "36a05cf353777711bd1c1d4936ad855cd7bba9e2f159389d07b5adaa01077491",
+          "triangles": 24,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    },
+    {
+      "asset_id": "ground_earth",
+      "category": "ground",
+      "source": "ArtSource/v2/build_yard_kit.py",
+      "editable_source": "ArtSource/v2/yard_kit.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original procedural geometry and material fields; no third-party source assets",
+      "usage": "Project-authored sample; same repository license/terms; no external attribution required",
+      "logic_id": "not_assigned_sample_only",
+      "unit": "metre",
+      "origin": "ground centre (ground tile top at 0)",
+      "runtime_axes": "+Y up, -Z forward; authoring +Z up, +Y forward",
+      "dimensions_m": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/ground_earth_lod0.glb",
+          "sha256": "fe78e1e720328ff435b16e614887dd81b88d3425a1212592ea96571ec37cd4a3",
+          "triangles": 44,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/ground_earth_lod1.glb",
+          "sha256": "fe78d676d88326a809efc7fb90e60ea77be4431696094e4f6614fcec7cca68d2",
+          "triangles": 24,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only; never navigation or combat LOS",
+      "animations": [],
+      "sockets": {},
+      "validation_scene": "res://scenes/presentation/asset_review.tscn",
+      "status": "exported; engine review pending"
+    }
+  ],
+  "textures": [
+    {
+      "path": "art/v2/textures/yard_atlas_albedo.png",
+      "sha256": "e08c646cbf8f5690819258c382be942e3c2e8712700adb6fe91b2ed5935072f2"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_normal.png",
+      "sha256": "825f4849f1f54d8e6c33c15b8498e124472f82db0866e1b8f2c64227e29bc931"
+    },
+    {
+      "path": "art/v2/textures/yard_atlas_orm.png",
+      "sha256": "3c95dc6f7f060a7e735ba58831164cad05f6a9be080413f640b5f827f7b867af"
+    }
+  ]
+}

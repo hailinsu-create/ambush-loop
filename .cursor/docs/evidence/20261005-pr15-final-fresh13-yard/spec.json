@@ -1,0 +1,420 @@
+{
+  "candidate": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "missions": [
+    {
+      "level": "yard",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        2,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        90,
+        180,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": null,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": null,
+      "first_sweep_mine_cell": null,
+      "next_level": "warehouse",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse"
+        ],
+        "continue_level": "warehouse",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "warehouse",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        3,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        180,
+        0,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [
+        {
+          "operator_index": 1,
+          "input": "F"
+        }
+      ],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": 1,
+      "first_sweep_mine_cell": [
+        24,
+        5
+      ],
+      "next_level": "pump",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump"
+        ],
+        "continue_level": "pump",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "pump",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        90,
+        0,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": 1,
+      "first_sweep_mine_cell": null,
+      "next_level": "railcut",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut"
+        ],
+        "continue_level": "railcut",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "railcut",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        270,
+        270,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 0,
+      "scout_policy_inputs": [
+        {
+          "operator_index": 0,
+          "input": "I -> original auto button off -> close"
+        }
+      ],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 2,
+      "first_sweep_authored_ammo_operator": 1,
+      "first_sweep_mine_cell": null,
+      "next_level": "depot",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot"
+        ],
+        "continue_level": "depot",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "depot",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        270,
+        270,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        },
+        {
+          "family": "mine",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": [
+        7,
+        11
+      ],
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": null,
+      "first_sweep_mine_cell": null,
+      "next_level": "radio",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot",
+          "radio"
+        ],
+        "continue_level": "radio",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "radio",
+      "wave_count": 3,
+      "wave_ids": [
+        0,
+        1,
+        2
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        270,
+        90,
+        270
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        },
+        {
+          "family": "mine",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": [
+        7,
+        11
+      ],
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": null,
+      "first_sweep_mine_cell": null,
+      "next_level": null,
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot",
+          "radio"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot",
+          "radio"
+        ],
+        "continue_level": null,
+        "complete": true
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    }
+  ],
+  "profile": "/workspace/.ambush-loop-env/web-final-fresh13-1ec-20261005",
+  "old_profile": "/workspace/.ambush-loop-env/web-fresh-native-dab-20261005",
+  "origin": "http://127.0.0.1:12915/index.html",
+  "seed": false,
+  "single_engine": true,
+  "whole": "separate bounded consumers after original bin sealed; no new producer rerun",
+  "tool_positive": "only actual current-writer event and saved confirmation; absent = UNRUN"
+}

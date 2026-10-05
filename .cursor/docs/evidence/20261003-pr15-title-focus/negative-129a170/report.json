@@ -1,0 +1,170 @@
+{
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "negative_settings_fresh_1600_200_settings",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_negative_settings_fresh_1600_200_settings.png",
+      "sha256": "e349cca10bda190ec7dfe850a4be9e49a7cc8fd5647137de8b4d5cf7ee3ed916"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "negative_settings_fresh_1600_200_settings_back",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_negative_settings_fresh_1600_200_settings_back.png",
+      "sha256": "0effd73ac832bdd3486d0fd592ac3303a97f609822951a8e8e9a3d681d01a266"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "negative_mouse_yard_brief_escape_brief_0",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_negative_mouse_yard_brief_escape_brief_0.png",
+      "sha256": "801adbaf229ade2122b2490251a548093f8a1eff618a290ba9212e983237cfaf"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "negative_mouse_yard_brief_escape_brief_back_0",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_negative_mouse_yard_brief_escape_brief_back_0.png",
+      "sha256": "aa1855100301af93cd07d75b77b57cadc37e1d168a090f4930d83552abc78d6c"
+    }
+  ],
+  "checks": 34,
+  "failures": 4,
+  "focus_rows": [
+    {
+      "focus": "none",
+      "id": "negative_settings_fresh_1600_200",
+      "inside": false,
+      "step": "settings opened"
+    },
+    {
+      "focus": "/root/Title/UI/TitleScroll/@VBoxContainer@101/Menu/StartButton",
+      "id": "negative_settings_fresh_1600_200",
+      "inside": false,
+      "step": "settings after five natural Tabs"
+    },
+    {
+      "focus": "/root/Title/UI/TitleScroll/@VBoxContainer@201/Menu/StartButton",
+      "id": "negative_mouse_yard_brief_escape",
+      "inside": true,
+      "step": "brief return 0"
+    }
+  ],
+  "native_inputs": [
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Escape"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Return"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Tab"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Return"
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_settings_fresh_1600_200",
+      "key": "Escape"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "negative_mouse_yard_brief_escape",
+      "path": "/root/Title/UI/TitleScroll/@VBoxContainer@201/Menu/StartButton",
+      "physical_screen": [
+        792.0,
+        478.020111083984
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "negative_mouse_yard_brief_escape",
+      "path": "/root/Title/@CanvasLayer@128/@PanelContainer@130/@MarginContainer@131/@VBoxContainer@132/BodyScroll/@VBoxContainer@135/MissionRow0/@Button@138",
+      "physical_screen": [
+        764.0,
+        290.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "negative_mouse_yard_brief_escape",
+      "key": "Escape"
+    }
+  ],
+  "rows": [
+    {
+      "control": "/root/Title/UI/TitleScroll/@VBoxContainer@201/Menu/StartButton",
+      "fully_reachable": true,
+      "id": "negative_mouse_yard_brief_escape_reach",
+      "rect": [
+        164.491851806641,
+        213.758697509766,
+        303.016296386719,
+        50.5027160644531
+      ],
+      "scroll": 0
+    },
+    {
+      "control": "/root/Title/@CanvasLayer@128/@PanelContainer@130/@MarginContainer@131/@VBoxContainer@132/BodyScroll/@VBoxContainer@135/MissionRow0/@Button@138",
+      "fully_reachable": true,
+      "id": "negative_mouse_yard_brief_escape_reach",
+      "rect": [
+        84.0,
+        111.0,
+        436.0,
+        68.0
+      ],
+      "scroll": 68
+    }
+  ],
+  "scope": "Natural XTest Tab/ShiftTab/Return/Escape; isolated API unlock/Continue fixtures, no gameplay wins; original brief Escape returns title."
+}

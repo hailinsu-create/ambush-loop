@@ -1,0 +1,61 @@
+# PR15 接管、单写者边界与资产接口
+
+日期：2026-10-02。接管基线：`b766da1c06b3312aac4f7120556d8cbd5d32b8d0`；PR15 为 Draft/Open，未合并。交接与实际远端已核对。执行顺序遵循 `AMBUSH_ASSET_EXECUTION_PLAN_20261002_v2.md`；PR14 的完整详单和 inventory 来源为 `d69251be42d5f96c99da48a24a3923b62863f28f`。高度玩法 PR4–6/13/16 不在本实现范围。
+
+## 所有权
+
+| 负责人 | 独占范围 | 交付方式 |
+| --- | --- | --- |
+| 主集成代码作者（本任务） | `scripts/main.gd`、`scripts/presentation/`、`scripts/replay/`、公共输入接口、共享测试与隔离包装器、runtime manifest/loader、PR15 | 分别复现、修复、验证、提交；推送授权 PR 分支，不 merge |
+| 资产工作者 `01a0fcac-42b5-7369-9ce6-aa223de910b0` | 角色制作源、角色/武器 GLB、Blender 输出、角色 atlas | 独立分支从 `f7c30f9` 修复；提交候选及验收证据；共享 manifest 改动仅提供候选 patch |
+| Notion 管理工作者 | 项目页、工作包与验收状态 | 主集成者返回进度，不覆盖管理页 |
+
+不编辑或重跑 `ArtSource/v2/build_yard_kit.py`，不编辑共享 atlas/角色 GLB/Blender 输出；不整体合并未验收 WIP。原作者已停止生产/测试并释放文件。资产制作与代码验证可在上述边界内独立进行；其他独立包需求向 dot 报告，由其安排。
+
+## 资产交付接口
+
+- 世界尺度：一格一米，Godot `+Y` 向上、`-Z` 向前；角色根在脚底地面中心，角色位移和朝向仅由模拟驱动。
+- 保留候选资产 ID：三名 `operator_*`、四名 `enemy_*`、十枪和五工具。LOD 路径维持 `art/v2/models/<asset_id>_lod<n>.glb`；每件交付实际尺寸、三角面、surface 数和 SHA-256。
+- 材质槽：yard 与 actor 图集分别命名；角色槽使用 `v2_actor_atlas`。actor Albedo/Normal/ORM 三张纹理路径、通道和尺寸必须明确，不隐式套用 yard 图集；发光槽单独声明。
+- 共同骨架：交付实际 Godot 导入后的骨名、父子关系和根节点路径；所有角色/LOD 的骨架和 bind pose 一致。不得以脚本声明骨数代替导入检验。
+- 动作：交付实际动画资源名、时长、循环标记及覆盖列表（idle/walk/run/aim/fire/pickup/death/crouch/crouch_walk/deploy/hit/haul）。全部为原地动作，无 root motion。声明尚未提供的动作，runtime 使用明确中性回退。
+- 挂点：提交右手握持、左手辅助、武器枪口和工具挂点的实际节点或骨名及本地变换（position/rotation/scale）；附近/远及八方向握持、足底、枪口证据。
+- 验收：无 invalid mesh 导出告警；源校验、重复导出、Godot 导入和动作验证分别有固定源、实际命令/退出码/完成标记。交付截图只是资产评审，战场接入由主集成者另测。
+- manifest：独立候选台账可随资产交付；共享运行台账由主集成者验收后更新。未通过引擎/战場验证不能写为 integrated/verified。
+
+## 首批代码切片与退出门
+
+1. 多波回放：先用实际状态转换复现 tick 重置造成的混帧/未来事件；稳定 attempt/wave/seq 身份、全局回放时间或明确分段；旧单波记录保持兼容，缺失身份不绑定当前 `run_id`。
+2. ALERT 装备冻结：复现 I 键、equip/pass/drop 与自动手雷策略入口；ALERT、暂停 ALERT、REPLAY 拒绝，SCOUT/SWEEP 合法；含真实 UI 信号和输入事件。
+3. 3D 事件聚焦、Back 先关闭背包、触控取消生命周期；随后六关完整多波不变量与历史视觉字段。
+4. 接收验收资产，再推进 A2 院子/HUD/事件、版本化全 3D 回放、A3 云端优化、A4 五关和完整 APK。每阶段继续云端运行、行为与视觉验证。
+
+每个切片记录固定源码 SHA、命令、退出码、完成标记、已验/未验和下一步。样件/灰盒结果不能宣称战场集成或设备性能通过。全部计划制作/六关接入/云端验证完成后再讨论模拟器与真机，不在当前阶段启动。网页 GPT PLAN/REVIEW：unavailable。
+
+## 当前状态
+
+后续已迁入R1静态15件/30LOD并验证loader、实际渲染和空目录PCK，见 [静态切片](AMBUSH_PR15_STATIC_EQUIPMENT_20261002.md)。独立QA四项P2的反例已复现并由dot独立复验关闭，cc11bb0/71df99a修复与六关复验见 [复验修复](AMBUSH_PR15_REVIEW_FIXES_20261002.md)。历史队员HUD/手机时间轴已用a932/ed673ed作者验证，见 [固定源码/证据](AMBUSH_PR15_HISTORY_HUD_20261002.md)，dot独立复验关闭原头像/队员卡P2，新增C2Help提示泄漏以cf61721独立小片修复，30项反例16fail→0，HUD164/生命周期32退出0，见 [补片证据](AMBUSH_PR15_C2_HISTORY_HINT_20261002.md)，已由dot独立复验关闭。R2未落地即由最新R3替代：18dc381采用00b2708/8a1fbe9候选原字节及新台账，角色4362、静态273、PCK329退出0，见 [R3技术接收/战场计划](AMBUSH_PR15_R3_RUNTIME_20261002.md)。e7b8cfa已接R3实战/历史骨骼主路径，231战場、84039合同、10296六关及其余回归通过，见 [主路径报告](AMBUSH_PR15_R3_BATTLE_20261002.md)，环境建筑仍灰盒，不用旧R1/R2 hash验证新资产。355ea89独立音频45 WAV／原import已采用，4a00a91真实play／混音405及云端回归通过，见 [音频报告](AMBUSH_PR15_AUDIO_RUNTIME_20261002.md)，耳听仍0/45、0/6；另提出 [环境资产独立包](AMBUSH_PR15_ENVIRONMENT_INTERFACE_20261002.md) 由dot另派生产。R4已正式接入十枪动作与格式2历史分层，源20cdc8c、90配置7681/动作17802/六关10296/PCK1380及其余回归退出0，见 [R4报告](AMBUSH_PR15_R4_RUNTIME_20261002.md)。完整资产与六关成品视觉仍待完成。
+
+已核对交接、PR15、WIP 与 PR14 详单。独立集成工作树为 `/workspace/ambush-pr15`；本环境 Godot 4.7.2 路径为 `/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64`，版本输出 `4.7.2.stable.official.ed1daf0bf`。首批回放/装备审计已实际复现和独立修复，后续 Back/手势取消/3D 事件聚焦也已施工；具体固定源码和证据见 [runtime 报告](AMBUSH_PR15_RUNTIME_REPORT_20261002.md)。完整资产与六关 3D 接入待完成。
+
+继承入口：[PR14 完整执行详单](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/AMBUSH_ASSET_EXECUTION_PLAN_20261002.md) · [资产 inventory](https://github.com/hailinsu-create/ambush-loop/blob/d69251be42d5f96c99da48a24a3923b62863f28f/.cursor/docs/evidence/asset-audit-20261002/inventory.json)。已读取；后者为 c1aaf27 原资产静态盘点，不作为当前新资产集成验收。
+
+当前独立新P2优先补：3ba263c / c381测试补片修SWEEP事件年龄和暂停/后台command时钟，真实反例22/11→正式24/0与正常记录/回放29/0，六关10296及其余回归通过，见 [动作时钟补片](AMBUSH_PR15_COMMAND_POSE_CLOCK_20261002.md)。dot独立关闭待验。环境资源85文件/11冻结依赖、40件80LOD618与空目录PCK1476已在a54d538/e0f50dd通过；实际六关组装和R5接入继续，资产制作源仍归独立作者。
+
+最新状态替代上段：dot于98075独立68/0关闭SWEEPclock P2；实际六关组装ffb95a670b4b58cbe420571bd9f884fed3a1a41b已283/0、六关10296/合同84039/HUD164/生命周期32/clock29退出0，50真实捕获，见 [环境正式报告](AMBUSH_PR15_ENVIRONMENT_RUNTIME_20261002.md)。旧/未知环境与布局保持记录grid灰盒；85/11原字节不改，未用展场取代战場。2ce6c602e31fb29556c85961704778185ca5a776独立修实时色罩入历史，36/18fail→36/0及HUD164/生命周期32；05a90268086dde694cc2f8313e808b5b23b629ba只将挡物实心圈改轮廓，近景11/生命周期32退出0。环境/角色/audio制作源和共享atlas所有权不变。
+
+下一主作者包为R5源29749157c5db064bfea626c3ed9d75d9a1791ece、交付ebedb829e3263abbeb6dd266905f24a3869fa281：先只读复核旧52clip/骨架/几何/挂点，接验收过的21角色GLB原字节，运行代码自行实现刀/投雷/诱饵/尸体真实事件clock/mask/cancel及历史纯副本；不整体并候选runtime/制作源。父端可并行安排此批固定环境/色罩的独立QA与当前HUD/视觉只读评审，主作者仍独占共享运行代码/测试，未自行派代理。其余完整HUD/FX、连续SWEEP时间轴及FAILED/abort终局、A3预算/六关完整smoke和可追溯APK继续；耳听/设备后置。
+
+
+最新R5工具片：[实际刀/雷/诱饵报告](AMBUSH_PR15_R5_TOOLS_20261002.md)。只接2974915/ebedb82的21角色GLB原字节，1092旧键/rig/geometry及30装备/3atlas兼容复核0失败；c5ec8ff工具真实事件clock/target/mask/取消与格式3保留R4/R3历史，d53成功装备立即取消修真实同帧反例4/1→4/0，工具1034/0和冻结66/0。分固定源六关10332/合同84042/角色21818/枪7681/战场231/clock29/HUD164/生命周期32/audio405/static333均退出0，f687空工程PCK1764/0。每run固定源、混合等价范围与保留失败在validation；未称当前全smoke/逐波视觉/设备通过。未merge/生产，制作源/atlas仍独立作者所有，尸体body来源/肩掌配对与20cm局部offset一次为下一片；之后必修desktop HUD覆盖和radio yaw345天线整隐，再FX/A3预算和13波视觉矩阵/完整回归APK，耳听设备后置。
+
+
+最新尸体片：[真实来源/肩掌/取消与纯回放报告](AMBUSH_PR15_CORPSE_RUNTIME_20261002.md)。ce932cc成功来源绑定/ground/held及真实H抓放先770/0；完整六关10332/3暴露age随capture浮点累加，bf1261c railcut1249/1明确只在两个年龄字段。3048294改domain原锚点后尸体770/合同84042/六关13波10332均0失败；91b9bdc仅扩实际移动/步态测试至1207/0和emptyPCK1766/0，运行树与304等价。复制bodyID/source wave不重绑，原任意loot haul/屏幕14px follow/自动ammo拾取和共享引用不变；内嵌20cm只采样一次。四张实际帧已看，72配对接触及−15mm最低floor门限通过，正向离地/自然艺术/墙碰撞/完整SWEEP玩家拖尸路径未称验收。当前技术PCK25618864 bytes SHA52e14b6b4189af54cb28086b0f36ec08f7201ba24a6be8fa2e823da376562378，非APK；环境重连旧exit句柄失效，304成功有pipefail后TEST_LOG证实0，两个FAILED退出码不冒称观测。HUD盖目标与radio整隐仍是下一必修，然后FX/continuous command/FAILED-A3/13波visual/最新fullsmoke/APK；生产源/GLB/atlas仍独立作者，最新fullsmoke7d34867、耳听设备后置。
+
+
+最新独立P2：[成功丢弃取消报告](AMBUSH_PR15_DROP_CANCEL_20261002.md)。原518仍同帧投雷→drop rifle→普通更新拾回rifle导致旧throw复活，b082540真实headless6/1exit1；47f0634仅成功drop立即cancel一行修为6/0，6e9ed4c扩失败/同枪kit/ALERT拒绝13/0、完整render1047/0、装备66/0、尸体headless1203/0，3e09a82专项render7/0与恢复枪实际帧。所有实际exit/durable状态和原日志已存。尸体正文按518原receipt改最低−0.001234874m（原误0.003765）、最高0.101031780m，原receipt不改；自然接地/离地上限/墙contact/完整SWEEP玩家路径独立待验。制作资产无修改，既有PCK91早于此修复，最新fullsmoke7d34867；HUD/radio→FX/A3/13wavevisual/fullsmoke/APK继续，未merge/生产/设备。
+
+
+2026-10-03 R02限定作者修复：[原生SWEEP墙接触报告](AMBUSH_PR15_CORPSE_CONTACT_20261003.md)。固定cd158166真实第二波H/原鼠标路径/朝+Y有363蒙皮顶点进砖墙17/1exit1，d7d291560a77ce112d3fe5f212e39e2d1143c132显式contact版本/共同显示转身修为render576/0，原尸体1203、合同84042、工具1041、冻结66、六关13波10332全部实际exit0；原终局/规则不变，5张真帧已看。独立墙QA、自然正向高度和全墙品质待验，R01由父端报告a325独立关闭；HUD/radio→FX/耳听/A3/13wave visual→单一候选smoke/QA/APK继续，设备后置。G另版、height PR13/16/17/18不合入；ArtSource/GLB/atlas/manifest未改未重跑。旧PCK91/完整smoke7d34867不归当前版本。
+
+附加固定29898fd精确父端MG/force-touch/原生Space-H抓放再抓-鼠标路径复现25/0 exit0；真实flank#3原source(596.6511,207.7352)，97步后(592.2054,178.353)、逻辑90°，LOD0墙内skin顶点0。仅测试文件不同，生产代码等价d7；新MG帧已看，测试parse诊断22c单列保留不计通过。

@@ -1,0 +1,33 @@
+{
+  "scope": "actual preparation/method failures retained; no game candidate change or relaxed runtime assertion",
+  "failures": [
+    {
+      "command": "prepare.py",
+      "actual_exit": 1,
+      "failure": "tracked alarm.wav.import differs cached UID metadata",
+      "runtime_started": false
+    },
+    {
+      "command": "prepare-v2.py",
+      "actual_exit": 1,
+      "failure": "textual mutation guard matched == comparison; assignment-specific regex fixed",
+      "runtime_started": false
+    },
+    {
+      "command": "export.py",
+      "actual_exit": 1,
+      "engine_exit": 0,
+      "failure": "missing hashlib in extracted PCK reader"
+    },
+    {
+      "command": "audit_payload.py",
+      "actual_exit": 1,
+      "failure": "strict original production delta rejects 45 UID-only import metadata differences"
+    },
+    {
+      "command": "ad-hoc UID alignment then export_aligned.py",
+      "actual_exit": 2,
+      "failure": "full cached sidecar versus exported remap equality assumption; alignment aborted, export command did not run; final align_uid.py verifies UID-only difference before copying existing production UID fields"
+    }
+  ]
+}

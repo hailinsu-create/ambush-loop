@@ -1,0 +1,70 @@
+{
+  "instrumentation_source_sha": "b429378c88ba21614d6564495755155badfa5e9c",
+  "actual_exit": 0,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "checks": 4,
+  "failures": 0,
+  "raw_rows": 20,
+  "uuid": "f4d7bfe7ec4e403793487f205c659f5f",
+  "files": [
+    {
+      "path": "Xorg-122-closure.json",
+      "bytes": 417,
+      "sha256": "0fa8445204d62c31e532143cd749a8510c245f646012385e8a21b179c8d2c90d"
+    },
+    {
+      "path": "Xorg-122.log",
+      "bytes": 57588,
+      "sha256": "ec5420932c267578e3bfa7bd5fbebabb2481b92149bebd7571f8d3cb60b62885"
+    },
+    {
+      "path": "cpu.max.txt",
+      "bytes": 14,
+      "sha256": "bd8ea316d63ccab47af9329b4b4b427cb510d04fe500195f5aa332d211d9fd3f"
+    },
+    {
+      "path": "probe-b429-r/a3_collector_probe_test.gd",
+      "bytes": 2653,
+      "sha256": "0c7766a30b0c2e75d5a37c0afb498ae89bd456d5135b3a807c737db1d5f22da6"
+    },
+    {
+      "path": "probe-b429-r/a3_render_metrics.gd",
+      "bytes": 5084,
+      "sha256": "2fb06b9c0831c28b21457335137bfaf14f16b696d3c6089e6da45d32e09180d4"
+    },
+    {
+      "path": "probe-b429-r/metadata.json",
+      "bytes": 2110,
+      "sha256": "0f896df282c72be378f15bebe269e70a30158a52204c663f289c6e56f92d5f16"
+    },
+    {
+      "path": "probe-b429-r/raw.csv",
+      "bytes": 6674,
+      "sha256": "5cef9134c661a3868d63c822d3e457b71a3d2a8aa458ea2275dde6fa593479d1"
+    },
+    {
+      "path": "probe-b429-r/run.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "probe-b429-r/run.log",
+      "bytes": 1017,
+      "sha256": "fd347a07b284034499c30d0cf10c8524e9aebd973012d6c8719113c758f2b866"
+    },
+    {
+      "path": "production-unchanged.json",
+      "bytes": 1695,
+      "sha256": "d17d93bb525d9885c3bb8d7e2596d831826139ce3d764a48b2e554ae28559bbf"
+    },
+    {
+      "path": "readonly-b429-review.md",
+      "bytes": 6891,
+      "sha256": "39ff7c0295a698d1e235418ce64020bf16f8a25ec033c30c108a801e33841b91"
+    }
+  ],
+  "file_count": 11,
+  "total_bytes": 84145,
+  "scope": "three-second frozen SCOUT instrumentation probe only; existing scene import cache, main automatic process disabled, collector attached after initial two frames. No sixphase/A3/performance acceptance; appendix timer/buffer memory/unsupported-zero/cold/provenance issues remain to improve"
+}

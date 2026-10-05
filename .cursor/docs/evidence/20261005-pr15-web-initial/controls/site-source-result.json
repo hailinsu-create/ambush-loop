@@ -1,0 +1,137 @@
+{
+  "project_id": "appgprj_6ac2e89b4db08191b308c175371ee7c6",
+  "commit_sha": "63642faff970fc8b01e4d54e624fa6ec129c929f",
+  "archive": "/workspace/pr15-web-artifacts/843f55c3bc618706d1ddc7aa18d01223927233fc/ambush-loop-site.tar",
+  "archive_bytes": 48486400,
+  "archive_sha256": "23dbec7329e31a2aa6f22805c6563d1868253eeea69acc61efb4668b0393c563",
+  "pushed_exact_remote_sha": "63642faff970fc8b01e4d54e624fa6ec129c929f",
+  "provider": "cloudflare_artifact",
+  "branch": "main",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:14.241104+00:00",
+      "end": "2026-10-05T00:02:14.250294+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "Codex"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:14.250306+00:00",
+      "end": "2026-10-05T00:02:14.252222+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "codex@openai.com"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:14.252230+00:00",
+      "end": "2026-10-05T00:02:14.253899+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "add",
+        "origin",
+        "https://git.chatgpt-team.site/73e0a121-9c37-434d-a2f3-abe77d807422/appgprj_6ac2e89b4db08191b308c175371ee7c6.git"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:14.253906+00:00",
+      "end": "2026-10-05T00:02:14.255989+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/main"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:14.255997+00:00",
+      "end": "2026-10-05T00:02:16.075223+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "--all"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:16.075242+00:00",
+      "end": "2026-10-05T00:02:17.482493+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Publish Ambush Loop full HTML game 843f55c with transport fa18869"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:17.482511+00:00",
+      "end": "2026-10-05T00:02:17.489255+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:17.489265+00:00",
+      "end": "2026-10-05T00:02:17.490753+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "push",
+        "origin",
+        "HEAD:refs/heads/main"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:02:17.490761+00:00",
+      "end": "2026-10-05T00:03:17.040451+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/main"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:03:17.040469+00:00",
+      "end": "2026-10-05T00:03:18.161040+00:00"
+    },
+    {
+      "argv": [
+        "git",
+        "archive",
+        "--format=tar",
+        "-o",
+        "/workspace/pr15-web-artifacts/843f55c3bc618706d1ddc7aa18d01223927233fc/ambush-loop-site.tar",
+        "63642faff970fc8b01e4d54e624fa6ec129c929f",
+        ".openai/hosting.json",
+        "dist"
+      ],
+      "actual_exit": 0,
+      "start": "2026-10-05T00:03:18.161097+00:00",
+      "end": "2026-10-05T00:03:18.442713+00:00"
+    }
+  ],
+  "helper_limit": "Installed skill site-workflow.mjs unavailable; equivalent explicit Git preparation/push/commit archive, credentials stdin/memory only"
+}

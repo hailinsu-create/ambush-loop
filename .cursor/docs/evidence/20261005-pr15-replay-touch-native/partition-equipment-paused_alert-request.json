@@ -1,0 +1,18 @@
+{
+  "label": "partition-equipment-paused_alert",
+  "start": "2026-10-05T18:28:55.970892+00:00",
+  "argv": [
+    "bash",
+    "/workspace/pr15-replay-touch-candidate-95daa-20261005/scripts/run_isolated_test.sh",
+    "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/godot-part",
+    "equipment_freeze_test.gd",
+    "--headless"
+  ],
+  "cap_s": 60,
+  "part": {
+    "part": "paused_alert",
+    "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-paused_alert.gd",
+    "sha256": "ce7cf5ffb45d3085119835ed21f2364faea2577a1de789bbacd172430c272bb7"
+  },
+  "process_group_owned": true
+}

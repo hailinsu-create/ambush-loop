@@ -1,0 +1,15 @@
+{
+  "source_sha": "a05fa959093ef5b6733466091a04fbb46647f97b",
+  "game_tree": "af63a0ba77a8c9e9a84af6e39d1ee4f0087f639a",
+  "command": "AMBUSH_TEST_SOURCE_SHA=a05fa959093ef5b6733466091a04fbb46647f97b bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 smoke_test.gd --headless",
+  "actual_exit": 54,
+  "checks": null,
+  "failures": null,
+  "ERROR": 1,
+  "SCRIPT_ERROR": 0,
+  "run_id": "a16ab966dc684905a5d0048ad395c574",
+  "guard": true,
+  "scope": "Original whole smoke stopped at SMOKE_JOURNAL_RADIO; no full smoke green",
+  "failure": "SMOKE_JOURNAL_RADIO",
+  "source_inference": "The fixture calls open_journal with briefing still visible. Title.open_journal refuses a top modal. No production correction executed."
+}

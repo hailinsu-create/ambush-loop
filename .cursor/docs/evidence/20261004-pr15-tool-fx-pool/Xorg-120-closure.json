@@ -1,0 +1,20 @@
+{
+  "pid": 110024,
+  "argv": [
+    "/usr/lib/xorg/Xorg",
+    ":120",
+    "-config",
+    "/tmp/pr15-full-xorg.conf",
+    "-noreset",
+    "-nolisten",
+    "tcp",
+    "-logfile",
+    "/tmp/pr15-tool-fx-pool/Xorg-120.log"
+  ],
+  "uid": 1000,
+  "owner_uid": 1000,
+  "signal": "SIGTERM after exact argv/uid check and after all engine sessions collected",
+  "actual_exit": 0,
+  "session_id": 58039,
+  "result": "Server terminated successfully (0); only owned PID110024 closed"
+}

@@ -1,0 +1,65 @@
+{
+  "checks": 3,
+  "failures": 0,
+  "rows": [
+    {
+      "actual_ammo": 2,
+      "actual_gun": "kar98k",
+      "actual_source_id": 1,
+      "case": "exact-source183-foreign-shooter",
+      "claimed_ammo": 32,
+      "claimed_gun": "mp40",
+      "claimed_source_id": 2,
+      "event_after": {
+        "actor_id": 2,
+        "attempt_id": "8245aafc165d40d60f7c449111efe72e",
+        "event_id": "8245aafc165d40d60f7c449111efe72e:0:2",
+        "payload": {
+          "animation_schema": 2,
+          "reload_s": 0.95,
+          "shot_interval_s": 0.078,
+          "visual_weapon": "mp40",
+          "weapon": "mp40"
+        },
+        "playback_schema": 2,
+        "playback_tick": 1,
+        "position": "(104.0, 80.0)",
+        "schema": 2,
+        "seq": 2,
+        "target_id": 1,
+        "tick": 0,
+        "timeline_tick": 0,
+        "type": "fire",
+        "wave_id": 0
+      },
+      "hp_after": 52.0,
+      "hp_before": 100.0,
+      "original_callback_count": 1,
+      "original_event": {
+        "actor_id": 2,
+        "attempt_id": "8245aafc165d40d60f7c449111efe72e",
+        "event_id": "8245aafc165d40d60f7c449111efe72e:0:2",
+        "payload": {
+          "animation_schema": 2,
+          "reload_s": 0.95,
+          "shot_interval_s": 0.078,
+          "visual_weapon": "mp40",
+          "weapon": "mp40"
+        },
+        "playback_schema": 2,
+        "playback_tick": 1,
+        "position": "(104.0, 80.0)",
+        "schema": 2,
+        "seq": 2,
+        "target_id": 1,
+        "tick": 0,
+        "timeline_tick": 0,
+        "type": "fire",
+        "wave_id": 0
+      },
+      "scope": "explicit valid currentlog B event passed to actual original A backend attack, not a demonstrated player UI path"
+    }
+  ],
+  "scope": "Exact original backend foreign-shooter source fixture. No ordinary-player route/render/native/FINAL/A3/device acceptance.",
+  "source_sha": "9f6f83ead818993114b8519266e1a7131acc5f05"
+}

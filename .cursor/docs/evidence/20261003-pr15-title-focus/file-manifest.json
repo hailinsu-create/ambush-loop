@@ -1,0 +1,658 @@
+{
+  "development-minimal/candidate.patch": {
+    "sha256": "f2d37c5bbec56ab5e372962f55128b341a37e4bbcb361b785aadb62f15882788",
+    "bytes": 6299
+  },
+  "development-minimal/modal_focus.gd": {
+    "sha256": "30d3203ab79d32ae623503e797b23ea74885f7161ff88bde9b90361896a457dc",
+    "bytes": 1283
+  },
+  "development-minimal/report.json": {
+    "sha256": "8698dccc257a6a834ab62c46f4a2a07d6556bbbafb95084599d949fdd928518e",
+    "bytes": 5015
+  },
+  "development-minimal/run.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "development-minimal/run.json": {
+    "sha256": "6f28ce8ec0c7417c0f0c1808fc2de969fdfbc240ff747da157864b776530a997",
+    "bytes": 304
+  },
+  "development-minimal/run.log": {
+    "sha256": "9a7911836046b1d7e9c74edc9d71c0b69532e8585e05c7a99c14063a063f56c5",
+    "bytes": 908
+  },
+  "development-minimal/viewport_negative_mouse_yard_brief_escape_brief_0.png": {
+    "sha256": "b9c5bdf46040b74fb76905c53625a0971d66a466ee641fc803709b98a16da428",
+    "bytes": 99609
+  },
+  "development-minimal/viewport_negative_mouse_yard_brief_escape_brief_back_0.png": {
+    "sha256": "c936906ace4dd6507c30705a7ff8cb5c97e6355da690e3382601a73917bad678",
+    "bytes": 118421
+  },
+  "development-minimal/viewport_negative_settings_fresh_1600_200_settings.png": {
+    "sha256": "2ac0d9ba408bc37a279d44ca9b1c1994e8dcdffda910e3bc2ef52209c7cf0167",
+    "bytes": 87700
+  },
+  "development-minimal/viewport_negative_settings_fresh_1600_200_settings_back.png": {
+    "sha256": "1060bfa2153d387b8d581b20be4717d085cbbbc6ab6fd66e2649085e2f0d1512",
+    "bytes": 117791
+  },
+  "formal-4ba2bfd/replay-auto-headless.json": {
+    "sha256": "399b3a48fd737f2135bd16f048bde740af0580ad2d79e666881a13cee32ae83b",
+    "bytes": 405
+  },
+  "formal-4ba2bfd/replay-auto-render.json": {
+    "sha256": "88133cecb848d6669946a5f29c78d63e59547fa514bc755b52ebee95c11ae000",
+    "bytes": 12158
+  },
+  "formal-4ba2bfd/replay_event_focus.png": {
+    "sha256": "7777a18be8e30cc6c38b63270c60fe900d4292ad8bb6e9760a2e84c63aa45c99",
+    "bytes": 732940
+  },
+  "formal-4ba2bfd/title-focus-auto-headless-v3.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "formal-4ba2bfd/title-focus-auto-headless-v3.log": {
+    "sha256": "24885a9da61353d6d33ec0eba51c3676955820273dca3819071cbf5c4f56981b",
+    "bytes": 608
+  },
+  "formal-4ba2bfd/title-focus-auto-render-v3.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "formal-4ba2bfd/title-focus-auto-render-v3.log": {
+    "sha256": "3bd2ca4d8b717522c6e144216b4749137b95fb23e56c1fc67dc42f8075fa8c1b",
+    "bytes": 1620
+  },
+  "formal-4ba2bfd/title-focus-formal-v3.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "formal-4ba2bfd/title-focus-formal-v3.log": {
+    "sha256": "4e7cb664cf3ca69311fdb322eee7fc337fb3686c87587c62ea5ff52ba9b9588f",
+    "bytes": 910
+  },
+  "formal-4ba2bfd/title-focus-lifecycle-headless-v3.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "formal-4ba2bfd/title-focus-lifecycle-headless-v3.log": {
+    "sha256": "8dffd41a46da9cda9e4dfe5ff724b71f0fd8ba7772345aa40e1379b9a72c6c88",
+    "bytes": 624
+  },
+  "formal-4ba2bfd/title-focus-lifecycle-render-v3.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "formal-4ba2bfd/title-focus-lifecycle-render-v3.log": {
+    "sha256": "ef2e6ae0290e7ed03ababeaac63495e6499b0e4546a82f44852e48b7d7ff63f2",
+    "bytes": 919
+  },
+  "formal-4ba2bfd/title-focus-quit-v3.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "formal-4ba2bfd/title-focus-quit-v3.log": {
+    "sha256": "92752de98e833952920fd0450de8c6a987eee26ec93769fb82d6cadec63de7a8",
+    "bytes": 926
+  },
+  "formal-4ba2bfd/title-focus-report.json": {
+    "sha256": "0200d5a0bf1b0712942a77877c439203f59025854229aec5ab83c4a870804e56",
+    "bytes": 516006
+  },
+  "formal-4ba2bfd/title-menu-exit-keyboard.json": {
+    "sha256": "b0c37764453975bc1fea742a37b6d50b62b4de49e3d5675d455b7ed725b77a90",
+    "bytes": 541
+  },
+  "formal-4ba2bfd/validation.json": {
+    "sha256": "a5ddbbde9416983c0af0436df76b622513e2639b37b3436684a95c94d1b281bb",
+    "bytes": 32963
+  },
+  "formal-4ba2bfd/viewport_auto_100_desktop_endpoint.png": {
+    "sha256": "9aa3cfef9500e8c5183903214c0e331a00ac10e229e8a8d9f3eebe6874848328",
+    "bytes": 858844
+  },
+  "formal-4ba2bfd/viewport_auto_100_desktop_entry.png": {
+    "sha256": "beac8ad51b300fb16806d5310e453f25721ac9c677512704640e3d98e0e0b66d",
+    "bytes": 698103
+  },
+  "formal-4ba2bfd/viewport_auto_100_desktop_playing.png": {
+    "sha256": "47a77cdcf6ca965d0c478e5e9ed7e12ffa3ed628bb4e4bd2d215e81aac88efab",
+    "bytes": 1023740
+  },
+  "formal-4ba2bfd/viewport_auto_200_compact_endpoint.png": {
+    "sha256": "e6117fb0b7ef0a62de85ad493fa6e5227aa15c44ecead22f0c1ea0728d3f7ffb",
+    "bytes": 545894
+  },
+  "formal-4ba2bfd/viewport_auto_200_compact_entry.png": {
+    "sha256": "94d4e9091bd4b68e178791fb499266472e23627f3ab70dbb58e2f02256df4922",
+    "bytes": 280594
+  },
+  "formal-4ba2bfd/viewport_auto_200_compact_playing.png": {
+    "sha256": "d8c7377791da39e7855bc4e472a5b8fe2a47bd0bc4fa9b4ac038462f26271eb9",
+    "bytes": 540635
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_keyboard_0.png": {
+    "sha256": "038a1c18c301b8bc20b66e8951e422fd2112eb224574d90f80a26c2230bbaa0d",
+    "bytes": 124432
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_keyboard_1.png": {
+    "sha256": "75ff4f850c238fb5613d4190f868a355ede6b3c3dc8626d5806e486e8920ec45",
+    "bytes": 124778
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_keyboard_2.png": {
+    "sha256": "733fc03ddac8c64b59c4ffda55c88fb98d6e40175058ec7e648cb220d26d0aa2",
+    "bytes": 125376
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_keyboard_3.png": {
+    "sha256": "e5c8fb4469d1435b46707286b2e4ca0f32848a6df07657e3e654d96bb6942a86",
+    "bytes": 125620
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_keyboard_4.png": {
+    "sha256": "a90d52d7c797bc368a936ceec396f340fe3f0205392780537f2cafb183bf19a6",
+    "bytes": 124778
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_keyboard_5.png": {
+    "sha256": "895c7fb7f1fb5113d075908ac968ef99d1f9110ac8da77087a76c1d66c556b21",
+    "bytes": 123675
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_back_mouse_0.png": {
+    "sha256": "535269b0f26cbb6e1ab5f83ec15ad98838c98a28b9dc2d69cf24ccb85aaceeb9",
+    "bytes": 124435
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_keyboard_0.png": {
+    "sha256": "4991428fd805dc10044b26e6a771a4eacb4e86cea91ae81d75c04b2bbae5c3da",
+    "bytes": 81216
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_keyboard_1.png": {
+    "sha256": "320a84afe4de3c63ec034cfd051feea5a7882729eb5fad3766e98cd1f5e388ac",
+    "bytes": 85635
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_keyboard_2.png": {
+    "sha256": "6c2ce20277a17df81da990927cb29c67d594be9806586fb9d5cadd675f646562",
+    "bytes": 96970
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_keyboard_3.png": {
+    "sha256": "fa6c8702ed7721e3d19545a9856be023147b781bfb642c51054c4b8b1091133e",
+    "bytes": 87662
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_keyboard_4.png": {
+    "sha256": "b5480b79be58cc8b7e2d720b342fdca490150f3910492bde6358a597c88c1437",
+    "bytes": 92428
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_keyboard_5.png": {
+    "sha256": "3fb31611379cc0dab82c9c9ed84ac6639d60f4e6b85467a1e0a0e1fe622dd222",
+    "bytes": 87491
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_brief_mouse_0.png": {
+    "sha256": "e480163a649ed0420b3ee50a00c0b830f8e16387bc28a73b45a7300125fd7a8f",
+    "bytes": 81527
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_continue_settings.png": {
+    "sha256": "501fb22884a5c35cd4c1ba8213dfba20d0830ea6dd6f26e156eefcbfb14e5d64",
+    "bytes": 97701
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_fresh_brief_back_mouse_0.png": {
+    "sha256": "f7a5a76b016d443cd4fe6fc91c33fa3a76164b2fa16b497127fba938e2375839",
+    "bytes": 121486
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_fresh_brief_mouse_0.png": {
+    "sha256": "01f78ee4711c2fd33014b3ab34362a4b758c167da4f70c0987f0e5b316027f07",
+    "bytes": 80649
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_fresh_settings.png": {
+    "sha256": "5c4274e33f364a1194522a419457ae24845c3ca98bd308b7c0326632a7fda2c8",
+    "bytes": 97641
+  },
+  "formal-4ba2bfd/viewport_focus_1280_100_desktop_fresh_settings_back.png": {
+    "sha256": "662b2543140fa57c96e5f572b8dadc146c0dc85cb9e7fa9c3dab56caaf273651",
+    "bytes": 121892
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_keyboard_0.png": {
+    "sha256": "0bab431687f0fb6f940bc7096443002b462afe7468aa058a63e986de8c6d9456",
+    "bytes": 91085
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_keyboard_1.png": {
+    "sha256": "346a78841223e2b9ae11cd7971f5980e3e0a24901eb0c7d2e8cb2c4f01b116d7",
+    "bytes": 91236
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_keyboard_2.png": {
+    "sha256": "b1ad3a05b6dce65e8475ee91b48194e4bbace6d500e280fa3af811911dd1966b",
+    "bytes": 92080
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_keyboard_3.png": {
+    "sha256": "d9ff82c61ecf2f9dc7954a3ce1eeb5319c2dad6dde2c5d1121a85afc9db664f4",
+    "bytes": 90686
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_keyboard_4.png": {
+    "sha256": "83655f90841ba43abba7ef7029c7848461f9c7fa74569b0ec730d604aaa35c2b",
+    "bytes": 91352
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_keyboard_5.png": {
+    "sha256": "a4b55eb0dcb92bc9c965ec66fa8cefa12108151a7b85797dd72742333c5af4fa",
+    "bytes": 92053
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_back_mouse_0.png": {
+    "sha256": "7b4a4d545fad724dd1ad6c6b861be2d1ffb37d21dc1f5dee206c18f6b3bbc42d",
+    "bytes": 90918
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_keyboard_0.png": {
+    "sha256": "c1017a275c24f0c18c4aa27c29df13ac630ebbe07a009e4a30c4a67590debd4a",
+    "bytes": 94764
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_keyboard_1.png": {
+    "sha256": "7bb63856e14243340b483ced0a32b4be918f8c7be60fd24d11cd69eaa93ce8bf",
+    "bytes": 92366
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_keyboard_2.png": {
+    "sha256": "b55d54fccd0672ab6c6acf4ac32039237d6c04cb1777350a95e12ca959703f6f",
+    "bytes": 89217
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_keyboard_3.png": {
+    "sha256": "5a63edcfc74b833233a8c850fda8d403dbbc86cba500477f3be9f07741d734e8",
+    "bytes": 87528
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_keyboard_4.png": {
+    "sha256": "6eaa051e2a6d56bfec2aacc8b5d7b729cd021b2b55f4322eb7a318a5cd7499d8",
+    "bytes": 85503
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_keyboard_5.png": {
+    "sha256": "7b57f59c8b6c4dfb868318f4ba64fb3224f1b50aeb8f2615e561fc00c0444ad7",
+    "bytes": 86549
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_brief_mouse_0.png": {
+    "sha256": "dfaadde7bb528f9dff68895b91970251b3e4f9b9f3dc9799467c1c2d87c8be9d",
+    "bytes": 95204
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_continue_settings.png": {
+    "sha256": "4c39b83c5a0016f80a70ff99c0b9708a9b72d8d55b3179894e25e122f5b0aa30",
+    "bytes": 82582
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_fresh_brief_back_mouse_0.png": {
+    "sha256": "d0ff79c67542cac1aa6e377a0571034456963136fc6dc479042f5d4695ab8083",
+    "bytes": 86227
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_fresh_brief_mouse_0.png": {
+    "sha256": "7313955d3a03f284f31abe8192323c9dfab32ac90561f375b12b9d4839805c7f",
+    "bytes": 93879
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_fresh_settings.png": {
+    "sha256": "0b4fd729c44895e61a625eac62522ca09cde57d5b42bf7ad7fa0b0a51ae13d75",
+    "bytes": 82186
+  },
+  "formal-4ba2bfd/viewport_focus_1280_200_touch_fresh_settings_back.png": {
+    "sha256": "d60cb56a45fd682ed875c32de0d57945c72ad91c25c4dcb0d29f3b6f83a2eeea",
+    "bytes": 89193
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_keyboard_0.png": {
+    "sha256": "52e471077e5e9341a9a4105fb360580fcd3b64df3b3ded62b8187899ccdde7cd",
+    "bytes": 127767
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_keyboard_1.png": {
+    "sha256": "175f4b7363b7462328057ac2291dc664a8b7c04ea848f85ba1b934d6808562c3",
+    "bytes": 127046
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_keyboard_2.png": {
+    "sha256": "2da4d72215c120f31e1b0c67f21e8a395f485e0bc0491591de3e99da10898220",
+    "bytes": 127355
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_keyboard_3.png": {
+    "sha256": "63fd8c0f4da5d51a6ebfcaff5f7bf927992c151b65c3cf6219481c9627d2ef37",
+    "bytes": 127692
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_keyboard_4.png": {
+    "sha256": "67b85bcde3bf11c5c4d97e149d0b334b54efbdabd4d36d709319a1e5a6ed9fef",
+    "bytes": 127521
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_keyboard_5.png": {
+    "sha256": "8a94f599c5423e8f3c6c0225a619c339e3a88f731bdb09beba996b1bb8c4c16f",
+    "bytes": 126396
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_back_mouse_0.png": {
+    "sha256": "b40303a5ab7f860f2553cd91dc6834b700bf5c72ab7e93164c14e963bd4d235d",
+    "bytes": 127362
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_keyboard_0.png": {
+    "sha256": "5662ed592ea3c299f336285015958ed56ab9c0ff744267d90e51823572e65e30",
+    "bytes": 83961
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_keyboard_1.png": {
+    "sha256": "fba6dbcd2aba22ea8d7b0826001f2b04db970f877626dae7bd8884fc7318d865",
+    "bytes": 88638
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_keyboard_2.png": {
+    "sha256": "2eb4ef936f7c470d887657a0edb02ea2f981f4002a0cedf85d4181619ee0a647",
+    "bytes": 100088
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_keyboard_3.png": {
+    "sha256": "779756cf6c699a67fbb05b5a1e502dfd282ef6bc6466af2468eae203bde9229e",
+    "bytes": 90325
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_keyboard_4.png": {
+    "sha256": "256e16e828f8bb09123471ded94e68ac361ed6b159689c385ea9b476f23b6755",
+    "bytes": 94577
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_keyboard_5.png": {
+    "sha256": "c5179a3e8599d460e321a2ae57c3aee509f8dca29969dc6c65f25441c0595d95",
+    "bytes": 90292
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_brief_mouse_0.png": {
+    "sha256": "8fcf4ac108db6d8aec76af21573055fde7f104dcaf7d2f8036267c33d29e43a2",
+    "bytes": 83690
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_continue_settings.png": {
+    "sha256": "9665c487d874d520c8809741035f767e1350586baba64af1b72a46c0fb0fe51d",
+    "bytes": 100351
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_fresh_brief_back_mouse_0.png": {
+    "sha256": "90a6ed4342f661d5a8a61cb437feba050eaa16f206b01eddd317ccda99dc01af",
+    "bytes": 124822
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_fresh_brief_mouse_0.png": {
+    "sha256": "1b73d1a5056a72b4ba5f94e66124a56be03d7a890504dba80cc8b845528d8313",
+    "bytes": 83162
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_fresh_settings.png": {
+    "sha256": "20361c8db5bfab46c819cdc3dea418f0ca5c3fed3ea60f9e57c9b7196608c26c",
+    "bytes": 100212
+  },
+  "formal-4ba2bfd/viewport_focus_1600_100_touch_fresh_settings_back.png": {
+    "sha256": "c63efc459df08f7302cbaf3915ad8e226979405f52896b785b4fba4029043972",
+    "bytes": 124444
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_keyboard_0.png": {
+    "sha256": "6899c6c7ac3df2ca8eaabc08632c40e3a599f7d791ea6fd5157b395e2b96a563",
+    "bytes": 92881
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_keyboard_1.png": {
+    "sha256": "a4bdb039a115e9c7b3f6bb5c32e88fe74bfad76ff0780c4b3b0e0bf9bc3507e9",
+    "bytes": 93368
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_keyboard_2.png": {
+    "sha256": "f4f4294516b98d9d682873b94bddf396b9964abbd07ec8b21e690289da5879f9",
+    "bytes": 94663
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_keyboard_3.png": {
+    "sha256": "0a018b4158de0e9bed8e918a2ffbf97dfc0d25492aea426a789e48cc37fc2cde",
+    "bytes": 93610
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_keyboard_4.png": {
+    "sha256": "3f8f2a008bd88324620489027e94bf0929e9119c6dc387c4ebca4436276d31ad",
+    "bytes": 94531
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_keyboard_5.png": {
+    "sha256": "d3fbb853f01f54c8c46ed4df48ddbac2b083047cadbf5147e5b3e85af7f34e27",
+    "bytes": 94811
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_back_mouse_0.png": {
+    "sha256": "a51635eac7294295c01cde419c0f51da00c4f50f2a3a8877728c59ab58a93ac5",
+    "bytes": 93050
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_keyboard_0.png": {
+    "sha256": "4616bdac798cda8468ddfd8ff20ab328e26be7580b89a22033728946b1027b5e",
+    "bytes": 97181
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_keyboard_1.png": {
+    "sha256": "e4bc068fe9515b08ca23de9fc98e2a2b6fa189e21cfa8c12b53be647f12a5e3c",
+    "bytes": 95519
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_keyboard_2.png": {
+    "sha256": "406a302edcc60b03f5e4430ef970dc008cff6d8586d868406ce721081ca795b4",
+    "bytes": 91684
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_keyboard_3.png": {
+    "sha256": "a76b5284df8ad4537dfcb0132060f9bf17b906c76923ae11faff79a83271adc5",
+    "bytes": 89823
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_keyboard_4.png": {
+    "sha256": "2738f9ea4a707d6d48f62cbc17348304793b6bef0684ddc16435b1b3154abf86",
+    "bytes": 87936
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_keyboard_5.png": {
+    "sha256": "eaa4cce8bf524938e24dde827f7da3f0fad49493a3940ea31e0d3939429e6ca4",
+    "bytes": 88801
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_brief_mouse_0.png": {
+    "sha256": "31d68fa4a63ca26d819191c4d4dd21e59333d2903b45ee2215d84b84ac615182",
+    "bytes": 97414
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_continue_settings.png": {
+    "sha256": "5a9c4e91ec9007559bcbac0d151b5e1025fec88475f02ed8e0f95cde405cbaeb",
+    "bytes": 84942
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_fresh_brief_back_mouse_0.png": {
+    "sha256": "ff5ef2d09df74b377a4d41d4f173aabb3db66e459472b7f2cc50e67b91ba04dc",
+    "bytes": 88617
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_fresh_brief_mouse_0.png": {
+    "sha256": "34bc8f85569d88eb98a67a8558bb6d9aaa01e0899cdcbc0f316b8954ed80959a",
+    "bytes": 96314
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_fresh_settings.png": {
+    "sha256": "de941030046352b6c9beacdee04d817a1d04a00816f837b69838e6ffb7462464",
+    "bytes": 84694
+  },
+  "formal-4ba2bfd/viewport_focus_1600_200_desktop_fresh_settings_back.png": {
+    "sha256": "e7c9fb0272be90754414ef5c90214586612ca7c4d9fcc8804c2bde3c57b885cb",
+    "bytes": 91515
+  },
+  "negative-129a170/report.json": {
+    "sha256": "acf5671ef91fdddbfc0dff63e49ce1b66fb0d20665345525ced524c8edd6d7b0",
+    "bytes": 4855
+  },
+  "negative-129a170/run.exit": {
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "bytes": 2
+  },
+  "negative-129a170/run.json": {
+    "sha256": "3d7f12c854e5dabdf1cc96f308b6c3814423ee09f021e316e6ca77bbdda07c72",
+    "bytes": 479
+  },
+  "negative-129a170/run.log": {
+    "sha256": "b780af3b49489c6bd870bec0c196c5caa78d00a9d7f8bfedb13fad1730b134bb",
+    "bytes": 1433
+  },
+  "negative-129a170/viewport_negative_mouse_yard_brief_escape_brief_0.png": {
+    "sha256": "801adbaf229ade2122b2490251a548093f8a1eff618a290ba9212e983237cfaf",
+    "bytes": 99704
+  },
+  "negative-129a170/viewport_negative_mouse_yard_brief_escape_brief_back_0.png": {
+    "sha256": "aa1855100301af93cd07d75b77b57cadc37e1d168a090f4930d83552abc78d6c",
+    "bytes": 118153
+  },
+  "negative-129a170/viewport_negative_settings_fresh_1600_200_settings.png": {
+    "sha256": "e349cca10bda190ec7dfe850a4be9e49a7cc8fd5647137de8b4d5cf7ee3ed916",
+    "bytes": 87619
+  },
+  "negative-129a170/viewport_negative_settings_fresh_1600_200_settings_back.png": {
+    "sha256": "0effd73ac832bdd3486d0fd592ac3303a97f609822951a8e8e9a3d681d01a266",
+    "bytes": 84111
+  },
+  "parse-diagnostic/isolated.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "parse-diagnostic/isolated.log": {
+    "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "bytes": 73
+  },
+  "parse-diagnostic/run.json": {
+    "sha256": "7a292b9a77264fec0da5b7bc14967f0018c16c0754041db0f5d486ca27379a1c",
+    "bytes": 420
+  },
+  "parse-diagnostic/test-draft.gd": {
+    "sha256": "13fbb555d5c6595433d0d8d55982c788d620b95f796fae64bad57a619d627517",
+    "bytes": 8346
+  },
+  "parse-diagnostic/unisolated.log": {
+    "sha256": "0767974863779ce4dd8b61433f83574ac13e0c5af72483b600336089251fd2f7",
+    "bytes": 1954
+  },
+  "terminated-8306706/run.json": {
+    "sha256": "b187cbc271a75f94f9e30049efdd5b0ed31278244633e026c5c68a29e66cd36c",
+    "bytes": 7810
+  },
+  "terminated-8306706/title-focus-auto-headless-v2.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "terminated-8306706/title-focus-auto-headless-v2.log": {
+    "sha256": "179702f0e562826ed71f0f213aa8f8674a6d9a04fe47b96518129505f0322d76",
+    "bytes": 608
+  },
+  "terminated-8306706/title-focus-auto-headless.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "terminated-8306706/title-focus-auto-headless.log": {
+    "sha256": "3f5d9ffb4923763f631389c6572129e76017958e3d0a7320779de4e4ca6ed84b",
+    "bytes": 608
+  },
+  "terminated-8306706/title-focus-formal-v2.exit": {
+    "sha256": "9d9b18720961e9b4689fd763b85e7b6f36160ccd3a8a1c9ddc5103bb0f66c396",
+    "bytes": 4
+  },
+  "terminated-8306706/title-focus-formal-v2.log": {
+    "sha256": "85ce232e1884ea96c0817bfa39b2fb819604c5d210b781315813fb7019bd4ae3",
+    "bytes": 7963
+  },
+  "terminated-8306706/title-focus-formal.exit": {
+    "sha256": "9d9b18720961e9b4689fd763b85e7b6f36160ccd3a8a1c9ddc5103bb0f66c396",
+    "bytes": 4
+  },
+  "terminated-8306706/title-focus-formal.log": {
+    "sha256": "c0064462a44b4e79585b69777e8f6ad2befacff9f04670f012bc69935842dbef",
+    "bytes": 12080
+  },
+  "terminated-8306706/title-focus-lifecycle-headless-v2.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "terminated-8306706/title-focus-lifecycle-headless-v2.log": {
+    "sha256": "7be07c9665fd72bd1cb3d7c79d48816a9913c814d468fde37c14bb0bce974827",
+    "bytes": 624
+  },
+  "terminated-8306706/title-focus-lifecycle-headless.exit": {
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "bytes": 2
+  },
+  "terminated-8306706/title-focus-lifecycle-headless.log": {
+    "sha256": "dfef1c3f148f05c42bd3f0988871d8157104ff5a75d126158fcb5571ecc49d30",
+    "bytes": 624
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_0.png": {
+    "sha256": "ca066956612bde186d311fa5cc92c7266fd030f20d2c8d4275affc9a2f23a43f",
+    "bytes": 125675
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_1.png": {
+    "sha256": "3e13ee8a9c95fe32b627637842e75e2105a633d47142e2dac4d9205dfe31f1e7",
+    "bytes": 85630
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_2.png": {
+    "sha256": "56ae745dfc482be49bc04d7364cebf85c3c5e508981fc681cbce688d24b168d7",
+    "bytes": 96940
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_3.png": {
+    "sha256": "f33b2d774b9d665cc45c8f1d00d6c3631f6785f93c009a3c50cd000f9653157c",
+    "bytes": 87874
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_4.png": {
+    "sha256": "53b61954ccec5bdd8bc9d682e6e9b2973c90e11a3c169117626841bf1c6c52c6",
+    "bytes": 92046
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_5.png": {
+    "sha256": "96306177a7ac077911d09113488e920a5894cc7f3facb2f6dbb17132c5714cbb",
+    "bytes": 87281
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_back_0.png": {
+    "sha256": "45dcb5359ad04ee79311fb28afcc97055d7a10520116b0f9099e89b1c093e6b2",
+    "bytes": 81305
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_back_1.png": {
+    "sha256": "40e85ed4a5e63d3a71b58ebcf905fbf5b69c4955286a9c155cf8c10aab37948e",
+    "bytes": 124623
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_back_2.png": {
+    "sha256": "1a36f8139ad4c030cf942183a9a40034d89585a2fd2f5389f74fae5858cfcc82",
+    "bytes": 125042
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_back_3.png": {
+    "sha256": "4537a29394dd03ff2c5a4080d1ef9d86a537376dae10027ccc3e6a6b0121bb1a",
+    "bytes": 124038
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_back_4.png": {
+    "sha256": "d97f2665bafb629d3f8f508dc7cfa18964b2c5981c7e9764b01f33202fa20e95",
+    "bytes": 125614
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_brief_back_5.png": {
+    "sha256": "f123166a8a35e184d0c92c6967daf4f73efbe40b9489ae32ac2331765956a6aa",
+    "bytes": 123789
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_continue_settings.png": {
+    "sha256": "f82f0d580406c679930282a58c6c981d1065a3eda260337d0ee47bfb3563ed3b",
+    "bytes": 109451
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_fresh_brief_0.png": {
+    "sha256": "d0738e008180c7ffb3f5fd818487362d4db0b09e8903f80f8baeb4a7a855e6f1",
+    "bytes": 80538
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_fresh_brief_back_0.png": {
+    "sha256": "e70c10fa42240c63c4d2764c390b9b88d1815f38e6d4a68b4b64adf04e55aa59",
+    "bytes": 121349
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_fresh_settings.png": {
+    "sha256": "a59ebd02c7b5f02cb283be2a97758f8ba71ae40d842c0ff4d738eb7a925aa3a4",
+    "bytes": 122307
+  },
+  "terminated-8306706/viewport_focus_1280_100_desktop_fresh_settings_back.png": {
+    "sha256": "f8a5ec226104529b66a7025c0258e2386c400cd00ff4f9d9b88ed1675ca1ccbe",
+    "bytes": 122290
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_continue_brief_0.png": {
+    "sha256": "f558885e424c0f26b1a60c1aac289d6c9bea3fce969a3164b75932f53dea2c78",
+    "bytes": 94897
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_continue_brief_back_0.png": {
+    "sha256": "75ff3132534dc7784fb2fac23b95d163b647156da32fa57ada49a3873a1095e2",
+    "bytes": 91124
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_continue_settings.png": {
+    "sha256": "c44f865d9b108faa6d56ab1027ba572314907dc02d5623ee6aba0798b1d10d87",
+    "bytes": 82538
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_fresh_brief_0.png": {
+    "sha256": "d64fd56314316bac0533b7a3f849c782d171d04d03393a7181abdc7307bb7c14",
+    "bytes": 94008
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_fresh_brief_back_0.png": {
+    "sha256": "c7cb04678cb0a51c546955d708b1dee49230dcf624b510ca755a6c0ce27d2d6d",
+    "bytes": 86733
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_fresh_settings.png": {
+    "sha256": "937c3d2fb07e88ffee623e22ea052b6f4dba4ae1c72c39f1d121e426a0b463a2",
+    "bytes": 82149
+  },
+  "terminated-8306706/viewport_focus_1280_200_touch_fresh_settings_back.png": {
+    "sha256": "bfddd0799beaeaec0664a847239431f14f1bed8db881549355c3d4964b327e91",
+    "bytes": 89157
+  },
+  "terminated-8306706/viewport_focus_1600_100_touch_fresh_brief_0.png": {
+    "sha256": "175b2b144057f4466746147c12413069bd4740d1adceab7552eeb4aa7ee1ba9a",
+    "bytes": 117241
+  },
+  "terminated-8306706/viewport_focus_1600_100_touch_fresh_brief_back_0.png": {
+    "sha256": "f3b087e42d2d3820a5905da061cff8a1771a7bf909aa5a7a3cbe702bd84e1977",
+    "bytes": 131748
+  },
+  "terminated-8306706/viewport_focus_1600_100_touch_fresh_settings.png": {
+    "sha256": "8b5c5c39e0e3e836c68933a4bbd2dfe878ad1139512ae7f6cba290b9a0966492",
+    "bytes": 161818
+  },
+  "terminated-8306706/viewport_focus_1600_100_touch_fresh_settings_back.png": {
+    "sha256": "073ec9d64972304ca54fd2e489b29912bfa066ed7ae6b88b55cd7ef83b899329",
+    "bytes": 130115
+  }
+}

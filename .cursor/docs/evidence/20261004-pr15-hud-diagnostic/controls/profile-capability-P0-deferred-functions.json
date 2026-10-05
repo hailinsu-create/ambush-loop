@@ -1,0 +1,4062 @@
+{
+  "log": "/tmp/pr15-hud-diagnostic/profile-capability-P0-deferred.log",
+  "segments": [
+    {
+      "profiler_disjoint_self_sum_seconds": 3.879687,
+      "signature_count": 2226,
+      "selected": {
+        "res://scripts/main.gd::_process": {
+          "rank": 72,
+          "signature": "res://scripts/main.gd::5508::_process",
+          "inclusive_seconds": 0.001294,
+          "self_seconds": 0.000134,
+          "calls": 62
+        },
+        "res://scripts/main.gd::_apply_replay_scrub": {
+          "rank": 1942,
+          "signature": "res://scripts/main.gd::6666::_apply_replay_scrub",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/main.gd::_update_hud": {
+          "rank": 1727,
+          "signature": "res://scripts/main.gd::7598::_update_hud",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/main.gd::_ensure_touch_hud": {
+          "rank": 414,
+          "signature": "res://scripts/main.gd::881::_ensure_touch_hud",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/main.gd::_refresh_touch_hud": {
+          "rank": 485,
+          "signature": "res://scripts/main.gd::1141::_refresh_touch_hud",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/main.gd::_paint_replay_snapshot": {
+          "rank": 1940,
+          "signature": "res://scripts/main.gd::6699::_paint_replay_snapshot",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/presentation/presenter_3d.gd::refresh": {
+          "rank": 4,
+          "signature": "res://scripts/presentation/presenter_3d.gd::254::refresh",
+          "inclusive_seconds": 0.199064,
+          "self_seconds": 0.009995,
+          "calls": 62
+        },
+        "res://scripts/touch_hud.gd::refresh_phase": {
+          "rank": 2062,
+          "signature": "res://scripts/touch_hud.gd::601::refresh_phase",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/touch_hud.gd::_apply_btn_style": {
+          "rank": 2072,
+          "signature": "res://scripts/touch_hud.gd::417::_apply_btn_style",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/touch_hud.gd::_paint_lock_states": {
+          "rank": 2059,
+          "signature": "res://scripts/touch_hud.gd::724::_paint_lock_states",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/touch_hud.gd::_apply_safe_area": {
+          "rank": 2070,
+          "signature": "res://scripts/touch_hud.gd::444::_apply_safe_area",
+          "inclusive_seconds": 0.0,
+          "self_seconds": 0.0,
+          "calls": 0
+        },
+        "res://scripts/operator.gd::_ensure_tag_plate": {
+          "rank": 2,
+          "signature": "res://scripts/operator.gd::1319::OperatorUnit._ensure_tag_plate",
+          "inclusive_seconds": 3.662851,
+          "self_seconds": 3.662365,
+          "calls": 186
+        }
+      },
+      "all_nonzero_functions": [
+        {
+          "rank": 0,
+          "signature": "res://scripts/operator.gd::1048::OperatorUnit._process",
+          "inclusive_seconds": 3.680995,
+          "self_seconds": 0.001369,
+          "calls": 186
+        },
+        {
+          "rank": 1,
+          "signature": "res://scripts/operator.gd::1254::OperatorUnit._apply_idle_bob",
+          "inclusive_seconds": 3.675064,
+          "self_seconds": 0.003996,
+          "calls": 186
+        },
+        {
+          "rank": 2,
+          "signature": "res://scripts/operator.gd::1319::OperatorUnit._ensure_tag_plate",
+          "inclusive_seconds": 3.662851,
+          "self_seconds": 3.662365,
+          "calls": 186
+        },
+        {
+          "rank": 3,
+          "signature": "res://scripts/presentation/presenter_3d.gd::242::_process",
+          "inclusive_seconds": 0.199363,
+          "self_seconds": 0.000154,
+          "calls": 62
+        },
+        {
+          "rank": 4,
+          "signature": "res://scripts/presentation/presenter_3d.gd::254::refresh",
+          "inclusive_seconds": 0.199064,
+          "self_seconds": 0.009995,
+          "calls": 62
+        },
+        {
+          "rank": 5,
+          "signature": "res://scripts/presentation/view_state.gd::134::_freeze",
+          "inclusive_seconds": 0.0569,
+          "self_seconds": 0.008602,
+          "calls": 45880
+        },
+        {
+          "rank": 6,
+          "signature": "res://scripts/presentation/view_state.gd::11::capture",
+          "inclusive_seconds": 0.045278,
+          "self_seconds": 0.004562,
+          "calls": 62
+        },
+        {
+          "rank": 7,
+          "signature": "res://scripts/presentation/presenter_3d.gd::380::_sync_actors",
+          "inclusive_seconds": 0.042275,
+          "self_seconds": 0.003153,
+          "calls": 62
+        },
+        {
+          "rank": 8,
+          "signature": "res://scripts/presentation/presenter_3d.gd::421::_sync_body",
+          "inclusive_seconds": 0.038192,
+          "self_seconds": 0.002725,
+          "calls": 310
+        },
+        {
+          "rank": 9,
+          "signature": "res://scripts/presentation/shot_fx_pool.gd::82::update_frame",
+          "inclusive_seconds": 0.033009,
+          "self_seconds": 0.002678,
+          "calls": 62
+        },
+        {
+          "rank": 10,
+          "signature": "res://scripts/presentation/actor_pose.gd::23::sample",
+          "inclusive_seconds": 0.028304,
+          "self_seconds": 0.003451,
+          "calls": 310
+        },
+        {
+          "rank": 11,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::15::active",
+          "inclusive_seconds": 0.026106,
+          "self_seconds": 0.000296,
+          "calls": 62
+        },
+        {
+          "rank": 12,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::28::sample",
+          "inclusive_seconds": 0.025383,
+          "self_seconds": 0.005508,
+          "calls": 682
+        },
+        {
+          "rank": 13,
+          "signature": "res://scripts/presentation/presenter_3d.gd::456::_sync_objects",
+          "inclusive_seconds": 0.021272,
+          "self_seconds": 0.005537,
+          "calls": 62
+        },
+        {
+          "rank": 14,
+          "signature": "res://scripts/presentation/occlusion_controller.gd::5::update",
+          "inclusive_seconds": 0.020466,
+          "self_seconds": 0.018884,
+          "calls": 62
+        },
+        {
+          "rank": 15,
+          "signature": "res://scripts/c2/context_cursor.gd::48::C2ContextCursor._process",
+          "inclusive_seconds": 0.018232,
+          "self_seconds": 0.018232,
+          "calls": 62
+        },
+        {
+          "rank": 16,
+          "signature": "res://scripts/presentation/asset_library.gd::27::asset_record",
+          "inclusive_seconds": 0.016691,
+          "self_seconds": 0.000218,
+          "calls": 682
+        },
+        {
+          "rank": 17,
+          "signature": "res://scripts/a3_render_metrics.gd::184::_sample",
+          "inclusive_seconds": 0.016259,
+          "self_seconds": 0.007174,
+          "calls": 62
+        },
+        {
+          "rank": 18,
+          "signature": "res://scripts/fx/mission_sky.gd::53::MissionSky._draw",
+          "inclusive_seconds": 0.016247,
+          "self_seconds": 0.000147,
+          "calls": 62
+        },
+        {
+          "rank": 19,
+          "signature": "res://scripts/fx/mission_sky.gd::142::MissionSky._draw_yard",
+          "inclusive_seconds": 0.016021,
+          "self_seconds": 0.003847,
+          "calls": 62
+        },
+        {
+          "rank": 20,
+          "signature": "res://scripts/presentation/actor_pose.gd::148::_last_event",
+          "inclusive_seconds": 0.015332,
+          "self_seconds": 0.008619,
+          "calls": 806
+        },
+        {
+          "rank": 21,
+          "signature": "res://scripts/c2/minimap.gd::71::C2Minimap._draw",
+          "inclusive_seconds": 0.013515,
+          "self_seconds": 0.002135,
+          "calls": 62
+        },
+        {
+          "rank": 22,
+          "signature": "res://scripts/c2/minimap.gd::124::C2Minimap._draw_history",
+          "inclusive_seconds": 0.011254,
+          "self_seconds": 0.009568,
+          "calls": 62
+        },
+        {
+          "rank": 23,
+          "signature": "res://scripts/raid/stash.gd::131::RaidStash._process",
+          "inclusive_seconds": 0.011139,
+          "self_seconds": 0.001575,
+          "calls": 558
+        },
+        {
+          "rank": 24,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::61::update_frame",
+          "inclusive_seconds": 0.009843,
+          "self_seconds": 0.00189,
+          "calls": 62
+        },
+        {
+          "rank": 25,
+          "signature": "res://scripts/presentation/actor_pose.gd::102::_legacy_sample",
+          "inclusive_seconds": 0.009508,
+          "self_seconds": 0.001288,
+          "calls": 310
+        },
+        {
+          "rank": 26,
+          "signature": "res://scripts/fx/mission_sky.gd::103::MissionSky._draw_starfield",
+          "inclusive_seconds": 0.008571,
+          "self_seconds": 0.006154,
+          "calls": 62
+        },
+        {
+          "rank": 27,
+          "signature": "res://scripts/raid/stash.gd::115::RaidStash._paint_tag",
+          "inclusive_seconds": 0.008518,
+          "self_seconds": 0.006961,
+          "calls": 558
+        },
+        {
+          "rank": 28,
+          "signature": "res://scripts/presentation/environment_visual.gd::30::set_lid",
+          "inclusive_seconds": 0.008454,
+          "self_seconds": 0.00102,
+          "calls": 930
+        },
+        {
+          "rank": 29,
+          "signature": "res://scripts/presentation/movement_dust_pool.gd::47::update_frame",
+          "inclusive_seconds": 0.005906,
+          "self_seconds": 0.000162,
+          "calls": 62
+        },
+        {
+          "rank": 30,
+          "signature": "res://scripts/map_draw.gd::111::_process",
+          "inclusive_seconds": 0.00563,
+          "self_seconds": 0.000225,
+          "calls": 62
+        },
+        {
+          "rank": 31,
+          "signature": "res://scripts/map_draw.gd::184::_draw",
+          "inclusive_seconds": 0.005535,
+          "self_seconds": 0.000405,
+          "calls": 62
+        },
+        {
+          "rank": 32,
+          "signature": "res://scripts/fx/operator_silhouette.gd::156::pose_parts",
+          "inclusive_seconds": 0.005511,
+          "self_seconds": 0.000741,
+          "calls": 186
+        },
+        {
+          "rank": 33,
+          "signature": "res://scripts/map_draw.gd::142::_ensure_cache_current",
+          "inclusive_seconds": 0.005311,
+          "self_seconds": 7.7e-05,
+          "calls": 62
+        },
+        {
+          "rank": 34,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::12::active",
+          "inclusive_seconds": 0.005106,
+          "self_seconds": 0.00071,
+          "calls": 62
+        },
+        {
+          "rank": 35,
+          "signature": "res://scripts/map_draw.gd::631::_draw_escape_mouth",
+          "inclusive_seconds": 0.00504,
+          "self_seconds": 0.004271,
+          "calls": 62
+        },
+        {
+          "rank": 36,
+          "signature": "res://scripts/map_draw.gd::161::_cache_signature",
+          "inclusive_seconds": 0.00496,
+          "self_seconds": 0.004449,
+          "calls": 62
+        },
+        {
+          "rank": 37,
+          "signature": "res://scripts/presentation/presenter_3d.gd::557::_sync_cones",
+          "inclusive_seconds": 0.004672,
+          "self_seconds": 0.004518,
+          "calls": 62
+        },
+        {
+          "rank": 38,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::34::sample",
+          "inclusive_seconds": 0.004227,
+          "self_seconds": 0.001787,
+          "calls": 62
+        },
+        {
+          "rank": 39,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::50::AmbushZoneFx._draw",
+          "inclusive_seconds": 0.003967,
+          "self_seconds": 0.001601,
+          "calls": 62
+        },
+        {
+          "rank": 40,
+          "signature": "res://scripts/game_settings.gd::54::is_power_saving",
+          "inclusive_seconds": 0.003734,
+          "self_seconds": 0.000387,
+          "calls": 2542
+        },
+        {
+          "rank": 41,
+          "signature": "res://scripts/presentation/asset_library.gd::32::has_asset",
+          "inclusive_seconds": 0.003494,
+          "self_seconds": 0.000221,
+          "calls": 744
+        },
+        {
+          "rank": 42,
+          "signature": "res://scripts/replay/replay_player.gd::120::ReplayPlayer.snapshot_at_or_before",
+          "inclusive_seconds": 0.003132,
+          "self_seconds": 0.000684,
+          "calls": 62
+        },
+        {
+          "rank": 43,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::11::active",
+          "inclusive_seconds": 0.002983,
+          "self_seconds": 0.000605,
+          "calls": 62
+        },
+        {
+          "rank": 44,
+          "signature": "res://scripts/fx/mission_sky.gd::30::MissionSky._is_power_saving",
+          "inclusive_seconds": 0.002838,
+          "self_seconds": 0.000668,
+          "calls": 1798
+        },
+        {
+          "rank": 45,
+          "signature": "res://scripts/replay/replay_player.gd::60::ReplayPlayer.playback_time",
+          "inclusive_seconds": 0.002835,
+          "self_seconds": 0.002835,
+          "calls": 4960
+        },
+        {
+          "rank": 46,
+          "signature": "res://scripts/presentation/asset_library.gd::41::model_path",
+          "inclusive_seconds": 0.002829,
+          "self_seconds": 0.00171,
+          "calls": 744
+        },
+        {
+          "rank": 47,
+          "signature": "res://scripts/presentation/view_state.gd::106::_movement_actors",
+          "inclusive_seconds": 0.002709,
+          "self_seconds": 0.001955,
+          "calls": 62
+        },
+        {
+          "rank": 48,
+          "signature": "res://scripts/fx/operator_silhouette.gd::849::_shift",
+          "inclusive_seconds": 0.002524,
+          "self_seconds": 0.002524,
+          "calls": 1302
+        },
+        {
+          "rank": 49,
+          "signature": "res://scripts/game_settings.gd::76::_normalize_quality_tier",
+          "inclusive_seconds": 0.002405,
+          "self_seconds": 0.001759,
+          "calls": 2542
+        },
+        {
+          "rank": 50,
+          "signature": "res://scripts/presentation/movement_dust_pool.gd::41::_hide",
+          "inclusive_seconds": 0.002317,
+          "self_seconds": 0.002317,
+          "calls": 62
+        },
+        {
+          "rank": 51,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::86::AmbushZoneFx._dashed_rect",
+          "inclusive_seconds": 0.002274,
+          "self_seconds": 7e-05,
+          "calls": 62
+        },
+        {
+          "rank": 52,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::112::_equal_int",
+          "inclusive_seconds": 0.002263,
+          "self_seconds": 0.001259,
+          "calls": 5890
+        },
+        {
+          "rank": 53,
+          "signature": "res://scripts/presentation/firearm_pose.gd::11::profile",
+          "inclusive_seconds": 0.002261,
+          "self_seconds": 0.000204,
+          "calls": 434
+        },
+        {
+          "rank": 54,
+          "signature": "res://scripts/presentation/shot_fx_pool.gd::76::_hide",
+          "inclusive_seconds": 0.002236,
+          "self_seconds": 0.002236,
+          "calls": 62
+        },
+        {
+          "rank": 55,
+          "signature": "res://scripts/main.gd::2219::_is_power_saving",
+          "inclusive_seconds": 0.002189,
+          "self_seconds": 0.000268,
+          "calls": 248
+        },
+        {
+          "rank": 56,
+          "signature": "res://scripts/presentation/presenter_3d.gd::315::_layout_camera_controls",
+          "inclusive_seconds": 0.002165,
+          "self_seconds": 0.001359,
+          "calls": 62
+        },
+        {
+          "rank": 57,
+          "signature": "res://scripts/replay/replay_player.gd::132::ReplayPlayer.events_up_to",
+          "inclusive_seconds": 0.002161,
+          "self_seconds": 0.00051,
+          "calls": 62
+        },
+        {
+          "rank": 58,
+          "signature": "res://scripts/raid/stash.gd::105::RaidStash._phone",
+          "inclusive_seconds": 0.002091,
+          "self_seconds": 0.001136,
+          "calls": 1116
+        },
+        {
+          "rank": 59,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::93::AmbushZoneFx._dashed_segment",
+          "inclusive_seconds": 0.002081,
+          "self_seconds": 0.002081,
+          "calls": 248
+        },
+        {
+          "rank": 60,
+          "signature": "res://scripts/presentation/environment_visual.gd::38::model_for",
+          "inclusive_seconds": 0.002042,
+          "self_seconds": 0.000656,
+          "calls": 930
+        },
+        {
+          "rank": 61,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::48::_hide",
+          "inclusive_seconds": 0.001897,
+          "self_seconds": 0.001897,
+          "calls": 62
+        },
+        {
+          "rank": 62,
+          "signature": "res://scripts/a3_render_metrics.gd::159::_put",
+          "inclusive_seconds": 0.001868,
+          "self_seconds": 0.001868,
+          "calls": 2542
+        },
+        {
+          "rank": 63,
+          "signature": "res://scripts/hud_profile_external.gd::81::_measure",
+          "inclusive_seconds": 0.001855,
+          "self_seconds": 0.001142,
+          "calls": 62
+        },
+        {
+          "rank": 64,
+          "signature": "res://scripts/operator.gd::2113::OperatorUnit._tick_sel_ring",
+          "inclusive_seconds": 0.00167,
+          "self_seconds": 0.000765,
+          "calls": 186
+        },
+        {
+          "rank": 65,
+          "signature": "res://scripts/operator.gd::1314::OperatorUnit._is_power_saving",
+          "inclusive_seconds": 0.00166,
+          "self_seconds": 0.000456,
+          "calls": 372
+        },
+        {
+          "rank": 66,
+          "signature": "res://scripts/fx/mission_sky.gd::130::MissionSky._draw_clouds",
+          "inclusive_seconds": 0.001611,
+          "self_seconds": 0.001487,
+          "calls": 62
+        },
+        {
+          "rank": 67,
+          "signature": "res://scripts/ui/op_card.gd::154::OpCard._process",
+          "inclusive_seconds": 0.001596,
+          "self_seconds": 0.001596,
+          "calls": 186
+        },
+        {
+          "rank": 68,
+          "signature": "res://scripts/presentation/view_state.gd::121::_actor_defaults",
+          "inclusive_seconds": 0.00155,
+          "self_seconds": 0.000812,
+          "calls": 310
+        },
+        {
+          "rank": 69,
+          "signature": "res://scripts/a3_render_metrics.gd::180::_property",
+          "inclusive_seconds": 0.001547,
+          "self_seconds": 0.000677,
+          "calls": 558
+        },
+        {
+          "rank": 70,
+          "signature": "res://scripts/a3_render_metrics.gd::167::_number",
+          "inclusive_seconds": 0.001413,
+          "self_seconds": 0.000644,
+          "calls": 992
+        },
+        {
+          "rank": 71,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::42::_sample",
+          "inclusive_seconds": 0.00134,
+          "self_seconds": 0.000763,
+          "calls": 310
+        },
+        {
+          "rank": 72,
+          "signature": "res://scripts/main.gd::5508::_process",
+          "inclusive_seconds": 0.001294,
+          "self_seconds": 0.000134,
+          "calls": 62
+        },
+        {
+          "rank": 73,
+          "signature": "res://scripts/presentation/actor_pose.gd::137::_elapsed",
+          "inclusive_seconds": 0.001241,
+          "self_seconds": 0.000233,
+          "calls": 620
+        },
+        {
+          "rank": 74,
+          "signature": "res://scripts/operator.gd::2007::OperatorUnit._tick_outline_boost",
+          "inclusive_seconds": 0.001234,
+          "self_seconds": 0.000469,
+          "calls": 186
+        },
+        {
+          "rank": 75,
+          "signature": "res://scripts/presentation/shot_fx_pool.gd::132::_saved_muzzle",
+          "inclusive_seconds": 0.001137,
+          "self_seconds": 0.001137,
+          "calls": 124
+        },
+        {
+          "rank": 76,
+          "signature": "res://scripts/c2/context_prompt.gd::108::C2ContextPrompt._process",
+          "inclusive_seconds": 0.001062,
+          "self_seconds": 0.000219,
+          "calls": 62
+        },
+        {
+          "rank": 77,
+          "signature": "res://scripts/raid/weapon_catalog.gd::73::WeaponCatalog.is_firearm",
+          "inclusive_seconds": 0.001029,
+          "self_seconds": 0.000412,
+          "calls": 558
+        },
+        {
+          "rank": 78,
+          "signature": "res://scripts/presentation/world_space.gd::29::facing_yaw",
+          "inclusive_seconds": 0.000985,
+          "self_seconds": 0.000399,
+          "calls": 992
+        },
+        {
+          "rank": 79,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::80::_valid_pose",
+          "inclusive_seconds": 0.000941,
+          "self_seconds": 0.000449,
+          "calls": 124
+        },
+        {
+          "rank": 80,
+          "signature": "res://scripts/presentation/corpse_pose.gd::27::sample",
+          "inclusive_seconds": 0.000831,
+          "self_seconds": 0.00022,
+          "calls": 186
+        },
+        {
+          "rank": 81,
+          "signature": "res://scripts/a3_render_metrics.gd::163::_text",
+          "inclusive_seconds": 0.000828,
+          "self_seconds": 9.2e-05,
+          "calls": 310
+        },
+        {
+          "rank": 82,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::104::_nonnegative_int",
+          "inclusive_seconds": 0.000806,
+          "self_seconds": 0.000503,
+          "calls": 1860
+        },
+        {
+          "rank": 83,
+          "signature": "res://scripts/fx/operator_silhouette.gd::855::_rot",
+          "inclusive_seconds": 0.00078,
+          "self_seconds": 0.00078,
+          "calls": 930
+        },
+        {
+          "rank": 84,
+          "signature": "res://scripts/presentation/corpse_pose.gd::9::supported",
+          "inclusive_seconds": 0.000778,
+          "self_seconds": 0.000413,
+          "calls": 434
+        },
+        {
+          "rank": 85,
+          "signature": "res://scripts/operator.gd::2069::OperatorUnit._ensure_sel_ring",
+          "inclusive_seconds": 0.000755,
+          "self_seconds": 0.000317,
+          "calls": 186
+        },
+        {
+          "rank": 86,
+          "signature": "res://scripts/map_draw.gd::179::_is_power_saving",
+          "inclusive_seconds": 0.000739,
+          "self_seconds": 0.000272,
+          "calls": 124
+        },
+        {
+          "rank": 87,
+          "signature": "res://scripts/main.gd::746::_modal_blocks_input",
+          "inclusive_seconds": 0.000704,
+          "self_seconds": 0.00011,
+          "calls": 62
+        },
+        {
+          "rank": 88,
+          "signature": "res://scripts/c2/portrait_strip.gd::274::C2PortraitStrip._process",
+          "inclusive_seconds": 0.000698,
+          "self_seconds": 0.000326,
+          "calls": 62
+        },
+        {
+          "rank": 89,
+          "signature": "res://scripts/presentation/actor_visual.gd::96::sample_layers",
+          "inclusive_seconds": 0.000697,
+          "self_seconds": 0.000596,
+          "calls": 310
+        },
+        {
+          "rank": 90,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::116::_equal_bool",
+          "inclusive_seconds": 0.000661,
+          "self_seconds": 0.000365,
+          "calls": 1612
+        },
+        {
+          "rank": 91,
+          "signature": "res://scripts/presentation/world_space.gd::11::logic_to_world",
+          "inclusive_seconds": 0.00066,
+          "self_seconds": 0.00066,
+          "calls": 2728
+        },
+        {
+          "rank": 92,
+          "signature": "res://scripts/operator.gd::1998::OperatorUnit._cam_center_world",
+          "inclusive_seconds": 0.000636,
+          "self_seconds": 0.000636,
+          "calls": 186
+        },
+        {
+          "rank": 93,
+          "signature": "res://scripts/game_settings.gd::31::want_touch_controls",
+          "inclusive_seconds": 0.000615,
+          "self_seconds": 0.000615,
+          "calls": 1240
+        },
+        {
+          "rank": 94,
+          "signature": "res://scripts/main.gd::863::_want_touch",
+          "inclusive_seconds": 0.000582,
+          "self_seconds": 9.9e-05,
+          "calls": 124
+        },
+        {
+          "rank": 95,
+          "signature": "res://scripts/fx/mission_sky.gd::73::MissionSky._draw_top_haze",
+          "inclusive_seconds": 0.000554,
+          "self_seconds": 0.000213,
+          "calls": 62
+        },
+        {
+          "rank": 96,
+          "signature": "res://scripts/c2/context_prompt.gd::132::C2ContextPrompt._phone",
+          "inclusive_seconds": 0.000547,
+          "self_seconds": 0.000175,
+          "calls": 62
+        },
+        {
+          "rank": 97,
+          "signature": "res://scripts/a3_render_metrics.gd::174::_size_property",
+          "inclusive_seconds": 0.000533,
+          "self_seconds": 0.000451,
+          "calls": 248
+        },
+        {
+          "rank": 98,
+          "signature": "res://scripts/presentation/actor_pose.gd::143::_has_event_clock",
+          "inclusive_seconds": 0.000513,
+          "self_seconds": 0.000261,
+          "calls": 620
+        },
+        {
+          "rank": 99,
+          "signature": "res://scripts/presentation/utility_pose.gd::36::sample",
+          "inclusive_seconds": 0.000496,
+          "self_seconds": 5.3e-05,
+          "calls": 186
+        },
+        {
+          "rank": 100,
+          "signature": "res://scripts/fx/killzone_overlay.gd::33::_process",
+          "inclusive_seconds": 0.000491,
+          "self_seconds": 0.000491,
+          "calls": 124
+        },
+        {
+          "rank": 101,
+          "signature": "res://scripts/operator.gd::175::OperatorUnit.role_kit_color",
+          "inclusive_seconds": 0.000484,
+          "self_seconds": 0.000484,
+          "calls": 558
+        },
+        {
+          "rank": 102,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::108::_positive_int",
+          "inclusive_seconds": 0.000452,
+          "self_seconds": 0.000284,
+          "calls": 930
+        },
+        {
+          "rank": 103,
+          "signature": "res://scripts/presentation/asset_library.gd::36::is_character_asset",
+          "inclusive_seconds": 0.000422,
+          "self_seconds": 0.000156,
+          "calls": 310
+        },
+        {
+          "rank": 104,
+          "signature": "res://scripts/replay/battle_log.gd::119::BattleLog.record_tick",
+          "inclusive_seconds": 0.000421,
+          "self_seconds": 0.000144,
+          "calls": 930
+        },
+        {
+          "rank": 105,
+          "signature": "res://scripts/presentation/world_space.gd::24::facing_direction",
+          "inclusive_seconds": 0.000415,
+          "self_seconds": 0.000415,
+          "calls": 1364
+        },
+        {
+          "rank": 106,
+          "signature": "res://scripts/raid/weapon_catalog.gd::38::WeaponCatalog.model_ids",
+          "inclusive_seconds": 0.000409,
+          "self_seconds": 0.000409,
+          "calls": 558
+        },
+        {
+          "rank": 107,
+          "signature": "res://scripts/presentation/actor_pose.gd::15::supported",
+          "inclusive_seconds": 0.000407,
+          "self_seconds": 0.000265,
+          "calls": 124
+        },
+        {
+          "rank": 108,
+          "signature": "res://scripts/operator.gd::2293::OperatorUnit._refresh_pack_glyph",
+          "inclusive_seconds": 0.000402,
+          "self_seconds": 0.000402,
+          "calls": 186
+        },
+        {
+          "rank": 109,
+          "signature": "res://scripts/main.gd::727::_gs",
+          "inclusive_seconds": 0.000392,
+          "self_seconds": 0.000392,
+          "calls": 372
+        },
+        {
+          "rank": 110,
+          "signature": "res://scripts/presentation/environment_scene.gd::28::supported",
+          "inclusive_seconds": 0.000391,
+          "self_seconds": 0.000211,
+          "calls": 62
+        },
+        {
+          "rank": 111,
+          "signature": "res://scripts/fx/mission_sky.gd::82::MissionSky._draw_contrast_wash",
+          "inclusive_seconds": 0.000365,
+          "self_seconds": 0.000253,
+          "calls": 62
+        },
+        {
+          "rank": 112,
+          "signature": "res://scripts/map_draw.gd::91::signature_tint",
+          "inclusive_seconds": 0.000355,
+          "self_seconds": 2.7e-05,
+          "calls": 62
+        },
+        {
+          "rank": 113,
+          "signature": "res://scripts/presentation/environment_visual.gd::11::set_asset",
+          "inclusive_seconds": 0.000354,
+          "self_seconds": 0.000354,
+          "calls": 930
+        },
+        {
+          "rank": 114,
+          "signature": "res://scripts/a3_render_metrics.gd::147::_intern",
+          "inclusive_seconds": 0.000354,
+          "self_seconds": 0.000354,
+          "calls": 314
+        },
+        {
+          "rank": 115,
+          "signature": "res://scripts/main.gd::877::_use_touch_chrome",
+          "inclusive_seconds": 0.000353,
+          "self_seconds": 2.9e-05,
+          "calls": 62
+        },
+        {
+          "rank": 116,
+          "signature": "res://scripts/fx/mission_sky.gd::119::MissionSky._draw_distant_lights",
+          "inclusive_seconds": 0.00035,
+          "self_seconds": 0.000234,
+          "calls": 62
+        },
+        {
+          "rank": 117,
+          "signature": "res://scripts/operator.gd::2087::OperatorUnit._ensure_sel_brackets",
+          "inclusive_seconds": 0.000342,
+          "self_seconds": 0.000342,
+          "calls": 186
+        },
+        {
+          "rank": 118,
+          "signature": "res://scripts/operator.gd::1706::OperatorUnit._tick_hold_cone_pulse",
+          "inclusive_seconds": 0.000333,
+          "self_seconds": 8.9e-05,
+          "calls": 186
+        },
+        {
+          "rank": 119,
+          "signature": "res://scripts/presentation/presenter_3d.gd::520::_sync_corpses",
+          "inclusive_seconds": 0.000292,
+          "self_seconds": 0.000125,
+          "calls": 62
+        },
+        {
+          "rank": 120,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::106::_tool_id",
+          "inclusive_seconds": 0.000288,
+          "self_seconds": 0.000178,
+          "calls": 62
+        },
+        {
+          "rank": 121,
+          "signature": "res://scripts/presentation/utility_pose.gd::13::valid",
+          "inclusive_seconds": 0.000286,
+          "self_seconds": 0.000136,
+          "calls": 186
+        },
+        {
+          "rank": 122,
+          "signature": "res://scripts/a3_render_metrics.gd::115::mark",
+          "inclusive_seconds": 0.000281,
+          "self_seconds": 5.8e-05,
+          "calls": 2
+        },
+        {
+          "rank": 123,
+          "signature": "res://scripts/a3_render_metrics.gd::260::numeric_at",
+          "inclusive_seconds": 0.000279,
+          "self_seconds": 0.000169,
+          "calls": 121
+        },
+        {
+          "rank": 124,
+          "signature": "res://scripts/presentation/asset_library.gd::54::_read_catalog",
+          "inclusive_seconds": 0.000224,
+          "self_seconds": 0.000224,
+          "calls": 1736
+        },
+        {
+          "rank": 125,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::121::_nonnegative",
+          "inclusive_seconds": 0.000223,
+          "self_seconds": 0.000103,
+          "calls": 434
+        },
+        {
+          "rank": 126,
+          "signature": "res://scripts/presentation/actor_pose.gd::96::_matching_weapon",
+          "inclusive_seconds": 0.000221,
+          "self_seconds": 0.000109,
+          "calls": 124
+        },
+        {
+          "rank": 127,
+          "signature": "res://scripts/a3_render_metrics.gd::287::own_rss_bytes",
+          "inclusive_seconds": 0.000205,
+          "self_seconds": 0.000201,
+          "calls": 2
+        },
+        {
+          "rank": 128,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::129::_int_eq",
+          "inclusive_seconds": 0.000204,
+          "self_seconds": 0.000132,
+          "calls": 372
+        },
+        {
+          "rank": 129,
+          "signature": "res://scripts/main.gd::1040::_result_overlay_active",
+          "inclusive_seconds": 0.0002,
+          "self_seconds": 0.0002,
+          "calls": 62
+        },
+        {
+          "rank": 130,
+          "signature": "res://scripts/a3_render_metrics.gd::107::column_count",
+          "inclusive_seconds": 0.000183,
+          "self_seconds": 0.000183,
+          "calls": 183
+        },
+        {
+          "rank": 131,
+          "signature": "res://scripts/c2/context_prompt.gd::577::C2ContextPrompt._hide_all",
+          "inclusive_seconds": 0.00018,
+          "self_seconds": 0.00018,
+          "calls": 62
+        },
+        {
+          "rank": 132,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::69::_int_eq",
+          "inclusive_seconds": 0.000176,
+          "self_seconds": 0.000101,
+          "calls": 248
+        },
+        {
+          "rank": 133,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::77::_positive",
+          "inclusive_seconds": 0.000167,
+          "self_seconds": 9.2e-05,
+          "calls": 372
+        },
+        {
+          "rank": 134,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::100::_number",
+          "inclusive_seconds": 0.000164,
+          "self_seconds": 0.000164,
+          "calls": 868
+        },
+        {
+          "rank": 135,
+          "signature": "res://scripts/level/level_def.gd::210::LevelDef.signature_color",
+          "inclusive_seconds": 0.000153,
+          "self_seconds": 0.000153,
+          "calls": 62
+        },
+        {
+          "rank": 136,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::125::_positive",
+          "inclusive_seconds": 0.000142,
+          "self_seconds": 9.4e-05,
+          "calls": 248
+        },
+        {
+          "rank": 137,
+          "signature": "res://scripts/fx/spawn_ghost.gd::57::_process",
+          "inclusive_seconds": 0.000137,
+          "self_seconds": 0.000137,
+          "calls": 186
+        },
+        {
+          "rank": 138,
+          "signature": "res://scripts/replay/replay_player.gd::64::ReplayPlayer._snapshots",
+          "inclusive_seconds": 0.000134,
+          "self_seconds": 0.000134,
+          "calls": 186
+        },
+        {
+          "rank": 139,
+          "signature": "res://scripts/a3_campaign_metrics_test.gd::52::_untimed",
+          "inclusive_seconds": 0.000132,
+          "self_seconds": 1e-06,
+          "calls": 1
+        },
+        {
+          "rank": 140,
+          "signature": "res://scripts/operator.gd::1695::OperatorUnit.hold_cone_pulsing",
+          "inclusive_seconds": 0.000131,
+          "self_seconds": 0.000131,
+          "calls": 186
+        },
+        {
+          "rank": 141,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::123::_size",
+          "inclusive_seconds": 0.000129,
+          "self_seconds": 7.1e-05,
+          "calls": 186
+        },
+        {
+          "rank": 142,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::45::AmbushZoneFx._process",
+          "inclusive_seconds": 0.000128,
+          "self_seconds": 0.000128,
+          "calls": 62
+        },
+        {
+          "rank": 143,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::117::_number",
+          "inclusive_seconds": 0.000128,
+          "self_seconds": 0.000128,
+          "calls": 434
+        },
+        {
+          "rank": 144,
+          "signature": "res://scripts/presentation/actor_visual.gd::24::set_asset",
+          "inclusive_seconds": 0.000125,
+          "self_seconds": 0.000125,
+          "calls": 310
+        },
+        {
+          "rank": 145,
+          "signature": "res://scripts/fx/mission_sky.gd::48::MissionSky._process",
+          "inclusive_seconds": 0.000124,
+          "self_seconds": 0.000124,
+          "calls": 62
+        },
+        {
+          "rank": 146,
+          "signature": "res://scripts/fx/mission_sky.gd::96::MissionSky._draw_horizon",
+          "inclusive_seconds": 0.000117,
+          "self_seconds": 7.1e-05,
+          "calls": 62
+        },
+        {
+          "rank": 147,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::119::_geometry",
+          "inclusive_seconds": 0.000112,
+          "self_seconds": 0.000112,
+          "calls": 620
+        },
+        {
+          "rank": 148,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::65::_number",
+          "inclusive_seconds": 0.000109,
+          "self_seconds": 0.000109,
+          "calls": 186
+        },
+        {
+          "rank": 149,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::28::<anonymous lambda>(lambda)",
+          "inclusive_seconds": 0.000108,
+          "self_seconds": 0.000108,
+          "calls": 62
+        },
+        {
+          "rank": 150,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::133::_bool_eq",
+          "inclusive_seconds": 0.000106,
+          "self_seconds": 7.2e-05,
+          "calls": 124
+        },
+        {
+          "rank": 151,
+          "signature": "res://scripts/presentation/actor_pose.gd::162::choose_lod",
+          "inclusive_seconds": 0.000106,
+          "self_seconds": 0.000106,
+          "calls": 310
+        },
+        {
+          "rank": 152,
+          "signature": "res://scripts/main.gd::870::_compact_hud",
+          "inclusive_seconds": 8e-05,
+          "self_seconds": 8e-05,
+          "calls": 124
+        },
+        {
+          "rank": 153,
+          "signature": "res://scripts/presentation/environment_scene.gd::152::set_door",
+          "inclusive_seconds": 7.9e-05,
+          "self_seconds": 7.9e-05,
+          "calls": 62
+        },
+        {
+          "rank": 154,
+          "signature": "res://scripts/presentation/actor_visual.gd::144::mount_item",
+          "inclusive_seconds": 7.9e-05,
+          "self_seconds": 7.9e-05,
+          "calls": 310
+        },
+        {
+          "rank": 155,
+          "signature": "res://scripts/fx/trap_path_fx.gd::100::_process",
+          "inclusive_seconds": 7.7e-05,
+          "self_seconds": 7.7e-05,
+          "calls": 62
+        },
+        {
+          "rank": 156,
+          "signature": "res://scripts/operator.gd::1030::OperatorUnit.cover_idle_planted",
+          "inclusive_seconds": 7.2e-05,
+          "self_seconds": 7.2e-05,
+          "calls": 186
+        },
+        {
+          "rank": 157,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::113::_position",
+          "inclusive_seconds": 7e-05,
+          "self_seconds": 3.5e-05,
+          "calls": 248
+        },
+        {
+          "rank": 158,
+          "signature": "res://scripts/map_draw.gd::119::_ensure_cache_vp",
+          "inclusive_seconds": 6.7e-05,
+          "self_seconds": 6.7e-05,
+          "calls": 62
+        },
+        {
+          "rank": 159,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::73::_nonnegative",
+          "inclusive_seconds": 5.4e-05,
+          "self_seconds": 3.8e-05,
+          "calls": 62
+        },
+        {
+          "rank": 160,
+          "signature": "res://scripts/c2/minimap.gd::41::C2Minimap._process",
+          "inclusive_seconds": 4.5e-05,
+          "self_seconds": 4.5e-05,
+          "calls": 62
+        },
+        {
+          "rank": 161,
+          "signature": "res://scripts/touch_hud.gd::129::_process",
+          "inclusive_seconds": 4e-05,
+          "self_seconds": 4e-05,
+          "calls": 62
+        },
+        {
+          "rank": 162,
+          "signature": "res://scripts/map_draw.gd::223::_atmo",
+          "inclusive_seconds": 3.8e-05,
+          "self_seconds": 3.8e-05,
+          "calls": 62
+        },
+        {
+          "rank": 163,
+          "signature": "res://scripts/ui/tutorial_overlay.gd::166::TutorialOverlay.is_open",
+          "inclusive_seconds": 3.8e-05,
+          "self_seconds": 3.8e-05,
+          "calls": 62
+        },
+        {
+          "rank": 164,
+          "signature": "res://scripts/c2/dest_flag.gd::30::C2DestFlag._process",
+          "inclusive_seconds": 3.8e-05,
+          "self_seconds": 3.8e-05,
+          "calls": 62
+        },
+        {
+          "rank": 165,
+          "signature": "res://scripts/presentation/presenter_3d.gd::685::_notification",
+          "inclusive_seconds": 3.6e-05,
+          "self_seconds": 3.6e-05,
+          "calls": 62
+        },
+        {
+          "rank": 166,
+          "signature": "res://scripts/a3_render_metrics.gd::111::storage_bytes",
+          "inclusive_seconds": 3.6e-05,
+          "self_seconds": 3.6e-05,
+          "calls": 62
+        },
+        {
+          "rank": 167,
+          "signature": "res://scripts/replay/replay_player.gd::101::ReplayPlayer.advance",
+          "inclusive_seconds": 3.3e-05,
+          "self_seconds": 3.3e-05,
+          "calls": 62
+        },
+        {
+          "rank": 168,
+          "signature": "res://scripts/fx/mission_sky.gd::69::MissionSky._map_size",
+          "inclusive_seconds": 3.2e-05,
+          "self_seconds": 3.2e-05,
+          "calls": 372
+        },
+        {
+          "rank": 169,
+          "signature": "res://scripts/c2/alert_mark.gd::23::C2AlertMark._process",
+          "inclusive_seconds": 2.7e-05,
+          "self_seconds": 2.7e-05,
+          "calls": 62
+        },
+        {
+          "rank": 170,
+          "signature": "res://scripts/ui/pause_overlay.gd::176::PauseOverlay.is_open",
+          "inclusive_seconds": 1.9e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 124
+        },
+        {
+          "rank": 171,
+          "signature": "res://scripts/ui/backpack_panel.gd::153::BackpackPanel.is_open",
+          "inclusive_seconds": 1.9e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 62
+        },
+        {
+          "rank": 172,
+          "signature": "res://scripts/ui/credits_overlay.gd::99::CreditsOverlay.is_open",
+          "inclusive_seconds": 1.9e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 62
+        },
+        {
+          "rank": 173,
+          "signature": "res://scripts/hud_profile_external.gd::18::_profile_end",
+          "inclusive_seconds": 1.8e-05,
+          "self_seconds": 1.5e-05,
+          "calls": 1
+        },
+        {
+          "rank": 174,
+          "signature": "res://scripts/ui/night_handoff.gd::119::NightHandoff.is_open",
+          "inclusive_seconds": 1.6e-05,
+          "self_seconds": 1.6e-05,
+          "calls": 62
+        },
+        {
+          "rank": 175,
+          "signature": "res://scripts/hud_profile_external.gd::11::_profile_begin",
+          "inclusive_seconds": 8e-06,
+          "self_seconds": 4e-06,
+          "calls": 1
+        },
+        {
+          "rank": 176,
+          "signature": "res://scripts/replay/replay_player.gd::97::ReplayPlayer.pause",
+          "inclusive_seconds": 1e-06,
+          "self_seconds": 1e-06,
+          "calls": 1
+        },
+        {
+          "rank": 177,
+          "signature": "res://scripts/a3_campaign_metrics_test.gd::44::_check",
+          "inclusive_seconds": 1e-06,
+          "self_seconds": 1e-06,
+          "calls": 1
+        }
+      ],
+      "label": "yard-static-confirmed-shot",
+      "latest_frame_samples": [
+        {
+          "header": " 0.338883 script: 0.062529/18 %",
+          "entries": 169
+        },
+        {
+          "header": " 0.140352 script: 0.061049/43 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.132468 script: 0.059854/45 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.133103 script: 0.060219/45 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.150843 script: 0.070589/46 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.136036 script: 0.06/44 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.149273 script: 0.064777/43 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.143325 script: 0.060664/42 %",
+          "entries": 171
+        },
+        {
+          "header": " 0.142953 script: 0.061397/42 %",
+          "entries": 171
+        }
+      ]
+    },
+    {
+      "profiler_disjoint_self_sum_seconds": 14.645002,
+      "signature_count": 2226,
+      "selected": {
+        "res://scripts/main.gd::_process": {
+          "rank": 0,
+          "signature": "res://scripts/main.gd::5508::_process",
+          "inclusive_seconds": 13.234567,
+          "self_seconds": 6.6e-05,
+          "calls": 26
+        },
+        "res://scripts/main.gd::_apply_replay_scrub": {
+          "rank": 1,
+          "signature": "res://scripts/main.gd::6666::_apply_replay_scrub",
+          "inclusive_seconds": 13.233828,
+          "self_seconds": 0.000805,
+          "calls": 25
+        },
+        "res://scripts/main.gd::_update_hud": {
+          "rank": 2,
+          "signature": "res://scripts/main.gd::7598::_update_hud",
+          "inclusive_seconds": 12.501824,
+          "self_seconds": 0.002668,
+          "calls": 25
+        },
+        "res://scripts/main.gd::_ensure_touch_hud": {
+          "rank": 7,
+          "signature": "res://scripts/main.gd::881::_ensure_touch_hud",
+          "inclusive_seconds": 6.163573,
+          "self_seconds": 5.2e-05,
+          "calls": 25
+        },
+        "res://scripts/main.gd::_refresh_touch_hud": {
+          "rank": 3,
+          "signature": "res://scripts/main.gd::1141::_refresh_touch_hud",
+          "inclusive_seconds": 11.980965,
+          "self_seconds": 0.000682,
+          "calls": 50
+        },
+        "res://scripts/main.gd::_paint_replay_snapshot": {
+          "rank": 12,
+          "signature": "res://scripts/main.gd::6699::_paint_replay_snapshot",
+          "inclusive_seconds": 0.602932,
+          "self_seconds": 0.001092,
+          "calls": 25
+        },
+        "res://scripts/presentation/presenter_3d.gd::refresh": {
+          "rank": 26,
+          "signature": "res://scripts/presentation/presenter_3d.gd::254::refresh",
+          "inclusive_seconds": 0.113241,
+          "self_seconds": 0.005792,
+          "calls": 26
+        },
+        "res://scripts/touch_hud.gd::refresh_phase": {
+          "rank": 4,
+          "signature": "res://scripts/touch_hud.gd::601::refresh_phase",
+          "inclusive_seconds": 11.978627,
+          "self_seconds": 0.003394,
+          "calls": 50
+        },
+        "res://scripts/touch_hud.gd::_apply_btn_style": {
+          "rank": 5,
+          "signature": "res://scripts/touch_hud.gd::417::_apply_btn_style",
+          "inclusive_seconds": 11.228941,
+          "self_seconds": 11.217029,
+          "calls": 1250
+        },
+        "res://scripts/touch_hud.gd::_paint_lock_states": {
+          "rank": 6,
+          "signature": "res://scripts/touch_hud.gd::724::_paint_lock_states",
+          "inclusive_seconds": 10.82986,
+          "self_seconds": 0.010776,
+          "calls": 50
+        },
+        "res://scripts/touch_hud.gd::_apply_safe_area": {
+          "rank": 11,
+          "signature": "res://scripts/touch_hud.gd::444::_apply_safe_area",
+          "inclusive_seconds": 0.681151,
+          "self_seconds": 0.105054,
+          "calls": 50
+        },
+        "res://scripts/operator.gd::_ensure_tag_plate": {
+          "rank": 10,
+          "signature": "res://scripts/operator.gd::1319::OperatorUnit._ensure_tag_plate",
+          "inclusive_seconds": 1.444119,
+          "self_seconds": 1.443925,
+          "calls": 78
+        }
+      },
+      "all_nonzero_functions": [
+        {
+          "rank": 0,
+          "signature": "res://scripts/main.gd::5508::_process",
+          "inclusive_seconds": 13.234567,
+          "self_seconds": 6.6e-05,
+          "calls": 26
+        },
+        {
+          "rank": 1,
+          "signature": "res://scripts/main.gd::6666::_apply_replay_scrub",
+          "inclusive_seconds": 13.233828,
+          "self_seconds": 0.000805,
+          "calls": 25
+        },
+        {
+          "rank": 2,
+          "signature": "res://scripts/main.gd::7598::_update_hud",
+          "inclusive_seconds": 12.501824,
+          "self_seconds": 0.002668,
+          "calls": 25
+        },
+        {
+          "rank": 3,
+          "signature": "res://scripts/main.gd::1141::_refresh_touch_hud",
+          "inclusive_seconds": 11.980965,
+          "self_seconds": 0.000682,
+          "calls": 50
+        },
+        {
+          "rank": 4,
+          "signature": "res://scripts/touch_hud.gd::601::refresh_phase",
+          "inclusive_seconds": 11.978627,
+          "self_seconds": 0.003394,
+          "calls": 50
+        },
+        {
+          "rank": 5,
+          "signature": "res://scripts/touch_hud.gd::417::_apply_btn_style",
+          "inclusive_seconds": 11.228941,
+          "self_seconds": 11.217029,
+          "calls": 1250
+        },
+        {
+          "rank": 6,
+          "signature": "res://scripts/touch_hud.gd::724::_paint_lock_states",
+          "inclusive_seconds": 10.82986,
+          "self_seconds": 0.010776,
+          "calls": 50
+        },
+        {
+          "rank": 7,
+          "signature": "res://scripts/main.gd::881::_ensure_touch_hud",
+          "inclusive_seconds": 6.163573,
+          "self_seconds": 5.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 8,
+          "signature": "res://scripts/operator.gd::1048::OperatorUnit._process",
+          "inclusive_seconds": 1.450708,
+          "self_seconds": 0.00051,
+          "calls": 78
+        },
+        {
+          "rank": 9,
+          "signature": "res://scripts/operator.gd::1254::OperatorUnit._apply_idle_bob",
+          "inclusive_seconds": 1.448565,
+          "self_seconds": 0.001393,
+          "calls": 78
+        },
+        {
+          "rank": 10,
+          "signature": "res://scripts/operator.gd::1319::OperatorUnit._ensure_tag_plate",
+          "inclusive_seconds": 1.444119,
+          "self_seconds": 1.443925,
+          "calls": 78
+        },
+        {
+          "rank": 11,
+          "signature": "res://scripts/touch_hud.gd::444::_apply_safe_area",
+          "inclusive_seconds": 0.681151,
+          "self_seconds": 0.105054,
+          "calls": 50
+        },
+        {
+          "rank": 12,
+          "signature": "res://scripts/main.gd::6699::_paint_replay_snapshot",
+          "inclusive_seconds": 0.602932,
+          "self_seconds": 0.001092,
+          "calls": 25
+        },
+        {
+          "rank": 13,
+          "signature": "res://scripts/main.gd::6755::_add_replay_marker",
+          "inclusive_seconds": 0.601011,
+          "self_seconds": 0.596043,
+          "calls": 125
+        },
+        {
+          "rank": 14,
+          "signature": "res://scripts/touch_hud.gd::468::_layout_compact",
+          "inclusive_seconds": 0.575994,
+          "self_seconds": 0.001059,
+          "calls": 50
+        },
+        {
+          "rank": 15,
+          "signature": "res://scripts/touch_hud.gd::508::_size_btn",
+          "inclusive_seconds": 0.574273,
+          "self_seconds": 0.57383,
+          "calls": 400
+        },
+        {
+          "rank": 16,
+          "signature": "res://scripts/touch_hud.gd::704::_paint_crouch_sticky",
+          "inclusive_seconds": 0.461123,
+          "self_seconds": 0.002923,
+          "calls": 50
+        },
+        {
+          "rank": 17,
+          "signature": "res://scripts/presentation/view_state.gd::134::_freeze",
+          "inclusive_seconds": 0.333567,
+          "self_seconds": 0.0449,
+          "calls": 247187
+        },
+        {
+          "rank": 18,
+          "signature": "res://scripts/main.gd::7761::_refresh_phase_chip",
+          "inclusive_seconds": 0.235096,
+          "self_seconds": 0.234878,
+          "calls": 50
+        },
+        {
+          "rank": 19,
+          "signature": "res://scripts/presentation/view_state.gd::11::capture",
+          "inclusive_seconds": 0.184623,
+          "self_seconds": 0.013781,
+          "calls": 226
+        },
+        {
+          "rank": 20,
+          "signature": "res://scripts/main.gd::894::_apply_phone_chrome",
+          "inclusive_seconds": 0.170698,
+          "self_seconds": 0.000215,
+          "calls": 25
+        },
+        {
+          "rank": 21,
+          "signature": "res://scripts/main.gd::8001::replay_hud_frame",
+          "inclusive_seconds": 0.160154,
+          "self_seconds": 8.9e-05,
+          "calls": 200
+        },
+        {
+          "rank": 22,
+          "signature": "res://scripts/main.gd::937::_fold_phone_north_hud",
+          "inclusive_seconds": 0.132083,
+          "self_seconds": 0.00161,
+          "calls": 25
+        },
+        {
+          "rank": 23,
+          "signature": "res://scripts/main.gd::973::_layout_compact_chrome",
+          "inclusive_seconds": 0.120014,
+          "self_seconds": 0.11998,
+          "calls": 25
+        },
+        {
+          "rank": 24,
+          "signature": "res://scripts/main.gd::6653::_refresh_replay_transport",
+          "inclusive_seconds": 0.118414,
+          "self_seconds": 0.000244,
+          "calls": 25
+        },
+        {
+          "rank": 25,
+          "signature": "res://scripts/presentation/presenter_3d.gd::242::_process",
+          "inclusive_seconds": 0.113363,
+          "self_seconds": 6.1e-05,
+          "calls": 26
+        },
+        {
+          "rank": 26,
+          "signature": "res://scripts/presentation/presenter_3d.gd::254::refresh",
+          "inclusive_seconds": 0.113241,
+          "self_seconds": 0.005792,
+          "calls": 26
+        },
+        {
+          "rank": 27,
+          "signature": "res://scripts/main.gd::1451::_update_observation_rings",
+          "inclusive_seconds": 0.057505,
+          "self_seconds": 4.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 28,
+          "signature": "res://scripts/operator.gd::1869::OperatorUnit.set_observation_ring",
+          "inclusive_seconds": 0.056754,
+          "self_seconds": 0.000106,
+          "calls": 75
+        },
+        {
+          "rank": 29,
+          "signature": "res://scripts/operator.gd::1715::OperatorUnit._ensure_observation_visual",
+          "inclusive_seconds": 0.056549,
+          "self_seconds": 2.8e-05,
+          "calls": 75
+        },
+        {
+          "rank": 30,
+          "signature": "res://scripts/operator.gd::1843::OperatorUnit._rebuild_observation_ring",
+          "inclusive_seconds": 0.056498,
+          "self_seconds": 0.00075,
+          "calls": 25
+        },
+        {
+          "rank": 31,
+          "signature": "res://scripts/operator.gd::1823::OperatorUnit._obs_clip_distance",
+          "inclusive_seconds": 0.055297,
+          "self_seconds": 0.004723,
+          "calls": 1800
+        },
+        {
+          "rank": 32,
+          "signature": "res://scripts/c2/c2_director.gd::831::C2Director.refresh_hud",
+          "inclusive_seconds": 0.051143,
+          "self_seconds": 0.000219,
+          "calls": 25
+        },
+        {
+          "rank": 33,
+          "signature": "res://scripts/presentation/presenter_3d.gd::380::_sync_actors",
+          "inclusive_seconds": 0.035137,
+          "self_seconds": 0.001755,
+          "calls": 26
+        },
+        {
+          "rank": 34,
+          "signature": "res://scripts/grid.gd::174::AmbushGrid.has_los",
+          "inclusive_seconds": 0.033163,
+          "self_seconds": 0.013051,
+          "calls": 10875
+        },
+        {
+          "rank": 35,
+          "signature": "res://scripts/presentation/presenter_3d.gd::421::_sync_body",
+          "inclusive_seconds": 0.032412,
+          "self_seconds": 0.001325,
+          "calls": 130
+        },
+        {
+          "rank": 36,
+          "signature": "res://scripts/main.gd::7951::_update_role_cards",
+          "inclusive_seconds": 0.026776,
+          "self_seconds": 0.000216,
+          "calls": 25
+        },
+        {
+          "rank": 37,
+          "signature": "res://scripts/c2/c2_director.gd::860::C2Director.refresh_hud_light",
+          "inclusive_seconds": 0.026723,
+          "self_seconds": 0.001679,
+          "calls": 25
+        },
+        {
+          "rank": 38,
+          "signature": "res://scripts/main.gd::1099::_pin_role_cards",
+          "inclusive_seconds": 0.021899,
+          "self_seconds": 0.021701,
+          "calls": 25
+        },
+        {
+          "rank": 39,
+          "signature": "res://scripts/main.gd::11585::_apply_phone_world_ink",
+          "inclusive_seconds": 0.021609,
+          "self_seconds": 0.014576,
+          "calls": 50
+        },
+        {
+          "rank": 40,
+          "signature": "res://scripts/main.gd::7258::_ammo_summary",
+          "inclusive_seconds": 0.020541,
+          "self_seconds": 0.00135,
+          "calls": 25
+        },
+        {
+          "rank": 41,
+          "signature": "res://scripts/main.gd::4302::_refresh_mode_pack_buttons",
+          "inclusive_seconds": 0.020284,
+          "self_seconds": 0.001371,
+          "calls": 25
+        },
+        {
+          "rank": 42,
+          "signature": "res://scripts/grid.gd::155::AmbushGrid.is_blocked",
+          "inclusive_seconds": 0.018663,
+          "self_seconds": 0.004503,
+          "calls": 28675
+        },
+        {
+          "rank": 43,
+          "signature": "res://scripts/presentation/actor_visual.gd::96::sample_layers",
+          "inclusive_seconds": 0.014567,
+          "self_seconds": 0.002049,
+          "calls": 139
+        },
+        {
+          "rank": 44,
+          "signature": "res://scripts/main.gd::1128::_safe_area_pad",
+          "inclusive_seconds": 0.014478,
+          "self_seconds": 0.014478,
+          "calls": 50
+        },
+        {
+          "rank": 45,
+          "signature": "res://scripts/presentation/actor_pose.gd::23::sample",
+          "inclusive_seconds": 0.014384,
+          "self_seconds": 0.001099,
+          "calls": 130
+        },
+        {
+          "rank": 46,
+          "signature": "res://scripts/presentation/shot_fx_pool.gd::82::update_frame",
+          "inclusive_seconds": 0.013873,
+          "self_seconds": 0.000347,
+          "calls": 26
+        },
+        {
+          "rank": 47,
+          "signature": "res://scripts/presentation/actor_visual.gd::67::sample_pose",
+          "inclusive_seconds": 0.012724,
+          "self_seconds": 0.012018,
+          "calls": 254
+        },
+        {
+          "rank": 48,
+          "signature": "res://scripts/replay/replay_player.gd::120::ReplayPlayer.snapshot_at_or_before",
+          "inclusive_seconds": 0.012203,
+          "self_seconds": 0.002619,
+          "calls": 276
+        },
+        {
+          "rank": 49,
+          "signature": "res://scripts/ui/night_ops.gd::51::NightOps.flat",
+          "inclusive_seconds": 0.010729,
+          "self_seconds": 0.006417,
+          "calls": 5150
+        },
+        {
+          "rank": 50,
+          "signature": "res://scripts/presentation/presenter_3d.gd::456::_sync_objects",
+          "inclusive_seconds": 0.009853,
+          "self_seconds": 0.002534,
+          "calls": 26
+        },
+        {
+          "rank": 51,
+          "signature": "res://scripts/presentation/actor_pose.gd::148::_last_event",
+          "inclusive_seconds": 0.00925,
+          "self_seconds": 0.004817,
+          "calls": 286
+        },
+        {
+          "rank": 52,
+          "signature": "res://scripts/replay/replay_player.gd::60::ReplayPlayer.playback_time",
+          "inclusive_seconds": 0.008671,
+          "self_seconds": 0.008671,
+          "calls": 25767
+        },
+        {
+          "rank": 53,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::15::active",
+          "inclusive_seconds": 0.008336,
+          "self_seconds": 0.000195,
+          "calls": 26
+        },
+        {
+          "rank": 54,
+          "signature": "res://scripts/presentation/occlusion_controller.gd::5::update",
+          "inclusive_seconds": 0.008231,
+          "self_seconds": 0.007596,
+          "calls": 26
+        },
+        {
+          "rank": 55,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::28::sample",
+          "inclusive_seconds": 0.007962,
+          "self_seconds": 0.001765,
+          "calls": 468
+        },
+        {
+          "rank": 56,
+          "signature": "res://scripts/presentation/view_state.gd::106::_movement_actors",
+          "inclusive_seconds": 0.007645,
+          "self_seconds": 0.005471,
+          "calls": 226
+        },
+        {
+          "rank": 57,
+          "signature": "res://scripts/ui/op_card.gd::260::OpCard.bind_record",
+          "inclusive_seconds": 0.007393,
+          "self_seconds": 0.00439,
+          "calls": 75
+        },
+        {
+          "rank": 58,
+          "signature": "res://scripts/fx/mission_sky.gd::53::MissionSky._draw",
+          "inclusive_seconds": 0.007212,
+          "self_seconds": 6.5e-05,
+          "calls": 26
+        },
+        {
+          "rank": 59,
+          "signature": "res://scripts/fx/mission_sky.gd::142::MissionSky._draw_yard",
+          "inclusive_seconds": 0.007115,
+          "self_seconds": 0.001719,
+          "calls": 26
+        },
+        {
+          "rank": 60,
+          "signature": "res://scripts/a3_render_metrics.gd::184::_sample",
+          "inclusive_seconds": 0.007067,
+          "self_seconds": 0.003081,
+          "calls": 26
+        },
+        {
+          "rank": 61,
+          "signature": "res://scripts/main.gd::3028::_layout_checklist",
+          "inclusive_seconds": 0.00693,
+          "self_seconds": 0.000591,
+          "calls": 25
+        },
+        {
+          "rank": 62,
+          "signature": "res://scripts/replay/replay_player.gd::132::ReplayPlayer.events_up_to",
+          "inclusive_seconds": 0.006655,
+          "self_seconds": 0.001551,
+          "calls": 251
+        },
+        {
+          "rank": 63,
+          "signature": "res://scripts/c2/portrait_strip.gd::358::C2PortraitStrip.bind_history",
+          "inclusive_seconds": 0.006395,
+          "self_seconds": 0.005263,
+          "calls": 25
+        },
+        {
+          "rank": 64,
+          "signature": "res://scripts/presentation/actor_pose.gd::102::_legacy_sample",
+          "inclusive_seconds": 0.006105,
+          "self_seconds": 0.000565,
+          "calls": 130
+        },
+        {
+          "rank": 65,
+          "signature": "res://scripts/c2/context_cursor.gd::48::C2ContextCursor._process",
+          "inclusive_seconds": 0.005951,
+          "self_seconds": 0.005951,
+          "calls": 26
+        },
+        {
+          "rank": 66,
+          "signature": "res://scripts/c2/minimap.gd::71::C2Minimap._draw",
+          "inclusive_seconds": 0.005566,
+          "self_seconds": 0.000843,
+          "calls": 26
+        },
+        {
+          "rank": 67,
+          "signature": "res://scripts/main.gd::7285::_fill_event_list",
+          "inclusive_seconds": 0.005348,
+          "self_seconds": 0.00214,
+          "calls": 25
+        },
+        {
+          "rank": 68,
+          "signature": "res://scripts/presentation/view_state.gd::121::_actor_defaults",
+          "inclusive_seconds": 0.005225,
+          "self_seconds": 0.002819,
+          "calls": 1130
+        },
+        {
+          "rank": 69,
+          "signature": "res://scripts/grid.gd::166::AmbushGrid.world_to_cell",
+          "inclusive_seconds": 0.00502,
+          "self_seconds": 0.00502,
+          "calls": 45800
+        },
+        {
+          "rank": 70,
+          "signature": "res://scripts/presentation/actor_visual.gd::24::set_asset",
+          "inclusive_seconds": 0.004791,
+          "self_seconds": 0.000511,
+          "calls": 159
+        },
+        {
+          "rank": 71,
+          "signature": "res://scripts/c2/minimap.gd::124::C2Minimap._draw_history",
+          "inclusive_seconds": 0.004676,
+          "self_seconds": 0.003991,
+          "calls": 26
+        },
+        {
+          "rank": 72,
+          "signature": "res://scripts/presentation/presenter_3d.gd::520::_sync_corpses",
+          "inclusive_seconds": 0.004638,
+          "self_seconds": 0.000421,
+          "calls": 26
+        },
+        {
+          "rank": 73,
+          "signature": "res://scripts/presentation/asset_library.gd::27::asset_record",
+          "inclusive_seconds": 0.004537,
+          "self_seconds": 8.8e-05,
+          "calls": 251
+        },
+        {
+          "rank": 74,
+          "signature": "res://scripts/raid/stash.gd::131::RaidStash._process",
+          "inclusive_seconds": 0.004525,
+          "self_seconds": 0.000615,
+          "calls": 234
+        },
+        {
+          "rank": 75,
+          "signature": "res://scripts/main.gd::1050::_sync_desktop_bars",
+          "inclusive_seconds": 0.004424,
+          "self_seconds": 0.003992,
+          "calls": 75
+        },
+        {
+          "rank": 76,
+          "signature": "res://scripts/presentation/asset_library.gd::131::instantiate",
+          "inclusive_seconds": 0.00438,
+          "self_seconds": 0.004153,
+          "calls": 9
+        },
+        {
+          "rank": 77,
+          "signature": "res://scripts/main.gd::1748::_apply_watch_layers",
+          "inclusive_seconds": 0.004327,
+          "self_seconds": 0.000416,
+          "calls": 25
+        },
+        {
+          "rank": 78,
+          "signature": "res://scripts/presentation/shot_fx_pool.gd::132::_saved_muzzle",
+          "inclusive_seconds": 0.004225,
+          "self_seconds": 0.000233,
+          "calls": 11
+        },
+        {
+          "rank": 79,
+          "signature": "res://scripts/c2/minimap.gd::33::C2Minimap.bind_history",
+          "inclusive_seconds": 0.004154,
+          "self_seconds": 0.004154,
+          "calls": 25
+        },
+        {
+          "rank": 80,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::61::update_frame",
+          "inclusive_seconds": 0.004124,
+          "self_seconds": 0.000779,
+          "calls": 26
+        },
+        {
+          "rank": 81,
+          "signature": "res://scripts/main.gd::11600::_ink_world_label",
+          "inclusive_seconds": 0.00389,
+          "self_seconds": 0.00389,
+          "calls": 3300
+        },
+        {
+          "rank": 82,
+          "signature": "res://scripts/fx/mission_sky.gd::103::MissionSky._draw_starfield",
+          "inclusive_seconds": 0.003764,
+          "self_seconds": 0.002741,
+          "calls": 26
+        },
+        {
+          "rank": 83,
+          "signature": "res://scripts/grid.gd::151::AmbushGrid.in_bounds",
+          "inclusive_seconds": 0.003672,
+          "self_seconds": 0.003672,
+          "calls": 28675
+        },
+        {
+          "rank": 84,
+          "signature": "res://scripts/presentation/environment_visual.gd::30::set_lid",
+          "inclusive_seconds": 0.003539,
+          "self_seconds": 0.000385,
+          "calls": 412
+        },
+        {
+          "rank": 85,
+          "signature": "res://scripts/raid/stash.gd::115::RaidStash._paint_tag",
+          "inclusive_seconds": 0.003505,
+          "self_seconds": 0.002922,
+          "calls": 234
+        },
+        {
+          "rank": 86,
+          "signature": "res://scripts/presentation/movement_dust_pool.gd::47::update_frame",
+          "inclusive_seconds": 0.003278,
+          "self_seconds": 0.000372,
+          "calls": 26
+        },
+        {
+          "rank": 87,
+          "signature": "res://scripts/ui/role_glyph.gd::18::_draw",
+          "inclusive_seconds": 0.003094,
+          "self_seconds": 0.000828,
+          "calls": 75
+        },
+        {
+          "rank": 88,
+          "signature": "res://scripts/main.gd::7915::_update_cover_previews",
+          "inclusive_seconds": 0.002896,
+          "self_seconds": 0.000267,
+          "calls": 25
+        },
+        {
+          "rank": 89,
+          "signature": "res://scripts/presentation/corpse_visual.gd::25::sync",
+          "inclusive_seconds": 0.002533,
+          "self_seconds": 0.000231,
+          "calls": 22
+        },
+        {
+          "rank": 90,
+          "signature": "res://scripts/map_draw.gd::184::_draw",
+          "inclusive_seconds": 0.002466,
+          "self_seconds": 0.000238,
+          "calls": 26
+        },
+        {
+          "rank": 91,
+          "signature": "res://scripts/main.gd::1382::_sync_audio_state",
+          "inclusive_seconds": 0.002458,
+          "self_seconds": 2.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 92,
+          "signature": "res://scripts/main.gd::4896::_refresh_intel_chip",
+          "inclusive_seconds": 0.00233,
+          "self_seconds": 0.002102,
+          "calls": 50
+        },
+        {
+          "rank": 93,
+          "signature": "res://scripts/sfx/audio_director.gd::115::set_phase_state",
+          "inclusive_seconds": 0.00231,
+          "self_seconds": 2.5e-05,
+          "calls": 25
+        },
+        {
+          "rank": 94,
+          "signature": "res://scripts/map_draw.gd::631::_draw_escape_mouth",
+          "inclusive_seconds": 0.002173,
+          "self_seconds": 0.001671,
+          "calls": 26
+        },
+        {
+          "rank": 95,
+          "signature": "res://scripts/map_draw.gd::111::_process",
+          "inclusive_seconds": 0.002073,
+          "self_seconds": 8.7e-05,
+          "calls": 26
+        },
+        {
+          "rank": 96,
+          "signature": "res://scripts/cover_slot.gd::399::CoverSlot.set_protect_preview",
+          "inclusive_seconds": 0.002019,
+          "self_seconds": 0.000205,
+          "calls": 150
+        },
+        {
+          "rank": 97,
+          "signature": "res://scripts/fx/operator_silhouette.gd::156::pose_parts",
+          "inclusive_seconds": 0.002015,
+          "self_seconds": 0.000254,
+          "calls": 78
+        },
+        {
+          "rank": 98,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::12::active",
+          "inclusive_seconds": 0.001994,
+          "self_seconds": 0.000278,
+          "calls": 26
+        },
+        {
+          "rank": 99,
+          "signature": "res://scripts/replay/battle_log.gd::158::BattleLog.format_event",
+          "inclusive_seconds": 0.001972,
+          "self_seconds": 0.001214,
+          "calls": 299
+        },
+        {
+          "rank": 100,
+          "signature": "res://scripts/map_draw.gd::142::_ensure_cache_current",
+          "inclusive_seconds": 0.001954,
+          "self_seconds": 4.2e-05,
+          "calls": 26
+        },
+        {
+          "rank": 101,
+          "signature": "res://scripts/ui/gun_stamp.gd::20::_draw",
+          "inclusive_seconds": 0.001953,
+          "self_seconds": 0.000509,
+          "calls": 75
+        },
+        {
+          "rank": 102,
+          "signature": "res://scripts/map_draw.gd::161::_cache_signature",
+          "inclusive_seconds": 0.001843,
+          "self_seconds": 0.001601,
+          "calls": 26
+        },
+        {
+          "rank": 103,
+          "signature": "res://scripts/main.gd::863::_want_touch",
+          "inclusive_seconds": 0.001827,
+          "self_seconds": 0.000299,
+          "calls": 477
+        },
+        {
+          "rank": 104,
+          "signature": "res://scripts/game_settings.gd::54::is_power_saving",
+          "inclusive_seconds": 0.001824,
+          "self_seconds": 0.00018,
+          "calls": 1116
+        },
+        {
+          "rank": 105,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::50::AmbushZoneFx._draw",
+          "inclusive_seconds": 0.00173,
+          "self_seconds": 0.000655,
+          "calls": 26
+        },
+        {
+          "rank": 106,
+          "signature": "res://scripts/main.gd::6680::_update_replay_status",
+          "inclusive_seconds": 0.001665,
+          "self_seconds": 9.4e-05,
+          "calls": 25
+        },
+        {
+          "rank": 107,
+          "signature": "res://scripts/main.gd::12916::_refresh_stash_board",
+          "inclusive_seconds": 0.001642,
+          "self_seconds": 0.000156,
+          "calls": 25
+        },
+        {
+          "rank": 108,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::34::sample",
+          "inclusive_seconds": 0.001637,
+          "self_seconds": 0.000709,
+          "calls": 23
+        },
+        {
+          "rank": 109,
+          "signature": "res://scripts/c2/c2_director.gd::165::C2Director.layout_chrome",
+          "inclusive_seconds": 0.001616,
+          "self_seconds": 0.000374,
+          "calls": 50
+        },
+        {
+          "rank": 110,
+          "signature": "res://scripts/cover_slot.gd::315::CoverSlot.rebuild_protect_arc",
+          "inclusive_seconds": 0.001544,
+          "self_seconds": 0.000732,
+          "calls": 150
+        },
+        {
+          "rank": 111,
+          "signature": "res://scripts/grid.gd::147::AmbushGrid.idx",
+          "inclusive_seconds": 0.001522,
+          "self_seconds": 0.001522,
+          "calls": 28675
+        },
+        {
+          "rank": 112,
+          "signature": "res://scripts/presentation/asset_library.gd::32::has_asset",
+          "inclusive_seconds": 0.001424,
+          "self_seconds": 7.5e-05,
+          "calls": 274
+        },
+        {
+          "rank": 113,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::112::_equal_int",
+          "inclusive_seconds": 0.00141,
+          "self_seconds": 0.000815,
+          "calls": 3560
+        },
+        {
+          "rank": 114,
+          "signature": "res://scripts/main.gd::4847::_refresh_spawn_teach",
+          "inclusive_seconds": 0.001374,
+          "self_seconds": 4.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 115,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::11::active",
+          "inclusive_seconds": 0.001337,
+          "self_seconds": 0.000316,
+          "calls": 26
+        },
+        {
+          "rank": 116,
+          "signature": "res://scripts/presentation/environment_scene.gd::197::contact_bounds",
+          "inclusive_seconds": 0.00133,
+          "self_seconds": 4.9e-05,
+          "calls": 22
+        },
+        {
+          "rank": 117,
+          "signature": "res://scripts/presentation/movement_dust_pool.gd::41::_hide",
+          "inclusive_seconds": 0.001284,
+          "self_seconds": 0.001284,
+          "calls": 26
+        },
+        {
+          "rank": 118,
+          "signature": "res://scripts/presentation/environment_scene.gd::207::_asset_contact_bounds",
+          "inclusive_seconds": 0.001267,
+          "self_seconds": 1.6e-05,
+          "calls": 18
+        },
+        {
+          "rank": 119,
+          "signature": "res://scripts/fx/mission_sky.gd::30::MissionSky._is_power_saving",
+          "inclusive_seconds": 0.001234,
+          "self_seconds": 0.000288,
+          "calls": 754
+        },
+        {
+          "rank": 120,
+          "signature": "res://scripts/presentation/asset_library.gd::41::model_path",
+          "inclusive_seconds": 0.001212,
+          "self_seconds": 0.000755,
+          "calls": 283
+        },
+        {
+          "rank": 121,
+          "signature": "res://scripts/game_settings.gd::76::_normalize_quality_tier",
+          "inclusive_seconds": 0.001149,
+          "self_seconds": 0.000811,
+          "calls": 1116
+        },
+        {
+          "rank": 122,
+          "signature": "res://scripts/main.gd::2219::_is_power_saving",
+          "inclusive_seconds": 0.001118,
+          "self_seconds": 0.000138,
+          "calls": 154
+        },
+        {
+          "rank": 123,
+          "signature": "res://scripts/touch_hud.gd::689::_hide_overflow",
+          "inclusive_seconds": 0.001097,
+          "self_seconds": 0.001097,
+          "calls": 50
+        },
+        {
+          "rank": 124,
+          "signature": "res://scripts/main.gd::7018::_refresh_watch_timeline",
+          "inclusive_seconds": 0.001048,
+          "self_seconds": 0.000279,
+          "calls": 50
+        },
+        {
+          "rank": 125,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::86::AmbushZoneFx._dashed_rect",
+          "inclusive_seconds": 0.00104,
+          "self_seconds": 4.1e-05,
+          "calls": 26
+        },
+        {
+          "rank": 126,
+          "signature": "res://scripts/main.gd::877::_use_touch_chrome",
+          "inclusive_seconds": 0.001022,
+          "self_seconds": 6.7e-05,
+          "calls": 251
+        },
+        {
+          "rank": 127,
+          "signature": "res://scripts/presentation/actor_pose.gd::15::supported",
+          "inclusive_seconds": 0.001008,
+          "self_seconds": 0.000652,
+          "calls": 477
+        },
+        {
+          "rank": 128,
+          "signature": "res://scripts/c2/c2_director.gd::183::C2Director._pin_portraits",
+          "inclusive_seconds": 0.00099,
+          "self_seconds": 0.000881,
+          "calls": 50
+        },
+        {
+          "rank": 129,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::48::_hide",
+          "inclusive_seconds": 0.000976,
+          "self_seconds": 0.000976,
+          "calls": 26
+        },
+        {
+          "rank": 130,
+          "signature": "res://scripts/presentation/environment_scene.gd::28::supported",
+          "inclusive_seconds": 0.000949,
+          "self_seconds": 0.000519,
+          "calls": 226
+        },
+        {
+          "rank": 131,
+          "signature": "res://scripts/ui/op_card.gd::303::OpCard._refresh_chrome",
+          "inclusive_seconds": 0.000949,
+          "self_seconds": 0.000949,
+          "calls": 75
+        },
+        {
+          "rank": 132,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::93::AmbushZoneFx._dashed_segment",
+          "inclusive_seconds": 0.000948,
+          "self_seconds": 0.000948,
+          "calls": 104
+        },
+        {
+          "rank": 133,
+          "signature": "res://scripts/replay/battle_log.gd::119::BattleLog.record_tick",
+          "inclusive_seconds": 0.000937,
+          "self_seconds": 0.000281,
+          "calls": 1393
+        },
+        {
+          "rank": 134,
+          "signature": "res://scripts/presentation/environment_visual.gd::38::model_for",
+          "inclusive_seconds": 0.000921,
+          "self_seconds": 0.000317,
+          "calls": 413
+        },
+        {
+          "rank": 135,
+          "signature": "res://scripts/sfx/audio_director.gd::73::_stop_active_sfx",
+          "inclusive_seconds": 0.000914,
+          "self_seconds": 0.000327,
+          "calls": 25
+        },
+        {
+          "rank": 136,
+          "signature": "res://scripts/presentation/presenter_3d.gd::557::_sync_cones",
+          "inclusive_seconds": 0.000904,
+          "self_seconds": 0.000786,
+          "calls": 26
+        },
+        {
+          "rank": 137,
+          "signature": "res://scripts/ui/role_glyph.gd::35::_draw_rifle",
+          "inclusive_seconds": 0.000899,
+          "self_seconds": 0.000899,
+          "calls": 25
+        },
+        {
+          "rank": 138,
+          "signature": "res://scripts/presentation/firearm_pose.gd::11::profile",
+          "inclusive_seconds": 0.000891,
+          "self_seconds": 6.9e-05,
+          "calls": 141
+        },
+        {
+          "rank": 139,
+          "signature": "res://scripts/hud_profile_external.gd::81::_measure",
+          "inclusive_seconds": 0.000889,
+          "self_seconds": 0.000427,
+          "calls": 26
+        },
+        {
+          "rank": 140,
+          "signature": "res://scripts/art/weapon_art.gd::280::WeaponArt.icon_poly",
+          "inclusive_seconds": 0.000875,
+          "self_seconds": 0.000514,
+          "calls": 75
+        },
+        {
+          "rank": 141,
+          "signature": "res://scripts/fx/operator_silhouette.gd::849::_shift",
+          "inclusive_seconds": 0.000859,
+          "self_seconds": 0.000859,
+          "calls": 546
+        },
+        {
+          "rank": 142,
+          "signature": "res://scripts/raid/weapon_catalog.gd::73::WeaponCatalog.is_firearm",
+          "inclusive_seconds": 0.000847,
+          "self_seconds": 0.000366,
+          "calls": 532
+        },
+        {
+          "rank": 143,
+          "signature": "res://scripts/main.gd::12905::named_crate_ids",
+          "inclusive_seconds": 0.000837,
+          "self_seconds": 0.000362,
+          "calls": 25
+        },
+        {
+          "rank": 144,
+          "signature": "res://scripts/raid/stash.gd::105::RaidStash._phone",
+          "inclusive_seconds": 0.000835,
+          "self_seconds": 0.000438,
+          "calls": 468
+        },
+        {
+          "rank": 145,
+          "signature": "res://scripts/presentation/presenter_3d.gd::315::_layout_camera_controls",
+          "inclusive_seconds": 0.000824,
+          "self_seconds": 0.000509,
+          "calls": 26
+        },
+        {
+          "rank": 146,
+          "signature": "res://scripts/presentation/actor_visual.gd::144::mount_item",
+          "inclusive_seconds": 0.000808,
+          "self_seconds": 0.000119,
+          "calls": 161
+        },
+        {
+          "rank": 147,
+          "signature": "res://scripts/game_settings.gd::31::want_touch_controls",
+          "inclusive_seconds": 0.000776,
+          "self_seconds": 0.000776,
+          "calls": 970
+        },
+        {
+          "rank": 148,
+          "signature": "res://scripts/a3_render_metrics.gd::159::_put",
+          "inclusive_seconds": 0.000759,
+          "self_seconds": 0.000759,
+          "calls": 1066
+        },
+        {
+          "rank": 149,
+          "signature": "res://scripts/sfx/sfx_bus.gd::161::SfxBus._gain",
+          "inclusive_seconds": 0.00075,
+          "self_seconds": 2.3e-05,
+          "calls": 50
+        },
+        {
+          "rank": 150,
+          "signature": "res://scripts/touch_hud.gd::576::set_alarm_cta",
+          "inclusive_seconds": 0.000731,
+          "self_seconds": 0.000555,
+          "calls": 50
+        },
+        {
+          "rank": 151,
+          "signature": "res://scripts/main.gd::7312::_event_tint",
+          "inclusive_seconds": 0.000724,
+          "self_seconds": 0.000465,
+          "calls": 299
+        },
+        {
+          "rank": 152,
+          "signature": "res://scripts/fx/mission_sky.gd::130::MissionSky._draw_clouds",
+          "inclusive_seconds": 0.00071,
+          "self_seconds": 0.000658,
+          "calls": 26
+        },
+        {
+          "rank": 153,
+          "signature": "res://scripts/cover_slot.gd::486::CoverSlot._rebuild_arc_edge",
+          "inclusive_seconds": 0.000704,
+          "self_seconds": 0.000704,
+          "calls": 150
+        },
+        {
+          "rank": 154,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::104::_nonnegative_int",
+          "inclusive_seconds": 0.000695,
+          "self_seconds": 0.00044,
+          "calls": 1720
+        },
+        {
+          "rank": 155,
+          "signature": "res://scripts/ui/role_glyph.gd::71::_draw_scout",
+          "inclusive_seconds": 0.00069,
+          "self_seconds": 0.00069,
+          "calls": 25
+        },
+        {
+          "rank": 156,
+          "signature": "res://scripts/presentation/shot_fx_pool.gd::76::_hide",
+          "inclusive_seconds": 0.000681,
+          "self_seconds": 0.000681,
+          "calls": 26
+        },
+        {
+          "rank": 157,
+          "signature": "res://scripts/ui/op_card.gd::154::OpCard._process",
+          "inclusive_seconds": 0.000671,
+          "self_seconds": 0.000671,
+          "calls": 78
+        },
+        {
+          "rank": 158,
+          "signature": "res://scripts/sfx/audio_assets.gd::9::record",
+          "inclusive_seconds": 0.000663,
+          "self_seconds": 4.2e-05,
+          "calls": 50
+        },
+        {
+          "rank": 159,
+          "signature": "res://scripts/operator.gd::1314::OperatorUnit._is_power_saving",
+          "inclusive_seconds": 0.000662,
+          "self_seconds": 0.00014,
+          "calls": 156
+        },
+        {
+          "rank": 160,
+          "signature": "res://scripts/a3_render_metrics.gd::180::_property",
+          "inclusive_seconds": 0.000661,
+          "self_seconds": 0.000309,
+          "calls": 234
+        },
+        {
+          "rank": 161,
+          "signature": "res://scripts/main.gd::10234::_apply_west_obs_scale",
+          "inclusive_seconds": 0.000656,
+          "self_seconds": 0.000109,
+          "calls": 25
+        },
+        {
+          "rank": 162,
+          "signature": "res://scripts/presentation/environment_visual.gd::11::set_asset",
+          "inclusive_seconds": 0.000644,
+          "self_seconds": 0.000167,
+          "calls": 413
+        },
+        {
+          "rank": 163,
+          "signature": "res://scripts/presentation/corpse_pose.gd::13::valid",
+          "inclusive_seconds": 0.000608,
+          "self_seconds": 0.00033,
+          "calls": 66
+        },
+        {
+          "rank": 164,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::42::_sample",
+          "inclusive_seconds": 0.000607,
+          "self_seconds": 0.000355,
+          "calls": 130
+        },
+        {
+          "rank": 165,
+          "signature": "res://scripts/sfx/audio_director.gd::155::_apply_music_gain",
+          "inclusive_seconds": 0.000599,
+          "self_seconds": 9.5e-05,
+          "calls": 25
+        },
+        {
+          "rank": 166,
+          "signature": "res://scripts/operator.gd::2113::OperatorUnit._tick_sel_ring",
+          "inclusive_seconds": 0.000581,
+          "self_seconds": 0.000264,
+          "calls": 78
+        },
+        {
+          "rank": 167,
+          "signature": "res://scripts/a3_render_metrics.gd::167::_number",
+          "inclusive_seconds": 0.000578,
+          "self_seconds": 0.000269,
+          "calls": 416
+        },
+        {
+          "rank": 168,
+          "signature": "res://scripts/raid/weapon_catalog.gd::153::WeaponCatalog.display_name",
+          "inclusive_seconds": 0.000554,
+          "self_seconds": 0.000554,
+          "calls": 150
+        },
+        {
+          "rank": 169,
+          "signature": "res://scripts/ui/op_card.gd::326::OpCard._refresh_ammo_values",
+          "inclusive_seconds": 0.00054,
+          "self_seconds": 0.00054,
+          "calls": 75
+        },
+        {
+          "rank": 170,
+          "signature": "res://scripts/presentation/world_space.gd::29::facing_yaw",
+          "inclusive_seconds": 0.000539,
+          "self_seconds": 0.000212,
+          "calls": 445
+        },
+        {
+          "rank": 171,
+          "signature": "res://scripts/ui/role_glyph.gd::52::_draw_mg",
+          "inclusive_seconds": 0.000526,
+          "self_seconds": 0.000526,
+          "calls": 25
+        },
+        {
+          "rank": 172,
+          "signature": "res://scripts/replay/hud_record.gd::16::operator_name",
+          "inclusive_seconds": 0.000507,
+          "self_seconds": 0.000319,
+          "calls": 250
+        },
+        {
+          "rank": 173,
+          "signature": "res://scripts/presentation/corpse_pose.gd::9::supported",
+          "inclusive_seconds": 0.000496,
+          "self_seconds": 0.000232,
+          "calls": 285
+        },
+        {
+          "rank": 174,
+          "signature": "res://scripts/sfx/audio_director.gd::174::_apply_mood_params",
+          "inclusive_seconds": 0.000489,
+          "self_seconds": 5.6e-05,
+          "calls": 25
+        },
+        {
+          "rank": 175,
+          "signature": "res://scripts/presentation/actor_visual.gd::184::_sync_attachment",
+          "inclusive_seconds": 0.000482,
+          "self_seconds": 0.000482,
+          "calls": 340
+        },
+        {
+          "rank": 176,
+          "signature": "res://scripts/main.gd::2087::_ensure_watch_cinema",
+          "inclusive_seconds": 0.000481,
+          "self_seconds": 9.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 177,
+          "signature": "res://scripts/map_draw.gd::179::_is_power_saving",
+          "inclusive_seconds": 0.000473,
+          "self_seconds": 0.000129,
+          "calls": 52
+        },
+        {
+          "rank": 178,
+          "signature": "res://scripts/operator.gd::2007::OperatorUnit._tick_outline_boost",
+          "inclusive_seconds": 0.000462,
+          "self_seconds": 0.00018,
+          "calls": 78
+        },
+        {
+          "rank": 179,
+          "signature": "res://scripts/c2/context_prompt.gd::108::C2ContextPrompt._process",
+          "inclusive_seconds": 0.00045,
+          "self_seconds": 9.2e-05,
+          "calls": 26
+        },
+        {
+          "rank": 180,
+          "signature": "res://scripts/presentation/asset_library.gd::153::_apply",
+          "inclusive_seconds": 0.00045,
+          "self_seconds": 8.4e-05,
+          "calls": 53
+        },
+        {
+          "rank": 181,
+          "signature": "res://scripts/presentation/actor_pose.gd::137::_elapsed",
+          "inclusive_seconds": 0.000426,
+          "self_seconds": 7.4e-05,
+          "calls": 161
+        },
+        {
+          "rank": 182,
+          "signature": "res://scripts/main.gd::727::_gs",
+          "inclusive_seconds": 0.00042,
+          "self_seconds": 0.00042,
+          "calls": 631
+        },
+        {
+          "rank": 183,
+          "signature": "res://scripts/main.gd::1122::_apply_result_rail",
+          "inclusive_seconds": 0.000418,
+          "self_seconds": 6.2e-05,
+          "calls": 50
+        },
+        {
+          "rank": 184,
+          "signature": "res://scripts/a3_render_metrics.gd::163::_text",
+          "inclusive_seconds": 0.000393,
+          "self_seconds": 3.5e-05,
+          "calls": 130
+        },
+        {
+          "rank": 185,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::108::_positive_int",
+          "inclusive_seconds": 0.000361,
+          "self_seconds": 0.000206,
+          "calls": 860
+        },
+        {
+          "rank": 186,
+          "signature": "res://scripts/presentation/corpse_pose.gd::27::sample",
+          "inclusive_seconds": 0.000361,
+          "self_seconds": 9.2e-05,
+          "calls": 78
+        },
+        {
+          "rank": 187,
+          "signature": "res://scripts/main.gd::7095::_refresh_watch_wave_chip",
+          "inclusive_seconds": 0.000361,
+          "self_seconds": 0.000192,
+          "calls": 100
+        },
+        {
+          "rank": 188,
+          "signature": "res://scripts/main.gd::12622::_refresh_alarm_cta",
+          "inclusive_seconds": 0.000357,
+          "self_seconds": 0.000357,
+          "calls": 75
+        },
+        {
+          "rank": 189,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::116::_equal_bool",
+          "inclusive_seconds": 0.000354,
+          "self_seconds": 0.00021,
+          "calls": 958
+        },
+        {
+          "rank": 190,
+          "signature": "res://scripts/replay/replay_player.gd::64::ReplayPlayer._snapshots",
+          "inclusive_seconds": 0.00035,
+          "self_seconds": 0.00035,
+          "calls": 829
+        },
+        {
+          "rank": 191,
+          "signature": "res://scripts/presentation/world_space.gd::11::logic_to_world",
+          "inclusive_seconds": 0.000343,
+          "self_seconds": 0.000343,
+          "calls": 1121
+        },
+        {
+          "rank": 192,
+          "signature": "res://scripts/c2/context_cursor.gd::58::C2ContextCursor._draw_icon",
+          "inclusive_seconds": 0.000338,
+          "self_seconds": 0.000338,
+          "calls": 25
+        },
+        {
+          "rank": 193,
+          "signature": "res://scripts/replay/hud_record.gd::5::operator_at",
+          "inclusive_seconds": 0.000338,
+          "self_seconds": 0.000207,
+          "calls": 200
+        },
+        {
+          "rank": 194,
+          "signature": "res://scripts/operator.gd::175::OperatorUnit.role_kit_color",
+          "inclusive_seconds": 0.000329,
+          "self_seconds": 0.000329,
+          "calls": 384
+        },
+        {
+          "rank": 195,
+          "signature": "res://scripts/fx/operator_silhouette.gd::855::_rot",
+          "inclusive_seconds": 0.000327,
+          "self_seconds": 0.000327,
+          "calls": 390
+        },
+        {
+          "rank": 196,
+          "signature": "res://scripts/raid/weapon_catalog.gd::38::WeaponCatalog.model_ids",
+          "inclusive_seconds": 0.00032,
+          "self_seconds": 0.00032,
+          "calls": 482
+        },
+        {
+          "rank": 197,
+          "signature": "res://scripts/main.gd::746::_modal_blocks_input",
+          "inclusive_seconds": 0.000299,
+          "self_seconds": 4.7e-05,
+          "calls": 26
+        },
+        {
+          "rank": 198,
+          "signature": "res://scripts/cover_slot.gd::341::CoverSlot.set_role_hint",
+          "inclusive_seconds": 0.000296,
+          "self_seconds": 0.000151,
+          "calls": 150
+        },
+        {
+          "rank": 199,
+          "signature": "res://scripts/replay/replay_player.gd::68::ReplayPlayer.max_tick",
+          "inclusive_seconds": 0.000267,
+          "self_seconds": 0.000267,
+          "calls": 377
+        },
+        {
+          "rank": 200,
+          "signature": "res://scripts/replay/hud_record.gd::28::inventory_line",
+          "inclusive_seconds": 0.000265,
+          "self_seconds": 0.000179,
+          "calls": 100
+        },
+        {
+          "rank": 201,
+          "signature": "res://scripts/main.gd::3278::_refresh_checklist",
+          "inclusive_seconds": 0.000265,
+          "self_seconds": 4.1e-05,
+          "calls": 25
+        },
+        {
+          "rank": 202,
+          "signature": "res://scripts/main.gd::1040::_result_overlay_active",
+          "inclusive_seconds": 0.000264,
+          "self_seconds": 0.000264,
+          "calls": 176
+        },
+        {
+          "rank": 203,
+          "signature": "res://scripts/operator.gd::2069::OperatorUnit._ensure_sel_ring",
+          "inclusive_seconds": 0.000263,
+          "self_seconds": 0.000105,
+          "calls": 78
+        },
+        {
+          "rank": 204,
+          "signature": "res://scripts/a3_render_metrics.gd::115::mark",
+          "inclusive_seconds": 0.00026,
+          "self_seconds": 4.7e-05,
+          "calls": 2
+        },
+        {
+          "rank": 205,
+          "signature": "res://scripts/c2/portrait_strip.gd::274::C2PortraitStrip._process",
+          "inclusive_seconds": 0.00026,
+          "self_seconds": 0.000128,
+          "calls": 26
+        },
+        {
+          "rank": 206,
+          "signature": "res://scripts/main.gd::870::_compact_hud",
+          "inclusive_seconds": 0.000253,
+          "self_seconds": 0.000253,
+          "calls": 302
+        },
+        {
+          "rank": 207,
+          "signature": "res://scripts/main.gd::10258::_apply_west_obs_offset",
+          "inclusive_seconds": 0.000241,
+          "self_seconds": 5.5e-05,
+          "calls": 25
+        },
+        {
+          "rank": 208,
+          "signature": "res://scripts/fx/mission_sky.gd::73::MissionSky._draw_top_haze",
+          "inclusive_seconds": 0.000238,
+          "self_seconds": 8.9e-05,
+          "calls": 26
+        },
+        {
+          "rank": 209,
+          "signature": "res://scripts/operator.gd::1998::OperatorUnit._cam_center_world",
+          "inclusive_seconds": 0.000233,
+          "self_seconds": 0.000233,
+          "calls": 78
+        },
+        {
+          "rank": 210,
+          "signature": "res://scripts/c2/context_prompt.gd::132::C2ContextPrompt._phone",
+          "inclusive_seconds": 0.000229,
+          "self_seconds": 4.8e-05,
+          "calls": 26
+        },
+        {
+          "rank": 211,
+          "signature": "res://scripts/a3_render_metrics.gd::174::_size_property",
+          "inclusive_seconds": 0.000216,
+          "self_seconds": 0.000184,
+          "calls": 104
+        },
+        {
+          "rank": 212,
+          "signature": "res://scripts/presentation/utility_pose.gd::36::sample",
+          "inclusive_seconds": 0.000214,
+          "self_seconds": 2.2e-05,
+          "calls": 78
+        },
+        {
+          "rank": 213,
+          "signature": "res://scripts/main.gd::1088::_hide_duplicate_tut",
+          "inclusive_seconds": 0.00021,
+          "self_seconds": 0.00021,
+          "calls": 50
+        },
+        {
+          "rank": 214,
+          "signature": "res://scripts/raid/raid_director.gd::25::RaidDirector.wave_count",
+          "inclusive_seconds": 0.000209,
+          "self_seconds": 0.000121,
+          "calls": 100
+        },
+        {
+          "rank": 215,
+          "signature": "res://scripts/presentation/world_space.gd::24::facing_direction",
+          "inclusive_seconds": 0.000208,
+          "self_seconds": 0.000208,
+          "calls": 616
+        },
+        {
+          "rank": 216,
+          "signature": "res://scripts/art/weapon_art.gd::224::WeaponArt.steel_color",
+          "inclusive_seconds": 0.000204,
+          "self_seconds": 0.000204,
+          "calls": 75
+        },
+        {
+          "rank": 217,
+          "signature": "res://scripts/a3_render_metrics.gd::287::own_rss_bytes",
+          "inclusive_seconds": 0.000198,
+          "self_seconds": 0.000195,
+          "calls": 2
+        },
+        {
+          "rank": 218,
+          "signature": "res://scripts/touch_hud.gd::342::set_next_wave",
+          "inclusive_seconds": 0.000198,
+          "self_seconds": 0.000198,
+          "calls": 50
+        },
+        {
+          "rank": 219,
+          "signature": "res://scripts/c2/c2_director.gd::161::C2Director._is_phone",
+          "inclusive_seconds": 0.000196,
+          "self_seconds": 4.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 220,
+          "signature": "res://scripts/raid/weapon_catalog.gd::83::WeaponCatalog.family_of",
+          "inclusive_seconds": 0.000196,
+          "self_seconds": 0.000196,
+          "calls": 50
+        },
+        {
+          "rank": 221,
+          "signature": "res://scripts/map_draw.gd::91::signature_tint",
+          "inclusive_seconds": 0.000191,
+          "self_seconds": 7e-06,
+          "calls": 26
+        },
+        {
+          "rank": 222,
+          "signature": "res://scripts/fx/mission_sky.gd::119::MissionSky._draw_distant_lights",
+          "inclusive_seconds": 0.000185,
+          "self_seconds": 0.000133,
+          "calls": 26
+        },
+        {
+          "rank": 223,
+          "signature": "res://scripts/presentation/asset_library.gd::36::is_character_asset",
+          "inclusive_seconds": 0.000182,
+          "self_seconds": 6.7e-05,
+          "calls": 130
+        },
+        {
+          "rank": 224,
+          "signature": "res://scripts/replay/replay_player.gd::101::ReplayPlayer.advance",
+          "inclusive_seconds": 0.000181,
+          "self_seconds": 7e-05,
+          "calls": 26
+        },
+        {
+          "rank": 225,
+          "signature": "res://scripts/c2/c2_director.gd::821::C2Director._clear_live_hint",
+          "inclusive_seconds": 0.000174,
+          "self_seconds": 0.000174,
+          "calls": 75
+        },
+        {
+          "rank": 226,
+          "signature": "res://scripts/art/weapon_art.gd::267::WeaponArt.wood_color",
+          "inclusive_seconds": 0.000171,
+          "self_seconds": 0.000171,
+          "calls": 75
+        },
+        {
+          "rank": 227,
+          "signature": "res://scripts/a3_render_metrics.gd::147::_intern",
+          "inclusive_seconds": 0.000171,
+          "self_seconds": 0.000171,
+          "calls": 134
+        },
+        {
+          "rank": 228,
+          "signature": "res://scripts/presentation/actor_pose.gd::143::_has_event_clock",
+          "inclusive_seconds": 0.000167,
+          "self_seconds": 9.1e-05,
+          "calls": 161
+        },
+        {
+          "rank": 229,
+          "signature": "res://scripts/main.gd::6822::_clear_replay_layer",
+          "inclusive_seconds": 0.000164,
+          "self_seconds": 0.000164,
+          "calls": 25
+        },
+        {
+          "rank": 230,
+          "signature": "res://scripts/operator.gd::1791::OperatorUnit._apply_obs_world_offset",
+          "inclusive_seconds": 0.000164,
+          "self_seconds": 0.000164,
+          "calls": 100
+        },
+        {
+          "rank": 231,
+          "signature": "res://scripts/operator.gd::1784::OperatorUnit.set_obs_world_offset",
+          "inclusive_seconds": 0.000164,
+          "self_seconds": 1.2e-05,
+          "calls": 75
+        },
+        {
+          "rank": 232,
+          "signature": "res://scripts/main.gd::3198::_play_refresh_leak_miss",
+          "inclusive_seconds": 0.000163,
+          "self_seconds": 0.000127,
+          "calls": 25
+        },
+        {
+          "rank": 233,
+          "signature": "res://scripts/main.gd::8027::wave_total",
+          "inclusive_seconds": 0.000158,
+          "self_seconds": 1.1e-05,
+          "calls": 50
+        },
+        {
+          "rank": 234,
+          "signature": "res://scripts/fx/mission_sky.gd::82::MissionSky._draw_contrast_wash",
+          "inclusive_seconds": 0.000154,
+          "self_seconds": 0.0001,
+          "calls": 26
+        },
+        {
+          "rank": 235,
+          "signature": "res://scripts/replay/hud_record.gd::12::selected",
+          "inclusive_seconds": 0.000144,
+          "self_seconds": 2.4e-05,
+          "calls": 50
+        },
+        {
+          "rank": 236,
+          "signature": "res://scripts/replay/battle_log.gd::332::BattleLog.first_of_type",
+          "inclusive_seconds": 0.000138,
+          "self_seconds": 0.000138,
+          "calls": 23
+        },
+        {
+          "rank": 237,
+          "signature": "res://scripts/main.gd::7342::_set_event_log_interactive",
+          "inclusive_seconds": 0.000134,
+          "self_seconds": 0.000134,
+          "calls": 25
+        },
+        {
+          "rank": 238,
+          "signature": "res://scripts/operator.gd::2293::OperatorUnit._refresh_pack_glyph",
+          "inclusive_seconds": 0.000132,
+          "self_seconds": 0.000132,
+          "calls": 78
+        },
+        {
+          "rank": 239,
+          "signature": "res://scripts/operator.gd::1706::OperatorUnit._tick_hold_cone_pulse",
+          "inclusive_seconds": 0.00013,
+          "self_seconds": 3.5e-05,
+          "calls": 78
+        },
+        {
+          "rank": 240,
+          "signature": "res://scripts/a3_campaign_metrics_test.gd::52::_untimed",
+          "inclusive_seconds": 0.000129,
+          "self_seconds": 1e-06,
+          "calls": 1
+        },
+        {
+          "rank": 241,
+          "signature": "res://scripts/presentation/utility_pose.gd::13::valid",
+          "inclusive_seconds": 0.000125,
+          "self_seconds": 5.9e-05,
+          "calls": 78
+        },
+        {
+          "rank": 242,
+          "signature": "res://scripts/operator.gd::2087::OperatorUnit._ensure_sel_brackets",
+          "inclusive_seconds": 0.000121,
+          "self_seconds": 0.000121,
+          "calls": 78
+        },
+        {
+          "rank": 243,
+          "signature": "res://scripts/main.gd::12364::_can_edit_equipment",
+          "inclusive_seconds": 0.000118,
+          "self_seconds": 4.6e-05,
+          "calls": 75
+        },
+        {
+          "rank": 244,
+          "signature": "res://scripts/cover_slot.gd::524::CoverSlot._maybe_idle_process",
+          "inclusive_seconds": 0.000118,
+          "self_seconds": 0.000118,
+          "calls": 300
+        },
+        {
+          "rank": 245,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::121::_nonnegative",
+          "inclusive_seconds": 0.000117,
+          "self_seconds": 4.3e-05,
+          "calls": 161
+        },
+        {
+          "rank": 246,
+          "signature": "res://scripts/cover_slot.gd::377::CoverSlot.set_plan_lock",
+          "inclusive_seconds": 0.000116,
+          "self_seconds": 0.000116,
+          "calls": 150
+        },
+        {
+          "rank": 247,
+          "signature": "res://scripts/c2/c2_director.gd::817::C2Director._in_replay",
+          "inclusive_seconds": 0.000115,
+          "self_seconds": 0.000115,
+          "calls": 75
+        },
+        {
+          "rank": 248,
+          "signature": "res://scripts/main.gd::5091::_deployed_count",
+          "inclusive_seconds": 0.000115,
+          "self_seconds": 0.000115,
+          "calls": 25
+        },
+        {
+          "rank": 249,
+          "signature": "res://scripts/presentation/asset_library.gd::54::_read_catalog",
+          "inclusive_seconds": 0.000113,
+          "self_seconds": 0.000113,
+          "calls": 664
+        },
+        {
+          "rank": 250,
+          "signature": "res://scripts/main.gd::7745::watch_census_text",
+          "inclusive_seconds": 0.000112,
+          "self_seconds": 0.000112,
+          "calls": 25
+        },
+        {
+          "rank": 251,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::80::_valid_pose",
+          "inclusive_seconds": 0.000111,
+          "self_seconds": 5.6e-05,
+          "calls": 11
+        },
+        {
+          "rank": 252,
+          "signature": "res://scripts/a3_render_metrics.gd::260::numeric_at",
+          "inclusive_seconds": 0.000107,
+          "self_seconds": 6.6e-05,
+          "calls": 49
+        },
+        {
+          "rank": 253,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::106::_tool_id",
+          "inclusive_seconds": 0.000106,
+          "self_seconds": 6.6e-05,
+          "calls": 23
+        },
+        {
+          "rank": 254,
+          "signature": "res://scripts/ui/role_glyph.gd::7::@role_setter",
+          "inclusive_seconds": 8.7e-05,
+          "self_seconds": 8.7e-05,
+          "calls": 150
+        },
+        {
+          "rank": 255,
+          "signature": "res://scripts/ui/gun_stamp.gd::9::@weapon_id_setter",
+          "inclusive_seconds": 8.6e-05,
+          "self_seconds": 8.6e-05,
+          "calls": 150
+        },
+        {
+          "rank": 256,
+          "signature": "res://scripts/fx/killzone_overlay.gd::33::_process",
+          "inclusive_seconds": 8.4e-05,
+          "self_seconds": 8.4e-05,
+          "calls": 52
+        },
+        {
+          "rank": 257,
+          "signature": "res://scripts/presentation/actor_pose.gd::96::_matching_weapon",
+          "inclusive_seconds": 8.3e-05,
+          "self_seconds": 4.1e-05,
+          "calls": 38
+        },
+        {
+          "rank": 258,
+          "signature": "res://scripts/cover_slot.gd::299::CoverSlot._ensure_protect_arc",
+          "inclusive_seconds": 8.2e-05,
+          "self_seconds": 8.2e-05,
+          "calls": 300
+        },
+        {
+          "rank": 259,
+          "signature": "res://scripts/level/level_def.gd::210::LevelDef.signature_color",
+          "inclusive_seconds": 8e-05,
+          "self_seconds": 8e-05,
+          "calls": 26
+        },
+        {
+          "rank": 260,
+          "signature": "res://scripts/a3_render_metrics.gd::107::column_count",
+          "inclusive_seconds": 8e-05,
+          "self_seconds": 8e-05,
+          "calls": 75
+        },
+        {
+          "rank": 261,
+          "signature": "res://scripts/main.gd::7793::_refresh_route_legend",
+          "inclusive_seconds": 7.9e-05,
+          "self_seconds": 7.9e-05,
+          "calls": 25
+        },
+        {
+          "rank": 262,
+          "signature": "res://scripts/main.gd::1862::_ensure_watch_clock",
+          "inclusive_seconds": 7.8e-05,
+          "self_seconds": 7.8e-05,
+          "calls": 50
+        },
+        {
+          "rank": 263,
+          "signature": "res://scripts/c2/context_prompt.gd::577::C2ContextPrompt._hide_all",
+          "inclusive_seconds": 7.8e-05,
+          "self_seconds": 7.8e-05,
+          "calls": 26
+        },
+        {
+          "rank": 264,
+          "signature": "res://scripts/ui/route_timeline.gd::21::set_live",
+          "inclusive_seconds": 7.8e-05,
+          "self_seconds": 7.8e-05,
+          "calls": 50
+        },
+        {
+          "rank": 265,
+          "signature": "res://scripts/main.gd::1885::_refresh_watch_clock",
+          "inclusive_seconds": 7.6e-05,
+          "self_seconds": 3.3e-05,
+          "calls": 25
+        },
+        {
+          "rank": 266,
+          "signature": "res://scripts/main.gd::7072::_ensure_watch_wave_chip",
+          "inclusive_seconds": 7.4e-05,
+          "self_seconds": 7.4e-05,
+          "calls": 100
+        },
+        {
+          "rank": 267,
+          "signature": "res://scripts/sfx/sfx_bus.gd::131::SfxBus.ambient_cue_id",
+          "inclusive_seconds": 7.1e-05,
+          "self_seconds": 7.1e-05,
+          "calls": 25
+        },
+        {
+          "rank": 268,
+          "signature": "res://scripts/c2/c2_director.gd::220::C2Director._portraits_needed",
+          "inclusive_seconds": 6.9e-05,
+          "self_seconds": 6.9e-05,
+          "calls": 50
+        },
+        {
+          "rank": 269,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::129::_int_eq",
+          "inclusive_seconds": 6.8e-05,
+          "self_seconds": 3.3e-05,
+          "calls": 138
+        },
+        {
+          "rank": 270,
+          "signature": "res://scripts/presentation/environment_scene.gd::223::_collect_bounds",
+          "inclusive_seconds": 6.8e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 18
+        },
+        {
+          "rank": 271,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::69::_int_eq",
+          "inclusive_seconds": 6.6e-05,
+          "self_seconds": 3.5e-05,
+          "calls": 104
+        },
+        {
+          "rank": 272,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::123::_size",
+          "inclusive_seconds": 6.6e-05,
+          "self_seconds": 4.4e-05,
+          "calls": 69
+        },
+        {
+          "rank": 273,
+          "signature": "res://scripts/main.gd::12356::_refresh_backpack_if_open",
+          "inclusive_seconds": 6.5e-05,
+          "self_seconds": 2.1e-05,
+          "calls": 25
+        },
+        {
+          "rank": 274,
+          "signature": "res://scripts/main.gd::1840::_refresh_watch_metronome",
+          "inclusive_seconds": 6.4e-05,
+          "self_seconds": 4.1e-05,
+          "calls": 25
+        },
+        {
+          "rank": 275,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::77::_positive",
+          "inclusive_seconds": 6.1e-05,
+          "self_seconds": 3.3e-05,
+          "calls": 156
+        },
+        {
+          "rank": 276,
+          "signature": "res://scripts/main.gd::10220::_follow_west_cluster",
+          "inclusive_seconds": 6e-05,
+          "self_seconds": 6e-05,
+          "calls": 25
+        },
+        {
+          "rank": 277,
+          "signature": "res://scripts/main.gd::1811::_ensure_watch_metronome",
+          "inclusive_seconds": 6e-05,
+          "self_seconds": 6e-05,
+          "calls": 50
+        },
+        {
+          "rank": 278,
+          "signature": "res://scripts/sfx/audio_director.gd::85::_stop_continuous",
+          "inclusive_seconds": 6e-05,
+          "self_seconds": 2.9e-05,
+          "calls": 25
+        },
+        {
+          "rank": 279,
+          "signature": "res://scripts/main.gd::6999::_ensure_watch_timeline",
+          "inclusive_seconds": 5.9e-05,
+          "self_seconds": 5.9e-05,
+          "calls": 50
+        },
+        {
+          "rank": 280,
+          "signature": "res://scripts/main.gd::7997::_is_command_phase",
+          "inclusive_seconds": 5.9e-05,
+          "self_seconds": 5.9e-05,
+          "calls": 200
+        },
+        {
+          "rank": 281,
+          "signature": "res://scripts/level/level_def.gd::226::LevelDef.mood_tag",
+          "inclusive_seconds": 5.9e-05,
+          "self_seconds": 5.9e-05,
+          "calls": 25
+        },
+        {
+          "rank": 282,
+          "signature": "res://scripts/replay/battle_log.gd::243::BattleLog._no_engage_reason_zh",
+          "inclusive_seconds": 5.7e-05,
+          "self_seconds": 5.7e-05,
+          "calls": 56
+        },
+        {
+          "rank": 283,
+          "signature": "res://scripts/level/level_def.gd::53::LevelDef.wave_count",
+          "inclusive_seconds": 5.3e-05,
+          "self_seconds": 5.3e-05,
+          "calls": 100
+        },
+        {
+          "rank": 284,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::125::_positive",
+          "inclusive_seconds": 5e-05,
+          "self_seconds": 3e-05,
+          "calls": 92
+        },
+        {
+          "rank": 285,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::117::_number",
+          "inclusive_seconds": 4.9e-05,
+          "self_seconds": 4.9e-05,
+          "calls": 161
+        },
+        {
+          "rank": 286,
+          "signature": "res://scripts/presentation/actor_pose.gd::162::choose_lod",
+          "inclusive_seconds": 4.8e-05,
+          "self_seconds": 4.8e-05,
+          "calls": 152
+        },
+        {
+          "rank": 287,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::65::_number",
+          "inclusive_seconds": 4.6e-05,
+          "self_seconds": 4.6e-05,
+          "calls": 56
+        },
+        {
+          "rank": 288,
+          "signature": "res://scripts/operator.gd::1695::OperatorUnit.hold_cone_pulsing",
+          "inclusive_seconds": 4.6e-05,
+          "self_seconds": 4.6e-05,
+          "calls": 78
+        },
+        {
+          "rank": 289,
+          "signature": "res://scripts/presentation/tool_fx_pool.gd::119::_geometry",
+          "inclusive_seconds": 4.5e-05,
+          "self_seconds": 4.5e-05,
+          "calls": 230
+        },
+        {
+          "rank": 290,
+          "signature": "res://scripts/presentation/actor_visual.gd::226::find_type",
+          "inclusive_seconds": 4.5e-05,
+          "self_seconds": 1.5e-05,
+          "calls": 24
+        },
+        {
+          "rank": 291,
+          "signature": "res://scripts/presentation/corpse_pose.gd::18::age",
+          "inclusive_seconds": 4.5e-05,
+          "self_seconds": 2.6e-05,
+          "calls": 44
+        },
+        {
+          "rank": 292,
+          "signature": "res://scripts/cover_slot.gd::358::CoverSlot._ensure_hint_ring",
+          "inclusive_seconds": 4.5e-05,
+          "self_seconds": 4.5e-05,
+          "calls": 150
+        },
+        {
+          "rank": 293,
+          "signature": "res://scripts/raid/weapon_catalog.gd::349::WeaponCatalog.is_class_firearm",
+          "inclusive_seconds": 4.4e-05,
+          "self_seconds": 4.4e-05,
+          "calls": 150
+        },
+        {
+          "rank": 294,
+          "signature": "res://scripts/replay/hud_record.gd::20::role_label",
+          "inclusive_seconds": 4.4e-05,
+          "self_seconds": 2.3e-05,
+          "calls": 75
+        },
+        {
+          "rank": 295,
+          "signature": "res://scripts/operator.gd::1772::OperatorUnit.set_obs_visual_scale",
+          "inclusive_seconds": 4.3e-05,
+          "self_seconds": 4.3e-05,
+          "calls": 75
+        },
+        {
+          "rank": 296,
+          "signature": "res://scripts/replay/hud_record.gd::24::weapon_label",
+          "inclusive_seconds": 4.3e-05,
+          "self_seconds": 9e-06,
+          "calls": 75
+        },
+        {
+          "rank": 297,
+          "signature": "res://scripts/fx/killzone_overlay.gd::11::set_miss_samples",
+          "inclusive_seconds": 4e-05,
+          "self_seconds": 4e-05,
+          "calls": 25
+        },
+        {
+          "rank": 298,
+          "signature": "res://scripts/fx/spawn_ghost.gd::57::_process",
+          "inclusive_seconds": 3.9e-05,
+          "self_seconds": 3.9e-05,
+          "calls": 78
+        },
+        {
+          "rank": 299,
+          "signature": "res://scripts/presentation/environment_scene.gd::152::set_door",
+          "inclusive_seconds": 3.8e-05,
+          "self_seconds": 3.8e-05,
+          "calls": 26
+        },
+        {
+          "rank": 300,
+          "signature": "res://scripts/main.gd::4863::_ensure_intel_chip",
+          "inclusive_seconds": 3.5e-05,
+          "self_seconds": 3.5e-05,
+          "calls": 50
+        },
+        {
+          "rank": 301,
+          "signature": "res://scripts/presentation/actor_visual.gd::205::item_socket",
+          "inclusive_seconds": 3.5e-05,
+          "self_seconds": 3.5e-05,
+          "calls": 7
+        },
+        {
+          "rank": 302,
+          "signature": "res://scripts/sfx/audio_director.gd::180::_apply_mood_mute",
+          "inclusive_seconds": 3.5e-05,
+          "self_seconds": 1.7e-05,
+          "calls": 25
+        },
+        {
+          "rank": 303,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::28::<anonymous lambda>(lambda)",
+          "inclusive_seconds": 3.5e-05,
+          "self_seconds": 3.5e-05,
+          "calls": 23
+        },
+        {
+          "rank": 304,
+          "signature": "res://scripts/fx/ambush_zone_fx.gd::45::AmbushZoneFx._process",
+          "inclusive_seconds": 3.4e-05,
+          "self_seconds": 3.4e-05,
+          "calls": 26
+        },
+        {
+          "rank": 305,
+          "signature": "res://scripts/main.gd::8023::wave_index",
+          "inclusive_seconds": 3.4e-05,
+          "self_seconds": 3.4e-05,
+          "calls": 50
+        },
+        {
+          "rank": 306,
+          "signature": "res://scripts/sfx/audio_director.gd::160::_apply_music_mute",
+          "inclusive_seconds": 3.4e-05,
+          "self_seconds": 1.4e-05,
+          "calls": 25
+        },
+        {
+          "rank": 307,
+          "signature": "res://scripts/fx/mission_sky.gd::96::MissionSky._draw_horizon",
+          "inclusive_seconds": 3.4e-05,
+          "self_seconds": 2.4e-05,
+          "calls": 26
+        },
+        {
+          "rank": 308,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::133::_bool_eq",
+          "inclusive_seconds": 3.3e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 46
+        },
+        {
+          "rank": 309,
+          "signature": "res://scripts/operator.gd::1030::OperatorUnit.cover_idle_planted",
+          "inclusive_seconds": 3.2e-05,
+          "self_seconds": 3.2e-05,
+          "calls": 78
+        },
+        {
+          "rank": 310,
+          "signature": "res://scripts/ui/night_ops.gd::102::NightOps.hp_color",
+          "inclusive_seconds": 3e-05,
+          "self_seconds": 3e-05,
+          "calls": 150
+        },
+        {
+          "rank": 311,
+          "signature": "res://scripts/main.gd::3776::_compass_deg",
+          "inclusive_seconds": 2.9e-05,
+          "self_seconds": 2.9e-05,
+          "calls": 25
+        },
+        {
+          "rank": 312,
+          "signature": "res://scripts/main.gd::7281::_event_display_log",
+          "inclusive_seconds": 2.8e-05,
+          "self_seconds": 2.8e-05,
+          "calls": 25
+        },
+        {
+          "rank": 313,
+          "signature": "res://scripts/presentation/tool_fx_frame.gd::113::_position",
+          "inclusive_seconds": 2.8e-05,
+          "self_seconds": 1.1e-05,
+          "calls": 92
+        },
+        {
+          "rank": 314,
+          "signature": "res://scripts/operator.gd::1812::OperatorUnit.set_cone_visual_fade",
+          "inclusive_seconds": 2.8e-05,
+          "self_seconds": 2.8e-05,
+          "calls": 75
+        },
+        {
+          "rank": 315,
+          "signature": "res://scripts/ui/pause_overlay.gd::176::PauseOverlay.is_open",
+          "inclusive_seconds": 2.7e-05,
+          "self_seconds": 2.7e-05,
+          "calls": 77
+        },
+        {
+          "rank": 316,
+          "signature": "res://scripts/fx/trap_path_fx.gd::100::_process",
+          "inclusive_seconds": 2.7e-05,
+          "self_seconds": 2.7e-05,
+          "calls": 26
+        },
+        {
+          "rank": 317,
+          "signature": "res://scripts/touch_hud.gd::571::set_hint",
+          "inclusive_seconds": 2.6e-05,
+          "self_seconds": 2.6e-05,
+          "calls": 50
+        },
+        {
+          "rank": 318,
+          "signature": "res://scripts/fx/mission_sky.gd::48::MissionSky._process",
+          "inclusive_seconds": 2.5e-05,
+          "self_seconds": 2.5e-05,
+          "calls": 26
+        },
+        {
+          "rank": 319,
+          "signature": "res://scripts/main.gd::3343::_refresh_decision_pulse",
+          "inclusive_seconds": 2.4e-05,
+          "self_seconds": 2.4e-05,
+          "calls": 25
+        },
+        {
+          "rank": 320,
+          "signature": "res://scripts/presentation/movement_dust_pool.gd::93::_geometry",
+          "inclusive_seconds": 2.2e-05,
+          "self_seconds": 2.2e-05,
+          "calls": 90
+        },
+        {
+          "rank": 321,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::73::_nonnegative",
+          "inclusive_seconds": 2.2e-05,
+          "self_seconds": 1.4e-05,
+          "calls": 26
+        },
+        {
+          "rank": 322,
+          "signature": "res://scripts/presentation/asset_library.gd::85::material_for_slot",
+          "inclusive_seconds": 2.2e-05,
+          "self_seconds": 2.2e-05,
+          "calls": 14
+        },
+        {
+          "rank": 323,
+          "signature": "res://scripts/map_draw.gd::223::_atmo",
+          "inclusive_seconds": 2e-05,
+          "self_seconds": 2e-05,
+          "calls": 26
+        },
+        {
+          "rank": 324,
+          "signature": "res://scripts/presentation/shot_fx_frame.gd::100::_number",
+          "inclusive_seconds": 2e-05,
+          "self_seconds": 2e-05,
+          "calls": 77
+        },
+        {
+          "rank": 325,
+          "signature": "res://scripts/presentation/corpse_pairing.gd::13::clip_seconds",
+          "inclusive_seconds": 1.9e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 22
+        },
+        {
+          "rank": 326,
+          "signature": "res://scripts/c2/minimap.gd::41::C2Minimap._process",
+          "inclusive_seconds": 1.9e-05,
+          "self_seconds": 1.9e-05,
+          "calls": 26
+        },
+        {
+          "rank": 327,
+          "signature": "res://scripts/ui/backpack_panel.gd::153::BackpackPanel.is_open",
+          "inclusive_seconds": 1.8e-05,
+          "self_seconds": 1.8e-05,
+          "calls": 51
+        },
+        {
+          "rank": 328,
+          "signature": "res://scripts/sfx/audio_director.gd::64::_gated",
+          "inclusive_seconds": 1.8e-05,
+          "self_seconds": 1.8e-05,
+          "calls": 75
+        },
+        {
+          "rank": 329,
+          "signature": "res://scripts/touch_hud.gd::129::_process",
+          "inclusive_seconds": 1.8e-05,
+          "self_seconds": 1.8e-05,
+          "calls": 26
+        },
+        {
+          "rank": 330,
+          "signature": "res://scripts/operator.gd::1804::OperatorUnit.set_cluster_visual_scale",
+          "inclusive_seconds": 1.7e-05,
+          "self_seconds": 1.7e-05,
+          "calls": 75
+        },
+        {
+          "rank": 331,
+          "signature": "res://scripts/hud_profile_external.gd::18::_profile_end",
+          "inclusive_seconds": 1.6e-05,
+          "self_seconds": 1.4e-05,
+          "calls": 1
+        },
+        {
+          "rank": 332,
+          "signature": "res://scripts/main.gd::2992::_ensure_checklist",
+          "inclusive_seconds": 1.6e-05,
+          "self_seconds": 1.6e-05,
+          "calls": 25
+        },
+        {
+          "rank": 333,
+          "signature": "res://scripts/main.gd::3105::_play_ensure_leak_miss_draw",
+          "inclusive_seconds": 1.5e-05,
+          "self_seconds": 1.5e-05,
+          "calls": 25
+        },
+        {
+          "rank": 334,
+          "signature": "res://scripts/map_draw.gd::119::_ensure_cache_vp",
+          "inclusive_seconds": 1.5e-05,
+          "self_seconds": 1.5e-05,
+          "calls": 26
+        },
+        {
+          "rank": 335,
+          "signature": "res://scripts/presentation/corpse_visual.gd::0::@implicit_new",
+          "inclusive_seconds": 1.5e-05,
+          "self_seconds": 1.5e-05,
+          "calls": 1
+        },
+        {
+          "rank": 336,
+          "signature": "res://scripts/presentation/movement_dust_frame.gd::35::<anonymous lambda>(lambda)",
+          "inclusive_seconds": 1.4e-05,
+          "self_seconds": 1.4e-05,
+          "calls": 15
+        },
+        {
+          "rank": 337,
+          "signature": "res://scripts/operator.gd::1749::OperatorUnit.observation_visual_radius",
+          "inclusive_seconds": 1.4e-05,
+          "self_seconds": 1.4e-05,
+          "calls": 25
+        },
+        {
+          "rank": 338,
+          "signature": "res://scripts/sfx/audio_director.gd::79::_cancel_fade",
+          "inclusive_seconds": 1.3e-05,
+          "self_seconds": 1.3e-05,
+          "calls": 50
+        },
+        {
+          "rank": 339,
+          "signature": "res://scripts/ui/tutorial_overlay.gd::166::TutorialOverlay.is_open",
+          "inclusive_seconds": 1.3e-05,
+          "self_seconds": 1.3e-05,
+          "calls": 26
+        },
+        {
+          "rank": 340,
+          "signature": "res://scripts/main.gd::3473::_refresh_door_visual",
+          "inclusive_seconds": 1.3e-05,
+          "self_seconds": 1.3e-05,
+          "calls": 25
+        },
+        {
+          "rank": 341,
+          "signature": "res://scripts/a3_render_metrics.gd::111::storage_bytes",
+          "inclusive_seconds": 1.2e-05,
+          "self_seconds": 1.2e-05,
+          "calls": 26
+        },
+        {
+          "rank": 342,
+          "signature": "res://scripts/replay/intel_store.gd::63::IntelStore.latest_line",
+          "inclusive_seconds": 1.2e-05,
+          "self_seconds": 1.2e-05,
+          "calls": 25
+        },
+        {
+          "rank": 343,
+          "signature": "res://scripts/fx/mission_sky.gd::69::MissionSky._map_size",
+          "inclusive_seconds": 1.2e-05,
+          "self_seconds": 1.2e-05,
+          "calls": 156
+        },
+        {
+          "rank": 344,
+          "signature": "res://scripts/presentation/presenter_3d.gd::685::_notification",
+          "inclusive_seconds": 1.2e-05,
+          "self_seconds": 1.2e-05,
+          "calls": 26
+        },
+        {
+          "rank": 345,
+          "signature": "res://scripts/c2/alert_mark.gd::23::C2AlertMark._process",
+          "inclusive_seconds": 1.1e-05,
+          "self_seconds": 1.1e-05,
+          "calls": 26
+        },
+        {
+          "rank": 346,
+          "signature": "res://scripts/c2/dest_flag.gd::30::C2DestFlag._process",
+          "inclusive_seconds": 1e-05,
+          "self_seconds": 1e-05,
+          "calls": 26
+        },
+        {
+          "rank": 347,
+          "signature": "res://scripts/ui/credits_overlay.gd::99::CreditsOverlay.is_open",
+          "inclusive_seconds": 1e-05,
+          "self_seconds": 1e-05,
+          "calls": 26
+        },
+        {
+          "rank": 348,
+          "signature": "res://scripts/replay/battle_log.gd::318::BattleLog._route_zh",
+          "inclusive_seconds": 9e-06,
+          "self_seconds": 9e-06,
+          "calls": 10
+        },
+        {
+          "rank": 349,
+          "signature": "res://scripts/presentation/corpse_visual.gd::17::_init",
+          "inclusive_seconds": 7e-06,
+          "self_seconds": 7e-06,
+          "calls": 1
+        },
+        {
+          "rank": 350,
+          "signature": "res://scripts/replay/replay_player.gd::91::ReplayPlayer.play",
+          "inclusive_seconds": 7e-06,
+          "self_seconds": 3e-06,
+          "calls": 1
+        },
+        {
+          "rank": 351,
+          "signature": "res://scripts/hud_profile_external.gd::11::_profile_begin",
+          "inclusive_seconds": 6e-06,
+          "self_seconds": 3e-06,
+          "calls": 1
+        },
+        {
+          "rank": 352,
+          "signature": "res://scripts/ui/night_handoff.gd::119::NightHandoff.is_open",
+          "inclusive_seconds": 6e-06,
+          "self_seconds": 6e-06,
+          "calls": 26
+        },
+        {
+          "rank": 353,
+          "signature": "res://scripts/simulation/sim_clock.gd::52::SimClock.time_sec",
+          "inclusive_seconds": 6e-06,
+          "self_seconds": 6e-06,
+          "calls": 25
+        },
+        {
+          "rank": 354,
+          "signature": "res://scripts/presentation/actor_visual.gd::212::_local_transform",
+          "inclusive_seconds": 5e-06,
+          "self_seconds": 5e-06,
+          "calls": 2
+        },
+        {
+          "rank": 355,
+          "signature": "res://scripts/presentation/actor_visual.gd::222::vector",
+          "inclusive_seconds": 4e-06,
+          "self_seconds": 4e-06,
+          "calls": 4
+        },
+        {
+          "rank": 356,
+          "signature": "res://scripts/presentation/actor_visual.gd::0::@implicit_new",
+          "inclusive_seconds": 3e-06,
+          "self_seconds": 3e-06,
+          "calls": 2
+        },
+        {
+          "rank": 357,
+          "signature": "res://scripts/replay/replay_player.gd::97::ReplayPlayer.pause",
+          "inclusive_seconds": 1e-06,
+          "self_seconds": 1e-06,
+          "calls": 1
+        },
+        {
+          "rank": 358,
+          "signature": "res://scripts/presentation/environment_visual.gd::0::@implicit_new",
+          "inclusive_seconds": 1e-06,
+          "self_seconds": 1e-06,
+          "calls": 1
+        },
+        {
+          "rank": 359,
+          "signature": "res://scripts/a3_campaign_metrics_test.gd::44::_check",
+          "inclusive_seconds": 1e-06,
+          "self_seconds": 1e-06,
+          "calls": 1
+        },
+        {
+          "rank": 360,
+          "signature": "res://scripts/replay/replay_player.gd::87::ReplayPlayer.set_speed",
+          "inclusive_seconds": 1e-06,
+          "self_seconds": 1e-06,
+          "calls": 1
+        }
+      ],
+      "label": "yard-advancing-original-replay",
+      "latest_frame_samples": [
+        {
+          "header": " 0.310622 script: 0.061243/19 %",
+          "entries": 169
+        },
+        {
+          "header": " 1.188302 script: 0.567372/47 %",
+          "entries": 334
+        },
+        {
+          "header": " 0.757574 script: 0.592367/78 %",
+          "entries": 339
+        },
+        {
+          "header": " 0.716416 script: 0.597622/83 %",
+          "entries": 337
+        },
+        {
+          "header": " 0.687379 script: 0.568348/82 %",
+          "entries": 338
+        },
+        {
+          "header": " 0.689668 script: 0.56875/82 %",
+          "entries": 337
+        },
+        {
+          "header": " 0.742086 script: 0.610095/82 %",
+          "entries": 339
+        },
+        {
+          "header": " 0.702775 script: 0.570724/81 %",
+          "entries": 335
+        },
+        {
+          "header": " 0.694075 script: 0.569499/82 %",
+          "entries": 335
+        },
+        {
+          "header": " 0.717672 script: 0.578712/80 %",
+          "entries": 335
+        },
+        {
+          "header": " 0.74921 script: 0.618946/82 %",
+          "entries": 335
+        },
+        {
+          "header": " 0.746535 script: 0.614465/82 %",
+          "entries": 335
+        },
+        {
+          "header": " 0.693667 script: 0.570704/82 %",
+          "entries": 324
+        },
+        {
+          "header": " 0.701006 script: 0.578297/82 %",
+          "entries": 329
+        }
+      ],
+      "H1_scrub_share_of_two_nonnested_roots": 0.9915156653494486,
+      "style_self_share_of_hud_inclusive": 0.8972313959946965
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "captures": [],
+  "checks": 374,
+  "controlled_api_swap": true,
+  "failures": 0,
+  "legacy_file_sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+  "minimal": {
+    "actual_list": "3.8s  ★ 第一枪是灰狼 → 敌1",
+    "actual_status": "定位 · 3.8s  ★ 第一枪是灰狼 → 敌1",
+    "attempt": "5238b2984c35e9db437210547b996879",
+    "checks": 6,
+    "cursor": 227,
+    "event_id": "5238b2984c35e9db437210547b996879:0:13",
+    "expected": "3.8s  ★ 第一枪是灰狼 → 敌1",
+    "failures": 0
+  },
+  "natural_callback_frames": 64,
+  "ordinary_ui_swap_reachability": "unproven",
+  "reference_battle_is_player_victory": false,
+  "rows": [
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 286,
+      "live": "no_fire",
+      "natural_ticks": [
+        230,
+        238,
+        246,
+        254,
+        262,
+        270,
+        278,
+        286
+      ],
+      "origin": 223,
+      "rate": 1.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 351,
+      "live": "no_fire",
+      "natural_ticks": [
+        239,
+        253,
+        269,
+        286,
+        302,
+        317,
+        335,
+        351
+      ],
+      "origin": 223,
+      "rate": 2.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 287,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        230,
+        239,
+        246,
+        254,
+        262,
+        270,
+        278,
+        287
+      ],
+      "origin": 223,
+      "rate": 1.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "5238b2984c35e9db437210547b996879",
+      "endpoint": 349,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        238,
+        253,
+        269,
+        285,
+        301,
+        317,
+        333,
+        349
+      ],
+      "origin": 223,
+      "rate": 2.0,
+      "source": "actual_schema1"
+    },
+    {
+      "attempt": "93a9671c444c749f102a04a728c963a5",
+      "record_fixture": "original dab yard schema2 saved archive; paired controlled consumer, no reference/new producer",
+      "sha256": "e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5"
+    },
+    {
+      "attempt": "93a9671c444c749f102a04a728c963a5",
+      "endpoint": 9764,
+      "live": "no_fire",
+      "natural_ticks": [
+        9708,
+        9716,
+        9724,
+        9732,
+        9740,
+        9748,
+        9756,
+        9764
+      ],
+      "origin": 9703,
+      "rate": 1.0,
+      "source": "actual_schema2_original_yard"
+    },
+    {
+      "attempt": "93a9671c444c749f102a04a728c963a5",
+      "endpoint": 9830,
+      "live": "no_fire",
+      "natural_ticks": [
+        9719,
+        9736,
+        9751,
+        9766,
+        9783,
+        9799,
+        9815,
+        9830
+      ],
+      "origin": 9703,
+      "rate": 2.0,
+      "source": "actual_schema2_original_yard"
+    },
+    {
+      "attempt": "93a9671c444c749f102a04a728c963a5",
+      "endpoint": 9767,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        9711,
+        9719,
+        9727,
+        9735,
+        9743,
+        9751,
+        9759,
+        9767
+      ],
+      "origin": 9703,
+      "rate": 1.0,
+      "source": "actual_schema2_original_yard"
+    },
+    {
+      "attempt": "93a9671c444c749f102a04a728c963a5",
+      "endpoint": 9830,
+      "live": "colliding_seq",
+      "natural_ticks": [
+        9719,
+        9734,
+        9750,
+        9766,
+        9783,
+        9798,
+        9815,
+        9830
+      ],
+      "origin": 9703,
+      "rate": 2.0,
+      "source": "actual_schema2_original_yard"
+    }
+  ]
+}

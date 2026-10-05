@@ -1,0 +1,364 @@
+{
+  "utc": "2026-10-05T21:06:13.557062+00:00",
+  "source": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "state": {
+    "briefing": false,
+    "continue_disabled": false,
+    "engine_frames": 99,
+    "fixture_ready": false,
+    "gui_focus": "",
+    "gui_hover": "/root/Title/UI/TitleScroll",
+    "input_count": 10,
+    "input_tail": {
+      "attempt": "cbdcf286e349ad500ef2ae80ec7a631e",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 92,
+      "kind": "mouse",
+      "phase": 0,
+      "pos": [
+        636,
+        614
+      ],
+      "presents": 92,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 28962400
+    },
+    "mission_select": false,
+    "observer_usec": 151200,
+    "pending": "yard",
+    "presents": 99,
+    "scale": 1,
+    "scene": "res://scenes/title.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+          "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "be93fd9c87c2900acdc56553780b9444e9a6a0bdd286e641f3d60dcfc304d7dd",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\nseen_pump=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "pump",
+      "persistence_error": "",
+      "persistence_status": "已保存到此浏览器",
+      "quality": "standard",
+      "seen": {
+        "pump": true,
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "ticks_usec": 29723300,
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "full_fingerprints": {
+    "inputs": [
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 18,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          336
+        ],
+        "presents": 18,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 3860000
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 18,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          336
+        ],
+        "presents": 18,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 3860700
+      },
+      {
+        "attempt": "",
+        "echo": false,
+        "engine_frame": 38,
+        "keycode": 4194305,
+        "kind": "key",
+        "phase": -1,
+        "presents": 38,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 6354500
+      },
+      {
+        "attempt": "",
+        "echo": false,
+        "engine_frame": 39,
+        "keycode": 4194305,
+        "kind": "key",
+        "phase": -1,
+        "presents": 39,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 6475400
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 56,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 56,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 8236500
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 56,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 56,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 8236900
+      },
+      {
+        "attempt": "cbdcf286e349ad500ef2ae80ec7a631e",
+        "echo": false,
+        "engine_frame": 78,
+        "keycode": 4194305,
+        "kind": "key",
+        "phase": 0,
+        "presents": 78,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 22262500
+      },
+      {
+        "attempt": "cbdcf286e349ad500ef2ae80ec7a631e",
+        "echo": false,
+        "engine_frame": 79,
+        "keycode": 4194305,
+        "kind": "key",
+        "phase": 0,
+        "presents": 79,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 22730600
+      },
+      {
+        "attempt": "cbdcf286e349ad500ef2ae80ec7a631e",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 92,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          636,
+          614
+        ],
+        "presents": 92,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 28962100
+      },
+      {
+        "attempt": "cbdcf286e349ad500ef2ae80ec7a631e",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 92,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          636,
+          614
+        ],
+        "presents": 92,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 28962400
+      }
+    ],
+    "replay_rows": []
+  },
+  "browser_trusted_inputs": [
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 4405.400000035763
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 4408.699999988079
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Escape",
+      "button": null,
+      "t": 6901.199999988079
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Escape",
+      "button": null,
+      "t": 7022.800000011921
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 8784.199999988079
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 8784.900000035763
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Escape",
+      "button": null,
+      "t": 22810
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Escape",
+      "button": null,
+      "t": 23278.100000023842
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 29509.900000035763
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 29510.400000035763
+    }
+  ],
+  "public_checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"pump\\\"\\nlevel_index=2\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"yard\\\", \\\"warehouse\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nyard_loops=1\\nyard_perfect=true\\nwarehouse_loops=1\\nwarehouse_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=true\\nseen_yard=true\\nseen_warehouse=true\\nseen_pump=true\\n\"},\"schema\":1}",
+  "public_checkpoint_sha256": "2d33cc93f05478c8b143bb98044df6bb42a2842eca5304866987eeab0f440700",
+  "record": null
+}

@@ -1,0 +1,20 @@
+TEST_RUN_ID=bf688d2cc73c4947940d33e11301db55
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/bf688d2cc73c4947940d33e11301db55/data
+TEST_ENTRY=radio_credits_viewport_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/bf688d2cc73c4947940d33e11301db55/data/godot/app_userdata/Ambush Loop run_id=bf688d2cc73c4947940d33e11301db55
+RADIO_CREDITS_FAIL  native original WON CTA opens real credits
+RADIO_CREDITS_FAIL radio_credits_1280_200_desktop credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1280_200_touch credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1600_200_desktop credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch credits title glyph stays inside usable viewport
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch long credits body has a bounded scroll container
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch native200 return button reaches actual title scene
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch original native Back remains a usable cleanup route
+RADIO_CREDITS_FAIL radio_credits_1600_200_touch native original WON CTA opens real credits
+RADIO_CREDITS_FAIL radio_credits_1600_100_desktop native100 button follows original finished signal and title route once
+Terminated

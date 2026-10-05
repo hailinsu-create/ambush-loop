@@ -1,0 +1,141 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "campaign-railcut-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "railcut",
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "89a2bf06188441988abe0107df948838",
+  "actual_exit_code": 0,
+  "checks": 1696,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "attempt_id": "0092eb9ee926186b08df9040563111ca",
+      "frame_seq": 0,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "railcut_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_railcut_scout.png",
+      "playback_tick": 0,
+      "recorded_phase": 0,
+      "sha256": "05a2f9e6e4240600560bd666cae9e07c5ae2693d56d3085ef38a4c099b2eaf0a",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/00_full_record_railcut_scout.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "0092eb9ee926186b08df9040563111ca",
+      "frame_seq": 16,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "railcut_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave0_alert.png",
+      "playback_tick": 79,
+      "recorded_phase": 1,
+      "sha256": "b7da1267a8b40bfdb26816c3a3d246856623dc3f1f715d1ff8b9c3bf348aff80",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/01_full_record_railcut_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "0092eb9ee926186b08df9040563111ca",
+      "frame_seq": 30,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "railcut_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave0_sweep.png",
+      "playback_tick": 154,
+      "recorded_phase": 5,
+      "sha256": "95f61326d058cf0bff7c62e3a36eadd7e2430ddcd3939b829fc8a75de8fb3601",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/02_full_record_railcut_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "0092eb9ee926186b08df9040563111ca",
+      "frame_seq": 82,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "railcut_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave1_alert.png",
+      "playback_tick": 455,
+      "recorded_phase": 1,
+      "sha256": "896f81aa64b39f6c7e6b08e195464449a79b26f596e3c3a7199339e1190f7ce6",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/03_full_record_railcut_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "0092eb9ee926186b08df9040563111ca",
+      "frame_seq": 136,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "railcut_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave1_sweep.png",
+      "playback_tick": 769,
+      "recorded_phase": 5,
+      "sha256": "1393779273b4cd6aae82e16b394823c3776d2baec422e4a9ba70cb36d255449c",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/04_full_record_railcut_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "0092eb9ee926186b08df9040563111ca",
+      "frame_seq": 137,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "railcut_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_railcut_won.png",
+      "playback_tick": 770,
+      "recorded_phase": 3,
+      "sha256": "1393779273b4cd6aae82e16b394823c3776d2baec422e4a9ba70cb36d255449c",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/05_full_record_railcut_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 6,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/run.exit"
+}

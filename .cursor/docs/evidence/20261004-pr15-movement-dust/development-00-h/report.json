@@ -1,0 +1,109 @@
+{
+  "captures": [],
+  "checks": 8,
+  "failures": 0,
+  "rows": [
+    {
+      "case": "actual-SCOUT-command-walk",
+      "current": "(245.3665, 528.0)",
+      "diagnostics": {
+        "active": [
+          {
+            "center": "(-12.3323, 0.0, 5.5)",
+            "clock_s": 0.333333333333333,
+            "group": "ops",
+            "id": 1,
+            "identity": "ops:1",
+            "opacity": 0.26,
+            "puff_count": 2,
+            "puffs": [
+              {
+                "cycle": 0.867444444444444,
+                "position": "(-12.55579, 0.131744, 5.34)",
+                "scale": "(0.28614, 0.128763, 0.28614)"
+              },
+              {
+                "cycle": 0.367444444444444,
+                "position": "(-12.45578, 0.081744, 5.66)",
+                "scale": "(0.19614, 0.088263, 0.19614)"
+              }
+            ],
+            "sprinting": false,
+            "stance": 0
+          }
+        ],
+        "capacity": 24,
+        "materials": 24,
+        "mesh_nodes": 48,
+        "rejected_geometry": 0,
+        "saving_capacity": 6,
+        "scope": [
+          -9223371951525853530,
+          "56f0240ba5ca185078e54b62404ac892",
+          0,
+          "yard",
+          0,
+          false,
+          1,
+          2
+        ],
+        "shared_meshes": 1
+      },
+      "from": "(208.0, 528.0)",
+      "source": {
+        "action": "walk",
+        "active": true,
+        "alive": true,
+        "ammo": 0,
+        "ammo_pool": {},
+        "auto_grenade": true,
+        "cone": "[(0.0, 0.0), (27.5776, -23.14035), (29.74459, -20.27952), (31.61598, -17.21714), (33.17314, -13.98365), (34.40062, -10.61119), (35.28621, -7.133261), (35.82111, -3.584442), (36.0, 0.0), (35.82111, 3.584442), (35.28621, 7.133261), (34.40062, 10.61119), (33.17314, 13.98365), (31.61598, 17.21714), (29.74459, 20.27952), (27.5776, 23.14035)]",
+        "cover_label": "机动",
+        "decoys": 0,
+        "display_name": "灰狼",
+        "facing": 0.0,
+        "fire_mode": 0,
+        "fire_mode_label": "见敌即打",
+        "fire_permitted": true,
+        "firearm_pose": {
+          "changed_weapon": true,
+          "from_intent": "",
+          "intent": "ready",
+          "since": 0.0,
+          "weapon": "knife"
+        },
+        "follow_lead": false,
+        "grenades": 0,
+        "has_nade_mark": false,
+        "hauling": false,
+        "hidden": false,
+        "hp": 100.0,
+        "id": 1,
+        "inventory": [],
+        "inventory_line": "刀  雷0 手雷0 饵0 包0/6",
+        "locked": false,
+        "max_ammo": 0,
+        "max_hp": 100.0,
+        "mines": 0,
+        "moving": true,
+        "nade_mark": "(0.0, 0.0)",
+        "pos": "(245.3665, 528.0)",
+        "role": 0,
+        "role_label": "步枪手",
+        "search_t": 0.0,
+        "searching": false,
+        "shot_cd": 0.0,
+        "shot_interval": 0.42,
+        "sprinting": false,
+        "stance": 0,
+        "start_ammo": 0,
+        "visual_model": "operator_rifle",
+        "visual_weapon": "knife",
+        "weapon": "knife",
+        "weapon_label": "匕首"
+      }
+    }
+  ],
+  "scope": "actual original SCOUT command movement; explicit saved-pose/backend/corrupt fixtures later. Not native/full13/FINAL/A3/device acceptance",
+  "source_sha": "00c6c6976a75179612c8c4f75c7118c0d898e99f"
+}

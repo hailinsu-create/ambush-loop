@@ -1,0 +1,131 @@
+--- HUD-QA/scripts/main.gd
++++ HUD-sub-QA/scripts/main.gd
+@@ -1140,6 +1140,11 @@
+ func _refresh_touch_hud() -> void:
+ 	if touch_hud == null or not touch_hud.has_method("refresh_phase"):
+ 		return
++	var qa = get_node("/root/EventLogObserver")
++	var measured: bool = qa.active and qa.measure_enabled
++	if qa.active: qa.sub_values[2] += 1
++	qa.touch_depth += 1
++	var started: int = Time.get_ticks_usec() if measured else 0
+ 	var phase_name := "SETUP"
+ 	match phase:
+ 		Phase.WATCHING:
+@@ -1177,6 +1182,9 @@
+ 				chip = "下一波 %s %.1fs" % [road, float(info.get("remain", 0.0))]
+ 		touch_hud.set_next_wave(chip, show_wave and chip != "")
+ 	_refresh_watch_wave_chip()
++
++	if measured: qa.sub_values[3] += Time.get_ticks_usec()-started
++	qa.touch_depth -= 1
+ 
+ 
+ func _toggle_event_log() -> void:
+@@ -7614,6 +7622,8 @@
+ 
+ 
+ func _update_hud() -> void:
++	var qa = get_node("/root/EventLogObserver")
++	qa.hud_depth += 1
+ 	var lv_title := level.title if level else "AMBUSH LOOP"
+ 	title_label.text = "AMBUSH LOOP  ·  第 %d 世  ·  波 %d/%d" % [loop_index, wave_index() + 1, wave_total()]
+ 	if phase == Phase.REPLAY:
+@@ -7691,6 +7701,8 @@
+ 	_refresh_touch_hud()
+ 	_apply_phone_world_ink()
+ 
++	qa.hud_depth -= 1
++
+ 
+ func _pending_unspawned() -> int:
+ 	var n := 0
+@@ -8017,7 +8029,20 @@
+ 
+ 
+ func replay_hud_frame() -> Dictionary:
+-	return ViewStateScript.capture(self) if phase == Phase.REPLAY else {}
++	var qa = get_node("/root/EventLogObserver")
++	var measured: bool = qa.active and qa.measure_enabled
++	if qa.active:
++		qa.sub_values[0] += 1
++		if qa.hud_depth > 0: qa.sub_values[6] += 1
++		if qa.touch_depth > 0: qa.sub_values[8] += 1
++	var started: int = Time.get_ticks_usec() if measured else 0
++	var result: Dictionary = ViewStateScript.capture(self) if phase == Phase.REPLAY else {}
++	if measured:
++		var elapsed: int = Time.get_ticks_usec()-started
++		qa.sub_values[1] += elapsed
++		if qa.hud_depth > 0: qa.sub_values[7] += elapsed
++		if qa.touch_depth > 0: qa.sub_values[9] += elapsed
++	return result
+ 
+ 
+ func phase_id() -> String:
+--- HUD-QA/scripts/touch_hud.gd
++++ HUD-sub-QA/scripts/touch_hud.gd
+@@ -414,6 +414,10 @@
+ 
+ 
+ func _apply_btn_style(b: Button, tint: Color, locked: bool) -> void:
++	var qa = get_node("/root/EventLogObserver")
++	var measured: bool = qa.active and qa.measure_enabled
++	if qa.active: qa.sub_values[4] += 1
++	var started: int = Time.get_ticks_usec() if measured else 0
+ 	var bg := Color(tint.r * 0.22, tint.g * 0.22, tint.b * 0.18, 0.96)
+ 	var border := Color(tint.r, tint.g, tint.b, 0.85).lightened(0.12)
+ 	if locked:
+@@ -432,6 +436,8 @@
+ 	b.add_theme_color_override("font_color", Color(0.94, 0.92, 0.78) if not locked else Color(0.42, 0.40, 0.38))
+ 	b.end_bulk_theme_override()
+ 	b.modulate = Color.WHITE if not locked else Color(0.62, 0.60, 0.58)
++
++	if measured: qa.sub_values[5] += Time.get_ticks_usec()-started
+ 
+ 
+ func _kick_btn(b: Button) -> void:
+--- HUD-QA/qa/event_log_observer.gd
++++ HUD-sub-QA/qa/event_log_observer.gd
+@@ -299,15 +299,20 @@
+ 			samples[k+16] = presenter_usec
+ 			samples[k+17] = m._event_list_items.size()
+ 			samples[k+18] = 1 if m.event_log != null and m.event_log.is_visible_in_tree() else 0
++			for i in 10: samples[k+20+i] = sub_values[i]
+ 			samples[k+19] = Time.get_ticks_usec()-start
+ 			row_count += 1
+ 	root_calls = 0
+ 	presenter_calls = 0
+ 	presenter_usec = 0
+ 	root_values.fill(0)
+-
+-const WIDTH := 20
+-const COLS = ["engine_frame","observer_us","tick","view_tick","playing","delta_us","root_calls","presenter_calls","root_us","select_slider_us","paint_us","event_select_title_us","list_us","status_us","transport_us","hud_us","presenter_us","list_rows","list_visible","sampler_us"]
++	sub_values.fill(0)
++
++const WIDTH := 30
++const COLS = ["engine_frame","observer_us","tick","view_tick","playing","delta_us","root_calls","presenter_calls","root_us","select_slider_us","paint_us","event_select_title_us","list_us","status_us","transport_us","hud_us","presenter_us","list_rows","list_visible","sampler_us","capture_calls","capture_us","touch_calls","touch_us","style_calls","style_us","hud_capture_calls","hud_capture_us","touch_capture_calls","touch_capture_us"]
++var sub_values := PackedInt64Array([0,0,0,0,0,0,0,0,0,0])
++var hud_depth := 0
++var touch_depth := 0
+ var active := false
+ var measure_enabled := false
+ var done := false
+@@ -345,7 +350,8 @@
+ 	measure_enabled = bool(r.get("enabled",false))
+ 	meter_label = str(r.get("label",""))
+ 	row_count = 0; post_count = 0; root_calls = 0; presenter_calls = 0; presenter_usec = 0
+-	root_values.fill(0); samples.fill(0); posts.fill(0)
++	root_values.fill(0)
++	sub_values.fill(0); samples.fill(0); posts.fill(0)
+ 	last_post = 0; done = false; overflow = false
+ 	collect_start = Time.get_ticks_usec()+int(warm_s*1000000)
+ 	collect_end = collect_start+int(collect_s*1000000)
+@@ -361,7 +367,7 @@
+ 		out.append(row)
+ 	var draw: Array = []
+ 	for i in post_count: draw.append([posts[i*3],posts[i*3+1],posts[i*3+2]])
+-	return {"schema":1,"label":meter_label,"enabled":measure_enabled,"done":done,"overflow":overflow,"columns":COLS,"rows":out,"post_columns":["engine_frame","postdraw_us","interval_us"],"posts":draw,"collect_start_us":collect_start,"collect_end_us":collect_end,"capacity":2048,"scope":"fixed rows, no per-frame output/RPC; elapsed inclusive, software WebGL; OFF retains branches/lookup/counters/sampler; nested tags cannot be added"}
++	return {"schema":2,"label":meter_label,"enabled":measure_enabled,"done":done,"overflow":overflow,"columns":COLS,"rows":out,"post_columns":["engine_frame","postdraw_us","interval_us"],"posts":draw,"collect_start_us":collect_start,"collect_end_us":collect_end,"capacity":2048,"scope":"fixed rows, no per-frame output/RPC; elapsed inclusive, software WebGL; OFF retains branches/lookup/counters/sampler; nested tags cannot be added"}
+ 
+ func _canonical() -> Dictionary:
+ 	var m = get_tree().current_scene

@@ -1,0 +1,241 @@
+{
+  "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+  "ambush_loop_tree": "67ad8156a6194f77fcf34746ffc0779f73018b07",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "graphics": "Compatibility Mesa llvmpipe; cloud only",
+  "negative": {
+    "source_sha": "c00ddef85377b5baed302f0c53c61344b859eb27",
+    "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_quality_test.gd --render",
+    "exit_code": 1,
+    "checks": 69,
+    "failures": 14,
+    "test_run_id": "ed42a7f72e2c4be8b141635ffb5fa8b2",
+    "log": "negative.log",
+    "log_sha256": "9288ac7cceac812ea8dd7adb7a00705763bde1ad1f403d314ed382aab7daf2a8",
+    "exit_receipt": "negative.exit",
+    "report": "negative-report.json"
+  },
+  "positive_runs": [
+    {
+      "key": "quality",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_quality_test.gd --render",
+      "exit_code": 0,
+      "checks": 106,
+      "failures": 0,
+      "test_run_id": "1b997920172b4d539db66c1b93e0673b",
+      "log": "quality.log",
+      "log_sha256": "4d16785ca98602ef14dbc3810a7abc4d6de81ae0f16bedbc3c46ae86e8202239",
+      "exit_receipt": "quality.exit",
+      "scope_note": ""
+    },
+    {
+      "key": "hud",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "exit_code": 0,
+      "checks": 164,
+      "failures": 0,
+      "test_run_id": "ffacf3c9c5cc4ab393c4479ee0a4300d",
+      "log": "hud.log",
+      "log_sha256": "1727f6f7448c3c360e7e0bf389be0b7c8e4d3846a4bfd576df43ed4a237d208d",
+      "exit_receipt": "hud.exit",
+      "scope_note": ""
+    },
+    {
+      "key": "lifecycle",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "exit_code": 0,
+      "checks": 32,
+      "failures": 0,
+      "test_run_id": "8ed1e886ba804db1a1c2f549b03cfe40",
+      "log": "lifecycle.log",
+      "log_sha256": "659d69032f783fcc4bfb204ab9866086c693cbe92594f53911d5f46c329d2447",
+      "exit_receipt": "lifecycle.exit",
+      "scope_note": ""
+    },
+    {
+      "key": "camera",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 camera_input_test.gd",
+      "exit_code": 0,
+      "checks": 23,
+      "failures": 0,
+      "test_run_id": "39a56489ecae4bc89b0776c82b9e8cd6",
+      "log": "camera.log",
+      "log_sha256": "e5f3d850a4b8db7fbc9e117409e1cf078d24637dddd2919bdc9d1e6a91abd538",
+      "exit_receipt": "camera.exit",
+      "scope_note": ""
+    },
+    {
+      "key": "contract",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "exit_code": 0,
+      "checks": 84042,
+      "failures": 0,
+      "test_run_id": "3c3218621ce043ba810da487d7573271",
+      "log": "contract.log",
+      "log_sha256": "95dbcefefb5e1e192c7041edcdadce01ff03accb133be84e6f212aa5fb38cadf",
+      "exit_receipt": "contract.exit",
+      "scope_note": ""
+    },
+    {
+      "key": "campaign",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "exit_code": 0,
+      "checks": 10332,
+      "failures": 0,
+      "test_run_id": "e19776baf2024becaf0cca090478cdb3",
+      "log": "campaign.log",
+      "log_sha256": "3857ba1b5d01cf96bdcdebaedba0fa4bcb4c1b0a931a4112a82db5d41ba2db13",
+      "exit_receipt": "campaign.exit",
+      "scope_note": ""
+    },
+    {
+      "key": "wall-exact",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "AMBUSH_CORPSE_CONTACT_SCOPE=qa_exact bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture corpse_contact_test.gd --render",
+      "exit_code": 0,
+      "checks": 576,
+      "failures": 0,
+      "test_run_id": "93ce31bb44b74b8ca22ef96b44e96145",
+      "log": "wall-exact.log",
+      "log_sha256": "100b442169ac2839d2f7a1495c31a68c30edca7f321b088a5d2afb2d84c7c1e9",
+      "exit_receipt": "wall-exact.exit",
+      "scope_note": "unrecognized env variable; actual default full Scout contact suite, not exact MG"
+    },
+    {
+      "key": "native-mg",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "command": "AMBUSH_CONTACT_SCOPE=qa_exact bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture corpse_contact_test.gd --render",
+      "exit_code": 0,
+      "checks": 25,
+      "failures": 0,
+      "test_run_id": "2597eed564424c72b10e5885a21f2d30",
+      "log": "native-mg.log",
+      "log_sha256": "0e610b4116de76cf0e5e7df04c7cb77d056de9c8b747b50c67546a4400175ba1",
+      "exit_receipt": "native-mg.exit",
+      "scope_note": ""
+    }
+  ],
+  "captures": [
+    {
+      "path": "negative_quality_depot_sweep_low.png",
+      "sha256": "2bee3454090878926b380d3c77893b8e896e94836fda010629588f55d4e7e7a8",
+      "source_sha": "c00ddef85377b5baed302f0c53c61344b859eb27",
+      "inspected": true
+    },
+    {
+      "path": "negative_quality_radio_yaw345_pitch35_size14.png",
+      "sha256": "28a470065d40fb0e795ab55702ea2139be9401e4acb4d875ca1ee73e804b9c6a",
+      "source_sha": "c00ddef85377b5baed302f0c53c61344b859eb27",
+      "inspected": true
+    },
+    {
+      "path": "negative_quality_radio_yaw345_pitch55_size30.png",
+      "sha256": "b7ae33944c42619ade9ca6141544ac98bbe86475b98d03939a02094a03163f2c",
+      "source_sha": "c00ddef85377b5baed302f0c53c61344b859eb27",
+      "inspected": false
+    },
+    {
+      "path": "quality_depot_sweep_low.png",
+      "sha256": "9dc9b58027601b7f17d9e8e0a44ea3f4bf95713ffd6c4d0cbd088cf2ee7f06e3",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "inspected": true
+    },
+    {
+      "path": "quality_radio_yaw345_pitch35_size14.png",
+      "sha256": "5c5ff4e052edb1c3ab5aff1be19c92d65a62b1571448c1fbb5e2e20db6fa66c7",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "inspected": true
+    },
+    {
+      "path": "quality_radio_yaw345_pitch55_size30.png",
+      "sha256": "6879f5b6dbc0f70c31ff0ce517702bca31b5472fda7275885cd9ec7dc47befb2",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "inspected": true
+    },
+    {
+      "path": "quality_radio_history.png",
+      "sha256": "7b54c7701d6fab15240d9220a050ffb15eee427ce5f11bb03b36b9e6f1ca7714",
+      "source_sha": "4741c5f020965f9a4315fa8993da20474efc04f0",
+      "inspected": true
+    }
+  ],
+  "excluded_development_runs": [
+    {
+      "log": "development-parse.log",
+      "log_sha256": "7386f33ea8ef64c3cff3d3c5e49e3dbfd656fd43f55b917c50b2a5f0799b1815",
+      "exit_code": 1,
+      "source_note": "a2a07356c601a17bfeb768628c61e2ca2f65ac3b",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-c2-insertion.log",
+      "log_sha256": "99e4905fd583f60dfe6c118144113f29721c976b6c93873d6ef37654ccdb8f70",
+      "exit_code": 143,
+      "source_note": "uncommitted; interrupted own hung parse run",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-first-fix.log",
+      "log_sha256": "43044ed581df8560bcdb069ae879be72e6e4fd334af9ead785bc8877d054e551",
+      "exit_code": 0,
+      "source_note": "uncommitted; initial 69/0 without full geometry oracle",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-initial-geometry.log",
+      "log_sha256": "e87f579e6960ab8e3cc21d335a8ba890a72a622cb6bb4fd5fc4e791e407d78b2",
+      "exit_code": 1,
+      "source_note": "uncommitted; exact attributes failed",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-attributes.log",
+      "log_sha256": "ff25d81cd563ca0e424159020f4ca090060415c15e2c47f7bdf1d0c4a8c204e0",
+      "exit_code": 1,
+      "source_note": "uncommitted; position/UV exact, normal/tangent failed",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-normal-copy.log",
+      "log_sha256": "26dc96dafea266e02c9045c9b1d432b2a05c60c2476e10981d3922a2cb271a8e",
+      "exit_code": 1,
+      "source_note": "uncommitted; compressed stride assertions failed",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-packed.log",
+      "log_sha256": "faee9f7c9e0af7d9ce7369fbe03d73e84c8848d1de9b4c6aca42a1d6c2414e52",
+      "exit_code": 0,
+      "source_note": "uncommitted; 95/0 before added compatibility/material checks",
+      "counted_as_acceptance": false
+    },
+    {
+      "log": "development-import.log",
+      "log_sha256": "5e9d1339c8b72100a479535671d9c4a514ddeaf322a1a9ccc168bc6abf4f90c0",
+      "exit_code": 0,
+      "source_note": "uncommitted import before fixed source; 45 original audio imports restored",
+      "counted_as_acceptance": false
+    }
+  ],
+  "limitations": [
+    "R03 independent QA pending; full HUD/13-wave visual/normal player journey incomplete",
+    "missing/unknown cutaway schema retains old single-mesh hide",
+    "55/42 parts increase render cost; A3 budget not measured here",
+    "ArrayMesh serialized surface bridge pinned to Godot4.7.2",
+    "parent reported R02 original wall P2 closed, but positive float up to97.64mm and intermediate shoulder/palm gap about0.56m remain quality work",
+    "ear listening0/45 cues0/6 soundscapes; no actual listening capability here",
+    "no current APK/PCK/full smoke/device validation"
+  ],
+  "parent_report_only": {
+    "R02_source": "68582f380163ea9e0b24858544de52fd9ac6a612",
+    "wall_vertices": "401 to0",
+    "results": "32/0 + portable32/0;387/0;133/0; no newP1/P2",
+    "raw_logs_in_this_artifact": false
+  }
+}

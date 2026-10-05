@@ -1,0 +1,57 @@
+{
+  "status": "PAUSED_USER_REQUEST",
+  "utc": "2026-10-05T05:02:19.182281+00:00",
+  "source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+  "game_tree": "4f49a7c9cb5a789fbb570bceb947eab7df2eb54a",
+  "record": {
+    "attempt": "93a9671c444c749f102a04a728c963a5",
+    "bytes": 19025696,
+    "level": "yard",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5",
+    "terminal": 12678,
+    "validation": {
+      "attempt": "93a9671c444c749f102a04a728c963a5",
+      "events": 30,
+      "failures": [],
+      "frames": 1622,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/fresh-native-dab-20261005/run/yard-record.bin",
+    "producer_wall": 424.70547753199935
+  },
+  "original_input_rows": 78,
+  "browser_trusted_input_rows": 78,
+  "all_browser_inputs_trusted": true,
+  "main_scenes_attempts": [
+    "93a9671c444c749f102a04a728c963a5"
+  ],
+  "phases_in_original_input_trace": [
+    -1,
+    0,
+    1,
+    3,
+    5
+  ],
+  "whole_started": false,
+  "later_level_started": false,
+  "limited_runtime_console": {
+    "entries": 13,
+    "console_errors": [],
+    "warnings": [
+      "[.WebGL-0x3de40c8efa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "[.WebGL-0x3de40c8efa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "[.WebGL-0x3de40c8efa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "[.WebGL-0x3de40c8efa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    ],
+    "page_errors": []
+  },
+  "method_console_retained": true,
+  "runtime_checks_actual_exit": {
+    "initialize_aligned_yard": 0,
+    "produce_yard": 0,
+    "finish_yard_and_pause": 0
+  },
+  "counts_are_not_full_campaign_or_performance_acceptance": true
+}

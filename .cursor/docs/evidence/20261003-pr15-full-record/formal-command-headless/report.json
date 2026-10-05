@@ -1,0 +1,151 @@
+{
+  "captures": [],
+  "checks": 217,
+  "failures": 0,
+  "rows": [
+    {
+      "battle_terminal_tick": 1283,
+      "events": 34,
+      "playback_terminal_tick": 1415,
+      "seek_records": 5,
+      "source_binary_sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+      "stage": "actual_legacy_schema1"
+    },
+    {
+      "actual_samples": 8,
+      "alarm_playback_tick": 52,
+      "attempt_survives_alarm": true,
+      "boundary_clock": 0.850000000000001,
+      "seek_checks": 16,
+      "stage": "scout_prelude"
+    },
+    {
+      "battle_terminal_tick": 1283,
+      "events": 34,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:36,no_engage:36,no_engage:36,no_engage:36,return_fire:201,return_fire:201,return_fire:218,return_fire:218,fire:227,kill:227,return_fire:235,return_fire:252,return_fire:269,return_fire:286,op_down:286,fire:1055,kill:1055,spawn:12,no_engage:12,no_engage:12,fire:198,fire:205,return_fire:208,fire:212,fire:219,return_fire:225,fire:226,kill:226,terminal:227",
+      "first_alarm_playback_tick": 10,
+      "frame_count": 235,
+      "playback_terminal_tick": 1427,
+      "terminal": "won"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.249999999999999,
+      "playback_tick": 1072,
+      "position": "(923.6666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.349999999999999,
+      "playback_tick": 1078,
+      "position": "(937.6664, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.449999999999999,
+      "playback_tick": 1084,
+      "position": "(951.6663, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.549999999999999,
+      "playback_tick": 1090,
+      "position": "(965.6662, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.649999999999999,
+      "playback_tick": 1096,
+      "position": "(979.6661, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.749999999999999,
+      "playback_tick": 1102,
+      "position": "(993.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.85,
+      "playback_tick": 1108,
+      "position": "(1007.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.95,
+      "playback_tick": 1114,
+      "position": "(1021.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.85,
+      "playback_tick": 1108,
+      "position": "(1007.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.749999999999999,
+      "playback_tick": 1102,
+      "position": "(993.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.649999999999999,
+      "playback_tick": 1096,
+      "position": "(979.6661, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.549999999999999,
+      "playback_tick": 1090,
+      "position": "(965.6662, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.449999999999999,
+      "playback_tick": 1084,
+      "position": "(951.6663, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.349999999999999,
+      "playback_tick": 1078,
+      "position": "(937.6664, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.249999999999999,
+      "playback_tick": 1072,
+      "position": "(923.6666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.95,
+      "playback_tick": 1114,
+      "position": "(1021.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "between_record_delta": 0.05,
+      "playback_tick": 1075
+    },
+    {
+      "battle_terminal_tick": 928,
+      "events": 19,
+      "playback_terminal_tick": 930,
+      "recorded_phase": 2,
+      "terminal": "escape"
+    },
+    {
+      "battle_terminal_tick": 0,
+      "events": 3,
+      "playback_terminal_tick": 2,
+      "recorded_phase": 2,
+      "terminal": "abort"
+    }
+  ],
+  "source_binary": {
+    "path": "res://build/asset_review/pr15-runtime/command-record-source-v2.bin",
+    "sha256": "e67b4eebbb20e6bc977c37226ed73ba052bf2ab0a5332be119c5fb1db185bfd9"
+  }
+}

@@ -1,0 +1,3539 @@
+{
+  "a0_preview_feature": true,
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_cover5_before_deploy1",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_cover5_before_deploy1.png",
+      "sha256": "d24f320588031de1575be4dab673ecd4a7c285c55821bd916de753258379e9cd"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_armed_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_armed_scout.png",
+      "sha256": "7b59eaa33866b12a9ddcf089ca4ff3241be576d51dbe3861deaf41104a374a04"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_wave0_alert.png",
+      "sha256": "da96300b8828893ecc162c9c0cce278a2990a36ab56e62f4836bdcee05d33f94"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_wave0_sweep.png",
+      "sha256": "80e043e98774dbd85025059f1473545ee0aabb4c3904ef0c7eaa01adc2786a3c"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_mine_placed_wave0",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_mine_placed_wave0.png",
+      "sha256": "545138c8c9b212fa01d52846e6ae47a1143e0fd6deb0eed6c88d1c658a91ddf7"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_wave0_sweep_looted",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_wave0_sweep_looted.png",
+      "sha256": "ed77ee337a8df7a79690872b3bae73cbb5fb641ba10c5374afd1fcaf627b648b"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "player_warehouse_1280_100_desktop_cover5_before_deploy2",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_cover5_before_deploy2.png",
+      "sha256": "26a06bcd9120ccebf7c6e7484c1023e31c9bf67e7af76551174aa49f47783f2b"
+    }
+  ],
+  "checks": 250,
+  "content_scale_factor": 1.0,
+  "failures": 1,
+  "journey": [
+    {
+      "action": "authored stash collected through original input/process",
+      "ammo": 7,
+      "end": [
+        368.0,
+        242.808746337891
+      ],
+      "kind": "kar98k",
+      "level": "warehouse",
+      "operator": 0,
+      "start": [
+        336.0,
+        528.0
+      ],
+      "weapon": "kar98k"
+    },
+    {
+      "action": "authored stash collected through original input/process",
+      "ammo": 20,
+      "end": [
+        528.0,
+        432.0
+      ],
+      "kind": "bar",
+      "level": "warehouse",
+      "operator": 1,
+      "start": [
+        368.0,
+        560.0
+      ],
+      "weapon": "bar"
+    },
+    {
+      "action": "authored stash collected through original input/process",
+      "ammo": 6,
+      "end": [
+        944.0,
+        528.0
+      ],
+      "kind": "springfield",
+      "level": "warehouse",
+      "operator": 2,
+      "start": [
+        400.0,
+        528.0
+      ],
+      "weapon": "springfield"
+    },
+    {
+      "action": "authored stash collected through original input/process",
+      "ammo": 7,
+      "end": [
+        880.0,
+        432.0
+      ],
+      "kind": "grenade",
+      "level": "warehouse",
+      "operator": 0,
+      "start": [
+        368.0,
+        242.808746337891
+      ],
+      "weapon": "kar98k"
+    },
+    {
+      "action": "ordinary engine wave cleared",
+      "ammo": [
+        5,
+        20,
+        6
+      ],
+      "events": 18,
+      "level": "warehouse",
+      "tick": 339,
+      "wave": 0
+    },
+    {
+      "action": "SWEEP inventory and actual remaining drops",
+      "drops": [
+        {
+          "amount": 4,
+          "kind": "ammo",
+          "pos": "(432.0, 379.2994)"
+        },
+        {
+          "amount": 32,
+          "kind": "ammo",
+          "pos": "(432.0, 379.299)"
+        }
+      ],
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 5,
+          "ammo_pack_used": false,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 5
+          },
+          "pos": [
+            496.0,
+            400.0
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 20,
+          "ammo_pack_used": false,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 20
+          },
+          "pos": [
+            912.0,
+            464.0
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ]
+        }
+      ],
+      "level": "warehouse",
+      "wave": 0
+    },
+    {
+      "action": "native SWEEP drop collected",
+      "after": [
+        {
+          "alive": true,
+          "ammo": 10,
+          "ammo_pack_used": false,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 41
+          },
+          "pos": [
+            432.010345458984,
+            369.356567382812
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 20,
+          "ammo_pack_used": false,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 20
+          },
+          "pos": [
+            912.0,
+            464.0
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ]
+        }
+      ],
+      "amount": 4,
+      "before": [
+        {
+          "alive": true,
+          "ammo": 5,
+          "ammo_pack_used": false,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 5
+          },
+          "pos": [
+            496.0,
+            400.0
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 20,
+          "ammo_pack_used": false,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 20
+          },
+          "pos": [
+            912.0,
+            464.0
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ]
+        }
+      ],
+      "kind": "ammo",
+      "level": "warehouse",
+      "loot_events": [
+        {
+          "actor_id": 1,
+          "attempt_id": "81f63ac38ebc5891610e62011864905e",
+          "event_id": "81f63ac38ebc5891610e62011864905e:0:18",
+          "payload": {
+            "amount": 4,
+            "kind": "ammo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 4883,
+          "position": "(432.0, 379.2994)",
+          "schema": 2,
+          "seq": 18,
+          "target_id": -1,
+          "tick": 339,
+          "timeline_tick": 339,
+          "type": "loot",
+          "wave_id": 0
+        },
+        {
+          "actor_id": 1,
+          "attempt_id": "81f63ac38ebc5891610e62011864905e",
+          "event_id": "81f63ac38ebc5891610e62011864905e:0:19",
+          "payload": {
+            "amount": 32,
+            "kind": "ammo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 4883,
+          "position": "(432.0, 379.299)",
+          "schema": 2,
+          "seq": 19,
+          "target_id": -1,
+          "tick": 339,
+          "timeline_tick": 339,
+          "type": "loot",
+          "wave_id": 0
+        }
+      ],
+      "status": "灰狼 搜刮 +32Kar98k弹",
+      "target": "(432.0, 379.2994)",
+      "wave": 0
+    },
+    {
+      "action": "authored stash collected through original input/process",
+      "ammo": 20,
+      "end": [
+        752.0,
+        208.0
+      ],
+      "kind": "ammo",
+      "level": "warehouse",
+      "operator": 1,
+      "start": [
+        912.0,
+        464.0
+      ],
+      "weapon": "bar"
+    },
+    {
+      "action": "SWEEP original authored ammo resupply",
+      "inventory": [
+        {
+          "alive": true,
+          "ammo": 10,
+          "ammo_pack_used": false,
+          "id": 1,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 41
+          },
+          "pos": [
+            432.010345458984,
+            369.356567382812
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 20,
+          "ammo_pack_used": false,
+          "id": 2,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 28
+          },
+          "pos": [
+            752.0,
+            208.0
+          ]
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "id": 3,
+          "mines": 0,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944.0,
+            560.0
+          ]
+        }
+      ],
+      "level": "warehouse",
+      "wave": 0
+    },
+    {
+      "action": "authored stash collected through original input/process",
+      "ammo": 10,
+      "end": [
+        336.000946044922,
+        430.141876220703
+      ],
+      "kind": "mine",
+      "level": "warehouse",
+      "operator": 0,
+      "start": [
+        432.010345458984,
+        369.356567382812
+      ],
+      "weapon": "kar98k"
+    },
+    {
+      "action": "native carried mine attempt",
+      "after": 0,
+      "before": 1,
+      "level": "warehouse",
+      "mines_after": 1,
+      "mines_before": 0,
+      "ok": true,
+      "operator_pos": "(816.0, 177.8308)",
+      "phase": 5,
+      "site": [
+        784.0,
+        176.0
+      ],
+      "status": "灰狼 埋雷 剩余0"
+    }
+  ],
+  "native_inputs": [
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Title/UI/TitleScroll/@VBoxContainer@101/Menu/ContinueButton",
+      "physical_screen": [
+        640.0,
+        391.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        491.0,
+        160.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "2"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        510.0,
+        351.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "3"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        778.0,
+        595.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        781.0,
+        506.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        542.0,
+        273.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "2"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        652.0,
+        584.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "3"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        420.0,
+        577.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "2"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/ExtraBar/PackButton",
+      "physical_screen": [
+        464.0,
+        620.5
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "2"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "f"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/AlarmButton",
+      "physical_screen": [
+        356.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/PauseButton",
+      "physical_screen": [
+        822.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/PauseButton",
+      "physical_screen": [
+        822.0,
+        673.5
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        631.0,
+        196.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "2"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        765.0,
+        445.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        590.0,
+        112.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        789.0,
+        506.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "physical_screen": [
+        670.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        587.0,
+        528.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "physical_screen": [
+        670.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "physical_screen": [
+        670.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "physical_screen": [
+        670.0,
+        673.5
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "1"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        743.0,
+        278.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "2"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/HUD/Root",
+      "physical_screen": [
+        364.0,
+        368.0
+      ]
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "a"
+    },
+    {
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "key": "3"
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "player_warehouse_1280_100_desktop",
+      "path": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "physical_screen": [
+        1229.0,
+        245.0
+      ]
+    }
+  ],
+  "progress_seed": {
+    "files": {
+      "ambush_loop.cfg": {
+        "destination": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/656e901d53ed4b41940dca385a447aa5/data/godot/app_userdata/Ambush Loop/ambush_loop.cfg",
+        "sha256": "02c3b271f6e96a32296417eff2133e38158a7ab2b6d02becce2e8df91f0e5683"
+      },
+      "ambush_loop_settings.cfg": {
+        "destination": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/656e901d53ed4b41940dca385a447aa5/data/godot/app_userdata/Ambush Loop/ambush_loop_settings.cfg",
+        "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6"
+      }
+    },
+    "manifest": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-remaining-journey/origin-d7-yard-player/manifest.json",
+    "manifest_sha256": "6348e970512870f4bc6311f65a18617ab333b4d6633e918e77b134d7667c8cd2",
+    "origin": {
+      "actual_exit": 0.0,
+      "checks": 135.0,
+      "failures": 0.0,
+      "files": {
+        "ambush_loop.cfg": {
+          "bytes": 172.0,
+          "origin_path": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/7bd62b208c484f9e87dc9a60230c7015/data/godot/app_userdata/Ambush Loop/ambush_loop.cfg",
+          "sha256": "02c3b271f6e96a32296417eff2133e38158a7ab2b6d02becce2e8df91f0e5683"
+        },
+        "ambush_loop_settings.cfg": {
+          "bytes": 209.0,
+          "origin_path": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/7bd62b208c484f9e87dc9a60230c7015/data/godot/app_userdata/Ambush Loop/ambush_loop_settings.cfg",
+          "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6"
+        }
+      },
+      "origin_report": "../../20261003-pr15-cover-input/formal-d7e6fe1/player-native.json",
+      "origin_report_sha256": "999204e884bf40cce069ab6c1bb017bc16890b6084305379f589fd03e242ea7e",
+      "provenance": "actual native player WON and original Continue",
+      "run_id": "7bd62b208c484f9e87dc9a60230c7015",
+      "source_sha": "d7e6fe1fb3a9251ded4e3f0692d194880476cf07"
+    },
+    "run_id": "656e901d53ed4b41940dca385a447aa5"
+  },
+  "rows": [
+    {
+      "control": "/root/Title/UI/TitleScroll/@VBoxContainer@101/Menu/ContinueButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        490.0,
+        367.0,
+        300.0,
+        48.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "stash_kar98k",
+      "camera_yaw": 35.0,
+      "picked_id": "stashes:0",
+      "picked_kind": "stashes",
+      "picked_pos": "(368.0, 240.0)",
+      "reachable": true,
+      "screen": [
+        491.0,
+        160.0
+      ],
+      "target": [
+        368.0,
+        240.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        491.0,
+        160.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:0",
+      "pick_kind": "stashes",
+      "pick_pos": "(368.0, 240.0)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 36274,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        491.0,
+        160.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:0",
+      "pick_kind": "stashes",
+      "pick_pos": "(368.0, 240.0)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 36276,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "stash_bar",
+      "camera_yaw": 35.0,
+      "picked_id": "stashes:1",
+      "picked_kind": "stashes",
+      "picked_pos": "(528.0, 432.0)",
+      "reachable": true,
+      "screen": [
+        510.0,
+        351.0
+      ],
+      "target": [
+        528.0,
+        432.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        510.0,
+        351.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:1",
+      "pick_kind": "stashes",
+      "pick_pos": "(528.0, 432.0)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 53076,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        510.0,
+        351.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:1",
+      "pick_kind": "stashes",
+      "pick_pos": "(528.0, 432.0)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 53077,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "stash_springfield",
+      "camera_yaw": 35.0,
+      "picked_id": "stashes:2",
+      "picked_kind": "stashes",
+      "picked_pos": "(944.0, 528.0)",
+      "reachable": true,
+      "screen": [
+        778.0,
+        595.0
+      ],
+      "target": [
+        944.0,
+        528.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        778.0,
+        595.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:2",
+      "pick_kind": "stashes",
+      "pick_pos": "(944.0, 528.0)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 72392,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        778.0,
+        595.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:2",
+      "pick_kind": "stashes",
+      "pick_pos": "(944.0, 528.0)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 72393,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "stash_grenade",
+      "camera_yaw": 35.0,
+      "picked_id": "stashes:3",
+      "picked_kind": "stashes",
+      "picked_pos": "(880.0, 432.0)",
+      "reachable": true,
+      "screen": [
+        781.0,
+        506.0
+      ],
+      "target": [
+        880.0,
+        432.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        781.0,
+        506.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:3",
+      "pick_kind": "stashes",
+      "pick_pos": "(880.0, 432.0)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 94066,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        781.0,
+        506.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "stashes:3",
+      "pick_kind": "stashes",
+      "pick_pos": "(880.0, 432.0)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 94068,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(528.0, 432.0)",
+      "target_action": "cover_1",
+      "wanted_kind": "covers",
+      "yaw": 35.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 121894,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 121895,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "cover_1",
+      "camera_yaw": 65.0,
+      "picked_id": "covers:1",
+      "picked_kind": "covers",
+      "picked_pos": "(496.0, 400.0)",
+      "reachable": true,
+      "screen": [
+        542.0,
+        273.0
+      ],
+      "target": [
+        496.0,
+        400.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        542.0,
+        273.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "covers:1",
+      "pick_kind": "covers",
+      "pick_pos": "(496.0, 400.0)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 126639,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        542.0,
+        273.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "covers:1",
+      "pick_kind": "covers",
+      "pick_pos": "(496.0, 400.0)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 127211,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "native cover outcome",
+      "actual_slot": 1,
+      "additional_wait_s": 0.8,
+      "after": [
+        496.0,
+        400.0
+      ],
+      "before": [
+        880.0,
+        432.0
+      ],
+      "distance_before": 385.331024169922,
+      "operator": 0,
+      "selected_id": 1,
+      "slot_after_settle": 1,
+      "status": "灰狼 · 射界朝东 · 保护朝西",
+      "target": [
+        496.0,
+        400.0
+      ],
+      "target_slot": 1
+    },
+    {
+      "action": "original native keyboard facing",
+      "actual_facing": 180.0,
+      "initial_facing": 0.0,
+      "intended_facing": 180.0,
+      "keys": 12,
+      "nearest_reachable": true,
+      "operator": 0,
+      "original_quantum_deg": 15.0,
+      "tolerance_deg": 7.51
+    },
+    {
+      "action": "cover_3",
+      "camera_yaw": 65.0,
+      "picked_id": "covers:3",
+      "picked_kind": "covers",
+      "picked_pos": "(912.0, 464.0)",
+      "reachable": true,
+      "screen": [
+        652.0,
+        584.0
+      ],
+      "target": [
+        912.0,
+        464.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        652.0,
+        584.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "covers:3",
+      "pick_kind": "covers",
+      "pick_pos": "(912.0, 464.0)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 178696,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        652.0,
+        584.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "covers:3",
+      "pick_kind": "covers",
+      "pick_pos": "(912.0, 464.0)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 179261,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "native cover outcome",
+      "actual_slot": 3,
+      "additional_wait_s": 0.8,
+      "after": [
+        912.0,
+        464.0
+      ],
+      "before": [
+        528.0,
+        432.0
+      ],
+      "distance_before": 385.331024169922,
+      "operator": 1,
+      "selected_id": 2,
+      "slot_after_settle": 3,
+      "status": "铁砧 · 射界朝西 · 保护朝东",
+      "target": [
+        912.0,
+        464.0
+      ],
+      "target_slot": 3
+    },
+    {
+      "action": "original native keyboard facing",
+      "actual_facing": 4.0,
+      "initial_facing": 180.0,
+      "intended_facing": 0.0,
+      "keys": 22,
+      "nearest_reachable": true,
+      "operator": 1,
+      "original_quantum_deg": 8.0,
+      "tolerance_deg": 4.01
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "covers",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 65.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 264476,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 264476,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "cover_5",
+      "camera_yaw": 95.0,
+      "picked_id": "covers:5",
+      "picked_kind": "covers",
+      "picked_pos": "(944.0, 560.0)",
+      "reachable": true,
+      "screen": [
+        420.0,
+        577.0
+      ],
+      "target": [
+        944.0,
+        560.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        420.0,
+        577.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "covers:5",
+      "pick_kind": "covers",
+      "pick_pos": "(944.0, 560.0)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 269256,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        420.0,
+        577.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "covers:5",
+      "pick_kind": "covers",
+      "pick_pos": "(944.0, 560.0)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 269812,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "native cover outcome",
+      "actual_slot": 5,
+      "additional_wait_s": 0.8,
+      "after": [
+        944.0,
+        560.0
+      ],
+      "before": [
+        944.0,
+        528.0
+      ],
+      "distance_before": 32.0,
+      "operator": 2,
+      "selected_id": 3,
+      "slot_after_settle": 5,
+      "status": "夜枭 · 射界朝西 · 保护朝东",
+      "target": [
+        944.0,
+        560.0
+      ],
+      "target_slot": 5
+    },
+    {
+      "action": "original native keyboard facing",
+      "actual_facing": 180.0,
+      "initial_facing": 180.0,
+      "intended_facing": 180.0,
+      "keys": 0,
+      "nearest_reachable": true,
+      "operator": 2,
+      "original_quantum_deg": 15.0,
+      "tolerance_deg": 7.51
+    },
+    {
+      "control": "/root/Main/HUD/Root/ExtraBar/PackButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        404.0,
+        598.0,
+        120.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        464.0,
+        620.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(993.6354, 509.5114)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 282672,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        464.0,
+        620.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(993.6354, 509.5114)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 282672,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/AlarmButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        266.0,
+        651.0,
+        180.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        356.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1072.428, 618.258)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 297104,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        356.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 0,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1072.428, 618.258)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 297104,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/PauseButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        762.0,
+        651.0,
+        120.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        822.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 1,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1029.105, 123.0828)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 303010,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        822.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 1,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1029.105, 123.0828)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 303010,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/PauseButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        762.0,
+        651.0,
+        120.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        822.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 1,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1029.105, 123.0828)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 309095,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        822.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 1,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1029.105, 123.0828)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 309095,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "SWEEP_loot_ammo",
+      "camera_yaw": 95.0,
+      "picked_id": "loot:0",
+      "picked_kind": "loot",
+      "picked_pos": "(432.0, 379.2994)",
+      "reachable": true,
+      "screen": [
+        631.0,
+        196.0
+      ],
+      "target": [
+        432.0,
+        379.299407958984
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        631.0,
+        196.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "loot:0",
+      "pick_kind": "loot",
+      "pick_pos": "(432.0, 379.2994)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 331320,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        631.0,
+        196.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "loot:0",
+      "pick_kind": "loot",
+      "pick_pos": "(432.0, 379.2994)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 331322,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "stash_ammo",
+      "camera_yaw": 95.0,
+      "picked_id": "stashes:5",
+      "picked_kind": "stashes",
+      "picked_pos": "(752.0, 208.0)",
+      "reachable": true,
+      "screen": [
+        765.0,
+        445.0
+      ],
+      "target": [
+        752.0,
+        208.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        765.0,
+        445.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "stashes:5",
+      "pick_kind": "stashes",
+      "pick_pos": "(752.0, 208.0)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 340181,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        765.0,
+        445.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "stashes:5",
+      "pick_kind": "stashes",
+      "pick_pos": "(752.0, 208.0)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 340182,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "stash_mine",
+      "camera_yaw": 95.0,
+      "picked_id": "stashes:4",
+      "picked_kind": "stashes",
+      "picked_pos": "(336.0, 432.0)",
+      "reachable": true,
+      "screen": [
+        590.0,
+        112.0
+      ],
+      "target": [
+        336.0,
+        432.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        590.0,
+        112.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "stashes:4",
+      "pick_kind": "stashes",
+      "pick_pos": "(336.0, 432.0)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 363028,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        590.0,
+        112.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "stashes:4",
+      "pick_kind": "stashes",
+      "pick_pos": "(336.0, 432.0)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 363029,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "walk_near_mine_site",
+      "camera_yaw": 95.0,
+      "picked_id": "-1",
+      "picked_kind": "ground",
+      "picked_pos": "(815.5402, 177.1018)",
+      "reachable": true,
+      "screen": [
+        789.0,
+        506.0
+      ],
+      "target": [
+        816.0,
+        176.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        789.0,
+        506.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(815.5402, 177.1018)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 373204,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        789.0,
+        506.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(815.5402, 177.1018)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 373206,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        590.0,
+        651.0,
+        160.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1043.236, 284.5992)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 395529,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(1043.236, 284.5992)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 395529,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(816.0, 177.8308)",
+      "target_action": "place_carried_mine",
+      "wanted_kind": "ground",
+      "yaw": 95.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 401369,
+      "tool": 1,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 401369,
+      "tool": 1,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "ground",
+      "observed_pos": "(783.2598, 177.4654)",
+      "target_action": "place_carried_mine",
+      "wanted_kind": "ground",
+      "yaw": 125.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 406065,
+      "tool": 1,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 406065,
+      "tool": 1,
+      "ui_blocked": true
+    },
+    {
+      "action": "place_carried_mine",
+      "camera_yaw": 155.0,
+      "picked_id": "-1",
+      "picked_kind": "ground",
+      "picked_pos": "(783.6897, 177.6255)",
+      "reachable": true,
+      "screen": [
+        587.0,
+        528.0
+      ],
+      "target": [
+        784.0,
+        176.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        587.0,
+        528.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(783.6897, 177.6255)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 411388,
+      "tool": 1,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        587.0,
+        528.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "-1",
+      "pick_kind": "ground",
+      "pick_pos": "(783.6897, 177.6255)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 411956,
+      "tool": 1,
+      "ui_blocked": false
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        590.0,
+        651.0,
+        160.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 417721,
+      "tool": 1,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 417721,
+      "tool": 1,
+      "ui_blocked": true
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        590.0,
+        651.0,
+        160.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 422750,
+      "tool": 2,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 422750,
+      "tool": 2,
+      "ui_blocked": true
+    },
+    {
+      "control": "/root/Main/HUD/Root/BottomBar/ToolButton",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        590.0,
+        651.0,
+        160.0,
+        45.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 428348,
+      "tool": 3,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        670.0,
+        673.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 428348,
+      "tool": 3,
+      "ui_blocked": true
+    },
+    {
+      "action": "cover_1",
+      "camera_yaw": 155.0,
+      "picked_id": "covers:1",
+      "picked_kind": "covers",
+      "picked_pos": "(496.0, 400.0)",
+      "reachable": true,
+      "screen": [
+        743.0,
+        278.0
+      ],
+      "target": [
+        496.0,
+        400.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        743.0,
+        278.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "covers:1",
+      "pick_kind": "covers",
+      "pick_pos": "(496.0, 400.0)",
+      "pressed": true,
+      "selected_id": 1,
+      "ticks_msec": 437992,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        743.0,
+        278.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "covers:1",
+      "pick_kind": "covers",
+      "pick_pos": "(496.0, 400.0)",
+      "pressed": false,
+      "selected_id": 1,
+      "ticks_msec": 438534,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "native cover outcome",
+      "actual_slot": 1,
+      "additional_wait_s": 0.8,
+      "after": [
+        496.0,
+        400.0
+      ],
+      "before": [
+        816.0,
+        177.830780029297
+      ],
+      "distance_before": 389.562774658203,
+      "operator": 0,
+      "selected_id": 1,
+      "slot_after_settle": 1,
+      "status": "灰狼 · 射界朝东 · 保护朝西",
+      "target": [
+        496.0,
+        400.0
+      ],
+      "target_slot": 1
+    },
+    {
+      "action": "original native keyboard facing",
+      "actual_facing": 180.0,
+      "initial_facing": 0.0,
+      "intended_facing": 180.0,
+      "keys": 12,
+      "nearest_reachable": true,
+      "operator": 0,
+      "original_quantum_deg": 15.0,
+      "tolerance_deg": 7.51
+    },
+    {
+      "action": "cover_3",
+      "camera_yaw": 155.0,
+      "picked_id": "covers:3",
+      "picked_kind": "covers",
+      "picked_pos": "(912.0, 464.0)",
+      "reachable": true,
+      "screen": [
+        364.0,
+        368.0
+      ],
+      "target": [
+        912.0,
+        464.0
+      ]
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        364.0,
+        368.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "covers:3",
+      "pick_kind": "covers",
+      "pick_pos": "(912.0, 464.0)",
+      "pressed": true,
+      "selected_id": 2,
+      "ticks_msec": 488006,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        364.0,
+        368.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "covers:3",
+      "pick_kind": "covers",
+      "pick_pos": "(912.0, 464.0)",
+      "pressed": false,
+      "selected_id": 2,
+      "ticks_msec": 488549,
+      "tool": 0,
+      "ui_blocked": false
+    },
+    {
+      "action": "native cover outcome",
+      "actual_slot": 3,
+      "additional_wait_s": 0.8,
+      "after": [
+        912.0,
+        464.0
+      ],
+      "before": [
+        752.0,
+        208.0
+      ],
+      "distance_before": 301.887390136719,
+      "operator": 1,
+      "selected_id": 2,
+      "slot_after_settle": 3,
+      "status": "铁砧 · 射界朝西 · 保护朝东",
+      "target": [
+        912.0,
+        464.0
+      ],
+      "target_slot": 3
+    },
+    {
+      "action": "original native keyboard facing",
+      "actual_facing": 4.0,
+      "initial_facing": 180.0,
+      "intended_facing": 0.0,
+      "keys": 22,
+      "nearest_reachable": true,
+      "operator": 1,
+      "original_quantum_deg": 8.0,
+      "tolerance_deg": 4.01
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 155.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 569285,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 569285,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 185.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 574598,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 574599,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 215.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 579170,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 579171,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 245.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 584229,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 584230,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 275.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 588793,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 588794,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 305.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 593991,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 593991,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 335.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 598582,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 598583,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 5.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 603835,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 603835,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 35.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 608369,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 608369,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 65.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 613426,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 613426,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 95.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 617925,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 617926,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 125.0
+    },
+    {
+      "control": "/root/Main/Presentation3D/@CanvasLayer@339/@Control@340/@VBoxContainer@341/@HBoxContainer@345/@Button@348",
+      "fully_reachable": true,
+      "id": "player_warehouse_1280_100_desktop_reach",
+      "rect": [
+        1200.0,
+        224.0,
+        58.0,
+        42.0
+      ],
+      "scroll": 0
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": true,
+      "selected_id": 3,
+      "ticks_msec": 623154,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "observed native mouse event",
+      "at": [
+        1229.0,
+        245.0
+      ],
+      "device": 32,
+      "phase": 5,
+      "pick_id": "",
+      "pick_kind": "invalid",
+      "pick_pos": "(inf, inf)",
+      "pressed": false,
+      "selected_id": 3,
+      "ticks_msec": 623155,
+      "tool": 0,
+      "ui_blocked": true
+    },
+    {
+      "action": "original camera UI reveal target",
+      "observed_kind": "op",
+      "observed_pos": "(944.0, 560.0)",
+      "target_action": "cover_5",
+      "wanted_kind": "covers",
+      "yaw": 155.0
+    },
+    {
+      "action": "cover_5",
+      "camera_yaw": 155.0,
+      "picked_id": "3",
+      "picked_kind": "op",
+      "picked_pos": "(944.0, 560.0)",
+      "reachable": false,
+      "screen": [
+        299.0,
+        312.0
+      ],
+      "target": [
+        944.0,
+        560.0
+      ]
+    }
+  ],
+  "scope": "Isolated original title/main flow; fresh start or byte-identical pinned actual player save and native Continue. Real XTest and engine callbacks. Existing a0_preview enabled only in the isolated PCK. No tutorial/progress/resource grants/reference/vacuum helpers. Only report actually reached missions/waves; source-derived deployment strategy is not a stranger playtest.",
+  "source_sha": "e37d3d3eb5b71b1c2e51b96273fc5637a6c2dd8f",
+  "window": [
+    1280,
+    720
+  ]
+}

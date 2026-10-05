@@ -1,0 +1,81 @@
+{
+  "source_A": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "source_B": "95daa05d0ccfc4e6bd357060b1f34c2a863c2041",
+  "window_end": {
+    "utc": "2026-10-05T19:46:27.294292+00:00",
+    "wall_s": 99.46232357103145,
+    "live_engines": [],
+    "receipts": [
+      {
+        "side": "A",
+        "start": "2026-10-05T19:44:47.832437+00:00",
+        "argv": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--rendering-method",
+          "gl_compatibility",
+          "--fixed-fps",
+          "60",
+          "--audio-driver",
+          "Dummy",
+          "--path",
+          "/workspace/pr15-replay-save-stage-1ec-20261005",
+          "-s",
+          "/tmp/pr15-replay-first-draw-20261005/first_draw.gd"
+        ],
+        "cap_s": 90,
+        "uuid": "1e1ea8e5a2214f708c073a2302b7b527",
+        "synthetic_engine_GUI_input": true,
+        "pid": 177689,
+        "timeout": false,
+        "end": "2026-10-05T19:45:39.107238+00:00",
+        "actual_exit": 0,
+        "ERROR": 0,
+        "SCRIPT_ERROR": 0,
+        "guard": true,
+        "summary": [
+          "FIRST_DRAW checks=214 failures=0 rows=25"
+        ]
+      },
+      {
+        "side": "B",
+        "start": "2026-10-05T19:45:39.107864+00:00",
+        "argv": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--rendering-method",
+          "gl_compatibility",
+          "--fixed-fps",
+          "60",
+          "--audio-driver",
+          "Dummy",
+          "--path",
+          "/workspace/pr15-replay-touch-candidate-95daa-20261005",
+          "-s",
+          "/tmp/pr15-replay-first-draw-20261005/first_draw.gd"
+        ],
+        "cap_s": 90,
+        "uuid": "8fb7b92569f743858f79b32af95e0328",
+        "synthetic_engine_GUI_input": true,
+        "pid": 177811,
+        "timeout": false,
+        "end": "2026-10-05T19:46:27.243098+00:00",
+        "actual_exit": 0,
+        "ERROR": 0,
+        "SCRIPT_ERROR": 0,
+        "guard": true,
+        "summary": [
+          "FIRST_DRAW checks=214 failures=0 rows=25"
+        ]
+      }
+    ]
+  },
+  "rows": 25,
+  "UI_nodes_each": 455,
+  "UI_different_nodes": 0,
+  "PNG_pairs": 17,
+  "changed_pixels": 0,
+  "strict_complete_AB_equal": false,
+  "full_raw_differences": 29,
+  "scope": "native llvmpipe/synthetic GUI/fixed-fps60 consumer fixture, no post-setup refresh; 29 cross-process raw domain/synchronous utility scope differences retained; not ordinary fresh victory, Web first draw, fullsmoke, performance, or independent QA acceptance",
+  "parent_QA_status": "handoff received; original b3be packet location not yet supplied; original E6/E3 layout failures stay open",
+  "decision": "withdraw sole unaccepted touch candidate; restore main bytes and game tree to 1ec; no visible regression claimed"
+}

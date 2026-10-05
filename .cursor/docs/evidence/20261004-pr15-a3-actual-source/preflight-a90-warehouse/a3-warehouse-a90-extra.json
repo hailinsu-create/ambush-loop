@@ -1,0 +1,3660 @@
+{
+  "format": 1,
+  "source_sha": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+  "strict_analysis_sha256": "4c0a1558adaeb2edbec2b4bafe0721d21a34353507f85c9a25d1c19fc2474353",
+  "segments": [
+    {
+      "label": "warehouse-live-SCOUT-command",
+      "samples": 3,
+      "actual_seconds": 2.706116,
+      "interval_ms": {
+        "median": 850.795,
+        "p95": 856.6098999999999,
+        "p99": 857.1267799999999,
+        "max": 857.256
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1753712704000376,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-ALERT-entry",
+      "samples": 3,
+      "actual_seconds": 2.919254,
+      "interval_ms": {
+        "median": 894.089,
+        "p95": 919.0244,
+        "p99": 921.24088,
+        "max": 921.795
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1184568874015897,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-paused-ALERT",
+      "samples": 3,
+      "actual_seconds": 2.174577,
+      "interval_ms": {
+        "median": 850.001,
+        "p95": 855.6449,
+        "p99": 856.1465800000001,
+        "max": 856.272
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1764692041538776,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-ALERT-wave0",
+      "samples": 34,
+      "actual_seconds": 23.551499,
+      "interval_ms": {
+        "median": 857.263,
+        "p95": 1024.35335,
+        "p99": 1067.36645,
+        "max": 1082.789
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.16650316180682,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-SWEEP-wave0",
+      "samples": 3,
+      "actual_seconds": 2.177633,
+      "interval_ms": {
+        "median": 830.11,
+        "p95": 854.4604,
+        "p99": 856.6248800000001,
+        "max": 857.166
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.2046596234234017,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-ALERT-wave1",
+      "samples": 108,
+      "actual_seconds": 70.50406,
+      "interval_ms": {
+        "median": 743.7555,
+        "p95": 1042.02225,
+        "p99": 1170.0169699999997,
+        "max": 1688.881
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.344527872398927,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-SWEEP-wave1",
+      "samples": 3,
+      "actual_seconds": 2.21759,
+      "interval_ms": {
+        "median": 870.437,
+        "p95": 882.0523999999999,
+        "p99": 883.08488,
+        "max": 883.343
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.1488482222148184,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-WON",
+      "samples": 9,
+      "actual_seconds": 2.024152,
+      "interval_ms": {
+        "median": 201.317,
+        "p95": 219.555,
+        "p99": 220.931,
+        "max": 221.275
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 4.967290392763651,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.078492,
+      "interval_ms": {
+        "median": 171.891,
+        "p95": 191.4015,
+        "p99": 199.66350000000003,
+        "max": 201.729
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.817640248762297,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw45",
+      "samples": 9,
+      "actual_seconds": 2.007953,
+      "interval_ms": {
+        "median": 201.428,
+        "p95": 214.8184,
+        "p99": 217.92368,
+        "max": 218.7
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 4.964553090930755,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.064509,
+      "interval_ms": {
+        "median": 140.441,
+        "p95": 165.42279999999997,
+        "p99": 168.95415999999997,
+        "max": 169.837
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.120427795301942,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.006105,
+      "interval_ms": {
+        "median": 152.5,
+        "p95": 165.86475000000002,
+        "p99": 169.53215000000003,
+        "max": 170.449
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.557377049180328,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw180",
+      "samples": 11,
+      "actual_seconds": 2.168289,
+      "interval_ms": {
+        "median": 178.651,
+        "p95": 190.045,
+        "p99": 192.1786,
+        "max": 192.712
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.59750575143716,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw225",
+      "samples": 10,
+      "actual_seconds": 2.018034,
+      "interval_ms": {
+        "median": 181.36849999999998,
+        "p95": 199.85154999999997,
+        "p99": 208.14631,
+        "max": 210.22
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.513636601725217,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.100454,
+      "interval_ms": {
+        "median": 147.366,
+        "p95": 165.6554,
+        "p99": 172.28228,
+        "max": 173.939
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.785825767137602,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-standard-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.081706,
+      "interval_ms": {
+        "median": 159.97050000000002,
+        "p95": 176.56064999999998,
+        "p99": 182.64893,
+        "max": 184.171
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.251152556252558,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw0",
+      "samples": 12,
+      "actual_seconds": 2.156681,
+      "interval_ms": {
+        "median": 162.1575,
+        "p95": 176.53475,
+        "p99": 180.78295,
+        "max": 181.845
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.166843963430615,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw45",
+      "samples": 10,
+      "actual_seconds": 2.020105,
+      "interval_ms": {
+        "median": 183.4425,
+        "p95": 197.63739999999999,
+        "p99": 201.38428,
+        "max": 202.321
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.45129945350723,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.098412,
+      "interval_ms": {
+        "median": 150.653,
+        "p95": 155.8016,
+        "p99": 155.88512,
+        "max": 155.906
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.637770240220905,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.047277,
+      "interval_ms": {
+        "median": 154.9195,
+        "p95": 169.3839,
+        "p99": 169.79837999999998,
+        "max": 169.902
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.454965320698815,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.02114,
+      "interval_ms": {
+        "median": 183.81400000000002,
+        "p95": 212.4266,
+        "p99": 214.57652000000002,
+        "max": 215.114
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.440282024220135,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw225",
+      "samples": 11,
+      "actual_seconds": 2.143873,
+      "interval_ms": {
+        "median": 179.244,
+        "p95": 186.94400000000002,
+        "p99": 187.49360000000001,
+        "max": 187.631
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.5789873022249,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.030877,
+      "interval_ms": {
+        "median": 144.286,
+        "p95": 150.236,
+        "p99": 151.4144,
+        "max": 151.709
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.930679345189415,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SCOUT-saved-move-power_saving-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.095956,
+      "interval_ms": {
+        "median": 159.15449999999998,
+        "p95": 173.7235,
+        "p99": 174.23829999999998,
+        "max": 174.367
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.283202799795168,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw0",
+      "samples": 10,
+      "actual_seconds": 2.104831,
+      "interval_ms": {
+        "median": 188.825,
+        "p95": 211.06275,
+        "p99": 214.35495,
+        "max": 215.178
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.295908910366742,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw45",
+      "samples": 10,
+      "actual_seconds": 2.076066,
+      "interval_ms": {
+        "median": 185.584,
+        "p95": 199.2451,
+        "p99": 199.92982,
+        "max": 200.101
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.388395551340633,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.135502,
+      "interval_ms": {
+        "median": 153.858,
+        "p95": 159.1934,
+        "p99": 159.70268000000002,
+        "max": 159.83
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.499499538535533,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.048097,
+      "interval_ms": {
+        "median": 156.285,
+        "p95": 166.9395,
+        "p99": 168.12310000000002,
+        "max": 168.419
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.398566721054484,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.085215,
+      "interval_ms": {
+        "median": 187.828,
+        "p95": 197.798,
+        "p99": 199.6052,
+        "max": 200.057
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.324019847945993,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw225",
+      "samples": 10,
+      "actual_seconds": 2.008136,
+      "interval_ms": {
+        "median": 183.24450000000002,
+        "p95": 196.2856,
+        "p99": 201.58911999999998,
+        "max": 202.915
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.457189711014518,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.049702,
+      "interval_ms": {
+        "median": 146.247,
+        "p95": 152.85279999999997,
+        "p99": 154.17855999999998,
+        "max": 154.51
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.837747099085792,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-standard-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.066662,
+      "interval_ms": {
+        "median": 158.1345,
+        "p95": 169.74085,
+        "p99": 172.97617,
+        "max": 173.785
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.323730748192204,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw0",
+      "samples": 10,
+      "actual_seconds": 2.044406,
+      "interval_ms": {
+        "median": 186.098,
+        "p95": 198.93055,
+        "p99": 199.41331,
+        "max": 199.534
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.373512880310374,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw45",
+      "samples": 10,
+      "actual_seconds": 2.131414,
+      "interval_ms": {
+        "median": 194.35199999999998,
+        "p95": 200.0991,
+        "p99": 200.60381999999998,
+        "max": 200.73
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.145303367086524,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw90",
+      "samples": 12,
+      "actual_seconds": 2.084512,
+      "interval_ms": {
+        "median": 159.79500000000002,
+        "p95": 178.03385,
+        "p99": 180.53877,
+        "max": 181.165
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.258018085672267,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.046237,
+      "interval_ms": {
+        "median": 157.98000000000002,
+        "p95": 161.5651,
+        "p99": 161.91621999999998,
+        "max": 162.004
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.329915179136599,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.007906,
+      "interval_ms": {
+        "median": 179.7095,
+        "p95": 191.5769,
+        "p99": 195.50018,
+        "max": 196.481
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.564536098536806,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw225",
+      "samples": 9,
+      "actual_seconds": 2.002284,
+      "interval_ms": {
+        "median": 197.105,
+        "p95": 219.7678,
+        "p99": 225.36396,
+        "max": 226.763
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.073438015271049,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw270",
+      "samples": 12,
+      "actual_seconds": 2.06797,
+      "interval_ms": {
+        "median": 155.043,
+        "p95": 167.8812,
+        "p99": 170.59864,
+        "max": 171.278
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.449823597324613,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw315",
+      "samples": 10,
+      "actual_seconds": 2.049602,
+      "interval_ms": {
+        "median": 181.992,
+        "p95": 202.9842,
+        "p99": 204.92964,
+        "max": 205.416
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.494747021847115,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.133145,
+      "interval_ms": {
+        "median": 176.292,
+        "p95": 184.49450000000002,
+        "p99": 184.9581,
+        "max": 185.074
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.672407142695074,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw45",
+      "samples": 9,
+      "actual_seconds": 2.016853,
+      "interval_ms": {
+        "median": 195.177,
+        "p95": 229.08319999999998,
+        "p99": 231.34303999999997,
+        "max": 231.908
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.12355451718184,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw90",
+      "samples": 12,
+      "actual_seconds": 2.018321,
+      "interval_ms": {
+        "median": 156.0985,
+        "p95": 169.0325,
+        "p99": 172.09930000000003,
+        "max": 172.866
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.40621146263417,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw135",
+      "samples": 11,
+      "actual_seconds": 2.028519,
+      "interval_ms": {
+        "median": 164.721,
+        "p95": 184.2375,
+        "p99": 185.1347,
+        "max": 185.359
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.0708713521651765,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.063891,
+      "interval_ms": {
+        "median": 182.97000000000003,
+        "p95": 200.55769999999998,
+        "p99": 203.47154,
+        "max": 204.2
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.465376837732961,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw225",
+      "samples": 9,
+      "actual_seconds": 2.000426,
+      "interval_ms": {
+        "median": 198.546,
+        "p95": 208.8722,
+        "p99": 209.12564,
+        "max": 209.189
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.036616199772345,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.062211,
+      "interval_ms": {
+        "median": 144.99,
+        "p95": 156.1084,
+        "p99": 159.67048,
+        "max": 160.561
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.897027381198703,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-standard-yaw315",
+      "samples": 12,
+      "actual_seconds": 2.022447,
+      "interval_ms": {
+        "median": 151.111,
+        "p95": 174.23845,
+        "p99": 180.60129,
+        "max": 182.192
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.617651924744063,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw0",
+      "samples": 10,
+      "actual_seconds": 2.123853,
+      "interval_ms": {
+        "median": 191.49599999999998,
+        "p95": 221.21169999999995,
+        "p99": 233.21194,
+        "max": 236.212
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.222041191460919,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw45",
+      "samples": 9,
+      "actual_seconds": 2.139316,
+      "interval_ms": {
+        "median": 219.762,
+        "p95": 242.1044,
+        "p99": 245.94407999999999,
+        "max": 246.904
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 4.550377226272058,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw90",
+      "samples": 12,
+      "actual_seconds": 2.105671,
+      "interval_ms": {
+        "median": 161.5265,
+        "p95": 180.92645,
+        "p99": 187.62369,
+        "max": 189.298
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.190934614444069,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw135",
+      "samples": 11,
+      "actual_seconds": 2.032692,
+      "interval_ms": {
+        "median": 161.721,
+        "p95": 207.96949999999998,
+        "p99": 233.0355,
+        "max": 239.302
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.183488848077863,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.073619,
+      "interval_ms": {
+        "median": 187.1455,
+        "p95": 199.7826,
+        "p99": 203.43012000000002,
+        "max": 204.342
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.343435989644421,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw225",
+      "samples": 9,
+      "actual_seconds": 2.021056,
+      "interval_ms": {
+        "median": 198.663,
+        "p95": 218.22779999999997,
+        "p99": 223.38236,
+        "max": 224.671
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.0336499499151826,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.155302,
+      "interval_ms": {
+        "median": 152.358,
+        "p95": 171.42399999999998,
+        "p99": 178.1008,
+        "max": 179.77
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.5634886254742115,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-SWEEP-saved-move-power_saving-yaw315",
+      "samples": 11,
+      "actual_seconds": 2.016279,
+      "interval_ms": {
+        "median": 167.292,
+        "p95": 174.16250000000002,
+        "p99": 174.26690000000002,
+        "max": 174.293
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.977572149295842,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw0",
+      "samples": 10,
+      "actual_seconds": 2.138865,
+      "interval_ms": {
+        "median": 192.059,
+        "p95": 203.83405,
+        "p99": 207.60361,
+        "max": 208.546
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.206733347565071,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw45",
+      "samples": 10,
+      "actual_seconds": 2.050905,
+      "interval_ms": {
+        "median": 185.3635,
+        "p95": 196.39915,
+        "p99": 199.44942999999998,
+        "max": 200.212
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.39480534193625,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw90",
+      "samples": 12,
+      "actual_seconds": 2.075007,
+      "interval_ms": {
+        "median": 160.4515,
+        "p95": 164.74409999999997,
+        "p99": 165.90482,
+        "max": 166.195
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.232412909820101,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.08914,
+      "interval_ms": {
+        "median": 159.953,
+        "p95": 168.94119999999998,
+        "p99": 173.38344,
+        "max": 174.494
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.251836476965108,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.196517,
+      "interval_ms": {
+        "median": 201.18650000000002,
+        "p95": 208.30904999999998,
+        "p99": 209.15541,
+        "max": 209.367
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 4.970512434979484,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw225",
+      "samples": 10,
+      "actual_seconds": 2.130565,
+      "interval_ms": {
+        "median": 188.913,
+        "p95": 206.6785,
+        "p99": 206.7397,
+        "max": 206.755
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.293441954762245,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw270",
+      "samples": 12,
+      "actual_seconds": 2.003425,
+      "interval_ms": {
+        "median": 152.3675,
+        "p95": 167.8075,
+        "p99": 168.2519,
+        "max": 168.363
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.563079396853003,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-standard-yaw315",
+      "samples": 11,
+      "actual_seconds": 2.072523,
+      "interval_ms": {
+        "median": 174.128,
+        "p95": 184.2335,
+        "p99": 187.3211,
+        "max": 188.093
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.742901773408068,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw0",
+      "samples": 10,
+      "actual_seconds": 2.089091,
+      "interval_ms": {
+        "median": 190.077,
+        "p95": 195.4279,
+        "p99": 195.85198,
+        "max": 195.958
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.261025794809472,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw45",
+      "samples": 10,
+      "actual_seconds": 2.180994,
+      "interval_ms": {
+        "median": 196.0055,
+        "p95": 219.06254999999996,
+        "p99": 232.11651,
+        "max": 235.38
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.101897650831226,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw90",
+      "samples": 13,
+      "actual_seconds": 2.057394,
+      "interval_ms": {
+        "median": 143.681,
+        "p95": 156.20899999999997,
+        "p99": 159.3842,
+        "max": 160.178
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.95986247311753,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw135",
+      "samples": 12,
+      "actual_seconds": 2.106271,
+      "interval_ms": {
+        "median": 162.2525,
+        "p95": 168.30245,
+        "p99": 169.57889,
+        "max": 169.898
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.163233232153588,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw180",
+      "samples": 10,
+      "actual_seconds": 2.086808,
+      "interval_ms": {
+        "median": 187.663,
+        "p95": 199.74115,
+        "p99": 201.30103,
+        "max": 201.691
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.328700916003688,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw225",
+      "samples": 10,
+      "actual_seconds": 2.146244,
+      "interval_ms": {
+        "median": 195.845,
+        "p95": 200.11464999999998,
+        "p99": 200.21652999999998,
+        "max": 200.242
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.10607878679568,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw270",
+      "samples": 13,
+      "actual_seconds": 2.121425,
+      "interval_ms": {
+        "median": 152.114,
+        "p95": 158.6894,
+        "p99": 160.90748,
+        "max": 161.462
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.5740168557792185,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-WON-original-source-power_saving-yaw315",
+      "samples": 11,
+      "actual_seconds": 2.00572,
+      "interval_ms": {
+        "median": 166.751,
+        "p95": 173.7405,
+        "p99": 175.2849,
+        "max": 175.671
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.996965535439068,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-REPLAY-live-1x",
+      "samples": 3,
+      "actual_seconds": 3.339193,
+      "interval_ms": {
+        "median": 782.099,
+        "p95": 786.2876,
+        "p99": 786.65992,
+        "max": 786.753
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.2786105083883241,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-REPLAY-live-2x",
+      "samples": 3,
+      "actual_seconds": 3.102506,
+      "interval_ms": {
+        "median": 751.101,
+        "p95": 809.7755999999999,
+        "p99": 814.9911199999999,
+        "max": 816.295
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.331378869153416,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-original-grenade-fuse",
+      "samples": 14,
+      "actual_seconds": 7.83361,
+      "interval_ms": {
+        "median": 532.5645,
+        "p95": 952.5975999999999,
+        "p99": 953.51072,
+        "max": 953.739
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 1.8777068317546515,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-live-FAILED-abort",
+      "samples": 12,
+      "actual_seconds": 2.072985,
+      "interval_ms": {
+        "median": 157.293,
+        "p95": 184.31414999999996,
+        "p99": 202.44523000000004,
+        "max": 206.978
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.357562002123426,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw0",
+      "samples": 12,
+      "actual_seconds": 2.103504,
+      "interval_ms": {
+        "median": 158.728,
+        "p95": 195.70049999999998,
+        "p99": 214.95930000000004,
+        "max": 219.774
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.300085681165264,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw45",
+      "samples": 12,
+      "actual_seconds": 2.149618,
+      "interval_ms": {
+        "median": 163.6365,
+        "p95": 180.43404999999998,
+        "p99": 184.09001,
+        "max": 185.004
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.1111060185227615,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.095301,
+      "interval_ms": {
+        "median": 122.4175,
+        "p95": 139.54725,
+        "p99": 140.09505,
+        "max": 140.232
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.168766720444381,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw135",
+      "samples": 15,
+      "actual_seconds": 2.068697,
+      "interval_ms": {
+        "median": 128.222,
+        "p95": 137.2036,
+        "p99": 146.08072,
+        "max": 148.3
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.798973655066993,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw180",
+      "samples": 13,
+      "actual_seconds": 2.108618,
+      "interval_ms": {
+        "median": 149.293,
+        "p95": 163.40939999999998,
+        "p99": 167.12267999999997,
+        "max": 168.051
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.698237693662797,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw225",
+      "samples": 13,
+      "actual_seconds": 2.134353,
+      "interval_ms": {
+        "median": 151.834,
+        "p95": 162.3002,
+        "p99": 164.27684,
+        "max": 164.771
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.586140126717336,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw270",
+      "samples": 15,
+      "actual_seconds": 2.011009,
+      "interval_ms": {
+        "median": 124.351,
+        "p95": 137.47369999999998,
+        "p99": 150.30834,
+        "max": 153.517
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.041752780436024,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-standard-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.124308,
+      "interval_ms": {
+        "median": 132.65,
+        "p95": 140.6348,
+        "p99": 141.87576,
+        "max": 142.186
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.538635506973238,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw0",
+      "samples": 13,
+      "actual_seconds": 2.1168,
+      "interval_ms": {
+        "median": 152.427,
+        "p95": 156.0994,
+        "p99": 157.19428,
+        "max": 157.468
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.560517493619897,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw45",
+      "samples": 13,
+      "actual_seconds": 2.114388,
+      "interval_ms": {
+        "median": 150.667,
+        "p95": 158.3134,
+        "p99": 158.59228000000002,
+        "max": 158.662
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.637153457625094,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.080047,
+      "interval_ms": {
+        "median": 122.30850000000001,
+        "p95": 130.4595,
+        "p99": 136.4391,
+        "max": 137.934
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.176046636170012,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw135",
+      "samples": 15,
+      "actual_seconds": 2.122612,
+      "interval_ms": {
+        "median": 134.481,
+        "p95": 142.4578,
+        "p99": 147.89875999999998,
+        "max": 149.259
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.435994675827812,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw180",
+      "samples": 13,
+      "actual_seconds": 2.091505,
+      "interval_ms": {
+        "median": 148.521,
+        "p95": 161.69959999999998,
+        "p99": 166.81832,
+        "max": 168.098
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.73305458487352,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw225",
+      "samples": 12,
+      "actual_seconds": 2.022118,
+      "interval_ms": {
+        "median": 155.127,
+        "p95": 163.54194999999999,
+        "p99": 165.08679,
+        "max": 165.473
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.446331070671127,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw270",
+      "samples": 15,
+      "actual_seconds": 2.031395,
+      "interval_ms": {
+        "median": 124.208,
+        "p95": 153.1186,
+        "p99": 154.63172,
+        "max": 155.01
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.0510112070076,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-confirmed-tool-source-power_saving-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.078481,
+      "interval_ms": {
+        "median": 128.927,
+        "p95": 136.3506,
+        "p99": 137.62852,
+        "max": 137.948
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.7563272239329235,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw0",
+      "samples": 12,
+      "actual_seconds": 2.152095,
+      "interval_ms": {
+        "median": 163.8195,
+        "p95": 173.33555,
+        "p99": 174.83111000000002,
+        "max": 175.205
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.104279405076929,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw45",
+      "samples": 12,
+      "actual_seconds": 2.149122,
+      "interval_ms": {
+        "median": 164.30700000000002,
+        "p95": 172.86595,
+        "p99": 174.33159,
+        "max": 174.698
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.086167966063527,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.028719,
+      "interval_ms": {
+        "median": 117.65549999999999,
+        "p95": 134.17525,
+        "p99": 139.33105,
+        "max": 140.62
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.499390168755392,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw135",
+      "samples": 15,
+      "actual_seconds": 2.132062,
+      "interval_ms": {
+        "median": 131.131,
+        "p95": 152.2013,
+        "p99": 153.29386,
+        "max": 153.567
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.625961824435107,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw180",
+      "samples": 12,
+      "actual_seconds": 2.134445,
+      "interval_ms": {
+        "median": 163.676,
+        "p95": 173.6515,
+        "p99": 178.76870000000002,
+        "max": 180.048
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.1096312226594005,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw225",
+      "samples": 12,
+      "actual_seconds": 2.113365,
+      "interval_ms": {
+        "median": 159.94400000000002,
+        "p95": 175.77974999999998,
+        "p99": 180.77595000000002,
+        "max": 182.025
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.252188265893062,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw270",
+      "samples": 16,
+      "actual_seconds": 2.075929,
+      "interval_ms": {
+        "median": 123.726,
+        "p95": 130.5215,
+        "p99": 130.7747,
+        "max": 130.838
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.082375571828072,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-standard-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.119256,
+      "interval_ms": {
+        "median": 131.311,
+        "p95": 146.5905,
+        "p99": 148.1053,
+        "max": 148.484
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.615508220941124,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw0",
+      "samples": 11,
+      "actual_seconds": 2.030261,
+      "interval_ms": {
+        "median": 162.752,
+        "p95": 197.37599999999998,
+        "p99": 213.1648,
+        "max": 217.112
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.14431773495871,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw45",
+      "samples": 11,
+      "actual_seconds": 2.053517,
+      "interval_ms": {
+        "median": 170.142,
+        "p95": 181.364,
+        "p99": 182.3496,
+        "max": 182.596
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 5.87744354715473,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw90",
+      "samples": 16,
+      "actual_seconds": 2.090685,
+      "interval_ms": {
+        "median": 123.2635,
+        "p95": 128.16325,
+        "p99": 128.31505,
+        "max": 128.353
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.112701651340421,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw135",
+      "samples": 16,
+      "actual_seconds": 2.076516,
+      "interval_ms": {
+        "median": 119.5115,
+        "p95": 128.93275,
+        "p99": 135.21535,
+        "max": 136.786
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.367395606280567,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw180",
+      "samples": 13,
+      "actual_seconds": 2.110054,
+      "interval_ms": {
+        "median": 152.209,
+        "p95": 153.8792,
+        "p99": 155.00384,
+        "max": 155.285
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.569913737032633,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw225",
+      "samples": 12,
+      "actual_seconds": 2.056957,
+      "interval_ms": {
+        "median": 157.6885,
+        "p95": 168.34505,
+        "p99": 173.50581,
+        "max": 174.796
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 6.341616541472587,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw270",
+      "samples": 16,
+      "actual_seconds": 2.045644,
+      "interval_ms": {
+        "median": 120.0755,
+        "p95": 125.654,
+        "p99": 129.6116,
+        "max": 130.601
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 8.328093574459402,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    },
+    {
+      "label": "warehouse-FAILED-abort-source-power_saving-yaw315",
+      "samples": 15,
+      "actual_seconds": 2.103245,
+      "interval_ms": {
+        "median": 127.812,
+        "p95": 143.33619999999996,
+        "p99": 151.85603999999998,
+        "max": 153.986
+      },
+      "fraction_over33_333ms": 1.0,
+      "fraction_over16_667ms": 1.0,
+      "median_interval_inverse_fps": 7.823991487497262,
+      "scope": "inverse median raw cadence includes instrumentation; no subtraction of collector time or exclusive GPU benchmark"
+    }
+  ],
+  "chunks": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-campaign-f82c7c15662d4846849e8845b23ef77a/warehouse-actual-source-metrics",
+      "collector_storage_bytes": 15466496.0,
+      "rss_ready_bytes": 263434240,
+      "rss_save_bytes": 985030656,
+      "raw_supported_counter_extrema": {
+        "MEMORY_STATIC": {
+          "first": 266307329.0,
+          "last": 276982265.0,
+          "max": 294776015.0
+        },
+        "OBJECT_COUNT": {
+          "first": 5335.0,
+          "last": 5391.0,
+          "max": 6174.0
+        },
+        "OBJECT_NODE_COUNT": {
+          "first": 1278.0,
+          "last": 1301.0,
+          "max": 1669.0
+        },
+        "OBJECT_RESOURCE_COUNT": {
+          "first": 469.0,
+          "last": 395.0,
+          "max": 617.0
+        },
+        "OBJECT_ORPHAN_NODE_COUNT": {
+          "first": 0.0,
+          "last": 0.0,
+          "max": 0.0
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "first": 73498834.0,
+          "last": 79174522.0,
+          "max": 79178618.0
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "first": 28906008.0,
+          "last": 42246620.0,
+          "max": 44903616.0
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "first": 102404842.0,
+          "last": 121421142.0,
+          "max": 124078138.0
+        }
+      },
+      "original_rss_marks": [
+        {
+          "label": "cold-production-scene",
+          "timed": false,
+          "ticks_usec": 13247183,
+          "rss_bytes": 263442432
+        },
+        {
+          "label": "warehouse-original-load",
+          "timed": false,
+          "ticks_usec": 23563517,
+          "rss_bytes": 862343168
+        },
+        {
+          "label": "warehouse-live-SCOUT-command",
+          "timed": true,
+          "ticks_usec": 26582948,
+          "rss_bytes": 888172544
+        },
+        {
+          "label": "warehouse-live-SCOUT-command-boundary",
+          "timed": false,
+          "ticks_usec": 29289199,
+          "rss_bytes": 912633856
+        },
+        {
+          "label": "warehouse-live-SCOUT-capture",
+          "timed": false,
+          "ticks_usec": 29289339,
+          "rss_bytes": 912633856
+        },
+        {
+          "label": "warehouse-reference-resource-snap",
+          "timed": false,
+          "ticks_usec": 30576674,
+          "rss_bytes": 920428544
+        },
+        {
+          "label": "warehouse-live-ALERT-entry",
+          "timed": true,
+          "ticks_usec": 39678702,
+          "rss_bytes": 920465408
+        },
+        {
+          "label": "warehouse-live-ALERT-entry-boundary",
+          "timed": false,
+          "ticks_usec": 42598072,
+          "rss_bytes": 922865664
+        },
+        {
+          "label": "warehouse-paused-ALERT",
+          "timed": true,
+          "ticks_usec": 42876763,
+          "rss_bytes": 922865664
+        },
+        {
+          "label": "warehouse-paused-ALERT-boundary",
+          "timed": false,
+          "ticks_usec": 45051475,
+          "rss_bytes": 922865664
+        },
+        {
+          "label": "warehouse-paused-ALERT-capture",
+          "timed": false,
+          "ticks_usec": 45056852,
+          "rss_bytes": 922865664
+        },
+        {
+          "label": "warehouse-live-ALERT-wave0",
+          "timed": true,
+          "ticks_usec": 46742756,
+          "rss_bytes": 926875648
+        },
+        {
+          "label": "warehouse-live-ALERT-wave0-finish",
+          "timed": false,
+          "ticks_usec": 70294399,
+          "rss_bytes": 937443328
+        },
+        {
+          "label": "warehouse-live-SWEEP-wave0",
+          "timed": true,
+          "ticks_usec": 70989949,
+          "rss_bytes": 937443328
+        },
+        {
+          "label": "warehouse-live-SWEEP-wave0-boundary",
+          "timed": false,
+          "ticks_usec": 73167710,
+          "rss_bytes": 937443328
+        },
+        {
+          "label": "warehouse-live-ALERT-wave1",
+          "timed": true,
+          "ticks_usec": 73840725,
+          "rss_bytes": 937443328
+        },
+        {
+          "label": "warehouse-live-ALERT-wave1-finish",
+          "timed": false,
+          "ticks_usec": 144344941,
+          "rss_bytes": 966008832
+        },
+        {
+          "label": "warehouse-live-SWEEP-wave1",
+          "timed": true,
+          "ticks_usec": 145834670,
+          "rss_bytes": 966008832
+        },
+        {
+          "label": "warehouse-live-SWEEP-wave1-boundary",
+          "timed": false,
+          "ticks_usec": 148052409,
+          "rss_bytes": 966017024
+        },
+        {
+          "label": "warehouse-original-WON-capture",
+          "timed": false,
+          "ticks_usec": 148785184,
+          "rss_bytes": 966025216
+        },
+        {
+          "label": "warehouse-live-WON",
+          "timed": true,
+          "ticks_usec": 149599698,
+          "rss_bytes": 965926912
+        },
+        {
+          "label": "warehouse-live-WON-boundary",
+          "timed": false,
+          "ticks_usec": 151623994,
+          "rss_bytes": 965926912
+        },
+        {
+          "label": "original-replay-entry",
+          "timed": false,
+          "ticks_usec": 151756237,
+          "rss_bytes": 965931008
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 152894275,
+          "rss_bytes": 965935104
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 154177007,
+          "rss_bytes": 965935104
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 156255653,
+          "rss_bytes": 965935104
+        },
+        {
+          "label": "warehouse-warehouse-SCOUT-saved-move-source-capture",
+          "timed": false,
+          "ticks_usec": 156322891,
+          "rss_bytes": 965935104
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 156940460,
+          "rss_bytes": 955297792
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 158066698,
+          "rss_bytes": 960286720
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 160074828,
+          "rss_bytes": 960286720
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 160138039,
+          "rss_bytes": 960286720
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 161358212,
+          "rss_bytes": 960286720
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 163422890,
+          "rss_bytes": 960487424
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 163486381,
+          "rss_bytes": 960487424
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 164629262,
+          "rss_bytes": 960532480
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 166635522,
+          "rss_bytes": 960712704
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 166700544,
+          "rss_bytes": 960712704
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 167840426,
+          "rss_bytes": 960712704
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 170008924,
+          "rss_bytes": 960716800
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 170071912,
+          "rss_bytes": 960716800
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 171293815,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 173312033,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 173382055,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 174651662,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 176752280,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 176859378,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 178096637,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 180178518,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 180245565,
+          "rss_bytes": 960720896
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 181725645,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 183882498,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 183952417,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 185208401,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 187228673,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 187298642,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 188518844,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 190617453,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 190687671,
+          "rss_bytes": 965193728
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 191939868,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 193987336,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 194055772,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 195374592,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 197395889,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 197467273,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 198601095,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 200745141,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 200811354,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 202003611,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 204034658,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 204105165,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 205310504,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-SCOUT-saved-move-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 207406625,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 207693408,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 209291766,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 211396759,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-warehouse-ALERT-confirmed-shot-source-capture",
+          "timed": false,
+          "ticks_usec": 211468405,
+          "rss_bytes": 966369280
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 212197349,
+          "rss_bytes": 959696896
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 213443374,
+          "rss_bytes": 966426624
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 215519598,
+          "rss_bytes": 966426624
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 215590837,
+          "rss_bytes": 966426624
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 216834537,
+          "rss_bytes": 966426624
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 218970203,
+          "rss_bytes": 966426624
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 219041352,
+          "rss_bytes": 967659520
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 220301359,
+          "rss_bytes": 967659520
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 222349614,
+          "rss_bytes": 967659520
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 222417202,
+          "rss_bytes": 967659520
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 223651228,
+          "rss_bytes": 969588736
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 225736603,
+          "rss_bytes": 969588736
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 225804376,
+          "rss_bytes": 969588736
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 227047011,
+          "rss_bytes": 969588736
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 229055340,
+          "rss_bytes": 969588736
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 229122096,
+          "rss_bytes": 969588736
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 230383654,
+          "rss_bytes": 974360576
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 232433511,
+          "rss_bytes": 960868352
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 232504386,
+          "rss_bytes": 966381568
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 233734533,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 235801380,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 235870697,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 237402727,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 239447301,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 239510800,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 240644306,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 242775995,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 242846339,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 244159112,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 246243811,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 246314453,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 247631017,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 249677455,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 249748090,
+          "rss_bytes": 967479296
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 250951789,
+          "rss_bytes": 971083776
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 252959862,
+          "rss_bytes": 971255808
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 253026160,
+          "rss_bytes": 971255808
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 254132702,
+          "rss_bytes": 971464704
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 256135215,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 256201819,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 257527435,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 259595602,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 259673044,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 261008731,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-ALERT-confirmed-shot-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 263058595,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 263156925,
+          "rss_bytes": 971476992
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 264886469,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 267019779,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-warehouse-SWEEP-saved-move-source-capture",
+          "timed": false,
+          "ticks_usec": 267082871,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 267792547,
+          "rss_bytes": 961753088
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 268931859,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 270948870,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 271018631,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 272317014,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 274335500,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 274405616,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 275640429,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 277669122,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 277742929,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 279050310,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 281114372,
+          "rss_bytes": 957353984
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 281185581,
+          "rss_bytes": 962871296
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 282392001,
+          "rss_bytes": 976322560
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 284392578,
+          "rss_bytes": 957353984
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 284457989,
+          "rss_bytes": 962871296
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 285747302,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 287809668,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 287873752,
+          "rss_bytes": 968523776
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 289149353,
+          "rss_bytes": 976011264
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 291171954,
+          "rss_bytes": 966057984
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 291238742,
+          "rss_bytes": 966160384
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 292844977,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 294968990,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 295034067,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 296212142,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 298351878,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 298423533,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 299762119,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 301867951,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 301932651,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 303182361,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 305215224,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 305280699,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 306549909,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 308623689,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 308696056,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 309875383,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 311896610,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 311962615,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 313261090,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 315416554,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 315482321,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 316608646,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-SWEEP-saved-move-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 318625095,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 318697760,
+          "rss_bytes": 972218368
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 320371294,
+          "rss_bytes": 969224192
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 322510380,
+          "rss_bytes": 969490432
+        },
+        {
+          "label": "warehouse-warehouse-WON-original-source-source-capture",
+          "timed": false,
+          "ticks_usec": 322581861,
+          "rss_bytes": 969490432
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 323325777,
+          "rss_bytes": 961867776
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 324446915,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 326497983,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 326560788,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 327843349,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 329918558,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 329981629,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 331214509,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 333303812,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 333366737,
+          "rss_bytes": 968527872
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 334566905,
+          "rss_bytes": 970297344
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 336763582,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 336839724,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 338076469,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 340207199,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 340271594,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 341567378,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 343570981,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 343636777,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 344921958,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 346994637,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 347062234,
+          "rss_bytes": 971116544
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 348741561,
+          "rss_bytes": 976715776
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 350830807,
+          "rss_bytes": 977018880
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 350895107,
+          "rss_bytes": 977018880
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 352089092,
+          "rss_bytes": 982667264
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 354270245,
+          "rss_bytes": 982667264
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 354338691,
+          "rss_bytes": 982667264
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 355690116,
+          "rss_bytes": 977022976
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 357747669,
+          "rss_bytes": 977809408
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 357810605,
+          "rss_bytes": 977809408
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 359031480,
+          "rss_bytes": 977838080
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 361137925,
+          "rss_bytes": 977838080
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 361205683,
+          "rss_bytes": 977838080
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 362621103,
+          "rss_bytes": 976465920
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 364708071,
+          "rss_bytes": 972468224
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 364771571,
+          "rss_bytes": 972468224
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 365953531,
+          "rss_bytes": 979558400
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 368099931,
+          "rss_bytes": 966901760
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 368166503,
+          "rss_bytes": 972550144
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 369466303,
+          "rss_bytes": 973905920
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 371587885,
+          "rss_bytes": 973905920
+        },
+        {
+          "label": "warehouse-WON-original-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 371653433,
+          "rss_bytes": 973905920
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 372921733,
+          "rss_bytes": 973905920
+        },
+        {
+          "label": "warehouse-WON-original-source-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 374927622,
+          "rss_bytes": 973905920
+        },
+        {
+          "label": "warehouse-replay-speed-transport",
+          "timed": false,
+          "ticks_usec": 374992992,
+          "rss_bytes": 973905920
+        },
+        {
+          "label": "warehouse-REPLAY-live-1x",
+          "timed": true,
+          "ticks_usec": 376019564,
+          "rss_bytes": 976633856
+        },
+        {
+          "label": "warehouse-REPLAY-live-1x-boundary",
+          "timed": false,
+          "ticks_usec": 379358907,
+          "rss_bytes": 968818688
+        },
+        {
+          "label": "warehouse-REPLAY-live-2x",
+          "timed": true,
+          "ticks_usec": 380110367,
+          "rss_bytes": 972730368
+        },
+        {
+          "label": "warehouse-REPLAY-live-2x-boundary",
+          "timed": false,
+          "ticks_usec": 383213059,
+          "rss_bytes": 972730368
+        },
+        {
+          "label": "warehouse-separate-tool-reference",
+          "timed": false,
+          "ticks_usec": 383338845,
+          "rss_bytes": 972730368
+        },
+        {
+          "label": "warehouse-live-original-grenade-fuse",
+          "timed": true,
+          "ticks_usec": 386188092,
+          "rss_bytes": 973336576
+        },
+        {
+          "label": "warehouse-live-original-grenade-fuse-boundary",
+          "timed": false,
+          "ticks_usec": 394021832,
+          "rss_bytes": 976228352
+        },
+        {
+          "label": "warehouse-original-FAILED-abort-capture",
+          "timed": false,
+          "ticks_usec": 395412744,
+          "rss_bytes": 976228352
+        },
+        {
+          "label": "warehouse-live-FAILED-abort",
+          "timed": true,
+          "ticks_usec": 396073002,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "warehouse-live-FAILED-abort-boundary",
+          "timed": false,
+          "ticks_usec": 398146099,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "original-replay-entry",
+          "timed": false,
+          "ticks_usec": 398152777,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 399311123,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 400504346,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 402608006,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "warehouse-warehouse-confirmed-tool-source-source-capture",
+          "timed": false,
+          "ticks_usec": 402611350,
+          "rss_bytes": 974004224
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 403250821,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 404310908,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 406460671,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 406464341,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 407543847,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 409639290,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 409642559,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 410602707,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 412671549,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 412675072,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 413801954,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 415910717,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 415914218,
+          "rss_bytes": 974114816
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 417018076,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 419152571,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 419156114,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 420311272,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 422322473,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 422325760,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 423307908,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 425432357,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 425436070,
+          "rss_bytes": 980164608
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 426851030,
+          "rss_bytes": 983257088
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 428967977,
+          "rss_bytes": 983257088
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 428971388,
+          "rss_bytes": 983257088
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 430032096,
+          "rss_bytes": 983257088
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 432146629,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 432149985,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 433303385,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 435383590,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 435386966,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 436378842,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 438501601,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 438505253,
+          "rss_bytes": 983502848
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 439632569,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 441724241,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 441727601,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 442784500,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 444806775,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 444810158,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 445841542,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 447873113,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 447876607,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 448889254,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-confirmed-tool-source-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 450967917,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 450971975,
+          "rss_bytes": 983506944
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw0",
+          "timed": true,
+          "ticks_usec": 452372170,
+          "rss_bytes": 976330752
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 454524412,
+          "rss_bytes": 976330752
+        },
+        {
+          "label": "warehouse-warehouse-FAILED-abort-source-source-capture",
+          "timed": false,
+          "ticks_usec": 454527904,
+          "rss_bytes": 976330752
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 455241270,
+          "rss_bytes": 974221312
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw45",
+          "timed": true,
+          "ticks_usec": 456378946,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 458528212,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 458531761,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw90",
+          "timed": true,
+          "ticks_usec": 459548397,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 461577255,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 461581099,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw135",
+          "timed": true,
+          "ticks_usec": 462565397,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 464697597,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 464701013,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw180",
+          "timed": true,
+          "ticks_usec": 465844962,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 467979560,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 467982979,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw225",
+          "timed": true,
+          "ticks_usec": 469070963,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 471184480,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 471187898,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw270",
+          "timed": true,
+          "ticks_usec": 472309061,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 474385155,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 474388535,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw315",
+          "timed": true,
+          "ticks_usec": 475401574,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-standard-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 477520978,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 477524512,
+          "rss_bytes": 974225408
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw0",
+          "timed": true,
+          "ticks_usec": 478864140,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw0-boundary",
+          "timed": false,
+          "ticks_usec": 480894544,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 480898139,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw45",
+          "timed": true,
+          "ticks_usec": 482024565,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw45-boundary",
+          "timed": false,
+          "ticks_usec": 484078229,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 484081661,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw90",
+          "timed": true,
+          "ticks_usec": 485096785,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw90-boundary",
+          "timed": false,
+          "ticks_usec": 487187640,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 487191201,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw135",
+          "timed": true,
+          "ticks_usec": 488236047,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw135-boundary",
+          "timed": false,
+          "ticks_usec": 490312715,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 490316255,
+          "rss_bytes": 983240704
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw180",
+          "timed": true,
+          "ticks_usec": 491464848,
+          "rss_bytes": 984883200
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw180-boundary",
+          "timed": false,
+          "ticks_usec": 493575045,
+          "rss_bytes": 984936448
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 493578368,
+          "rss_bytes": 984936448
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw225",
+          "timed": true,
+          "ticks_usec": 494642201,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw225-boundary",
+          "timed": false,
+          "ticks_usec": 496699302,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 496702919,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw270",
+          "timed": true,
+          "ticks_usec": 497752473,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw270-boundary",
+          "timed": false,
+          "ticks_usec": 499798260,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-pose-policy-settle",
+          "timed": false,
+          "ticks_usec": 499801759,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw315",
+          "timed": true,
+          "ticks_usec": 500826883,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-FAILED-abort-source-power_saving-yaw315-boundary",
+          "timed": false,
+          "ticks_usec": 502930268,
+          "rss_bytes": 985026560
+        },
+        {
+          "label": "warehouse-actual-source-metrics-seal",
+          "timed": false,
+          "ticks_usec": 502936268,
+          "rss_bytes": 985026560
+        }
+      ]
+    }
+  ],
+  "scope": "Same original strict-validated raw; cloud interval thresholds describe this llvmpipe workload, not Android performance. RSS marks include collector/driver/archives/cache and sampling/metadata overhead; no leak or isolated-GPU claim."
+}

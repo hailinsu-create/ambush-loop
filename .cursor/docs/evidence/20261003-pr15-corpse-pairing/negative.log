@@ -1,0 +1,115 @@
+TEST_RUN_ID=6a0562a3134641b5b1a077c30d332076
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/6a0562a3134641b5b1a077c30d332076/data
+TEST_ENTRY=corpse_pose_quality_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/6a0562a3134641b5b1a077c30d332076/data/godot/app_userdata/Ambush Loop run_id=6a0562a3134641b5b1a077c30d332076
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_1: [0.04473953321576, 0.04446836188436]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_2: [0.16293872892857, 0.16209657490253]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_3: [0.34106460213661, 0.33969965577126]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_4: [0.55912691354752, 0.55731236934662]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_5: [0.78737753629684, 0.78597784042358]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _capture (res://scripts/corpse_contact_test.gd:186)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_6: [0.99206155538559, 0.99109089374542]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _capture (res://scripts/corpse_contact_test.gd:186)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm release_7: [1.1381539106369, 1.13787138462067]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _capture (res://scripts/corpse_contact_test.gd:186)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_0: [1.19574964046478, 1.19574987888336]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_1: [1.13908314704895, 1.13885354995728]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_2: [0.99221932888031, 0.99135363101959]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_3: [0.78762567043304, 0.78608775138855]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_4: [0.55879044532776, 0.55716103315353]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _native_key (res://scripts/corpse_contact_test.gd:303)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_5: [0.34101918339729, 0.33963173627853]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _capture (res://scripts/corpse_contact_test.gd:186)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_6: [0.16272288560867, 0.16189643740654]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _capture (res://scripts/corpse_contact_test.gd:186)
+ERROR: CORPSE_CONTACT: quality both actual palms/shoulders within15mm grab_7: [0.04402260109782, 0.0437748990953]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:26)
+       [1] _measure (res://scripts/corpse_pose_quality_test.gd:27)
+       [2] _run (res://scripts/corpse_pose_quality_test.gd:63)
+       [3] _capture (res://scripts/corpse_contact_test.gd:186)
+CORPSE_POSE_QUALITY_FAILED checks=102 failures=15

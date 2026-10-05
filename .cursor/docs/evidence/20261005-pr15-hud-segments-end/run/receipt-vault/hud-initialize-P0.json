@@ -1,0 +1,51 @@
+{
+  "start": "2026-10-05T17:23:43.653428+00:00",
+  "pid": 171560,
+  "request": {
+    "label": "hud-initialize-P0",
+    "script": "/tmp/pr15-web-controls/hud-segments-1ec-20261005/initialize_p0.py"
+  },
+  "loaded_script_sha256": "d278c7e127e91b2277c4adc3dba0174cf694ced1b76f120f4fb0d934cdff34cc",
+  "actual_exit": 1,
+  "exception": "135.99428559700027",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/hud-segments-1ec-20261005/browser_controller.py\", line 73, in main\n    exec(compile(loaded,str(script_path),'exec'),runtime);request_receipt['actual_exit']=0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pr15-web-controls/hud-segments-1ec-20261005/initialize_p0.py\", line 16, in <module>\n    elapsed=time.monotonic()-json.loads((CONTROL_ROOT/'budget-start.json').read_text())['monotonic'];assert elapsed<=120,elapsed\n                                                                                                            ^^^^^^^^^^^^\nAssertionError: 135.99428559700027\n",
+  "end": "2026-10-05T17:24:32.886396+00:00",
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 275524.882557454
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 275525.264956655
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 275525.930011543
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xfdc024e4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 275533.906020571
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xfdc024e4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 275534.354049956
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xfdc024e4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 275534.775906399
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0xfdc024e4c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "wall": 275535.225975281
+    }
+  ],
+  "page_errors": []
+}

@@ -1,0 +1,28 @@
+{
+  "source_sha": "226505fb7cc424fb8ff955e94f98f086835b2423",
+  "actual_exit": 0,
+  "checks": 2391,
+  "failures": 0,
+  "engine_errors": 0,
+  "script_errors": 0,
+  "cases": [
+    "title_1280_100_desktop",
+    "title_1280_100_touch",
+    "title_1280_200_desktop",
+    "title_1280_200_touch",
+    "title_1600_100_desktop",
+    "title_1600_100_touch",
+    "title_1600_200_desktop",
+    "title_1600_200_touch"
+  ],
+  "uuid": "bb2364214600482d9a540ecfb77515a1",
+  "original_quit_signal_received": true,
+  "exit_kind": "button",
+  "captures": 72,
+  "native_inputs": 1119,
+  "command": "bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_menu_viewport_test.gd --render",
+  "display": ":112",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "GL Compatibility/Mesa llvmpipe; no device performance claim",
+  "source_unchanged": true
+}

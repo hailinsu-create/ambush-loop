@@ -1,0 +1,92 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "utility_runtime-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "utility_runtime_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "b33f55c217d0456abc22e1b250847f46",
+  "actual_exit_code": 0,
+  "checks": 1047,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "action": "grenade_throw",
+      "event_id": "b703f3ec51d61c2892f5077dbdf1ea58:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_scout_grenade_follow.png",
+      "phase": 0,
+      "sha256": "8068189fed1972fdc65f9765646404310e723a085c90cb4761392fcace3fa66e",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/00_r5_scout_grenade_follow.png",
+      "hash_verified": true
+    },
+    {
+      "action": "knife_stab",
+      "event_id": "71ed5cce33ff131a5cc4b62a18a4cfd5:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_scout_knife_hit.png",
+      "phase": 0,
+      "sha256": "3b0e490b56121f83bdea61cbc59308ac86686988a956b305ce89a63892382f17",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/01_r5_scout_knife_hit.png",
+      "hash_verified": true
+    },
+    {
+      "action": "decoy_place",
+      "event_id": "71ed5cce33ff131a5cc4b62a18a4cfd5:0:1",
+      "path": "res://build/asset_review/pr15-runtime/r5_scout_decoy_release.png",
+      "phase": 0,
+      "sha256": "7b46e0e9b417bc1e0e1c58c01bf0aeec93cbda7e6ebc8ee875ab18b21fc7e2ee",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/02_r5_scout_decoy_release.png",
+      "hash_verified": true
+    },
+    {
+      "action": "grenade_throw",
+      "event_id": "f35d69c934039f79585978539e96f454:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_alert_auto_grenade.png",
+      "phase": 1,
+      "sha256": "8d12461fba8e057396842f8c3dd1bbc303197efbb7257035a8f9415bcc56fb72",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/03_r5_alert_auto_grenade.png",
+      "hash_verified": true
+    },
+    {
+      "action": "knife_stab",
+      "event_id": "f35d69c934039f79585978539e96f454:0:1",
+      "path": "res://build/asset_review/pr15-runtime/r5_alert_knife_hit.png",
+      "phase": 1,
+      "sha256": "3343e884ab42ad9271ac9aa162f06701272f062a5e3da401d686c7c5f465dcab",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/04_r5_alert_knife_hit.png",
+      "hash_verified": true
+    },
+    {
+      "action": "grenade_throw",
+      "event_id": "f35d69c934039f79585978539e96f454:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_history_auto_grenade.png",
+      "phase": 4,
+      "sha256": "d2d2753bdd29ea150508b0b6c8c4e156f4b157b6fe62a5c56ace0bbd9dfb9e00",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/05_r5_history_auto_grenade.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 6,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/run.exit"
+}

@@ -1,0 +1,8 @@
+{
+  "actual_exit": 1,
+  "source": "543d76ef1e5dd3d0231332197d90178ac7140cc6",
+  "engine_started": false,
+  "failure": "AssertionError: all art sidecar count differs from the prior loader-only 493 subset",
+  "actual_all_art_sidecars": 222,
+  "fix": "Enumerate and prove all same-byte art sidecars without treating loader subset size as full import count; preserve v2 stage"
+}

@@ -1,0 +1,10 @@
+{
+  "source_sha": "528c3026b5f5652b6515411fe8e2b4b0d499d01b",
+  "uuid": "07209bc929ac451da759fa0223b9553a",
+  "command": "AMBUSH_JOURNEY_SCOPE=all bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-journey-pack-godot first_visit_journey_test.gd --render",
+  "actual_exit": 1,
+  "script_errors": 0,
+  "engine_errors": 8,
+  "completed_report_available": true,
+  "scope": "Test fixture captured freed stash Node in Lambda; Godot rejects before predicate body, so is_instance_valid cannot guard it. Native pickup had completed but test waiting emits errors. Entire run excluded from formal/production-defect conclusions. Source pack and exact inputs/images preserved; legacy c7 report not reused. Private root-screen triage is1920x1080, not native Window crop. Pack import/export children0, stored shell exit0, outer tool session inexplicably reported1; both observations retained, no complete pipeline-green claim."
+}

@@ -1,0 +1,23 @@
+{
+  "UTC": "2026-10-05T18:26:52.711027+00:00",
+  "actual_wrapper_exit": -9,
+  "cap60_timeout_retained": true,
+  "rows": [
+    {
+      "pid": 175087,
+      "before": "Z",
+      "after": "Z",
+      "already_ended": true
+    },
+    {
+      "pid": 175088,
+      "before": "Z",
+      "after": "Z",
+      "already_ended": true
+    }
+  ],
+  "late_log_bytes": 531,
+  "late_log_sha256": "488058d239541bd9ad19a42419b90370777e05ac4119092a7cbf68cac5b3f781",
+  "late_OK_does_not_override_timeout": true,
+  "scope": "first closure attempt hit empty cmdline for already-ended zombie before mutation; now verified own orphan child/tee ended; no child actual exit claimed"
+}

@@ -1,0 +1,101 @@
+{
+  "actual_source_sha": "7b3ffd5f8d75d7499e2f7fd9e0a8859fda8165a6",
+  "validation_kind": "previous-fixed-7b3-component; fixture migration failures retained",
+  "name": "campaign-warehouse-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "warehouse"
+  },
+  "run_id": "d82d688eefc045ebad0e7b456b67b593",
+  "actual_exit_code": 0,
+  "checks": 2665,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "id": "warehouse_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_scout.png",
+      "sha256": "06aa5deff5c86b863bf35c461ac472eeef8dd3feafee161fde412d3e0a18ad59",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-warehouse-render/00_full_record_warehouse_scout.png",
+      "hash_verified": true
+    },
+    {
+      "id": "warehouse_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave0_alert.png",
+      "sha256": "7401b106a09868d98b706b952e5bb57e22383190e41712049e05b112fee9645f",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-warehouse-render/01_full_record_warehouse_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "warehouse_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave0_sweep.png",
+      "sha256": "5640a09696d3e816bc0172b9e3811f0034c781ecaf8fcf9683a247b5161bd380",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-warehouse-render/02_full_record_warehouse_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "warehouse_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave1_alert.png",
+      "sha256": "8e1eb7ec31c213895407d69ac835c70b29782c753c2b270571cf0402d87daa5b",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-warehouse-render/03_full_record_warehouse_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "warehouse_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave1_sweep.png",
+      "sha256": "6b356aee91d2ecf3ee15906584eab436eced8ac714cfd993dcbc715a438ebf97",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-warehouse-render/04_full_record_warehouse_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "warehouse_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_won.png",
+      "sha256": "6b356aee91d2ecf3ee15906584eab436eced8ac714cfd993dcbc715a438ebf97",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-warehouse-render/05_full_record_warehouse_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 6,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice",
+    "One-draw native front-buffer capture can lag the selected phase; superseded by two-draw captures with explicit identity receipts"
+  ]
+}

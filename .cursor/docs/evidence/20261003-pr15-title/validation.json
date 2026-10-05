@@ -1,0 +1,89 @@
+{
+  "source_sha": "226505fb7cc424fb8ff955e94f98f086835b2423",
+  "game_tree": "5c6ffb034015dd31a8ee52dfc6c62e822c53a1de",
+  "formal_matrix": {
+    "source_sha": "226505fb7cc424fb8ff955e94f98f086835b2423",
+    "actual_exit": 0,
+    "checks": 2391,
+    "failures": 0,
+    "engine_errors": 0,
+    "script_errors": 0,
+    "cases": [
+      "title_1280_100_desktop",
+      "title_1280_100_touch",
+      "title_1280_200_desktop",
+      "title_1280_200_touch",
+      "title_1600_100_desktop",
+      "title_1600_100_touch",
+      "title_1600_200_desktop",
+      "title_1600_200_touch"
+    ],
+    "uuid": "bb2364214600482d9a540ecfb77515a1",
+    "original_quit_signal_received": true,
+    "exit_kind": "button",
+    "captures": 72,
+    "native_inputs": 1119,
+    "command": "bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_menu_viewport_test.gd --render",
+    "display": ":112",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "renderer": "GL Compatibility/Mesa llvmpipe; no device performance claim",
+    "source_unchanged": true
+  },
+  "formal_keyboard": {
+    "source_sha": "226505fb7cc424fb8ff955e94f98f086835b2423",
+    "actual_exit": 0,
+    "checks": 7,
+    "failures": 0,
+    "engine_errors": 0,
+    "script_errors": 0,
+    "uuid": "e86556c0629c4df0b334c953fa066a14",
+    "exit_kind": "keyboard",
+    "original_quit_signal_received": true,
+    "native_inputs": [
+      {
+        "helper_exit": 0,
+        "id": "exit_keyboard_1600_200",
+        "key": "Escape"
+      },
+      {
+        "helper_exit": 0,
+        "id": "exit_keyboard_1600_200",
+        "key": "Tab"
+      },
+      {
+        "helper_exit": 0,
+        "id": "exit_keyboard_1600_200",
+        "key": "Tab"
+      },
+      {
+        "helper_exit": 0,
+        "id": "exit_keyboard_1600_200",
+        "key": "Return"
+      }
+    ],
+    "command": "AMBUSH_TITLE_EXIT_ONLY=keyboard bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_menu_viewport_test.gd --render",
+    "source_unchanged": true
+  },
+  "formal_runs": 2,
+  "all_actual_exit_zero": true,
+  "formal_capture_hashes_verified": 72,
+  "parent_qa": "parent-qa-scope.json reported15c; separate counts and source",
+  "history": {
+    "negative": "negative-ea54a61/run.json",
+    "development": "development-one-case/run.json",
+    "parse_diagnostics": [
+      "parse-diagnostic-2b6d50f",
+      "development-flow-enum"
+    ]
+  },
+  "visual_review": "visual-review.json",
+  "sync": "local commits only; normal Git auth failed after a218 successful push; no retry/bypass",
+  "library_id": null,
+  "scope_limits": [
+    "isolated API unlock/progress fixtures are not normal six-level wins",
+    "XTest and forced HUD preference are not real mobile touch",
+    "llvmpipe does not prove device performance",
+    "new title not covered by parent15c limited QA",
+    "full3DFX and autoREPLAY2x/A3/finalcandidate/APK pending"
+  ]
+}

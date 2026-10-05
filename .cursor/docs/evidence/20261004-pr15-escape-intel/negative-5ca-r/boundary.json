@@ -1,0 +1,46 @@
+{
+  "source_sha": "5ca6bc966f2b3a89044d1a95208bedba4cfeb912",
+  "checks": 21,
+  "failures": 8,
+  "actual_exit": 1,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "record": {
+    "bytes": 7737780,
+    "sha256": "8930fc052984a68a7d41fede2afcde4d5f788b2d4035af0ccf96abb3b25067bd"
+  },
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "teaching_radio_first_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_first_scout.png",
+      "sha256": "b87c957573c81f74ac0b2592062f58125e51061f019761e0def4ea972255370b"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "teaching_radio_actual_last_escape",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_actual_last_escape.png",
+      "sha256": "87f3855e61eb7b0d149a748173ebd4c55fbe7cf981ea76ec794478d9c006fc93"
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "teaching_radio_retry_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_teaching_radio_retry_scout.png",
+      "sha256": "634e1c0bbb27ebbc7e59a70c2c8085a9e60f610e069b255f4ed08127fd241e7e"
+    }
+  ],
+  "guard": true,
+  "scope": "Original radio3wave late escape/retry reference and explicit legacy/corrupt saved context fixtures. Not normal13/fullrecord3D/legacy2D/FX/A3/audio/device acceptance."
+}

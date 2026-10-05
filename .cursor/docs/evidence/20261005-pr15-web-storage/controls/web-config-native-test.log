@@ -1,0 +1,19 @@
+TEST_RUN_ID=2a6f38ac56674acab894bcc7a0d72657
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/2a6f38ac56674acab894bcc7a0d72657/data
+TEST_ENTRY=web_config_store_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Cannot infer the type of "path" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/web_config_store.gd:52)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "path" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/web_config_store.gd:59)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://scripts/web_config_store_test.gd:0)
+ERROR: Failed to load script "res://scripts/web_config_store_test.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/2a6f38ac56674acab894bcc7a0d72657/data/godot/app_userdata/Ambush Loop run_id=2a6f38ac56674acab894bcc7a0d72657
+SCRIPT ERROR: Invalid call. Nonexistent function 'snapshot' in base 'GDScript'.
+          at: _run (res://scripts/web_config_store_test.gd:24)
+          GDScript backtrace (most recent call first):
+              [0] _run (res://scripts/web_config_store_test.gd:24)
+Terminated

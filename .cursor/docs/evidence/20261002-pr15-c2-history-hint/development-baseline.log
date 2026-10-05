@@ -1,0 +1,111 @@
+TEST_RUN_ID=f1e2d7c2c6694343ab032af6dda8ef52
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/f1e2d7c2c6694343ab032af6dda8ef52/data
+TEST_ENTRY=c2_history_hint_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/f1e2d7c2c6694343ab032af6dda8ef52/data/godot/app_userdata/Ambush Loop run_id=f1e2d7c2c6694343ab032af6dda8ef52
+C2_HISTORY_HINT_CONTROLS_OK=true ticks=306
+ERROR: C2_HISTORY_HINT: actual SWEEP enters replay removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:60)
+C2_HISTORY_HINT_SKILL_CONTROLS_OK=true
+ERROR: C2_HISTORY_HINT: legal binocular hint enters retained history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:85)
+ERROR: C2_HISTORY_HINT: phone/desktop layout change removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:92)
+ERROR: C2_HISTORY_HINT: late hint producer during history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:95)
+ERROR: C2_HISTORY_HINT: late live hint cannot overwrite the historical status
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _run (res://scripts/c2_history_hint_test.gd:96)
+ERROR: C2_HISTORY_HINT: phone/desktop layout change removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:92)
+ERROR: C2_HISTORY_HINT: late hint producer during history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:95)
+ERROR: C2_HISTORY_HINT: phone/desktop layout change removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:92)
+ERROR: C2_HISTORY_HINT: late hint producer during history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:95)
+ERROR: C2_HISTORY_HINT: phone/desktop layout change removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:92)
+ERROR: C2_HISTORY_HINT: late hint producer during history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:95)
+ERROR: C2_HISTORY_HINT: legacy partial history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:103)
+ERROR: C2_HISTORY_HINT: unknown future history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:107)
+ERROR: C2_HISTORY_HINT: result exit fixture enters history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:117)
+ERROR: C2_HISTORY_HINT: result exit restores chrome without old transient hint
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _run (res://scripts/c2_history_hint_test.gd:119)
+ERROR: C2_HISTORY_HINT: result exit fixture enters history removes live C2Help visibility and retained text
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _hidden (res://scripts/c2_history_hint_test.gd:23)
+       [2] _run (res://scripts/c2_history_hint_test.gd:117)
+ERROR: C2_HISTORY_HINT: result exit restores chrome without old transient hint
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/c2_history_hint_test.gd:19)
+       [1] _run (res://scripts/c2_history_hint_test.gd:119)
+C2_HISTORY_HINT_FAILED checks=28 failures=17

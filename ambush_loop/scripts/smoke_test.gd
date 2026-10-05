@@ -164,7 +164,7 @@ func _run() -> void:
 			print("SMOKE_OK_ESCAPE_PANEL_CLEAR")
 			var leak_line_txt := _fail_txt(main)
 			var card_txt := str(main.result_label.text)
-			if card_txt.find("漏网：") < 0 or card_txt.find("改一处") < 0 or card_txt.find("带着情报穿梭回去") < 0:
+			if card_txt.find("漏网：") < 0 or card_txt.find("全关教学建议") < 0 or card_txt.find("带着情报穿梭回去") < 0:
 				push_error("SMOKE_FAIL_CARD_NOT_THREE %s" % card_txt)
 				quit(4)
 				return
@@ -201,12 +201,12 @@ func _run() -> void:
 				quit(59)
 				return
 			print("SMOKE_OK_LEAK_RESULT_LINE")
-			if leak_line_txt.find("改一处") < 0:
+			if leak_line_txt.find("全关教学建议") < 0:
 				push_error("SMOKE_NO_FIX_ONE %s" % leak_line_txt)
 				quit(61)
 				return
 			print("SMOKE_OK_FIX_ONE")
-			if leak_line_txt.find("截获") < 0 or leak_line_txt.find("北门") < 0:
+			if leak_line_txt.find("关卡背景") < 0 or leak_line_txt.find("北门") < 0:
 				push_error("SMOKE_NO_CHATTER_FAIL %s" % leak_line_txt)
 				quit(61)
 				return
@@ -292,7 +292,7 @@ func _run() -> void:
 				quit(4)
 				return
 			print("SMOKE_OK_INTEL_GHOST")
-			if not main.has_method("leak_advice_text") or str(main.leak_advice_text()).find("建议") < 0 or str(main.leak_advice_text()).find("秒前") < 0:
+			if not main.has_method("leak_advice_text") or str(main.leak_advice_text()).find("历史第") < 0 or str(main.leak_advice_text()).find("出发→逃逸") < 0:
 				push_error("SMOKE_NO_LEAK_ADVICE %s" % (main.leak_advice_text() if main.has_method("leak_advice_text") else "no_api"))
 				quit(56)
 				return
@@ -331,53 +331,32 @@ func _run() -> void:
 				push_error("SMOKE_LEAK_ADVICE_NOT_FLANK txt=%s" % advice_txt)
 				quit(56)
 				return
-			if advice_txt.find("改一处") < 0:
-				push_error("SMOKE_LEAK_ADVICE_NO_FIX txt=%s" % advice_txt)
+			var leak_context: Dictionary = main.intel.validated_escape_context(leak_rec, str(main.level.level_id))
+			if leak_context.is_empty():
+				push_error("SMOKE_LEAK_SOURCE_CONTEXT_MISSING")
 				quit(56)
 				return
-			var leak_tick_n: int = int(leak_rec.get("leak_tick", -1))
-			var leak_sec_n: float = float(leak_tick_n) / 60.0 if leak_tick_n >= 0 else float(leak_rec.get("cut_sec", 0.0))
-			var expect_ahead := maxf(0.1, leak_sec_n - actor_delay)
-			if advice_txt.find("%.1f" % expect_ahead) < 0:
-				push_error(
-					"SMOKE_LEAK_ADVICE_WRONG_DELAY id=%s delay=%s ahead=%s txt=%s"
-					% [leaker_id, actor_delay, expect_ahead, advice_txt]
-				)
+			var recorded_spawn := float(leak_context.spawn.tick) / 60.0
+			var recorded_escape := float(leak_context.escape.tick) / 60.0
+			if advice_txt.find("%.1f" % recorded_spawn) < 0 or advice_txt.find("%.1f" % recorded_escape) < 0 or advice_txt.find("改一处") >= 0 or advice_txt.find("秒前") >= 0:
+				push_error("SMOKE_LEAK_FACTS_WRONG_SOURCE %s" % advice_txt)
 				quit(56)
 				return
-			# Authored per-runner delay (railcut 敌4 = 4.6s) must beat first_route_delay (3.8s).
+			if int(leak_context.actor_id) != leaker_id or int(leak_context.escape.tick) != int(leak_rec.leak_tick) or leak_context.attempt_id == main.battle_log.attempt_id:
+				push_error("SMOKE_LEAK_RETRY_REBOUND_CONTEXT")
+				quit(56)
+				return
+			# A legacy8-argument memory lacks source/wave; do not infer4.6/3.8s from railcut.
 			var rc_def: LevelDef = LevelDef.by_id("railcut")
-			if not rc_def.has_method("delay_for_actor"):
-				push_error("SMOKE_RAILCUT_NO_ACTOR_DELAY")
-				quit(56)
-				return
-			var d4: float = float(rc_def.delay_for_actor(4))
-			var d_flank: float = float(rc_def.first_route_delay("flank"))
-			if d4 <= 0.0 or d4 <= d_flank + 0.01:
-				push_error("SMOKE_ACTOR_DELAY_NOT_PER_RUNNER d4=%s first=%s" % [d4, d_flank])
-				quit(56)
-				return
 			var store := IntelStore.new()
-			store.add_path(
-				1,
-				PackedVector2Array([Vector2.ZERO, Vector2(40, 0)]),
-				6.0,
-				"escape",
-				"侧翼奔袭从东廊漏出",
-				"flank",
-				360,
-				4
-			)
-			var unit_line := str(store.leak_advice_line(rc_def, "侧翼"))
-			if unit_line.find("1.4") < 0 or unit_line.find("敌4") < 0 or unit_line.find("2.2") >= 0:
-				push_error("SMOKE_PER_RUNNER_ADVICE_MATH %s" % unit_line)
+			store.add_path(1,PackedVector2Array([Vector2.ZERO,Vector2(40,0)]),6.0,"escape","侧翼奔袭从东廊漏出","flank",360,4)
+			var old_memory := var_to_bytes(store.records)
+			var unit_line := str(store.leak_advice_line(rc_def,"侧翼"))
+			if unit_line.find("敌4") < 0 or unit_line.find("未确认") < 0 or unit_line.find("1.4") >= 0 or unit_line.find("2.2") >= 0 or var_to_bytes(store.records) != old_memory:
+				push_error("SMOKE_LEGACY_INTEL_GUESSED_SOURCE %s" % unit_line)
 				quit(56)
 				return
-			if unit_line.find("改一处") < 0:
-				push_error("SMOKE_PER_RUNNER_NO_FIX %s" % unit_line)
-				quit(56)
-				return
-			print("SMOKE_OK_LEAK_ADVICE ", advice_txt, " leaker=", leaker_id, " delay=", actor_delay)
+			print("SMOKE_OK_LEAK_FACTS ",advice_txt," actor=",leaker_id," original_spawn=",recorded_spawn," original_escape=",recorded_escape)
 			if main.has_method("_refresh_checklist"):
 				main._refresh_checklist()
 			if not main.has_method("leak_cover_ok") or bool(main.leak_cover_ok()):
@@ -551,7 +530,7 @@ func _run() -> void:
 				quit(12)
 				return
 			var dump_txt := _fail_txt(main)
-			if dump_txt.find("改一处") < 0 or (dump_txt.find("东廊") < 0 and dump_txt.find("侧翼") < 0):
+			if dump_txt.find("全关教学建议") < 0 or (dump_txt.find("东廊") < 0 and dump_txt.find("侧翼") < 0):
 				push_error("SMOKE_WAREHOUSE_DUMP_COPY %s" % dump_txt)
 				quit(12)
 				return
@@ -2356,13 +2335,21 @@ func _assert_radio_contract(main) -> bool:
 		push_error("SMOKE_RADIO_ECHO_CALLOUT %s" % (echo_tag.text if echo_tag else "null"))
 		quit(62)
 		return false
-	if main.has_method("echo_wait_breathing") and not bool(main.echo_wait_breathing()):
-		push_error("SMOKE_RADIO_NO_ECHO_BREATH")
+	if main.phase != main.Phase.SETUP:
+		push_error("SMOKE_RADIO_CONTRACT_NOT_SCOUT")
+		quit(62)
+		return false
+	if not str(echo_tag.text).begins_with("全关教学预览"):
+		push_error("SMOKE_RADIO_ECHO_PREVIEW_UNLABELED %s" % echo_tag.text)
+		quit(62)
+		return false
+	if main.has_method("echo_wait_breathing") and bool(main.echo_wait_breathing()):
+		push_error("SMOKE_RADIO_SCOUT_HAS_LIVE_ECHO_PENDING")
 		quit(62)
 		return false
 	print(
 		"SMOKE_OK_RADIO_CONTRACT covers=6 routes=4 sneak=", min_sneak,
-		" echo=", echo_d, " dish_pad kit=echo hall breath=1"
+		" echo=", echo_d, " dish_pad kit=echo hall scout_preview=1 live_echo_pending=0"
 	)
 	return true
 
@@ -14270,6 +14257,24 @@ func _assert_launch_bar() -> bool:
 		return false
 	if not inst.has_method("open_journal"):
 		push_error("SMOKE_NO_JOURNAL_API")
+		inst.free()
+		quit(54)
+		return false
+	# Original Title denies opening another modal over the mission briefing.
+	inst.open_journal()
+	await process_frame
+	if inst.journal_visible() or not inst.briefing_visible():
+		push_error("SMOKE_JOURNAL_BYPASSES_BRIEF_MODAL")
+		inst.free()
+		quit(54)
+		return false
+	inst._on_back()
+	# Wait for the original 0.15s dismissal tween, not one headless frame.
+	if inst._modal_tween != null and inst._modal_tween.is_running():
+		await inst._modal_tween.finished
+	await process_frame
+	if inst.briefing_visible() or inst._top_modal() != null:
+		push_error("SMOKE_BACK_DID_NOT_CLOSE_BRIEF_MODAL")
 		inst.free()
 		quit(54)
 		return false

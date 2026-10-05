@@ -1,0 +1,125 @@
+{
+  "actual_source_sha": "7b3ffd5f8d75d7499e2f7fd9e0a8859fda8165a6",
+  "validation_kind": "previous-fixed-7b3-component; fixture migration failures retained",
+  "name": "campaign-radio-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "radio"
+  },
+  "run_id": "ceca2eaf35eb4014a4a02e02101c21b6",
+  "actual_exit_code": 0,
+  "checks": 3171,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "id": "radio_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_scout.png",
+      "sha256": "38aa9d7ad8edd3cda55ce2b41d8a418970eadbc68fb16d5a237b4513e8dcb16f",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/00_full_record_radio_scout.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave0_alert.png",
+      "sha256": "badfaf5d0c9566986417a1cc8cce2c5e677c59cffef908479a0b76641a93e12a",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/01_full_record_radio_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave0_sweep.png",
+      "sha256": "6bf95d150aa49a7d52b8e501f449cf1be7abf1155e54abaa837431113227c155",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/02_full_record_radio_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave1_alert.png",
+      "sha256": "436f93f24cf77048f6f8b6de18e98d1db311fe0aa2a3a2d0b19ce14b8b3bb7f4",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/03_full_record_radio_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave1_sweep.png",
+      "sha256": "e890846628a9ea3c2c354973d520c59f2c514b804782504c7c77d9ee8291bfea",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/04_full_record_radio_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_wave2_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave2_alert.png",
+      "sha256": "89470c68258d8058dffdbb94ce6944465c5b61d16804b24e2f9a7bbfc11c3f67",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/05_full_record_radio_wave2_alert.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_wave2_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave2_sweep.png",
+      "sha256": "a4692cbb9f45d3262af1c4bc5438139adf54c6d41f7f6bc4e851ffcd9f015a09",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/06_full_record_radio_wave2_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "id": "radio_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_radio_won.png",
+      "sha256": "a4692cbb9f45d3262af1c4bc5438139adf54c6d41f7f6bc4e851ffcd9f015a09",
+      "source": "native Window crop",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-7b3-campaign-radio-render/07_full_record_radio_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 8,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice",
+    "One-draw native front-buffer capture can lag the selected phase; superseded by two-draw captures with explicit identity receipts"
+  ]
+}

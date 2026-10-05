@@ -1,0 +1,372 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+  "producer_checkpoint_sha": "7c661957276ca7445f7e2cf66896dccda3c53155",
+  "sealed_at": "2026-10-05T11:47:43.918086+00:00",
+  "status": "PASS_BOUNDED_RAILCUT_FUNCTIONAL_END",
+  "prior_evidence_manifest": "../20261005-pr15-web-railcut-producer/manifest.json",
+  "prior_file_count": 28,
+  "prior_total_bytes": 20199029,
+  "original_record": {
+    "attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+    "bytes": 15373004,
+    "level": "railcut",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+    "terminal": 7610,
+    "validation": {
+      "attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+      "events": 45,
+      "failures": [],
+      "frames": 1017,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/railcut-native-8532-20261005/run-v2/railcut-record.bin",
+    "producer_wall": 463.15195600601146
+  },
+  "whole": [
+    {
+      "status": "PASS",
+      "level": "railcut",
+      "rate": 1,
+      "attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+      "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "record_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+      "terminal_tick": 7610,
+      "record_duration": 126.83333333333333,
+      "deadline_wall": 791.0,
+      "controller_total_wall": 474.90480178498547,
+      "input_to_terminal_callback_wall": 469.5659,
+      "record_unchanged": true,
+      "domain_unchanged": true,
+      "frame_checks": {
+        "checks": 17,
+        "failures": [],
+        "tick": 7610
+      },
+      "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance",
+      "observer_row_count": 962,
+      "actual_request_exit": 0,
+      "request_start": "2026-10-05T11:26:20.800731+00:00",
+      "request_end": "2026-10-05T11:34:56.887756+00:00"
+    },
+    {
+      "status": "PASS",
+      "level": "railcut",
+      "rate": 2,
+      "attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+      "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "record_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+      "terminal_tick": 7610,
+      "record_duration": 126.83333333333333,
+      "deadline_wall": 410.5,
+      "controller_total_wall": 241.06612218200462,
+      "input_to_terminal_callback_wall": 235.7332,
+      "record_unchanged": true,
+      "domain_unchanged": true,
+      "frame_checks": {
+        "checks": 17,
+        "failures": [],
+        "tick": 7610
+      },
+      "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance",
+      "observer_row_count": 486,
+      "actual_request_exit": 0,
+      "request_start": "2026-10-05T11:39:11.835496+00:00",
+      "request_end": "2026-10-05T11:43:48.682939+00:00"
+    }
+  ],
+  "browser_final_proof": {
+    "status": "PASS",
+    "utc": "2026-10-05T11:46:37.167394+00:00",
+    "controller_pid": 159645,
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "original_attempt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+    "original_record_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+    "owned_pages": 1,
+    "scene": "res://scenes/title.tscn",
+    "next_level": "depot",
+    "fixture_ready": false,
+    "browser_trusted_before_reload": 140,
+    "browser_trusted_after_reload": 10,
+    "engine_inputs_before_reload": 140,
+    "engine_inputs_after_reload": 10,
+    "console_errors": 0,
+    "page_errors": 0,
+    "GL_invalid": 0,
+    "gpu_readpixels_warnings": 4,
+    "whole_1x_callback_wall": 469.5659,
+    "whole_2x_callback_wall": 235.7332,
+    "rate_wall_ratio": 1.9919379196481446,
+    "scope": "original railcut producer, same original recording natural whole1x/2x, depot handoff and exact saved reload; safe Title; browser END and pure artifact audit still separate"
+  },
+  "offline_artifact_result": {
+    "checks": 16350,
+    "event_wave_counts": {
+      "0": 23,
+      "1": 22
+    },
+    "events": 45,
+    "failures": [],
+    "frames": 1017,
+    "local_tick_regressions": 1,
+    "record_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+    "scope": "non-destructive original archived binary and pure reader/ViewState contract audit; offline selections are not whole playback or actual 3D renderer checks",
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "terminal": 7610,
+    "wave_phase_counts": {
+      "0:0": 393,
+      "0:1": 34,
+      "0:5": 246,
+      "1:1": 193,
+      "1:3": 1,
+      "1:5": 150
+    }
+  },
+  "file_count": 48,
+  "total_bytes": 8080845,
+  "files": [
+    {
+      "path": "browser-end-tool-receipt.json",
+      "bytes": 241,
+      "sha256": "4b27ef77ccdfa5f5a5bb22773a6fc4894318795e036c84d9f6610f4875bfa8e4"
+    },
+    {
+      "path": "finish_railcut.py",
+      "bytes": 2848,
+      "sha256": "09fd7cf087f2607ef57bb246090088801c023abbfbd5f239e0b3f8aa4fe0c80e"
+    },
+    {
+      "path": "negative-final-proof-global-label/disclosure.json",
+      "bytes": 872,
+      "sha256": "d980bcc32c5f9447c6b4fb7ccf53293b59d3a26347622d9e58b7db12a35043df"
+    },
+    {
+      "path": "negative-final-proof-global-label/first-valid-browser-proof.json",
+      "bytes": 964,
+      "sha256": "215a03b5850d7363a62502a3a268e29f13c59153a6f55a293af8451d207448ed"
+    },
+    {
+      "path": "negative-final-proof-global-label/loaded-finish.py",
+      "bytes": 2818,
+      "sha256": "92d2c791e54ee845d1b7a0ea53d21661c9cd38e467d7be5b991ff7b2e7256f82"
+    },
+    {
+      "path": "negative-final-proof-global-label/overwritten-boundary-request.json",
+      "bytes": 2203,
+      "sha256": "6810d8ccce2d5afd9bcf57e44f4fb6691f14196c4b464509569414a8333f6562"
+    },
+    {
+      "path": "post-end-verification.json",
+      "bytes": 6193,
+      "sha256": "c91545fff19becfa0877ffed6413693f2c47a2734e0d972c5332df4c7f39e959"
+    },
+    {
+      "path": "railcut-offline-audit-receipt.json",
+      "bytes": 919,
+      "sha256": "c4fb4f9519dc130739b831c4b5524e70ec6de02215baa4e28cdc1dbadb21d4dc"
+    },
+    {
+      "path": "railcut-offline-audit-result.json",
+      "bytes": 584,
+      "sha256": "ed34f5351838a589a22ad0fe4f9a5c16fda2e812fd1547bf2273b1ef05e58fae"
+    },
+    {
+      "path": "railcut-offline-audit.log",
+      "bytes": 828,
+      "sha256": "f2c243806541826b6ad1ac11c216bcb6fc3a297e87054e9a6fd19a5bfbda120e"
+    },
+    {
+      "path": "railcut_boundary.py",
+      "bytes": 3195,
+      "sha256": "ae627a13cc5ca5b2755ab658247a47d14eacf187b30029aa0dba7a167aeb4b78"
+    },
+    {
+      "path": "railcut_record_readonly_audit.gd",
+      "bytes": 6256,
+      "sha256": "a4c947b65fdc6cb3dcc4266f36edbbc82cc3f07ad45d3182b5cb70c03db039f1"
+    },
+    {
+      "path": "run-v2/console-final.json",
+      "bytes": 1917,
+      "sha256": "4d8a1afcb618d5fb9d339e43adf2bbcde4be0b3c35ab413877b93e6cb0cc4aa1"
+    },
+    {
+      "path": "run-v2/depot_continued_knife_scout.png",
+      "bytes": 1007174,
+      "sha256": "c14a3314f4b67768557a53ea74f06ff607060aff1d8e2152cd4f6a1ded9f8e76"
+    },
+    {
+      "path": "run-v2/depot_tutorial_0.png",
+      "bytes": 456551,
+      "sha256": "db97cad3c8723ac0ad1310a00bce53aa31eb8e356d4a9c5be8735df0b677f603"
+    },
+    {
+      "path": "run-v2/depot_tutorial_1.png",
+      "bytes": 488983,
+      "sha256": "c588c98ccca9d806cbee9663f6f0bf4b4cee6afec18923ac3e82188f121ee718"
+    },
+    {
+      "path": "run-v2/driver-actions.jsonl",
+      "bytes": 1986509,
+      "sha256": "31cad9da2b0b6d26d5029f456d32f5d126680afae17f630faf6907034fe6ad84"
+    },
+    {
+      "path": "run-v2/http.log",
+      "bytes": 1122,
+      "sha256": "0fff4f6158631d424527ae6f2506141b051a708c776f725ecbb06d139709d808"
+    },
+    {
+      "path": "run-v2/profile-after-railcut.json",
+      "bytes": 5097,
+      "sha256": "6d7c72505fa582d8407182c58da151c3ad662e198ea93c9517a6fabdcc62c73c"
+    },
+    {
+      "path": "run-v2/railcut-before-boundary-browser.json",
+      "bytes": 14530,
+      "sha256": "717676c6370c1235c7f96e07e4e7e11923bfa059286003555e9deb7933aeb568"
+    },
+    {
+      "path": "run-v2/railcut-before-boundary-fingerprints.json",
+      "bytes": 366484,
+      "sha256": "14957d2ab5a44532d0c48158b267195e80a791abedee0d620dfff0d654425ac4"
+    },
+    {
+      "path": "run-v2/railcut-boundary-final-browser.json",
+      "bytes": 1181,
+      "sha256": "10cda0727658caf933f83c292786adb46021069e3d9e9f24b7d25647a6ea31ef"
+    },
+    {
+      "path": "run-v2/railcut-boundary-final-fingerprints.json",
+      "bytes": 2969,
+      "sha256": "94474a010afb0ba6663ffac929c80c03d6e7fd8135628ab0c7d785a74c5026fa"
+    },
+    {
+      "path": "run-v2/railcut-browser-final-proof-corrected.json",
+      "bytes": 2206,
+      "sha256": "cd080dbb78610039cc44f09b3c329d4fb2afe8b8f71ad781d8830223d37d3015"
+    },
+    {
+      "path": "run-v2/railcut-browser-final-proof.json",
+      "bytes": 964,
+      "sha256": "903deb4dc154d9b3e040d5d4731ac96cce59eff348f2c181977aebf5297d54da"
+    },
+    {
+      "path": "run-v2/railcut-save-unlock-depot-reload.json",
+      "bytes": 2203,
+      "sha256": "6810d8ccce2d5afd9bcf57e44f4fb6691f14196c4b464509569414a8333f6562"
+    },
+    {
+      "path": "run-v2/railcut-whole-1x-browser.json",
+      "bytes": 12625,
+      "sha256": "b5cca72f781fe8a442f86aae09f9505cec17b1ae22ca23f87b0d5f8acd78baac"
+    },
+    {
+      "path": "run-v2/railcut-whole-1x-fingerprints.json",
+      "bytes": 250077,
+      "sha256": "c805996e9a3518f2b50604fe236ed746fcffbc12532062f97d636801fa9c7b8e"
+    },
+    {
+      "path": "run-v2/railcut-whole-1x.json",
+      "bytes": 198122,
+      "sha256": "725a1651f6b22938c6d5e4f72f2f0e7ddb98a7df07f2f94b021a8b18ae603101"
+    },
+    {
+      "path": "run-v2/railcut-whole-2x-browser.json",
+      "bytes": 14530,
+      "sha256": "717676c6370c1235c7f96e07e4e7e11923bfa059286003555e9deb7933aeb568"
+    },
+    {
+      "path": "run-v2/railcut-whole-2x-fingerprints.json",
+      "bytes": 366484,
+      "sha256": "14957d2ab5a44532d0c48158b267195e80a791abedee0d620dfff0d654425ac4"
+    },
+    {
+      "path": "run-v2/railcut-whole-2x.json",
+      "bytes": 101371,
+      "sha256": "38130cd51d350c11c9f8f3382a012fce7bf9869c3a3f260d5cb494212a3bc500"
+    },
+    {
+      "path": "run-v2/railcut-whole-natural-1x.json",
+      "bytes": 1680,
+      "sha256": "52675812c0387d8734372897d295d1835b560c5980911a4718d3db1abd02f043"
+    },
+    {
+      "path": "run-v2/railcut-whole-natural-2x.json",
+      "bytes": 1680,
+      "sha256": "69ba50dc9ab4da8dc068a5e85279b0257974e2598909c0158f5d6f8f4c7eae66"
+    },
+    {
+      "path": "run-v2/railcut_cleared_mission_rows.png",
+      "bytes": 89507,
+      "sha256": "5749b3426d4ebd27d622e4f5d2105203f6830fa61f87b5cfe7c4e7f9cd6bef21"
+    },
+    {
+      "path": "run-v2/railcut_next_handoff.png",
+      "bytes": 214088,
+      "sha256": "20def3092d6c43b8a8ee4f2c05892f0e1a2b6ea6a3a203b4c1eae97cc0e1964d"
+    },
+    {
+      "path": "run-v2/railcut_reload-after-reload.json",
+      "bytes": 3828,
+      "sha256": "1230dcc18d940e27b01f71ef63116231945f25c9c615fc122bc3c8d5e82dd12b"
+    },
+    {
+      "path": "run-v2/railcut_reload-before-reload.json",
+      "bytes": 4594,
+      "sha256": "ee05fa66b6cd34977009c3ce7033b5394393f0903eb8840d84d5328d6508addb"
+    },
+    {
+      "path": "run-v2/railcut_reload-browser-before-reload.json",
+      "bytes": 16389,
+      "sha256": "72d98c86f32563ae6864de929f75c4d535934deb7b6a31b2c9c9af48ba434c5d"
+    },
+    {
+      "path": "run-v2/railcut_reload-engine-before-reload.json",
+      "bytes": 366065,
+      "sha256": "02396ae9c08e9516bdc645388a2036dbd40928a47629bc7eafeab4ed34f63f38"
+    },
+    {
+      "path": "run-v2/railcut_reload_reloaded_mission_rows.png",
+      "bytes": 87180,
+      "sha256": "4d64fb7e455d4b01c7961dc58cc4066235ecead983239c86b58d467a8b5ab93c"
+    },
+    {
+      "path": "run-v2/railcut_saved_depot_next_title.png",
+      "bytes": 112580,
+      "sha256": "c4694fff12e01499a15a1b62c5e492057ac6c9538ba09a20d51916178b7cdf8a"
+    },
+    {
+      "path": "run-v2/railcut_whole_1x_terminal.png",
+      "bytes": 931839,
+      "sha256": "a4165a5af4bd02a1498f0cc1cbf408d106de9a4d81642a940d17d288e738a1ea"
+    },
+    {
+      "path": "run-v2/railcut_whole_2x_terminal.png",
+      "bytes": 932154,
+      "sha256": "095886352e1015d56c2a797eff258b948ef298747c2a5779d728b06e9e14e924"
+    },
+    {
+      "path": "run_railcut_offline_audit.py",
+      "bytes": 2548,
+      "sha256": "360b532001290ec822d3538aac691bf5c0d9ca4fa87f3e833e26dc749d34dc3c"
+    },
+    {
+      "path": "seal_railcut_end.py",
+      "bytes": 6327,
+      "sha256": "cf89b37fad77f75db2fadd93231dc512f48c1538df9616e9b7bd96780f4afca2"
+    },
+    {
+      "path": "whole_railcut_1x.py",
+      "bytes": 683,
+      "sha256": "3a4f72913c079726e73c8477012d1f2ba6c2f288f7405720c8062eaa666604cc"
+    },
+    {
+      "path": "whole_railcut_2x.py",
+      "bytes": 683,
+      "sha256": "d6f65d96a2826ab5db0bc8d4cbda69003e05b02c0b5a7f1b0b766adb346ec0f1"
+    }
+  ],
+  "scope": "final immutable whole/progress/lifecycle controls and all previously-live driver/HTTP logs after END; original producer/bin/7PNG referenced unchanged from sealed checkpoint; no assets, Site deploy, full campaign, performance, APK, or device acceptance"
+}

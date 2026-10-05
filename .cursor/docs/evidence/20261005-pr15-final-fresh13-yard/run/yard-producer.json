@@ -1,0 +1,413 @@
+{
+  "status": "PASS",
+  "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+  "record": {
+    "attempt": "66c9939c44165e01cf7cf13de3d75028",
+    "bytes": 8897916,
+    "level": "yard",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "b49d032bb5a18272d28b4d824995ef3b9d17aac300d0f8595a64c1db2254702d",
+    "terminal": 5070,
+    "validation": {
+      "attempt": "66c9939c44165e01cf7cf13de3d75028",
+      "events": 30,
+      "failures": [],
+      "frames": 671,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-final-fresh13-1ec-20261005/run/yard-record.bin",
+    "producer_wall": 265.93779127899325
+  },
+  "state": {
+    "attempt": "66c9939c44165e01cf7cf13de3d75028",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          240,
+          368
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          496,
+          240
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          784,
+          240
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          816,
+          432
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          400,
+          496
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          912,
+          528
+        ]
+      }
+    ],
+    "credits_scroll": {
+      "max": 8124,
+      "page": 0,
+      "vertical": 0
+    },
+    "engine_frames": 798,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "fixture_ready": false,
+    "focus_actor": -1,
+    "focus_type": "",
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 70,
+    "input_tail": {
+      "attempt": "66c9939c44165e01cf7cf13de3d75028",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 770,
+      "kind": "mouse",
+      "phase": 5,
+      "pos": [
+        356,
+        674
+      ],
+      "presents": 770,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 324024500
+    },
+    "level": "yard",
+    "log": {
+      "events": 30,
+      "playback_frames": 671,
+      "playback_terminal": 5070,
+      "playback_tick": 5070,
+      "snapshots": 118,
+      "terminal": 676,
+      "terminal_reason": "win"
+    },
+    "loot": [],
+    "mines_count": 0,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "\u7a7a\u683c\u62c9\u8b66\u62a5\u3002\u672c\u6ce2\u654c\u4eba\u6309\u4f5c\u8005\u8def\u7ebf\u51b2\u9003\u9038\u53e3\uff0c\u961f\u5458\u6309\u5c04\u754c\u81ea\u52a8\u5f00\u706b\uff1b\u6709\u624b\u96f7\u5219\u5728\u9525\u9762/\u96f7\u70b9\u81ea\u52a8\u4e22\uff08\u53cb\u4f24\u5708\u5185\u4e0d\u4e22\uff0c\u51b7\u5374 3.6 \u79d2\uff09\u3002\u6e05\u6ce2\u540e\u8fdb\u5165\u6253\u626b\uff1a\u8d70\u8fd1\u5c38\u4f53\u641c\u522e\uff0c\u7a7a\u683c\u62c9\u4e0b\u4e00\u6ce2\u3002\u6700\u540e\u4e00\u6ce2\u6253\u626b\u540e\u64a4\u79bb\u624d\u7b97\u5c01\u9501\u3002\u9003\u9038\u6216\u5168\u706d\u5931\u8d25\uff0c\u88c5\u5907\u91cd\u7f6e\uff0c\u60c5\u62a5\u7559\u4e0b\u3002\u9677\u9631\u8def\u7ebf\uff1a\u6a59\u7ebf\u4fa7\u7ffc\u7b2c\u4e8c\u6ce2\u4ece\u4e1c\u5eca\u7ed5\u51fa\u3002\u865a\u7ebf\u7bad\u5934\u6807\u7b2c\u4e8c\u5c42\u3002",
+      "tutorial_page": 2
+    },
+    "observer_usec": 2126900,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 10,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 271.103884842106,
+        "family": "rifle",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 7,
+            "kind": "kar98k"
+          },
+          {
+            "amount": 1,
+            "kind": "grenade"
+          }
+        ],
+        "pool": {
+          "rifle": 15
+        },
+        "pos": [
+          591.978759765625,
+          209.101531982422
+        ],
+        "role": 0,
+        "slot": -1,
+        "start_ammo": 5,
+        "weapon": "kar98k"
+      },
+      {
+        "alive": true,
+        "ammo": 44,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180,
+        "family": "mg",
+        "has_ammo_pack": false,
+        "hp": 77.8,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 50,
+            "kind": "mg42"
+          }
+        ],
+        "pool": {
+          "mg": 44
+        },
+        "pos": [
+          784,
+          240
+        ],
+        "role": 1,
+        "slot": 2,
+        "start_ammo": 50,
+        "weapon": "mg42"
+      },
+      {
+        "alive": true,
+        "ammo": 6,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180,
+        "family": "scout",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 6,
+            "kind": "kar98k_zf"
+          }
+        ],
+        "pool": {
+          "scout": 6
+        },
+        "pos": [
+          912,
+          528
+        ],
+        "role": 2,
+        "slot": 5,
+        "start_ammo": 5,
+        "weapon": "kar98k_zf"
+      }
+    ],
+    "phase": 3,
+    "presents": 798,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2,
+      "tick": 0
+    },
+    "run_id": 3,
+    "scale": 1,
+    "scene": "res://scenes/main.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "selected": 1,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "02c3b271f6e96a32296417eff2133e38158a7ab2b6d02becce2e8df91f0e5683",
+          "text": "[progress]\n\nlevel_id=\"warehouse\"\nlevel_index=1\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "b3d5532b4fe14c2a7c1db1351b4138367a2a6c4357873b473a129899571371ea",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c1\u5173 \u00b7 \u9662\u5b50\uff1a\u4ea4\u53c9\u5c01\u9501",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "warehouse",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c2\u5173 \u00b7 \u4ed3\u9053\uff1a\u5f39\u836f\u7a97\u53e3",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c3\u5173 \u00b7 \u6cf5\u7ad9\uff1a\u5173\u95e8\u4e4b\u540e",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c4\u5173 \u00b7 \u4fe1\u53f7\u697c\uff1a\u53cc\u8d70\u5eca\u5ef6\u8fdf",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c5\u5173 \u00b7 \u6cb9\u5e93\uff1a\u4e09\u8def\u5408\u56f4",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c6\u5173 \u00b7 \u7535\u53f0\uff1a\u706f\u5854\u56de\u6ce2",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "warehouse",
+      "persistence_error": "",
+      "persistence_status": "\u5df2\u4fdd\u5b58\u5230\u6b64\u6d4f\u89c8\u5668",
+      "quality": "standard",
+      "seen": {
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "sim": {
+      "accum": 0.0153500000000136,
+      "paused": false,
+      "speed": 1,
+      "tick": 225
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "mine",
+        "id": 171647700583,
+        "kind": "mine",
+        "pos": [
+          336,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "ammo",
+        "id": 171798695536,
+        "kind": "ammo",
+        "pos": [
+          752,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "pistol",
+        "id": 171949690489,
+        "kind": "m1911",
+        "pos": [
+          272,
+          432
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 172134239875,
+        "kind": "thompson",
+        "pos": [
+          560,
+          400
+        ]
+      },
+      {
+        "collected": false,
+        "family": "pistol",
+        "id": 172318789261,
+        "kind": "luger",
+        "pos": [
+          688,
+          560
+        ]
+      }
+    ],
+    "status": "\u8ba1\u5212\u594f\u6548",
+    "ticks_usec": 336319500,
+    "tool": 0,
+    "view": {
+      "attempt": "66c9939c44165e01cf7cf13de3d75028",
+      "gesture": {
+        "contacts": 0,
+        "middle_down": false,
+        "pending_id": -1,
+        "suppressed": 0,
+        "ui_contacts": 0
+      },
+      "level": "yard",
+      "pitch": 55,
+      "recorded_phase": 3,
+      "roots": 4,
+      "seq": -1,
+      "tick": 5070,
+      "wave": 1,
+      "yaw": 35
+    },
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "wave": 1,
+    "wave_count": 2,
+    "waves_cleared": 2,
+    "window_size": [
+      1280,
+      720
+    ]
+  }
+}

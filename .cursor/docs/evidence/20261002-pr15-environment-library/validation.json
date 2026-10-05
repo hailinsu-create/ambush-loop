@@ -1,0 +1,71 @@
+{
+  "scope": "environment runtime library/material acceptance only; actual six-level environment is not integrated in this slice",
+  "fixed_source": "a54d538d10658440ac1bd8336d91a68d1da305ad",
+  "candidate_source": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+  "candidate_delivery": "9c06f04cf7795faf69d9d69d0f853f30ccf80838",
+  "runs": [
+    {
+      "label": "library",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture environment_assets_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "exit_code": 0,
+      "run_id": "8f550c842f3b4e7dbcf6f0c85b4aabc0",
+      "checks": 618,
+      "log": "pr15-env-a54d538-library-final.log",
+      "sha256": "b5b4e0c844a8211b0a2579bb1995ea74e640ce0ad7687375f8cfb3262cb02aea"
+    },
+    {
+      "label": "battle",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_battle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "exit_code": 0,
+      "run_id": "004147e0a55d4a249efc64511a8727aa",
+      "checks": 231,
+      "log": "pr15-env-a54d538-battle-final.log",
+      "sha256": "f21c1b6f77ecf30f66c31e0bbcedbc879526d2c5e9e41d4d5456d9ee2ad2d624"
+    },
+    {
+      "label": "static",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture asset_library_test.gd --render",
+      "cwd": "/workspace/ambush-pr15",
+      "exit_code": 0,
+      "run_id": "af5658ea43f1461cbe1a2a37a4464f76",
+      "checks": 333,
+      "log": "pr15-env-a54d538-static-final.log",
+      "sha256": "66543c3348bc2465300cec8315976070315edb2c5f9fce2851dbdcc9a93e564b"
+    },
+    {
+      "label": "pack",
+      "command": "AMBUSH_TEST_PACK=/tmp/pr15-env-library.pck timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 asset_pack_test.gd",
+      "cwd": "/workspace/ambush-pr15",
+      "exit_code": 0,
+      "run_id": "f0fa9e4b29ff4984b1d3f3bbe705bdf0",
+      "checks": 1476,
+      "log": "pr15-env-a54d538-pack-final.log",
+      "sha256": "487e6eefe9fc74c239603384f67b3b556cc286fc66c4039d9ab678cfa1cd4764"
+    }
+  ],
+  "pack": {
+    "path": "/tmp/pr15-env-library.pck",
+    "bytes": 24478880,
+    "sha256": "7796693420562ae102031b21ffce3523fb79dee7c0e3cad96d28a88f8de00ff2",
+    "exit_code": 0,
+    "command": "XDG_DATA_HOME=/tmp/pr15-env-export/data XDG_CONFIG_HOME=/tmp/pr15-env-export/config XDG_CACHE_HOME=/tmp/pr15-env-export/cache timeout 300 /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_loop --export-pack \"Linux Desktop\" /tmp/pr15-env-library.pck"
+  },
+  "captures": [
+    {
+      "path": "library_lod0_yaw35.png",
+      "sha256": "5a73f509475f35dfb034c19a5c2939d7b56e5359d3cd65c9826f0a0f561b6141",
+      "viewed": true,
+      "source_sha": "a54d538d10658440ac1bd8336d91a68d1da305ad"
+    }
+  ],
+  "dev_failure": "test-only ternary count inference parse error, exit1 preserved; explicit int fixed, development618 and fixed618 pass",
+  "not_verified": [
+    "Actual 40x22 six-level environment assembly",
+    "Door/crate events in actual scene",
+    "Historical environment versioning",
+    "Final art/continuous animation",
+    "Hardware FPS/APK"
+  ]
+}

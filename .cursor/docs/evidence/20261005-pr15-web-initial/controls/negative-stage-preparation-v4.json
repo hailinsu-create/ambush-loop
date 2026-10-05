@@ -1,0 +1,7 @@
+{
+  "actual_exit": 1,
+  "source": "543d76ef1e5dd3d0231332197d90178ac7140cc6",
+  "engine_started": false,
+  "failure": "FileExistsError: previously prepared isolated template directory",
+  "fix": "Permit retained directory; overwrite only identical verified template copies in isolated owned directory; preserve v4 stage"
+}

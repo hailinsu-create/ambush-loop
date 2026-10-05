@@ -1,0 +1,13 @@
+d.producer_active=False
+s=d.state();emit('WAREHOUSE_CAP_DIAGNOSTIC_START',phase=s['phase'],wave=s['wave'],sim=s['sim'],attempt=s['attempt'],scope='after producer cap FAIL, original pause/abort only; no continued victory')
+if s['phase']==1 and not s['sim']['paused']:d.key('p')
+s=d.capture('warehouse_cap_failed_before_abort')
+if s['phase'] in [0,1,5]:d.key('x')
+s=d.wait(lambda s:s['phase']==2,'original bounded attempt abort FAILED',120)
+d.capture('warehouse_cap_failed_aborted')
+warehouse_failed_record=d.archive('warehouse-cap-aborted')
+f=d.rpc('fingerprints');trusted=page.evaluate('window.pr15TrustedInputs')
+(BASE/'warehouse-cap-failed-inputs.json').write_text(json.dumps({'engine':f['inputs'],'browser':trusted},indent=2)+'\n')
+render=page.evaluate("""()=>{const gl=document.getElementById('canvas').getContext('webgl2');const e=gl.getExtension('WEBGL_debug_renderer_info');return {version:gl.getParameter(gl.VERSION),unmasked_renderer:e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):null,unmasked_vendor:e?gl.getParameter(e.UNMASKED_VENDOR_WEBGL):null}}""")
+(BASE/'warehouse-cap-renderer.json').write_text(json.dumps(render,indent=2)+'\n')
+emit('WAREHOUSE_FAILED_PACKET_END',record=warehouse_failed_record,renderer=render,natural_victory=False,scope='original abort after driver cap; natural waves not combined with later retries')

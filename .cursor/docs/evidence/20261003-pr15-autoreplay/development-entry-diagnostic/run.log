@@ -1,0 +1,16 @@
+TEST_RUN_ID=5341db22684c415289a9d4d4ed7fb06a
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/5341db22684c415289a9d4d4ed7fb06a/data
+TEST_ENTRY=replay_autoplay_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/5341db22684c415289a9d4d4ed7fb06a/data/godot/app_userdata/Ambush Loop run_id=5341db22684c415289a9d4d4ed7fb06a
+REPLAY_AUTO_CASE auto_100_desktop
+REPLAY_AUTO_ENTRY { "id": "auto_100_desktop", "entry_signals": [], "entry_phase": 3, "entry_tick": 60, "entry_playing": false, "entry_suspended": false, "entry_modal": false, "hovered": "Content:<VBoxContainer#415571648435>" }
+REPLAY_AUTO_FAIL auto_100_desktop native production button binds the original recording
+REPLAY_AUTO_CASE auto_200_compact
+REPLAY_AUTO_ENTRY { "id": "auto_200_compact", "entry_signals": [], "entry_phase": 3, "entry_tick": 60, "entry_playing": false, "entry_suspended": false, "entry_modal": false, "hovered": "ResultColumns:<GridContainer#100612966928>" }
+REPLAY_AUTO_FAIL auto_200_compact native production button binds the original recording
+REPLAY_AUTO_TEST checks=36 failures=2

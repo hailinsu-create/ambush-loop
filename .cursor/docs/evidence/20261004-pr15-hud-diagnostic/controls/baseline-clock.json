@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "bash",
+    "/workspace/pr15-metadata-candidate-a42/ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-hud-diagnostic/godot-dummy",
+    "command_pose_clock_test.gd",
+    "--headless"
+  ],
+  "source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+  "game_tree": "ff0de72e42f636e201983cf47aa24aa142a652bd",
+  "start": "2026-10-04T22:06:53.419961+00:00",
+  "timeout_seconds": 240,
+  "timed_out": false,
+  "owned_wrapper_pid": 127281,
+  "actual_wrapper_exit": 143,
+  "end": "2026-10-04T22:09:53.267399+00:00",
+  "ERROR": 0,
+  "SCRIPT_ERROR": 1,
+  "uuid": "7f1f6520a1b44c3a9d70e553e3997b7d",
+  "terminal_lines": [
+    "SCRIPT ERROR: Invalid access to property or key 'enemies:3' on a base object of type 'Dictionary'.",
+    "          at: _run (res://scripts/command_pose_clock_test.gd:205)"
+  ]
+}

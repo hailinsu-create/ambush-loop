@@ -1,0 +1,13 @@
+# Read-only b6c2 review
+
+Fixed commit: b6c2d62d0f6b6448be3c2cf8555a25ef48123033. Reviewed git diff and original API/collector/context source only; no engine, tests, import, display, benchmark, or repository edits.
+
+No obvious compile/API blocker identified in the changed code. Dictionary literals infer Dictionary; candidate operator is explicitly OperatorUnit; op_id and original methods exist. `_is_command_phase()` accepts SETUP/SWEEP. The changed command walks indexes0,2,1 and skips dead/invisible/locked actors before calling original selection and movement. Artificial LOS restriction is removed. This addresses the observed dead-index0 last-SWEEP rejection without resurrecting actors or manufacturing FX. Receipts preserve level/attempt/wave/phase, actor eligibility and position, tested destinations and accepted selected ID.
+
+Raw column cross-check: 6=level_id,7=attempt_id,8=wave_id,9=current phase,15=replay_speed,32=main_auto_process. New identity check matches those definitions. Wave equality is required outside current REPLAY phase4; existing matrix exact-source check additionally enforces selected saved wave/frame/playback identity. Speed equality applies only when declared phase4, so live ALERT speed receipts are not incorrectly compared with replay_speed. `_dwell` adds identity to every dwell receipt; direct live ALERT receipts now carry identity too. Live transition rows remain retained while minimum3 samples are counted for the requested phase.
+
+Campaign `_finish` overrides Context.environment stationary-control scope with actual live callback/API-reference and exact-history workload scope; existing report limitations retain no-native/device/FINAL and bounded playback exclusions. Context's other shared users remain unchanged.
+
+Residual limits, not observed blockers: fixed indexes assume original three nonnull operators; nearby bounded destination search can still fail on another level. Accepted receipt checks is_moving after the void original command API: if an actor already has a path, a rejected replacement could appear accepted; current SWEEP entry stops paths and initial SETUP starts idle, so the observed repair is consistent. If later callers enter with existing movement, record moving_before/path identity or use original boolean _command_move_op after selection rather than claim a new command solely from is_moving. Original stash/open-cell redirection means receipt.destination is requested cell, not proven effective path endpoint. These limits do not establish fresh runtime success.
+
+Evidence: git show --stat/diff at fixed commit; sed reads of collector COLUMNS, main command gates and movement API, campaign matrix/seal and Context.environment. New fixed-source Window run remains necessary.

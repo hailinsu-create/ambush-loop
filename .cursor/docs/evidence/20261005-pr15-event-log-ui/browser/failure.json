@@ -1,0 +1,4 @@
+{
+  "exception": "original slider reaches second saved wave",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py\", line 107, in <module>\n    ui.geometry();ui.seek(.945);check(ui.state()['view']['wave']==1,'original slider reaches second saved wave')\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py\", line 25, in check\n    if not value:raise AssertionError(label)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: original slider reaches second saved wave\n"
+}

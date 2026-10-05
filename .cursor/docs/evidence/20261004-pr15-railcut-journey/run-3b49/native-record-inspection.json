@@ -1,0 +1,64 @@
+{
+  "attempt": "93d07e8fdaa687f28d8e05c9432f4724",
+  "checks": 3906,
+  "event_counts": {
+    "door": 1,
+    "fire": 12,
+    "kill": 4,
+    "loot": 4,
+    "no_engage": 14,
+    "repack": 1,
+    "return_fire": 4,
+    "spawn": 4,
+    "terminal": 1
+  },
+  "events": 45,
+  "failures": 0,
+  "frames": 896,
+  "global_wave_offsets": {
+    "0": 0,
+    "1": 196
+  },
+  "mine_events": [],
+  "phase_sequence": [
+    0,
+    1,
+    5,
+    1,
+    5,
+    3
+  ],
+  "playback_terminal_tick": 6641,
+  "raw_sha256": "154c69778d82b3d7a35b32d7d5ebd8782cd792cb9edad82544495a125af86e53",
+  "repack_events": [
+    {
+      "actor_id": 1,
+      "attempt_id": "93d07e8fdaa687f28d8e05c9432f4724",
+      "event_id": "93d07e8fdaa687f28d8e05c9432f4724:1:28",
+      "payload": {
+        "animation_schema": 2,
+        "name": "灰狼",
+        "reload_s": 1.15,
+        "repack_kind": "same_weapon",
+        "source_visual_weapon": "kar98k",
+        "visual_weapon": "kar98k"
+      },
+      "playback_schema": 2,
+      "playback_tick": 4749,
+      "position": "(432.0, 400.0)",
+      "schema": 2,
+      "seq": 28,
+      "target_id": -1,
+      "tick": 58,
+      "timeline_tick": 254,
+      "type": "repack",
+      "wave_id": 1
+    }
+  ],
+  "scope": "Read-only original native serialized record metadata; no gameplay scene, simulation, replay rendering or fixture mutation.",
+  "terminal_tick": 1345,
+  "wave_event_counts": {
+    "0": 23,
+    "1": 22
+  }
+}

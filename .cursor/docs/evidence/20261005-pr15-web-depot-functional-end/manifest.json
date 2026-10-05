@@ -1,0 +1,652 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+  "sealed_at": "2026-10-05T12:37:16.660618+00:00",
+  "status": "PASS_BOUNDED_DEPOT_FUNCTIONAL_END",
+  "original_record": {
+    "attempt": "1f32042b812907b6d833285e37ad9a5c",
+    "bytes": 17939460,
+    "level": "depot",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "02a8b05a334c4c83279e01d5f0d7323265e4da540baf31a1b900eac917e4368e",
+    "terminal": 10137,
+    "validation": {
+      "attempt": "1f32042b812907b6d833285e37ad9a5c",
+      "events": 40,
+      "failures": [],
+      "frames": 1303,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/depot-native-8532-20261005/run/depot-record.bin",
+    "producer_wall": 619.2766775990021
+  },
+  "receipts": [
+    {
+      "label": "close-depot",
+      "bytes": 2111,
+      "sha256": "0bee19e9fdc0e6658cfa28d0a72caa45e3bdf54427983f8e7aa350fe1a23b0bc",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:35:46.802550+00:00",
+      "end": "2026-10-05T12:35:47.245912+00:00"
+    },
+    {
+      "label": "depot-browser-final-proof",
+      "bytes": 2283,
+      "sha256": "25b2e11c93dec8e38f050a203420d6dc797cb584a409dae7baba90b126d37516",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:35:17.561393+00:00",
+      "end": "2026-10-05T12:35:17.618580+00:00"
+    },
+    {
+      "label": "depot-save-unlock-radio-reload",
+      "bytes": 2290,
+      "sha256": "131b3b034e6d497d650b66e0d2db9ad7b95208dff28c8fb6081b5f50adf2fcb0",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:32:50.885113+00:00",
+      "end": "2026-10-05T12:34:27.855416+00:00"
+    },
+    {
+      "label": "depot-whole-natural-1x",
+      "bytes": 1769,
+      "sha256": "2db09e2282297abc942e3fb51706d66257333ac5b42bcab09ce0d40d15eae5b9",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:14:57.038038+00:00",
+      "end": "2026-10-05T12:26:08.712434+00:00"
+    },
+    {
+      "label": "depot-whole-natural-2x",
+      "bytes": 1774,
+      "sha256": "e82c8367852196a66d86177bf252087074c145f0cb5d8903271f1040d0e064b0",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:26:31.990040+00:00",
+      "end": "2026-10-05T12:32:30.679614+00:00"
+    },
+    {
+      "label": "initialize-depot-original-profile-v2",
+      "bytes": 1779,
+      "sha256": "518821858b3c41482c11549dfe70fe4576868be0f5f43730fa7aa4cff21d8203",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:02:06.878378+00:00",
+      "end": "2026-10-05T12:02:12.066605+00:00"
+    },
+    {
+      "label": "initialize-depot-original-profile",
+      "bytes": 986,
+      "sha256": "43450e8f17148bbc4e70fd02050bf0c9a07c8f1aea74ae4c10aad5861be628a9",
+      "actual_exit": 1,
+      "start": "2026-10-05T12:01:29.084879+00:00",
+      "end": "2026-10-05T12:01:29.086628+00:00"
+    },
+    {
+      "label": "produce-depot-natural",
+      "bytes": 2322,
+      "sha256": "a6ba3c86add0c201cab72f95a74ce14c456cb153376323ec185f823a0d61b9ce",
+      "actual_exit": 1,
+      "start": "2026-10-05T12:02:57.505822+00:00",
+      "end": "2026-10-05T12:09:44.303025+00:00"
+    },
+    {
+      "label": "resume-depot-original-terminal",
+      "bytes": 1793,
+      "sha256": "fca12759a54671e929e9902502579591bbcb02cd7d1046ba4e7586deddc6f55d",
+      "actual_exit": 0,
+      "start": "2026-10-05T12:12:45.161248+00:00",
+      "end": "2026-10-05T12:13:32.718277+00:00"
+    },
+    {
+      "label": "resume-depot-same-budget",
+      "bytes": 2554,
+      "sha256": "b1510898b3f841bcfffd4952e5993e61000dcedb310a32de3caa830ea561947e",
+      "actual_exit": 1,
+      "start": "2026-10-05T12:12:18.868092+00:00",
+      "end": "2026-10-05T12:12:19.810031+00:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "browser-end-tool-receipt.json",
+      "bytes": 988,
+      "sha256": "8a128ab75c70b726ec63419e9bc00a385740cc029a390b6551bd68255a15de6a"
+    },
+    {
+      "path": "depot-offline-audit-receipt.json",
+      "bytes": 913,
+      "sha256": "7745100f7fa527888e2cd9c469e46be3d0a1c75abaed8880c0cc3e31197a2261"
+    },
+    {
+      "path": "depot-offline-audit-result.json",
+      "bytes": 1179,
+      "sha256": "65d323b846667d5d33b2aeafb941508d0b06dc2b5f26678966e8c08ee563df56"
+    },
+    {
+      "path": "depot-offline-audit.log",
+      "bytes": 1220,
+      "sha256": "603bd3d67d50ccc91d854e592fe67ff9624c3fc8feff0dbee003e7bc5a283bd3"
+    },
+    {
+      "path": "driver_whole_full_fingerprints.py",
+      "bytes": 8992,
+      "sha256": "408ad0b0f9f534cedfcf643dcee1389d64fb6350b876e048f2a03f90e2bc6863"
+    },
+    {
+      "path": "post-end-verification.json",
+      "bytes": 12495,
+      "sha256": "e6ffc9c4cc7128186eac229c9c0dcfc94f7df85937d3bbbf83fe6229d1fe3c82"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/depot-save-unlock-radio-reload.json",
+      "bytes": 2290,
+      "sha256": "131b3b034e6d497d650b66e0d2db9ad7b95208dff28c8fb6081b5f50adf2fcb0"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/depot-whole-natural-1x.json",
+      "bytes": 1769,
+      "sha256": "2db09e2282297abc942e3fb51706d66257333ac5b42bcab09ce0d40d15eae5b9"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/depot-whole-natural-2x.json",
+      "bytes": 1774,
+      "sha256": "e82c8367852196a66d86177bf252087074c145f0cb5d8903271f1040d0e064b0"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/initialize-depot-original-profile-v2.json",
+      "bytes": 1779,
+      "sha256": "518821858b3c41482c11549dfe70fe4576868be0f5f43730fa7aa4cff21d8203"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/initialize-depot-original-profile.json",
+      "bytes": 986,
+      "sha256": "43450e8f17148bbc4e70fd02050bf0c9a07c8f1aea74ae4c10aad5861be628a9"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/manifest.json",
+      "bytes": 2489,
+      "sha256": "3d57d9133c783f60379d3be4865db6e734ad8d2367c907f88093f653acae504b"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/produce-depot-natural.json",
+      "bytes": 2322,
+      "sha256": "a6ba3c86add0c201cab72f95a74ce14c456cb153376323ec185f823a0d61b9ce"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/resume-depot-original-terminal.json",
+      "bytes": 1793,
+      "sha256": "fca12759a54671e929e9902502579591bbcb02cd7d1046ba4e7586deddc6f55d"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/resume-depot-same-budget.json",
+      "bytes": 2554,
+      "sha256": "b1510898b3f841bcfffd4952e5993e61000dcedb310a32de3caa830ea561947e"
+    },
+    {
+      "path": "run/console-final.json",
+      "bytes": 1916,
+      "sha256": "bbab37cabb1df397dcfada9a2d9b72e37bee2c9b443e602d51c0b9b82e44d782"
+    },
+    {
+      "path": "run/controller-events.jsonl",
+      "bytes": 5142,
+      "sha256": "a1fe7f8829f1ac78a1c6b69f649163c1253bf27d355bc92792df07fbc89518bb"
+    },
+    {
+      "path": "run/depot-before-boundary-browser.json",
+      "bytes": 15718,
+      "sha256": "29748fd941aa8476c1ded4f83e51ca22f20d95e249f4405064df6b9fd58acd67"
+    },
+    {
+      "path": "run/depot-before-boundary-fingerprints.json",
+      "bytes": 467852,
+      "sha256": "3766d78a7b4d133f3e77ae1738e5d848fed5f08d6449e8c21642b24aee639a47"
+    },
+    {
+      "path": "run/depot-boundary-final-browser.json",
+      "bytes": 1179,
+      "sha256": "374e7195ca4247ba4b360be83920a366b630c98c6071d527ef7a6b1f815173ee"
+    },
+    {
+      "path": "run/depot-boundary-final-fingerprints.json",
+      "bytes": 2969,
+      "sha256": "566d95592edc11bf98757e291af7e3af6d8ed5b9fff74ad618082611bea6196f"
+    },
+    {
+      "path": "run/depot-browser-final-proof.json",
+      "bytes": 962,
+      "sha256": "313494b0d6946e2539b13a5cd8ea9063da8161a9b9030082000266edd152ea20"
+    },
+    {
+      "path": "run/depot-whole-1x-browser.json",
+      "bytes": 13811,
+      "sha256": "86529b85b4980dafa31462f54d95426898e807c5ce6cc1b025107dc97bc7d97f"
+    },
+    {
+      "path": "run/depot-whole-1x-fingerprints.json",
+      "bytes": 318884,
+      "sha256": "7eeb2059aeb25e5dde3f1514a481ed6046c6482bb934e9109743b30cfa586ab2"
+    },
+    {
+      "path": "run/depot-whole-1x.json",
+      "bytes": 263980,
+      "sha256": "921bd8c506e7690063f7a0551c7ce0ae63bc2e12b25291e6d556475588c11f85"
+    },
+    {
+      "path": "run/depot-whole-2x-after-terminal-full-fingerprint.json",
+      "bytes": 461300,
+      "sha256": "fcf34ea3d95cbc7b4d3e1d84865f56f9501b5570ddf35fb64c95a888a53e7be6"
+    },
+    {
+      "path": "run/depot-whole-2x-before-natural-full-fingerprint.json",
+      "bytes": 328228,
+      "sha256": "ef19ed463332790d809b5797ce0618e5942a72231bd15c56c4c0ed5f8fd2a2e6"
+    },
+    {
+      "path": "run/depot-whole-2x-browser.json",
+      "bytes": 15718,
+      "sha256": "29748fd941aa8476c1ded4f83e51ca22f20d95e249f4405064df6b9fd58acd67"
+    },
+    {
+      "path": "run/depot-whole-2x-fingerprints.json",
+      "bytes": 467852,
+      "sha256": "3766d78a7b4d133f3e77ae1738e5d848fed5f08d6449e8c21642b24aee639a47"
+    },
+    {
+      "path": "run/depot-whole-2x.json",
+      "bytes": 133822,
+      "sha256": "c67deb8ab42a6d6a83ff3652a3623c83583f8caabe1bfd241e0e5024949e6f9c"
+    },
+    {
+      "path": "run/depot-whole1x-natural-wave1-visual.json",
+      "bytes": 16968,
+      "sha256": "d0926fe1b5da25245314155fc4adc8ec307a492134994ba7ac1f10d77fd1edf3"
+    },
+    {
+      "path": "run/depot_cleared_mission_rows.png",
+      "bytes": 88799,
+      "sha256": "9779d9205dbef86124076dc2a8695df6c8199d0869bd6d9ef5ef787ba86fcbcc"
+    },
+    {
+      "path": "run/depot_next_handoff.png",
+      "bytes": 209153,
+      "sha256": "09a731601ef0aafcc3be88be7128a8942d09274b941ec76aed96e065117760ff"
+    },
+    {
+      "path": "run/depot_reload-after-reload.json",
+      "bytes": 3911,
+      "sha256": "9b0ab63c27eb90fba917dd1bd26197cd4eff148deac81acb444795181c6dec25"
+    },
+    {
+      "path": "run/depot_reload-before-reload.json",
+      "bytes": 4740,
+      "sha256": "052888bf084bd6777fb102330edd10871c4615b3324f419f9ea1d75bb8a60b57"
+    },
+    {
+      "path": "run/depot_reload-browser-before-reload.json",
+      "bytes": 17579,
+      "sha256": "bbc4f7ae463515f6ed817e2b2c640a2d6306f07c39ea02d87179e27584978371"
+    },
+    {
+      "path": "run/depot_reload-engine-before-reload.json",
+      "bytes": 467516,
+      "sha256": "6da19d04eeb2459ef2ece52f9be26e6e42869d247abacc62c23207813737091b"
+    },
+    {
+      "path": "run/depot_reload_reloaded_mission_rows.png",
+      "bytes": 86249,
+      "sha256": "42457181b21d237a80930aa3b45f1abaca08777a289aa06ff17fbec08aaf1922"
+    },
+    {
+      "path": "run/depot_saved_radio_next_title.png",
+      "bytes": 112651,
+      "sha256": "94d4d1c108d0f462cc540b0eed416b5dc10f77673b6e517045169d651498b5c3"
+    },
+    {
+      "path": "run/depot_whole1x_natural_wave1_alert.png",
+      "bytes": 991876,
+      "sha256": "8eaf0a51f5d7a9ea16a56df352193dbaf4dc0f2bb5b3378beee4eff796308cf6"
+    },
+    {
+      "path": "run/depot_whole_1x_terminal.png",
+      "bytes": 999859,
+      "sha256": "4144310d4c4b6d45224d885ef0d5794317a86e53d877002576798128a40ec5a2"
+    },
+    {
+      "path": "run/depot_whole_2x_terminal.png",
+      "bytes": 1000205,
+      "sha256": "cc2eb1284ce08e7d6b6ce57e1a01c5e1cdd51eeeb2a0c0ae1a4d1604b4297bfd"
+    },
+    {
+      "path": "run/driver-actions.jsonl",
+      "bytes": 2328151,
+      "sha256": "e94b4f9862e6de5c088e968416fa481008d40e3836789dfc8fdf11af4296aecf"
+    },
+    {
+      "path": "run/engine-window-lifecycle.json",
+      "bytes": 483,
+      "sha256": "d8e3f311b263c91936d5dfe076f376d1a60157e3f2f13a4f39cac49ea78689b0"
+    },
+    {
+      "path": "run/http.log",
+      "bytes": 1122,
+      "sha256": "50ef648aa6c7e303b00711317bff9bb82b8298e40d25f852070b20101ea50f7f"
+    },
+    {
+      "path": "run/loaded-controls/depot-browser-final-proof.py",
+      "bytes": 2841,
+      "sha256": "5bd31677dde1acbe3508a01c6c57e15e66945f9dd6d4210658635afeee37ffea"
+    },
+    {
+      "path": "run/loaded-controls/depot-save-unlock-radio-reload.py",
+      "bytes": 3173,
+      "sha256": "4a85144e0ee1e18f277d6815c103b8c40dc89e64626d6af99d83cbc0a59d4c44"
+    },
+    {
+      "path": "run/loaded-controls/depot-whole-natural-1x.py",
+      "bytes": 1942,
+      "sha256": "d5cc61bdab969b5d06503296b910c70d277cf0947224914d18c0c92de5b0fc0a"
+    },
+    {
+      "path": "run/loaded-controls/depot-whole-natural-2x.py",
+      "bytes": 746,
+      "sha256": "0da87f2a49dee13063aa7c6765094bda1bf6b51cfc7cade06db268b7c088d200"
+    },
+    {
+      "path": "run/profile-after-depot.json",
+      "bytes": 5241,
+      "sha256": "4f0b37a746f6b9ae1831afda8c08d6f3ff1a087c02ec0530ea84c4209e42aa7d"
+    },
+    {
+      "path": "run/radio_continued_knife_scout.png",
+      "bytes": 1073829,
+      "sha256": "29eedf72255d9a1f12125d7c03ed7be75346cb2c5503b574da9395cea9c1e1a6"
+    },
+    {
+      "path": "run/radio_tutorial_0.png",
+      "bytes": 453721,
+      "sha256": "9804e9def6381b474fb5cdfb97093b35fd742492f82cd4b12404a38920be781b"
+    },
+    {
+      "path": "run/radio_tutorial_1.png",
+      "bytes": 470604,
+      "sha256": "3f1c47d3c48ae224694e16bfd4fc104f357ca68a28a878103a2dee2a73f15c7d"
+    },
+    {
+      "path": "run/receipt-vault/close-depot.json",
+      "bytes": 2111,
+      "sha256": "0bee19e9fdc0e6658cfa28d0a72caa45e3bdf54427983f8e7aa350fe1a23b0bc"
+    },
+    {
+      "path": "run/receipt-vault/close-depot.seal.json",
+      "bytes": 247,
+      "sha256": "45f6bbf71924148a59f4d2ec49b4d0ff678346fa1abbc8a59eed31430689a0b7"
+    },
+    {
+      "path": "run/receipt-vault/depot-browser-final-proof.json",
+      "bytes": 2283,
+      "sha256": "25b2e11c93dec8e38f050a203420d6dc797cb584a409dae7baba90b126d37516"
+    },
+    {
+      "path": "run/receipt-vault/depot-browser-final-proof.seal.json",
+      "bytes": 261,
+      "sha256": "76dbe216e0bb20db30dced70165a44a0d090fb1b3cbb61d77fecfb1c04482425"
+    },
+    {
+      "path": "run/receipt-vault/depot-save-unlock-radio-reload.json",
+      "bytes": 2290,
+      "sha256": "131b3b034e6d497d650b66e0d2db9ad7b95208dff28c8fb6081b5f50adf2fcb0"
+    },
+    {
+      "path": "run/receipt-vault/depot-save-unlock-radio-reload.seal.json",
+      "bytes": 266,
+      "sha256": "75c1c88c95273424e1cfade743b7987c4a719918f1b9cc9ce8067d82c5b4cdf4"
+    },
+    {
+      "path": "run/receipt-vault/depot-whole-natural-1x.json",
+      "bytes": 1769,
+      "sha256": "2db09e2282297abc942e3fb51706d66257333ac5b42bcab09ce0d40d15eae5b9"
+    },
+    {
+      "path": "run/receipt-vault/depot-whole-natural-1x.seal.json",
+      "bytes": 258,
+      "sha256": "39e8a4f3e439590f9a35a9a6ef68569499580156b736b0329b14befc071558c1"
+    },
+    {
+      "path": "run/receipt-vault/depot-whole-natural-2x.json",
+      "bytes": 1774,
+      "sha256": "e82c8367852196a66d86177bf252087074c145f0cb5d8903271f1040d0e064b0"
+    },
+    {
+      "path": "run/receipt-vault/depot-whole-natural-2x.seal.json",
+      "bytes": 258,
+      "sha256": "960355ff4beea233ee4b125e211962aa306bb7f96a490974363a7c3721230b67"
+    },
+    {
+      "path": "run/receipts/close-depot.json",
+      "bytes": 2111,
+      "sha256": "0bee19e9fdc0e6658cfa28d0a72caa45e3bdf54427983f8e7aa350fe1a23b0bc"
+    },
+    {
+      "path": "run/receipts/depot-browser-final-proof.json",
+      "bytes": 2283,
+      "sha256": "25b2e11c93dec8e38f050a203420d6dc797cb584a409dae7baba90b126d37516"
+    },
+    {
+      "path": "run/receipts/depot-save-unlock-radio-reload.json",
+      "bytes": 2290,
+      "sha256": "131b3b034e6d497d650b66e0d2db9ad7b95208dff28c8fb6081b5f50adf2fcb0"
+    },
+    {
+      "path": "run/receipts/depot-whole-natural-1x.json",
+      "bytes": 1769,
+      "sha256": "2db09e2282297abc942e3fb51706d66257333ac5b42bcab09ce0d40d15eae5b9"
+    },
+    {
+      "path": "run/receipts/depot-whole-natural-2x.json",
+      "bytes": 1774,
+      "sha256": "e82c8367852196a66d86177bf252087074c145f0cb5d8903271f1040d0e064b0"
+    },
+    {
+      "path": "run/requests/close-depot.json",
+      "bytes": 133,
+      "sha256": "19ed53fd8929596b39435d10dca50fb128d2e1478dafdcf0b5d1021e6281faf3"
+    },
+    {
+      "path": "run/requests/depot-browser-final-proof.json",
+      "bytes": 211,
+      "sha256": "a1974366fb2c1f22e63dd634a8899ddf187e257ab4737f80f921a2cf056b1af0"
+    },
+    {
+      "path": "run/requests/depot-save-unlock-radio-reload.json",
+      "bytes": 218,
+      "sha256": "00c4b6bc50425dd1df9ad40b432ca8b1d1d264ca6f8c86ea9e13a553350d17a9"
+    },
+    {
+      "path": "run/requests/depot-whole-natural-1x.json",
+      "bytes": 210,
+      "sha256": "25dc9c2989b7de4c813da03ce868bd8173d69ab85e81442a1035c166b8777ad0"
+    },
+    {
+      "path": "run/requests/depot-whole-natural-2x.json",
+      "bytes": 215,
+      "sha256": "71327d8f59f4f904392bcabf53917d5456e4b0a4b7f2c2f54aebccca60560c0f"
+    },
+    {
+      "path": "seal_depot_end_full.py",
+      "bytes": 8782,
+      "sha256": "454f7a2abec79213ff2689d739d174270eb03d99a9e36fd578af130f2138cf5f"
+    },
+    {
+      "path": "whole_depot_2x_full.py",
+      "bytes": 746,
+      "sha256": "0da87f2a49dee13063aa7c6765094bda1bf6b51cfc7cade06db268b7c088d200"
+    }
+  ],
+  "file_count": 75,
+  "total_bytes": 10916494,
+  "scope": "all final whole/progress/END proof plus previously-live logs; original producer/bin referenced without rewrite; no full six/performance acceptance",
+  "prior_manifest": "../20261005-pr15-web-depot-producer/manifest.json",
+  "prior_file_count": 59,
+  "prior_total_bytes": 23984722,
+  "browser_final_proof": {
+    "status": "PASS",
+    "utc": "2026-10-05T12:35:17.618360+00:00",
+    "controller_pid": 160947,
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "original_attempt": "1f32042b812907b6d833285e37ad9a5c",
+    "original_record_sha256": "02a8b05a334c4c83279e01d5f0d7323265e4da540baf31a1b900eac917e4368e",
+    "owned_pages": 1,
+    "scene": "res://scenes/title.tscn",
+    "next_level": "radio",
+    "fixture_ready": false,
+    "browser_trusted_before_reload": 150,
+    "browser_trusted_after_reload": 10,
+    "engine_inputs_before_reload": 150,
+    "engine_inputs_after_reload": 10,
+    "console_errors": 0,
+    "page_errors": 0,
+    "GL_invalid": 0,
+    "gpu_readpixels_warnings": 4,
+    "whole_1x_callback_wall": 625.7599,
+    "whole_2x_callback_wall": 316.1377,
+    "rate_wall_ratio": 1.9793903099820112,
+    "scope": "original depot producer, same original recording natural whole1x/2x, radio handoff and exact saved reload; safe Title; browser END and pure artifact audit still separate"
+  },
+  "lifecycle": {
+    "window_start": "2026-10-05T12:01:16.248288+00:00",
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "pid": 160947,
+    "profile": "/workspace/.ambush-loop-env/web-fresh-native-dab-20261005",
+    "url": "http://127.0.0.1:12815/index.html",
+    "engine_start": "2026-10-05T12:01:17.739678+00:00",
+    "engine_end": "2026-10-05T12:35:47.245912+00:00",
+    "clean_context_end": true,
+    "scope": "owned single persistent page/controller/server; actual PTY exit separately recorded"
+  },
+  "whole": [
+    {
+      "status": "PASS",
+      "level": "depot",
+      "rate": 1,
+      "attempt": "1f32042b812907b6d833285e37ad9a5c",
+      "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "record_sha256": "02a8b05a334c4c83279e01d5f0d7323265e4da540baf31a1b900eac917e4368e",
+      "terminal_tick": 10137,
+      "record_duration": 168.95,
+      "deadline_wall": 1043.6999999999998,
+      "controller_total_wall": 631.0486499019898,
+      "input_to_terminal_callback_wall": 625.7599,
+      "record_unchanged": true,
+      "domain_unchanged": true,
+      "frame_checks": {
+        "checks": 15,
+        "failures": [],
+        "tick": 10137
+      },
+      "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance",
+      "observer_row_count": 1278,
+      "full_request_wall": 671.674396,
+      "actual_request_exit": 0,
+      "full_internal_fingerprints_saved": false,
+      "helper_timer_scope": "controller_total_wall is helper-local natural playback+terminal fingerprint elapsed; full_request_wall is immutable controller request end-start; callback timer separate"
+    },
+    {
+      "status": "PASS",
+      "level": "depot",
+      "rate": 2,
+      "attempt": "1f32042b812907b6d833285e37ad9a5c",
+      "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "record_sha256": "02a8b05a334c4c83279e01d5f0d7323265e4da540baf31a1b900eac917e4368e",
+      "terminal_tick": 10137,
+      "record_duration": 168.95,
+      "deadline_wall": 536.8499999999999,
+      "controller_total_wall": 321.7844062850054,
+      "input_to_terminal_callback_wall": 316.1377,
+      "record_unchanged": true,
+      "domain_unchanged": true,
+      "frame_checks": {
+        "checks": 15,
+        "failures": [],
+        "tick": 10137
+      },
+      "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance",
+      "observer_row_count": 644,
+      "full_request_wall": 358.689574,
+      "actual_request_exit": 0,
+      "full_internal_fingerprints_saved": true,
+      "helper_timer_scope": "controller_total_wall is helper-local natural playback+terminal fingerprint elapsed; full_request_wall is immutable controller request end-start; callback timer separate"
+    }
+  ],
+  "offline_artifact_result": {
+    "checks": 20714,
+    "event_type_counts": {
+      "door": 1,
+      "fire": 13,
+      "kill": 4,
+      "loot": 4,
+      "no_engage": 13,
+      "spawn": 4,
+      "terminal": 1
+    },
+    "event_wave_counts": {
+      "0": 30,
+      "1": 10
+    },
+    "events": 40,
+    "failures": [],
+    "fire_actor_counts": {
+      "1": 9,
+      "2": 4
+    },
+    "frames": 1303,
+    "local_tick_regressions": 1,
+    "original_loot_events": [
+      {
+        "payload": {
+          "amount": 2,
+          "kind": "ammo"
+        },
+        "seq": 27,
+        "wave_id": 0
+      },
+      {
+        "payload": {
+          "amount": 5,
+          "kind": "ammo"
+        },
+        "seq": 28,
+        "wave_id": 0
+      },
+      {
+        "payload": {
+          "amount": 2,
+          "kind": "ammo"
+        },
+        "seq": 29,
+        "wave_id": 0
+      },
+      {
+        "payload": {
+          "amount": 1,
+          "kind": "mine"
+        },
+        "seq": 38,
+        "wave_id": 1
+      }
+    ],
+    "record_sha256": "02a8b05a334c4c83279e01d5f0d7323265e4da540baf31a1b900eac917e4368e",
+    "scope": "non-destructive original archived binary and pure reader/ViewState contract audit; offline selections are not whole playback or actual 3D renderer checks",
+    "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "terminal": 10137,
+    "wave_phase_counts": {
+      "0:0": 571,
+      "0:1": 91,
+      "0:5": 171,
+      "1:1": 18,
+      "1:3": 1,
+      "1:5": 451
+    }
+  },
+  "pre_finish_receipts_reverified": 8,
+  "live_engines": [],
+  "ports_closed": true,
+  "profile_lock_absent": true
+}

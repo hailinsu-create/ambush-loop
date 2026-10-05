@@ -1,0 +1,20 @@
+{
+  "pid": 127287,
+  "uid": 1000,
+  "ppid": 127281,
+  "owned_runner_pid": 127276,
+  "argv": [
+    "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--path",
+    "/workspace/pr15-metadata-candidate-a42/ambush_loop",
+    "-s",
+    "res://scripts/command_pose_clock_test.gd"
+  ],
+  "uuid_from_original_log": "7f1f6520a1b44c3a9d70e553e3997b7d",
+  "environ_read": "PermissionError; not used for ownership; exact own ancestry/uid/argv verified",
+  "reason": "Reproduced SCRIPT ERROR prevents completion; own failed engine SIGTERM, not acceptance",
+  "time": "2026-10-04T22:09:53.209684+00:00"
+}

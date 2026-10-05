@@ -1,0 +1,40 @@
+[
+  {
+    "source_sha": "80ce3798bd5cffdd3e1c92f1c3ca6a39b20f4ece",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "result_viewport_test.gd",
+      "--render"
+    ],
+    "environment": {},
+    "exit": 1,
+    "wall_seconds": 149.265,
+    "checks": 745,
+    "failures": 24,
+    "run_id": "87049211afe0452d9fc627aad75ff2db",
+    "errors": 0,
+    "capture_count": 26
+  },
+  {
+    "source_sha": "80ce3798bd5cffdd3e1c92f1c3ca6a39b20f4ece",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "viewport_hud_test.gd",
+      "--render"
+    ],
+    "environment": {
+      "AMBUSH_VIEWPORT_SCOPE": "focus"
+    },
+    "exit": 1,
+    "wall_seconds": 109.974,
+    "checks": 1718,
+    "failures": 16,
+    "run_id": "96485e29f1694796af2b74054e696c6f",
+    "errors": 16,
+    "capture_count": 40
+  }
+]

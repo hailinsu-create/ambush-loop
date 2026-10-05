@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+task_args=("$@")
+for ((task_index=0; task_index<${#task_args[@]}; task_index++)); do
+  if [[ "${task_args[$task_index]}" == 'res://scripts/native_record_replay_test.gd' ]]; then
+    task_args[$task_index]='/tmp/pr15-a05-record3d/native_record_replay_test.gd'
+  fi
+done
+exec /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --display-driver x11 --audio-driver Dummy --main-pack /workspace/ambush-pr15/ambush_loop/build/player_journey/a05fa959093e/player-journey.pck "${task_args[@]}"

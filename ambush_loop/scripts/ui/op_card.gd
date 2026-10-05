@@ -7,6 +7,7 @@ signal picked(idx: int)
 
 const RoleGlyphScript := preload("res://scripts/ui/role_glyph.gd")
 const GunStampScript := preload("res://scripts/ui/gun_stamp.gd")
+const HudRecord := preload("res://scripts/replay/hud_record.gd")
 
 var idx: int = 0
 var _name: Label
@@ -31,6 +32,7 @@ var _hurt_flash: float = 0.0
 var _watching: bool = false
 var _deployed: bool = false
 var _fire_pulse: float = 0.0
+var _historical := false
 
 
 func setup(i: int) -> void:
@@ -167,16 +169,21 @@ func _process(delta: float) -> void:
 
 
 func pulse_fire() -> void:
+	if _historical:
+		return
 	## Muzzle-linked punch on the card while WATCHING.
 	_fire_pulse = 1.0
 	_refresh_chrome()
 
 
 func bind(op: OperatorUnit, is_sel: bool, can_pick: bool, watching: bool = false, why: String = "") -> void:
+	_historical = false
 	if op == null:
 		visible = false
 		return
 	visible = true
+	_hp.max_value = OperatorUnit.MAX_HP
+	_hp.visible = true
 	size_flags_vertical = 0
 	_selected = is_sel
 	_can_pick = can_pick
@@ -249,12 +256,57 @@ func bind(op: OperatorUnit, is_sel: bool, can_pick: bool, watching: bool = false
 		_why.add_theme_color_override("font_color", kit.lerp(NightOps.OLIVE_HI, 0.45))
 
 
+func bind_record(op: Dictionary, is_sel: bool) -> void:
+	_historical = true
+	_can_pick = false
+	visible = not op.is_empty()
+	if not visible:
+		return
+	_selected = is_sel
+	_can_pick = false
+	_watching = false
+	_hurt_flash = 0.0
+	_fire_pulse = 0.0
+	_refresh_chrome()
+	_glyph.set("role", int(op.get("role", 0)))
+	_glyph.visible = op.has("role_label")
+	_gun.set("weapon_id", str(op.get("weapon", "")))
+	_gun.visible = str(op.get("weapon", "")) not in ["", "knife"]
+	_name.text = HudRecord.operator_name(op)
+	var stripe := OperatorUnit.role_kit_color(int(op.get("role", 0))).lerp(NightOps.OLIVE, 0.42)
+	_name.add_theme_color_override("font_color", stripe.lerp(NightOps.OLIVE_HI, 0.55))
+	_normal.border_color = Color(stripe.r, stripe.g, stripe.b, 0.70)
+	_hot.border_color = stripe.lerp(NightOps.OLIVE_HI, 0.35)
+	_role.text = "%s · %s" % [HudRecord.role_label(op), HudRecord.weapon_label(op)]
+	var hp := float(op.get("hp", 0.0)) if bool(op.get("alive", true)) else 0.0
+	_hp.max_value = float(op.get("max_hp", 100.0))
+	_hp.visible = op.has("max_hp") and op.has("hp")
+	_hp_target = hp
+	_hp_shown = hp
+	_hp.value = hp
+	_hp.modulate = Color.WHITE
+	_hp_txt.text = "HP %d" % int(round(hp)) if op.has("hp") else "HP —"
+	var color := NightOps.hp_color(hp / maxf(_hp.max_value, 1.0))
+	_fill_col = color
+	_hp.add_theme_stylebox_override("fill", NightOps.flat(color, Color.TRANSPARENT, 0, 0, 2))
+	_pips.visible = op.has("start_ammo") and op.has("max_ammo")
+	if _pips.visible:
+		_refresh_ammo_values(int(op.get("start_ammo", 0)), int(op.get("max_ammo", 0)), str(op.get("weapon", "")), int(op.get("ammo", 0)), bool(op.get("alive", true)))
+	var stance := " 匍" if int(op.get("stance", 0)) == 1 else (" 奔" if bool(op.get("sprinting", false)) else "")
+	_meta.text = "%s%s  %s" % [HudRecord.inventory_line(op), stance, str(op.get("fire_mode_label", "开火策略未记录"))]
+	_slot.text = str(op.get("cover_label", "掩体未记录"))
+	_slot.visible = false
+	_why.visible = false
+
+
 func _refresh_chrome() -> void:
 	add_theme_stylebox_override("panel", _hot if _selected else _normal)
 	if _watching and not _deployed:
 		modulate = Color(0.50, 0.50, 0.48, 0.48)
 	elif _fire_pulse > 0.04:
 		modulate = Color(1.0, 1.0, 1.0).lerp(Color(1.28, 1.22, 0.78), _fire_pulse)
+	elif _historical:
+		modulate = Color.WHITE
 	elif not _can_pick:
 		modulate = Color(1, 1, 1, 0.5)
 	elif _hovered and not _selected:
@@ -266,12 +318,17 @@ func _refresh_chrome() -> void:
 
 
 func _refresh_ammo_pips(op: OperatorUnit) -> void:
+	_pips.visible = true
+	_refresh_ammo_values(op.start_ammo, op.max_ammo, op.weapon_id, op.ammo, op.alive)
+
+
+func _refresh_ammo_values(start: int, maximum: int, weapon: String, ammo: int, alive: bool) -> void:
 	if _pips == null:
 		return
-	var mag := maxi(op.start_ammo, 1) if op.start_ammo > 0 else maxi(op.max_ammo, 1)
+	var mag := maxi(start, 1) if start > 0 else maxi(maximum, 1)
 	var n := mini(mag, 16)
-	if op.weapon_id in ["mg42", "bar"]:
-		n = mini(maxi(op.max_ammo, mag), 16)
+	if weapon in ["mg42", "bar"]:
+		n = mini(maxi(maximum, mag), 16)
 	while _pips.get_child_count() > n:
 		var last := _pips.get_child(_pips.get_child_count() - 1)
 		_pips.remove_child(last)
@@ -281,8 +338,8 @@ func _refresh_ammo_pips(op: OperatorUnit) -> void:
 		pip.custom_minimum_size = Vector2(7, 6)
 		pip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_pips.add_child(pip)
-	var filled := mini(maxi(op.ammo, 0), n)
-	if not op.alive:
+	var filled := mini(maxi(ammo, 0), n)
+	if not alive:
 		filled = 0
 	for i in n:
 		var pip: ColorRect = _pips.get_child(i) as ColorRect
@@ -317,6 +374,8 @@ func _default_why(op: OperatorUnit) -> String:
 
 
 func _on_gui(event: InputEvent) -> void:
+	if not _can_pick:
+		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		picked.emit(idx)
 		accept_event()

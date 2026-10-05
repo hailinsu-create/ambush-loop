@@ -1,0 +1,2225 @@
+{
+  "status": "PASS_FIXED_WON_REPLAY_M_CONTINUE",
+  "states": {
+    "cold": {
+      "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+      "covers": [
+        {
+          "id": 0,
+          "pos": [
+            368,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "pos": [
+            496,
+            400
+          ]
+        },
+        {
+          "id": 2,
+          "pos": [
+            720,
+            240
+          ]
+        },
+        {
+          "id": 3,
+          "pos": [
+            912,
+            464
+          ]
+        },
+        {
+          "id": 4,
+          "pos": [
+            592,
+            528
+          ]
+        },
+        {
+          "id": 5,
+          "pos": [
+            944,
+            560
+          ]
+        }
+      ],
+      "engine_frames": 12,
+      "event_log_open": true,
+      "event_ring_visible": false,
+      "fail_reason": "",
+      "fixture_ready": true,
+      "focus_actor": -1,
+      "focus_type": "",
+      "gui_focus": "",
+      "gui_hover": "",
+      "input_count": 0,
+      "input_tail": null,
+      "level": "warehouse",
+      "log": {
+        "events": 62,
+        "playback_frames": 2072,
+        "playback_terminal": 16102,
+        "playback_tick": 0,
+        "snapshots": 206,
+        "terminal": 1203,
+        "terminal_reason": "win"
+      },
+      "loot": [],
+      "mines_count": 0,
+      "modal": {
+        "backpack": false,
+        "credits": false,
+        "handoff": false,
+        "handoff_from": "",
+        "handoff_to": "",
+        "pause": false,
+        "tutorial": false,
+        "tutorial_body": "",
+        "tutorial_page": 0
+      },
+      "observer_usec": 45900,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 0,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            336,
+            528
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 90,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            368,
+            560
+          ],
+          "role": 1,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            400,
+            528
+          ],
+          "role": 2,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        }
+      ],
+      "phase": 4,
+      "presents": 12,
+      "replay": {
+        "max": 16102,
+        "playing": false,
+        "speed": 2,
+        "tick": 10788
+      },
+      "run_id": 1,
+      "scale": 1,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "selected": 1,
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "469c990d25b1e45653af9420ce2fde007a4d57c7b7ad2011422119112f5125b8",
+            "text": "[progress]\n\nlevel_id=\"warehouse\"\nlevel_index=1\ncomplete=false\nloop_index=1\n\n[audio]\n\nmuted=false\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "f3c62905690656599e93fb999ce95c50405e655c8efd3f6ad99c3270aa120fa0",
+            "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": false,
+        "next": "warehouse",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "sim": {
+        "accum": 0,
+        "paused": false,
+        "speed": 1,
+        "tick": 0
+      },
+      "stashes": [
+        {
+          "collected": false,
+          "family": "rifle",
+          "id": 139972316615,
+          "kind": "kar98k",
+          "pos": [
+            368,
+            240
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mg",
+          "id": 140156866166,
+          "kind": "bar",
+          "pos": [
+            528,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "scout",
+          "id": 140341415552,
+          "kind": "springfield",
+          "pos": [
+            944,
+            528
+          ]
+        },
+        {
+          "collected": false,
+          "family": "grenade",
+          "id": 140525964938,
+          "kind": "grenade",
+          "pos": [
+            880,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mine",
+          "id": 140676959891,
+          "kind": "mine",
+          "pos": [
+            336,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "ammo",
+          "id": 140827954844,
+          "kind": "ammo",
+          "pos": [
+            752,
+            208
+          ]
+        },
+        {
+          "collected": false,
+          "family": "decoy",
+          "id": 140978949797,
+          "kind": "decoy",
+          "pos": [
+            720,
+            304
+          ]
+        },
+        {
+          "collected": false,
+          "family": "smg",
+          "id": 141129944750,
+          "kind": "mp40",
+          "pos": [
+            464,
+            528
+          ]
+        }
+      ],
+      "status": "只读复盘 · P 暂停/继续 · +/- 倍速 · 滑条/←→/事件定位后暂停 · 空格返回",
+      "ticks_usec": 15537900,
+      "tool": 0,
+      "view": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "gesture": {
+          "contacts": 0,
+          "middle_down": false,
+          "pending_id": -1,
+          "suppressed": 0,
+          "ui_contacts": 0
+        },
+        "level": "warehouse",
+        "pitch": 55,
+        "recorded_phase": 5,
+        "roots": 5,
+        "seq": 1365,
+        "tick": 10788,
+        "wave": 0,
+        "yaw": 35
+      },
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "wave": 0,
+      "wave_count": 2,
+      "waves_cleared": 0,
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "settled": {
+      "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+      "covers": [
+        {
+          "id": 0,
+          "pos": [
+            368,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "pos": [
+            496,
+            400
+          ]
+        },
+        {
+          "id": 2,
+          "pos": [
+            720,
+            240
+          ]
+        },
+        {
+          "id": 3,
+          "pos": [
+            912,
+            464
+          ]
+        },
+        {
+          "id": 4,
+          "pos": [
+            592,
+            528
+          ]
+        },
+        {
+          "id": 5,
+          "pos": [
+            944,
+            560
+          ]
+        }
+      ],
+      "engine_frames": 31,
+      "event_log_open": true,
+      "event_ring_visible": false,
+      "fail_reason": "",
+      "fixture_ready": true,
+      "focus_actor": -1,
+      "focus_type": "",
+      "gui_focus": "",
+      "gui_hover": "",
+      "input_count": 2,
+      "input_tail": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "echo": false,
+        "engine_frame": 27,
+        "keycode": 32,
+        "kind": "key",
+        "phase": 3,
+        "presents": 27,
+        "pressed": false,
+        "scene": "res://scenes/presentation/yard_3d.tscn",
+        "us": 22609400
+      },
+      "level": "warehouse",
+      "log": {
+        "events": 62,
+        "playback_frames": 2072,
+        "playback_terminal": 16102,
+        "playback_tick": 0,
+        "snapshots": 206,
+        "terminal": 1203,
+        "terminal_reason": "win"
+      },
+      "loot": [],
+      "mines_count": 0,
+      "modal": {
+        "backpack": false,
+        "credits": false,
+        "handoff": false,
+        "handoff_from": "",
+        "handoff_to": "",
+        "pause": false,
+        "tutorial": false,
+        "tutorial_body": "",
+        "tutorial_page": 0
+      },
+      "observer_usec": 71300,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 0,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            336,
+            528
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 90,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            368,
+            560
+          ],
+          "role": 1,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            400,
+            528
+          ],
+          "role": 2,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        }
+      ],
+      "phase": 3,
+      "presents": 31,
+      "replay": {
+        "max": 16102,
+        "playing": false,
+        "speed": 2,
+        "tick": 10788
+      },
+      "run_id": 1,
+      "scale": 1,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "selected": 1,
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "acb1afc3c1b00d3f05303775af4c95b893b8e27be2efba16db2b49d69252f88d",
+            "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "f3c62905690656599e93fb999ce95c50405e655c8efd3f6ad99c3270aa120fa0",
+            "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 1,
+            "perfect": true,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": false,
+        "next": "pump",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "sim": {
+        "accum": 0,
+        "paused": false,
+        "speed": 1,
+        "tick": 0
+      },
+      "stashes": [
+        {
+          "collected": false,
+          "family": "rifle",
+          "id": 139972316615,
+          "kind": "kar98k",
+          "pos": [
+            368,
+            240
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mg",
+          "id": 140156866166,
+          "kind": "bar",
+          "pos": [
+            528,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "scout",
+          "id": 140341415552,
+          "kind": "springfield",
+          "pos": [
+            944,
+            528
+          ]
+        },
+        {
+          "collected": false,
+          "family": "grenade",
+          "id": 140525964938,
+          "kind": "grenade",
+          "pos": [
+            880,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mine",
+          "id": 140676959891,
+          "kind": "mine",
+          "pos": [
+            336,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "ammo",
+          "id": 140827954844,
+          "kind": "ammo",
+          "pos": [
+            752,
+            208
+          ]
+        },
+        {
+          "collected": false,
+          "family": "decoy",
+          "id": 140978949797,
+          "kind": "decoy",
+          "pos": [
+            720,
+            304
+          ]
+        },
+        {
+          "collected": false,
+          "family": "smg",
+          "id": 141129944750,
+          "kind": "mp40",
+          "pos": [
+            464,
+            528
+          ]
+        }
+      ],
+      "status": "计划奏效",
+      "ticks_usec": 24425000,
+      "tool": 0,
+      "view": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "gesture": {
+          "contacts": 0,
+          "middle_down": false,
+          "pending_id": -1,
+          "suppressed": 0,
+          "ui_contacts": 0
+        },
+        "level": "warehouse",
+        "pitch": 55,
+        "recorded_phase": 3,
+        "roots": 4,
+        "seq": -1,
+        "tick": 0,
+        "wave": 0,
+        "yaw": 35
+      },
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "wave": 0,
+      "wave_count": 2,
+      "waves_cleared": 0,
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "replay": {
+      "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+      "covers": [
+        {
+          "id": 0,
+          "pos": [
+            368,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "pos": [
+            496,
+            400
+          ]
+        },
+        {
+          "id": 2,
+          "pos": [
+            720,
+            240
+          ]
+        },
+        {
+          "id": 3,
+          "pos": [
+            912,
+            464
+          ]
+        },
+        {
+          "id": 4,
+          "pos": [
+            592,
+            528
+          ]
+        },
+        {
+          "id": 5,
+          "pos": [
+            944,
+            560
+          ]
+        }
+      ],
+      "engine_frames": 56,
+      "event_log_open": true,
+      "event_ring_visible": false,
+      "fail_reason": "",
+      "fixture_ready": true,
+      "focus_actor": -1,
+      "focus_type": "",
+      "gui_focus": "",
+      "gui_hover": "",
+      "input_count": 4,
+      "input_tail": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 52,
+        "kind": "mouse",
+        "phase": 3,
+        "pos": [
+          840,
+          540
+        ],
+        "presents": 52,
+        "pressed": false,
+        "scene": "res://scenes/presentation/yard_3d.tscn",
+        "us": 34320300
+      },
+      "level": "warehouse",
+      "log": {
+        "events": 62,
+        "playback_frames": 2072,
+        "playback_terminal": 16102,
+        "playback_tick": 0,
+        "snapshots": 206,
+        "terminal": 1203,
+        "terminal_reason": "win"
+      },
+      "loot": [],
+      "mines_count": 0,
+      "modal": {
+        "backpack": false,
+        "credits": false,
+        "handoff": false,
+        "handoff_from": "",
+        "handoff_to": "",
+        "pause": false,
+        "tutorial": false,
+        "tutorial_body": "",
+        "tutorial_page": 0
+      },
+      "observer_usec": 113500,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 0,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            336,
+            528
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 90,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            368,
+            560
+          ],
+          "role": 1,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            400,
+            528
+          ],
+          "role": 2,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        }
+      ],
+      "phase": 4,
+      "presents": 56,
+      "replay": {
+        "max": 16102,
+        "playing": true,
+        "speed": 2,
+        "tick": 63
+      },
+      "run_id": 1,
+      "scale": 1,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "selected": 1,
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "acb1afc3c1b00d3f05303775af4c95b893b8e27be2efba16db2b49d69252f88d",
+            "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "f3c62905690656599e93fb999ce95c50405e655c8efd3f6ad99c3270aa120fa0",
+            "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 1,
+            "perfect": true,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": false,
+        "next": "pump",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "sim": {
+        "accum": 0,
+        "paused": false,
+        "speed": 1,
+        "tick": 0
+      },
+      "stashes": [
+        {
+          "collected": false,
+          "family": "rifle",
+          "id": 139972316615,
+          "kind": "kar98k",
+          "pos": [
+            368,
+            240
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mg",
+          "id": 140156866166,
+          "kind": "bar",
+          "pos": [
+            528,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "scout",
+          "id": 140341415552,
+          "kind": "springfield",
+          "pos": [
+            944,
+            528
+          ]
+        },
+        {
+          "collected": false,
+          "family": "grenade",
+          "id": 140525964938,
+          "kind": "grenade",
+          "pos": [
+            880,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mine",
+          "id": 140676959891,
+          "kind": "mine",
+          "pos": [
+            336,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "ammo",
+          "id": 140827954844,
+          "kind": "ammo",
+          "pos": [
+            752,
+            208
+          ]
+        },
+        {
+          "collected": false,
+          "family": "decoy",
+          "id": 140978949797,
+          "kind": "decoy",
+          "pos": [
+            720,
+            304
+          ]
+        },
+        {
+          "collected": false,
+          "family": "smg",
+          "id": 141129944750,
+          "kind": "mp40",
+          "pos": [
+            464,
+            528
+          ]
+        }
+      ],
+      "status": "只读复盘 · P 暂停/继续 · +/- 倍速 · 滑条/←→/事件定位后暂停 · 空格返回",
+      "ticks_usec": 36279200,
+      "tool": 0,
+      "view": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "gesture": {
+          "contacts": 0,
+          "middle_down": false,
+          "pending_id": -1,
+          "suppressed": 0,
+          "ui_contacts": 0
+        },
+        "level": "warehouse",
+        "pitch": 55,
+        "recorded_phase": 0,
+        "roots": 4,
+        "seq": 7,
+        "tick": 63,
+        "wave": 0,
+        "yaw": 35
+      },
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "wave": 0,
+      "wave_count": 2,
+      "waves_cleared": 0,
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "mute": {
+      "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+      "covers": [
+        {
+          "id": 0,
+          "pos": [
+            368,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "pos": [
+            496,
+            400
+          ]
+        },
+        {
+          "id": 2,
+          "pos": [
+            720,
+            240
+          ]
+        },
+        {
+          "id": 3,
+          "pos": [
+            912,
+            464
+          ]
+        },
+        {
+          "id": 4,
+          "pos": [
+            592,
+            528
+          ]
+        },
+        {
+          "id": 5,
+          "pos": [
+            944,
+            560
+          ]
+        }
+      ],
+      "engine_frames": 63,
+      "event_log_open": true,
+      "event_ring_visible": false,
+      "fail_reason": "",
+      "fixture_ready": true,
+      "focus_actor": -1,
+      "focus_type": "",
+      "gui_focus": "",
+      "gui_hover": "",
+      "input_count": 6,
+      "input_tail": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "echo": false,
+        "engine_frame": 59,
+        "keycode": 77,
+        "kind": "key",
+        "phase": 4,
+        "presents": 59,
+        "pressed": false,
+        "scene": "res://scenes/presentation/yard_3d.tscn",
+        "us": 38156200
+      },
+      "level": "warehouse",
+      "log": {
+        "events": 62,
+        "playback_frames": 2072,
+        "playback_terminal": 16102,
+        "playback_tick": 0,
+        "snapshots": 206,
+        "terminal": 1203,
+        "terminal_reason": "win"
+      },
+      "loot": [],
+      "mines_count": 0,
+      "modal": {
+        "backpack": false,
+        "credits": false,
+        "handoff": false,
+        "handoff_from": "",
+        "handoff_to": "",
+        "pause": false,
+        "tutorial": false,
+        "tutorial_body": "",
+        "tutorial_page": 0
+      },
+      "observer_usec": 130400,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 0,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            336,
+            528
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 90,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            368,
+            560
+          ],
+          "role": 1,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            400,
+            528
+          ],
+          "role": 2,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        }
+      ],
+      "phase": 4,
+      "presents": 63,
+      "replay": {
+        "max": 16102,
+        "playing": true,
+        "speed": 2,
+        "tick": 176
+      },
+      "run_id": 1,
+      "scale": 1,
+      "scene": "res://scenes/presentation/yard_3d.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "selected": 1,
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "48d853b04522fc5d9ebbb7c3e0733882b8d325d42f39fd51260d9cf31d82e181",
+            "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "0476769ee28086f1e969a18ddfc89ecf58611c84888ab02f007c91a3461ba272",
+            "text": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 1,
+            "perfect": true,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": true,
+        "next": "pump",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "sim": {
+        "accum": 0,
+        "paused": false,
+        "speed": 1,
+        "tick": 0
+      },
+      "stashes": [
+        {
+          "collected": false,
+          "family": "rifle",
+          "id": 139972316615,
+          "kind": "kar98k",
+          "pos": [
+            368,
+            240
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mg",
+          "id": 140156866166,
+          "kind": "bar",
+          "pos": [
+            528,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "scout",
+          "id": 140341415552,
+          "kind": "springfield",
+          "pos": [
+            944,
+            528
+          ]
+        },
+        {
+          "collected": false,
+          "family": "grenade",
+          "id": 140525964938,
+          "kind": "grenade",
+          "pos": [
+            880,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mine",
+          "id": 140676959891,
+          "kind": "mine",
+          "pos": [
+            336,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "ammo",
+          "id": 140827954844,
+          "kind": "ammo",
+          "pos": [
+            752,
+            208
+          ]
+        },
+        {
+          "collected": false,
+          "family": "decoy",
+          "id": 140978949797,
+          "kind": "decoy",
+          "pos": [
+            720,
+            304
+          ]
+        },
+        {
+          "collected": false,
+          "family": "smg",
+          "id": 141129944750,
+          "kind": "mp40",
+          "pos": [
+            464,
+            528
+          ]
+        }
+      ],
+      "status": "只读复盘 · P 暂停/继续 · +/- 倍速 · 滑条/←→/事件定位后暂停 · 空格返回",
+      "ticks_usec": 40028100,
+      "tool": 0,
+      "view": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "gesture": {
+          "contacts": 0,
+          "middle_down": false,
+          "pending_id": -1,
+          "suppressed": 0,
+          "ui_contacts": 0
+        },
+        "level": "warehouse",
+        "pitch": 55,
+        "recorded_phase": 0,
+        "roots": 4,
+        "seq": 22,
+        "tick": 176,
+        "wave": 0,
+        "yaw": 35
+      },
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "wave": 0,
+      "wave_count": 2,
+      "waves_cleared": 0,
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "title": {
+      "briefing": false,
+      "continue_disabled": false,
+      "engine_frames": 105,
+      "fixture_ready": true,
+      "gui_focus": "",
+      "gui_hover": "/root/Title/UI/TitleScroll",
+      "input_count": 10,
+      "input_tail": {
+        "attempt": "1289c65c34af63cf62707bf18ddc4cca",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 99,
+        "kind": "mouse",
+        "phase": 4,
+        "pos": [
+          636,
+          614
+        ],
+        "presents": 99,
+        "pressed": false,
+        "scene": "res://scenes/presentation/yard_3d.tscn",
+        "us": 56358000
+      },
+      "mission_select": false,
+      "observer_usec": 189400,
+      "pending": "yard",
+      "presents": 105,
+      "scale": 1,
+      "scene": "res://scenes/title.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "48d853b04522fc5d9ebbb7c3e0733882b8d325d42f39fd51260d9cf31d82e181",
+            "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "0476769ee28086f1e969a18ddfc89ecf58611c84888ab02f007c91a3461ba272",
+            "text": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 1,
+            "perfect": true,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": true,
+        "next": "pump",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "ticks_usec": 57141800,
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "correct_continue": {
+      "attempt": "d7304dd549bb67cd353a4368e216de2e",
+      "covers": [
+        {
+          "id": 0,
+          "pos": [
+            336,
+            272
+          ]
+        },
+        {
+          "id": 1,
+          "pos": [
+            464,
+            240
+          ]
+        },
+        {
+          "id": 2,
+          "pos": [
+            752,
+            272
+          ]
+        },
+        {
+          "id": 3,
+          "pos": [
+            688,
+            464
+          ]
+        },
+        {
+          "id": 4,
+          "pos": [
+            880,
+            400
+          ]
+        },
+        {
+          "id": 5,
+          "pos": [
+            944,
+            560
+          ]
+        }
+      ],
+      "engine_frames": 131,
+      "event_log_open": false,
+      "event_ring_visible": false,
+      "fail_reason": "",
+      "fixture_ready": true,
+      "focus_actor": -1,
+      "focus_type": "",
+      "gui_focus": "",
+      "gui_hover": "/root/Main/@CanvasLayer@1023/@PanelContainer@1024/@MarginContainer@1025",
+      "input_count": 12,
+      "input_tail": {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 127,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 127,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 59473800
+      },
+      "level": "pump",
+      "log": {
+        "events": 0,
+        "playback_frames": 4,
+        "playback_terminal": -1,
+        "playback_tick": 23,
+        "snapshots": 0,
+        "terminal": -1,
+        "terminal_reason": ""
+      },
+      "loot": [],
+      "mines_count": 0,
+      "modal": {
+        "backpack": false,
+        "credits": false,
+        "handoff": false,
+        "handoff_from": "",
+        "handoff_to": "",
+        "pause": false,
+        "tutorial": true,
+        "tutorial_body": "两波。搜刮时岗哨黄锥仍在：C 蹲进管廊阴影。先打主路，打扫后再打侧翼。B 锁门不是稳赢——侧翼会在决策格改走紫色备用接近。第一波打扫完再决定锁不锁门，第二波前把青弧转过去。",
+        "tutorial_page": 0
+      },
+      "observer_usec": 230500,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 0,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            336,
+            528
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 90,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            368,
+            560
+          ],
+          "role": 1,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        },
+        {
+          "alive": true,
+          "ammo": 0,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "knife",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [],
+          "pool": {},
+          "pos": [
+            400,
+            528
+          ],
+          "role": 2,
+          "slot": -1,
+          "start_ammo": 0,
+          "weapon": "knife"
+        }
+      ],
+      "phase": 0,
+      "presents": 131,
+      "replay": {
+        "max": 0,
+        "playing": false,
+        "speed": 2,
+        "tick": 0
+      },
+      "run_id": 1,
+      "scale": 1,
+      "scene": "res://scenes/main.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "selected": 1,
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "48d853b04522fc5d9ebbb7c3e0733882b8d325d42f39fd51260d9cf31d82e181",
+            "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "0476769ee28086f1e969a18ddfc89ecf58611c84888ab02f007c91a3461ba272",
+            "text": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 1,
+            "perfect": true,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": true,
+        "next": "pump",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "sim": {
+        "accum": 0,
+        "paused": false,
+        "speed": 1,
+        "tick": 0
+      },
+      "stashes": [
+        {
+          "collected": false,
+          "family": "rifle",
+          "id": 487227133797,
+          "kind": "m1_garand",
+          "pos": [
+            336,
+            400
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mg",
+          "id": 487411680965,
+          "kind": "bar",
+          "pos": [
+            720,
+            432
+          ]
+        },
+        {
+          "collected": false,
+          "family": "scout",
+          "id": 487596230351,
+          "kind": "springfield",
+          "pos": [
+            944,
+            528
+          ]
+        },
+        {
+          "collected": false,
+          "family": "grenade",
+          "id": 487780779735,
+          "kind": "grenade",
+          "pos": [
+            528,
+            272
+          ]
+        },
+        {
+          "collected": false,
+          "family": "mine",
+          "id": 487931774689,
+          "kind": "mine",
+          "pos": [
+            304,
+            400
+          ]
+        },
+        {
+          "collected": false,
+          "family": "ammo",
+          "id": 488082769641,
+          "kind": "ammo",
+          "pos": [
+            752,
+            528
+          ]
+        },
+        {
+          "collected": false,
+          "family": "smg",
+          "id": 488233764595,
+          "kind": "thompson",
+          "pos": [
+            464,
+            528
+          ]
+        }
+      ],
+      "status": "点选队员 · 点地走 · C匍匐 · Q技能 · 岗哨有黄锥",
+      "ticks_usec": 62630100,
+      "tool": 0,
+      "view": {
+        "attempt": "d7304dd549bb67cd353a4368e216de2e",
+        "gesture": {
+          "contacts": 0,
+          "middle_down": false,
+          "pending_id": -1,
+          "suppressed": 0,
+          "ui_contacts": 0
+        },
+        "level": "pump",
+        "pitch": 55,
+        "recorded_phase": 0,
+        "roots": 4,
+        "seq": -1,
+        "tick": 23,
+        "wave": 0,
+        "yaw": 35
+      },
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "wave": 0,
+      "wave_count": 2,
+      "waves_cleared": 0,
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "final": {
+      "briefing": false,
+      "continue_disabled": false,
+      "engine_frames": 209,
+      "fixture_ready": true,
+      "gui_focus": "",
+      "gui_hover": "/root/Title/UI/TitleScroll",
+      "input_count": 20,
+      "input_tail": {
+        "attempt": "d7304dd549bb67cd353a4368e216de2e",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 203,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          636,
+          614
+        ],
+        "presents": 203,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 97026900
+      },
+      "mission_select": false,
+      "observer_usec": 361500,
+      "pending": "yard",
+      "presents": 209,
+      "scale": 1,
+      "scene": "res://scenes/title.tscn",
+      "screen_transform": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "settings": {
+        "complete": false,
+        "configs": {
+          "ambush_loop.cfg": {
+            "sha256": "48d853b04522fc5d9ebbb7c3e0733882b8d325d42f39fd51260d9cf31d82e181",
+            "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"warehouse\", \"yard\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+          },
+          "ambush_loop_settings.cfg": {
+            "sha256": "fc339d6863cd9873a91b6337c8da1f62b655ddd2ea8fb09cec7c3c04083bc7a2",
+            "text": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_warehouse=true\nseen_pump=true\n"
+          }
+        },
+        "force_touch_hud": false,
+        "has_progress": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 1,
+            "perfect": true,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "music_volume": 1,
+        "muted": true,
+        "next": "pump",
+        "persistence_error": "",
+        "persistence_status": "已保存到此浏览器",
+        "quality": "standard",
+        "seen": {
+          "pump": true,
+          "warehouse": true
+        },
+        "sfx_volume": 1
+      },
+      "ticks_usec": 97708200,
+      "viewport": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "window_size": [
+        1280,
+        720
+      ]
+    }
+  },
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org"
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL"
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x2ac4051a0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x2ac4051a0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x2ac4051a0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x2ac4051a0000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    }
+  ],
+  "page_errors": [],
+  "trusted_input_count": 20,
+  "first_cold_Space_scope": "unsettled fixture victory side effect, not itself product bug",
+  "ordinary_route": "settled WON → original Replay → M → original settings → Title → original Continue pump",
+  "no_fresh_producer": true
+}

@@ -1,0 +1,176 @@
+{
+  "source_sha": "83067064d6add31bd4f15c2d9ea6da2237c4398b",
+  "native_runs": [
+    {
+      "uuid": "b4d55a6ad60b468d977fff3852ac966c",
+      "actual_exit": 143
+    },
+    {
+      "uuid": "13f67b5e3fbc4e4abb6ab5846a96aae1",
+      "actual_exit": 143
+    }
+  ],
+  "scope": "Author intended early termination for duplicate mouse/keyboard yard PNG names, but process selection read restricted /proc/environ and skipped the process. Exit receipt was absent; an unguarded shell continued and mistakenly started second native test on112. Both were then actually terminated using exact Godot --path and script args. All native outputs invalid for formal acceptance due concurrent input/window conflict. Original run had7 SCRIPTERROR and failures; no green counts. Current partial PNG versions are ambiguous between runs, not attributed evidence. Two earlier overwritten frame versions cannot be claimed retained. Old minimal report was not reused. Follow-up native queue never launched. 830 headless auto29/lifecycle30 in both batches separately completed; new fixed source will rerun final H checks.",
+  "files": {
+    "title-focus-auto-headless-v2.log": {
+      "sha256": "179702f0e562826ed71f0f213aa8f8674a6d9a04fe47b96518129505f0322d76",
+      "bytes": 608
+    },
+    "viewport_focus_1280_200_touch_continue_brief_0.png": {
+      "sha256": "f558885e424c0f26b1a60c1aac289d6c9bea3fce969a3164b75932f53dea2c78",
+      "bytes": 94897
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_4.png": {
+      "sha256": "53b61954ccec5bdd8bc9d682e6e9b2973c90e11a3c169117626841bf1c6c52c6",
+      "bytes": 92046
+    },
+    "title-focus-formal-v2.log": {
+      "sha256": "85ce232e1884ea96c0817bfa39b2fb819604c5d210b781315813fb7019bd4ae3",
+      "bytes": 7963
+    },
+    "title-focus-formal.exit": {
+      "sha256": "9d9b18720961e9b4689fd763b85e7b6f36160ccd3a8a1c9ddc5103bb0f66c396",
+      "bytes": 4
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_0.png": {
+      "sha256": "ca066956612bde186d311fa5cc92c7266fd030f20d2c8d4275affc9a2f23a43f",
+      "bytes": 125675
+    },
+    "viewport_focus_1280_100_desktop_fresh_settings_back.png": {
+      "sha256": "f8a5ec226104529b66a7025c0258e2386c400cd00ff4f9d9b88ed1675ca1ccbe",
+      "bytes": 122290
+    },
+    "viewport_focus_1280_100_desktop_fresh_brief_back_0.png": {
+      "sha256": "e70c10fa42240c63c4d2764c390b9b88d1815f38e6d4a68b4b64adf04e55aa59",
+      "bytes": 121349
+    },
+    "viewport_focus_1280_200_touch_fresh_brief_back_0.png": {
+      "sha256": "c7cb04678cb0a51c546955d708b1dee49230dcf624b510ca755a6c0ce27d2d6d",
+      "bytes": 86733
+    },
+    "viewport_focus_1600_100_touch_fresh_brief_0.png": {
+      "sha256": "175b2b144057f4466746147c12413069bd4740d1adceab7552eeb4aa7ee1ba9a",
+      "bytes": 117241
+    },
+    "title-focus-lifecycle-headless-v2.log": {
+      "sha256": "7be07c9665fd72bd1cb3d7c79d48816a9913c814d468fde37c14bb0bce974827",
+      "bytes": 624
+    },
+    "title-focus-auto-headless-v2.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_2.png": {
+      "sha256": "56ae745dfc482be49bc04d7364cebf85c3c5e508981fc681cbce688d24b168d7",
+      "bytes": 96940
+    },
+    "title-focus-auto-headless.log": {
+      "sha256": "3f5d9ffb4923763f631389c6572129e76017958e3d0a7320779de4e4ca6ed84b",
+      "bytes": 608
+    },
+    "viewport_focus_1280_200_touch_fresh_settings_back.png": {
+      "sha256": "bfddd0799beaeaec0664a847239431f14f1bed8db881549355c3d4964b327e91",
+      "bytes": 89157
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_back_0.png": {
+      "sha256": "45dcb5359ad04ee79311fb28afcc97055d7a10520116b0f9099e89b1c093e6b2",
+      "bytes": 81305
+    },
+    "title-focus-formal-v2.exit": {
+      "sha256": "9d9b18720961e9b4689fd763b85e7b6f36160ccd3a8a1c9ddc5103bb0f66c396",
+      "bytes": 4
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_back_3.png": {
+      "sha256": "4537a29394dd03ff2c5a4080d1ef9d86a537376dae10027ccc3e6a6b0121bb1a",
+      "bytes": 124038
+    },
+    "viewport_focus_1280_200_touch_continue_brief_back_0.png": {
+      "sha256": "75ff3132534dc7784fb2fac23b95d163b647156da32fa57ada49a3873a1095e2",
+      "bytes": 91124
+    },
+    "viewport_focus_1600_100_touch_fresh_settings.png": {
+      "sha256": "8b5c5c39e0e3e836c68933a4bbd2dfe878ad1139512ae7f6cba290b9a0966492",
+      "bytes": 161818
+    },
+    "viewport_focus_1600_100_touch_fresh_brief_back_0.png": {
+      "sha256": "f3b087e42d2d3820a5905da061cff8a1771a7bf909aa5a7a3cbe702bd84e1977",
+      "bytes": 131748
+    },
+    "viewport_focus_1280_100_desktop_fresh_brief_0.png": {
+      "sha256": "d0738e008180c7ffb3f5fd818487362d4db0b09e8903f80f8baeb4a7a855e6f1",
+      "bytes": 80538
+    },
+    "viewport_focus_1280_200_touch_fresh_settings.png": {
+      "sha256": "937c3d2fb07e88ffee623e22ea052b6f4dba4ae1c72c39f1d121e426a0b463a2",
+      "bytes": 82149
+    },
+    "viewport_focus_1280_200_touch_fresh_brief_0.png": {
+      "sha256": "d64fd56314316bac0533b7a3f849c782d171d04d03393a7181abdc7307bb7c14",
+      "bytes": 94008
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_back_4.png": {
+      "sha256": "d97f2665bafb629d3f8f508dc7cfa18964b2c5981c7e9764b01f33202fa20e95",
+      "bytes": 125614
+    },
+    "title-focus-lifecycle-headless-v2.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "title-focus-formal.log": {
+      "sha256": "c0064462a44b4e79585b69777e8f6ad2befacff9f04670f012bc69935842dbef",
+      "bytes": 12080
+    },
+    "viewport_focus_1600_100_touch_fresh_settings_back.png": {
+      "sha256": "073ec9d64972304ca54fd2e489b29912bfa066ed7ae6b88b55cd7ef83b899329",
+      "bytes": 130115
+    },
+    "title-focus-auto-headless.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "viewport_focus_1280_100_desktop_fresh_settings.png": {
+      "sha256": "a59ebd02c7b5f02cb283be2a97758f8ba71ae40d842c0ff4d738eb7a925aa3a4",
+      "bytes": 122307
+    },
+    "title-focus-lifecycle-headless.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "viewport_focus_1280_100_desktop_continue_settings.png": {
+      "sha256": "f82f0d580406c679930282a58c6c981d1065a3eda260337d0ee47bfb3563ed3b",
+      "bytes": 109451
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_5.png": {
+      "sha256": "96306177a7ac077911d09113488e920a5894cc7f3facb2f6dbb17132c5714cbb",
+      "bytes": 87281
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_back_5.png": {
+      "sha256": "f123166a8a35e184d0c92c6967daf4f73efbe40b9489ae32ac2331765956a6aa",
+      "bytes": 123789
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_back_2.png": {
+      "sha256": "1a36f8139ad4c030cf942183a9a40034d89585a2fd2f5389f74fae5858cfcc82",
+      "bytes": 125042
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_1.png": {
+      "sha256": "3e13ee8a9c95fe32b627637842e75e2105a633d47142e2dac4d9205dfe31f1e7",
+      "bytes": 85630
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_3.png": {
+      "sha256": "f33b2d774b9d665cc45c8f1d00d6c3631f6785f93c009a3c50cd000f9653157c",
+      "bytes": 87874
+    },
+    "viewport_focus_1280_200_touch_continue_settings.png": {
+      "sha256": "c44f865d9b108faa6d56ab1027ba572314907dc02d5623ee6aba0798b1d10d87",
+      "bytes": 82538
+    },
+    "title-focus-lifecycle-headless.log": {
+      "sha256": "dfef1c3f148f05c42bd3f0988871d8157104ff5a75d126158fcb5571ecc49d30",
+      "bytes": 624
+    },
+    "viewport_focus_1280_100_desktop_continue_brief_back_1.png": {
+      "sha256": "40e85ed4a5e63d3a71b58ebcf905fbf5b69c4955286a9c155cf8c10aab37948e",
+      "bytes": 124623
+    }
+  }
+}

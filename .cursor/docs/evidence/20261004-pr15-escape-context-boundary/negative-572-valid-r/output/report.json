@@ -1,0 +1,190 @@
+{
+  "captures": [
+    {
+      "capture_source": "Native DisplayServer Window crop",
+      "id": "original_third",
+      "path": "res://build/asset_review/pr15-runtime/escape-context-boundary-cee94feaa14d4c74a756a5b42ca6896e/original_third.png",
+      "sha256": "b0b69d8b85c8940823aa9555520ec0f39ee22185d7dd6ef12d176babe338551b"
+    },
+    {
+      "capture_source": "Native DisplayServer Window crop",
+      "id": "invalid_fourth",
+      "path": "res://build/asset_review/pr15-runtime/escape-context-boundary-cee94feaa14d4c74a756a5b42ca6896e/invalid_fourth.png",
+      "sha256": "784d68d8b64bb5f007a82e8d8fbbf26e2de54f559472b2cecd744c12b628bae5"
+    },
+    {
+      "capture_source": "Native DisplayServer Window crop",
+      "id": "invalid_stalled_playback",
+      "path": "res://build/asset_review/pr15-runtime/escape-context-boundary-cee94feaa14d4c74a756a5b42ca6896e/invalid_stalled_playback.png",
+      "sha256": "dd9368736d811814e352f2a7d23acac21bfc92b3ed5a24f008dbaed245ee70fe"
+    }
+  ],
+  "checks": 18,
+  "failures": 4,
+  "producer_source_sha": "877decb0ea14d6c3c0a833e4d6948c7ee549514f",
+  "raw_sha256": "cf77a08654aff89561723944176e38dcb7aa8b1b8d0a897cf77f39685b7a6c09",
+  "rows": [
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "original_third",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "历史第4波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "invalid_fourth",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:3:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 3
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:3:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 3
+        },
+        "wave_id": 3
+      }
+    },
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "invalid_stalled_playback",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    }
+  ],
+  "scope": "Read-only actual877 archived escape/retry source; explicit corrupt context and cold3D formatter fixtures. No new battles/native input/fullrecord/FX/A3/FINAL/device acceptance.",
+  "source_sha": "5722333c7653661034fd1b0e562d4e383a479b92",
+  "source_unchanged": true
+}

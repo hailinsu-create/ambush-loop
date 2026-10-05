@@ -1,0 +1,282 @@
+{
+  "complete_buffer": false,
+  "extra": {
+    "scope": "headless manual-callback contract only; no actual Window/cold rendered frames/A3 performance acceptance"
+  },
+  "metadata": {
+    "adapter": "",
+    "api_version": "",
+    "buffer": {
+      "allocation_delta_including_tables": 31556,
+      "capacity": 12,
+      "columns": 59,
+      "payload_bytes": 5664,
+      "scope": "fixed numeric payload; metadata/symbol strings/allocator overhead also resident; never subtract payload as total instrumentation memory",
+      "static_after_allocate": 33710049,
+      "static_before_allocate": 33678493,
+      "symbol_capacity": 1024
+    },
+    "cold_scope": "hook exists before caller changes production scene; engine boot/autoloads before script are not captured",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "headless",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "format": 2,
+    "monitor_ids": [
+      1,
+      2,
+      13,
+      12,
+      11,
+      15,
+      16,
+      14,
+      4,
+      7,
+      9,
+      8,
+      10,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "monitor_names": [
+      "TIME_PROCESS",
+      "TIME_PHYSICS_PROCESS",
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME",
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME",
+      "RENDER_TOTAL_OBJECTS_IN_FRAME",
+      "RENDER_TEXTURE_MEM_USED",
+      "RENDER_BUFFER_MEM_USED",
+      "RENDER_VIDEO_MEM_USED",
+      "MEMORY_STATIC",
+      "OBJECT_COUNT",
+      "OBJECT_NODE_COUNT",
+      "OBJECT_RESOURCE_COUNT",
+      "OBJECT_ORPHAN_NODE_COUNT",
+      "PIPELINE_COMPILATIONS_CANVAS",
+      "PIPELINE_COMPILATIONS_MESH",
+      "PIPELINE_COMPILATIONS_SURFACE",
+      "PIPELINE_COMPILATIONS_DRAW",
+      "PIPELINE_COMPILATIONS_SPECIALIZATION"
+    ],
+    "monitor_support": {
+      "MEMORY_STATIC": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_ORPHAN_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_RESOURCE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "PIPELINE_COMPILATIONS_CANVAS": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_DRAW": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_MESH": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_SURFACE": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_BUFFER_MEM_USED": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TEXTURE_MEM_USED": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_VIDEO_MEM_USED": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "TIME_PHYSICS_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "TIME_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      }
+    },
+    "monitor_update_scope": "some engine monitors lag up to one second; early render counters need two drawn frames",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 114411,
+    "pipeline_zero_scope": "unknown backend support is not proof of no compilation; exclude unknown from supported summaries",
+    "render_setup_supported": false,
+    "rendering_driver": "vulkan",
+    "rendering_method": "forward_plus",
+    "rss_ready_bytes": 102342656,
+    "run_id": "b0ca39649a0d4a1788bf62d3a112aab9",
+    "scope": "wall post-draw intervals, engine counters and explicit workload receipts; not Android performance",
+    "source_proof_before": {
+      "cache_scope": "tracked source and all tracked game asset bytes verified; generated .godot import cache is excluded",
+      "consumer_commit": "b2ac13a0b0020f9a0edd3cb16cae5d02a5a0f907",
+      "consumer_game_tree": "2b30e07608676c4e6ec179af2395c7e7dc9de314",
+      "engine": {
+        "bytes": 146414384.0,
+        "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+      },
+      "producer_records": [
+        {
+          "attribution": "caller-declared producer commit; actual original bytes verified",
+          "bytes": 5418800.0,
+          "level_id": "yard",
+          "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+          "producer_commit": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+          "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+        }
+      ],
+      "receipt_sha256": "c1d7087f1d85db77426912b8c1d35c6e5c43c2495fb658c1eda7a54f7523b0de",
+      "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+      "source_files_verified": 981,
+      "verified": true
+    },
+    "source_sha": "b2ac13a0b0020f9a0edd3cb16cae5d02a5a0f907",
+    "timer_scope": "callback entry through scalar table/counter writes and row_count increment; final timestamp field store and return excluded; not whole frame CPU/GPU time",
+    "vendor": "",
+    "xdg_cache": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/b0ca39649a0d4a1788bf62d3a112aab9/cache"
+  },
+  "overflow_rows": 11,
+  "rows": 12,
+  "rss_save_bytes": 371208192,
+  "segments": [
+    {
+      "frame_boundary": 0,
+      "label": "cold-production-scene",
+      "max_fps": 0,
+      "reason": "cold_scene_loading",
+      "row_boundary": 0,
+      "rss_bytes": 102350848,
+      "scale": 1.0,
+      "ticks_usec": 6336005,
+      "timed": false,
+      "vsync": 1,
+      "window": "(64, 64)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 1,
+      "label": "headless-manual-original-SCOUT",
+      "max_fps": 0,
+      "reason": "",
+      "row_boundary": 1,
+      "rss_bytes": 371200000,
+      "scale": 1.0,
+      "ticks_usec": 11535929,
+      "timed": true,
+      "vsync": 1,
+      "window": "(64, 64)",
+      "workload": {
+        "fixture": "actual original yard, main automatic process frozen; callbacks manual, not render metrics"
+      }
+    },
+    {
+      "frame_boundary": 23,
+      "label": "headless-contract-flush",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 12,
+      "rss_bytes": 371200000,
+      "scale": 1.0,
+      "ticks_usec": 11536878,
+      "timed": false,
+      "vsync": 1,
+      "window": "(64, 64)",
+      "workload": {}
+    }
+  ],
+  "source_proof_after": {
+    "cache_scope": "tracked source and all tracked game asset bytes verified; generated .godot import cache is excluded",
+    "consumer_commit": "b2ac13a0b0020f9a0edd3cb16cae5d02a5a0f907",
+    "consumer_game_tree": "2b30e07608676c4e6ec179af2395c7e7dc9de314",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5418800.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+        "producer_commit": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+        "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+      }
+    ],
+    "receipt_sha256": "c1d7087f1d85db77426912b8c1d35c6e5c43c2495fb658c1eda7a54f7523b0de",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 981,
+    "verified": true
+  },
+  "symbol_overflow": 0
+}

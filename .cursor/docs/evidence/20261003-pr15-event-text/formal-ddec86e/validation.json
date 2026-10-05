@@ -1,0 +1,422 @@
+{
+  "fixed_source_sha": "ddec86eacc051e0955164ee3f26d288a25aaade8",
+  "production_fix_sha": "fcfdb9be8fe2f862beb7bfa91bdb93faabd290cb",
+  "game_tree": "0bee6f321686c1d7703140a1c942df98fec5b586",
+  "environment": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "display": ":112",
+    "renderer": "llvmpipe/Mesa gl_compatibility",
+    "native_window": [
+      1280,
+      720
+    ],
+    "native_input_count": 0,
+    "source_swaps_and_seeks": "controlled API; ordinary UI swap reachability unproven",
+    "own_godot_remaining_after_tests": [],
+    "own_xorg_term_requested_pid": 72866,
+    "own_xorg_actual_exit": 0,
+    "own_display_closed": true
+  },
+  "runs": [
+    {
+      "label": "negative-headless",
+      "source_sha": "16293809dea56338ecf61a7d6b24c7f212167f74",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "negative-1629380/headless.log",
+      "exit_file": "negative-1629380/headless.exit",
+      "actual_exit": 1,
+      "uuid": "0b98e1fdb85442e1850666ceb90d5ba9",
+      "guard_passed": true,
+      "checks": 6,
+      "failures": 2,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "negative-render",
+      "source_sha": "16293809dea56338ecf61a7d6b24c7f212167f74",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--render"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "negative-1629380/render.log",
+      "exit_file": "negative-1629380/render.exit",
+      "actual_exit": 1,
+      "uuid": "98010134194c47c7a6b17c258c0a5ff4",
+      "guard_passed": true,
+      "checks": 8,
+      "failures": 2,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "minimal-fixed",
+      "source_sha": "fcfdb9be8fe2f862beb7bfa91bdb93faabd290cb",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "development-fcfdb9b/pr15-bound-text-minimal-fixed.log",
+      "exit_file": "development-fcfdb9b/pr15-bound-text-minimal-fixed.exit",
+      "actual_exit": 0,
+      "uuid": "5feabaa18b83450e9151448fb6b260e8",
+      "guard_passed": true,
+      "checks": 6,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "test-parse-error",
+      "source_sha": "de86f84dcf28d1ea69f934fa4530f6e86d4324b0",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "development-de86f84/pr15-bound-text-development-h.log",
+      "exit_file": "development-de86f84/pr15-bound-text-development-h.exit",
+      "actual_exit": 1,
+      "uuid": "9e07566e48374b0dbb626bc4f9a0924c",
+      "guard_passed": false,
+      "checks": null,
+      "failures": null,
+      "script_errors": 1,
+      "engine_errors": 1
+    },
+    {
+      "label": "test-prefix-oracle-error",
+      "source_sha": "d6a0009a814f8d89a940b96cb093473191d297e3",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "development-d6a0009/pr15-bound-text-development-v2-h.log",
+      "exit_file": "development-d6a0009/pr15-bound-text-development-v2-h.exit",
+      "actual_exit": 1,
+      "uuid": "299e9c8cc3044ea38d4be82a250aa9bf",
+      "guard_passed": true,
+      "checks": 371,
+      "failures": 2,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "formal-headless",
+      "source_sha": "ddec86eacc051e0955164ee3f26d288a25aaade8",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "formal-ddec86e/headless.log",
+      "exit_file": "formal-ddec86e/headless.exit",
+      "actual_exit": 0,
+      "uuid": "1a4317b014d0476db96939f5cc59ce6a",
+      "guard_passed": true,
+      "checks": 373,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "formal-render",
+      "source_sha": "ddec86eacc051e0955164ee3f26d288a25aaade8",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_event_text_source_test.gd",
+        "--render"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "formal-ddec86e/render.log",
+      "exit_file": "formal-ddec86e/render.exit",
+      "actual_exit": 0,
+      "uuid": "667463d7474a4ad5b8bbac0dd38303c7",
+      "guard_passed": true,
+      "checks": 387,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "related-timeline",
+      "source_sha": "ddec86eacc051e0955164ee3f26d288a25aaade8",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_timeline_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "formal-ddec86e/timeline.log",
+      "exit_file": "formal-ddec86e/timeline.exit",
+      "actual_exit": 0,
+      "uuid": "4b6ee9c8ed4b48028f9afb171fedcee7",
+      "guard_passed": true,
+      "checks": 67,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "label": "related-equipment",
+      "source_sha": "ddec86eacc051e0955164ee3f26d288a25aaade8",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "equipment_freeze_test.gd",
+        "--headless"
+      ],
+      "env": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "log": "formal-ddec86e/equipment.log",
+      "exit_file": "formal-ddec86e/equipment.exit",
+      "actual_exit": 0,
+      "uuid": "bac6aa281b2b4ecd9280646451e84443",
+      "guard_passed": true,
+      "checks": 66,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    }
+  ],
+  "formal_pngs": [
+    {
+      "path": "viewport_bound_text_original.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b",
+      "bytes": 982263,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_bound_text_live_replaced.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b",
+      "bytes": 982263,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema1_no_fire_first.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b",
+      "bytes": 982263,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema1_no_fire_auto1.png",
+      "sha256": "7b8d3aeb0392fb23f3c35de3ba0d333bab7bfe2f1ef9679f89deec4e26575ee2",
+      "bytes": 981957,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema1_no_fire_auto2.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b",
+      "bytes": 982263,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema1_colliding_seq_first.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b",
+      "bytes": 982263,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema1_colliding_seq_auto1.png",
+      "sha256": "7b8d3aeb0392fb23f3c35de3ba0d333bab7bfe2f1ef9679f89deec4e26575ee2",
+      "bytes": 981957,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema1_colliding_seq_auto2.png",
+      "sha256": "b631e257f18f6b44697a70cdadebe270e682e64c4830356d89cc3d894096168b",
+      "bytes": 982263,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema2_reference_no_fire_first.png",
+      "sha256": "b0ff0aa4783148028f94bcb67edc6d1162b680fd3be3c4bb911b2b43761fc81b",
+      "bytes": 983111,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema2_reference_no_fire_auto1.png",
+      "sha256": "3f0c229bdb90ba07790602e9c093f31e76c16438a4fb7ab74f3cc3b6093fae91",
+      "bytes": 982537,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema2_reference_no_fire_auto2.png",
+      "sha256": "3d27ffdd3e697c6379737675808c6def288131313517814658512c9b0af3163f",
+      "bytes": 982927,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema2_reference_colliding_seq_first.png",
+      "sha256": "3d27ffdd3e697c6379737675808c6def288131313517814658512c9b0af3163f",
+      "bytes": 982927,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema2_reference_colliding_seq_auto1.png",
+      "sha256": "3f0c229bdb90ba07790602e9c093f31e76c16438a4fb7ab74f3cc3b6093fae91",
+      "bytes": 982537,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "viewport_actual_schema2_reference_colliding_seq_auto2.png",
+      "sha256": "3d27ffdd3e697c6379737675808c6def288131313517814658512c9b0af3163f",
+      "bytes": 982927,
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "size": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "formal_pngs_actually_viewed": [
+    "viewport_actual_schema1_no_fire_first.png",
+    "viewport_actual_schema1_colliding_seq_auto2.png",
+    "viewport_actual_schema2_reference_no_fire_first.png",
+    "viewport_actual_schema2_reference_colliding_seq_auto2.png"
+  ],
+  "negative_pngs_actually_viewed": [
+    "negative-1629380/viewport_bound_text_original.png",
+    "negative-1629380/viewport_bound_text_live_replaced.png"
+  ],
+  "natural_callback_frames": {
+    "headless": 64,
+    "render": 64
+  },
+  "unverified": [
+    "independent closure of new text P2",
+    "ordinary UI source-swap reachability",
+    "normal six-mission/thirteen-wave player journey",
+    "full3D FX",
+    "A3 budgets/device performance",
+    "ears45cue/6soundscapes",
+    "same-candidate final fullsmoke/APK"
+  ],
+  "sync": "confirm delivery with actual push exit and PR15 head read; no merge",
+  "documentation_diff_check": {
+    "all_receipt_files": {
+      "argv": [
+        "git",
+        "diff",
+        "ddec86e",
+        "HEAD",
+        "--check"
+      ],
+      "actual_exit": 2,
+      "output": ".cursor/docs/evidence/20261003-pr15-event-text/environment/xorg.log:2: trailing whitespace.\n+[120645.074] \n.cursor/docs/evidence/20261003-pr15-event-text/environment/xorg.log:7: trailing whitespace.\n+[120645.074] xorg-server 2:21.1.16-1.3+deb13u3 (https://www.debian.org/support) \n.cursor/docs/evidence/20261003-pr15-event-text/environment/xorg.log:529: trailing whitespace.\n+[120645.078] (II) DUMMY(0): Using 33053 scanlines of offscreen memory \n"
+    },
+    "excluding_unchanged_raw_xorg_log": {
+      "argv": [
+        "git",
+        "diff",
+        "ddec86e",
+        "HEAD",
+        "--check",
+        "--",
+        ".",
+        ":(exclude).cursor/docs/evidence/20261003-pr15-event-text/environment/xorg.log"
+      ],
+      "actual_exit": 0
+    },
+    "reason": "Preserve original Xorg bytes; only three raw trailing whitespace lines, no code whitespace failure."
+  }
+}

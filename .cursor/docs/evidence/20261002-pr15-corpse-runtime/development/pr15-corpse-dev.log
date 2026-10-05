@@ -1,0 +1,154 @@
+TEST_RUN_ID=e83edc51b74f449f8be80bb5c12634ea
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/e83edc51b74f449f8be80bb5c12634ea/data
+TEST_ENTRY=corpse_runtime_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/e83edc51b74f449f8be80bb5c12634ea/data/godot/app_userdata/Ambush Loop run_id=e83edc51b74f449f8be80bb5c12634ea
+SCRIPT ERROR: Parse Error: Expected indented block after "if" block.
+          at: GDScript::reload (res://scripts/presentation/presenter_3d.gd:331)
+          GDScript backtrace (most recent call first):
+              [0] _run (res://scripts/corpse_runtime_test.gd:164)
+ERROR: Failed to load script "res://scripts/presentation/presenter_3d.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://scripts/corpse_runtime_test.gd:164)
+SCRIPT ERROR: Invalid call. Nonexistent function 'bind' in base 'Node3D'.
+          at: _ready (res://scripts/main.gd:379)
+          GDScript backtrace (most recent call first):
+              [0] _ready (res://scripts/main.gd:379)
+SCRIPT ERROR: Invalid call. Nonexistent function 'cancel_input' in base 'Node3D'.
+          at: _cancel_world_input (res://scripts/main.gd:1254)
+          GDScript backtrace (most recent call first):
+              [0] _cancel_world_input (res://scripts/main.gd:1254)
+              [1] _start_setup (res://scripts/main.gd:3362)
+              [2] _load_level (res://scripts/main.gd:2330)
+              [3] _reset (res://scripts/corpse_runtime_test.gd:27)
+              [4] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [5] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _clear_deployments (res://scripts/main.gd:3527)
+              [4] _start_setup (res://scripts/main.gd:3413)
+              [5] _load_level (res://scripts/main.gd:2330)
+              [6] _reset (res://scripts/corpse_runtime_test.gd:27)
+              [7] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [8] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _start_setup (res://scripts/main.gd:3429)
+              [4] _load_level (res://scripts/main.gd:2330)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:27)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _select_op (res://scripts/main.gd:4093)
+              [4] raid_prepare_ref (res://scripts/main.gd:12349)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _deploy_selected_to (res://scripts/main.gd:4227)
+              [4] raid_prepare_ref (res://scripts/main.gd:12350)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _select_op (res://scripts/main.gd:4093)
+              [4] raid_prepare_ref (res://scripts/main.gd:12349)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _deploy_selected_to (res://scripts/main.gd:4227)
+              [4] raid_prepare_ref (res://scripts/main.gd:12350)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _select_op (res://scripts/main.gd:4093)
+              [4] raid_prepare_ref (res://scripts/main.gd:12349)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _deploy_selected_to (res://scripts/main.gd:4227)
+              [4] raid_prepare_ref (res://scripts/main.gd:12350)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _select_op (res://scripts/main.gd:4093)
+              [4] raid_prepare_ref (res://scripts/main.gd:12352)
+              [5] _reset (res://scripts/corpse_runtime_test.gd:28)
+              [6] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [7] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'pointer_logic_position' in base 'Node3D'.
+          at: pointer_logic_position (res://scripts/main.gd:3928)
+          GDScript backtrace (most recent call first):
+              [0] pointer_logic_position (res://scripts/main.gd:3928)
+              [1] _aim_world (res://scripts/main.gd:5551)
+              [2] _update_cover_previews (res://scripts/main.gd:7613)
+              [3] _select_op (res://scripts/main.gd:4093)
+              [4] _reset (res://scripts/corpse_runtime_test.gd:29)
+              [5] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [6] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'refresh' in base 'Node3D'.
+          at: _reset (res://scripts/corpse_runtime_test.gd:30)
+          GDScript backtrace (most recent call first):
+              [0] _reset (res://scripts/corpse_runtime_test.gd:30)
+              [1] _actual (res://scripts/corpse_runtime_test.gd:58)
+              [2] _run (res://scripts/corpse_runtime_test.gd:171)
+SCRIPT ERROR: Invalid call. Nonexistent function 'refresh' in base 'Node3D'.
+          at: _actual (res://scripts/corpse_runtime_test.gd:64)
+          GDScript backtrace (most recent call first):
+              [0] _actual (res://scripts/corpse_runtime_test.gd:64)
+              [1] _run (res://scripts/corpse_runtime_test.gd:171)
+ERROR: CORPSE_RUNTIME: actual stage reaches completion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_runtime_test.gd:24)
+       [1] _run (res://scripts/corpse_runtime_test.gd:172)
+CORPSE_RUNTIME_FAILED checks=2 failures=1

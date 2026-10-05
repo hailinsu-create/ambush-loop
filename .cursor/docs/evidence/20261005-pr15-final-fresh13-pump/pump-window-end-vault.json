@@ -1,0 +1,58 @@
+{
+  "START": "2026-10-05T21:15:06.941174+00:00",
+  "cap_seconds": 1430,
+  "steps": [
+    [
+      "preserved-title-pump-entry",
+      "initialize_pump.py",
+      180
+    ],
+    [
+      "pump-natural-two-waves",
+      "produce_pump.py",
+      900
+    ],
+    [
+      "pump-original-checkpoint-boundary",
+      "finish_pump.py",
+      300
+    ]
+  ],
+  "source": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/tmp/pr15-final-fresh13-1ec-20261005/browser_controller_pump.py"
+  ],
+  "profile_preserved": true,
+  "END": "2026-10-05T21:21:37.803138+00:00",
+  "wall_seconds": 390.86168089899,
+  "actual_exit": 0,
+  "timed_out": false,
+  "request_results": [
+    {
+      "label": "preserved-title-pump-entry",
+      "actual_exit": 0,
+      "wall_seconds": 18.560976,
+      "cap_seconds": 180,
+      "within_cap": true
+    },
+    {
+      "label": "pump-natural-two-waves",
+      "actual_exit": 0,
+      "wall_seconds": 359.771716,
+      "cap_seconds": 900,
+      "within_cap": true
+    },
+    {
+      "label": "pump-original-checkpoint-boundary",
+      "actual_exit": 0,
+      "wall_seconds": 10.718111,
+      "cap_seconds": 300,
+      "within_cap": true
+    }
+  ],
+  "all_steps_passed": true
+}

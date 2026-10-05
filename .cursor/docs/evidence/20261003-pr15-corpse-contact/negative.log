@@ -1,0 +1,13 @@
+TEST_RUN_ID=261c33b329b84c2eb260644053ee2a49
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/261c33b329b84c2eb260644053ee2a49/data
+TEST_ENTRY=corpse_contact_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/261c33b329b84c2eb260644053ee2a49/data/godot/app_userdata/Ambush Loop run_id=261c33b329b84c2eb260644053ee2a49
+ERROR: CORPSE_CONTACT: actual imported corpse skin stays outside brickwall; vertices=363
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/corpse_contact_test.gd:25)
+       [1] _journey (res://scripts/corpse_contact_test.gd:146)
+       [2] _run (res://scripts/corpse_contact_test.gd:163)
+CORPSE_CONTACT_FAILED checks=17 failures=1

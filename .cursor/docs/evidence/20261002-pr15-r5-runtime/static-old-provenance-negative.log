@@ -1,0 +1,12 @@
+TEST_RUN_ID=fd4723fa973048b28b5f0115fe714aba
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/fd4723fa973048b28b5f0115fe714aba/data
+TEST_ENTRY=asset_library_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/fd4723fa973048b28b5f0115fe714aba/data/godot/app_userdata/Ambush Loop run_id=fd4723fa973048b28b5f0115fe714aba
+ERROR: ASSET_LIBRARY: R4 runtime catalog has frozen provenance
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/asset_library_test.gd:23)
+       [1] _run (res://scripts/asset_library_test.gd:30)
+ASSET_LIBRARY_FAILED checks=301 failures=1 assets=15 lods=30

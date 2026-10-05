@@ -1,0 +1,294 @@
+{
+  "chunk_source_and_buffer_valid": false,
+  "complete_buffer": false,
+  "extra": {
+    "scope": "headless manual-callback contract only; no actual Window/cold rendered frames/A3 performance acceptance"
+  },
+  "metadata": {
+    "adapter": "",
+    "api_version": "",
+    "buffer": {
+      "allocation_delta_including_tables": 31556,
+      "capacity": 12,
+      "columns": 59,
+      "payload_bytes": 5664,
+      "scope": "fixed numeric payload; metadata/symbol strings/allocator overhead also resident; never subtract payload as total instrumentation memory",
+      "static_after_allocate": 36464027,
+      "static_before_allocate": 36432471,
+      "symbol_capacity": 1024
+    },
+    "cold_scope": "hook exists before caller changes production scene; engine boot/autoloads before script are not captured",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "headless",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "format": 2,
+    "monitor_ids": [
+      1,
+      2,
+      13,
+      12,
+      11,
+      15,
+      16,
+      14,
+      4,
+      7,
+      9,
+      8,
+      10,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "monitor_names": [
+      "TIME_PROCESS",
+      "TIME_PHYSICS_PROCESS",
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME",
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME",
+      "RENDER_TOTAL_OBJECTS_IN_FRAME",
+      "RENDER_TEXTURE_MEM_USED",
+      "RENDER_BUFFER_MEM_USED",
+      "RENDER_VIDEO_MEM_USED",
+      "MEMORY_STATIC",
+      "OBJECT_COUNT",
+      "OBJECT_NODE_COUNT",
+      "OBJECT_RESOURCE_COUNT",
+      "OBJECT_ORPHAN_NODE_COUNT",
+      "PIPELINE_COMPILATIONS_CANVAS",
+      "PIPELINE_COMPILATIONS_MESH",
+      "PIPELINE_COMPILATIONS_SURFACE",
+      "PIPELINE_COMPILATIONS_DRAW",
+      "PIPELINE_COMPILATIONS_SPECIALIZATION"
+    ],
+    "monitor_support": {
+      "MEMORY_STATIC": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_ORPHAN_NODE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "OBJECT_RESOURCE_COUNT": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "PIPELINE_COMPILATIONS_CANVAS": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_DRAW": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_MESH": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_SPECIALIZATION": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "PIPELINE_COMPILATIONS_SURFACE": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_BUFFER_MEM_USED": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TEXTURE_MEM_USED": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_TOTAL_PRIMITIVES_IN_FRAME": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "RENDER_VIDEO_MEM_USED": {
+        "raw_sentinel": -1,
+        "status": "unsupported_headless_renderer",
+        "supported": false
+      },
+      "TIME_PHYSICS_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      },
+      "TIME_PROCESS": {
+        "scope": "availability does not imply immediate updates or isolated GPU/VRAM",
+        "status": "documented_monitor_api",
+        "supported": true
+      }
+    },
+    "monitor_update_scope": "some engine monitors lag up to one second; early render counters need two drawn frames",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 116410,
+    "pipeline_zero_scope": "unknown backend support is not proof of no compilation; exclude unknown from supported summaries",
+    "render_setup_supported": false,
+    "rendering_driver": "vulkan",
+    "rendering_method": "forward_plus",
+    "rss_ready_bytes": 106352640,
+    "run_id": "908a622a5ae94a7aa38361a1130adcbb",
+    "scope": "wall post-draw intervals, engine counters and explicit workload receipts; not Android performance",
+    "source_proof_before": {
+      "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+      "complete_source_tree_verified": true,
+      "consumer_commit": "8b37c31b0bc833c51862e4eb9ae01ca10bb3ffca",
+      "consumer_game_tree": "a4990e991d1b3b635d76c454ab3e16d319ffa43d",
+      "engine": {
+        "bytes": 146414384.0,
+        "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+      },
+      "imported_cache_files_verified": 986,
+      "loaded_resource_scope": "complete existing warm imported inventory",
+      "producer_records": [
+        {
+          "attribution": "caller-declared producer commit; actual original bytes verified",
+          "bytes": 5418800.0,
+          "level_id": "yard",
+          "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+          "producer_commit": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+          "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+        }
+      ],
+      "receipt_sha256": "1ef3414165fa19b605875a6ba4bdd58b8b57399d0ef3ae0855287324edcf817f",
+      "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+      "source_files_verified": 982,
+      "verified": true
+    },
+    "source_sha": "8b37c31b0bc833c51862e4eb9ae01ca10bb3ffca",
+    "timer_scope": "callback entry through scalar table/counter writes and row_count increment; final timestamp field store and return excluded; not whole frame CPU/GPU time",
+    "vendor": "",
+    "xdg_cache": "/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/908a622a5ae94a7aa38361a1130adcbb/cache"
+  },
+  "overflow_rows": 11,
+  "raw_sha256": "16b94e96a322e20c825e5a465dba029e4fafb0102dd384eba3e569f595fa929b",
+  "receipt_stable": true,
+  "rows": 12,
+  "rss_save_bytes": 377368576,
+  "run_incomplete": true,
+  "run_overflow_rows": 11,
+  "segments": [
+    {
+      "frame_boundary": 0,
+      "label": "cold-production-scene",
+      "max_fps": 0,
+      "reason": "cold_scene_loading",
+      "row_boundary": 0,
+      "rss_bytes": 106360832,
+      "scale": 1.0,
+      "ticks_usec": 11076021,
+      "timed": false,
+      "vsync": 1,
+      "window": "(64, 64)",
+      "workload": {}
+    },
+    {
+      "frame_boundary": 1,
+      "label": "headless-manual-original-SCOUT",
+      "max_fps": 0,
+      "reason": "",
+      "row_boundary": 1,
+      "rss_bytes": 375205888,
+      "scale": 1.0,
+      "ticks_usec": 16416643,
+      "timed": true,
+      "vsync": 1,
+      "window": "(64, 64)",
+      "workload": {
+        "fixture": "actual original yard, main automatic process frozen; callbacks manual, not render metrics"
+      }
+    },
+    {
+      "frame_boundary": 23,
+      "label": "headless-contract-flush",
+      "max_fps": 0,
+      "reason": "fixture_or_transition",
+      "row_boundary": 12,
+      "rss_bytes": 375205888,
+      "scale": 1.0,
+      "ticks_usec": 16417643,
+      "timed": false,
+      "vsync": 1,
+      "window": "(64, 64)",
+      "workload": {}
+    }
+  ],
+  "source_proof_after": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "8b37c31b0bc833c51862e4eb9ae01ca10bb3ffca",
+    "consumer_game_tree": "a4990e991d1b3b635d76c454ab3e16d319ffa43d",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5418800.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+        "producer_commit": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+        "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+      }
+    ],
+    "receipt_sha256": "1ef3414165fa19b605875a6ba4bdd58b8b57399d0ef3ae0855287324edcf817f",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 982,
+    "verified": true
+  },
+  "symbol_overflow": 0,
+  "warm_import_proof_complete": true
+}

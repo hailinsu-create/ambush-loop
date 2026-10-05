@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 135, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 121, in main
+    require([r['variant'] for r in runs]==list('ABBABAAB'),'complete declared ABBA/BAAB order')
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 22, in require
+    if not value: raise ValueError(message)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: complete declared ABBA/BAAB order

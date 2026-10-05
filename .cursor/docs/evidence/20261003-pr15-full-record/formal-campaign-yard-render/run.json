@@ -1,0 +1,141 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "campaign-yard-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "campaign_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_CAMPAIGN_LEVEL": "yard",
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "1998128791e1430db7399dcf52571d18",
+  "actual_exit_code": 0,
+  "checks": 2527,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+      "frame_seq": 0,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "yard_scout",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_scout.png",
+      "playback_tick": 0,
+      "recorded_phase": 0,
+      "sha256": "98eb02cc482d4957dbd1f1055509fc7ea3ec6d39b7a5cea66bc9c6312ba52fcb",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/00_full_record_yard_scout.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+      "frame_seq": 94,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "yard_wave0_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave0_alert.png",
+      "playback_tick": 547,
+      "recorded_phase": 1,
+      "sha256": "e7ec67b5ecba285d3a077e7d8d4a00d63750e68ed3be45df53b3441eb6a33562",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/01_full_record_yard_wave0_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+      "frame_seq": 186,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+      "id": "yard_wave0_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave0_sweep.png",
+      "playback_tick": 1093,
+      "recorded_phase": 5,
+      "sha256": "ccba5b2ac38364dfbfcd455f28463128a1e28e17543ebd4419aafaf6791192c5",
+      "source": "native Window crop after two draws",
+      "wave_id": 0,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/02_full_record_yard_wave0_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+      "frame_seq": 206,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "yard_wave1_alert",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave1_alert.png",
+      "playback_tick": 1202,
+      "recorded_phase": 1,
+      "sha256": "0845e9afe5905f5f3a27b009c05d044af8d5f8cf79fc80c7b8138c72f64a83c0",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/03_full_record_yard_wave1_alert.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+      "frame_seq": 229,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "yard_wave1_sweep",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave1_sweep.png",
+      "playback_tick": 1333,
+      "recorded_phase": 5,
+      "sha256": "db0ae4b7ea67a2383f501144c2963e6542c212b3d070401c92ba6be8c7224b65",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/04_full_record_yard_wave1_sweep.png",
+      "hash_verified": true
+    },
+    {
+      "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+      "frame_seq": 230,
+      "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+      "id": "yard_won",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/full_record_yard_won.png",
+      "playback_tick": 1334,
+      "recorded_phase": 3,
+      "sha256": "db0ae4b7ea67a2383f501144c2963e6542c212b3d070401c92ba6be8c7224b65",
+      "source": "native Window crop after two draws",
+      "wave_id": 1,
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/05_full_record_yard_won.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 6,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/run.exit"
+}

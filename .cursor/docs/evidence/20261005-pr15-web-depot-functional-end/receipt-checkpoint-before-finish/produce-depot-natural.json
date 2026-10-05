@@ -1,0 +1,51 @@
+{
+  "start": "2026-10-05T12:02:57.505822+00:00",
+  "pid": 160947,
+  "request": {
+    "label": "produce-depot-natural",
+    "script": "/tmp/pr15-web-controls/depot-native-8532-20261005/produce_depot.py"
+  },
+  "loaded_script_sha256": "5c2348550d1c272c4ffbeb49336a1572fe6a137be68ddd346e9d5ac4edb97b77",
+  "actual_exit": 1,
+  "exception": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/depot-native-8532-20261005/browser_controller.py\", line 57, in main\n    exec(compile(loaded,str(script_path),'exec'),runtime);request_receipt['actual_exit']=0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pr15-web-controls/depot-native-8532-20261005/produce_depot.py\", line 12, in <module>\n    depot_record=d.mission(plan)\n                 ^^^^^^^^^^^^^^^\n  File \"<string>\", line 158, in mission\nAssertionError\n",
+  "end": "2026-10-05T12:09:44.303025+00:00",
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 256228.299486364
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 256228.530422098
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 256229.452924199
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x352c04f04000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 256230.877764102
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x352c04f04000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 256230.988938601
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x352c04f04000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 256231.114184642
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x352c04f04000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "wall": 256231.239835383
+    }
+  ],
+  "page_errors": []
+}

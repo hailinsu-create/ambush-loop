@@ -1,0 +1,6561 @@
+{
+  "utc": "2026-10-05T21:04:40.274688+00:00",
+  "source": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "state": {
+    "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          368,
+          272
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          496,
+          400
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          720,
+          240
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          912,
+          464
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          592,
+          528
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          944,
+          560
+        ]
+      }
+    ],
+    "credits_scroll": {
+      "max": 8124,
+      "page": 0,
+      "vertical": 0
+    },
+    "engine_frames": 1374,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "fixture_ready": false,
+    "focus_actor": -1,
+    "focus_type": "",
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 268,
+    "input_tail": {
+      "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1351,
+      "kind": "mouse",
+      "phase": 5,
+      "pos": [
+        356,
+        674
+      ],
+      "presents": 1351,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 630625100
+    },
+    "level": "warehouse",
+    "log": {
+      "events": 67,
+      "playback_frames": 1326,
+      "playback_terminal": 10156,
+      "playback_tick": 10156,
+      "snapshots": 196,
+      "terminal": 1146,
+      "terminal_reason": "win"
+    },
+    "loot": [],
+    "mines_count": 0,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "",
+      "tutorial_page": 0
+    },
+    "observer_usec": 3228200,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 10,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 270.040792646724,
+        "family": "rifle",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 7,
+            "kind": "kar98k"
+          },
+          {
+            "amount": 1,
+            "kind": "grenade"
+          }
+        ],
+        "pool": {
+          "rifle": 50
+        },
+        "pos": [
+          1039.99877929688,
+          401.6435546875
+        ],
+        "role": 0,
+        "slot": -1,
+        "start_ammo": 5,
+        "weapon": "kar98k"
+      },
+      {
+        "alive": true,
+        "ammo": 8,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 4,
+        "family": "mg",
+        "has_ammo_pack": true,
+        "hp": 76.4,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 20,
+            "kind": "bar"
+          }
+        ],
+        "pool": {
+          "mg": 8
+        },
+        "pos": [
+          912,
+          464
+        ],
+        "role": 1,
+        "slot": 3,
+        "start_ammo": 20,
+        "weapon": "bar"
+      },
+      {
+        "alive": true,
+        "ammo": 6,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180,
+        "family": "scout",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 6,
+            "kind": "springfield"
+          }
+        ],
+        "pool": {
+          "scout": 6
+        },
+        "pos": [
+          944,
+          560
+        ],
+        "role": 2,
+        "slot": 5,
+        "start_ammo": 5,
+        "weapon": "springfield"
+      }
+    ],
+    "phase": 3,
+    "presents": 1374,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2,
+      "tick": 0
+    },
+    "run_id": 3,
+    "scale": 1,
+    "scene": "res://scenes/main.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "selected": 1,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+          "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "pump",
+      "persistence_error": "",
+      "persistence_status": "已保存到此浏览器",
+      "quality": "standard",
+      "seen": {
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "sim": {
+      "accum": 0.0173746031746092,
+      "paused": false,
+      "speed": 1,
+      "tick": 863
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "decoy",
+        "id": 143512309387,
+        "kind": "decoy",
+        "pos": [
+          720,
+          304
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 143663304340,
+        "kind": "mp40",
+        "pos": [
+          464,
+          528
+        ]
+      }
+    ],
+    "status": "计划奏效",
+    "ticks_usec": 642477700,
+    "tool": 0,
+    "view": {
+      "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+      "gesture": {
+        "contacts": 0,
+        "middle_down": false,
+        "pending_id": -1,
+        "suppressed": 0,
+        "ui_contacts": 0
+      },
+      "level": "warehouse",
+      "pitch": 55,
+      "recorded_phase": 3,
+      "roots": 6,
+      "seq": -1,
+      "tick": 10156,
+      "wave": 1,
+      "yaw": 155
+    },
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "wave": 1,
+    "wave_count": 2,
+    "waves_cleared": 2,
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "full_fingerprints": {
+    "domain": {
+      "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+      "decoys": 0,
+      "door_locked": false,
+      "enemies": [
+        {
+          "alive": false,
+          "hp": -12,
+          "id": 2,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ]
+        },
+        {
+          "alive": false,
+          "hp": -12,
+          "id": 4,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ]
+        },
+        {
+          "alive": false,
+          "hp": -12,
+          "id": 5,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ]
+        }
+      ],
+      "grenades": 0,
+      "loot": 0,
+      "mines": 0,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 10,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 270.040792646724,
+          "family": "rifle",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 50
+          },
+          "pos": [
+            1039.99877929688,
+            401.6435546875
+          ],
+          "role": 0,
+          "slot": -1,
+          "start_ammo": 5,
+          "weapon": "kar98k"
+        },
+        {
+          "alive": true,
+          "ammo": 8,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 4,
+          "family": "mg",
+          "has_ammo_pack": true,
+          "hp": 76.4,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 8
+          },
+          "pos": [
+            912,
+            464
+          ],
+          "role": 1,
+          "slot": 3,
+          "start_ammo": 20,
+          "weapon": "bar"
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "scout",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944,
+            560
+          ],
+          "role": 2,
+          "slot": 5,
+          "start_ammo": 5,
+          "weapon": "springfield"
+        }
+      ],
+      "raid_wave": 1,
+      "selected": 1,
+      "sim": [
+        863,
+        1,
+        false,
+        0.0173746031746092,
+        3
+      ],
+      "stashes": 2,
+      "waves_cleared": 2
+    },
+    "frame_checks": {
+      "status": "not replay"
+    },
+    "full_snapshot": {
+      "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+      "animation_schema": 3,
+      "attempt_number": 1,
+      "barrels": [
+        {
+          "active": true,
+          "armed": true,
+          "id": "barrels:0",
+          "pos": [
+            720,
+            272
+          ],
+          "spent": false
+        }
+      ],
+      "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+      "corpse_contact_schema": 1,
+      "corpse_pairing_schema": 2,
+      "corpse_schema": 1,
+      "corpses": [
+        {
+          "active": true,
+          "asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "carrier": {},
+          "carrier_id": -1,
+          "death_age_s": 71.8899777777775,
+          "ever_grabbed": false,
+          "facing": 90.0000025044782,
+          "ground_anchor": {},
+          "id": "c32a1ca6721a32e311315b468530a799:body:0",
+          "loot_available": false,
+          "mode": "ground",
+          "model": "enemy_patrol",
+          "pairing": false,
+          "pos": [
+            432,
+            156.333419799805
+          ],
+          "schema": 1,
+          "scope_id": "c32a1ca6721a32e311315b468530a799",
+          "source_actor_id": 1,
+          "source_attempt_id": "e62d12a26a5c23f80e90b284fcd61797",
+          "source_group": "enemies",
+          "source_pos": [
+            432,
+            156.333419799805
+          ],
+          "source_wave_id": 0,
+          "transition": {},
+          "transition_age_s": 71.8899777777775
+        },
+        {
+          "active": true,
+          "asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "carrier": {},
+          "carrier_id": -1,
+          "death_age_s": 67.8233111111109,
+          "ever_grabbed": false,
+          "facing": 90.0000025044782,
+          "ground_anchor": {},
+          "id": "c32a1ca6721a32e311315b468530a799:body:1",
+          "loot_available": false,
+          "mode": "ground",
+          "model": "enemy_patrol",
+          "pairing": false,
+          "pos": [
+            432,
+            379.299407958984
+          ],
+          "schema": 1,
+          "scope_id": "c32a1ca6721a32e311315b468530a799",
+          "source_actor_id": 3,
+          "source_attempt_id": "e62d12a26a5c23f80e90b284fcd61797",
+          "source_group": "enemies",
+          "source_pos": [
+            432,
+            379.299407958984
+          ],
+          "source_wave_id": 0,
+          "transition": {},
+          "transition_age_s": 67.8233111111109
+        },
+        {
+          "active": true,
+          "asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "carrier": {},
+          "carrier_id": -1,
+          "death_age_s": 16.1638666666664,
+          "ever_grabbed": false,
+          "facing": 89.9966557117849,
+          "ground_anchor": {},
+          "id": "c32a1ca6721a32e311315b468530a799:body:2",
+          "loot_available": false,
+          "mode": "ground",
+          "model": "enemy_flank",
+          "pairing": false,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "schema": 1,
+          "scope_id": "c32a1ca6721a32e311315b468530a799",
+          "source_actor_id": 2,
+          "source_attempt_id": "e62d12a26a5c23f80e90b284fcd61797",
+          "source_group": "enemies",
+          "source_pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "source_wave_id": 1,
+          "transition": {},
+          "transition_age_s": 16.1638666666664
+        },
+        {
+          "active": true,
+          "asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "carrier": {},
+          "carrier_id": -1,
+          "death_age_s": 15.5638666666664,
+          "ever_grabbed": false,
+          "facing": 89.9966557117849,
+          "ground_anchor": {},
+          "id": "c32a1ca6721a32e311315b468530a799:body:3",
+          "loot_available": false,
+          "mode": "ground",
+          "model": "enemy_flank",
+          "pairing": false,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "schema": 1,
+          "scope_id": "c32a1ca6721a32e311315b468530a799",
+          "source_actor_id": 4,
+          "source_attempt_id": "e62d12a26a5c23f80e90b284fcd61797",
+          "source_group": "enemies",
+          "source_pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "source_wave_id": 1,
+          "transition": {},
+          "transition_age_s": 15.5638666666664
+        },
+        {
+          "active": true,
+          "asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "carrier": {},
+          "carrier_id": -1,
+          "death_age_s": 15.0638666666664,
+          "ever_grabbed": false,
+          "facing": 89.9966557117849,
+          "ground_anchor": {},
+          "id": "c32a1ca6721a32e311315b468530a799:body:4",
+          "loot_available": false,
+          "mode": "ground",
+          "model": "enemy_flank",
+          "pairing": false,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "schema": 1,
+          "scope_id": "c32a1ca6721a32e311315b468530a799",
+          "source_actor_id": 5,
+          "source_attempt_id": "e62d12a26a5c23f80e90b284fcd61797",
+          "source_group": "enemies",
+          "source_pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "source_wave_id": 1,
+          "transition": {},
+          "transition_age_s": 15.0638666666664
+        }
+      ],
+      "covers": [
+        {
+          "active": true,
+          "facing": 90,
+          "id": "covers:0",
+          "pos": [
+            368,
+            272
+          ]
+        },
+        {
+          "active": true,
+          "facing": 0,
+          "id": "covers:1",
+          "pos": [
+            496,
+            400
+          ]
+        },
+        {
+          "active": true,
+          "facing": 180,
+          "id": "covers:2",
+          "pos": [
+            720,
+            240
+          ]
+        },
+        {
+          "active": true,
+          "facing": 180,
+          "id": "covers:3",
+          "pos": [
+            912,
+            464
+          ]
+        },
+        {
+          "active": true,
+          "facing": 0,
+          "id": "covers:4",
+          "pos": [
+            592,
+            528
+          ]
+        },
+        {
+          "active": true,
+          "facing": 180,
+          "id": "covers:5",
+          "pos": [
+            944,
+            560
+          ]
+        }
+      ],
+      "decoys": [],
+      "door_locked": false,
+      "door_pos": [
+        0,
+        0
+      ],
+      "enemies": [
+        {
+          "action": "death",
+          "active": true,
+          "alerted": false,
+          "alive": false,
+          "corpse_id": "c32a1ca6721a32e311315b468530a799:body:2",
+          "echo_kit": false,
+          "facing": 89.9966557117849,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "cancel",
+            "since": 138.405744444445,
+            "weapon": "mp40"
+          },
+          "hp": -12,
+          "id": 2,
+          "moving": false,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "returning_fire": false,
+          "route": "flank",
+          "target_id": 2,
+          "visual_model": "enemy_flank",
+          "visual_weapon": "mp40"
+        },
+        {
+          "action": "death",
+          "active": true,
+          "alerted": false,
+          "alive": false,
+          "corpse_id": "c32a1ca6721a32e311315b468530a799:body:3",
+          "echo_kit": false,
+          "facing": 89.9966557117849,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "cancel",
+            "since": 138.405744444445,
+            "weapon": "mp40"
+          },
+          "hp": -12,
+          "id": 4,
+          "moving": false,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "returning_fire": false,
+          "route": "flank",
+          "target_id": 2,
+          "visual_model": "enemy_flank",
+          "visual_weapon": "mp40"
+        },
+        {
+          "action": "death",
+          "active": true,
+          "alerted": false,
+          "alive": false,
+          "corpse_id": "c32a1ca6721a32e311315b468530a799:body:4",
+          "echo_kit": false,
+          "facing": 89.9966557117849,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "cancel",
+            "since": 138.405744444445,
+            "weapon": "mp40"
+          },
+          "hp": -12,
+          "id": 5,
+          "moving": false,
+          "pos": [
+            1039.99450683594,
+            401.860473632812
+          ],
+          "returning_fire": false,
+          "route": "flank",
+          "target_id": 2,
+          "visual_model": "enemy_flank",
+          "visual_weapon": "mp40"
+        }
+      ],
+      "environment_cutaway_schema": 1,
+      "environment_layout_revision": "six_level_grid_assembly_1",
+      "environment_objects": [
+        {
+          "active": true,
+          "amount": 0,
+          "empty": true,
+          "id": "empty:0",
+          "kind": "kar98k",
+          "pos": [
+            368,
+            240
+          ],
+          "progress": 1
+        },
+        {
+          "active": true,
+          "amount": 0,
+          "empty": true,
+          "id": "empty:1",
+          "kind": "bar",
+          "pos": [
+            528,
+            432
+          ],
+          "progress": 1
+        },
+        {
+          "active": true,
+          "amount": 0,
+          "empty": true,
+          "id": "empty:2",
+          "kind": "springfield",
+          "pos": [
+            944,
+            528
+          ],
+          "progress": 1
+        },
+        {
+          "active": true,
+          "amount": 0,
+          "empty": true,
+          "id": "empty:3",
+          "kind": "grenade",
+          "pos": [
+            880,
+            432
+          ],
+          "progress": 1
+        },
+        {
+          "active": true,
+          "amount": 0,
+          "empty": true,
+          "id": "empty:4",
+          "kind": "mine",
+          "pos": [
+            336,
+            432
+          ],
+          "progress": 1
+        },
+        {
+          "active": true,
+          "amount": 0,
+          "empty": true,
+          "id": "empty:5",
+          "kind": "ammo",
+          "pos": [
+            752,
+            208
+          ],
+          "progress": 1
+        }
+      ],
+      "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+      "environment_schema": 1,
+      "escape": [
+        1008,
+        624
+      ],
+      "event_pose_clock_s": 34.1638666666664,
+      "event_pose_schema": 1,
+      "grenades": [],
+      "has_door": false,
+      "hud_schema": 1,
+      "level_id": "warehouse",
+      "level_title": "第2关 · 仓道：弹药窗口",
+      "loot": [],
+      "mines": [],
+      "movement_fx_schema": 1,
+      "ops": [
+        {
+          "action": "idle",
+          "active": true,
+          "alive": true,
+          "ammo": 10,
+          "ammo_pool": {
+            "rifle": 50
+          },
+          "auto_grenade": true,
+          "cone": "[(0.0, 0.0), (-76.46827, -235.9165), (-65.80692, -239.1097), (-55.01304, -241.8214), (-44.10837, -244.046), (-33.11487, -245.7792), (-22.05469, -247.0174), (-10.95009, -247.7581), (0.176568, -247.9999), (11.30287, -247.7423), (22.4064, -246.9857), (33.46481, -245.7318), (44.45583, -243.9829), (55.35732, -241.7428), (66.14733, -239.0157), (76.80412, -235.8074)]",
+          "cover_label": "机动",
+          "decoys": 0,
+          "display_name": "灰狼",
+          "facing": 270.040792646724,
+          "fire_mode": 0,
+          "fire_mode_label": "见敌即打",
+          "fire_permitted": true,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 138.405744444445,
+            "weapon": "kar98k"
+          },
+          "follow_lead": false,
+          "grenades": 1,
+          "has_nade_mark": false,
+          "hauling": false,
+          "hidden": false,
+          "hp": 100,
+          "id": 1,
+          "inventory": [
+            {
+              "amount": 7,
+              "kind": "kar98k"
+            },
+            {
+              "amount": 1,
+              "kind": "grenade"
+            }
+          ],
+          "inventory_line": "Kar98k 弹10/10  雷0 手雷1 包2/6",
+          "locked": false,
+          "max_ammo": 10,
+          "max_hp": 100,
+          "mines": 0,
+          "moving": false,
+          "nade_mark": [
+            0,
+            0
+          ],
+          "pos": [
+            1039.99877929688,
+            401.6435546875
+          ],
+          "role": 0,
+          "role_label": "步枪手",
+          "search_t": 0,
+          "searching": false,
+          "shot_cd": 0,
+          "shot_interval": 0.52,
+          "sprinting": false,
+          "stance": 0,
+          "start_ammo": 5,
+          "visual_model": "operator_rifle",
+          "visual_weapon": "kar98k",
+          "weapon": "kar98k",
+          "weapon_label": "Kar98k"
+        },
+        {
+          "action": "fire",
+          "active": true,
+          "alive": true,
+          "ammo": 8,
+          "ammo_pool": {
+            "mg": 8
+          },
+          "auto_grenade": true,
+          "cone": "[(0.0, 0.0), (187.0615, -108.0), (195.5343, -91.77336), (202.6027, -74.88759), (208.216, -57.46396), (212.3338, -39.62761), (214.9267, -21.50665), (215.9758, -3.231232), (215.4738, 15.0674), (213.4243, 33.25781), (209.8418, 51.20936), (204.7523, 68.79312), (198.1922, 85.88279), (190.2086, 102.3556), (160.7635, 104.9719), (138.6899, 108.3564)]",
+          "cover_label": "装卸位",
+          "decoys": 0,
+          "display_name": "铁砧",
+          "facing": 4,
+          "fire_mode": 1,
+          "fire_mode_label": "入伏再打",
+          "fire_permitted": true,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 138.405744444445,
+            "weapon": "bar"
+          },
+          "follow_lead": false,
+          "grenades": 0,
+          "has_nade_mark": false,
+          "hauling": false,
+          "hidden": false,
+          "hp": 76.4,
+          "id": 2,
+          "inventory": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "inventory_line": "BAR 弹8/20  雷0 手雷0 包1/6",
+          "locked": false,
+          "max_ammo": 20,
+          "max_hp": 100,
+          "mines": 0,
+          "moving": false,
+          "nade_mark": [
+            0,
+            0
+          ],
+          "pos": [
+            912,
+            464
+          ],
+          "role": 1,
+          "role_label": "机枪手",
+          "search_t": 0,
+          "searching": false,
+          "shot_cd": 0.115,
+          "shot_interval": 0.115,
+          "sprinting": false,
+          "stance": 0,
+          "start_ammo": 20,
+          "visual_model": "operator_mg",
+          "visual_weapon": "bar",
+          "weapon": "bar",
+          "weapon_label": "BAR"
+        },
+        {
+          "action": "idle",
+          "active": true,
+          "alive": true,
+          "ammo": 6,
+          "ammo_pool": {
+            "scout": 6
+          },
+          "auto_grenade": true,
+          "cone": "[(0.0, 0.0), (-62.35968, 14.39687), (-78.49187, 15.46047), (-94.74201, 15.49035), (-111.06, 14.48049), (-159.2441, 15.53386), (-239.4959, 15.54747), (-311.8361, 10.11117), (-312.0, 0.0), (-311.8361, -10.11117), (-311.3446, -20.21171), (-310.5261, -30.29102), (-309.3813, -40.33851), (-307.9116, -50.34362), (-306.1183, -60.29585), (-304.0034, -70.18473)]",
+          "cover_label": "闸口掩体",
+          "decoys": 0,
+          "display_name": "夜枭",
+          "facing": 180,
+          "fire_mode": 0,
+          "fire_mode_label": "见敌即打",
+          "fire_permitted": true,
+          "firearm_pose": {
+            "changed_weapon": true,
+            "from_intent": "",
+            "intent": "ready",
+            "since": 138.405744444445,
+            "weapon": "springfield"
+          },
+          "follow_lead": false,
+          "grenades": 0,
+          "has_nade_mark": false,
+          "hauling": false,
+          "hidden": false,
+          "hp": 100,
+          "id": 3,
+          "inventory": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "inventory_line": "春田 弹6/10  雷0 手雷0 包1/6",
+          "locked": false,
+          "max_ammo": 10,
+          "max_hp": 100,
+          "mines": 0,
+          "moving": false,
+          "nade_mark": [
+            0,
+            0
+          ],
+          "pos": [
+            944,
+            560
+          ],
+          "role": 2,
+          "role_label": "侦察兵",
+          "search_t": 0,
+          "searching": false,
+          "shot_cd": 0,
+          "shot_interval": 0.48,
+          "sprinting": false,
+          "stance": 0,
+          "start_ammo": 5,
+          "visual_model": "operator_scout",
+          "visual_weapon": "springfield",
+          "weapon": "springfield",
+          "weapon_label": "春田"
+        }
+      ],
+      "phase": 3,
+      "pose_clock_domain": "command",
+      "pose_clock_s": 153.469611111111,
+      "selected_id": 1,
+      "sentries": [],
+      "stashes": [
+        {
+          "active": true,
+          "amount": 1,
+          "id": "stashes:6",
+          "kind": "decoy",
+          "pos": [
+            720,
+            304
+          ],
+          "progress": 0
+        },
+        {
+          "active": true,
+          "amount": 32,
+          "id": "stashes:7",
+          "kind": "mp40",
+          "pos": [
+            464,
+            528
+          ],
+          "progress": 0
+        }
+      ],
+      "tool_fx": [],
+      "tool_fx_schema": 1,
+      "tripwires": [],
+      "utility_scope_id": "c32a1ca6721a32e311315b468530a799",
+      "visual_schema": 1,
+      "wave_count": 2
+    },
+    "inputs": [
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 33,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 33,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 5640000
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 33,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 33,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 5640900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 55,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 55,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 19967700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 56,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 56,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 20459900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 70,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          491,
+          160
+        ],
+        "presents": 70,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 27051900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 70,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          491,
+          160
+        ],
+        "presents": 70,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 27054000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 96,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 96,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 39605100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 97,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 97,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 40097500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 111,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          511,
+          352
+        ],
+        "presents": 111,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 46797800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 111,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          511,
+          352
+        ],
+        "presents": 111,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 46799600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 142,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 142,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 61941000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 143,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 143,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 62474300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 157,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          779,
+          595
+        ],
+        "presents": 157,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 69307200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 157,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          779,
+          595
+        ],
+        "presents": 157,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 69308900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 195,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 195,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 87863100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 196,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 196,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 88369700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 210,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          781,
+          507
+        ],
+        "presents": 210,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 95198700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 210,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          781,
+          507
+        ],
+        "presents": 210,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 95201600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 262,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 262,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 120512300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 263,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 263,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 121017600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 277,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          364,
+          267
+        ],
+        "presents": 277,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 127759900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 277,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          364,
+          267
+        ],
+        "presents": 277,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 127761900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 322,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 322,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 149627100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 323,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 323,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 150115800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 337,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 337,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 156851400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 337,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 337,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 156851800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 350,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          542,
+          274
+        ],
+        "presents": 350,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 162607900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 350,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          542,
+          274
+        ],
+        "presents": 350,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 162637800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 356,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 356,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 165258200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 357,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 357,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 165664400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 358,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 358,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 166071000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 359,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 359,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 166447900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 360,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 360,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 166856600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 361,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 361,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 167267900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 362,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 362,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 167663800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 363,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 363,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 168055500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 369,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 369,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 170554000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 370,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 370,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 170959500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 371,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 371,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 171402800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 372,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 372,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 171851100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 373,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 373,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 172254500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 374,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 374,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 172661400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 375,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 375,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 173069500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 376,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 376,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 173511500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 382,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 382,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 176174200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 383,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 383,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 176582400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 384,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 384,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 177020100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 385,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 385,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 177445800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 386,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 386,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 177865000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 387,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 387,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 178267800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 388,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 388,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 178711000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 389,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 389,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 179140100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 396,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 396,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 182144900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 397,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 397,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 182569100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 411,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          653,
+          584
+        ],
+        "presents": 411,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 188549900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 411,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          653,
+          584
+        ],
+        "presents": 411,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 188579900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 417,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 417,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 191124200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 418,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 418,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 191567100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 419,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 419,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 191960000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 420,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 420,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 192369900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 421,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 421,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 192797300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 422,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 422,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 193233000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 423,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 423,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 193648400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 424,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 424,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 194114400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 429,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 429,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 196262700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 430,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 430,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 196703200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 431,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 431,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 197123100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 432,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 432,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 197562400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 433,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 433,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 197964900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 434,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 434,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 198407400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 435,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 435,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 198828200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 436,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 436,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 199270300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 442,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 442,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 201912200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 443,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 443,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 202335600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 444,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 444,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 202768700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 445,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 445,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 203171400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 446,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 446,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 203653500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 447,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 447,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 204118100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 448,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 448,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 204604100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 449,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 449,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 205014000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 455,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 455,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 207618900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 456,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 456,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 208052300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 457,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 457,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 208471500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 458,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 458,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 208903700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 459,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 459,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 209332600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 460,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 460,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 209777400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 461,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 461,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 210210700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 462,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 462,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 210654400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 468,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 468,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 213256900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 469,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 469,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 213712100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 470,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 470,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 214203800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 471,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 471,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 214624000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 472,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 472,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 215052400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 473,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 473,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 215466200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 474,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 474,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 215876000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 475,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 475,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 216307800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 481,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 481,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 218944400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 482,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 482,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 219397800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 483,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 483,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 219808900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 484,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 484,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 220234600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 490,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 490,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 222796600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 491,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 491,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 223254200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 505,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 505,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 229460200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 505,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 505,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 229460400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 518,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          421,
+          577
+        ],
+        "presents": 518,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 234314600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 518,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          421,
+          577
+        ],
+        "presents": 518,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 234344500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 525,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 525,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 237032900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 526,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 526,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 237415700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 539,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          464,
+          622
+        ],
+        "presents": 539,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 242243900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 539,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          464,
+          622
+        ],
+        "presents": 539,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 242244200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 544,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 544,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 244143300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 545,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 545,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 244535300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 550,
+        "keycode": 70,
+        "kind": "key",
+        "phase": 0,
+        "presents": 550,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 246398800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 551,
+        "keycode": 70,
+        "kind": "key",
+        "phase": 0,
+        "presents": 551,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 246776500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 555,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 555,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 248250400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 556,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 556,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 248647800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 572,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          819,
+          237
+        ],
+        "presents": 572,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 254625400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 572,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          819,
+          237
+        ],
+        "presents": 572,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 254627000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 600,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 600,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 264945300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 600,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 600,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 264945600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 616,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 616,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 270901000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 616,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 616,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 270901300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 629,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 629,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 276903500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 629,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 629,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 276903700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 642,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          886,
+          415
+        ],
+        "presents": 642,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 283106100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 642,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          886,
+          415
+        ],
+        "presents": 642,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 283125000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 656,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 656,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 290034800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 656,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 656,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 290035100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 669,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 669,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 296164100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 669,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 669,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 296164400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 681,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 681,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 301868900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 681,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 681,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 301869100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 687,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 687,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 304756600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 688,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 688,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 305228300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 702,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          743,
+          278
+        ],
+        "presents": 702,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 311853000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 702,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          743,
+          278
+        ],
+        "presents": 702,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 311881300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 708,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 708,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 314844200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 709,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 709,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 315336200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 710,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 710,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 315825000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 711,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 711,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 316306400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 712,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 712,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 316803600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 713,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 713,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 317262200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 714,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 714,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 317735500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 715,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 715,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 318211700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 721,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 721,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 321204900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 722,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 722,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 321672200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 723,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 723,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 322128700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 724,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 724,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 322635500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 725,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 725,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 323138700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 726,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 726,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 323627100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 727,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 727,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 324114500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 728,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 728,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 324609400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 734,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 734,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 327560400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 735,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 735,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 328024100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 736,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 736,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 328524600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 737,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 737,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 329009500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 738,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 738,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 329504900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 739,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 739,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 329965000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 740,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 740,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 330440600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 741,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 0,
+        "presents": 741,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 330924500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 748,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 748,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 334354000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 749,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 749,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 334843400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 757,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 757,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 338834500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 758,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 758,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 339412600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 784,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 784,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 352215500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 784,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 784,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 352215800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 797,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 797,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 358611400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 797,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 797,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 358611600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 820,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 820,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 369717700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 820,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 820,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 369717900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 847,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 847,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 383568200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 848,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 848,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 384151400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 865,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          894,
+          427
+        ],
+        "presents": 865,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 392464900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 865,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          894,
+          427
+        ],
+        "presents": 865,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 392466800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 890,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 5,
+        "presents": 890,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 404604800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 891,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 5,
+        "presents": 891,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 405114900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 905,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          602,
+          487
+        ],
+        "presents": 905,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 411916300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 905,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          602,
+          487
+        ],
+        "presents": 905,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 411918200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 958,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 958,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 437426900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 959,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 959,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 437946100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 973,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          743,
+          278
+        ],
+        "presents": 973,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 444709300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 973,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          743,
+          278
+        ],
+        "presents": 973,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 444735100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 979,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 979,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 447717400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 980,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 980,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 448207500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 981,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 981,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 448677200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 982,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 982,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 449174700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 983,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 983,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 449644500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 984,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 984,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 450138100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 985,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 985,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 450614000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 986,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 986,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 451109800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 992,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 992,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 454049800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 993,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 993,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 454539900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 994,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 994,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 455024900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 995,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 995,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 455502000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 996,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 996,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 455973900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 997,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 997,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 456453500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 998,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 998,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 456913700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 999,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 999,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 457379600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1005,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1005,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 460326900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1006,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1006,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 460835200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1007,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1007,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 461354800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1008,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1008,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 461843800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1009,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1009,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 462313300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1010,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1010,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 462807300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1011,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1011,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 463266400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1012,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1012,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 463751100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1019,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1019,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 467227300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1020,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1020,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 467725900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1034,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          365,
+          369
+        ],
+        "presents": 1034,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 474568600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1034,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          365,
+          369
+        ],
+        "presents": 1034,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 474595300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1040,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1040,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 477497300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1041,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1041,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 477935200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1042,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1042,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 478429200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1043,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1043,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 478864700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1044,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1044,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 479326800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1045,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1045,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 479773400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1046,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1046,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 480241400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1047,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1047,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 480709300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1053,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1053,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 483639000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1054,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1054,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 484138100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1055,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1055,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 484609800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1056,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1056,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 485097500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1057,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1057,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 485557700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1058,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1058,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 486040900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1059,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1059,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 486517300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1060,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1060,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 487012600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1066,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1066,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 489905300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1067,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1067,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 490346800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1068,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1068,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 490809100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1069,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1069,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 491250600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1070,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1070,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 491712400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1071,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1071,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 492157000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1072,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1072,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 492604500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1073,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1073,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 493052300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1079,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1079,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 495972200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1080,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1080,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 496448800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1081,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1081,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 496918600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1082,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1082,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 497409500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1083,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1083,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 497871600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1084,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1084,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 498348900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1085,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1085,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 498834900
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1086,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1086,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 499332300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1092,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1092,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 502336800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1093,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1093,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 502818200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1094,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1094,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 503334700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1095,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1095,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 503814000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1096,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1096,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 504314000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1097,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1097,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 504800400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1098,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1098,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 505271000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1099,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1099,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 505767100
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1105,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1105,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 508747700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1106,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1106,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 509219600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1107,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1107,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 509670700
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1108,
+        "keycode": 65,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1108,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 510140000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1114,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1114,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 513098400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1115,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1115,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 513608200
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1131,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1131,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 521407500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1131,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1131,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 521407800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1144,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1144,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 527841000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1144,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1144,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 527841400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1167,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1167,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 538674000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1167,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1167,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 538674300
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1267,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1267,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 588719600
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "echo": false,
+        "engine_frame": 1268,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1268,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 589234000
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1285,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          280,
+          453
+        ],
+        "presents": 1285,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 597803400
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1285,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          280,
+          453
+        ],
+        "presents": 1285,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 597805500
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1351,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1351,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 630624800
+      },
+      {
+        "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1351,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1351,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 630625100
+      }
+    ],
+    "record_sha256": "8295a57f03264703faee6707ad4361abd3126102bd96521126cc02748d8393bc",
+    "record_validation": {
+      "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+      "events": 67,
+      "failures": [],
+      "frames": 1326,
+      "terminal_reason": "win"
+    },
+    "replay_rows": []
+  },
+  "browser_trusted_inputs": [
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 6036.699999988079
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 6040.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 20366.19999998808
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 20858.69999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 27451
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 27453.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 40004
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 40496.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 47196.89999997616
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 47199.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 62340.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 62873.39999997616
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 69706.29999995232
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 69708.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 88261.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 88768.69999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 95597.69999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 95601.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 120911.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 121416.69999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 128159
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 128161.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 150026
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 150514.89999997616
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 157250.69999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 157251.29999995232
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 163007
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 163037.19999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 165657.29999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 166063.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 166470
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 166846.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 167255.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 167666.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 168062.69999998808
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 168454.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 170953.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 171358.69999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 171801.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 172250
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 172653.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 173060.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 173468.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 173910.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 176573.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 176981.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 177419.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 177844.69999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 178264.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 178666.79999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 179110
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 179539
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 182543.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 182968
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 188949.19999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 188979.29999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 191523.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 191966.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 192359
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 192768.79999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 193196.29999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 193631.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 194047.29999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 194513.29999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 196661.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 197102.19999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 197516.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 197961.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 198363.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 198806.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 199227.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 199669.29999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 202311.19999998808
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 202734.69999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 203167.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 203570.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 204052.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 204517
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 205002.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 205412.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 208017.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 208451.19999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 208869.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 209302.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 209731
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 210176.19999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 210609.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 211053.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 213656
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 214111.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 214602.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 215023
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 215451.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 215865.19999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 216275.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 216706.79999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 219343.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 219796.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 220208
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 220633.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 223195.69999998808
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 223653.19999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 229859.59999996424
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 229859.89999997616
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 234713.69999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 234744.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 237431.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 237814.79999995232
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 242643.09999996424
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 242643.79999995232
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 244542.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 244934.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyF",
+      "button": null,
+      "t": 246797.79999995232
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyF",
+      "button": null,
+      "t": 247175.69999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 248649.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 249046.79999995232
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 255024.69999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 255026.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 265344.5
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 265345.09999996424
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 271300.39999997616
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 271300.7999999523
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 277302.7999999523
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 277303.2999999523
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 283505.1999999881
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 283524.39999997616
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 290434
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 290434.6999999881
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 296563.39999997616
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 296563.89999997616
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 302268
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 302268.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 305155.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 305627.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 312252.09999996424
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 312280.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 315243.1999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 315735.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 316224
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 316705.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 317202.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 317661.1999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 318134.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 318610.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 321603.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 322071.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 322527.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 323034.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 323537.7999999523
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 324026.1999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 324513.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 325008.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 327959.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 328423.1999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 328923.7999999523
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 329408.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 329903.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 330363.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 330839.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 331323.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 334753.1999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 335242.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 339233.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 339811.6999999881
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 352614.6999999881
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 352615.2999999523
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 359010.59999996424
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 359011.1999999881
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 370117
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 370117.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 383967.1999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 384550.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 392864.09999996424
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 392866.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 405003.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 405514
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 412315.5
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 412317.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 437826
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 438345.1999999881
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 445108.39999997616
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 445134.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 448116.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 448606.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 449076.1999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 449573.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 450043.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 450537.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 451013
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 451508.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 454448.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 454938.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 455423.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 455900.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 456373
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 456852.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 457312.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 457778.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 460725.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 461234.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 461753.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 462242.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 462712.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 463206.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 463665.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 464150.09999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 467626.2999999523
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 468125
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 474967.7999999523
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 474994.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 477896.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 478334.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 478828.1999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 479263.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 479725.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 480172.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 480640.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 481108.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 484038
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 484537.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 485008.7999999523
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 485496.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 485956.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 486439.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 486916.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 487411.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 490304.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 490745.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 491208.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 491649.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 492111.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 492556
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 493003.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 493451.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 496371.39999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 496847.89999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 497317.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 497808.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 498270.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 498747.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 499234
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 499731.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 502735.89999997616
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 503217.2999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 503733.59999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 504213
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 504713.09999996424
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 505199.39999997616
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 505670
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 506166.1999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 509146.7999999523
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 509618.59999996424
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 510069.6999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "KeyA",
+      "button": null,
+      "t": 510539
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 513497.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 514007
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 521806.6999999881
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 521807.2999999523
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 528240.2999999523
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 528240.8999999762
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 539073.1999999881
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 539073.7999999523
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 589118.7999999523
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 589633.0999999642
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 598202.5999999642
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 598205
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 631024
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 631024.5999999642
+    }
+  ],
+  "public_checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"pump\\\"\\nlevel_index=2\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"yard\\\", \\\"warehouse\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nyard_loops=1\\nyard_perfect=true\\nwarehouse_loops=1\\nwarehouse_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=true\\nseen_yard=true\\nseen_warehouse=true\\n\"},\"schema\":1}",
+  "public_checkpoint_sha256": "620da12560048397e3eb5c56dca41541fb3f922fb7b4bd5b03f47511bb543679",
+  "record": {
+    "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+    "bytes": 18247504,
+    "level": "warehouse",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "8295a57f03264703faee6707ad4361abd3126102bd96521126cc02748d8393bc",
+    "terminal": 10156,
+    "validation": {
+      "attempt": "e62d12a26a5c23f80e90b284fcd61797",
+      "events": 67,
+      "failures": [],
+      "frames": 1326,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-final-fresh13-1ec-20261005/warehouse-run/warehouse-record.bin",
+    "producer_wall": 614.0283974889899
+  }
+}

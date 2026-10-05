@@ -1,0 +1,165 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "credits-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "radio_credits_viewport_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "DISPLAY": ":112",
+    "AMBUSH_TEST_X11_DISPLAY": ":112",
+    "LIBGL_ALWAYS_SOFTWARE": "1"
+  },
+  "run_id": "2d157166d8304b90a287a751c8542287",
+  "actual_exit_code": 0,
+  "checks": 127,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1280_100_desktop",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_100_desktop.png",
+      "sha256": "8d5563bac79ca6b1ea47919dd602b986a3545e7faf79b318b3f2f61d72f65deb",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/00_viewport_radio_credits_journey1_1280_100_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1280_100_touch",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_100_touch.png",
+      "sha256": "e098fc74321019a823eadf96622f00de501d9e35ea29b172efc4d84d5c8fbb20",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/01_viewport_radio_credits_journey1_1280_100_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1280_200_desktop",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_200_desktop.png",
+      "sha256": "27d83cdaa3654a8cfe0cea49695fe7090f592704b67a8869dc5455bcf909550a",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/02_viewport_radio_credits_journey1_1280_200_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1280_200_touch",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_200_touch.png",
+      "sha256": "5beb30126fc36f68c4040fdb886ea85dda334bcef47346b4d83389f1dd712a78",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/03_viewport_radio_credits_journey1_1280_200_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1600_100_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_100_desktop.png",
+      "sha256": "2c3ef5cdbeedb02b462072056c43546a9e69c03e8d9c07cf2287505bb99a225c",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/04_viewport_radio_credits_journey1_1600_100_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1600_100_touch",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_100_touch.png",
+      "sha256": "ae79bd3a4846028bb3d20b64a1423d3ecbd606f1286983601d6c4695162b6e5d",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/05_viewport_radio_credits_journey1_1600_100_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1600_200_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_200_desktop.png",
+      "sha256": "7a99c978731bd7554e2ffd321fc3405d2ebc209d23c75e0888bb9186ea47523f",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/06_viewport_radio_credits_journey1_1600_200_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1600_200_touch",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_200_touch.png",
+      "sha256": "6ff46b7c1a43e47d2094625b0659f366394ee70ff0ad28326e22c724f9c3e70f",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/07_viewport_radio_credits_journey1_1600_200_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey1_1600_200_touch_scrolled",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_200_touch_scrolled.png",
+      "sha256": "721c0e7b26d995b4b05e1ad9892d8dfa5de7e577e4b2f5f4c11477fca230627d",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/08_viewport_radio_credits_journey1_1600_200_touch_scrolled.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey2_1600_100_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey2_1600_100_desktop.png",
+      "sha256": "95d4232140daf3169470b2a34d855972c84f170d1a4de1512e997bbc860a2cd8",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/09_viewport_radio_credits_journey2_1600_100_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_journey3_1600_200_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey3_1600_200_desktop.png",
+      "sha256": "0346c94597d3d34d4bd51893ab3f6af408eaeb412caaf7595f00d223a08c6ea7",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/10_viewport_radio_credits_journey3_1600_200_desktop.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 11,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "native_inputs": 26,
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/run.exit"
+}

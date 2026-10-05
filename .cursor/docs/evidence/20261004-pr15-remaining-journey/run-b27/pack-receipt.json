@@ -1,0 +1,34 @@
+{
+  "source_sha": "b27ff62e34e4a822c278f737e7a088a0ff48e5ea",
+  "game_tree": "7757913c5f598e813cbcb46971f120b7339802b5",
+  "commands": [
+    {
+      "command": [
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--editor",
+        "--path",
+        "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/source",
+        "--import"
+      ],
+      "actual_exit": 0
+    },
+    {
+      "command": [
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/source",
+        "--export-pack",
+        "Linux Desktop",
+        "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/player-journey.pck"
+      ],
+      "actual_exit": 0
+    }
+  ],
+  "pack": "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/player-journey.pck",
+  "sha256": "006a8b91d62a6da63b5bb8bea4a7367837eef645c4cdaa95459cfbb590b19509",
+  "bytes": 23425820,
+  "staging_changes": "Only Linux Desktop custom_features=a0_preview; original title/main scene and rendering configuration kept",
+  "asset_generators_run": false
+}

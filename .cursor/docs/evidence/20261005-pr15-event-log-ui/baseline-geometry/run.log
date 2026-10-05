@@ -1,0 +1,40 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/5336cb1348374ac1bfd30004661ccce6/data/godot/app_userdata/Ambush Loop run_id=5336cb1348374ac1bfd30004661ccce6
+ERROR: EVENT_LOG_LAYOUT: 1280_720_100_false camera and log hit areas are disjoint
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/event_log_layout_test.gd:23)
+       [1] _run (res://scripts/event_log_layout_test.gd:100)
+       [2] _settle (res://scripts/event_log_layout_test.gd:30)
+ERROR: EVENT_LOG_LAYOUT: 1280_720_100_true camera and log hit areas are disjoint
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/event_log_layout_test.gd:23)
+       [1] _run (res://scripts/event_log_layout_test.gd:100)
+       [2] _settle (res://scripts/event_log_layout_test.gd:30)
+ERROR: EVENT_LOG_LAYOUT: 1280_720_200_false whole log viewport fits usable viewport
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/event_log_layout_test.gd:23)
+       [1] _run (res://scripts/event_log_layout_test.gd:98)
+       [2] _settle (res://scripts/event_log_layout_test.gd:30)
+ERROR: EVENT_LOG_LAYOUT: 1280_720_200_true whole log viewport fits usable viewport
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/event_log_layout_test.gd:23)
+       [1] _run (res://scripts/event_log_layout_test.gd:98)
+       [2] _settle (res://scripts/event_log_layout_test.gd:30)
+ERROR: EVENT_LOG_LAYOUT: 1600_900_200_true whole log viewport fits usable viewport
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/event_log_layout_test.gd:23)
+       [1] _run (res://scripts/event_log_layout_test.gd:98)
+       [2] _settle (res://scripts/event_log_layout_test.gd:30)
+ERROR: EVENT_LOG_LAYOUT: 960_540_100_true camera and log hit areas are disjoint
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/event_log_layout_test.gd:23)
+       [1] _run (res://scripts/event_log_layout_test.gd:100)
+       [2] _settle (res://scripts/event_log_layout_test.gd:30)
+EVENT_LOG_LAYOUT checks=36 failures=6

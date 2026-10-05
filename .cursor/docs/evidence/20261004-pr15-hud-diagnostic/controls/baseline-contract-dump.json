@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "bash",
+    "/workspace/pr15-metadata-candidate-a42/ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-hud-diagnostic/godot-contract-diag",
+    "presentation_contract_test.gd",
+    "--headless"
+  ],
+  "source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+  "game_tree": "ff0de72e42f636e201983cf47aa24aa142a652bd",
+  "start": "2026-10-04T22:08:45.702459+00:00",
+  "timeout_seconds": 240,
+  "timed_out": false,
+  "owned_wrapper_pid": 127398,
+  "actual_wrapper_exit": 1,
+  "end": "2026-10-04T22:09:51.353102+00:00",
+  "ERROR": 2,
+  "SCRIPT_ERROR": 0,
+  "uuid": "954c4786d5cb4c1792c9c31f5fdc6f79",
+  "terminal_lines": [
+    "ERROR: PRESENTATION_CONTRACT: 30 FPS rotating and 60 FPS static outcomes/events are identical",
+    "ERROR: PRESENTATION_CONTRACT: 2x presentation keeps identical simulation result",
+    "PRESENTATION_CONTRACT_FAILED failures=2 checks=84042"
+  ]
+}

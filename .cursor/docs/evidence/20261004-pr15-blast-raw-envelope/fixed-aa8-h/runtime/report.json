@@ -1,0 +1,3747 @@
+{
+  "checks": 22,
+  "failures": 0,
+  "rows": [
+    {
+      "actual_original_snapshot_frame_seq": 3,
+      "case": "legal-control",
+      "control": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "facing": 90.0,
+              "group": "ops",
+              "id": 1,
+              "moving": false,
+              "pos": "(80.0, 80.0)",
+              "sprinting": false,
+              "stance": 0
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "facing": 180.0,
+              "group": "ops",
+              "id": 2,
+              "moving": false,
+              "pos": "(1024.0, 640.0)",
+              "sprinting": false,
+              "stance": 0
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "facing": 180.0,
+              "group": "ops",
+              "id": 3,
+              "moving": false,
+              "pos": "(1024.0, 640.0)",
+              "sprinting": false,
+              "stance": 0
+            },
+            {
+              "action": "walk",
+              "active": true,
+              "alive": true,
+              "facing": 90.0000025044782,
+              "group": "enemies",
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)"
+            }
+          ],
+          "movement_fx_clock_domain": "simulation",
+          "movement_fx_clock_s": 0.8,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 1,
+          "movement_fx_source_token": -9223371791303438514,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791303438514,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [
+            {
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "clock_domain": "playback",
+              "clock_tick": 49,
+              "confirmed": true,
+              "created_clock_tick": 1,
+              "created_pos": "(80.0, 80.0)",
+              "created_wave_id": 0,
+              "effect_id": "8e52e10b930afb4772fc7cdf2b2752fc:tool_fx:0",
+              "kind": "grenade",
+              "level_id": "yard",
+              "local_tick": 48,
+              "original_event": {},
+              "owner_group": "ops",
+              "owner_id": 1,
+              "phase": 1,
+              "playback_schema": 2,
+              "position": "(88.0, 246.0)",
+              "radius": 78.0,
+              "schema": 1,
+              "seq": 0,
+              "tool_id": "8e52e10b930afb4772fc7cdf2b2752fc:tool:0",
+              "variant": "stiel",
+              "victims": [],
+              "wave_id": 0
+            }
+          ],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 1,
+          "tool_fx_source_token": -9223371791303438514,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [
+          {
+            "age_ticks": 0,
+            "center": "(-17.25, 0.0, -3.3125)",
+            "effect_id": "8e52e10b930afb4772fc7cdf2b2752fc:tool_fx:0",
+            "flash_visible": true,
+            "kind": "grenade",
+            "opacity": 0.0,
+            "ring_visible": true,
+            "seq": 0,
+            "smoke": [],
+            "smoke_count": 0,
+            "tool_id": "8e52e10b930afb4772fc7cdf2b2752fc:tool:0"
+          }
+        ],
+        "reader": [
+          {
+            "age_ticks": 0,
+            "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+            "clock_domain": "playback",
+            "clock_tick": 49,
+            "confirmed": true,
+            "created_clock_tick": 1,
+            "created_pos": "(80.0, 80.0)",
+            "created_wave_id": 0,
+            "effect_id": "8e52e10b930afb4772fc7cdf2b2752fc:tool_fx:0",
+            "kind": "grenade",
+            "level_id": "yard",
+            "local_tick": 48,
+            "original_event": {},
+            "owner_group": "ops",
+            "owner_id": 1,
+            "phase": 1,
+            "playback_schema": 2,
+            "position": "(88.0, 246.0)",
+            "radius": 78.0,
+            "schema": 1,
+            "seq": 0,
+            "tool_id": "8e52e10b930afb4772fc7cdf2b2752fc:tool:0",
+            "variant": "stiel",
+            "victims": [],
+            "wave_id": 0
+          }
+        ],
+        "unsupported": false
+      },
+      "control_frame_seq": 0
+    },
+    {
+      "case": [
+        "snapshot",
+        "schema"
+      ],
+      "raw_after": 2.0,
+      "raw_before": 2,
+      "result": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [],
+          "movement_fx_clock_domain": "",
+          "movement_fx_clock_s": 0.0,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 0,
+          "movement_fx_source_token": -9223371791269884081,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791269884081,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 0,
+          "tool_fx_source_token": -9223371791269884081,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [],
+        "reader": [],
+        "unsupported": false
+      },
+      "source_read_only": true
+    },
+    {
+      "case": [
+        "snapshot",
+        "playback_schema"
+      ],
+      "raw_after": 2.0,
+      "raw_before": 2,
+      "result": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [],
+          "movement_fx_clock_domain": "",
+          "movement_fx_clock_s": 0.0,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 0,
+          "movement_fx_source_token": -9223371791236329648,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791236329648,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 0,
+          "tool_fx_source_token": -9223371791236329648,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [],
+        "reader": [],
+        "unsupported": false
+      },
+      "source_read_only": true
+    },
+    {
+      "case": [
+        "snapshot",
+        "wave_id"
+      ],
+      "raw_after": 0.0,
+      "raw_before": 0,
+      "result": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [],
+          "movement_fx_clock_domain": "",
+          "movement_fx_clock_s": 0.0,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 0,
+          "movement_fx_source_token": -9223371791202775217,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791202775217,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 0,
+          "tool_fx_source_token": -9223371791202775217,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [],
+        "reader": [],
+        "unsupported": false
+      },
+      "source_read_only": true
+    },
+    {
+      "case": [
+        "snapshot",
+        "frame_seq"
+      ],
+      "raw_after": 0.0,
+      "raw_before": 0,
+      "result": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [],
+          "movement_fx_clock_domain": "",
+          "movement_fx_clock_s": 0.0,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 0,
+          "movement_fx_source_token": -9223371791169220784,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791169220784,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 0,
+          "tool_fx_source_token": -9223371791169220784,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [],
+        "reader": [],
+        "unsupported": false
+      },
+      "source_read_only": true
+    },
+    {
+      "case": [
+        "data",
+        "phase"
+      ],
+      "raw_after": 1.0,
+      "raw_before": 1,
+      "result": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [],
+          "movement_fx_clock_domain": "",
+          "movement_fx_clock_s": 0.0,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 0,
+          "movement_fx_source_token": -9223371791135666353,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791135666353,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 0,
+          "tool_fx_source_token": -9223371791135666353,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [],
+        "reader": [],
+        "unsupported": false
+      },
+      "source_read_only": true
+    },
+    {
+      "case": [
+        "data",
+        "wave_count"
+      ],
+      "raw_after": 2.0,
+      "raw_before": 2,
+      "result": {
+        "continuous": true,
+        "frame": {
+          "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+          "animation_schema": 3,
+          "animation_supported": true,
+          "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+          "attempt_number": 1,
+          "barrels": [],
+          "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+          "corpse_contact_schema": 1,
+          "corpse_pairing_schema": 2,
+          "corpse_schema": 1,
+          "corpses": [],
+          "covers": [
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:0",
+              "pos": "(240.0, 368.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:1",
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:2",
+              "pos": "(784.0, 240.0)"
+            },
+            {
+              "active": true,
+              "facing": 90.0,
+              "id": "covers:3",
+              "pos": "(816.0, 432.0)"
+            },
+            {
+              "active": true,
+              "facing": 0.0,
+              "id": "covers:4",
+              "pos": "(400.0, 496.0)"
+            },
+            {
+              "active": true,
+              "facing": 180.0,
+              "id": "covers:5",
+              "pos": "(912.0, 528.0)"
+            }
+          ],
+          "decoys": [],
+          "door_locked": false,
+          "door_pos": "(0.0, 0.0)",
+          "enemies": [
+            {
+              "action": "walk",
+              "active": true,
+              "alerted": false,
+              "alive": true,
+              "cone": "[]",
+              "corpse_id": "",
+              "echo_kit": false,
+              "facing": 90.0000025044782,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "ready",
+                "since": 0.8,
+                "weapon": "kar98k"
+              },
+              "hp": 100.0,
+              "id": 1,
+              "moving": true,
+              "pos": "(960.0, 576.0)",
+              "returning_fire": false,
+              "role": 0,
+              "route": "main",
+              "stance": 0,
+              "target_id": -1,
+              "visual_model": "enemy_patrol",
+              "visual_weapon": "kar98k",
+              "weapon": ""
+            }
+          ],
+          "environment_cutaway_schema": 1,
+          "environment_layout_revision": "six_level_grid_assembly_1",
+          "environment_objects": [],
+          "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+          "environment_schema": 1,
+          "environment_supported": true,
+          "escape": "(1008.0, 624.0)",
+          "event_pose_clock_s": 0.8,
+          "event_pose_schema": 1,
+          "events": [
+            {
+              "actor_id": -1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:0",
+              "payload": {
+                "locked": false
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(0.0, 0.0)",
+              "schema": 2,
+              "seq": 0,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "door",
+              "wave_id": 0
+            },
+            {
+              "actor_id": 1,
+              "attempt_id": "8e52e10b930afb4772fc7cdf2b2752fc",
+              "event_id": "8e52e10b930afb4772fc7cdf2b2752fc:0:1",
+              "payload": {
+                "kit": "",
+                "note": "",
+                "route": "main"
+              },
+              "playback_schema": 2,
+              "playback_tick": 1,
+              "position": "(432.0, 112.0)",
+              "schema": 2,
+              "seq": 1,
+              "target_id": -1,
+              "tick": 0,
+              "timeline_tick": 0,
+              "type": "spawn",
+              "wave_id": 0
+            }
+          ],
+          "frame_seq": 0,
+          "grenades": [],
+          "has_door": false,
+          "historical_defaults": false,
+          "hud_schema": 1,
+          "level_id": "yard",
+          "level_title": "第1关 · 院子：交叉封锁",
+          "local_tick": 48,
+          "loot": [],
+          "mines": [],
+          "movement_fx_actors": [],
+          "movement_fx_clock_domain": "",
+          "movement_fx_clock_s": 0.0,
+          "movement_fx_playback_schema": 2,
+          "movement_fx_schema": 0,
+          "movement_fx_source_token": -9223371791102111920,
+          "ops": [
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 7,
+              "ammo_pool": {
+                "rifle": 7
+              },
+              "auto_grenade": false,
+              "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+              "cover_label": "机动",
+              "decoys": 0,
+              "display_name": "灰狼",
+              "facing": 90.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 1,
+              "inventory": [
+                {
+                  "amount": 7,
+                  "kind": "rifle"
+                }
+              ],
+              "inventory_line": "步枪 弹7/14  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 14,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(80.0, 80.0)",
+              "role": 0,
+              "role_label": "步枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.18,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 7,
+              "visual_model": "operator_rifle",
+              "visual_weapon": "kar98k",
+              "weapon": "rifle",
+              "weapon_label": "步枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 12,
+              "ammo_pool": {
+                "mg": 12
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+              "cover_label": "东箱掩体",
+              "decoys": 0,
+              "display_name": "铁砧",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "mg42"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 2,
+              "inventory": [
+                {
+                  "amount": 12,
+                  "kind": "mg"
+                }
+              ],
+              "inventory_line": "机枪 弹12/18  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 18,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 1,
+              "role_label": "机枪手",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.1,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 12,
+              "visual_model": "operator_mg",
+              "visual_weapon": "mg42",
+              "weapon": "mg",
+              "weapon_label": "机枪"
+            },
+            {
+              "action": "aim",
+              "active": true,
+              "alive": true,
+              "ammo": 6,
+              "ammo_pool": {
+                "scout": 6
+              },
+              "auto_grenade": true,
+              "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+              "cover_label": "出口掩体",
+              "decoys": 0,
+              "display_name": "夜枭",
+              "facing": 180.0,
+              "fire_mode": 0,
+              "fire_mode_label": "见敌即打",
+              "fire_permitted": true,
+              "firearm_pose": {
+                "changed_weapon": true,
+                "from_intent": "",
+                "intent": "aim",
+                "since": 0.0,
+                "weapon": "kar98k_zf"
+              },
+              "follow_lead": false,
+              "grenades": 0,
+              "has_nade_mark": false,
+              "hauling": false,
+              "hidden": false,
+              "hp": 100.0,
+              "id": 3,
+              "inventory": [
+                {
+                  "amount": 6,
+                  "kind": "scout"
+                }
+              ],
+              "inventory_line": "狙 弹6/10  雷0 手雷0 包1/6",
+              "locked": true,
+              "max_ammo": 10,
+              "max_hp": 100.0,
+              "mines": 0,
+              "moving": false,
+              "nade_mark": "(0.0, 0.0)",
+              "pos": "(1024.0, 640.0)",
+              "role": 2,
+              "role_label": "侦察兵",
+              "search_t": 0.0,
+              "searching": false,
+              "shot_cd": 0.0,
+              "shot_interval": 0.28,
+              "sprinting": false,
+              "stance": 0,
+              "start_ammo": 6,
+              "visual_model": "operator_scout",
+              "visual_weapon": "kar98k_zf",
+              "weapon": "scout",
+              "weapon_label": "狙"
+            }
+          ],
+          "phase": 4,
+          "playback_schema": 2,
+          "playback_tick": 49,
+          "pose_clock_domain": "simulation",
+          "pose_clock_s": 0.8,
+          "pose_snapshot_delta_s": 0.0,
+          "recorded_phase": 1,
+          "replay": true,
+          "run_id": -1,
+          "schema": 2,
+          "selected_id": 1,
+          "sentries": [],
+          "shot_fx_playback_schema": 2,
+          "shot_fx_schema": 1,
+          "shot_fx_source_token": -9223371791102111920,
+          "stashes": [
+            {
+              "active": true,
+              "amount": 7,
+              "id": "stashes:0",
+              "kind": "kar98k",
+              "pos": "(208.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 12,
+              "id": "stashes:1",
+              "kind": "mg42",
+              "pos": "(848.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:2",
+              "kind": "kar98k_zf",
+              "pos": "(944.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 2,
+              "id": "stashes:3",
+              "kind": "grenade",
+              "pos": "(368.0, 528.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 1,
+              "id": "stashes:4",
+              "kind": "mine",
+              "pos": "(336.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 6,
+              "id": "stashes:5",
+              "kind": "ammo",
+              "pos": "(752.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:6",
+              "kind": "m1911",
+              "pos": "(272.0, 432.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 20,
+              "id": "stashes:7",
+              "kind": "thompson",
+              "pos": "(560.0, 400.0)",
+              "progress": 0.0
+            },
+            {
+              "active": true,
+              "amount": 8,
+              "id": "stashes:8",
+              "kind": "luger",
+              "pos": "(688.0, 560.0)",
+              "progress": 0.0
+            }
+          ],
+          "tick": 48,
+          "tool_fx": [],
+          "tool_fx_playback_schema": 2,
+          "tool_fx_schema": 0,
+          "tool_fx_source_token": -9223371791102111920,
+          "tool_fx_terminal_reason": "",
+          "tripwires": [],
+          "utility_scope_id": "79e49f06f1a80c149796584768400950",
+          "visual_schema": 1,
+          "visual_unsupported": false,
+          "wave_count": 2,
+          "wave_id": 0
+        },
+        "pool": [],
+        "reader": [],
+        "unsupported": false
+      },
+      "source_read_only": true
+    },
+    {
+      "case": "actual-old-schema1",
+      "frame": {
+        "actor_asset_revision": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+        "animation_schema": 3,
+        "animation_supported": true,
+        "attempt_id": "5238b2984c35e9db437210547b996879",
+        "attempt_number": 1,
+        "barrels": [],
+        "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+        "corpse_contact_schema": 1,
+        "corpse_pairing_schema": 2,
+        "corpse_schema": 1,
+        "corpses": [],
+        "covers": [
+          {
+            "active": true,
+            "facing": 0.0,
+            "id": "covers:0",
+            "pos": "(240.0, 368.0)"
+          },
+          {
+            "active": true,
+            "facing": 90.0,
+            "id": "covers:1",
+            "pos": "(496.0, 240.0)"
+          },
+          {
+            "active": true,
+            "facing": 180.0,
+            "id": "covers:2",
+            "pos": "(784.0, 240.0)"
+          },
+          {
+            "active": true,
+            "facing": 90.0,
+            "id": "covers:3",
+            "pos": "(816.0, 432.0)"
+          },
+          {
+            "active": true,
+            "facing": 0.0,
+            "id": "covers:4",
+            "pos": "(400.0, 496.0)"
+          },
+          {
+            "active": true,
+            "facing": 180.0,
+            "id": "covers:5",
+            "pos": "(912.0, 528.0)"
+          }
+        ],
+        "decoys": [],
+        "door_locked": false,
+        "door_pos": "(0.0, 0.0)",
+        "enemies": [
+          {
+            "action": "walk",
+            "active": true,
+            "alerted": false,
+            "alive": true,
+            "cone": "[]",
+            "corpse_id": "",
+            "echo_kit": false,
+            "facing": 90.0000025044782,
+            "firearm_pose": {
+              "changed_weapon": true,
+              "from_intent": "",
+              "intent": "ready",
+              "since": 0.0,
+              "weapon": "kar98k"
+            },
+            "hp": 100.0,
+            "id": 1,
+            "moving": true,
+            "pos": "(432.0, 113.1667)",
+            "returning_fire": false,
+            "role": 0,
+            "route": "main",
+            "stance": 0,
+            "target_id": -1,
+            "visual_model": "enemy_patrol",
+            "visual_weapon": "kar98k",
+            "weapon": ""
+          }
+        ],
+        "environment_cutaway_schema": 1,
+        "environment_layout_revision": "six_level_grid_assembly_1",
+        "environment_objects": [],
+        "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+        "environment_schema": 1,
+        "environment_supported": true,
+        "escape": "(1008.0, 624.0)",
+        "event_pose_clock_s": 0.0,
+        "event_pose_schema": 1,
+        "events": [
+          {
+            "actor_id": -1,
+            "attempt_id": "5238b2984c35e9db437210547b996879",
+            "event_id": "5238b2984c35e9db437210547b996879:0:0",
+            "payload": {
+              "locked": false
+            },
+            "playback_schema": 1,
+            "playback_tick": 0,
+            "position": "(0.0, 0.0)",
+            "schema": 2,
+            "seq": 0,
+            "target_id": -1,
+            "tick": 0,
+            "timeline_tick": 0,
+            "type": "door",
+            "wave_id": 0
+          },
+          {
+            "actor_id": 1,
+            "attempt_id": "5238b2984c35e9db437210547b996879",
+            "event_id": "5238b2984c35e9db437210547b996879:0:1",
+            "payload": {
+              "kit": "",
+              "note": "",
+              "route": "main"
+            },
+            "playback_schema": 1,
+            "playback_tick": 0,
+            "position": "(432.0, 112.0)",
+            "schema": 2,
+            "seq": 1,
+            "target_id": -1,
+            "tick": 0,
+            "timeline_tick": 0,
+            "type": "spawn",
+            "wave_id": 0
+          },
+          {
+            "actor_id": 1,
+            "attempt_id": "5238b2984c35e9db437210547b996879",
+            "event_id": "5238b2984c35e9db437210547b996879:0:2",
+            "payload": {
+              "reason": "cone"
+            },
+            "playback_schema": 1,
+            "playback_tick": 0,
+            "position": "(496.0, 240.0)",
+            "schema": 2,
+            "seq": 2,
+            "target_id": 1,
+            "tick": 0,
+            "timeline_tick": 0,
+            "type": "no_engage",
+            "wave_id": 0
+          },
+          {
+            "actor_id": 2,
+            "attempt_id": "5238b2984c35e9db437210547b996879",
+            "event_id": "5238b2984c35e9db437210547b996879:0:3",
+            "payload": {
+              "reason": "range"
+            },
+            "playback_schema": 1,
+            "playback_tick": 0,
+            "position": "(784.0, 240.0)",
+            "schema": 2,
+            "seq": 3,
+            "target_id": 1,
+            "tick": 0,
+            "timeline_tick": 0,
+            "type": "no_engage",
+            "wave_id": 0
+          },
+          {
+            "actor_id": 3,
+            "attempt_id": "5238b2984c35e9db437210547b996879",
+            "event_id": "5238b2984c35e9db437210547b996879:0:4",
+            "payload": {
+              "reason": "range"
+            },
+            "playback_schema": 1,
+            "playback_tick": 0,
+            "position": "(912.0, 528.0)",
+            "schema": 2,
+            "seq": 4,
+            "target_id": 1,
+            "tick": 0,
+            "timeline_tick": 0,
+            "type": "no_engage",
+            "wave_id": 0
+          }
+        ],
+        "frame_seq": 1,
+        "grenades": [],
+        "has_door": false,
+        "historical_defaults": false,
+        "hud_schema": 1,
+        "level_id": "yard",
+        "level_title": "第1关 · 院子：交叉封锁",
+        "local_tick": 0,
+        "loot": [],
+        "mines": [],
+        "movement_fx_actors": [],
+        "movement_fx_clock_domain": "",
+        "movement_fx_clock_s": 0.0,
+        "movement_fx_playback_schema": 1,
+        "movement_fx_schema": 0,
+        "movement_fx_source_token": -9223371791018225841,
+        "ops": [
+          {
+            "action": "aim",
+            "active": true,
+            "alive": true,
+            "ammo": 7,
+            "ammo_pool": {
+              "rifle": 7
+            },
+            "auto_grenade": true,
+            "cone": "[(0.0, 0.0), (75.11545, 141.2716), (78.09344, 175.4007), (75.24443, 206.7324), (60.64022, 211.4776), (45.74057, 215.1925), (30.61808, 217.859), (15.34642, 219.4641), (0.0, 220.0), (-15.34642, 219.4641), (-30.61808, 217.859), (-45.74057, 215.1925), (-60.64022, 211.4776), (-75.24443, 206.7324), (-89.48206, 200.98), (-103.2837, 194.2485)]",
+            "cover_label": "北廊掩体",
+            "decoys": 0,
+            "display_name": "灰狼",
+            "facing": 90.0,
+            "fire_mode": 0,
+            "fire_mode_label": "见敌即打",
+            "fire_permitted": true,
+            "firearm_pose": {
+              "changed_weapon": true,
+              "from_intent": "",
+              "intent": "aim",
+              "since": 0.0,
+              "weapon": "kar98k"
+            },
+            "follow_lead": false,
+            "grenades": 1,
+            "has_nade_mark": false,
+            "hauling": false,
+            "hidden": false,
+            "hp": 100.0,
+            "id": 1,
+            "inventory": [
+              {
+                "amount": 7,
+                "kind": "rifle"
+              },
+              {
+                "amount": 1,
+                "kind": "grenade"
+              },
+              {
+                "amount": 1,
+                "kind": "mine"
+              }
+            ],
+            "inventory_line": "步枪 弹7/14  雷1 手雷1 包3/6",
+            "locked": true,
+            "max_ammo": 14,
+            "max_hp": 100.0,
+            "mines": 1,
+            "moving": false,
+            "nade_mark": "(0.0, 0.0)",
+            "pos": "(496.0, 240.0)",
+            "role": 0,
+            "role_label": "步枪手",
+            "search_t": 0.0,
+            "searching": false,
+            "shot_cd": 0.0,
+            "shot_interval": 0.18,
+            "sprinting": false,
+            "stance": 0,
+            "start_ammo": 7,
+            "visual_model": "operator_rifle",
+            "visual_weapon": "kar98k",
+            "weapon": "rifle",
+            "weapon_label": "步枪"
+          },
+          {
+            "action": "aim",
+            "active": true,
+            "alive": true,
+            "ammo": 12,
+            "ammo_pool": {
+              "mg": 12
+            },
+            "auto_grenade": true,
+            "cone": "[(0.0, 0.0), (-42.82436, 47.56127), (-48.19658, 42.10808), (-66.0991, 45.06561), (-85.20824, 44.22168), (-119.8381, 44.97598), (-199.1555, 48.60148), (-203.5336, 24.47582), (-205.0, 0.0), (-203.5336, -24.47582), (-199.1555, -48.60148), (-191.9281, -72.03184), (-142.0137, -73.70279), (-105.7586, -72.10497), (-84.34401, -73.68913), (-64.23654, -71.3419)]",
+            "cover_label": "东箱掩体",
+            "decoys": 0,
+            "display_name": "铁砧",
+            "facing": 180.0,
+            "fire_mode": 0,
+            "fire_mode_label": "见敌即打",
+            "fire_permitted": true,
+            "firearm_pose": {
+              "changed_weapon": true,
+              "from_intent": "",
+              "intent": "aim",
+              "since": 0.0,
+              "weapon": "mg42"
+            },
+            "follow_lead": false,
+            "grenades": 1,
+            "has_nade_mark": false,
+            "hauling": false,
+            "hidden": false,
+            "hp": 100.0,
+            "id": 2,
+            "inventory": [
+              {
+                "amount": 12,
+                "kind": "mg"
+              },
+              {
+                "amount": 1,
+                "kind": "grenade"
+              },
+              {
+                "amount": 1,
+                "kind": "mine"
+              }
+            ],
+            "inventory_line": "机枪 弹12/18  雷1 手雷1 包3/6",
+            "locked": true,
+            "max_ammo": 18,
+            "max_hp": 100.0,
+            "mines": 1,
+            "moving": false,
+            "nade_mark": "(0.0, 0.0)",
+            "pos": "(784.0, 240.0)",
+            "role": 1,
+            "role_label": "机枪手",
+            "search_t": 0.0,
+            "searching": false,
+            "shot_cd": 0.0,
+            "shot_interval": 0.1,
+            "sprinting": false,
+            "stance": 0,
+            "start_ammo": 12,
+            "visual_model": "operator_mg",
+            "visual_weapon": "mg42",
+            "weapon": "mg",
+            "weapon_label": "机枪"
+          },
+          {
+            "action": "aim",
+            "active": true,
+            "alive": true,
+            "ammo": 6,
+            "ammo_pool": {
+              "scout": 6
+            },
+            "auto_grenade": true,
+            "cone": "[(0.0, 0.0), (-120.2807, 43.77858), (-152.8916, 47.16083), (-186.0628, 47.37742), (-235.2414, 47.55508), (-276.8726, 41.73183), (-278.6086, 27.879), (-239.7017, 11.96301), (-240.0, 0.0), (-239.7017, -11.96301), (-238.8074, -23.89628), (-237.3194, -35.77014), (-235.2414, -47.55508), (-232.5786, -59.22178), (-229.3375, -70.74124), (-263.1139, -95.76564)]",
+            "cover_label": "出口掩体",
+            "decoys": 0,
+            "display_name": "夜枭",
+            "facing": 180.0,
+            "fire_mode": 0,
+            "fire_mode_label": "见敌即打",
+            "fire_permitted": true,
+            "firearm_pose": {
+              "changed_weapon": true,
+              "from_intent": "",
+              "intent": "aim",
+              "since": 0.0,
+              "weapon": "kar98k_zf"
+            },
+            "follow_lead": false,
+            "grenades": 1,
+            "has_nade_mark": false,
+            "hauling": false,
+            "hidden": false,
+            "hp": 100.0,
+            "id": 3,
+            "inventory": [
+              {
+                "amount": 6,
+                "kind": "scout"
+              },
+              {
+                "amount": 1,
+                "kind": "grenade"
+              },
+              {
+                "amount": 1,
+                "kind": "mine"
+              }
+            ],
+            "inventory_line": "狙 弹6/10  雷1 手雷1 包3/6",
+            "locked": true,
+            "max_ammo": 10,
+            "max_hp": 100.0,
+            "mines": 1,
+            "moving": false,
+            "nade_mark": "(0.0, 0.0)",
+            "pos": "(912.0, 528.0)",
+            "role": 2,
+            "role_label": "侦察兵",
+            "search_t": 0.0,
+            "searching": false,
+            "shot_cd": 0.0,
+            "shot_interval": 0.28,
+            "sprinting": false,
+            "stance": 0,
+            "start_ammo": 6,
+            "visual_model": "operator_scout",
+            "visual_weapon": "kar98k_zf",
+            "weapon": "scout",
+            "weapon_label": "狙"
+          }
+        ],
+        "phase": 4,
+        "playback_schema": 1,
+        "playback_tick": 0,
+        "pose_clock_domain": "simulation",
+        "pose_clock_s": 0.0,
+        "pose_snapshot_delta_s": 0.0,
+        "recorded_phase": 1,
+        "replay": true,
+        "run_id": -1,
+        "schema": 2,
+        "selected_id": 1,
+        "sentries": [],
+        "shot_fx_playback_schema": 1,
+        "shot_fx_schema": 0,
+        "shot_fx_source_token": -9223371791018225841,
+        "stashes": [
+          {
+            "active": true,
+            "amount": 7,
+            "id": "stashes:0",
+            "kind": "kar98k",
+            "pos": "(208.0, 400.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 12,
+            "id": "stashes:1",
+            "kind": "mg42",
+            "pos": "(848.0, 400.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 6,
+            "id": "stashes:2",
+            "kind": "kar98k_zf",
+            "pos": "(944.0, 528.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 2,
+            "id": "stashes:3",
+            "kind": "grenade",
+            "pos": "(368.0, 528.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 1,
+            "id": "stashes:4",
+            "kind": "mine",
+            "pos": "(336.0, 432.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 6,
+            "id": "stashes:5",
+            "kind": "ammo",
+            "pos": "(752.0, 432.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 8,
+            "id": "stashes:6",
+            "kind": "m1911",
+            "pos": "(272.0, 432.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 20,
+            "id": "stashes:7",
+            "kind": "thompson",
+            "pos": "(560.0, 400.0)",
+            "progress": 0.0
+          },
+          {
+            "active": true,
+            "amount": 8,
+            "id": "stashes:8",
+            "kind": "luger",
+            "pos": "(688.0, 560.0)",
+            "progress": 0.0
+          }
+        ],
+        "tick": 0,
+        "tool_fx": [],
+        "tool_fx_playback_schema": 1,
+        "tool_fx_schema": 0,
+        "tool_fx_source_token": -9223371791018225841,
+        "tool_fx_terminal_reason": "",
+        "tripwires": [],
+        "utility_scope_id": "dd768a11eb038771b5143085d0b68c1d",
+        "visual_schema": 1,
+        "visual_unsupported": false,
+        "wave_count": 2,
+        "wave_id": 0
+      },
+      "original_hash": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+    }
+  ],
+  "scope": "actual original empty blast, explicit grants/positions/backend clocks and one-frame/corrupt copies; no normal malformed-writer/UI route/render/performance/FINAL/device acceptance",
+  "source_sha": "aa8e0b650fabe75dd12ddbc23fa110e782bb83fd"
+}

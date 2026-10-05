@@ -1,0 +1,19 @@
+{
+  "pid": 117451,
+  "uid": 1000,
+  "argv": [
+    "/usr/lib/xorg/Xorg",
+    ":124",
+    "-config",
+    "/tmp/pr15-full-xorg.conf",
+    "-nolisten",
+    "tcp",
+    "-noreset",
+    "-logfile",
+    "/tmp/pr15-a3-window-controls/Xorg-124.log"
+  ],
+  "owned_exact_argv": true,
+  "action": "SIGTERM only this owned Xorg after both Godot suites completed",
+  "time_unix": 1791134368.9352834,
+  "note": "first two ownership checks safely refused signals due launcher path assumption. Read /usr/bin/Xorg POSIX launcher confirms exec /usr/lib/xorg/Xorg; exact actual UID/PID/arguments then matched."
+}

@@ -1,0 +1,678 @@
+--- production-PCK
++++ QA-PCK
+@@ -1,4 +1,20 @@
+ list=[{
++"base": &"CanvasLayer",
++"class": &"PauseOverlay",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/ui/pause_overlay.gd"
++}, {
++"base": &"Node2D",
++"class": &"ExplosiveBarrel",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/barrel.gd"
++}, {
+ "base": &"PanelContainer",
+ "class": &"OpCard",
+ "icon": "",
+@@ -15,30 +31,6 @@
+ "language": &"GDScript",
+ "path": "res://scripts/ui/night_ops.gd"
+ }, {
+-"base": &"Node2D",
+-"class": &"ExplosiveBarrel",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/barrel.gd"
+-}, {
+-"base": &"CanvasLayer",
+-"class": &"PauseOverlay",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/ui/pause_overlay.gd"
+-}, {
+-"base": &"CanvasLayer",
+-"class": &"NightHandoff",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/ui/night_handoff.gd"
+-}, {
+ "base": &"CanvasLayer",
+ "class": &"TutorialOverlay",
+ "icon": "",
+@@ -48,6 +40,110 @@
+ "path": "res://scripts/ui/tutorial_overlay.gd"
+ }, {
+ "base": &"Node2D",
++"class": &"Tripwire",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/mine.gd"
++}, {
++"base": &"Node2D",
++"class": &"OperatorUnit",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/operator.gd"
++}, {
++"base": &"Control",
++"class": &"C2SkillBar",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/skill_bar.gd"
++}, {
++"base": &"RefCounted",
++"class": &"C2HudIcons",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/hud_icons.gd"
++}, {
++"base": &"RefCounted",
++"class": &"CombatFx",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/fx/combat_fx.gd"
++}, {
++"base": &"RefCounted",
++"class": &"WeaponArt",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/art/weapon_art.gd"
++}, {
++"base": &"CanvasLayer",
++"class": &"C2ContextCursor",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/context_cursor.gd"
++}, {
++"base": &"CanvasLayer",
++"class": &"C2ContextPrompt",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/context_prompt.gd"
++}, {
++"base": &"Node2D",
++"class": &"LootPickup",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/loot_pickup.gd"
++}, {
++"base": &"RefCounted",
++"class": &"C2Examine",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/c2_examine.gd"
++}, {
++"base": &"Control",
++"class": &"C2PortraitStrip",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/portrait_strip.gd"
++}, {
++"base": &"RefCounted",
++"class": &"C2Skills",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/c2_skills.gd"
++}, {
++"base": &"Node2D",
++"class": &"C2Sentry",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/sentry.gd"
++}, {
++"base": &"Node2D",
+ "class": &"C2ShadowLayer",
+ "icon": "",
+ "is_abstract": false,
+@@ -55,14 +151,6 @@
+ "language": &"GDScript",
+ "path": "res://scripts/c2/shadow_layer.gd"
+ }, {
+-"base": &"CanvasLayer",
+-"class": &"C2ContextPrompt",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/context_prompt.gd"
+-}, {
+ "base": &"Node2D",
+ "class": &"C2DestFlag",
+ "icon": "",
+@@ -72,30 +160,6 @@
+ "path": "res://scripts/c2/dest_flag.gd"
+ }, {
+ "base": &"Node2D",
+-"class": &"AmbushZoneFx",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/fx/ambush_zone_fx.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"C2Skills",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/c2_skills.gd"
+-}, {
+-"base": &"CanvasLayer",
+-"class": &"C2ContextCursor",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/context_cursor.gd"
+-}, {
+-"base": &"Node2D",
+ "class": &"C2Director",
+ "icon": "",
+ "is_abstract": false,
+@@ -103,13 +167,21 @@
+ "language": &"GDScript",
+ "path": "res://scripts/c2/c2_director.gd"
+ }, {
+-"base": &"RefCounted",
+-"class": &"CombatFx",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/fx/combat_fx.gd"
++"base": &"Node2D",
++"class": &"C2AlertMark",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/alert_mark.gd"
++}, {
++"base": &"CanvasLayer",
++"class": &"C2SkillWheel",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/c2/skill_wheel.gd"
+ }, {
+ "base": &"Control",
+ "class": &"C2Minimap",
+@@ -120,38 +192,6 @@
+ "path": "res://scripts/c2/minimap.gd"
+ }, {
+ "base": &"RefCounted",
+-"class": &"C2Examine",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/c2_examine.gd"
+-}, {
+-"base": &"Control",
+-"class": &"C2PortraitStrip",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/portrait_strip.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"C2Sentry",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/sentry.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"C2AlertMark",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/alert_mark.gd"
+-}, {
+-"base": &"RefCounted",
+ "class": &"Ww2Palette",
+ "icon": "",
+ "is_abstract": false,
+@@ -159,38 +199,6 @@
+ "language": &"GDScript",
+ "path": "res://scripts/art/ww2_palette.gd"
+ }, {
+-"base": &"Control",
+-"class": &"C2SkillBar",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/skill_bar.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"C2HudIcons",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/hud_icons.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"WeaponArt",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/art/weapon_art.gd"
+-}, {
+-"base": &"CanvasLayer",
+-"class": &"C2SkillWheel",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/c2/skill_wheel.gd"
+-}, {
+ "base": &"Node2D",
+ "class": &"C2SoundRing",
+ "icon": "",
+@@ -200,6 +208,22 @@
+ "path": "res://scripts/c2/sound_ring.gd"
+ }, {
+ "base": &"Node2D",
++"class": &"AmbushZoneFx",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/fx/ambush_zone_fx.gd"
++}, {
++"base": &"Node2D",
++"class": &"CoverSlot",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/cover_slot.gd"
++}, {
++"base": &"Node2D",
+ "class": &"EnemyRunner",
+ "icon": "",
+ "is_abstract": false,
+@@ -207,38 +231,6 @@
+ "language": &"GDScript",
+ "path": "res://scripts/enemy.gd"
+ }, {
+-"base": &"Node2D",
+-"class": &"CoverSlot",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/cover_slot.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"WeaponCatalog",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/weapon_catalog.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"RaidPathfinder",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/pathfinder.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"ReplayPlayer",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/replay/replay_player.gd"
+-}, {
+ "base": &"RefCounted",
+ "class": &"BattleLog",
+ "icon": "",
+@@ -247,13 +239,53 @@
+ "language": &"GDScript",
+ "path": "res://scripts/replay/battle_log.gd"
+ }, {
+-"base": &"CanvasLayer",
+-"class": &"CreditsOverlay",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/ui/credits_overlay.gd"
++"base": &"RefCounted",
++"class": &"RaidDirector",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/raid_director.gd"
++}, {
++"base": &"RefCounted",
++"class": &"IntelStore",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/replay/intel_store.gd"
++}, {
++"base": &"RefCounted",
++"class": &"RaidLoc",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/raid_loc.gd"
++}, {
++"base": &"CanvasLayer",
++"class": &"BackpackPanel",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/ui/backpack_panel.gd"
++}, {
++"base": &"RefCounted",
++"class": &"PayoffCopy",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/replay/payoff.gd"
++}, {
++"base": &"RefCounted",
++"class": &"RaidBackpack",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/backpack.gd"
+ }, {
+ "base": &"Node",
+ "class": &"SfxBus",
+@@ -263,13 +295,53 @@
+ "language": &"GDScript",
+ "path": "res://scripts/sfx/sfx_bus.gd"
+ }, {
+-"base": &"RefCounted",
+-"class": &"RaidDirector",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/raid_director.gd"
++"base": &"CanvasLayer",
++"class": &"CreditsOverlay",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/ui/credits_overlay.gd"
++}, {
++"base": &"Node2D",
++"class": &"RaidDecoy",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/decoy.gd"
++}, {
++"base": &"RefCounted",
++"class": &"ReplayPlayer",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/replay/replay_player.gd"
++}, {
++"base": &"RefCounted",
++"class": &"WeaponCatalog",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/weapon_catalog.gd"
++}, {
++"base": &"RefCounted",
++"class": &"RaidPathfinder",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/pathfinder.gd"
++}, {
++"base": &"Node2D",
++"class": &"RaidStash",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/stash.gd"
+ }, {
+ "base": &"RefCounted",
+ "class": &"SimClock",
+@@ -279,13 +351,13 @@
+ "language": &"GDScript",
+ "path": "res://scripts/simulation/sim_clock.gd"
+ }, {
+-"base": &"RefCounted",
+-"class": &"IntelStore",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/replay/intel_store.gd"
++"base": &"CanvasLayer",
++"class": &"NightHandoff",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/ui/night_handoff.gd"
+ }, {
+ "base": &"CanvasLayer",
+ "class": &"CampaignJournal",
+@@ -295,29 +367,13 @@
+ "language": &"GDScript",
+ "path": "res://scripts/ui/campaign_journal.gd"
+ }, {
+-"base": &"RefCounted",
+-"class": &"RaidBackpack",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/backpack.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"PayoffCopy",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/replay/payoff.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"RaidStash",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/stash.gd"
++"base": &"Node2D",
++"class": &"RaidGrenade",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/raid/grenade.gd"
+ }, {
+ "base": &"Node2D",
+ "class": &"RaidMine",
+@@ -328,36 +384,28 @@
+ "path": "res://scripts/raid/landmine.gd"
+ }, {
+ "base": &"RefCounted",
+-"class": &"RaidLoc",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/raid_loc.gd"
+-}, {
+-"base": &"CanvasLayer",
+-"class": &"BackpackPanel",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/ui/backpack_panel.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"RaidDecoy",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/decoy.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"RaidGrenade",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/raid/grenade.gd"
++"class": &"LevelDef",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/level/level_def.gd"
++}, {
++"base": &"Node2D",
++"class": &"MuzzleFlash",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/fx/muzzle_flash.gd"
++}, {
++"base": &"RefCounted",
++"class": &"PlanState",
++"icon": "",
++"is_abstract": false,
++"is_tool": false,
++"language": &"GDScript",
++"path": "res://scripts/planning/plan_state.gd"
+ }, {
+ "base": &"Node2D",
+ "class": &"MissionSky",
+@@ -368,58 +416,10 @@
+ "path": "res://scripts/fx/mission_sky.gd"
+ }, {
+ "base": &"RefCounted",
+-"class": &"PlanState",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/planning/plan_state.gd"
+-}, {
+-"base": &"RefCounted",
+-"class": &"LevelDef",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/level/level_def.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"MuzzleFlash",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/fx/muzzle_flash.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"LootPickup",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/loot_pickup.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"OperatorUnit",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/operator.gd"
+-}, {
+-"base": &"RefCounted",
+ "class": &"AmbushGrid",
+ "icon": "",
+ "is_abstract": false,
+ "is_tool": false,
+ "language": &"GDScript",
+ "path": "res://scripts/grid.gd"
+-}, {
+-"base": &"Node2D",
+-"class": &"Tripwire",
+-"icon": "",
+-"is_abstract": false,
+-"is_tool": false,
+-"language": &"GDScript",
+-"path": "res://scripts/mine.gd"
+ }]

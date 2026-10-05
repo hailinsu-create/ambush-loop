@@ -1,0 +1,79 @@
+{
+  "actual_exit": 0,
+  "E": 0,
+  "S": 0,
+  "checks": 37,
+  "failures": 0,
+  "chunks": [
+    {
+      "label": "first",
+      "raw_rows": 35,
+      "measured_rows": 20,
+      "raw_sha256": "c950f09c2a0b30ca29bccf99a4dbb967d2593c4a26fafa0847eda5a23811e081",
+      "valid": true,
+      "metadata_sha256": "9a1d6f52f8c2f906c341159c9b574cbd9985259641b048df9d1a76fc502fa743"
+    },
+    {
+      "label": "second",
+      "raw_rows": 27,
+      "measured_rows": 19,
+      "raw_sha256": "8d51703b26ca740eb4d1731f9d750ab90686ce3ce260eb94d2850bba3ac6ad94",
+      "valid": true,
+      "metadata_sha256": "c6c10e679a1c34e6dc915d9a61177cd1804337aa3affc1801d64cce8834821ee"
+    },
+    {
+      "label": "Title-and-rebound",
+      "raw_rows": 56,
+      "measured_rows": 14,
+      "raw_sha256": "e698933b6907beea82cfd4e0e73062121b9c6ef51c746573e8f90968cc933e28",
+      "valid": true,
+      "metadata_sha256": "fc559a527e7b736e0831b4b987ceda0fd78bfa25cdba7a297c529d3d3f717b9f"
+    }
+  ],
+  "environment": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "audio_driver": "Dummy",
+    "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "driver": "opengl3",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "method": "gl_compatibility",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 117468,
+    "scope": "stationary original yard with main AND presenter automatic process stopped; not normal SCOUT/dynamic FX/mobile FPS",
+    "vendor": "Mesa",
+    "visible_cpu_effective": "0-4",
+    "visible_cpu_max": "400000 100000",
+    "visible_memory_max": "17179869184"
+  },
+  "captures": [
+    {
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/original-frozen-yard-first.png",
+      "sha256": "4b814fb23dfd6762175292a5ec3172eccf679baf74b635b9a665b6409de13f69"
+    },
+    {
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/original-Title-unbound.png",
+      "sha256": "0a8db044707d7510e90108e4d190cf76a2e6095055d90cc6fbe80e84e25b181a"
+    },
+    {
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/original-frozen-yard-rebound.png",
+      "sha256": "598a505da184003666bf1448da96ac9bfec3a557b15b451e9ef26428e1338ac6"
+    }
+  ],
+  "inspection_note": "CSV numeric flags are 0.0/1.0; initial external inspection used string 1 and failed. Numeric parsing corrected; engine not rerun."
+}

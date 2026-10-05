@@ -1,0 +1,171 @@
+{
+  "captures": [],
+  "checks": 3,
+  "failures": 2,
+  "producer_source_sha": "877decb0ea14d6c3c0a833e4d6948c7ee549514f",
+  "raw_sha256": "cf77a08654aff89561723944176e38dcb7aa8b1b8d0a897cf77f39685b7a6c09",
+  "rows": [
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "original_third",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "历史第4波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "invalid_fourth",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:3:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 3
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:3:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 3
+        },
+        "wave_id": 3
+      }
+    },
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "invalid_stalled_playback",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    }
+  ],
+  "scope": "Read-only actual877 archived escape/retry source; explicit corrupt context and cold3D formatter fixtures. No new battles/native input/fullrecord/FX/A3/FINAL/device acceptance.",
+  "source_sha": "23c02bbaca01db16a1b787ba5b8dd386af59917a",
+  "source_unchanged": true
+}

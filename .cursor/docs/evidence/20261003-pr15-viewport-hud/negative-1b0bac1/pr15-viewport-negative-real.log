@@ -1,0 +1,577 @@
+TEST_RUN_ID=755310948746475b8c08685fdbb7b5c9
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/755310948746475b8c08685fdbb7b5c9/data
+TEST_ENTRY=viewport_hud_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/755310948746475b8c08685fdbb7b5c9/data/godot/app_userdata/Ambush Loop run_id=755310948746475b8c08685fdbb7b5c9
+ERROR: VIEWPORT_HUD: scout_1280_100_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_100_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-54.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/PauseButton [P: (574.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-12.0, 260.0), S: (152.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/LogButton [P: (532.0, 260.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (204.0, 440.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1280_200_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@124/@Button@129 [P: (554.0, 283.0), S: (88.0, 69.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_100_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_100_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-54.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/PauseButton [P: (574.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-12.0, 260.0), S: (152.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/LogButton [P: (532.0, 260.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (204.0, 440.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_desktop SCOUT title glyphs do not overlap route chips
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _inspect (res://scripts/viewport_hud_test.gd:62)
+       [2] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: scout_1600_200_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@124/@Button@129 [P: (554.0, 283.0), S: (88.0, 69.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-186.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AbortButton [P: (574.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/SkipOutcomeButton [P: (706.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-12.0, 260.0), S: (152.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/LogButton [P: (532.0, 260.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (233.0, 460.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1280_200_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@141/@Button@144 [P: (616.0, 288.0), S: (120.0, 64.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-186.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AbortButton [P: (574.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/SkipOutcomeButton [P: (706.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-12.0, 260.0), S: (152.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/LogButton [P: (532.0, 260.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (233.0, 460.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@141/@Button@144 [P: (616.0, 288.0), S: (120.0, 64.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: alert_1600_200_touch reference original yard first wave reaches SWEEP1056
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _run (res://scripts/viewport_hud_test.gd:126)
+       [2] _matrix (res://scripts/viewport_hud_test.gd:94)
+       [3] _layout (res://scripts/viewport_hud_test.gd:89)
+ERROR: VIEWPORT_HUD: sweep_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-54.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/PauseButton [P: (574.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-12.0, 260.0), S: (152.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/LogButton [P: (532.0, 260.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (233.0, 460.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1280_200_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@124/@Button@129 [P: (554.0, 283.0), S: (96.0, 69.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-54.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/PauseButton [P: (574.0, 291.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-12.0, 260.0), S: (152.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/LogButton [P: (532.0, 260.0), S: (120.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (233.0, 460.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: sweep_1600_200_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@124/@Button@129 [P: (554.0, 283.0), S: (96.0, 69.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1280_100_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@124/@Button@129 [P: (1176.0, 666.0), S: (96.0, 56.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-170.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/ScrubSlider [P: (590.0, 291.0), S: (220.0, 24.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-1.0, 260.0), S: (129.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1280_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (233.0, 411.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1600_100_touch visible control inside actual viewport: /root/Yard3D/TouchHud/@Control@119/@MarginContainer@121/@VBoxContainer@122/@HBoxContainer@124/@Button@129 [P: (1176.0, 666.0), S: (96.0, 56.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [7] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [8] _inspect (res://scripts/viewport_hud_test.gd:55)
+       [9] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/AlarmButton [P: (-170.0, 291.0), S: (180.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/BottomBar/ScrubSlider [P: (590.0, 291.0), S: (220.0, 24.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/ExtraBar/ModeButton [P: (-1.0, 260.0), S: (129.0, 45.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _buttons (res://scripts/viewport_hud_test.gd:38)
+       [3] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [4] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [5] _buttons (res://scripts/viewport_hud_test.gd:39)
+       [6] _inspect (res://scripts/viewport_hud_test.gd:54)
+       [7] _layout (res://scripts/viewport_hud_test.gd:78)
+ERROR: VIEWPORT_HUD: replay_1600_200_desktop visible control inside actual viewport: /root/Yard3D/HUD/Root/RoleCards [P: (18.0, 82.0), S: (233.0, 411.0)]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/viewport_hud_test.gd:23)
+       [1] _fits (res://scripts/viewport_hud_test.gd:34)
+       [2] _inspect (res://scripts/viewport_hud_test.gd:56)
+       [3] _layout (res://scripts/viewport_hud_test.gd:78)
+VIEWPORT_HUD_TEST checks=627 failures=57 samples=32

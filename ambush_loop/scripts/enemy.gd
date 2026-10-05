@@ -1047,14 +1047,9 @@ func _play_death_fx() -> void:
 	if body == null:
 		return
 	_death_tween = create_tween()
-	var dir := _last_move_dir
-	if dir.length_squared() < 0.04:
-		dir = Vector2(0, 1)
-	else:
-		dir = dir.normalized()
-	var dest: Vector2 = global_position + dir * 8.0
-	_death_tween.tween_property(self, "global_position", dest, 0.16).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_death_tween.parallel().tween_property(body, "rotation", body.rotation + deg_to_rad(70.0), 0.16)
+	# The logical corpse anchor is recorded. A wall-clock death effect must not
+	# move it while ALERT is paused or a different historical frame is rendered.
+	_death_tween.tween_property(body, "rotation", body.rotation + deg_to_rad(70.0), 0.16)
 	_death_tween.parallel().tween_property(body, "scale", Vector2(1.22, 0.42), 0.16)
 	if body_outline:
 		_death_tween.parallel().tween_property(body_outline, "rotation", body.rotation + deg_to_rad(70.0), 0.16)

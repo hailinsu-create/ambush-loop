@@ -1,0 +1,413 @@
+{
+  "boundary_rows": [],
+  "captures": [
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_qa_exact.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "d025ffbb8efe501e30c7dea6ace9cae76a6fbf2effa06301ec68746571456e57",
+      "yaw": 65.0
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_boundary_release_0.5.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "a3bc4858663f376ed73bbe665ec63a526bd1baaef79c21d0f669f3d29dc62d67",
+      "yaw": 65.0
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_boundary_release_0.5001.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "859600c4d895b76fc84cbe966b02c76c35314d18958a092041ff34270e8d63af",
+      "yaw": 65.0
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_boundary_grab_0.1999.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "eb7905fca4de51da2dcfb8251c6db3e839a834ed042c20ef0f28887519af6581",
+      "yaw": 65.0
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_boundary_grab_0.2.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "a799f99937fd616e794e7be40d6212303ab02a18f770f3c915c0c213f5e18c8d",
+      "yaw": 65.0
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_history.png",
+      "pitch": 55.0,
+      "requested_view_size": 8.0,
+      "sha256": "d18a06b705afedb39b202f04aac4abae80b8f5565343c7daebb674910d9d6901",
+      "yaw": 65.0
+    },
+    {
+      "actual_view_size": 12.0,
+      "actual_viewport_size": "(1280, 720)",
+      "hud": "actual desktop",
+      "path": "res://build/asset_review/pr15-runtime/contact_quality_history_desktop.png",
+      "pitch": 35.0,
+      "requested_view_size": 4.0,
+      "sha256": "a8e375ba339dfee1409d319f11dcaa466ea20b6fd4f9cade472698d9b7558afe",
+      "yaw": 65.0
+    }
+  ],
+  "checks": 133,
+  "dense_rows": [],
+  "failures": 0,
+  "legacy_rows": [],
+  "native_quality_rows": [
+    {
+      "body_transform": "[X: (0.000001, 0.0, -1.0), Y: (0.0, 1.0, 0.0), Z: (1.0, 0.0, 0.000001), O: (0.209837, 0.003, -5.426467)]",
+      "carrier_floor_m": -0.00000113551027425274,
+      "carrier_wall_vertices": 0,
+      "contacts_m": [
+        0.000000149011611938477,
+        0.000000480548010273196
+      ],
+      "floor_m": 0.00599998235702515,
+      "label": "boundary_release_0.5",
+      "mode": "release",
+      "reaches": [
+        {
+          "arm_length_m": 0.59236079454422,
+          "palm": "(-1.020163, 0.215999, -5.221468)",
+          "shoulder_to_target_m": 0.521117150783539,
+          "target": "(-1.020163, 0.215999, -5.221468)"
+        },
+        {
+          "arm_length_m": 0.59236067533493,
+          "palm": "(-1.020163, 0.215999, -5.631469)",
+          "shoulder_to_target_m": 0.521117150783539,
+          "target": "(-1.020163, 0.215999, -5.631468)"
+        }
+      ],
+      "wall_vertices": 0
+    },
+    {
+      "body_transform": "[X: (0.000001, 0.0, -1.0), Y: (0.0, 1.0, 0.0), Z: (1.0, 0.0, 0.000001), O: (0.209837, 0.003, -5.426467)]",
+      "carrier_floor_m": -0.00000412973849961418,
+      "carrier_wall_vertices": 0,
+      "contacts_m": [
+        0.000000368634374581234,
+        0.00000054056516773926
+      ],
+      "floor_m": 0.00599998235702515,
+      "label": "boundary_release_0.5001",
+      "mode": "release",
+      "reaches": [
+        {
+          "arm_length_m": 0.59236079454422,
+          "palm": "(-1.020164, 0.215999, -5.221468)",
+          "shoulder_to_target_m": 0.521117866039276,
+          "target": "(-1.020163, 0.215999, -5.221468)"
+        },
+        {
+          "arm_length_m": 0.592360883951187,
+          "palm": "(-1.020163, 0.215999, -5.631469)",
+          "shoulder_to_target_m": 0.521117925643921,
+          "target": "(-1.020163, 0.215999, -5.631468)"
+        }
+      ],
+      "wall_vertices": 0
+    },
+    {
+      "body_transform": "[X: (0.000001, 0.0, -1.0), Y: (0.0, 1.0, 0.0), Z: (1.0, 0.0, 0.000001), O: (0.209837, 0.003, -5.426467)]",
+      "carrier_floor_m": -0.0000431779044447467,
+      "carrier_wall_vertices": 0,
+      "contacts_m": [
+        0.00000024978896817629,
+        0.00000024978896817629
+      ],
+      "floor_m": 0.00599998235702515,
+      "label": "boundary_grab_0.1999",
+      "mode": "grab",
+      "reaches": [
+        {
+          "arm_length_m": 0.59236091375351,
+          "palm": "(-1.020163, 0.215999, -5.221468)",
+          "shoulder_to_target_m": 0.521117925643921,
+          "target": "(-1.020163, 0.215999, -5.221468)"
+        },
+        {
+          "arm_length_m": 0.592360734939575,
+          "palm": "(-1.020163, 0.215999, -5.631468)",
+          "shoulder_to_target_m": 0.521117985248566,
+          "target": "(-1.020163, 0.215999, -5.631468)"
+        }
+      ],
+      "wall_vertices": 0
+    },
+    {
+      "body_transform": "[X: (0.000001, 0.0, -1.0), Y: (0.0, 1.0, 0.0), Z: (1.0, 0.0, 0.000001), O: (0.209837, 0.003, -5.426467)]",
+      "carrier_floor_m": -0.0000420782307628542,
+      "carrier_wall_vertices": 0,
+      "contacts_m": [
+        0.000000133280039449346,
+        0.000000149011611938477
+      ],
+      "floor_m": 0.00599998235702515,
+      "label": "boundary_grab_0.2",
+      "mode": "grab",
+      "reaches": [
+        {
+          "arm_length_m": 0.592360824346542,
+          "palm": "(-1.020163, 0.215999, -5.221468)",
+          "shoulder_to_target_m": 0.521117210388184,
+          "target": "(-1.020163, 0.215999, -5.221468)"
+        },
+        {
+          "arm_length_m": 0.592360943555832,
+          "palm": "(-1.020163, 0.215998, -5.631468)",
+          "shoulder_to_target_m": 0.521117210388184,
+          "target": "(-1.020163, 0.215999, -5.631468)"
+        }
+      ],
+      "wall_vertices": 0
+    }
+  ],
+  "ui_rows": [
+    {
+      "controls": [
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@234",
+          "rect": "[P: (1076.0, 132.0), S: (188.0, 22.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HBoxContainer@235",
+          "rect": "[P: (1076.0, 160.0), S: (188.0, 42.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@239",
+          "rect": "[P: (1076.0, 208.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HSlider@240",
+          "rect": "[P: (1076.0, 250.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@241",
+          "rect": "[P: (1076.0, 292.0), S: (188.0, 38.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@242",
+          "rect": "[P: (1076.0, 336.0), S: (188.0, 17.0)]",
+          "visible": true
+        }
+      ],
+      "label": "qa_exact",
+      "panel": "[P: (1076.0, 132.0), S: (188.0, 221.0)]",
+      "panel_minimum": "(182.0, 221.0)",
+      "root_visible": "[P: (0.0, 0.0), S: (1280.0, 720.0)]"
+    },
+    {
+      "controls": [
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@234",
+          "rect": "[P: (1076.0, 132.0), S: (188.0, 22.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HBoxContainer@235",
+          "rect": "[P: (1076.0, 160.0), S: (188.0, 42.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@239",
+          "rect": "[P: (1076.0, 208.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HSlider@240",
+          "rect": "[P: (1076.0, 250.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@241",
+          "rect": "[P: (1076.0, 292.0), S: (188.0, 38.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@242",
+          "rect": "[P: (1076.0, 336.0), S: (188.0, 17.0)]",
+          "visible": true
+        }
+      ],
+      "label": "boundary_release_0.5",
+      "panel": "[P: (1076.0, 132.0), S: (188.0, 221.0)]",
+      "panel_minimum": "(182.0, 221.0)",
+      "root_visible": "[P: (0.0, 0.0), S: (1280.0, 720.0)]"
+    },
+    {
+      "controls": [
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@234",
+          "rect": "[P: (1076.0, 132.0), S: (188.0, 22.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HBoxContainer@235",
+          "rect": "[P: (1076.0, 160.0), S: (188.0, 42.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@239",
+          "rect": "[P: (1076.0, 208.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HSlider@240",
+          "rect": "[P: (1076.0, 250.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@241",
+          "rect": "[P: (1076.0, 292.0), S: (188.0, 38.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@242",
+          "rect": "[P: (1076.0, 336.0), S: (188.0, 17.0)]",
+          "visible": true
+        }
+      ],
+      "label": "boundary_release_0.5001",
+      "panel": "[P: (1076.0, 132.0), S: (188.0, 221.0)]",
+      "panel_minimum": "(182.0, 221.0)",
+      "root_visible": "[P: (0.0, 0.0), S: (1280.0, 720.0)]"
+    },
+    {
+      "controls": [
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@234",
+          "rect": "[P: (1076.0, 132.0), S: (188.0, 22.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HBoxContainer@235",
+          "rect": "[P: (1076.0, 160.0), S: (188.0, 42.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@239",
+          "rect": "[P: (1076.0, 208.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HSlider@240",
+          "rect": "[P: (1076.0, 250.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@241",
+          "rect": "[P: (1076.0, 292.0), S: (188.0, 38.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@242",
+          "rect": "[P: (1076.0, 336.0), S: (188.0, 17.0)]",
+          "visible": true
+        }
+      ],
+      "label": "boundary_grab_0.1999",
+      "panel": "[P: (1076.0, 132.0), S: (188.0, 221.0)]",
+      "panel_minimum": "(182.0, 221.0)",
+      "root_visible": "[P: (0.0, 0.0), S: (1280.0, 720.0)]"
+    },
+    {
+      "controls": [
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@234",
+          "rect": "[P: (1076.0, 132.0), S: (188.0, 22.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HBoxContainer@235",
+          "rect": "[P: (1076.0, 160.0), S: (188.0, 42.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@239",
+          "rect": "[P: (1076.0, 208.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HSlider@240",
+          "rect": "[P: (1076.0, 250.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@241",
+          "rect": "[P: (1076.0, 292.0), S: (188.0, 38.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@242",
+          "rect": "[P: (1076.0, 336.0), S: (188.0, 17.0)]",
+          "visible": true
+        }
+      ],
+      "label": "boundary_grab_0.2",
+      "panel": "[P: (1076.0, 132.0), S: (188.0, 221.0)]",
+      "panel_minimum": "(182.0, 221.0)",
+      "root_visible": "[P: (0.0, 0.0), S: (1280.0, 720.0)]"
+    },
+    {
+      "controls": [
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@234",
+          "rect": "[P: (1076.0, 132.0), S: (188.0, 22.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HBoxContainer@235",
+          "rect": "[P: (1076.0, 160.0), S: (188.0, 42.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@239",
+          "rect": "[P: (1076.0, 208.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@HSlider@240",
+          "rect": "[P: (1076.0, 250.0), S: (188.0, 36.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Button@241",
+          "rect": "[P: (1076.0, 292.0), S: (188.0, 38.0)]",
+          "visible": true
+        },
+        {
+          "path": "/root/Yard3D/Presentation3D/@CanvasLayer@229/@Control@230/@VBoxContainer@231/@Label@242",
+          "rect": "[P: (1076.0, 336.0), S: (188.0, 17.0)]",
+          "visible": true
+        }
+      ],
+      "label": "quality_history",
+      "panel": "[P: (1076.0, 132.0), S: (188.0, 221.0)]",
+      "panel_minimum": "(182.0, 221.0)",
+      "root_visible": "[P: (0.0, 0.0), S: (1280.0, 720.0)]"
+    }
+  ]
+}

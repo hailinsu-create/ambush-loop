@@ -1,0 +1,50 @@
+{
+  "start": "2026-10-05T07:14:49.178400+00:00",
+  "pid": 151305,
+  "request": {
+    "label": "after-warehouse-single",
+    "script": "state=d.state();assert state['phase']==3\nrender=page.evaluate(\"\"\"()=>{const gl=document.getElementById('canvas').getContext('webgl2');const e=gl.getExtension('WEBGL_debug_renderer_info');return {version:gl.getParameter(gl.VERSION),renderer:gl.getParameter(gl.RENDERER),vendor:gl.getParameter(gl.VENDOR),unmasked_renderer:e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):null,unmasked_vendor:e?gl.getParameter(e.UNMASKED_VENDOR_WEBGL):null}}\"\"\")\nf=d.rpc('fingerprints');assert f['record_sha256']==warehouse_record['sha256'] and not f['record_validation']['failures']\ntrusted=page.evaluate('window.pr15TrustedInputs');assert all(r['isTrusted'] for r in trusted)\n(BASE/'warehouse-original-trusted-inputs.json').write_text(json.dumps(trusted,indent=2)+'\\n')\n(BASE/'warehouse-original-input-trace.json').write_text(json.dumps(f['inputs'],indent=2)+'\\n')\n(BASE/'warehouse-renderer.json').write_text(json.dumps(render,indent=2)+'\\n')\nprint(json.dumps({'WAREHOUSE_POST_PRODUCER_READONLY':render,'trusted_inputs':len(trusted),'engine_inputs':len(f['inputs']),'record_unchanged':True}),flush=True)\n"
+  },
+  "actual_exit": 1,
+  "exception": "[Errno 36] File name too long: 'state=d.state();assert state[\\'phase\\']==3\\nrender=page.evaluate(\"\"\"()=>{const gl=document.getElementById(\\'canvas\\').getContext(\\'webgl2\\');const e=gl.getExtension(\\'WEBGL_debug_renderer_info\\');return {version:gl.getParameter(gl.VERSION),renderer:gl.getParameter(gl.RENDERER),vendor:gl.getParameter(gl.VENDOR),unmasked_renderer:e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):null,unmasked_vendor:e?gl.getParameter(e.UNMASKED_VENDOR_WEBGL):null}}\"\"\")\\nf=d.rpc(\\'fingerprints\\');assert f[\\'record_sha256\\']==warehouse_record[\\'sha256\\'] and not f[\\'record_validation\\'][\\'failures\\']\\ntrusted=page.evaluate(\\'window.pr15TrustedInputs\\');assert all(r[\\'isTrusted\\'] for r in trusted)\\n(BASE/\\'warehouse-original-trusted-inputs.json\\').write_text(json.dumps(trusted,indent=2)+\\'\\\\n\\')\\n(BASE/\\'warehouse-original-input-trace.json\\').write_text(json.dumps(f[\\'inputs\\'],indent=2)+\\'\\\\n\\')\\n(BASE/\\'warehouse-renderer.json\\').write_text(json.dumps(render,indent=2)+\\'\\\\n\\')\\nprint(json.dumps({\\'WAREHOUSE_POST_PRODUCER_READONLY\\':render,\\'trusted_inputs\\':len(trusted),\\'engine_inputs\\':len(f[\\'inputs\\']),\\'record_unchanged\\':True}),flush=True)\\n'",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/browser_controller_single.py\", line 34, in <module>\n    exec(Path(r['script']).read_text(),globals());receipt['actual_exit']=0\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1027, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 36] File name too long: 'state=d.state();assert state[\\'phase\\']==3\\nrender=page.evaluate(\"\"\"()=>{const gl=document.getElementById(\\'canvas\\').getContext(\\'webgl2\\');const e=gl.getExtension(\\'WEBGL_debug_renderer_info\\');return {version:gl.getParameter(gl.VERSION),renderer:gl.getParameter(gl.RENDERER),vendor:gl.getParameter(gl.VENDOR),unmasked_renderer:e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):null,unmasked_vendor:e?gl.getParameter(e.UNMASKED_VENDOR_WEBGL):null}}\"\"\")\\nf=d.rpc(\\'fingerprints\\');assert f[\\'record_sha256\\']==warehouse_record[\\'sha256\\'] and not f[\\'record_validation\\'][\\'failures\\']\\ntrusted=page.evaluate(\\'window.pr15TrustedInputs\\');assert all(r[\\'isTrusted\\'] for r in trusted)\\n(BASE/\\'warehouse-original-trusted-inputs.json\\').write_text(json.dumps(trusted,indent=2)+\\'\\\\n\\')\\n(BASE/\\'warehouse-original-input-trace.json\\').write_text(json.dumps(f[\\'inputs\\'],indent=2)+\\'\\\\n\\')\\n(BASE/\\'warehouse-renderer.json\\').write_text(json.dumps(render,indent=2)+\\'\\\\n\\')\\nprint(json.dumps({\\'WAREHOUSE_POST_PRODUCER_READONLY\\':render,\\'trusted_inputs\\':len(trusted),\\'engine_inputs\\':len(f[\\'inputs\\']),\\'record_unchanged\\':True}),flush=True)\\n'\n",
+  "end": "2026-10-05T07:14:49.184268+00:00",
+  "console": [
+    {
+      "type": "log",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "wall": 237741.058617988
+    },
+    {
+      "type": "log",
+      "text": "OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+      "wall": 237741.328378856
+    },
+    {
+      "type": "log",
+      "text": "Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support.",
+      "wall": 237742.244887462
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 237743.844789218
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 237744.009808917
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "wall": 237744.171915502
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x3c740520e800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "wall": 237744.280653681
+    }
+  ],
+  "page_errors": []
+}

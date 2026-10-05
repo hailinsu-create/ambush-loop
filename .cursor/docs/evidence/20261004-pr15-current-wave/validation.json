@@ -1,0 +1,101 @@
+{
+  "production_source": "480c2c4c14c72dc254d6d513f0985ac5505a99a4",
+  "formal_source": "0bfe57cdd57e2b6dc40a1ec909535931c4e7cac7",
+  "formal_game_tree": "4bc8a5aeb04436bef621904fb4903447f7e1c551",
+  "runs": [
+    {
+      "stage": "negative-a091-h",
+      "source_sha": "a0910379476ea4fb1ff3d4519451c6c16940ac35",
+      "actual_exit": 1,
+      "checks": 968,
+      "failures": 271,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "fd522126dad94682ad2858fe67f2c9d1",
+      "command": "AMBUSH_TEST_SOURCE_SHA=a0910379476ea4fb1ff3d4519451c6c16940ac35 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 current_wave_hint_test.gd --headless"
+    },
+    {
+      "stage": "fixed-480c-h",
+      "source_sha": "480c2c4c14c72dc254d6d513f0985ac5505a99a4",
+      "actual_exit": 0,
+      "checks": 968,
+      "failures": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "ab17715901c54a45872d436529b93fa6",
+      "command": "AMBUSH_TEST_SOURCE_SHA=480c2c4c14c72dc254d6d513f0985ac5505a99a4 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 current_wave_hint_test.gd --headless"
+    },
+    {
+      "stage": "dev-480c-r-stale-clock",
+      "source_sha": "480c2c4c14c72dc254d6d513f0985ac5505a99a4",
+      "actual_exit": 0,
+      "checks": 972,
+      "failures": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "1da17d913ef24d6a9b63180181f0199a",
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=480c2c4c14c72dc254d6d513f0985ac5505a99a4 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-wave-godot.sh current_wave_hint_test.gd --render"
+    },
+    {
+      "stage": "final-0bfe-h",
+      "source_sha": "0bfe57cdd57e2b6dc40a1ec909535931c4e7cac7",
+      "actual_exit": 0,
+      "checks": 971,
+      "failures": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "c6a5cd1a3a9b4dbd870f25b7e41b469b",
+      "command": "AMBUSH_TEST_SOURCE_SHA=0bfe57cdd57e2b6dc40a1ec909535931c4e7cac7 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 current_wave_hint_test.gd --headless"
+    },
+    {
+      "stage": "final-0bfe-r",
+      "source_sha": "0bfe57cdd57e2b6dc40a1ec909535931c4e7cac7",
+      "actual_exit": 0,
+      "checks": 975,
+      "failures": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "70e54380b8a34be9a0efb90a81420f98",
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=0bfe57cdd57e2b6dc40a1ec909535931c4e7cac7 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-wave-godot.sh current_wave_hint_test.gd --render"
+    }
+  ],
+  "final_captures_hashed": 2,
+  "final_captures_viewed": [
+    "wave_hint_actual_radio_paused_final_wave_1_4s",
+    "wave_hint_reference_history_no_live_hint"
+  ],
+  "final_native_inputs": 2,
+  "xorg_actual_exit": 0,
+  "domain_comparison_actual_exit": 0,
+  "domain_comparison": {
+    "attempts": [
+      "8eb911078931e9ca9a7d29b3ddb0dc0c",
+      "f28e1672bfb3880ae2196137e69df68d"
+    ],
+    "equal_event_fields_excluding_attempt_id_and_event_id": true,
+    "events": [
+      52,
+      52
+    ],
+    "fixed_source": "480c2c4c14c72dc254d6d513f0985ac5505a99a4",
+    "hashes": [
+      "8eb264760bb7f67b576fb7bd48b08b63196864b450473c99bf577067be0cd7b5",
+      "83559ed40e88b480af147dda3f609015c36dacaada58d43b14efe6945ab6c6b6"
+    ],
+    "immutable_source_bytes": true,
+    "negative_source": "a0910379476ea4fb1ff3d4519451c6c16940ac35",
+    "same_terminal_tick_reason": true,
+    "scope": "Read-only comparison of two separate reference-domain recordings. Only per-run attempt/event identities excluded from equality; seq/wave/local/global/playback time, actor/target/position/type/payload all retained. Sources are never rebound, mutated or merged. Not a normal-input or rendered playback check.",
+    "snapshot_counts": [
+      149,
+      149
+    ],
+    "terminal_ticks": [
+      843,
+      843
+    ]
+  },
+  "formal_added_oracles": "Three new assertions refresh original full HUD and prove visible paused wave3/3 t1.4 pending0 plus state/log immutability and paused history transport. Original968 core assertions unchanged; negativea091 did not include these3. Dev480R972 green omitted clock/transport visibility; both original PNGs retained and viewed, not formal acceptance.",
+  "remaining_known_defects": "Live watch route timeline still uses total-table3.6/5.2s dots against local clock; actually visible in formal final PNG and source, not accepted by chip test. Prior-wave payoff local ticks may also appear on current strip (source audit). Separate live timeline negative/fix before closing all current-wave display or final samecandidate smoke. Static teaching/fix_one/chatter, IntelStore/debrief total-time assumptions remain audit boundary.",
+  "scope": "Six-level13-wave display fixtures in3D andlegacy2D assign phase/index/tick/spawned explicitly; not26 actual battles. One actual radio reference traverses original3 waves, id5/wave2/tick30 event, original pause/WON/history; uses authored-firearm grants/cover snaps/direct ticks/vacuum, not normal input. Original normal3b source read-only unchanged. No full3D replay/samecandidate fresh normal13/FX/art/audio/performance/wholelegacy/device/APK acceptance."
+}

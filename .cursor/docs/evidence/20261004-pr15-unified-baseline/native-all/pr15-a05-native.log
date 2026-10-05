@@ -1,0 +1,19 @@
+TEST_RUN_ID=7b50d8a62bfd48dc9f741796d2ce9e75
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/7b50d8a62bfd48dc9f741796d2ce9e75/data
+TEST_ENTRY=first_visit_journey_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/7b50d8a62bfd48dc9f741796d2ce9e75/data/godot/app_userdata/Ambush Loop run_id=7b50d8a62bfd48dc9f741796d2ce9e75
+JOURNEY_OUTPUT=res://build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75
+PLAYER_JOURNEY_MISSION yard
+PLAYER_JOURNEY_MISSION warehouse
+PLAYER_JOURNEY_MISSION pump
+PLAYER_JOURNEY_MISSION railcut
+PLAYER_ACTUAL_AMMO_PACK_REFILL {"actual_exhaustion_pack_refill":true,"after":{"ammo":5,"ammo_pack_used":true,"has_ammo_pack":true,"start_ammo":5,"weapon":"kar98k"},"last_real_shot":{"ammo":0,"ammo_pack_used":false,"has_ammo_pack":true,"level":"railcut","phase":1,"target":[432.0,152.833404541016],"tick":58,"wave":1,"weapon":"kar98k"},"latest_original_repack_event":{"actor_id":1,"attempt_id":"80476d518907a35e66f2d5dee84e2535","event_id":"80476d518907a35e66f2d5dee84e2535:1:28","payload":{"animation_schema":2,"name":"灰狼","reload_s":1.15,"repack_kind":"same_weapon","source_visual_weapon":"kar98k","visual_weapon":"kar98k"},"playback_schema":2,"playback_tick":4749,"position":"(432.0, 400.0)","schema":2,"seq":28,"target_id":-1,"tick":58,"timeline_tick":254,"type":"repack","wave_id":1},"level":"railcut","operator":1,"phase":1,"tick":58,"wave":1}
+PLAYER_JOURNEY_MISSION depot
+PLAYER_JOURNEY_MISSION radio
+FIRST_VISIT_JOURNEY_TEST checks=1193 failures=0
+TEST_LOG=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/7b50d8a62bfd48dc9f741796d2ce9e75/run.log

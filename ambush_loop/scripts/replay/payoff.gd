@@ -174,11 +174,17 @@ static func timeline_tag(kind: String) -> String:
 			return "★"
 
 
-static func timeline_marks(log: Variant) -> Array:
+static func timeline_marks(log: Variant, wave_id: int = -1, attempt_id: String = "") -> Array:
 	var out: Array = []
 	if log == null or not log.has_method("first_of_type"):
 		return out
-	var first_fire: Dictionary = log.first_of_type("fire")
+	# A live local-clock strip uses only this stored attempt/wave. Filtering
+	# never rewrites identities or gives legacy events a new run owner.
+	var events: Array = log.events
+	if wave_id >= 0:
+		events = events.filter(func(event: Dictionary) -> bool:
+			return int(event.get("wave_id", 0)) == wave_id and (attempt_id == "" or str(event.get("attempt_id", "")) == attempt_id))
+	var first_fire: Dictionary = _first_event(events, "fire")
 	if not first_fire.is_empty():
 		var nm := str(first_fire.get("payload", {}).get("name", "")).strip_edges()
 		out.append({
@@ -186,11 +192,11 @@ static func timeline_marks(log: Variant) -> Array:
 			"kind": "first_fire",
 			"label": "枪" if nm == "" else nm.substr(0, 1),
 		})
-	var combo_ticks: Array = _combo_peak_ticks(log)
+	var combo_ticks: Array = _combo_peak_ticks(events)
 	for t in combo_ticks:
 		out.append({"t": float(t) / 60.0, "kind": "combo", "label": "连"})
 	for typ in ["trip", "barrel", "ambush_armed", "repack", "route_choice"]:
-		var ev: Dictionary = log.first_of_type(str(typ))
+		var ev: Dictionary = _first_event(events, str(typ))
 		if ev.is_empty():
 			continue
 		var kind: String = str(typ)
@@ -204,20 +210,22 @@ static func timeline_marks(log: Variant) -> Array:
 	return out
 
 
+static func _first_event(events: Array, type_name: String) -> Dictionary:
+	for event in events:
+		if str(event.get("type", "")) == type_name:
+			return event
+	return {}
+
+
 static func highlight_result_line(level: Variant, log: Variant, won: bool) -> String:
 	if level == null:
 		return ""
-	var hook := str(level.highlight_hook).strip_edges()
-	if hook == "":
-		return ""
-	var hit := hook_hit(level, log)
-	if won and hit:
-		return "打中了：%s" % hook
-	if won:
-		return "本关高光：%s" % hook
-	if hit:
-		return "打中过：%s（还没封锁）" % hook
-	return "没打中：%s" % hook
+	# Teaching hooks and isolated event types cannot prove a compound tactic.
+	# Actual shots/loot/traps remain in the event summary; this is the outcome.
+	var names := {"yard":"院子", "warehouse":"仓库", "pump":"泵站",
+		"railcut":"信号楼", "depot":"油库", "radio":"电台"}
+	var name := str(names.get(str(level.level_id), ""))
+	return name + ("封锁完成" if won else "尚未封锁")
 
 
 static func hook_hit(level: Variant, log: Variant) -> bool:
@@ -245,10 +253,8 @@ static func leak_road_name(level: Variant, route: String, branched: bool = false
 		"sneak":
 			return "西暗道"
 		"echo":
-			return "碟台夹缝（晚 5.2 秒回波）"
+			return "碟台夹缝"
 		"flank":
-			if level != null and str(level.level_id) == "railcut":
-				return "东廊（晚 3.8 秒）"
 			return "东廊"
 		"alt":
 			return "西侧紫备用接近"
@@ -265,14 +271,12 @@ static func max_kill_combo(log: Variant, window_ticks: int = -1) -> int:
 	return 0
 
 
-static func _combo_peak_ticks(log: Variant) -> Array:
+static func _combo_peak_ticks(events: Array) -> Array:
 	var ticks: Array = []
-	if log == null:
-		return ticks
 	var win := combo_window_ticks()
 	var run := 0
 	var last := -99999
-	for raw in log.events:
+	for raw in events:
 		var ev: Dictionary = raw
 		if str(ev.get("type", "")) != "kill":
 			continue

@@ -1,0 +1,289 @@
+{
+  "source_sha": "b27ff62e34e4a822c278f737e7a088a0ff48e5ea",
+  "game_tree": "7757913c5f598e813cbcb46971f120b7339802b5",
+  "native_run": {
+    "source_sha": "b27ff62e34e4a822c278f737e7a088a0ff48e5ea",
+    "archived_at_utc": "2026-10-04T01:10:02.594790+00:00",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-remaining-b27-godot",
+      "first_visit_journey_test.gd",
+      "--render"
+    ],
+    "env": {
+      "AMBUSH_JOURNEY_START": "resume",
+      "AMBUSH_JOURNEY_SCOPE": "warehouse"
+    },
+    "actual_exit": 0,
+    "uuid": "3ac52362bbc54ae3bfa20fad84ad3a75",
+    "guard_passed": true,
+    "checks": 270,
+    "failures": 0,
+    "native_inputs": 124,
+    "script_errors": 0,
+    "engine_errors": 0,
+    "window": [
+      1280,
+      720
+    ],
+    "scale": 1.0,
+    "pngs": 14,
+    "records": [
+      {
+        "action": "archive actual native player battle and command recording",
+        "attempt": "2a53f1c40c480b06c4b12c24c9416bbb",
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-runtime/native-player-warehouse-record.bin",
+        "playback_frames": 1034,
+        "playback_schema": 2,
+        "playback_terminal_tick": 7796,
+        "sha256": "63fccaa28ed9ff9f90729f458ebf695f05bac57cac9be0d58ec28c54ef17a08c",
+        "raw_bytes": 15311216,
+        "archive": "native-player-warehouse-record.bin.gz",
+        "gzip_sha256": "5e2607a9e7d3a645ae6722893ebc2efc59a73dce64775123fccf51d692082ab3"
+      }
+    ],
+    "classification": "Formal actual native title Continue from byte-identical d7 player save. Warehouse SCOUT original gear/cover/8deg MG turning/pack/F, real2wave ALERT+pause/SWEEP walking loot and ammo resupply/carried mine, final extract WON and original Continue/handoff CTA/pump3pages. No reference/grants/sim fast-forward. 270/0 actual0 errors0. Only reached warehouse2waves+next teaching, not remaining9waves/art/ears/device/performance/fullFX."
+  },
+  "pack": {
+    "source_sha": "b27ff62e34e4a822c278f737e7a088a0ff48e5ea",
+    "game_tree": "7757913c5f598e813cbcb46971f120b7339802b5",
+    "commands": [
+      {
+        "command": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--headless",
+          "--editor",
+          "--path",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/source",
+          "--import"
+        ],
+        "actual_exit": 0
+      },
+      {
+        "command": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--headless",
+          "--path",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/source",
+          "--export-pack",
+          "Linux Desktop",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/player-journey.pck"
+        ],
+        "actual_exit": 0
+      }
+    ],
+    "pack": "/workspace/ambush-pr15/ambush_loop/build/player_journey/b27ff62e34e4/player-journey.pck",
+    "sha256": "006a8b91d62a6da63b5bb8bea4a7367837eef645c4cdaa95459cfbb590b19509",
+    "bytes": 23425820,
+    "staging_changes": "Only Linux Desktop custom_features=a0_preview; original title/main scene and rendering configuration kept",
+    "asset_generators_run": false
+  },
+  "pack_shell_actual_exit": 0,
+  "import_export_SCRIPT_ERROR": 0,
+  "import_export_ERROR": 0,
+  "record_inspection": {
+    "attempt": "2a53f1c40c480b06c4b12c24c9416bbb",
+    "checks": 4574,
+    "event_counts": {
+      "ambush_armed": 1,
+      "door": 1,
+      "fire": 10,
+      "kill": 5,
+      "loot": 5,
+      "mine": 1,
+      "no_engage": 29,
+      "return_fire": 4,
+      "spawn": 5,
+      "terminal": 1
+    },
+    "events": 62,
+    "failures": 0,
+    "frames": 1034,
+    "global_wave_offsets": {
+      "0": 0,
+      "1": 340
+    },
+    "mine_events": [
+      {
+        "actor_id": 2,
+        "attempt_id": "2a53f1c40c480b06c4b12c24c9416bbb",
+        "event_id": "2a53f1c40c480b06c4b12c24c9416bbb:1:39",
+        "payload": {},
+        "playback_schema": 2,
+        "playback_tick": 6633,
+        "position": "(783.6897, 177.6255)",
+        "schema": 2,
+        "seq": 39,
+        "target_id": -1,
+        "tick": 356,
+        "timeline_tick": 696,
+        "type": "mine",
+        "wave_id": 1
+      }
+    ],
+    "phase_sequence": [
+      0,
+      1,
+      5,
+      1,
+      5,
+      3
+    ],
+    "playback_terminal_tick": 7796,
+    "raw_sha256": "63fccaa28ed9ff9f90729f458ebf695f05bac57cac9be0d58ec28c54ef17a08c",
+    "scope": "Read-only original native serialized record metadata; no gameplay scene, simulation, replay rendering or fixture mutation.",
+    "terminal_tick": 1203,
+    "wave_event_counts": {
+      "0": 20,
+      "1": 42
+    },
+    "command_receipt": "native-record-inspect-receipt.json",
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0
+  },
+  "visual": {
+    "total_formal_png": 14,
+    "unique_id": 14,
+    "unique_sha256": 14,
+    "all_hashes_checked": true,
+    "actually_viewed": [
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_armed_scout",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_armed_scout.png",
+        "sha256": "b10878774d341621938ab0379071ed2c9614b9e81bd033f6f7025f946e58c470"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_mine_placed_wave0",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_mine_placed_wave0.png",
+        "sha256": "c92d1e5dac54ea2129fc60c17590aeaefd666f8935db55fcc0338733d6d49baf"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_wave0_sweep_looted",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_wave0_sweep_looted.png",
+        "sha256": "dfb41954ddaf67b7f7c72ad2608232fced9235b9b9f70005139dbbe9ea98cadb"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_wave1_alert",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_wave1_alert.png",
+        "sha256": "c98732c37d906e5a5e2d83ff1b35770b347c63c58412fc9013181038b1b93b05"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_wave1_sweep",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_wave1_sweep.png",
+        "sha256": "e8dd1e230bacea07223335cc9f1f6c0ef9bcc66947cc516311f05343c659e687"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_won",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_won.png",
+        "sha256": "f4ba015d2420a7ac02cb7c858f3fd2a1c8ed8930ec4317cfc083c5f53651a94d"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_warehouse_1280_100_desktop_next_night_handoff",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_warehouse_1280_100_desktop_next_night_handoff.png",
+        "sha256": "321b489595aa134c28ffc0603ac1b2ff8b0538591dfece2f0af10d8c99f2161f"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_tutorial_page1",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_tutorial_page1.png",
+        "sha256": "2a6692870a5631245d47fcc0da91ebcf20ce309cdf41c9dabe290cc3eae46351"
+      }
+    ],
+    "scope": "Bounded actual native warehouse input/behavior and original overlays; no whole-art/FX/device/readability certification."
+  },
+  "prior_development_runs": [
+    {
+      "sha": "b46780c7519ce04db213ea40c04c12bf08670081",
+      "checks": 45,
+      "failures": 1,
+      "actual_exit": 1,
+      "native_inputs": 11,
+      "pngs": 1,
+      "actually_viewed": 1,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0
+    },
+    {
+      "sha": "bfc2374f68b522dffb7a8247224c366c78ba1830",
+      "checks": 155,
+      "failures": 2,
+      "actual_exit": 1,
+      "native_inputs": 71,
+      "pngs": 5,
+      "actually_viewed": 2,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0
+    },
+    {
+      "sha": "e37d3d3eb5b71b1c2e51b96273fc5637a6c2dd8f",
+      "checks": 250,
+      "failures": 1,
+      "actual_exit": 1,
+      "native_inputs": 124,
+      "pngs": 7,
+      "actually_viewed": 2,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0
+    }
+  ],
+  "ownership": {
+    "production_runtime_changed": false,
+    "changed_game_files": [
+      "scripts/first_visit_journey_test.gd",
+      "scripts/seed_player_progress.py"
+    ],
+    "asset_generators_run": false,
+    "asset_source_sha": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+    "asset_delivery_sha": "ebedb829e3263abbeb6dd266905f24a3869fa281"
+  },
+  "xorg": {
+    "display": ":112",
+    "owned_pid": 79513,
+    "actual_exit": 0,
+    "raw_log_sha256": "be89e657d59bbc3945c80dae9b52c49e9baf586de0ad1d641111a1c2250e3dc8",
+    "lossless_archive": "../xorg.log.gz"
+  },
+  "next": "Resume authentic ending-player-progress/pump via original title Continue after generic driver support; pump/railcut/depot/radio9waves pending. Raw schema2 actual native record available for independent readonly replay QA. No new asset package needed for this slice. FullFX/A3/ears/APK/device remain pending."
+}

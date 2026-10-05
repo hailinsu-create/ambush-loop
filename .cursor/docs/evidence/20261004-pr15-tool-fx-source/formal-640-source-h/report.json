@@ -1,0 +1,214 @@
+{
+  "checks": 46,
+  "failures": 0,
+  "rows": [
+    {
+      "case": "actual-empty-and-explicit-duplicate",
+      "effect": {
+        "attempt_id": "ea509acd2d1c281ee840fa6ee4af7a01",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "ea509acd2d1c281ee840fa6ee4af7a01:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 246.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "ea509acd2d1c281ee840fa6ee4af7a01:tool:0",
+        "variant": "stiel",
+        "victims": [],
+        "wave_id": 0
+      },
+      "original_event_count": 2,
+      "scope": "real fuse/bounce then explicit duplicate signal; no native player route"
+    },
+    {
+      "case": "actual-overkill-cover-mg-selected",
+      "effect": {
+        "attempt_id": "e2195e10cb4a75e0035bc2099a80d3f0",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(496.0, 108.0)",
+        "created_wave_id": 0,
+        "effect_id": "e2195e10cb4a75e0035bc2099a80d3f0:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 3,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(496.0, 208.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "e2195e10cb4a75e0035bc2099a80d3f0:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 78.0,
+            "group": "enemies",
+            "hp_after": -68.0,
+            "hp_before": 10.0,
+            "id": 1,
+            "pos": "(496.0, 208.0)"
+          },
+          {
+            "damage": 10.92,
+            "group": "ops",
+            "hp_after": 89.08,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(496.0, 240.0)"
+          },
+          {
+            "damage": 31.395,
+            "group": "ops",
+            "hp_after": 68.605,
+            "hp_before": 100.0,
+            "id": 2,
+            "pos": "(496.0, 208.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "original_event_count": 3,
+      "original_selected_id": 2
+    },
+    {
+      "case": "actual-mine",
+      "effect": {
+        "attempt_id": "aabbb21093c9a17d4b366fde3602bf5a",
+        "clock_domain": "playback",
+        "clock_tick": 1,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 112.0)",
+        "created_wave_id": 0,
+        "effect_id": "aabbb21093c9a17d4b366fde3602bf5a:tool_fx:0",
+        "kind": "mine",
+        "level_id": "yard",
+        "local_tick": 0,
+        "original_event": {
+          "actor_id": 1,
+          "attempt_id": "aabbb21093c9a17d4b366fde3602bf5a",
+          "event_id": "aabbb21093c9a17d4b366fde3602bf5a:0:3",
+          "position": "(80.0, 112.0)",
+          "seq": 3,
+          "target_id": -1,
+          "type": "mine",
+          "wave_id": 0
+        },
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(80.0, 112.0)",
+        "radius": 20.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "aabbb21093c9a17d4b366fde3602bf5a:tool:0",
+        "variant": "mine",
+        "victims": [
+          {
+            "damage": 120.0,
+            "group": "enemies",
+            "hp_after": -20.0,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(80.0, 112.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "original_event": {
+        "actor_id": 1,
+        "attempt_id": "aabbb21093c9a17d4b366fde3602bf5a",
+        "event_id": "aabbb21093c9a17d4b366fde3602bf5a:0:3",
+        "payload": {},
+        "playback_schema": 2,
+        "playback_tick": 1,
+        "position": "(80.0, 112.0)",
+        "schema": 2,
+        "seq": 3,
+        "target_id": -1,
+        "tick": 0,
+        "timeline_tick": 0,
+        "type": "mine",
+        "wave_id": 0
+      }
+    },
+    {
+      "case": "actual-terminal-wipe",
+      "effect": {
+        "attempt_id": "ef09d4d9963440e6e3df50889ffabaa0",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "ef09d4d9963440e6e3df50889ffabaa0:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 86.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "ef09d4d9963440e6e3df50889ffabaa0:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 1,
+            "pos": "(80.0, 80.0)"
+          },
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 2,
+            "pos": "(80.0, 80.0)"
+          },
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 3,
+            "pos": "(80.0, 80.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "snapshot_tick": 50,
+      "terminal_playback_tick": 50
+    }
+  ],
+  "scope": "real original tool callbacks/HP/inventory/stats with grants/positions/direct ticks and explicit duplicate signal; source-only, no native normal/blast render/FINAL/A3/device acceptance",
+  "source_sha": "640a9840bb89012306017e5c01ea4e0452daba57"
+}

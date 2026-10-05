@@ -1,0 +1,54 @@
+{
+  "project_id": "appgprj_6ac2e89b4db08191b308c175371ee7c6",
+  "checkout_path": "/workspace/sites/ambush-loop-html-game",
+  "commit_sha": "87cccf2152ce112c36a704efa332f16e7692867b",
+  "remote_readback_sha": "87cccf2152ce112c36a704efa332f16e7692867b",
+  "worktree_clean": true,
+  "actual_exit": 0,
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "start": "2026-10-05T16:47:09.064829+00:00",
+      "end": "2026-10-05T16:47:09.068408+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "start": "2026-10-05T16:47:09.068418+00:00",
+      "end": "2026-10-05T16:47:09.070755+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/main"
+      ],
+      "start": "2026-10-05T16:47:09.070764+00:00",
+      "end": "2026-10-05T16:47:11.601227+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "start": "2026-10-05T16:47:11.601249+00:00",
+      "end": "2026-10-05T16:47:11.603743+00:00",
+      "actual_exit": 0
+    }
+  ],
+  "helper": "manual exact Git workflow; packaged Sites helper unavailable in selected environment and cloud scripts resource unavailable; existing source maintained",
+  "opening_only": true
+}

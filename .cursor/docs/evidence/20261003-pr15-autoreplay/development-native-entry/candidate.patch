@@ -1,0 +1,120 @@
+diff --git a/ambush_loop/scripts/main.gd b/ambush_loop/scripts/main.gd
+index 226c147..c4c9b39 100644
+--- a/ambush_loop/scripts/main.gd
++++ b/ambush_loop/scripts/main.gd
+@@ -1638,6 +1638,12 @@ func _fit_result_dialog() -> void:
+ 			child.reparent(_result_body)
+ 	shell.move_child(_result_scroll,0)
+ 	shell.move_child(_result_footer,1)
++	# The terminal overlay hides BottomBar. Keep its original replay button and
++	# pressed binding reachable alongside the terminal actions.
++	if replay_button and replay_button.get_parent() != _result_footer:
++		replay_button.reparent(_result_footer)
++		replay_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
++		replay_button.custom_minimum_size = Vector2(0,44)
+ 	result_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ 	result_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ 	var usable := get_viewport().get_visible_rect().size
+@@ -1652,6 +1658,16 @@ func _fit_result_dialog() -> void:
+ 	result_panel.grow_vertical=Control.GROW_DIRECTION_BEGIN if phase==Phase.FAILED else Control.GROW_DIRECTION_BOTH
+ 
+ 
++func _restore_replay_button() -> void:
++	if replay_button == null:
++		return
++	var bar := get_node("HUD/Root/BottomBar")
++	if replay_button.get_parent() != bar:
++		replay_button.reparent(bar)
++		replay_button.size_flags_horizontal = Control.SIZE_FILL
++		replay_button.custom_minimum_size = Vector2(128,48) if _want_touch() else Vector2(120,32)
++
++
+ func _fill_result_stats() -> void:
+ 	_ensure_result_layout()
+ 	if result_stats == null:
+@@ -3513,6 +3529,7 @@ func door_slam_dust_active() -> bool:
+ 
+ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+ 	replay.pause()
++	_restore_replay_button()
+ 	_cancel_world_input()
+ 	if sfx and sfx.has_method("stop_mission_audio"):
+ 		sfx.stop_mission_audio()
+@@ -6560,6 +6577,7 @@ func _on_replay_pressed() -> void:
+ 	if phase == Phase.SWEEP:
+ 		battle_log.add_command_snapshot(sim.tick, _snapshot_data())
+ 	replay_return_phase = phase
++	_restore_replay_button()
+ 	_cancel_world_input()
+ 	if backpack_panel:
+ 		backpack_panel.dismiss()
+diff --git a/ambush_loop/scripts/replay_autoplay_test.gd b/ambush_loop/scripts/replay_autoplay_test.gd
+index a12fbdc..09a4818 100644
+--- a/ambush_loop/scripts/replay_autoplay_test.gd
++++ b/ambush_loop/scripts/replay_autoplay_test.gd
+@@ -161,6 +161,25 @@ func _pause_control(touch: bool) -> Control:
+ func _speed_control(touch: bool) -> Control:
+ 	return main.touch_hud.get("_replay_speed") if touch else main.speed_button
+ 
++func _bound_record_case() -> void:
++	# Controlled host callback: swapping the live log must not rebind playback.
++	main._on_replay_pressed()
++	live = main._snapshot_data().duplicate(true)
++	sim_state = [main.sim.tick,main.sim.speed,main.sim.paused,main.sim._accum]
++	var foreign := BattleLog.new()
++	foreign.begin_attempt("unrelated-live-record")
++	foreign.add_snapshot(0,{"phase":0})
++	foreign.add_snapshot(4,{"phase":3})
++	foreign.mark_terminal(4,"won")
++	var saved := _state(foreign)
++	main.battle_log = foreign
++	main._process(0.5)
++	_check(main.replay.log == source and main.replay.scrub_tick == 60 and main.replay.max_tick() == source.playback_terminal_tick, "automatic host playback retains bound record clock after live log replacement")
++	_check(_state(foreign) == saved, "automatic playback never modifies the unrelated live recording")
++	main.battle_log = source
++	_unchanged("bound source clock")
++	main._exit_replay_to_setup()
++
+ func _native_case(touch: bool) -> void:
+ 	root.size = Vector2i(1600,720) if touch else Vector2i(1280,720)
+ 	root.content_scale_factor = 2.0 if touch else 1.0
+@@ -228,6 +247,9 @@ func _native_case(touch: bool) -> void:
+ 	await _draw()
+ 	var seek: int = main.replay.scrub_tick
+ 	_check(not main.replay.playing and seek > paused_tick and seek < main.replay.max_tick(), "native slider seeks retained clock and remains paused")
++	# Arrow keys act on a focused HSlider itself. Release that GUI focus before
++	# checking the existing global six-tick unhandled-key bindings.
++	slider.release_focus()
+ 	await _key("Right")
+ 	_check(main.replay.scrub_tick == seek + 6 and not main.replay.playing, "original right step remains6 ticks and pauses")
+ 	await _key("Left")
+@@ -270,6 +292,8 @@ func _native_case(touch: bool) -> void:
+ 	await _native_click(pause)
+ 	_check(main.replay.playing and main.replay.scrub_tick < main.replay.max_tick(), "native terminal control restarts the same recording")
+ 	await _key("p")
++	# Keep Space on the original global return route, outside button GUI focus.
++	if root.gui_get_focus_owner(): root.gui_get_focus_owner().release_focus()
+ 	await _key("space")
+ 	_check(main.phase == main.Phase.WON and not main.replay.playing, "original space binding returns to WON and stops history transport")
+ 	main.set_process(false)
+@@ -279,6 +303,7 @@ func _run() -> void:
+ 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://build/asset_review/pr15-runtime"))
+ 	_clock_cases()
+ 	await _prepare()
++	_bound_record_case()
+ 	if DisplayServer.get_name() == "headless":
+ 		main._on_replay_pressed()
+ 		var start: int = main.replay.scrub_tick
+diff --git a/ambush_loop/scripts/result_viewport_test.gd b/ambush_loop/scripts/result_viewport_test.gd
+index 350e8c3..900814f 100644
+--- a/ambush_loop/scripts/result_viewport_test.gd
++++ b/ambush_loop/scripts/result_viewport_test.gd
+@@ -34,6 +34,8 @@ func _result_bounds(moment: String) -> void:
+ 	var controls := []
+ 	_fits(main.result_panel,controls)
+ 	_fits(main.continue_button,controls)
++	_fits(main.replay_button,controls)
++	_check(main.replay_button.is_visible_in_tree(),"original replay button remains reachable in the terminal footer")
+ 	if main.dossier_button!=null: _fits(main.dossier_button,controls)
+ 	_check(not main.desktop_command_bars_visible(),"terminal hides command rails")
+ 	for control: Control in [view._camera_panel,view._camera_toggle,view._camera_plate]:

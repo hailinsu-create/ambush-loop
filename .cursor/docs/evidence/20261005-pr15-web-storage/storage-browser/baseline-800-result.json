@@ -1,0 +1,138 @@
+{
+  "scope": "Original stock 1d17 release PCK, Title trusted physical M, observer-only JS. Narrow Title case, not independent failed/replay flow.",
+  "expected": "muted=true",
+  "before": {
+    "time": 39973.5,
+    "files": {
+      "ambush_loop_settings.cfg": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+      "ambush_loop.cfg": null
+    },
+    "trace": [
+      {
+        "seq": 1,
+        "populate": true,
+        "start": 301.09999999403954,
+        "files": {
+          "ambush_loop_settings.cfg": null,
+          "ambush_loop.cfg": null
+        },
+        "end": 312.69999998807907,
+        "error": null
+      },
+      {
+        "seq": 2,
+        "populate": false,
+        "start": 2460.9000000059605,
+        "files": {
+          "ambush_loop_settings.cfg": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+          "ambush_loop.cfg": null
+        },
+        "end": 6351.5999999940395,
+        "error": null
+      }
+    ]
+  },
+  "changed": {
+    "time": 40480,
+    "files": {
+      "ambush_loop_settings.cfg": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+      "ambush_loop.cfg": null
+    },
+    "trace": [
+      {
+        "seq": 1,
+        "populate": true,
+        "start": 301.09999999403954,
+        "files": {
+          "ambush_loop_settings.cfg": null,
+          "ambush_loop.cfg": null
+        },
+        "end": 312.69999998807907,
+        "error": null
+      },
+      {
+        "seq": 2,
+        "populate": false,
+        "start": 2460.9000000059605,
+        "files": {
+          "ambush_loop_settings.cfg": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+          "ambush_loop.cfg": null
+        },
+        "end": 6351.5999999940395,
+        "error": null
+      },
+      {
+        "seq": 3,
+        "populate": false,
+        "start": 40176.69999998808,
+        "files": {
+          "ambush_loop_settings.cfg": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+          "ambush_loop.cfg": null
+        }
+      }
+    ]
+  },
+  "pre_reload": {
+    "time": 41292.29999998212,
+    "files": {
+      "ambush_loop_settings.cfg": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+      "ambush_loop.cfg": null
+    },
+    "trace": [
+      {
+        "seq": 1,
+        "populate": true,
+        "start": 301.09999999403954,
+        "files": {
+          "ambush_loop_settings.cfg": null,
+          "ambush_loop.cfg": null
+        },
+        "end": 312.69999998807907,
+        "error": null
+      },
+      {
+        "seq": 2,
+        "populate": false,
+        "start": 2460.9000000059605,
+        "files": {
+          "ambush_loop_settings.cfg": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+          "ambush_loop.cfg": null
+        },
+        "end": 6351.5999999940395,
+        "error": null
+      },
+      {
+        "seq": 3,
+        "populate": false,
+        "start": 40176.69999998808,
+        "files": {
+          "ambush_loop_settings.cfg": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+          "ambush_loop.cfg": null
+        }
+      }
+    ]
+  },
+  "after": {
+    "time": 1413.0999999940395,
+    "files": {
+      "ambush_loop_settings.cfg": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\n",
+      "ambush_loop.cfg": null
+    },
+    "trace": [
+      {
+        "seq": 1,
+        "populate": true,
+        "start": 327.89999997615814,
+        "files": {
+          "ambush_loop_settings.cfg": null,
+          "ambush_loop.cfg": null
+        },
+        "end": 350.89999997615814,
+        "error": null
+      }
+    ]
+  },
+  "observed_s": 0.40480675699654967,
+  "reload_after_observed_s": 0.9143201440165285,
+  "preserved": false
+}

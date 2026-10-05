@@ -8,6 +8,7 @@ var elapsed: float = 0.0
 var live: bool = false
 var preview_upcoming: int = 0
 var payoff_marks: Array = [] # {t, kind, label} — watching / debrief highlight ticks
+var context_label: String = ""
 var _pulse: float = 0.0
 
 
@@ -57,7 +58,7 @@ func pending_breathing() -> bool:
 	if not live:
 		return preview_upcoming > 0 and not upcoming_marks(preview_upcoming).is_empty()
 	for m in marks:
-		if float(m.get("delay", 0.0)) > elapsed + 0.05:
+		if _mark_pending(m):
 			return true
 	return false
 
@@ -66,9 +67,17 @@ func echo_mark_pending() -> bool:
 	for m in marks:
 		if str(m.get("route", "")) != "echo":
 			continue
-		if float(m.get("delay", 0.0)) > elapsed + 0.05:
+		if _mark_pending(m):
 			return true
 	return false
+
+
+func _mark_pending(mark: Dictionary) -> bool:
+	# Current live queues carry the original spawn state. Older standalone
+	# widgets without it retain their authored-time fallback.
+	if live and mark.has("spawned"):
+		return not bool(mark.spawned)
+	return float(mark.get("delay", 0.0)) > elapsed + 0.05
 
 
 func active_route() -> String:
@@ -81,10 +90,11 @@ func active_route() -> String:
 	for m in marks:
 		var t := float(m.get("delay", 0.0))
 		var route := str(m.get("route", "main"))
-		if t <= now + 0.05 and t >= best_t:
+		var pending := _mark_pending(m) if live else t > now + 0.05
+		if not pending and t >= best_t:
 			best_t = t
 			best = route
-		elif t > now + 0.05 and t < next_t:
+		elif pending and t < next_t:
 			next_t = t
 			next_r = route
 	if best != "":
@@ -102,6 +112,8 @@ func _draw() -> void:
 	var caption := "路线时间轴 · 观战" if live else "路线时间轴"
 	if preview_upcoming > 0 and not live:
 		caption = "路线时间轴 · 下一波"
+	if context_label != "":
+		caption = context_label
 	draw_string(ThemeDB.fallback_font, Vector2(8, 12), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.82, 0.84, 0.62, 0.9))
 	var tmax := maxf(t_max, 0.5)
 	if live:
@@ -132,7 +144,7 @@ func _draw() -> void:
 				lab = "回"
 		var is_active := live and route == active
 		var is_preview := preview_ids.has(int(m.get("id", -2)))
-		var is_pending := live and t > elapsed + 0.05
+		var is_pending := live and _mark_pending(m)
 		var is_echo := route == "echo"
 		var echo_soon := is_echo and is_pending and (t - elapsed) <= 2.4
 		if is_active:

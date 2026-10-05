@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 135, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 114, in main
+    variant,label=entry.split(':',1);r,g=analyze_run(variant,label);runs.append(r);groups.append(g)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 42, in analyze_run
+    require(int(stem.with_suffix('.exit').read_text())==0 and not re.search(r'^(?:ERROR:|SCRIPT ERROR:)',log,re.M),'actual exit/E/S '+label)
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 22, in require
+    if not value: raise ValueError(message)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: actual exit/E/S preflight-A-common2

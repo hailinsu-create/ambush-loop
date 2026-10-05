@@ -1,0 +1,70 @@
+{
+  "actual_source_sha": "de27aa07379624e1e56143c1b23016e3bed4a7f9",
+  "validation_kind": "fixed-source component before final campaign fixture input-order correction",
+  "name": "command-render",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-full-godot",
+    "full_command_record_replay_test.gd",
+    "--render"
+  ],
+  "environment": {
+    "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+  },
+  "run_id": "1370727319414d1d93720c15bf8bd304",
+  "actual_exit_code": 0,
+  "checks": 224,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_live_0800.png",
+      "sha256": "6980ed41cbc17d23197bb835068521870d75e4912828ae9d1a7a94b16123b1d5",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/00_command_record_full_scout_live_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_history_0800.png",
+      "sha256": "5ba5cd6f2b849245093e1c0acc3c9c5a8849509c3826e508e2180027485902cb",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/01_command_record_full_scout_history_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_actual_schema1_history.png",
+      "sha256": "cf3bb08b10588847d442a4bc4e4ce4432031a3d5b6aab55fd06843af9ca275e9",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/02_command_record_full_actual_schema1_history.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_live_sweep_0800.png",
+      "sha256": "de77db37b4809d7adb181658f3a7c974b987345fd1c5341e5ba4befb3fbba512",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/03_command_record_live_sweep_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_history_sweep_0800.png",
+      "sha256": "35e164c8b15655d9f3f5cc66aa58d390a6752b1fa3dfde7e60299079df713c18",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/04_command_record_history_sweep_0800.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_escape.png",
+      "sha256": "df3fc27163ebb6da37397d4b2b5b7397ebc5c82b6a54e618e8d8e965e733ed07",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/05_command_record_full_failed_escape.png",
+      "hash_verified": true
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_abort.png",
+      "sha256": "90dc6084dfb53ba206c7fdc9b41b43b0002255c338538840372cf79e9fa65887",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/previous-de27-command-render/06_command_record_full_failed_abort.png",
+      "hash_verified": true
+    }
+  ],
+  "captured_frames": 7,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ]
+}

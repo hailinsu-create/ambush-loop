@@ -1,0 +1,754 @@
+{
+  "schema": 1,
+  "kind": "source_only_fresh_web_native_input_driver_contract",
+  "status": "PREPARED_RUNTIME_UNRUN",
+  "driver_implemented": false,
+  "observer_implemented": false,
+  "runtime_started": false,
+  "gpt_plan_review": "unavailable",
+  "window": {
+    "owner": "independent_storage_QA",
+    "root_engine_browser_allowed": false,
+    "next_start_requires": "parent QA END and explicit window return",
+    "qa_worktree_head_frozen": "b46c31c008ae8dea700b3c36ad9b514e68b7e1ac"
+  },
+  "candidate": {
+    "source_sha": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+    "game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85"
+  },
+  "source_strategy_pins": [
+    {
+      "path": "ambush_loop/scripts/first_visit_journey_test.gd",
+      "git_blob": "9ea4e029e146ce528606ed458eaab9e276b0dbd6",
+      "bytes": 31071,
+      "sha256": "aefede32b09809fe0832aa85732303e6825209b4d82beace255bc693bf0e946b"
+    },
+    {
+      "path": "ambush_loop/scripts/title_menu_viewport_test.gd",
+      "git_blob": "d5bd3bb07863387302cefe25048db94cd30f9320",
+      "bytes": 14234,
+      "sha256": "9f542637fa7b13f8f26443d2638c4f3d55bb2338f8d8d48c439bc2fa8408e316"
+    },
+    {
+      "path": "ambush_loop/scripts/main.gd",
+      "git_blob": "92af332b439cf8f9e924adc6e9adea07dec2bc77",
+      "bytes": 432554,
+      "sha256": "f3ce39d7d2d50627ac478b57d35bce40646b9ca751b8b2438fd0c38c54f9ca0c"
+    },
+    {
+      "path": "ambush_loop/scripts/title.gd",
+      "git_blob": "2b0f081294d7325bd7cb7408bdeda3d200fe35bf",
+      "bytes": 36877,
+      "sha256": "465adea2000eb8e5deae8c2cfec93805b98253a2d91c7928d55b1dd044ce7a4b"
+    },
+    {
+      "path": "ambush_loop/scripts/game_settings.gd",
+      "git_blob": "84b47077cfc4188baba8fa5e606fefc5718b1244",
+      "bytes": 15430,
+      "sha256": "76b59d9f68fb020d02355fef7e5418d72805140f131a7b8fc8384c2a2754a62d"
+    },
+    {
+      "path": "ambush_loop/scripts/web_config_store.gd",
+      "git_blob": "8c820ae77c8146ea2186ce3b79c30e13986a647a",
+      "bytes": 3087,
+      "sha256": "a4bb1c42e6522eb8d426ef5d3fb8f31e462478739aae622a93e3eed1ca8776bf"
+    },
+    {
+      "path": "ambush_loop/scripts/level/level_def.gd",
+      "git_blob": "a7be64c289a04dc06abf536b8fe33967427c96d2",
+      "bytes": 36665,
+      "sha256": "852fd877c1a90ef39176912a1400b2fdb8d6ba3961fd0679611221b0b2c4d925"
+    },
+    {
+      "path": "ambush_loop/scripts/simulation/sim_clock.gd",
+      "git_blob": "2e16f12e247d7bdc480cea9eca84bd7afe370350",
+      "bytes": 1028,
+      "sha256": "0028fb93df4949eff46c08e393f6dd6a5d415f24bc3fab60c1ee5ea1dac13775"
+    },
+    {
+      "path": "ambush_loop/scripts/replay/battle_log.gd",
+      "git_blob": "b9126afc5e27cab52964dbc7d8e098230c37bbf6",
+      "bytes": 12543,
+      "sha256": "d381e3ca70e58bf60ddb1d89c0fdba715a297a5f4b50557a3d909748a852d316"
+    },
+    {
+      "path": "ambush_loop/scripts/replay/replay_player.gd",
+      "git_blob": "137066dea357d08fbf1c3a0aee756f3bb476a9a1",
+      "bytes": 4651,
+      "sha256": "d649641c7aa17a975e36de8763518ea356d645617ddf1b42c23249e78b331f48"
+    },
+    {
+      "path": "ambush_loop/scripts/ui/night_handoff.gd",
+      "git_blob": "4e735e59ad0d79a1007d63db5d0809f7e1daa5a1",
+      "bytes": 5074,
+      "sha256": "82b338636a2b057951c1ca0865b51ca8188f9ae2efebfb33ca8498cc15231176"
+    },
+    {
+      "path": "ambush_loop/scripts/ui/tutorial_overlay.gd",
+      "git_blob": "6e874230308b7b0272cc16087835714e1f1e9c1e",
+      "bytes": 10764,
+      "sha256": "a2c8b91b97640d61aeededb23ef03ac4450ff36f71f79f3a46a6e711778963bd"
+    },
+    {
+      "path": "ambush_loop/scripts/ui/pause_overlay.gd",
+      "git_blob": "3885c65763f46b1b527269646abd96005d65865d",
+      "bytes": 10048,
+      "sha256": "c0ad56e0a8336cbe4f69162088ecbed264194a5729ff5a527bdef6796070436b"
+    },
+    {
+      "path": "ambush_loop/scripts/ui/credits_overlay.gd",
+      "git_blob": "685a9d1bb44f902517ef954b55d37d2fa91518fc",
+      "bytes": 3709,
+      "sha256": "a329af227d14117f5cf3a210a8503fb7bd4f43add0886ad6fa949ca95fcbe9db"
+    }
+  ],
+  "profile": {
+    "fresh_root_owned": true,
+    "persistent_single_campaign": true,
+    "origin_and_path_fixed": true,
+    "import_or_seed": false,
+    "clear_user_or_independent_QA_storage": false,
+    "close_reopen_checkpoints": [
+      "after_yard_next_tutorial",
+      "after_radio_credits"
+    ]
+  },
+  "trusted_input_allowlist": [
+    "CDP keyboard press/down/up",
+    "CDP mouse move/click/down/up/wheel"
+  ],
+  "forbidden_actions": [
+    "direct pressed.emit",
+    "direct load_level/raid_force_alarm/record_win/mark_tutorial_seen",
+    "phase/tick/HP/ammo/resources/facing assignments",
+    "sim_step/process/manual replay advance",
+    "DOM dispatchEvent/Input.parse_input_event",
+    "old web_qa_bridge mutations",
+    "force_fs_sync"
+  ],
+  "observer_rpc_allowlist": [
+    "state",
+    "controls",
+    "project_targets",
+    "copy_record_bytes",
+    "fingerprints"
+  ],
+  "observer_writes": "own reply/serialization buffers and diagnostic counters only",
+  "semantic_controls": [
+    "title_start",
+    "title_continue",
+    "mission_row:<level>",
+    "brief_go",
+    "tutorial_next",
+    "alarm",
+    "pause",
+    "speed",
+    "tool",
+    "pack",
+    "backpack_auto",
+    "backpack_close",
+    "replay",
+    "scrub",
+    "camera_clockwise",
+    "handoff_cta",
+    "pause_title",
+    "credits_scroll",
+    "credits_back"
+  ],
+  "observer_state_contract": [
+    "scene/level/phase/modals",
+    "attempt_id/wave_id/main.run_id",
+    "sim.tick/speed/paused/_accum",
+    "original operators/inventory/stashes/loot/covers/mines",
+    "replay.scrub_tick/max_tick/speed/playing",
+    "original GameSettings reads",
+    "original cfg texts and public checkpoint value/hash",
+    "present identity and input trace"
+  ],
+  "world_target_rules": {
+    "read_only_projection": "rig.project_logic",
+    "read_only_pick": "pick_at/pointer_over_ui; audit getter implementation before use",
+    "coordinate_map": "CSS -> canvas -> logical; account DPR/letterbox and sent pixel rounding",
+    "max_original_clockwise_camera_clicks": 12,
+    "stash_height": 0.55,
+    "cover_height": 0.08,
+    "loot_height": 0.12,
+    "ground_height": 0.02,
+    "ground_neighbor_pixel_checks": 4
+  },
+  "facing": {
+    "mg_quantum": 8,
+    "other_quantum": 15,
+    "max_actual_key_turns": 24,
+    "tolerance": "quantum/2+0.01; actual A/D only"
+  },
+  "mine": {
+    "walk_offset_cell": [
+      1,
+      0
+    ],
+    "max_distance_logic": 64,
+    "original_tool_cycle": [
+      "DEPLOY",
+      "TRIPWIRE",
+      "DEPLOY"
+    ],
+    "assert": "carried mines -1 and raid_mines +1 through actual ground click"
+  },
+  "sweep": {
+    "max_original_uncollected_loot_attempts": 20,
+    "order": "original loot_piles order",
+    "observe": "natural collection, original loot event, actual resources and walking completion",
+    "redeploy_before_next_wave": true
+  },
+  "deadlines_wall_seconds": {
+    "ui_or_walk": 120,
+    "natural_alert_wave": 300,
+    "level_producer_total": 900,
+    "max_original_FAILED_retries_per_level": 2,
+    "retry_budget_is_inside_level_total": true,
+    "whole": "max(180,6*(playback_terminal_tick/60)/rate+30)",
+    "clock": "controller monotonic wall; no quiet extension or forced terminal"
+  },
+  "initial_entry": [
+    "fresh Title rows/Continue disabled",
+    "original Start/yard row/brief_go",
+    "all original tutorial pages",
+    "knife-only SCOUT",
+    "original settings UI + restore standard"
+  ],
+  "missions": [
+    {
+      "level": "yard",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        2,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        90,
+        180,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": null,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": null,
+      "first_sweep_mine_cell": null,
+      "next_level": "warehouse",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse"
+        ],
+        "continue_level": "warehouse",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "warehouse",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        3,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        180,
+        0,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [
+        {
+          "operator_index": 1,
+          "input": "F"
+        }
+      ],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": 1,
+      "first_sweep_mine_cell": [
+        24,
+        5
+      ],
+      "next_level": "pump",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump"
+        ],
+        "continue_level": "pump",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "pump",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        90,
+        0,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": 1,
+      "first_sweep_mine_cell": null,
+      "next_level": "railcut",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut"
+        ],
+        "continue_level": "railcut",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "railcut",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        270,
+        270,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 0,
+      "scout_policy_inputs": [
+        {
+          "operator_index": 0,
+          "input": "I -> original auto button off -> close"
+        }
+      ],
+      "scout_mine_cell": null,
+      "sweep_loot_operator": 2,
+      "first_sweep_authored_ammo_operator": 1,
+      "first_sweep_mine_cell": null,
+      "next_level": "depot",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot"
+        ],
+        "continue_level": "depot",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "depot",
+      "wave_count": 2,
+      "wave_ids": [
+        0,
+        1
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        270,
+        270,
+        180
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        },
+        {
+          "family": "mine",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": [
+        7,
+        11
+      ],
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": null,
+      "first_sweep_mine_cell": null,
+      "next_level": "radio",
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot",
+          "radio"
+        ],
+        "continue_level": "radio",
+        "complete": false
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    },
+    {
+      "level": "radio",
+      "wave_count": 3,
+      "wave_ids": [
+        0,
+        1,
+        2
+      ],
+      "cover_array_indices_by_operator": [
+        1,
+        4,
+        5
+      ],
+      "facing_degrees_by_operator": [
+        270,
+        90,
+        270
+      ],
+      "collect": [
+        {
+          "family": "rifle",
+          "operator_index": 0
+        },
+        {
+          "family": "mg",
+          "operator_index": 1
+        },
+        {
+          "family": "scout",
+          "operator_index": 2
+        },
+        {
+          "family": "grenade",
+          "operator_index": 0
+        },
+        {
+          "family": "mine",
+          "operator_index": 0
+        }
+      ],
+      "ammo_pack_operator": 1,
+      "scout_policy_inputs": [],
+      "scout_mine_cell": [
+        7,
+        11
+      ],
+      "sweep_loot_operator": 0,
+      "first_sweep_authored_ammo_operator": null,
+      "first_sweep_mine_cell": null,
+      "next_level": null,
+      "expected_after_natural_win": {
+        "cleared": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot",
+          "radio"
+        ],
+        "unlocked": [
+          "yard",
+          "warehouse",
+          "pump",
+          "railcut",
+          "depot",
+          "radio"
+        ],
+        "continue_level": null,
+        "complete": true
+      },
+      "producer_status": "UNRUN",
+      "whole_1x_status": "UNRUN",
+      "whole_2x_status": "UNRUN",
+      "progress_reload_status": "UNRUN"
+    }
+  ],
+  "continuous_boundary_order": [
+    "natural WON and copy original record",
+    "whole1x and whole2x; Space -> WON",
+    "original Continue loads next SCOUT then handoff",
+    "original handoff CTA",
+    "all next first-visit tutorial pages",
+    "Esc -> original pause_title",
+    "Title rows/config/checkpoint",
+    "same-origin reload",
+    "original Title Continue -> new knife-only SCOUT attempt"
+  ],
+  "preview_attempts": "record as abandoned-preview after tutorial/reload; never stitch into winning attempt",
+  "final_boundary": [
+    "radio WON and record/whole",
+    "original Continue -> credits",
+    "original wheel scroll/back",
+    "Title reload/reopen: six cleared/unlocked, complete, Continue disabled"
+  ],
+  "record": {
+    "format": "original Godot var_to_bytes; preserve Variant/Vector types",
+    "fields": [
+      "attempt_id",
+      "events",
+      "snapshots",
+      "terminal_tick",
+      "terminal_reason",
+      "playback_schema",
+      "playback_snapshots",
+      "playback_terminal_tick"
+    ],
+    "copy_when": "natural WON before any level or scene change",
+    "each_copy_has_sha256": true,
+    "new_completed_records": 6,
+    "winning_waves": 13,
+    "all_waves_per_record_same_attempt": true,
+    "failed_attempts_preserved_not_counted": true,
+    "original_a05_dependency": false
+  },
+  "whole": {
+    "rates": [
+      1,
+      2
+    ],
+    "original_default_rate": 2,
+    "order": [
+      "original ReplayButton",
+      "original pause",
+      "original desired speed input",
+      "original slider minimum",
+      "observe paused/tick0/rate",
+      "original resume",
+      "natural terminal and playing=false"
+    ],
+    "seek_focus_checks_are_separate": true,
+    "record_bytes_and_domain_fingerprints_unchanged": true,
+    "callback_terminal_time_separate_from_poll_and_capture": true,
+    "checks": [
+      "monotonic playback time",
+      "stable attempt/wave/seq/event_id",
+      "continuous frame_seq",
+      "latest same-tick snapshot",
+      "future-event cutoff",
+      "3D roots/bones/weapons/tools/source identity"
+    ]
+  },
+  "evidence": {
+    "per_level_seal": true,
+    "statuses": [
+      "PASS",
+      "FAIL",
+      "BLOCKED",
+      "UNRUN"
+    ],
+    "unknown_is_not_zero": true,
+    "retain": [
+      "fixed source/fixture/browser identity",
+      "trusted input trace and action pre/post identity",
+      "natural failed and successful attempts",
+      "original record bytes/hashes",
+      "console/network",
+      "actual phase/present screenshots",
+      "cfg/public checkpoint/reload reads",
+      "START/END/actual exit and wall durations"
+    ]
+  },
+  "execution_order_after_window_return": [
+    "observer source audit and fixture identity gate",
+    "yard bounded packet/seal",
+    "same profile warehouse/pump/railcut/depot/radio packets/seals"
+  ],
+  "not_proved_by_this_spec": [
+    "fresh Web natural 13 waves",
+    "six new records or whole1x/2x",
+    "production origin",
+    "stranger playtest",
+    "touch lifecycle",
+    "ears audio",
+    "fullsmoke/all-art/FINAL",
+    "A3 frame budget",
+    "APK",
+    "device performance"
+  ],
+  "library": {
+    "status": "BLOCKED_NO_UPLOAD_IDS",
+    "original_batch_files": 8,
+    "host": "chatgpt.com",
+    "path": "/backend-api/wham/apps",
+    "runtime_endpoint_override": false,
+    "failure_stage": "tools/list discovery before first upload mutation",
+    "original_stderr": "library upload failed: hosted apps tools/list request failed: network",
+    "later_read_only_diagnostic": "HTTPS proxy CONNECT403; not original stderr or origin response",
+    "prepared_tools_surfaced": true,
+    "single_fast_path_for_this_batch": false,
+    "resume_rule": "official helper route restored then unchanged ordered eight-file helper; no bypass"
+  },
+  "current_level": "railcut",
+  "order": [
+    "verify_original_profile",
+    "original_continue_new_knife_attempt",
+    "natural_two_wave_producer_and_archive",
+    "original_whole1x",
+    "original_whole2x",
+    "depot_handoff_tutorial_save_reload",
+    "END"
+  ],
+  "whole_scope": "same original producer scene original Replay UI; no isolated cold setup this slice",
+  "site": "version3 unchanged; no redeploy for each level"
+}

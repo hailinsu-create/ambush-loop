@@ -1,0 +1,64 @@
+{
+  "status": "PASS_BOUNDED_ORIGINAL_YARD_CONSUMER_END",
+  "producer_source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+  "consumer_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "record": {
+    "path": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/run/yard-record.bin",
+    "bytes": 19025696,
+    "sha256": "e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5",
+    "attempt": "93a9671c444c749f102a04a728c963a5",
+    "frames": 1622,
+    "events": 30,
+    "terminal": 12678
+  },
+  "whole": [
+    {
+      "rate": 1,
+      "actual_exit": 0,
+      "request_wall": 718.568968,
+      "complete_helper_wall": 718.5539555110154,
+      "helper_to_terminal_wall": 677.7605287050246,
+      "callback_wall": 671.98,
+      "cap": 1297.8000000000002,
+      "observer_rows": 1597,
+      "terminal_3d_checks": 15,
+      "failures": []
+    },
+    {
+      "rate": 2,
+      "actual_exit": 0,
+      "request_wall": 375.47074,
+      "complete_helper_wall": 375.4611977689783,
+      "helper_to_terminal_wall": 339.9946028899867,
+      "callback_wall": 334.2833,
+      "cap": 663.9000000000001,
+      "observer_rows": 805,
+      "terminal_3d_checks": 15,
+      "failures": []
+    }
+  ],
+  "native_checks": 24690,
+  "native_failures": 0,
+  "native_actual_exit": 0,
+  "browser_engine_inputs": 34,
+  "browser_trusted_inputs": 34,
+  "browser_actual_exit": 0,
+  "browser_end": "2026-10-05T16:39:24.358462+00:00",
+  "native_end": "2026-10-05T16:39:56.442623+00:00",
+  "ports_closed": [
+    12815,
+    12816,
+    12817
+  ],
+  "live_engine_browser": 0,
+  "png_all_viewed": [
+    "run/yard_initial_paired_WON.png",
+    "run/yard_whole_1x_returned_WON.png",
+    "run/yard_whole_1x_terminal.png",
+    "run/yard_whole_2x_returned_WON.png",
+    "run/yard_whole_2x_terminal.png"
+  ],
+  "no_new_producer": true,
+  "not_final_same_candidate_six13_or_A3": true
+}

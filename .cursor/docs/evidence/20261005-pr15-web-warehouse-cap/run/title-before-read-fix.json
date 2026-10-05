@@ -1,0 +1,115 @@
+{
+  "state": {
+    "briefing": false,
+    "continue_disabled": false,
+    "engine_frames": 3152,
+    "input_count": 242,
+    "mission_select": false,
+    "observer_usec": 3305700,
+    "pending": "yard",
+    "presents": 3152,
+    "scene": "res://scenes/title.tscn",
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+          "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c1\u5173 \u00b7 \u9662\u5b50\uff1a\u4ea4\u53c9\u5c01\u9501",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c2\u5173 \u00b7 \u4ed3\u9053\uff1a\u5f39\u836f\u7a97\u53e3",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c3\u5173 \u00b7 \u6cf5\u7ad9\uff1a\u5173\u95e8\u4e4b\u540e",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c4\u5173 \u00b7 \u4fe1\u53f7\u697c\uff1a\u53cc\u8d70\u5eca\u5ef6\u8fdf",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c5\u5173 \u00b7 \u6cb9\u5e93\uff1a\u4e09\u8def\u5408\u56f4",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c6\u5173 \u00b7 \u7535\u53f0\uff1a\u706f\u5854\u56de\u6ce2",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1.0,
+      "muted": false,
+      "next": "pump",
+      "persistence_error": "",
+      "persistence_status": "\u5df2\u4fdd\u5b58\u5230\u6b64\u6d4f\u89c8\u5668",
+      "quality": "standard",
+      "seen": {
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1.0
+    },
+    "ticks_usec": 1601074700,
+    "viewport": [
+      0.0,
+      0.0,
+      1280.0,
+      720.0
+    ]
+  },
+  "public_checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"pump\\\"\\nlevel_index=2\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"yard\\\", \\\"warehouse\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nyard_loops=1\\nyard_perfect=true\\nwarehouse_loops=1\\nwarehouse_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=true\\nseen_yard=true\\nseen_warehouse=true\\n\"},\"schema\":1}",
+  "late_record": {
+    "attempt": "1c9e6cb757ca36a5f3950bf67d6acb0e",
+    "bytes": 38525548,
+    "level": "warehouse",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "77d7ed59d580de4a4cf98c292cd858542218e4834db8c94c4a90d868f950c30a",
+    "terminal": 21867,
+    "validation": {
+      "attempt": "1c9e6cb757ca36a5f3950bf67d6acb0e",
+      "events": 59,
+      "failures": [],
+      "frames": 2793,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/run/warehouse-late-excluded-record.bin"
+  },
+  "status": "LATE_WIN_PROGRESS_PRESERVED_NOT_PRODUCER_PASS"
+}

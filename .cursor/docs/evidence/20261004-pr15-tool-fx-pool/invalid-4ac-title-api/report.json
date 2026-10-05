@@ -1,0 +1,593 @@
+{
+  "captures": [],
+  "checks": 235,
+  "failures": 0,
+  "rows": [
+    {
+      "case": "actual-empty-and-explicit-duplicate",
+      "effect": {
+        "attempt_id": "08d5c1223b3eef5bb69fd8b533d126b1",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "08d5c1223b3eef5bb69fd8b533d126b1:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 246.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "08d5c1223b3eef5bb69fd8b533d126b1:tool:0",
+        "variant": "stiel",
+        "victims": [],
+        "wave_id": 0
+      },
+      "original_event_count": 2,
+      "scope": "real fuse/bounce then explicit duplicate signal; no native player route"
+    },
+    {
+      "case": "actual-empty-grenade-pool",
+      "pool": {
+        "active": [
+          {
+            "age_ticks": 0,
+            "center": "(-17.25, 0.0, -3.3125)",
+            "effect_id": "08d5c1223b3eef5bb69fd8b533d126b1:tool_fx:0",
+            "flash_visible": true,
+            "kind": "grenade",
+            "opacity": 0.0,
+            "ring_visible": true,
+            "seq": 0,
+            "smoke": [],
+            "smoke_count": 0,
+            "tool_id": "08d5c1223b3eef5bb69fd8b533d126b1:tool:0"
+          }
+        ],
+        "capacity": 8,
+        "materials": 10,
+        "mesh_nodes": 40,
+        "rejected_geometry": 1,
+        "saving_capacity": 2,
+        "scope": [
+          -9223371951106423126,
+          "08d5c1223b3eef5bb69fd8b533d126b1",
+          0,
+          "yard",
+          false,
+          1,
+          1,
+          2,
+          false,
+          2
+        ],
+        "shared_meshes": 3
+      },
+      "scope": "actual original source plus explicit playback-age/capacity copies; no normal-player/performance claim",
+      "source": {
+        "attempt_id": "08d5c1223b3eef5bb69fd8b533d126b1",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "08d5c1223b3eef5bb69fd8b533d126b1:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 246.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "08d5c1223b3eef5bb69fd8b533d126b1:tool:0",
+        "variant": "stiel",
+        "victims": [],
+        "wave_id": 0
+      }
+    },
+    {
+      "case": "actual-overkill-cover-mg-selected",
+      "effect": {
+        "attempt_id": "c833f32c72e00d001bffc2bd333b6c3f",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(496.0, 108.0)",
+        "created_wave_id": 0,
+        "effect_id": "c833f32c72e00d001bffc2bd333b6c3f:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 3,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(496.0, 208.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "c833f32c72e00d001bffc2bd333b6c3f:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 78.0,
+            "group": "enemies",
+            "hp_after": -68.0,
+            "hp_before": 10.0,
+            "id": 1,
+            "pos": "(496.0, 208.0)"
+          },
+          {
+            "damage": 10.92,
+            "group": "ops",
+            "hp_after": 89.08,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(496.0, 240.0)"
+          },
+          {
+            "damage": 31.395,
+            "group": "ops",
+            "hp_after": 68.605,
+            "hp_before": 100.0,
+            "id": 2,
+            "pos": "(496.0, 208.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "original_event_count": 3,
+      "original_selected_id": 2
+    },
+    {
+      "case": "actual-source-and-explicit-corrupt-reader",
+      "read_only": true,
+      "sample": [
+        {
+          "age_ticks": 0,
+          "attempt_id": "c833f32c72e00d001bffc2bd333b6c3f",
+          "clock_domain": "playback",
+          "clock_tick": 49,
+          "confirmed": true,
+          "created_clock_tick": 1,
+          "created_pos": "(496.0, 108.0)",
+          "created_wave_id": 0,
+          "effect_id": "c833f32c72e00d001bffc2bd333b6c3f:tool_fx:0",
+          "kind": "grenade",
+          "level_id": "yard",
+          "local_tick": 48,
+          "original_event": {},
+          "owner_group": "ops",
+          "owner_id": 3,
+          "phase": 1,
+          "playback_schema": 2,
+          "position": "(496.0, 208.0)",
+          "radius": 78.0,
+          "schema": 1,
+          "seq": 0,
+          "tool_id": "c833f32c72e00d001bffc2bd333b6c3f:tool:0",
+          "variant": "stiel",
+          "victims": [
+            {
+              "damage": 78.0,
+              "group": "enemies",
+              "hp_after": -68.0,
+              "hp_before": 10.0,
+              "id": 1,
+              "pos": "(496.0, 208.0)"
+            },
+            {
+              "damage": 10.92,
+              "group": "ops",
+              "hp_after": 89.08,
+              "hp_before": 100.0,
+              "id": 1,
+              "pos": "(496.0, 240.0)"
+            },
+            {
+              "damage": 31.395,
+              "group": "ops",
+              "hp_after": 68.605,
+              "hp_before": 100.0,
+              "id": 2,
+              "pos": "(496.0, 208.0)"
+            }
+          ],
+          "wave_id": 0
+        }
+      ],
+      "source": {
+        "attempt_id": "c833f32c72e00d001bffc2bd333b6c3f",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(496.0, 108.0)",
+        "created_wave_id": 0,
+        "effect_id": "c833f32c72e00d001bffc2bd333b6c3f:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 3,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(496.0, 208.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "c833f32c72e00d001bffc2bd333b6c3f:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 78.0,
+            "group": "enemies",
+            "hp_after": -68.0,
+            "hp_before": 10.0,
+            "id": 1,
+            "pos": "(496.0, 208.0)"
+          },
+          {
+            "damage": 10.92,
+            "group": "ops",
+            "hp_after": 89.08,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(496.0, 240.0)"
+          },
+          {
+            "damage": 31.395,
+            "group": "ops",
+            "hp_after": 68.605,
+            "hp_before": 100.0,
+            "id": 2,
+            "pos": "(496.0, 208.0)"
+          }
+        ],
+        "wave_id": 0
+      }
+    },
+    {
+      "case": "actual-damage-grenade-pool",
+      "pool": {
+        "active": [
+          {
+            "age_ticks": 0,
+            "center": "(-4.5, 0.0, -4.5)",
+            "effect_id": "c833f32c72e00d001bffc2bd333b6c3f:tool_fx:0",
+            "flash_visible": true,
+            "kind": "grenade",
+            "opacity": 0.0,
+            "ring_visible": true,
+            "seq": 0,
+            "smoke": [],
+            "smoke_count": 0,
+            "tool_id": "c833f32c72e00d001bffc2bd333b6c3f:tool:0"
+          }
+        ],
+        "capacity": 8,
+        "materials": 10,
+        "mesh_nodes": 40,
+        "rejected_geometry": 2,
+        "saving_capacity": 2,
+        "scope": [
+          -9223371951106423126,
+          "c833f32c72e00d001bffc2bd333b6c3f",
+          0,
+          "yard",
+          false,
+          1,
+          1,
+          2,
+          false,
+          2
+        ],
+        "shared_meshes": 3
+      },
+      "scope": "actual original source plus explicit playback-age/capacity copies; no normal-player/performance claim",
+      "source": {
+        "attempt_id": "c833f32c72e00d001bffc2bd333b6c3f",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(496.0, 108.0)",
+        "created_wave_id": 0,
+        "effect_id": "c833f32c72e00d001bffc2bd333b6c3f:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 3,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(496.0, 208.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "c833f32c72e00d001bffc2bd333b6c3f:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 78.0,
+            "group": "enemies",
+            "hp_after": -68.0,
+            "hp_before": 10.0,
+            "id": 1,
+            "pos": "(496.0, 208.0)"
+          },
+          {
+            "damage": 10.92,
+            "group": "ops",
+            "hp_after": 89.08,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(496.0, 240.0)"
+          },
+          {
+            "damage": 31.395,
+            "group": "ops",
+            "hp_after": 68.605,
+            "hp_before": 100.0,
+            "id": 2,
+            "pos": "(496.0, 208.0)"
+          }
+        ],
+        "wave_id": 0
+      }
+    },
+    {
+      "case": "actual-mine",
+      "effect": {
+        "attempt_id": "181778eff287988d25ec0d60c45fa1c4",
+        "clock_domain": "playback",
+        "clock_tick": 1,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 112.0)",
+        "created_wave_id": 0,
+        "effect_id": "181778eff287988d25ec0d60c45fa1c4:tool_fx:0",
+        "kind": "mine",
+        "level_id": "yard",
+        "local_tick": 0,
+        "original_event": {
+          "actor_id": 1,
+          "attempt_id": "181778eff287988d25ec0d60c45fa1c4",
+          "event_id": "181778eff287988d25ec0d60c45fa1c4:0:3",
+          "position": "(80.0, 112.0)",
+          "seq": 3,
+          "target_id": -1,
+          "type": "mine",
+          "wave_id": 0
+        },
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(80.0, 112.0)",
+        "radius": 20.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "181778eff287988d25ec0d60c45fa1c4:tool:0",
+        "variant": "mine",
+        "victims": [
+          {
+            "damage": 120.0,
+            "group": "enemies",
+            "hp_after": -20.0,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(80.0, 112.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "original_event": {
+        "actor_id": 1,
+        "attempt_id": "181778eff287988d25ec0d60c45fa1c4",
+        "event_id": "181778eff287988d25ec0d60c45fa1c4:0:3",
+        "payload": {},
+        "playback_schema": 2,
+        "playback_tick": 1,
+        "position": "(80.0, 112.0)",
+        "schema": 2,
+        "seq": 3,
+        "target_id": -1,
+        "tick": 0,
+        "timeline_tick": 0,
+        "type": "mine",
+        "wave_id": 0
+      }
+    },
+    {
+      "case": "actual-mine-pool",
+      "pool": {
+        "active": [
+          {
+            "age_ticks": 0,
+            "center": "(-17.5, 0.0, -7.5)",
+            "effect_id": "181778eff287988d25ec0d60c45fa1c4:tool_fx:0",
+            "flash_visible": true,
+            "kind": "mine",
+            "opacity": 0.0,
+            "ring_visible": true,
+            "seq": 0,
+            "smoke": [],
+            "smoke_count": 0,
+            "tool_id": "181778eff287988d25ec0d60c45fa1c4:tool:0"
+          }
+        ],
+        "capacity": 8,
+        "materials": 10,
+        "mesh_nodes": 40,
+        "rejected_geometry": 2,
+        "saving_capacity": 2,
+        "scope": [
+          -9223371951106423126,
+          "181778eff287988d25ec0d60c45fa1c4",
+          0,
+          "yard",
+          false,
+          1,
+          1,
+          2,
+          false,
+          2
+        ],
+        "shared_meshes": 3
+      },
+      "scope": "actual original source plus explicit playback-age/capacity copies; no normal-player/performance claim",
+      "source": {
+        "attempt_id": "181778eff287988d25ec0d60c45fa1c4",
+        "clock_domain": "playback",
+        "clock_tick": 1,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 112.0)",
+        "created_wave_id": 0,
+        "effect_id": "181778eff287988d25ec0d60c45fa1c4:tool_fx:0",
+        "kind": "mine",
+        "level_id": "yard",
+        "local_tick": 0,
+        "original_event": {
+          "actor_id": 1,
+          "attempt_id": "181778eff287988d25ec0d60c45fa1c4",
+          "event_id": "181778eff287988d25ec0d60c45fa1c4:0:3",
+          "position": "(80.0, 112.0)",
+          "seq": 3,
+          "target_id": -1,
+          "type": "mine",
+          "wave_id": 0
+        },
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(80.0, 112.0)",
+        "radius": 20.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "181778eff287988d25ec0d60c45fa1c4:tool:0",
+        "variant": "mine",
+        "victims": [
+          {
+            "damage": 120.0,
+            "group": "enemies",
+            "hp_after": -20.0,
+            "hp_before": 100.0,
+            "id": 1,
+            "pos": "(80.0, 112.0)"
+          }
+        ],
+        "wave_id": 0
+      }
+    },
+    {
+      "case": "actual-terminal-wipe",
+      "effect": {
+        "attempt_id": "ac65c67252293daab0a5fecf32bada2f",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "ac65c67252293daab0a5fecf32bada2f:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 86.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "ac65c67252293daab0a5fecf32bada2f:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 1,
+            "pos": "(80.0, 80.0)"
+          },
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 2,
+            "pos": "(80.0, 80.0)"
+          },
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 3,
+            "pos": "(80.0, 80.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "snapshot_tick": 50,
+      "terminal_playback_tick": 50
+    },
+    {
+      "case": "actual-empty-and-explicit-duplicate",
+      "effect": {
+        "attempt_id": "226975d1c5393e49e6a4d104f8ec72dc",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "226975d1c5393e49e6a4d104f8ec72dc:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 246.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "226975d1c5393e49e6a4d104f8ec72dc:tool:0",
+        "variant": "stiel",
+        "victims": [],
+        "wave_id": 0
+      },
+      "original_event_count": 2,
+      "scope": "real fuse/bounce then explicit duplicate signal; no native player route"
+    }
+  ],
+  "scope": "actual original tool sources; explicit backend grants/placement/clock/reader/capacity/corrupt copies/consumer fixtures. Real Window crops only in render mode; not normal13/FINAL/A3/device acceptance",
+  "source_sha": "4ac2d161410c0c155bb437e46f742216271766e8"
+}
