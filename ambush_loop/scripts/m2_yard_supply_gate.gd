@@ -101,7 +101,9 @@ func _run() -> void:
 	main._on_abort_pressed()
 	main._on_continue_pressed()
 	await _frames(3)
-	_expect(_inventory_empty(main) and main.raid_stashes.size() == 4, "M2_B1_REAL_ABORT_CONTINUE_BASELINE")
+	_expect(_inventory_empty(main) and main.raid_stashes.size() == 3, "M2_B1_D1_CONTINUE_PRESERVES_SEARCHED_TOOL_CRATE")
+	main._on_restart_preparation_pressed()
+	_expect(_inventory_empty(main) and main.raid_stashes.size() == 4, "M2_B1_D1_EXPLICIT_RESTART_BASELINE")
 	for id in ["warehouse", "pump", "railcut", "depot", "radio"]:
 		main._load_level(id, false, false)
 		await _frames(3)
