@@ -2,10 +2,13 @@
 
 更新日期：2026-10-05。仅用于本游戏；设计文件不是实现或验收证明。
 
+**当前终态 PAUSED_USER_REQUEST**：用户21:15UTC要求完成当前工作后暂停，覆盖下方历史“下一包/持续”安排。仅已START pump有界包已END并安全存Title；未经用户明确恢复，不启动下一关、新QA/优化/资产/部署。
+
 ## 当前有效规划
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [最终fresh13 pump END / 用户暂停交接](AMBUSH_PR15_FINAL_FRESH13_PUMP_PAUSE_20261005.md) | PAUSED_USER_REQUEST；同b74/tree1e8/PCK7cf3，新profile实际前三关6/13波3/6原bin，pump原11369024B/46db、34events837frames/t6312先封/122trusted-engine，最终126/126；自然local253/681，browser390.8617/1430 actual0 END21:21:37。暂停缩减原WON→Title cfg/checkpoint exact，未开railcut/教学/reload/新native/whole；9原PNG全看、70件6571287B，旧12文件same/live0/controller absent/四ports111。pump审计只准备UNRUN。需明确恢复再接原件native和未seen railcut原教学入口→余7波，所有剩余门/资产/Sitev4/旧95QA未闭保持。 |
 | [最终fresh13 warehouse END](AMBUSH_PR15_FINAL_FRESH13_WAREHOUSE_END_20261005.md) | 同b74/tree1e8/PCK7cf3/profile12915，原cfg精准接yard→双波自然WON，原bin18247504B/8295/67events1326frames先封、268trusted/engine；自然mine120、grenade78的当前writer descriptor2/strict接受2，utility throw真实身份5存帧/pure pose18/0，BAR12发；无repack/新whole。browser739.2785/1430 actual0 END21:06:14，Guard22136/0与utility18/0 actual0/E0/S0，14原PNG全看/90件9826672B；旧12文件same/live0。最终4/13波2/6原件；下一pump同包原checkpoint，3D工具/握持/whole及其余门待，资产/Sitev4/旧95QA失败保持。 |
 | [最终fresh13首包yard END](AMBUSH_PR15_FINAL_FRESH13_YARD_END_20261005.md) | b74/tree1e8 exact1ec、同最终新PCK7cf3/新profile12915；原Title三页教学→双波自然WON/无retry，30event/671frame原bin8897916B/b49d先封，70trusted+70engine、完整cfg/checkpoint，原handoff及下一关三页教学/Title reload-reopen exact。browser442.8668/1430 END20:44:36实际0/live0，随后Guard原件10979/0实际0/E0/S0；旧profile12文件same、21原PNG全看、115件11,221,395B无损封。最终2/13波1/6原件；无throw/mine/repack、whole未跑，旧helper误名不补whole；方法失败原件保留。下一同PCK warehouse SCOUT合法早路线雷策略，尚未START，原95失败/Sitev4/资产/其余门保持。 |
 | [最终同source fresh13最小计划](AMBUSH_PR15_FINAL_FRESH13_PLAN_20261005.md) | 父端恢复授权；固定b74/tree1e8 exact1ec、新独立profile/12915、只读无cold桥，同包六关13波，原bin先封/完整checkpoint/逐包实际回执/自然mine-repack-throw-MG缺项不造。前两包已END见yard/warehouse记录，后三双波及radio三波/新whole仍待；entry180+producer900+boundary300/硬cap1430；旧profile与Sitev4/资产保持。产品变更须另锁及声明重验，不等待计划确认。 |
