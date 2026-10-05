@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [pump原profile有界执行计划](AMBUSH_PR15_WEB_PUMP_PLAN_20261005.md) | 独立UI QA已END并归还窗口；固定8532/tree45b与14原数值策略pin相同，保留原profile/origin/教学seen。复用明示受控QA-v2，无fixture参数；准备单窗口原Continue→pump两自然波/WON/bin、railcut教学保存reload与同原record完整1×/2×，120/300/900/whole cap。当前原cfg/runtime compare与producer未启，不重仓库、资产/merge/APK/public保持。 |
 | [日志/相机UI有界结果与END](AMBUSH_PR15_EVENT_LOG_UI_END_20261005.md) | fixed8532/tree45b：两控件同时可用，原基线36/6→headless36/0、Window103/0，各actual0。桌面/200%完整END在保留actual1整批内、手机独立actual0/284；26实际文字聚焦/两波/镜头/键鼠触控取消焦点、原record/domain/3D及离线198/0。官方生产导出0/PCKd3fa、QA-v2f02差异实核、9接受图全看；manifest118条数据/15,538,576bytes封存，全部自有engine/browser/server END。所有方法/cap/原损失披露；独立QA待，再继续pump；线上v2/资产/APK不变，非全计划/设备性能通过。 |
 | [日志/相机最小UI切片计划](AMBUSH_PR15_EVENT_LOG_UI_PLAN_20261005.md) | 已实现，当前结果以上方END为准：只修原中心日志被 camera 遮挡；候选无窗口几何36/0、真实Window/XTest三组合103/0，各actual0、三原图已看，原基线36/6实际复现；方法负例及六组合180cap保留。固定完整Web/真实鼠标触控/键盘焦点、封存END及独立QA待，不启动pump/资产/APK。 |
 | [warehouse完整回放与存档交接END](AMBUSH_PR15_WEB_WAREHOUSE_FUNCTIONAL_END_20261005.md) | 原同SHA28c909整段1×/2×自然16102，各actual0，真实wall978.206/488.1532s，比例2.003891，但软件环境实速未通过；两波露出原文字fire focus10482/15054、3D/source/记录/domain checks0；原handoff/pump实际两页教学/解锁/reload/有限同profile重开cfg全文SHA/public checkpoint exact0。46数据/14PNG已看，全自有PID/port END；中央camera遮日志原鼠标实际失败待修，首geometry receipt同名覆盖损失明示、reopen变量负例保留。未重打542s仓库或启后4关；下一最小UI切片后单窗口继续，生产dab/4f49/私有v2/资产保持，FINAL/APK待。 |
