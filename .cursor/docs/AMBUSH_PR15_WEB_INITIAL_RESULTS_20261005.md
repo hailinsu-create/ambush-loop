@@ -1,5 +1,7 @@
 # PR15 完整 HTML 首次正式发布与实际浏览器结果
 
+后续 [Web画布门结果](AMBUSH_PR15_WEB_CANVAS_RESULTS_20261005.md) 已固定1d17并验六关seek/focus零WebGL警告，尚未更新正式Site、未验whole/完整Web。首发v1与以下原失败保留。作者tar23db/48,486,400与Site archive9b789/48,476,160已用相同13文件默认Python tar重新串行化完整复现，差异仅tar封装。最新END窗口释放见后续结果。
+
 2026-10-05。继承 [Web 执行计划](AMBUSH_PR15_WEB_GAME_EXECUTION_PLAN_20261004.md)；用户最新顺序为完整游戏 HTML 先行，APK 后置。此次交付建立了真实的完整 Title 游戏包及独立、默认私有的稳定正式站点，**Web 完整验收仍未完成**。没有 merge PR15、改变分享范围、修改旧 dot 站点或部署到 Vercel。
 
 ## 正式站点及固定身份

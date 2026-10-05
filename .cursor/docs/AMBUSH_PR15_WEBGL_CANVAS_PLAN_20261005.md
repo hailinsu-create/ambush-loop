@@ -15,3 +15,7 @@
 ## 实施前置实际结果
 
 工作候选在31273a基线两文件overlay的隔离stage执行原生storage guard包装器：presentation_contract_test.gd实际84048/0、exit0/E0/S0，01:11:55.927546→01:12:45.382198Z。presenter文件SHA256622843339c393cef53f397b3e76471bd8f96f3fe6c0ef0df3fd4b83a68aad69a、shared test SHA2562de44b20ffaea7cb2a0932f501b672ac5ab6c20a032addea04136b7e5c64e25a；root全部tracked前后不变。它仅证明native分支保持，不代Web门。
+
+## 2026-10-05实际进展
+
+候选已固定1d17；完整Title debug/release0 E0/S0，实际六关原native消费25951/0 actual0、76前后seek/6fire聚焦/44原PNG全看、freshGL/JS/Godot0。whole/输入仍待，正式Site仍v1未更新。父端要求本轮有界封存，owned窗口END01:37:59Z已释放；[实际结果、tar差异复现及下一包](AMBUSH_PR15_WEB_CANVAS_RESULTS_20261005.md)替代本计划的候选待导出/历史待验状态，不替代完整Web/FINAL门。

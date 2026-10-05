@@ -1,0 +1,23 @@
+{
+  "base_sha": "31273a8424a112e5ceee1573e01d91b859db0047",
+  "source": "working candidate patch on exact31273a",
+  "source_files": {
+    "scripts/presentation/presenter_3d.gd": "622843339c393cef53f397b3e76471bd8f96f3fe6c0ef0df3fd4b83a68aad69a",
+    "scripts/presentation_contract_test.gd": "2de44b20ffaea7cb2a0932f501b672ac5ab6c20a032addea04136b7e5c64e25a"
+  },
+  "scope": "Native isolated guard presentation contract; Web branch not executed here; native pass-through invariant only",
+  "stage": "/workspace/pr15-web-canvas-contract-stage",
+  "argv": [
+    "bash",
+    "/workspace/pr15-web-canvas-contract-stage/scripts/run_isolated_test.sh",
+    "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+    "presentation_contract_test.gd",
+    "--headless"
+  ],
+  "start": "2026-10-05T01:11:55.927546+00:00",
+  "actual_exit": 0,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "end": "2026-10-05T01:12:45.382198+00:00",
+  "root_tracked_unchanged": true
+}
