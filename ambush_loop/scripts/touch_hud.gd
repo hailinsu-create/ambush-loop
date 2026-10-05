@@ -156,7 +156,8 @@ func _build() -> void:
 
 	var plate := ColorRect.new()
 	plate.name = "BarPlate"
-	plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# The opaque command rail owns its blank space as well as its buttons.
+	plate.mouse_filter = Control.MOUSE_FILTER_STOP
 	plate.color = Color(0.05, 0.045, 0.032, 0.90)
 	plate.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	plate.offset_top = -132.0
@@ -298,7 +299,7 @@ func _add_world_intent_controls(root: Control) -> void:
 	_world_intent_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(_world_intent_label)
 
-	var confirm := _make_intent_button("确认", Color(0.42, 0.62, 0.34), Vector2(72.0, 46.0))
+	var confirm := _make_intent_button("确认", Color(0.42, 0.62, 0.34), Vector2(72.0, 48.0))
 	confirm.name = "WorldIntentConfirm"
 	confirm.pressed.connect(func() -> void:
 		if _host != null and _host.has_method("confirm_touch_intent"):
@@ -307,7 +308,7 @@ func _add_world_intent_controls(root: Control) -> void:
 	row.add_child(confirm)
 	_btns["world_confirm"] = confirm
 
-	var cancel := _make_intent_button("取消", Color(0.54, 0.34, 0.28), Vector2(64.0, 46.0))
+	var cancel := _make_intent_button("取消", Color(0.54, 0.34, 0.28), Vector2(64.0, 48.0))
 	cancel.name = "WorldIntentCancel"
 	cancel.pressed.connect(func() -> void:
 		if _host != null and _host.has_method("cancel_touch_intent"):
@@ -523,8 +524,8 @@ func _layout_compact(avail_override: float = -1.0) -> void:
 	_compact_font = 11 if tight else 12
 	_compact_sep = 3 if tight else 4
 	var stack_w := 52.0 if tight else 60.0
-	## R38: +4px stack height for thumb hit on 匍匐/背包.
-	var stack_h := 28.0 if tight else 30.0
+	## T3: keep actual secondary hit targets at least 48 logical pixels tall.
+	var stack_h := 48.0
 	var twist := 58.0 if tight else 66.0
 	var twist_h := 56.0 if tight else 62.0
 	var alarm_w := 88.0 if tight else 96.0
@@ -732,7 +733,7 @@ func _hide_overflow() -> void:
 		if b == null:
 			continue
 		var c := str(cmd)
-		if SETUP_RESIDENT.has(c) or WATCH_RESIDENT.has(c):
+		if SETUP_RESIDENT.has(c) or WATCH_RESIDENT.has(c) or c in ["world_confirm", "world_cancel"]:
 			b.visible = true
 			continue
 		b.visible = false

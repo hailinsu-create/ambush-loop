@@ -44,15 +44,18 @@ func _ready() -> void:
 		b.theme = NightOps.theme()
 		var idx := i
 		b.gui_input.connect(func(ev: InputEvent) -> void:
-			if not (ev is InputEventMouseButton) or ev.button_index != MOUSE_BUTTON_LEFT:
+			# Native touch owns this gesture; Godot's emulated mouse must not pick twice.
+			if ev is InputEventMouseButton and ev.device == -1:
 				return
-			var screen: Vector2 = ev.global_position
+			if not (ev is InputEventScreenTouch or (ev is InputEventMouseButton and ev.button_index == MOUSE_BUTTON_LEFT)):
+				return
+			var screen: Vector2 = b.get_global_transform() * ev.position if ev is InputEventScreenTouch else ev.global_position
 			if ev.pressed:
 				_hold_idx = idx
 				_hold_msec = Time.get_ticks_msec()
 				_hold_fired = false
 				_press_follow = _in_follow_hit(idx, screen)
-				if ev.double_click and not _press_follow:
+				if ev is InputEventMouseButton and ev.double_click and not _press_follow:
 					picked.emit(idx)
 					_hold_idx = -1
 					var main = get_tree().current_scene

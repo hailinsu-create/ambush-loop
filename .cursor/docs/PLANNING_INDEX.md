@@ -2,7 +2,7 @@
 
 当前执行入口：[M2 玩法与协作 3D 整合规划](AMBUSH_M2_INTEGRATION_REPLAN_20261005.md)。顺序仍为 I0 → T3 → B2 → D1 → C → E → F。M2-I0 独立分支的选择性院子 3D 桌面接入、真实 B1 箱子 3D 点选至搜索拾取接缝、定向门、共享回归、六关 smoke 与真实渲染均通过；GPT 已对精确差异与 iteration-2 输出给出 DONE。[Draft PR #29](https://github.com/hailinsu-create/ambush-loop/pull/29) 已推送，依赖 Draft PR #28。下一切片进入 M2-T3 触屏目标尺寸与输入归属。真机/真人暂缓，不合并 PR #15 整分支。
 
-[M2-T3 触屏目标尺寸与界面输入归属](AMBUSH_M2_T3_TOUCH_TARGET_PLAN_20261005.md) 是下一实施切片的有效规格。T2 定向门与完整六关桌面 smoke 已通过，c2c_7e27 已复核；手机/真人门仍暂缓，代码 PR #28 保持 Draft。
+[M2-T3 触屏目标尺寸与界面输入归属](AMBUSH_M2_T3_TOUCH_TARGET_PLAN_20261005.md) 是当前实施切片的有效规格。[T3 执行记录](AMBUSH_M2_T3_EXECUTION_20261006.md)：真实两尺寸/两场景的目标矩形与触摸归属门已通过，修正小按钮、隐藏确认/取消、肖像直接触摸和底栏空白穿透；GPT 已复审代码/定向回归，无修正项，完整六关 smoke 尚在执行，尚未 DONE。手机/真人门仍暂缓。
 
 2026-10-06 当前在 M2 阶段：[游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) 是玩法与验收基线；T1/T2 桌面检查、M2-I0 桌面接入和 GPT 复审已通过，手机验收、首局盲测及 M2 全阶段退出条件仍未完成。执行证据见 T2 与 M2-I0 报告，M2-T3 是下一待实施切片。
 
