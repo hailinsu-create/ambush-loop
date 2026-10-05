@@ -4,7 +4,7 @@
 
 ## 首包实际负例与晚到原件
 
-原同profile/origin承接已封yard，原Continue进入warehouse的首次两页教学，knife-only SCOUT，同attempt `1c9e6cb757ca36a5f3950bf67d6acb0e`。整个玩法仅trusted CDP键鼠/原UI：三枪与手雷/原1-3-5掩体/180-4-180度、原MG弹包/F，波0自然SWEEP tick339，原ammo→1、mine→0及cell(24,5)放雷现场0→1、再部署进入波1。没有授予/赋HP-ammo-tick/skip/forced win。
+原同profile/origin承接已封yard，原Continue进入warehouse的首次三页教学，knife-only SCOUT，同attempt `1c9e6cb757ca36a5f3950bf67d6acb0e`。整个玩法仅trusted CDP键鼠/原UI：三枪与手雷/原1-3-5掩体/180-4-180度、原MG弹包/F，波0自然SWEEP tick339，原ammo→1、mine→0及cell(24,5)放雷现场0→1、再部署进入波1。没有授予/赋HP-ammo-tick/skip/forced win。
 
 producer实际 START05:58:41.655Z，receipt END06:13:41.562Z actual1 `level producer wall cap900 reached`。最后记录采样仍波1 ALERT，不能报900秒通关或延长原deadline。后续只读诊断06:15:20发现波1已自然SWEEP tick863，但在截止之后；波1确切SWEEP切换时间没有采到，不能回填为cap内。
 

@@ -14,7 +14,7 @@
 
 只读观察桥先修正已封未调用敌人getter `enemy_id → label_id`；仅新隔离QA stage。官方4.7.2 export actual0 E0/S0，PCK38,094,916/SHA0280f0fe765fbe1565bbb15edf82d457e3558a4be03bce2dfad8684b3ee25458；bridge SHA65ac15289dba5dc5b3860fe07772796cd981120913d563b0e01f96b593f7c05a。965→967目录payload逐项MD5核：只加桥remap/gdc，原内容仅project.binary/uid_cache登记差异，无移除/其他变化。不是生产PCK字节等同。
 
-Browser插件不存在，已有Playwright1.62/headlessChromium/1280×720/DPR1。首次controller未分配TTY，stdin提前EOF，actual0/no游戏请求、关闭；原空目录保留。首次HTML load后立即标题assert actual1，无输入；之后先等待engine观察桥再查原debug标题，负例收据保留。initialize ready actual0：两cfg/seen与yard封存原件完全相同，原Continue进入warehouse SCOUT，全部两页教学后仍knife-only，同attempt1c9e6cb757ca36a5f3950bf67d6acb0e。旧yard live场景已合法退Title，本次入口不计yard→warehouse handoff实测。
+Browser插件不存在，已有Playwright1.62/headlessChromium/1280×720/DPR1。首次controller未分配TTY，stdin提前EOF，actual0/no游戏请求、关闭；原空目录保留。首次HTML load后立即标题assert actual1，无输入；之后先等待engine观察桥再查原debug标题，负例收据保留。initialize ready actual0：两cfg/seen与yard封存原件完全相同，原Continue进入warehouse SCOUT，全部三页教学后仍knife-only，同attempt1c9e6cb757ca36a5f3950bf67d6acb0e。旧yard live场景已合法退Title，本次入口不计yard→warehouse handoff实测。
 
 云warehouse渲染/观察延迟较长；QA driver将朝向键每批最多4次真实按键后核两次present及实际facing，保留旧driver原件/新输入trace，不改生产时钟/速度/行为或提高预算。当前producer START05:58:41.655Z。
 
