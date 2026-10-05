@@ -1471,8 +1471,9 @@ func _load_progress() -> void:
 func _save_progress() -> void:
 	var cfg := ConfigFile.new()
 	cfg.load(PROGRESS_PATH)
-	# After a win, GameSettings.record_win already advanced level_id / cleared.
-	if phase != Phase.WON:
+	# A WON replay still belongs to the settled victory. Audio edits must keep
+	# the next mission saved by GameSettings.record_win.
+	if phase != Phase.WON and not (phase == Phase.REPLAY and replay_return_phase == Phase.WON):
 		cfg.set_value("progress", "level_id", level.level_id if level else "yard")
 		cfg.set_value("progress", "level_index", level_index)
 		cfg.set_value("progress", "complete", _campaign_complete)

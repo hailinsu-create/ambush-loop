@@ -12,4 +12,12 @@
 
 完成此片normal push/readback与Draft PR15同步后，继续原depot存档radio3波：原producer900s、UI120s、每波300s；原八字段先封，再自然whole1×2×分别完整before/terminal-after指纹、原回执/各层wall分列；credits开启/滚动/六关完成存档/同profile精确reload重开/安全Title END。短波pause按输入后的真实phase分类，不伪造暂停检查点。radio完成后才隔离消费原yard bin whole；mine/repack自然专项仍独立，不造状态触发。GPT PLAN/REVIEW unavailable。
 
-当前：PLAN；分类运行、必要修复、radio均UNRUN。
+父端后续明确补充原QA：桥载原bin、设WON而未配对producer胜利存档；原全1×终点后←→Space首次写railcut→depot，cfg与localStorage变，settings/原bin/模拟域/捕获IndexedDB镜像相同。该补充是父端所述原件事实；完整文件尚未在本环境找到，不称已逐文件读取QA包。不能称冷consumer全过程档不变。
+
+作者隔离分类fixed8532 actual0/28checks/0failures/E0/S0/实际Guard：冷WON首Space写下一关，已结算WON重复两次checkpoint原文保持；显式未来完成档配旧WON会回退，但属于人为注入、不证明普通UI可达。另发现普通已结算WON→Replay→M→设置返回标题→Continue会退回刚完成的关卡：仓道胜利本应续pump，真实browser却进warehouse。修正收尾后的独立新profile负例actual0、原可信键鼠/原UI均封，browser/HTTP END13:44:06.095120；shared回归fixed8532真实15/2、actual1/E0/S0/Guard，精确失败是WON回放M进度和Title续关两个断言。
+
+最小实现只让 `_save_progress` 将return_phase=WON的REPLAY视为已结算胜利，保留record_win已写下一关；主动M音频设置照常保存，SCOUT/SWEEP/FAILED回放仍保持当前任务。不改变冷WON首次返回原结算行为，不引入外部历史加载UI、不扩大不可达夹具修复。新增paired结果回归与两平台隔离runner入口。固定候选回归/官方Web导出/真实browser对照尚UNRUN；完成后再radio。
+
+方法负例保留：首预检误把Z僵尸认作活动进程，未启动引擎；reader误调用不存在函数导致45秒timeout，原script/request/log保留、native退出码及精确END回执未留存；首browser交互结果到safeTitle但with结束后重复ctx.close导致wrapper1，原END receipt缺失不回填。新轮独立命名，不覆盖旧原件。
+
+当前：IMPLEMENTED_FIX_PENDING_VERIFICATION；radio仍UNRUN。
