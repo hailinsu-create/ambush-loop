@@ -1,15 +1,26 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-01。仅用于本游戏；设计文件不是实现或验收证明。
+当前执行入口：[M2 玩法与协作 3D 整合规划](AMBUSH_M2_INTEGRATION_REPLAN_20261005.md)。顺序仍为 I0 → T3 → B2 → D1 → C → E → F。M2-I0 独立分支的选择性院子 3D 桌面接入、真实 B1 箱子 3D 点选至搜索拾取接缝、定向门、共享回归、六关 smoke 与真实渲染均通过；GPT 已对精确差异与 iteration-2 输出给出 DONE。[Draft PR #29](https://github.com/hailinsu-create/ambush-loop/pull/29) 已推送，依赖 Draft PR #28。下一切片进入 M2-T3 触屏目标尺寸与输入归属。真机/真人暂缓，不合并 PR #15 整分支。
+
+[M2-T3 触屏目标尺寸与界面输入归属](AMBUSH_M2_T3_TOUCH_TARGET_PLAN_20261005.md) 是下一实施切片的有效规格。T2 定向门与完整六关桌面 smoke 已通过，c2c_7e27 已复核；手机/真人门仍暂缓，代码 PR #28 保持 Draft。
+
+2026-10-06 当前在 M2 阶段：[游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) 是玩法与验收基线；T1/T2 桌面检查、M2-I0 桌面接入和 GPT 复审已通过，手机验收、首局盲测及 M2 全阶段退出条件仍未完成。执行证据见 T2 与 M2-I0 报告，M2-T3 是下一待实施切片。
+
+更新日期：2026-10-06。仅用于本游戏；设计文件不是实现或验收证明。
 
 **云端迁移入口：** [云端、网页评审与 PaperRoute 迁移交接](AMBUSH_CLOUD_WORKFLOWS_MIGRATION_20261001.md)。Draft PR #7 仍为 OPEN，暂无 GitHub review 或自动检查；本次精确验收的源码 SHA 为 `9675c034469e8adcecef403df6ebd5492209e153`。最新 Cloud 任务 [执行 Ambush Loop 云端迁移验收](https://chatgpt.com/codex/cloud/tasks/task_e_6abe1b723a68833281724667ca3f3e92) 已核验该 SHA：Godot 4.7.2 import 与 Accept→Yard 隔离门通过；PaperRoute 的 GLB、turnaround、iso/top 已生成、检查并目视，但 Blender 进程最终以 143 终止，故 Look 生成命令尚无干净退出证据，整体验收为部分通过。当前 bootstrap pin `5f6cdff` 与两个安装脚本 blob 已在精确 SHA 任务核对；未改源码/资产。新工作区独立固定地址已配置，doctor 全项通过；ChatGPT 连接器配对与外部 GPT 精确 SHA 评审仍受浏览器控制超时阻塞，不能把服务健康当成评审批准。Android/vivo、触控、音频与内存门仍待本机验收。Cloud 任务期网络保持关闭，不扩大网络权限或绕过代理。规划、迁移流程入库不代表游戏或完整迁移已验收。
 
 ## 当前有效规划
 
+执行优先级以页首 2026-10-05 M2 整合重排为准。下方 9 月设备/随队“当前执行入口”是保留的历史交接，不是新的 M2 下一切片；其未关闭的真机门仍有效。
+
 **当前执行入口：** [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md)。原六小时窗口已结束，用户要求继续处理未完成工作。后续 code80 记录确认 Accept → Yard 与至少三分钟存活；此前 CTA 未证实状态已被更新，但 Android 长时稳定性、旧 AudioTrack 根因仍未闭环。新符号构建成功但 Build ID `f4a54bf1…1526` 仍不匹配原库，未接受行号结果。当前 vivo 不可用，按外部 GPT iteration 7 规划，仅补桌面双向随队和断坡反例，再完成回归、评审与交接。评审工作区有诊断改动，已不是 clean `340b819`；后续评审须确认精确差异。
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [M2 整合重排](AMBUSH_M2_INTEGRATION_REPLAN_20261005.md) | I0 含真实 B1 箱子点击—移动—搜索—只领取一次接缝门；桌面接入、完整 smoke/渲染及 GPT 复审已通过；下一步 M2-T3。 |
+| [M2-I0 接入记录](AMBUSH_M2_I0_IMPLEMENTATION_20261005.md) | 本切片边界、真实箱子接缝、隔离测试矩阵、GPT 复审结果、来源与未验收事项。 |
+| [M2-T3 触屏目标尺寸与界面输入归属](AMBUSH_M2_T3_TOUCH_TARGET_PLAN_20261005.md) | 保留有效规格，顺延 I0 后；未实现，真机人体工学仍待验证。 |
 | [B2 双向随队补验与诊断交接](AMBUSH_B2_FOLLOW_VALIDATION_20260930.md) | 当前窗口外续做切片：真实双向随队、双向断坡反例、隔离回归和 GPT 评审；完整 B2/Android 验收仍待真机证据。 |
 | [6 小时开发与修复计划](AMBUSH_6H_DEV_REPAIR_PLAN_20260929.md) | 原窗口已结束，后续状态见第 13 节及当前补验报告。code80 已有 Accept → Yard 短时样本；AudioTrack 根因、长时稳定性及完整 B2 真机验收仍未闭环。 |
 | [游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) | 当前开发设计基线：玩法、高点规则、六关、视觉、手机操作、M0–M5。用户已同意以此推进；具体设计仍须逐切片实现、验证。 |

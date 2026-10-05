@@ -100,17 +100,21 @@ func _run() -> void:
 	replay.bind(main.battle_log)
 	var recorded_events: Array = main.battle_log.events.duplicate(true)
 	var recorded_hp := op.hp
-	var recorded_ammo := op.ammo
+	var ammo_before_replay := maxi(op.ammo, 1)
+	# The successful high shot may consume the fixture's final round. The checks
+	# below isolate geometry and fail-closed map handling, not ammo precedence.
+	if op.ammo != ammo_before_replay:
+		op.ammo = ammo_before_replay
 	grid.set_occlusion_kind(8, 6, GridScript.OCCLUSION_FULL)
 	_expect(replay.events_up_to(main.sim.tick) == recorded_events, "C2_REPLAY_EVENTS_NOT_RESIMULATED")
-	_expect(op.hp == recorded_hp and op.ammo == recorded_ammo, "C2_REPLAY_READ_ONLY")
+	_expect(op.hp == recorded_hp and op.ammo == ammo_before_replay, "C2_REPLAY_READ_ONLY")
 	op.shot_cd = 0.0
 	enemy.return_cd = 0.0
 	main.battle_log.clear()
 	main._sim_tick()
 	_expect(op.engage_block_reason(target, grid) == "los" and not op.in_fire_geometry(target, grid), "C2_FULL_HIGH_DENIED")
 	_expect(main.battle_log.first_of_type("fire").is_empty() and main.battle_log.first_of_type("return_fire").is_empty(), "C2_FULL_NO_RECORDED_SHOTS")
-	_expect(fired_count == 1 and return_count == 1 and op.ammo == recorded_ammo and op.hp == recorded_hp, "C2_FULL_NO_SIDE_EFFECTS")
+	_expect(fired_count == 1 and return_count == 1 and op.ammo == ammo_before_replay and op.hp == recorded_hp, "C2_FULL_NO_SIDE_EFFECTS")
 	grid.set_occlusion_kind(8, 6, GridScript.OCCLUSION_LOW)
 	var saved_range := op.range_px
 	op.range_px = 100.0
@@ -124,7 +128,7 @@ func _run() -> void:
 	op.fire_permitted = true
 	op.ammo = 0
 	_expect(op.engage_block_reason(target, grid) == "ammo", "C2_AMMO_STILL_REQUIRED")
-	op.ammo = recorded_ammo
+	op.ammo = ammo_before_replay
 	op.melee = true
 	# Preserve range to isolate LOS, rather than obtaining a vacuous knife-range denial.
 	_expect(op.engage_block_reason(target, grid) == "los" and not op.in_fire_geometry(target, grid), "C2_MELEE_LEGACY_LOS")
