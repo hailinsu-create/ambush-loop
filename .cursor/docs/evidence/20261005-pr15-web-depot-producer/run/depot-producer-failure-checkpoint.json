@@ -1,0 +1,2549 @@
+{
+  "state": {
+    "attempt": "1f32042b812907b6d833285e37ad9a5c",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          208,
+          336
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          432,
+          400
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          496,
+          528
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          720,
+          208
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          1040,
+          368
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          944,
+          560
+        ]
+      }
+    ],
+    "engine_frames": 1322,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "fixture_ready": false,
+    "focus_actor": -1,
+    "focus_type": "",
+    "gui_focus": "/root/Main/HUD/Root/BottomBar/SpeedButton",
+    "gui_hover": "/root/Main/HUD/Root/BottomBar/SpeedButton",
+    "input_count": 94,
+    "input_tail": {
+      "attempt": "1f32042b812907b6d833285e37ad9a5c",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1317,
+      "kind": "mouse",
+      "phase": 5,
+      "pos": [
+        822,
+        674
+      ],
+      "presents": 1317,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 448355400
+    },
+    "level": "depot",
+    "log": {
+      "events": 38,
+      "playback_frames": 857,
+      "playback_terminal": -1,
+      "playback_tick": 6584,
+      "snapshots": 111,
+      "terminal": -1,
+      "terminal_reason": ""
+    },
+    "loot": [
+      {
+        "amount": 1,
+        "collected": false,
+        "id": 2982351475573,
+        "kind": "mine",
+        "pos": [
+          419.733520507812,
+          174.377563476562
+        ]
+      }
+    ],
+    "mines_count": 1,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "",
+      "tutorial_page": 0
+    },
+    "observer_usec": 2081000,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 8,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 270,
+        "family": "rifle",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 8,
+            "kind": "m1_garand"
+          },
+          {
+            "amount": 2,
+            "kind": "grenade"
+          }
+        ],
+        "pool": {
+          "rifle": 8
+        },
+        "pos": [
+          432,
+          400
+        ],
+        "role": 0,
+        "slot": 1,
+        "start_ammo": 8,
+        "weapon": "m1_garand"
+      },
+      {
+        "alive": true,
+        "ammo": 16,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 270,
+        "family": "mg",
+        "has_ammo_pack": true,
+        "hp": 100,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 20,
+            "kind": "bar"
+          }
+        ],
+        "pool": {
+          "mg": 16
+        },
+        "pos": [
+          1040,
+          368
+        ],
+        "role": 1,
+        "slot": 4,
+        "start_ammo": 20,
+        "weapon": "bar"
+      },
+      {
+        "alive": true,
+        "ammo": 6,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180,
+        "family": "scout",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 6,
+            "kind": "springfield"
+          }
+        ],
+        "pool": {
+          "scout": 6
+        },
+        "pos": [
+          944,
+          560
+        ],
+        "role": 2,
+        "slot": 5,
+        "start_ammo": 5,
+        "weapon": "springfield"
+      }
+    ],
+    "phase": 5,
+    "presents": 1322,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2,
+      "tick": 0
+    },
+    "run_id": 3,
+    "scale": 1,
+    "scene": "res://scenes/main.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "selected": 3,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "050864ec68d3819eb4275bce4e106ba64299f6635b648cf736f0e68903d57b7c",
+          "text": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\", \"pump\", \"railcut\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\npump_loops=1\npump_perfect=true\nrailcut_loops=1\nrailcut_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "5610ba32c76ec210bb5e3baf24ad8d17ad53702c14e9b05dd45cf0b3fd55042e",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\nseen_pump=true\nseen_railcut=true\nseen_depot=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "pump",
+          "loops": 1,
+          "perfect": true,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "railcut",
+          "loops": 1,
+          "perfect": true,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "depot",
+      "persistence_error": "",
+      "persistence_status": "已保存到此浏览器",
+      "quality": "standard",
+      "seen": {
+        "depot": true,
+        "pump": true,
+        "railcut": true,
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "sim": {
+      "accum": 0.010444444444445,
+      "paused": false,
+      "speed": 1,
+      "tick": 102
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "mg",
+        "id": 143428423303,
+        "kind": "bar",
+        "pos": [
+          720,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "decoy",
+        "id": 143612972689,
+        "kind": "decoy",
+        "pos": [
+          208,
+          272
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 143763967642,
+        "kind": "thompson",
+        "pos": [
+          528,
+          528
+        ]
+      }
+    ],
+    "status": "打扫：搜尸 / 包扎 / 换枪。岗哨已随警报撤走。",
+    "ticks_usec": 450734500,
+    "tool": 0,
+    "view": {
+      "attempt": "1f32042b812907b6d833285e37ad9a5c",
+      "gesture": {
+        "contacts": 0,
+        "middle_down": false,
+        "pending_id": -1,
+        "suppressed": 0,
+        "ui_contacts": 0
+      },
+      "level": "depot",
+      "pitch": 55,
+      "recorded_phase": 5,
+      "roots": 4,
+      "seq": -1,
+      "tick": 6584,
+      "wave": 1,
+      "yaw": 155
+    },
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "wave": 1,
+    "wave_count": 2,
+    "waves_cleared": 2,
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "exception": "",
+  "elapsed_wall": 401.89309157797834,
+  "fingerprints": {
+    "domain": {
+      "blocked": "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+      "decoys": 0,
+      "door_locked": false,
+      "enemies": [
+        {
+          "alive": false,
+          "hp": -8,
+          "id": 3,
+          "pos": [
+            419.733520507812,
+            174.377563476562
+          ]
+        }
+      ],
+      "grenades": 0,
+      "loot": 1,
+      "mines": 1,
+      "operators": [
+        {
+          "alive": true,
+          "ammo": 8,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 270,
+          "family": "rifle",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 1,
+          "mines": 0,
+          "moving": false,
+          "pack": [
+            {
+              "amount": 8,
+              "kind": "m1_garand"
+            },
+            {
+              "amount": 2,
+              "kind": "grenade"
+            }
+          ],
+          "pool": {
+            "rifle": 8
+          },
+          "pos": [
+            432,
+            400
+          ],
+          "role": 0,
+          "slot": 1,
+          "start_ammo": 8,
+          "weapon": "m1_garand"
+        },
+        {
+          "alive": true,
+          "ammo": 16,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 270,
+          "family": "mg",
+          "has_ammo_pack": true,
+          "hp": 100,
+          "id": 2,
+          "mines": 0,
+          "moving": false,
+          "pack": [
+            {
+              "amount": 20,
+              "kind": "bar"
+            }
+          ],
+          "pool": {
+            "mg": 16
+          },
+          "pos": [
+            1040,
+            368
+          ],
+          "role": 1,
+          "slot": 4,
+          "start_ammo": 20,
+          "weapon": "bar"
+        },
+        {
+          "alive": true,
+          "ammo": 6,
+          "ammo_pack_used": false,
+          "auto_grenade": true,
+          "facing": 180,
+          "family": "scout",
+          "has_ammo_pack": false,
+          "hp": 100,
+          "id": 3,
+          "mines": 0,
+          "moving": false,
+          "pack": [
+            {
+              "amount": 6,
+              "kind": "springfield"
+            }
+          ],
+          "pool": {
+            "scout": 6
+          },
+          "pos": [
+            944,
+            560
+          ],
+          "role": 2,
+          "slot": 5,
+          "start_ammo": 5,
+          "weapon": "springfield"
+        }
+      ],
+      "raid_wave": 1,
+      "selected": 3,
+      "sim": [
+        102,
+        1,
+        false,
+        0.010444444444445,
+        3
+      ],
+      "stashes": 3,
+      "waves_cleared": 2
+    },
+    "frame_checks": {
+      "status": "not replay"
+    },
+    "inputs": [
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 474,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 474,
+        "pressed": true,
+        "scene": "res://scenes/title.tscn",
+        "us": 51039500
+      },
+      {
+        "attempt": "",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 474,
+        "kind": "mouse",
+        "phase": -1,
+        "pos": [
+          640,
+          395
+        ],
+        "presents": 474,
+        "pressed": false,
+        "scene": "res://scenes/title.tscn",
+        "us": 51041900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 481,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 481,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 58135900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 482,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 482,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 58643300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 496,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          386,
+          370
+        ],
+        "presents": 496,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 65480100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 496,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          386,
+          370
+        ],
+        "presents": 496,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 65482300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 516,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 516,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 75439700
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 517,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 517,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 75942500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 531,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          904,
+          577
+        ],
+        "presents": 531,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 83013100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 531,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          904,
+          577
+        ],
+        "presents": 531,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 83016200
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 622,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 622,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 128147800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 623,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 623,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 128657600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 637,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          779,
+          595
+        ],
+        "presents": 637,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 135547000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 637,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          779,
+          595
+        ],
+        "presents": 637,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 135549400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 687,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 687,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 159724100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 688,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 688,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 160242400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 702,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          452,
+          378
+        ],
+        "presents": 702,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 167041900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 702,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          452,
+          378
+        ],
+        "presents": 702,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 167043300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 713,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 713,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 172441000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 714,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 714,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 172942100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 728,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          307,
+          205
+        ],
+        "presents": 728,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 179679100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 728,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          307,
+          205
+        ],
+        "presents": 728,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 179680800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 756,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 756,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 193234400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 757,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 757,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 193742300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 771,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          454,
+          297
+        ],
+        "presents": 771,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 200444500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 771,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          454,
+          297
+        ],
+        "presents": 771,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 200476700
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 778,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 778,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 203873600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 779,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 779,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 204380900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 793,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          939,
+          545
+        ],
+        "presents": 793,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 211431000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 793,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          939,
+          545
+        ],
+        "presents": 793,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 211462500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 799,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 799,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 214440500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 800,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 800,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 214949200
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 814,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 814,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 221671800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 814,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 814,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 221672400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 827,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 827,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 227289900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 827,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 827,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 227290100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 839,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          421,
+          577
+        ],
+        "presents": 839,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 231955300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 839,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          421,
+          577
+        ],
+        "presents": 839,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 231984900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 846,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 846,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 234738500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 847,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 847,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 235143000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 860,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          464,
+          622
+        ],
+        "presents": 860,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 240278100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 860,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          464,
+          622
+        ],
+        "presents": 860,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 240278600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 865,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 865,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 242238800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 866,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 866,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 242635300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 882,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          655,
+          77
+        ],
+        "presents": 882,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 249022900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 882,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          655,
+          77
+        ],
+        "presents": 882,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 249024600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 913,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 913,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 261144900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 913,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 913,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 261145800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 928,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 928,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 266933300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 928,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 928,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 266933600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 941,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          843,
+          101
+        ],
+        "presents": 941,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 272685700
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 941,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          843,
+          101
+        ],
+        "presents": 941,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 272711500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 955,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 955,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 278921700
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 955,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 955,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 278921900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 968,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 968,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 284536000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 968,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 968,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 284536300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 981,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 981,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 290166800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 981,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          670,
+          674
+        ],
+        "presents": 981,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 290167100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 987,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 987,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 292918300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 988,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 0,
+        "presents": 988,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 293397600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1002,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          715,
+          207
+        ],
+        "presents": 1002,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 299866800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1002,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          715,
+          207
+        ],
+        "presents": 1002,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 299898200
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1008,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 1008,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 302694100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1009,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 0,
+        "presents": 1009,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 303214000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1017,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 1017,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 306936100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1018,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 0,
+        "presents": 1018,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 307420400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1044,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1044,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 319114900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1044,
+        "kind": "mouse",
+        "phase": 0,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1044,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 319115200
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1057,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1057,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 325187200
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1057,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1057,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 325187400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1080,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1080,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 335331100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1080,
+        "kind": "mouse",
+        "phase": 1,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1080,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 335331400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1139,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1139,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 362524500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1140,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1140,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 362976700
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1157,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          879,
+          300
+        ],
+        "presents": 1157,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 370628800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1157,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          879,
+          300
+        ],
+        "presents": 1157,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 370630500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1176,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1176,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 379213000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1177,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1177,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 379662900
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1194,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 1194,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 387311300
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1194,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          1229,
+          245
+        ],
+        "presents": 1194,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 387311600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1207,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          444,
+          582
+        ],
+        "presents": 1207,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 393638000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1207,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          444,
+          582
+        ],
+        "presents": 1207,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 393639600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1256,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1256,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 418230800
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1257,
+        "keycode": 49,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1257,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 418752700
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1271,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          798,
+          258
+        ],
+        "presents": 1271,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 425640200
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1271,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          798,
+          258
+        ],
+        "presents": 1271,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 425665600
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1278,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1278,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 429113500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1279,
+        "keycode": 50,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1279,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 429649500
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1287,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1287,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 433651400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "echo": false,
+        "engine_frame": 1288,
+        "keycode": 51,
+        "kind": "key",
+        "phase": 5,
+        "presents": 1288,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 434158400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1304,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1304,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 441795100
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1304,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          356,
+          674
+        ],
+        "presents": 1304,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 441795400
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1317,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1317,
+        "pressed": true,
+        "scene": "res://scenes/main.tscn",
+        "us": 448355000
+      },
+      {
+        "attempt": "1f32042b812907b6d833285e37ad9a5c",
+        "button": 1,
+        "device": 32,
+        "engine_frame": 1317,
+        "kind": "mouse",
+        "phase": 5,
+        "pos": [
+          822,
+          674
+        ],
+        "presents": 1317,
+        "pressed": false,
+        "scene": "res://scenes/main.tscn",
+        "us": 448355400
+      }
+    ],
+    "record_sha256": "723101fb707d36a3610e6ab8b38fe448c9c92284b22eaec020a84a3286767e0e",
+    "record_validation": {
+      "attempt": "1f32042b812907b6d833285e37ad9a5c",
+      "events": 38,
+      "failures": [],
+      "frames": 858,
+      "terminal_reason": ""
+    },
+    "replay_rows": []
+  },
+  "browser_inputs": [
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 51660.59999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 51665.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 58758.29999998212
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 59266.19999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 66103.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 66105.79999998212
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 76062.79999998212
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 76565.59999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 83636.19999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 83639.69999998808
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 128770.90000000596
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 129280.69999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 136170.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 136172.90000000596
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 160347.19999998808
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 160865.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 167665
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 167666.79999998212
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 173064
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 173565.19999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 180302.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 180304.40000000596
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 193857.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 194365.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 201067.79999998212
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 201100.29999998212
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 204496.79999998212
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 205004.09999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 212054.29999998212
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 212086
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 215063.79999998212
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 215572.29999998212
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 222295.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 222296.09999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 227913.19999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 227913.69999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 232578.59999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 232608.5
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 235358.09999999404
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 235766.29999998212
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 240901.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 240902.09999999404
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 242862
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 243258.5
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 249646.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 249648.19999998808
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 261768.19999998808
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 261768.90000000596
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 267556.6999999881
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 267557.2999999821
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 273309.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 273335.09999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 279545
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 279545.59999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 285159.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 285160
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 290790.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 290790.7999999821
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 293541.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 294020.7999999821
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 300490.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 300521.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 303317.40000000596
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 303837.09999999404
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 307559.2999999821
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 308043.59999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 319738.2999999821
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 319738.90000000596
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 325810.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 325811.09999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 335954.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 335955
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 363147.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 363599.7999999821
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 371252.09999999404
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 371254.09999999404
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 379836.1999999881
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 380286.1999999881
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 387934.6999999881
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 387935.1999999881
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 394261.2999999821
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 394263.09999999404
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 418853.90000000596
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit1",
+      "button": null,
+      "t": 419375.90000000596
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 426263.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 426289.1999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 429736.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit2",
+      "button": null,
+      "t": 430272.6999999881
+    },
+    {
+      "name": "keydown",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 434274.5
+    },
+    {
+      "name": "keyup",
+      "isTrusted": true,
+      "code": "Digit3",
+      "button": null,
+      "t": 434781.59999999404
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 442418.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 442418.90000000596
+    },
+    {
+      "name": "mousedown",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 448978.40000000596
+    },
+    {
+      "name": "mouseup",
+      "isTrusted": true,
+      "code": "",
+      "button": 0,
+      "t": 448979
+    }
+  ],
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "scope": "failure preserved, no source/policy/tick/phase mutation"
+}
