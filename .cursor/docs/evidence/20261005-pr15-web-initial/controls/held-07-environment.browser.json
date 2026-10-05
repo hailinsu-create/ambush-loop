@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/workspace/.ambush-loop-env/web-browser/node_modules/.bin/agent-browser",
+    "--namespace",
+    "ambush-pr15-web-held",
+    "--session",
+    "pr15game543d",
+    "--executable-path",
+    "/usr/bin/chromium",
+    "--profile",
+    "/workspace/.ambush-loop-env/web-browser-state-held",
+    "--args",
+    "--no-sandbox,--disable-dev-shm-usage,--disable-breakpad",
+    "eval",
+    "JSON.stringify({ua:navigator.userAgent,secure:isSecureContext,crossOriginIsolated,SharedArrayBuffer:typeof SharedArrayBuffer,focus:document.activeElement?.tagName,visibility:document.visibilityState,viewport:{w:innerWidth,h:innerHeight},rect:document.querySelector(\"canvas\")?.getBoundingClientRect().toJSON(),engineType:typeof engine})"
+  ],
+  "start": "2026-10-04T23:27:11.282413+00:00",
+  "end": "2026-10-04T23:27:11.642213+00:00",
+  "actual_exit": 0
+}

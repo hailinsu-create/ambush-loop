@@ -1,11 +1,12 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-04。仅用于本游戏；设计文件不是实现或验收证明。
+更新日期：2026-10-05。仅用于本游戏；设计文件不是实现或验收证明。
 
 ## 当前有效规划
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [完整HTML首次正式发布与实际浏览器结果](AMBUSH_PR15_WEB_INITIAL_RESULTS_20261005.md) / [执行计划](AMBUSH_PR15_WEB_GAME_EXECUTION_PLAN_20261004.md) | 固定游戏843f/运输fa188，匹配官方4.7.2 TPZ整hash；三对debug/release共6actual0 E0/S0。完整Title/中文/符号/完整资源，12运行文件48,465,105bytes；新owner-private稳定正式Sites publish succeeded，仅一次非Vercel。Site source63642已push/readback、tar48,486,400/SHA23dbec…；localhost实际启动/分片坏字节拒绝。9038原UI教学/SCOUT/ALERT锁/失败回放/音频/checkpoint有限已验；843f原native六关历史实际3D seek+focus、yard全1x/2x合26085/0 actual0，46原PNG全看。WebGL非法index绑定257/209warnings及约3×wall缓慢未修；正式域名proxy CONNECT403未抵达origin。新Web正常13/完整six1x2x/旧schema/触控/通关刷新/宿主均待，完整Web/FINAL/A3预算不称通过；APK后置、制作所有权保持。 |
 | [HUD通知合批实际结果](AMBUSH_PR15_HUD_BATCH_RESULTS_20261004.md) / [执行契约](AMBUSH_PR15_HUD_DIAGNOSTIC_EXECUTION_20261004.md) | 测试修正f275、唯一生产541d；两ON实际scrub相对refresh热点重复，style self/HUD约89.6–89.7%，观察开销2–5%实报。正式ABBABAAB全8actual0/strict0、1272raw/672accepted；推进四对中位下降50–52%，static方向混合，云预算100%失败。候选history84045/clock28/equipment66/actual-old3选17/lifecycleR32各0 E0/S0；A/B样式855各0、原表bin等；34原PNG全看、8static像素等；452证据/48,695,690bytes封存，Godot自然结束/Xorg127actual0关闭。最新交付主线完整六关13波HTML站点优先，核Web模板/完整Title入口/真实browser门；APK/JDK/SDK全部后置，FINAL/fullsmoke/新whole/all-art尚待。 |
 | [A3下一最小热点诊断计划](AMBUSH_PR15_A3_HOTSPOT_DIAGNOSTIC_PLAN_20261004.md) | 父端接1879固定候选并启新独立QA、接管性能窗口。当前仅只读source/已封raw/工具存在/官方固定ed1daf入口；无engine/profile/attach/install/资源重活。旧raw只证wall/窄setup/monitor，未验函数热点；local scripts profiler与Compatibility viewport/GL timestamp路径有source依据，runtime能力/开销待门。待明确QA结束归还后单P0→同source profiler OFF/ON/ON/OFF静态+推进，H1比较replay scrub与refresh真实root计时；不稳先方法，不堆优化。第二viewport/像素/原生域门按结果条件进入，未知不称零，不推断llvmpipe唯一瓶颈。方案未实施/未测；1879候选/失败/资产/玩法保持，FINAL/APK待。 |
 | [A3窄metadata scalar实际结果](AMBUSH_PR15_A3_METADATA_SCALAR_RESULTS_20261004.md) / [历史计划](AMBUSH_PR15_A3_METADATA_SCALAR_PLAN_20261004.md) | fixed生产cd352/consumer a42，两生产blob同；六功能门4069/21818/610/7681/233/32各0 actual0 E0/S0。A41ff/Ba42同原yard/完整canonical画面/20骨socket/backend/config，common4两预检各0；正式ABBA/BAAB START20:54:51/naturalEND21:04:27UTC，8actual0/strict0，1278raw/672accepted/16正式原PNG全核并看。配对方向混合/漂移，无稳定性能收益、云预算未达。412证据/54980644bytes/39原PNG全看，所有失败保留；引擎收尾/Xorg126actual0关闭/99未动，窗口释放。本turn按父端有界结束交QA，不叠加优化；下一先真实热点量测，再新candidate。制作边界不动，FINAL/fullsmoke/新normal13/whole1x2x/旧compat/all-art/APK待。 |

@@ -1,0 +1,8 @@
+{
+  "actual_exit": 1,
+  "source": "543d76ef1e5dd3d0231332197d90178ac7140cc6",
+  "engine_started": false,
+  "failure": "AssertionError: loader sidecar already present in git archive",
+  "script": "export-full-game.py initial stage /workspace/pr15-web-stage-543d",
+  "fix": "Retain same-byte tracked sidecar rather than requiring absence; preserve first stage and create v2 stage"
+}
