@@ -141,6 +141,7 @@ var _hold_move_acc: float = 0.0
 var _foot_acc: float = 0.0
 var frozen_plan: PlanState = PlanState.new()
 var replay_return_phase: Phase = Phase.SETUP
+var _replay_live_visibility: Dictionary = {}
 
 var pending_spawns: Array = [] # {id, route, delay, loot, spawned}
 var route_world: Dictionary = {} # name -> PackedVector2Array
@@ -6855,6 +6856,10 @@ func _on_replay_pressed() -> void:
 	if battle_log.events.is_empty() and battle_log.snapshots.is_empty():
 		return
 	replay_return_phase = phase
+	_replay_live_visibility.clear()
+	for actor in operators + enemies + loot_piles:
+		if is_instance_valid(actor):
+			_replay_live_visibility[actor] = actor.visible
 	frozen_plan = last_plan.duplicate_plan()
 	phase = Phase.REPLAY
 	result_panel.visible = false
@@ -6875,7 +6880,7 @@ func _on_replay_pressed() -> void:
 			l.visible = false
 	_clear_replay_layer()
 	_apply_replay_scrub()
-	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
+	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回结算，再选择调整伏击或重新搜集"
 	_update_hud()
 
 
@@ -6926,7 +6931,7 @@ func _paint_replay_snapshot(snap: Dictionary) -> void:
 			"敌%d" % int(e["id"]),
 			alive,
 			hot,
-			90.0,
+			float(e.get("facing", 90.0)),
 			false,
 			not alive
 		)
@@ -6953,6 +6958,7 @@ func _add_replay_marker(
 ) -> void:
 	var n := Node2D.new()
 	n.position = pos
+	n.set_meta("recorded_facing", facing)
 	if focused:
 		var halo := Polygon2D.new()
 		var hpts := PackedVector2Array()
@@ -6975,6 +6981,7 @@ func _add_replay_marker(
 		n.add_child(cone)
 	var body := Polygon2D.new()
 	body.polygon = PackedVector2Array([Vector2(0, -10), Vector2(8, 8), Vector2(-8, 8)])
+	body.rotation_degrees = facing + 90.0
 	body.color = Color(1.0, 0.9, 0.3) if focused else color
 	n.add_child(body)
 	if kill_stamp:
@@ -7030,23 +7037,18 @@ func _exit_replay_to_setup() -> void:
 		scrub_slider.visible = false
 	if not frozen_plan.deployments.is_empty():
 		last_plan = frozen_plan.duplicate_plan()
-	if replay_return_phase == Phase.WON:
-		phase = Phase.WON
-		for op in operators:
-			if op.slot != null:
-				op.visible = true
-				op.global_position = op.slot.global_position
-		for e in enemies:
-			if is_instance_valid(e):
-				e.visible = true
-		for l in loot_piles:
-			if is_instance_valid(l):
-				l.visible = true
-		_show_win_result()
+	if replay_return_phase in [Phase.WON, Phase.FAILED]:
+		phase = replay_return_phase
+		for actor in _replay_live_visibility:
+			if is_instance_valid(actor):
+				actor.visible = _replay_live_visibility[actor]
+		_replay_live_visibility.clear()
+		if phase == Phase.WON:
+			_show_win_result()
+		else:
+			_show_fail_result()
 		_update_hud()
 		return
-	if replay_return_phase == Phase.FAILED:
-		loop_index += 1
 	_start_setup(true, true)
 
 

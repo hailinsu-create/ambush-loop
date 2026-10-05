@@ -77,7 +77,7 @@ func bind(main: Node) -> void:
 	result_replay = Button.new()
 	result_replay.text = "时间轴复盘"
 	result_replay.focus_mode = Control.FOCUS_NONE
-	result_replay.custom_minimum_size.y = 40
+	result_replay.custom_minimum_size.y = 48
 	result_replay.visible = false
 	result_replay.pressed.connect(func(): host._on_replay_pressed())
 	var result_box: VBoxContainer = host.continue_button.get_parent()
@@ -124,7 +124,7 @@ func primary_text() -> String:
 	if host.phase == host.Phase.SWEEP:
 		return "完成行动" if host.raid.is_last_wave(host.level) else "继续交战"
 	if host.phase == host.Phase.REPLAY:
-		return "返回准备"
+		return "返回结算"
 	if host.squad_has_firearm():
 		return "开始交战"
 	return "确认无枪交战" if host._alarm_warned_no_gun else "先搜集武器"
@@ -132,7 +132,7 @@ func primary_text() -> String:
 
 func refresh() -> void:
 	visible = host.yard_redesign_active()
-	result_replay.visible = visible and host._result_overlay_active()
+	result_replay.visible = visible and host._result_overlay_active() and not host._want_touch()
 	if not visible:
 		selected_status.visible = false
 		return
