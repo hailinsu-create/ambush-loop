@@ -36,7 +36,7 @@
 | PowerShell 7 隔离套件 | 最终顺序复验退出 0；同上 |
 | m2_touch_intent_gate.gd | 退出 0；M2_TOUCH_INTENT_OK；PLAYER_DATA_UNCHANGED=1；run ID 9259087cb9f64690b69c8b7ac27a8247 |
 | m2_role_dock_gate.gd | 退出 0；M2_ROLE_DOCK_GATE_OK；PLAYER_DATA_UNCHANGED=1；run ID 956cea93c8ad4e9b8bb45c9ba1fe372a |
-| 完整 smoke | 前一轮中断，没有完成证据；已按 GPT 下一步启动修复运行器后的新完整回归，结果待记录 |
+| 完整 smoke | 修复运行器后的新回归退出 0；SMOKE_SLICE_COMPLETE、SMOKE_OK_RAID_LOOP、六关典型循环与 PLAYER_DATA_UNCHANGED=1 均存在；run ID fe2da4ceeff643489c5fd6a3af49436e |
 | 真机 | 按用户要求暂缓，不以桌面合成触摸事件代替手指实测 |
 
 PS5.1 最终 sentinel ID：518412a7c44d483fa9967ec4ca5cccc5。
@@ -52,7 +52,9 @@ PS7 最终 sentinel ID：3c1d6c6df9d144b88a501e86a1cc7987。
 
 ## 已知风险与下一步
 
-- 整套 smoke 仍须完成；当前在制代码不得称为完整验收，也未随本文发布。
+完整回归收尾：GPT 实际读取输出 34–36 和当前差异，返回 DONE，范围仅桌面 T1。源码已保存为 e1bc3189728313e3e2fca1d580ca1f778b20a5dd，发布代码 PR #27（依赖 #25），未合并。下一输入安全切片见 M2-T2 取消触摸计划，不以此 DONE 批准其新增代码。
+
+- 桌面整套 smoke 已完成；该结果已发布给原 GPT 对话收尾复核。真机与完整 M2 仍未验收，游戏代码未随本文发布。
 - 运行器将实时输出写入本次 stdout.log/stderr.log，run.log 在退出时合并；查看长测试进度应读 stdout.log，不能把暂时未合并误判为卡死。
 - 保存真机、陌生人首局、渲染/音频及完整 M2 验收缺项。
-- 下一步：收集新完整 smoke 的实际退出码与第一个失败或完成标记，供同一 GPT 对话审阅；再核对 main 审计历史并继续 B2。
+- 下一步：完成原 GPT 对话的桌面 T1 收尾复核，保存源码与实际退出证据；补查系统取消触摸边界，再核对 main 审计历史并继续 B2。
