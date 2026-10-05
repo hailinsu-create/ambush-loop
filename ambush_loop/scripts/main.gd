@@ -955,7 +955,9 @@ func _apply_phone_chrome(on: bool) -> void:
 		## shove the C2 strip into the courtyard.
 		root.offset_bottom = -pad.w
 	if plan_readout:
-		plan_readout.visible = not on
+		# The yard owns this legacy child too. Do not show it before each refit
+		# only to hide it again in YardHud.refresh(), oscillating minimum height.
+		plan_readout.visible = not on and not yard_redesign_active()
 	if route_legend:
 		# Sit in the phase-chip band, left of the checklist — not on the timeline.
 		route_legend.offset_top = 36.0 if on else 38.0
@@ -1089,6 +1091,11 @@ func _schedule_role_box_refit(touch: bool) -> void:
 	## adapt if another level's card content has a different minimum height.
 	if _role_box_pin_pending and _role_box_pin_pending_touch == touch:
 		return
+	if not _role_box_pin_pending and role_box is Container:
+		var content_h := (role_box as Container).get_combined_minimum_size().y
+		var dock_h := role_box.offset_bottom - role_box.offset_top
+		if _role_box_pin_mode_initialized and touch == _role_box_pin_touch and absf(dock_h - content_h) <= 0.5:
+			return
 	_role_box_pin_revision += 1
 	_role_box_pin_pending = true
 	_role_box_pin_pending_touch = touch
@@ -1108,9 +1115,14 @@ func _pin_role_cards_after_layout(touch: bool, revision: int) -> void:
 	await scene_tree.process_frame
 	if not is_inside_tree() or get_tree() != scene_tree:
 		return
-	if revision != _role_box_pin_revision or not is_instance_valid(role_box) or touch != _want_touch():
+	if revision != _role_box_pin_revision:
 		return
 	_role_box_pin_pending = false
+	if not is_instance_valid(role_box):
+		return
+	if touch != _want_touch():
+		_pin_role_cards(_want_touch())
+		return
 	_pin_role_cards(touch, true)
 
 
