@@ -405,8 +405,8 @@ static func make_yard() -> LevelDef:
 	l.level_id = "yard"
 	l.atmosphere_id = "yard"
 	l.title = "第1关 · 院子：交叉封锁"
-	l.teaching = "这关必须带铁砧扫东箱侧翼，灰狼补主路第一枪，夜枭长窄锁南闸。夜巡小队从北门进院子，要在南闸汇合前切断。陷阱：只盯主路，侧翼奔袭会从东廊绕出。青弧朝向才有掩体减免，侧背全伤。失败三种：逃逸、全灭、中止（X 留情报）。"
-	l.tutorial = "三人携带基础枪与少量应急弹药。西侧短路的三个弹药箱分别补充步枪、机枪、精准枪；东侧可绕路取一枚手雷。补给不替你换枪。点肖像选人，点地移动，点掩体部署；I 查看背包，G 标记投雷点。当前仍先打主路、再打侧翼；单次接触将在下一切片实施。"
+	l.teaching = "夜巡小队从北门进院子，要在南闸汇合前切断。可沿坡道形成高点交叉火力，或绕路取手雷、全员留在地面封锁。主路与延迟进入的东廊侧翼都要有人看守；只盯主路会漏防。青弧朝向才有掩体减免，侧背全伤。失败三种：逃逸、全灭、中止（X 留情报）。"
+	l.tutorial = "三人携带基础枪与少量应急弹药。西侧三个弹药箱补充对应枪械；东侧可绕路取一枚手雷。可走坡道占领高点，也可留在地面用手雷封主路、精准枪看东廊。补给不替你换枪。点肖像选人，点地移动，点掩体部署；I 查看背包，G 标记投雷点。一次接触：两名主路巡卫先到，东廊侧翼稍后进入；开战后不能重新部署。"
 	l.escape_cell = Vector2i(31, 19)
 	# All covers on open cells (yard crates leave spine / lanes free).
 	l.cover_defs = [
@@ -430,18 +430,11 @@ static func make_yard() -> LevelDef:
 	}
 	l.spawn_schedule = [
 		{"id": 1, "route": "main", "delay": 0.0, "loot": 2},
-		{"id": 2, "route": "main", "delay": 0.8, "loot": 0},
-		{"id": 3, "route": "flank", "delay": 0.4, "loot": 2, "teaching_note": "东廊绕出"},
+		{"id": 2, "route": "main", "delay": 0.6, "loot": 0},
+		{"id": 3, "route": "flank", "delay": 1.6, "loot": 2, "teaching_note": "东廊侧翼稍后进入"},
 	]
-	l.waves = [
-		[
-			{"id": 1, "route": "main", "delay": 0.0, "loot": 2},
-			{"id": 2, "route": "main", "delay": 0.6, "loot": 0},
-		],
-		[
-			{"id": 3, "route": "flank", "delay": 0.2, "loot": 2, "teaching_note": "东廊绕出"},
-		],
-	]
+	# One contact: no between-wave deployment or replenishment in the yard.
+	l.waves = [l.spawn_schedule.duplicate(true)]
 	l.insert_cells = [Vector2i(6, 16), Vector2i(7, 17), Vector2i(8, 17)]
 	l.explicit_ammo = true
 	l.starting_loadouts = [
@@ -460,16 +453,16 @@ static func make_yard() -> LevelDef:
 	l.beat_kind = "ambush_zone"
 	l.beat_text = "交叉封锁 · 侧翼"
 	l.highlight_hook = "交叉封锁第一枪"
-	l.must_bring = "基础枪已携带，应急弹仅 1/3/1 发。西侧弹药补足 7/50/6 发；东侧一枚手雷可选，非开战条件。当前仍分两波，注意主路与东廊。"
+	l.must_bring = "基础枪已携带，应急弹仅 1/3/1 发。西侧弹药补足 7/50/6 发；东侧手雷可选。高点与地面都能封锁，但必须兼顾主路和稍后进入的东廊侧翼。一次接触，无中途补给。"
 	l.role_why = {
 		"rifle": "本关：主路第一枪",
 		"mg": "本关：东箱扫橙线",
 		"scout": "本关：长窄锁南闸",
 	}
-	l.fix_one = "改一处就能赢：把铁砧转到东箱扫橙线侧翼，灰狼继续锁主路。"
+	l.fix_one = "若东廊漏防，检查看守队员的射界、视线和剩余弹药；主路也必须保持覆盖。"
 	l.spawn_teaching = [
-		"东廊橙线随后到 — 铁砧扫东箱。",
-		"第二层：只锁红线主路，东廊橙线会自己绕出。",
+		"东廊橙线稍后进入 — 开战前安排侧翼看守。",
+		"只锁红线主路，东廊橙线会绕出。此次接触中不能重新部署。",
 	]
 	l.situation = "北门院子是补给链最外一圈。夜巡小队要从北门进南闸汇合，再转入仓区。切断这一班，内院才不会提前亮灯。"
 	l.intel_chatter = [

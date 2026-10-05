@@ -1,6 +1,6 @@
 extends "res://scripts/m2_yard_hud_gate.gd"
 
-## B1 resource contract only. B2 encounter/ground tactic is not yet implemented.
+## B1 resource conservation retained after the B2 single-contact contract.
 func _run() -> void:
 	create_timer(300.0).timeout.connect(func(): quit(3))
 	capture_dir = OS.get_environment("AMBUSH_TEST_DATA_ROOT").get_base_dir().path_join("m2-b1-screens")
@@ -13,7 +13,7 @@ func _run() -> void:
 	var tutorial := preload("res://scripts/ui/tutorial_overlay.gd")
 	_expect(not str(tutorial.YARD_STEPS[0].body).contains("只有刀") and str(tutorial.YARD_STEPS_TOUCH[0].body).contains("1/3/1"), "M2_B1_DESKTOP_TOUCH_TUTORIAL_MATCH_RESOURCE_CONTRACT")
 	_expect(main.raid_stashes.size() == 4, "M2_B1_FOUR_INTERACTIONS")
-	_expect(main.level.wave_count() == 2, "M2_B1_WAVES_UNCHANGED_UNTIL_B2")
+	_expect(main.level.wave_count() == 1, "M2_B1_B2_SINGLE_CONTACT_RESOURCE_CONTRACT")
 	await _capture_if_rendered(main, "insertion-supplies")
 	if not await _prepare_plan(main, "A"):
 		_finish_failed()

@@ -86,6 +86,8 @@ func format_event(ev: Dictionary) -> String:
 			if hits > 0:
 				return "%.1fs  ★ 油桶炸到人 · %d" % [t, hits]
 			return "%.1fs  油桶爆炸" % t
+		"grenade":
+			return "%.1fs  手雷爆炸 · 命中%d" % [t, int(ev.get("payload", {}).get("hits", 0))]
 		"repack":
 			var pack_nm := str(ev.get("payload", {}).get("name", ""))
 			if pack_nm != "":

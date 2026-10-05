@@ -1,6 +1,6 @@
 extends SceneTree
 
-## M1-H: exercise the authored yard from real crate search through two-wave
+## M1-H retained after M2-B2: real crate search through single-contact
 ## combat, speed equivalence, read-only replay, a real flank escape, and retry.
 
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
@@ -45,7 +45,7 @@ func _run() -> void:
 		_finish_failed()
 		return
 
-	print("M1_YARD_END_TO_END_OK real_crates=1 legal_ramp=1 preview=1 authoritative_fire=1 ammo_damage=1 two_wave_win=1 speed_equivalent=1 replay_read_only=1 real_escape=1 real_retry=1")
+	print("M1_YARD_END_TO_END_OK real_crates=1 legal_ramp=1 preview=1 authoritative_fire=1 ammo_damage=1 single_contact_win=1 speed_equivalent=1 replay_read_only=1 real_escape=1 real_retry=1")
 	quit(0)
 
 

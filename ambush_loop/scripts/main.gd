@@ -1087,6 +1087,9 @@ func _schedule_role_box_refit(touch: bool) -> void:
 
 
 func _pin_role_cards_after_layout(touch: bool, revision: int) -> void:
+	# A queued layout callback can outlive the outgoing scene's tree membership.
+	if not is_inside_tree():
+		return
 	var scene_tree := get_tree()
 	if scene_tree == null:
 		return
@@ -12524,10 +12527,14 @@ func _on_grenade_boom(pos: Vector2, radius: float, damage: float) -> void:
 	_shake_for_explosion(pos)
 	if entities:
 		CombatFxScript.grenade_scorch(entities, pos)
+	var hits := 0
 	for e in enemies:
 		if e != null and is_instance_valid(e) and e.alive:
 			if e.global_position.distance_to(pos) <= radius:
+				hits += 1
 				e.apply_fire(damage, selected)
+	if phase == Phase.WATCHING:
+		battle_log.add_event(sim.tick, "grenade", -1, -1, pos, {"hits": hits, "damage": damage})
 	for op in operators:
 		if op != null and op.alive and op.global_position.distance_to(pos) <= radius * 0.55:
 			op.take_damage(damage * 0.35, pos)

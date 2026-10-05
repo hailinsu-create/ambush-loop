@@ -1,7 +1,7 @@
 extends SceneTree
 
 ## M1-G: verify two authored tactical plans and a real main-road-only failure
-## against the actual yard, crate searches, movement routes, two raid waves, and
+## against the actual yard, crate searches, movement routes, one B2 contact, and
 ## authoritative combat/escape events.
 
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
@@ -39,10 +39,10 @@ func _run() -> void:
 		3: {"weapon": "scout", "cell": Vector2i(13, 12), "facing": 90.0},
 	})
 
-	_expect(bool(plan_a.get("won", false)), "M1_G_PLAN_A_WINS_BOTH_WAVES")
+	_expect(bool(plan_a.get("won", false)), "M1_G_PLAN_A_WINS_B2_CONTACT")
 	_expect(_has_all_kills(plan_a), "M1_G_PLAN_A_KILLS_ALL_THREE_AUTHORED_ENEMIES")
 	_expect(int(plan_a.get("escape_count", -1)) == 0, "M1_G_PLAN_A_NO_ESCAPE")
-	_expect(bool(plan_b.get("won", false)), "M1_G_PLAN_B_WINS_BOTH_WAVES")
+	_expect(bool(plan_b.get("won", false)), "M1_G_PLAN_B_WINS_B2_CONTACT")
 	_expect(_has_all_kills(plan_b), "M1_G_PLAN_B_KILLS_ALL_THREE_AUTHORED_ENEMIES")
 	_expect(int(plan_b.get("escape_count", -1)) == 0, "M1_G_PLAN_B_NO_ESCAPE")
 	_expect(str(plan_a.get("weapon_ids", "")) == str(plan_b.get("weapon_ids", "!")), "M1_G_A_B_SAME_CRATE_WEAPON_FAMILIES")
@@ -55,7 +55,7 @@ func _run() -> void:
 	if not failures.is_empty():
 		_finish_failed()
 		return
-	print("M1_YARD_TACTICAL_SOLUTIONS_OK real_weapons=1 real_ramp=1 plan_a_win=1 plan_b_win=1 same_budget=1 flank_counterexample=1 explained_escape=1 two_waves=1")
+	print("M1_YARD_TACTICAL_SOLUTIONS_OK real_weapons=1 real_ramp=1 plan_a_win=1 plan_b_win=1 same_budget=1 flank_counterexample=1 explained_escape=1 single_contact=1")
 	quit(0)
 
 

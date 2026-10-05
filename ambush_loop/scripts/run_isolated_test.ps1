@@ -19,6 +19,7 @@ param(
         'm2_supply_regression_gate.gd',
         'm2_touch_intent_gate.gd',
         'm2_touch_target_gate.gd',
+        'm2_single_contact_gate.gd',
         'm2_role_dock_gate.gd',
         'm2_i0_3d_seam_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
