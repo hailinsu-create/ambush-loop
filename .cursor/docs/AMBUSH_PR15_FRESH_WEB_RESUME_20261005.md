@@ -1,5 +1,7 @@
 # PR15 fresh Web 实际操作恢复
 
+2026-10-05 最新：[多标签环境更正与原单页回归](AMBUSH_PR15_WEB_SINGLE_PAGE_CORRECTION_20261005.md)。d8原双波WON/record实际0/894.493s已保留，但ctx真实5页/3游戏使旧单引擎口径撤回；whole已环境中断非pass。当前只关自有surplus、保留cfg/profile，原新attempt1289单页回归中，首波已自然SWEEP339。
+
 2026-10-05：父端转达用户明确“那你继续完成实际操作和修正工作吧”，取代[已封yard暂停](AMBUSH_PR15_FRESH_WEB_YARD_PAUSE_20261005.md)的停止指令。当前状态 **RUNNING / warehouse 同步观察器修正回归**，后续结果只按原件填写，不预报pass。父端明确将唯一游戏引擎窗口交root，独立QA暂停；不并发其他引擎/浏览器。
 
 ## 固定身份与范围

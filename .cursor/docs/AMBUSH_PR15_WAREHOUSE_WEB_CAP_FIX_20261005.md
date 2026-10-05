@@ -1,5 +1,7 @@
 # PR15 warehouse Web 900秒负例与观察器修正
 
+2026-10-05 最新：[多标签环境更正与原单页回归](AMBUSH_PR15_WEB_SINGLE_PAGE_CORRECTION_20261005.md)。d8原双波WON/record实际0/894.493s已保留，但ctx真实5页/3游戏使旧单引擎口径撤回；whole已环境中断非pass。当前只关自有surplus、保留cfg/profile，原新attempt1289单页回归中，首波已自然SWEEP339。
+
 2026-10-05，用户恢复实际操作与修正。**首包 FAIL_PRODUCER_900；同步只读观察器已修，独立原UI回归 RUNNING，未预报通过。** 同源dab/game tree4f49/私有Site version2不变。仅仓库根QA文档/原件/外桥代码，不改生产游戏/资产，不merge/APK/public分享。
 
 ## 首包实际负例与晚到原件
