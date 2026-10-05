@@ -38,6 +38,7 @@ param(
         'smoke_test.gd',
         'presentation_contract_test.gd',
         'presentation_interaction_test.gd',
+        'event_log_layout_test.gd',
         'camera_input_test.gd',
         'presentation_capture.gd',
         'asset_review_capture.gd',
@@ -111,7 +112,7 @@ try {
     else {
         Write-Output "TEST_ENTRY=$Entry"
         $engineFlags = if ($Rendered) { @('--rendering-method', 'gl_compatibility') } else { @('--headless') }
-        if ($Entry -like '*capture.gd' -or $Entry -in @('tool_fx_raw_envelope_test.gd', 'a3_collector_contract_test.gd', 'a3_collector_probe_test.gd', 'a3_collector_overhead_test.gd', 'a3_campaign_metrics_test.gd', 'movement_dust_source_boundary_test.gd', 'movement_dust_test.gd', 'tool_fx_visible_test.gd', 'tool_fx_mine_reference_test.gd', 'tool_fx_pool_test.gd', 'tool_fx_source_boundary_test.gd', 'tool_fx_source_test.gd', 'grenade_flight_height_test.gd', 'shot_fx_shooter_binding_test.gd', 'shot_fx_visible_test.gd', 'shot_fx_pool_test.gd', 'shot_fx_frame_test.gd', 'escape_context_boundary_test.gd', 'escape_intel_source_test.gd')) { $engineFlags += @('--audio-driver', 'Dummy') }
+        if ($Entry -like '*capture.gd' -or $Entry -in @('event_log_layout_test.gd', 'tool_fx_raw_envelope_test.gd', 'a3_collector_contract_test.gd', 'a3_collector_probe_test.gd', 'a3_collector_overhead_test.gd', 'a3_campaign_metrics_test.gd', 'movement_dust_source_boundary_test.gd', 'movement_dust_test.gd', 'tool_fx_visible_test.gd', 'tool_fx_mine_reference_test.gd', 'tool_fx_pool_test.gd', 'tool_fx_source_boundary_test.gd', 'tool_fx_source_test.gd', 'grenade_flight_height_test.gd', 'shot_fx_shooter_binding_test.gd', 'shot_fx_visible_test.gd', 'shot_fx_pool_test.gd', 'shot_fx_frame_test.gd', 'escape_context_boundary_test.gd', 'escape_intel_source_test.gd')) { $engineFlags += @('--audio-driver', 'Dummy') }
         $launchRoot = $projectRoot
         if ($Entry -eq 'asset_pack_test.gd') {
             if (-not (Test-Path -LiteralPath $TestPack -PathType Leaf)) {

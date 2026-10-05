@@ -345,6 +345,40 @@ func _layout_camera_controls() -> void:
 	_camera_plate.visible = compact and _camera_open
 	_camera_plate.position = _camera_panel.position - Vector2(4,4)
 	_camera_plate.size = _camera_panel.size + Vector2(8,8)
+	_layout_event_log(compact)
+
+
+func _layout_event_log(compact: bool) -> void:
+	# Both panels stay usable. CanvasLayer order must never decide which
+	# command receives a click on a visible historical event row.
+	var log: Control = host.event_log
+	if log == null or not log.is_visible_in_tree():
+		return
+	var hud: Control = host.get_node("HUD/Root")
+	var usable := hud.get_global_rect()
+	var camera := _camera_panel.get_global_rect()
+	var right := usable.end.x - 8.0 if compact else camera.position.x - 12.0
+	var left := usable.position.x + 8.0
+	if compact and _camera_panel.is_visible_in_tree():
+		left = maxf(left, camera.end.x + 12.0)
+	var width := minf(316.0, right - left)
+	var top := usable.position.y + 148.0 if compact else camera.position.y
+	var bottom := usable.end.y - 8.0
+	if host._use_touch_chrome() and host.touch_hud != null:
+		bottom = minf(bottom, get_viewport().get_visible_rect().end.y - host.touch_hud.bar_height() - 8.0)
+	else:
+		for path: String in ["ExtraBar", "BottomBar"]:
+			var bar := hud.get_node_or_null(path) as Control
+			if bar != null and bar.is_visible_in_tree():
+				bottom = minf(bottom, bar.get_global_rect().position.y - 8.0)
+	var target_position := Vector2(right - width, top) - usable.position
+	var target_size := Vector2(width, minf(224.0, bottom - top))
+	if log.anchor_left != 0.0 or log.anchor_right != 0.0:
+		log.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	if not log.position.is_equal_approx(target_position):
+		log.position = target_position
+	if not log.size.is_equal_approx(target_size):
+		log.size = target_size
 
 
 func _rebuild_geometry() -> void:

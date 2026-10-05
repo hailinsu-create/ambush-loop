@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [日志/相机最小UI切片计划](AMBUSH_PR15_EVENT_LOG_UI_PLAN_20261005.md) | RUNNING：只修原中心日志被 camera 遮挡；候选无窗口几何36/0、真实Window/XTest三组合103/0，各actual0、三原图已看，原基线36/6实际复现；方法负例及六组合180cap保留。固定完整Web/真实鼠标触控/键盘焦点、封存END及独立QA待，不启动pump/资产/APK。 |
 | [warehouse完整回放与存档交接END](AMBUSH_PR15_WEB_WAREHOUSE_FUNCTIONAL_END_20261005.md) | 原同SHA28c909整段1×/2×自然16102，各actual0，真实wall978.206/488.1532s，比例2.003891，但软件环境实速未通过；两波露出原文字fire focus10482/15054、3D/source/记录/domain checks0；原handoff/pump实际两页教学/解锁/reload/有限同profile重开cfg全文SHA/public checkpoint exact0。46数据/14PNG已看，全自有PID/port END；中央camera遮日志原鼠标实际失败待修，首geometry receipt同名覆盖损失明示、reopen变量负例保留。未重打542s仓库或启后4关；下一最小UI切片后单窗口继续，生产dab/4f49/私有v2/资产保持，FINAL/APK待。 |
 | [单页warehouse原输入检查点](AMBUSH_PR15_WEB_WAREHOUSE_SINGLE_PRODUCER_20261005.md) | 原单页producer PASS actual0/542.211s，两波自然SWEEP339/863、原WON；26,554,792bytes/SHA28c909/62events/2072frames/t16102，validation[]、trusted244/engine244。31数据封存；原whole1正在自然播放，07:19 tick3104/16102，未计pass；保留PID151305/session65568唯一窗口，whole2/focus/reload/其余关待。生产dab/4f49/私有v2不变；Library network/PCK差异/FINAL/APK待。 |
 | [自有多标签发现与单页控制修正](AMBUSH_PR15_WEB_SINGLE_PAGE_CORRECTION_20261005.md) | RUNNING：d8真实原UI双波WON actual0/894.493s/原11,738,920-SHAcd9e/62events/713frames/t5228保全，但原ctx5页3游戏环境confounded，旧单引擎口径撤回；whole1×中断不计pass，PTY wrapper1/实际自有PID关端口111分别封。修controller首次/reopen关闭仅自有surplus，新单页入口0/关闭5/精确cfg加载同d8，1289原菜单刀装回归START07:00:43；首波自然SWEEP339，余门待。25数据原件保全，生产dab/4f49/PCK17711/私有v2未变，非设备性能/FINAL/APK通过。 |
