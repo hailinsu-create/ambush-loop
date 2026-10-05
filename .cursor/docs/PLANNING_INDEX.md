@@ -1,5 +1,7 @@
 # Ambush Loop 规划与续开发入口
 
+当前切片：[M2-F 四步实际操作引导](AMBUSH_M2_F_OPERABLE_GUIDE_PLAN_20261006.md)。实际 GPT PLAN 已读取，基线 E `7286cd0`，非阻塞、动作驱动、仅保存教学完成偏好；实施与集成验证进行中。手机/真人暂缓，尚不能宣布完整 M2 验收。
+
 当前切片：[M2-E 战场展示与只读 3D 复盘](AMBUSH_M2_E_PRESENTATION_PLAN_20261006.md)。基线 C `379d7ea`，实际外部 PLAN 已收到；实施及定向/渲染验收进行中。随后 F 与集成回归，手机/真人暂缓。
 
 最新规格：[M2-C 单次开火许可实验](AMBUSH_M2_C_PERMISSION_PLAN_20261006.md)，基于 B2/D1 `3d46d88`，实际 GPT PLAN 已收到。默认自动；手动仅院子实验、下一模拟 tick 一次消费；独立验收待完成。随后 E → F，手机/真人暂缓。

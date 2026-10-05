@@ -13,6 +13,7 @@ var result_replay: Button
 var permission_mode_button: Button
 var buttons: Dictionary = {}
 var hidden_chrome: Dictionary = {}
+var operable_guide: Label
 
 
 func bind(main: Node) -> void:
@@ -23,6 +24,11 @@ func bind(main: Node) -> void:
 	z_index = 8
 	heading = _label(Vector2(16, 10), Vector2(650, 30), 22)
 	objective = _label(Vector2(16, 42), Vector2(810, 28), 15)
+	operable_guide = preload("res://scripts/ui/yard_operable_guide.gd").new()
+	operable_guide.position = Vector2(16, 80)
+	operable_guide.size = Vector2(470, 120)
+	add_child(operable_guide)
+	operable_guide.completed.connect(host._on_tutorial_dismissed)
 	selected_status = _label(Vector2.ZERO, Vector2.ZERO, 14)
 	selected_status.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	selected_status.offset_left = 380
@@ -139,6 +145,7 @@ func refresh() -> void:
 	var command_phase: bool = host._is_command_phase()
 	var watching: bool = host.phase == host.Phase.WATCHING
 	var replaying: bool = host.phase == host.Phase.REPLAY
+	operable_guide.visible = not result_open and not details_open and not replaying and not host._gs().has_seen_tutorial("yard")
 	permission_mode_button.visible = details_open and not result_open and host.phase == host.Phase.SETUP
 	permission_mode_button.text = "发动：手动许可（实验）" if host.yard_manual_permission else "发动：入伏自动（默认）"
 	permission_mode_button.tooltip_text = "仅待伏队员：自动在黄色区入伏许可；手动在交战中许可一次。不改变随遇开火或自动投雷。"

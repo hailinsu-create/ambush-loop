@@ -815,6 +815,8 @@ func _maybe_show_tutorial() -> void:
 		return
 	var gs = _gs()
 	var lid := level.level_id
+	if lid == "yard":
+		return # Operable observer in YardHud; no modal or page-click completion.
 	if gs and gs.has_method("has_seen_tutorial"):
 		if gs.has_seen_tutorial(lid):
 			return
@@ -1261,13 +1263,13 @@ func apply_touch_command(cmd: String) -> void:
 			if phase == Phase.SETUP and selected and selected.visible:
 				selected.rotate_by(15.0)
 				_sfx("ui")
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 		"rotate_ccw":
 			if phase == Phase.SETUP and selected and selected.visible:
 				selected.rotate_by(-15.0)
 				_sfx("ui")
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 		"nade":
 			_place_nade_mark()
@@ -2394,6 +2396,8 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	if yard_hud:
+		yard_hud.operable_guide.reset_session()
 	yard_manual_permission = false
 	preparation_checkpoint.clear()
 	_cancel_touch_intent()
@@ -3837,7 +3841,9 @@ func _diff_vs_last_plan() -> String:
 	return "；".join(bits)
 
 
-func _announce_plan_edit() -> void:
+func _announce_plan_edit(facing_edit: bool = false) -> void:
+	if facing_edit and phase == Phase.SETUP and yard_hud and level.level_id == "yard":
+		yard_hud.operable_guide.note_facing()
 	if _plan_diff_guard or not _restored_this_setup:
 		return
 	if last_plan.deployments.is_empty():
@@ -4050,7 +4056,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_A:
 				if selected and selected.visible:
 					selected.rotate_by(-15.0)
-					_announce_plan_edit()
+					_announce_plan_edit(true)
 					_refresh_killzone_preview()
 			KEY_C, KEY_Q, KEY_W, KEY_Z, KEY_K, KEY_F1, KEY_F2, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8:
 				if event.echo:
@@ -4060,7 +4066,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_D:
 				if selected and selected.visible:
 					selected.rotate_by(15.0)
-					_announce_plan_edit()
+					_announce_plan_edit(true)
 					_refresh_killzone_preview()
 			KEY_E:
 				_try_pickup_near_selected()
@@ -4103,7 +4109,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if pointer.is_finite():
 				var v := pointer - selected.global_position
 				selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 		get_viewport().set_input_as_handled()
 		return
@@ -4464,7 +4470,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 			var v := world2 - selected.global_position
 			if v.length() > 10.0:
 				selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 				_touch_dragged = true
 				_cover_hold_slot = null
@@ -4621,6 +4627,8 @@ func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
 	selected.visible = true
 	selected.stop_move()
 	selected.global_position = slot.global_position
+	if announce and phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.moved[int(selected.op_id)] = true
 	var face := float(slot.get_meta("default_face"))
 	if not selected.alive:
 		selected.reset_loadout()
@@ -4629,6 +4637,8 @@ func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
 	# Player double-tap (announce) faces the next authored route. Smoke uses announce=false.
 	if same_pad and announce:
 		selected.set_facing(_facing_toward_wave_route())
+		if phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+			yard_hud.operable_guide.note_facing()
 	elif had_cover:
 		selected.set_facing(keep_deg)
 	else:
@@ -5463,7 +5473,10 @@ func _on_alarm_pressed() -> void:
 	var this_run := run_id
 	phase = Phase.WATCHING
 	if backpack_panel != null and backpack_panel.is_open():
+		# The guide observes the accepted transition, not a button click.
 		backpack_panel.dismiss()
+	if yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.combat_started = true
 	if c2:
 		c2.begin_alert()
 	leak_advice_shown = ""
@@ -7743,6 +7756,8 @@ func result_cta_buried_by_bars() -> bool:
 func _update_hud() -> void:
 	if _checkpoint_restoring:
 		return
+	if yard_hud and level != null and str(level.level_id) == "yard":
+		yard_hud.operable_guide.observe(self)
 	var lv_title := level.title if level else "AMBUSH LOOP"
 	title_label.text = "AMBUSH LOOP  ·  第 %d 世  ·  波 %d/%d" % [loop_index, wave_index() + 1, wave_total()]
 	if level_label:
@@ -8290,6 +8305,8 @@ func _command_move_op(op: OperatorUnit, world_pos: Vector2, sprint: bool = false
 	elif sprint and op.has_method("set_sprint"):
 		op.set_sprint(true)
 	_paint_move_for(op, pts)
+	if phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.note_move(op, pts[pts.size() - 1])
 	return true
 
 
@@ -8322,6 +8339,8 @@ func _apply_move_cells(op: OperatorUnit, cells: Array[Vector2i], sprint: bool = 
 	if sprint and op.has_method("set_sprint"):
 		op.set_sprint(true)
 	_paint_move_for(op, pts)
+	if phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.note_move(op, pts[pts.size() - 1])
 	return true
 
 
@@ -12311,6 +12330,8 @@ func _tick_command_pickups(delta: float = 0.016) -> void:
 			continue
 		_try_assign_loot(loot)
 	loot_piles = loot_piles.filter(func(l: LootPickup) -> bool: return is_instance_valid(l) and not l.collected)
+	if yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.observe(self)
 
 
 func _nearest_stash_for(op: OperatorUnit) -> Node2D:
@@ -12356,6 +12377,8 @@ func _complete_stash_search(op: OperatorUnit) -> bool:
 		_update_hud()
 		return true
 	status_label.text = "%s %s" % [op.display_name, str(rec.get("text", "拾取"))]
+	if yard_hud and str(level.level_id) == "yard" and bool(rec.get("ok", false)):
+		yard_hud.operable_guide.note_supply(str(item.get("kind", "")), int(item.get("amount", 0)))
 	_sfx("crate_lid")
 	_sfx(_pickup_cue(str(item.get("kind", "ammo"))))
 	_operator_bark(op, "crate")
