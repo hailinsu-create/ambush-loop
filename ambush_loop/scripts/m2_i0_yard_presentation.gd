@@ -506,7 +506,7 @@ func _process(_delta: float) -> void:
 		if _controls != null: _controls.visible = false
 		return
 	if not _bound: bind(host)
-	if _controls != null: _controls.visible = true
+	if _controls != null: _controls.visible = not host._result_overlay_active()
 	sync_presentation()
 
 

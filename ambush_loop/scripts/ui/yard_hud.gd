@@ -11,6 +11,7 @@ var menu_button: Button
 var commands: HBoxContainer
 var result_replay: Button
 var permission_mode_button: Button
+var preview_3d_button: Button
 var buttons: Dictionary = {}
 var hidden_chrome: Dictionary = {}
 
@@ -34,6 +35,10 @@ func bind(main: Node) -> void:
 	details_button.pressed.connect(toggle_details)
 	menu_button = _top_button("菜单", -104, -16)
 	menu_button.pressed.connect(func(): host._toggle_pause_menu())
+	preview_3d_button = _top_button("查看 3D 院子", -396, -240)
+	preview_3d_button.custom_minimum_size = Vector2(156, 48)
+	preview_3d_button.offset_bottom = 58
+	preview_3d_button.pressed.connect(host.open_yard_3d)
 	permission_mode_button = Button.new()
 	permission_mode_button.position = Vector2(16, 80)
 	permission_mode_button.size = Vector2(220, 48)
@@ -155,6 +160,7 @@ func refresh() -> void:
 	objective.visible = not result_open and not watching and not replaying
 	details_button.visible = not result_open
 	menu_button.visible = not result_open
+	preview_3d_button.visible = not result_open and host.get_node_or_null("I0YardPresentation") == null
 	details_button.text = "收起战术" if details_open else "战术视图"
 	details_button.tooltip_text = "查看路线、时间轴和方向参考；青色菱形表示选中队员的射线覆盖。"
 	commands.visible = not phone and not result_open

@@ -4121,6 +4121,20 @@ func _active_i0_presenter() -> Node:
 	return presenter if presenter != null and bool(presenter.get("active")) else null
 
 
+func open_yard_3d() -> void:
+	# Explicit presentation opt-in; normal startup keeps its 2D/memory path.
+	if level == null or str(level.level_id) != "yard" or _modal_blocks_input(): return
+	var presenter := get_node_or_null("I0YardPresentation")
+	if presenter == null:
+		presenter = load("res://scripts/m2_i0_yard_presentation.gd").new()
+		presenter.name = "I0YardPresentation"
+		add_child(presenter)
+		presenter.bind(self)
+	else:
+		presenter._set_active(true)
+	_update_hud()
+
+
 func _touch_span() -> Dictionary:
 	var keys: Array = _touches.keys()
 	if keys.size() < 2:
