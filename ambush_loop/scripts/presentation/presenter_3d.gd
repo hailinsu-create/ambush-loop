@@ -68,6 +68,11 @@ var _probe_result: Label
 
 func bind(main: Node) -> void:
 	host = main
+	# WebGL cannot update an existing Polygon2D index buffer in this engine.
+	# Hide the legacy canvas through its root, retaining World/actor local
+	# visibility and processing. HUD CanvasLayers and the 3D view stay visible.
+	if OS.has_feature("web"):
+		host.visible = false
 	# Parent's simulation update and child actors finish before we take a frame.
 	process_priority = 100
 	geometry.name = "Geometry"

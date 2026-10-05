@@ -53,6 +53,9 @@ func _run() -> void:
 	_check(main.grid.blocked[0] == 1, "grid bytes do not alias logic")
 	state = ViewState.capture(main)
 	_check(main.get_node("World").visible and main.operators[0].visible, "render gate preserves logical visibility")
+	_check(main.visible == (not OS.has_feature("web")), "only Web suppresses the legacy root canvas")
+	_check(main.get_node("HUD/Root").is_visible_in_tree(), "independent HUD remains visible through render gate")
+	_check(main.process_mode == Node.PROCESS_MODE_INHERIT, "render gate keeps simulation processing mode")
 	for y in 22:
 		for x in 40:
 			var pos := Vector2(x * 32 + 16, y * 32 + 16)
