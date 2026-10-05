@@ -20,6 +20,7 @@ const FOLLOW_MAX_DETOUR := 6
 const FOLLOW_LOCAL_DETOUR := 3
 const FOLLOW_KEEP_DEST := 3
 const FOLLOW_TWIST_DEG := 5.0
+const FOLLOW_ANCHOR_REFRESH_SIM_SEC := 0.20
 const FOLLOW_SLOT_DEPTH := 2
 const FOLLOW_WEST_SLOT_DEPTH := 1
 const FOLLOW_WEST_SECOND_DEPTH := 2
@@ -204,6 +205,11 @@ var tut_label: Label = null
 var sweep_hint_shown_this_attempt := false
 var flash_label: Label = null
 var role_box: Control = null
+var _role_box_pin_revision: int = 0
+var _role_box_pin_mode_initialized: bool = false
+var _role_box_pin_touch: bool = false
+var _role_box_pin_pending: bool = false
+var _role_box_pin_pending_touch: bool = false
 var role_card_buttons: Array[Button] = []
 var role_cards: Array = []
 var plan_readout: Label = null
@@ -299,6 +305,8 @@ var _door_tween: Tween = null
 var _touch_preview_slot: CoverSlot = null
 var _pending_setup_touch: bool = false
 var _pending_touch_world: Vector2 = Vector2.ZERO
+var _touch_intent: Dictionary = {}
+var _touch_intent_visual: Node2D = null
 var _touch_dragged: bool = false
 var _touch_panning: bool = false
 var _touch_start_screen: Vector2 = Vector2.ZERO
@@ -306,6 +314,7 @@ var _sprint_hold_armed: bool = false
 var _last_touch_gesture: String = ""
 var _pending_flank = null
 var _follow_dest: Dictionary = {}
+var _follow_anchor_cache: Dictionary = {}
 var _follow_lock: Dictionary = {}
 var _follow_flip_count: int = 0
 var _follow_settle_drops: int = 0
@@ -898,8 +907,17 @@ func _ensure_touch_hud() -> void:
 			touch_hud.bind_host(self)
 	var on := _want_touch()
 	touch_hud.visible = on
+	if touch_hud.has_method("set_world_intent_pending"):
+		touch_hud.set_world_intent_pending(on and not _touch_intent.is_empty(), str(_touch_intent.get("label", "")))
 	_apply_phone_chrome(on)
+	## _fold_phone_north_hud hides this line on touch. Restore its current
+	## phase/level state immediately when the display mode changes back.
+	_refresh_spawn_teach()
 	_refresh_touch_hud()
+	## The redesigned yard owns these shared legacy controls. Reapply ownership
+	## after a settings-only display-mode change, without waiting for _update_hud.
+	if yard_hud and yard_redesign_active():
+		yard_hud.refresh()
 
 
 func _apply_phone_chrome(on: bool) -> void:
@@ -1017,10 +1035,12 @@ func _hide_duplicate_tut() -> void:
 		plate.visible = false
 
 
-func _pin_role_cards(touch: bool) -> void:
+func _pin_role_cards(touch: bool, after_layout: bool = false) -> void:
 	## Art 5.0 pinned cards to content height so 夜枭 does not stretch across
 	## the checklist. Phone chrome used to inflate desktop cards to 138px and
 	## leave a 400px dock well; restore content height whenever touch is off.
+	## Container minimum-size caches settle after child min sizes change. A
+	## deferred second pass below refits the dock after the current layout.
 	var card_min := Vector2(220, 142) if touch else Vector2(204, 96)
 	for card in role_cards:
 		if card is Control:
@@ -1029,6 +1049,14 @@ func _pin_role_cards(touch: bool) -> void:
 			c.size_flags_vertical = 0
 	if role_box == null or not is_instance_valid(role_box):
 		return
+	var mode_changed := not _role_box_pin_mode_initialized or touch != _role_box_pin_touch
+	if not after_layout and not mode_changed:
+		_apply_result_rail()
+		_schedule_role_box_refit(touch)
+		return
+	if not after_layout:
+		_role_box_pin_mode_initialized = true
+		_role_box_pin_touch = touch
 	role_box.size_flags_vertical = 0
 	var h := 0.0
 	if role_box is Container:
@@ -1039,6 +1067,35 @@ func _pin_role_cards(touch: bool) -> void:
 		h = 3.0 * card_min.y + seps + plan_h
 	role_box.offset_bottom = role_box.offset_top + h
 	_apply_result_rail()
+	if not after_layout:
+		_schedule_role_box_refit(touch)
+
+
+func _schedule_role_box_refit(touch: bool) -> void:
+	## Coalesce repeated HUD refreshes, but allow a later settled measurement to
+	## adapt if another level's card content has a different minimum height.
+	if _role_box_pin_pending and _role_box_pin_pending_touch == touch:
+		return
+	_role_box_pin_revision += 1
+	_role_box_pin_pending = true
+	_role_box_pin_pending_touch = touch
+	call_deferred("_pin_role_cards_after_layout", touch, _role_box_pin_revision)
+
+
+func _pin_role_cards_after_layout(touch: bool, revision: int) -> void:
+	var scene_tree := get_tree()
+	if scene_tree == null:
+		return
+	await scene_tree.process_frame
+	if not is_inside_tree() or get_tree() != scene_tree:
+		return
+	await scene_tree.process_frame
+	if not is_inside_tree() or get_tree() != scene_tree:
+		return
+	if revision != _role_box_pin_revision or not is_instance_valid(role_box) or touch != _want_touch():
+		return
+	_role_box_pin_pending = false
+	_pin_role_cards(touch, true)
 
 
 func _apply_result_rail() -> void:
@@ -1088,6 +1145,8 @@ func _refresh_touch_hud() -> void:
 		phase_name, paused, hi, sfx_muted, _event_log_open and event_log != null and event_log.visible,
 		has_pack, has_door
 	)
+	if touch_hud.has_method("set_world_intent_pending"):
+		touch_hud.set_world_intent_pending(_is_command_phase() and not _touch_intent.is_empty(), str(_touch_intent.get("label", "")))
 	if touch_hud.has_method("set_alarm_cta") and alarm_button:
 		touch_hud.set_alarm_cta(str(alarm_button.text))
 	if touch_hud.has_method("set_next_wave"):
@@ -1118,6 +1177,8 @@ func _toggle_event_log() -> void:
 
 
 func apply_touch_command(cmd: String) -> void:
+	if cmd != "world_confirm" and cmd != "world_cancel":
+		_cancel_touch_intent()
 	if cmd == "settings":
 		_toggle_pause_menu()
 		_refresh_touch_hud()
@@ -2278,6 +2339,7 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	_cancel_touch_intent()
 	if yard_hud:
 		yard_hud.restore_chrome()
 		yard_hud.details_open = false
@@ -3397,6 +3459,8 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	_cancel_touch_intent()
+	_follow_anchor_cache.clear()
 	if yard_hud:
 		yard_hud.details_open = false
 	phase = Phase.SETUP
@@ -3828,6 +3892,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
+		_cancel_touch_intent()
 		if tutorial_overlay and tutorial_overlay.is_open():
 			get_viewport().set_input_as_handled()
 			return
@@ -3944,6 +4009,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_cancel_touch_intent()
 		_handle_setup_click(get_global_mouse_position())
 		get_viewport().set_input_as_handled()
 		return
@@ -3970,8 +4036,187 @@ func _touch_span() -> Dictionary:
 	return {"dist": a.distance_to(b), "mid": (a + b) * 0.5}
 
 
+func _build_touch_intent(world_pos: Vector2, sprint: bool = false) -> Dictionary:
+	if not _is_command_phase() or _modal_blocks_input() or selected == null:
+		return {}
+	var common := {
+		"world": world_pos,
+		"sprint": sprint,
+		"actor_instance_id": selected.get_instance_id(),
+		"tool": int(tool),
+	}
+	match tool:
+		Tool.TRIPWIRE:
+			common["kind"] = "tripwire"
+			common["label"] = "确认在此布置绊索"
+			return common
+		Tool.GRENADE:
+			common["kind"] = "grenade"
+			common["label"] = "确认设置手雷点"
+			return common
+		Tool.DECOY:
+			common["kind"] = "decoy"
+			common["label"] = "确认投掷诱饵"
+			return common
+		_:
+			pass
+	if c2 != null and _want_touch():
+		for sentry in c2.sentries:
+			if sentry == null or not is_instance_valid(sentry) or sentry.global_position.distance_to(world_pos) > 22.0:
+				continue
+			common["kind"] = "context"
+			common["label"] = "确认岗哨互动"
+			return common
+	var slot_r := 8.0 if _want_touch() else 28.0
+	var slot := _nearest_slot(world_pos, slot_r)
+	if slot and _want_touch() and grid:
+		if grid.world_to_cell(world_pos) != grid.world_to_cell(slot.global_position):
+			slot = null
+	if slot != null:
+		common["kind"] = "cover"
+		common["slot"] = slot
+		common["label"] = "确认部署到「%s」" % slot.label_text
+		return common
+	var cells := _resolve_move_cells(selected, world_pos)
+	if cells.is_empty():
+		return {}
+	common["kind"] = "move"
+	common["cells"] = cells
+	common["label"] = "确认奔跑至此" if sprint else "确认移动至此"
+	return common
+
+
+func _begin_touch_intent(world_pos: Vector2, sprint: bool = false) -> bool:
+	_cancel_touch_intent()
+	var intent := _build_touch_intent(world_pos, sprint)
+	if intent.is_empty():
+		if status_label and _is_command_phase():
+			status_label.text = "此处无法通行"
+		if touch_hud and touch_hud.has_method("set_hint"):
+			touch_hud.set_hint("这里走不过去")
+		return false
+	_touch_intent = intent
+	if str(intent.get("kind", "")) == "cover":
+		_touch_preview_slot = intent.get("slot") as CoverSlot
+	_update_cover_previews()
+	_show_touch_intent_preview(intent)
+	if touch_hud and touch_hud.has_method("set_world_intent_pending"):
+		touch_hud.set_world_intent_pending(true, str(intent.get("label", "")))
+	return true
+
+
+func _show_touch_intent_preview(intent: Dictionary) -> void:
+	_clear_touch_intent_visual()
+	if str(intent.get("kind", "")) == "cover":
+		return # The cover's authored protection arc is the preview.
+	var world := get_node_or_null("World") as Node2D
+	if world == null:
+		return
+	var host := Node2D.new()
+	host.name = "TouchIntentPreview"
+	host.z_index = 14
+	world.add_child(host)
+	_touch_intent_visual = host
+	var kind := str(intent.get("kind", ""))
+	var color := Color(0.55, 0.88, 0.42, 0.92)
+	if kind in ["tripwire", "grenade", "decoy"]:
+		color = Color(0.98, 0.72, 0.28, 0.94)
+	elif kind == "context":
+		color = Color(0.38, 0.80, 0.98, 0.94)
+	if kind == "move" and selected != null:
+		var path := Line2D.new()
+		path.name = "PreviewPath"
+		path.width = 4.0
+		path.default_color = Color(color.r, color.g, color.b, 0.74)
+		path.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		path.end_cap_mode = Line2D.LINE_CAP_ROUND
+		var points := PackedVector2Array([selected.global_position])
+		for cell in intent.get("cells", []):
+			points.append(grid.cell_to_world_center(cell))
+		path.points = points
+		host.add_child(path)
+	var marker := Polygon2D.new()
+	marker.name = "TargetMarker"
+	marker.position = intent.get("world", Vector2.ZERO)
+	marker.polygon = PackedVector2Array([Vector2(0, -11), Vector2(11, 0), Vector2(0, 11), Vector2(-11, 0)])
+	marker.color = color
+	host.add_child(marker)
+	var ring := Line2D.new()
+	ring.name = "TargetRing"
+	ring.closed = true
+	ring.width = 2.0
+	ring.default_color = color
+	var ring_points := PackedVector2Array()
+	for i in 16:
+		var angle := TAU * float(i) / 16.0
+		ring_points.append(Vector2(cos(angle), sin(angle)) * 20.0)
+	ring.points = ring_points
+	ring.position = intent.get("world", Vector2.ZERO)
+	host.add_child(ring)
+
+
+func _clear_touch_intent_visual() -> void:
+	if _touch_intent_visual != null and is_instance_valid(_touch_intent_visual):
+		_touch_intent_visual.queue_free()
+	_touch_intent_visual = null
+
+
+func touch_intent_pending() -> bool:
+	return not _touch_intent.is_empty()
+
+
+func touch_intent_preview_active() -> bool:
+	return not _touch_intent.is_empty() and (str(_touch_intent.get("kind", "")) == "cover" or (_touch_intent_visual != null and is_instance_valid(_touch_intent_visual)))
+
+
+func confirm_touch_intent() -> bool:
+	if _touch_intent.is_empty():
+		return false
+	var intent := _touch_intent
+	var actor_id := int(selected.get_instance_id()) if selected != null and is_instance_valid(selected) else -1
+	var world_pos: Vector2 = intent.get("world", Vector2.ZERO)
+	var sprint := bool(intent.get("sprint", false))
+	var valid := (
+		_is_command_phase()
+		and not _modal_blocks_input()
+		and actor_id == int(intent.get("actor_instance_id", -2))
+		and int(tool) == int(intent.get("tool", -1))
+	)
+	_cancel_touch_intent()
+	if not valid:
+		return false
+	_c2_sprint_next = sprint
+	_handle_setup_click(world_pos)
+	_c2_sprint_next = false
+	return true
+
+
+func cancel_touch_intent() -> void:
+	_cancel_touch_intent()
+
+
+func _cancel_touch_intent() -> void:
+	var prior_slot: CoverSlot = null
+	if not _touch_intent.is_empty():
+		prior_slot = _touch_intent.get("slot") as CoverSlot
+	_touch_intent.clear()
+	_clear_touch_intent_visual()
+	if prior_slot != null and prior_slot == _touch_preview_slot:
+		_touch_preview_slot = null
+	if touch_hud != null and is_instance_valid(touch_hud) and touch_hud.has_method("set_world_intent_pending"):
+		touch_hud.set_world_intent_pending(false)
+	if not cover_slots.is_empty():
+		_update_cover_previews()
+
+
 func _handle_touch_gestures(event: InputEvent) -> bool:
 	if event is InputEventMagnifyGesture:
+		_cancel_touch_intent()
+		_touch_preview_slot = null
+		_pending_setup_touch = false
+		_cover_hold_slot = null
+		_sprint_hold_armed = false
+		_touch_panning = false
 		_cam_zoom *= (event as InputEventMagnifyGesture).factor
 		_apply_cam()
 		return true
@@ -3980,6 +4225,8 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		if st.pressed:
 			_touches[st.index] = st.position
 			if _touches.size() >= 2:
+				_cancel_touch_intent()
+				_touch_preview_slot = null
 				_facing_touch = -1
 				_pending_setup_touch = false
 				_cover_hold_slot = null
@@ -3998,6 +4245,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 				return true
 			if _is_command_phase() or phase == Phase.WATCHING:
 				var world := _screen_to_world(st.position)
+				_cancel_touch_intent()
 				_touch_preview_slot = null
 				_pending_setup_touch = _is_command_phase()
 				_pending_touch_world = world
@@ -4017,22 +4265,33 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		if _facing_touch == st.index:
 			_facing_touch = -1
 		_pinch_start_dist = 0.0
+		if _modal_blocks_input() or not _is_command_phase():
+			_cancel_touch_intent()
+			_pending_setup_touch = false
+			_cover_hold_slot = null
+			_sprint_hold_armed = false
+			_touch_panning = false
+			return true
 		if _pending_setup_touch and _is_command_phase():
 			if _touch_panning:
 				_last_touch_gesture = "pan"
+				_cancel_touch_intent()
 			elif _touch_preview_slot != null:
 				_last_touch_gesture = "cover"
+			elif _touch_dragged:
+				if _last_touch_gesture == "":
+					_last_touch_gesture = "drag"
+				_cancel_touch_intent()
 			elif _sprint_hold_armed or (
 				_want_touch()
 				and _cover_hold_slot == null
 				and Time.get_ticks_msec() - _cover_hold_msec >= TOUCH_SPRINT_MS
 			):
-				_c2_sprint_next = true
 				_last_touch_gesture = "sprint"
-				_handle_setup_click(_pending_touch_world)
+				_begin_touch_intent(_pending_touch_world, true)
 			else:
 				_last_touch_gesture = "tap"
-				_handle_setup_click(_pending_touch_world)
+				_begin_touch_intent(_pending_touch_world, false)
 			_pending_setup_touch = false
 			_cover_hold_slot = null
 			_sprint_hold_armed = false
@@ -4042,6 +4301,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 			_touch_panning = false
 		return true
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+		_cancel_touch_intent()
 		_cam_pan -= event.relative / maxf(_cam_zoom, 0.01)
 		_apply_cam()
 		return true
@@ -4049,6 +4309,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		var sd := event as InputEventScreenDrag
 		_touches[sd.index] = sd.position
 		if _touches.size() >= 2:
+			_cancel_touch_intent()
 			var span2: Dictionary = _touch_span()
 			var dist: float = float(span2["dist"])
 			if _pinch_start_dist > 8.0:
@@ -4062,6 +4323,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		if _is_command_phase():
 			_pending_touch_world = _screen_to_world(sd.position)
 		if _is_command_phase() and sd.index == _facing_touch and selected and selected.visible and not selected.locked:
+			_cancel_touch_intent()
 			var world2 := _screen_to_world(sd.position)
 			var v := world2 - selected.global_position
 			if v.length() > 10.0:
@@ -4074,13 +4336,17 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 				_last_touch_gesture = "face"
 			return true
 		if phase == Phase.SETUP and tool == Tool.TRIPWIRE:
+			_cancel_touch_intent()
 			_touch_dragged = true
 			_cover_hold_slot = null
 			_sprint_hold_armed = false
+			_last_touch_gesture = "tool_drag"
 			_update_tripwire_ghost()
 			return true
 		var total := sd.position.distance_to(_touch_start_screen)
 		if _touch_panning or total >= TOUCH_PAN_SLOP:
+			_cancel_touch_intent()
+			_touch_preview_slot = null
 			_touch_panning = true
 			_touch_dragged = true
 			_cover_hold_slot = null
@@ -4099,6 +4365,7 @@ func _select_op(idx: int) -> void:
 		return
 	if idx < 0 or idx >= operators.size():
 		return
+	_cancel_touch_intent()
 	selected = operators[idx]
 	_follow_arrive_on = false
 	_follow_ring_hold = false
@@ -5295,6 +5562,17 @@ func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 
 
 func _process(delta: float) -> void:
+	if not _touch_intent.is_empty():
+		var pack_open: bool = backpack_panel != null and backpack_panel.has_method("is_open") and backpack_panel.is_open()
+		var selected_id := int(selected.get_instance_id()) if selected != null and is_instance_valid(selected) else -1
+		if (
+			not _is_command_phase()
+			or _modal_blocks_input()
+			or pack_open
+			or selected_id != int(_touch_intent.get("actor_instance_id", -2))
+			or int(tool) != int(_touch_intent.get("tool", -1))
+		):
+			_cancel_touch_intent()
 	if phase == Phase.SETUP or phase == Phase.WATCHING or phase == Phase.SWEEP:
 		_night_timer += delta
 	if _is_command_phase():
@@ -5540,6 +5818,8 @@ func _ensure_tripwire_ghost() -> void:
 
 
 func _aim_world() -> Vector2:
+	if not _touch_intent.is_empty() and str(_touch_intent.get("kind", "")) == "tripwire":
+		return _touch_intent.get("world", Vector2.ZERO)
 	if phase == Phase.SETUP and not _touches.is_empty() and _pending_touch_world != Vector2.ZERO:
 		return _pending_touch_world
 	return get_global_mouse_position()
@@ -7791,14 +8071,7 @@ func _command_move_selected(world_pos: Vector2) -> void:
 func _command_move_op(op: OperatorUnit, world_pos: Vector2, sprint: bool = false) -> bool:
 	if op == null or not op.visible or not op.alive or op.locked:
 		return false
-	var from_c := op.grid_cell()
-	var to_c := grid.world_to_cell(world_pos)
-	var stash_c := _stash_cell_near(to_c, 0 if _want_touch() else 1)
-	if stash_c.x >= 0:
-		to_c = stash_c
-	elif _cell_taken(to_c, op):
-		to_c = _open_cell_near(to_c, op)
-	var cells: Array[Vector2i] = RaidPathfinderScript.find_path(grid, from_c, to_c)
+	var cells := _resolve_move_cells(op, world_pos)
 	if cells.is_empty():
 		if op == selected and status_label:
 			status_label.text = "走不过去"
@@ -7821,6 +8094,20 @@ func _command_move_op(op: OperatorUnit, world_pos: Vector2, sprint: bool = false
 		op.set_sprint(true)
 	_paint_move_for(op, pts)
 	return true
+
+
+func _resolve_move_cells(op: OperatorUnit, world_pos: Vector2) -> Array[Vector2i]:
+	var empty: Array[Vector2i] = []
+	if op == null or grid == null or not op.visible or not op.alive or op.locked:
+		return empty
+	var from_c := op.grid_cell()
+	var to_c := grid.world_to_cell(world_pos)
+	var stash_c := _stash_cell_near(to_c, 0 if _want_touch() else 1)
+	if stash_c.x >= 0:
+		to_c = stash_c
+	elif _cell_taken(to_c, op):
+		to_c = _open_cell_near(to_c, op)
+	return RaidPathfinderScript.find_path(grid, from_c, to_c)
 
 
 func _apply_move_cells(op: OperatorUnit, cells: Array[Vector2i], sprint: bool = false) -> bool:
@@ -7943,7 +8230,7 @@ func _tick_touch_hold() -> void:
 	if c2 and selected:
 		c2.plant_dest(_pending_touch_world, selected)
 	if touch_hud and touch_hud.has_method("set_hint"):
-		touch_hud.set_hint("松手奔跑")
+		touch_hud.set_hint("松手预览奔跑，再点确认")
 
 
 func flank_dest_world(sentry, op: Node = null) -> Vector2:
@@ -8339,6 +8626,7 @@ func toggle_follow(idx: int) -> void:
 	if not op.follow_lead:
 		op.stop_move()
 		var drop_id := int(op.op_id)
+		_follow_anchor_cache.erase(drop_id)
 		_follow_dest.erase(drop_id)
 		_follow_lock.erase(drop_id)
 		_follow_dest_world.erase(drop_id)
@@ -8385,7 +8673,7 @@ func _tick_squad_follow(delta: float = 0.05) -> void:
 	for op in followers:
 		var oid: int = int(op.op_id)
 		var prev: Vector2i = _follow_dest.get(oid, Vector2i(-99, -99))
-		var want: Vector2i = _follow_anchor_cell(selected, op)
+		var want: Vector2i = _follow_anchor_for_tick(selected, op, delta, twisting)
 		if want.x < 0 and _stealth_blocks(op.global_position, op):
 			want = _open_cell_outside_cone(op.grid_cell(), op, _follow_reserved(op))
 		if want.x < 0:
@@ -9735,6 +10023,7 @@ func _clear_follow_dest_mark(oid: int) -> void:
 
 
 func _clear_follow_dest_marks() -> void:
+	_follow_anchor_cache.clear()
 	var keys: Array = _follow_dest_marks.keys()
 	for k in keys:
 		_clear_follow_dest_mark(int(k))
@@ -10250,6 +10539,74 @@ func follow_dest_rear_ok(cell: Vector2i, lead: OperatorUnit) -> bool:
 	return s <= b + pad
 
 
+func _follow_anchor_for_tick(
+	lead: OperatorUnit, follower: OperatorUnit, delta: float, force_refresh: bool = false
+) -> Vector2i:
+	var oid := int(follower.op_id)
+	var signature := _follow_anchor_signature(lead, follower)
+	var state: Dictionary = _follow_anchor_cache.get(oid, {})
+	var age := float(state.get("age", FOLLOW_ANCHOR_REFRESH_SIM_SEC)) + maxf(delta, 0.0)
+	var refresh: bool = force_refresh or not state.has("cell") or state.get("signature", []) != signature
+	if age >= FOLLOW_ANCHOR_REFRESH_SIM_SEC:
+		refresh = true
+	if refresh:
+		var cell: Vector2i = _follow_anchor_cell(lead, follower)
+		_follow_anchor_cache[oid] = {"signature": signature, "age": 0.0, "cell": cell}
+		return cell
+	state["age"] = age
+	_follow_anchor_cache[oid] = state
+	return state.get("cell", Vector2i(-1, -1))
+
+
+func _follow_anchor_signature(lead: OperatorUnit, follower: OperatorUnit) -> Array:
+	var lead_goal: Vector2i = lead.grid_cell()
+	if lead.move_path.size() >= 2:
+		lead_goal = grid.world_to_cell(lead.move_path[lead.move_path.size() - 1])
+	var signature: Array = [
+		lead.get_instance_id(),
+		follower.get_instance_id(),
+		grid.get_instance_id(),
+		int(phase),
+		lead.grid_cell(),
+		Vector2i(int(round(lead.global_position.x / 16.0)), int(round(lead.global_position.y / 16.0))),
+		lead_goal,
+		lead.is_moving(),
+		int(round(lead.facing_deg / FOLLOW_TWIST_DEG)),
+		follower.grid_cell(),
+		Vector2i(
+			int(round(follower.global_position.x / 16.0)), int(round(follower.global_position.y / 16.0))
+		)
+	]
+	for op in operators:
+		if op == null:
+			signature.append([])
+			continue
+		signature.append([
+			int(op.op_id),
+			op.grid_cell(),
+			op.alive,
+			op.visible,
+			op.follow_lead
+		])
+	if c2 != null:
+		for sentry in c2.sentries:
+			if sentry == null or not is_instance_valid(sentry):
+				signature.append([])
+				continue
+			signature.append([
+				sentry.get_instance_id(),
+				grid.world_to_cell(sentry.global_position),
+				Vector2i(
+					int(round(sentry.global_position.x / 16.0)),
+					int(round(sentry.global_position.y / 16.0))
+				),
+				int(round(float(sentry.facing_deg) / FOLLOW_TWIST_DEG)),
+				sentry.get("alive") == true,
+				sentry.visible
+			])
+	return signature
+
+
 func _follow_anchor_cell(lead: OperatorUnit, follower: OperatorUnit) -> Vector2i:
 	var reserved := _follow_reserved(follower)
 	var slot := _follow_slot_index(lead, follower)
@@ -10345,8 +10702,12 @@ func _follow_anchor_cell(lead: OperatorUnit, follower: OperatorUnit) -> Vector2i
 	var best := Vector2i(-1, -1)
 	var best_score := 999999
 	var from_lead: int = absi(from.x - lead_c.x) + absi(from.y - lead_c.y)
+	## Every candidate is evaluated against the same world snapshot. Building the
+	## sentry/friendly-cone grid inside stealth_path_cells for each candidate was
+	## multiplying a full-map scan by hundreds during one follower retarget.
+	var blocked_snapshot: Dictionary = _stealth_blocked_cells(follower)
 	for cell in cands:
-		var path: Array[Vector2i] = stealth_path_cells(from, cell, follower)
+		var path: Array[Vector2i] = stealth_path_cells(from, cell, follower, blocked_snapshot)
 		if cell != from and path.size() < 2:
 			continue
 		var plen: int = path.size() if path.size() >= 2 else 1
@@ -10497,13 +10858,18 @@ func _follow_path_leaves_west(path: Array[Vector2i], from: Vector2i, to: Vector2
 	return false
 
 
-func _follow_west_stay_path(from: Vector2i, to: Vector2i, op: Node) -> Array[Vector2i]:
+func _follow_west_stay_path(
+	from: Vector2i, to: Vector2i, op: Node, blocked_snapshot: Variant = null
+) -> Array[Vector2i]:
 	## West-alley A* that never steps x>12. Cone avoid stays; courtyard
 	## wraps around the crate cluster do not.
 	var empty: Array[Vector2i] = []
 	if grid == null:
 		return empty
-	var avoid: Dictionary = _stealth_blocked_cells(op).duplicate()
+	var source: Dictionary = (
+		blocked_snapshot if blocked_snapshot is Dictionary else _stealth_blocked_cells(op)
+	)
+	var avoid: Dictionary = source.duplicate()
 	for y in range(AmbushGrid.ROWS):
 		for x in range(13, AmbushGrid.COLS):
 			avoid[Vector2i(x, y)] = true
@@ -10514,7 +10880,11 @@ func _follow_west_stay_path(from: Vector2i, to: Vector2i, op: Node) -> Array[Vec
 
 
 func _follow_prefer_west_path(
-	from: Vector2i, to: Vector2i, op: Node, path: Array[Vector2i]
+	from: Vector2i,
+	to: Vector2i,
+	op: Node,
+	path: Array[Vector2i],
+	blocked_snapshot: Variant = null
 ) -> Array[Vector2i]:
 	if op == null or not bool(op.get("follow_lead")):
 		return path
@@ -10528,7 +10898,7 @@ func _follow_prefer_west_path(
 	var wrap := _follow_path_leaves_west(path, from, to)
 	if path.size() >= 2 and not wrap and detour <= FOLLOW_MAX_DETOUR:
 		return path
-	var stay: Array[Vector2i] = _follow_west_stay_path(from, to, op)
+	var stay: Array[Vector2i] = _follow_west_stay_path(from, to, op, blocked_snapshot)
 	if stay.size() < 2:
 		return path
 	var stay_detour: int = maxi(0, stay.size() - manh - 1)
@@ -10826,10 +11196,14 @@ func follow_dest_min_spacing() -> float:
 	return best
 
 
-func stealth_path_cells(from: Vector2i, to: Vector2i, op: Node) -> Array[Vector2i]:
+func stealth_path_cells(
+	from: Vector2i, to: Vector2i, op: Node, blocked_snapshot: Variant = null
+) -> Array[Vector2i]:
 	if grid == null:
 		return []
-	var avoid: Dictionary = _stealth_blocked_cells(op)
+	var avoid: Dictionary = (
+		blocked_snapshot if blocked_snapshot is Dictionary else _stealth_blocked_cells(op)
+	)
 	if avoid.has(to):
 		to = _open_cell_outside_cone(to, op)
 		if to.x < 0:
@@ -10884,11 +11258,11 @@ func stealth_path_cells(from: Vector2i, to: Vector2i, op: Node) -> Array[Vector2
 	if path.size() >= 2 and not _path_hits_cone(path, op):
 		if following:
 			path = _trim_follow_dest_margin(path, op)
-		return _follow_prefer_west_path(from, to, op, path)
+		return _follow_prefer_west_path(from, to, op, path, avoid)
 	var trimmed: Array[Vector2i] = _trim_path_before_cone(RaidPathfinderScript.find_path(grid, from, to), op)
 	if following:
 		trimmed = _trim_follow_dest_margin(trimmed, op)
-	return _follow_prefer_west_path(from, to, op, trimmed)
+	return _follow_prefer_west_path(from, to, op, trimmed, avoid)
 
 
 func _stealth_blocked_cells(op: Node) -> Dictionary:
@@ -11325,6 +11699,8 @@ func yard_touch_loop_cells() -> Array[Vector2i]:
 
 
 func simulate_touch_tap(world: Vector2) -> void:
+	## High-level fixture helper: tap to stage an intent, then explicitly confirm
+	## it so legacy movement/layout smoke cases remain about their original behavior.
 	var xf: Transform2D = get_viewport().get_canvas_transform()
 	var screen: Vector2 = xf * world
 	_touches.clear()
@@ -11338,6 +11714,8 @@ func simulate_touch_tap(world: Vector2) -> void:
 	rel.pressed = false
 	rel.position = screen
 	_unhandled_input(rel)
+	if not _touch_intent.is_empty():
+		confirm_touch_intent()
 
 
 func simulate_hotspot(caption: String) -> bool:
@@ -11498,6 +11876,7 @@ func follow_dest_flips() -> int:
 
 
 func reset_follow_dest_flips() -> void:
+	_follow_anchor_cache.clear()
 	_follow_flip_count = 0
 	_follow_settle_drops = 0
 	_follow_blend_hits = 0
