@@ -20,3 +20,6 @@
 headless 初始 fixture 缺 3D presenter 后修正；synthetic push_input 路由方法不计真实输入。首轮 Window launcher 缺 `AMBUSH_TEST_X11_DISPLAY`，原助手在 XTest 前拒绝，actual1/99 checks/42 failures，保留原日志。已补启动参数，并用原生 wheel 露出 compact 历史行，六组合 Window 后续触及180s cap，actual124、不计通过，保留四原图；改为三组合有界 Window（1280/1×touch、1280/2×touch、960/1×touch）103/0 actual0，原生XTest、真实wheel、三原图全看。最终同测试 headless六组合36/0 actual0。自有 Xorg136准确argv关闭actual0，首次stop因wrapper路径不匹配未发信号。完整Web/浏览器门仍待。不得把方法失败隐藏或算产品验收。
 
 资产接口保持既有所有权：ArtSource、build_yard_kit.py、角色 GLB/Blender、共享 atlas/manifest 由资产作者负责，本切片 diff 不含这些路径。网页 GPT PLAN/REVIEW unavailable；独立 QA 尚待本轮 END。
+
+
+当前状态：固定8532源码，作者有界结果与END详见 [结果报告](AMBUSH_PR15_EVENT_LOG_UI_END_20261005.md)，替代本文RUNNING描述。独立QA待；窗口归还前不启pump，不将部分case的actual1整批改写为通过。

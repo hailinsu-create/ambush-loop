@@ -1,0 +1,45 @@
+{
+  "scope": "method-negative actual1, not acceptance",
+  "report_original_hashes_preserved": true,
+  "original_pngs_preserved": 1,
+  "original_pngs_missing": 5,
+  "reason": "generic capture paths were reused before copies; raw log/code/report retained. Existing original hash-matching PNG recovered only if bytes exact",
+  "rows": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/event_log_1280_720_100_false.png",
+      "sha256": "1c4a9558f2d5e214cf99e06da1167f5187c4ce7cfd82323fbf6db85a23b69f2c",
+      "preserved_actual_png": false,
+      "status": "generic path overwritten; not reconstructed"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/event_log_1280_720_100_true.png",
+      "sha256": "2402d606f6ff37d73bd95a80f7237a7efedceb4bde679a072175c63bbc9f277a",
+      "preserved_actual_png": false,
+      "status": "generic path overwritten; not reconstructed"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/event_log_1280_720_200_false.png",
+      "sha256": "bd27bf95f89426c2459b4bf867c873a20839b13b45f95cab45beb662bd22ffc5",
+      "preserved_actual_png": false,
+      "status": "generic path overwritten; not reconstructed"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/event_log_1280_720_200_true.png",
+      "sha256": "00dc090460526ec05b92e3c77c96aaf3ce98205f7672981f1ebd1a1061aa1e71",
+      "preserved_actual_png": false,
+      "status": "generic path overwritten; not reconstructed"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/event_log_1600_900_200_true.png",
+      "sha256": "1e3444200dedfff20bb56616d91849e456427ff58bfad8745b61c22f63c49feb",
+      "preserved_actual_png": true,
+      "status": "original current bytes exact SHA, copied after discovery"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/event_log_960_540_100_true.png",
+      "sha256": "aa6416970148b893e9fc8a8de0c803d868b77c66951ed7eabdf30ce30ef525e6",
+      "preserved_actual_png": false,
+      "status": "generic path overwritten; not reconstructed"
+    }
+  ]
+}

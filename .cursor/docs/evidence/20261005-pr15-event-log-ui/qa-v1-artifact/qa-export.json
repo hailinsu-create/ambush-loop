@@ -1,0 +1,71 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "stage": "/workspace/pr15-event-log-qa-stage-20261005",
+  "output": "/workspace/pr15-web-artifacts/8532c4c3084d1a5672bbe28dc96e1c02522a8f05/event-log-cold-qa-20261005",
+  "argv": [
+    "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+    "--audio-driver",
+    "Dummy",
+    "--headless",
+    "--path",
+    "/workspace/pr15-event-log-qa-stage-20261005",
+    "--export-debug",
+    "Web Game",
+    "/workspace/pr15-web-artifacts/8532c4c3084d1a5672bbe28dc96e1c02522a8f05/event-log-cold-qa-20261005/index.html"
+  ],
+  "start": "2026-10-05T08:43:17.969120+00:00",
+  "scope": "declared one-time cold historical consumer setup plus read-only observer; no runtime mutation API; QA is not production bundle",
+  "bridge_sha256": "22f0564138939ba9abc19a269ba483ae3d4102f23cd0306422a44d4340503a67",
+  "record_sha256": "28c90902016e3a0323081c756ddde215ea2ec228223147231eed7ef66af33266",
+  "actual_exit": 0,
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "end": "2026-10-05T08:43:22.224213+00:00",
+  "files": [
+    {
+      "name": "index.apple-touch-icon.png",
+      "bytes": 10015,
+      "sha256": "8d7beb9a029424558ffa8f9cc76b6aad2e96aa91060153e4421b52a14c3239b5"
+    },
+    {
+      "name": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "name": "index.js",
+      "bytes": 315645,
+      "sha256": "ffc3898b59fba6f5af0c02f76e5ee526cc061e65c7d2d6f4f98186876cea15c4"
+    },
+    {
+      "name": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "name": "index.html",
+      "bytes": 5444,
+      "sha256": "43d52935dac57c2376b3f3a4220abb6f137ceca76f17c767d8404f185f6bdeee"
+    },
+    {
+      "name": "index.wasm",
+      "bytes": 37902138,
+      "sha256": "11ea19645368f8e73cf337b59cfd7ceeb4ebb51f7a3bbf77d1a5c3ddfedbc522"
+    },
+    {
+      "name": "index.icon.png",
+      "bytes": 4016,
+      "sha256": "f5b83b2e20897a943ef34368a3bbe2fdbc85af0b67616d234d5850842086979d"
+    },
+    {
+      "name": "index.pck",
+      "bytes": 64661976,
+      "sha256": "e657ee5b03ea1bf183f9ddd247f3448f0155cfc5683fa31dda4b4ca1c1e0d612"
+    },
+    {
+      "name": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    }
+  ]
+}

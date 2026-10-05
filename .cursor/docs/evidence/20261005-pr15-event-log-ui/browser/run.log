@@ -1,0 +1,16 @@
+{"label": "desktop geometry", "wall": 21.261416305002058}
+{"label": "desktop original glyph focus", "wall": 31.554239239019807}
+{"label": "desktop original glyph focus", "wall": 40.33099986499292}
+{"label": "desktop original glyph focus", "wall": 50.00613225001143}
+{"label": "desktop capture wave0_focus", "wall": 54.62645729799988}
+{"label": "desktop geometry", "wall": 61.524109362013405}
+Traceback (most recent call last):
+  File "/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py", line 107, in <module>
+    ui.geometry();ui.seek(.945);check(ui.state()['view']['wave']==1,'original slider reaches second saved wave')
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py", line 25, in check
+    if not value:raise AssertionError(label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: original slider reaches second saved wave
+
+{"BROWSER_END": true, "actual_exit": 1, "checks": 92, "wall": 67.95672253600787}
