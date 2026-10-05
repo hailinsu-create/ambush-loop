@@ -250,6 +250,7 @@ func _build() -> void:
 	_add(_row_watch, "abort", "中止观战", Color(0.58, 0.20, 0.18), Vector2(120, 64))
 	_add(_row_watch, "pause", "暂停", Color(0.40, 0.44, 0.38), Vector2(120, 64))
 	_add(_row_watch, "speed", "倍速", Color(0.42, 0.46, 0.32), Vector2(120, 64))
+	_add(_row_watch, "team_fire", "全队开火", Color(0.82, 0.65, 0.24), Vector2(120, 64))
 	_add_wave_chip(_row_watch)
 	_add(_row_watch, "nade_watch", "自动雷", Color(0.82, 0.42, 0.18))
 	_add(_row_watch, "skip", "终局", Color(0.42, 0.52, 0.28))
@@ -368,6 +369,13 @@ func _add_wave_chip(row: HBoxContainer) -> void:
 	_wave_chip = p
 	_wave_lab = lab
 
+
+func set_team_permission(show: bool, text: String, locked: bool) -> void:
+	var button: Button = _btns.get("team_fire")
+	if button:
+		button.visible = show
+		button.disabled = locked
+		button.text = text
 
 func set_next_wave(text: String, show: bool) -> void:
 	if _wave_chip == null:

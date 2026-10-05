@@ -28,6 +28,14 @@ func _run() -> void:
 		return
 	if not _expect_teaching_owner("yard_initial", main):
 		return
+	for _refresh in 8:
+		main._update_hud()
+		await _frames(3)
+		print("M2_ROLE_DOCK_REFRESH touch=%s pin_touch=%s pending_touch=%s revision=%d dock=%s content=%s" % [main._want_touch(), main._role_box_pin_touch, main._role_box_pin_pending_touch, main._role_box_pin_revision, main.role_box.offset_bottom-main.role_box.offset_top, main.role_box.get_combined_minimum_size().y])
+		if bool(main._role_box_pin_pending):
+			push_error("M2_ROLE_DOCK_UNCHANGED_REFRESH_REQUEUES")
+			quit(70)
+			return
 	gs.set_force_touch_hud(true)
 	main._ensure_touch_hud()
 	main._update_hud()

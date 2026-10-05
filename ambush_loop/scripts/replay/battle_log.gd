@@ -98,6 +98,8 @@ func format_event(ev: Dictionary) -> String:
 			if amb_nm != "":
 				return "%.1fs  ★ %s 入伏许可 — 现在打" % [t, amb_nm]
 			return "%.1fs  队员%d 入伏许可开启" % [t, ev["actor_id"]]
+		"team_fire_permission":
+			return "%.1fs  全队开火许可 · %d名待伏队员" % [t, ev.get("payload", {}).get("armed_ids", []).size()]
 		"door":
 			return "%.1fs  门状态=%s" % [t, str(ev["payload"].get("locked", "?"))]
 		"no_engage":

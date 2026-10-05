@@ -1,7 +1,7 @@
 extends RefCounted
 
 ## In-memory, pre-alarm only. Never load battle progress or grant extra supply.
-const VERSION := 1
+const VERSION := 2
 const Weapons := preload("res://scripts/raid/weapon_catalog.gd")
 const FIELDS := ["ammo", "grenades", "mines", "decoys", "stance", "auto_grenade", "has_ammo_pack", "ammo_pack_used", "visible", "follow_lead", "hp", "alive"]
 var snapshot: Dictionary = {}
@@ -11,7 +11,7 @@ func clear() -> void:
 
 func _signature(main) -> String:
 	if main.level == null or main.level.level_id != "yard": return ""
-	var rules := [VERSION, main.level.level_id, main.level.stashes, main.level.waves, main.level.route_cells, main.level.starting_loadouts, main.level.ambush_zone, main.grid.blocked, main.grid.elevation_tier, main.grid.occlusion_kind, main.grid.ramp_links]
+	var rules := [VERSION, main.YARD_PERMISSION_CONTRACT, main.level.level_id, main.level.stashes, main.level.waves, main.level.route_cells, main.level.starting_loadouts, main.level.ambush_zone, main.grid.blocked, main.grid.elevation_tier, main.grid.occlusion_kind, main.grid.ramp_links]
 	for weapon in ["kar98k", "mg42", "kar98k_zf", "grenade"]: rules.append(Weapons.def(weapon))
 	return str(rules).sha256_text()
 
@@ -29,7 +29,7 @@ func capture(main) -> void:
 	var crates: Array = []
 	for stash in main.raid_stashes:
 		if is_instance_valid(stash) and not stash.collected: crates.append({"cell": stash.cell, "kind": stash.kind, "amount": stash.amount})
-	snapshot = {"signature": _signature(main), "crew": crew, "crates": crates, "selected": main.selected.op_id if main.selected else -1, "plan": main.last_plan.duplicate_plan()}
+	snapshot = {"signature": _signature(main), "manual_permission": main.yard_manual_permission, "crew": crew, "crates": crates, "selected": main.selected.op_id if main.selected else -1, "plan": main.last_plan.duplicate_plan()}
 
 func restore(main) -> bool:
 	if not available(main) or main.phase != main.Phase.FAILED: return false
@@ -43,6 +43,7 @@ func restore(main) -> bool:
 	main.last_plan = state.plan.duplicate_plan()
 	main._checkpoint_restoring = true
 	main._start_setup(true, false, true)
+	main.yard_manual_permission = bool(state.get("manual_permission", false))
 	main.frozen_plan.clear()
 	for slot in main.cover_slots: slot.occupied_by = null
 	for record in state.crew:
