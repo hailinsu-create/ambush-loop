@@ -12,10 +12,9 @@ func _run() -> void:
 	if main == null or not await _prepare_plan(main, "A"):
 		_finish_failed()
 		return
-	var presenter = PresenterScript.new()
-	presenter.name = "I0YardPresentation"
-	main.add_child(presenter)
-	presenter.bind(main)
+	_expect(main.get_node_or_null("I0YardPresentation") == null, "M2_E_NORMAL_ENTRY_NO_EAGER_3D_ALLOCATION")
+	await _click(main.yard_hud.preview_3d_button)
+	var presenter = main.get_node_or_null("I0YardPresentation")
 	presenter.set_process(false)
 	presenter.sync_presentation()
 	_expect(presenter._world != null and presenter.active, "M2_E_YARD_BOUND")
