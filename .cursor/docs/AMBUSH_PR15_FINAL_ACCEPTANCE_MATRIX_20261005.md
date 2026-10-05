@@ -1,5 +1,7 @@
 # PR15 最终候选剩余验收矩阵与合批顺序
 
+2026-10-05最新：[首绘制反证/撤回touch候选END](AMBUSH_PR15_REPLAY_FIRST_DRAW_END_20261005.md)。父端95daa QA严格同步E6/首process后隐藏layout E3、帧收益不稳，原失败保持。native原按钮首postdraw反证UI/17对像素一致但完整raw state29差/strict实际1且Web范围未覆盖，不称候选接受；固定撤回产品b74f1fc/tree1e8与1ec产品树精确same。下一旧真实mine/repack原件呈现；不继续同类小优化，不部署Site仍v4；既有1ec历史证据按原范围沿用，不为docs/撤回同产品树重打旧producer/whole。完整QA包路径仍待。
+
 2026-10-05追加：[最小REPLAY touch候选END](AMBUSH_PR15_REPLAY_TOUCH_CANDIDATE_END_20261005.md)固定runtime95daa05/tree e331，较下文基线1ec仅main省相邻第二刷新；已有producer/whole cohort不拼成此候选最终13。已完成有界子诊断与fresh ABBA/原消费者最终HUD等价，源码调用2→1/style50→25；不利p95、约1%漂移与两原monolithic cap60失败保留，两个对应行为变体通过，不称原时间门通过。owned engines/browser END18:46:54/live0，下一父端独立QA；production release新包/Site更新尚无，独立合格前不发布。原samecandidate13/核心fullsmoke/全艺术/听感/A3/APK/设备与archive身份门仍待，下文历史入口保留。
 
 
