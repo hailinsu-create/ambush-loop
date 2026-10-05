@@ -17,3 +17,5 @@ close原receipt/vault及预收尾外部副本先封，实际PTY0/browser/HTTP EN
 mine/repack可能仍0，基线不代所有工具自然专项；之后用真实合法策略独立验证，不注入forced events。后续原yard全whole、同最终候选13波/六record/全3D事件/FX与A3/fullsmoke/FINAL/正式origin与PCK差异/耳听/可追溯APK仍待。设备按用户全计划后统一，GPT PLAN/REVIEW unavailable。R5制作/manifest-loader/资产独占接口保持，无新资产请求。
 
 准备更新：隔离持久刷新负/正对照已完成，原8532刷新后仍错误warehouse、1ec刷新后实际pump且静音偏好持久，各actual0，原活动档未打开。radio只读桥官方导出实际0/E0/S0，PCK64,667,788bytes/SHA817fadb99a811b188eb309cdd663efd0577b28fc6e2bf1fe64512144657edd3f；相对fixed QA仅qa/event_log_observer.gdc改变，所有payload MD5/53完整class块/资产保持已核。导出外层pure audit误加res://前缀KeyError使wrapper1，原日志/工具实际观察保留；另独立纯读取audit修正actual0，不重导/不重跑制作。radio producer/whole/credits runtime仍UNRUN。
+
+状态更新：PASS_BOUNDED_RADIO_FUNCTIONAL_END，实际命令/原件/范围及下一QA交接以[radio功能END](AMBUSH_PR15_WEB_RADIO_FUNCTIONAL_END_20261005.md)为准。所有作者窗口已END，radio/whole/credits相关UNRUN均为历史准备状态；同sourcefull13/完整计划仍待。

@@ -1,0 +1,654 @@
+{
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "sealed_at": "2026-10-05T15:02:44.864386+00:00",
+  "status": "PASS_BOUNDED_RADIO_FUNCTIONAL_END",
+  "original_record": {
+    "attempt": "1b581d1574f29d83f44f04032601b7f6",
+    "bytes": 14263460,
+    "level": "radio",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+    "terminal": 7390,
+    "validation": {
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "events": 57,
+      "failures": [],
+      "frames": 972,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/radio-native-1ec-20261005/run/radio-record.bin",
+    "producer_wall": 552.739915187005
+  },
+  "receipts": [
+    {
+      "label": "close-radio",
+      "bytes": 3473,
+      "sha256": "0cb4f3cf6be0192c0f458fc993f1d0a710e90be7947bb3ebf2fa4b99a42d90a6",
+      "actual_exit": 0,
+      "start": "2026-10-05T15:01:25.955512+00:00",
+      "end": "2026-10-05T15:01:26.442554+00:00"
+    },
+    {
+      "label": "initialize-radio-original-profile",
+      "bytes": 1775,
+      "sha256": "49c467f3d38528843f6a2c3ac55af919b85fa0611985ad89f224d0f82518689c",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:29:24.782322+00:00",
+      "end": "2026-10-05T14:29:29.439831+00:00"
+    },
+    {
+      "label": "produce-radio-natural",
+      "bytes": 1766,
+      "sha256": "78570507a17a03045353dcaf90b33b52b91b435df9cd3de9650e96d9be61f8a6",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:30:14.351304+00:00",
+      "end": "2026-10-05T14:39:42.464997+00:00"
+    },
+    {
+      "label": "radio-browser-final-proof",
+      "bytes": 3644,
+      "sha256": "4e888029494e0ccffc745b38428816c4e635c78a73a3dad306b169f9a23d4234",
+      "actual_exit": 0,
+      "start": "2026-10-05T15:01:03.798504+00:00",
+      "end": "2026-10-05T15:01:03.913447+00:00"
+    },
+    {
+      "label": "radio-credits-complete-reload-reopen",
+      "bytes": 3657,
+      "sha256": "5b886403092ea6154d7821e3e27263ddcca3cd13d0daed8f43c2d65457e1d679",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:59:23.349893+00:00",
+      "end": "2026-10-05T15:00:22.681470+00:00"
+    },
+    {
+      "label": "radio-whole-natural-1x",
+      "bytes": 1768,
+      "sha256": "05d4558b65fc1f567f6d12b232eb6d6309c02d955e149d036d53c606bbf5678a",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:43:27.742405+00:00",
+      "end": "2026-10-05T14:52:39.618689+00:00"
+    },
+    {
+      "label": "radio-whole-natural-2x",
+      "bytes": 1768,
+      "sha256": "bd06fc36d07453bd445b15ee77e7eae233f7a7b628886f6357205c186aa44679",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:53:32.126096+00:00",
+      "end": "2026-10-05T14:58:27.905367+00:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "browser-end-tool-receipt.json",
+      "bytes": 988,
+      "sha256": "2b2687104348020f551b0cc1af948f2a33345564ee200d9d6720e851197fe873"
+    },
+    {
+      "path": "input-and-visual-accounting.json",
+      "bytes": 658,
+      "sha256": "64b19dd52118dfc25f06260db22068dd9c21b49a7ae1f57f34bc8bb8f17507ab"
+    },
+    {
+      "path": "post-end-verification.json",
+      "bytes": 11233,
+      "sha256": "4d5218fda991934bcc05995f90fbe7b1688cec65739cf56a64e966703818e15e"
+    },
+    {
+      "path": "radio-offline-audit-receipt-seal.json",
+      "bytes": 83,
+      "sha256": "923f4e92e626b07e674637dbb7ce1e22744214c8b5d582423670f66db7481e08"
+    },
+    {
+      "path": "radio-offline-audit-receipt-vault.json",
+      "bytes": 1041,
+      "sha256": "8fa0073c427c0b493fe7c2d92505cf6061c7f2da03475e9f16066c2b78f675f6"
+    },
+    {
+      "path": "radio-offline-audit-receipt.json",
+      "bytes": 1041,
+      "sha256": "8fa0073c427c0b493fe7c2d92505cf6061c7f2da03475e9f16066c2b78f675f6"
+    },
+    {
+      "path": "radio-offline-audit-request.json",
+      "bytes": 858,
+      "sha256": "d2f004eb86f12a07b0caf9d84cd98b7da16de1ad772a7ed5f2cee81728b5cf7f"
+    },
+    {
+      "path": "radio-offline-audit-result.json",
+      "bytes": 1339,
+      "sha256": "d0f5b1e28f0c5419cd0deed73bd749e98d13ab28f764daf66a132ee2a34f4fea"
+    },
+    {
+      "path": "radio-offline-audit.log",
+      "bytes": 1326,
+      "sha256": "99df3d6b9173f9dac93da7e5213dcd60c68abe453f3beefdcbab797b49288e37"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/initialize-radio-original-profile.json",
+      "bytes": 1775,
+      "sha256": "49c467f3d38528843f6a2c3ac55af919b85fa0611985ad89f224d0f82518689c"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/manifest.json",
+      "bytes": 1626,
+      "sha256": "841d3e83624e724e99839509288d01b3c194b0e61e5217101920bfff98a138ad"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/produce-radio-natural.json",
+      "bytes": 1766,
+      "sha256": "78570507a17a03045353dcaf90b33b52b91b435df9cd3de9650e96d9be61f8a6"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/radio-credits-complete-reload-reopen.json",
+      "bytes": 3657,
+      "sha256": "5b886403092ea6154d7821e3e27263ddcca3cd13d0daed8f43c2d65457e1d679"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/radio-whole-natural-1x.json",
+      "bytes": 1768,
+      "sha256": "05d4558b65fc1f567f6d12b232eb6d6309c02d955e149d036d53c606bbf5678a"
+    },
+    {
+      "path": "receipt-checkpoint-before-finish/radio-whole-natural-2x.json",
+      "bytes": 1768,
+      "sha256": "bd06fc36d07453bd445b15ee77e7eae233f7a7b628886f6357205c186aa44679"
+    },
+    {
+      "path": "run/console-final.json",
+      "bytes": 3278,
+      "sha256": "523162d746aec192600809bb008048ab01d0c9c57a8be67133adf8c9a08b90da"
+    },
+    {
+      "path": "run/controller-events.jsonl",
+      "bytes": 3793,
+      "sha256": "14a8d3c2fedca610a81e4c77a12cb0a20fae5532cf5e15dbf2a5619f01fd578e"
+    },
+    {
+      "path": "run/driver-actions.jsonl",
+      "bytes": 2225419,
+      "sha256": "be385b85b392c73019171e34d4611da16e59d6680d1ccf464e1a322b2efc16ad"
+    },
+    {
+      "path": "run/engine-window-lifecycle.json",
+      "bytes": 483,
+      "sha256": "7750529b1fbab98f1dbfe14dfa628e5dbdf192c3fd0782e8d594700dd2a7537e"
+    },
+    {
+      "path": "run/http.log",
+      "bytes": 1683,
+      "sha256": "976f1e153c91503c9b418f27ae86232dbd7dcd50ac32dde41ba09b121a5d595b"
+    },
+    {
+      "path": "run/limited-reopen-owned-pages.json",
+      "bytes": 208,
+      "sha256": "524ee73259a7d40d86c257ee23d471f4cdbd042b7cb4cf3608d97f7f03f670d8"
+    },
+    {
+      "path": "run/loaded-controls/radio-browser-final-proof.py",
+      "bytes": 2755,
+      "sha256": "f651ad1e41b10de999d80b23296225fd4a0488507039a228d2db0134605b45dc"
+    },
+    {
+      "path": "run/loaded-controls/radio-credits-complete-reload-reopen.py",
+      "bytes": 4264,
+      "sha256": "18224bc3ef2110e1ed65ad14c9f46854cd63c713cd905ea6c7c2e033742605b6"
+    },
+    {
+      "path": "run/loaded-controls/radio-whole-1x-helper.py",
+      "bytes": 9672,
+      "sha256": "95037cda1161d0183753f379656871b4b05648cbeb31971b5af16f1d833292d1"
+    },
+    {
+      "path": "run/loaded-controls/radio-whole-2x-helper.py",
+      "bytes": 9672,
+      "sha256": "95037cda1161d0183753f379656871b4b05648cbeb31971b5af16f1d833292d1"
+    },
+    {
+      "path": "run/loaded-controls/radio-whole-natural-1x.py",
+      "bytes": 698,
+      "sha256": "281f455f47f888a4b3e808ac54ce5ef4a217a86b46a7d2f81ba70f0f158ed4e4"
+    },
+    {
+      "path": "run/loaded-controls/radio-whole-natural-2x.py",
+      "bytes": 698,
+      "sha256": "56891aa8b5f855a47db295cf04684df80fe8fa9fe16ef2205943a55d9c102bf0"
+    },
+    {
+      "path": "run/profile-after-radio.json",
+      "bytes": 5303,
+      "sha256": "737eb7f08507d5dd7c842660a2ba9a3586f7ee0153059e8b1dbdb783fe6f5651"
+    },
+    {
+      "path": "run/radio-before-boundary-browser.json",
+      "bytes": 17160,
+      "sha256": "aea3f2639d6a0c5346bbe48288b19f3af9b9d67da913911a3c7d4ca0a2f649f1"
+    },
+    {
+      "path": "run/radio-before-boundary-fingerprints.json",
+      "bytes": 365693,
+      "sha256": "e1e78abe9218b972ffa034bcb29f8b3655e182a7774f9df58d3d64b7ad27f727"
+    },
+    {
+      "path": "run/radio-boundary-final-browser.json",
+      "bytes": 482,
+      "sha256": "84b68e3add3d90d8a938e0711e0852efb844acb81407d5688572bf3cc9d0c2d0"
+    },
+    {
+      "path": "run/radio-boundary-final-fingerprints.json",
+      "bytes": 1146,
+      "sha256": "28d49844c7a67b90efcf1a7dd1aadec57ac1cb8ce71f7559afcad82854cb3e73"
+    },
+    {
+      "path": "run/radio-browser-final-proof.json",
+      "bytes": 984,
+      "sha256": "bb70a04bb1f970fe0e04514df5ce1ca593ffe33ec73dcec4fb89ba4d4facec1c"
+    },
+    {
+      "path": "run/radio-credits-scroll-proof.json",
+      "bytes": 17390,
+      "sha256": "e90ea36fc294f2e6d3ccbe7440a7c0f8c12ab8ef3ab32d15d0a0cf98effa0e66"
+    },
+    {
+      "path": "run/radio-whole-1x-after-terminal-full-fingerprint.json",
+      "bytes": 253842,
+      "sha256": "322d386848cbf253a29d49ddd8ebe159baba6a2553112146152ee1ab5c680934"
+    },
+    {
+      "path": "run/radio-whole-1x-before-natural-full-fingerprint.json",
+      "bytes": 61414,
+      "sha256": "6dd74f51be75996db44af77c2d1ac2e2bc3f75e4c32cfb51ade6387d70e1f521"
+    },
+    {
+      "path": "run/radio-whole-1x-post-WON-full-fingerprint.json",
+      "bytes": 260295,
+      "sha256": "2e8167e4f347e17a63fb0ddd56a91a7305f1c4da21b48c51139aa5544d1084ca"
+    },
+    {
+      "path": "run/radio-whole-1x.json",
+      "bytes": 193125,
+      "sha256": "aa7202eef0ee91d36c98b6e7cc6971274864710f09d18143069d691df296d037"
+    },
+    {
+      "path": "run/radio-whole-2x-after-terminal-full-fingerprint.json",
+      "bytes": 367696,
+      "sha256": "dd3ed677a5fc2db6fa55ef4b12fc5736114e9fee5244103a9a12feca76acd077"
+    },
+    {
+      "path": "run/radio-whole-2x-before-natural-full-fingerprint.json",
+      "bytes": 269820,
+      "sha256": "1f8d7df4ad62d2f9d31b6a5b846812720f994163073c50720a46604b933f7d0d"
+    },
+    {
+      "path": "run/radio-whole-2x-post-WON-full-fingerprint.json",
+      "bytes": 374169,
+      "sha256": "0daf93ed88c2334f3a0d785312d28ad4881f9d08743d92628d0e9498d57ccfac"
+    },
+    {
+      "path": "run/radio-whole-2x.json",
+      "bytes": 98574,
+      "sha256": "715948cd7a7e14489add75b91bdc8f6cb9831413ffdb01aa47c6cb68a881d997"
+    },
+    {
+      "path": "run/radio_complete_mission_rows.png",
+      "bytes": 89111,
+      "sha256": "14c2ed7253505769be9fce505fa3f4b954fb92bca3bdcbbd94c509eec02b5d49"
+    },
+    {
+      "path": "run/radio_complete_reload-after-reload.json",
+      "bytes": 3953,
+      "sha256": "e31c80a2f6a7f151bc210c5bd08ca01af84dbefaca56be409c35dc5a8bbc8f42"
+    },
+    {
+      "path": "run/radio_complete_reload-before-reload.json",
+      "bytes": 4827,
+      "sha256": "17168bccfe411cc996b1f4056fadf2d91d2273bbbd555b4ae2055c030a16e6f3"
+    },
+    {
+      "path": "run/radio_complete_reload-browser-before-reload.json",
+      "bytes": 18211,
+      "sha256": "f69f49cc05e8721db17cee616ca02ddb16e04f0d684b11b5bd00f0be26d96895"
+    },
+    {
+      "path": "run/radio_complete_reload-engine-before-reload.json",
+      "bytes": 363441,
+      "sha256": "53bbfd381e8892a560643aab887f226951e2e615d0276f95d67507a836475136"
+    },
+    {
+      "path": "run/radio_complete_reload_reloaded_mission_rows.png",
+      "bytes": 86636,
+      "sha256": "ad0d86f860be4c0bc3202b81e63acff237e7430d9f40e2f91b5286e0ea53810a"
+    },
+    {
+      "path": "run/radio_complete_reopen-after-reload.json",
+      "bytes": 3952,
+      "sha256": "d65ccdd302461d6f31291a3383b41936633d2143cee5839e105d2338a76499e0"
+    },
+    {
+      "path": "run/radio_complete_reopen-before-reload.json",
+      "bytes": 4780,
+      "sha256": "86c5cf80b993b15ed5573e5d8edfc428306de47719e95b9a7fcc8fca52efc79d"
+    },
+    {
+      "path": "run/radio_complete_reopen-browser-before-reload.json",
+      "bytes": 456,
+      "sha256": "9cdc7fb8d0001890f979ce561ee7e99f33c9dd5f77101b65a0e9c9b0f4e0b9ac"
+    },
+    {
+      "path": "run/radio_complete_reopen-engine-before-reload.json",
+      "bytes": 1146,
+      "sha256": "3482cf2962e660e573ddda7ff9127e7ed73e1793e32f5f8f8b7765c4bd53104a"
+    },
+    {
+      "path": "run/radio_complete_reopen_reloaded_mission_rows.png",
+      "bytes": 86797,
+      "sha256": "5ed74796ea74c5de9c632d27c5e375f40c40041fd1ea16e754e50d832a4149ff"
+    },
+    {
+      "path": "run/radio_complete_saved_safe_title.png",
+      "bytes": 106486,
+      "sha256": "61ce4ad03692c762d59895a077f8f52ad702e562a619e093c9b8ffaa213c9318"
+    },
+    {
+      "path": "run/radio_credits_open.png",
+      "bytes": 318977,
+      "sha256": "74a7aec53a0a945b3f4cb1f87e4d8df3046d803d1aff3ec5a339d62842ad842a"
+    },
+    {
+      "path": "run/radio_credits_scrolled.png",
+      "bytes": 313633,
+      "sha256": "35ca432f662e786ecbfd8a2ebc55c8735853a876409f1d8e776198c052fb5a8b"
+    },
+    {
+      "path": "run/radio_whole_1x_terminal.png",
+      "bytes": 1051345,
+      "sha256": "0d0555d508ef8c5744988fcf7c5946407e930266be298d1e8a3d56c723f8a36a"
+    },
+    {
+      "path": "run/radio_whole_2x_terminal.png",
+      "bytes": 1051638,
+      "sha256": "3fc6d445fb26f4e6e12e3ea9f670bedad4276b0441a11fc2fcc951fe0e21fc99"
+    },
+    {
+      "path": "run/receipt-vault/close-radio.json",
+      "bytes": 3473,
+      "sha256": "0cb4f3cf6be0192c0f458fc993f1d0a710e90be7947bb3ebf2fa4b99a42d90a6"
+    },
+    {
+      "path": "run/receipt-vault/close-radio.seal.json",
+      "bytes": 247,
+      "sha256": "ebc87e04ba296a17f12da888858136d7ae837f7a5d7d1576064417b69a039824"
+    },
+    {
+      "path": "run/receipt-vault/radio-browser-final-proof.json",
+      "bytes": 3644,
+      "sha256": "4e888029494e0ccffc745b38428816c4e635c78a73a3dad306b169f9a23d4234"
+    },
+    {
+      "path": "run/receipt-vault/radio-browser-final-proof.seal.json",
+      "bytes": 261,
+      "sha256": "7d5cff7126752f9ed32edd5d835afad525f14640f979922c7d6092ed6b913e62"
+    },
+    {
+      "path": "run/receipt-vault/radio-credits-complete-reload-reopen.json",
+      "bytes": 3657,
+      "sha256": "5b886403092ea6154d7821e3e27263ddcca3cd13d0daed8f43c2d65457e1d679"
+    },
+    {
+      "path": "run/receipt-vault/radio-credits-complete-reload-reopen.seal.json",
+      "bytes": 272,
+      "sha256": "286f88b8a71357ed53a0499c3ac9385db75e4ed275e5a545718a93987e888d36"
+    },
+    {
+      "path": "run/receipt-vault/radio-whole-natural-1x.json",
+      "bytes": 1768,
+      "sha256": "05d4558b65fc1f567f6d12b232eb6d6309c02d955e149d036d53c606bbf5678a"
+    },
+    {
+      "path": "run/receipt-vault/radio-whole-natural-1x.seal.json",
+      "bytes": 258,
+      "sha256": "40efe75a0a2683050980fe2a7dc07cb2327189a7549ce2ebe7eec66a488cfe97"
+    },
+    {
+      "path": "run/receipt-vault/radio-whole-natural-2x.json",
+      "bytes": 1768,
+      "sha256": "bd06fc36d07453bd445b15ee77e7eae233f7a7b628886f6357205c186aa44679"
+    },
+    {
+      "path": "run/receipt-vault/radio-whole-natural-2x.seal.json",
+      "bytes": 258,
+      "sha256": "b3b5028be84f8a332e53ffac9d1dd35f60868fb73da71b772cdfc01ede4687cf"
+    },
+    {
+      "path": "run/receipts/close-radio.json",
+      "bytes": 3473,
+      "sha256": "0cb4f3cf6be0192c0f458fc993f1d0a710e90be7947bb3ebf2fa4b99a42d90a6"
+    },
+    {
+      "path": "run/receipts/radio-browser-final-proof.json",
+      "bytes": 3644,
+      "sha256": "4e888029494e0ccffc745b38428816c4e635c78a73a3dad306b169f9a23d4234"
+    },
+    {
+      "path": "run/receipts/radio-credits-complete-reload-reopen.json",
+      "bytes": 3657,
+      "sha256": "5b886403092ea6154d7821e3e27263ddcca3cd13d0daed8f43c2d65457e1d679"
+    },
+    {
+      "path": "run/receipts/radio-whole-natural-1x.json",
+      "bytes": 1768,
+      "sha256": "05d4558b65fc1f567f6d12b232eb6d6309c02d955e149d036d53c606bbf5678a"
+    },
+    {
+      "path": "run/receipts/radio-whole-natural-2x.json",
+      "bytes": 1768,
+      "sha256": "bd06fc36d07453bd445b15ee77e7eae233f7a7b628886f6357205c186aa44679"
+    },
+    {
+      "path": "run/requests/close-radio.json",
+      "bytes": 133,
+      "sha256": "75917865b5f1d2afaaeb08508667e44a921be98a438869d13bcf82bd16b34c06"
+    },
+    {
+      "path": "run/requests/radio-browser-final-proof.json",
+      "bytes": 210,
+      "sha256": "55d767026da0207e728bb4206943a7ffa8723aa167ec5f1fafee93f0c4ee2124"
+    },
+    {
+      "path": "run/requests/radio-credits-complete-reload-reopen.json",
+      "bytes": 223,
+      "sha256": "6744933b27cb175d31176d21f8e72402536961111fc358b641dae814394e7696"
+    },
+    {
+      "path": "run/requests/radio-whole-natural-1x.json",
+      "bytes": 209,
+      "sha256": "3cd1f264ce87c655fc7e4832c8342755d9e2abf76b0a2a2a92c5b5b6e5a35d0d"
+    },
+    {
+      "path": "run/requests/radio-whole-natural-2x.json",
+      "bytes": 209,
+      "sha256": "b465ca7b140aa690d70ce87b5976c66d548cf2538c55bca402cf7aa86d6e00dc"
+    }
+  ],
+  "file_count": 78,
+  "total_bytes": 8116932,
+  "scope": "all final whole/progress/END proof plus previously-live logs; original producer/bin referenced without rewrite; no full six/performance acceptance",
+  "prior_manifest": "../20261005-pr15-web-radio-producer/manifest.json",
+  "prior_file_count": 57,
+  "prior_total_bytes": 23087925,
+  "browser_final_proof": {
+    "status": "PASS",
+    "utc": "2026-10-05T15:01:03.913218+00:00",
+    "controller_pid": 165979,
+    "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+    "original_attempt": "1b581d1574f29d83f44f04032601b7f6",
+    "original_record_sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+    "owned_pages": 1,
+    "scene": "res://scenes/title.tscn",
+    "complete": true,
+    "continue_disabled": true,
+    "fixture_ready": false,
+    "browser_trusted_segments": [
+      155,
+      4,
+      4
+    ],
+    "engine_input_segments": [
+      156,
+      4,
+      4
+    ],
+    "console_errors": 0,
+    "page_errors": 0,
+    "GL_invalid": 0,
+    "gpu_readpixels_warnings": 8,
+    "whole_1x_callback_wall": 501.3123,
+    "whole_2x_callback_wall": 250.6034,
+    "rate_wall_ratio": 2.000420983913227,
+    "scope": "original radio producer, same original record natural full whole1x/2x, actual credits scroll, exact full campaign saved reload/reopen, safe Title; browser END/pure native artifact audit separately required"
+  },
+  "lifecycle": {
+    "window_start": "2026-10-05T14:28:54.974339+00:00",
+    "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+    "pid": 165979,
+    "profile": "/workspace/.ambush-loop-env/web-fresh-native-dab-20261005",
+    "url": "http://127.0.0.1:12815/index.html",
+    "engine_start": "2026-10-05T14:28:56.555790+00:00",
+    "engine_end": "2026-10-05T15:01:26.442554+00:00",
+    "clean_context_end": true,
+    "scope": "owned single persistent page/controller/server; actual PTY exit separately recorded"
+  },
+  "whole": [
+    {
+      "status": "PASS",
+      "level": "radio",
+      "rate": 1,
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "record_sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+      "terminal_tick": 7390,
+      "record_duration": 123.16666666666667,
+      "deadline_wall": 769.0,
+      "controller_total_wall": 507.5366934639751,
+      "input_to_terminal_callback_wall": 501.3123,
+      "record_unchanged": true,
+      "domain_unchanged": true,
+      "frame_checks": {
+        "checks": 15,
+        "failures": [],
+        "tick": 7390
+      },
+      "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance",
+      "observer_row_count": 935
+    },
+    {
+      "status": "PASS",
+      "level": "radio",
+      "rate": 2,
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "record_sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+      "terminal_tick": 7390,
+      "record_duration": 123.16666666666667,
+      "deadline_wall": 399.5,
+      "controller_total_wall": 257.0618547369959,
+      "input_to_terminal_callback_wall": 250.6034,
+      "record_unchanged": true,
+      "domain_unchanged": true,
+      "frame_checks": {
+        "checks": 15,
+        "failures": [],
+        "tick": 7390
+      },
+      "scope": "original ReplayButton/pause/speed/scrub/Home/resume; natural terminal; software WebGL, not frame budget acceptance",
+      "observer_row_count": 473
+    }
+  ],
+  "offline_artifact_result": {
+    "checks": 15707,
+    "event_type_counts": {
+      "door": 1,
+      "fire": 14,
+      "kill": 5,
+      "loot": 5,
+      "no_engage": 20,
+      "return_fire": 6,
+      "spawn": 5,
+      "terminal": 1
+    },
+    "event_wave_counts": {
+      "0": 38,
+      "1": 9,
+      "2": 10
+    },
+    "events": 57,
+    "failures": [],
+    "fire_actor_counts": {
+      "1": 12,
+      "3": 2
+    },
+    "frames": 972,
+    "local_tick_regressions": 2,
+    "original_loot_events": [
+      {
+        "payload": {
+          "amount": 2,
+          "kind": "ammo"
+        },
+        "seq": 35,
+        "wave_id": 0
+      },
+      {
+        "payload": {
+          "amount": 5,
+          "kind": "ammo"
+        },
+        "seq": 36,
+        "wave_id": 0
+      },
+      {
+        "payload": {
+          "amount": 2,
+          "kind": "ammo"
+        },
+        "seq": 37,
+        "wave_id": 0
+      },
+      {
+        "payload": {
+          "amount": 1,
+          "kind": "decoy"
+        },
+        "seq": 46,
+        "wave_id": 1
+      },
+      {
+        "payload": {
+          "amount": 1,
+          "kind": "radio_part"
+        },
+        "seq": 55,
+        "wave_id": 2
+      }
+    ],
+    "record_sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+    "scope": "non-destructive original archived binary and pure reader/ViewState contract audit; offline selections are not whole playback or actual 3D renderer checks",
+    "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+    "terminal": 7390,
+    "wave_phase_counts": {
+      "0:0": 505,
+      "0:1": 100,
+      "0:5": 160,
+      "1:1": 22,
+      "1:5": 101,
+      "2:1": 23,
+      "2:3": 1,
+      "2:5": 60
+    }
+  },
+  "pre_finish_receipts_reverified": 5,
+  "live_engines": [],
+  "ports_closed": true,
+  "profile_lock_absent": true
+}
