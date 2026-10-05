@@ -1,0 +1,412 @@
+{
+  "status": "PASS",
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "record": {
+    "attempt": "1b581d1574f29d83f44f04032601b7f6",
+    "bytes": 14263460,
+    "level": "radio",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+    "terminal": 7390,
+    "validation": {
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "events": 57,
+      "failures": [],
+      "frames": 972,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/radio-native-1ec-20261005/run/radio-record.bin",
+    "producer_wall": 552.739915187005
+  },
+  "state": {
+    "attempt": "1b581d1574f29d83f44f04032601b7f6",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          208,
+          336
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          432,
+          400
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          496,
+          528
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          944,
+          560
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          784,
+          208
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          1040,
+          368
+        ]
+      }
+    ],
+    "credits_scroll": {
+      "max": 8124,
+      "page": 0,
+      "vertical": 0
+    },
+    "engine_frames": 1492,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "fixture_ready": false,
+    "focus_actor": -1,
+    "focus_type": "",
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 112,
+    "input_tail": {
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "button": 1,
+      "device": 32,
+      "engine_frame": 1463,
+      "kind": "mouse",
+      "phase": 5,
+      "pos": [
+        356,
+        674
+      ],
+      "presents": 1463,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 599675400
+    },
+    "level": "radio",
+    "log": {
+      "events": 57,
+      "playback_frames": 972,
+      "playback_terminal": 7390,
+      "playback_tick": 7390,
+      "snapshots": 149,
+      "terminal": 845,
+      "terminal_reason": "win"
+    },
+    "loot": [],
+    "mines_count": 1,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "",
+      "tutorial_page": 0
+    },
+    "observer_usec": 2911000,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 4,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 270,
+        "family": "rifle",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 7,
+            "kind": "kar98k"
+          },
+          {
+            "amount": 1,
+            "kind": "grenade"
+          },
+          {
+            "amount": 2,
+            "kind": "decoy"
+          }
+        ],
+        "pool": {
+          "rifle": 4
+        },
+        "pos": [
+          432,
+          178.887634277344
+        ],
+        "role": 0,
+        "slot": -1,
+        "start_ammo": 5,
+        "weapon": "kar98k"
+      },
+      {
+        "alive": true,
+        "ammo": 50,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 90,
+        "family": "mg",
+        "has_ammo_pack": true,
+        "hp": 100,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 50,
+            "kind": "mg42"
+          }
+        ],
+        "pool": {
+          "mg": 50
+        },
+        "pos": [
+          784,
+          208
+        ],
+        "role": 1,
+        "slot": 4,
+        "start_ammo": 50,
+        "weapon": "mg42"
+      },
+      {
+        "alive": true,
+        "ammo": 4,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 270,
+        "family": "scout",
+        "has_ammo_pack": false,
+        "hp": 100,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 6,
+            "kind": "springfield"
+          }
+        ],
+        "pool": {
+          "scout": 4
+        },
+        "pos": [
+          1040,
+          368
+        ],
+        "role": 2,
+        "slot": 5,
+        "start_ammo": 5,
+        "weapon": "springfield"
+      }
+    ],
+    "phase": 3,
+    "presents": 1492,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2,
+      "tick": 0
+    },
+    "run_id": 4,
+    "scale": 1,
+    "scene": "res://scenes/main.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "selected": 1,
+    "settings": {
+      "complete": true,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "bd858eed12b54c69ef40eb3b6e4d97a5ed9fb2fe74b72bdf79f39199f92a3d55",
+          "text": "[progress]\n\nlevel_id=\"radio\"\nlevel_index=5\ncomplete=true\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\", \"pump\", \"railcut\", \"depot\", \"radio\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\npump_loops=1\npump_perfect=true\nrailcut_loops=1\nrailcut_perfect=true\ndepot_loops=1\ndepot_perfect=true\nradio_loops=1\nradio_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "9301c4e5a6be0d02e8d4274e92cad786790dce801903f7cbb330686757fefa0e",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\nseen_pump=true\nseen_railcut=true\nseen_depot=true\nseen_radio=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": false,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c1\u5173 \u00b7 \u9662\u5b50\uff1a\u4ea4\u53c9\u5c01\u9501",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c2\u5173 \u00b7 \u4ed3\u9053\uff1a\u5f39\u836f\u7a97\u53e3",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "pump",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c3\u5173 \u00b7 \u6cf5\u7ad9\uff1a\u5173\u95e8\u4e4b\u540e",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "railcut",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c4\u5173 \u00b7 \u4fe1\u53f7\u697c\uff1a\u53cc\u8d70\u5eca\u5ef6\u8fdf",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "depot",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c5\u5173 \u00b7 \u6cb9\u5e93\uff1a\u4e09\u8def\u5408\u56f4",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "radio",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c6\u5173 \u00b7 \u7535\u53f0\uff1a\u706f\u5854\u56de\u6ce2",
+          "unlocked": true
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "radio",
+      "persistence_error": "",
+      "persistence_status": "\u5df2\u4fdd\u5b58\u5230\u6b64\u6d4f\u89c8\u5668",
+      "quality": "standard",
+      "seen": {
+        "depot": true,
+        "pump": true,
+        "radio": true,
+        "railcut": true,
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "sim": {
+      "accum": 0.0198666666666667,
+      "paused": false,
+      "speed": 1,
+      "tick": 129
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "decoy",
+        "id": 143596195471,
+        "kind": "decoy",
+        "pos": [
+          720,
+          208
+        ]
+      },
+      {
+        "collected": false,
+        "family": "ammo",
+        "id": 143747190424,
+        "kind": "ammo",
+        "pos": [
+          944,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "scout",
+        "id": 143898185377,
+        "kind": "springfield",
+        "pos": [
+          592,
+          528
+        ]
+      },
+      {
+        "collected": false,
+        "family": "pistol",
+        "id": 144082734763,
+        "kind": "luger",
+        "pos": [
+          336,
+          528
+        ]
+      }
+    ],
+    "status": "\u8ba1\u5212\u594f\u6548",
+    "ticks_usec": 615972200,
+    "tool": 0,
+    "view": {
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "gesture": {
+        "contacts": 0,
+        "middle_down": false,
+        "pending_id": -1,
+        "suppressed": 0,
+        "ui_contacts": 0
+      },
+      "level": "radio",
+      "pitch": 55,
+      "recorded_phase": 3,
+      "roots": 4,
+      "seq": -1,
+      "tick": 7390,
+      "wave": 2,
+      "yaw": 35
+    },
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "wave": 2,
+    "wave_count": 3,
+    "waves_cleared": 3,
+    "window_size": [
+      1280,
+      720
+    ]
+  }
+}

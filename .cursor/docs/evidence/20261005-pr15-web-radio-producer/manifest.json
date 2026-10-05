@@ -1,0 +1,332 @@
+{
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "sealed_at": "2026-10-05T14:40:30.833404+00:00",
+  "status": "PRODUCER_PASS_WHOLE_PROGRESS_PENDING",
+  "original_record": {
+    "attempt": "1b581d1574f29d83f44f04032601b7f6",
+    "bytes": 14263460,
+    "level": "radio",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+    "terminal": 7390,
+    "validation": {
+      "attempt": "1b581d1574f29d83f44f04032601b7f6",
+      "events": 57,
+      "failures": [],
+      "frames": 972,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/radio-native-1ec-20261005/run/radio-record.bin",
+    "producer_wall": 552.739915187005
+  },
+  "receipts": [
+    {
+      "label": "initialize-radio-original-profile",
+      "bytes": 1775,
+      "sha256": "49c467f3d38528843f6a2c3ac55af919b85fa0611985ad89f224d0f82518689c",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:29:24.782322+00:00",
+      "end": "2026-10-05T14:29:29.439831+00:00"
+    },
+    {
+      "label": "produce-radio-natural",
+      "bytes": 1766,
+      "sha256": "78570507a17a03045353dcaf90b33b52b91b435df9cd3de9650e96d9be61f8a6",
+      "actual_exit": 0,
+      "start": "2026-10-05T14:30:14.351304+00:00",
+      "end": "2026-10-05T14:39:42.464997+00:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "audit_radio_payload_v2.py",
+      "bytes": 2284,
+      "sha256": "8c921ee6d4e257fecca3b6103d2bd634994c1ef3547717465b3b6460873cba2f"
+    },
+    {
+      "path": "browser_controller.py",
+      "bytes": 6687,
+      "sha256": "08cb07f724c38777ad7848c293ae3e1d805f3eef314f4e34bb94d18bc3832a83"
+    },
+    {
+      "path": "driver_core.py",
+      "bytes": 12085,
+      "sha256": "56e0bf7b813a7982b7de6a67e2aed14c5d7429e03ce2bf6af0b22487efed8bca"
+    },
+    {
+      "path": "driver_whole_and_progress.py",
+      "bytes": 8602,
+      "sha256": "f57855bc925f80d5fd00572936412ae586c64f2799ad8fff887aa7f8fabdbfbc"
+    },
+    {
+      "path": "driver_whole_full_fingerprints.py",
+      "bytes": 9672,
+      "sha256": "95037cda1161d0183753f379656871b4b05648cbeb31971b5af16f1d833292d1"
+    },
+    {
+      "path": "event_log_observer.gd",
+      "bytes": 19306,
+      "sha256": "8f12bc9175a04d42e0fc72a3bd03698053db06fb0dad5e083d8bd67a6ae5f008"
+    },
+    {
+      "path": "expected-profile-before.json",
+      "bytes": 5241,
+      "sha256": "4f0b37a746f6b9ae1831afda8c08d6f3ff1a087c02ec0530ea84c4209e42aa7d"
+    },
+    {
+      "path": "export-receipt-seal.json",
+      "bytes": 157,
+      "sha256": "b2e8c0927e7816cb0080aec705f3da9e674ed989031cef1811e4456822a7cec0"
+    },
+    {
+      "path": "export-receipt-vault.json",
+      "bytes": 2277,
+      "sha256": "39d363cf6400229e968326eca57b0dadb0c29dd1a209dbe47a3aac75a79ce6ba"
+    },
+    {
+      "path": "export-receipt.json",
+      "bytes": 2277,
+      "sha256": "39d363cf6400229e968326eca57b0dadb0c29dd1a209dbe47a3aac75a79ce6ba"
+    },
+    {
+      "path": "export-request.json",
+      "bytes": 748,
+      "sha256": "bcae3d5968951cec24ec14898701071c5d09d522c6c0578f432bc6fa9c804deb"
+    },
+    {
+      "path": "export-wrapper-observation.json",
+      "bytes": 478,
+      "sha256": "099c3c98455f6a0325a7c29970cd5192ec65e1845d425864e6b560e131f81f93"
+    },
+    {
+      "path": "export.log",
+      "bytes": 109059,
+      "sha256": "0b2504c3761ac990c1902059925299cde7f3ef1aa9e5409cfb9f22d4976a47f3"
+    },
+    {
+      "path": "export_radio.py",
+      "bytes": 4583,
+      "sha256": "6df8aa562b909b419a1f9b16a84dea2d1a01fa8bc3a34058f866a057b647b375"
+    },
+    {
+      "path": "finish_radio.py",
+      "bytes": 2755,
+      "sha256": "f651ad1e41b10de999d80b23296225fd4a0488507039a228d2db0134605b45dc"
+    },
+    {
+      "path": "initialize.py",
+      "bytes": 1927,
+      "sha256": "23fd7f9611f9ee914c68b458b563decb3551a961f45746aea99666c7b6392cef"
+    },
+    {
+      "path": "preflight.json",
+      "bytes": 3894,
+      "sha256": "835e8baee258b57dfa0ab730477744158a6814f0f345aab898912b20bd6e6fe5"
+    },
+    {
+      "path": "prepare_controls.py",
+      "bytes": 8886,
+      "sha256": "5679ba505497ea81fc20339c1c9ebbb6bcccc2b302751fb2faf4f9c2aa53bbe3"
+    },
+    {
+      "path": "prepare_export.py",
+      "bytes": 1726,
+      "sha256": "c9d160a113b46ee9c600656af78a3dda6c005e205ebdb196efe72316ddef9e74"
+    },
+    {
+      "path": "produce_radio.py",
+      "bytes": 2549,
+      "sha256": "34b8e55ee102eba966dd538e8502ce3124ea3b7d5741ee63d4dc51e98ffe6ddb"
+    },
+    {
+      "path": "radio-observer-stage-proof.json",
+      "bytes": 642,
+      "sha256": "dcd79cc22fa57a82f9b76b3e8901fde52285dc959362484abba95871725444ed"
+    },
+    {
+      "path": "radio-payload-audit.json",
+      "bytes": 327018,
+      "sha256": "c248b9178c289fbfb295386b8de4f667c91b129ec2be821a796ced865f5e2c97"
+    },
+    {
+      "path": "radio_boundary.py",
+      "bytes": 4264,
+      "sha256": "18224bc3ef2110e1ed65ad14c9f46854cd63c713cd905ea6c7c2e033742605b6"
+    },
+    {
+      "path": "radio_record_readonly_audit.gd",
+      "bytes": 6828,
+      "sha256": "edd39f95be21477b5da9dd87d7cdb7d223107b3d1a8a01f268c964fe222da5f0"
+    },
+    {
+      "path": "run/loaded-controls/initialize-radio-original-profile.py",
+      "bytes": 1927,
+      "sha256": "23fd7f9611f9ee914c68b458b563decb3551a961f45746aea99666c7b6392cef"
+    },
+    {
+      "path": "run/loaded-controls/produce-radio-natural.py",
+      "bytes": 2549,
+      "sha256": "34b8e55ee102eba966dd538e8502ce3124ea3b7d5741ee63d4dc51e98ffe6ddb"
+    },
+    {
+      "path": "run/owned-pages-startup.json",
+      "bytes": 203,
+      "sha256": "8e6300e48216cd4624fd2917b508706158b3a3258012d9905fe03b328321c548"
+    },
+    {
+      "path": "run/profile-before.json",
+      "bytes": 3735,
+      "sha256": "e1a3815e8871e85a032ba78666beee5848908ec4a983d25fac233c9d50be9eb5"
+    },
+    {
+      "path": "run/radio-browser-trusted.json",
+      "bytes": 13179,
+      "sha256": "fc263cbe65829d4ce3da909a34399b9bb9ced25c9f964b01c6676f53e11167b3"
+    },
+    {
+      "path": "run/radio-original-fingerprints.json",
+      "bytes": 40381,
+      "sha256": "c1a78380df8227f9c82e4c9e7ad71d55279cdce91d44e7a5ea5aacef42b81d0c"
+    },
+    {
+      "path": "run/radio-producer.json",
+      "bytes": 9377,
+      "sha256": "8bb24553d3faa43e7f7687ed1d085f50594ffd9d8c0840f44b5c21cfd641dc31"
+    },
+    {
+      "path": "run/radio-record.bin",
+      "bytes": 14263460,
+      "sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196"
+    },
+    {
+      "path": "run/radio-start-checkpoint.json",
+      "bytes": 9190,
+      "sha256": "1bf8f689ccbb639f1df6ff8533ffac11258708357a3399ecd29a0baea6b050ea"
+    },
+    {
+      "path": "run/radio_armed_scout.png",
+      "bytes": 1065675,
+      "sha256": "6bf74e40f7456410cfdc0a598efb779db9083b7e0ea5cf954a9f1379a92e8928"
+    },
+    {
+      "path": "run/radio_before_continue_title.png",
+      "bytes": 110345,
+      "sha256": "0a89f71dddf27edc7d7451088e0c4fe66e95e8d67a2cc881100ca454f15551c8"
+    },
+    {
+      "path": "run/radio_wave0_paused_alert.png",
+      "bytes": 1017221,
+      "sha256": "a36045dca6f781990fd959d33cd23e0f649f546a4ff599c7cb675b10983fee73"
+    },
+    {
+      "path": "run/radio_wave0_sweep.png",
+      "bytes": 1041128,
+      "sha256": "3050cade81f07c6bf5499292abb3d1e041335dcb96ec2a9a1ee7b7da6c21c061"
+    },
+    {
+      "path": "run/radio_wave1_paused_alert.png",
+      "bytes": 1016023,
+      "sha256": "bd2a654ed6663f783f2a6b261206dfe0fa009e4059f5126931c863976a385cb7"
+    },
+    {
+      "path": "run/radio_wave1_sweep.png",
+      "bytes": 1045924,
+      "sha256": "828e1b2d682b639bf5b9e73950f25eb6622f1159499cb552c58166a58cdb1f4a"
+    },
+    {
+      "path": "run/radio_wave2_paused_alert.png",
+      "bytes": 1017238,
+      "sha256": "599c24d3c8dcf9d9d411ca1f585dacac9b63b79027777222d4cc82a992d0f5bf"
+    },
+    {
+      "path": "run/radio_wave2_sweep.png",
+      "bytes": 1048006,
+      "sha256": "5319d5ccffa8fb16c0fedb4ea296a0bcc1b5e97afda1f38529203561f0cabd6c"
+    },
+    {
+      "path": "run/radio_won.png",
+      "bytes": 795452,
+      "sha256": "1c183345e4875cf4f23629ca3ffe29a3f44ae7695fb5852ffe5701a76b15fb26"
+    },
+    {
+      "path": "run/receipt-vault/initialize-radio-original-profile.json",
+      "bytes": 1775,
+      "sha256": "49c467f3d38528843f6a2c3ac55af919b85fa0611985ad89f224d0f82518689c"
+    },
+    {
+      "path": "run/receipt-vault/initialize-radio-original-profile.seal.json",
+      "bytes": 269,
+      "sha256": "a6f4387d5026f84710a685462c0f6d27379bad08797323aea35759a63f35bd50"
+    },
+    {
+      "path": "run/receipt-vault/produce-radio-natural.json",
+      "bytes": 1766,
+      "sha256": "78570507a17a03045353dcaf90b33b52b91b435df9cd3de9650e96d9be61f8a6"
+    },
+    {
+      "path": "run/receipt-vault/produce-radio-natural.seal.json",
+      "bytes": 257,
+      "sha256": "cfb4b1d4ed21ee628c34b20c6a60bf7e2841df3129f2e162e14b2c4dd483ce5f"
+    },
+    {
+      "path": "run/receipts/initialize-radio-original-profile.json",
+      "bytes": 1775,
+      "sha256": "49c467f3d38528843f6a2c3ac55af919b85fa0611985ad89f224d0f82518689c"
+    },
+    {
+      "path": "run/receipts/produce-radio-natural.json",
+      "bytes": 1766,
+      "sha256": "78570507a17a03045353dcaf90b33b52b91b435df9cd3de9650e96d9be61f8a6"
+    },
+    {
+      "path": "run/requests/initialize-radio-original-profile.json",
+      "bytes": 216,
+      "sha256": "aab3af9618ef2ed510ed6dad354e525029b3e524eb1d055df9a773678f88102b"
+    },
+    {
+      "path": "run/requests/produce-radio-natural.json",
+      "bytes": 207,
+      "sha256": "d89eb6c79500c122fe3c13d57e424061aba8a16487d44cb4625627e68b7f9918"
+    },
+    {
+      "path": "run_radio_offline_audit.py",
+      "bytes": 3120,
+      "sha256": "4ec2406da7e3922fc4912bc696f310f060c8f1333d002fc4e588688daa4738ab"
+    },
+    {
+      "path": "runtime-preflight.json",
+      "bytes": 546,
+      "sha256": "5fd466bdfffe21ba5bb11b679a52de3d0970869b99d9300dc96ee97f7f3605d5"
+    },
+    {
+      "path": "seal_radio_evidence.py",
+      "bytes": 8022,
+      "sha256": "e9a9f9f3b9d332f30333dea7fbd5439df660a0f5985f946538d4e4f207a004fb"
+    },
+    {
+      "path": "source-parent-chain.json",
+      "bytes": 1579,
+      "sha256": "51ac0e1b13d97b90fdb2e7c86a266b98579526042074cd21418cc8919f331b21"
+    },
+    {
+      "path": "spec.json",
+      "bytes": 20273,
+      "sha256": "057b4f81837bf5996ce902e30cfa58b321aca6b89f0f25261dbdc6c4662fe584"
+    },
+    {
+      "path": "whole_radio_1x.py",
+      "bytes": 698,
+      "sha256": "281f455f47f888a4b3e808ac54ce5ef4a217a86b46a7d2f81ba70f0f158ed4e4"
+    },
+    {
+      "path": "whole_radio_2x.py",
+      "bytes": 698,
+      "sha256": "56891aa8b5f855a47db295cf04684df80fe8fa9fe16ef2205943a55d9c102bf0"
+    }
+  ],
+  "file_count": 57,
+  "total_bytes": 23087925,
+  "scope": "immutable original producer files; live logs excluded"
+}
