@@ -292,6 +292,7 @@ var _win_stinger_tween: Tween = null
 var _sig_wash: ColorRect = null
 var _load_fade_tween: Tween = null
 var _touches: Dictionary = {}
+var _canceled_touch_indices: Dictionary = {}
 var _facing_touch: int = -1
 var _pinch_start_dist: float = 0.0
 var _pinch_start_zoom: float = 1.0
@@ -4222,7 +4223,27 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		return true
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch
+		if st.canceled:
+			# OS cancellation is not a tap/release. Quarantine late events until
+			# a fresh press reuses this finger index; never rearm a world intent.
+			_touches.erase(st.index)
+			_canceled_touch_indices[st.index] = true
+			_cancel_touch_intent()
+			_touch_preview_slot = null
+			_pending_setup_touch = false
+			_cover_hold_slot = null
+			_sprint_hold_armed = false
+			_touch_panning = false
+			_touch_dragged = false
+			_pinch_start_dist = 0.0
+			if _facing_touch == st.index:
+				_facing_touch = -1
+			_last_touch_gesture = "cancel"
+			_touch_ate_click = true
+			_update_cover_previews()
+			return true
 		if st.pressed:
+			_canceled_touch_indices.erase(st.index)
 			_touches[st.index] = st.position
 			if _touches.size() >= 2:
 				_cancel_touch_intent()
@@ -4260,6 +4281,8 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 				if _is_command_phase() and selected and selected.visible and world.distance_to(selected.global_position) <= 44.0:
 					_facing_touch = st.index
 				_touch_ate_click = true
+			return true
+		if _canceled_touch_indices.has(st.index):
 			return true
 		_touches.erase(st.index)
 		if _facing_touch == st.index:
@@ -4307,6 +4330,8 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		return true
 	if event is InputEventScreenDrag:
 		var sd := event as InputEventScreenDrag
+		if _canceled_touch_indices.has(sd.index):
+			return true
 		_touches[sd.index] = sd.position
 		if _touches.size() >= 2:
 			_cancel_touch_intent()
