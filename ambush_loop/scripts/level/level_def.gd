@@ -424,14 +424,13 @@ static func make_yard() -> LevelDef:
 			Vector2i(13, 15), Vector2i(13, 17), Vector2i(24, 17), Vector2i(31, 17), Vector2i(31, 19)
 		],
 		"flank": [
-			Vector2i(13, 3), Vector2i(13, 5), Vector2i(16, 6), Vector2i(23, 6),
-			Vector2i(32, 6), Vector2i(32, 11), Vector2i(32, 15), Vector2i(31, 17), Vector2i(31, 19)
+			Vector2i(32, 10), Vector2i(32, 15), Vector2i(31, 17), Vector2i(31, 19)
 		],
 	}
 	l.spawn_schedule = [
 		{"id": 1, "route": "main", "delay": 0.0, "loot": 2},
 		{"id": 2, "route": "main", "delay": 0.6, "loot": 0},
-		{"id": 3, "route": "flank", "delay": 1.6, "loot": 2, "teaching_note": "东廊侧翼稍后进入"},
+		{"id": 3, "route": "flank", "delay": 4.0, "loot": 2, "teaching_note": "东廊入口 · 4秒后增援"},
 	]
 	# One contact: no between-wave deployment or replenishment in the yard.
 	l.waves = [l.spawn_schedule.duplicate(true)]

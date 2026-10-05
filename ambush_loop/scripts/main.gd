@@ -12528,13 +12528,16 @@ func _on_grenade_boom(pos: Vector2, radius: float, damage: float) -> void:
 	if entities:
 		CombatFxScript.grenade_scorch(entities, pos)
 	var hits := 0
+	var targets: Array = []
 	for e in enemies:
 		if e != null and is_instance_valid(e) and e.alive:
 			if e.global_position.distance_to(pos) <= radius:
 				hits += 1
+				var hp_before := float(e.hp)
 				e.apply_fire(damage, selected)
+				targets.append({"id": e.label_id, "damage": hp_before - float(e.hp)})
 	if phase == Phase.WATCHING:
-		battle_log.add_event(sim.tick, "grenade", -1, -1, pos, {"hits": hits, "damage": damage})
+		battle_log.add_event(sim.tick, "grenade", -1, -1, pos, {"hits": hits, "damage": damage, "targets": targets})
 	for op in operators:
 		if op != null and op.alive and op.global_position.distance_to(pos) <= radius * 0.55:
 			op.take_damage(damage * 0.35, pos)

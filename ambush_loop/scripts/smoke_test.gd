@@ -4917,12 +4917,8 @@ func _assert_touch_feel_0619(main) -> bool:
 
 
 func _assert_touch_feel_r38(main) -> bool:
-	## R38: compact crouch/bag stack height +4px (28 tight / 30 normal).
-	var src := FileAccess.get_file_as_string("res://scripts/touch_hud.gd")
-	if src.find("stack_h := 28.0 if tight else 30.0") < 0:
-		push_error("SMOKE_R38_STACK_H")
-		quit(44)
-		return false
+	## T3 intentionally replaces the historical 28/30px source literal with
+	## minimum 48px touch targets. Validate real controls, not obsolete source text.
 	main._ensure_touch_hud()
 	var th = main.touch_hud
 	if th == null or not th._btns.has("crouch"):
@@ -4932,7 +4928,7 @@ func _assert_touch_feel_r38(main) -> bool:
 	if th.has_method("_layout_compact"):
 		th._layout_compact()
 	var h := float(th._btns["crouch"].custom_minimum_size.y)
-	if h < 27.5:
+	if h < 48.0 or float(th._btns["bag"].custom_minimum_size.y) < 48.0:
 		push_error("SMOKE_R38_CROUCH_SHORT h=%s" % h)
 		quit(44)
 		return false
