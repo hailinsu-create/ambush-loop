@@ -20,7 +20,7 @@
 | 原bin纯reader审计 | `python3 /tmp/pr15-web-controls/railcut-native-8532-20261005/run_railcut_offline_audit.py` | wrapper/native actual0，16,350 checks/0 failures，ERROR0/SCRIPT_ERROR0，实际StorageGuard通过 |
 | END封存/源码核对 | `python3 /tmp/pr15-web-controls/railcut-native-8532-20261005/seal_railcut_end.py` | actual0；14pins、原bin、旧28证据size/SHA保持，ports12815/12816 closed、live engines0、profile lock absent |
 
-whole1× controller total wall **474.90480178498547s**；whole2× **241.06612218200462s**。真实输入到自然terminal callback比例 **1.9919379196481446**；原录制模拟时长126.83333333333333s。软件WebGL仍明显慢于模拟时长，只计完整自然功能流程，不作帧预算或设备性能通过。962/486观察行分别完整单调0→7610、view_tick逐行等于replay tick、attempt/rate固定；实际终点3D frame各 **17checks/0failures**。原record/domain前后相等，原ArrowLeft/ArrowRight只读暂停、Space返回WON分列，不用直接set_tick补whole终点。
+whole辅助函数内部计时（原字段 `controller_total_wall`）1× **474.90480178498547s**、2× **241.06612218200462s**；它不是完整控制器请求耗时。按原不可变whole回执start/end，完整请求实际 **516.087025s / 276.847443s**；原输入→terminal callback为469.5659/235.7332s，比例 **1.9919379196481446**。原录制模拟时长126.83333333333333s。软件WebGL仍明显慢于模拟时长，只计完整自然功能流程，不作帧预算或设备性能通过。962/486观察行分别完整单调0→7610、view_tick逐行等于replay tick、attempt/rate固定；实际终点3D frame各 **17checks/0failures**。原record/domain前后相等是当轮helper断言，完整内部before/terminal-after指纹未分别全存，不升级为完整指纹证据；原ArrowLeft/ArrowRight只读暂停、Space返回WON分列，不用直接set_tick补whole终点。父端只读QA核原件/观察流不代独立引擎验收；后续独立原bin语义与railcut隔离1×2×完整指纹另包。pump冷消费者before-domain未全存、producer最终PTY未知亦继续单列。
 
 ## 原producer与身份
 
