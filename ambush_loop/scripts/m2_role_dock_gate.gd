@@ -36,6 +36,20 @@ func _run() -> void:
 			push_error("M2_ROLE_DOCK_UNCHANGED_REFRESH_REQUEUES")
 			quit(70)
 			return
+	var original_min: Vector2 = main.role_box.custom_minimum_size
+	main.role_box.custom_minimum_size.y = main.role_box.get_combined_minimum_size().y + 56.0
+	main._schedule_role_box_refit(false)
+	if not main._role_box_pin_pending:
+		push_error("M2_ROLE_DOCK_REAL_CONTENT_CHANGE_NOT_QUEUED")
+		quit(70)
+		return
+	await _frames(4)
+	if main._role_box_pin_pending or not _expect_content_fit("real_content_growth", main):
+		quit(70)
+		return
+	main.role_box.custom_minimum_size = original_min
+	main._schedule_role_box_refit(false)
+	# Change touch mode while the desktop callback still owns a pending request.
 	gs.set_force_touch_hud(true)
 	main._ensure_touch_hud()
 	main._update_hud()
@@ -44,6 +58,8 @@ func _run() -> void:
 		return
 	if not _expect_teaching_owner("yard_touch", main):
 		return
+	main.role_box.custom_minimum_size.y = main.role_box.get_combined_minimum_size().y + 56.0
+	main._schedule_role_box_refit(true)
 	gs.set_force_touch_hud(false)
 	main._ensure_touch_hud()
 	main._update_hud()
@@ -52,6 +68,13 @@ func _run() -> void:
 		return
 	if not _expect_teaching_owner("yard_desktop_restored", main):
 		return
+	if main._role_box_pin_pending:
+		push_error("M2_ROLE_DOCK_MODE_FLIP_PENDING_LATCH")
+		quit(70)
+		return
+	main.role_box.custom_minimum_size = original_min
+	main._update_hud()
+	await _frames(4)
 	main._ensure_night_grade()
 	main._ensure_watch_cinema()
 	for op in main.operators:

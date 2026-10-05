@@ -1075,17 +1075,22 @@ func _pin_role_cards(touch: bool, after_layout: bool = false) -> void:
 		_role_box_pin_mode_initialized = true
 		_role_box_pin_touch = touch
 	role_box.size_flags_vertical = 0
+	role_box.offset_bottom = role_box.offset_top + _role_box_target_height(touch)
+	_apply_result_rail()
+	if not after_layout:
+		_schedule_role_box_refit(touch)
+
+
+func _role_box_target_height(touch: bool) -> float:
 	var h := 0.0
 	if role_box is Container:
 		h = (role_box as Container).get_combined_minimum_size().y
 	if h < 200.0:
+		var card_min := Vector2(220, 142) if touch else Vector2(204, 96)
 		var seps := 16.0
 		var plan_h := 0.0 if touch else 56.0
 		h = 3.0 * card_min.y + seps + plan_h
-	role_box.offset_bottom = role_box.offset_top + h
-	_apply_result_rail()
-	if not after_layout:
-		_schedule_role_box_refit(touch)
+	return h
 
 
 func _schedule_role_box_refit(touch: bool) -> void:
@@ -1094,7 +1099,7 @@ func _schedule_role_box_refit(touch: bool) -> void:
 	if _role_box_pin_pending and _role_box_pin_pending_touch == touch:
 		return
 	if not _role_box_pin_pending and role_box is Container:
-		var content_h := (role_box as Container).get_combined_minimum_size().y
+		var content_h := _role_box_target_height(touch)
 		var dock_h := role_box.offset_bottom - role_box.offset_top
 		if _role_box_pin_mode_initialized and touch == _role_box_pin_touch and absf(dock_h - content_h) <= 0.5:
 			return
@@ -1123,7 +1128,6 @@ func _pin_role_cards_after_layout(touch: bool, revision: int) -> void:
 	if not is_instance_valid(role_box):
 		return
 	if touch != _want_touch():
-		_pin_role_cards(_want_touch())
 		return
 	_pin_role_cards(touch, true)
 
