@@ -68,3 +68,5 @@
 自然专项的策略准备是source推断，未实际复现：mine需活跃存活敌进20px真实调用sim_check/伤害120；SWEEP可合法调面向/站位，不能授雷/改敌/传送/手调sim_check。`_begin_next_wave` 会对HOLD队员无条件 `arm_ambush()`，所以“设HOLD就能拖住下一波”不是有效策略。repack需真正最后一枪耗尽后 `_try_ammo_pack`，MG42箱50发/少量敌不保证耗尽；优先低容量已合法取得的武器，考虑真实落弹补充和其他队员击杀。实际策略、独立attempt/cap/失败退出先封后跑，不预报必然命中；可在最终fresh旅程实际触发则直接复用该case，无需额外再跑。
 
 所有权不变：唯一主集成作者负责 main/presenter/ViewState/replay/shared tests/runtime manifest-loader；R5 source `29749157c5db064bfea626c3ed9d75d9a1791ece`、交付 `ebedb829e3263abbeb6dd266905f24a3869fa281`，20骨/socket/3LOD/52语义接口保持。制作作者独占源/生成器/共享atlas/角色GLB/Blender；不编辑或重跑、不全并WIP。本片不产生新资产请求。PR15保持Draft，不merge、不发布生产，不混高度射击PR4–6/13/16。网页GPT PLAN/REVIEW unavailable。
+
+2026-10-05 接续：父端1ec普通save限定QA END并归还窗口，两个favicon controller exit1保持；本矩阵的yard原件缺口现已由[05469 consumer END](AMBUSH_PR15_YARD_WHOLE_END_20261005.md)补齐自然两速/三时点指纹/native24690/0，未重打旧producer、不生成新最终cohort。随后新增明确同私有站更新授权，现[Site v4成功/ACL exact](AMBUSH_PR15_PRIVATE_SITE_V4_END_20261005.md)；原表未来Site/QA等待状态为当时盘点，当前以这两个END为准。下一[有限HUD分段计划](AMBUSH_PR15_REPLAY_HUD_SEGMENT_PLAN_20261005.md)未运行。其余最终fresh13/自然工具/fullsmoke/A3/all-art/耳听/设备/APK及server archive/正式origin PCK仍待，不因为上述两包完成而全计划接受。

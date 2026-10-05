@@ -1,6 +1,6 @@
 # PR15 原yard完整1×/2× consumer有界计划
 
-2026-10-05。父端报告限定独立1ec save QA已END **16:03:38.231912**，全引擎/浏览器/控制器结束、端口关，并明确返还主作者独占窗口。普通warehouse旧/新各两轮246原生输入签名同：旧三次Continue均warehouse，新首次/真实刷新/关闭重开均pump，全文档及非默认音量保持；fixture旧15/2 actual1→新15/0 actual0。两browser长controller因favicon404各actual1，候选合同0失败；有界canonical actual0/E0/S0。**这些是父端报告，不把两个exit1改成全绿，不冒称本地已收到完整包。** 父端原radio bin native15707/0，没有重whole。1ec修复限定独立通过，旧scope不重开。
+2026-10-05。父端报告限定独立1ec save QA已END **16:03:38.231912**，全引擎/浏览器/控制器结束、端口关，并明确返还主作者独占窗口。父端原述普通warehouse“两轮246原生输入签名同”：旧三次Continue均warehouse，新首次/真实刷新/关闭重开均pump，全文档及非默认音量保持；fixture旧15/2 actual1→新15/0 actual0。两browser长controller因favicon404各actual1，候选合同0失败；有界canonical actual0/E0/S0。**这些是父端报告，不把两个exit1改成全绿，不冒称本地已收到完整包。** 父端原radio bin native15707/0，没有重whole。1ec修复限定独立通过，旧scope不重开。
 
 本包执行[已定spec](evidence/20261005-pr15-final-acceptance-readonly/next-yard-spec.json)，source **1ec3198e9c0db367af96fc264604c5a286003b5e** / tree **1e8af45ee23098f763acc139b56f8f7e0f41665a**；只是原yard consumer，不重打producer、不启动其他关、不新增产品功能或资产。原producer **dab870595175eed37a6d2a012bc69a76062d48b0** / tree4f49，bin **19,025,696bytes / e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5**，attempt93a9671c444c749f102a04a728c963a5、schema2/win/t12678。每速从零自然terminal，cap **1297.8/663.9秒**、UI120；原记录不升级、不挂当前run_id。
 
