@@ -1478,7 +1478,11 @@ func _save_progress() -> void:
 		cfg.set_value("progress", "complete", _campaign_complete)
 	cfg.set_value("progress", "loop_index", loop_index)
 	cfg.set_value("audio", "muted", sfx_muted)
-	cfg.save(PROGRESS_PATH)
+	var gs = _gs()
+	if gs != null:
+		gs.save_config(cfg, PROGRESS_PATH)
+	else:
+		cfg.save(PROGRESS_PATH)
 
 
 func _ensure_debrief_buttons() -> void:
