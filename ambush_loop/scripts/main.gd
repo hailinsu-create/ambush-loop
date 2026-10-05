@@ -4121,6 +4121,20 @@ func _active_i0_presenter() -> Node:
 	return presenter if presenter != null and bool(presenter.get("active")) else null
 
 
+func open_yard_3d() -> void:
+	# Explicit presentation opt-in; normal startup keeps its 2D/memory path.
+	if level == null or str(level.level_id) != "yard" or _modal_blocks_input(): return
+	var presenter := get_node_or_null("I0YardPresentation")
+	if presenter == null:
+		presenter = load("res://scripts/m2_i0_yard_presentation.gd").new()
+		presenter.name = "I0YardPresentation"
+		add_child(presenter)
+		presenter.bind(self)
+	else:
+		presenter._set_active(true)
+	_update_hud()
+
+
 func _touch_span() -> Dictionary:
 	var keys: Array = _touches.keys()
 	if keys.size() < 2:
@@ -6043,21 +6057,27 @@ func _snapshot_data() -> Dictionary:
 				"pos": op.global_position,
 				"facing": op.facing_deg,
 				"role": op.role,
+				"tier": grid.get_elevation_tier(op.grid_cell().x, op.grid_cell().y),
+				"visible": op.visible,
 			})
 	var ens := []
 	for e in enemies:
+		var enemy_cell: Vector2i = grid.world_to_cell(e.global_position)
 		ens.append({
 			"id": e.label_id,
 			"hp": e.hp,
 			"alive": e.alive,
 			"pos": e.global_position,
 			"route": e.spawn_route,
+			"facing": e.facing_deg,
+			"tier": grid.get_elevation_tier(enemy_cell.x, enemy_cell.y),
+			"active": e.active,
 		})
 	var bars := []
 	for b in barrels:
 		if is_instance_valid(b):
 			bars.append({"pos": b.global_position, "spent": bool(b.spent)})
-	return {"ops": ops, "enemies": ens, "barrels": bars}
+	return {"presentation_schema": 2, "ops": ops, "enemies": ens, "barrels": bars}
 
 
 func _try_assign_loot(loot: LootPickup) -> void:

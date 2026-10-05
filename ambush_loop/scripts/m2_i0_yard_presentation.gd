@@ -26,6 +26,10 @@ var _decor_targets: Array[Dictionary] = []
 var _intent_preview: Node3D
 var _intent_signature := ""
 var _bound := false
+var _enemy_nodes: Dictionary = {}
+var _fx_nodes: Array[MeshInstance3D] = []
+var landmark_nodes: Dictionary = {}
+const FX_CAP := 16
 
 
 func _ready() -> void:
@@ -40,11 +44,11 @@ func _bind_parent() -> void:
 func bind(game: Node) -> void:
 	if _bound or game == null:
 		return
-	_bound = true
 	host = game
 	if host.level == null or str(host.level.level_id) != "yard":
 		print("M2_I0_PREVIEW_DISABLED reason=yard_only")
 		return
+	_bound = true
 	_atlas = load(ATLAS_MATERIAL) as StandardMaterial3D
 	_build_world()
 	_build_controls()
@@ -82,6 +86,8 @@ func _build_world() -> void:
 	_build_grid_geometry()
 	_build_platform_and_ramp()
 	_build_landmarks()
+	_build_tactical_landmarks()
+	_build_fx_pool()
 	_sync_actors()
 	_sync_stashes()
 
@@ -292,6 +298,8 @@ func _set_active(value: bool) -> void:
 	active = value and host != null and host.level != null and str(host.level.level_id) == "yard"
 	if camera != null:
 		camera.current = active
+	if _world != null:
+		_world.visible = active
 	if host != null:
 		var legacy_world := host.get_node_or_null("World") as Node2D
 		if legacy_world != null:
@@ -301,7 +309,7 @@ func _set_active(value: bool) -> void:
 
 
 func pick_at(screen: Vector2) -> Dictionary:
-	if not active or host == null:
+	if not active or host == null or host.phase == host.Phase.REPLAY:
 		return {}
 	return Adapter.pick(camera, screen, host.grid, _pick_targets())
 
@@ -359,6 +367,7 @@ func _sync_actors() -> void:
 			material.albedo_color = [Color("86936e"), Color("65776f"), Color("738391")][clampi(int(op.role), 0, 2)]
 			material.roughness = 0.86
 			body.material_override = material
+			body.add_child(_box("FacingCue", Vector3(0.09, 0.09, 0.35), Vector3(0, 0.25, -0.30), Color("dfd7ac")))
 			_world.add_child(body)
 			_actor_nodes[key] = body
 		var visual: MeshInstance3D = _actor_nodes[key]
@@ -490,11 +499,146 @@ func _clear_intent_preview() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not _bound or host == null or not is_instance_valid(host) or host.level == null or str(host.level.level_id) != "yard":
+	if host == null or not is_instance_valid(host) or host.level == null:
 		return
-	_sync_actors()
-	_sync_stashes()
-	_sync_intent_preview()
+	if str(host.level.level_id) != "yard":
+		if active: _set_active(false)
+		if _controls != null: _controls.visible = false
+		return
+	if not _bound: bind(host)
+	if _controls != null: _controls.visible = not host._result_overlay_active()
+	sync_presentation()
+
+
+func sync_presentation() -> void:
+	if host == null or _world == null: return
+	var display_tick: int = host.replay.scrub_tick if host.phase == host.Phase.REPLAY else host.sim.tick
+	if host.phase == host.Phase.REPLAY:
+		_sync_recorded(host.replay.snapshot_at_or_before(display_tick).get("data", {}))
+		for node in _stash_nodes.values(): node.visible = false
+		_clear_intent_preview()
+	else:
+		_sync_actors()
+		_sync_enemies()
+		_sync_stashes()
+		for node in _stash_nodes.values(): node.visible = true
+		_sync_intent_preview()
+	_sync_event_fx(display_tick)
+	if landmark_nodes.has("permission"):
+		landmark_nodes["permission"].text = "手动许可 · 入区不自动开火" if host.yard_manual_permission else "自动许可 · 入区后待伏开火"
+
+
+func _new_enemy(key: String) -> MeshInstance3D:
+	var body := MeshInstance3D.new()
+	body.name = "Enemy_" + key
+	var mesh := CapsuleMesh.new()
+	mesh.radius = 0.24
+	mesh.height = 1.22
+	body.mesh = mesh
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color("c16751")
+	body.material_override = material
+	body.add_child(_box("FacingCue", Vector3(0.09, 0.09, 0.35), Vector3(0, 0.25, -0.30), Color("ffd098")))
+	_world.add_child(body)
+	_enemy_nodes[key] = body
+	return body
+
+
+func _sync_enemies() -> void:
+	for node in _enemy_nodes.values(): node.visible = false
+	for enemy in host.enemies:
+		if not is_instance_valid(enemy): continue
+		var key := str(enemy.label_id)
+		var body: MeshInstance3D = _enemy_nodes[key] if _enemy_nodes.has(key) else _new_enemy(key)
+		body.visible = enemy.alive and enemy.active
+		body.position = Adapter.world_anchor(host.grid, enemy.global_position, 0.68)
+		body.rotation.y = Space.facing_yaw(enemy.facing_deg)
+
+
+func _sync_recorded(data: Dictionary) -> void:
+	for node in _actor_nodes.values(): node.visible = false
+	for node in _enemy_nodes.values(): node.visible = false
+	# Operators are instantiated by initial yard binding. No live fields are read here.
+	for record in data.get("ops", []):
+		var key := str(record.get("id", -1))
+		if not _actor_nodes.has(key): continue
+		var body: MeshInstance3D = _actor_nodes[key]
+		body.visible = bool(record.get("alive", false)) and bool(record.get("visible", true))
+		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68)
+		body.rotation.y = Space.facing_yaw(float(record.get("facing", 90.0)))
+	for record in data.get("enemies", []):
+		var key := str(record.get("id", -1))
+		var body: MeshInstance3D = _enemy_nodes[key] if _enemy_nodes.has(key) else _new_enemy(key)
+		body.visible = bool(record.get("alive", false)) and bool(record.get("active", true))
+		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68)
+		body.rotation.y = Space.facing_yaw(float(record.get("facing", 90.0)))
+
+
+func _build_tactical_landmarks() -> void:
+	for route in ["main", "flank"]:
+		var points: Array = host.route_world.get(route, [])
+		if not points.is_empty():
+			_landmark(route, points[0], "主路入口" if route == "main" else "侧翼入口", Color("e09953"))
+	_landmark("exit", host.grid.cell_to_world_center(host.level.escape_cell), "撤离 / 敌军越界", Color("73c8ca"))
+	var zone: Rect2 = host.level.ambush_zone
+	var corners := [zone.position, zone.position + Vector2(zone.size.x, 0), zone.end, zone.position + Vector2(0, zone.size.y)]
+	for i in 4:
+		var a := Adapter.recorded_anchor(corners[i], 0, 0.04)
+		var b := Adapter.recorded_anchor(corners[(i + 1) % 4], 0, 0.04)
+		var delta := b - a
+		var edge := _box("PermissionBoundary_%d" % i, Vector3(delta.length(), 0.025, 0.035), (a + b) * 0.5, Color("c8ab69"))
+		edge.rotation.y = -atan2(delta.z, delta.x)
+		_world.add_child(edge)
+	_landmark("permission", zone.get_center(), "自动许可 · 入区后待伏开火", Color("c8ab69"))
+
+
+func _landmark(key: String, logic: Vector2, title: String, color: Color) -> void:
+	var label := Label3D.new()
+	label.name = "Landmark_" + key
+	label.text = title
+	label.font_size = 36
+	label.pixel_size = 0.008
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.modulate = color
+	label.position = Adapter.world_anchor(host.grid, logic, 1.6)
+	_world.add_child(label)
+	landmark_nodes[key] = label
+
+
+func _build_fx_pool() -> void:
+	for i in FX_CAP:
+		var node := _box("RecordedEventFX_%d" % i, Vector3(0.1, 0.1, 0.1), Vector3.ZERO, Color("ffdd88"))
+		node.visible = false
+		_world.add_child(node)
+		_fx_nodes.append(node)
+
+
+func _recorded_event_anchor(ev: Dictionary, enemy: bool) -> Vector3:
+	var snap: Dictionary = {}
+	for candidate in host.battle_log.snapshots:
+		if int(candidate.get("tick", -1)) > int(ev.get("tick", 0)): break
+		snap = candidate
+	var collection: Array = snap.get("data", {}).get("enemies" if enemy else "ops", [])
+	for record in collection:
+		if int(record.get("id", -2)) == int(ev.get("actor_id", -1)):
+			return Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.9)
+	return Adapter.recorded_anchor(ev.get("position", Vector2.ZERO), 0, 0.9)
+
+
+func _sync_event_fx(tick: int) -> void:
+	for node in _fx_nodes: node.visible = false
+	var count := 0
+	for ev in host.battle_log.events:
+		var kind := str(ev.get("type", ""))
+		if kind not in ["fire", "kill", "return_fire"]: continue
+		var age := tick - int(ev.get("tick", 0))
+		if age < 0 or age >= (12 if kind == "kill" else 6): continue
+		if count >= FX_CAP: break
+		var node := _fx_nodes[count]
+		node.position = _recorded_event_anchor(ev, kind != "fire")
+		node.scale = Vector3.ONE * (4.0 if kind == "kill" else 2.0)
+		node.visible = true
+		count += 1
 
 
 func _exit_tree() -> void:

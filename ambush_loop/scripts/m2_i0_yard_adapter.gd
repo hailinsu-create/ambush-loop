@@ -4,6 +4,13 @@ const HEIGHT_METRES := 0.85
 const SPACE := preload("res://scripts/presentation/world_space.gd")
 
 
+static func recorded_anchor(logic_position: Vector2, tier: int, lift: float = 0.0) -> Vector3:
+	# Legacy records without a tier use explicit ground fallback, never the live grid.
+	if not logic_position.is_finite() or not SPACE.contains_logic(logic_position):
+		return Vector3(INF, INF, INF)
+	return SPACE.logic_to_world(logic_position, float(tier) * HEIGHT_METRES + lift)
+
+
 static func world_anchor(grid: RefCounted, logic_position: Vector2, lift: float = 0.0) -> Vector3:
 	if grid == null or not logic_position.is_finite() or not SPACE.contains_logic(logic_position):
 		return Vector3(INF, INF, INF)
