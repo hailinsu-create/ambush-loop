@@ -32,6 +32,10 @@ main.gd 的 InputEventScreenTouch 原路径只检查 pressed，不检查 cancele
 
 ## 当前状态与下一步
 
-已保存规划并新增测试，尚在红/绿验证阶段。测试脚本首次出现动态变量类型推断错误，已补显式类型；该失败不作为行为漏洞的红证据。后续单独保存行为失败与修复后输出。
+已实现最小取消事件修复，源码 8728081b444aaafdbd2a45cf23a023668ae2847a，Draft PR https://github.com/hailinsu-create/ambush-loop/pull/28 依赖 PR #27；远端 SHA 已核对一致。
 
-下一步：取得真实取消行为的红证据，再实现最小修复并进行独立 GPT REVIEW。源码与证据按分支/PR 发布，不覆盖其他在制改动。
+测试先红后绿：首次类型推断错误 run 878b8edd327f4fe98671f26bb9d76c7d 不作为行为红证据；真实行为失败 run 07f1bbd48dba4b99a57165b2f088a111 退出 1；修复后 run 4d278ea5cca4465faae9a270d37d0289 退出 0，八种取消场景、迟到事件隔离、新按下恢复与原 T1 断言均通过，M2_TOUCH_CANCEL_OK、M2_TOUCH_INTENT_OK 和 PLAYER_DATA_UNCHANGED=1 均有实际输出。
+
+原外部 GPT c2c_ba05 iteration1 实际读取输出 37–39 和精确两文件差异，返回 DONE，无专项阻断项。此 DONE 仅针对取消触摸专项，不等于新完整回归、Android 或整个 M2 验收。
+
+2026-10-05 已启动新代码完整隔离 smoke，执行会话 34607，捕获文件 %TEMP%/ambush_m2_t2_full_smoke.txt；结果尚未获得。下一步收集真实退出码、完成标记和存档后验，再提交外部 GPT 复核。手机继续暂缓，PR 保持 Draft。
