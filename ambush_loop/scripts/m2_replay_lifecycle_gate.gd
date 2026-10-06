@@ -35,7 +35,7 @@ func _run() -> void:
 		await _frames(8)
 		var replay_ctas: Array = []
 		_collect_replay_buttons(main.result_panel, replay_ctas)
-		_expect(replay_ctas.size() == 1 and not main.touch_hud.is_visible_in_tree(), "M2_REPLAY_ONE_RESULT_OWNER_NO_TOUCH_RAIL")
+		_expect(replay_ctas.size() == 1 and not main.touch_hud.visible, "M2_REPLAY_ONE_RESULT_OWNER_NO_TOUCH_RAIL")
 		if replay_ctas.size() != 1:
 			_finish_failed()
 			return
