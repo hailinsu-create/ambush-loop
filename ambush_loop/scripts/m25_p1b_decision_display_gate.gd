@@ -181,6 +181,23 @@ func _run() -> void:
 	_expect(bool(main.yard_manual_permission) == permission_before, "M25_P1B_PRESENTATION_FIXTURE_RESTORES_PERMISSION")
 	_expect(int(presenter.get("_tactical_panel").mouse_filter) == Control.MOUSE_FILTER_IGNORE, "M25_P1B_CARD_PRESERVES_WORLD_INPUT_OWNERSHIP")
 	await _capture_if_rendered(main, "p1b-decision-card")
+	if rendered_readback_supported:
+		var original_window_size := DisplayServer.window_get_size()
+		DisplayServer.window_set_size(Vector2i(960, 540))
+		await process_frame
+		await process_frame
+		var compact_viewport: Vector2 = root.get_visible_rect().size
+		var compact_panel: Rect2 = presenter.get("_tactical_panel").get_global_rect()
+		var toggle_rect: Rect2 = presenter.get("_toggle").get_global_rect()
+		var bottom_action_top := compact_viewport.y - 72.0
+		var compact_window_size := DisplayServer.window_get_size()
+		_expect(compact_window_size == Vector2i(960, 540), "M25_P1B_COMPACT_WINDOW_RESIZED")
+		print("M25_P1B_COMPACT_LAYOUT window=%s viewport=%s" % [str(compact_window_size), str(compact_viewport)])
+		_expect(compact_panel.position.x >= 0.0 and compact_panel.position.y >= 0.0 and compact_panel.end.x <= compact_viewport.x and compact_panel.end.y < bottom_action_top, "M25_P1B_COMPACT_PANEL_WITHIN_SAFE_VIEWPORT")
+		_expect(not compact_panel.intersects(toggle_rect) and toggle_rect.position.y >= 0.0 and toggle_rect.end.y < compact_panel.position.y, "M25_P1B_COMPACT_PANEL_DOES_NOT_OVERLAP_2D_TOGGLE")
+		await _capture_if_rendered(main, "p1b-decision-card-960x540")
+		DisplayServer.window_set_size(original_window_size)
+		await process_frame
 
 	if failures.is_empty():
 		print("M25_P1B_DECISION_DISPLAY_OK resources=1 supplies=1 targets=2 landmarks=1 readonly=1")

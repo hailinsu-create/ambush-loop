@@ -18,22 +18,22 @@
 2. 查询签名覆盖上述资源、背包/弹药池、补给箱状态与许可模式，变化会使旧卡片数据失效。
 3. 3D 信息卡逐条显示资源、补给、工具/许可与所有活动目标状态。既有入口、撤离、许可地标保留；测试验证位置与授权路线/撤离格一致、许可文案随模式变化。卡片仍为 `MOUSE_FILTER_IGNORE`，不拦截地图拾取。
 4. Forward+ 定向门逐点比较 3D 路线标记的位置和颜色与共享查询样本，并比较名义扇形首条边界与权威武器射程/朝向。headless 门验证实例数和样本预算；精确 MultiMesh 实例读回应由真实渲染门断言。
-5. 面板底部锚点为 310px；1280×720 Forward+ 截图中目标清楚，未遮挡底栏、引导文字或地图操作区。较窄/低分辨率排布仍需单独验收。
+5. 面板底部锚点为 310px；1280×720 与 960×540 Forward+ 截图中信息可读，均未遮挡底部交战操作；960×540 门另核对卡片与返回 2D 控件无重叠。更窄屏、不同系统缩放/安全区仍需验收。
 
 ## 验证
 
-- 最终 headless P1B run `a110eda18aa84f90853d246c7fd7cfce`：Godot 4.7.2，退出 0，`PLAYER_DATA_UNCHANGED=1`。资源、补给、许可缓存失效/复原、多目标、精确地标、工具切换，以及许可/弹药/射程/朝向/地形遮挡五种阻挡原因和 3D 文案映射均通过；只读与输入穿透断言通过。
-- 最终 Forward+ P1B run `4ac46e79a95d47e2ad20e751e65c9948`：Intel Iris Xe、1280×720，退出 0，`PLAYER_DATA_UNCHANGED=1`。除上述 headless 语义门外，路线标记坐标/颜色和射界边界逐项对照权威数据通过；截图 `ambush_loop/build/ambush_test_runs/4ac46e79a95d47e2ad20e751e65c9948/m25-p1b-screens/p1b-decision-card.png` 已目视检查。
+- 最终 headless P1B run `8e464b2e701b41e0a8114244bc0cf8f8`：Godot 4.7.2，退出 0，`PLAYER_DATA_UNCHANGED=1`。资源、补给、许可缓存失效/复原、多目标、精确地标、工具切换，以及许可/弹药/射程/朝向/地形遮挡五种阻挡原因和 3D 文案映射均通过；只读与输入穿透断言通过。
+- 最终 Forward+ P1B run `b07dfe3074ed4f31986000658fe3535b`：Intel Iris Xe，退出 0、`PLAYER_DATA_UNCHANGED=1`。路线标记坐标/颜色、射界边界和阻挡原因逐项通过；同一 run 在 1280×720 与调整后的 960×540 窗口分别保存截图。960×540 图 `ambush_loop/build/ambush_test_runs/b07dfe3074ed4f31986000658fe3535b/m25-p1b-screens/p1b-decision-card-960x540.png` 已目视检查，卡片/返回按钮/底部操作区边界断言通过。
 - 共享接口扩展后的 P1A 最终专项：headless `f235e85733a940f2a0b057a37afe2e77`、Forward+ `8fed4c4e807646bdad50402a09481e03`，均退出 0、隔离存档未变。
 - 旧候选 `c40a602` 的六关 full smoke `5a7b181cda9a4a11a0b3072308adc0c6` 已完整通过：`yard,warehouse,pump,railcut,depot,radio` 全部胜利，出现 `SMOKE_SLICE_COMPLETE`，引擎与包装器退出 0，`PLAYER_DATA_UNCHANGED=1`。它早于冷却修正/P1B，不是最终源码集成验收。
-- 当前完整候选 full smoke `bc44c0a6f088441da4051a4ede0f58e4` 正在运行，最近完成 `touch_feel_056` 并进入 `touch_feel_057`。通过须具备六关完成标记、引擎/包装器退出 0、真实玩家数据未变；启动不算通过。
+- 当前完整候选 full smoke `bc44c0a6f088441da4051a4ede0f58e4` 正在运行，最近完成触控长组 `touch_feel_059` 并进入 `touch_feel_0510`。通过须具备六关完成标记、引擎/包装器退出 0、真实玩家数据未变；启动不算通过。
 - headless 的 MultiMesh 实例缓冲读取为默认值，故该环境只核对标记数量/预算；Forward+ 实际渲染的同一门已成功读取并逐项核对实例位置与颜色。此为测试后端差异，不据此声称手机 Compatibility 已通过。
 
 ## 外部评审与未完成项
 
 - P1A iteration 3 的真实 GPT 建议已落实。iteration 4 浏览器提交请求连续超时，是否送达/是否回复均未确认；没有重复发送，也不记录为批准。
 - P1B 当前源码未得到精确 SHA 的 GPT 复审；评审桥接及原工作区/检查点按先前状态保留，未重配、未改写。
-- 仍待更多高低/坡道和目标原因反例、低分辨率布局门、当前源码 full smoke 最终汇总，以及可送达的精确 SHA 外审。
+- 仍待更多高低/坡道和目标状态反例、更窄屏与系统安全区/缩放验收、当前源码 full smoke 最终汇总，以及可送达的精确 SHA 外审。
 - 触摸 dp/安全区、真人误触、Android 渲染器帧时/热/内存和真机可读性按用户指示跳过；桌面测试不替代这些验收。
 
 ## 下一步
