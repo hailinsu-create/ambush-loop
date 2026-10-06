@@ -14,6 +14,10 @@ var permission_mode_button: Button
 var preview_3d_button: Button
 var buttons: Dictionary = {}
 var hidden_chrome: Dictionary = {}
+var operable_guide: Label
+var replay_slider_home: Node = null
+var replay_slider_minimum := Vector2.ZERO
+var replay_slider_touch := -1
 
 
 func bind(main: Node) -> void:
@@ -24,6 +28,11 @@ func bind(main: Node) -> void:
 	z_index = 8
 	heading = _label(Vector2(16, 10), Vector2(650, 30), 22)
 	objective = _label(Vector2(16, 42), Vector2(810, 28), 15)
+	operable_guide = preload("res://scripts/ui/yard_operable_guide.gd").new()
+	operable_guide.position = Vector2(16, 80)
+	operable_guide.size = Vector2(470, 120)
+	add_child(operable_guide)
+	operable_guide.completed.connect(host._on_tutorial_dismissed)
 	selected_status = _label(Vector2.ZERO, Vector2.ZERO, 14)
 	selected_status.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	selected_status.offset_left = 380
@@ -71,7 +80,7 @@ func bind(main: Node) -> void:
 	result_replay = Button.new()
 	result_replay.text = "时间轴复盘"
 	result_replay.focus_mode = Control.FOCUS_NONE
-	result_replay.custom_minimum_size.y = 40
+	result_replay.custom_minimum_size.y = 48
 	result_replay.visible = false
 	result_replay.pressed.connect(func(): host._on_replay_pressed())
 	var result_box: VBoxContainer = host.continue_button.get_parent()
@@ -118,7 +127,7 @@ func primary_text() -> String:
 	if host.phase == host.Phase.SWEEP:
 		return "完成行动" if host.raid.is_last_wave(host.level) else "继续交战"
 	if host.phase == host.Phase.REPLAY:
-		return "返回准备"
+		return "返回结算"
 	if host.squad_has_firearm():
 		return "开始交战"
 	return "确认无枪交战" if host._alarm_warned_no_gun else "先搜集武器"
@@ -126,7 +135,7 @@ func primary_text() -> String:
 
 func refresh() -> void:
 	visible = host.yard_redesign_active()
-	result_replay.visible = visible and host._result_overlay_active()
+	result_replay.visible = visible and host._result_overlay_active() and not host._want_touch()
 	if not visible:
 		selected_status.visible = false
 		return
@@ -144,6 +153,24 @@ func refresh() -> void:
 	var command_phase: bool = host._is_command_phase()
 	var watching: bool = host.phase == host.Phase.WATCHING
 	var replaying: bool = host.phase == host.Phase.REPLAY
+	# Keep the original read-only slider and handler, outside hidden legacy chrome.
+	if host.scrub_slider:
+		if replay_slider_home == null:
+			replay_slider_home = host.scrub_slider.get_parent()
+			replay_slider_minimum = host.scrub_slider.custom_minimum_size
+			host.scrub_slider.gui_input.connect(_on_replay_slider_gui)
+		var slider_parent: Control = host.touch_hud.replay_controls() if phone else self
+		if host.scrub_slider.get_parent() != slider_parent:
+			host.scrub_slider.reparent(slider_parent, false)
+			if phone: slider_parent.move_child(host.scrub_slider, 0)
+		host.scrub_slider.custom_minimum_size = Vector2(220, 48)
+		if not phone:
+			host.scrub_slider.set_anchors_preset(Control.PRESET_TOP_LEFT)
+			host.scrub_slider.position = Vector2(16, 80)
+			host.scrub_slider.size = Vector2(470, 48)
+		host.scrub_slider.visible = replaying and not result_open
+		if not replaying: replay_slider_touch = -1
+	operable_guide.visible = not result_open and not details_open and not replaying and not host._gs().has_seen_tutorial("yard")
 	permission_mode_button.visible = details_open and not result_open and host.phase == host.Phase.SETUP
 	permission_mode_button.text = "发动：手动许可（实验）" if host.yard_manual_permission else "发动：入伏自动（默认）"
 	permission_mode_button.tooltip_text = "仅待伏队员：自动在黄色区入伏许可；手动在交战中许可一次。不改变随遇开火或自动投雷。"
@@ -222,7 +249,26 @@ func refresh() -> void:
 			selected_status.text = "%s · %s · %d 发 · 朝%s\n按住↺/↻转向 · 长按队员打开技能" % [host.selected.display_name, WeaponCatalog.display_name(host.selected.weapon_id), host.selected.ammo, host.selected.facing_compass()]
 
 
+func _on_replay_slider_gui(event: InputEvent) -> void:
+	if not host.yard_redesign_active() or host.phase != host.Phase.REPLAY: return
+	# Godot Range's mouse path remains intact; explicit native touch uses GUI-local X.
+	if event is InputEventScreenTouch:
+		if event.pressed and replay_slider_touch < 0:
+			replay_slider_touch = event.index
+			host.scrub_slider.value = clampf(event.position.x / maxf(host.scrub_slider.size.x, 1.0), 0.0, 1.0)
+		elif not event.pressed and event.index == replay_slider_touch:
+			replay_slider_touch = -1
+		host.scrub_slider.accept_event()
+	elif event is InputEventScreenDrag and event.index == replay_slider_touch:
+		host.scrub_slider.value = clampf(event.position.x / maxf(host.scrub_slider.size.x, 1.0), 0.0, 1.0)
+		host.scrub_slider.accept_event()
+
+
 func restore_chrome() -> void:
+	if host.scrub_slider and is_instance_valid(replay_slider_home):
+		if host.scrub_slider.get_parent() != replay_slider_home:
+			host.scrub_slider.reparent(replay_slider_home, false)
+		host.scrub_slider.custom_minimum_size = replay_slider_minimum
 	for node in hidden_chrome:
 		if is_instance_valid(node):
 			node.visible = bool(hidden_chrome[node])

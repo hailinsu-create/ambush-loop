@@ -1654,10 +1654,28 @@ func _assert_raid_campaign(main) -> bool:
 	main._on_continue_pressed()
 	await process_frame
 
-	# Yard reference: kits + covers 1,2,5.
+	# M2 yard: actual west-crate searches and the validated highpoint formation.
+	# Legacy cover slots no longer cover the authored short east entry.
 	main._start_setup(false, false)
 	await process_frame
-	_deploy_ref(main, [1, 2, 5], [90.0, 180.0, 180.0])
+	if main.yard_redesign_active():
+		for i in 3:
+			var stash = main.raid_stashes[0]
+			main.selected = main.operators[i]
+			main.selected.stop_move()
+			main.selected.global_position = main.grid.cell_to_world_center(stash.cell)
+			main._try_pickup_near_selected()
+			main.raid_advance_search(1.0)
+			await process_frame
+		var cells := [Vector2i(30, 11), Vector2i(12, 14), Vector2i(15, 10)]
+		var faces := [0.0, 45.0, 153.4]
+		for i in 3:
+			main.operators[i].stop_move()
+			main.operators[i].global_position = main.grid.cell_to_world_center(cells[i])
+			main.operators[i].set_facing(faces[i])
+			main.operators[i].set_fire_mode(OperatorUnit.FireMode.ENGAGE_ON_SIGHT)
+	else:
+		_deploy_ref(main, [1, 2, 5], [90.0, 180.0, 180.0])
 	var yard_ok: bool = await _run_all_waves(main, 60 * 240)
 	if not yard_ok:
 		push_error("SMOKE_YARD_RAID_FAIL phase=%s reason=%s wave=%s" % [main.phase, main.fail_reason, main.wave_index() if main.has_method("wave_index") else -1])
@@ -3772,6 +3790,9 @@ func _assert_touch_feel_052(main) -> bool:
 	if home.distance_to(clear) < 48.0:
 		clear = home + Vector2(96, 0)
 	var pan0: Vector2 = main._cam_pan
+	## Move toward the interior of the camera's pan range. A fixed rightward
+	## drag can point out of the -X clamp and correctly leave the camera still.
+	var pan_drag := Vector2(48, 0) if pan0.x >= 0.0 else Vector2(-48, 0)
 	var press := InputEventScreenTouch.new()
 	press.index = 0
 	press.pressed = true
@@ -3779,8 +3800,8 @@ func _assert_touch_feel_052(main) -> bool:
 	main._unhandled_input(press)
 	var drag := InputEventScreenDrag.new()
 	drag.index = 0
-	drag.position = press.position + Vector2(48, 0)
-	drag.relative = Vector2(48, 0)
+	drag.position = press.position + pan_drag
+	drag.relative = pan_drag
 	main._unhandled_input(drag)
 	var rel := InputEventScreenTouch.new()
 	rel.index = 0
@@ -3796,7 +3817,7 @@ func _assert_touch_feel_052(main) -> bool:
 		quit(44)
 		return false
 	if main._cam_pan.is_equal_approx(pan0):
-		push_error("SMOKE_PAN_NO_CAM")
+		push_error("SMOKE_PAN_NO_CAM start=%s end=%s zoom=%s" % [pan0, main._cam_pan, main._cam_zoom])
 		quit(44)
 		return false
 	print("SMOKE_OK_GESTURE_PAN")
@@ -14265,6 +14286,19 @@ func _assert_first_visit_tutorial(main) -> bool:
 		main.tutorial_overlay._finish()
 	gs.seen_tutorial = false
 	gs.seen_level_tutorials.clear()
+	var started_in_yard: bool = main.yard_redesign_active()
+	if started_in_yard:
+		main.yard_hud.operable_guide.reset_session()
+		main._maybe_show_tutorial()
+		main._update_hud()
+		if main.tutorial_overlay.is_open() or main._modal_blocks_input() or not main.yard_hud.operable_guide.is_visible_in_tree() or gs.has_seen_tutorial("yard"):
+			push_error("SMOKE_YARD_OPERABLE_GUIDE_FIRST_VISIT_CONTRACT")
+			quit(52)
+			return false
+		print("SMOKE_OK_YARD_NONMODAL_FIRST_VISIT no_silent_completion=1")
+		# Preserve the legacy dimmer/Next/completion gate on an unchanged mission.
+		main._load_level("warehouse", false, false)
+	var tutorial_level: String = main.level.level_id
 	main._maybe_show_tutorial()
 	if not main.tutorial_overlay.is_open():
 		push_error("SMOKE_TUTORIAL_NOT_SHOWN")
@@ -14292,7 +14326,7 @@ func _assert_first_visit_tutorial(main) -> bool:
 		push_error("SMOKE_TUTORIAL_STUCK")
 		quit(52)
 		return false
-	if not bool(gs.has_seen_tutorial("yard")):
+	if not bool(gs.has_seen_tutorial(tutorial_level)):
 		push_error("SMOKE_TUTORIAL_NOT_MARKED")
 		quit(52)
 		return false
@@ -14302,6 +14336,8 @@ func _assert_first_visit_tutorial(main) -> bool:
 		quit(52)
 		return false
 	gs.seen_tutorial = true
+	if started_in_yard:
+		main._load_level("yard", false, false)
 	return true
 
 
@@ -14461,7 +14497,8 @@ func _assert_payoff_copy(main) -> bool:
 			push_error("SMOKE_NO_CAMPAIGN_BEAT %s" % lid)
 			quit(61)
 			return false
-		if str(def.fix_one).find("改一处") < 0:
+		var suggestion_ok: bool = str(def.fix_one).contains("射界") and str(def.fix_one).contains("视线") and str(def.fix_one).contains("弹药") and not str(def.fix_one).contains("就能赢") if lid == "yard" else str(def.fix_one).contains("改一处")
+		if not suggestion_ok:
 			push_error("SMOKE_NO_FIX_ONE_COPY %s" % lid)
 			quit(61)
 			return false

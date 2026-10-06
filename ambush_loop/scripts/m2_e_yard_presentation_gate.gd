@@ -40,7 +40,12 @@ func _run() -> void:
 			event = candidate
 			break
 	_expect(not event.is_empty(), "M2_E_REAL_FIRE_EVENT")
+	var before_visibility: Dictionary = {}
+	for actor in main.operators + main.enemies + main.loot_piles:
+		if is_instance_valid(actor): before_visibility[actor] = actor.visible
 	main._on_replay_pressed()
+	await _frames(4)
+	_expect(main.scrub_slider.is_visible_in_tree() and main.scrub_slider.get_global_rect().size.y >= 48, "M2_E_VISIBLE_DESKTOP_REPLAY_TIMELINE")
 	# Deliberately corrupt live display inputs after recording: replay must ignore them.
 	main.operators[2].global_position = Vector2(208, 528)
 	main.operators[2].facing_deg = 270.0
@@ -48,8 +53,15 @@ func _run() -> void:
 	var baseline_detail := _authority_data(main)
 	for tick in [0, 239, 240, int(event.get("tick", 0)), main.battle_log.terminal_tick]:
 		main.replay.set_tick(tick)
+		main._apply_replay_scrub()
 		presenter.sync_presentation()
 		_verify_record(presenter, main.replay.snapshot_at_or_before(tick).get("data", {}))
+		var marker_data: Dictionary = main.replay.snapshot_at_or_before(tick).get("data", {})
+		var marker_records: Array = marker_data.get("ops", []) + marker_data.get("enemies", []) + marker_data.get("barrels", [])
+		var markers: Array = main.replay_layer.get_children().filter(func(node): return not node.is_queued_for_deletion())
+		_expect(markers.size() == marker_records.size(), "M2_E_2D_RECORD_COUNT")
+		for i in mini(markers.size(), marker_records.size()):
+			_expect(is_equal_approx(float(markers[i].get_meta("recorded_facing")), float(marker_records[i].get("facing", 90.0))), "M2_E_2D_3D_RECORDED_FACING_PARITY")
 		_expect(presenter.pick_at(Vector2(640, 360)).is_empty() and presenter.screen_to_logic(Vector2(640, 360)) == Vector2.INF, "M2_E_REPLAY_NO_WORLD_ACTION")
 	await _capture_if_rendered(main, "replay-terminal")
 	var event_tick := int(event.get("tick", 0))
@@ -76,6 +88,10 @@ func _run() -> void:
 	presenter._set_active(true)
 	presenter.sync_presentation()
 	await _capture_if_rendered(main, "replay-fire")
+	main._exit_replay_to_setup()
+	_expect(main.phase == main.Phase.WON and baseline == _authority(main), "M2_E_REPLAY_EXIT_NO_POSITION_OR_COMBAT_MUTATION")
+	for actor in before_visibility:
+		_expect(actor.visible == before_visibility[actor], "M2_E_REPLAY_EXIT_EXACT_VISIBILITY")
 	main._load_level("warehouse", false, false)
 	presenter._process(0)
 	_expect(not presenter.active and not presenter._world.visible and not presenter._controls.visible, "M2_E_OTHER_LEVEL_NOT_PROMOTED")

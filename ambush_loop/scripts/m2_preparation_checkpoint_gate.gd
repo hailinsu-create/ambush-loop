@@ -29,6 +29,23 @@ func _run() -> void:
 		faces.append(op.facing_deg)
 	main.raid_force_alarm()
 	_expect(main.preparation_checkpoint_available(), "M2_D1_CAPTURE_AT_ALARM")
+	main._sim_tick()
+	main._on_abort_pressed()
+	var saved_checkpoint: String = str(main.preparation_checkpoint.snapshot)
+	var visibility: Dictionary = {}
+	for actor in main.operators + main.enemies + main.loot_piles:
+		if is_instance_valid(actor): visibility[actor] = actor.visible
+	main._on_replay_pressed()
+	_expect(main.phase == main.Phase.REPLAY, "M2_D1_REAL_FAILED_REPLAY_ENTERED")
+	main.replay.set_tick(0)
+	main._apply_replay_scrub()
+	main._exit_replay_to_setup()
+	_expect(main.phase == main.Phase.FAILED and str(main.preparation_checkpoint.snapshot) == saved_checkpoint, "M2_D1_REPLAY_RETURNS_RESULT_PRESERVES_CHECKPOINT")
+	for actor in visibility:
+		_expect(actor.visible == visibility[actor], "M2_D1_REPLAY_EXACT_VISIBILITY")
+	main._on_continue_pressed()
+	_expect(main.phase == main.Phase.SETUP and _rounds(main) == before, "M2_D1_REPLAY_THEN_EXACT_RESTORE")
+	main.raid_force_alarm()
 	for repeat in 10:
 		main.operators[0].ammo = 0
 		main._on_abort_pressed()
@@ -122,6 +139,7 @@ func _run() -> void:
 	main._on_abort_pressed()
 	await _frames(8)
 	var result_rects: Array[Rect2] = []
+	_expect(not main.yard_hud.result_replay.is_visible_in_tree(), "M2_D1_NO_DUPLICATE_TOUCH_REPLAY")
 	for button in [main.continue_button, main.restart_preparation_button, main.result_replay_button, main.dossier_button]:
 		var rect: Rect2 = button.get_global_rect()
 		print("M2_D1_RESULT_RECT name=%s rect=%s" % [button.name, rect])

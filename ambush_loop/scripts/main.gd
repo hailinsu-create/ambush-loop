@@ -141,6 +141,7 @@ var _hold_move_acc: float = 0.0
 var _foot_acc: float = 0.0
 var frozen_plan: PlanState = PlanState.new()
 var replay_return_phase: Phase = Phase.SETUP
+var _replay_live_visibility: Dictionary = {}
 
 var pending_spawns: Array = [] # {id, route, delay, loot, spawned}
 var route_world: Dictionary = {} # name -> PackedVector2Array
@@ -815,6 +816,8 @@ func _maybe_show_tutorial() -> void:
 		return
 	var gs = _gs()
 	var lid := level.level_id
+	if lid == "yard":
+		return # Operable observer in YardHud; no modal or page-click completion.
 	if gs and gs.has_method("has_seen_tutorial"):
 		if gs.has_seen_tutorial(lid):
 			return
@@ -1073,17 +1076,22 @@ func _pin_role_cards(touch: bool, after_layout: bool = false) -> void:
 		_role_box_pin_mode_initialized = true
 		_role_box_pin_touch = touch
 	role_box.size_flags_vertical = 0
+	role_box.offset_bottom = role_box.offset_top + _role_box_target_height(touch)
+	_apply_result_rail()
+	if not after_layout:
+		_schedule_role_box_refit(touch)
+
+
+func _role_box_target_height(touch: bool) -> float:
 	var h := 0.0
 	if role_box is Container:
 		h = (role_box as Container).get_combined_minimum_size().y
 	if h < 200.0:
+		var card_min := Vector2(220, 142) if touch else Vector2(204, 96)
 		var seps := 16.0
 		var plan_h := 0.0 if touch else 56.0
 		h = 3.0 * card_min.y + seps + plan_h
-	role_box.offset_bottom = role_box.offset_top + h
-	_apply_result_rail()
-	if not after_layout:
-		_schedule_role_box_refit(touch)
+	return h
 
 
 func _schedule_role_box_refit(touch: bool) -> void:
@@ -1092,7 +1100,7 @@ func _schedule_role_box_refit(touch: bool) -> void:
 	if _role_box_pin_pending and _role_box_pin_pending_touch == touch:
 		return
 	if not _role_box_pin_pending and role_box is Container:
-		var content_h := (role_box as Container).get_combined_minimum_size().y
+		var content_h := _role_box_target_height(touch)
 		var dock_h := role_box.offset_bottom - role_box.offset_top
 		if _role_box_pin_mode_initialized and touch == _role_box_pin_touch and absf(dock_h - content_h) <= 0.5:
 			return
@@ -1121,7 +1129,6 @@ func _pin_role_cards_after_layout(touch: bool, revision: int) -> void:
 	if not is_instance_valid(role_box):
 		return
 	if touch != _want_touch():
-		_pin_role_cards(_want_touch())
 		return
 	_pin_role_cards(touch, true)
 
@@ -1232,6 +1239,9 @@ func apply_touch_command(cmd: String) -> void:
 				_update_hud()
 		"team_fire":
 			_queue_team_permission()
+		"replay_return":
+			if phase == Phase.REPLAY:
+				_exit_replay_to_setup()
 		"alarm":
 			if phase == Phase.REPLAY:
 				_exit_replay_to_setup()
@@ -1261,13 +1271,13 @@ func apply_touch_command(cmd: String) -> void:
 			if phase == Phase.SETUP and selected and selected.visible:
 				selected.rotate_by(15.0)
 				_sfx("ui")
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 		"rotate_ccw":
 			if phase == Phase.SETUP and selected and selected.visible:
 				selected.rotate_by(-15.0)
 				_sfx("ui")
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 		"nade":
 			_place_nade_mark()
@@ -2394,6 +2404,8 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	if yard_hud:
+		yard_hud.operable_guide.reset_session()
 	yard_manual_permission = false
 	preparation_checkpoint.clear()
 	_cancel_touch_intent()
@@ -3837,7 +3849,9 @@ func _diff_vs_last_plan() -> String:
 	return "；".join(bits)
 
 
-func _announce_plan_edit() -> void:
+func _announce_plan_edit(facing_edit: bool = false) -> void:
+	if facing_edit and phase == Phase.SETUP and yard_hud and level.level_id == "yard":
+		yard_hud.operable_guide.note_facing()
 	if _plan_diff_guard or not _restored_this_setup:
 		return
 	if last_plan.deployments.is_empty():
@@ -4050,7 +4064,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_A:
 				if selected and selected.visible:
 					selected.rotate_by(-15.0)
-					_announce_plan_edit()
+					_announce_plan_edit(true)
 					_refresh_killzone_preview()
 			KEY_C, KEY_Q, KEY_W, KEY_Z, KEY_K, KEY_F1, KEY_F2, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8:
 				if event.echo:
@@ -4060,7 +4074,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_D:
 				if selected and selected.visible:
 					selected.rotate_by(15.0)
-					_announce_plan_edit()
+					_announce_plan_edit(true)
 					_refresh_killzone_preview()
 			KEY_E:
 				_try_pickup_near_selected()
@@ -4103,7 +4117,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if pointer.is_finite():
 				var v := pointer - selected.global_position
 				selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 		get_viewport().set_input_as_handled()
 		return
@@ -4478,7 +4492,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 			var v := world2 - selected.global_position
 			if v.length() > 10.0:
 				selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
-				_announce_plan_edit()
+				_announce_plan_edit(true)
 				_refresh_killzone_preview()
 				_touch_dragged = true
 				_cover_hold_slot = null
@@ -4635,6 +4649,8 @@ func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
 	selected.visible = true
 	selected.stop_move()
 	selected.global_position = slot.global_position
+	if announce and phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.moved[int(selected.op_id)] = true
 	var face := float(slot.get_meta("default_face"))
 	if not selected.alive:
 		selected.reset_loadout()
@@ -4643,6 +4659,8 @@ func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
 	# Player double-tap (announce) faces the next authored route. Smoke uses announce=false.
 	if same_pad and announce:
 		selected.set_facing(_facing_toward_wave_route())
+		if phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+			yard_hud.operable_guide.note_facing()
 	elif had_cover:
 		selected.set_facing(keep_deg)
 	else:
@@ -5477,7 +5495,10 @@ func _on_alarm_pressed() -> void:
 	var this_run := run_id
 	phase = Phase.WATCHING
 	if backpack_panel != null and backpack_panel.is_open():
+		# The guide observes the accepted transition, not a button click.
 		backpack_panel.dismiss()
+	if yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.combat_started = true
 	if c2:
 		c2.begin_alert()
 	leak_advice_shown = ""
@@ -6838,6 +6859,10 @@ func _on_replay_pressed() -> void:
 	if battle_log.events.is_empty() and battle_log.snapshots.is_empty():
 		return
 	replay_return_phase = phase
+	_replay_live_visibility.clear()
+	for actor in operators + enemies + loot_piles:
+		if is_instance_valid(actor):
+			_replay_live_visibility[actor] = actor.visible
 	frozen_plan = last_plan.duplicate_plan()
 	phase = Phase.REPLAY
 	result_panel.visible = false
@@ -6858,7 +6883,7 @@ func _on_replay_pressed() -> void:
 			l.visible = false
 	_clear_replay_layer()
 	_apply_replay_scrub()
-	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
+	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回结算，再选择调整伏击或重新搜集"
 	_update_hud()
 
 
@@ -6909,7 +6934,7 @@ func _paint_replay_snapshot(snap: Dictionary) -> void:
 			"敌%d" % int(e["id"]),
 			alive,
 			hot,
-			90.0,
+			float(e.get("facing", 90.0)),
 			false,
 			not alive
 		)
@@ -6936,6 +6961,7 @@ func _add_replay_marker(
 ) -> void:
 	var n := Node2D.new()
 	n.position = pos
+	n.set_meta("recorded_facing", facing)
 	if focused:
 		var halo := Polygon2D.new()
 		var hpts := PackedVector2Array()
@@ -6958,6 +6984,7 @@ func _add_replay_marker(
 		n.add_child(cone)
 	var body := Polygon2D.new()
 	body.polygon = PackedVector2Array([Vector2(0, -10), Vector2(8, 8), Vector2(-8, 8)])
+	body.rotation_degrees = facing + 90.0
 	body.color = Color(1.0, 0.9, 0.3) if focused else color
 	n.add_child(body)
 	if kill_stamp:
@@ -7013,23 +7040,18 @@ func _exit_replay_to_setup() -> void:
 		scrub_slider.visible = false
 	if not frozen_plan.deployments.is_empty():
 		last_plan = frozen_plan.duplicate_plan()
-	if replay_return_phase == Phase.WON:
-		phase = Phase.WON
-		for op in operators:
-			if op.slot != null:
-				op.visible = true
-				op.global_position = op.slot.global_position
-		for e in enemies:
-			if is_instance_valid(e):
-				e.visible = true
-		for l in loot_piles:
-			if is_instance_valid(l):
-				l.visible = true
-		_show_win_result()
+	if replay_return_phase in [Phase.WON, Phase.FAILED]:
+		phase = replay_return_phase
+		for actor in _replay_live_visibility:
+			if is_instance_valid(actor):
+				actor.visible = _replay_live_visibility[actor]
+		_replay_live_visibility.clear()
+		if phase == Phase.WON:
+			_show_win_result()
+		else:
+			_show_fail_result()
 		_update_hud()
 		return
-	if replay_return_phase == Phase.FAILED:
-		loop_index += 1
 	_start_setup(true, true)
 
 
@@ -7757,6 +7779,8 @@ func result_cta_buried_by_bars() -> bool:
 func _update_hud() -> void:
 	if _checkpoint_restoring:
 		return
+	if yard_hud and level != null and str(level.level_id) == "yard":
+		yard_hud.operable_guide.observe(self)
 	var lv_title := level.title if level else "AMBUSH LOOP"
 	title_label.text = "AMBUSH LOOP  ·  第 %d 世  ·  波 %d/%d" % [loop_index, wave_index() + 1, wave_total()]
 	if level_label:
@@ -8304,6 +8328,8 @@ func _command_move_op(op: OperatorUnit, world_pos: Vector2, sprint: bool = false
 	elif sprint and op.has_method("set_sprint"):
 		op.set_sprint(true)
 	_paint_move_for(op, pts)
+	if phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.note_move(op, pts[pts.size() - 1])
 	return true
 
 
@@ -8336,6 +8362,8 @@ func _apply_move_cells(op: OperatorUnit, cells: Array[Vector2i], sprint: bool = 
 	if sprint and op.has_method("set_sprint"):
 		op.set_sprint(true)
 	_paint_move_for(op, pts)
+	if phase == Phase.SETUP and yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.note_move(op, pts[pts.size() - 1])
 	return true
 
 
@@ -12325,6 +12353,8 @@ func _tick_command_pickups(delta: float = 0.016) -> void:
 			continue
 		_try_assign_loot(loot)
 	loot_piles = loot_piles.filter(func(l: LootPickup) -> bool: return is_instance_valid(l) and not l.collected)
+	if yard_hud and str(level.level_id) == "yard":
+		yard_hud.operable_guide.observe(self)
 
 
 func _nearest_stash_for(op: OperatorUnit) -> Node2D:
@@ -12370,6 +12400,8 @@ func _complete_stash_search(op: OperatorUnit) -> bool:
 		_update_hud()
 		return true
 	status_label.text = "%s %s" % [op.display_name, str(rec.get("text", "拾取"))]
+	if yard_hud and str(level.level_id) == "yard" and bool(rec.get("ok", false)):
+		yard_hud.operable_guide.note_supply(str(item.get("kind", "")), int(item.get("amount", 0)))
 	_sfx("crate_lid")
 	_sfx(_pickup_cue(str(item.get("kind", "ammo"))))
 	_operator_bark(op, "crate")
