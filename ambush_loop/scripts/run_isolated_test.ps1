@@ -133,7 +133,8 @@ finally {
             if (Test-Path -LiteralPath $_) { Get-Content -LiteralPath $_ }
         } | Tee-Object -FilePath $runLog
         # Godot can exit 0 after a GDScript callback aborts. That is not a pass.
-        $runtimeErrors = @($stdoutLog, $stderrLog) | Where-Object { Test-Path -LiteralPath $_ } | Select-String -Pattern '^SCRIPT ERROR:'
+        $runtimeLogPaths = @(@($stdoutLog, $stderrLog) | Where-Object { Test-Path -LiteralPath $_ })
+        $runtimeErrors = if ($runtimeLogPaths.Count -gt 0) { Select-String -LiteralPath $runtimeLogPaths -Pattern '^SCRIPT ERROR:' }
         if ($runtimeErrors) {
             Write-Output 'TEST_RUNTIME_ERRORS=1'
             if ($wrapperExit -eq 0) { $wrapperExit = 94 }
