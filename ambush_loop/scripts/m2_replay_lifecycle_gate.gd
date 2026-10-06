@@ -13,11 +13,20 @@ func _run() -> void:
 		var gs = root.get_node_or_null("GameSettings")
 		if gs: gs.force_touch_hud = true
 		main._ensure_touch_hud()
+		var grenade = main.raid_stashes[0]
+		await _walk_to_cell(main, main.operators[0], grenade.cell)
+		main.selected = main.operators[0]
+		main._try_pickup_near_selected()
+		main.raid_advance_search(1.0)
+		await _frames(2)
+		_expect(main.operators[0].grenades == 1, "M2_REPLAY_REAL_GRENADE_PICKUP")
 		var cells := [Vector2i(15,13), Vector2i(29,15), Vector2i(12,14)]
 		for i in 3:
 			await _walk_to_cell(main, main.operators[i], cells[i])
 			main.operators[i].set_facing(180.0 if i < 2 else 0.0)
 			main.operators[i].set_fire_mode(OperatorUnit.FireMode.ENGAGE_ON_SIGHT)
+		main.selected = main.operators[0]
+		main._place_nade_mark(main.grid.cell_to_world_center(Vector2i(13,11)))
 		main.apply_touch_command("permission_mode")
 		main.raid_force_alarm()
 		main.apply_touch_command("team_fire")
@@ -47,7 +56,13 @@ func _run() -> void:
 		_expect(main.phase == main.Phase.REPLAY and main._touches.is_empty(), "M2_REPLAY_NATIVE_SINGLE_ENTRY")
 		main.replay.set_tick(240)
 		main._apply_replay_scrub()
-		main._exit_replay_to_setup()
+		await _frames(6)
+		var return_button: Button = main.touch_hud._btns.get("replay_return", main.touch_hud._btns["alarm"])
+		_expect(return_button.is_visible_in_tree() and return_button.get_global_rect().size.y >= 48, "M2_REPLAY_VISIBLE_NATIVE_RETURN")
+		if not return_button.is_visible_in_tree():
+			_finish_failed()
+			return
+		await _native_tap(return_button.get_global_rect().get_center())
 		_expect(main.phase == main.Phase.FAILED and checkpoint == str(main.preparation_checkpoint.snapshot), "M2_REPLAY_FAILURE_CHECKPOINT_UNCHANGED")
 		_expect(log_before == str([main.battle_log.events, main.battle_log.snapshots]), "M2_REPLAY_LOG_UNCHANGED")
 		for actor in visibility:
@@ -58,7 +73,7 @@ func _run() -> void:
 		await _frames(8)
 		await _native_tap(main.continue_button.get_global_rect().get_center())
 		_expect(main.phase == main.Phase.SETUP and main.yard_manual_permission and not main._manual_permission_queued and not main._manual_permission_used, "M2_REPLAY_NATIVE_MANUAL_RESTORE_FRESH_QUEUE")
-		_expect(_rounds(main) == [7,50,6] and main.raid_stashes.size() == 1 and main.battle_log.events.is_empty(), "M2_REPLAY_NATIVE_EXACT_SUPPLY_NO_PERMISSION_EVENT")
+		_expect(_rounds(main) == [7,50,6] and main.raid_stashes.is_empty() and main.operators[0].grenades == 1 and main.operators[0].has_nade_mark and main.battle_log.events.is_empty(), "M2_REPLAY_NATIVE_EXACT_SUPPLY_NO_PERMISSION_EVENT")
 		for i in 3:
 			var record: Dictionary = main.preparation_checkpoint.snapshot.crew[i]
 			var op = main.operators[i]
@@ -67,7 +82,8 @@ func _run() -> void:
 		main._sim_tick()
 		main._on_abort_pressed()
 		main._on_replay_pressed()
-		main._exit_replay_to_setup()
+		await _frames(6)
+		await _native_tap(main.touch_hud._btns["replay_return"].get_global_rect().get_center())
 		await _frames(8)
 		await _native_tap(main.restart_preparation_button.get_global_rect().get_center())
 		_expect(main.phase == main.Phase.SETUP and _inventory_empty(main) and main.raid_stashes.size() == 4 and not main.preparation_checkpoint_available(), "M2_REPLAY_NATIVE_FRESH_RECOLLECT_BRANCH")

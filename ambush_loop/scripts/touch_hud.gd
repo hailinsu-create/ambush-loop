@@ -11,6 +11,7 @@ var _host: Node = null
 var _hint: Label = null
 var _row_setup: HBoxContainer = null
 var _row_watch: HBoxContainer = null
+var _row_replay: HBoxContainer = null
 var _stack_secondary: VBoxContainer = null
 var _twist_pair: HBoxContainer = null
 var _safe: MarginContainer = null
@@ -258,6 +259,11 @@ func _build() -> void:
 	_add(_row_watch, "mute", "静音", Color(0.35, 0.38, 0.42))
 	_add(_row_watch, "log", "日志", Color(0.32, 0.42, 0.44))
 	_add(_row_watch, "settings", "菜单", Color(0.32, 0.36, 0.40))
+	_row_replay = HBoxContainer.new()
+	_row_replay.alignment = BoxContainer.ALIGNMENT_CENTER
+	_row_replay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.add_child(_row_replay)
+	_add(_row_replay, "replay_return", "返回结算", Color(0.32, 0.42, 0.50), Vector2(120, 64))
 	_add_world_intent_controls(root)
 	_layout_compact()
 	_hide_overflow()
@@ -662,7 +668,10 @@ func refresh_phase(
 	if _row_setup:
 		_row_setup.visible = phase_name == "SETUP" or phase_name == "SWEEP"
 	if _row_watch:
-		_row_watch.visible = phase_name != "SETUP" and phase_name != "SWEEP"
+		_row_watch.visible = phase_name not in ["SETUP", "SWEEP", "REPLAY"]
+	if _row_replay:
+		_row_replay.visible = phase_name == "REPLAY"
+		_btns["replay_return"].visible = phase_name == "REPLAY"
 	match phase_name:
 		"SETUP":
 			set_hint("点地预览再确认 · 拖动地图 · 长按预览奔跑 · 长按掩体看保护 · 近背面绕背/割喉 · 匍匐 · 拧射界 · 拉警报")
@@ -671,7 +680,7 @@ func refresh_phase(
 		"WATCHING":
 			set_hint("警报：暂停·倍速·中止 · 自动开火")
 		"REPLAY":
-			set_hint("复盘只读 — 拖时间轴；警报钮返回搜刮")
+			set_hint("复盘只读 — 拖时间轴；返回结算后选择调整伏击或重新搜集")
 		_:
 			set_hint("点继续。菜单可清空记忆或回标题")
 	if _btns.has("pause"):
@@ -741,7 +750,7 @@ func _hide_overflow() -> void:
 		if b == null:
 			continue
 		var c := str(cmd)
-		if SETUP_RESIDENT.has(c) or WATCH_RESIDENT.has(c) or c in ["world_confirm", "world_cancel"]:
+		if SETUP_RESIDENT.has(c) or WATCH_RESIDENT.has(c) or c in ["world_confirm", "world_cancel", "replay_return"]:
 			b.visible = true
 			continue
 		b.visible = false

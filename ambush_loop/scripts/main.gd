@@ -1239,6 +1239,9 @@ func apply_touch_command(cmd: String) -> void:
 				_update_hud()
 		"team_fire":
 			_queue_team_permission()
+		"replay_return":
+			if phase == Phase.REPLAY:
+				_exit_replay_to_setup()
 		"alarm":
 			if phase == Phase.REPLAY:
 				_exit_replay_to_setup()
