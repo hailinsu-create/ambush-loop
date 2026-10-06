@@ -714,13 +714,19 @@ func _tactical_summary(data: Dictionary) -> String:
 	if not target_states.is_empty():
 		var target: Dictionary = target_states[0]
 		var reason := str(target.get("block_reason", ""))
-		lines.append("目标 %d：%s" % [int(target.get("id", -1)), _tactical_reason_label(reason, bool(target.get("geometry_clear", false)))])
+		lines.append("目标 %d：%s" % [int(target.get("id", -1)), _tactical_reason_label(
+			reason,
+			bool(target.get("geometry_clear", false)),
+			bool(target.get("shot_cooldown_clear", false)),
+		)])
 	return "\n".join(lines)
 
 
-func _tactical_reason_label(reason: String, geometry_clear: bool) -> String:
+func _tactical_reason_label(reason: String, geometry_clear: bool, cooldown_clear: bool) -> String:
 	if reason.is_empty():
-		return "交战条件满足 · 冷却另计" if geometry_clear else "待复核"
+		if not geometry_clear:
+			return "待复核"
+		return "交战条件满足" if cooldown_clear else "射击冷却中"
 	match reason:
 		"hold": return "未获开火许可"
 		"ammo": return "弹药不足"

@@ -54,6 +54,7 @@ func _run() -> void:
 
 	var original_ammo := int(op.ammo)
 	var original_permission := bool(op.fire_permitted)
+	var original_shot_cd := float(op.shot_cd)
 	op.ammo = maxi(original_ammo, 1)
 	op.fire_permitted = true
 	var target = main.call("_make_enemy", 9001)
@@ -90,6 +91,39 @@ func _run() -> void:
 	_restore_line_of_sight_block(main, blocker_cell)
 	op.ammo = original_ammo
 	op.fire_permitted = original_permission
+	op.shot_cd = original_shot_cd
+	var cooldown_authority_before := _authority_snapshot(main, op)
+	op.ammo = maxi(original_ammo, 1)
+	op.fire_permitted = true
+	op.shot_cd = 0.0
+	var ready_panel_data: Dictionary = main.call("yard_tactical_display_data")
+	var ready_panel_status := _target_status(ready_panel_data, int(target.label_id))
+	_expect(bool(ready_panel_status.get("geometry_clear", false)) and str(ready_panel_status.get("block_reason", "")) == "", "M25_P1A_COOLDOWN_FIXTURE_HAS_CLEAR_TARGET")
+	_expect(bool(ready_panel_status.get("shot_cooldown_clear", false)), "M25_P1A_READY_STATUS_HAS_NO_COOLDOWN")
+	if occluded_presenter != null:
+		occluded_presenter.call("sync_presentation")
+		var ready_panel_text := str(occluded_presenter.get("_tactical_info").text)
+		_expect(ready_panel_text.contains("交战条件满足") and not ready_panel_text.contains("冷却中"), "M25_P1A_READY_TARGET_STATUS_IS_EXPLICIT")
+	op.shot_cd = 1.0
+	var cooldown_panel_data: Dictionary = main.call("yard_tactical_display_data")
+	var cooldown_panel_status := _target_status(cooldown_panel_data, int(target.label_id))
+	_expect(bool(cooldown_panel_status.get("engagement_conditions_clear", false)) and not bool(cooldown_panel_status.get("shot_cooldown_clear", true)), "M25_P1A_COOLDOWN_FIXTURE_SEPARATES_GEOMETRY_FROM_COOLDOWN")
+	if occluded_presenter != null:
+		occluded_presenter.call("sync_presentation")
+		var cooldown_panel_text := str(occluded_presenter.get("_tactical_info").text)
+		_expect(cooldown_panel_text.contains("射击冷却中") and not cooldown_panel_text.contains("当前可射") and not cooldown_panel_text.contains("交战条件满足"), "M25_P1A_COOLDOWN_PRESENTATION_DOES_NOT_PROMISE_READY_SHOT")
+	op.shot_cd = 0.0
+	var restored_ready_data: Dictionary = main.call("yard_tactical_display_data")
+	var restored_ready_status := _target_status(restored_ready_data, int(target.label_id))
+	_expect(bool(restored_ready_status.get("shot_cooldown_clear", false)), "M25_P1A_COOLDOWN_CLEAR_RESTORES_STATUS")
+	if occluded_presenter != null:
+		occluded_presenter.call("sync_presentation")
+		var restored_ready_text := str(occluded_presenter.get("_tactical_info").text)
+		_expect(restored_ready_text.contains("交战条件满足") and not restored_ready_text.contains("冷却中"), "M25_P1A_COOLDOWN_CLEAR_RESTORES_PANEL_COPY")
+	op.ammo = original_ammo
+	op.fire_permitted = original_permission
+	op.shot_cd = original_shot_cd
+	_expect(cooldown_authority_before == _authority_snapshot(main, op), "M25_P1A_COOLDOWN_PRESENTATION_RESTORES_WITHOUT_MUTATION")
 	baseline = _authority_snapshot(main, op)
 
 	main.set("_touch_intent", {
