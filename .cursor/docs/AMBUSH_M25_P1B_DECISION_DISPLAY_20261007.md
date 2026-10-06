@@ -10,7 +10,7 @@
 
 - 分支：`codex/m25-p1a-tactical-data`
 - 基线：`c76209b`（冷却文案修正 `0e17f6f` 后的文档提交）
-- 本报告对应源码当前仍在工作树；最终 SHA 待提交后登记。
+- 本报告对应源码提交：`4ee9ed2`（`feat(m25): enrich 3D tactical decision display`）。
 
 ## 实现
 
