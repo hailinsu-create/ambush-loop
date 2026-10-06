@@ -20,11 +20,13 @@ static func state_signature(host: Node) -> String:
 	bits.append("door=%s" % str(host.get("door_locked")))
 	bits.append("grid=%d" % int(grid.get("tactical_revision")) if grid != null else "grid=-1")
 	if selected != null and is_instance_valid(selected):
-		bits.append("actor=%d:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % [
+		var moving := bool(selected.call("is_moving")) if selected.has_method("is_moving") else false
+		bits.append("actor=%d:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % [
 			selected.get_instance_id(), str(selected.get("op_id")), str(selected.get("global_position")),
 			str(selected.get("facing_deg")), str(selected.get("weapon_id")), str(selected.get("ammo")),
 			str(selected.get("stance")), str(selected.get("fire_mode")), str(selected.get("fire_permitted")),
-			str(selected.get("alive")), str(selected.get("visible")),
+			str(selected.get("alive")), str(selected.get("visible")), str(selected.get("range_px")),
+			str(selected.get("half_angle_deg")), str(selected.get("melee")), str(selected.get("shot_cd")), str(moving),
 		])
 	else:
 		bits.append("actor=none")
@@ -42,12 +44,15 @@ static func state_signature(host: Node) -> String:
 	else:
 		var slot = intent.get("slot")
 		var slot_id: int = -1
+		var slot_position := "none"
 		if slot is Node and is_instance_valid(slot):
 			slot_id = slot.get_instance_id()
-		bits.append("intent=%s:%s:%s:%s:%s:%s:%d" % [
+			if slot is Node2D:
+				slot_position = str(slot.global_position)
+		bits.append("intent=%s:%s:%s:%s:%s:%s:%d:%s" % [
 			str(intent.get("kind", "")), str(intent.get("actor_instance_id", -1)),
 			str(intent.get("tool", -1)), str(intent.get("world", Vector2.ZERO)),
-			str(intent.get("cells", [])), str(intent.get("sprint", false)), slot_id,
+			str(intent.get("cells", [])), str(intent.get("sprint", false)), slot_id, slot_position,
 		])
 	return "|".join(bits)
 
@@ -102,23 +107,27 @@ static func build(host: Node, signature: String) -> Dictionary:
 		"range_px": actor["range_px"],
 		"half_angle_deg": actor["half_angle_deg"],
 		"geometry_only": true,
-		"authority": "OperatorUnit.in_fire_geometry",
+		"authority": "weapon_envelope",
+		"line_of_sight_tested": false,
 	}
 	data["movement_preview"] = _movement_preview(host, op, grid)
 	if not bool(actor["alive"]) or not bool(actor["visible"]) or bool(actor["melee"]):
 		return data
 
-	var active_routes: Array = host.call("_active_routes")
+	var active_routes: Array = host.call("_active_route_records") if host.has_method("_active_route_records") else []
 	var coverage_points := PackedVector2Array()
 	var seen: Dictionary = {}
 	var route_samples: Array[Dictionary] = []
 	var route_summary: Array[Dictionary] = []
-	for route_index in active_routes.size():
-		var raw_route: Variant = active_routes[route_index]
+	for raw_record in active_routes:
+		if not raw_record is Dictionary:
+			continue
+		var route_record: Dictionary = raw_record
+		var raw_route: Variant = route_record.get("points", PackedVector2Array())
 		if not raw_route is PackedVector2Array:
 			continue
 		var route: PackedVector2Array = raw_route
-		var route_id := _route_id(route_index)
+		var route_id := str(route_record.get("route_id", ""))
 		var hits := 0
 		var total := 0
 		for point in _sample_polyline(route, ROUTE_SAMPLE_SPACING_PX):
@@ -184,20 +193,11 @@ static func _target_states(host: Node, op: Object, grid: Object) -> Array[Dictio
 			"position": target,
 			"geometry_clear": geometry_clear,
 			"geometry_query": "OperatorUnit.in_fire_geometry",
-			"fire_ready": reason.is_empty(),
+			"engagement_conditions_clear": reason.is_empty(),
+			"shot_cooldown_clear": float(op.get("shot_cd")) <= 0.0,
 			"block_reason": reason,
 		})
 	return out
-
-
-static func _route_id(index: int) -> String:
-	match index:
-		0:
-			return "main"
-		1:
-			return "flank"
-		_:
-			return "route_%d" % index
 
 
 static func _sample_polyline(points: PackedVector2Array, spacing: float) -> PackedVector2Array:

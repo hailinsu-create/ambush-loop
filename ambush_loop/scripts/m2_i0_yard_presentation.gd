@@ -705,7 +705,8 @@ func _tactical_summary(data: Dictionary) -> String:
 	for route in data.get("route_summary", []):
 		if not route is Dictionary:
 			continue
-		var name := "主路" if str(route.get("route_id", "")) == "main" else ("侧翼" if str(route.get("route_id", "")) == "flank" else "路线")
+		var route_id := str(route.get("route_id", ""))
+		var name := "主路" if route_id == "main" else ("侧翼" if route_id == "flank" else ("备选" if route_id == "alternate" else "路线"))
 		route_parts.append("%s %d/%d" % [name, int(route.get("covered_samples", 0)), int(route.get("total_samples", 0))])
 	if not route_parts.is_empty():
 		lines.append("路线覆盖 " + " · ".join(route_parts))
@@ -719,7 +720,7 @@ func _tactical_summary(data: Dictionary) -> String:
 
 func _tactical_reason_label(reason: String, geometry_clear: bool) -> String:
 	if reason.is_empty():
-		return "当前可射" if geometry_clear else "待复核"
+		return "交战条件满足 · 冷却另计" if geometry_clear else "待复核"
 	match reason:
 		"hold": return "未获开火许可"
 		"ammo": return "弹药不足"

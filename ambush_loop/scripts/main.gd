@@ -2533,14 +2533,22 @@ func _cells_to_world(cells: Array) -> PackedVector2Array:
 func _active_routes() -> Array:
 	## Routes enemies will actually walk: skip locked door_blocks_route, include alt.
 	var out: Array = []
+	for route in _active_route_records():
+		out.append(route.get("points", PackedVector2Array()))
+	return out
+
+
+func _active_route_records() -> Array[Dictionary]:
+	## Stable authored identity paired with the route points for presentation/query consumers.
+	var out: Array[Dictionary] = []
 	if level == null:
 		return out
 	for key in route_world.keys():
 		if door_locked and level.door_blocks_route != "" and str(key) == level.door_blocks_route:
 			continue
-		out.append(route_world[key])
+		out.append({"route_id": str(key), "points": route_world[key]})
 	if door_locked and not level.alternate_route_cells.is_empty():
-		out.append(_cells_to_world(level.alternate_route_cells))
+		out.append({"route_id": "alternate", "points": _cells_to_world(level.alternate_route_cells)})
 	return out
 
 
