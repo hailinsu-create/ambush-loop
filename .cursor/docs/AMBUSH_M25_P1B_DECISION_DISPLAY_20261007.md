@@ -10,7 +10,7 @@
 
 - 分支：`codex/m25-p1a-tactical-data`
 - 基线：`c76209b`（冷却文案修正 `0e17f6f` 后的文档提交）
-- 本报告对应源码提交：`4ee9ed2`（`feat(m25): enrich 3D tactical decision display`）。
+- 展示实现提交：`4ee9ed2`（`feat(m25): enrich 3D tactical decision display`）；扩展阻挡/小屏验证门提交：`bf2d73c`（`test(m25): verify compact tactical display layouts`）。
 
 ## 实现
 
