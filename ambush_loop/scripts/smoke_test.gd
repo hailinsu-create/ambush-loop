@@ -3790,6 +3790,9 @@ func _assert_touch_feel_052(main) -> bool:
 	if home.distance_to(clear) < 48.0:
 		clear = home + Vector2(96, 0)
 	var pan0: Vector2 = main._cam_pan
+	## Move toward the interior of the camera's pan range. A fixed rightward
+	## drag can point out of the -X clamp and correctly leave the camera still.
+	var pan_drag := Vector2(48, 0) if pan0.x >= 0.0 else Vector2(-48, 0)
 	var press := InputEventScreenTouch.new()
 	press.index = 0
 	press.pressed = true
@@ -3797,8 +3800,8 @@ func _assert_touch_feel_052(main) -> bool:
 	main._unhandled_input(press)
 	var drag := InputEventScreenDrag.new()
 	drag.index = 0
-	drag.position = press.position + Vector2(48, 0)
-	drag.relative = Vector2(48, 0)
+	drag.position = press.position + pan_drag
+	drag.relative = pan_drag
 	main._unhandled_input(drag)
 	var rel := InputEventScreenTouch.new()
 	rel.index = 0
@@ -3814,7 +3817,7 @@ func _assert_touch_feel_052(main) -> bool:
 		quit(44)
 		return false
 	if main._cam_pan.is_equal_approx(pan0):
-		push_error("SMOKE_PAN_NO_CAM")
+		push_error("SMOKE_PAN_NO_CAM start=%s end=%s zoom=%s" % [pan0, main._cam_pan, main._cam_zoom])
 		quit(44)
 		return false
 	print("SMOKE_OK_GESTURE_PAN")
