@@ -28,8 +28,27 @@ static func state_signature(host: Node) -> String:
 			str(selected.get("alive")), str(selected.get("visible")), str(selected.get("range_px")),
 			str(selected.get("half_angle_deg")), str(selected.get("melee")), str(selected.get("shot_cd")), str(moving),
 		])
+		var pack = selected.get("pack")
+		var pack_slots: Array = pack.get("slots") if pack != null else []
+		bits.append("resources=%s:%s:%s:%s:%s:%s:%s:%s" % [
+			str(selected.get("max_ammo")), str(selected.get("grenades")), str(selected.get("mines")),
+			str(selected.get("decoys")), str(selected.get("has_ammo_pack")), str(selected.get("ammo_pack_used")),
+			str(selected.get("ammo_pool")), str(pack_slots),
+		])
 	else:
 		bits.append("actor=none")
+	var stashes: Array = host.get("raid_stashes")
+	for stash in stashes:
+		if stash == null or not is_instance_valid(stash):
+			continue
+		bits.append("stash=%s:%s:%s:%s:%s" % [
+			str(stash.get_instance_id()), str(stash.get("kind")), str(stash.get("amount")),
+			str(stash.get("collected")), str(stash.get("cell")),
+		])
+	bits.append("yard_permission=%s:%s:%s" % [
+		str(host.get("yard_manual_permission")), str(host.get("_manual_permission_queued")),
+		str(host.get("_manual_permission_used")),
+	])
 	var enemies: Array = host.get("enemies")
 	for enemy in enemies:
 		if enemy == null or not is_instance_valid(enemy):
@@ -70,6 +89,7 @@ static func build(host: Node, signature: String) -> Dictionary:
 		"coverage_points": PackedVector2Array(),
 		"target_states": [],
 		"movement_preview": {},
+		"resources": {},
 	}
 	if host == null or not is_instance_valid(host):
 		return data
@@ -101,6 +121,7 @@ static func build(host: Node, signature: String) -> Dictionary:
 		"moving": bool(op.call("is_moving")) if op.has_method("is_moving") else false,
 	}
 	data["actor"] = actor
+	data["resources"] = _resource_summary(host, op)
 	data["nominal_sector"] = {
 		"origin": actor_position,
 		"facing_deg": actor["facing_deg"],
@@ -198,6 +219,33 @@ static func _target_states(host: Node, op: Object, grid: Object) -> Array[Dictio
 			"block_reason": reason,
 		})
 	return out
+
+
+static func _resource_summary(host: Node, op: Object) -> Dictionary:
+	var by_kind: Dictionary = {}
+	var available_stashes := 0
+	var stashes: Array = host.get("raid_stashes")
+	for stash in stashes:
+		if stash == null or not is_instance_valid(stash) or bool(stash.get("collected")):
+			continue
+		available_stashes += 1
+		var kind := str(stash.get("kind"))
+		by_kind[kind] = int(by_kind.get(kind, 0)) + int(stash.get("amount"))
+	return {
+		"tool": int(host.get("tool")),
+		"permission_mode": "manual" if bool(host.get("yard_manual_permission")) else "automatic",
+		"permission_queued": bool(host.get("_manual_permission_queued")),
+		"permission_used": bool(host.get("_manual_permission_used")),
+		"available_stashes": available_stashes,
+		"stash_item_counts": by_kind,
+		"ammo": int(op.get("ammo")),
+		"max_ammo": int(op.get("max_ammo")),
+		"grenades": int(op.get("grenades")),
+		"mines": int(op.get("mines")),
+		"decoys": int(op.get("decoys")),
+		"ammo_pack_ready": bool(op.get("has_ammo_pack")) and not bool(op.get("ammo_pack_used")),
+		"ammo_pack_used": bool(op.get("ammo_pack_used")),
+	}
 
 
 static func _sample_polyline(points: PackedVector2Array, spacing: float) -> PackedVector2Array:

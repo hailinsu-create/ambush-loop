@@ -1,7 +1,7 @@
 # M2.5/P1A：院子只读战术数据层执行记录
 
 日期：2026-10-06
-状态（2026-10-07 更新）：P1A 实现、冷却文案修正和 headless/Forward+ 定向桌面门通过；iteration 4 精确源码复审和六关全量回归仍待完成。用户要求跳过真机，本报告不宣称手机/触屏验收。
+状态（2026-10-07 更新）：P1A 实现、冷却文案修正和最新工作树 headless/Forward+ 定向桌面门通过；iteration 4 精确源码复审消息因浏览器控制超时未能确认送达，未重复发送。旧候选 `c40a602` 六关全量回归已通过；当前 P1B 工作树的最终源码全量回归 `bc44c0a6f088441da4051a4ede0f58e4` 正在执行。用户要求跳过真机，本报告不宣称手机/触屏验收。
 
 ## 范围
 
@@ -26,9 +26,9 @@
 - Headless 专项：run `0ca6436080ad4c4182f734f4d6d4d755`，`execution_output` 85，Godot 4.7.2，退出 0，`PLAYER_DATA_UNCHANGED=1`。
 - Forward+ 桌面渲染专项：run `7aec3544467d4446ac7a6a9729e7714b`，`execution_output` 86，Intel Iris Xe、1280×720，退出 0。截图已目视确认面板与底栏/引导不重叠，且标签明确为名义射界：`ambush_loop/build/ambush_test_runs/7aec3544467d4446ac7a6a9729e7714b/m25-p1a-screens/p1a-selected-fire-sector.png`。
 - 前一候选 `42315ba` 的六关 smoke `a46802ebee5348169c7d061df3aee8b3` 已通过，但不是最终源码集成证据。
-- 当前候选 `c40a602` 的全量桌面 smoke run `5a7b181cda9a4a11a0b3072308adc0c6` 使用隔离包装器运行中。尚未核实六关完成标记、引擎退出码与真实玩家数据未变，故总体回归状态为进行中。
+- 旧候选 `c40a602` 的全量桌面 smoke run `5a7b181cda9a4a11a0b3072308adc0c6` 已完整通过：六关 `yard,warehouse,pump,railcut,depot,radio` 胜利，出现 `SMOKE_SLICE_COMPLETE`，引擎/包装器退出 0，`PLAYER_DATA_UNCHANGED=1`。该源码早于冷却修正和当前 P1B，不能替代最终候选验收。
 - 冷却文案最终工作树 headless run `bc20d485470c450e8eda26343dddf91b` 与 Intel Iris Xe 1280×720 Forward+ 渲染 run `6ab81a0e19e64e468ed81852202ff400` 均退出 0，`PLAYER_DATA_UNCHANGED=1`；新增冷却态提示、恢复提示和权威状态无残留断言通过。渲染截图为 `ambush_loop/build/ambush_test_runs/6ab81a0e19e64e468ed81852202ff400/m25-p1a-screens/p1a-selected-fire-sector.png`。
-- 当前 `c40a602` 全量桌面 smoke run `5a7b181cda9a4a11a0b3072308adc0c6` 仍在运行，最新进入 `touch_feel_0511`，没有最终六关完成标记或退出码；不可记作通过。
+- 当前 P1B 最终源码 smoke run `bc44c0a6f088441da4051a4ede0f58e4` 已启动；须等六关完成标记、引擎/包装器退出 0 和 `PLAYER_DATA_UNCHANGED=1` 后再记录通过。
 - 初次修正后曾有一次类型推断失败（`execution_output` 84）；显式标注动态 `Vector2` 类型后，最终候选专项测试通过。该历史失败保留，不计作最终源码通过。
 
 ## GPT 评审
@@ -39,13 +39,13 @@
 
 ## 仍未完成
 
-- iteration 4 精确源码复审结果及其要求的任何跟进。
+- iteration 4 精确源码复审请求的送达/返回状态及其要求的任何跟进；当前浏览器控制超时，不能把工具动作计作 GPT 复审。
 - `c40a602` 候选 full smoke 完成与退出/存档隔离证据。
-- P1B：预设朝向/拟议朝向覆盖、完整目标阻挡提示、补给与工具状态、入口/逃逸/许可地标，使主要战术准备信息在 3D 中完整可读。
+- P1B 仍需补更多高低/遮挡与目标状态反例、不同分辨率布局门、最终源码全量回归及可送达的精确 SHA 外审；当前首切片已经显示资源/补给/工具/许可/多目标/地标，并验证名义射界和路线标记消费共享查询。
 - P2 触摸归属、双指镜头与就近确认流程；需真机核验按钮 dp/安全区与同一触摸不重复提交。
 - P3 真实 Android 帧时、CPU/GPU、温度/降频和内存/节点平台测量。本轮按用户指示明确跳过真机，桌面 Vulkan 不构成 Android 性能验收。
 - P4/P5 美术样板、默认 3D、可玩性与真人盲测，以及进入 M3 前的全部门槛。
 
 ## 下一步
 
-先补跑冷却文案最终工作树 headless，完成当前 `c40a602` 全量桌面 smoke，提交并向原评审对话送审精确修正 SHA；若无新阻断，封存 P1A 证据并按计划推进 P1B。仍暂缓手机与真人项目，不把这次局部切片扩大成阶段完成声明。
+收尾当前最终 P1B 源码全量桌面 smoke；通过后记录精确源码 SHA 与证据，封存 P1A/P1B 局部证据，再处理可送达的外部复审。仍暂缓手机与真人项目，不把这次局部切片扩大成阶段完成声明。

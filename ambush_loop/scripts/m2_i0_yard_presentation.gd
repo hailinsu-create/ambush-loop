@@ -310,7 +310,7 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	_tactical_panel.offset_left = -396.0
 	_tactical_panel.offset_right = -16.0
 	_tactical_panel.offset_top = 72.0
-	_tactical_panel.offset_bottom = 230.0
+	_tactical_panel.offset_bottom = 310.0
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color("101a20", 0.96)
 	panel_style.border_color = Color("48c9ba", 0.92)
@@ -695,6 +695,27 @@ func _tactical_summary(data: Dictionary) -> String:
 	var actor: Dictionary = data.get("actor", {})
 	var lines := PackedStringArray()
 	lines.append("%s · %s · %d 发" % [str(actor.get("name", "队员")), str(actor.get("weapon_id", "")), int(actor.get("ammo", 0))])
+	var resources: Dictionary = data.get("resources", {})
+	var pack_status := ""
+	if bool(resources.get("ammo_pack_ready", false)):
+		pack_status = " · 弹包待用"
+	elif bool(resources.get("ammo_pack_used", false)):
+		pack_status = " · 弹包已用"
+	lines.append("弹药 %d/%d · 手雷 %d · 绊雷 %d · 诱饵 %d%s" % [
+		int(resources.get("ammo", 0)), int(resources.get("max_ammo", 0)),
+		int(resources.get("grenades", 0)), int(resources.get("mines", 0)),
+		int(resources.get("decoys", 0)), pack_status,
+	])
+	var stash_counts: Dictionary = resources.get("stash_item_counts", {})
+	var stash_parts := PackedStringArray()
+	var stash_kinds: Array = stash_counts.keys()
+	stash_kinds.sort()
+	for kind in stash_kinds:
+		stash_parts.append("%s%d" % [_stash_kind_label(str(kind)), int(stash_counts[kind])])
+	var stash_summary := " · ".join(stash_parts) if not stash_parts.is_empty() else "无"
+	lines.append("补给点 %d · %s" % [int(resources.get("available_stashes", 0)), stash_summary])
+	var permission_label := "手动许可" if str(resources.get("permission_mode", "automatic")) == "manual" else "自动许可"
+	lines.append("工具：%s · %s" % [_tool_label(int(resources.get("tool", -1))), permission_label])
 	var sector: Dictionary = data.get("nominal_sector", {})
 	if bool(actor.get("melee", true)):
 		lines.append("近战装备 · 无枪械射界")
@@ -711,8 +732,9 @@ func _tactical_summary(data: Dictionary) -> String:
 	if not route_parts.is_empty():
 		lines.append("路线覆盖 " + " · ".join(route_parts))
 	var target_states: Array = data.get("target_states", [])
-	if not target_states.is_empty():
-		var target: Dictionary = target_states[0]
+	for target in target_states:
+		if not target is Dictionary:
+			continue
 		var reason := str(target.get("block_reason", ""))
 		lines.append("目标 %d：%s" % [int(target.get("id", -1)), _tactical_reason_label(
 			reason,
@@ -720,6 +742,30 @@ func _tactical_summary(data: Dictionary) -> String:
 			bool(target.get("shot_cooldown_clear", false)),
 		)])
 	return "\n".join(lines)
+
+
+func _tool_label(tool_id: int) -> String:
+	match tool_id:
+		0: return "部署"
+		1: return "绊雷"
+		2: return "手雷"
+		3: return "诱饵"
+		_: return "未选择"
+
+
+func _stash_kind_label(kind: String) -> String:
+	match kind:
+		"ammo": return "弹"
+		"grenade": return "雷"
+		"mine": return "绊雷"
+		"decoy": return "饵"
+		"pistol_ammo": return "手枪弹"
+		"rifle_ammo": return "步枪弹"
+		"mg_ammo": return "机枪弹"
+		"scout_ammo": return "侦察弹"
+		"shotgun_ammo": return "霰弹"
+		"smg_ammo": return "冲锋枪弹"
+		_: return kind
 
 
 func _tactical_reason_label(reason: String, geometry_clear: bool, cooldown_clear: bool) -> String:
