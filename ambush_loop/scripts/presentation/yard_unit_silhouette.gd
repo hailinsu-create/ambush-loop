@@ -5,7 +5,7 @@ static func build(body: MeshInstance3D, role: int, hostile: bool = false) -> voi
 	var torso := BoxMesh.new()
 	torso.size = Vector3(0.42 if role != 1 else 0.50, 0.50, 0.26)
 	body.mesh = torso
-	var uniform := Color("b15e4e") if hostile else [Color("86936e"), Color("65776f"), Color("738391")][clampi(role, 0, 2)]
+	var uniform: Color = Color("b15e4e") if hostile else [Color("86936e"), Color("65776f"), Color("738391")][clampi(role, 0, 2)]
 	var cloth := StandardMaterial3D.new()
 	cloth.albedo_color = uniform
 	cloth.roughness = 0.94
