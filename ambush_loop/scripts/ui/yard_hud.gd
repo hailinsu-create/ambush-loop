@@ -185,7 +185,7 @@ func refresh() -> void:
 	objective.text = "搜集弹药，封锁主路和侧巷；阻止敌人从出口逃离。"
 	heading.visible = not result_open and not watching
 	objective.visible = not result_open and not watching and not replaying
-	details_button.visible = not result_open
+	details_button.visible = not result_open and host._active_i0_presenter() == null
 	menu_button.visible = not result_open
 	preview_3d_button.visible = not result_open and host.get_node_or_null("I0YardPresentation") == null
 	details_button.text = "收起战术" if details_open else "战术视图"

@@ -19,6 +19,13 @@ var camera: Camera3D
 var _world: Node3D
 var _controls: CanvasLayer
 var _toggle: Button
+var _quality_button: Button
+var _recenter_button: Button
+var _sun: DirectionalLight3D
+var low_quality := false
+var sync_count := 0
+var sync_last_usec := 0
+var sync_peak_usec := 0
 var _atlas: StandardMaterial3D
 var _actor_nodes: Dictionary = {}
 var _stash_nodes: Dictionary = {}
@@ -76,6 +83,7 @@ func _build_world() -> void:
 	environment.environment = env
 	_world.add_child(environment)
 	var sun := DirectionalLight3D.new()
+	_sun = sun
 	sun.rotation_degrees = Vector3(-56.0, -32.0, 0.0)
 	sun.light_color = Color("d2d9d7")
 	sun.light_energy = 1.1
@@ -299,7 +307,35 @@ func _build_controls() -> void:
 	_toggle.offset_bottom = 64.0
 	root.add_child(_toggle)
 	_toggle.pressed.connect(func() -> void: _set_active(not active))
+	_recenter_button = _camera_button(root, "回中", -232.0, -128.0)
+	_recenter_button.pressed.connect(func() -> void:
+		host._cancel_touch_intent()
+		host._yard_facing_preview.clear()
+		host._reset_cam_view())
+	_quality_button = _camera_button(root, "标准画质", -120.0, -16.0)
+	_quality_button.pressed.connect(func() -> void: set_low_quality(not low_quality))
 	_build_tactical_info_panel(root)
+
+
+func _camera_button(parent: Control, title: String, left: float, right: float) -> Button:
+	var button := Button.new()
+	button.text = title
+	button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	button.offset_left = left
+	button.offset_right = right
+	button.offset_top = 16.0
+	button.offset_bottom = 64.0
+	parent.add_child(button)
+	return button
+
+
+func set_low_quality(value: bool) -> void:
+	## Quality changes rendering only. LOS/picking/replay rules are identical.
+	low_quality = value
+	if _sun != null:
+		_sun.shadow_enabled = not value
+	if _quality_button != null:
+		_quality_button.text = "低耗画质" if value else "标准画质"
 
 
 func _build_tactical_info_panel(parent: Control) -> void:
@@ -337,7 +373,13 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	heading.add_theme_font_size_override("font_size", 18)
 	heading.add_theme_color_override("font_color", Color("8ce3d7"))
 	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	column.add_child(heading)
+	var heading_row := HBoxContainer.new()
+	heading_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(heading_row)
+	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	heading_row.add_child(heading)
+	_quality_button.reparent(heading_row)
+	_quality_button.custom_minimum_size = Vector2(104.0, 40.0)
 	_tactical_info = Label.new()
 	_tactical_info.name = "SelectedTacticalInfo"
 	_tactical_info.add_theme_font_size_override("font_size", 16)
@@ -349,9 +391,13 @@ func _build_tactical_info_panel(parent: Control) -> void:
 
 
 func _set_active(value: bool) -> void:
+	if host != null:
+		host._yard_facing_preview.clear()
 	active = value and host != null and host.level != null and str(host.level.level_id) == "yard"
 	if camera != null:
 		camera.current = active
+		if active:
+			apply_camera_view(host._cam_pan, host._cam_zoom)
 	if _world != null:
 		_world.visible = active
 	if host != null:
@@ -360,6 +406,17 @@ func _set_active(value: bool) -> void:
 			legacy_world.visible = not active
 	if _toggle != null:
 		_toggle.text = "返回 2D 院子" if active else "查看 3D 院子"
+
+
+func apply_camera_view(pan: Vector2, zoom: float) -> void:
+	## Shared gesture state; display-only and never changes grid/actor coordinates.
+	if camera == null or not pan.is_finite() or not is_finite(zoom):
+		return
+	camera.size = 29.0 / clampf(zoom, 0.72, 1.65)
+	var offset := Vector3(clampf(pan.x, -627.0, 627.0), 0.0,
+		clampf(pan.y, -627.0, 627.0)) / Space.PIXELS_PER_METRE
+	camera.position = Vector3(0.0, 24.0, 26.0) + offset
+	camera.look_at(offset, Vector3.UP)
 
 
 func pick_at(screen: Vector2) -> Dictionary:
@@ -387,7 +444,7 @@ func screen_position_for_logic(logic_position: Vector2) -> Vector2:
 
 func intent_ui_obstacles() -> Array[Rect2]:
 	var obstacles: Array[Rect2] = []
-	for raw_control in [_toggle, _tactical_panel]:
+	for raw_control in [_toggle, _quality_button, _recenter_button, _tactical_panel]:
 		if raw_control is Control:
 			var control: Control = raw_control
 			if not control.is_visible_in_tree():
@@ -452,6 +509,9 @@ func _sync_actors() -> void:
 		var anchor := Adapter.world_anchor(host.grid, op.global_position)
 		visual.position = anchor + Vector3(0.0, 0.68, 0.0)
 		visual.rotation.y = Space.facing_yaw(float(op.facing_deg))
+		var facing_preview: Dictionary = host._yard_facing_preview
+		if host._is_command_phase() and host.selected == op and not op.locked and not facing_preview.is_empty() and int(facing_preview.get("phase", -1)) == int(host.phase) and int(facing_preview.get("tool", -1)) == int(host.tool) and int(facing_preview.get("actor", -1)) == op.get_instance_id():
+			visual.rotation.y = Space.facing_yaw(float(facing_preview["angle"]))
 	for key in _actor_nodes.keys():
 		if not seen.has(key):
 			_actor_nodes[key].queue_free()
@@ -479,7 +539,7 @@ func _sync_stashes() -> void:
 	for key in _stash_nodes.keys():
 		if not seen.has(key):
 			_stash_nodes[key].queue_free()
-		_stash_nodes.erase(key)
+			_stash_nodes.erase(key)
 
 
 func _sync_intent_preview() -> void:
@@ -584,11 +644,14 @@ func _process(_delta: float) -> void:
 		return
 	if not _bound: bind(host)
 	if _controls != null: _controls.visible = not host._result_overlay_active()
+	if not active:
+		return
 	sync_presentation()
 
 
 func sync_presentation() -> void:
 	if host == null or _world == null: return
+	var sync_begin := Time.get_ticks_usec()
 	var display_tick: int = host.replay.scrub_tick if host.phase == host.Phase.REPLAY else host.sim.tick
 	if host.phase == host.Phase.REPLAY:
 		_sync_recorded(host.replay.snapshot_at_or_before(display_tick).get("data", {}))
@@ -605,6 +668,9 @@ func sync_presentation() -> void:
 	_sync_event_fx(display_tick)
 	if landmark_nodes.has("permission"):
 		landmark_nodes["permission"].text = "手动许可 · 入区不自动开火" if host.yard_manual_permission else "自动许可 · 入区后待伏开火"
+	sync_last_usec = Time.get_ticks_usec() - sync_begin
+	sync_peak_usec = maxi(sync_peak_usec, sync_last_usec)
+	sync_count += 1
 
 
 func tactical_display_snapshot() -> Dictionary:
@@ -922,9 +988,20 @@ func _build_tactical_display_nodes() -> void:
 
 func _recorded_event_anchor(ev: Dictionary, enemy: bool) -> Vector3:
 	var snap: Dictionary = {}
-	for candidate in host.battle_log.snapshots:
-		if int(candidate.get("tick", -1)) > int(ev.get("tick", 0)): break
-		snap = candidate
+	## BattleLog appends fixed-tick snapshots in order. Upper-bound search also
+	## preserves the last snapshot when several records share the same tick.
+	var snapshots: Array = host.battle_log.snapshots
+	var low := 0
+	var high := snapshots.size()
+	var event_tick := int(ev.get("tick", 0))
+	while low < high:
+		var middle := (low + high) / 2
+		if int(snapshots[middle].get("tick", -1)) <= event_tick:
+			low = middle + 1
+		else:
+			high = middle
+	if low > 0:
+		snap = snapshots[low - 1]
 	var collection: Array = snap.get("data", {}).get("enemies" if enemy else "ops", [])
 	for record in collection:
 		if int(record.get("id", -2)) == int(ev.get("actor_id", -1)):

@@ -96,7 +96,53 @@ func _test_alternate_yard_scene() -> void:
 			tutorial.call("_on_next")
 	var runtime_grid: RefCounted = scene.get("grid")
 	var camera: Camera3D = presenter.get("camera")
+	var original_camera_position := camera.position
+	var original_actor_position: Vector2 = scene.get("selected").position
+	scene.set("_cam_pan", Vector2(64.0, 32.0))
+	scene.set("_cam_zoom", 1.4)
+	scene.call("_apply_cam")
+	_expect(not camera.position.is_equal_approx(original_camera_position), "M25_CAMERA_SHARED_PAN_UPDATES_3D")
+	_expect(is_equal_approx(camera.size, 29.0 / 1.4), "M25_CAMERA_SHARED_PINCH_UPDATES_3D")
+	_expect(scene.get("selected").position == original_actor_position, "M25_CAMERA_DOES_NOT_MOVE_ACTOR")
+	scene.call("_reset_cam_view")
+	_expect(camera.position.is_equal_approx(Vector3(0.0, 24.0, 26.0)) and is_equal_approx(camera.size, 29.0), "M25_CAMERA_RECENTER_RESTORES_3D")
 	var ground_picked := _find_camera_pick(presenter, camera, runtime_grid, GridScript.HEIGHT_GROUND)
+	presenter.call("set_low_quality", true)
+	_expect(not presenter._sun.shadow_enabled, "M25_LOW_QUALITY_DISABLES_DYNAMIC_SHADOWS")
+	_expect(scene.get("selected").position == original_actor_position, "M25_QUALITY_DOES_NOT_MOVE_ACTOR")
+	presenter.call("set_low_quality", false)
+	_expect(presenter._sun.shadow_enabled, "M25_STANDARD_QUALITY_RESTORES_SHADOWS")
+	var sync_before := int(presenter.sync_count)
+	presenter.call("_set_active", false)
+	presenter.call("_process", 0.016)
+	_expect(int(presenter.sync_count) == sync_before, "M25_INACTIVE_3D_DOES_NOT_SYNC")
+	presenter.call("_set_active", true)
+	var saved_snapshots: Array = scene.battle_log.snapshots.duplicate(true)
+	scene.battle_log.snapshots = [
+		{"tick": 5, "data": {"ops": [{"id": 901, "pos": Vector2(32, 32), "tier": 0}]}},
+		{"tick": 5, "data": {"ops": [{"id": 901, "pos": Vector2(64, 64), "tier": 1}]}},
+		{"tick": 10, "data": {"ops": [{"id": 901, "pos": Vector2(96, 96), "tier": 0}]}},
+	]
+	var event := {"tick": 7, "actor_id": 901, "position": Vector2(128, 128)}
+	_expect(presenter.call("_recorded_event_anchor", event, false).is_equal_approx(Adapter.recorded_anchor(Vector2(64, 64), 1, 0.9)), "M25_REPLAY_LOOKUP_LAST_DUPLICATE_BEFORE_EVENT")
+	event.tick = 1
+	_expect(presenter.call("_recorded_event_anchor", event, false).is_equal_approx(Adapter.recorded_anchor(Vector2(128, 128), 0, 0.9)), "M25_REPLAY_LOOKUP_BEFORE_FIRST_FALLBACK")
+	scene.battle_log.snapshots = saved_snapshots
+	print("M25_PRESENTER_PROFILE sync_last_usec=%d sync_peak_usec=%d" % [presenter.sync_last_usec, presenter.sync_peak_usec])
+	var steady_samples: Array[int] = []
+	var stash_instances: Dictionary = {}
+	for key in presenter._stash_nodes:
+		stash_instances[key] = presenter._stash_nodes[key].get_instance_id()
+	var world_nodes_before: int = presenter._world.get_child_count()
+	for sample in 60:
+		presenter.call("sync_presentation")
+		steady_samples.append(int(presenter.sync_last_usec))
+	steady_samples.sort()
+	_expect(not stash_instances.is_empty(), "M25_SUPPLY_CACHE_HAS_LIVE_FIXTURE")
+	for key in stash_instances:
+		_expect(presenter._stash_nodes.has(key) and presenter._stash_nodes[key].get_instance_id() == stash_instances[key], "M25_SUPPLY_MODEL_REUSES_INSTANCE_" + str(key))
+	_expect(presenter._world.get_child_count() == world_nodes_before, "M25_STEADY_SYNC_NODE_COUNT_PLATEAUS")
+	print("M25_PRESENTER_STEADY_CPU samples=60 p50_usec=%d p95_usec=%d max_usec=%d device=desktop_not_phone" % [steady_samples[29], steady_samples[56], steady_samples[59]])
 	var platform_picked := _find_camera_pick(presenter, camera, runtime_grid, GridScript.HEIGHT_PLATFORM)
 	_expect(ground_picked, "M2_I0_CAMERA_RAY_MAPS_GROUND_TO_LOCAL_CELL")
 	_expect(platform_picked, "M2_I0_CAMERA_RAY_MAPS_PLATFORM_TO_LOCAL_CELL")
@@ -260,11 +306,50 @@ func _test_operator_touch_pick(scene: Node, presenter: Node, camera: Camera3D) -
 	var selected_after := scene.get("selected") as Node2D
 	_expect(consumed and selected_after != null and int(selected_after.op_id) == target_id, "M2_I0_TOUCH_PICK_SELECTS_BY_STABLE_LOCAL_ID")
 	_expect(not bool(scene.call("touch_intent_pending")), "M2_I0_ACTOR_PICK_DOES_NOT_ISSUE_MOVE")
+	var facing_before := float(selected_after.facing_deg)
+	var drag := InputEventScreenDrag.new()
+	drag.index = 71
+	var drag_found := false
+	for y in GridScript.ROWS:
+		for x in GridScript.COLS:
+			var logic := _cell_center(Vector2i(x, y))
+			var screen := camera.unproject_position(Adapter.world_anchor(scene.grid, logic))
+			var candidate: Dictionary = presenter.call("pick_at", screen)
+			if candidate.is_empty() or logic.distance_to(selected_after.global_position) < 96.0:
+				continue
+			var delta: Vector2 = candidate.get("pos", logic) - selected_after.global_position
+			if absf(wrapf(rad_to_deg(delta.angle()) - facing_before, -180.0, 180.0)) < 20.0:
+				continue
+			drag.position = screen
+			drag_found = true
+			break
+		if drag_found: break
+	_expect(drag_found, "M25_FACING_VALID_DRAG_FIXTURE")
+	if drag_found:
+		scene.call("_handle_touch_gestures", drag)
+		_expect(is_equal_approx(float(selected_after.facing_deg), facing_before), "M25_FACING_DRAG_PREVIEWS_WITHOUT_COMMIT")
+		_expect(not scene._yard_facing_preview.is_empty(), "M25_FACING_PREVIEW_EXISTS")
 	var up := InputEventScreenTouch.new()
 	up.index = 71
 	up.pressed = false
 	up.position = target_screen
 	scene.call("_handle_touch_gestures", up)
+	if drag_found:
+		_expect(not is_equal_approx(float(selected_after.facing_deg), facing_before), "M25_FACING_RELEASE_COMMITS")
+		_expect(scene._yard_facing_preview.is_empty(), "M25_FACING_RELEASE_CLEARS_PREVIEW")
+		selected_after.set_facing(facing_before)
+		scene.call("_handle_touch_gestures", down)
+		scene.call("_handle_touch_gestures", drag)
+		var second := InputEventScreenTouch.new()
+		second.index = 72
+		second.pressed = true
+		second.position = drag.position + Vector2(80.0, 0.0)
+		scene.call("_handle_touch_gestures", second)
+		_expect(scene._yard_facing_preview.is_empty(), "M25_SECOND_FINGER_CANCELS_FACING")
+		scene.call("_handle_touch_gestures", up)
+		second.pressed = false
+		scene.call("_handle_touch_gestures", second)
+		_expect(is_equal_approx(float(selected_after.facing_deg), facing_before), "M25_CANCELED_FACING_NEVER_COMMITS")
 	var emulated_mouse_up := InputEventMouseButton.new()
 	emulated_mouse_up.button_index = MOUSE_BUTTON_LEFT
 	emulated_mouse_up.pressed = false

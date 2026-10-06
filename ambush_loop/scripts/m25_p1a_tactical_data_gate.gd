@@ -194,6 +194,8 @@ func _authority_snapshot(main: Node, op: Node) -> Dictionary:
 		"facing": float(op.facing_deg),
 		"weapon": str(op.weapon_id),
 		"ammo": int(op.ammo),
+		"fire_permitted": bool(op.fire_permitted),
+		"shot_cd": float(op.shot_cd),
 		"hp": float(op.hp),
 		"events": main.battle_log.events.size(),
 		"grid_revision": int(main.grid.tactical_revision),

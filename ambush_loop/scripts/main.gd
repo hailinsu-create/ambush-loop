@@ -307,6 +307,7 @@ var _load_fade_tween: Tween = null
 var _touches: Dictionary = {}
 var _canceled_touch_indices: Dictionary = {}
 var _facing_touch: int = -1
+var _yard_facing_preview: Dictionary = {}
 var _pinch_start_dist: float = 0.0
 var _pinch_start_zoom: float = 1.0
 var _pinch_start_mid: Vector2 = Vector2.ZERO
@@ -1904,6 +1905,9 @@ func _apply_cam() -> void:
 	var z := _cam_zoom * _cam_zoom_punch * _cam_squad_zoom
 	_game_cam.zoom = Vector2(z, z)
 	_game_cam.offset = _cam_pan + _cam_punch
+	var yard_presenter := _active_i0_presenter()
+	if yard_presenter != null:
+		yard_presenter.apply_camera_view(_cam_pan, _cam_zoom)
 
 
 func _reset_cam_view() -> void:
@@ -4364,6 +4368,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch
 		if st.canceled:
+			_yard_facing_preview.clear()
 			# OS cancellation is not a tap/release. Quarantine late events until
 			# a fresh press reuses this finger index; never rearm a world intent.
 			_touches.erase(st.index)
@@ -4383,6 +4388,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 			_update_cover_previews()
 			return true
 		if st.pressed:
+			_yard_facing_preview.clear()
 			_canceled_touch_indices.erase(st.index)
 			_touches[st.index] = st.position
 			if _touches.size() >= 2:
@@ -4445,6 +4451,13 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		_touches.erase(st.index)
 		if _facing_touch == st.index:
 			_facing_touch = -1
+			if not _yard_facing_preview.is_empty():
+				var preview := _yard_facing_preview.duplicate()
+				_yard_facing_preview.clear()
+				if _active_i0_presenter() != null and not _modal_blocks_input() and _is_command_phase() and selected != null and selected.alive and not selected.locked and selected.get_instance_id() == int(preview.get("actor", -1)) and int(phase) == int(preview.get("phase", -1)) and int(tool) == int(preview.get("tool", -1)):
+					selected.set_facing(float(preview["angle"]))
+					_announce_plan_edit(true)
+					_refresh_killzone_preview()
 		_pinch_start_dist = 0.0
 		if _modal_blocks_input() or not _is_command_phase():
 			_cancel_touch_intent()
@@ -4510,9 +4523,16 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 			var world2 := _screen_to_world(sd.position)
 			var v := world2 - selected.global_position
 			if v.length() > 10.0:
-				selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
-				_announce_plan_edit(true)
-				_refresh_killzone_preview()
+				var angle := rad_to_deg(atan2(v.y, v.x))
+				if _active_i0_presenter() != null:
+					if not world2.is_finite():
+						return true
+					_yard_facing_preview = {"actor": selected.get_instance_id(), "phase": int(phase), "tool": int(tool), "angle": angle}
+					status_label.text = "朝向预览 · 松手应用；双指取消"
+				else:
+					selected.set_facing(angle)
+					_announce_plan_edit(true)
+					_refresh_killzone_preview()
 				_touch_dragged = true
 				_cover_hold_slot = null
 				_sprint_hold_armed = false
@@ -4544,6 +4564,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 
 
 func _select_op(idx: int) -> void:
+	_yard_facing_preview.clear()
 	if phase == Phase.REPLAY:
 		return
 	if idx < 0 or idx >= operators.size():
@@ -11962,6 +11983,8 @@ func simulate_touch_tap(world: Vector2) -> void:
 	var xf: Transform2D = get_viewport().get_canvas_transform()
 	var screen: Vector2 = xf * world
 	_touches.clear()
+	_yard_facing_preview.clear()
+	_facing_touch = -1
 	var press := InputEventScreenTouch.new()
 	press.index = 0
 	press.pressed = true
