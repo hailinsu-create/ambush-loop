@@ -20,6 +20,11 @@ func _run() -> void:
 		push_error("M2_T1_WALL_CLOCK_GUARD")
 		quit(3)
 	)
+	var touch_hud_script := load("res://scripts/touch_hud.gd")
+	_expect(touch_hud_script != null, "M2_T1_TOUCH_HUD_SCRIPT_PARSES")
+	if touch_hud_script == null:
+		quit(2)
+		return
 	if change_scene_to_file("res://scenes/main.tscn") != OK:
 		quit(2)
 		return
@@ -381,7 +386,7 @@ func _assert_intent_panel_safe_area(main) -> void:
 	var safe_top := 20.0
 	var safe_right := 44.0
 	var safe_bottom := 32.0
-	hud._position_world_intent_panel(safe_right, safe_bottom)
+	hud._position_world_intent_panel(safe_right, safe_bottom, safe_left, safe_top)
 	hud.set_world_intent_pending(true, "safe-area geometry check")
 	await _frames(2)
 	var panel_rect: Rect2 = panel.get_global_rect()
@@ -394,6 +399,6 @@ func _assert_intent_panel_safe_area(main) -> void:
 		"M2_T1_CONFIRM_PANEL_INSIDE_SAFE_RECT"
 	)
 	_expect(not panel_rect.intersects(setup_row_rect), "M2_T1_CONFIRM_PANEL_CLEAR_OF_SETUP_ROW")
-	hud._position_world_intent_panel(8.0, 8.0)
+	hud._position_world_intent_panel(8.0, 8.0, 8.0, 8.0)
 	hud._apply_safe_area()
 	hud.set_world_intent_pending(was_visible, prior_label)

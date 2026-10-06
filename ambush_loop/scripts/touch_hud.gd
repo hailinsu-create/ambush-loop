@@ -6,6 +6,7 @@ extends CanvasLayer
 const SETUP_RESIDENT := ["crouch", "bag", "rotate_ccw", "rotate_cw", "alarm"]
 const WATCH_RESIDENT := ["abort", "pause", "speed"]
 const PORTRAIT_INSET := 348
+const IntentLayout := preload("res://scripts/ui/touch_intent_layout.gd")
 
 var _host: Node = null
 var _hint: Label = null
@@ -21,6 +22,8 @@ var _wave_lab: Label = null
 var _portrait_slot: Control = null
 var _world_intent_panel: PanelContainer = null
 var _world_intent_label: Label = null
+var _intent_safe_insets := Vector4(8.0, 8.0, 8.0, 8.0)
+var _intent_layout_mode := "safe_fallback"
 var _abort_armed: bool = false
 var _abort_msec: int = 0
 var _hold_cmd: String = ""
@@ -280,16 +283,9 @@ func _add_world_intent_controls(root: Control) -> void:
 	_world_intent_panel.name = "WorldIntentPanel"
 	_world_intent_panel.visible = false
 	_world_intent_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_world_intent_panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	_world_intent_panel.anchor_left = 1.0
-	_world_intent_panel.anchor_right = 1.0
-	_world_intent_panel.anchor_top = 1.0
-	_world_intent_panel.anchor_bottom = 1.0
-	_world_intent_panel.offset_left = -340.0
-	_world_intent_panel.offset_right = -8.0
-	_world_intent_panel.offset_top = -198.0
-	_world_intent_panel.offset_bottom = -138.0
-	_world_intent_panel.custom_minimum_size = Vector2(232.0, 58.0)
+	_world_intent_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	_world_intent_panel.custom_minimum_size = Vector2(284.0, 64.0)
+	_world_intent_panel.size = _world_intent_panel.custom_minimum_size
 	var panel_style := NightOps.flat(Color(0.07, 0.075, 0.05, 0.97), Color(0.80, 0.70, 0.30, 0.96), 2, 10, 8)
 	_world_intent_panel.add_theme_stylebox_override("panel", panel_style)
 	root.add_child(_world_intent_panel)
@@ -301,7 +297,7 @@ func _add_world_intent_controls(root: Control) -> void:
 	_world_intent_label = Label.new()
 	_world_intent_label.name = "IntentLabel"
 	_world_intent_label.text = "确认这项操作？"
-	_world_intent_label.custom_minimum_size = Vector2(106.0, 46.0)
+	_world_intent_label.custom_minimum_size = Vector2(110.0, 48.0)
 	_world_intent_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_world_intent_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_world_intent_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -499,30 +495,91 @@ func _apply_safe_area() -> void:
 	var vis := get_viewport().get_visible_rect().size
 	var left := sa.position.x * vis.x / float(wsz.x)
 	var right := (float(wsz.x) - sa.end.x) * vis.x / float(wsz.x)
+	var top := sa.position.y * vis.y / float(wsz.y)
 	var bottom := (float(wsz.y) - sa.end.y) * vis.y / float(wsz.y)
 	var safe_right := maxi(8, int(round(right)))
+	var safe_top := maxi(8, int(round(top)))
 	var safe_bottom := maxi(8, int(round(bottom)))
 	_safe.add_theme_constant_override("margin_left", int(maxi(8, int(round(left)))) + PORTRAIT_INSET)
 	_safe.add_theme_constant_override("margin_right", safe_right)
 	_safe.add_theme_constant_override("margin_bottom", safe_bottom)
-	_position_world_intent_panel(float(safe_right), float(safe_bottom))
 	if _portrait_slot:
 		_portrait_slot.offset_left = 8.0 + left
 		_portrait_slot.offset_right = 8.0 + left + 336.0
 	if _hint:
 		_hint.position = Vector2(12.0 + left, 6.0)
 	_layout_compact()
+	_position_world_intent_panel(float(safe_right), float(safe_bottom), float(maxi(8, int(round(left)))), float(safe_top))
 
 
-func _position_world_intent_panel(right_inset: float, bottom_inset: float) -> void:
+func _position_world_intent_panel(right_inset: float, bottom_inset: float, left_inset: float = 8.0, top_inset: float = 8.0) -> void:
 	if _world_intent_panel == null:
 		return
-	var safe_right := maxf(8.0, right_inset)
-	var safe_bottom := maxf(8.0, bottom_inset)
-	_world_intent_panel.offset_left = -340.0 - safe_right
-	_world_intent_panel.offset_right = -8.0 - safe_right
-	_world_intent_panel.offset_top = -198.0 - safe_bottom
-	_world_intent_panel.offset_bottom = -138.0 - safe_bottom
+	_intent_safe_insets = Vector4(
+		maxf(8.0, left_inset),
+		maxf(8.0, top_inset),
+		maxf(8.0, right_inset),
+		maxf(8.0, bottom_inset) + bar_height() + 8.0
+	)
+	var viewport_size := get_viewport().get_visible_rect().size if get_viewport() else Vector2(1280.0, 720.0)
+	var target := _intent_target_screen_position() if _world_intent_panel.visible else Vector2.INF
+	var placement: Dictionary = IntentLayout.choose_position(
+		target,
+		viewport_size,
+		_world_intent_panel.size,
+		_intent_safe_insets,
+		_intent_panel_obstacles()
+	)
+	_world_intent_panel.position = placement.get("position", Vector2(8.0, 8.0))
+	_intent_layout_mode = str(placement.get("mode", "safe_fallback"))
+	_world_intent_panel.set_meta("layout_mode", _intent_layout_mode)
+	_world_intent_panel.set_meta("overlaps_obstacle", placement.get("overlaps_obstacle", false))
+
+
+func _intent_target_screen_position() -> Vector2:
+	if _host == null:
+		return Vector2.INF
+	var raw: Variant = _host.get("_touch_intent")
+	if not raw is Dictionary or raw.is_empty():
+		return Vector2.INF
+	var intent: Dictionary = raw
+	var world: Vector2 = intent.get("world", Vector2.INF)
+	if str(intent.get("kind", "")) == "cover":
+		var slot := intent.get("slot") as Node2D
+		if slot != null and is_instance_valid(slot):
+			world = slot.global_position
+	if not world.is_finite():
+		return Vector2.INF
+	var presenter := _host.get_node_or_null("I0YardPresentation")
+	if presenter != null and presenter.get("active") == true and presenter.has_method("screen_position_for_logic"):
+		return presenter.call("screen_position_for_logic", world)
+	var viewport := _host.get_viewport()
+	return viewport.get_canvas_transform() * world if viewport != null else Vector2.INF
+
+
+func _intent_panel_obstacles() -> Array[Rect2]:
+	var obstacles: Array[Rect2] = []
+	if _hint != null and _hint.is_visible_in_tree() and _hint.size.x > 0.0 and _hint.size.y > 0.0:
+		obstacles.append(_hint.get_global_rect().grow(4.0))
+	if _host != null:
+		var controller: Variant = _host.get("c2")
+		if controller != null:
+			var portraits: Variant = controller.get("portraits")
+			if portraits != null and portraits.has_method("card_global_rect"):
+				var cards: Variant = portraits.get("_cards")
+				if cards is Array:
+					for index in cards.size():
+						var card_rect: Rect2 = portraits.call("card_global_rect", index)
+						if card_rect.size.x > 0.0 and card_rect.size.y > 0.0:
+							obstacles.append(card_rect.grow(6.0))
+		var presenter := _host.get_node_or_null("I0YardPresentation")
+		if presenter != null and presenter.get("active") == true and presenter.has_method("intent_ui_obstacles"):
+			var overlay_obstacles: Variant = presenter.call("intent_ui_obstacles")
+			if overlay_obstacles is Array:
+				for rect in overlay_obstacles:
+					if rect is Rect2:
+						obstacles.append(rect.grow(6.0))
+	return obstacles
 
 
 func _layout_compact(avail_override: float = -1.0) -> void:
@@ -655,6 +712,12 @@ func set_world_intent_pending(pending: bool, label: String = "") -> void:
 	_world_intent_panel.visible = pending
 	if _world_intent_label != null:
 		_world_intent_label.text = label.strip_edges() if label.strip_edges() != "" else "确认这项操作？"
+	_position_world_intent_panel(
+		_intent_safe_insets.z,
+		maxf(8.0, _intent_safe_insets.w - bar_height() - 8.0),
+		_intent_safe_insets.x,
+		_intent_safe_insets.y
+	)
 
 
 func refresh_phase(

@@ -375,6 +375,29 @@ func screen_to_logic(screen: Vector2) -> Vector2:
 	return candidate.get("pos", Vector2.INF)
 
 
+func screen_position_for_logic(logic_position: Vector2) -> Vector2:
+	if not active or camera == null or host == null or host.grid == null or not logic_position.is_finite():
+		return Vector2.INF
+	var anchor := Adapter.world_anchor(host.grid, logic_position)
+	if not anchor.is_finite() or camera.is_position_behind(anchor) or not camera.is_position_in_frustum(anchor):
+		return Vector2.INF
+	var screen := camera.unproject_position(anchor)
+	return screen if get_viewport().get_visible_rect().has_point(screen) else Vector2.INF
+
+
+func intent_ui_obstacles() -> Array[Rect2]:
+	var obstacles: Array[Rect2] = []
+	for raw_control in [_toggle, _tactical_panel]:
+		if raw_control is Control:
+			var control: Control = raw_control
+			if not control.is_visible_in_tree():
+				continue
+			var rect: Rect2 = control.get_global_rect()
+			if rect.size.x > 0.0 and rect.size.y > 0.0:
+				obstacles.append(rect)
+	return obstacles
+
+
 func _pick_targets() -> Array:
 	var targets := _decor_targets.duplicate()
 	for op in host.operators:

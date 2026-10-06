@@ -1,6 +1,8 @@
 extends SceneTree
 
 const Guard := preload("res://scripts/test_storage_guard.gd")
+const IntentLayout := preload("res://scripts/ui/touch_intent_layout.gd")
+const YardAdapter := preload("res://scripts/m2_i0_yard_adapter.gd")
 var failures: Array[String] = []
 var portrait_picks: int = 0
 
@@ -76,6 +78,18 @@ func _run() -> void:
 			main._begin_touch_intent(target)
 			await _frames(4)
 			_expect(main.touch_intent_pending(), "PENDING_FIXTURE")
+			var intent_target: Vector2 = hud._intent_target_screen_position()
+			var panel_rect: Rect2 = hud._world_intent_panel.get_global_rect()
+			_expect(intent_target.is_finite(), "CONFIRM_TARGET_SCREEN_PROJECTION")
+			var presenter = main.get_node_or_null("I0YardPresentation")
+			var expected_target := main.get_viewport().get_canvas_transform() * target
+			if presenter != null and presenter.get("active") == true:
+				expected_target = presenter.camera.unproject_position(YardAdapter.world_anchor(main.grid, target))
+			_expect(intent_target.distance_to(expected_target) <= 0.5, "CONFIRM_TARGET_USES_ACTIVE_RENDERER_PROJECTION")
+			_expect(hud._intent_layout_mode == "target_nearby", "CONFIRM_PANEL_FOLLOWS_WORLD_TARGET")
+			_expect(_distance_to_rect(intent_target, panel_rect) <= 180.0, "CONFIRM_PANEL_WITHIN_REACH_OF_TARGET")
+			_expect(not panel_rect.intersects(hud._row_setup.get_global_rect()), "CONFIRM_PANEL_CLEAR_OF_COMMAND_RAIL")
+			_expect(hud._world_intent_panel.get_meta("overlaps_obstacle", false) == false, "CONFIRM_PANEL_CLEAR_OF_UI_OBSTACLES")
 			_check_rect(hud._btns.world_confirm, size, rects)
 			_check_rect(hud._btns.world_cancel, size, rects)
 			var intent: Dictionary = main._touch_intent.duplicate(true)
@@ -88,6 +102,7 @@ func _run() -> void:
 			await _tap(hud._btns.world_confirm.get_global_rect().get_center())
 			_expect(not main.touch_intent_pending() and main.selected.is_moving(), "CONFIRM_EXISTING_PATH")
 			main.selected.stop_move()
+			_assert_edge_layout(size)
 			# Phase refresh must remove the entire old row from hit testing.
 			await _tap(hud._btns.alarm.get_global_rect().get_center())
 			_expect(main.phase == main.Phase.WATCHING and main._touches.is_empty(), "ALARM_EXISTING_COMMAND_ONLY")
@@ -137,3 +152,26 @@ func _frames(count: int) -> void:
 func _expect(ok: bool, label: String) -> void:
 	if not ok:
 		failures.append(label)
+
+func _distance_to_rect(point: Vector2, rect: Rect2) -> float:
+	var nearest := Vector2(clampf(point.x, rect.position.x, rect.end.x), clampf(point.y, rect.position.y, rect.end.y))
+	return nearest.distance_to(point)
+
+func _assert_edge_layout(viewport_size: Vector2i) -> void:
+	var size := Vector2(viewport_size)
+	var obstacles: Array[Rect2] = [
+		Rect2(Vector2(0.0, 0.0), Vector2(300.0, 170.0)),
+		Rect2(Vector2(size.x - 410.0, 0.0), Vector2(410.0, 180.0)),
+	]
+	var placement: Dictionary = IntentLayout.choose_position(
+		Vector2(size.x - 2.0, size.y - 2.0),
+		size,
+		Vector2(284.0, 64.0),
+		Vector4(28.0, 20.0, 44.0, 160.0),
+		obstacles
+	)
+	var rect := Rect2(placement.position, Vector2(284.0, 64.0))
+	var safe_rect: Rect2 = placement.safe_rect
+	_expect(safe_rect.encloses(rect), "EDGE_CONFIRM_PANEL_INSIDE_SAFE_RECT")
+	_expect(str(placement.mode) == "target_nearby", "EDGE_CONFIRM_PANEL_REMAINS_NEAR_TARGET")
+	_expect(placement.overlaps_obstacle == false, "EDGE_CONFIRM_PANEL_AVOIDS_OVERLAYS")
