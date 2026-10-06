@@ -9,7 +9,7 @@
 解决移动/掩体意图确认条固定在右下角、手指离目标太远的问题：把预览目标投影到活动渲染器的屏幕坐标，将确认条放到安全区内、靠近目标且避开现有 HUD 覆盖。此记录只覆盖 P2 的就近确认，不代表朝向手柄、镜头回中/缩放、上下文搜索或完整 P2 已完成。
 
 - 分支：`codex/m25-p1a-tactical-data`
-- 基线：P1B 展示与扩展门已提交；当前 P2 源码变更尚未提交。
+- 实现提交：`f08cc85fffb3dc166b894a28a7792b9dafdff26d`（`feat(m25): place touch confirmation near target`），已推送到 `origin/codex/m25-p1a-tactical-data`，并核对远端 SHA 一致。
 - 不改移动、射击、搜索、资源消耗、游戏阶段或存档规则。
 
 ## 实现
