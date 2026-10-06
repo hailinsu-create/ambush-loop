@@ -44,6 +44,8 @@ func _run() -> void:
 	for actor in main.operators + main.enemies + main.loot_piles:
 		if is_instance_valid(actor): before_visibility[actor] = actor.visible
 	main._on_replay_pressed()
+	await _frames(4)
+	_expect(main.scrub_slider.is_visible_in_tree() and main.scrub_slider.get_global_rect().size.y >= 48, "M2_E_VISIBLE_DESKTOP_REPLAY_TIMELINE")
 	# Deliberately corrupt live display inputs after recording: replay must ignore them.
 	main.operators[2].global_position = Vector2(208, 528)
 	main.operators[2].facing_deg = 270.0

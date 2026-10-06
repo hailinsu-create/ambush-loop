@@ -48,6 +48,10 @@ func portrait_slot() -> Control:
 	return _portrait_slot
 
 
+func replay_controls() -> Control:
+	return _row_replay
+
+
 func bar_height() -> float:
 	return 132.0
 

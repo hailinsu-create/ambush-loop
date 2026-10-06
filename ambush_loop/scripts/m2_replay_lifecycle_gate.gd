@@ -3,6 +3,8 @@ extends "res://scripts/m2_yard_supply_gate.gd"
 ## Actual losing free-position tactic; replay is presentation, never retry authority.
 func _run() -> void:
 	create_timer(300.0).timeout.connect(func(): quit(3))
+	capture_dir = OS.get_environment("AMBUSH_TEST_DATA_ROOT").get_base_dir().path_join("m2-replay-screens")
+	DirAccess.make_dir_recursive_absolute(capture_dir)
 	for size in [Vector2i(1280, 720), Vector2i(960, 540)]:
 		root.content_scale_size = size
 		root.size = size
@@ -54,11 +56,38 @@ func _run() -> void:
 			_expect(not rect.intersects(other.get_global_rect()), "M2_REPLAY_RESULT_NONOVERLAP")
 		await _native_tap(rect.get_center())
 		_expect(main.phase == main.Phase.REPLAY and main._touches.is_empty(), "M2_REPLAY_NATIVE_SINGLE_ENTRY")
-		main.replay.set_tick(240)
-		main._apply_replay_scrub()
 		await _frames(6)
+		var slider_rect: Rect2 = main.scrub_slider.get_global_rect()
+		_expect(main.scrub_slider.is_visible_in_tree() and slider_rect.size.y >= 48 and root.get_visible_rect().encloses(slider_rect), "M2_REPLAY_VISIBLE_NATIVE_TIMELINE")
+		if not main.scrub_slider.is_visible_in_tree():
+			_finish_failed()
+			return
+		var previous_tick: int = main.replay.scrub_tick
+		await _native_tap(slider_rect.position + Vector2(slider_rect.size.x * 0.25, slider_rect.size.y * 0.5))
+		_expect(main.replay.scrub_tick < previous_tick, "M2_REPLAY_NATIVE_TIMELINE_CHANGES_RECORDED_TICK")
+		var tapped_tick: int = main.replay.scrub_tick
+		var from := slider_rect.position + Vector2(slider_rect.size.x * 0.25, slider_rect.size.y * 0.5)
+		var to := slider_rect.position + Vector2(slider_rect.size.x * 0.75, slider_rect.size.y * 0.5)
+		var down := InputEventScreenTouch.new()
+		down.index = 0
+		down.position = from
+		down.pressed = true
+		root.push_input(down, true)
+		var drag := InputEventScreenDrag.new()
+		drag.index = 0
+		drag.position = to
+		drag.relative = to - from
+		root.push_input(drag, true)
+		var up := InputEventScreenTouch.new()
+		up.index = 0
+		up.position = to
+		up.pressed = false
+		root.push_input(up, true)
+		await _frames(4)
+		_expect(main.replay.scrub_tick > tapped_tick and main._touches.is_empty() and main._touch_intent.is_empty(), "M2_REPLAY_NATIVE_DRAG_READONLY_UI_OWNER")
 		var return_button: Button = main.touch_hud._btns.get("replay_return", main.touch_hud._btns["alarm"])
 		_expect(return_button.is_visible_in_tree() and return_button.get_global_rect().size.y >= 48 and root.get_visible_rect().encloses(return_button.get_global_rect()), "M2_REPLAY_VISIBLE_NATIVE_RETURN")
+		await _capture_if_rendered(main, "native-return-%dx%d" % [size.x, size.y])
 		if not return_button.is_visible_in_tree():
 			_finish_failed()
 			return
@@ -89,6 +118,11 @@ func _run() -> void:
 		await _frames(8)
 		await _native_tap(main.restart_preparation_button.get_global_rect().get_center())
 		_expect(main.phase == main.Phase.SETUP and _inventory_empty(main) and main.raid_stashes.size() == 4 and not main.preparation_checkpoint_available(), "M2_REPLAY_NATIVE_FRESH_RECOLLECT_BRANCH")
+		var slider_home: Node = main.yard_hud.replay_slider_home
+		var slider_minimum: Vector2 = main.yard_hud.replay_slider_minimum
+		main._load_level("warehouse", false, false)
+		await _frames(4)
+		_expect(main.scrub_slider.get_parent() == slider_home and main.scrub_slider.custom_minimum_size == slider_minimum, "M2_REPLAY_OTHER_LEVEL_SLIDER_PARENT_AND_SIZE_RESTORED")
 		main.queue_free()
 		await _frames(3)
 	if failures.is_empty():
