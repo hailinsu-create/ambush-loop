@@ -58,7 +58,7 @@ func _run() -> void:
 		main._apply_replay_scrub()
 		await _frames(6)
 		var return_button: Button = main.touch_hud._btns.get("replay_return", main.touch_hud._btns["alarm"])
-		_expect(return_button.is_visible_in_tree() and return_button.get_global_rect().size.y >= 48, "M2_REPLAY_VISIBLE_NATIVE_RETURN")
+		_expect(return_button.is_visible_in_tree() and return_button.get_global_rect().size.y >= 48 and root.get_visible_rect().encloses(return_button.get_global_rect()), "M2_REPLAY_VISIBLE_NATIVE_RETURN")
 		if not return_button.is_visible_in_tree():
 			_finish_failed()
 			return
@@ -71,7 +71,9 @@ func _run() -> void:
 			var op = main.operators[i]
 			_expect(crew_before[i] == [op.global_position, op.facing_deg, op.hp, op.ammo, op.pack.slots, op.ammo_pool], "M2_REPLAY_GROUND_AUTHORITY_UNCHANGED")
 		await _frames(8)
+		var restore_run_id: int = main.run_id
 		await _native_tap(main.continue_button.get_global_rect().get_center())
+		_expect(main.run_id == restore_run_id + 1 and main._touches.is_empty() and main._touch_intent.is_empty(), "M2_REPLAY_NATIVE_RESTORE_EXACTLY_ONCE_UI_ONLY")
 		_expect(main.phase == main.Phase.SETUP and main.yard_manual_permission and not main._manual_permission_queued and not main._manual_permission_used, "M2_REPLAY_NATIVE_MANUAL_RESTORE_FRESH_QUEUE")
 		_expect(_rounds(main) == [7,50,6] and main.raid_stashes.is_empty() and main.operators[0].grenades == 1 and main.operators[0].has_nade_mark and main.battle_log.events.is_empty(), "M2_REPLAY_NATIVE_EXACT_SUPPLY_NO_PERMISSION_EVENT")
 		for i in 3:
