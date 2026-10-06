@@ -26,6 +26,7 @@ param(
         'm2_e_yard_presentation_gate.gd',
         'm2_f_yard_guide_gate.gd',
         'm2_integrated_campaign_gate.gd',
+        'm2_replay_lifecycle_gate.gd',
         'm2_role_dock_gate.gd',
         'm2_i0_3d_seam_gate.gd',
         'm1_ramp_pathfinder_gate.gd',

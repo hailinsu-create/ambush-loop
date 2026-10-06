@@ -9,6 +9,7 @@ case "$entry" in
   m2_e_yard_presentation_gate.gd) ;;
   m2_f_yard_guide_gate.gd) ;;
   m2_integrated_campaign_gate.gd) ;;
+  m2_replay_lifecycle_gate.gd) ;;
   m2_c_auto_baseline_gate.gd) ;;
 m2_single_contact_gate.gd) ;;
 smoke_test.gd|r45_sweep_gate.gd|m1_height_data_gate.gd|m1_height_los_gate.gd|m1_height_fire_gate.gd|m1_height_coverage_gate.gd|m1_yard_plan_contract_gate.gd|m1_yard_resource_budget_gate.gd|m1_yard_timing_causality_gate.gd|m1_yard_tactical_solutions_gate.gd|m1_yard_end_to_end_gate.gd|m1_yard_visual_evidence_gate.gd|m2_yard_hud_gate.gd|m2_yard_supply_gate.gd|m2_supply_regression_gate.gd|m2_touch_intent_gate.gd|m2_touch_target_gate.gd|m2_role_dock_gate.gd|m2_i0_3d_seam_gate.gd|m1_ramp_pathfinder_gate.gd|m1_b2_yard_height_gate.gd|accept_cta_flow_gate.gd|feel_gate.gd|playable_dump.gd|visual_dump.gd|storage_probe.gd|eval_dump_0de4f1d.gd|eval_dump_71ca4af.gd|eval_dump_v030.gd|eval_dump_v031.gd|eval_dump_v040.gd|eval_dump_touch_hud.gd) ;;
