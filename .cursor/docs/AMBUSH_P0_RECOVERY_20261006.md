@@ -24,18 +24,14 @@
 
 此记录确认本轮页面控制和评审链路恢复可用，不保证浏览器以后没有底层超时。额外创建且未配对的 F 本地服务已停止；保留已健康的 B1 评审连接。
 
-## 正在运行的完整回归
+## 完整隔离回归终态（2026-10-07）
 
-- Godot 4.7.2，正常 `run_isolated_test.ps1` 包装器，独立 data 目录；未直接调用清档 smoke。
-- run：`eb477ca62f3b4f108186a1bd1c6bd84b`，测试源码为上述 `6f9a6dc`。
-- 控制台 PID 6452，实际 Godot 子进程 PID 13168；进程 ID 只适用于本次运行，后续需核对 command line/父子关系。
-- 统一执行会话 ID `73583` 可用时通过 `write_stdin` 取最终包装器输出；`run.log` 只有引擎输出，不能把它当作包装器退出/存档后检记录。
-- 已记录 `SMOKE_OK_GESTURE_PAN` 并进展到后续随队/触屏项目；完整终态、六关循环、engine/wrapper exit 和 `PLAYER_DATA_UNCHANGED=1` 尚待获得。
-- 这条历史 smoke 的随队段耗时较长，`touch_feel_056` 实际 141400ms。进程继续消耗 CPU、后续标记有推进，不能因暂时没有日志就算死锁或终止它；这也不是手机 3D 帧时证据。
-- 用户此前要求“回归跑完告诉我”；已设置本聊天 15 分钟跟踪，运行中不重复启动、无可操作变化时保持安静，完成或失败时写终态并通知。自动跟踪 ID `ambush-p0`。
-
-终态日志根：`ambush_loop/build/ambush_test_runs/eb477ca62f3b4f108186a1bd1c6bd84b/`。完整通过需核对正常结束标记、六关实际结果、无未解释错误、engine/wrapper 0 和存档后检，不用只通过 pan 代替全量通过。
+- 原 run `eb477ca62f3b4f108186a1bd1c6bd84b` 的引擎日志已含六关胜利、`SMOKE_SLICE_COMPLETE` 与 `SMOKE_OK_SWEEP_FIRST_HINT`，但执行会话 `73583` 已不可读取，缺包装器退出码及存档后检证据；因此保留为“引擎日志完成、包装器终态未知”，不登记通过。
+- 在确认原 Godot 进程已退出后，以 Godot `4.7.2.stable.official.ed1daf0bf` 和正常 `run_isolated_test.ps1` 隔离包装器重跑，run `8b29ceeef7104d11b07c905b30d590c1`。测试源码为获批提交 `6f9a6dcf1f430ee29b6b27f4143f37f1ef96c913`：复验时 HEAD 为文档提交 `38b6d38`，`6f9a6dc..HEAD` 的 `ambush_loop` 无差异，工作树 `smoke_test.gd` blob 与该提交相同（`89622e4639af8515c7303299eac95efa609daa46`）。
+- 隔离 run 输出六关 `yard/warehouse/pump/railcut/depot/radio raid won`、`SMOKE_OK_TYPICAL_LOOPS`、`SMOKE_SLICE_COMPLETE`、`SMOKE_OK_SWEEP_FIRST_HINT`；stderr 为空。
+- 统一执行会话 `91358` 正常结束、wrapper 退出码 `0`；包装器后检明确输出 `TEST_ENGINE_EXIT=0` 与 `PLAYER_DATA_UNCHANGED=1`。因此该桌面完整隔离回归通过，完整日志位于 `ambush_loop/build/ambush_test_runs/8b29ceeef7104d11b07c905b30d590c1/`。
+- 本结果只验证 Godot 桌面隔离 smoke；手机 3D 性能和真人操作门仍待测，不代表 M2/M3 或 P0 所有手机工作已完成。自动跟踪 ID `ambush-p0` 在记录同步后停用。
 
 ## 剩余工作
 
-先收完整回归终态；手机连接后采集实际院子 3D 的 CPU/GPU/帧时、触摸、内存与热稳定基线，再决定优化目标。下一代码切片按已有 GPT PLAN 做 P0 计时采样和 P1A 小型只读权威查询，再 P1B 绘制。当前没有手机性能结论、没有默认 3D 新功能交付、没有 M2/M3 完成声明。
+手机连接后采集实际院子 3D 的 CPU/GPU/帧时、触摸、内存与热稳定基线，再决定优化目标。下一代码切片按已有 GPT PLAN 做 P0 计时采样和 P1A 小型只读权威查询，再 P1B 绘制。当前没有手机性能结论、没有默认 3D 新功能交付、没有 M2/M3 完成声明。
