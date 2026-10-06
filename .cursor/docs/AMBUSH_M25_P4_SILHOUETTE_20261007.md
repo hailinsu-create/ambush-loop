@@ -7,3 +7,13 @@
 验证：同一 seam 门覆盖网格/高度/拾取/搜集/朝向/回放，实际 Forward+ 截图检查；战术卡 1280×720/960×540 布局。角色辨识与动画感仍需真人评价。连续地形、遮挡处理、动画和 P5 尚待，不把本切片标成整个 P4。
 
 首版 `91ada7f` 的 run `8a7d5fe276804a5e965efe787f67cf99` 有程序化颜色类型推断错误，虽 engine/wrapper 0 但 stderr 出现 SCRIPT ERROR，明确记红灯，不能算通过。`836f81dc52c64cebb7797cfb8b3fef5b` 验证期间源码切换且同样出现脚本错误，也不计验收。修正显式 Color 类型，并增强隔离包装器：引擎 0 但存在 SCRIPT ERROR 时 wrapper 返回 94。后续只对冻结源码复验。
+
+## 当前验证证据
+
+- 生产样板来源 `729be60`：Forward+ seam `8bf20107e4234dec8116196e57f04124`；3 个单位部件断言、镜头、合法拾取、真实搜索守恒、朝向预览/松手/双指取消、历史快照语义、补给实例与节点平台通过。手工核对 stderr 为空，engine/wrapper=0、PLAYER_DATA_UNCHANGED=1。稳态显示 CPU p95=1280μs，仅桌面同步成本。
+- 包装器内容检查修正来源 `4a2c6eef9f278b30265327265e6ef1c29cfab383`：对保留红灯 stderr 实际匹配 66 条 SCRIPT ERROR，避免把日志路径当成日志内容。
+- 同来源 Forward+ 战术显示 `fd7148a6dcfa4a05906694906b5ee977`：1280×720/960×540、资源/多目标/名义射界/精确路线/地标/只读与缓存断言通过，stderr 空、engine/wrapper=0。实际检查两张截图，顶部菜单和回中与卡片内质量按钮不重叠。
+- 同来源触控回归 `c37c9d669163419cb5850152a36a3e00`：8 类取消与旧事件隔离、预览后独立确认、无重复命令、拖动/双指不误执行通过；TEST_RUNTIME_ERRORS=0、engine/wrapper=0、PLAYER_DATA_UNCHANGED=1。
+- 完整新源码六关 smoke 尚未执行，不借用旧源码绿灯。默认 3D 未启用，P4 动画/连续地形/遮挡和 P5 待后续；手机/真人验收继续暂缓。
+
+外部评审：已向原聊天提交 iteration 5 的 `46ed6ad` 不可变操作/性能包；随后两次原页读取分别 Runtime.evaluate/Emulation.setFocusEmulationEnabled 超时，没有重复发送或重配连接，也没有确认回复。不得写 GPT 已批准本轮或角色样板。
