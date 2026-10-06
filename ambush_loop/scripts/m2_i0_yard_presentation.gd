@@ -29,7 +29,13 @@ var _bound := false
 var _enemy_nodes: Dictionary = {}
 var _fx_nodes: Array[MeshInstance3D] = []
 var landmark_nodes: Dictionary = {}
+var _tactical_sector: MeshInstance3D
+var _tactical_coverage: MultiMeshInstance3D
+var _tactical_panel: PanelContainer
+var _tactical_info: Label
+var _tactical_signature: String = ""
 const FX_CAP := 16
+const TACTICAL_SAMPLE_CAP := 192
 
 
 func _ready() -> void:
@@ -87,6 +93,7 @@ func _build_world() -> void:
 	_build_platform_and_ramp()
 	_build_landmarks()
 	_build_tactical_landmarks()
+	_build_tactical_display_nodes()
 	_build_fx_pool()
 	_sync_actors()
 	_sync_stashes()
@@ -292,6 +299,53 @@ func _build_controls() -> void:
 	_toggle.offset_bottom = 64.0
 	root.add_child(_toggle)
 	_toggle.pressed.connect(func() -> void: _set_active(not active))
+	_build_tactical_info_panel(root)
+
+
+func _build_tactical_info_panel(parent: Control) -> void:
+	_tactical_panel = PanelContainer.new()
+	_tactical_panel.name = "SelectedTacticalInfoPanel"
+	_tactical_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_tactical_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_tactical_panel.offset_left = -396.0
+	_tactical_panel.offset_right = -16.0
+	_tactical_panel.offset_top = 72.0
+	_tactical_panel.offset_bottom = 230.0
+	var panel_style := StyleBoxFlat.new()
+	panel_style.bg_color = Color("101a20", 0.96)
+	panel_style.border_color = Color("48c9ba", 0.92)
+	panel_style.border_width_left = 4
+	panel_style.border_width_top = 1
+	panel_style.border_width_right = 1
+	panel_style.border_width_bottom = 1
+	panel_style.corner_radius_top_left = 8
+	panel_style.corner_radius_top_right = 8
+	panel_style.corner_radius_bottom_left = 8
+	panel_style.corner_radius_bottom_right = 8
+	panel_style.content_margin_left = 12.0
+	panel_style.content_margin_top = 10.0
+	panel_style.content_margin_right = 12.0
+	panel_style.content_margin_bottom = 10.0
+	_tactical_panel.add_theme_stylebox_override("panel", panel_style)
+	parent.add_child(_tactical_panel)
+	var column := VBoxContainer.new()
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_theme_constant_override("separation", 4)
+	_tactical_panel.add_child(column)
+	var heading := Label.new()
+	heading.text = "战术信息 · 当前队员"
+	heading.add_theme_font_size_override("font_size", 18)
+	heading.add_theme_color_override("font_color", Color("8ce3d7"))
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(heading)
+	_tactical_info = Label.new()
+	_tactical_info.name = "SelectedTacticalInfo"
+	_tactical_info.add_theme_font_size_override("font_size", 16)
+	_tactical_info.add_theme_color_override("font_color", Color("e4eee9"))
+	_tactical_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_tactical_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(_tactical_info)
+	_tactical_panel.visible = false
 
 
 func _set_active(value: bool) -> void:
@@ -517,15 +571,162 @@ func sync_presentation() -> void:
 		_sync_recorded(host.replay.snapshot_at_or_before(display_tick).get("data", {}))
 		for node in _stash_nodes.values(): node.visible = false
 		_clear_intent_preview()
+		_clear_tactical_display()
 	else:
 		_sync_actors()
 		_sync_enemies()
 		_sync_stashes()
 		for node in _stash_nodes.values(): node.visible = true
 		_sync_intent_preview()
+		_sync_tactical_display()
 	_sync_event_fx(display_tick)
 	if landmark_nodes.has("permission"):
 		landmark_nodes["permission"].text = "手动许可 · 入区不自动开火" if host.yard_manual_permission else "自动许可 · 入区后待伏开火"
+
+
+func tactical_display_snapshot() -> Dictionary:
+	## 3D reads the same cached, authoritative query as the 2D yard overlay.
+	if host == null or not is_instance_valid(host) or not host.has_method("yard_tactical_display_data"):
+		return {}
+	return host.call("yard_tactical_display_data")
+
+
+func _sync_tactical_display() -> void:
+	var signature := ""
+	if host != null and is_instance_valid(host) and host.has_method("yard_tactical_display_signature"):
+		signature = str(host.call("yard_tactical_display_signature"))
+	else:
+		signature = str(tactical_display_snapshot().get("state_signature", ""))
+	if signature == _tactical_signature:
+		return
+	var data := tactical_display_snapshot()
+	signature = str(data.get("state_signature", signature))
+	_tactical_signature = signature
+	if not bool(data.get("available", false)):
+		_set_tactical_display_visible(false)
+		return
+	var actor: Dictionary = data.get("actor", {})
+	if actor.is_empty():
+		_set_tactical_display_visible(false)
+		return
+	var sector: Dictionary = data.get("nominal_sector", {})
+	var has_firearm := not bool(actor.get("melee", true)) and float(sector.get("range_px", 0.0)) > 0.0
+	_tactical_sector.visible = has_firearm
+	_tactical_coverage.visible = has_firearm
+	_tactical_info.visible = true
+	if has_firearm:
+		_rebuild_nominal_sector(sector)
+		_rebuild_route_query_markers(data.get("route_samples", []))
+	else:
+		_tactical_sector.mesh = null
+		_tactical_coverage.multimesh.instance_count = 0
+	_tactical_info.text = _tactical_summary(data)
+	_tactical_panel.visible = true
+
+
+func _set_tactical_display_visible(value: bool) -> void:
+	if _tactical_sector != null:
+		_tactical_sector.visible = value
+	if _tactical_coverage != null:
+		_tactical_coverage.visible = value
+	if _tactical_info != null:
+		_tactical_info.visible = value
+	if _tactical_panel != null:
+		_tactical_panel.visible = value
+
+
+func _clear_tactical_display() -> void:
+	_tactical_signature = ""
+	_set_tactical_display_visible(false)
+
+
+func _rebuild_nominal_sector(sector: Dictionary) -> void:
+	var origin: Vector2 = sector.get("origin", Vector2.ZERO)
+	var facing := float(sector.get("facing_deg", 0.0))
+	var half_angle := float(sector.get("half_angle_deg", 0.0))
+	var range_px := float(sector.get("range_px", 0.0))
+	var center := Adapter.world_anchor(host.grid, origin, 0.055)
+	if not center.is_finite() or range_px <= 0.0 or half_angle <= 0.0:
+		_tactical_sector.mesh = null
+		_tactical_sector.visible = false
+		return
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	const SEGMENTS := 32
+	var start_angle := deg_to_rad(facing - half_angle)
+	var span := deg_to_rad(half_angle * 2.0)
+	for index in SEGMENTS:
+		var angle_a := start_angle + span * float(index) / float(SEGMENTS)
+		var angle_b := start_angle + span * float(index + 1) / float(SEGMENTS)
+		var logic_a := origin + Vector2(cos(angle_a), sin(angle_a)) * range_px
+		var logic_b := origin + Vector2(cos(angle_b), sin(angle_b)) * range_px
+		var point_a := Adapter.world_anchor(host.grid, logic_a, 0.055)
+		var point_b := Adapter.world_anchor(host.grid, logic_b, 0.055)
+		if not point_a.is_finite() or not point_b.is_finite():
+			continue
+		st.add_vertex(center)
+		st.add_vertex(point_a)
+		st.add_vertex(point_b)
+	_tactical_sector.mesh = st.commit()
+
+
+func _rebuild_route_query_markers(raw_samples: Array) -> void:
+	var candidates: Array[Dictionary] = []
+	for sample in raw_samples:
+		if candidates.size() >= TACTICAL_SAMPLE_CAP:
+			break
+		if not sample is Dictionary:
+			continue
+		var logic: Vector2 = sample.get("position", Vector2.INF)
+		var anchor := Adapter.world_anchor(host.grid, logic, 0.075)
+		if not anchor.is_finite():
+			continue
+		candidates.append({"anchor": anchor, "clear": bool(sample.get("geometry_clear", false))})
+	var markers: MultiMesh = _tactical_coverage.multimesh
+	markers.instance_count = candidates.size()
+	for index in candidates.size():
+		var record: Dictionary = candidates[index]
+		markers.set_instance_transform(index, Transform3D(Basis.IDENTITY, record["anchor"]))
+		markers.set_instance_color(index, Color("4fe3d0") if bool(record["clear"]) else Color("e0a86b", 0.58))
+	_tactical_coverage.visible = not candidates.is_empty()
+
+
+func _tactical_summary(data: Dictionary) -> String:
+	var actor: Dictionary = data.get("actor", {})
+	var lines := PackedStringArray()
+	lines.append("%s · %s · %d 发" % [str(actor.get("name", "队员")), str(actor.get("weapon_id", "")), int(actor.get("ammo", 0))])
+	var sector: Dictionary = data.get("nominal_sector", {})
+	if bool(actor.get("melee", true)):
+		lines.append("近战装备 · 无枪械射界")
+	else:
+		lines.append("名义射界 %.1f 格 / ±%.0f° · 朝 %.0f°" % [float(sector.get("range_px", 0.0)) / 32.0, float(sector.get("half_angle_deg", 0.0)), float(sector.get("facing_deg", 0.0))])
+		lines.append("青点：射界/视线通 · 琥珀点：未通")
+	var route_parts := PackedStringArray()
+	for route in data.get("route_summary", []):
+		if not route is Dictionary:
+			continue
+		var name := "主路" if str(route.get("route_id", "")) == "main" else ("侧翼" if str(route.get("route_id", "")) == "flank" else "路线")
+		route_parts.append("%s %d/%d" % [name, int(route.get("covered_samples", 0)), int(route.get("total_samples", 0))])
+	if not route_parts.is_empty():
+		lines.append("路线覆盖 " + " · ".join(route_parts))
+	var target_states: Array = data.get("target_states", [])
+	if not target_states.is_empty():
+		var target: Dictionary = target_states[0]
+		var reason := str(target.get("block_reason", ""))
+		lines.append("目标 %d：%s" % [int(target.get("id", -1)), _tactical_reason_label(reason, bool(target.get("geometry_clear", false)))])
+	return "\n".join(lines)
+
+
+func _tactical_reason_label(reason: String, geometry_clear: bool) -> String:
+	if reason.is_empty():
+		return "当前可射" if geometry_clear else "待复核"
+	match reason:
+		"hold": return "未获开火许可"
+		"ammo": return "弹药不足"
+		"range": return "超出射程"
+		"cone": return "不在朝向范围"
+		"los": return "被地形遮挡"
+		_: return "不可射（%s）" % reason
 
 
 func _new_enemy(key: String) -> MeshInstance3D:
@@ -612,6 +813,36 @@ func _build_fx_pool() -> void:
 		_world.add_child(node)
 		_fx_nodes.append(node)
 
+
+func _build_tactical_display_nodes() -> void:
+	_tactical_sector = MeshInstance3D.new()
+	_tactical_sector.name = "SelectedNominalFireSector"
+	var sector_material := StandardMaterial3D.new()
+	sector_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	sector_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	sector_material.albedo_color = Color("36d9cf", 0.20)
+	sector_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	sector_material.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
+	_tactical_sector.material_override = sector_material
+	_tactical_sector.visible = false
+	_world.add_child(_tactical_sector)
+
+	_tactical_coverage = MultiMeshInstance3D.new()
+	_tactical_coverage.name = "SelectedRouteFireQueries"
+	var markers := MultiMesh.new()
+	markers.transform_format = MultiMesh.TRANSFORM_3D
+	markers.use_colors = true
+	var marker_mesh := SphereMesh.new()
+	marker_mesh.radius = 0.085
+	marker_mesh.height = 0.17
+	markers.mesh = marker_mesh
+	_tactical_coverage.multimesh = markers
+	var marker_material := StandardMaterial3D.new()
+	marker_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	marker_material.vertex_color_use_as_albedo = true
+	_tactical_coverage.material_override = marker_material
+	_tactical_coverage.visible = false
+	_world.add_child(_tactical_coverage)
 
 func _recorded_event_anchor(ev: Dictionary, enemy: bool) -> Vector3:
 	var snap: Dictionary = {}

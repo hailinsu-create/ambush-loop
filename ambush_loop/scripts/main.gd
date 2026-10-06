@@ -102,6 +102,7 @@ const RaidMineScript := preload("res://scripts/raid/landmine.gd")
 const RaidDecoyScript := preload("res://scripts/raid/decoy.gd")
 const BackpackPanelScript := preload("res://scripts/ui/backpack_panel.gd")
 const C2DirectorScript := preload("res://scripts/c2/c2_director.gd")
+const YardTacticalDisplayDataScript := preload("res://scripts/presentation/yard_tactical_display_data.gd")
 
 var grid: AmbushGrid = AmbushGrid.new()
 var phase: Phase = Phase.SETUP
@@ -247,6 +248,8 @@ var _escape_tween: Tween = null
 var _result_panel_home: Vector4 = Vector4(-180, -90, 180, 90)
 var killzone_draw: Node2D = null
 var selected_coverage_draw: Node2D = null
+var _yard_tactical_display_signature: String = ""
+var _yard_tactical_display_cache: Dictionary = {}
 var _leak_miss_draw: Node2D = null
 var tripwire_ghost: Node2D = null
 
@@ -2588,23 +2591,31 @@ func _refresh_selected_coverage() -> void:
 		selected_coverage_draw.remove_child(child)
 		child.free()
 	selected_coverage_draw.visible = phase == Phase.SETUP
-	if phase != Phase.SETUP or grid == null or selected == null:
+	var data := yard_tactical_display_data()
+	if not bool(data.get("available", false)):
 		return
-	if not selected.visible or not selected.alive or selected.melee:
-		return
-	var seen: Dictionary = {}
-	for route in _active_routes():
-		for point in _sample_polyline(route, 16.0):
-			if seen.has(point) or not selected.in_fire_geometry(point, grid):
-				continue
-			seen[point] = true
-			var marker := Polygon2D.new()
-			marker.position = point
-			marker.polygon = PackedVector2Array([
-				Vector2(0, -4), Vector2(4, 0), Vector2(0, 4), Vector2(-4, 0)
-			])
-			marker.color = Color(0.32, 0.96, 0.90, 0.94)
-			selected_coverage_draw.add_child(marker)
+	for point in data.get("coverage_points", PackedVector2Array()):
+		var marker := Polygon2D.new()
+		marker.position = point
+		marker.polygon = PackedVector2Array([
+			Vector2(0, -4), Vector2(4, 0), Vector2(0, 4), Vector2(-4, 0)
+		])
+		marker.color = Color(0.32, 0.96, 0.90, 0.94)
+		selected_coverage_draw.add_child(marker)
+
+
+func yard_tactical_display_data() -> Dictionary:
+	## Shared pure-query contract consumed by the 2D map and yard 3D presenter.
+	var signature := str(YardTacticalDisplayDataScript.state_signature(self))
+	if signature != _yard_tactical_display_signature:
+		_yard_tactical_display_signature = signature
+		_yard_tactical_display_cache = YardTacticalDisplayDataScript.build(self, signature)
+	return _yard_tactical_display_cache.duplicate(true)
+
+
+func yard_tactical_display_signature() -> String:
+	## Cheap change detector for the 3D presenter; avoids deep-copying cached data per rendered frame.
+	return str(YardTacticalDisplayDataScript.state_signature(self))
 
 
 func _sample_polyline(points: PackedVector2Array, spacing: float) -> PackedVector2Array:

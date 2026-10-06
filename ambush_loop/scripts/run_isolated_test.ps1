@@ -30,6 +30,7 @@ param(
         'm2_post_touch_regression_gate.gd',
         'm2_role_dock_gate.gd',
         'm2_i0_3d_seam_gate.gd',
+        'm25_p1a_tactical_data_gate.gd',
         'm1_ramp_pathfinder_gate.gd',
         'm1_b2_yard_height_gate.gd',
         'accept_cta_flow_gate.gd',
@@ -50,7 +51,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-if ($Rendered -and ($ImportOnly -or $Entry -notin @('m1_height_coverage_gate.gd', 'm1_yard_visual_evidence_gate.gd', 'm2_yard_hud_gate.gd', 'm2_yard_supply_gate.gd', 'm2_i0_3d_seam_gate.gd', 'm2_e_yard_presentation_gate.gd', 'm2_f_yard_guide_gate.gd', 'm2_replay_lifecycle_gate.gd'))) {
+if ($Rendered -and ($ImportOnly -or $Entry -notin @('m1_height_coverage_gate.gd', 'm1_yard_visual_evidence_gate.gd', 'm2_yard_hud_gate.gd', 'm2_yard_supply_gate.gd', 'm2_i0_3d_seam_gate.gd', 'm2_e_yard_presentation_gate.gd', 'm2_f_yard_guide_gate.gd', 'm2_replay_lifecycle_gate.gd', 'm25_p1a_tactical_data_gate.gd'))) {
     throw 'Rendered mode is restricted to the coverage and yard presentation evidence gates.'
 }
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))

@@ -25,6 +25,7 @@ var ramp_links: Dictionary = {}
 var layout_id: String = "yard"
 var door_cell: Vector2i = Vector2i(-1, -1)
 var door_locked: bool = false
+var tactical_revision: int = 0
 
 
 func _init() -> void:
@@ -36,6 +37,7 @@ func _init() -> void:
 
 
 func rebuild(level_id: String) -> void:
+	tactical_revision += 1
 	layout_id = level_id
 	blocked.fill(0)
 	elevation_tier.fill(HEIGHT_GROUND)
@@ -185,13 +187,20 @@ func is_blocked(x: int, y: int) -> bool:
 
 func set_blocked(x: int, y: int, value: bool) -> void:
 	if in_bounds(x, y):
-		blocked[idx(x, y)] = 1 if value else 0
+		var next_value := 1 if value else 0
+		var index := idx(x, y)
+		if blocked[index] != next_value:
+			blocked[index] = next_value
+			tactical_revision += 1
 
 
 func set_elevation_tier(x: int, y: int, tier: int) -> bool:
 	if not in_bounds(x, y) or is_blocked(x, y) or tier < HEIGHT_GROUND or tier > HEIGHT_PLATFORM:
 		return false
-	elevation_tier[idx(x, y)] = tier
+	var index := idx(x, y)
+	if elevation_tier[index] != tier:
+		elevation_tier[index] = tier
+		tactical_revision += 1
 	return true
 
 
@@ -204,7 +213,10 @@ func get_elevation_tier(x: int, y: int) -> int:
 func set_occlusion_kind(x: int, y: int, kind: int) -> bool:
 	if not in_bounds(x, y) or kind < OCCLUSION_INHERIT or kind > OCCLUSION_FULL:
 		return false
-	occlusion_kind[idx(x, y)] = kind
+	var index := idx(x, y)
+	if occlusion_kind[index] != kind:
+		occlusion_kind[index] = kind
+		tactical_revision += 1
 	return true
 
 
@@ -237,9 +249,13 @@ func set_ramp_link(a: Vector2i, b: Vector2i, enabled: bool = true) -> bool:
 		return false
 	var edge := _ramp_edge_key(a, b)
 	if enabled:
-		ramp_links[edge] = true
+		if not ramp_links.has(edge):
+			ramp_links[edge] = true
+			tactical_revision += 1
 	else:
-		ramp_links.erase(edge)
+		if ramp_links.has(edge):
+			ramp_links.erase(edge)
+			tactical_revision += 1
 	return true
 
 
