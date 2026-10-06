@@ -4,6 +4,7 @@ extends Node3D
 ## Source assets and coordinate convention are pinned in art/environment_v2/M2_I0_SOURCE.md.
 const Adapter := preload("res://scripts/m2_i0_yard_adapter.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
+const UnitSilhouette := preload("res://scripts/presentation/yard_unit_silhouette.gd")
 const GridScript := preload("res://scripts/grid.gd")
 const GROUND_MODEL := "res://art/environment_v2/models/env_ground_concrete_2m_lod0.glb"
 const SHELL_MODEL := "res://art/environment_v2/models/env_warehouse_shell_lod0.glb"
@@ -493,14 +494,7 @@ func _sync_actors() -> void:
 		if not _actor_nodes.has(key):
 			var body := MeshInstance3D.new()
 			body.name = "Operator_%s" % key
-			var capsule := CapsuleMesh.new()
-			capsule.radius = 0.22
-			capsule.height = 1.22
-			body.mesh = capsule
-			var material := StandardMaterial3D.new()
-			material.albedo_color = [Color("86936e"), Color("65776f"), Color("738391")][clampi(int(op.role), 0, 2)]
-			material.roughness = 0.86
-			body.material_override = material
+			UnitSilhouette.build(body, int(op.role))
 			body.add_child(_box("FacingCue", Vector3(0.09, 0.09, 0.35), Vector3(0, 0.25, -0.30), Color("dfd7ac")))
 			_world.add_child(body)
 			_actor_nodes[key] = body
@@ -874,13 +868,7 @@ func _tactical_reason_label(reason: String, geometry_clear: bool, cooldown_clear
 func _new_enemy(key: String) -> MeshInstance3D:
 	var body := MeshInstance3D.new()
 	body.name = "Enemy_" + key
-	var mesh := CapsuleMesh.new()
-	mesh.radius = 0.24
-	mesh.height = 1.22
-	body.mesh = mesh
-	var material := StandardMaterial3D.new()
-	material.albedo_color = Color("c16751")
-	body.material_override = material
+	UnitSilhouette.build(body, 0, true)
 	body.add_child(_box("FacingCue", Vector3(0.09, 0.09, 0.35), Vector3(0, 0.25, -0.30), Color("ffd098")))
 	_world.add_child(body)
 	_enemy_nodes[key] = body

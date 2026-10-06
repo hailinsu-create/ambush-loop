@@ -97,6 +97,9 @@ func _test_alternate_yard_scene() -> void:
 	var runtime_grid: RefCounted = scene.get("grid")
 	var camera: Camera3D = presenter.get("camera")
 	var original_camera_position := camera.position
+	for key in presenter._actor_nodes:
+		var miniature: MeshInstance3D = presenter._actor_nodes[key]
+		_expect(miniature.mesh is BoxMesh and miniature.has_node("Helmet") and miniature.has_node("Weapon") and miniature.has_node("LeftBoot") and miniature.has_node("Backpack"), "M25_UNIT_ORIGINAL_SILHOUETTE_" + str(key))
 	var original_actor_position: Vector2 = scene.get("selected").position
 	scene.set("_cam_pan", Vector2(64.0, 32.0))
 	scene.set("_cam_zoom", 1.4)
