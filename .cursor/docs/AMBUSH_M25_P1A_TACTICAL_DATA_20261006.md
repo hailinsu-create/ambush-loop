@@ -11,7 +11,7 @@
 - 基线：`38b6d38`（`origin/codex/m2-f-operable-guide`）
 - 实现提交：`c40a602485b530dda17da4e7a1886c634906a24d`
 - 上一候选：`42315ba441a3b3aab2404e0f022f000560d45b11`
-- 冷却文案跟进：当前工作树包含 presenter 与专项 gate 的未提交修正，待最终 headless 与提交后取得精确 SHA。
+- 冷却文案跟进：`0e17f6f`，修改 presenter 与专项 gate；最终 headless 与 Forward+ 定向门均以此源码内容通过。
 
 ## 本次实现
 
