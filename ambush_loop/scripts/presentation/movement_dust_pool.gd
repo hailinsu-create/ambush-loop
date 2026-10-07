@@ -52,7 +52,7 @@ func update_frame(frame: Dictionary, power_saving: bool = false) -> void:
 	var samples := Reader.active(frame)
 	var limit := SAVING_CAPACITY if power_saving else CAPACITY
 	for source: Dictionary in samples.slice(0,limit):
-		var center := Space.logic_to_world(source.position)
+		var center := Space.logic_to_surface(frame, source.position)
 		var direction := Space.facing_direction(source.facing)
 		var side := Vector3(-direction.z,0,direction.x)
 		var period := 0.62 if source.stance == 1 else (0.36 if source.sprinting else 0.48)

@@ -3,6 +3,7 @@ extends Node
 const Layout := preload("res://scripts/ui/touch_intent_layout.gd")
 const Commands := preload("res://scripts/input/command_router.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
+const Picker := preload("res://scripts/presentation/world_picker_3d.gd")
 const Geometry := preload("res://scripts/presentation/graybox_geometry.gd")
 const Pathfinder := preload("res://scripts/raid/pathfinder.gd")
 
@@ -86,14 +87,14 @@ func stage(pick: Dictionary) -> bool:
 		var previous: Vector2 = host.selected.global_position
 		for cell in cells:
 			var next: Vector2 = host.grid.cell_to_world_center(cell)
-			mesh.surface_add_vertex(Space.logic_to_world(previous, 0.09))
-			mesh.surface_add_vertex(Space.logic_to_world(next, 0.09))
+			mesh.surface_add_vertex(Space.logic_to_surface(view.frame, previous, 0.09))
+			mesh.surface_add_vertex(Space.logic_to_surface(view.frame, next, 0.09))
 			previous = next
 		mesh.surface_end()
 		path_preview.mesh = mesh
 		path_preview.show()
 		confirm_button.text = "确认移动"
-	marker.position = Space.logic_to_world(pick.pos, 0.08)
+	marker.position = Space.logic_to_surface(view.frame, pick.pos, 0.08)
 	marker.visible = true
 	panel.show()
 	position_panel()
@@ -160,7 +161,8 @@ func update_handle() -> void:
 	if not face_handle.visible or face_contact >= 0:
 		return
 	var direction := Vector2.from_angle(deg_to_rad(host.selected.facing_deg))
-	var screen: Vector2 = view.rig.project_logic(host.selected.global_position + direction * 64.0)
+	var face_pos: Vector2 = host.selected.global_position + direction * 64.0
+	var screen: Vector2 = view.rig.project_logic(face_pos, Space.height_at(view.frame, face_pos))
 	var bounds := get_viewport().get_visible_rect().size
 	face_handle.position = Vector2(clampf(screen.x - 28, 8, maxf(8, bounds.x - 64)),
 		clampf(screen.y - 24, 90, maxf(90, bounds.y - 196)))
@@ -201,7 +203,10 @@ func consume_face_touch(event: InputEvent) -> bool:
 
 
 func stage_face(screen: Vector2) -> void:
-	var ground: Variant = view.rig.ground_at(screen)
+	# Direction is measured on the selected actor's plane, not a foreground roof.
+	var camera: Camera3D = view.rig.camera
+	var plane := Plane(Vector3.UP, Space.height_at(view.frame, view.host.selected.global_position))
+	var ground: Variant = plane.intersects_ray(camera.project_ray_origin(screen), camera.project_ray_normal(screen))
 	if not ground is Vector3:
 		return
 	var target := Space.world_to_logic(ground)
@@ -211,12 +216,12 @@ func stage_face(screen: Vector2) -> void:
 	pending = {"pick": {"valid": true, "pos": target, "kind": "ground"},
 		"scope": scope(), "command": "face"}
 	confirm_button.text = "确认射向"
-	marker.position = Space.logic_to_world(target, 0.08)
+	marker.position = Space.logic_to_surface(view.frame, target, 0.08)
 	marker.show()
 	var mesh := ImmediateMesh.new()
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	mesh.surface_add_vertex(Space.logic_to_world(origin, 0.09))
-	mesh.surface_add_vertex(Space.logic_to_world(target, 0.09))
+	mesh.surface_add_vertex(Space.logic_to_surface(view.frame, origin, 0.09))
+	mesh.surface_add_vertex(Space.logic_to_surface(view.frame, target, 0.09))
 	mesh.surface_end()
 	path_preview.mesh = mesh
 	path_preview.show()
@@ -232,6 +237,6 @@ func position_panel() -> void:
 	# Resident north HUD and bottom command rail must stay accessible.
 	obstacles.append(Rect2(Vector2.ZERO, Vector2(viewport_size.x, 84)))
 	obstacles.append(Rect2(Vector2(0, maxf(0, viewport_size.y - 140)), Vector2(viewport_size.x, 140)))
-	var placement := Layout.choose_position(view.rig.project_logic(pending.pick.pos),
+	var placement := Layout.choose_position(view.rig.project_logic(pending.pick.pos, Space.height_at(view.frame, pending.pick.pos)),
 		viewport_size, Vector2(188, 48), Vector4(8, 8, 8, 8), obstacles)
 	panel.position = placement.position

@@ -286,7 +286,7 @@ func _try_return_fire() -> void:
 	var dist := global_position.distance_to(focus_target.global_position)
 	if dist > RETURN_RANGE:
 		return
-	if grid != null and not grid.has_los(global_position, focus_target.global_position):
+	if grid == null or not grid.has_height_los(global_position, focus_target.global_position):
 		return
 	if return_cd > 0.0:
 		returning_fire = true # still aiming / in contact

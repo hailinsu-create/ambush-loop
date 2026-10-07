@@ -191,7 +191,7 @@ func _sees(world: Vector2) -> bool:
 	var ang := rad_to_deg(atan2(v.y, v.x))
 	if absf(_ang_diff(facing_deg, ang)) > HALF_ANG:
 		return false
-	if grid != null and grid.has_method("has_los") and not bool(grid.has_los(global_position, world)):
+	if grid != null and not bool(grid.has_height_los(global_position, world)):
 		return false
 	return true
 
@@ -210,7 +210,7 @@ func sees_world_padded(world: Vector2, extra_r: float = 22.0, extra_deg: float =
 	var ang := rad_to_deg(atan2(v.y, v.x))
 	if absf(_ang_diff(facing_deg, ang)) > HALF_ANG + extra_deg:
 		return false
-	if grid != null and grid.has_method("has_los") and not bool(grid.has_los(global_position, world)):
+	if grid != null and not bool(grid.has_height_los(global_position, world)):
 		return false
 	return true
 
@@ -396,7 +396,7 @@ func _clip(dirv: Vector2) -> float:
 	var last_ok := step
 	while traveled <= SEE_R:
 		var sample: Vector2 = global_position + dirv * traveled
-		if grid.has_method("has_los") and not bool(grid.has_los(global_position, sample)):
+		if not bool(grid.has_height_los(global_position, sample)):
 			return last_ok
 		last_ok = traveled
 		traveled += step

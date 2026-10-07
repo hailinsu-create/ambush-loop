@@ -12,11 +12,7 @@ static func pick(camera: Camera3D, screen: Vector2, frame: Dictionary) -> Dictio
 	var direction := camera.project_ray_normal(screen)
 	if absf(direction.y) < 0.0001:
 		return invalid
-	var distance := -origin.y / direction.y
-	if distance < 0.0:
-		return invalid
-	var point := origin + direction * distance
-	var logic := Space.world_to_logic(point)
+	var point: Variant = surface_at(camera, screen, frame)
 	var nearest := INF
 	var target := {}
 	for group in ["ops", "sentries", "stashes", "covers", "loot"]:
@@ -26,7 +22,7 @@ static func pick(camera: Camera3D, screen: Vector2, frame: Dictionary) -> Dictio
 			var actor: bool = group in ["ops", "sentries"]
 			var height := 1.8 if actor else (0.75 if group == "stashes" else 0.2)
 			var radius := 0.42 if actor else 0.45
-			var at := Space.logic_to_world(item.pos)
+			var at := Space.logic_to_surface(frame, item.pos)
 			var bounds := AABB(at - Vector3(radius, 0.0, radius), Vector3(radius * 2.0, height, radius * 2.0))
 			var hit: Variant = bounds.intersects_ray(origin, direction)
 			if hit is Vector3:
@@ -37,6 +33,9 @@ static func pick(camera: Camera3D, screen: Vector2, frame: Dictionary) -> Dictio
 						"kind": "op" if group == "ops" else group, "id": item.id}
 	if not target.is_empty():
 		return target
+	if point == null:
+		return invalid
+	var logic := Space.world_to_logic(point)
 	if not Space.contains_logic(logic):
 		return invalid
 	var cell := Vector2i(floori(logic.x / 32.0), floori(logic.y / 32.0))
@@ -44,3 +43,22 @@ static func pick(camera: Camera3D, screen: Vector2, frame: Dictionary) -> Dictio
 	if blocked.size() != 880 or blocked[cell.y * 40 + cell.x] != 0:
 		return invalid
 	return {"valid": true, "pos": logic, "kind": "ground", "id": -1}
+
+
+static func surface_at(camera: Camera3D, screen: Vector2, frame: Dictionary) -> Variant:
+	var origin := camera.project_ray_origin(screen)
+	var direction := camera.project_ray_normal(screen)
+	if absf(direction.y) < 0.0001:
+		return null
+	var nearest := INF
+	var result: Variant = null
+	for height in [0.0, 1.0]:
+		var distance: float = (height - origin.y) / direction.y
+		if distance < 0.0 or distance >= nearest:
+			continue
+		var point := origin + direction * distance
+		var logic := Space.world_to_logic(point)
+		if Space.contains_logic(logic) and is_equal_approx(Space.height_at(frame, logic), height):
+			nearest = distance
+			result = point
+	return result

@@ -4393,6 +4393,13 @@ func _nearest_slot(world_pos: Vector2, max_dist: float) -> CoverSlot:
 func _deploy_selected_to(slot: CoverSlot, announce: bool = true) -> void:
 	if selected == null:
 		return
+	# Height-aware levels must traverse the ramp, not teleport onto a pad.
+	if announce and grid.uses_height_topology() and selected.visible:
+		if slot.occupied_by != null and slot.occupied_by != selected:
+			return
+		if selected.global_position.distance_to(slot.global_position) > 8.0:
+			_command_move_op(selected, slot.global_position)
+			return
 	var had_cover := selected.visible and selected.slot != null
 	var keep_deg := selected.facing_deg
 	var same_pad := selected.slot == slot
@@ -12704,7 +12711,7 @@ func raid_prepare_ref(slots: Array, facings: Array, extra: Dictionary = {}) -> v
 			op.receive_item("mine", m)
 	for i in slots.size():
 		_select_op(i)
-		_deploy_selected_to(cover_slots[int(slots[i])])
+		_deploy_selected_to(cover_slots[int(slots[i])], false)
 		selected.set_facing(float(facings[i]))
 	_select_op(0)
 	_update_hud()
