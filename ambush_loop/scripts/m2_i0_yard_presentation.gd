@@ -1013,7 +1013,8 @@ func _sync_recorded(data: Dictionary) -> void:
 		body.visible = bool(record.get("visible", true))
 		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68 if alive else 0.18)
 		body.rotation.y = Space.facing_yaw(float(record.get("facing", 90.0)))
-		UnitSilhouette.pose(body, "队员 " + key, alive, false, false, alive, host.replay.scrub_tick)
+		# Snapshots contain positions, not action flags: use an explicitly neutral pose.
+		UnitSilhouette.pose(body, "队员 " + key + " · 复盘静态姿态", alive, false, false, false, host.replay.scrub_tick)
 	for record in data.get("enemies", []):
 		var key := str(record.get("id", -1))
 		var body: MeshInstance3D = _enemy_nodes[key] if _enemy_nodes.has(key) else _new_enemy(key)
@@ -1021,7 +1022,7 @@ func _sync_recorded(data: Dictionary) -> void:
 		body.visible = not alive or bool(record.get("active", true))
 		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68 if alive else 0.18)
 		body.rotation.y = Space.facing_yaw(float(record.get("facing", 90.0)))
-		UnitSilhouette.pose(body, ("侧翼 " if str(record.get("route", "")) == "flank" else "主路 ") + key, alive, false, false, alive, host.replay.scrub_tick)
+		UnitSilhouette.pose(body, ("侧翼 " if str(record.get("route", "")) == "flank" else "主路 ") + key + " · 复盘静态姿态", alive, false, false, false, host.replay.scrub_tick)
 
 
 func _build_tactical_landmarks() -> void:

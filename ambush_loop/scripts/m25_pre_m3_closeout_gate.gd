@@ -68,8 +68,30 @@ func _run() -> void:
 	_expect(presenter.open_readiness() and main._modal_blocks_input(), "M25_READINESS_BLOCKS_WORLD_INPUT")
 	_expect(main.selected.ammo == ammo and main.selected.facing_deg == facing, "M25_READINESS_READ_ONLY")
 	await _capture(main, "3d-readiness")
+	_expect(presenter._readiness_sheet.candidate.size.y >= 48, "M25_READINESS_CANDIDATE_TARGET_48")
+	DisplayServer.window_set_size(Vector2i(960, 540))
+	await _frames(3)
+	_expect(presenter._readiness_sheet.candidate.size.y >= 48 and presenter._readiness_sheet.candidate.get_global_rect().end.x <= root.get_visible_rect().size.x, "M25_READINESS_CANDIDATE_SMALL_LAYOUT")
+	DisplayServer.window_set_size(original_window_size)
+	await _frames(3)
 	presenter.close_readiness()
 	_expect(not presenter.readiness_open(), "M25_READINESS_DISMISS")
+	var saved_snapshots: Array = main.battle_log.snapshots.duplicate(true)
+	var saved_phase = main.phase
+	var saved_scrub: int = main.replay.scrub_tick
+	var historical_position := main.selected.global_position + Vector2(64, 0)
+	var record := {"id": main.selected.op_id, "pos": historical_position, "tier": 0, "facing": 90.0, "alive": true}
+	main.battle_log.snapshots.assign([{ "tick": 10, "data": {"ops": [record]} }, { "tick": 20, "data": {"ops": [{"id": main.selected.op_id, "pos": main.selected.global_position}]} }])
+	main.phase = main.Phase.FAILED
+	main._focus_battle_event({"tick": 10, "type": "fire", "actor_id": main.selected.op_id})
+	_expect(main.focus_ring.global_position.is_equal_approx(historical_position), "M25_TERMINAL_EVENT_FOCUS_HISTORICAL_NOT_LIVE")
+	_expect(main.replay.scrub_tick == saved_scrub, "M25_TERMINAL_FOCUS_DOES_NOT_SEEK_REPLAY")
+	_expect(main._event_snapshot_at_or_before(9).is_empty(), "M25_EVENT_BEFORE_FIRST_SNAPSHOT_NO_FUTURE")
+	presenter._sync_recorded({"ops": [record]})
+	var recorded_body = presenter._actor_nodes[str(main.selected.op_id)]
+	_expect(is_zero_approx(recorded_body.get_node("LeftArm").rotation.x) and "复盘静态姿态" in recorded_body.get_node("OcclusionIdentity").text, "M25_REPLAY_NEUTRAL_POSE_EXPLICIT")
+	main.battle_log.snapshots.assign(saved_snapshots)
+	main.phase = saved_phase
 	main._gs().set_yard_3d_candidate(true)
 	main._load_level("yard", false, false)
 	await _frames(4)

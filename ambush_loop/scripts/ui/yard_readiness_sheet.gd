@@ -30,6 +30,7 @@ func _ready() -> void:
 	text_label.add_theme_font_size_override("font_size", 18)
 	column.add_child(text_label)
 	candidate = CheckButton.new()
+	candidate.custom_minimum_size = Vector2(0, 48)
 	candidate.text = "下次院子默认 3D（候选，手机待验）"
 	candidate.toggled.connect(func(value: bool) -> void:
 		if game != null: game._gs().set_yard_3d_candidate(value))

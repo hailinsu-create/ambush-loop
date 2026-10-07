@@ -7641,8 +7641,8 @@ func _focus_battle_event(ev: Dictionary) -> void:
 		replay.set_tick(int(ev["tick"]))
 		_apply_replay_scrub()
 	var pos := _event_focus_position(ev)
-	if phase == Phase.REPLAY:
-		pos = _pos_from_snapshot(replay.snapshot_at_or_before(replay.scrub_tick), ev, pos)
+	# Result-log focus is historical too; looking up a frame must not seek replay.
+	pos = _pos_from_snapshot(_event_snapshot_at_or_before(int(ev.get("tick", 0))), ev, pos)
 	_spawn_focus_ring(pos)
 	var yard_presenter := _active_i0_presenter()
 	if yard_presenter != null: yard_presenter.focus_recorded_event(pos, int(ev.get("tick", 0)), str(ev.get("type", "")))
@@ -7650,6 +7650,16 @@ func _focus_battle_event(ev: Dictionary) -> void:
 		_begin_escape_flash()
 	if status_label:
 		status_label.text = "定位 · %s" % battle_log.format_event(ev)
+
+
+func _event_snapshot_at_or_before(tick: int) -> Dictionary:
+	var low := 0
+	var high := battle_log.snapshots.size()
+	while low < high:
+		var middle := (low + high) / 2
+		if int(battle_log.snapshots[middle]["tick"]) <= tick: low = middle + 1
+		else: high = middle
+	return battle_log.snapshots[low - 1] if low > 0 else {}
 
 
 func focus_latest_of_type(type_name: String) -> bool:
