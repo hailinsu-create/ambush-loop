@@ -2,6 +2,8 @@
 
 ## 2026-10-07 最新终态与外审修正（覆盖下方历史状态）
 
+2026-10-07 11:46终态：冻结测试源码ec832057582c1ad567cc1aa3bc72b7437bfac45b（生产1d27c42）的完整六关b213d0b5e3974424a21c484e079d283e已从统一会话20164取得最终退出0：yard/warehouse/pump/railcut/depot/radio均raid won，SMOKE_OK_RAID_LOOP、SMOKE_OK_TYPICAL_LOOPS、SMOKE_SLICE_COMPLETE齐全；TEST_RUNTIME_ERRORS=0、PLAYER_DATA_UNCHANGED=1、TEST_ENGINE_EXIT=0、SEQUENTIAL_WRAPPER_EXIT=0 ENTRY=smoke_test.gd。对应Godot进程已结束。新源Forward+、复盘生命周期、准备恢复与完整六关所列门均有绿灯，不再等待此长组，不重复启动。旧红灯保留。精确新源GPT复审仍待，设备仍无ADB连接、APK未安装，真人门未验；不宣布M2/M2.5或M3入口通过，跟踪暂不停用。
+
 新源恢复aaf8a58b8cc8445a86e96bf8543564e4已取engine0/runtime_errors0/player unchanged1/SEQUENTIAL_WRAPPER_EXIT0完整终态。队列20164进入完整六关 `b213d0b5e3974424a21c484e079d283e`，console10792/子引擎38540，仍运行。用户重连手机后短时可读，随后再次offline；新源APK已备妥、尚未安装，见荣耀报告，不阻断本地长组。
 
 2026-10-07 11:16续收：ec83205新源复盘run2a0a3ec991d7421dae13f538569ad708已取得完整完成、engine0、runtime_errors0、PLAYER_DATA_UNCHANGED1及SEQUENTIAL_WRAPPER_EXIT0。同会话20164自动进入恢复run `aaf8a58b8cc8445a86e96bf8543564e4`，PID38624；尚未取得恢复终态，之后仍为同源完整smoke。不要重复启动或改生产依赖。
