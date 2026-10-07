@@ -306,7 +306,7 @@ func refresh() -> void:
 				if bool(item.get("active", true)):
 					targets.append(Space.logic_to_surface(frame, item.pos, 0.12))
 					if bool(item.get("alive", false)):
-					targets.append(Space.logic_to_surface(frame, item.pos, 0.9))
+						targets.append(Space.logic_to_surface(frame, item.pos, 0.9))
 		Occlusion.update(rig.camera, walls, targets)
 		_occlusion_acc = 0.0
 		_last_pose = rig.camera.global_transform
