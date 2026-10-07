@@ -13,6 +13,8 @@ var confirm_button: Button
 var cancel_button: Button
 var marker: MeshInstance3D
 var path_preview: MeshInstance3D
+var face_handle: Button
+var face_contact := -1
 
 
 func bind(presenter: Node) -> void:
@@ -23,6 +25,11 @@ func bind(presenter: Node) -> void:
 	panel = HBoxContainer.new()
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	layer.add_child(panel)
+	face_handle = Button.new()
+	face_handle.text = "射向"
+	face_handle.size = Vector2(56, 48)
+	face_handle.mouse_filter = Control.MOUSE_FILTER_STOP
+	layer.add_child(face_handle)
 	confirm_button = Button.new()
 	confirm_button.custom_minimum_size = Vector2(112, 48)
 	panel.add_child(confirm_button)
@@ -63,7 +70,7 @@ func stage(pick: Dictionary) -> bool:
 		return Commands.dispatch(host, "primary", pick)
 	if not is_instance_valid(host.selected) or not host.selected.visible or not host.selected.alive or host.selected.locked:
 		return false
-	pending = {"pick": pick.duplicate(true), "scope": scope()}
+	pending = {"pick": pick.duplicate(true), "scope": scope(), "command": "primary"}
 	confirm_button.text = "确认占位" if pick.get("kind") == "covers" else "确认指令"
 	match host.tool:
 		host.Tool.TRIPWIRE: confirm_button.text = "确认布雷"
@@ -116,11 +123,15 @@ func confirm() -> void:
 			cancel()
 			return
 	# Clear before dispatch: double activation can never execute a second command.
+	var command := str(pending.get("command", "primary"))
 	cancel()
-	Commands.dispatch(host, "primary", pick)
+	Commands.dispatch(host, command, pick)
 
 
 func cancel() -> void:
+	if face_contact >= 0 and is_instance_valid(view):
+		view.gestures.suppressed_contacts[face_contact] = true
+	face_contact = -1
 	pending.clear()
 	if is_instance_valid(panel):
 		panel.hide()
@@ -132,11 +143,84 @@ func cancel() -> void:
 
 
 func _process(_delta: float) -> void:
+	update_handle()
 	if pending.is_empty():
 		return
 	if pending.scope != scope() or view.host._modal_blocks_input():
 		cancel()
 		return
+	position_panel()
+
+
+func update_handle() -> void:
+	var host: Node = view.host
+	face_handle.visible = host._want_touch() and host._is_command_phase() and not host._modal_blocks_input() \
+		and is_instance_valid(host.selected) and host.selected.visible and host.selected.alive and not host.selected.locked \
+		and host.tool == host.Tool.DEPLOY and (pending.is_empty() or pending.get("command") == "face")
+	if not face_handle.visible or face_contact >= 0:
+		return
+	var direction := Vector2.from_angle(deg_to_rad(host.selected.facing_deg))
+	var screen: Vector2 = view.rig.project_logic(host.selected.global_position + direction * 64.0)
+	var bounds := get_viewport().get_visible_rect().size
+	face_handle.position = Vector2(clampf(screen.x - 28, 8, maxf(8, bounds.x - 64)),
+		clampf(screen.y - 24, 90, maxf(90, bounds.y - 196)))
+	# If another UI owns this location, leave direction adjustment to the rail.
+	face_handle.visible = not panel.visible or not panel.get_global_rect().intersects(face_handle.get_global_rect())
+
+
+func consume_face_touch(event: InputEvent) -> bool:
+	if not (event is InputEventScreenTouch or event is InputEventScreenDrag):
+		return false
+	if not view.gestures.suppressed_contacts.is_empty():
+		return false
+	if event is InputEventScreenTouch and event.pressed:
+		if face_contact >= 0:
+			view.gestures.suppressed_contacts[event.index] = true
+			cancel()
+			return true
+		if not face_handle.visible or not face_handle.get_global_rect().has_point(event.position):
+			return false
+		if not view.gestures.contacts.is_empty():
+			return false
+		cancel()
+		face_contact = event.index
+		view.gestures.block_emulated_mouse = true
+		stage_face(event.position)
+		return true
+	if face_contact < 0 or event.index != face_contact:
+		return false
+	if event is InputEventScreenDrag:
+		stage_face(event.position)
+		return true
+	face_contact = -1
+	if event.canceled:
+		cancel()
+	else:
+		stage_face(event.position)
+	return true
+
+
+func stage_face(screen: Vector2) -> void:
+	var ground: Variant = view.rig.ground_at(screen)
+	if not ground is Vector3:
+		return
+	var target := Space.world_to_logic(ground)
+	var origin: Vector2 = view.host.selected.global_position
+	if not Space.contains_logic(target) or origin.distance_squared_to(target) < 1.0:
+		return
+	pending = {"pick": {"valid": true, "pos": target, "kind": "ground"},
+		"scope": scope(), "command": "face"}
+	confirm_button.text = "确认射向"
+	marker.position = Space.logic_to_world(target, 0.08)
+	marker.show()
+	var mesh := ImmediateMesh.new()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	mesh.surface_add_vertex(Space.logic_to_world(origin, 0.09))
+	mesh.surface_add_vertex(Space.logic_to_world(target, 0.09))
+	mesh.surface_end()
+	path_preview.mesh = mesh
+	path_preview.show()
+	panel.show()
 	position_panel()
 
 

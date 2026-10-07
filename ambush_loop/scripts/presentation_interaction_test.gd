@@ -163,6 +163,31 @@ func _run() -> void:
 	intent.confirm()
 	_check(intent.pending.is_empty(), "tool change invalidates pending instruction")
 	main.tool = main.Tool.DEPLOY
+	intent.update_handle()
+	_check(intent.face_handle.visible, "selected actor exposes an independent direction handle")
+	var face_start: Vector2 = intent.face_handle.get_global_rect().get_center()
+	var old_face: float = main.selected.facing_deg
+	var face_end: Vector2 = view.rig.project_logic(main.selected.global_position + Vector2(64, 64))
+	await _send(_touch(4, true, face_start))
+	var face_drag := InputEventScreenDrag.new()
+	face_drag.index = 4
+	face_drag.position = face_end
+	face_drag.relative = face_end - face_start
+	await _send(face_drag)
+	await _send(_touch(4, false, face_end))
+	_check(intent.pending.get("command") == "face" and main.selected.facing_deg == old_face and not main.selected.is_moving(),
+		"direction drag previews without changing facing or moving actor")
+	intent.confirm()
+	_check(is_equal_approx(main.selected.facing_deg, 45.0) and not main.selected.is_moving(), "direction confirmation uses authoritative face command")
+	main.selected.set_facing(old_face)
+	intent.update_handle()
+	face_start = intent.face_handle.get_global_rect().get_center()
+	await _send(_touch(4, true, face_start))
+	await _send(_touch(5, true, face_end))
+	await _send(_touch(4, false, face_start))
+	await _send(_touch(5, false, face_end))
+	_check(intent.pending.is_empty() and not main.selected.is_moving() and main.selected.facing_deg == old_face,
+		"second finger cancels direction handle and suppresses both releases")
 	var start := Vector2(640, 350)
 	var second := Vector2(800, 350)
 	var focus_before: Vector3 = view.rig.focus
