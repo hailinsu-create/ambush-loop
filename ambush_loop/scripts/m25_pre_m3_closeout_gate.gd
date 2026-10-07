@@ -28,6 +28,8 @@ func _run() -> void:
 	down.pressed = false
 	handle._gui_input(down)
 	_expect(main.selected.facing_deg == original_facing, "M25_MAGNIFY_LATE_RELEASE_NO_COMMIT")
+	presenter.set_tactical_expanded(true)
+	await _frames(2)
 	_expect(presenter._quality_button.size.y >= 48 and presenter._handed_button.size.y >= 48, "M25_TOUCH_TARGET_MINIMUM_48")
 	var original_window_size := DisplayServer.window_get_size()
 	DisplayServer.window_set_size(Vector2i(960, 540))

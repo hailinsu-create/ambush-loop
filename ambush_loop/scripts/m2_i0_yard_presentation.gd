@@ -5,6 +5,10 @@ extends Node3D
 const Adapter := preload("res://scripts/m2_i0_yard_adapter.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
 const UnitSilhouette := preload("res://scripts/presentation/yard_unit_silhouette.gd")
+const VisualStyle := preload("res://scripts/presentation/yard_visual_style.gd")
+const CAMERA_SIZE := 23.0
+const CAMERA_RIG := Vector3(0.0, 24.0, 26.0)
+const CAMERA_FOCUS := Vector3(-0.5, 0.0, 0.7)
 const GridScript := preload("res://scripts/grid.gd")
 const GROUND_MODEL := "res://art/environment_v2/models/env_ground_concrete_2m_lod0.glb"
 const SHELL_MODEL := "res://art/environment_v2/models/env_warehouse_shell_lod0.glb"
@@ -49,6 +53,15 @@ var _tactical_coverage: MultiMeshInstance3D
 var _tactical_panel: PanelContainer
 var _tactical_info: Label
 var _tactical_signature: String = ""
+var _style: RefCounted
+var _box_materials: Dictionary = {}
+var _intent_materials: Dictionary = {}
+var _compact_info: Label
+var _tactical_details: VBoxContainer
+var _expand_button: Button
+var tactical_expanded := false
+var tactical_rebuild_count := 0
+var event_rebuild_count := 0
 const FX_CAP := 16
 const TACTICAL_SAMPLE_CAP := 192
 
@@ -71,6 +84,8 @@ func bind(game: Node) -> void:
 		return
 	_bound = true
 	_atlas = load(ATLAS_MATERIAL) as StandardMaterial3D
+	_style = VisualStyle.new()
+	_style.find_warehouse(host.grid)
 	_build_world()
 	_build_controls()
 	_set_active(true)
@@ -84,30 +99,34 @@ func _build_world() -> void:
 	var environment := WorldEnvironment.new()
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
-	env.background_color = Color("17212a")
+	env.background_color = Color("101d29")
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color("a9bbca")
-	env.ambient_light_energy = 0.8
+	env.ambient_light_color = Color("a9c5dd")
+	env.ambient_light_energy = 0.38
 	environment.environment = env
 	_world.add_child(environment)
 	var sun := DirectionalLight3D.new()
 	_sun = sun
 	sun.rotation_degrees = Vector3(-56.0, -32.0, 0.0)
-	sun.light_color = Color("d2d9d7")
-	sun.light_energy = 1.1
+	sun.light_color = Color("d3e6f4")
+	sun.light_energy = 0.82
 	sun.shadow_enabled = true
+	sun.directional_shadow_max_distance = 42.0
 	_world.add_child(sun)
 	camera = Camera3D.new()
 	camera.name = "I0Camera"
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.size = 29.0
-	camera.position = Vector3(0.0, 24.0, 26.0)
+	camera.size = CAMERA_SIZE
+	camera.position = CAMERA_RIG + CAMERA_FOCUS
 	_world.add_child(camera)
-	camera.look_at(Vector3(0.0, 0.0, 0.0), Vector3.UP)
+	camera.look_at(CAMERA_FOCUS, Vector3.UP)
 	_build_ground()
 	_build_grid_geometry()
 	_build_platform_and_ramp()
 	_build_landmarks()
+	var supply_position: Vector2 = host.raid_stashes[0].global_position if not host.raid_stashes.is_empty() else Vector2(208, 336)
+	_style.build(_world, host.grid, supply_position)
+	_decor_targets.append({"valid": true, "actionable": false, "kind": "decoration", "id": "supply-lamp", "bounds": _style.lamp_bounds})
 	_build_tactical_landmarks()
 	_build_tactical_display_nodes()
 	_build_fx_pool()
@@ -120,40 +139,10 @@ func _build_ground() -> void:
 	floor.name = "GroundFallback"
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(40.0, 22.0)
-	var floor_mat := StandardMaterial3D.new()
-	floor_mat.albedo_color = Color("555954")
-	floor_mat.roughness = 0.94
-	plane.material = floor_mat
+	plane.material = _style.material("concrete")
 	floor.mesh = plane
-	floor.position.y = -0.08
+	floor.position.y = -0.025
 	_world.add_child(floor)
-	var packed := load(GROUND_MODEL) as PackedScene
-	if packed == null:
-		push_warning("M2_I0_GROUND_ASSET_UNAVAILABLE; using flat fallback")
-		return
-	var instance := packed.instantiate()
-	var source_mesh := _find_mesh(instance)
-	if source_mesh == null or source_mesh.mesh == null:
-		instance.free()
-		push_warning("M2_I0_GROUND_MESH_UNAVAILABLE; using flat fallback")
-		return
-	var multi := MultiMesh.new()
-	multi.transform_format = MultiMesh.TRANSFORM_3D
-	multi.mesh = source_mesh.mesh
-	multi.instance_count = 20 * 11
-	var i := 0
-	for z in 11:
-		for x in 20:
-			var at := Vector3(float(x * 2 - 19), -0.035, float(z * 2 - 10))
-			multi.set_instance_transform(i, Transform3D(Basis.IDENTITY, at) * source_mesh.transform)
-			i += 1
-	var tiles := MultiMeshInstance3D.new()
-	tiles.name = "CollaboratorConcreteTiles"
-	tiles.multimesh = multi
-	if _atlas != null:
-		tiles.material_override = _atlas
-	_world.add_child(tiles)
-	instance.free()
 
 
 func _find_mesh(node: Node) -> MeshInstance3D:
@@ -185,10 +174,7 @@ func _build_grid_geometry() -> void:
 	var blockers := MultiMeshInstance3D.new()
 	blockers.name = "LogicBlockedCellsReadOnly"
 	blockers.multimesh = mm
-	var wall_mat := StandardMaterial3D.new()
-	wall_mat.albedo_color = Color("41464a")
-	wall_mat.roughness = 0.9
-	blockers.material_override = wall_mat
+	blockers.material_override = _style.material("brick")
 	_world.add_child(blockers)
 	_decor_targets.clear()
 	for y in GridScript.ROWS:
@@ -197,6 +183,7 @@ func _build_grid_geometry() -> void:
 				continue
 			var border := x == 0 or x == GridScript.COLS - 1 or y == 0 or y == GridScript.ROWS - 1
 			var height := 2.2 if border else 0.52
+			if _style.warehouse_cells.has_point(Vector2i(x,y)): height = 2.32
 			var center := Space.logic_to_world(Vector2((x + 0.5) * 32.0, (y + 0.5) * 32.0))
 			_decor_targets.append({
 				"valid": true, "actionable": false, "kind": "decoration",
@@ -211,20 +198,14 @@ func _build_platform_and_ramp() -> void:
 	var slab_mesh := BoxMesh.new()
 	slab_mesh.size = Vector3(3.0, 0.18, 3.0)
 	slab.mesh = slab_mesh
-	var slab_mat := StandardMaterial3D.new()
-	slab_mat.albedo_color = Color("756e5f")
-	slab_mat.roughness = 0.86
-	slab.material_override = slab_mat
+	slab.material_override = _style.material("slab")
 	var center := Space.logic_to_world(Vector2(16.5 * 32.0, 11.5 * 32.0))
 	slab.position = center + Vector3(0.0, Adapter.HEIGHT_METRES - 0.09, 0.0)
 	_world.add_child(slab)
 	var ramp := MeshInstance3D.new()
 	ramp.name = "OnlyAuthoredSouthRamp"
 	ramp.mesh = _ramp_mesh()
-	var ramp_mat := StandardMaterial3D.new()
-	ramp_mat.albedo_color = Color("817b70")
-	ramp_mat.roughness = 0.9
-	ramp.material_override = ramp_mat
+	ramp.material_override = _style.material("slab")
 	_world.add_child(ramp)
 
 
@@ -244,7 +225,9 @@ func _ramp_mesh() -> ArrayMesh:
 
 func _build_landmarks() -> void:
 	var shell := _place_model(SHELL_MODEL, Vector3(0.5, 0.0, 0.0), Vector3(0.76, 0.78, 0.9), "CollaboratorWarehouseShell")
-	if shell == null:
+	# Preserve source asset for fallback; the new frontage fits exact blocked footprint.
+	if shell != null and _style.warehouse_cells.size != Vector2i.ZERO: shell.visible = false
+	if shell == null and _style.warehouse_cells.size == Vector2i.ZERO:
 		var building := _box("WarehouseShellFallback", Vector3(4.8, 2.2, 3.8), Vector3(0.5, 1.1, 0.0), Color("605b50"))
 		_world.add_child(building)
 	for cell in [Vector2i(9, 9), Vector2i(28, 9), Vector2i(18, 15)]:
@@ -285,10 +268,13 @@ func _box(node_name: String, dimensions: Vector3, at: Vector3, color: Color) -> 
 	var box := BoxMesh.new()
 	box.size = dimensions
 	node.mesh = box
-	var material := StandardMaterial3D.new()
-	material.albedo_color = color
-	material.roughness = 0.9
-	node.material_override = material
+	var material_key := color.to_html()
+	if not _box_materials.has(material_key):
+		var material := StandardMaterial3D.new()
+		material.albedo_color = color
+		material.roughness = 0.9
+		_box_materials[material_key] = material
+	node.material_override = _box_materials[material_key]
 	node.position = at
 	return node
 
@@ -414,7 +400,7 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	_tactical_panel.offset_left = -396.0
 	_tactical_panel.offset_right = -16.0
 	_tactical_panel.offset_top = 72.0
-	_tactical_panel.offset_bottom = 310.0
+	_tactical_panel.offset_bottom = 72.0
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color("101a20", 0.96)
 	panel_style.border_color = Color("48c9ba", 0.92)
@@ -452,7 +438,24 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	summary.pressed.connect(open_readiness)
 	heading_row.add_child(summary)
-	_quality_button.reparent(heading_row)
+	_expand_button = Button.new()
+	_expand_button.text = "展开战术"
+	_expand_button.custom_minimum_size = Vector2(112, 48)
+	_expand_button.pressed.connect(func() -> void: set_tactical_expanded(not tactical_expanded))
+	heading_row.add_child(_expand_button)
+	_compact_info = Label.new()
+	_compact_info.add_theme_font_size_override("font_size", 16)
+	_compact_info.add_theme_color_override("font_color", Color("dce9e9"))
+	_compact_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_compact_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(_compact_info)
+	_tactical_details = VBoxContainer.new()
+	_tactical_details.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(_tactical_details)
+	var preferences := HBoxContainer.new()
+	preferences.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_tactical_details.add_child(preferences)
+	_quality_button.reparent(preferences)
 	_quality_button.custom_minimum_size = Vector2(104.0, 48.0)
 	_handed_button = Button.new()
 	_handed_button.custom_minimum_size = Vector2(56, 48)
@@ -461,15 +464,26 @@ func _build_tactical_info_panel(parent: Control) -> void:
 		if _facing_handle != null: _facing_handle.cancel_capture()
 		host._gs().set_left_handed(not host._gs().left_handed)
 		_handed_button.text = "左手" if host._gs().left_handed else "右手")
-	heading_row.add_child(_handed_button)
+	preferences.add_child(_handed_button)
 	_tactical_info = Label.new()
 	_tactical_info.name = "SelectedTacticalInfo"
 	_tactical_info.add_theme_font_size_override("font_size", 16)
 	_tactical_info.add_theme_color_override("font_color", Color("e4eee9"))
 	_tactical_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_tactical_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	column.add_child(_tactical_info)
+	_tactical_details.add_child(_tactical_info)
+	set_tactical_expanded(false)
 	_tactical_panel.visible = false
+
+
+func set_tactical_expanded(value: bool) -> void:
+	tactical_expanded = value
+	if _tactical_details != null: _tactical_details.visible = value
+	if _compact_info != null: _compact_info.visible = not value
+	if _expand_button != null: _expand_button.text = "收起战术" if value else "展开战术"
+	if _tactical_panel != null: _tactical_panel.size.y = 0.0
+	if host != null and host.yard_hud != null:
+		host.yard_hud.operable_guide.max_lines_visible = -1 if value or not active else 2
 
 
 func _set_active(value: bool) -> void:
@@ -477,6 +491,8 @@ func _set_active(value: bool) -> void:
 	if host != null:
 		host._yard_facing_preview.clear()
 	active = value and host != null and host.level != null and str(host.level.level_id) == "yard"
+	if host != null and host.yard_hud != null:
+		host.yard_hud.operable_guide.max_lines_visible = 2 if active and not tactical_expanded else -1
 	if camera != null:
 		camera.current = active
 		if active:
@@ -505,11 +521,13 @@ func apply_camera_view(pan: Vector2, zoom: float) -> void:
 	## Shared gesture state; display-only and never changes grid/actor coordinates.
 	if camera == null or not pan.is_finite() or not is_finite(zoom):
 		return
-	camera.size = 29.0 / clampf(zoom, 0.72, 1.65)
-	var offset := Vector3(clampf(pan.x, -627.0, 627.0), 0.0,
-		clampf(pan.y, -627.0, 627.0)) / Space.PIXELS_PER_METRE
-	camera.position = Vector3(0.0, 24.0, 26.0) + offset
-	camera.look_at(offset, Vector3.UP)
+	camera.size = CAMERA_SIZE / clampf(zoom, 0.72, 1.65)
+	var view_size := get_viewport().get_visible_rect().size
+	var aspect := view_size.x / maxf(1.0, view_size.y)
+	var limits := Vector2(maxf(1.0, 20.0 - camera.size * aspect * 0.5), maxf(1.0, 11.0 - camera.size * 0.5 / 0.68))
+	var offset := Vector3(clampf(pan.x / 32.0, -limits.x, limits.x), 0.0, clampf(pan.y / 32.0, -limits.y, limits.y))
+	camera.position = CAMERA_RIG + CAMERA_FOCUS + offset
+	camera.look_at(CAMERA_FOCUS + offset, Vector3.UP)
 
 
 func pick_at(screen: Vector2) -> Dictionary:
@@ -716,9 +734,12 @@ func _add_intent_segment(from_logic: Vector2, to_logic: Vector2, color: Color) -
 
 
 func _intent_material(color: Color) -> StandardMaterial3D:
+	var key := color.to_html()
+	if _intent_materials.has(key): return _intent_materials[key]
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_color = color
+	_intent_materials[key] = material
 	return material
 
 
@@ -790,6 +811,7 @@ func _sync_tactical_display() -> void:
 	if signature == _tactical_signature:
 		return
 	var data := tactical_display_snapshot()
+	tactical_rebuild_count += 1
 	signature = str(data.get("state_signature", signature))
 	_tactical_signature = signature
 	if not bool(data.get("available", false)):
@@ -813,9 +835,22 @@ func _sync_tactical_display() -> void:
 		_tactical_sector.mesh = null
 		_tactical_coverage.multimesh.instance_count = 0
 	_tactical_info.text = _tactical_summary(data)
+	_compact_info.text = _compact_tactical_summary(data)
 	if not preview_sector.is_empty():
 		_tactical_info.text = "预览射界 · 未执行 · 非命中保证\n" + _tactical_info.text
+		_compact_info.text = "预览射界 · 未执行\n" + _compact_info.text
 	_tactical_panel.visible = true
+
+
+func _compact_tactical_summary(data: Dictionary) -> String:
+	var actor: Dictionary = data.get("actor", {})
+	var title := "%s · %s · %d发" % [str(actor.get("name", "队员")), str(actor.get("weapon_id", "")), int(actor.get("ammo", 0))]
+	var states: Array = data.get("target_states", [])
+	var state := "手动许可" if host.yard_manual_permission else "自动许可"
+	if not states.is_empty():
+		var target: Dictionary = states[0]
+		state += " · 目标%d：%s" % [int(target.get("id", -1)), _tactical_reason_label(str(target.get("block_reason", "")), bool(target.get("geometry_clear", false)), bool(target.get("shot_cooldown_clear", false)))]
+	return title + "\n" + state
 
 
 func _set_tactical_display_visible(value: bool) -> void:
@@ -1121,6 +1156,7 @@ func _sync_event_fx(tick: int) -> void:
 	var signature := "%d:%d:%d:%d" % [host.battle_log.get_instance_id(), tick, host.battle_log.events.size(), host.battle_log.snapshots.size()]
 	if signature == _fx_signature: return
 	_fx_signature = signature
+	event_rebuild_count += 1
 	for node in _fx_nodes: node.visible = false
 	var count := 0
 	for ev in event_window(tick):
