@@ -12,7 +12,7 @@
 
 验收：实际截图前后同镜头；装饰不增加可走格阻挡/可选身份；镜头不改队员位置，边界不出现大片空白；摘要/展开/质量/左右手至少48逻辑px，实际手机dp另验；静态节点/材质/模型身份在600次同步后稳定；静止 pose 写入平台且运动/搜索/命中恢复正确；资源打包不含生成 build 截图。测试均使用隔离包装器，记录实际 engine/wrapper退出与 runtime_errors、PLAYER_DATA_UNCHANGED，保留旧红灯。
 
-当前：正在实施，持续卡顿尚未定因；桌面成本/资源平台不替代手机30分钟热态门。本轮不是 V0–V5 全部完成或 M3正式准入。
+当前：V1首样板已实现并完成下面列出的本地受影响门；外审后读不可用，持续卡顿尚未定因；桌面成本/资源平台不替代手机30分钟热态门。本轮不是 V0–V5 全部完成或 M3正式准入。
 
 ## 首轮验证记录
 
@@ -29,4 +29,10 @@
 
 实际导出 `Windows Desktop` ZIP，EXPORT_EXIT=0；check_visual_export.ps1 退出0，232资源、banned=0、9项运行必需资源齐备。SHA256=12AB12FD0DA6EEA7213E8205125B5E84BA5B2B21E09D8125374CE09C2890CD61。排除docs/build/ArtSource以及开发门/截图/probe；原证据不删除。此处是资源包检查，不是Windows安装/Android APK验收。
 
-截图在各run/m1-i-screens；完整前后比较、外审与同步终态后续补记。手机长稳、真人操作、完整人物模型/动画、环境铺陈和V2–V5仍待完成；发行默认3D门未放开。
+补充门：最终08d9fb3源码触控 run f6f58e77739e44159747ebef6894f833（M2_TOUCH_INTENT_OK/M2_TOUCH_CANCEL_OK；顺序包装器的非零退出guard后继续进入P1B，确认触控wrapper0）；P1B run ff8a477268d8410291e8d2549e2d014e，M25_P1B_DECISION_DISPLAY_OK、engine0/wrapper0/runtime_errors0/PLAYER_DATA_UNCHANGED1。两项均完整结束。
+
+原 GPT 聊天 c2c_visual_v1 iteration1：精确08d9fb3包已git archive并记录执行摘要/隔离测试输出。包 `.cursor/review_packets/visual-v1-executed-08d9fb3` 位于原只读B1，SHA256=3E6413D4B57D274EF368DBC269181E11CAD3FF54B1A8D4B2AE18E4A43240C7A3。EXECUTED填写和Enter返回成功；随后两次60秒上限的DOM后读均超时，因此送达/回复未验证，REVIEW=unavailable/pending，不能声明DONE/approve；不重复发送、不改旧会话/连接。恢复后先只读原聊天核对本精确包。
+
+实际前后截图已保留到 `evidence/yard-v1-20261007/`（before-seam/after-seam是同一隔离接缝夹具，默认镜头因本次设计不同；并非同镜头性能对比）；compact-1280为新V1门实际截图。未使用概念图代替实际游戏。ADB devices本次为空。
+
+下一步：先恢复读取本次外审，再实施V2静态环境细化与V3人物剪影/动画独立切片；手机长稳、真人操作、完整人物模型/动画、环境铺陈和V2–V5仍待完成；发行默认3D门未放开。GitHub同步只登记远端核对过的源码，不把本地受影响门扩大为六关新全回归或手机验收。
