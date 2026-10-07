@@ -33,6 +33,11 @@
 | 最新六关全量 smoke | e4e3c93d3b7540a3ba4231fd5aa7e467 | 正在运行，不登记通过；包装器统一会话32544 |
 | 复盘生命周期 | 4768e7678c434b3ea658fd06238a8c30 | 完整完成，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1；native/manual checkpoint/free position/single owner/exact restore/fresh restart/readonly均通过 |
 | 准备恢复（与长组并行） | 3cb15475f18c454482c9394f578f1859 | 保留红灯：engine/wrapper2，runtime_errors0，PLAYER_DATA_UNCHANGED1；10次恢复中 repeat5耗时5253ms超过5000ms，其余库存/朝向/只恢复一次/原生UI/其他关拒绝均通过。不能据并行负载直接豁免；待其他测试结束后单独复验，不改阈值 |
+| 冻结后 3D 接缝 | d6c6f89cf0594e0cb8e2dd6f5fa73ce2 | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
+| 冻结后战术数据 | c5f53a1c1d114aeb917b24a3ade6553e | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
+| 冻结后 3D 信息 | 93e6c3a874344975acafc32991e46a4e | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
+| 冻结后确认/取消八类 | 5064b871dd274e2dae2d9a1d32fadca1 | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
+| 冻结后院子引导 | 45df2b1a786345d5a830f3cd1a7bdc52 | 统一会话40443正在执行，尚未通过 |
 
 截图位于各 run/m1-i-screens，实际已检查最新 960×540 操作布局和 1280×720 摘要/方案 B。48 Godot 逻辑像素不等于 Android 实际 48dp，设备测试暂缓。
 
@@ -45,3 +50,9 @@ iteration6 已在原聊天编辑框填写，按 Enter 的调用超时，随后�
 ## 仍待退出门
 
 本地：六关完整终态、复盘/准备恢复包装器后检、最终专项矩阵与 GitHub SHA 核对。设备：Android dp/误触、兼容/低档帧时、热/内存/后台/长稳。真人：艺术/声触反馈评价与五人盲测。后两类按用户暂缓，不阻断本地开发，但正式默认3D、M2/M2.5整体验收和进入M3发行门仍不关闭。
+
+## 自动续收尾
+
+原 `ambush-p0` 跟踪已完成后处于 PAUSED；本轮沿用它更新为“Ambush M3 前回归收尾”，同聊天 ACTIVE，每15分钟检查有意义变化。任务明确保留运行中长组、不重复启动/终止、不改冻结生产依赖；等全量与矩阵结束后单独复验准备恢复；失败按必要缺陷闭环，成功补终态并同步后停用。通知仅限完成、失败、需要授权或重大可操作变化。不需用户重复说继续。
+
+代码/报告截至0c24ca01c65a5d43adadbabc25d12b8a48c2e8aa已推送并远端SHA核对一致；本段更新随后另作纯文档提交。没有改动已有未跟踪Godot UID文件，没有安装/卸载手机应用，没有伪造APK或真机验收。
