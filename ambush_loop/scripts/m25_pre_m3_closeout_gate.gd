@@ -83,7 +83,7 @@ func _run() -> void:
 	var record := {"id": main.selected.op_id, "pos": historical_position, "tier": 0, "facing": 90.0, "alive": true}
 	main.battle_log.snapshots.assign([{ "tick": 10, "data": {"ops": [record]} }, { "tick": 20, "data": {"ops": [{"id": main.selected.op_id, "pos": main.selected.global_position}]} }])
 	main.phase = main.Phase.FAILED
-	main._focus_battle_event({"tick": 10, "type": "fire", "actor_id": main.selected.op_id})
+	main._focus_battle_event({"tick": 10, "type": "fire", "actor_id": main.selected.op_id, "target_id": 1})
 	_expect(main.focus_ring.global_position.is_equal_approx(historical_position), "M25_TERMINAL_EVENT_FOCUS_HISTORICAL_NOT_LIVE")
 	_expect(main.replay.scrub_tick == saved_scrub, "M25_TERMINAL_FOCUS_DOES_NOT_SEEK_REPLAY")
 	_expect(main._event_snapshot_at_or_before(9).is_empty(), "M25_EVENT_BEFORE_FIRST_SNAPSHOT_NO_FUTURE")
