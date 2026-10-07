@@ -1,5 +1,11 @@
 # M2.5 荣耀真机首轮复验 2026-10-07
 
+## 重新连接后的续测状态
+
+用户再次重连后ADB短时恢复：AAP-AN00 transport11，wm density明确560且无override，原进程15219仍在、3D准备态截图已取到。随后的回中触摸命令再次长时间卡住；取消本轮客户端并kill-server/start-server后仅有 `(no serial number) offline transport1`。已请求保持解锁并确认USB调试授权；没有新安装、卸载或清档，真机续测未完成。
+
+已导出最新生产1d27c42/冻结ec832057582c1ad567cc1aa3bc72b7437bfac45b的调试APK `build/android/AmbushLoop-m25-ec83205.apk`，checkout ed0c69e仅后续文档变化。SHA256 `8cb5e9f5510215004917ec583ef8f27b49ce2b5db1f16dee235e929dca8d7512`，60,395,345字节，apksigner校验及与旧包同签名已确认。等待可靠连接后原位更新；不能把APK已生成当作已安装/真机通过。导出额外导入了build下测试截图，包增长应在后续独立导出卫生切片排除，当前保持冻结生产依赖。
+
 ## 源码与安装证据
 
 用户本轮已连接手机并要求完成设备复验。实机是 HONOR AAP-AN00，不是此前 vivo。ADB authorized，横屏截图 2800×1272，设备报告密度560dpi。

@@ -2,6 +2,8 @@
 
 ## 2026-10-07 最新终态与外审修正（覆盖下方历史状态）
 
+新源恢复aaf8a58b8cc8445a86e96bf8543564e4已取engine0/runtime_errors0/player unchanged1/SEQUENTIAL_WRAPPER_EXIT0完整终态。队列20164进入完整六关 `b213d0b5e3974424a21c484e079d283e`，console10792/子引擎38540，仍运行。用户重连手机后短时可读，随后再次offline；新源APK已备妥、尚未安装，见荣耀报告，不阻断本地长组。
+
 2026-10-07 11:16续收：ec83205新源复盘run2a0a3ec991d7421dae13f538569ad708已取得完整完成、engine0、runtime_errors0、PLAYER_DATA_UNCHANGED1及SEQUENTIAL_WRAPPER_EXIT0。同会话20164自动进入恢复run `aaf8a58b8cc8445a86e96bf8543564e4`，PID38624；尚未取得恢复终态，之后仍为同源完整smoke。不要重复启动或改生产依赖。
 
 新源顺序队列统一会话20164，首门复盘run `2a0a3ec991d7421dae13f538569ad708`，engine PID38756；后续run由同会话自动依次产生，必须取SEQUENTIAL_WRAPPER_EXIT及包装器后检，不能重复启动。原自动跟踪中的会话32544已完成，本节覆盖其旧运行提示；继续跟踪20164。手机断连不阻断此本地队列。
