@@ -2,6 +2,7 @@ extends Node3D
 
 const Space := preload("res://scripts/presentation/world_space.gd")
 const TerrainGrid := preload("res://scripts/grid.gd")
+const Surface := preload("res://scripts/terrain_surface.gd")
 const ViewState := preload("res://scripts/presentation/view_state.gd")
 const Rig := preload("res://scripts/presentation/camera_rig_3d.gd")
 const Picker := preload("res://scripts/presentation/world_picker_3d.gd")
@@ -279,7 +280,7 @@ func refresh() -> void:
 		_environment_lod = 1
 	elif rig.view_size < 22.0:
 		_environment_lod = 0
-	var layout_hash: int = hash([frame.level_id, frame.blocked, frame.get("elevation_tier", []), frame.get("ramp_links", {}), frame.environment_supported,
+	var layout_hash: int = hash([frame.level_id, frame.height_schema, frame.blocked, frame.get("elevation_tier", []), frame.get("occlusion_kind", []), frame.get("ramp_links", {}), frame.environment_supported,
 		frame.environment_revision, frame.environment_layout_revision, frame.environment_cutaway_schema, frame.has_door, frame.door_pos, _environment_lod])
 	if layout_hash != _layout_hash:
 		_layout_hash = layout_hash
@@ -303,9 +304,9 @@ func refresh() -> void:
 		for group in [frame.ops, frame.enemies, frame.sentries, frame.stashes, frame.loot]:
 			for item in group:
 				if bool(item.get("active", true)):
-					targets.append(Space.logic_to_world(item.pos, 0.12))
+					targets.append(Space.logic_to_surface(frame, item.pos, 0.12))
 					if bool(item.get("alive", false)):
-						targets.append(Space.logic_to_world(item.pos, 0.9))
+					targets.append(Space.logic_to_surface(frame, item.pos, 0.9))
 		Occlusion.update(rig.camera, walls, targets)
 		_occlusion_acc = 0.0
 		_last_pose = rig.camera.global_transform
@@ -428,7 +429,7 @@ func _rebuild_geometry() -> void:
 
 func _build_terrain() -> void:
 	terrain_grid = null
-	if int(frame.get("height_schema", 0)) != 1:
+	if int(frame.get("height_schema", 0)) not in [1,2]:
 		return
 	var tiers: PackedByteArray = frame.get("elevation_tier", PackedByteArray())
 	if tiers.size() != 880:
@@ -438,12 +439,38 @@ func _build_terrain() -> void:
 	terrain_grid.elevation_tier = tiers.duplicate()
 	terrain_grid.occlusion_kind = frame.occlusion_kind.duplicate()
 	terrain_grid.ramp_links = frame.ramp_links.duplicate()
+	terrain_grid.continuous_surface = int(frame.height_schema) == 2
 	var mat := Geometry.material(Color("777b70"))
+	var ramps: Array = Surface.ramps(tiers, frame.ramp_links) if terrain_grid.continuous_surface else []
 	for index in tiers.size():
 		if tiers[index] != 1:
 			continue
 		var pos := Vector2((index % 40 + 0.5) * 32.0, (index / 40 + 0.5) * 32.0)
-		Geometry.box(geometry, Vector3(1.0, 1.0, 1.0), Space.logic_to_world(pos, 0.5), mat)
+		var size := Vector3.ONE
+		var center := Space.logic_to_world(pos,0.5)
+		for ramp in ramps:
+			if ramp.high_index != index:
+				continue
+			var axis: Vector2 = (ramp.high-ramp.low).normalized()
+			center += Vector3(axis.x,0,axis.y)*0.25
+			size -= Vector3(absf(axis.x),0,absf(axis.y))*0.5
+		Geometry.box(geometry, size, center, mat)
+	for ramp in ramps:
+		var axis: Vector2 = (ramp.high-ramp.low).normalized()
+		var across := Vector3(-axis.y,0,axis.x)*0.5
+		var low := Space.logic_to_world(ramp.low)
+		var high := Space.logic_to_world(ramp.high,1.0)
+		var mesh := ImmediateMesh.new()
+		mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		mesh.surface_set_normal(Vector3(-axis.x,1,-axis.y).normalized())
+		for point in [low-across,high-across,high+across,low-across,high+across,low+across]:
+			mesh.surface_add_vertex(point)
+		mesh.surface_end()
+		var instance := MeshInstance3D.new()
+		instance.mesh = mesh
+		instance.material_override = mat
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		geometry.add_child(instance)
 
 
 func _sync_actors() -> void:

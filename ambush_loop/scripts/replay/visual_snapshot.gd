@@ -102,7 +102,7 @@ func capture(host: Node) -> Dictionary:
 		"event_pose_schema": 1, "event_pose_clock_s": event_clock,
 		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
-		"height_schema": 1, "elevation_tier": host.grid.elevation_tier.duplicate(),
+		"height_schema": 2, "elevation_tier": host.grid.elevation_tier.duplicate(),
 		"occlusion_kind": host.grid.occlusion_kind.duplicate(),
 		"ramp_links": host.grid.ramp_links.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,

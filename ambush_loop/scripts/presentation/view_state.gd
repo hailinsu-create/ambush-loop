@@ -2,6 +2,7 @@ extends RefCounted
 
 const VisualSnapshot := preload("res://scripts/replay/visual_snapshot.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
+const Surface := preload("res://scripts/terrain_surface.gd")
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 const GROUPS := ["ops", "enemies", "sentries", "stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys", "environment_objects", "corpses"]
@@ -97,6 +98,7 @@ static func capture(host: Node) -> Dictionary:
 		"movement_fx_clock_domain": data.get("pose_clock_domain") if movement_supported else "",
 		"movement_fx_actors": _movement_actors(data) if movement_supported else [],
 	}
+	frame["surface_ramps"] = Surface.ramps(frame.elevation_tier,frame.ramp_links) if frame.height_schema == 2 else []
 	for group in GROUPS:
 		frame[group] = data.get(group, []).duplicate(true)
 		for item in frame[group]:

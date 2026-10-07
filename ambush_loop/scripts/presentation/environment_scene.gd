@@ -55,6 +55,14 @@ func build(frame: Dictionary, detail: int) -> void:
 		# A low footprint keeps the existing no-go region legible when a wall/roof
 		# is cut away. Its size is copied grid geometry, never a GLB-derived rule.
 		Geometry.box(self, Vector3(rect.size.x, 0.035, rect.size.y), center + Vector3(0, 0.006, 0), Geometry.material(Color("343b3d")))
+		if _low_footprint(frame,rect):
+			for y in range(rect.position.y,rect.end.y):
+				for x in range(rect.position.x,rect.end.x):
+					var crate := _place("env_yard_crate",Vector3(x-19.5,0,y-10.5))
+					var dimensions: Array = Assets.asset_record("env_yard_crate").dimensions_m
+					crate.scale = Vector3(0.96/float(dimensions[0]),1.0/float(dimensions[1]),0.96/float(dimensions[2]))
+					_register_cutaway(crate)
+			continue
 		if rect in inner:
 			var main_rect: bool = rect == inner[0]
 			_build_block(str(frame.level_id), rect, center, main_rect)
@@ -107,6 +115,17 @@ func build(frame: Dictionary, detail: int) -> void:
 		set_door(bool(frame.door_locked))
 		_register_cutaway(leaf, true)
 	_flush_batches()
+
+
+func _low_footprint(frame: Dictionary, rect: Rect2i) -> bool:
+	var kinds: PackedByteArray = frame.get("occlusion_kind",PackedByteArray())
+	if kinds.size() != 880:
+		return false
+	for y in range(rect.position.y,rect.end.y):
+		for x in range(rect.position.x,rect.end.x):
+			if kinds[y*40+x] != 2:
+				return false
+	return true
 
 
 func _build_block(theme: String, rect: Rect2i, center: Vector3, main_rect: bool) -> void:
