@@ -1,5 +1,23 @@
 # M3 前本地开发收尾
 
+## 2026-10-07 最新终态与外审修正（覆盖下方历史状态）
+
+新源顺序队列统一会话20164，首门复盘run `2a0a3ec991d7421dae13f538569ad708`，engine PID38756；后续run由同会话自动依次产生，必须取SEQUENTIAL_WRAPPER_EXIT及包装器后检，不能重复启动。原自动跟踪中的会话32544已完成，本节覆盖其旧运行提示；继续跟踪20164。手机断连不阻断此本地队列。
+
+新冻结ec83205的第三次Forward+收尾f72a5e3…已从32625取得完整终态：新增历史定位、不seek、首快照前反例、中性姿态、两尺寸candidate以及3D A/B胜利均通过，runtime_errors0/player unchanged1/engine0/wrapper0。1280×720摘要截图已目视检查。下一顺序队列：新源复盘生命周期→准备恢复→完整smoke；任何失败立即停在失败门，不改冻结生产依赖，仍不把旧六关结果当新源通过。
+
+最新冻结 `ec83205`：生产仍为1d27c42，仅补齐测试fire事件必需target_id字段。`ea76b921fd7f46f9bb35000ed1fedfc7` 虽engine0/完成标记，但格式化测试事件缺target_id造成runtime_errors1、wrapper94、player unchanged1，保留红灯。第三次Forward+收尾 `f72a5e3fc2624a208de9390c4a64028c`，会话32625，正在运行；它的终态覆盖下方“正在执行”历史描述。
+
+旧冻结生产源f8ad51c完整六关run `e4e3c93d3b7540a3ba4231fd5aa7e467` 已从会话32544取得最终证据：六关胜利、SMOKE_OK_RAID_LOOP、SMOKE_OK_TYPICAL_LOOPS、SMOKE_SLICE_COMPLETE，TEST_RUNTIME_ERRORS0、PLAYER_DATA_UNCHANGED1、TEST_ENGINE_EXIT0、WRAPPER_EXIT0。不能据此批准后续新源。
+
+旧源准备恢复单独run `c5f9d4d0a1e14916ac2ec7100a1cff56` 会话20197终态：两案20次恢复、原生恢复/重开、库存守恒及其他关拒绝全部完成，runtime_errors0、player unchanged1、engine/wrapper0。高点10次计时727–1745ms，保留旧5253ms红灯，不改5000ms阈值。
+
+本轮原GPT聊天已真实读到iteration6，上次消息已送达，不重复发送。它指出：结算事件定位使用最终live位置；回放把存活演员全部显示瞄准；摘要candidate开关无48逻辑px下限。生产修正 `1d27c42`：事件tick二分历史查询独立于是否进入REPLAY且不seek；缺失历史动作字段时明确标“复盘静态姿态”而不是猜测动作；candidate最小高48。新增实际终态历史定位/不seek/早于首快照/中性姿态/小窗开关门。新冻结源码 `2dc4d63` 仅另修测试显式Vector2类型。
+
+首次新源门run `e4bb9daae03b4c08b9d1b7f8161ee8ed` 保留红灯：新测试历史位置变量类型推断失败，runtime_errors1、engine/wrapper1、player unchanged1。修正后Forward+ run `ea76b921fd7f46f9bb35000ed1fedfc7`，会话43574，正在执行；不得在它运行时修改生产依赖。随后必须新源复盘生命周期/恢复和完整六关回归，旧绿灯不替代新源验证。外审发现已实现修正，但新修正尚无GPT批准。
+
+用户已恢复手机测试，荣耀首轮见AMBUSH_HONOR_M25_DEVICE_20261007.md；本轮ADB命令长时间卡住，停止本轮卡住的只读客户端并对该设备reconnect后列表为空，没有卸载/清档。手机长稳/dp/胜利仍待；真人门继续暂缓。默认3D发行值仍false。当前不能宣布M3前全部完成。
+
 用户本轮要求做完 M3 前开发；真机与真人门维持暂缓，其他不得据此跳过。当前基线 ab5c0e2，沿原分支推进，不另起项目。
 
 切片顺序与验收：
