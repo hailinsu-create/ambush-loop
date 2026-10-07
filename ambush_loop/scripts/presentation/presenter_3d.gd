@@ -1,5 +1,7 @@
 extends Node3D
 
+const TacticalStatus := preload("res://scripts/presentation/tactical_status.gd")
+
 const Space := preload("res://scripts/presentation/world_space.gd")
 const TerrainGrid := preload("res://scripts/grid.gd")
 const Surface := preload("res://scripts/terrain_surface.gd")
@@ -318,6 +320,11 @@ func refresh() -> void:
 		host.touch_hud.set_hint("点选 / 点地移动 · 双指平移、旋转、缩放 · ↶↷调整队员射界")
 	if host.touch_hud != null:
 		host.touch_hud._hint.position.y = 60.0
+		if frame.recorded_phase in [host.Phase.SETUP, host.Phase.WATCHING, host.Phase.SWEEP]:
+			var text := TacticalStatus.line(frame)
+			if frame.replay:
+				text = "复盘 · " + text
+			host.touch_hud.set_hint(text)
 	if host.c2 != null and host.c2.help_chip != null and host.c2.help_chip.text.contains("短拖"):
 		host.c2.help_chip.text = "点选 / 点地移动 · 双指操作镜头 · 近背面出绕背"
 
