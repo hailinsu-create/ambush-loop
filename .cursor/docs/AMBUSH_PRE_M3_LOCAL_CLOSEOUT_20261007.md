@@ -2,6 +2,8 @@
 
 ## 2026-10-07 最新终态与外审修正（覆盖下方历史状态）
 
+2026-10-07 11:16续收：ec83205新源复盘run2a0a3ec991d7421dae13f538569ad708已取得完整完成、engine0、runtime_errors0、PLAYER_DATA_UNCHANGED1及SEQUENTIAL_WRAPPER_EXIT0。同会话20164自动进入恢复run `aaf8a58b8cc8445a86e96bf8543564e4`，PID38624；尚未取得恢复终态，之后仍为同源完整smoke。不要重复启动或改生产依赖。
+
 新源顺序队列统一会话20164，首门复盘run `2a0a3ec991d7421dae13f538569ad708`，engine PID38756；后续run由同会话自动依次产生，必须取SEQUENTIAL_WRAPPER_EXIT及包装器后检，不能重复启动。原自动跟踪中的会话32544已完成，本节覆盖其旧运行提示；继续跟踪20164。手机断连不阻断此本地队列。
 
 新冻结ec83205的第三次Forward+收尾f72a5e3…已从32625取得完整终态：新增历史定位、不seek、首快照前反例、中性姿态、两尺寸candidate以及3D A/B胜利均通过，runtime_errors0/player unchanged1/engine0/wrapper0。1280×720摘要截图已目视检查。下一顺序队列：新源复盘生命周期→准备恢复→完整smoke；任何失败立即停在失败门，不改冻结生产依赖，仍不把旧六关结果当新源通过。
