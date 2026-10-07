@@ -6,6 +6,7 @@ const Rig := preload("res://scripts/presentation/camera_rig_3d.gd")
 const Picker := preload("res://scripts/presentation/world_picker_3d.gd")
 const Commands := preload("res://scripts/input/command_router.gd")
 const CameraInput := preload("res://scripts/input/camera_input.gd")
+const TouchIntent := preload("res://scripts/input/touch_intent_3d.gd")
 const Geometry := preload("res://scripts/presentation/graybox_geometry.gd")
 const Occlusion := preload("res://scripts/presentation/occlusion_controller.gd")
 const DeviceProbe := preload("res://scripts/presentation/device_probe.gd")
@@ -23,6 +24,7 @@ const MovementDustPool := preload("res://scripts/presentation/movement_dust_pool
 var host: Node
 var rig: Node3D
 var gestures := CameraInput.new()
+var touch_intent: Node
 var frame: Dictionary = {}
 var geometry := Node3D.new()
 var proxies := Node3D.new()
@@ -99,6 +101,9 @@ func bind(main: Node) -> void:
 		_role_materials.append(Geometry.material(color))
 	_make_lighting()
 	_make_controls()
+	touch_intent = TouchIntent.new()
+	add_child(touch_intent)
+	touch_intent.bind(self)
 	var ring_mat := Geometry.material(Color(0.55, 0.94, 0.82, 0.72), true)
 	ring_mat.no_depth_test = true
 	_selected_ring = Geometry.ring(proxies, 0.55, 0.055, Vector3.ZERO, ring_mat)
@@ -632,15 +637,17 @@ func _input(event: InputEvent) -> void:
 	if host == null or rig == null:
 		return
 	if host._modal_blocks_input():
-		gestures.cancel()
+		cancel_input()
 		if event is InputEventScreenTouch or event is InputEventScreenDrag:
 			gestures.touch(event, rig, true)
 		return
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		var blocked: bool = pointer_over_ui(event.position)
 		var result: Dictionary = gestures.touch(event, rig, blocked)
+		if gestures.multi_latched or (event is InputEventScreenTouch and event.canceled) or (event is InputEventScreenDrag and gestures.tap_cancelled):
+			touch_intent.cancel()
 		if result.tap:
-			Commands.dispatch(host, "primary", pick_at(result.position))
+			touch_intent.stage(pick_at(result.position))
 		if result.handled:
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and not event.pressed:
@@ -679,6 +686,8 @@ func pick_at(screen: Vector2) -> Dictionary:
 
 func cancel_input(reset_contacts: bool = false) -> void:
 	gestures.cancel(reset_contacts)
+	if is_instance_valid(touch_intent):
+		touch_intent.cancel()
 
 
 func focus_event(pos: Vector2, event: Dictionary) -> void:
