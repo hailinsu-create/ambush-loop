@@ -37,7 +37,7 @@
 | 冻结后战术数据 | c5f53a1c1d114aeb917b24a3ade6553e | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
 | 冻结后 3D 信息 | 93e6c3a874344975acafc32991e46a4e | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
 | 冻结后确认/取消八类 | 5064b871dd274e2dae2d9a1d32fadca1 | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1 |
-| 冻结后院子引导 | 45df2b1a786345d5a830f3cd1a7bdc52 | 统一会话40443正在执行，尚未通过 |
+| 冻结后院子引导 | 45df2b1a786345d5a830f3cd1a7bdc52 | 完整通过，engine/wrapper0，runtime_errors0，PLAYER_DATA_UNCHANGED1；真实资源/部署/战斗/复盘重试及其他五关引导保留均通过；矩阵会话40443已结束exit0 |
 
 截图位于各 run/m1-i-screens，实际已检查最新 960×540 操作布局和 1280×720 摘要/方案 B。48 Godot 逻辑像素不等于 Android 实际 48dp，设备测试暂缓。
 
@@ -49,7 +49,7 @@ iteration6 已在原聊天编辑框填写，按 Enter 的调用超时，随后�
 
 ## 仍待退出门
 
-本地：六关完整终态、复盘/准备恢复包装器后检、最终专项矩阵与 GitHub SHA 核对。设备：Android dp/误触、兼容/低档帧时、热/内存/后台/长稳。真人：艺术/声触反馈评价与五人盲测。后两类按用户暂缓，不阻断本地开发，但正式默认3D、M2/M2.5整体验收和进入M3发行门仍不关闭。
+本地：六关完整终态、准备恢复单独复验与最终 GitHub SHA 核对；复盘/专项矩阵已完成。外审新源回复待核对或如实unavailable。设备：Android dp/误触、兼容/低档帧时、热/内存/后台/长稳。真人：艺术/声触反馈评价与五人盲测。后两类按用户暂缓，不阻断本地开发，但正式默认3D、M2/M2.5整体验收和进入M3发行门仍不关闭。
 
 ## 自动续收尾
 
