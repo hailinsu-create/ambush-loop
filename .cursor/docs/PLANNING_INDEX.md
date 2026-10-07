@@ -1,13 +1,16 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-05。仅用于本游戏；设计文件不是实现或验收证明。
+更新日期：2026-10-07。仅用于本游戏；设计文件不是实现或验收证明。
 
-**当前终态 PAUSED_USER_REQUEST**：用户21:15UTC要求完成当前工作后暂停，覆盖下方历史“下一包/持续”安排。仅已START pump有界包已END并安全存Title；未经用户明确恢复，不启动下一关、新QA/优化/资产/部署。
+**当前执行入口**：用户已授权按协作者完整 3D 基座迁移规划开发。CB0 本地隔离测试已通过，CB1 镜头侧栏默认收起已实现并专项通过；继续 UI/输入适配。云端构建、导出资源门、真机与长局性能仍待。下方协作者原交付的暂停与未闭门保留历史，不能与本轮结果混为验收。
+
+**协作者原交付历史暂停状态**：用户21:15UTC要求完成当前工作后暂停；仅已START pump有界包已END并安全存Title。此次新迁移授权在独立分支执行，原profile与证据保持。
 
 ## 当前有效规划
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [协作者 3D 基座迁移规划](AMBUSH_COLLABORATOR_BASE_PLAN_20261007.md) / [本地基线与首个 UI 切片](AMBUSH_CB0_CB1_EXECUTION_20261007.md) | 当前入口；固定协作者891f967，六关本地隔离与资源/演出合同通过。72839ef仅使镜头工具侧栏默认收起；45项交互、106项画质专项通过。触控确认、其余HUD、规则迁移及设备门待；外部GPT unavailable。 |
 | [最终fresh13 pump END / 用户暂停交接](AMBUSH_PR15_FINAL_FRESH13_PUMP_PAUSE_20261005.md) | PAUSED_USER_REQUEST；同b74/tree1e8/PCK7cf3，新profile实际前三关6/13波3/6原bin，pump原11369024B/46db、34events837frames/t6312先封/122trusted-engine，最终126/126；自然local253/681，browser390.8617/1430 actual0 END21:21:37。暂停缩减原WON→Title cfg/checkpoint exact，未开railcut/教学/reload/新native/whole；9原PNG全看、70件6571287B，旧12文件same/live0/controller absent/四ports111。pump审计只准备UNRUN。需明确恢复再接原件native和未seen railcut原教学入口→余7波，所有剩余门/资产/Sitev4/旧95QA未闭保持。 |
 | [最终fresh13 warehouse END](AMBUSH_PR15_FINAL_FRESH13_WAREHOUSE_END_20261005.md) | 同b74/tree1e8/PCK7cf3/profile12915，原cfg精准接yard→双波自然WON，原bin18247504B/8295/67events1326frames先封、268trusted/engine；自然mine120、grenade78的当前writer descriptor2/strict接受2，utility throw真实身份5存帧/pure pose18/0，BAR12发；无repack/新whole。browser739.2785/1430 actual0 END21:06:14，Guard22136/0与utility18/0 actual0/E0/S0，14原PNG全看/90件9826672B；旧12文件same/live0。最终4/13波2/6原件；下一pump同包原checkpoint，3D工具/握持/whole及其余门待，资产/Sitev4/旧95QA失败保持。 |
 | [最终fresh13首包yard END](AMBUSH_PR15_FINAL_FRESH13_YARD_END_20261005.md) | b74/tree1e8 exact1ec、同最终新PCK7cf3/新profile12915；原Title三页教学→双波自然WON/无retry，30event/671frame原bin8897916B/b49d先封，70trusted+70engine、完整cfg/checkpoint，原handoff及下一关三页教学/Title reload-reopen exact。browser442.8668/1430 END20:44:36实际0/live0，随后Guard原件10979/0实际0/E0/S0；旧profile12文件same、21原PNG全看、115件11,221,395B无损封。最终2/13波1/6原件；无throw/mine/repack、whole未跑，旧helper误名不补whole；方法失败原件保留。下一同PCK warehouse SCOUT合法早路线雷策略，尚未START，原95失败/Sitev4/资产/其余门保持。 |
