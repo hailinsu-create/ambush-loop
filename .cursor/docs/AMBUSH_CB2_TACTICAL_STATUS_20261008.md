@@ -1,0 +1,7 @@
+# CB2 轻量战术说明
+
+冻结源47eb6cf。保留原提示条，不增加卡片或全场线；从不可变ViewState中选中队员的录制值显示格中心视线、弹数、禁火、缺弹、冷却、阵亡与近战限制。就绪仍要求目标在射界内，不声称必然开火；旧缺失字段明确“未记录”，不读取当前人物补历史。复盘带独立标识。
+
+隔离真实高点接线run72bd663caab643ef9f2762bf43a20a49：failures0、active_shots2，HEIGHT_FIRE_GATE_OK，wrapper/engine0、PLAYER_DATA_UNCHANGED1；含实际提示接线与状态优先级正反例。画质布局runf7ae582ddb46489d9002bd6a8fef0140：102/0、wrapper/engine0、PLAYER_DATA_UNCHANGED1。两日志runtime_errors0。
+
+继续CB3明确弹药与院子双部署；随后CB4完整世界重试、教学和CB5整体回归构建。CB2局部证据不代替整体、真机或外部GPT审核。
