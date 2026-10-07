@@ -44,6 +44,29 @@ func _mouse(pressed: bool, at: Vector2) -> InputEventMouseButton:
 	return event
 
 
+func _north_layout_matrix(settings: Node) -> void:
+	var before: Dictionary = main._snapshot_data().duplicate(true)
+	for touch in [false, true]:
+		settings.set_force_touch_hud(touch)
+		for viewport_size in [Vector2i(1280, 720), Vector2i(1600, 720), Vector2i(960, 540), Vector2i(640, 360)]:
+			root.size = viewport_size
+			main._update_hud()
+			view.refresh()
+			await process_frame
+			await process_frame
+			_check(main.phase_chip.is_visible_in_tree() and main.checklist_strip.is_visible_in_tree(),
+				"north matrix keeps phase and readiness available: %s touch=%s" % [viewport_size, touch])
+			_check(not main.phase_chip.get_global_rect().intersects(main.checklist_strip.get_global_rect()),
+				"north phase/readiness do not overlap: %s touch=%s" % [viewport_size, touch])
+	_check(main._snapshot_data() == before, "north layout matrix leaves tactical state unchanged")
+	root.size = Vector2i(1280, 720)
+	settings.set_force_touch_hud(true)
+	main._update_hud()
+	view.refresh()
+	await process_frame
+	await process_frame
+
+
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	var settings = root.get_node("GameSettings")
@@ -58,6 +81,7 @@ func _run() -> void:
 	main.raid_prepare_ref([1, 2, 5], [90.0, 180.0, 180.0])
 	view = main.presentation_3d
 	await process_frame
+	await _north_layout_matrix(settings)
 	view.refresh()
 	_check(view._camera_toggle.visible and not view._camera_panel.visible,
 		"camera tools start collapsed while the compact entry remains available")

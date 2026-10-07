@@ -10,6 +10,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [CB1北侧HUD修复](AMBUSH_CB1_NORTH_HUD_20261007.md) | 3ef8527：实际触控画面阶段/准备检查重叠已修；原4红灯保留，62项交互/布局、106项画质及实际渲染均退出0/运行错误0/玩家数据未变。继续触屏预览确认、底部占地与杂线审计；云端/设备/GPT新评审待。 |
 | [协作者 3D 基座迁移规划](AMBUSH_COLLABORATOR_BASE_PLAN_20261007.md) / [本地基线与首个 UI 切片](AMBUSH_CB0_CB1_EXECUTION_20261007.md) | 当前入口；固定协作者891f967，六关本地隔离与资源/演出合同通过。72839ef仅使镜头工具侧栏默认收起；45项交互、106项画质专项通过。触控确认、其余HUD、规则迁移及设备门待；外部GPT unavailable。 |
 | [最终fresh13 pump END / 用户暂停交接](AMBUSH_PR15_FINAL_FRESH13_PUMP_PAUSE_20261005.md) | PAUSED_USER_REQUEST；同b74/tree1e8/PCK7cf3，新profile实际前三关6/13波3/6原bin，pump原11369024B/46db、34events837frames/t6312先封/122trusted-engine，最终126/126；自然local253/681，browser390.8617/1430 actual0 END21:21:37。暂停缩减原WON→Title cfg/checkpoint exact，未开railcut/教学/reload/新native/whole；9原PNG全看、70件6571287B，旧12文件same/live0/controller absent/四ports111。pump审计只准备UNRUN。需明确恢复再接原件native和未seen railcut原教学入口→余7波，所有剩余门/资产/Sitev4/旧95QA未闭保持。 |
 | [最终fresh13 warehouse END](AMBUSH_PR15_FINAL_FRESH13_WAREHOUSE_END_20261005.md) | 同b74/tree1e8/PCK7cf3/profile12915，原cfg精准接yard→双波自然WON，原bin18247504B/8295/67events1326frames先封、268trusted/engine；自然mine120、grenade78的当前writer descriptor2/strict接受2，utility throw真实身份5存帧/pure pose18/0，BAR12发；无repack/新whole。browser739.2785/1430 actual0 END21:06:14，Guard22136/0与utility18/0 actual0/E0/S0，14原PNG全看/90件9826672B；旧12文件same/live0。最终4/13波2/6原件；下一pump同包原checkpoint，3D工具/握持/whole及其余门待，资产/Sitev4/旧95QA失败保持。 |
