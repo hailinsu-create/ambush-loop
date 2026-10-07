@@ -79,7 +79,7 @@ func _run() -> void:
 	var saved_snapshots: Array = main.battle_log.snapshots.duplicate(true)
 	var saved_phase = main.phase
 	var saved_scrub: int = main.replay.scrub_tick
-	var historical_position := main.selected.global_position + Vector2(64, 0)
+	var historical_position: Vector2 = main.selected.global_position + Vector2(64, 0)
 	var record := {"id": main.selected.op_id, "pos": historical_position, "tier": 0, "facing": 90.0, "alive": true}
 	main.battle_log.snapshots.assign([{ "tick": 10, "data": {"ops": [record]} }, { "tick": 20, "data": {"ops": [{"id": main.selected.op_id, "pos": main.selected.global_position}]} }])
 	main.phase = main.Phase.FAILED
