@@ -58,6 +58,20 @@ func _run() -> void:
 	main.raid_prepare_ref([1, 2, 5], [90.0, 180.0, 180.0])
 	view = main.presentation_3d
 	await process_frame
+	view.refresh()
+	_check(view._camera_toggle.visible and not view._camera_panel.visible,
+		"camera tools start collapsed while the compact entry remains available")
+	var camera_state: Dictionary = main._snapshot_data().duplicate(true)
+	var camera_toggle_at: Vector2 = view._camera_toggle.get_global_rect().get_center()
+	_check(view.pointer_over_ui(camera_toggle_at), "camera entry owns its visible hit target")
+	await _send(_mouse(true, camera_toggle_at))
+	await _send(_mouse(false, camera_toggle_at))
+	_check(view._camera_panel.visible, "camera entry opens detailed controls")
+	_check(main._snapshot_data() == camera_state, "opening camera controls does not mutate gameplay")
+	await _send(_mouse(true, camera_toggle_at))
+	await _send(_mouse(false, camera_toggle_at))
+	_check(not view._camera_panel.visible, "camera entry closes detailed controls")
+	_check(main._snapshot_data() == camera_state, "closing camera controls does not mutate gameplay")
 	for yaw in range(0, 360, 45):
 		view.rig.yaw_deg = yaw
 		view.rig.focus = Vector3.ZERO
@@ -81,6 +95,7 @@ func _run() -> void:
 	main._select_op(0)
 	var start := Vector2(640, 350)
 	var second := Vector2(800, 350)
+	var focus_before: Vector3 = view.rig.focus
 	await _send(_touch(0, true, start))
 	await _send(_touch(1, true, second))
 	var drag := InputEventScreenDrag.new()
@@ -93,6 +108,7 @@ func _run() -> void:
 	await _send(_touch(1, false, drag.position))
 	await _send(_touch(0, false, start))
 	_check(not is_equal_approx(yaw_before, view.rig.yaw_deg), "native two-finger event pipeline rotates")
+	_check(focus_before.distance_to(view.rig.focus) > 0.001, "native two-finger event pipeline pans")
 	_check(before == main._snapshot_data() and not main.selected.is_moving(), "camera gesture emits no command")
 	# A real GUI button must own its click, without issuing a world command.
 	var button := Button.new()

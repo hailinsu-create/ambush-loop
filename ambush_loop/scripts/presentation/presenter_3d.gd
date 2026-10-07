@@ -326,9 +326,12 @@ func _layout_camera_controls() -> void:
 	if compact != _compact_camera:
 		_camera_open = false
 		_compact_camera = compact
-	_camera_toggle.visible = compact
+	# Detailed camera controls are useful on demand but occupy a large,
+	# persistent slice of the battlefield on desktop. Keep one small entry point
+	# in every layout and let players open the panel deliberately.
+	_camera_toggle.visible = true
 	_camera_toggle.text = "收镜头" if _camera_open else "镜头"
-	_camera_panel.visible = not compact or _camera_open
+	_camera_panel.visible = _camera_open
 	_camera_controls.layer = 50 if compact and _camera_open else 4
 	var camera_top := 80 if compact else (196 if not host._use_touch_chrome() else 132)
 	var key := "%s:%d" % [compact,camera_top]
