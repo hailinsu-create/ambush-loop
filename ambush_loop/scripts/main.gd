@@ -788,6 +788,8 @@ func _sync_settings() -> void:
 
 
 func _modal_blocks_input() -> bool:
+	var presenter := get_node_or_null("I0YardPresentation")
+	if presenter != null and presenter.has_method("readiness_open") and presenter.readiness_open(): return true
 	if pause_overlay and pause_overlay.is_open():
 		return true
 	if tutorial_overlay and tutorial_overlay.is_open():
@@ -2411,6 +2413,8 @@ func _fade_result_panel() -> void:
 
 
 func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void:
+	var previous_presenter := get_node_or_null("I0YardPresentation")
+	if previous_presenter != null and previous_presenter.has_method("close_readiness"): previous_presenter.close_readiness()
 	if yard_hud:
 		yard_hud.operable_guide.reset_session()
 	yard_manual_permission = false
@@ -2478,6 +2482,19 @@ func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void
 	_save_progress()
 	_maybe_show_tutorial()
 	_play_load_fade()
+	call_deferred("_apply_yard_3d_preference")
+
+
+func _apply_yard_3d_preference() -> void:
+	if level == null or str(level.level_id) != "yard" or not _gs().yard_3d_candidate: return
+	var presenter := get_node_or_null("I0YardPresentation")
+	if presenter == null:
+		presenter = load("res://scripts/m2_i0_yard_presentation.gd").new()
+		presenter.name = "I0YardPresentation"
+		add_child(presenter)
+		presenter.bind(self)
+	else: presenter._set_active(true)
+	_update_hud()
 
 
 func _ensure_mission_sky() -> void:
@@ -4385,6 +4402,11 @@ func _cancel_touch_intent() -> void:
 func _handle_touch_gestures(event: InputEvent) -> bool:
 	if event is InputEventMagnifyGesture:
 		_cancel_touch_intent()
+		_yard_facing_preview.clear()
+		if _facing_touch >= 0:
+			_canceled_touch_indices[_facing_touch] = true
+			_touches.erase(_facing_touch)
+		_facing_touch = -1
 		_touch_preview_slot = null
 		_pending_setup_touch = false
 		_cover_hold_slot = null
@@ -7622,6 +7644,8 @@ func _focus_battle_event(ev: Dictionary) -> void:
 	if phase == Phase.REPLAY:
 		pos = _pos_from_snapshot(replay.snapshot_at_or_before(replay.scrub_tick), ev, pos)
 	_spawn_focus_ring(pos)
+	var yard_presenter := _active_i0_presenter()
+	if yard_presenter != null: yard_presenter.focus_recorded_event(pos, int(ev.get("tick", 0)), str(ev.get("type", "")))
 	if str(ev["type"]) == "escape":
 		_begin_escape_flash()
 	if status_label:

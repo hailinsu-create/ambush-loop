@@ -9,6 +9,9 @@ var captured_phase := -1
 var captured_tool := -1
 var title: Label
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT: cancel_capture()
+
 func _ready() -> void:
 	custom_minimum_size = Vector2(112, 56)
 	size = custom_minimum_size

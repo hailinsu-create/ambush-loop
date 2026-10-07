@@ -24,11 +24,16 @@ var _quality_button: Button
 var _recenter_button: Button
 var _facing_handle: Control
 var _handed_button: Button
+var _readiness_sheet: Control
+var _focus_marker: Node3D
 var _sun: DirectionalLight3D
 var low_quality := false
 var sync_count := 0
 var sync_last_usec := 0
 var sync_peak_usec := 0
+var _fx_signature := ""
+var _replay_signature := ""
+var _dormant_draw_states: Dictionary = {}
 var _atlas: StandardMaterial3D
 var _actor_nodes: Dictionary = {}
 var _stash_nodes: Dictionary = {}
@@ -168,15 +173,12 @@ func _build_grid_geometry() -> void:
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.mesh = blocker_mesh
 	var specs: Array[Transform3D] = []
-	for y in GridScript.ROWS:
-		for x in GridScript.COLS:
-			if not host.grid.is_blocked(x, y):
-				continue
-			var border := x == 0 or x == GridScript.COLS - 1 or y == 0 or y == GridScript.ROWS - 1
-			var height := 2.2 if border else 0.52
-			var center := Space.logic_to_world(Vector2((x + 0.5) * 32.0, (y + 0.5) * 32.0))
-			var scale := Vector3(0.96, height, 0.96)
-			specs.append(Transform3D(Basis.from_scale(scale), center + Vector3(0.0, height * 0.5, 0.0)))
+	for rectangle in preload("res://scripts/presentation/yard_wall_layout.gd").rectangles(host.grid, GridScript.COLS, GridScript.ROWS):
+		var cells: Rect2i = rectangle.cells
+		var height: float = rectangle.height
+		var center := Space.logic_to_world((Vector2(cells.position) + Vector2(cells.size) * 0.5) * 32.0)
+		var scale := Vector3(cells.size.x - 0.04, height, cells.size.y - 0.04)
+		specs.append(Transform3D(Basis.from_scale(scale), center + Vector3(0, height * 0.5, 0)))
 	mm.instance_count = specs.size()
 	for index in specs.size():
 		mm.set_instance_transform(index, specs[index])
@@ -316,12 +318,71 @@ func _build_controls() -> void:
 		host._yard_facing_preview.clear()
 		host._reset_cam_view())
 	_quality_button = _camera_button(root, "标准画质", -120.0, -16.0)
-	_quality_button.pressed.connect(func() -> void: set_low_quality(not low_quality))
+	_quality_button.pressed.connect(func() -> void: host._gs().toggle_quality_tier())
 	_build_tactical_info_panel(root)
 	_facing_handle = preload("res://scripts/ui/yard_facing_handle.gd").new()
 	_facing_handle.name = "FacingHandle"
 	_facing_handle.presenter = self
 	root.add_child(_facing_handle)
+	_readiness_sheet = preload("res://scripts/ui/yard_readiness_sheet.gd").new()
+	root.add_child(_readiness_sheet)
+	_readiness_sheet.start_requested.connect(func() -> void: host._on_alarm_pressed())
+	host._gs().changed.connect(_on_preferences_changed)
+	_on_preferences_changed()
+
+
+func _on_preferences_changed() -> void:
+	set_low_quality(host._gs().is_power_saving())
+	if _handed_button != null:
+		_handed_button.text = "左手" if host._gs().left_handed else "右手"
+
+
+func readiness_open() -> bool:
+	return _readiness_sheet != null and _readiness_sheet.visible
+
+
+func close_readiness() -> void:
+	if _readiness_sheet != null: _readiness_sheet.visible = false
+
+
+func open_readiness() -> bool:
+	if not active or host.phase != host.Phase.SETUP or host._modal_blocks_input(): return false
+	host._cancel_touch_intent()
+	_facing_handle.cancel_capture()
+	host._yard_facing_preview.clear()
+	for index in host._touches: host._canceled_touch_indices[index] = true
+	host._touches.clear()
+	host._facing_touch = -1
+	var lines: Array[String] = ["开战摘要 · 采样覆盖不保证命中或胜利"]
+	for op in host.operators:
+		lines.append("%s · 弹药 %d · 朝向 %.0f°" % [op.display_name, op.ammo, op.facing_deg])
+	lines.append("手动许可：需发出开火指令" if host.yard_manual_permission else "自动许可：敌人入区后待伏开火")
+	_readiness_sheet.present(host, "\n".join(lines))
+	return true
+
+
+func focus_recorded_event(logic: Vector2, tick: int, kind: String) -> void:
+	if not active or not logic.is_finite(): return
+	host._cam_zoom = maxf(host._cam_zoom, 1.4)
+	host._cam_pan = logic - Space.HALF_MAP * 32.0
+	host._apply_cam()
+	if _focus_marker == null:
+		_focus_marker = Node3D.new()
+		_world.add_child(_focus_marker)
+		_focus_marker.add_child(_box("EventCrossX", Vector3(0.9, 0.04, 0.06), Vector3.ZERO, Color("ffdd88")))
+		_focus_marker.add_child(_box("EventCrossZ", Vector3(0.06, 0.04, 0.9), Vector3.ZERO, Color("ffdd88")))
+		var label := Label3D.new()
+		label.name = "EventLabel"
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.no_depth_test = true
+		label.position.y = 1.1
+		label.font_size = 28
+		label.pixel_size = 0.009
+		_focus_marker.add_child(label)
+	_focus_marker.position = Adapter.world_anchor(host.grid, logic, 0.1)
+	_focus_marker.set_meta("tick", tick)
+	_focus_marker.get_node("EventLabel").text = "%s · tick %d" % [kind, tick]
+	_focus_marker.visible = true
 
 
 func _camera_button(parent: Control, title: String, left: float, right: float) -> Button:
@@ -384,11 +445,17 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	heading_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_child(heading_row)
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	heading_row.add_child(heading)
+	heading.free()
+	var summary := Button.new()
+	summary.text = "开战摘要"
+	summary.custom_minimum_size = Vector2(112, 48)
+	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	summary.pressed.connect(open_readiness)
+	heading_row.add_child(summary)
 	_quality_button.reparent(heading_row)
-	_quality_button.custom_minimum_size = Vector2(104.0, 40.0)
+	_quality_button.custom_minimum_size = Vector2(104.0, 48.0)
 	_handed_button = Button.new()
-	_handed_button.custom_minimum_size = Vector2(56, 40)
+	_handed_button.custom_minimum_size = Vector2(56, 48)
 	_handed_button.text = "左手" if host._gs().left_handed else "右手"
 	_handed_button.pressed.connect(func() -> void:
 		if _facing_handle != null: _facing_handle.cancel_capture()
@@ -406,6 +473,7 @@ func _build_tactical_info_panel(parent: Control) -> void:
 
 
 func _set_active(value: bool) -> void:
+	close_readiness()
 	if host != null:
 		host._yard_facing_preview.clear()
 	active = value and host != null and host.level != null and str(host.level.level_id) == "yard"
@@ -415,10 +483,20 @@ func _set_active(value: bool) -> void:
 			apply_camera_view(host._cam_pan, host._cam_zoom)
 	if _world != null:
 		_world.visible = active
+	if not active and _focus_marker != null: _focus_marker.visible = false
 	if host != null:
 		var legacy_world := host.get_node_or_null("World") as Node2D
 		if legacy_world != null:
 			legacy_world.visible = not active
+		for path in ["World/MapDraw", "World/RoutesDraw"]:
+			var draw_node := host.get_node_or_null(path)
+			if draw_node == null: continue
+			if active:
+				if not _dormant_draw_states.has(path): _dormant_draw_states[path] = draw_node.is_processing()
+				draw_node.set_process(false)
+			elif _dormant_draw_states.has(path):
+				draw_node.set_process(bool(_dormant_draw_states[path]))
+				_dormant_draw_states.erase(path)
 	if _toggle != null:
 		_toggle.text = "返回 2D 院子" if active else "查看 3D 院子"
 
@@ -520,10 +598,11 @@ func _sync_actors() -> void:
 			_world.add_child(body)
 			_actor_nodes[key] = body
 		var visual: MeshInstance3D = _actor_nodes[key]
-		visual.visible = op.visible and op.alive
+		visual.visible = op.visible
 		var anchor := Adapter.world_anchor(host.grid, op.global_position)
-		visual.position = anchor + Vector3(0.0, 0.68, 0.0)
+		visual.position = anchor + Vector3(0.0, 0.68 if op.alive else 0.18, 0.0)
 		visual.rotation.y = Space.facing_yaw(float(op.facing_deg))
+		UnitSilhouette.pose(visual, str(op.display_name), op.alive, op.is_moving(), op.is_searching(), host.phase == host.Phase.WATCHING, host.sim.tick if host.phase != host.Phase.SETUP else int(Time.get_ticks_msec() / 16))
 		var facing_preview: Dictionary = host._yard_facing_preview
 		if host._is_command_phase() and host.selected == op and not op.locked and not facing_preview.is_empty() and int(facing_preview.get("phase", -1)) == int(host.phase) and int(facing_preview.get("tool", -1)) == int(host.tool) and int(facing_preview.get("actor", -1)) == op.get_instance_id():
 			visual.rotation.y = Space.facing_yaw(float(facing_preview["angle"]))
@@ -659,6 +738,9 @@ func _process(_delta: float) -> void:
 		return
 	if not _bound: bind(host)
 	if _controls != null: _controls.visible = not host._result_overlay_active()
+	if host.phase != host.Phase.SETUP: close_readiness()
+	if _focus_marker != null and (host.phase == host.Phase.SETUP or (host.phase == host.Phase.REPLAY and host.replay.scrub_tick != int(_focus_marker.get_meta("tick", -1)))):
+		_focus_marker.visible = false
 	if not active:
 		return
 	sync_presentation()
@@ -669,11 +751,15 @@ func sync_presentation() -> void:
 	var sync_begin := Time.get_ticks_usec()
 	var display_tick: int = host.replay.scrub_tick if host.phase == host.Phase.REPLAY else host.sim.tick
 	if host.phase == host.Phase.REPLAY:
-		_sync_recorded(host.replay.snapshot_at_or_before(display_tick).get("data", {}))
+		var replay_signature := "%d:%d:%d" % [host.battle_log.get_instance_id(), display_tick, host.battle_log.snapshots.size()]
+		if replay_signature != _replay_signature:
+			_sync_recorded(host.replay.snapshot_at_or_before(display_tick).get("data", {}))
+			_replay_signature = replay_signature
 		for node in _stash_nodes.values(): node.visible = false
 		_clear_intent_preview()
 		_clear_tactical_display()
 	else:
+		_replay_signature = ""
 		_sync_actors()
 		_sync_enemies()
 		_sync_stashes()
@@ -906,9 +992,13 @@ func _sync_enemies() -> void:
 		if not is_instance_valid(enemy): continue
 		var key := str(enemy.label_id)
 		var body: MeshInstance3D = _enemy_nodes[key] if _enemy_nodes.has(key) else _new_enemy(key)
-		body.visible = enemy.alive and enemy.active
-		body.position = Adapter.world_anchor(host.grid, enemy.global_position, 0.68)
+		body.visible = enemy.active or not enemy.alive
+		body.position = Adapter.world_anchor(host.grid, enemy.global_position, 0.68 if enemy.alive else 0.18)
 		body.rotation.y = Space.facing_yaw(enemy.facing_deg)
+		var moving: bool = body.get_meta("last_position", body.position) != body.position
+		body.set_meta("last_position", body.position)
+		UnitSilhouette.pose(body, ("侧翼" if str(enemy.spawn_route) == "flank" else "主路") + " %d" % enemy.label_id, enemy.alive, moving, false, enemy.returning_fire, host.sim.tick)
+		body.get_node("Backpack").scale.x = 1.5 if str(enemy.spawn_route) == "flank" else 1.0
 
 
 func _sync_recorded(data: Dictionary) -> void:
@@ -919,15 +1009,19 @@ func _sync_recorded(data: Dictionary) -> void:
 		var key := str(record.get("id", -1))
 		if not _actor_nodes.has(key): continue
 		var body: MeshInstance3D = _actor_nodes[key]
-		body.visible = bool(record.get("alive", false)) and bool(record.get("visible", true))
-		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68)
+		var alive: bool = record.get("alive", false)
+		body.visible = bool(record.get("visible", true))
+		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68 if alive else 0.18)
 		body.rotation.y = Space.facing_yaw(float(record.get("facing", 90.0)))
+		UnitSilhouette.pose(body, "队员 " + key, alive, false, false, alive, host.replay.scrub_tick)
 	for record in data.get("enemies", []):
 		var key := str(record.get("id", -1))
 		var body: MeshInstance3D = _enemy_nodes[key] if _enemy_nodes.has(key) else _new_enemy(key)
-		body.visible = bool(record.get("alive", false)) and bool(record.get("active", true))
-		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68)
+		var alive: bool = record.get("alive", false)
+		body.visible = not alive or bool(record.get("active", true))
+		body.position = Adapter.recorded_anchor(record.get("pos", Vector2.ZERO), int(record.get("tier", 0)), 0.68 if alive else 0.18)
 		body.rotation.y = Space.facing_yaw(float(record.get("facing", 90.0)))
+		UnitSilhouette.pose(body, ("侧翼 " if str(record.get("route", "")) == "flank" else "主路 ") + key, alive, false, false, alive, host.replay.scrub_tick)
 
 
 func _build_tactical_landmarks() -> void:
@@ -1023,19 +1117,45 @@ func _recorded_event_anchor(ev: Dictionary, enemy: bool) -> Vector3:
 
 
 func _sync_event_fx(tick: int) -> void:
+	var signature := "%d:%d:%d:%d" % [host.battle_log.get_instance_id(), tick, host.battle_log.events.size(), host.battle_log.snapshots.size()]
+	if signature == _fx_signature: return
+	_fx_signature = signature
 	for node in _fx_nodes: node.visible = false
 	var count := 0
-	for ev in host.battle_log.events:
+	for ev in event_window(tick):
 		var kind := str(ev.get("type", ""))
 		if kind not in ["fire", "kill", "return_fire"]: continue
 		var age := tick - int(ev.get("tick", 0))
 		if age < 0 or age >= (12 if kind == "kill" else 6): continue
 		if count >= FX_CAP: break
 		var node := _fx_nodes[count]
+		var actors: Dictionary = _actor_nodes if kind == "fire" else _enemy_nodes
+		var actor_key := str(ev.get("actor_id", -1))
+		if actors.has(actor_key): actors[actor_key].set_meta("fire_tick", int(ev.tick))
+		if kind == "return_fire" and _actor_nodes.has(str(ev.get("target_id", -1))):
+			_actor_nodes[str(ev.target_id)].set_meta("hit_tick", int(ev.tick))
 		node.position = _recorded_event_anchor(ev, kind != "fire")
 		node.scale = Vector3.ONE * (4.0 if kind == "kill" else 2.0)
 		node.visible = true
 		count += 1
+
+
+func event_window(tick: int) -> Array:
+	## Lower-bound search is stateless: scrubbing backwards cannot leave a cursor stale.
+	var events: Array = host.battle_log.events
+	var low := 0
+	var high := events.size()
+	while low < high:
+		var middle := (low + high) / 2
+		if int(events[middle].get("tick", 0)) < tick - 11:
+			low = middle + 1
+		else: high = middle
+	var window: Array = []
+	for index in range(low, events.size()):
+		var event: Dictionary = events[index]
+		if int(event.get("tick", 0)) > tick: break
+		window.append(event)
+	return window
 
 
 func _exit_tree() -> void:

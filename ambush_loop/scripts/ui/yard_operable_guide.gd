@@ -9,6 +9,7 @@ var facing_edited := false
 var combat_started := false
 var terminal_seen := false
 var _completion_emitted := false
+var using_3d := false
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -42,6 +43,8 @@ func reset_session() -> void:
 
 func observe(main: Node) -> void:
 	if main.level == null or str(main.level.level_id) != "yard": return
+	var presenter = main._active_i0_presenter()
+	using_3d = presenter != null and presenter.active
 	if main.phase == main.Phase.SETUP:
 		for op in main.operators:
 			var key := int(op.op_id)
@@ -73,6 +76,8 @@ func refresh_copy() -> void:
 		text = "✓ 训练完成 · 继续尝试自己的伏击方案"
 		return
 	var labels := ["搜集补给：走到西侧弹药箱，站定搜索", "布置射界：移动两名队员并调整朝向，高台可选", "发动伏击：开始交战，观察实际火力", "看结果：时间轴复盘，或失败后调整伏击"]
+	if using_3d:
+		labels = ["搜集补给：点弹药箱，确认前往搜索", "布置射界：移动两名队员，拖朝向手柄后松手", "发动伏击：查看开战摘要，再开始交战", "看结果：时间轴复盘，点事件定位 3D 战场"]
 	var lines := PackedStringArray(["训练 · %d/4" % steps.count(true)])
 	for i in 4: lines.append(("✓ " if steps[i] else "○ ") + labels[i])
 	text = "\n".join(lines)
