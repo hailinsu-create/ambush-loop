@@ -528,7 +528,8 @@ func _position_world_intent_panel(right_inset: float, bottom_inset: float, left_
 		viewport_size,
 		_world_intent_panel.size,
 		_intent_safe_insets,
-		_intent_panel_obstacles()
+		_intent_panel_obstacles(),
+		_host._gs().left_handed if _host != null else false
 	)
 	_world_intent_panel.position = placement.get("position", Vector2(8.0, 8.0))
 	_intent_layout_mode = str(placement.get("mode", "safe_fallback"))

@@ -309,6 +309,12 @@ func _test_operator_touch_pick(scene: Node, presenter: Node, camera: Camera3D) -
 	var selected_after := scene.get("selected") as Node2D
 	_expect(consumed and selected_after != null and int(selected_after.op_id) == target_id, "M2_I0_TOUCH_PICK_SELECTS_BY_STABLE_LOCAL_ID")
 	_expect(not bool(scene.call("touch_intent_pending")), "M2_I0_ACTOR_PICK_DOES_NOT_ISSUE_MOVE")
+	var selection_up := InputEventScreenTouch.new()
+	selection_up.index = 71
+	selection_up.position = target_screen
+	selection_up.pressed = false
+	scene.call("_handle_touch_gestures", selection_up)
+	_expect(scene.call("begin_yard_facing_handle", 71, target_screen), "M25_FACING_EXPLICIT_HANDLE_CAPTURES_POINTER")
 	var facing_before := float(selected_after.facing_deg)
 	var drag := InputEventScreenDrag.new()
 	drag.index = 71
@@ -332,6 +338,10 @@ func _test_operator_touch_pick(scene: Node, presenter: Node, camera: Camera3D) -
 		scene.call("_handle_touch_gestures", drag)
 		_expect(is_equal_approx(float(selected_after.facing_deg), facing_before), "M25_FACING_DRAG_PREVIEWS_WITHOUT_COMMIT")
 		_expect(not scene._yard_facing_preview.is_empty(), "M25_FACING_PREVIEW_EXISTS")
+		var preview_data: Dictionary = scene.call("yard_tactical_display_data")
+		_expect(not preview_data.get("preview_sector", {}).is_empty() and not preview_data.get("preview_route_samples", []).is_empty(), "M25_FACING_PROPOSED_SECTOR_AND_LOS_SAMPLES")
+		for sample in preview_data.get("preview_route_samples", []):
+			_expect(bool(sample.geometry_clear) == selected_after.fire_geometry_from(selected_after.global_position, float(scene._yard_facing_preview.angle), sample.position, scene.grid), "M25_FACING_PROPOSED_QUERY_MATCHES_AUTHORITY")
 	var up := InputEventScreenTouch.new()
 	up.index = 71
 	up.pressed = false
@@ -341,7 +351,7 @@ func _test_operator_touch_pick(scene: Node, presenter: Node, camera: Camera3D) -
 		_expect(not is_equal_approx(float(selected_after.facing_deg), facing_before), "M25_FACING_RELEASE_COMMITS")
 		_expect(scene._yard_facing_preview.is_empty(), "M25_FACING_RELEASE_CLEARS_PREVIEW")
 		selected_after.set_facing(facing_before)
-		scene.call("_handle_touch_gestures", down)
+		scene.call("begin_yard_facing_handle", 71, target_screen)
 		scene.call("_handle_touch_gestures", drag)
 		var second := InputEventScreenTouch.new()
 		second.index = 72

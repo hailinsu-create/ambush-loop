@@ -22,6 +22,8 @@ var _controls: CanvasLayer
 var _toggle: Button
 var _quality_button: Button
 var _recenter_button: Button
+var _facing_handle: Control
+var _handed_button: Button
 var _sun: DirectionalLight3D
 var low_quality := false
 var sync_count := 0
@@ -316,6 +318,10 @@ func _build_controls() -> void:
 	_quality_button = _camera_button(root, "标准画质", -120.0, -16.0)
 	_quality_button.pressed.connect(func() -> void: set_low_quality(not low_quality))
 	_build_tactical_info_panel(root)
+	_facing_handle = preload("res://scripts/ui/yard_facing_handle.gd").new()
+	_facing_handle.name = "FacingHandle"
+	_facing_handle.presenter = self
+	root.add_child(_facing_handle)
 
 
 func _camera_button(parent: Control, title: String, left: float, right: float) -> Button:
@@ -370,7 +376,7 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	column.add_theme_constant_override("separation", 4)
 	_tactical_panel.add_child(column)
 	var heading := Label.new()
-	heading.text = "战术信息 · 当前队员"
+	heading.text = "战术信息"
 	heading.add_theme_font_size_override("font_size", 18)
 	heading.add_theme_color_override("font_color", Color("8ce3d7"))
 	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -381,6 +387,14 @@ func _build_tactical_info_panel(parent: Control) -> void:
 	heading_row.add_child(heading)
 	_quality_button.reparent(heading_row)
 	_quality_button.custom_minimum_size = Vector2(104.0, 40.0)
+	_handed_button = Button.new()
+	_handed_button.custom_minimum_size = Vector2(56, 40)
+	_handed_button.text = "左手" if host._gs().left_handed else "右手"
+	_handed_button.pressed.connect(func() -> void:
+		if _facing_handle != null: _facing_handle.cancel_capture()
+		host._gs().set_left_handed(not host._gs().left_handed)
+		_handed_button.text = "左手" if host._gs().left_handed else "右手")
+	heading_row.add_child(_handed_button)
 	_tactical_info = Label.new()
 	_tactical_info.name = "SelectedTacticalInfo"
 	_tactical_info.add_theme_font_size_override("font_size", 16)
@@ -424,6 +438,13 @@ func pick_at(screen: Vector2) -> Dictionary:
 	if not active or host == null or host.phase == host.Phase.REPLAY:
 		return {}
 	return Adapter.pick(camera, screen, host.grid, _pick_targets())
+
+
+func facing_logic_at(screen: Vector2, actor_position: Vector2) -> Vector2:
+	if camera == null or not screen.is_finite(): return Vector2(INF, INF)
+	var anchor := Adapter.world_anchor(host.grid, actor_position)
+	var hit: Variant = Plane(Vector3.UP, anchor.y).intersects_ray(camera.project_ray_origin(screen), camera.project_ray_normal(screen))
+	return Space.world_to_logic(hit) if hit is Vector3 else Vector2(INF, INF)
 
 
 func screen_to_logic(screen: Vector2) -> Vector2:
@@ -693,17 +714,21 @@ func _sync_tactical_display() -> void:
 		_set_tactical_display_visible(false)
 		return
 	var sector: Dictionary = data.get("nominal_sector", {})
+	var preview_sector: Dictionary = data.get("preview_sector", {})
+	if not preview_sector.is_empty(): sector = preview_sector
 	var has_firearm := not bool(actor.get("melee", true)) and float(sector.get("range_px", 0.0)) > 0.0
 	_tactical_sector.visible = has_firearm
 	_tactical_coverage.visible = has_firearm
 	_tactical_info.visible = true
 	if has_firearm:
 		_rebuild_nominal_sector(sector)
-		_rebuild_route_query_markers(data.get("route_samples", []))
+		_rebuild_route_query_markers(data.get("preview_route_samples", []) if not preview_sector.is_empty() else data.get("route_samples", []))
 	else:
 		_tactical_sector.mesh = null
 		_tactical_coverage.multimesh.instance_count = 0
 	_tactical_info.text = _tactical_summary(data)
+	if not preview_sector.is_empty():
+		_tactical_info.text = "预览射界 · 未执行 · 非命中保证\n" + _tactical_info.text
 	_tactical_panel.visible = true
 
 

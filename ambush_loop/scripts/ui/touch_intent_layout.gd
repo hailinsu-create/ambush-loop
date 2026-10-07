@@ -10,7 +10,8 @@ static func choose_position(
 	viewport_size: Vector2,
 	panel_size: Vector2,
 	safe_insets: Vector4,
-	obstacles: Array = []
+	obstacles: Array = [],
+	prefer_left: bool = false
 ) -> Dictionary:
 	var min_x := maxf(0.0, safe_insets.x)
 	var min_y := maxf(0.0, safe_insets.y)
@@ -28,6 +29,11 @@ static func choose_position(
 			target_screen + Vector2(-panel_size.x - TARGET_GAP, -panel_size.y * 0.5),
 		]
 	var target_candidate_count := candidates.size()
+	if prefer_left:
+		for pair in candidates.size() / 2:
+			var swap := candidates[pair * 2]
+			candidates[pair * 2] = candidates[pair * 2 + 1]
+			candidates[pair * 2 + 1] = swap
 	# Keep a predictable non-target fallback above the resident command rail.
 	candidates.append(Vector2(max_x, max_y))
 	candidates.append(Vector2(min_x, max_y))

@@ -1002,14 +1002,23 @@ func _attack_has_los(target: Vector2, p_grid: AmbushGrid) -> bool:
 
 func in_fire_geometry(target: Vector2, p_grid: AmbushGrid) -> bool:
 	## Range + cone + LOS only — ignore ammo, hold-fire, and alive.
-	var to_v := target - global_position
+	return fire_geometry_from(global_position, facing_deg, target, p_grid)
+
+
+func fire_geometry_from(origin: Vector2, proposed_facing: float, target: Vector2, p_grid: AmbushGrid) -> bool:
+	## Pure preview query. Combat and proposed poses share identical eligibility.
+	if not origin.is_finite() or not target.is_finite() or not is_finite(proposed_facing):
+		return false
+	var to_v := target - origin
 	var dist := to_v.length()
 	if dist < 8.0 or dist > range_px:
 		return false
 	var ang := rad_to_deg(atan2(to_v.y, to_v.x))
-	if absf(angle_diff_deg(facing_deg, ang)) > half_angle_deg:
+	if absf(angle_diff_deg(proposed_facing, ang)) > half_angle_deg:
 		return false
-	return _attack_has_los(target, p_grid)
+	var g := p_grid if p_grid != null else grid
+	if g == null: return false
+	return g.has_los(origin, target) if melee else g.has_height_los(origin, target)
 
 
 func engage_block_reason(target: Vector2, p_grid: AmbushGrid) -> String:

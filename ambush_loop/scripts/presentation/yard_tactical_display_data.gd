@@ -17,6 +17,7 @@ static func state_signature(host: Node) -> String:
 	bits.append("level=%s" % (str(level.get("level_id")) if level != null else "none"))
 	bits.append("phase=%d" % int(host.get("phase")))
 	bits.append("tool=%d" % int(host.get("tool")))
+	bits.append("facing_preview=%s" % str(host.get("_yard_facing_preview")))
 	bits.append("door=%s" % str(host.get("door_locked")))
 	bits.append("grid=%d" % int(grid.get("tactical_revision")) if grid != null else "grid=-1")
 	if selected != null and is_instance_valid(selected):
@@ -132,6 +133,20 @@ static func build(host: Node, signature: String) -> Dictionary:
 		"line_of_sight_tested": false,
 	}
 	data["movement_preview"] = _movement_preview(host, op, grid)
+	var proposed: Dictionary = host.get("_yard_facing_preview")
+	var preview_position := actor_position
+	var preview_facing := float(actor["facing_deg"])
+	var has_preview := false
+	if not proposed.is_empty() and int(proposed.get("actor", -1)) == op.get_instance_id() and int(proposed.get("phase", -1)) == int(host.get("phase")) and int(proposed.get("tool", -1)) == int(host.get("tool")):
+		preview_facing = float(proposed.get("angle", preview_facing))
+		has_preview = true
+	elif not data["movement_preview"].is_empty() and str(data["movement_preview"].get("kind", "")) in ["move", "cover"]:
+		preview_position = data["movement_preview"].get("position", actor_position)
+		has_preview = true
+	if has_preview and not bool(actor["melee"]):
+		data["preview_sector"] = data["nominal_sector"].duplicate()
+		data["preview_sector"]["origin"] = preview_position
+		data["preview_sector"]["facing_deg"] = preview_facing
 	if not bool(actor["alive"]) or not bool(actor["visible"]) or bool(actor["melee"]):
 		return data
 
@@ -140,6 +155,7 @@ static func build(host: Node, signature: String) -> Dictionary:
 	var seen: Dictionary = {}
 	var route_samples: Array[Dictionary] = []
 	var route_summary: Array[Dictionary] = []
+	var preview_samples: Array[Dictionary] = []
 	for raw_record in active_routes:
 		if not raw_record is Dictionary:
 			continue
@@ -152,6 +168,8 @@ static func build(host: Node, signature: String) -> Dictionary:
 		var hits := 0
 		var total := 0
 		for point in _sample_polyline(route, ROUTE_SAMPLE_SPACING_PX):
+			if has_preview:
+				preview_samples.append({"route_id": route_id, "position": point, "geometry_clear": bool(op.call("fire_geometry_from", preview_position, preview_facing, point, grid)), "query": "OperatorUnit.fire_geometry_from"})
 			var geometry_clear := bool(op.call("in_fire_geometry", point, grid))
 			route_samples.append({
 				"route_id": route_id,
@@ -168,6 +186,7 @@ static func build(host: Node, signature: String) -> Dictionary:
 				coverage_points.append(point)
 		route_summary.append({"route_id": route_id, "covered_samples": hits, "total_samples": total})
 	data["route_samples"] = route_samples
+	data["preview_route_samples"] = preview_samples
 	data["route_summary"] = route_summary
 	data["coverage_points"] = coverage_points
 	data["target_states"] = _target_states(host, op, grid)

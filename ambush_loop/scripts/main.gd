@@ -4181,6 +4181,21 @@ func _touch_span() -> Dictionary:
 	return {"dist": a.distance_to(b), "mid": (a + b) * 0.5}
 
 
+func begin_yard_facing_handle(index: int, screen: Vector2) -> bool:
+	if _active_i0_presenter() == null or not _is_command_phase() or _modal_blocks_input() or selected == null or not selected.alive or selected.locked or not _touches.is_empty():
+		return false
+	_cancel_touch_intent()
+	_yard_facing_preview.clear()
+	_canceled_touch_indices.erase(index)
+	_touches[index] = screen
+	_facing_touch = index
+	_pending_setup_touch = false
+	_touch_dragged = false
+	_touch_panning = false
+	_touch_ate_click = true
+	return true
+
+
 func _build_touch_intent(world_pos: Vector2, sprint: bool = false) -> Dictionary:
 	if not _is_command_phase() or _modal_blocks_input() or selected == null:
 		return {}
@@ -4228,6 +4243,13 @@ func _build_touch_intent(world_pos: Vector2, sprint: bool = false) -> Dictionary
 	common["kind"] = "move"
 	common["cells"] = cells
 	common["label"] = "确认奔跑至此" if sprint else "确认移动至此"
+	if _active_i0_presenter() != null:
+		for stash in raid_stashes:
+			if stash == null or not is_instance_valid(stash) or stash.collected or stash.global_position.distance_to(world_pos) > 20.0: continue
+			common["action"] = "search"
+			common["target_instance"] = stash.get_instance_id()
+			common["label"] = "前往搜索 · 站定开匣"
+			break
 	return common
 
 
@@ -4330,6 +4352,12 @@ func confirm_touch_intent() -> bool:
 	_cancel_touch_intent()
 	if not valid:
 		return false
+	if str(intent.get("action", "")) == "search":
+		var target_valid := false
+		for stash in raid_stashes:
+			if stash != null and is_instance_valid(stash) and not stash.collected and stash.get_instance_id() == int(intent.get("target_instance", -1)) and stash.global_position.distance_to(world_pos) <= 20.0:
+				target_valid = true
+		if not target_valid: return false
 	_c2_sprint_next = sprint
 	_handle_setup_click(world_pos)
 	_c2_sprint_next = false
@@ -4425,7 +4453,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 								_touch_start_screen = st.position
 								_touch_dragged = false
 								_touch_panning = false
-								_facing_touch = st.index if not selected.locked else -1
+								_facing_touch = -1 # In 3D only an explicit handle owns facing.
 								_touch_ate_click = true
 								_last_touch_gesture = "select_operator"
 								return true
@@ -4442,7 +4470,7 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 				var hold_r := 16.0 if _want_touch() else 32.0
 				_cover_hold_slot = _nearest_slot(world, hold_r) if _is_command_phase() else null
 				_cover_hold_msec = Time.get_ticks_msec()
-				if _is_command_phase() and selected and selected.visible and world.distance_to(selected.global_position) <= 44.0:
+				if _active_i0_presenter() == null and _is_command_phase() and selected and selected.visible and world.distance_to(selected.global_position) <= 44.0:
 					_facing_touch = st.index
 				_touch_ate_click = true
 			return true
@@ -4520,7 +4548,8 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 			_pending_touch_world = _screen_to_world(sd.position)
 		if _is_command_phase() and sd.index == _facing_touch and selected and selected.visible and not selected.locked:
 			_cancel_touch_intent()
-			var world2 := _screen_to_world(sd.position)
+			var presenter := _active_i0_presenter()
+			var world2: Vector2 = presenter.facing_logic_at(sd.position, selected.global_position) if presenter != null else _screen_to_world(sd.position)
 			var v := world2 - selected.global_position
 			if v.length() > 10.0:
 				var angle := rad_to_deg(atan2(v.y, v.x))

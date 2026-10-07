@@ -20,6 +20,7 @@ var seen_level_tutorials: Dictionary = {} # level_id -> bool
 var pending_level_id: String = ""
 ## Desktop override so smoke / playtest can force the phone command bar.
 var force_touch_hud: bool = false
+var left_handed: bool = false
 ## "standard" keeps current FX; "power_saving" drops particles/trails and uses sparse map tiles.
 var quality_tier: String = QUALITY_STANDARD
 var hold_to_move: bool = false
@@ -52,6 +53,12 @@ func set_force_touch_hud(on: bool) -> void:
 
 func is_power_saving() -> bool:
 	return _normalize_quality_tier(quality_tier) == QUALITY_POWER_SAVING
+
+
+func set_left_handed(value: bool) -> void:
+	left_handed = value
+	save_settings()
+	changed.emit()
 
 
 func quality_tier_label() -> String:
@@ -140,6 +147,7 @@ func load_settings() -> void:
 		music_volume = master_volume
 		sfx_volume = master_volume
 	force_touch_hud = bool(cfg.get_value("input", "force_touch_hud", false))
+	left_handed = bool(cfg.get_value("input", "left_handed", false))
 	quality_tier = _normalize_quality_tier(str(cfg.get_value("graphics", "quality_tier", QUALITY_STANDARD)))
 	seen_tutorial = bool(cfg.get_value("onboarding", "seen_tutorial", false))
 	seen_level_tutorials.clear()
@@ -155,6 +163,7 @@ func save_settings() -> void:
 	cfg.set_value("audio", "music_volume", music_volume)
 	cfg.set_value("audio", "sfx_volume", sfx_volume)
 	cfg.set_value("input", "force_touch_hud", force_touch_hud)
+	cfg.set_value("input", "left_handed", left_handed)
 	cfg.set_value("graphics", "quality_tier", _normalize_quality_tier(quality_tier))
 	cfg.set_value("onboarding", "seen_tutorial", seen_tutorial)
 	for id in LEVEL_ORDER:
@@ -172,6 +181,7 @@ func reset_to_defaults() -> void:
 	seen_level_tutorials.clear()
 	pending_level_id = ""
 	force_touch_hud = false
+	left_handed = false
 	quality_tier = QUALITY_STANDARD
 	apply_audio()
 
