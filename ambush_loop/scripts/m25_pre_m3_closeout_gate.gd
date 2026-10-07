@@ -29,11 +29,14 @@ func _run() -> void:
 	handle._gui_input(down)
 	_expect(main.selected.facing_deg == original_facing, "M25_MAGNIFY_LATE_RELEASE_NO_COMMIT")
 	_expect(presenter._quality_button.size.y >= 48 and presenter._handed_button.size.y >= 48, "M25_TOUCH_TARGET_MINIMUM_48")
-	root.size = Vector2i(960, 540)
+	var original_window_size := DisplayServer.window_get_size()
+	DisplayServer.window_set_size(Vector2i(960, 540))
 	await _frames(4)
-	_expect(presenter._quality_button.get_global_rect().end.x <= 960 and presenter._quality_button.size.y >= 48, "M25_960_TOUCH_TARGET_LAYOUT")
+	var logical_size: Vector2 = root.get_visible_rect().size
+	_expect(DisplayServer.window_get_size() == Vector2i(960, 540), "M25_960_PHYSICAL_WINDOW")
+	_expect(presenter._quality_button.get_global_rect().end.x <= logical_size.x and presenter._quality_button.size.y >= 48, "M25_960_TOUCH_TARGET_LAYOUT")
 	await _capture(main, "3d-960-layout")
-	root.size = Vector2i(1280, 720)
+	DisplayServer.window_set_size(original_window_size)
 	await _frames(3)
 	var covered := {}
 	var rectangles = preload("res://scripts/presentation/yard_wall_layout.gd").rectangles(main.grid, 40, 22)
