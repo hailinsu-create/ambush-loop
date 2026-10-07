@@ -42,7 +42,7 @@ func _run() -> void:
 	frame["ramp_links"] = grid.ramp_links.duplicate()
 	_expect(Space.terrain_supported(frame), "complete recorded terrain valid")
 	var bad := frame.duplicate(true)
-	bad.height_schema = 2
+	bad.height_schema = 3
 	_expect(not Space.terrain_supported(bad), "unknown terrain rejected")
 	bad = frame.duplicate(true)
 	bad.elevation_tier[0] = 255
@@ -65,6 +65,23 @@ func _run() -> void:
 		at = camera.unproject_position(Space.logic_to_surface(frame,a,1.1))
 		pick = Picker.pick(camera,at,frame)
 		_expect(pick.get("id",-1)==333, "high actor pick at yaw %d" % yaw)
+	frame.ops = []
+	frame.height_schema = 2
+	var low := grid.cell_to_world_center(Vector2i(15,13))
+	var top := grid.cell_to_world_center(Vector2i(15,12))
+	for step in range(9):
+		var t := float(step)/8.0
+		var pos := low.lerp(top,t)
+		_expect(is_equal_approx(grid.surface_height_at(pos),t) and is_equal_approx(Space.height_at(frame,pos),t), "ramp authority and visual agree %d" % step)
+		for yaw in range(0,360,45):
+			var angle := deg_to_rad(float(yaw))
+			camera.position = Vector3(sin(angle)*20.0,32.0,cos(angle)*20.0)
+			camera.look_at(Vector3.ZERO)
+			var screen := camera.unproject_position(Space.logic_to_surface(frame,pos))
+			var pick := Picker.pick(camera,screen,frame)
+			_expect(pick.get("valid",false) and pick.get("pos",Vector2.ZERO).distance_to(pos)<0.1, "continuous ramp pick step %d yaw %d" % [step,yaw])
+	frame.height_schema = 1
+	_expect(Space.height_at(frame,low.lerp(top,0.25)) == 0.0 and Space.height_at(frame,low.lerp(top,0.75)) == 1.0, "old tier snapshot not reinterpreted as new continuous ramp")
 	camera.free()
 	grid.elevation_tier.fill(0)
 	_expect(Space.logic_to_surface(frame, a).y == 1.0, "recorded terrain independent of live world")

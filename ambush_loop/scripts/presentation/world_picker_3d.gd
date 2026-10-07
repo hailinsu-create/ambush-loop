@@ -1,6 +1,7 @@
 extends RefCounted
 
 const Space := preload("res://scripts/presentation/world_space.gd")
+const Surface := preload("res://scripts/terrain_surface.gd")
 
 ## Presentation-only ray tests, independent of simulation collision and frame rate.
 ## Proxy bounds cover whole bodies so clicking a head still selects its ground anchor.
@@ -61,4 +62,17 @@ static func surface_at(camera: Camera3D, screen: Vector2, frame: Dictionary) -> 
 		if Space.contains_logic(logic) and is_equal_approx(Space.height_at(frame, logic), height):
 			nearest = distance
 			result = point
+	if int(frame.get("height_schema",0)) == 2:
+		for ramp in Surface.ramps(frame.elevation_tier, frame.ramp_links):
+			var axis: Vector2 = (ramp.high-ramp.low).normalized()
+			var low := Space.logic_to_world(ramp.low)
+			var normal := Vector3(-axis.x,1.0,-axis.y).normalized()
+			var hit: Variant = Plane(normal,normal.dot(low)).intersects_ray(origin,direction)
+			if not hit is Vector3:
+				continue
+			var logic := Space.world_to_logic(hit)
+			var distance: float = origin.distance_to(hit)
+			if distance < nearest and hit.y >= 0.0 and hit.y <= 1.0 and Space.contains_logic(logic) and is_equal_approx(Space.height_at(frame,logic),hit.y):
+				nearest = distance
+				result = hit
 	return result

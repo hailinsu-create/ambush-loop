@@ -1,4 +1,5 @@
 extends RefCounted
+const Surface := preload("res://scripts/terrain_surface.gd")
 
 ## Tactical coordinates stay in pixels. Presentation uses metres, +Y up, -Z forward.
 const CELL_METRES := 1.0
@@ -18,11 +19,15 @@ static func world_to_logic(pos: Vector3) -> Vector2:
 
 ## Missing terrain in legacy recordings means explicitly flat, never live terrain.
 static func height_at(frame: Dictionary, pos: Vector2) -> float:
-	if int(frame.get("height_schema", 0)) != 1 or not contains_logic(pos):
+	if int(frame.get("height_schema", 0)) not in [1,2] or not contains_logic(pos):
 		return 0.0
 	var tiers: PackedByteArray = frame.get("elevation_tier", PackedByteArray())
 	if tiers.size() != 880:
 		return 0.0
+	if int(frame.height_schema) == 2:
+		if frame.has("surface_ramps"):
+			return Surface.height_on_ramps(tiers,frame.surface_ramps,pos)
+		return Surface.height_at(tiers, frame.get("ramp_links", {}), pos)
 	var cell := Vector2i(floori(pos.x / 32.0), floori(pos.y / 32.0))
 	return float(tiers[cell.y * 40 + cell.x])
 
@@ -34,7 +39,7 @@ static func logic_to_surface(frame: Dictionary, pos: Vector2, offset: float = 0.
 static func terrain_supported(data: Dictionary) -> bool:
 	if not data.has("height_schema"):
 		return true
-	if typeof(data.height_schema) != TYPE_INT or data.height_schema != 1:
+	if typeof(data.height_schema) != TYPE_INT or data.height_schema not in [1,2]:
 		return false
 	for field in ["elevation_tier", "occlusion_kind", "blocked"]:
 		if not data.get(field) is PackedByteArray or data[field].size() != 880:

@@ -69,6 +69,17 @@ func _stash_contract(main: Node) -> void:
 	main._tick_crate_search(0.2)
 	main.presentation_3d.refresh()
 	var partial: Dictionary = main._snapshot_data().duplicate(true)
+	_check(EnvironmentScene.supported(partial), "current terrain assembly supported")
+	var legacy := partial.duplicate(true)
+	legacy.environment_layout_revision = EnvironmentScene.LEGACY_LAYOUT_REVISION
+	_check(EnvironmentScene.supported(legacy), "original terrain assembly remains supported")
+	var legacy_scene := EnvironmentScene.new()
+	root.add_child(legacy_scene)
+	legacy_scene.build(legacy, 0)
+	_check(legacy_scene.get_meta("environment_layout_revision") == EnvironmentScene.LEGACY_LAYOUT_REVISION, "historical assembly identity not rewritten")
+	legacy_scene.queue_free()
+	legacy.environment_layout_revision = "unknown_terrain_assembly"
+	_check(not EnvironmentScene.supported(legacy), "unknown terrain assembly fails closed")
 	var recorded: Array = partial.stashes.filter(func(item: Dictionary) -> bool: return item.pos == stash.global_position)
 	_check(recorded.size() == 1 and is_equal_approx(float(recorded[0].progress), 0.5), "actual half-search progress copied")
 	var key: String = "stashes:" + recorded[0].id

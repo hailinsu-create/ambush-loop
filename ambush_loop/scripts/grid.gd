@@ -1,5 +1,6 @@
 class_name AmbushGrid
 extends RefCounted
+const Surface := preload("res://scripts/terrain_surface.gd")
 
 ## Per-level collision/LOS geometry. Rebuilt on every level load.
 
@@ -26,6 +27,9 @@ var layout_id: String = "yard"
 var door_cell: Vector2i = Vector2i(-1, -1)
 var door_locked: bool = false
 var tactical_revision: int = 0
+var continuous_surface := true
+var _surface_revision := -1
+var _surface_ramps: Array = []
 
 
 func _init() -> void:
@@ -113,6 +117,9 @@ func _build_yard() -> void:
 		for y in range(10, 13):
 			set_elevation_tier(x, y, HEIGHT_PLATFORM)
 	set_ramp_link(Vector2i(15, 13), Vector2i(15, 12))
+	# A visible one-metre cargo obstacle makes the dock's LOS advantage explicit.
+	set_blocked(14, 10, true)
+	set_occlusion_kind(14, 10, OCCLUSION_LOW)
 
 
 func _build_warehouse() -> void:
@@ -339,6 +346,8 @@ func has_height_los(from: Vector2, to: Vector2) -> bool:
 		return false
 	var tier_a := get_elevation_tier(a.x, a.y)
 	var tier_b := get_elevation_tier(b.x, b.y)
+	var eye_a := surface_height_at(from) + 0.5
+	var eye_b := surface_height_at(to) + 0.5
 	if tier_a < HEIGHT_GROUND or tier_a > HEIGHT_PLATFORM or tier_b < HEIGHT_GROUND or tier_b > HEIGHT_PLATFORM:
 		return false
 	if a == b:
@@ -348,6 +357,9 @@ func has_height_los(from: Vector2, to: Vector2) -> bool:
 		var swap := a
 		a = b
 		b = swap
+		var eye_swap := eye_a
+		eye_a = eye_b
+		eye_b = eye_swap
 		tier_a = get_elevation_tier(a.x, a.y)
 		tier_b = get_elevation_tier(b.x, b.y)
 	var origin := cell_to_world_center(a)
@@ -369,7 +381,7 @@ func has_height_los(from: Vector2, to: Vector2) -> bool:
 			if kind == OCCLUSION_FULL or (kind == OCCLUSION_INHERIT and is_blocked(x, y)):
 				return false
 			var t := clampf((cell_to_world_center(cell) - origin).dot(delta) / distance_squared, 0.0, 1.0)
-			var ray_height := lerpf(float(tier_a) + 0.5, float(tier_b) + 0.5, t)
+			var ray_height := lerpf(eye_a, eye_b, t)
 			var obstacle_height := occlusion_height_at(x, y)
 			if obstacle_height > 0.0 and obstacle_height >= ray_height:
 				return false
@@ -383,6 +395,16 @@ func has_height_los(from: Vector2, to: Vector2) -> bool:
 			err += dx
 			y += sy
 	return true
+
+
+func surface_height_at(pos: Vector2) -> float:
+	if continuous_surface:
+		if _surface_revision != tactical_revision:
+			_surface_revision = tactical_revision
+			_surface_ramps = Surface.ramps(elevation_tier, ramp_links)
+		return Surface.height_on_ramps(elevation_tier, _surface_ramps, pos)
+	var cell := world_to_cell(pos)
+	return float(get_elevation_tier(cell.x, cell.y))
 
 
 func has_los(from: Vector2, to: Vector2) -> bool:
