@@ -11,6 +11,11 @@ var _host: Node = null
 var _hint: Label = null
 var _row_setup: HBoxContainer = null
 var _row_watch: HBoxContainer = null
+var _replay_controls: VBoxContainer = null
+var _replay_time: Label = null
+var _replay_pause: Button = null
+var _replay_speed: Button = null
+var _replay_scrub: HSlider = null
 var _stack_secondary: VBoxContainer = null
 var _twist_pair: HBoxContainer = null
 var _safe: MarginContainer = null
@@ -185,6 +190,7 @@ func _build() -> void:
 	_safe.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	_safe.anchor_top = 1.0
 	_safe.anchor_bottom = 1.0
+	_safe.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_safe.offset_top = -124.0
 	_safe.offset_bottom = 0.0
 	_safe.offset_left = 0.0
@@ -200,6 +206,41 @@ func _build() -> void:
 	col.add_theme_constant_override("separation", 6)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_safe.add_child(col)
+	_replay_controls = VBoxContainer.new()
+	_replay_controls.name = "ReplayControls"
+	_replay_controls.visible = false
+	col.add_child(_replay_controls)
+	var transport := HBoxContainer.new()
+	transport.add_theme_constant_override("separation", 4)
+	_replay_controls.add_child(transport)
+	_replay_time = Label.new()
+	_replay_time.theme = NightOps.theme()
+	_replay_time.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_replay_time.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_replay_time.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_replay_time.add_theme_font_size_override("font_size", 12)
+	transport.add_child(_replay_time)
+	_replay_pause = Button.new()
+	_replay_pause.custom_minimum_size = Vector2(52, 32)
+	_replay_pause.focus_mode = Control.FOCUS_NONE
+	_replay_pause.pressed.connect(func() -> void: _host.apply_touch_command("pause"))
+	transport.add_child(_replay_pause)
+	_replay_speed = Button.new()
+	_replay_speed.custom_minimum_size = Vector2(44, 32)
+	_replay_speed.focus_mode = Control.FOCUS_NONE
+	_replay_speed.pressed.connect(func() -> void: _host.apply_touch_command("speed"))
+	transport.add_child(_replay_speed)
+	_replay_scrub = HSlider.new()
+	_replay_scrub.name = "ReplayScrub"
+	_replay_scrub.min_value = 0.0
+	_replay_scrub.max_value = 1.0
+	_replay_scrub.step = 0.001
+	_replay_scrub.custom_minimum_size = Vector2(160, 36)
+	_replay_scrub.value_changed.connect(func(value: float) -> void:
+		if _host != null and _host.phase == _host.Phase.REPLAY:
+			_host._on_scrub_changed(value)
+	)
+	_replay_controls.add_child(_replay_scrub)
 
 	_row_setup = HBoxContainer.new()
 	_row_setup.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -300,7 +341,7 @@ func _add_wave_chip(row: HBoxContainer) -> void:
 func set_next_wave(text: String, show: bool) -> void:
 	if _wave_chip == null:
 		return
-	_wave_chip.visible = show and text != ""
+	_wave_chip.visible = show and text != "" and get_viewport().get_visible_rect().size.x >= 1000.0
 	if _wave_lab:
 		_wave_lab.text = text
 
@@ -382,11 +423,14 @@ func _apply_btn_style(b: Button, tint: Color, locked: bool) -> void:
 	var hover := NightOps.flat(bg.lightened(0.18), border.lightened(0.2), 2, 10, 6)
 	var pressed := NightOps.flat(bg.darkened(0.18), border, 2, 10, 6)
 	var disabled := NightOps.flat(Color(0.09, 0.09, 0.08, 0.82), Color(0.22, 0.20, 0.18), 1, 10, 6)
+	# Apply this button's fresh overrides with one theme notification.
+	b.begin_bulk_theme_override()
 	b.add_theme_stylebox_override("normal", normal)
 	b.add_theme_stylebox_override("hover", hover)
 	b.add_theme_stylebox_override("pressed", pressed)
 	b.add_theme_stylebox_override("disabled", disabled)
 	b.add_theme_color_override("font_color", Color(0.94, 0.92, 0.78) if not locked else Color(0.42, 0.40, 0.38))
+	b.end_bulk_theme_override()
 	b.modulate = Color.WHITE if not locked else Color(0.62, 0.60, 0.58)
 
 
@@ -406,15 +450,17 @@ func _apply_safe_area() -> void:
 		_layout_compact()
 		return
 	var vis := get_viewport().get_visible_rect().size
+	var small := vis.x < 1000.0
+	var portrait_inset := 340 if small else PORTRAIT_INSET
 	var left := sa.position.x * vis.x / float(wsz.x)
 	var right := (float(wsz.x) - sa.end.x) * vis.x / float(wsz.x)
 	var bottom := (float(wsz.y) - sa.end.y) * vis.y / float(wsz.y)
-	_safe.add_theme_constant_override("margin_left", int(maxi(8, int(round(left)))) + PORTRAIT_INSET)
+	_safe.add_theme_constant_override("margin_left", int(maxi(8, int(round(left)))) + portrait_inset)
 	_safe.add_theme_constant_override("margin_right", int(maxi(8, int(round(right)))))
 	_safe.add_theme_constant_override("margin_bottom", int(maxi(8, int(round(bottom)))))
 	if _portrait_slot:
 		_portrait_slot.offset_left = 8.0 + left
-		_portrait_slot.offset_right = 8.0 + left + 336.0
+		_portrait_slot.offset_right = 8.0 + left + (328.0 if small else 336.0)
 	if _hint:
 		_hint.position = Vector2(12.0 + left, 6.0)
 	_layout_compact()
@@ -439,7 +485,7 @@ func _layout_compact(avail_override: float = -1.0) -> void:
 	var stack_w := 52.0 if tight else 60.0
 	## R38: +4px stack height for thumb hit on 匍匐/背包.
 	var stack_h := 28.0 if tight else 30.0
-	var twist := 58.0 if tight else 66.0
+	var twist := 56.0 if tight else 66.0
 	var twist_h := 56.0 if tight else 62.0
 	var alarm_w := 88.0 if tight else 96.0
 	var alarm_h := 52.0 if tight else 56.0
@@ -456,6 +502,8 @@ func _layout_compact(avail_override: float = -1.0) -> void:
 	_size_btn("rotate_ccw", Vector2(twist, twist_h), 16 if not tight else 15)
 	_size_btn("rotate_cw", Vector2(twist, twist_h), 16 if not tight else 15)
 	_size_btn("alarm", Vector2(alarm_w, alarm_h), 13 if not tight else 12)
+	for cmd in WATCH_RESIDENT:
+		_size_btn(cmd, Vector2(80, 64) if vis.x < 1000.0 else Vector2(120, 64), 12 if vis.x < 1000.0 else 13)
 	_compact_need_w = stack_w + twist * 2.0 + alarm_w + float(_compact_sep) * 5.0 + 8.0
 
 
@@ -554,10 +602,20 @@ func refresh_phase(
 	has_door: bool = true
 ) -> void:
 	_apply_safe_area()
+	_hint.position.y = 48.0 if phase_name == "REPLAY" else 6.0
 	if _row_setup:
-		_row_setup.visible = phase_name == "SETUP" or phase_name == "SWEEP"
+		_row_setup.visible = phase_name in ["SETUP", "SWEEP", "REPLAY"]
 	if _row_watch:
-		_row_watch.visible = phase_name != "SETUP" and phase_name != "SWEEP"
+		_row_watch.visible = phase_name not in ["SETUP", "SWEEP", "REPLAY"]
+	_replay_controls.visible = phase_name == "REPLAY"
+	if _replay_controls.visible and _host != null:
+		_replay_time.text = "%.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
+		var ended: bool = _host.replay.scrub_tick >= _host.replay.max_tick()
+		_replay_pause.text = "暂停" if _host.replay.playing else ("重播" if ended else "继续")
+		_replay_speed.text = "2×" if speed_hi else "1×"
+		_replay_pause.disabled = _host.replay.max_tick() <= 0 or _host.replay.legacy_ambiguous
+		_replay_speed.disabled = _replay_pause.disabled
+		_replay_scrub.set_value_no_signal(float(_host.replay.scrub_tick) / maxf(float(_host.replay.max_tick()), 1.0))
 	match phase_name:
 		"SETUP":
 			set_hint("点地走 · 短拖拖图 · 长按跑 · 近背面绕背/割喉 · 角标跟上 · 匍匐 · 按住↺/↻或左右滑拧射界 · 拉警报")
@@ -566,7 +624,7 @@ func refresh_phase(
 		"WATCHING":
 			set_hint("警报：暂停·倍速·中止 · 自动开火")
 		"REPLAY":
-			set_hint("复盘只读 — 拖时间轴；警报钮返回搜刮")
+			set_hint("复盘只读 · 暂停/倍速 · 拖时间轴后暂停 · 返回")
 		_:
 			set_hint("点继续。菜单可清空记忆或回标题")
 	if _btns.has("pause"):
@@ -591,7 +649,7 @@ func refresh_phase(
 	if _btns.has("nade"):
 		_btns["nade"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("bag"):
-		_btns["bag"].disabled = false
+		_btns["bag"].disabled = not (_host != null and _host.has_method("_can_edit_equipment") and _host._can_edit_equipment())
 	if _btns.has("decoy"):
 		_btns["decoy"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("crouch"):
@@ -605,7 +663,7 @@ func refresh_phase(
 	if _btns.has("pass"):
 		_btns["pass"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("nade_watch"):
-		_btns["nade_watch"].disabled = phase_name != "WATCHING"
+		_btns["nade_watch"].disabled = phase_name != "SETUP" and phase_name != "SWEEP"
 	if _btns.has("door"):
 		_btns["door"].visible = false
 		_btns["door"].disabled = (phase_name != "SETUP" and phase_name != "SWEEP") or not has_door
@@ -626,16 +684,19 @@ func refresh_phase(
 		if _wave_chip:
 			_wave_chip.visible = false
 	_paint_crouch_sticky()
-	_hide_overflow()
+	_hide_overflow(phase_name == "REPLAY")
 	_paint_lock_states(phase_name)
 
 
-func _hide_overflow() -> void:
+func _hide_overflow(replay_mode: bool = false) -> void:
 	for cmd in _btns.keys():
 		var b: Button = _btns[cmd]
 		if b == null:
 			continue
 		var c := str(cmd)
+		if replay_mode:
+			b.visible = c == "alarm"
+			continue
 		if SETUP_RESIDENT.has(c) or WATCH_RESIDENT.has(c):
 			b.visible = true
 			continue
@@ -647,7 +708,12 @@ func _paint_crouch_sticky() -> void:
 		return
 	var b: Button = _btns["crouch"]
 	var crouched := false
-	if _host != null and _host.get("selected") != null:
+	if _host != null and _host.phase == _host.Phase.REPLAY:
+		var history: Dictionary = _host.replay_hud_frame()
+		for op in history.get("ops", []):
+			if int(op.get("id", -2)) == int(history.get("selected_id", -1)):
+				crouched = int(op.get("stance", 0)) == 1
+	elif _host != null and _host.get("selected") != null:
 		var op = _host.selected
 		crouched = op.get("stance") != null and int(op.stance) == 1
 	b.text = "匍中" if crouched else "匍匐"

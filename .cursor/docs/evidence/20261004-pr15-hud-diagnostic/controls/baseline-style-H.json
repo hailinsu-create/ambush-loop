@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "bash",
+    "/workspace/pr15-hud-baseline-f275/ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-hud-diagnostic/godot-hud-style",
+    "phase_tools_test.gd",
+    "--headless"
+  ],
+  "source": "f275178c0f60a7579685f9823894cafc3386f6da",
+  "game_tree": "fae983e61e032abd93fbd99f9491c4a90ec57b17",
+  "start": "2026-10-04T22:36:14.422295+00:00",
+  "timeout_seconds": 240,
+  "timed_out": false,
+  "owned_wrapper_pid": 128650,
+  "actual_wrapper_exit": 1,
+  "end": "2026-10-04T22:36:14.987483+00:00",
+  "ERROR": 1,
+  "SCRIPT_ERROR": 1,
+  "uuid": "6776304874c44118ba4868929d75d0b7",
+  "terminal_lines": [
+    "SCRIPT ERROR: Parse Error: Used tab character for indentation instead of space as used before in the file.",
+    "          at: GDScript::reload (res://scripts/hud_style_boundary_external.gd:79)",
+    "ERROR: Failed to load script \"res://scripts/hud_style_boundary_external.gd\" with error \"Parse error\"."
+  ]
+}

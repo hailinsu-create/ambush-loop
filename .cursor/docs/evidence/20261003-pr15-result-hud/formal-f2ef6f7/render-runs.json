@@ -1,0 +1,49 @@
+[
+  {
+    "entry": "visual_snapshot_test.gd",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "visual_snapshot_test.gd",
+      "--render"
+    ],
+    "environment": {},
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "label": "snapshot-render",
+    "exit": 0,
+    "wall_seconds": 51.119
+  },
+  {
+    "entry": "presentation_lifecycle_test.gd",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "presentation_lifecycle_test.gd",
+      "--render"
+    ],
+    "environment": {},
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "label": "lifecycle-render",
+    "exit": 0,
+    "wall_seconds": 57.602
+  },
+  {
+    "entry": "corpse_pairing_boundary_test.gd",
+    "command": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-hud-godot",
+      "corpse_pairing_boundary_test.gd",
+      "--render"
+    ],
+    "environment": {
+      "AMBUSH_BOUNDARY_SCOPE": "ui"
+    },
+    "source_sha": "f2ef6f7b6f2119430ad9410f046d3067b22877b6",
+    "label": "native-ui",
+    "exit": 0,
+    "wall_seconds": 83.337
+  }
+]

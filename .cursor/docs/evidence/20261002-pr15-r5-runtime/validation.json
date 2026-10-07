@@ -1,0 +1,562 @@
+{
+  "runtime_source_sha": "c5ec8ff7b668ba86d9c9a305ecec0bca0072e9c7",
+  "test_baseline_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+  "identity_test_fix_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+  "equip_fix_sha": "d53e54f525687543e51080eb8482663a5058c443",
+  "pack_and_static_test_sha": "f687ea080b95593d8f01bdc23ce18447bfa69aa8",
+  "game_tree": "e9cfc5ae89620730ed269564a6d085dc85dfaf75",
+  "engine": "4.7.2.stable.official.ed1daf0bf; Compatibility/Mesa llvmpipe for rendered runs; isolated XDG/StorageGuard",
+  "runs": [
+    {
+      "name": "base-utility_runtime_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture utility_runtime_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "8bb17057a5d24c65a08faa3c10c737e8",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-utility_runtime_test.gd.log",
+      "log_sha256": "39fbfac2028d2533efeaab5cdde24dfeff2525995f410c635365831b76b96bac",
+      "script_error": false,
+      "markers": [
+        "UTILITY_RUNTIME_OK checks=1030 failures=0 captures=6"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "base-firearm_runtime_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture firearm_runtime_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "b8964b2f9f394ce4a76a9c61d8e9af27",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-firearm_runtime_test.gd.log",
+      "log_sha256": "a42f8034b4f3941cb150e51028ea52531ee054497414cfc589615e33ddf5a82e",
+      "script_error": false,
+      "markers": [
+        "FIREARM_RUNTIME_OK checks=7681 configurations=90 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "base-actor_battle_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture actor_battle_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "d6b189af55654ecebe18956bf7d80af7",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-actor_battle_test.gd.log",
+      "log_sha256": "4225946b64f37acacfeb43b5ee6c50afba7d7b36fe6abeb901b4e97770a8f40f",
+      "script_error": false,
+      "markers": [
+        "ACTOR_BATTLE_OK checks=231 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "base-command_pose_clock_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture command_pose_clock_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "4f8eae81916d4637ad7ffffd10bec46f",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-command_pose_clock_test.gd.log",
+      "log_sha256": "e2921e29e11cd07c348741892dfd0ec725d1f2805bebfaf472414a3a54beebd2",
+      "script_error": false,
+      "markers": [
+        "COMMAND_POSE_CLOCK_OK checks=29 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "base-visual_snapshot_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "ba572363f0db4933b483a1ebc3bc5583",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-visual_snapshot_test.gd.log",
+      "log_sha256": "9cbd2afa5d01829013a257bb6f314001442c3ea7d8ae4e705af74109100adba5",
+      "script_error": false,
+      "markers": [
+        "VISUAL_SNAPSHOT_OK checks=164 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "base-presentation_lifecycle_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "4dafbb8daa914bbd930572bf45e91d6b",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-presentation_lifecycle_test.gd.log",
+      "log_sha256": "fef9bada40ad1c7d68d2500c09e2b501f41abb4b5124953aa617080a4a38a9bb",
+      "script_error": false,
+      "markers": [
+        "PRESENTATION_LIFECYCLE_OK checks=32 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "base-audio_runtime_test.gd",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture audio_runtime_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "6790d66290cf4e3c9d1c04c7ed8878bb",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/base-audio_runtime_test.gd.log",
+      "log_sha256": "a02d6b0bfdc30194d5cfa02bb4badcf40683b493fbb36705c9df456c1bdaf173",
+      "script_error": false,
+      "markers": [
+        "AUDIO_RUNTIME_OK checks=405 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "normalized-presentation_contract_test.gd",
+      "source_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "698ab97619c84204b2c1ea38d0e98348",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/normalized-presentation_contract_test.gd.log",
+      "log_sha256": "a1b2e499e22b1f608a1948f81bcca48d7499459c0721e8be7ba98585a7e29200",
+      "script_error": false,
+      "markers": [
+        "PRESENTATION_CONTRACT_OK checks=84042"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "normalized-actor_visual_test.gd",
+      "source_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 actor_visual_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "698c10e2a8f143deadc3cf31e9d81902",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/normalized-actor_visual_test.gd.log",
+      "log_sha256": "685ae9692d494e90092932e3d91c4b46bc9aa81a83f90dce1f8426d1688dcfb1",
+      "script_error": false,
+      "markers": [
+        "ACTOR_VISUAL_OK checks=21818 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "normalized-equipment_freeze_test.gd",
+      "source_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "1dcbb25ab55a421cb54a89d1b0d5bfd1",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/normalized-equipment_freeze_test.gd.log",
+      "log_sha256": "653225e85480480b064ac25353c0620d2711e9c31cc25ecb8802bff96528bf06",
+      "script_error": false,
+      "markers": [
+        "EQUIPMENT_FREEZE_OK checks=66"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "normalized-replay_timeline_test.gd",
+      "source_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 replay_timeline_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "867b14be5ab14217a693eef595357b1c",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/normalized-replay_timeline_test.gd.log",
+      "log_sha256": "b4840c9f89dbc8a56f2e2655a078b5fe9d7d687f334284d30fec58a60f402f22",
+      "script_error": false,
+      "markers": [
+        "REPLAY_TIMELINE_OK checks=66"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "normalized-campaign",
+      "source_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "c0c05b4816c04663ab67fe6b417d6d1a",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/normalized-campaign.log",
+      "log_sha256": "a9e0346b06adb28fb808c54173126041d88c0972e1f2f0b094b8f63910c1f30a",
+      "script_error": false,
+      "markers": [
+        "CAMPAIGN_REPLAY_LEVEL yard waves=2 terminal=1283 events=34",
+        "CAMPAIGN_REPLAY_LEVEL warehouse waves=2 terminal=1191 events=67",
+        "CAMPAIGN_REPLAY_LEVEL pump waves=2 terminal=907 events=34",
+        "CAMPAIGN_REPLAY_LEVEL railcut waves=2 terminal=719 events=38",
+        "CAMPAIGN_REPLAY_LEVEL depot waves=2 terminal=957 events=35",
+        "CAMPAIGN_REPLAY_LEVEL radio waves=3 terminal=1413 events=51",
+        "CAMPAIGN_REPLAY_OK checks=10332 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "equip-before",
+      "source_sha": "cdbf86b01b30c2c26c473ff2aebe08c8edcb244d",
+      "command": "AMBUSH_UTILITY_TEST_SCOPE=equip_roundtrip bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 utility_runtime_test.gd",
+      "actual_exit_code": 1,
+      "run_id": "b39a3db2c38e4222b0507a156479379a",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/equip-before.log",
+      "log_sha256": "98bbfd0e23e0185f65d599cbea807711e4f53892d97cc080166fabaf1a9f95b8",
+      "script_error": false,
+      "markers": [
+        "UTILITY_EQUIP_ROUNDTRIP checks=4 failures=1"
+      ],
+      "accepted": false,
+      "fixed_source": true,
+      "formal_accepted": false
+    },
+    {
+      "name": "equip-after",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "command": "AMBUSH_UTILITY_TEST_SCOPE=equip_roundtrip bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 utility_runtime_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "b17b70416780439487f3657c8803dc2b",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/equip-after.log",
+      "log_sha256": "6772b0fc723ce58b2f5e28fa22f52c08404a231d137646ed5ffee0ef4a10e3b4",
+      "script_error": false,
+      "markers": [
+        "UTILITY_EQUIP_ROUNDTRIP checks=4 failures=0"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "equip-complete-utility",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture utility_runtime_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "aa3b97987fdf44aab58fa92dd9d3ae3c",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/equip-complete-utility.log",
+      "log_sha256": "4a57d133da8a5252baa67a24ba43d0a2ce308b22d0055fd8a6700839e58b2877",
+      "script_error": false,
+      "markers": [
+        "UTILITY_RUNTIME_OK checks=1034 failures=0 captures=6"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "equip-freeze",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "actual_exit_code": 0,
+      "run_id": "3bb813fa166e4c6ab641d9b9b5f41a44",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/equip-freeze.log",
+      "log_sha256": "4df19df5296f61cd7a8392eb5b3e761c7f26e5e8ca2f9613edbe51567c671f8f",
+      "script_error": false,
+      "markers": [
+        "EQUIPMENT_FREEZE_OK checks=66"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "static-source-updated",
+      "source_sha": "f687ea080b95593d8f01bdc23ce18447bfa69aa8",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture asset_library_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "6c83c68a42214acc92f46a3bc9681926",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/static-source-updated.log",
+      "log_sha256": "3d12d33813213d6009efdfc3adaf875370b937c7f65defc122d5127dfbbf0a11",
+      "script_error": false,
+      "markers": [
+        "ASSET_LIBRARY_OK checks=333 failures=0 assets=15 lods=30"
+      ],
+      "accepted": true,
+      "fixed_source": true,
+      "formal_accepted": true
+    },
+    {
+      "name": "campaign-random-scope-negative",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "actual_exit_code": 1,
+      "run_id": "eebfad2382e84b9b9d12f8209c818cd5",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/campaign-random-scope-negative.log",
+      "log_sha256": "8fc9e290dea01f492bcdd86bccafb660a62fa09c96a4297f9df925a2f96f047c",
+      "script_error": false,
+      "markers": [
+        "CAMPAIGN_REPLAY_LEVEL yard waves=2 terminal=1283 events=34",
+        "CAMPAIGN_REPLAY_LEVEL warehouse waves=2 terminal=1191 events=67",
+        "CAMPAIGN_REPLAY_LEVEL pump waves=2 terminal=907 events=34",
+        "CAMPAIGN_REPLAY_LEVEL railcut waves=2 terminal=719 events=38",
+        "CAMPAIGN_REPLAY_LEVEL depot waves=2 terminal=957 events=35",
+        "CAMPAIGN_REPLAY_LEVEL radio waves=3 terminal=1413 events=51",
+        "CAMPAIGN_REPLAY_FAILED checks=10296 failures=6"
+      ],
+      "accepted": false,
+      "fixed_source": true,
+      "formal_accepted": false
+    },
+    {
+      "name": "contract-random-scope-negative",
+      "source_sha": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "actual_exit_code": 1,
+      "run_id": "091dd8ad5ac54350b213c3dfbdf82bb3",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/contract-random-scope-negative.log",
+      "log_sha256": "c332686f2353e44f4feb141ebcc087718720d40a1ec5b9f26b236dabacafc228",
+      "script_error": false,
+      "markers": [
+        "PRESENTATION_CONTRACT_FAILED failures=2 checks=84039"
+      ],
+      "accepted": false,
+      "fixed_source": true,
+      "formal_accepted": false
+    },
+    {
+      "name": "static-old-provenance-negative",
+      "source_sha": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 asset_library_test.gd",
+      "actual_exit_code": 1,
+      "run_id": "fd4723fa973048b28b5f0115fe714aba",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/static-old-provenance-negative.log",
+      "log_sha256": "e3dfea69f61f697c48dedbc47eac04bd140b70cf82be7437dc877d555199ae38",
+      "script_error": false,
+      "markers": [
+        "ASSET_LIBRARY_FAILED checks=301 failures=1 assets=15 lods=30"
+      ],
+      "accepted": false,
+      "fixed_source": true,
+      "formal_accepted": false
+    },
+    {
+      "name": "development-first-invalid",
+      "source_sha": "uncommitted development fixture; not a fixed-source acceptance",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture utility_runtime_test.gd --render",
+      "actual_exit_code": 1,
+      "run_id": "3a3f0ee3663045f3ac5ec6ec689dffd5",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/development-first-invalid.log",
+      "log_sha256": "0a6f1ea7b11baa073850dc085a64109cb17b1dbffbf72b7cf78687a452116ead",
+      "script_error": true,
+      "markers": [
+        "UTILITY_RUNTIME_FAILED checks=1024 failures=5 captures=6"
+      ],
+      "accepted": false,
+      "fixed_source": false,
+      "formal_accepted": false
+    },
+    {
+      "name": "development-second-invalid",
+      "source_sha": "uncommitted development fixture; not a fixed-source acceptance",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture utility_runtime_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "6714efe4a6724eb6a52bb6b6ef1deb97",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/development-second-invalid.log",
+      "log_sha256": "a56c469851156a9ceb7d6882e9e9b056a1841e45f5ccad86d0c0d54ee6820819",
+      "script_error": true,
+      "markers": [
+        "UTILITY_RUNTIME_OK checks=1011 failures=0 captures=3"
+      ],
+      "accepted": false,
+      "fixed_source": false,
+      "formal_accepted": false
+    },
+    {
+      "name": "development-corrected",
+      "source_sha": "uncommitted development fixture; not a fixed-source acceptance",
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture utility_runtime_test.gd --render",
+      "actual_exit_code": 0,
+      "run_id": "6a21239d95f24cb0a77ccd66d3300355",
+      "log": ".cursor/docs/evidence/20261002-pr15-r5-runtime/development-corrected.log",
+      "log_sha256": "6aed6b818493e73201d617619d97a0f98f119bdfb4243e4a30e0758dd4d84ecd",
+      "script_error": false,
+      "markers": [
+        "UTILITY_RUNTIME_OK checks=1030 failures=0 captures=6"
+      ],
+      "accepted": true,
+      "fixed_source": false,
+      "formal_accepted": false
+    }
+  ],
+  "captures": [
+    {
+      "action": "grenade_throw",
+      "event_id": "1b38c362539f78cfcfd4f3532ae67696:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_scout_grenade_follow.png",
+      "phase": 0,
+      "sha256": "3a7f7c78dde73cdedb8c0bb7fd659edaba28a80c892ddaa313dc8b1e1165606f",
+      "wave_id": 0,
+      "repository_path": ".cursor/docs/evidence/20261002-pr15-r5-runtime/r5_scout_grenade_follow.png",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "visually_inspected": true
+    },
+    {
+      "action": "knife_stab",
+      "event_id": "fb5c5c5439e5959bde6ccfef1235486e:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_scout_knife_hit.png",
+      "phase": 0,
+      "sha256": "4a2f561296b87a6696f97afc3a3e200d67ce1b9482dda4d7aeab4a0d063bc80b",
+      "wave_id": 0,
+      "repository_path": ".cursor/docs/evidence/20261002-pr15-r5-runtime/r5_scout_knife_hit.png",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "visually_inspected": true
+    },
+    {
+      "action": "decoy_place",
+      "event_id": "fb5c5c5439e5959bde6ccfef1235486e:0:1",
+      "path": "res://build/asset_review/pr15-runtime/r5_scout_decoy_release.png",
+      "phase": 0,
+      "sha256": "5f6735dc6550cf433047032af48e409b5dc706cf381982e69b5ef711edeac3f6",
+      "wave_id": 0,
+      "repository_path": ".cursor/docs/evidence/20261002-pr15-r5-runtime/r5_scout_decoy_release.png",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "visually_inspected": true
+    },
+    {
+      "action": "grenade_throw",
+      "event_id": "01abebb8f0b92b86338d68b0d7e64024:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_alert_auto_grenade.png",
+      "phase": 1,
+      "sha256": "94d6d5c3e1d89c2dba224268c8c874ca449e3e0633f464f94fb6b03eb3b80850",
+      "wave_id": 0,
+      "repository_path": ".cursor/docs/evidence/20261002-pr15-r5-runtime/r5_alert_auto_grenade.png",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "visually_inspected": true
+    },
+    {
+      "action": "knife_stab",
+      "event_id": "01abebb8f0b92b86338d68b0d7e64024:0:1",
+      "path": "res://build/asset_review/pr15-runtime/r5_alert_knife_hit.png",
+      "phase": 1,
+      "sha256": "90739c1b7e350b8c786829092be2314c10c5009f3f272375f6e57c51913acc54",
+      "wave_id": 0,
+      "repository_path": ".cursor/docs/evidence/20261002-pr15-r5-runtime/r5_alert_knife_hit.png",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "visually_inspected": true
+    },
+    {
+      "action": "grenade_throw",
+      "event_id": "01abebb8f0b92b86338d68b0d7e64024:0:0",
+      "path": "res://build/asset_review/pr15-runtime/r5_history_auto_grenade.png",
+      "phase": 4,
+      "sha256": "752b1e0d3d3f4b9aa5578a45d1cea0e9f16d9d266d7139d6ade310502e86a56f",
+      "wave_id": 0,
+      "repository_path": ".cursor/docs/evidence/20261002-pr15-r5-runtime/r5_history_auto_grenade.png",
+      "source_sha": "d53e54f525687543e51080eb8482663a5058c443",
+      "visually_inspected": true
+    }
+  ],
+  "equivalence": [
+    {
+      "base": "c5ec8ff7b668ba86d9c9a305ecec0bca0072e9c7",
+      "head": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "excluded": [
+        "ambush_loop/scripts/utility_runtime_test.gd.uid"
+      ],
+      "exit_code": 0,
+      "note": "8b adds only test UID in the project; compatibility helper is outside the project."
+    },
+    {
+      "base": "8b7a38c90a796ab42d7aec691c0aa69f801fc307",
+      "head": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "excluded": [
+        "ambush_loop/scripts/campaign_replay_test.gd",
+        "ambush_loop/scripts/presentation_contract_test.gd"
+      ],
+      "exit_code": 0,
+      "note": "Only the listed changes differ; not a claim that every run was executed at latest HEAD."
+    },
+    {
+      "base": "abc6aed123abe37ea1b4f694e6ea4285fd234193",
+      "head": "d53e54f525687543e51080eb8482663a5058c443",
+      "excluded": [
+        "ambush_loop/scripts/utility_runtime_test.gd",
+        "ambush_loop/scripts/main.gd"
+      ],
+      "exit_code": 0,
+      "note": "Only the listed changes differ; not a claim that every run was executed at latest HEAD."
+    },
+    {
+      "base": "d53e54f525687543e51080eb8482663a5058c443",
+      "head": "f687ea080b95593d8f01bdc23ce18447bfa69aa8",
+      "excluded": [
+        "ambush_loop/scripts/asset_library_test.gd"
+      ],
+      "exit_code": 0,
+      "note": "Only the listed changes differ; not a claim that every run was executed at latest HEAD."
+    }
+  ],
+  "compatibility_command": "python3 .cursor/docs/evidence/20261002-pr15-r5-runtime/check_compatibility.py --repo . --candidate /tmp/pr15-r5-candidate-ebedb82/ambush_loop --baseline 651f72bf650512b7291fe6a40715a87a5ce3ea10 --output /tmp/pr15-r5-fixed-compatibility.json",
+  "compatibility_exit_code": 0,
+  "pending": [
+    "actual paired corpse grab/drag/release, source IDs and death_prone with embedded 20cm once",
+    "HUD desktop occlusion and radio yaw345 landmark cutaway quality",
+    "versioned 3D FX/full command timeline/complete FAILED abort terminal regression/latest full smoke",
+    "A3 actual budget and six-level all13wave visual matrix",
+    "traceable APK; ear0/45 and0/6/device after all production and cloud"
+  ],
+  "pack": {
+    "source_sha": "f687ea080b95593d8f01bdc23ce18447bfa69aa8",
+    "path": "/tmp/pr15-r5-tools-runtime.pck",
+    "bytes": 25584156,
+    "sha256": "7e81d6fa6a22cbb5e02ac7e29ff955b07ee3a3ba3b42260f6e56161d4bc0c54e",
+    "export_command": "isolated UUID/XDG/AMBUSH_TEST_RUN_ID + Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_loop --export-pack 'Linux Desktop' /tmp/pr15-r5-tools-runtime.pck",
+    "export_actual_exit_code": 0,
+    "export_run_id": "26786b936656432f82e88ea343f2eb94",
+    "export_log": "export-pack.log",
+    "probe_command": "AMBUSH_TEST_PACK=/tmp/pr15-r5-tools-runtime.pck bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 asset_pack_test.gd",
+    "probe_actual_exit_code": 0,
+    "probe_run_id": "2146158ee901451095a4df0245a12f84",
+    "checks": 1764,
+    "failures": 0,
+    "probe_log": "empty-project-pack.log",
+    "no_physical_project_files": true,
+    "not_apk": true,
+    "source_audio_import_restored": true,
+    "runtime_diff_after_export_exit_code": 0
+  },
+  "protected_scope": {
+    "changed_art_paths": [
+      "ambush_loop/art/v2/actors_manifest.json",
+      "ambush_loop/art/v2/models/enemy_flank_lod0.glb",
+      "ambush_loop/art/v2/models/enemy_flank_lod1.glb",
+      "ambush_loop/art/v2/models/enemy_flank_lod2.glb",
+      "ambush_loop/art/v2/models/enemy_patrol_lod0.glb",
+      "ambush_loop/art/v2/models/enemy_patrol_lod1.glb",
+      "ambush_loop/art/v2/models/enemy_patrol_lod2.glb",
+      "ambush_loop/art/v2/models/enemy_radio_lod0.glb",
+      "ambush_loop/art/v2/models/enemy_radio_lod1.glb",
+      "ambush_loop/art/v2/models/enemy_radio_lod2.glb",
+      "ambush_loop/art/v2/models/enemy_sneak_lod0.glb",
+      "ambush_loop/art/v2/models/enemy_sneak_lod1.glb",
+      "ambush_loop/art/v2/models/enemy_sneak_lod2.glb",
+      "ambush_loop/art/v2/models/operator_mg_lod0.glb",
+      "ambush_loop/art/v2/models/operator_mg_lod1.glb",
+      "ambush_loop/art/v2/models/operator_mg_lod2.glb",
+      "ambush_loop/art/v2/models/operator_rifle_lod0.glb",
+      "ambush_loop/art/v2/models/operator_rifle_lod1.glb",
+      "ambush_loop/art/v2/models/operator_rifle_lod2.glb",
+      "ambush_loop/art/v2/models/operator_scout_lod0.glb",
+      "ambush_loop/art/v2/models/operator_scout_lod1.glb",
+      "ambush_loop/art/v2/models/operator_scout_lod2.glb"
+    ],
+    "unchanged": [
+      "ArtSource production sources",
+      "all environment_v2 and old yard dependencies",
+      "30 equipment GLBs",
+      "six R3 historical gun GLBs",
+      "all atlas PNGs and 45 WAV/original import inputs"
+    ],
+    "assertion": "Only the 21 accepted character GLBs and owned actors_manifest changed in art/."
+  }
+}

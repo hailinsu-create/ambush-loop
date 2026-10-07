@@ -1,0 +1,22 @@
+{
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "parents": [
+    "f0d97457faa81b94a51cae12c40e07987267c738 f4ac6cb1f65660ede4206056b14e0c497d750f21 docs(test): seal depot whole playback and original radio save boundary",
+    "bd022d194f2371a1f2a8cf4b34c73f5992019249 f0d97457faa81b94a51cae12c40e07987267c738 docs(plan): classify replay return victory persistence before radio",
+    "1ec3198e9c0db367af96fc264604c5a286003b5e bd022d194f2371a1f2a8cf4b34c73f5992019249 fix(save): retain settled next mission when muting a won replay",
+    "037ac927a120485ce462028a6bb7d19ba4521794 1ec3198e9c0db367af96fc264604c5a286003b5e docs(test): seal replay save classification and trusted mute regression",
+    "0a160a46055d4beb01084da32b56d3525a927c3b 037ac927a120485ce462028a6bb7d19ba4521794 docs: plan fixed-source radio campaign and save refresh proof",
+    "1eddea3e131e45ffc5a05c02aff81c6d8c7693cd 0a160a46055d4beb01084da32b56d3525a927c3b test: seal replay mute save refresh negative and fixed proof"
+  ],
+  "game_changed_since_depot": [
+    "ambush_loop/scripts/main.gd",
+    "ambush_loop/scripts/replay_progress_save_test.gd",
+    "ambush_loop/scripts/run_isolated_test.ps1",
+    "ambush_loop/scripts/run_isolated_test.sh"
+  ],
+  "production_change_only": "ambush_loop/scripts/main.gd _save_progress settled WON replay pointer guard",
+  "other_game_changes": "new regression + two isolated wrapper registrations only",
+  "game_diff_1ec_to_delivery_empty": true,
+  "no_other_product_change_in_037ac_or_later": true
+}

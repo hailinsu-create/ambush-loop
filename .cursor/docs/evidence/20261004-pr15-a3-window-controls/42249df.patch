@@ -1,0 +1,89 @@
+commit 42249dfd4e753c2d994bea4aa8c2d0f73159ce44
+Author:     Liu Ning <lning@prepop.net>
+AuthorDate: Sun Oct 4 17:05:51 2026 +0000
+Commit:     Liu Ning <lning@prepop.net>
+CommitDate: Sun Oct 4 17:05:51 2026 +0000
+
+    test: correct Window level identity and retain partial warm controls
+
+diff --git a/ambush_loop/scripts/a3_collector_overhead_test.gd b/ambush_loop/scripts/a3_collector_overhead_test.gd
+index c0a9e42..61cdfbf 100644
+--- a/ambush_loop/scripts/a3_collector_overhead_test.gd
++++ b/ambush_loop/scripts/a3_collector_overhead_test.gd
+@@ -55,8 +55,28 @@ func _condition(family: String, index: int, attached: bool, resident: Node) -> v
+ 	_check(before==canonical,"same original backend/presenter/camera/config before "+label)
+ 	if failures>failures_before:
+ 		sampler.stop()
+-		if is_instance_valid(active_collector):active_collector.stop()
+-		sampler.save(path,{"label":label,"invalid_before_timing":true,"workload":before})
++		var partial_collector: Dictionary={}
++		if is_instance_valid(active_collector):
++			active_collector.mark(label+"-failed-before-timing",false)
++			active_collector.stop()
++			if active_collector.row_count>0:
++				var partial_path := path+"/collector"
++				DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(partial_path))
++				var partial_error: Error=active_collector.save(partial_path,{"invalid_before_timing":true,"scope":"preserved partial warm raw; not an accepted control window"})
++				partial_collector={"path":partial_path,"rows":active_collector.row_count,
++					"save_error":partial_error,"raw_sha256":FileAccess.get_sha256(partial_path+"/raw.csv")}
++		var partial: Dictionary={"label":label,"family":family,"index":index,"attached":attached,
++			"invalid_before_timing":true,"valid":false,"workload_before":before,"canonical":canonical,
++			"collector":partial_collector,"receipt_sha256":receipt_sha,"path":path}
++		var partial_cadence_error: Error=sampler.save(path,partial)
++		partial["cadence_save_error"]=partial_cadence_error
++		partial["cadence_sha256"]=FileAccess.get_sha256(path+"/cadence.csv")
++		conditions.append(partial) # Failed controls are explicit, never disappear from the run.
++		if family=="full_buffer" and is_instance_valid(active_collector):
++			active_collector.queue_free()
++			await process_frame
++			await process_frame
++			active_collector=null
+ 		return
+ 	var rss_start: int=Collector.own_rss_bytes()
+ 	var static_start: float=Performance.get_monitor(Performance.MEMORY_STATIC) if OS.is_debug_build() else -1
+diff --git a/ambush_loop/scripts/a3_collector_probe_test.gd b/ambush_loop/scripts/a3_collector_probe_test.gd
+index 0288b84..872d0d4 100644
+--- a/ambush_loop/scripts/a3_collector_probe_test.gd
++++ b/ambush_loop/scripts/a3_collector_probe_test.gd
+@@ -44,8 +44,17 @@ func _seal(label: String, require_measured: bool) -> Dictionary:
+ 	_check(rows.slice(1).all(func(row:Array)->bool:return row[2]>0 and is_finite(row[30]) and row[30]>=0),"actual monotonic intervals and finite callback usecs "+label)
+ 	_check(included.size()>=3 if require_measured else true,"actual measured Window rows exist "+label)
+ 	_check(included.all(func(row:Array)->bool:return row[31]==1 and row[34]==1 and row[2]>0 and row[5]=="" and row[32]==0),"accepted rows ready/presenter-valid/frozen and free of exclusions "+label)
+-	_check(collector.save(path,{"scope":"actual Window stationary chunk/lifecycle; no six-level performance acceptance"})==OK,"valid nonoverflow Window chunk seals outside timing "+label)
+-	var saved: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(path+"/metadata.json"))
++	var save_error: Error=collector.save(path,{"scope":"actual Window stationary chunk/lifecycle; no six-level performance acceptance"})
++	_check(save_error==OK,"valid nonoverflow Window chunk seals outside timing "+label)
++	if not FileAccess.file_exists(path+"/metadata.json"):
++		chunks.append({"label":label,"path":path,"valid":false,"save_error":save_error})
++		return {}
++	var parsed: Variant=JSON.parse_string(FileAccess.get_file_as_string(path+"/metadata.json"))
++	if not parsed is Dictionary:
++		_check(false,"valid JSON receipt exists "+label)
++		chunks.append({"label":label,"path":path,"valid":false,"save_error":save_error})
++		return {}
++	var saved: Dictionary=parsed
+ 	_check(saved.chunk_source_and_buffer_valid and not saved.run_incomplete and saved.run_overflow_rows==0 and saved.receipt_stable and saved.warm_import_proof_complete,"complete lifetime/buffer/fixed-loaded-proof receipt "+label)
+ 	_check(saved.metadata.source_proof_before.receipt_sha256==receipt_sha and saved.source_proof_after.receipt_sha256==receipt_sha and saved.raw_sha256==FileAccess.get_sha256(path+"/raw.csv"),"original receipt and raw hash exact before/after "+label)
+ 	if rows.is_empty():return {}
+diff --git a/ambush_loop/scripts/a3_window_context.gd b/ambush_loop/scripts/a3_window_context.gd
+index 20e3525..98880c2 100644
+--- a/ambush_loop/scripts/a3_window_context.gd
++++ b/ambush_loop/scripts/a3_window_context.gd
+@@ -26,7 +26,7 @@ static func freeze(main: Node) -> void:
+ 
+ static func backend_bytes(main: Node) -> PackedByteArray:
+ 	var log: BattleLog = main.battle_log
+-	return var_to_bytes([main.phase,main.level_id,main.run_id,main._presentation_suspended,
++	return var_to_bytes([main.phase,main.level.level_id,main.run_id,main._presentation_suspended,
+ 		main._pose_command_clock_s,main._night_timer,main.sim.tick,main.sim.paused,main.sim.speed,main.sim._accum,
+ 		log.attempt_id,log.wave_id,log.wave_offset,log.events,log.snapshots,log.playback_snapshots,
+ 		log.terminal_tick,log.terminal_reason,log.playback_schema,log.playback_terminal_tick,log.current_playback_tick(),
+@@ -46,7 +46,7 @@ static func digest(bytes: PackedByteArray) -> String:
+ static func workload(main: Node) -> Dictionary:
+ 	var view: Node3D = main.presentation_3d
+ 	return {"backend_sha256":digest(backend_bytes(main)),"presenter_frame_sha256":digest(var_to_bytes(view.frame)),
+-		"level_id":main.level_id,"attempt_id":main.battle_log.attempt_id,"phase":main.phase,
++		"level_id":main.level.level_id,"attempt_id":main.battle_log.attempt_id,"phase":main.phase,
+ 		"main_auto_process":main.is_processing(),"presenter_auto_process":view.is_processing(),
+ 		"tree_paused":main.get_tree().paused,"policy":main.get_tree().root.get_node("GameSettings").quality_tier,
+ 		"window_width":main.get_window().size.x,"window_height":main.get_window().size.y,

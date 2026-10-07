@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/ambush_test_runs/510c9599c5a048638fc0560472e5f569/data/godot/app_userdata/Ambush Loop run_id=510c9599c5a048638fc0560472e5f569
+ERROR: HUD_FINAL_ORACLE: full domain retained
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/hud_final_oracle.gd:16)
+       [1] _run (/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/hud_final_oracle.gd:126)
+       [2] settle (/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/hud_final_oracle.gd:72)
+HUD_FINAL_ORACLE checks=223 failures=1 cases=30

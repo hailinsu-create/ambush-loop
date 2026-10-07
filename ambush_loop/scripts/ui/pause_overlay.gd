@@ -1,5 +1,6 @@
 class_name PauseOverlay
 extends CanvasLayer
+const ModalFocus := preload("res://scripts/ui/modal_focus.gd")
 
 ## Shared pause / settings: mute, Music/SFX volumes, return to title, redeploy (scout/sweep).
 
@@ -25,6 +26,8 @@ var _wipe_btn: Button
 var _nade_btn: Button
 var _close_btn: Button
 var _wipe_armed: bool = false
+var _scroll: ScrollContainer
+var _previous_focus: WeakRef
 
 
 func _ready() -> void:
@@ -50,17 +53,27 @@ func _ready() -> void:
 	margin.add_theme_constant_override("margin_top", 16)
 	margin.add_theme_constant_override("margin_bottom", 16)
 	_panel.add_child(margin)
+	var shell := VBoxContainer.new()
+	shell.add_theme_constant_override("separation", 10)
+	margin.add_child(shell)
+	_scroll = ScrollContainer.new()
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.follow_focus = true
+	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 10)
-	margin.add_child(box)
 	var title := Label.new()
 	title.text = "作战设置"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 22)
 	title.add_theme_color_override("font_color", NightOps.OLIVE_HI)
-	box.add_child(title)
+	shell.add_child(title)
+	shell.add_child(_scroll)
+	_scroll.add_child(box)
 	var ver := Label.new()
 	ver.name = "BuildVersion"
+	ver.clip_text = true
 	ver.text = "v%s · COMMANDOS / WW2" % NightOps.game_version()
 	ver.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ver.add_theme_font_size_override("font_size", 13)
@@ -68,6 +81,7 @@ func _ready() -> void:
 	box.add_child(ver)
 	var frame := Label.new()
 	frame.name = "CampaignFrame"
+	frame.clip_text = true
 	frame.text = LevelDef.campaign_frame()
 	frame.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	frame.add_theme_font_size_override("font_size", 13)
@@ -109,7 +123,20 @@ func _ready() -> void:
 	_close_btn = _fat_btn()
 	_close_btn.text = "继续"
 	_close_btn.pressed.connect(dismiss)
-	box.add_child(_close_btn)
+	shell.add_child(_close_btn)
+	get_viewport().size_changed.connect(_layout_for_surface)
+	_layout_for_surface()
+
+
+func _layout_for_surface() -> void:
+	if _panel == null: return
+	var usable := get_viewport().get_visible_rect().size
+	var half := Vector2(minf(420.0,usable.x-16.0),minf(680.0,usable.y-16.0))*0.5
+	_panel.set_anchors_preset(Control.PRESET_CENTER)
+	_panel.offset_left = -half.x
+	_panel.offset_right = half.x
+	_panel.offset_top = -half.y
+	_panel.offset_bottom = half.y
 
 
 func _fat_btn() -> Button:
@@ -150,6 +177,10 @@ func is_open() -> bool:
 
 
 func present(show_redeploy: bool, show_title: bool) -> void:
+	var previous := get_viewport().gui_get_focus_owner()
+	_previous_focus = weakref(previous) if is_instance_valid(previous) and previous.is_visible_in_tree() else null
+	_layout_for_surface()
+	_scroll.scroll_vertical = 0
 	_open = true
 	visible = true
 	_wipe_armed = false
@@ -160,8 +191,10 @@ func present(show_redeploy: bool, show_title: bool) -> void:
 	if _wipe_btn:
 		_wipe_btn.visible = show_title
 	_refresh_audio()
+	ModalFocus.loop(self)
+	_close_btn.grab_focus()
 	if _panel:
-		_panel.pivot_offset = Vector2(210, 296)
+		_panel.pivot_offset = _panel.size * 0.5
 		_panel.scale = Vector2(0.92, 0.92)
 		_panel.modulate.a = 0.0
 		var tw := create_tween()
@@ -185,6 +218,10 @@ func dismiss() -> void:
 		_panel.modulate.a = 1.0
 	if _dim:
 		_dim.modulate.a = 1.0
+	var previous := _previous_focus.get_ref() as Control if _previous_focus else null
+	_previous_focus = null
+	if is_instance_valid(previous) and previous.is_visible_in_tree():
+		previous.grab_focus()
 	closed.emit()
 
 
@@ -208,6 +245,9 @@ func _refresh_audio() -> void:
 		if gs and gs.has_method("want_touch_controls"):
 			touch_on = bool(gs.want_touch_controls())
 		_touch_btn.text = "触控底栏：开" if touch_on else "触控底栏：关"
+		var scene = get_tree().current_scene if get_tree() else null
+		if scene != null and scene.has_method("_compact_hud") and scene._compact_hud():
+			_touch_btn.text = "触控偏好：%s（当前紧凑底栏）" % ("开" if touch_on else "关")
 	if _nade_btn:
 		var nade_on := true
 		var scene = get_tree().current_scene if get_tree() else null

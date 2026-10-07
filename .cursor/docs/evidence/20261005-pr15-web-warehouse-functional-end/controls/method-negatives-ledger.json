@@ -1,0 +1,33 @@
+{
+  "first_geometry": {
+    "actual_exit": 1,
+    "exception": "('no original visible fire row', 0)",
+    "label": "warehouse-original-event-focus",
+    "evidence": "actual controller stdout transcribed from tool response; frozen failed script + original candidate geometry rows in driver-actions retained",
+    "original_receipt_retained": false,
+    "reason": "controller label JSON path was the same as later successful focus packet output and was overwritten; not claim full original receipt exists"
+  },
+  "center_occlusion": {
+    "actual_exit": 1,
+    "original_receipt": "run-single/warehouse-original-event-focus-hit-index.json",
+    "original_loaded_script": "warehouse_original_event_focus.failed-overlay.py",
+    "actual_click_css": [
+      1098,
+      311
+    ],
+    "scope": "readonly ItemList hit6 fire but higher camera layer intercepted; focus_actor remained -1/tick unchanged; confirmed UI defect, not fixed here"
+  },
+  "reopen_variable": {
+    "actual_exit": 1,
+    "original_receipt": "run-single/warehouse-final-title-reopen.json",
+    "scope": "top-level row width variable pw replaced Playwright owner before existing reopen helper; context was closed then launch failed; production/profile/record not corrupted"
+  },
+  "corrections": {
+    "focus_left_original_mouse_actual_exit": 0,
+    "final_finite_original_Title_reopen_actual_exit": 0,
+    "future_controller_rules": [
+      "distinct receipt and artifact namespaces",
+      "stable browser owner variable; isolate recipe local row_width variables"
+    ]
+  }
+}

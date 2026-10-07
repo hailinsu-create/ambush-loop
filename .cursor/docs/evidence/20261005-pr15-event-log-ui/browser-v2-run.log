@@ -1,0 +1,56 @@
+{"label": "desktop page identity", "wall": 21.16334814002039}
+{"label": "desktop geometry", "wall": 23.810092112020357}
+{"label": "desktop original glyph focus", "wall": 32.79122233801172}
+{"label": "desktop original glyph focus", "wall": 41.689246452995576}
+{"label": "desktop original glyph focus", "wall": 50.516840819997014}
+{"label": "desktop capture wave0_focus", "wall": 54.94473519301391}
+{"label": "desktop geometry", "wall": 61.453469542000676}
+{"label": "desktop actual original slider", "wall": 67.13115864200518}
+{"label": "desktop original glyph focus", "wall": 75.08632611701614}
+{"label": "desktop original glyph focus", "wall": 81.83909828000469}
+{"label": "desktop original glyph focus", "wall": 88.58935588400345}
+{"label": "desktop capture wave1_focus", "wall": 91.99495758401463}
+{"label": "desktop END", "wall": 99.25495764700463}
+{"label": "scale200 page identity", "wall": 117.73116898100125}
+{"label": "scale200 geometry", "wall": 128.51231556001585}
+{"label": "scale200 original glyph focus", "wall": 177.54020032202243}
+{"label": "scale200 original glyph focus", "wall": 186.34188962102053}
+{"label": "scale200 original glyph focus", "wall": 195.01927400002023}
+{"label": "scale200 original glyph focus", "wall": 205.85241203999612}
+{"label": "scale200 original glyph focus", "wall": 216.48038436000934}
+{"label": "scale200 original glyph focus", "wall": 227.53514638802153}
+{"label": "scale200 capture wave0_focus", "wall": 231.9096807570022}
+{"label": "scale200 geometry", "wall": 240.3370858770213}
+{"label": "scale200 actual original slider", "wall": 246.0433804890199}
+{"label": "scale200 original glyph focus", "wall": 255.41167122201296}
+{"label": "scale200 original glyph focus", "wall": 263.84360413701506}
+{"label": "scale200 original glyph focus", "wall": 272.332932350022}
+{"label": "scale200 capture wave1_focus", "wall": 275.768674698018}
+{"label": "scale200 original glyph focus", "wall": 298.28338313201675}
+{"label": "scale200 END", "wall": 299.60016534102033}
+{"label": "phone_landscape page identity", "wall": 312.558079644019}
+{"label": "phone_landscape geometry", "wall": 317.90694165602326}
+{"label": "phone_landscape original glyph focus", "wall": 343.0379980959988}
+{"label": "phone_landscape original glyph focus", "wall": 347.6094087540114}
+{"label": "phone_landscape original glyph focus", "wall": 351.95534211501945}
+{"label": "phone_landscape original glyph focus", "wall": 357.3063066320028}
+{"label": "phone_landscape original glyph focus", "wall": 362.59968938000384}
+{"label": "phone_landscape original glyph focus", "wall": 367.95976311501}
+{"label": "phone_landscape capture wave0_focus", "wall": 370.3647372359992}
+{"label": "phone_landscape geometry", "wall": 374.4632351550099}
+{"label": "phone_landscape actual original slider", "wall": 377.859047956008}
+Traceback (most recent call last):
+  File "/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py", line 108, in <module>
+    for fraction in range(3):ui.focus(1,fraction,touch=touch)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py", line 71, in focus
+    c=self.fire(wave);point=c['fractions'][fraction];before=self.state();after=self.click(point,touch)
+      ^^^^^^^^^^^^^^^
+  File "/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py", line 64, in fire
+    check(bool(fire),'historical fire exists for expected wave')
+  File "/tmp/pr15-web-controls/event-log-ui-20261005/browser_regression.py", line 25, in check
+    if not value:raise AssertionError(label)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: historical fire exists for expected wave
+
+{"BROWSER_END": true, "actual_exit": 1, "checks": 613, "wall": 378.83999554801267}

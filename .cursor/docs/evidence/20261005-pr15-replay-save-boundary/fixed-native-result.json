@@ -1,0 +1,120 @@
+{
+  "checks": 15,
+  "failures": [],
+  "record_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+  "rows": [
+    {
+      "case": "settled_repeat",
+      "repeat": 0,
+      "saved": {
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "muted": false,
+        "next": "depot",
+        "progress": {
+          "progress": {
+            "cleared": [
+              "railcut",
+              "yard",
+              "warehouse",
+              "pump"
+            ],
+            "complete": false,
+            "level_id": "depot",
+            "level_index": 4,
+            "loop_index": 1
+          },
+          "stats": {
+            "railcut_loops": 1,
+            "railcut_perfect": true
+          }
+        },
+        "settings_text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      }
+    },
+    {
+      "case": "settled_repeat",
+      "repeat": 1,
+      "saved": {
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "muted": false,
+        "next": "depot",
+        "progress": {
+          "progress": {
+            "cleared": [
+              "railcut",
+              "yard",
+              "warehouse",
+              "pump"
+            ],
+            "complete": false,
+            "level_id": "depot",
+            "level_index": 4,
+            "loop_index": 1
+          },
+          "stats": {
+            "railcut_loops": 1,
+            "railcut_perfect": true
+          }
+        },
+        "settings_text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      }
+    },
+    {
+      "after": {
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=true\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=true\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "muted": true,
+        "next": "depot",
+        "progress": {
+          "progress": {
+            "cleared": [
+              "railcut",
+              "yard",
+              "warehouse",
+              "pump"
+            ],
+            "complete": false,
+            "level_id": "depot",
+            "level_index": 4,
+            "loop_index": 1
+          },
+          "stats": {
+            "railcut_loops": 1,
+            "railcut_perfect": true
+          }
+        },
+        "settings_text": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "before": {
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "muted": false,
+        "next": "depot",
+        "progress": {
+          "progress": {
+            "cleared": [
+              "railcut",
+              "yard",
+              "warehouse",
+              "pump"
+            ],
+            "complete": false,
+            "level_id": "depot",
+            "level_index": 4,
+            "loop_index": 1
+          },
+          "stats": {
+            "railcut_loops": 1,
+            "railcut_perfect": true
+          }
+        },
+        "settings_text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "case": "WON_replay_M"
+    }
+  ],
+  "scope": "guarded paired pending-WON and active-phase fixtures; original handlers; not ordinary producer, whole, renderer or device acceptance",
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e"
+}

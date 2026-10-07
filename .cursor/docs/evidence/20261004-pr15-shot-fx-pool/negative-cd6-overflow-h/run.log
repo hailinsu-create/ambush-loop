@@ -1,0 +1,18 @@
+TEST_RUN_ID=f933931b6396489391b236f5ac1a35dc
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/f933931b6396489391b236f5ac1a35dc/data
+TEST_ENTRY=shot_fx_pool_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/f933931b6396489391b236f5ac1a35dc/data/godot/app_userdata/Ambush Loop run_id=f933931b6396489391b236f5ac1a35dc
+SHOT_FX_POOL_FAIL finite saved coordinate with overflowed derived tracer length fails closed
+ERROR: Condition "!v.is_finite()" is true.
+   at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1000)
+   GDScript backtrace (most recent call first):
+       [0] update_frame (res://scripts/presentation/shot_fx_pool.gd:108)
+       [1] _boundary_cases (res://scripts/shot_fx_pool_test.gd:193)
+       [2] _run_cases (res://scripts/shot_fx_pool_test.gd:344)
+       [3] _original_shots (res://scripts/shot_fx_pool_test.gd:121)
+       [4] _reset (res://scripts/shot_fx_boundary_test.gd:39)
+SHOT_FX_POOL_FAIL foreign current live shot/gun cannot replace bound original history
+SHOT_FX_POOL_FAIL restoring original modern bound log restores exact saved shot after all old sources and preserves actual foreign live shot
+SHOT_FX_POOL_TEST checks=224 failures=3 output=res://build/asset_review/pr15-runtime/shot-fx-pool-f933931b6396489391b236f5ac1a35dc

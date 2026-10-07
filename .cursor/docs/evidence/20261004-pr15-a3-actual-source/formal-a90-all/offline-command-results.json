@@ -1,0 +1,31 @@
+{
+  "strict": {
+    "argv": [
+      "python3",
+      "ambush_loop/scripts/summarize_a3_campaign.py",
+      "--report",
+      "ambush_loop/build/asset_review/pr15-runtime/a3-campaign-bc8eae712ba64d45884041cc92e7f7e5/report.json",
+      "--proof",
+      "/tmp/pr15-a3-window-controls/provenance-a90-all.json",
+      "--output",
+      "/tmp/pr15-a3-window-controls/a3-all-a90-analysis.json"
+    ],
+    "actual_exit": 0
+  },
+  "supplemental": {
+    "argv": [
+      "python3",
+      "/tmp/pr15-a3-window-controls/extra_campaign_stats.py",
+      "--report",
+      "ambush_loop/build/asset_review/pr15-runtime/a3-campaign-bc8eae712ba64d45884041cc92e7f7e5/report.json",
+      "--strict",
+      "/tmp/pr15-a3-window-controls/a3-all-a90-analysis.json",
+      "--root",
+      "/workspace/ambush-pr15",
+      "--output",
+      "/tmp/pr15-a3-window-controls/a3-all-a90-extra.json"
+    ],
+    "actual_exit": 0,
+    "scope": "Additional percentiles/RSS on same ended original raw, not a new engine run."
+  }
+}

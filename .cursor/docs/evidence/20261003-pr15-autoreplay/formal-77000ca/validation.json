@@ -1,0 +1,106 @@
+{
+  "source_sha": "77000cae182ce9836d5ecc0926ed5178a0a012d7",
+  "game_tree": "670400771e5c2988855f7aebb048c3bff341cc0d",
+  "runs": [
+    {
+      "entry": "replay_autoplay_test.gd",
+      "mode": "--headless",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot replay_autoplay_test.gd --headless",
+      "uuid": "0e4b6f6780934fda9ccb4444bbdcfd18",
+      "actual_exit": 0,
+      "checks": 29,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "entry": "replay_autoplay_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot replay_autoplay_test.gd --render",
+      "uuid": "65fa40e7eee445bab873b6238ad1a97b",
+      "actual_exit": 0,
+      "checks": 168,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "entry": "replay_timeline_test.gd",
+      "mode": "--headless",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot replay_timeline_test.gd --headless",
+      "uuid": "807d7a298b27454eb9b393c891a6669b",
+      "actual_exit": 0,
+      "checks": 67,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "entry": "equipment_freeze_test.gd",
+      "mode": "--headless",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot equipment_freeze_test.gd --headless",
+      "uuid": "a64201485e22433f813c2f55ae6db2f5",
+      "actual_exit": 0,
+      "checks": 66,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "entry": "presentation_lifecycle_test.gd",
+      "mode": "--headless",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot presentation_lifecycle_test.gd --headless",
+      "uuid": "11fe5fd7109444c0bdc4d5ad558fd014",
+      "actual_exit": 0,
+      "checks": 30,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "entry": "presentation_lifecycle_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot presentation_lifecycle_test.gd --render",
+      "uuid": "52812444db874eac8ea4b8c6e6d68bdb",
+      "actual_exit": 0,
+      "checks": 32,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "entry": "result_viewport_test.gd",
+      "mode": "--render",
+      "command": "AMBUSH_LEGACY_RECORD_FIXTURE=/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot result_viewport_test.gd --render",
+      "uuid": "b9329332188f423a9bc10d802cbc70dc",
+      "actual_exit": 0,
+      "checks": 553,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    }
+  ],
+  "captures": 33,
+  "native_window_captures": 32,
+  "root_viewport_capture": 1,
+  "visual_inspected": [
+    "viewport_auto_100_desktop_entry.png",
+    "viewport_auto_100_desktop_playing.png",
+    "viewport_auto_100_desktop_endpoint.png",
+    "viewport_auto_200_compact_entry.png",
+    "viewport_auto_200_compact_playing.png",
+    "viewport_auto_200_compact_endpoint.png",
+    "viewport_result_failed_1600_200_touch_scrolled.png",
+    "viewport_result_won_1600_200_touch_scrolled.png",
+    "replay_event_focus.png"
+  ],
+  "actual_schema1": {
+    "source_sha": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+    "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+    "bytes": 5418800,
+    "original_endpoint": 1415
+  },
+  "scope": "Reference original battle deployments + legal movement fixture; native automatic engine callbacks, not per-frame manual sample seeks. Desktop100/compact200 native pause/speed/slider/arrows/P/menu. Global arrows/Space release GUI focus explicitly. Event seek and app focus out/in use original APIs. No normal player journey, art/device/FPS/FX/A3 acceptance.",
+  "assets_changed": false,
+  "production_shortcut_gui_reroute": false
+}

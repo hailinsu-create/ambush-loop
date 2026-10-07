@@ -1,0 +1,119 @@
+{
+  "end_utc": "2026-10-05T01:37:59.044565+00:00",
+  "http_services": [
+    {
+      "pid": 132052,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "-m",
+        "http.server",
+        "12783",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "/workspace/pr15-web-artifacts/543d76ef1e5dd3d0231332197d90178ac7140cc6/release"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 133540,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "-m",
+        "http.server",
+        "12784",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "/workspace/pr15-web-artifacts/90383cfd7b744f89d450fa4c37819904cf753b5b/release"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 135915,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/portable-server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 136193,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/qa-server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 137807,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/polygon-caller-diagnostic/server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 138167,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/polygon-caller-diagnostic-v2/server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 138538,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/polygon-compat-prototype/server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 138932,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/main-canvas-gate-prototype/server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    },
+    {
+      "pid": 140006,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/main-canvas-gate-candidate-qa/server.py"
+      ],
+      "ownership_matched": true,
+      "signal": "SIGTERM intentional HTTP-service closure; not a test failure",
+      "proc_absent_after": true
+    }
+  ],
+  "remaining_owned_browser_or_qa_engine_processes": [],
+  "scope": "Exact previously owned processes only; no global pkill, no unrelated Xorg/Godot/network/ACL change",
+  "actual_exit": 0
+}

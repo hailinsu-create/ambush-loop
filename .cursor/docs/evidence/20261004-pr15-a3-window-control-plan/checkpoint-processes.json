@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-04T16:15:42.934222+00:00",
+  "uid": 1000,
+  "own_uid_engine_and_display_processes": [
+    {
+      "pid": 1764,
+      "argv": [
+        "/usr/lib/xorg/Xorg",
+        ":99",
+        "-config",
+        "/workspace/.ambush-loop-env/display/xorg.conf",
+        "-nolisten",
+        "tcp",
+        "-noreset",
+        "-logfile",
+        "/tmp/pr15-Xorg.log"
+      ]
+    }
+  ],
+  "scope": "read-only argv/UID inventory; no environ/credential read or foreign process mutation"
+}

@@ -1,0 +1,609 @@
+{
+  "schema": 1,
+  "A_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "B_source": "95daa05d0ccfc4e6bd357060b1f34c2a863c2041",
+  "runs": [
+    {
+      "label": "run1-A",
+      "side": "A",
+      "receipt": {
+        "start": "2026-10-05T18:38:49.496874+00:00",
+        "end": "2026-10-05T18:41:15.138532+00:00",
+        "actual_exit": 0,
+        "loaded_script_sha256": "0b0568f4ce7b81cc8408862d53fb6c243185dc4d5512ff42a3b0846f8f26f481",
+        "profile": "/workspace/.ambush-loop-env/web-touch-abba-95daa-20261005-run1-A",
+        "clean_context_end": true
+      },
+      "end": {
+        "utc": "2026-10-05T18:41:09.910245+00:00",
+        "wall_s": 72.95314459997462,
+        "actual_exit": 0,
+        "static_rows": 49,
+        "advance_rows": 47,
+        "record_domain_settings_checkpoint_exact": true
+      },
+      "input_counts": {
+        "DOM": 32,
+        "engine": 32
+      },
+      "phases": {
+        "static": {
+          "samples": 49,
+          "postdraw_interval": {
+            "n": 49,
+            "median_us": 405200,
+            "p95_us": 456900,
+            "min_us": 393400,
+            "max_us": 472400,
+            "sum_us": 20296800,
+            "over_33333": 49,
+            "over_16667": 49
+          },
+          "delta_us": {
+            "n": 49,
+            "median_us": 133733,
+            "p95_us": 143477,
+            "min_us": 116666,
+            "max_us": 150000,
+            "sum_us": 6523580,
+            "over_33333": 49,
+            "over_16667": 49
+          },
+          "tick_range": [
+            6339,
+            6339
+          ],
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "root_calls": 0,
+          "presenter_calls": 49,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        },
+        "advance": {
+          "samples": 47,
+          "postdraw_interval": {
+            "n": 47,
+            "median_us": 429900,
+            "p95_us": 459700,
+            "min_us": 400600,
+            "max_us": 533500,
+            "sum_us": 20260500,
+            "over_33333": 47,
+            "over_16667": 47
+          },
+          "delta_us": {
+            "n": 47,
+            "median_us": 133333,
+            "p95_us": 142800,
+            "min_us": 116666,
+            "max_us": 147600,
+            "sum_us": 6257281,
+            "over_33333": 47,
+            "over_16667": 47
+          },
+          "tick_range": [
+            6434,
+            6802
+          ],
+          "counts": {
+            "capture_calls": [
+              8
+            ],
+            "hud_capture_calls": [
+              8
+            ],
+            "touch_calls": [
+              2
+            ],
+            "style_calls": [
+              50
+            ],
+            "touch_capture_calls": [
+              2
+            ]
+          },
+          "root_calls": 47,
+          "presenter_calls": 47,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        }
+      }
+    },
+    {
+      "label": "run2-B",
+      "side": "B",
+      "receipt": {
+        "start": "2026-10-05T18:41:15.139740+00:00",
+        "end": "2026-10-05T18:43:08.680925+00:00",
+        "actual_exit": 0,
+        "loaded_script_sha256": "7075874079bb0e3e73c574adb136e7c40bf7fbad2439b7da7be27b8839c826b4",
+        "profile": "/workspace/.ambush-loop-env/web-touch-abba-95daa-20261005-run2-B",
+        "clean_context_end": true
+      },
+      "end": {
+        "utc": "2026-10-05T18:43:03.404216+00:00",
+        "wall_s": 73.49488593998831,
+        "actual_exit": 0,
+        "static_rows": 50,
+        "advance_rows": 47,
+        "record_domain_settings_checkpoint_exact": true
+      },
+      "input_counts": {
+        "DOM": 22,
+        "engine": 22
+      },
+      "phases": {
+        "static": {
+          "samples": 50,
+          "postdraw_interval": {
+            "n": 50,
+            "median_us": 401100.0,
+            "p95_us": 423700,
+            "min_us": 380600,
+            "max_us": 429200,
+            "sum_us": 20130200,
+            "over_33333": 50,
+            "over_16667": 50
+          },
+          "delta_us": {
+            "n": 50,
+            "median_us": 133333.0,
+            "p95_us": 143700,
+            "min_us": 117066,
+            "max_us": 145399,
+            "sum_us": 6673445,
+            "over_33333": 50,
+            "over_16667": 50
+          },
+          "tick_range": [
+            6339,
+            6339
+          ],
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "root_calls": 0,
+          "presenter_calls": 50,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        },
+        "advance": {
+          "samples": 47,
+          "postdraw_interval": {
+            "n": 47,
+            "median_us": 424800,
+            "p95_us": 491700,
+            "min_us": 400000,
+            "max_us": 519400,
+            "sum_us": 20205200,
+            "over_33333": 47,
+            "over_16667": 47
+          },
+          "delta_us": {
+            "n": 47,
+            "median_us": 134233,
+            "p95_us": 147533,
+            "min_us": 116666,
+            "max_us": 149366,
+            "sum_us": 6271746,
+            "over_33333": 47,
+            "over_16667": 47
+          },
+          "tick_range": [
+            6435,
+            6803
+          ],
+          "counts": {
+            "capture_calls": [
+              7
+            ],
+            "hud_capture_calls": [
+              7
+            ],
+            "touch_calls": [
+              1
+            ],
+            "style_calls": [
+              25
+            ],
+            "touch_capture_calls": [
+              1
+            ]
+          },
+          "root_calls": 47,
+          "presenter_calls": 47,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        }
+      }
+    },
+    {
+      "label": "run3-B",
+      "side": "B",
+      "receipt": {
+        "start": "2026-10-05T18:43:08.682106+00:00",
+        "end": "2026-10-05T18:45:01.944719+00:00",
+        "actual_exit": 0,
+        "loaded_script_sha256": "78389eb01d2f7e4f81696c3ecd34f0e25e1914bd2a40170f03bba74eb81b3311",
+        "profile": "/workspace/.ambush-loop-env/web-touch-abba-95daa-20261005-run3-B",
+        "clean_context_end": true
+      },
+      "end": {
+        "utc": "2026-10-05T18:44:56.595873+00:00",
+        "wall_s": 73.13520309404703,
+        "actual_exit": 0,
+        "static_rows": 49,
+        "advance_rows": 46,
+        "record_domain_settings_checkpoint_exact": true
+      },
+      "input_counts": {
+        "DOM": 22,
+        "engine": 22
+      },
+      "phases": {
+        "static": {
+          "samples": 49,
+          "postdraw_interval": {
+            "n": 49,
+            "median_us": 404700,
+            "p95_us": 429200,
+            "min_us": 392500,
+            "max_us": 449700,
+            "sum_us": 19984500,
+            "over_33333": 49,
+            "over_16667": 49
+          },
+          "delta_us": {
+            "n": 49,
+            "median_us": 133233,
+            "p95_us": 144433,
+            "min_us": 122266,
+            "max_us": 148611,
+            "sum_us": 6541289,
+            "over_33333": 49,
+            "over_16667": 49
+          },
+          "tick_range": [
+            6339,
+            6339
+          ],
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "root_calls": 0,
+          "presenter_calls": 49,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        },
+        "advance": {
+          "samples": 46,
+          "postdraw_interval": {
+            "n": 46,
+            "median_us": 429050.0,
+            "p95_us": 509900,
+            "min_us": 401700,
+            "max_us": 558800,
+            "sum_us": 20161400,
+            "over_33333": 46,
+            "over_16667": 46
+          },
+          "delta_us": {
+            "n": 46,
+            "median_us": 133333.0,
+            "p95_us": 144033,
+            "min_us": 119433,
+            "max_us": 150000,
+            "sum_us": 6126044,
+            "over_33333": 46,
+            "over_16667": 46
+          },
+          "tick_range": [
+            6434,
+            6794
+          ],
+          "counts": {
+            "capture_calls": [
+              7
+            ],
+            "hud_capture_calls": [
+              7
+            ],
+            "touch_calls": [
+              1
+            ],
+            "style_calls": [
+              25
+            ],
+            "touch_capture_calls": [
+              1
+            ]
+          },
+          "root_calls": 46,
+          "presenter_calls": 46,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        }
+      }
+    },
+    {
+      "label": "run4-A",
+      "side": "A",
+      "receipt": {
+        "start": "2026-10-05T18:45:01.945858+00:00",
+        "end": "2026-10-05T18:46:54.931952+00:00",
+        "actual_exit": 0,
+        "loaded_script_sha256": "983c2ebc2226b679c0f530431fb62ad4247918ac393078773c8721131318bf39",
+        "profile": "/workspace/.ambush-loop-env/web-touch-abba-95daa-20261005-run4-A",
+        "clean_context_end": true
+      },
+      "end": {
+        "utc": "2026-10-05T18:46:49.682385+00:00",
+        "wall_s": 73.62779666204005,
+        "actual_exit": 0,
+        "static_rows": 50,
+        "advance_rows": 45,
+        "record_domain_settings_checkpoint_exact": true
+      },
+      "input_counts": {
+        "DOM": 22,
+        "engine": 22
+      },
+      "phases": {
+        "static": {
+          "samples": 50,
+          "postdraw_interval": {
+            "n": 50,
+            "median_us": 400900.0,
+            "p95_us": 417900,
+            "min_us": 376200,
+            "max_us": 423000,
+            "sum_us": 20061500,
+            "over_33333": 50,
+            "over_16667": 50
+          },
+          "delta_us": {
+            "n": 50,
+            "median_us": 133333.0,
+            "p95_us": 141700,
+            "min_us": 120000,
+            "max_us": 147666,
+            "sum_us": 6680982,
+            "over_33333": 50,
+            "over_16667": 50
+          },
+          "tick_range": [
+            6339,
+            6339
+          ],
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "root_calls": 0,
+          "presenter_calls": 50,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        },
+        "advance": {
+          "samples": 45,
+          "postdraw_interval": {
+            "n": 45,
+            "median_us": 432900,
+            "p95_us": 489200,
+            "min_us": 404500,
+            "max_us": 547800,
+            "sum_us": 19871600,
+            "over_33333": 45,
+            "over_16667": 45
+          },
+          "delta_us": {
+            "n": 45,
+            "median_us": 133333,
+            "p95_us": 145433,
+            "min_us": 116666,
+            "max_us": 150000,
+            "sum_us": 5992518,
+            "over_33333": 45,
+            "over_16667": 45
+          },
+          "tick_range": [
+            6434,
+            6786
+          ],
+          "counts": {
+            "capture_calls": [
+              8
+            ],
+            "hud_capture_calls": [
+              8
+            ],
+            "touch_calls": [
+              2
+            ],
+            "style_calls": [
+              50
+            ],
+            "touch_capture_calls": [
+              2
+            ]
+          },
+          "root_calls": 45,
+          "presenter_calls": 45,
+          "list_rows": [
+            0
+          ],
+          "list_visible": [
+            0
+          ],
+          "OFF_time_fields_zero_by_design": true
+        }
+      }
+    }
+  ],
+  "pixels": [
+    {
+      "A": "run1-A",
+      "B": "run2-B",
+      "pixels": 921600,
+      "changed_pixels": 0,
+      "pixel_exact": true,
+      "A_rgba_sha256": "898200abef16404997ecf1254d0b2c4c7eebf10e1151ca0b63bb5ecac81fd718",
+      "B_rgba_sha256": "898200abef16404997ecf1254d0b2c4c7eebf10e1151ca0b63bb5ecac81fd718"
+    },
+    {
+      "A": "run1-A",
+      "B": "run3-B",
+      "pixels": 921600,
+      "changed_pixels": 0,
+      "pixel_exact": true,
+      "A_rgba_sha256": "898200abef16404997ecf1254d0b2c4c7eebf10e1151ca0b63bb5ecac81fd718",
+      "B_rgba_sha256": "898200abef16404997ecf1254d0b2c4c7eebf10e1151ca0b63bb5ecac81fd718"
+    },
+    {
+      "A": "run1-A",
+      "B": "run4-A",
+      "pixels": 921600,
+      "changed_pixels": 0,
+      "pixel_exact": true,
+      "A_rgba_sha256": "898200abef16404997ecf1254d0b2c4c7eebf10e1151ca0b63bb5ecac81fd718",
+      "B_rgba_sha256": "898200abef16404997ecf1254d0b2c4c7eebf10e1151ca0b63bb5ecac81fd718"
+    }
+  ],
+  "pairs": [
+    {
+      "phase": "static",
+      "postdraw_medians_us": [
+        405200,
+        401100.0,
+        404700,
+        400900.0
+      ],
+      "postdraw_p95_us": [
+        456900,
+        423700,
+        429200,
+        417900
+      ],
+      "pair1_B2_vs_A1_pct": -1.011846001974337,
+      "pair2_B3_vs_A4_pct": 0.9478672985782088,
+      "A_repeat_drift_pct": -1.0612043435340612,
+      "B_repeat_drift_pct": 0.8975317875841382,
+      "scope": "common OFF overhead remains; paired direction/tail/drift only, not CPU/GPU attribution or device/30FPS acceptance"
+    },
+    {
+      "phase": "advance",
+      "postdraw_medians_us": [
+        429900,
+        424800,
+        429050.0,
+        432900
+      ],
+      "postdraw_p95_us": [
+        459700,
+        491700,
+        509900,
+        489200
+      ],
+      "pair1_B2_vs_A1_pct": -1.1863224005582707,
+      "pair2_B3_vs_A4_pct": -0.8893508893508928,
+      "A_repeat_drift_pct": 0.6978367062107527,
+      "B_repeat_drift_pct": 1.0004708097928416,
+      "scope": "common OFF overhead remains; paired direction/tail/drift only, not CPU/GPU attribution or device/30FPS acceptance"
+    }
+  ],
+  "whole_static_canonical_equal": true,
+  "record_domain_complete_cfg_checkpoint_each_run_exact": true,
+  "scope": "original yard e850 consumer/6339/wave0 SCOUT empty event list; fresh ABBA common OFF; no new producer/whole/APK/device/A3; all first P0 and mixed OFF/ON failures retained"
+}

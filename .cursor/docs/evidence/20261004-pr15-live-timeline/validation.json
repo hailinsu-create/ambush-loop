@@ -1,0 +1,186 @@
+{
+  "production_source": "f0208ebd25481c43e7c7ae5242d7e03c010c1cc5",
+  "formal_source": "cdbed4c5949a50cd696b48d8b6d6becbb3adc5dd",
+  "formal_game_tree": "7390812dd5c9020c7d14fc5b45639e394e18b7c4",
+  "runs": [
+    {
+      "stage": "dev-8abb-parse",
+      "source_sha": "8abb31a332aac37727e246e54f1c8dc2d86b3dea",
+      "checks": null,
+      "failures": null,
+      "actual_exit": 1,
+      "SCRIPT_ERROR": 2,
+      "ERROR": 1,
+      "run_id": "1c3ac0a260c24d5ebce6bf02a3f42ab6",
+      "suite_guard_passed": false,
+      "command": "AMBUSH_TEST_SOURCE_SHA=8abb31a332aac37727e246e54f1c8dc2d86b3dea bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 live_wave_timeline_test.gd --headless"
+    },
+    {
+      "stage": "negative-ee15-h",
+      "source_sha": "ee151102dd2af5ee7f4dc235a8a3bfde4685eac1",
+      "checks": 1158,
+      "failures": 463,
+      "actual_exit": 1,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "9a9203f407474b07a3abc39249af2ead",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=ee151102dd2af5ee7f4dc235a8a3bfde4685eac1 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 live_wave_timeline_test.gd --headless"
+    },
+    {
+      "stage": "fixed-f020-h",
+      "source_sha": "f0208ebd25481c43e7c7ae5242d7e03c010c1cc5",
+      "checks": 1158,
+      "failures": 0,
+      "actual_exit": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "1ffddf0fdea34d89a604477d16610f97",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=f0208ebd25481c43e7c7ae5242d7e03c010c1cc5 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 live_wave_timeline_test.gd --headless"
+    },
+    {
+      "stage": "dev-f020-r-stale-layout",
+      "source_sha": "f0208ebd25481c43e7c7ae5242d7e03c010c1cc5",
+      "checks": 1126,
+      "failures": 2,
+      "actual_exit": 1,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "e8e0743727904071864c0a6815ec7473",
+      "suite_guard_passed": true,
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=f0208ebd25481c43e7c7ae5242d7e03c010c1cc5 bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-live-godot.sh live_wave_timeline_test.gd --render"
+    },
+    {
+      "stage": "final-74cc-h",
+      "source_sha": "74cc8b8e62339e86bf8b1a3987e4cc721a1afc62",
+      "checks": 1159,
+      "failures": 0,
+      "actual_exit": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "a0530909957b44c0895dcc8278b0a10c",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=74cc8b8e62339e86bf8b1a3987e4cc721a1afc62 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 live_wave_timeline_test.gd --headless"
+    },
+    {
+      "stage": "dev-74cc-r-unsettled-layout",
+      "source_sha": "74cc8b8e62339e86bf8b1a3987e4cc721a1afc62",
+      "checks": 1127,
+      "failures": 2,
+      "actual_exit": 1,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "9a57698aabc24012a8b74cdc3128f72e",
+      "suite_guard_passed": true,
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=74cc8b8e62339e86bf8b1a3987e4cc721a1afc62 bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-live-godot.sh live_wave_timeline_test.gd --render"
+    },
+    {
+      "stage": "final-cdbe-h",
+      "source_sha": "cdbed4c5949a50cd696b48d8b6d6becbb3adc5dd",
+      "checks": 1159,
+      "failures": 0,
+      "actual_exit": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "55b44768b9054664b16fc6b99a1ae1fe",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=cdbed4c5949a50cd696b48d8b6d6becbb3adc5dd bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 live_wave_timeline_test.gd --headless"
+    },
+    {
+      "stage": "final-cdbe-r",
+      "source_sha": "cdbed4c5949a50cd696b48d8b6d6becbb3adc5dd",
+      "checks": 1164,
+      "failures": 0,
+      "actual_exit": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "0f80e1c5c55442109c948f62bd34f9ce",
+      "suite_guard_passed": true,
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=cdbed4c5949a50cd696b48d8b6d6becbb3adc5dd bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-live-godot.sh live_wave_timeline_test.gd --render"
+    }
+  ],
+  "formal_captures_hashed": 3,
+  "formal_captures_viewed": [
+    "live_strip_radio_paused_final_wave",
+    "live_strip_history_seek_no_live",
+    "live_strip_exit_new_scout"
+  ],
+  "dev_failed_captures_viewed": 2,
+  "formal_native_inputs": [
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "actual_radio_reference",
+      "path": "/root/Yard3D/HUD/Root/BottomBar/PauseButton",
+      "physical_screen": [
+        822.0,
+        673.5
+      ]
+    },
+    {
+      "button": 1,
+      "helper_exit": 0,
+      "id": "actual_radio_reference",
+      "path": "/root/Yard3D/HUD/Root/BottomBar/PauseButton",
+      "physical_screen": [
+        822.0,
+        673.5
+      ]
+    }
+  ],
+  "xorg_actual_exit": 0,
+  "domain_compare_actual_exit": 0,
+  "domain_compare": {
+    "attempts": [
+      "78a46e22b2f15878f40b9d5eb677ab0c",
+      "e2b31c89e2033b0a0ea80a6175d02ed3"
+    ],
+    "both_nonterminal_last_sweep": true,
+    "equal_event_fields_excluding_attempt_id_and_event_id": true,
+    "events": [
+      51,
+      51
+    ],
+    "fixed_source": "f0208ebd25481c43e7c7ae5242d7e03c010c1cc5",
+    "hashes": [
+      "c66ab76333e7c6956f18daf699bd0e47b347293072778e414b1b083610c1e5da",
+      "7b7083047923f9be05a6075edd92ad1afe1785dc598ab1cf66870a23cfb22ee5"
+    ],
+    "immutable_source_bytes": true,
+    "negative_source": "ee151102dd2af5ee7f4dc235a8a3bfde4685eac1",
+    "scope": "Read-only separate H reference domain recordings. All event fields retained except distinct per-run attempt/event identifiers; local/global/playback time/seq/wave/actors/targets/position/payload equal. Both last SWEEP/nonterminal, no WON or full recording acceptance.",
+    "terminal_ticks": [
+      -1,
+      -1
+    ]
+  },
+  "records": [
+    {
+      "path": "final-74cc-h/live-strip-reference-record.bin.gz",
+      "raw_bytes": 3966952,
+      "raw_sha256": "71d0a25b58068b49560003ca3bd0819516a3fdca4655bf5f03e0ced5880aacaa"
+    },
+    {
+      "path": "final-cdbe-h/live-strip-reference-record.bin.gz",
+      "raw_bytes": 3966952,
+      "raw_sha256": "6a3f5743747a169dd36717980a437a2e5e714f6697b68ecfb20c29c9f28acec0"
+    },
+    {
+      "path": "final-cdbe-r/live-strip-reference-record.bin.gz",
+      "raw_bytes": 3966952,
+      "raw_sha256": "f50a6f13d5b975f3de28bc786b695513b4a73102f27c53279934c60e4af7d12a"
+    },
+    {
+      "path": "fixed-f020-h/live-strip-reference-record.bin.gz",
+      "raw_bytes": 3966952,
+      "raw_sha256": "7b7083047923f9be05a6075edd92ad1afe1785dc598ab1cf66870a23cfb22ee5"
+    },
+    {
+      "path": "negative-ee15-h/live-strip-reference-record.bin.gz",
+      "raw_bytes": 3966952,
+      "raw_sha256": "c66ab76333e7c6956f18daf699bd0e47b347293072778e414b1b083610c1e5da"
+    }
+  ],
+  "scope": "Explicit 13-wave display data in2modes and one original radio reference (authored gun grants/cover snaps/direct ticks/vacuum) three SWEEP, due/pause/seek/exit SCOUT. Not26 real battles/normal input/WON/full record3D/old original compatibility/FX/A3/art/audio/APK/device acceptance. SCOUT IntelStore total-table5.2 text remains separately open. No inventory/event clock/identity/source mutation. Each failed run remains separate; private UUID/XDG/autoload guard."
+}

@@ -1,0 +1,110 @@
+{
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "argv": [
+    "python3",
+    "/workspace/ambush-pr15/ambush_loop/tools/package_web_site.py",
+    "/workspace/pr15-web-artifacts/1ec3198e9c0db367af96fc264604c5a286003b5e/release",
+    "/workspace/pr15-web-artifacts/1ec3198e9c0db367af96fc264604c5a286003b5e/site-candidate/dist",
+    "--source-sha",
+    "1ec3198e9c0db367af96fc264604c5a286003b5e",
+    "--game-tree",
+    "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  ],
+  "actual_exit": 0,
+  "start": "2026-10-05T16:47:10.818922+00:00",
+  "end": "2026-10-05T16:47:14.288049+00:00",
+  "production_manifest_rehashed": true,
+  "full_Title_entry": true,
+  "packager_unchanged": true,
+  "original_pck_reassembled_exact": true,
+  "original_wasm_decompressed_exact": true,
+  "all_stored_files_under_25MiB": true,
+  "files": [
+    {
+      "path": "_headers",
+      "bytes": 144,
+      "sha256": "7d6031e4e2fecd4548ee10dc76893e23d9b52d2c7064c9ba2a4dfa235a35f2ac"
+    },
+    {
+      "path": "game-build.json",
+      "bytes": 2440,
+      "sha256": "4761fffc1a681a40396ec2bb9ed92b1a1a5edf783b44856220cbbfa612fe8910"
+    },
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 10015,
+      "sha256": "8d7beb9a029424558ffa8f9cc76b6aad2e96aa91060153e4421b52a14c3239b5"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 8087,
+      "sha256": "b2c1e84cc5c52e8652f9d949ff06d51cf889dd0fef389cd8739554d0eb838c03"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 4016,
+      "sha256": "f5b83b2e20897a943ef34368a3bbe2fdbc85af0b67616d234d5850842086979d"
+    },
+    {
+      "path": "index.js",
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    {
+      "path": "index.pck.part00",
+      "bytes": 25165824,
+      "sha256": "ae9bcfa8230188f5789b16ad1324a3cfc133cec8445b3cd0f7cc2beda16448a4"
+    },
+    {
+      "path": "index.pck.part01",
+      "bytes": 12930432,
+      "sha256": "bafd4cca2b1e25dbf55748a72e7849a1a464c00ebc2925a154577672dcb4be1a"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm.gz",
+      "bytes": 10054758,
+      "sha256": "8032306d52d52497129dce5b767baacb660d504bdde28668b1c1337b717eacd8"
+    }
+  ],
+  "total_files": 12,
+  "total_bytes": 48487245,
+  "checks": [
+    {
+      "argv": [
+        "node",
+        "--check",
+        "/tmp/pr15-web-controls/site-update-1ec-20261005/site-inline-1.js"
+      ],
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "node",
+        "--check",
+        "/workspace/pr15-web-artifacts/1ec3198e9c0db367af96fc264604c5a286003b5e/site-candidate/dist/index.js"
+      ],
+      "actual_exit": 0
+    }
+  ],
+  "production_candidate_only": true,
+  "qa_bridge_records_excluded": true,
+  "site_modified": false,
+  "deployed": false,
+  "scope": "prepare proven production release source8532 with unchanged transport; one authorized official production release export; no asset generation"
+}

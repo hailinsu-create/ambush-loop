@@ -1,0 +1,11 @@
+# PR15 live/loot后的有界接续
+
+2026-10-04。作者live生产f020/formal cdb H1159/R1164各actual0，交付d363远端/PR已核；loot392 H85/R86各actual0，独立固定source先交QA。不同source与reference/text matrix不拼最终candidate全绿。完整资产执行v2与[同候选/FX-A3计划](AMBUSH_PR15_SAME_CANDIDATE_FX_A3_PLAN_20261004.md)继续有效；该文是接续计划，不是已验结论。设备/APK最终验收后置，未merge/生产/height/G。
+
+下一代码边界先**静态情报/教学语境审查**：cdb末SCOUT实际图有“灯塔回波5.2s/继续封暗道”，本波新dot只0/0.6/0.4。main._fix_one_line取level.fix_one，echo_callout硬编码5.2；IntelStore.leak_advice_line取total delay_for_actor/first_route_delay而record存local leak_tick、无保存wave/attempt。先区分静态全关教学总表与真实当次wave情报，读取实际record/失败重开原callback来证实后者，不能把源码疑点当正常复现。六关静态目标若保留需明确语境；真实建议只能引用原事件身份/wave/local clock，不重写旧memory/record，不把回放foreign log补给它。先guard负向→最小修/旧缺字段兼容与实际图→固定source交QA，每片只做一个可验证问题。cdb全关总表已经明确preview，本项不重开它或chip既有QA。
+
+随后锁**同候选基线**：main/game tree/R5 revision和单次官方4.7.2 import/export/PCK/hash；fresh原菜单/自然cfg进度、六关13原生波、真实搜刮/补给/原CTA/credits和六份新record3D，用同source的真实player journey与对应record，不拼旧d7/b27/030/3b。原装备锁/Back/touch lifecycle是新候选相关回归；reference授枪/snap/directtick/vacuum的火力/工具正反例必须独列。基线不是FX后最终接受，不提前APK/SDK设备轮；railcut旧limitedQA已闭不单独重跑。发现问题先固定source/日志归具体slice。
+
+**FX-A1**继续主集成单写：main._sim_tick第6段实际try_fire成功与fire日志顺序审查，return_fire另核；不能拿每个fire当成功射击/命中。从原成功callback建版本化表现descriptor，绑定保存attempt/wave/seq/socket/原source/target/positions/time，向VisualSnapshot/ViewState/presenter输送；R5 item_socket("muzzle")/bone_socket现存接口先读验，不修改制作源/共享资产。有限池/无shadow；缺socket/旧原件缺schema/unknown schema回退不借live状态，source bytes不升级。negative成功/失败射击、暂停、1x/2x、跨波、重复seek/source切换/迟到callback/reset/退出/焦点，state/HP/ammo/log保持，实际3D帧核图再交fixedQA。后续grenade/mine实际boom/smoke/dust独片，mine actor是受害敌，不能错绑队员socket。A3再留真实raw帧间隔/draw/mesh/texture/memory/pool/warmup与优化回归，云llvmpipe不代安卓30/60FPS。
+
+可并行包由父端分配（优先6.1-sol，不自行astra）：fixedcdb live条readonly QA、fixed392 loot文字readonly QA，与a794/0bfe既有QA独立；各独立checkout/display/UUID/XDG/输出，不写主集成/共享测试或复跑资产generator。R5角色艺术/握持/socket只读实际姿态审查、45cue/六声景实际耳听可独立出问题帧/清单；Dummy不代耳听。新资产需求必须明确原frame/socket/schema/revision，经资产作者验收提交后逐项接入，不全并f7c30WIP。当前无新制作包、R5源29749157/交付ebedb829和20骨/socket/3LOD/52语义保持。main/input/HUD/presenter/ViewState/replay/运行loader/共享测试归本主作者，源制作/GLB/Blender/atlas/生产manifest归资产作者。独立QA数量、原metadata、normal/newrecord/作者原record渲染分开，不抵销depot旧两P2失败。网页GPT PLAN/REVIEW unavailable；Notion由指定管理者。

@@ -1,0 +1,29 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "validation_kind": "fixed-source-formal",
+  "name": "command-headless",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+    "full_command_record_replay_test.gd",
+    "--headless"
+  ],
+  "environment": {
+    "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+  },
+  "run_id": "325a468d459e47a69f5ea05a6eecd7c8",
+  "actual_exit_code": 0,
+  "checks": 217,
+  "failures": 0,
+  "engine_error_lines": 0,
+  "captures": [],
+  "captured_frames": 0,
+  "limits": [
+    "Linux Godot4.7.2; software renderer is not device performance",
+    "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+    "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+  ],
+  "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-headless/run.log",
+  "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-headless/run.exit"
+}

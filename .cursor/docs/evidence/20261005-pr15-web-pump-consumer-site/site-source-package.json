@@ -1,0 +1,204 @@
+{
+  "project_id": "appgprj_6ac2e89b4db08191b308c175371ee7c6",
+  "commit_sha": "87cccf2152ce112c36a704efa332f16e7692867b",
+  "pushed_exact_remote_sha": "87cccf2152ce112c36a704efa332f16e7692867b",
+  "archive": "/workspace/pr15-web-artifacts/8532c4c3084d1a5672bbe28dc96e1c02522a8f05/ambush-loop-site.tar",
+  "archive_bytes": 48496640,
+  "archive_sha256": "0577186ecdf9c3de56ddab4e017b35fa4ce99f9875c5a6588fb4cd1e89cd167e",
+  "payload": [
+    {
+      "path": ".openai/hosting.json",
+      "bytes": 106,
+      "sha256": "f354c402dcc3c4b2534e85cb9666e32cd6e1fb68ecd75261ea6acbdc65ef63ee"
+    },
+    {
+      "path": "dist/_headers",
+      "bytes": 144,
+      "sha256": "7d6031e4e2fecd4548ee10dc76893e23d9b52d2c7064c9ba2a4dfa235a35f2ac"
+    },
+    {
+      "path": "dist/game-build.json",
+      "bytes": 2440,
+      "sha256": "22e4792410d7a368dc73ddb699e748080711df126af1d8fe1c660d0e2a3da936"
+    },
+    {
+      "path": "dist/index.apple-touch-icon.png",
+      "bytes": 10015,
+      "sha256": "8d7beb9a029424558ffa8f9cc76b6aad2e96aa91060153e4421b52a14c3239b5"
+    },
+    {
+      "path": "dist/index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "dist/index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 8087,
+      "sha256": "e72b19a104ff50d26d1e5b23570dd017cf194c26131d3ba674ef7b5ed23bcbc2"
+    },
+    {
+      "path": "dist/index.icon.png",
+      "bytes": 4016,
+      "sha256": "f5b83b2e20897a943ef34368a3bbe2fdbc85af0b67616d234d5850842086979d"
+    },
+    {
+      "path": "dist/index.js",
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    {
+      "path": "dist/index.pck.part00",
+      "bytes": 25165824,
+      "sha256": "de2606c144865d7311be12315fbddb5a5b342716913578698b083637e10b5877"
+    },
+    {
+      "path": "dist/index.pck.part01",
+      "bytes": 12924988,
+      "sha256": "d6448302c48085f910f3f6a5fef1b9db51153ca32d38152abc0999823d5fc41f"
+    },
+    {
+      "path": "dist/index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "dist/index.wasm.gz",
+      "bytes": 10054758,
+      "sha256": "8032306d52d52497129dce5b767baacb660d504bdde28668b1c1337b717eacd8"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "start": "2026-10-05T10:52:41.014376+00:00",
+      "end": "2026-10-05T10:52:41.017368+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "start": "2026-10-05T10:52:41.017378+00:00",
+      "end": "2026-10-05T10:52:41.019646+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/main"
+      ],
+      "start": "2026-10-05T10:52:41.019656+00:00",
+      "end": "2026-10-05T10:52:42.589747+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "start": "2026-10-05T10:52:42.589964+00:00",
+      "end": "2026-10-05T10:52:43.314158+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "--",
+        "dist",
+        "BUNDLE-IDENTITY.json"
+      ],
+      "start": "2026-10-05T10:52:43.314177+00:00",
+      "end": "2026-10-05T10:52:44.641009+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Update private game event-log layout from verified 8532c4c"
+      ],
+      "start": "2026-10-05T10:52:44.641028+00:00",
+      "end": "2026-10-05T10:52:44.922698+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "start": "2026-10-05T10:52:44.922718+00:00",
+      "end": "2026-10-05T10:52:44.924721+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "push",
+        "origin",
+        "HEAD:refs/heads/main"
+      ],
+      "start": "2026-10-05T10:52:44.924733+00:00",
+      "end": "2026-10-05T10:52:54.452410+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/main"
+      ],
+      "start": "2026-10-05T10:52:54.452427+00:00",
+      "end": "2026-10-05T10:52:55.532025+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "archive",
+        "--format=tar",
+        "-o",
+        "/workspace/pr15-web-artifacts/8532c4c3084d1a5672bbe28dc96e1c02522a8f05/ambush-loop-site.tar",
+        "87cccf2152ce112c36a704efa332f16e7692867b",
+        ".openai/hosting.json",
+        "dist"
+      ],
+      "start": "2026-10-05T10:52:55.532246+00:00",
+      "end": "2026-10-05T10:52:55.867418+00:00",
+      "actual_exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "start": "2026-10-05T10:52:56.367968+00:00",
+      "end": "2026-10-05T10:52:56.373680+00:00",
+      "actual_exit": 0
+    }
+  ],
+  "actual_exit": 0,
+  "publish_on_push_accepted": false,
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "helper": "manual exact Git workflow; packaged Sites helper unavailable in selected environment and cloud scripts resource unavailable; existing source maintained",
+  "deployment_started": false
+}

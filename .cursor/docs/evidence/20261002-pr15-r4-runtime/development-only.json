@@ -1,0 +1,126 @@
+{
+  "status": "LOCAL_WIP_ONLY_NOT_ADOPTED_ON_PR15",
+  "scope": "development tests on working tree, not fixed-SHA formal acceptance; parked in independent main-author runtime WIP branch on parent status request",
+  "base_sha": "1514a79148a9e5e8561de04f9ebb797135019eb9",
+  "asset_source_sha": "194d9c41aaddbf014f05c70c14d40c09e6d8131b",
+  "asset_delivery_sha": "c4c21708a2e06d3a7eaefbb8ab6bfeee31f5073d",
+  "completed_development": {
+    "import": {
+      "exit_code": 0
+    },
+    "actor_52clip": {
+      "checks": 17802,
+      "exit_code": 0
+    },
+    "actual_battle_after_crouch_fix": {
+      "checks": 231,
+      "exit_code": 0
+    },
+    "firearm_runtime_final": {
+      "checks": 7681,
+      "configurations": 90,
+      "run_id": "6e0a9bed9d914042a5ab860ab9d21a35",
+      "exit_code": 0,
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture firearm_runtime_test.gd --render"
+    }
+  },
+  "failures_retained": [
+    "5 actual battle assertions from crouch hip tipping upper gun, fixed upper spine orientation and action label",
+    "test enum typo HOLD_FIRE instead of HOLD_FOR_AMBUSH, actual exit1",
+    "MG42 placed at original generic MG cover was genuinely out of its shorter authored range; fixture moved to legal closer cover without changing gun range or combat values"
+  ],
+  "unverified": [
+    "fixed-source formal R4 battery/campaign/equipment/HUD/time/lifecycle/audio/PCK",
+    "viewing current R4 captures/final art and transition continuity",
+    "knife/throw/decoy/corpse-haul clips",
+    "complete environments/HUD/FX/A3/six levels/final APK",
+    "ear review 0/45 and 0/6",
+    "device stage"
+  ],
+  "files": [
+    {
+      "file": "dev-actor-52clips.log",
+      "bytes": 2512,
+      "sha256": "8756a236eb9ca3c71cc247951df323ddbae79802ad0dbc647d1085d0fa5751cc",
+      "viewed": false
+    },
+    {
+      "file": "dev-battle-crouch-failed.log",
+      "bytes": 3697,
+      "sha256": "eb9cb3ff34502e00a806a503b67cd129e6c39cdeaf691cbbc67b99729385dfa0",
+      "viewed": false
+    },
+    {
+      "file": "dev-battle-crouch-fixed.log",
+      "bytes": 1778,
+      "sha256": "3b44d9aba658aa3070f5d6a86ccd6bb097b683384ea3816c62be1da5b3a73770",
+      "viewed": false
+    },
+    {
+      "file": "dev-firearm-final.log",
+      "bytes": 925,
+      "sha256": "50826392bdc0eb3eed5992a1aab8079050515497daa8ffd3b2209fc4ecea422d",
+      "viewed": false
+    },
+    {
+      "file": "dev-firearm-parse-failed.log",
+      "bytes": 1049,
+      "sha256": "9df9341b05aa3c25e62b484facd9e22a60929346f154df32381067d8d79d374f",
+      "viewed": false
+    },
+    {
+      "file": "dev-firearm-range-diagnose.log",
+      "bytes": 1352,
+      "sha256": "7903c4378a31f2bbb85f7f26c24c87dabc9ad612a6843c315582a740d2090f12",
+      "viewed": false
+    },
+    {
+      "file": "dev-firearm-range-failed.log",
+      "bytes": 1186,
+      "sha256": "8ce879dab8b2e2353deb6e949e8eeb53b6306fd6c3d3f508a9c13405fc7271c0",
+      "viewed": false
+    },
+    {
+      "file": "dev-firearm-range-fixed.log",
+      "bytes": 925,
+      "sha256": "2640f432a96977ad76b55cb7e98a8a7e3dbeb3c4358693d596be67693b50d59b",
+      "viewed": false
+    },
+    {
+      "file": "dev-import.log",
+      "bytes": 38515,
+      "sha256": "06a95cd32557aa22a028b0c8fc39adab7e5f872c1d6c5f35e68622835ff4a9e7",
+      "viewed": false
+    },
+    {
+      "file": "r4_runtime_actual_fallback.png",
+      "bytes": 252653,
+      "sha256": "9ed3b2a6a7730fb034406f63c11f9252bcfb358298e79ce246d941dd5569360a",
+      "viewed": false
+    },
+    {
+      "file": "r4_runtime_actual_history_mg.png",
+      "bytes": 225696,
+      "sha256": "12ab09279abc909b7b37dc578523be6ef1ef43e25d5eb028a62e7df7ab8f965d",
+      "viewed": false
+    },
+    {
+      "file": "r4_runtime_actual_mg.png",
+      "bytes": 256273,
+      "sha256": "10691bf8a2f74c6d62d5d4f82fd94cef6942654ff6662ba5caf8e6b5d678399a",
+      "viewed": false
+    },
+    {
+      "file": "readonly-compatibility.json",
+      "bytes": 642,
+      "sha256": "fbcf9c676f9f570a155be78ae7c05c52ff97dc09f4e29693f9a5b484f873c57c",
+      "viewed": false
+    },
+    {
+      "file": "readonly_compatibility.py",
+      "bytes": 4107,
+      "sha256": "8905c9a1cd10797124caf05655d2808d4b6ba1fbdc3c7c6b65aae14099c14de7",
+      "viewed": false
+    }
+  ]
+}

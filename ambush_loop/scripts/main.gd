@@ -91,6 +91,10 @@ const RaidMineScript := preload("res://scripts/raid/landmine.gd")
 const RaidDecoyScript := preload("res://scripts/raid/decoy.gd")
 const BackpackPanelScript := preload("res://scripts/ui/backpack_panel.gd")
 const C2DirectorScript := preload("res://scripts/c2/c2_director.gd")
+const VisualSnapshotScript := preload("res://scripts/replay/visual_snapshot.gd")
+const ShotFxRecordingScript := preload("res://scripts/replay/shot_fx_recording.gd")
+const ViewStateScript := preload("res://scripts/presentation/view_state.gd")
+const HudRecord := preload("res://scripts/replay/hud_record.gd")
 
 var grid: AmbushGrid = AmbushGrid.new()
 var phase: Phase = Phase.SETUP
@@ -106,6 +110,8 @@ var level: LevelDef = null
 var level_index: int = 0
 var sim: SimClock = SimClock.new()
 var battle_log: BattleLog = BattleLog.new()
+var visual_snapshot := VisualSnapshotScript.new()
+var shot_fx_recording := ShotFxRecordingScript.new()
 var last_plan: PlanState = PlanState.new()
 var door_locked: bool = false
 
@@ -125,6 +131,9 @@ var _alarm_warned_no_gun: bool = false
 var _alarm_pulled_unarmed: bool = false
 var _night_hp_lost: bool = false
 var _night_timer: float = 0.0
+var _pose_command_clock_s: float = 0.0
+var _command_record_acc_s: float = 0.0
+var _presentation_suspended := false
 var _wave_fail_index: int = 0
 var _hold_move_acc: float = 0.0
 var _foot_acc: float = 0.0
@@ -149,6 +158,9 @@ var trap_path: Node2D = null
 var result_dossier: Label = null
 var dossier_button: Button = null
 var _dossier_open: bool = false
+var _result_scroll: ScrollContainer
+var _result_body: VBoxContainer
+var _result_footer: HBoxContainer
 var _fail_dossier_text: String = ""
 var _wave_tension_id: int = -1
 var spawn_ghost_host: Node2D = null
@@ -336,6 +348,8 @@ var _stealth_avoid_msec: int = 0
 var _move_ghost: Line2D = null
 var c2 = null
 var _c2_sprint_next: bool = false
+## Optional development presentation; the normal scene keeps the legacy path.
+var presentation_3d: Node3D = null
 
 
 func _ready() -> void:
@@ -362,6 +376,14 @@ func _ready() -> void:
 	_ensure_touch_hud()
 	_ensure_c2()
 	_load_level(_resolve_start_level(), false, false)
+	presentation_3d = get_node_or_null("Presentation3D")
+	if presentation_3d == null and OS.has_feature("a0_preview"):
+		presentation_3d = load("res://scripts/presentation/presenter_3d.gd").new()
+		presentation_3d.name = "Presentation3D"
+		add_child(presentation_3d)
+	if presentation_3d != null:
+		presentation_3d.bind(self)
+	get_viewport().size_changed.connect(_update_hud)
 
 
 func _ensure_c2() -> void:
@@ -695,6 +717,7 @@ func _build_modals() -> void:
 	backpack_panel.equip_requested.connect(_on_pack_equip)
 	backpack_panel.pass_requested.connect(_on_pack_pass)
 	backpack_panel.drop_requested.connect(_on_pack_drop)
+	backpack_panel.auto_grenade_requested.connect(_toggle_auto_grenade)
 	backpack_panel.closed.connect(func() -> void:
 		_update_hud()
 	)
@@ -729,7 +752,7 @@ func _modal_blocks_input() -> bool:
 	if night_handoff and night_handoff.is_open():
 		return true
 	if backpack_panel and backpack_panel.has_method("is_open") and backpack_panel.is_open():
-		return false
+		return true
 	return false
 
 
@@ -777,12 +800,14 @@ func _toggle_pause_menu() -> void:
 	if pause_overlay.is_open():
 		pause_overlay.dismiss()
 		return
+	_cancel_world_input()
 	pause_overlay.present(_is_command_phase(), true)
 	if phase == Phase.WATCHING and not sim.paused:
 		sim.paused = true
 		_menu_paused_sim = true
 		if pause_button:
 			pause_button.text = "继续"
+	_sync_audio_state()
 
 
 func _on_pause_overlay_closed() -> void:
@@ -791,6 +816,7 @@ func _on_pause_overlay_closed() -> void:
 		_menu_paused_sim = false
 		if pause_button:
 			pause_button.text = "暂停"
+	_sync_audio_state()
 
 
 func _on_redeploy_from_menu() -> void:
@@ -840,6 +866,17 @@ func _want_touch() -> bool:
 	return OS.has_feature("android") or OS.has_feature("mobile")
 
 
+func _compact_hud() -> bool:
+	var usable := get_viewport().get_visible_rect().size
+	return usable.x < 1000.0 or usable.y < 600.0
+
+
+func _use_touch_chrome() -> bool:
+	# Presentation only: a small usable viewport gets the existing compact
+	# command/portrait rail. Keyboard and world gesture policy stay unchanged.
+	return _want_touch() or _compact_hud()
+
+
 func _ensure_touch_hud() -> void:
 	if touch_hud == null or not is_instance_valid(touch_hud):
 		touch_hud = TouchHudScript.new()
@@ -847,8 +884,8 @@ func _ensure_touch_hud() -> void:
 		add_child(touch_hud)
 		if touch_hud.has_method("bind_host"):
 			touch_hud.bind_host(self)
-	var on := _want_touch()
-	touch_hud.visible = on
+	var on := _use_touch_chrome()
+	touch_hud.visible = on and not _result_overlay_active()
 	_apply_phone_chrome(on)
 	_refresh_touch_hud()
 
@@ -880,7 +917,8 @@ func _apply_phone_chrome(on: bool) -> void:
 		# Sit in the phase-chip band, left of the checklist — not on the timeline.
 		route_legend.offset_top = 36.0 if on else 38.0
 		route_legend.offset_bottom = 68.0 if on else 72.0
-		route_legend.offset_right = -280.0
+		route_legend.offset_left = 448.0
+		route_legend.offset_right = -520.0
 	alarm_button.custom_minimum_size = Vector2(180, 48) if on else Vector2(180, 36)
 	clear_button.custom_minimum_size = Vector2(120, 48) if on else Vector2(120, 36)
 	tool_button.custom_minimum_size = Vector2(160, 48) if on else Vector2(160, 36)
@@ -890,6 +928,8 @@ func _apply_phone_chrome(on: bool) -> void:
 	if c2 and c2.has_method("layout_chrome"):
 		c2.layout_chrome(on)
 	_fold_phone_north_hud(on)
+	if _result_overlay_active():
+		_apply_result_columns()
 
 
 func _fold_phone_north_hud(on: bool) -> void:
@@ -898,9 +938,12 @@ func _fold_phone_north_hud(on: bool) -> void:
 	if top:
 		top.offset_bottom = 48.0 if on else 110.0
 	if title_label:
-		title_label.add_theme_font_size_override("font_size", 18 if on else 26)
+		title_label.add_theme_font_size_override("font_size", 18 if on else 22)
+		title_label.clip_text = true
 	if status_label:
 		status_label.visible = not on
+		status_label.clip_text = true
+		status_label.add_theme_font_size_override("font_size", 14)
 	if level_label:
 		level_label.visible = not on
 	if spawn_teach_label and on:
@@ -908,15 +951,89 @@ func _fold_phone_north_hud(on: bool) -> void:
 	if route_legend and on:
 		route_legend.visible = false
 	if flash_label:
+		flash_label.set_anchors_preset(Control.PRESET_CENTER_TOP)
+		flash_label.offset_left = -280
+		flash_label.offset_right = 280
 		if on:
 			flash_label.offset_top = 4.0
 			flash_label.offset_bottom = 26.0
 			flash_label.add_theme_font_size_override("font_size", 14)
 		else:
+			flash_label.set_anchors_preset(Control.PRESET_CENTER_TOP)
+			flash_label.offset_left = -280
+			flash_label.offset_right = 280
 			flash_label.offset_top = 72.0
 			flash_label.offset_bottom = 104.0
 			flash_label.add_theme_font_size_override("font_size", 18)
+	_layout_compact_chrome()
 	_apply_phone_world_ink()
+
+
+func _layout_compact_chrome() -> void:
+	var compact := _compact_hud()
+	var root: Control = $HUD/Root
+	var menu := root.get_node_or_null("CompactMenu") as Button
+	if menu == null:
+		menu = Button.new()
+		menu.name = "CompactMenu"
+		menu.text = "菜单"
+		menu.custom_minimum_size = Vector2(72, 32)
+		menu.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		menu.offset_left = -80
+		menu.offset_right = -8
+		menu.offset_top = 108
+		menu.offset_bottom = 140
+		menu.pressed.connect(_toggle_pause_menu)
+		root.add_child(menu)
+	menu.visible = compact
+	var top: Control = $HUD/Root/TopBar
+	top.offset_top = 12
+	top.offset_right = 428
+	phase_chip.clip_text = true
+	phase_chip.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	phase_chip.offset_left = -420
+	phase_chip.offset_right = -16
+	phase_chip.offset_top = 10
+	phase_chip.offset_bottom = 36
+	phase_chip.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	phase_chip.add_theme_font_size_override("font_size", 18)
+	if touch_hud and touch_hud._hint:
+		touch_hud._hint.visible = not compact
+	if not compact:
+		return
+	top.offset_right = root.size.x - 8.0
+	top.offset_top = 0
+	top.offset_bottom = 36
+	phase_chip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	phase_chip.offset_left = 8
+	phase_chip.offset_right = -8
+	phase_chip.offset_top = 34
+	phase_chip.offset_bottom = 54
+	phase_chip.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	phase_chip.add_theme_font_size_override("font_size", 14)
+	checklist_strip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	checklist_strip.offset_left = 8
+	checklist_strip.offset_right = -8
+	checklist_strip.offset_top = 56
+	checklist_strip.offset_bottom = 78
+	(checklist_strip as BoxContainer).alignment = BoxContainer.ALIGNMENT_BEGIN
+	if intel_chip:
+		intel_chip.offset_left = 8
+		intel_chip.offset_right = -8
+		intel_chip.offset_top = 80
+		intel_chip.offset_bottom = 100
+		intel_chip.clip_text = true
+		intel_chip.add_theme_font_size_override("font_size", 12)
+	if route_timeline: route_timeline.visible = false
+	if watch_timeline: watch_timeline.visible = false
+	if flash_label:
+		flash_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+		flash_label.offset_left = 8
+		flash_label.offset_right = -96
+		flash_label.offset_top = 108
+		flash_label.offset_bottom = 132
+		flash_label.clip_text = true
+		flash_label.add_theme_font_size_override("font_size", 12)
 
 
 func _result_overlay_active() -> bool:
@@ -930,13 +1047,20 @@ func _result_overlay_active() -> bool:
 func _sync_desktop_bars(show: bool) -> void:
 	## Touch HUD owns the command row. Never stack ExtraBar + BottomBar under it.
 	## Fail/win overlays hide the bars so the three-line card / 下一关 CTA is not buried.
-	var bars := show and not _result_overlay_active()
+	var bars := show and not _use_touch_chrome() and not _result_overlay_active()
 	var bar: Control = get_node_or_null("HUD/Root/BottomBar") as Control
 	if bar:
 		bar.visible = bars
 	if extra_bar:
 		extra_bar.visible = bars
 		extra_bar.z_index = 0
+	if bars and bar and extra_bar:
+		# Theme content can make a 36px row 45px tall. Keep the two real
+		# minimum heights apart instead of stacking fixed offset bands.
+		bar.offset_bottom = -16
+		bar.offset_top = -16 - maxf(36.0,bar.get_combined_minimum_size().y)
+		extra_bar.offset_bottom = bar.offset_top - 8
+		extra_bar.offset_top = extra_bar.offset_bottom - maxf(32.0,extra_bar.get_combined_minimum_size().y)
 
 
 func desktop_command_bars_visible() -> bool:
@@ -997,7 +1121,7 @@ func _apply_result_rail() -> void:
 	## Phone simplified rail: portraits are identity; left cards stay off.
 	if role_box == null or not is_instance_valid(role_box):
 		return
-	role_box.visible = (not _want_touch()) and not _result_overlay_active()
+	role_box.visible = (not _use_touch_chrome()) and not _result_overlay_active()
 
 
 func _safe_area_pad() -> Vector4:
@@ -1030,8 +1154,8 @@ func _refresh_touch_hud() -> void:
 			phase_name = "SWEEP"
 		_:
 			phase_name = "SETUP"
-	var paused := phase == Phase.WATCHING and sim.paused
-	var hi := phase == Phase.WATCHING and sim.speed >= 1.5
+	var paused := not replay.playing if phase == Phase.REPLAY else phase == Phase.WATCHING and sim.paused
+	var hi := replay.speed >= 1.5 if phase == Phase.REPLAY else phase == Phase.WATCHING and sim.speed >= 1.5
 	var has_pack := level != null and bool(level.has_ammo_pack)
 	var has_door := level != null and level.door_cell.x >= 0
 	_refresh_alarm_cta()
@@ -1107,13 +1231,13 @@ func apply_touch_command(cmd: String) -> void:
 		"replay":
 			_on_replay_pressed()
 		"rotate_cw":
-			if phase == Phase.SETUP and selected and selected.visible:
+			if _can_edit_equipment():
 				selected.rotate_by(15.0)
 				_sfx("ui")
 				_announce_plan_edit()
 				_refresh_killzone_preview()
 		"rotate_ccw":
-			if phase == Phase.SETUP and selected and selected.visible:
+			if _can_edit_equipment():
 				selected.rotate_by(-15.0)
 				_sfx("ui")
 				_announce_plan_edit()
@@ -1187,6 +1311,10 @@ func apply_context_action(cmd: String, world: Vector2 = Vector2.ZERO) -> void:
 
 
 func handle_android_back() -> void:
+	_cancel_world_input()
+	if backpack_panel and backpack_panel.is_open():
+		backpack_panel.dismiss()
+		return
 	if tutorial_overlay and tutorial_overlay.is_open():
 		return
 	if credits_overlay and credits_overlay.is_open():
@@ -1196,7 +1324,14 @@ func handle_android_back() -> void:
 
 
 func handle_app_focus_out() -> void:
+	_presentation_suspended = true
+	_cancel_world_input(true)
 	_gate_scene_audio(true)
+	if phase == Phase.REPLAY:
+		replay.pause()
+		_refresh_replay_transport()
+		_refresh_touch_hud()
+		return
 	# Freeze the sim clock whenever it can still step. Result panels are idle.
 	if phase == Phase.WATCHING and not sim.paused:
 		sim.paused = true
@@ -1209,9 +1344,24 @@ func handle_app_focus_out() -> void:
 
 
 func handle_app_focus_in() -> void:
+	_presentation_suspended = false
 	_gate_scene_audio(false)
 	# Stay paused after a home-button; player taps 继续. Do not auto-unpause sim.
 	_refresh_touch_hud()
+
+
+func _cancel_world_input(reset_contacts: bool = false) -> void:
+	_touches.clear()
+	_facing_touch = -1
+	_pending_setup_touch = false
+	_pending_touch_world = Vector2.ZERO
+	_cover_hold_slot = null
+	_touch_preview_slot = null
+	_sprint_hold_armed = false
+	_touch_panning = false
+	_pinch_start_dist = 0.0
+	if presentation_3d != null:
+		presentation_3d.cancel_input(reset_contacts)
 
 
 func _gate_scene_audio(paused: bool) -> void:
@@ -1226,6 +1376,14 @@ func _gate_scene_audio(paused: bool) -> void:
 		audio.pause_for_background()
 	elif (not paused) and audio.has_method("resume_from_background"):
 		audio.resume_from_background()
+
+
+func _sync_audio_state() -> void:
+	if sfx and sfx.has_method("set_phase_state"):
+		var paused: bool = (phase == Phase.WATCHING and sim.paused) or (pause_overlay != null and pause_overlay.is_open())
+		sfx.set_phase_state(phase == Phase.WATCHING, paused, phase == Phase.REPLAY)
+	elif sfx and sfx.has_method("set_watch_bed"):
+		sfx.set_watch_bed(phase == Phase.WATCHING)
 
 
 func _on_memory_wipe_from_menu() -> void:
@@ -1246,9 +1404,9 @@ func _sfx(cue: String) -> void:
 	sfx.play(cue)
 
 
-func _sfx_every_shot(op: OperatorUnit = null) -> void:
+func _sfx_every_shot(op: OperatorUnit = null, recorded_cue: String = "") -> void:
 	## Every burst, not only the first-contact payoff. Kit timbre per role.
-	_sfx(fire_cue_for(op))
+	_sfx(recorded_cue if recorded_cue != "" else fire_cue_for(op))
 
 
 func fire_cue_for(op: OperatorUnit = null) -> String:
@@ -1313,14 +1471,19 @@ func _load_progress() -> void:
 func _save_progress() -> void:
 	var cfg := ConfigFile.new()
 	cfg.load(PROGRESS_PATH)
-	# After a win, GameSettings.record_win already advanced level_id / cleared.
-	if phase != Phase.WON:
+	# A WON replay still belongs to the settled victory. Audio edits must keep
+	# the next mission saved by GameSettings.record_win.
+	if phase != Phase.WON and not (phase == Phase.REPLAY and replay_return_phase == Phase.WON):
 		cfg.set_value("progress", "level_id", level.level_id if level else "yard")
 		cfg.set_value("progress", "level_index", level_index)
 		cfg.set_value("progress", "complete", _campaign_complete)
 	cfg.set_value("progress", "loop_index", loop_index)
 	cfg.set_value("audio", "muted", sfx_muted)
-	cfg.save(PROGRESS_PATH)
+	var gs = _gs()
+	if gs != null:
+		gs.save_config(cfg, PROGRESS_PATH)
+	else:
+		cfg.save(PROGRESS_PATH)
 
 
 func _ensure_debrief_buttons() -> void:
@@ -1449,6 +1612,67 @@ func _apply_result_columns() -> void:
 	if result_stats:
 		result_stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		result_stats.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_fit_result_dialog()
+
+
+func _fit_result_dialog() -> void:
+	if not _result_overlay_active():
+		return
+	var shell := result_panel.get_node("Margin/VBox") as VBoxContainer
+	if _result_scroll == null:
+		_result_scroll=ScrollContainer.new()
+		_result_scroll.name="ResultScroll"
+		_result_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
+		_result_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
+		_result_scroll.follow_focus=true
+		shell.add_child(_result_scroll)
+		_result_body=VBoxContainer.new()
+		_result_body.name="Content"
+		_result_body.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		_result_body.add_theme_constant_override("separation",10)
+		_result_scroll.add_child(_result_body)
+		_result_footer=HBoxContainer.new()
+		_result_footer.name="ResultActions"
+		_result_footer.add_theme_constant_override("separation",8)
+		shell.add_child(_result_footer)
+	for child in shell.get_children():
+		if child in [_result_scroll,_result_footer]: continue
+		if child in [continue_button,dossier_button,title_return_button]:
+			child.reparent(_result_footer)
+			child.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+			child.custom_minimum_size=Vector2(0,44)
+		else:
+			child.reparent(_result_body)
+	shell.move_child(_result_scroll,0)
+	shell.move_child(_result_footer,1)
+	# The terminal overlay hides BottomBar. Keep its original replay button and
+	# pressed binding reachable alongside the terminal actions.
+	if replay_button and replay_button.get_parent() != _result_footer:
+		replay_button.reparent(_result_footer)
+		replay_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		replay_button.custom_minimum_size = Vector2(0,44)
+	result_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	result_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	var usable := get_viewport().get_visible_rect().size
+	var width := minf(560.0 if phase==Phase.FAILED else 640.0,usable.x-32.0)
+	var height := minf(340.0 if phase==Phase.FAILED else 460.0,usable.y-24.0)
+	result_panel.set_anchors_preset(Control.PRESET_CENTER_BOTTOM if phase==Phase.FAILED else Control.PRESET_CENTER)
+	result_panel.offset_left=-width*0.5
+	result_panel.offset_right=width*0.5
+	result_panel.offset_top=-height-12.0 if phase==Phase.FAILED else -height*0.5
+	result_panel.offset_bottom=-12.0 if phase==Phase.FAILED else height*0.5
+	result_panel.grow_horizontal=Control.GROW_DIRECTION_BOTH
+	result_panel.grow_vertical=Control.GROW_DIRECTION_BEGIN if phase==Phase.FAILED else Control.GROW_DIRECTION_BOTH
+
+
+func _restore_replay_button() -> void:
+	if replay_button == null:
+		return
+	var bar := get_node("HUD/Root/BottomBar")
+	if replay_button.get_parent() != bar:
+		replay_button.reparent(bar)
+		replay_button.size_flags_horizontal = Control.SIZE_FILL
+		replay_button.custom_minimum_size = Vector2(128,48) if _want_touch() else Vector2(120,32)
 
 
 func _fill_result_stats() -> void:
@@ -1470,7 +1694,7 @@ func _fill_result_stats() -> void:
 	var secs := float(ticks) / 60.0
 	var hook := ""
 	if level != null:
-		hook = str(level.highlight_hook).strip_edges()
+		hook = highlight_result_text()
 	var shot_line := "第一枪是  %s" % shot
 	if hook != "":
 		result_stats.text = "世数  %d\n%s\n逃逸  %s\n用时  %.1fs\n高光  %s" % [loop_index, shot_line, esc, secs, hook]
@@ -1560,8 +1784,7 @@ func _apply_watch_layers() -> void:
 		entities.modulate = Color.WHITE
 	if ghosts:
 		ghosts.modulate = Color.WHITE
-	if sfx and sfx.has_method("set_watch_bed"):
-		sfx.set_watch_bed(phase == Phase.WATCHING)
+	_sync_audio_state()
 	_ensure_watch_cinema()
 	var cinema := phase == Phase.WATCHING or phase == Phase.WON
 	if _watch_letterbox:
@@ -2205,6 +2428,12 @@ func _reset_presentation_fx() -> void:
 	if _load_fade_tween != null:
 		_load_fade_tween.kill()
 		_load_fade_tween = null
+	if _fail_static_tween != null:
+		_fail_static_tween.kill()
+		_fail_static_tween = null
+	if _fail_static != null:
+		_fail_static.visible = false
+		_fail_static.modulate.a = 0.0
 	if result_panel:
 		result_panel.modulate = Color.WHITE
 
@@ -2262,7 +2491,6 @@ func _load_level(level_id: String, keep_intel: bool, restore_plan: bool) -> void
 	map_draw.queue_redraw()
 	_ensure_mission_sky()
 	_ensure_night_grade()
-	_play_mission_ambient()
 	_build_route_world()
 	_build_cover_slots()
 	_build_operators()
@@ -2798,7 +3026,7 @@ func _ensure_checklist(root: Control = null) -> void:
 
 
 func _checklist_use_touch_layout() -> bool:
-	return _want_touch()
+	return _use_touch_chrome()
 
 
 func _layout_checklist() -> void:
@@ -3170,14 +3398,16 @@ func _leak_result_line() -> String:
 	var lid := int(rec.get("leaker_id", -1))
 	if lid < 1:
 		return ""
-	var delay := 0.0
-	if level != null and level.has_method("delay_for_actor"):
-		delay = float(level.delay_for_actor(lid))
+	var context: Dictionary = intel.validated_escape_context(rec, str(level.level_id) if level != null else "")
+	if context.is_empty():
+		return "漏网记录：%s · 敌%d（波次/入场未确认）" % [_route_zh_short(route) if route in IntelStore.ROUTES else "路线", lid]
+	var delay := float(context.spawn.tick) / 60.0
+	var escaped := float(context.escape.tick) / 60.0
 	var road := str(PayoffCopy.leak_road_name(level, route, false))
-	var wave_n := _wave_fail_index if _wave_fail_index > 0 else (wave_index() + 1)
+	var wave_n := int(context.wave_id) + 1
 	if road != "" and road != _route_zh_short(route):
-		return "第%d波漏网：%s · 敌%d · %.1fs出发 · %s" % [wave_n, _route_zh_short(route), lid, delay, road]
-	return "第%d波漏网：%s · 敌%d · %.1fs出发" % [wave_n, _route_zh_short(route), lid, delay]
+		return "第%d波漏网：%s · 敌%d · %.1fs出发 · %.1fs逃逸 · %s" % [wave_n, _route_zh_short(route), lid, delay, escaped, road]
+	return "第%d波漏网：%s · 敌%d · %.1fs出发 · %.1fs逃逸" % [wave_n, _route_zh_short(route), lid, delay, escaped]
 
 
 func leak_advice_text() -> String:
@@ -3307,13 +3537,21 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	replay.pause()
+	_restore_replay_button()
+	_cancel_world_input()
+	if sfx and sfx.has_method("stop_mission_audio"):
+		sfx.stop_mission_audio()
+	if backpack_panel:
+		backpack_panel.dismiss()
 	phase = Phase.SETUP
 	tool = Tool.DEPLOY
 	fail_reason = ""
 	pending_result = ""
 	run_id += 1
 	sim.reset()
-	battle_log.clear()
+	battle_log.begin_attempt()
+	battle_log.enable_continuous_playback(2)
 	pending_spawns.clear()
 	all_spawns_done = false
 	if raid:
@@ -3323,6 +3561,8 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	_clear_flash()
 	_night_hp_lost = false
 	_night_timer = 0.0
+	_pose_command_clock_s = 0.0
+	_command_record_acc_s = 0.0
 	_wave_fail_index = 0
 	_watch_first_fire = false
 	_watch_first_return = false
@@ -3438,7 +3678,9 @@ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
 	_ensure_c2()
 	if c2:
 		c2.begin_scout()
+	_play_mission_ambient()
 	_update_hud()
+	battle_log.add_command_snapshot(0, _snapshot_data())
 
 
 func _on_clear_pressed() -> void:
@@ -3705,6 +3947,9 @@ func _toggle_tool() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if presentation_3d != null and presentation_3d.handle_unhandled_input(event):
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and _touch_ate_click:
 		if not event.pressed:
 			_touch_ate_click = false
@@ -3735,15 +3980,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if tutorial_overlay and tutorial_overlay.is_open():
-			get_viewport().set_input_as_handled()
-			return
-		if credits_overlay and credits_overlay.is_open():
-			_return_to_title()
-			get_viewport().set_input_as_handled()
-			return
-		_toggle_pause_menu()
+		# Credits Back can detach this scene immediately. Consume input first.
 		get_viewport().set_input_as_handled()
+		handle_android_back()
 		return
 	if _handle_touch_gestures(event):
 		get_viewport().set_input_as_handled()
@@ -3762,7 +4001,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if phase == Phase.REPLAY:
 		if event is InputEventKey and event.pressed and not event.echo:
-			match event.physical_keycode:
+			var replay_key: int = event.physical_keycode
+			# Some native arrow events provide only the logical keycode.
+			if replay_key == 0 and event.keycode in [KEY_LEFT, KEY_RIGHT]:
+				replay_key = event.keycode
+			match replay_key:
 				KEY_LEFT:
 					replay.set_tick(replay.scrub_tick - 6)
 					_apply_replay_scrub()
@@ -3771,6 +4014,16 @@ func _unhandled_input(event: InputEvent) -> void:
 					_apply_replay_scrub()
 				KEY_SPACE:
 					_exit_replay_to_setup()
+				KEY_P:
+					_on_pause_pressed()
+				KEY_EQUAL, KEY_KP_ADD:
+					replay.set_speed(2.0)
+					_refresh_replay_transport()
+					_refresh_touch_hud()
+				KEY_MINUS, KEY_KP_SUBTRACT:
+					replay.set_speed(1.0)
+					_refresh_replay_transport()
+					_refresh_touch_hud()
 			get_viewport().set_input_as_handled()
 		return
 
@@ -3848,12 +4101,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_handle_setup_click(get_global_mouse_position())
+		_handle_setup_click(pointer_logic_position())
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		if selected and selected.visible and not selected.locked:
-			var v := get_global_mouse_position() - selected.global_position
+			var v := pointer_logic_position() - selected.global_position
 			selected.set_facing(rad_to_deg(atan2(v.y, v.x)))
 			_announce_plan_edit()
 			_refresh_killzone_preview()
@@ -3862,7 +4115,22 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _screen_to_world(screen_pos: Vector2) -> Vector2:
+	if presentation_3d != null:
+		var picked: Dictionary = presentation_3d.pick_at(screen_pos)
+		return picked.pos if bool(picked.get("valid", false)) else Vector2.INF
 	return get_viewport().get_canvas_transform().affine_inverse() * screen_pos
+
+
+func pointer_logic_position() -> Vector2:
+	if presentation_3d != null:
+		return presentation_3d.pointer_logic_position()
+	return get_global_mouse_position()
+
+
+func project_logic_position(pos: Vector2) -> Vector2:
+	if presentation_3d != null:
+		return presentation_3d.rig.project_logic(pos)
+	return get_viewport().get_canvas_transform() * pos
 
 
 func _touch_span() -> Dictionary:
@@ -3881,6 +4149,9 @@ func _handle_touch_gestures(event: InputEvent) -> bool:
 		return true
 	if event is InputEventScreenTouch:
 		var st := event as InputEventScreenTouch
+		if st.canceled:
+			_cancel_world_input()
+			return true
 		if st.pressed:
 			_touches[st.index] = st.position
 			if _touches.size() >= 2:
@@ -4033,6 +4304,18 @@ func _refresh_selection_visual() -> void:
 
 
 func _refresh_mode_pack_buttons() -> void:
+	if bag_button:
+		bag_button.disabled = not _can_edit_equipment()
+	if phase == Phase.REPLAY:
+		var op := HudRecord.selected(replay_hud_frame())
+		if mode_button:
+			mode_button.text = "开火: %s" % str(op.get("fire_mode_label", "未记录"))
+			mode_button.disabled = true
+		if pack_button:
+			pack_button.visible = false
+		return
+	if mode_button:
+		mode_button.disabled = not _is_command_phase()
 	if mode_button and selected:
 		mode_button.text = "开火: %s (F)" % selected.fire_mode_label()
 	if pack_button:
@@ -4344,7 +4627,7 @@ func _build_echo_callout() -> void:
 	if not level.route_cells.has("echo"):
 		return
 	var pos := grid.cell_to_world_center(Vector2i(24, 12)) + Vector2(8, -22)
-	echo_callout = _make_map_callout("EchoCallout", "回波 5.2s", pos, Color(0.72, 0.58, 0.28))
+	echo_callout = _make_map_callout("EchoCallout", "全关教学预览 · 回波 5.2s", pos, Color(0.72, 0.58, 0.28))
 
 
 func echo_callout_visible() -> bool:
@@ -4574,6 +4857,8 @@ func _refresh_spawn_teach() -> void:
 		text = str(level.beat_text).strip_edges()
 		if text == "" and not level.spawn_teaching.is_empty():
 			text = str(level.spawn_teaching[0]).strip_edges()
+		if text != "":
+			text = "全关教学预览 · " + text
 	spawn_teach_label.visible = text != "" and not _want_touch()
 	spawn_teach_label.text = text
 	_refresh_intel_chip()
@@ -4899,6 +5184,13 @@ func _on_door_pressed() -> void:
 
 
 func _on_speed_pressed() -> void:
+	if phase == Phase.REPLAY:
+		if _modal_blocks_input() or _presentation_suspended:
+			return
+		replay.set_speed(1.0 if replay.speed >= 1.5 else 2.0)
+		_refresh_replay_transport()
+		_refresh_touch_hud()
+		return
 	if phase != Phase.WATCHING:
 		return
 	sim.set_speed(1.0 if sim.speed >= 1.5 else 2.0)
@@ -4909,6 +5201,16 @@ func _on_speed_pressed() -> void:
 
 
 func _on_pause_pressed() -> void:
+	if phase == Phase.REPLAY:
+		if _modal_blocks_input() or _presentation_suspended:
+			return
+		if replay.playing:
+			replay.pause()
+		else:
+			replay.play()
+		_refresh_replay_transport()
+		_refresh_touch_hud()
+		return
 	if phase != Phase.WATCHING:
 		return
 	sim.toggle_pause()
@@ -4916,6 +5218,7 @@ func _on_pause_pressed() -> void:
 		pause_button.text = "继续" if sim.paused else "暂停"
 	_refresh_phase_chip()
 	_refresh_touch_hud()
+	_sync_audio_state()
 
 
 func alarm_leak_warning() -> String:
@@ -4931,6 +5234,9 @@ func raid_force_alarm() -> void:
 
 
 func _on_alarm_pressed() -> void:
+	if phase == Phase.REPLAY:
+		_exit_replay_to_setup()
+		return
 	if phase == Phase.SWEEP:
 		_on_sweep_commit()
 		return
@@ -4955,9 +5261,13 @@ func _on_alarm_pressed() -> void:
 		if status_label:
 			status_label.text = leak_warn
 	_alarm_pulled_unarmed = not squad_has_firearm()
+	battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 	_capture_plan()
 	frozen_plan = last_plan.duplicate_plan()
 	run_id += 1
+	_cancel_world_input()
+	if backpack_panel:
+		backpack_panel.dismiss()
 	var this_run := run_id
 	phase = Phase.WATCHING
 	if c2:
@@ -4965,7 +5275,8 @@ func _on_alarm_pressed() -> void:
 	leak_advice_shown = ""
 	_clear_intel_path_ghost()
 	sim.reset()
-	battle_log.clear()
+	battle_log.begin_battle_recording()
+	_command_record_acc_s = 0.0
 	_watch_first_fire = false
 	_watch_first_return = false
 	_kill_combo = 0
@@ -5004,6 +5315,7 @@ func _on_alarm_pressed() -> void:
 	_update_tripwire_ghost()
 	battle_log.add_event(0, "door", -1, -1, Vector2.ZERO, {"locked": door_locked})
 	_queue_spawns(this_run)
+	battle_log.add_snapshot(0, _snapshot_data())
 	_set_watch_view_buttons(true)
 	if pause_button:
 		pause_button.disabled = false
@@ -5159,9 +5471,9 @@ func _make_enemy(id: int) -> EnemyRunner:
 	return e
 
 
-func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> void:
+func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> LootPickup:
 	if amount <= 0 and kind == "ammo":
-		return
+		return null
 	var loot := LootPickup.new()
 	var visual := Polygon2D.new()
 	visual.name = "Visual"
@@ -5180,12 +5492,15 @@ func _spawn_loot_at(pos: Vector2, amount: int, kind: String = "ammo") -> void:
 	loot.global_position = pos
 	loot.setup(amount, kind)
 	loot_piles.append(loot)
+	return loot
 
 
 func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 	# Called before damage is applied so terminal summaries include the shot.
 	if phase == Phase.WATCHING or pending_result != "":
-		battle_log.add_event(sim.tick, "return_fire", from.label_id, to.op_id, from.global_position)
+		battle_log.add_event(sim.tick, "return_fire", from.label_id, to.op_id, from.global_position,
+			{"animation_schema": 2, "visual_weapon": {"main": "kar98k", "flank": "mp40", "sneak": "kar98k", "echo": "luger"}.get(from.kind_id(), ""), "shot_interval_s": EnemyRunner.RETURN_INTERVAL})
+		shot_fx_recording.confirm(self, from, to, battle_log.events.back())
 	_sfx("return_fire")
 	_night_hp_lost = true
 	if not _watch_first_return:
@@ -5195,9 +5510,22 @@ func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
 
 
 func _process(delta: float) -> void:
+	var presentation_paused := _presentation_suspended or (pause_overlay != null and pause_overlay.is_open())
+	if phase == Phase.REPLAY:
+		if not _presentation_suspended and not _modal_blocks_input() and replay.advance(delta):
+			_apply_replay_scrub()
+		return
+	# Command movement and presentation share the pause menu/focus gate. The
+	# battle clock remains authoritative in ALERT, including its existing 2x.
+	if _is_command_phase() and presentation_paused:
+		return
+	if phase in [Phase.SETUP, Phase.SWEEP, Phase.WON, Phase.FAILED] and not presentation_paused:
+		_pose_command_clock_s += maxf(delta, 0.0)
 	if phase == Phase.SETUP or phase == Phase.WATCHING or phase == Phase.SWEEP:
 		_night_timer += delta
 	if _is_command_phase():
+		battle_log.advance_command_playback(delta)
+		_command_record_acc_s += maxf(delta, 0.0)
 		_tick_cover_long_press()
 		_tick_touch_hold()
 		_tick_cover_hold_ring()
@@ -5213,6 +5541,10 @@ func _process(delta: float) -> void:
 		_tick_footsteps(delta)
 		if c2:
 			c2.tick(delta)
+		if _command_record_acc_s + 0.0000001 >= 0.1:
+			var periods := floori((_command_record_acc_s + 0.0000001) / 0.1)
+			_command_record_acc_s = maxf(_command_record_acc_s - periods * 0.1, 0.0)
+			battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 		hud_tick += delta
 		if hud_tick >= 0.20:
 			hud_tick = 0.0
@@ -5325,12 +5657,16 @@ func _sim_tick() -> void:
 					best_id = enemy.label_id
 					best = enemy
 			if best != null and op.shot_cd <= 0.0 and op.can_engage(best.global_position, grid):
+				var shot_cue := fire_cue_for(op)
 				battle_log.add_event(
 					sim.tick, "fire", op.op_id, best.label_id, op.global_position,
-					{"name": op.display_name, "role": op.role_short, "codename": op.display_name}
+					{"name": op.display_name, "role": op.role_short, "codename": op.display_name,
+						"animation_schema": 2, "weapon": op.weapon_id,
+						"visual_weapon": WeaponCatalog.resolve_crate_kind(op.weapon_id, str(level.level_id), op.op_id),
+						"shot_interval_s": op.shot_interval, "reload_s": op.reload_s, "sfx_cue": shot_cue}
 				)
-				if op.try_fire(best, grid):
-					_sfx_every_shot(op)
+				if _try_fire_with_recorded_fx(op, best, battle_log.events.back()):
+					_sfx_every_shot(op, shot_cue)
 					if not _watch_first_fire:
 						_watch_first_fire = true
 						_announce_payoff(
@@ -5350,7 +5686,7 @@ func _sim_tick() -> void:
 	if phase == Phase.WATCHING:
 		for enemy in enemies:
 			if enemy.alive and enemy.active:
-				enemy.resolve_return_fire()
+				_resolve_return_with_recorded_fx(enemy)
 			if phase != Phase.WATCHING:
 				_finish_sim_tick()
 				return
@@ -5365,6 +5701,19 @@ func _sim_tick() -> void:
 	_finish_sim_tick()
 
 
+func _try_fire_with_recorded_fx(op: OperatorUnit, target: EnemyRunner, event: Dictionary) -> bool:
+	shot_fx_recording.begin(self, op, target, "ops", event)
+	var fired := op.try_fire(target, grid)
+	shot_fx_recording.finish()
+	return fired
+
+
+func _resolve_return_with_recorded_fx(enemy: EnemyRunner) -> void:
+	shot_fx_recording.begin(self, enemy, enemy.focus_target, "enemies")
+	enemy.resolve_return_fire()
+	shot_fx_recording.finish()
+
+
 func _finish_sim_tick() -> void:
 	# Win check before snapshot so terminal ticks always get a recorded frame.
 	if phase == Phase.WATCHING:
@@ -5374,6 +5723,7 @@ func _finish_sim_tick() -> void:
 		if phase == Phase.WATCHING:
 			_update_role_cards()
 	sim.advance()
+	battle_log.advance_simulation_playback()
 	_flush_pending_result()
 
 
@@ -5442,7 +5792,7 @@ func _ensure_tripwire_ghost() -> void:
 func _aim_world() -> Vector2:
 	if phase == Phase.SETUP and not _touches.is_empty() and _pending_touch_world != Vector2.ZERO:
 		return _pending_touch_world
-	return get_global_mouse_position()
+	return pointer_logic_position()
 
 
 func _update_tripwire_ghost() -> void:
@@ -5452,6 +5802,9 @@ func _update_tripwire_ghost() -> void:
 		return
 	tripwire_ghost.visible = true
 	var pos := _aim_world()
+	if not pos.is_finite():
+		tripwire_ghost.visible = false
+		return
 	tripwire_ghost.global_position = pos
 	var inv_mine := selected != null and int(selected.mines) > 0
 	var ok := inv_mine or _near_any_route_segment(pos, TRIPWIRE_ROUTE_DIST)
@@ -5486,32 +5839,7 @@ func _tick_ambush_zone() -> void:
 
 
 func _snapshot_data() -> Dictionary:
-	var ops := []
-	for op in operators:
-		if op.visible:
-			ops.append({
-				"id": op.op_id,
-				"hp": op.hp,
-				"ammo": op.ammo,
-				"alive": op.alive,
-				"pos": op.global_position,
-				"facing": op.facing_deg,
-				"role": op.role,
-			})
-	var ens := []
-	for e in enemies:
-		ens.append({
-			"id": e.label_id,
-			"hp": e.hp,
-			"alive": e.alive,
-			"pos": e.global_position,
-			"route": e.spawn_route,
-		})
-	var bars := []
-	for b in barrels:
-		if is_instance_valid(b):
-			bars.append({"pos": b.global_position, "spent": bool(b.spent)})
-	return {"ops": ops, "enemies": ens, "barrels": bars}
+	return visual_snapshot.capture(self)
 
 
 func _try_assign_loot(loot: LootPickup) -> void:
@@ -5587,17 +5915,19 @@ func _on_enemy_escaped(enemy: EnemyRunner, path: PackedVector2Array) -> void:
 	var lid := int(enemy.label_id)
 	fail_reason = "escape"
 	_wave_fail_index = wave_index() + 1
+	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
-	var hint := _escape_route_hint(enemy)
 	battle_log.add_event(
 		sim.tick, "escape", lid, -1, enemy.global_position,
 		{"route": route, "kind": enemy.kind_short()}
 	)
 	battle_log.mark_terminal(sim.tick, "escape")
+	var context := _escape_source_context(lid)
+	var hint := _escape_route_hint(enemy, context)
 	for e in enemies:
 		if e != null and is_instance_valid(e) and e != enemy:
 			e.active = false
-	_remember_path(path, "escape", hint, route, lid)
+	_remember_path(path, "escape", hint, route, lid, context)
 	_mission_had_escape = true
 	_flash("逃逸！%s" % hint, Color(1.0, 0.35, 0.25))
 	_sfx("escape")
@@ -5616,7 +5946,8 @@ func _on_enemy_died(enemy: EnemyRunner) -> void:
 	var drop_kit := "echo" if enemy.echo_kit else ""
 	var night := str(level.level_id) if level else ""
 	var drop: Dictionary = WeaponCatalogScript.enemy_drop_for(int(enemy.loot_ammo), drop_kit, night, int(enemy.label_id))
-	_spawn_loot_at(enemy.global_position, int(drop.get("amount", 2)), str(drop.get("kind", "ammo")))
+	var dropped := _spawn_loot_at(enemy.global_position, int(drop.get("amount", 2)), str(drop.get("kind", "ammo")))
+	visual_snapshot.corpses.remember(self, dropped, enemy, "enemies")
 	if phase == Phase.WATCHING:
 		_kill_edge_flash()
 		if _last_kill_tick >= 0 and sim.tick - _last_kill_tick <= PayoffCopy.combo_window_ticks():
@@ -5667,6 +5998,7 @@ func _fail_squad_wipe() -> void:
 	if phase != Phase.WATCHING:
 		return
 	fail_reason = "wipe"
+	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
 	battle_log.mark_terminal(sim.tick, "wipe")
 	for e in enemies:
@@ -5680,35 +6012,42 @@ func _fail_squad_wipe() -> void:
 	pending_result = "fail"
 
 
-func _remember_path(path: PackedVector2Array, reason: String, hint: String = "", route: String = "", leaker_id: int = -1) -> void:
-	intel.add_path(loop_index, path, sim.time_sec(), reason, hint, route, sim.tick, leaker_id)
+func _remember_path(path: PackedVector2Array, reason: String, hint: String = "", route: String = "", leaker_id: int = -1, source_context: Dictionary = {}) -> void:
+	intel.add_path(loop_index, path, sim.time_sec(), reason, hint, route, sim.tick, leaker_id, source_context)
 	intel_paths.clear()
 	for rec in intel.records:
 		intel_paths.append(rec["path"])
 
 
-func _escape_route_hint(enemy: EnemyRunner) -> String:
+func _escape_source_context(leaker_id: int) -> Dictionary:
+	var escape: Dictionary = battle_log.last_of_type("escape")
+	if escape.get("actor_id", -1) != leaker_id or escape.get("attempt_id", "") != battle_log.attempt_id or escape.get("wave_id", -1) != battle_log.wave_id:
+		return {}
+	for index in range(battle_log.events.size() - 1, -1, -1):
+		var spawn: Dictionary = battle_log.events[index]
+		if spawn.get("type", "") == "spawn" and spawn.get("actor_id", -1) == leaker_id and spawn.get("attempt_id", "") == escape.attempt_id and spawn.get("wave_id", -1) == escape.wave_id:
+			return intel.make_escape_context(str(level.level_id), spawn, escape)
+	return {}
+
+
+func _escape_route_hint(enemy: EnemyRunner, source_context: Dictionary = {}) -> String:
 	if enemy == null:
 		return "漏网路线已标在地图上"
 	if bool(enemy.did_branch):
 		return "锁门后从西侧紫备用接近漏出"
 	var lid := int(enemy.label_id)
-	var delay := 0.0
-	if level != null and level.has_method("delay_for_actor") and lid >= 1:
-		delay = float(level.delay_for_actor(lid))
+	var suffix := "（敌%d）" % lid
+	if not source_context.is_empty():
+		suffix = "（敌%d · %.1fs出发）" % [lid, float(source_context.spawn.tick) / 60.0]
 	match enemy.spawn_route:
 		"flank":
-			if level != null and str(level.level_id) == "railcut":
-				return "侧翼奔袭从东廊漏出（晚 3.8 秒）"
-			if delay > 0.05:
-				return "侧翼奔袭从东廊漏出（敌%d · %.1fs出发）" % [lid, delay]
-			return "侧翼奔袭从东廊漏出"
+			return "侧翼奔袭从东廊漏出" + suffix
 		"sneak":
-			if delay > 0.05:
-				return "西暗道影探从夹缝漏出（敌%d · %.1fs出发）" % [lid, delay]
-			return "西暗道影探从夹缝漏出"
+			return "西暗道影探从夹缝漏出" + suffix
+		"echo":
+			return "回波从碟台夹缝漏出" + suffix
 		_:
-			return "主路巡卫从南闸漏出"
+			return "主路巡卫从南闸漏出" + suffix
 
 
 func _set_watch_view_buttons(on: bool) -> void:
@@ -5739,6 +6078,7 @@ func _on_abort_pressed() -> void:
 	if phase != Phase.WATCHING:
 		return
 	fail_reason = "abort"
+	battle_log.advance_phase_boundary()
 	phase = Phase.FAILED
 	battle_log.add_event(sim.tick, "abort", -1, -1, Vector2.ZERO)
 	battle_log.mark_terminal(sim.tick, "abort")
@@ -5755,6 +6095,12 @@ func _on_abort_pressed() -> void:
 
 
 func _on_op_fired_shot(op: OperatorUnit, target_pos: Vector2) -> void:
+	if op != null:
+		if op.weapon_id == "knife":
+			_record_utility_action(op, "knife_stab", target_pos)
+		else:
+			visual_snapshot.cancel_utility(op.op_id)
+	shot_fx_recording.confirm(self, op)
 	var col := Color(1.0, 0.96, 0.62, 0.95)
 	var w := 2.15
 	if op != null:
@@ -5857,6 +6203,8 @@ func _clear_tracer_pool() -> void:
 
 func _exit_tree() -> void:
 	_clear_tracer_pool()
+	if sfx and sfx.has_method("stop_mission_audio"):
+		sfx.stop_mission_audio()
 
 
 func _on_op_ammo_empty(op: OperatorUnit) -> void:
@@ -5880,7 +6228,18 @@ func _operator_bark(op: OperatorUnit, kind: String) -> void:
 
 func _on_op_ammo_repacked(op: OperatorUnit) -> void:
 	if phase == Phase.WATCHING or pending_result != "":
-		battle_log.add_event(sim.tick, "repack", op.op_id, -1, op.global_position, {"name": op.display_name})
+		var shot := {}
+		for i in range(battle_log.events.size() - 1, -1, -1):
+			var event: Dictionary = battle_log.events[i]
+			if event.type == "fire" and int(event.actor_id) == op.op_id and int(event.wave_id) == battle_log.wave_id and int(event.tick) == sim.tick:
+				shot = event.payload
+				break
+		var visual_weapon := WeaponCatalog.resolve_crate_kind(op.weapon_id, str(level.level_id), op.op_id)
+		battle_log.add_event(sim.tick, "repack", op.op_id, -1, op.global_position,
+			{"name": op.display_name, "animation_schema": 2, "visual_weapon": visual_weapon,
+				"source_visual_weapon": str(shot.get("visual_weapon", "")),
+				"repack_kind": "same_weapon" if visual_weapon == str(shot.get("visual_weapon", "")) else "weapon_switch",
+				"reload_s": float(shot.get("reload_s", 0.0))})
 	_announce_payoff("repack", {"name": op.display_name}, op.global_position)
 	_update_event_log()
 	_update_role_cards()
@@ -5991,7 +6350,7 @@ func _fix_one_line() -> String:
 	if level != null:
 		var authored := str(level.fix_one).strip_edges()
 		if authored != "":
-			return authored
+			return "全关教学建议 · " + authored.trim_prefix("改一处就能赢：")
 	return ""
 
 
@@ -6025,12 +6384,13 @@ func _announce_payoff(kind: String, payload: Dictionary = {}, pos: Vector2 = Vec
 
 
 func _sync_payoff_timelines() -> void:
-	var marks: Array = PayoffCopy.timeline_marks(battle_log)
+	var marks: Array = PayoffCopy.timeline_marks(battle_log, battle_log.wave_id, battle_log.attempt_id) if phase == Phase.WATCHING else []
 	if watch_timeline != null and is_instance_valid(watch_timeline):
 		watch_timeline.set("payoff_marks", marks)
 		watch_timeline.queue_redraw()
 	if route_timeline != null and is_instance_valid(route_timeline) and route_timeline.visible:
-		route_timeline.set("payoff_marks", marks)
+		# This strip is the teaching total-table preview, not a battle clock.
+		route_timeline.set("payoff_marks", [])
 		route_timeline.queue_redraw()
 
 
@@ -6126,7 +6486,7 @@ func _show_fail_result() -> void:
 	if hook != "":
 		dossier_bits.append(hook)
 	if chatter != "":
-		dossier_bits.append("截获 · %s" % chatter)
+		dossier_bits.append("关卡背景 · %s" % chatter)
 	if cover_line != "":
 		dossier_bits.append(cover_line)
 	if trap_miss != "":
@@ -6253,14 +6613,23 @@ func _show_win_result() -> void:
 func _on_replay_pressed() -> void:
 	if battle_log.events.is_empty() and battle_log.snapshots.is_empty():
 		return
+	if phase == Phase.SWEEP:
+		battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 	replay_return_phase = phase
+	_restore_replay_button()
+	_cancel_world_input()
+	if backpack_panel:
+		backpack_panel.dismiss()
 	frozen_plan = last_plan.duplicate_plan()
 	phase = Phase.REPLAY
+	_clear_flash()
+	_reset_presentation_fx()
 	result_panel.visible = false
 	replay.bind(battle_log)
+	replay.play(true)
 	if scrub_slider:
 		scrub_slider.visible = true
-		scrub_slider.value = 1.0
+		scrub_slider.set_value_no_signal(0.0)
 	if replay_button:
 		replay_button.visible = false
 	# Hide live combat nodes; do not copy snapshot hp/ammo/alive onto them.
@@ -6274,7 +6643,7 @@ func _on_replay_pressed() -> void:
 			l.visible = false
 	_clear_replay_layer()
 	_apply_replay_scrub()
-	status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
+	_update_replay_status()
 	_update_hud()
 
 
@@ -6285,6 +6654,19 @@ func _on_scrub_changed(v: float) -> void:
 	_apply_replay_scrub()
 
 
+func _refresh_replay_transport() -> void:
+	if phase != Phase.REPLAY:
+		return
+	var available := replay.max_tick() > 0 and not replay.legacy_ambiguous
+	if pause_button:
+		pause_button.disabled = not available
+		pause_button.text = "暂停" if replay.playing else ("重播" if replay.scrub_tick >= replay.max_tick() else "继续")
+	if speed_button:
+		speed_button.disabled = not available
+		speed_button.text = "速度 2×" if replay.speed >= 1.5 else "速度 1×"
+	_refresh_phase_chip()
+
+
 func _apply_replay_scrub() -> void:
 	if phase != Phase.REPLAY:
 		return
@@ -6292,8 +6674,30 @@ func _apply_replay_scrub() -> void:
 	if scrub_slider and replay.max_tick() > 0:
 		scrub_slider.set_value_no_signal(float(replay.scrub_tick) / float(replay.max_tick()))
 	_paint_replay_snapshot(snap)
-	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "复盘 t=%.1fs · 点击定位" % (float(replay.scrub_tick) / 60.0))
+	var clock_label := "播放" if replay.continuous_playback else "复盘"
+	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "%s t=%.1fs · 点击定位" % [clock_label, float(replay.scrub_tick) / 60.0])
+	_update_replay_status()
+	_refresh_replay_transport()
 	_update_hud()
+
+
+func _update_replay_status() -> void:
+	var data: Dictionary = replay.snapshot_at_or_before(replay.scrub_tick).get("data", {})
+	var format := int(data.get("visual_schema", 0))
+	if replay.legacy_ambiguous:
+		status_label.text = "旧记录缺少波次边界，无法可靠复盘；原记录保留。空格返回"
+	elif replay.playback_unsupported:
+		status_label.text = "命令播放时间版本暂不支持，保留原战斗时间轴。空格返回"
+	elif format > VisualSnapshotScript.FORMAT_VERSION or format < 0:
+		status_label.text = "暂不支持此历史画面版本；原记录保留。空格返回"
+	elif format == 0:
+		status_label.text = "旧记录 · 缺失装备/场景以中性值显示。空格返回"
+	elif int(data.get("animation_schema", 0)) == 0:
+		status_label.text = "旧记录 · 动作未保存，使用简化人物显示。空格返回"
+	elif not preload("res://scripts/presentation/actor_pose.gd").supported(data):
+		status_label.text = "历史动作版本暂不支持，使用简化人物显示；原记录保留。空格返回"
+	else:
+		status_label.text = "只读复盘 · P 暂停/继续 · +/- 倍速 · 滑条/←→/事件定位后暂停 · 空格返回"
 
 
 func _paint_replay_snapshot(snap: Dictionary) -> void:
@@ -6301,9 +6705,12 @@ func _paint_replay_snapshot(snap: Dictionary) -> void:
 	if replay_layer == null or not snap.has("data"):
 		return
 	var data: Dictionary = snap["data"]
+	var format := int(data.get("visual_schema", 0))
+	if format > VisualSnapshotScript.FORMAT_VERSION or format < 0:
+		return
 	for o in data.get("ops", []):
-		var op := _op_by_id(int(o["id"]))
-		var col := op.body_color if op != null else Color(0.35, 0.65, 0.95)
+		var palette := [Color(0.36, 0.34, 0.24), Color(0.38, 0.36, 0.22), Color(0.24, 0.28, 0.22)]
+		var col: Color = palette[clampi(int(o.get("role", 0)), 0, 2)]
 		var alive := bool(o["alive"])
 		var hot := replay_focus_actor == int(o["id"]) and replay_focus_type in ["fire", "empty", "op_down", "loot", "ambush_armed", "repack", "return_fire", "no_engage"]
 		_add_replay_marker(
@@ -6325,7 +6732,7 @@ func _paint_replay_snapshot(snap: Dictionary) -> void:
 			"敌%d" % int(e["id"]),
 			alive,
 			hot,
-			90.0,
+			float(e.get("facing", 90.0)),
 			false,
 			not alive
 		)
@@ -6424,6 +6831,13 @@ func _clear_replay_layer() -> void:
 
 
 func _exit_replay_to_setup() -> void:
+	replay.pause()
+	if pause_button:
+		pause_button.disabled = true
+		pause_button.text = "暂停"
+	if speed_button:
+		speed_button.disabled = true
+		speed_button.text = "速度 2×" if sim.speed >= 1.5 else "速度 1×"
 	_clear_replay_layer()
 	if scrub_slider:
 		scrub_slider.visible = false
@@ -6489,7 +6903,7 @@ func _route_zh_short(route: String) -> String:
 
 
 func _next_wave_info() -> Dictionary:
-	## Shared pending-wave clock for fail panel and the WATCHING touch chip.
+	## Current-wave queued spawn clock for fail panel and WATCHING chips.
 	var out := {
 		"pending": false,
 		"remain": 0.0,
@@ -6497,7 +6911,7 @@ func _next_wave_info() -> Dictionary:
 		"intel_cut": -1.0,
 		"now": 0.0,
 	}
-	if level == null:
+	if level == null or phase == Phase.REPLAY:
 		return out
 	var now := sim.time_sec()
 	out["now"] = now
@@ -6515,16 +6929,13 @@ func _next_wave_info() -> Dictionary:
 	var next_kit := ""
 	var next_note := ""
 	var next_id := -1
-	for spec in level.spawn_schedule:
+	for spec in pending_spawns:
 		var d := float(spec.get("delay", 0.0))
-		var spawned := false
-		for p in pending_spawns:
-			if int(p.get("id", -1)) == int(spec.get("id", -2)) and bool(p.get("spawned", false)):
-				spawned = true
-				break
-		if spawned:
+		if bool(spec.get("spawned", false)):
 			continue
-		if d > ref_t + 0.05 and d < next_d:
+		# ALERT stays pending until the original spawn event actually happens,
+		# including the due tick. Terminal/intel cut eligibility is preserved.
+		if (phase == Phase.WATCHING or d > ref_t + 0.05) and d < next_d:
 			next_d = d
 			next_route = str(spec.get("route", "main"))
 			next_kit = str(spec.get("kit", "")).strip_edges()
@@ -6542,7 +6953,7 @@ func _next_wave_info() -> Dictionary:
 
 
 func _next_wave_line() -> String:
-	## Seconds until the next authored spawn after now / last intel cut.
+	## Seconds until the next queued spawn in this wave / last intel cut.
 	var info := _next_wave_info()
 	if level == null:
 		return "下一波：—"
@@ -6576,7 +6987,8 @@ func _refresh_route_timeline(show: bool) -> void:
 	if level.has_method("route_spawn_marks"):
 		marks = level.route_spawn_marks()
 	route_timeline.set("marks", marks)
-	route_timeline.set("payoff_marks", PayoffCopy.timeline_marks(battle_log))
+	route_timeline.set("context_label", "路线时间轴 · 全关预览（教学总表）")
+	route_timeline.set("payoff_marks", [])
 	var tmax := 1.0
 	for m in marks:
 		tmax = maxf(tmax, float(m.get("delay", 0.0)) + 0.5)
@@ -6614,6 +7026,9 @@ func _refresh_watch_timeline() -> void:
 	var touch := _want_touch()
 	## Phone SCOUT: hide the timeline so it does not cover the north wall.
 	var show := level != null and (phase == Phase.WATCHING or (phase == Phase.SETUP and not touch))
+	# Desktop minimap owns the north-right column; the route strip must end
+	# before it. Compact chrome hides the minimap and can use the full strip.
+	watch_timeline.offset_right = -16.0 if _use_touch_chrome() else -220.0
 	if touch:
 		watch_timeline.offset_top = 44.0
 		watch_timeline.offset_bottom = 80.0
@@ -6621,11 +7036,24 @@ func _refresh_watch_timeline() -> void:
 		watch_timeline.offset_top = 76.0
 		watch_timeline.offset_bottom = 120.0
 	watch_timeline.visible = show
+	if not show:
+		watch_timeline.set("marks", [])
+		watch_timeline.set("payoff_marks", [])
+		watch_timeline.set("context_label", "")
+		watch_timeline.set_live(false)
+		watch_timeline.queue_redraw()
+		_refresh_watch_wave_chip()
+		return
 	var marks: Array = []
-	if level != null and level.has_method("route_spawn_marks"):
-		marks = level.route_spawn_marks()
+	var specs: Array = pending_spawns if phase == Phase.WATCHING else (raid.current_spawns(level) if raid else level.spawn_schedule)
+	for spec in specs:
+		var mark := {"id":int(spec.get("id", -1)), "route":str(spec.get("route", "main")), "delay":float(spec.get("delay", 0.0))}
+		if phase == Phase.WATCHING:
+			mark["spawned"] = bool(spec.get("spawned", false))
+		marks.append(mark)
 	watch_timeline.set("marks", marks)
-	watch_timeline.set("payoff_marks", PayoffCopy.timeline_marks(battle_log) if phase == Phase.WATCHING else [])
+	watch_timeline.set("context_label", "路线时间轴 · 第%d/%d波 · %s" % [wave_index()+1, wave_total(), "观战" if phase == Phase.WATCHING else "下一波"])
+	watch_timeline.set("payoff_marks", PayoffCopy.timeline_marks(battle_log, battle_log.wave_id, battle_log.attempt_id) if phase == Phase.WATCHING else [])
 	var tmax := 1.0
 	for m in marks:
 		tmax = maxf(tmax, float(m.get("delay", 0.0)) + 0.5)
@@ -6833,6 +7261,11 @@ func _redraw_ghosts() -> void:
 
 func _ammo_summary() -> String:
 	var parts: PackedStringArray = []
+	if phase == Phase.REPLAY:
+		for op in replay_hud_frame().ops:
+			if bool(op.get("active", true)):
+				parts.append("%s:%s" % [HudRecord.operator_name(op), str(op.get("ammo", "—"))])
+		return "  ".join(parts)
 	for op in operators:
 		if op.visible:
 			if not op.alive:
@@ -6843,10 +7276,18 @@ func _ammo_summary() -> String:
 
 
 func _update_event_log() -> void:
-	_fill_event_list(battle_log.events, 14, "事件日志 · 点击定位")
+	var source := _event_display_log()
+	var evs := replay.events_up_to(replay.scrub_tick) if phase == Phase.REPLAY else (source.events if source != null else [])
+	_fill_event_list(evs, 14, "事件日志 · 点击定位")
+
+
+func _event_display_log() -> BattleLog:
+	# First-shot labels depend on the recording, just like frames and identity.
+	return replay.log if phase == Phase.REPLAY else battle_log
 
 
 func _fill_event_list(evs: Array, max_count: int, title: String) -> void:
+	var source := _event_display_log()
 	if event_log_title:
 		event_log_title.text = title
 	if event_list == null:
@@ -6854,7 +7295,7 @@ func _fill_event_list(evs: Array, max_count: int, title: String) -> void:
 			var lines := PackedStringArray()
 			var start0 := maxi(evs.size() - max_count, 0)
 			for i in range(start0, evs.size()):
-				lines.append(battle_log.format_event(evs[i]))
+				lines.append(source.format_event(evs[i]) if source != null else "")
 			(event_log as RichTextLabel).text = "[b]%s[/b]\n%s" % [title, "\n".join(lines)]
 		return
 	event_list.clear()
@@ -6863,7 +7304,7 @@ func _fill_event_list(evs: Array, max_count: int, title: String) -> void:
 	for i in range(start, evs.size()):
 		var ev: Dictionary = evs[i]
 		_event_list_items.append(ev)
-		event_list.add_item(battle_log.format_event(ev))
+		event_list.add_item(source.format_event(ev) if source != null else "")
 		event_list.set_item_custom_fg_color(_event_list_items.size() - 1, _event_tint(ev))
 	var log_open := _event_log_open and event_log != null and event_log.visible
 	if log_open and _event_list_items.size() > 0:
@@ -6924,20 +7365,24 @@ func _focus_battle_event(ev: Dictionary) -> void:
 	replay_focus_actor = int(ev.get("actor_id", -1))
 	replay_focus_type = str(ev.get("type", ""))
 	if phase == Phase.REPLAY:
-		replay.set_tick(int(ev["tick"]))
+		replay.set_tick(replay.playback_time(ev))
 		_apply_replay_scrub()
-	var pos := _event_focus_position(ev)
+	var pos := _event_focus_position(ev) if phase != Phase.REPLAY else Vector2(ev.get("position", escape_world))
 	if phase == Phase.REPLAY:
 		pos = _pos_from_snapshot(replay.snapshot_at_or_before(replay.scrub_tick), ev, pos)
+	if presentation_3d != null:
+		presentation_3d.focus_event(pos, ev)
 	_spawn_focus_ring(pos)
 	if str(ev["type"]) == "escape":
 		_begin_escape_flash()
 	if status_label:
-		status_label.text = "定位 · %s" % battle_log.format_event(ev)
+		var source := _event_display_log()
+		status_label.text = "定位 · %s" % (source.format_event(ev) if source != null else "")
 
 
 func focus_latest_of_type(type_name: String) -> bool:
-	var ev := battle_log.last_of_type(type_name)
+	var source := _event_display_log()
+	var ev := source.last_of_type(type_name) if source != null else {}
 	if ev.is_empty():
 		return false
 	_focus_battle_event(ev)
@@ -7097,6 +7542,7 @@ func _raise_result_overlay() -> void:
 		continue_button.add_theme_font_size_override("font_size", 18)
 	_apply_result_rail()
 	_sync_desktop_bars(not _want_touch())
+	_fit_result_dialog()
 
 
 func _dock_fail_result_panel(_keep_escape_visible: bool) -> void:
@@ -7156,9 +7602,18 @@ func result_cta_buried_by_bars() -> bool:
 func _update_hud() -> void:
 	var lv_title := level.title if level else "AMBUSH LOOP"
 	title_label.text = "AMBUSH LOOP  ·  第 %d 世  ·  波 %d/%d" % [loop_index, wave_index() + 1, wave_total()]
+	if phase == Phase.REPLAY:
+		var history := replay_hud_frame()
+		lv_title = str(history.level_title)
+		var attempt := str(history.attempt_number) if int(history.attempt_number) > 0 else "—"
+		var wave := str(int(history.wave_id) + 1) if int(history.wave_id) >= 0 else "—"
+		var total := str(history.wave_count) if int(history.wave_count) > 0 else "—"
+		title_label.text = "AMBUSH LOOP  ·  第 %s 世  ·  波 %s/%s" % [attempt, wave, total]
 	if level_label:
 		level_label.text = lv_title
-	if tut_label and level:
+	if tut_label and phase == Phase.REPLAY:
+		tut_label.text = ""
+	elif tut_label and level:
 		tut_label.text = level.tutorial if phase == Phase.SETUP else level.teaching
 	_hide_duplicate_tut()
 	_sync_desktop_bars(not _want_touch())
@@ -7183,6 +7638,8 @@ func _update_hud() -> void:
 	_refresh_checklist()
 	_refresh_decision_pulse()
 	for op in operators:
+		if phase == Phase.REPLAY:
+			break
 		if op == null or not is_instance_valid(op):
 			continue
 		op.tag_emphasis = phase == Phase.WATCHING and op.alive and op.slot != null
@@ -7331,7 +7788,7 @@ func _refresh_phase_chip() -> void:
 			phase_chip.text = "阶段 · 封锁成功"
 			phase_chip.add_theme_color_override("font_color", Color(0.55, 0.92, 0.48))
 		Phase.REPLAY:
-			phase_chip.text = "阶段 · 只读复盘"
+			phase_chip.text = "复盘 %s %s t=%.1fs" % ["播放" if replay.playing else "暂停", "2×" if replay.speed >= 1.5 else "1×", float(replay.scrub_tick) / 60.0]
 			phase_chip.add_theme_color_override("font_color", Color(0.78, 0.70, 0.48))
 		_:
 			phase_chip.text = ""
@@ -7368,7 +7825,7 @@ func _route_chip_label(route: String, base: String) -> String:
 	if level != null and level.has_method("first_route_delay"):
 		var delay := float(level.first_route_delay(route))
 		if delay >= 1.0:
-			lab = "%s %.1fs" % [base, delay]
+			lab = "全关预览 · %s %.1fs" % [base, delay]
 	if level != null and level.has_method("teaching_note_for"):
 		var note := str(level.teaching_note_for(route))
 		if note != "":
@@ -7389,7 +7846,8 @@ func _fill_route_chips(chips: Array) -> void:
 
 func _make_route_chip() -> PanelContainer:
 	var p := PanelContainer.new()
-	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	p.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	p.mouse_filter = Control.MOUSE_FILTER_PASS
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 5)
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -7407,6 +7865,9 @@ func _make_route_chip() -> PanelContainer:
 	row.add_child(icon)
 	var lab := Label.new()
 	lab.name = "Lab"
+	lab.clip_text = true
+	lab.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	lab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	lab.add_theme_font_size_override("font_size", 13)
 	lab.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(lab)
@@ -7429,6 +7890,7 @@ func _bind_route_chip(chip: Control, spec: Dictionary) -> void:
 	var lab := chip.find_child("Lab", true, false) as Label
 	if lab:
 		lab.text = str(spec["label"])
+		chip.tooltip_text = lab.text
 		lab.add_theme_color_override("font_color", Color(0.94, 0.90, 0.78))
 
 
@@ -7493,7 +7955,16 @@ func _update_cover_previews() -> void:
 func _update_role_cards() -> void:
 	_apply_result_rail()
 	if role_box:
-		role_box.modulate = Color(1, 1, 1, 0.45) if phase == Phase.REPLAY else Color.WHITE
+		role_box.modulate = Color.WHITE
+	if phase == Phase.REPLAY:
+		var history := replay_hud_frame()
+		for i in role_cards.size():
+			var op := HudRecord.operator_at(history, i)
+			role_cards[i].bind_record(op, int(op.get("id", -2)) == int(history.selected_id))
+		if plan_readout:
+			var op := HudRecord.selected(history)
+			plan_readout.text = "历史选择未记录" if op.is_empty() else "%s · %s\n%s · 射界朝%s" % [HudRecord.operator_name(op), str(op.get("cover_label", "掩体未记录")), HudRecord.inventory_line(op), _compass_deg(float(op.get("facing", 90.0)))]
+		return
 	for i in role_cards.size():
 		var card: OpCard = role_cards[i]
 		if i >= operators.size():
@@ -7529,6 +8000,10 @@ func _update_role_cards() -> void:
 
 func _is_command_phase() -> bool:
 	return phase == Phase.SETUP or phase == Phase.SWEEP
+
+
+func replay_hud_frame() -> Dictionary:
+	return ViewStateScript.capture(self) if phase == Phase.REPLAY else {}
 
 
 func phase_id() -> String:
@@ -7609,6 +8084,7 @@ func _clear_raid_throwables() -> void:
 
 
 func _spawn_level_stashes() -> void:
+	visual_snapshot.reset_environment()
 	_clear_stashes()
 	if level == null or grid == null:
 		return
@@ -11630,6 +12106,7 @@ func _complete_stash_search(op: OperatorUnit) -> bool:
 	var item: Dictionary = st.take()
 	if item.is_empty():
 		return false
+	visual_snapshot.remember_collected_stash(st)
 	var rec: Dictionary = op.receive_item(str(item.get("kind", "ammo")), int(item.get("amount", 1)))
 	if not bool(rec.get("ok", false)) and bool(rec.get("full", false)):
 		_spawn_loot_at(op.global_position + Vector2(18, 10), int(item.get("amount", 1)), str(item.get("kind", "ammo")))
@@ -11713,6 +12190,7 @@ func _try_place_inventory_mine(world_pos: Vector2) -> void:
 	var mine = RaidMineScript.new()
 	entities.add_child(mine)
 	mine.global_position = world_pos
+	visual_snapshot.tool_fx.register(self, mine, selected, "mine")
 	raid_mines.append(mine)
 	status_label.text = "%s 埋雷 剩余%d" % [selected.display_name, selected.mines]
 	_sfx("trip")
@@ -11721,7 +12199,9 @@ func _try_place_inventory_mine(world_pos: Vector2) -> void:
 
 
 func _throw_grenade_at_cursor() -> void:
-	_throw_grenade_at(get_global_mouse_position())
+	var pos := pointer_logic_position()
+	if pos.is_finite():
+		_throw_grenade_at(pos)
 
 
 func _throw_grenade_at(world_pos: Vector2) -> void:
@@ -11751,8 +12231,10 @@ func _throw_grenade_from(op: OperatorUnit, world_pos: Vector2) -> bool:
 	var night := str(level.level_id) if level else ""
 	var gvar := WeaponCatalogScript.grenade_variant_for(str(op.weapon_id), night)
 	g.setup(op.global_position, dest, float(d.get("fuse", 0.55)), float(d.get("radius", 78.0)), float(d.get("damage", 78.0)), gvar)
-	g.detonated.connect(_on_grenade_boom)
+	visual_snapshot.tool_fx.register(self, g, op, "grenade")
+	g.detonated.connect(_on_recorded_grenade_boom.bind(g))
 	raid_grenades.append(g)
+	_record_utility_action(op, "grenade_throw", dest)
 	if op == selected:
 		status_label.text = "%s 丢手雷 剩余%d" % [op.display_name, op.grenades]
 	_sfx("ui")
@@ -11761,7 +12243,7 @@ func _throw_grenade_from(op: OperatorUnit, world_pos: Vector2) -> bool:
 
 
 func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
-	if selected == null or not selected.alive or not selected.visible:
+	if not _can_edit_equipment() or _modal_blocks_input():
 		return
 	if selected.grenades <= 0:
 		status_label.text = "没有手雷"
@@ -11773,6 +12255,8 @@ func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
 		_update_hud()
 		return
 	var dest := world_pos if world_pos.is_finite() else _throw_ahead(110.0)
+	if not dest.is_finite():
+		return
 	var d: Dictionary = WeaponCatalogScript.def("grenade")
 	var max_r := float(d.get("throw_range", 160.0))
 	if selected.global_position.distance_to(dest) > max_r:
@@ -11785,12 +12269,13 @@ func _place_nade_mark(world_pos: Vector2 = Vector2(INF, INF)) -> void:
 
 
 func _toggle_auto_grenade() -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	selected.auto_grenade = not selected.auto_grenade
 	var on := selected.auto_grenade
 	status_label.text = "%s 自动手雷 %s" % [selected.display_name, "开" if on else "关"]
 	_flash(status_label.text, Color(0.95, 0.72, 0.32) if on else Color(0.62, 0.58, 0.48))
+	_refresh_backpack_if_open()
 	_update_hud()
 
 
@@ -11866,22 +12351,31 @@ func _toggle_backpack() -> void:
 	if backpack_panel.is_open():
 		backpack_panel.dismiss()
 		return
-	if selected == null:
+	if not _can_edit_equipment() or _modal_blocks_input():
 		return
+	_cancel_world_input()
 	backpack_panel.present(selected)
 
 
 func _refresh_backpack_if_open() -> void:
 	if backpack_panel != null and backpack_panel.is_open() and selected != null:
-		backpack_panel.refresh(selected)
+		if _can_edit_equipment():
+			backpack_panel.refresh(selected)
+		else:
+			backpack_panel.dismiss()
+
+
+func _can_edit_equipment() -> bool:
+	return _is_command_phase() and selected != null and selected.visible and selected.alive and not selected.locked
 
 
 func _on_pack_equip(kind: String) -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	var rec: Dictionary = selected.equip_from_pack(kind)
 	status_label.text = str(rec.get("text", ""))
 	if bool(rec.get("ok", false)):
+		visual_snapshot.cancel_utility(selected.op_id)
 		_sfx("loot")
 		_flash(str(rec.get("text", "")), Color(0.82, 0.92, 0.45))
 	_refresh_backpack_if_open()
@@ -11890,7 +12384,7 @@ func _on_pack_equip(kind: String) -> void:
 
 
 func _on_pack_pass(kind: String) -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	var best: OperatorUnit = null
 	var best_d := 56.0
@@ -11915,12 +12409,13 @@ func _on_pack_pass(kind: String) -> void:
 
 
 func _on_pack_drop(kind: String) -> void:
-	if selected == null:
+	if not _can_edit_equipment():
 		return
 	var rec: Dictionary = selected.drop_from_pack(kind)
 	if not bool(rec.get("ok", false)):
 		status_label.text = str(rec.get("text", "丢不掉"))
 		return
+	visual_snapshot.cancel_utility(selected.op_id)
 	_spawn_loot_at(selected.global_position + Vector2(16, 12), int(rec.get("amount", 1)), str(rec.get("kind", kind)))
 	status_label.text = str(rec.get("text", "丢掉"))
 	_sfx("ui")
@@ -11929,29 +12424,44 @@ func _on_pack_drop(kind: String) -> void:
 	_update_hud()
 
 
-func _on_grenade_boom(pos: Vector2, radius: float, damage: float) -> void:
+func _on_recorded_grenade_boom(pos: Vector2, radius: float, damage: float, grenade: RaidGrenade) -> void:
+	var source: Dictionary = visual_snapshot.tool_fx.begin_grenade(self, grenade, pos, radius)
+	_on_grenade_boom(pos, radius, damage, source, grenade)
+
+
+func _on_grenade_boom(pos: Vector2, radius: float, damage: float, fx_source: Dictionary = {}, fx_tool: Node2D = null) -> void:
 	_sfx("barrel")
 	_shake_for_explosion(pos)
 	if entities:
 		CombatFxScript.grenade_scorch(entities, pos)
+	var victims: Array = []
 	for e in enemies:
 		if e != null and is_instance_valid(e) and e.alive:
 			if e.global_position.distance_to(pos) <= radius:
+				var hp_before: float = e.hp
 				e.apply_fire(damage, selected)
+				if not fx_source.is_empty():
+					victims.append(visual_snapshot.tool_fx.victim(e, "enemies", hp_before))
 	for op in operators:
 		if op != null and op.alive and op.global_position.distance_to(pos) <= radius * 0.55:
+			var hp_before: float = op.hp
 			op.take_damage(damage * 0.35, pos)
+			if not fx_source.is_empty():
+				victims.append(visual_snapshot.tool_fx.victim(op, "ops", hp_before))
 			_night_hp_lost = true
+	visual_snapshot.tool_fx.finish(self, fx_tool, fx_source, victims)
 	if phase == Phase.WATCHING:
 		_check_win()
 
 
 func _throw_decoy_at_cursor() -> void:
-	_throw_decoy_at(get_global_mouse_position())
+	var pos := pointer_logic_position()
+	if pos.is_finite():
+		_throw_decoy_at(pos)
 
 
 func _throw_decoy_at(world_pos: Vector2) -> void:
-	if selected == null or not selected.alive:
+	if not _can_edit_equipment() or _modal_blocks_input() or not world_pos.is_finite():
 		return
 	if selected.decoys <= 0:
 		status_label.text = "没有诱饵"
@@ -11966,6 +12476,7 @@ func _throw_decoy_at(world_pos: Vector2) -> void:
 	d.global_position = world_pos
 	d.setup()
 	raid_decoys.append(d)
+	_record_utility_action(selected, "decoy_place", world_pos)
 	status_label.text = "%s 诱饵" % selected.display_name
 	_sfx("ui")
 
@@ -11978,12 +12489,26 @@ func _tick_raid_grenades(dt: float) -> void:
 	raid_grenades = raid_grenades.filter(func(n) -> bool: return n != null and is_instance_valid(n) and not n.spent())
 
 
+func _record_utility_action(op: OperatorUnit, action: String, target: Vector2) -> void:
+	if op != null and op.alive and op.visible and target.is_finite():
+		visual_snapshot.record_utility(self, op, action, target)
+
+
 func _tick_raid_mines() -> void:
 	for m in raid_mines:
 		if m != null and is_instance_valid(m) and m.has_method("sim_check"):
+			var source: Dictionary = visual_snapshot.tool_fx.begin_mine(self, m)
+			var hp_before := {}
+			if not source.is_empty():
+				for enemy in enemies:
+					if is_instance_valid(enemy):
+						hp_before[enemy.get_instance_id()] = float(enemy.hp)
 			var victim: EnemyRunner = m.sim_check(enemies)
 			if victim != null:
 				battle_log.add_event(sim.tick, "mine", victim.label_id, -1, m.global_position)
+				if not source.is_empty() and hp_before.has(victim.get_instance_id()):
+					var target: Dictionary = visual_snapshot.tool_fx.victim(victim, "enemies", hp_before[victim.get_instance_id()])
+					visual_snapshot.tool_fx.finish(self, m, source, [target], battle_log.events.back())
 				_sfx("trip")
 				_announce_payoff("trip", {"enemy_id": victim.label_id}, m.global_position)
 	raid_mines = raid_mines.filter(func(n) -> bool: return n != null and is_instance_valid(n) and not bool(n.spent))
@@ -12037,6 +12562,8 @@ func _enter_sweep() -> void:
 func _on_sweep_commit() -> void:
 	if phase != Phase.SWEEP:
 		return
+	battle_log.add_command_snapshot(sim.tick, _snapshot_data())
+	_command_record_acc_s = 0.0
 	if raid != null and raid.is_last_wave(level):
 		_extract_win()
 		return
@@ -12044,12 +12571,17 @@ func _on_sweep_commit() -> void:
 
 
 func _begin_next_wave() -> void:
+	_cancel_world_input()
+	if backpack_panel:
+		backpack_panel.dismiss()
 	if raid:
 		raid.advance_wave()
+	battle_log.advance_phase_boundary()
 	run_id += 1
 	var this_run := run_id
 	phase = Phase.WATCHING
 	sim.reset()
+	battle_log.begin_wave(raid.wave_index if raid else battle_log.wave_id + 1)
 	_watch_first_fire = false
 	_watch_first_return = false
 	_kill_combo = 0
@@ -12069,14 +12601,17 @@ func _begin_next_wave() -> void:
 			if op.fire_mode == OperatorUnit.FireMode.HOLD_FOR_AMBUSH:
 				op.arm_ambush()
 	_queue_spawns(this_run)
+	battle_log.add_snapshot(0, _snapshot_data())
 	_set_watch_view_buttons(true)
 	status_label.text = "警报 · 第%d波" % (raid.wave_index + 1 if raid else 1)
 	_update_hud()
 
 
 func _extract_win() -> void:
+	battle_log.advance_phase_boundary()
 	phase = Phase.WON
 	battle_log.mark_terminal(sim.tick, "win")
+	battle_log.add_snapshot(sim.tick, _snapshot_data())
 	_ensure_watch_cinema()
 	if _watch_letterbox:
 		_watch_letterbox.visible = true
@@ -12110,6 +12645,9 @@ func _refresh_alarm_cta() -> void:
 		Phase.WATCHING:
 			alarm_button.text = "警报中"
 			alarm_button.disabled = true
+		Phase.REPLAY:
+			alarm_button.text = "返回搜刮"
+			alarm_button.disabled = false
 		_:
 			alarm_button.disabled = true
 	var now := str(alarm_button.text)
@@ -12182,6 +12720,9 @@ func _raid_clock_text() -> String:
 
 
 func _tick_hold_to_move(delta: float) -> void:
+	# Native 3D touch commands commit only on release; never poll emulated LMB.
+	if presentation_3d != null:
+		return
 	var gs = get_node_or_null("/root/GameSettings")
 	if gs == null or not bool(gs.get("hold_to_move")):
 		return
@@ -12193,7 +12734,7 @@ func _tick_hold_to_move(delta: float) -> void:
 	if _hold_move_acc < 0.28:
 		return
 	_hold_move_acc = 0.0
-	_command_move_selected(get_global_mouse_position())
+	_command_move_selected(pointer_logic_position())
 
 
 func _tick_footsteps(delta: float) -> void:
@@ -12258,6 +12799,8 @@ func squad_has_firearm() -> bool:
 
 
 func raid_transfer(from_index: int, to_index: int, kind: String = "auto") -> Dictionary:
+	if not _is_command_phase():
+		return {"ok": false, "text": "当前阶段装备已冻结"}
 	if from_index < 0 or from_index >= operators.size() or to_index < 0 or to_index >= operators.size():
 		return {"ok": false, "text": "索引"}
 	var rec: Dictionary = operators[from_index].transfer_to(operators[to_index], kind)
@@ -12267,7 +12810,7 @@ func raid_transfer(from_index: int, to_index: int, kind: String = "auto") -> Dic
 
 
 func _transfer_selected_to_nearest() -> void:
-	if selected == null or not selected.alive:
+	if not _can_edit_equipment():
 		return
 	var best: OperatorUnit = null
 	var best_d := 64.0
@@ -12294,7 +12837,7 @@ func _transfer_selected_to_nearest() -> void:
 
 func _throw_ahead(max_r: float) -> Vector2:
 	if selected == null:
-		return get_global_mouse_position()
+		return pointer_logic_position()
 	var rad := deg_to_rad(selected.facing_deg)
 	return selected.global_position + Vector2(cos(rad), sin(rad)) * minf(max_r, 110.0)
 
@@ -12318,6 +12861,8 @@ func _toggle_haul_corpse() -> void:
 		status_label.text = "走近尸体再拖（H）"
 		return
 	selected.haul_loot(best)
+	visual_snapshot.cancel_utility(selected.op_id)
+	visual_snapshot.corpses.action(self, selected, best, "grab")
 	status_label.text = "%s 拖尸" % selected.display_name
 	_sfx("body_drop")
 
@@ -12325,7 +12870,10 @@ func _toggle_haul_corpse() -> void:
 func _drop_hauled(op: OperatorUnit) -> void:
 	if op == null or not op.has_method("drop_hauled"):
 		return
+	var dropped: LootPickup = op.hauled_loot if op.is_hauling() else null
 	op.drop_hauled()
+	if dropped != null:
+		visual_snapshot.corpses.action(self, op, dropped, "release")
 	status_label.text = "%s 放下尸体" % op.display_name
 	_sfx("ui")
 
@@ -12450,4 +12998,3 @@ func raid_vacuum_loot() -> int:
 	loot_piles = loot_piles.filter(func(l: LootPickup) -> bool: return is_instance_valid(l) and not l.collected)
 	_update_hud()
 	return n
-

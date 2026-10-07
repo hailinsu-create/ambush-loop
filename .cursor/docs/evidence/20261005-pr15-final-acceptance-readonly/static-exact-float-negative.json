@@ -1,0 +1,12 @@
+{
+  "status": "STATIC_METHOD_NEGATIVE_NO_RUNTIME",
+  "actual_exit": 1,
+  "original_tool_chunk_id": "aef15e",
+  "original_output": " .cursor/docs/PLANNING_INDEX.md | 3 ++-\n 1 file changed, 2 insertions(+), 1 deletion(-)\nTraceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\nAssertionError\n",
+  "cause": "Exact binary float equality in static cap assertion; documentary decimal budget is mathematically correct. No Godot/browser launched; no runtime evidence changed.",
+  "stored_whole1": 1297.8,
+  "calculated_whole1": 1297.8000000000002,
+  "stored_whole2": 663.9,
+  "calculated_whole2": 663.9000000000001,
+  "comparison_correction": "math.isclose(..., rel_tol=0, abs_tol=1e-9)"
+}

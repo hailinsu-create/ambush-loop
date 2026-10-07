@@ -1,0 +1,14 @@
+{
+  "start": "2026-10-05T05:55:07.415770+00:00",
+  "pid": 149581,
+  "request": {
+    "label": "initialize-warehouse",
+    "script": "/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/initialize_warehouse.py"
+  },
+  "actual_exit": 1,
+  "exception": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/browser_controller.py\", line 27, in <module>\n    exec(Path(r['script']).read_text(),globals());receipt['actual_exit']=0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 6, in <module>\nAssertionError\n",
+  "end": "2026-10-05T05:55:08.090688+00:00",
+  "console": [],
+  "page_errors": []
+}

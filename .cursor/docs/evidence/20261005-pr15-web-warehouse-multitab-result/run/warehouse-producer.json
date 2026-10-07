@@ -1,0 +1,348 @@
+{
+  "status": "PASS",
+  "source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+  "record": {
+    "attempt": "d8ba862ce497eb87f8d3fde463a5d35b",
+    "bytes": 11738920,
+    "level": "warehouse",
+    "reason": "win",
+    "schema": 2,
+    "sha256": "cd9ed64e7653770e5dcc24724be7bf862f09c907a043ac23503570cdc364f49f",
+    "terminal": 5228,
+    "validation": {
+      "attempt": "d8ba862ce497eb87f8d3fde463a5d35b",
+      "events": 62,
+      "failures": [],
+      "frames": 713,
+      "terminal_reason": "win"
+    },
+    "path": "/tmp/pr15-web-controls/fresh-native-resume-dab-20261005/run-sync/warehouse-record.bin",
+    "producer_wall": 894.4934469409927
+  },
+  "state": {
+    "attempt": "d8ba862ce497eb87f8d3fde463a5d35b",
+    "covers": [
+      {
+        "id": 0,
+        "pos": [
+          368.0,
+          272.0
+        ]
+      },
+      {
+        "id": 1,
+        "pos": [
+          496.0,
+          400.0
+        ]
+      },
+      {
+        "id": 2,
+        "pos": [
+          720.0,
+          240.0
+        ]
+      },
+      {
+        "id": 3,
+        "pos": [
+          912.0,
+          464.0
+        ]
+      },
+      {
+        "id": 4,
+        "pos": [
+          592.0,
+          528.0
+        ]
+      },
+      {
+        "id": 5,
+        "pos": [
+          944.0,
+          560.0
+        ]
+      }
+    ],
+    "engine_frames": 703,
+    "event_log_open": false,
+    "event_ring_visible": false,
+    "fail_reason": "",
+    "focus_actor": -1,
+    "focus_type": "",
+    "input_count": 244,
+    "input_tail": {
+      "attempt": "d8ba862ce497eb87f8d3fde463a5d35b",
+      "button": 1,
+      "engine_frame": 691,
+      "kind": "mouse",
+      "phase": 5,
+      "pos": [
+        356.0,
+        674.0
+      ],
+      "presents": 691,
+      "pressed": false,
+      "scene": "res://scenes/main.tscn",
+      "us": 974383900
+    },
+    "level": "warehouse",
+    "log": {
+      "events": 62,
+      "playback_frames": 713,
+      "playback_terminal": 5228,
+      "playback_tick": 5228,
+      "snapshots": 206,
+      "terminal": 1203,
+      "terminal_reason": "win"
+    },
+    "loot": [],
+    "mines_count": 0,
+    "modal": {
+      "backpack": false,
+      "credits": false,
+      "handoff": false,
+      "handoff_from": "",
+      "handoff_to": "",
+      "pause": false,
+      "tutorial": false,
+      "tutorial_body": "",
+      "tutorial_page": 0
+    },
+    "observer_usec": 10707200,
+    "operators": [
+      {
+        "alive": true,
+        "ammo": 10,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 90.0,
+        "family": "rifle",
+        "has_ammo_pack": false,
+        "hp": 100.0,
+        "id": 1,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 7,
+            "kind": "kar98k"
+          },
+          {
+            "amount": 1,
+            "kind": "grenade"
+          }
+        ],
+        "pool": {
+          "rifle": 49
+        },
+        "pos": [
+          1040.0,
+          400.0
+        ],
+        "role": 0,
+        "slot": -1,
+        "start_ammo": 5,
+        "weapon": "kar98k"
+      },
+      {
+        "alive": true,
+        "ammo": 12,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 4.0,
+        "family": "mg",
+        "has_ammo_pack": true,
+        "hp": 87.6,
+        "id": 2,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 20,
+            "kind": "bar"
+          }
+        ],
+        "pool": {
+          "mg": 12
+        },
+        "pos": [
+          912.0,
+          464.0
+        ],
+        "role": 1,
+        "slot": 3,
+        "start_ammo": 20,
+        "weapon": "bar"
+      },
+      {
+        "alive": true,
+        "ammo": 6,
+        "ammo_pack_used": false,
+        "auto_grenade": true,
+        "facing": 180.0,
+        "family": "scout",
+        "has_ammo_pack": false,
+        "hp": 100.0,
+        "id": 3,
+        "mines": 0,
+        "moving": false,
+        "pack": [
+          {
+            "amount": 6,
+            "kind": "springfield"
+          }
+        ],
+        "pool": {
+          "scout": 6
+        },
+        "pos": [
+          944.0,
+          560.0
+        ],
+        "role": 2,
+        "slot": 5,
+        "start_ammo": 5,
+        "weapon": "springfield"
+      }
+    ],
+    "phase": 3,
+    "presents": 703,
+    "replay": {
+      "max": 0,
+      "playing": false,
+      "speed": 2.0,
+      "tick": 0
+    },
+    "run_id": 3,
+    "scene": "res://scenes/main.tscn",
+    "selected": 1,
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "a1952169fd685883c5b87fb318fbcf2d0041acff36b2c904f2004f5f729da60e",
+          "text": "[progress]\n\nlevel_id=\"pump\"\nlevel_index=2\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c1\u5173 \u00b7 \u9662\u5b50\uff1a\u4ea4\u53c9\u5c01\u9501",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "\u7b2c2\u5173 \u00b7 \u4ed3\u9053\uff1a\u5f39\u836f\u7a97\u53e3",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c3\u5173 \u00b7 \u6cf5\u7ad9\uff1a\u5173\u95e8\u4e4b\u540e",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c4\u5173 \u00b7 \u4fe1\u53f7\u697c\uff1a\u53cc\u8d70\u5eca\u5ef6\u8fdf",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c5\u5173 \u00b7 \u6cb9\u5e93\uff1a\u4e09\u8def\u5408\u56f4",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "\u7b2c6\u5173 \u00b7 \u7535\u53f0\uff1a\u706f\u5854\u56de\u6ce2",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1.0,
+      "muted": false,
+      "next": "pump",
+      "persistence_error": "",
+      "persistence_status": "\u5df2\u4fdd\u5b58\u5230\u6b64\u6d4f\u89c8\u5668",
+      "quality": "standard",
+      "seen": {
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1.0
+    },
+    "sim": {
+      "accum": 0.0167666666666744,
+      "paused": false,
+      "speed": 1.0,
+      "tick": 863
+    },
+    "stashes": [
+      {
+        "collected": false,
+        "family": "decoy",
+        "id": 175707786898,
+        "kind": "decoy",
+        "pos": [
+          720.0,
+          304.0
+        ]
+      },
+      {
+        "collected": false,
+        "family": "smg",
+        "id": 175858781851,
+        "kind": "mp40",
+        "pos": [
+          464.0,
+          528.0
+        ]
+      }
+    ],
+    "status": "\u8ba1\u5212\u594f\u6548",
+    "ticks_usec": 988133200,
+    "tool": 0,
+    "view": {
+      "attempt": "d8ba862ce497eb87f8d3fde463a5d35b",
+      "level": "warehouse",
+      "recorded_phase": 3,
+      "roots": 6,
+      "seq": -1,
+      "tick": 5228,
+      "wave": 1,
+      "yaw": 155.0
+    },
+    "viewport": [
+      0.0,
+      0.0,
+      1280.0,
+      720.0
+    ],
+    "wave": 1,
+    "wave_count": 2,
+    "waves_cleared": 2
+  }
+}

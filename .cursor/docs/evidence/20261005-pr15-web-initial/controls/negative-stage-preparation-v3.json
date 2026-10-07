@@ -1,0 +1,7 @@
+{
+  "actual_exit": 1,
+  "source": "543d76ef1e5dd3d0231332197d90178ac7140cc6",
+  "engine_started": false,
+  "failure": "FileNotFoundError: default git ls-files quoting for nonASCII filename was mistaken for real filename",
+  "fix": "git ls-files -z byte decoding; preserve v3 stage. Before any engine launch, source audit also excludes author-owned .blend from isolated stage."
+}

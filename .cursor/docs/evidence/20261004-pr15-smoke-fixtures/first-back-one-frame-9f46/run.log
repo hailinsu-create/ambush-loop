@@ -1,0 +1,11 @@
+TEST_RUN_ID=d8a565b89f1d4122b93df06b6333faf1
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d8a565b89f1d4122b93df06b6333faf1/data
+TEST_ENTRY=smoke_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/d8a565b89f1d4122b93df06b6333faf1/data/godot/app_userdata/Ambush Loop run_id=d8a565b89f1d4122b93df06b6333faf1
+SMOKE_GAME_VERSION 0.6.28
+ERROR: SMOKE_BACK_DID_NOT_CLOSE_BRIEF_MODAL
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _assert_launch_bar (res://scripts/smoke_test.gd:14266)

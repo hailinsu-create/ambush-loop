@@ -1,0 +1,85 @@
+{
+  "formal_source": "392abf936b31ac7f868fec06a109f65fe91cbc6b",
+  "formal_game_tree": "361ec3aa2e004fa6f56f6a7096a651ba93d7fee7",
+  "runs": [
+    {
+      "stage": "negative-a190-h",
+      "source_sha": "a19059915e83d8333f09581ff55e3efc3919e6c1",
+      "checks": 85,
+      "failures": 45,
+      "actual_exit": 1,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "864814ebb33a43a9b3ca4954cada3ec5",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=a19059915e83d8333f09581ff55e3efc3919e6c1 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 loot_event_text_test.gd --headless"
+    },
+    {
+      "stage": "fixed-392a-h",
+      "source_sha": "392abf936b31ac7f868fec06a109f65fe91cbc6b",
+      "checks": 85,
+      "failures": 0,
+      "actual_exit": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "608bccca3bf74284b6b6ecd14d26b534",
+      "suite_guard_passed": true,
+      "command": "AMBUSH_TEST_SOURCE_SHA=392abf936b31ac7f868fec06a109f65fe91cbc6b AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 loot_event_text_test.gd --headless"
+    },
+    {
+      "stage": "fixed-392a-r",
+      "source_sha": "392abf936b31ac7f868fec06a109f65fe91cbc6b",
+      "checks": 86,
+      "failures": 0,
+      "actual_exit": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "a15c0eab59fd4793b7545856a750b63e",
+      "suite_guard_passed": true,
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=392abf936b31ac7f868fec06a109f65fe91cbc6b AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-loot-godot.sh loot_event_text_test.gd --render"
+    }
+  ],
+  "original_record_source": "3b4976d1f4348d828a95bb627b2fb57c8501934d",
+  "original_record_raw_sha256": "ec232057b98e04262fd60f4e44933c7545f396ded83be68a05cdea26b4ebb3e0",
+  "original_record_raw_bytes": 10866596,
+  "original_archive": "../20261004-pr15-depot-journey/run-3b49/native-player-depot-record.bin.gz",
+  "original_mine_event": {
+    "after": {
+      "ammo": 8,
+      "mines": 1
+    },
+    "before": {
+      "ammo": 8,
+      "mines": 0
+    },
+    "event": {
+      "actor_id": 1,
+      "attempt_id": "f3bbcc8550a908a5e5740cfa16df238b",
+      "event_id": "f3bbcc8550a908a5e5740cfa16df238b:1:38",
+      "payload": {
+        "amount": 1,
+        "kind": "mine"
+      },
+      "playback_schema": 2,
+      "playback_tick": 6023,
+      "position": "(419.7335, 174.3776)",
+      "schema": 2,
+      "seq": 38,
+      "target_id": -1,
+      "tick": 102,
+      "timeline_tick": 639,
+      "type": "loot",
+      "wave_id": 1
+    },
+    "scope": "original fixed3b read-only",
+    "text": "10.7s  队员1 拾取 地雷（数量 1）"
+  },
+  "formal_captures_hashed": 1,
+  "formal_captures_viewed": [
+    "loot_depot_saved_mine_history"
+  ],
+  "native_inputs": 0,
+  "xorg_actual_exit": 0,
+  "scope": "Read-only original fixed3b depot4loot/mine1/ammo8 plus explicitly synthetic catalog/boundary/text surfaces. Saved3D source bind/focus and rendered text only; not normal journey/full recording3D/ALERT inventory behavior or device acceptance.",
+  "pending": "Independent QA of392a; original parent fixed3b4/1 failure retained, not retroactively green. No loot/inventory behavior fix, full normal/3D/old-original QA, asset/FX/A3/audio/APK/device claim. Payload remains Dictionary; null/absent amount and absent kind supported, corrupt nonDictionary payload not covered."
+}

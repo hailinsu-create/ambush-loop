@@ -1,0 +1,6 @@
+packet1=whole(d,record,1)
+fp=d.rpc('fingerprints');trusted=page.evaluate('window.pr15TrustedInputs')
+assert len(context.pages)==1 and all(row['isTrusted'] for row in trusted)
+(BASE/'pump-whole-1x-fingerprints.json').write_text(json.dumps(fp,ensure_ascii=False,indent=2)+'\n')
+(BASE/'pump-whole-1x-browser.json').write_text(json.dumps(trusted,ensure_ascii=False,indent=2)+'\n')
+assert not errors and not any(row['type']=='error' for row in console),(errors,[row for row in console if row['type']=='error'])

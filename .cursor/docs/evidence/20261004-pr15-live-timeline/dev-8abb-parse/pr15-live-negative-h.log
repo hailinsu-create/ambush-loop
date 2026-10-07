@@ -1,0 +1,11 @@
+TEST_RUN_ID=1c3ac0a260c24d5ebce6bf02a3f42ab6
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/1c3ac0a260c24d5ebce6bf02a3f42ab6/data
+TEST_ENTRY=live_wave_timeline_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SCRIPT ERROR: Parse Error: Cannot infer the type of "attempt" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/live_wave_timeline_test.gd:70)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "other" variable because the value doesn't have a set type.
+          at: GDScript::reload (res://scripts/live_wave_timeline_test.gd:73)
+ERROR: Failed to load script "res://scripts/live_wave_timeline_test.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)

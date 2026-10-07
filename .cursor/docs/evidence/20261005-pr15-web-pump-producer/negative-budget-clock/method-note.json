@@ -1,0 +1,7 @@
+{
+  "actual_exit": 1,
+  "reason": "producer_active set before d.click but self.level_start left None; Driver.check_budget threw before first Continue input",
+  "gameplay_entered": false,
+  "source_unchanged": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "correction": "initialize level_start with already chosen budget_started_at; keep original monotonic deadline, no game/profile mutation"
+}

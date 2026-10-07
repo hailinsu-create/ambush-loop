@@ -1,0 +1,864 @@
+{
+  "checks": 28,
+  "failures": [],
+  "rows": [
+    {
+      "after": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "before": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"railcut\\\"\\nlevel_index=3\\ncomplete=false\\nloop_index=1\\n\\n[audio]\\n\\nmuted=false\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "railcut",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"railcut\"\nlevel_index=3\ncomplete=false\nloop_index=1\n\n[audio]\n\nmuted=false\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "case": "cold_unsettled_WON",
+      "config_equal": false,
+      "during": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"railcut\\\"\\nlevel_index=3\\ncomplete=false\\nloop_index=1\\n\\n[audio]\\n\\nmuted=false\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "railcut",
+            "loops": 0,
+            "perfect": false,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": false
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "railcut",
+        "phase": 4,
+        "progress": "[progress]\n\nlevel_id=\"railcut\"\nlevel_index=3\ncomplete=false\nloop_index=1\n\n[audio]\n\nmuted=false\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "input_scope": "controlled original handler event, not OS/browser normal input",
+      "source_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f"
+    },
+    {
+      "after": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "before": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "case": "settled_WON_repeat1",
+      "config_equal": true,
+      "during": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 4,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "input_scope": "controlled original handler event, not OS/browser normal input",
+      "source_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f"
+    },
+    {
+      "after": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "before": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "case": "settled_WON_repeat2",
+      "config_equal": true,
+      "during": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 4,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "input_scope": "controlled original handler event, not OS/browser normal input",
+      "source_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f"
+    },
+    {
+      "after_mute": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"railcut\\\"\\nlevel_index=3\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=true\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=true\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "railcut",
+        "phase": 4,
+        "progress": "[progress]\n\nlevel_id=\"railcut\"\nlevel_index=3\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "before": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\")\\n\\n[audio]\\n\\nmuted=false\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=false\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": false,
+            "id": "radio",
+            "loops": 0,
+            "perfect": false,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": false
+          }
+        ],
+        "next": "depot",
+        "phase": 4,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\n",
+        "settings": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "case": "settled_WON_replay_M_then_Title",
+      "scope": "normal UI handlers after settled current WON; handler inputs here controlled, native/browser reproduction separate",
+      "title_next": "railcut",
+      "title_scene": "res://scenes/title.tscn"
+    },
+    {
+      "after": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"depot\\\"\\nlevel_index=4\\ncomplete=false\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\", \\\"radio\\\", \\\"depot\\\")\\n\\n[audio]\\n\\nmuted=true\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\nradio_loops=1\\nradio_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=true\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": false,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "radio",
+            "loops": 1,
+            "perfect": true,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": true
+          }
+        ],
+        "next": "depot",
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\", \"radio\", \"depot\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\nradio_loops=1\nradio_perfect=true\n",
+        "settings": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "before": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"railcut\\\"\\nlevel_index=3\\ncomplete=true\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\", \\\"radio\\\", \\\"depot\\\")\\n\\n[audio]\\n\\nmuted=true\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\nradio_loops=1\\nradio_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=true\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "radio",
+            "loops": 1,
+            "perfect": true,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": true
+          }
+        ],
+        "next": null,
+        "phase": 3,
+        "progress": "[progress]\n\nlevel_id=\"railcut\"\nlevel_index=3\ncomplete=true\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\", \"radio\", \"depot\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\nradio_loops=1\nradio_perfect=true\n",
+        "settings": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "case": "injected_future_profile_old_WON",
+      "config_equal": false,
+      "during": {
+        "campaign_complete": false,
+        "checkpoint": "{\"files\":{\"ambush_loop.cfg\":\"[progress]\\n\\nlevel_id=\\\"railcut\\\"\\nlevel_index=3\\ncomplete=true\\nloop_index=1\\ncleared=PackedStringArray(\\\"railcut\\\", \\\"yard\\\", \\\"warehouse\\\", \\\"pump\\\", \\\"radio\\\", \\\"depot\\\")\\n\\n[audio]\\n\\nmuted=true\\n\\n[stats]\\n\\nrailcut_loops=1\\nrailcut_perfect=true\\nradio_loops=1\\nradio_perfect=true\\n\",\"ambush_loop_settings.cfg\":\"[audio]\\n\\nmuted=true\\nmaster_volume=1.0\\nmusic_volume=1.0\\nsfx_volume=1.0\\n\\n[input]\\n\\nforce_touch_hud=false\\n\\n[graphics]\\n\\nquality_tier=\\\"standard\\\"\\n\\n[onboarding]\\n\\nseen_tutorial=false\\nseen_railcut=true\\n\"},\"schema\":1}",
+        "complete": true,
+        "missions": [
+          {
+            "cleared": true,
+            "id": "yard",
+            "loops": 0,
+            "perfect": false,
+            "title": "第1关 · 院子：交叉封锁",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "warehouse",
+            "loops": 0,
+            "perfect": false,
+            "title": "第2关 · 仓道：弹药窗口",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "pump",
+            "loops": 0,
+            "perfect": false,
+            "title": "第3关 · 泵站：关门之后",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "railcut",
+            "loops": 1,
+            "perfect": true,
+            "title": "第4关 · 信号楼：双走廊延迟",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "depot",
+            "loops": 0,
+            "perfect": false,
+            "title": "第5关 · 油库：三路合围",
+            "unlocked": true
+          },
+          {
+            "cleared": true,
+            "id": "radio",
+            "loops": 1,
+            "perfect": true,
+            "title": "第6关 · 电台：灯塔回波",
+            "unlocked": true
+          }
+        ],
+        "next": null,
+        "phase": 4,
+        "progress": "[progress]\n\nlevel_id=\"railcut\"\nlevel_index=3\ncomplete=true\nloop_index=1\ncleared=PackedStringArray(\"railcut\", \"yard\", \"warehouse\", \"pump\", \"radio\", \"depot\")\n\n[audio]\n\nmuted=true\n\n[stats]\n\nrailcut_loops=1\nrailcut_perfect=true\nradio_loops=1\nradio_perfect=true\n",
+        "settings": "[audio]\n\nmuted=true\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=false\nseen_railcut=true\n"
+      },
+      "input_scope": "controlled original handler event, not OS/browser normal input",
+      "source_sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f"
+    }
+  ],
+  "scope": "isolated controlled source/handler classification, cold prior source railcut original bin; adversarial future profile explicitly injected, no proof of normal UI reachability; not fresh producer, whole replay, renderer or performance acceptance",
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05"
+}

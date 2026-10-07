@@ -1,0 +1,19 @@
+{
+  "A_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "B_source": "95daa05d0ccfc4e6bd357060b1f34c2a863c2041",
+  "A_stage": "/workspace/pr15-replay-touch-qa-A-95daa-20261005",
+  "B_stage": "/workspace/pr15-replay-touch-qa-B-95daa-20261005",
+  "QA_common": "same sealed subsegment instrumentation, common OFF only plus read-only final touch UI canonical; no source or asset generator",
+  "production_diff": "main only: omit second adjacent refresh in REPLAY",
+  "changes_vs_sealed_QA_A": [
+    "qa/event_log_observer.gd"
+  ],
+  "changes_vs_A_B": [
+    "scripts/main.gd"
+  ],
+  "files": {
+    "/workspace/pr15-replay-touch-qa-A-95daa-20261005/scripts/main.gd": "dac1a98a5b609c98acee5c2441337cd685c1c8272cd30c85faf5f581a16efe37",
+    "/workspace/pr15-replay-touch-qa-B-95daa-20261005/scripts/main.gd": "e68fdb0dbde37ac17b7922aee8146f02900bdccde8749e8b6647ae96bd837277",
+    "/workspace/pr15-replay-touch-qa-A-95daa-20261005/qa/event_log_observer.gd": "86c90d3267f1b6eb0b1bb00cc14368e7e5140010e2ecce0841d666314d9f7eae"
+  }
+}

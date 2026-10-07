@@ -1,0 +1,13 @@
+{
+  "attempts": [
+    {
+      "actual_exit": 1,
+      "failure": "Initial FontTools WOFF2 save requires brotli module; no valid WOFF2 produced"
+    },
+    {
+      "actual_exit": 1,
+      "failure": "Complete WOFF2/cmap/glyph conversion passed; pathlib rename of source OTF across workspace/tmp failed EXDEV; license include edit not reached"
+    }
+  ],
+  "repair": "Workspace-local Brotli 1.2.0 installed; shutil.move completed source OTF removal; Web preset includes OFL.txt; no engine consumed incomplete candidates"
+}

@@ -1,0 +1,198 @@
+{
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/metadata-pair-ab97661d0e2e4984a449b08a1deaa18a/yard-static-confirmed-shot.png",
+      "scope": "untimed actual Window API/reference/historical view",
+      "sha256": "c201fe96ff526f4ac5f68c47f06d491cb65bb99d3d1e20ade6335d1d8904bff9"
+    }
+  ],
+  "checks": 438,
+  "chunks": [
+    {
+      "accepted": 143,
+      "collector_instance_id": 185069471347,
+      "first_usec": 18323769,
+      "last_usec": 30882037,
+      "path": "res://build/asset_review/pr15-runtime/metadata-pair-ab97661d0e2e4984a449b08a1deaa18a/yard-metadata-pair-metrics",
+      "raw_sha256": "c9980db403f520f2b46c18858d64d6dc3388bbed27864f95e92bc6e325072c48",
+      "rows": 266,
+      "run_overflow_rows": 0.0,
+      "save_error": 0,
+      "segment_capacity": 512,
+      "segment_receipts": 7,
+      "segment_summaries": [
+        {
+          "accepted": 143,
+          "label": "yard-static-confirmed-shot",
+          "requested_phase_samples": 143,
+          "transition_phase_rows_retained": 0
+        }
+      ],
+      "symbol_overflow": 0.0,
+      "valid": false
+    }
+  ],
+  "environment": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "audio_driver": "Dummy",
+    "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "driver": "opengl3",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "method": "gl_compatibility",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 124460,
+    "scope": "controlled archived original frame/advancing transport; main/presenter automatic callbacks; paired source versions, not new normal/whole/device",
+    "vendor": "Mesa",
+    "visible_cpu_effective": "0-4",
+    "visible_cpu_max": "400000 100000",
+    "visible_memory_max": "17179869184"
+  },
+  "external_fixture_sha256": "cc4191f08a34710686d10670d97ced23623991014e5f0c61d1dbcc07b8c94b31",
+  "failures": 8,
+  "format": 1,
+  "pair_rows": [
+    {
+      "advancing": false,
+      "end_tick": 253,
+      "initial_backend_sha256": "f0839fc68723d866c2838aef8aea635421e91cf710835279332df876181ee7dd",
+      "initial_frame_sha256": "9d192ebe69eaaf6bc5dfb9eed120ee0a7b1cb7c2f7546f6589a1d2451265a622",
+      "initial_signature_sha256": "4d159113222bfeb85fbe717cc2393ee8a6a85b7ce5ac1791c4eade5e3dd6de41",
+      "initial_tick": 253,
+      "label": "yard-static-confirmed-shot",
+      "restored_frame_sha256": "9d192ebe69eaaf6bc5dfb9eed120ee0a7b1cb7c2f7546f6589a1d2451265a622",
+      "restored_signature_sha256": "4d159113222bfeb85fbe717cc2393ee8a6a85b7ce5ac1791c4eade5e3dd6de41",
+      "source_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+      "source_unchanged": true
+    }
+  ],
+  "receipt_sha256": "afe135c7e0ea78addfa710d71395e1fc17aaab6a795e659a0b322a7572ba32bb",
+  "scope": "two fixed source versions; preserved originals; repeatedABBA/BAAB analyzed separately; no source intuition or mobile FPS claim",
+  "segments": [
+    {
+      "actual_measured_phase_rows": 143,
+      "actual_seconds": 5.025929,
+      "label": "yard-static-confirmed-shot",
+      "receipt": {
+        "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+        "configuration": {
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "backend_sha256": "f0839fc68723d866c2838aef8aea635421e91cf710835279332df876181ee7dd",
+          "content_scale": 1.0,
+          "focus": "(-6.5, 0.0, -0.155217)",
+          "level_id": "yard",
+          "main_auto_process": true,
+          "max_fps": 0,
+          "phase": 4,
+          "pitch_deg": 35.0,
+          "policy": "standard",
+          "presenter_auto_process": true,
+          "presenter_frame_sha256": "9d192ebe69eaaf6bc5dfb9eed120ee0a7b1cb7c2f7546f6589a1d2451265a622",
+          "tree_paused": false,
+          "view_size": 12.0,
+          "vsync": 0,
+          "window_height": 720,
+          "window_width": 1280,
+          "yaw_deg": 0.0
+        },
+        "initial_frame_sha256": "9d192ebe69eaaf6bc5dfb9eed120ee0a7b1cb7c2f7546f6589a1d2451265a622",
+        "initial_signature_sha256": "4d159113222bfeb85fbe717cc2393ee8a6a85b7ce5ac1791c4eade5e3dd6de41",
+        "kind": "paused exact saved frame with automatic callbacks",
+        "level_id": "yard",
+        "minimum_measured_phase_rows": 60,
+        "phase": 4,
+        "policy": "standard",
+        "requested_seconds": 5.0,
+        "scope": "bounded A3 candidate comparison, not whole replay/new normal/device",
+        "selected_source": {
+          "active_saved_candidates": 2,
+          "attempt_id": "ebb3b40c430e9939e054455f03a54e6f",
+          "feature": "shot",
+          "frame_seq": 43,
+          "frame_sha256": "74b36012d278b2a0d7885b42879bf6ffac67298f508bae5b404c9affd7ca5d30",
+          "recorded_phase": 1,
+          "tick": 253,
+          "wave": 0
+        },
+        "source_archive_sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598",
+        "wall_limit_seconds": 30.0,
+        "warmup_seconds": 5.0,
+        "wave": 0
+      },
+      "requested_seconds": 5.0
+    }
+  ],
+  "source_game_tree": "ec73ed78833b5608919ae98e39ba7a58c4e03f41",
+  "source_proof_after": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "41ff06cf8d01ce01b0d6ca1e33247daac9210bc1",
+    "consumer_game_tree": "ec73ed78833b5608919ae98e39ba7a58c4e03f41",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5589224.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+        "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+        "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+      }
+    ],
+    "receipt_sha256": "afe135c7e0ea78addfa710d71395e1fc17aaab6a795e659a0b322a7572ba32bb",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 988,
+    "verified": true,
+    "window_control_verified": true
+  },
+  "source_proof_before": {
+    "cache_scope": "complete existing warm .godot/imported inventory verified; no cold asset import claim",
+    "complete_source_tree_verified": true,
+    "consumer_commit": "41ff06cf8d01ce01b0d6ca1e33247daac9210bc1",
+    "consumer_game_tree": "ec73ed78833b5608919ae98e39ba7a58c4e03f41",
+    "engine": {
+      "bytes": 146414384.0,
+      "path": "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+      "sha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e"
+    },
+    "imported_cache_files_verified": 986,
+    "loaded_resource_scope": "complete existing warm imported inventory",
+    "producer_records": [
+      {
+        "attribution": "caller-declared producer commit; actual original bytes verified",
+        "bytes": 5589224.0,
+        "level_id": "yard",
+        "path": "/workspace/ambush-pr15/.cursor/docs/evidence/20261004-pr15-a3-actual-source/formal-a90-all/original-output/yard-primary-reference-record.bin",
+        "producer_commit": "a90eb0798914c023f5c8902303c72f2619abd7c2",
+        "sha256": "426cf659c9fd10a47e53cd6ef28363e9e38ced0a6cb30c65cc844885104c4598"
+      }
+    ],
+    "receipt_sha256": "afe135c7e0ea78addfa710d71395e1fc17aaab6a795e659a0b322a7572ba32bb",
+    "record_attribution_scope": "record hashes prove unchanged bytes; producer commit remains declared unless independently matched to its sealed author manifest",
+    "source_files_verified": 988,
+    "verified": true,
+    "window_control_verified": true
+  },
+  "source_sha": "41ff06cf8d01ce01b0d6ca1e33247daac9210bc1"
+}

@@ -1,0 +1,142 @@
+{
+  "consumer_source_sha": "d9c67256545a227c78bf5c3264818b8ad86b2c78",
+  "producer_source_sha": "a05fa959093ef5b6733466091a04fbb46647f97b",
+  "fixture_sha256": "9aceae7a15b82e2bbe1c36905dc91a530da7cadda53f54c8566ca705ea5311ac",
+  "display_backend": "X11",
+  "diagnostic_short": false,
+  "checks": 29976,
+  "failures": 0,
+  "scope": "Read-only authentic archived native producer bytes. Cold scene loads and explicit terminal/foreign-live fixtures are not new normal battles. Real imported3D actors/world/20bones, original native transport and natural engine callbacks. API seek/focus fixtures separately identified. No source upgrades or final same-candidate FX/A3/device acceptance.",
+  "records": [
+    {
+      "attempt": "ae19123d74887f21dfa1cd8d0c8aab22",
+      "events": 30,
+      "frames": 553,
+      "level": "yard",
+      "playback_terminal_tick": 4126,
+      "sha256": "4e27b9af88ad72199489ee11e987e1ab0e8200c47bc963e831f4c9eb1883c164",
+      "source_unchanged": true
+    },
+    {
+      "attempt": "94179739d8d8d7d0314e7cc05d5e9647",
+      "events": 62,
+      "frames": 1099,
+      "level": "warehouse",
+      "playback_terminal_tick": 8317,
+      "sha256": "cba97cc34446a384d1853a6b7c7224afbd32c5c456ee215fbf5afffdc0015cfd",
+      "source_unchanged": true
+    },
+    {
+      "attempt": "ad7e19c4f9abdd5c887d8e25ed0443b9",
+      "events": 34,
+      "frames": 720,
+      "level": "pump",
+      "playback_terminal_tick": 5376,
+      "sha256": "e0faee3000b85ae795737dfd7b39e510e4a0670560d40a0a01890e5acfba2b46",
+      "source_unchanged": true
+    },
+    {
+      "attempt": "80476d518907a35e66f2d5dee84e2535",
+      "events": 45,
+      "frames": 896,
+      "level": "railcut",
+      "playback_terminal_tick": 6640,
+      "sha256": "19919a17225308894332b5cf9a849b4bc004792afa02f3c5e27d25b0f08f9628",
+      "source_unchanged": true
+    },
+    {
+      "attempt": "c04cdc0f03e4f5202c335d5b94233c37",
+      "events": 40,
+      "frames": 825,
+      "level": "depot",
+      "playback_terminal_tick": 6313,
+      "sha256": "1720fe0dc83bfa2647d22c0dcc74b5bea35ac11db2ce25a141e3fb734d156d6d",
+      "source_unchanged": true
+    },
+    {
+      "attempt": "f3b17c147694ad05454fdca046cb41a7",
+      "events": 57,
+      "frames": 898,
+      "level": "radio",
+      "playback_terminal_tick": 6798,
+      "sha256": "69926921f672c941f66bc2885ba15e0484f37923e7addae0670047cae0653d22",
+      "source_unchanged": true
+    }
+  ],
+  "ERROR": 0,
+  "SCRIPT_ERROR": 0,
+  "captures_hashed": 56,
+  "native_inputs": 78,
+  "seeks": 76,
+  "whole": [
+    {
+      "level": "yard",
+      "callbacks": 258,
+      "elapsed_wall_ms": 176963,
+      "tick": 4126,
+      "terminal": 4126
+    },
+    {
+      "level": "warehouse",
+      "callbacks": 520,
+      "elapsed_wall_ms": 376819,
+      "tick": 8317,
+      "terminal": 8317
+    },
+    {
+      "level": "pump",
+      "callbacks": 336,
+      "elapsed_wall_ms": 241987,
+      "tick": 5376,
+      "terminal": 5376
+    },
+    {
+      "level": "railcut",
+      "callbacks": 416,
+      "elapsed_wall_ms": 302095,
+      "tick": 6640,
+      "terminal": 6640
+    },
+    {
+      "level": "depot",
+      "callbacks": 395,
+      "elapsed_wall_ms": 289667,
+      "tick": 6313,
+      "terminal": 6313
+    },
+    {
+      "level": "radio",
+      "callbacks": 425,
+      "elapsed_wall_ms": 319687,
+      "tick": 6798,
+      "terminal": 6798
+    }
+  ],
+  "actual_exit": 0,
+  "run_id": "992bc5e87f13408e99e54d13d739137b",
+  "images_viewed": 6,
+  "viewed_capture_ids": [
+    "warehouse_whole2x_terminal",
+    "pump_seek_wave0_phase1",
+    "railcut_native_railcut_100_desktop_event_focus",
+    "yard_whole2x_terminal",
+    "depot_native_depot_100_desktop_event_focus",
+    "radio_whole2x_terminal"
+  ],
+  "command": "DISPLAY=:116 AMBUSH_TEST_X11_DISPLAY=:116 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=d9c67256545a227c78bf5c3264818b8ad86b2c78 AMBUSH_CONSUMER_STAGE=fixed-d9c-pck-six-a05-native-records AMBUSH_RECORD_SOURCE_SHA=a05fa959093ef5b6733466091a04fbb46647f97b AMBUSH_NATIVE_RECORD_MANIFEST=/tmp/pr15-d9c-record3d/all-manifest.json AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/baseline-a05fa959093e-7b50d8a62bfd48dc9f741796d2ce9e75 bash /tmp/pr15-d9c-record3d/ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-d9c-record3d/godot-pck-external native_record_replay_test.gd --render",
+  "environment": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "rendering_method": "gl_compatibility",
+    "gpu": "Mesa25.0.7 llvmpipe LLVM19.1.7 256bits",
+    "display": ":116",
+    "viewport": [
+      1280,
+      720
+    ],
+    "scale": 1,
+    "audio": "Dummy",
+    "cpu_quota": "400000/100000=4cores",
+    "scope": "Cloud functional consumer run; no Android30/60FPS acceptance. Two source H test processes ran independently for part of long consumer run."
+  },
+  "remaining": "50of56 images not viewed. Whole1x not run, only actual short1x/2x rate segments plus whole2x. Actual app focusout/in API fixture not native focus proof. ColdWON/source loads and foreign-live fixtures are not new normal victories. Oldschema1/finalFX/A3/nativeFINAL13/newFINAL6/fullsmoke/APK/ears/devices pending."
+}

@@ -1,0 +1,290 @@
+{
+  "scope": "local supplied tar only; server bytes unavailable",
+  "local_path": "/workspace/pr15-web-artifacts/1ec3198e9c0db367af96fc264604c5a286003b5e/ambush-loop-site-v4.tar",
+  "size_bytes": 48506880,
+  "sha256": "e62ee8b3ea3a3e54c0d04e712565e59286ba897f856639c9a8bebfceec1736e1",
+  "members": [
+    {
+      "path": ".openai",
+      "size_bytes": 0,
+      "is_file": false,
+      "is_directory": true,
+      "offset": 1024,
+      "offset_data": 1536
+    },
+    {
+      "path": ".openai/hosting.json",
+      "size_bytes": 106,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 1536,
+      "offset_data": 2048,
+      "sha256": "f354c402dcc3c4b2534e85cb9666e32cd6e1fb68ecd75261ea6acbdc65ef63ee"
+    },
+    {
+      "path": "dist",
+      "size_bytes": 0,
+      "is_file": false,
+      "is_directory": true,
+      "offset": 2560,
+      "offset_data": 3072
+    },
+    {
+      "path": "dist/_headers",
+      "size_bytes": 144,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 3072,
+      "offset_data": 3584,
+      "sha256": "7d6031e4e2fecd4548ee10dc76893e23d9b52d2c7064c9ba2a4dfa235a35f2ac"
+    },
+    {
+      "path": "dist/game-build.json",
+      "size_bytes": 2440,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 4096,
+      "offset_data": 4608,
+      "sha256": "4761fffc1a681a40396ec2bb9ed92b1a1a5edf783b44856220cbbfa612fe8910"
+    },
+    {
+      "path": "dist/index.apple-touch-icon.png",
+      "size_bytes": 10015,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 7168,
+      "offset_data": 7680,
+      "sha256": "8d7beb9a029424558ffa8f9cc76b6aad2e96aa91060153e4421b52a14c3239b5"
+    },
+    {
+      "path": "dist/index.audio.position.worklet.js",
+      "size_bytes": 2973,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 17920,
+      "offset_data": 18432,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "dist/index.audio.worklet.js",
+      "size_bytes": 7298,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 21504,
+      "offset_data": 22016,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "dist/index.html",
+      "size_bytes": 8087,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 29696,
+      "offset_data": 30208,
+      "sha256": "b2c1e84cc5c52e8652f9d949ff06d51cf889dd0fef389cd8739554d0eb838c03"
+    },
+    {
+      "path": "dist/index.icon.png",
+      "size_bytes": 4016,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 38400,
+      "offset_data": 38912,
+      "sha256": "f5b83b2e20897a943ef34368a3bbe2fdbc85af0b67616d234d5850842086979d"
+    },
+    {
+      "path": "dist/index.js",
+      "size_bytes": 279815,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 43008,
+      "offset_data": 43520,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    {
+      "path": "dist/index.pck.part00",
+      "size_bytes": 25165824,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 323584,
+      "offset_data": 324096,
+      "sha256": "ae9bcfa8230188f5789b16ad1324a3cfc133cec8445b3cd0f7cc2beda16448a4"
+    },
+    {
+      "path": "dist/index.pck.part01",
+      "size_bytes": 12930432,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 25489920,
+      "offset_data": 25490432,
+      "sha256": "bafd4cca2b1e25dbf55748a72e7849a1a464c00ebc2925a154577672dcb4be1a"
+    },
+    {
+      "path": "dist/index.png",
+      "size_bytes": 21443,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 38420992,
+      "offset_data": 38421504,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "dist/index.wasm.gz",
+      "size_bytes": 10054758,
+      "is_file": true,
+      "is_directory": false,
+      "offset": 38443008,
+      "offset_data": 38443520,
+      "sha256": "8032306d52d52497129dce5b767baacb660d504bdde28668b1c1337b717eacd8"
+    }
+  ],
+  "checks": [
+    {
+      "check": "member_path_safe:.openai",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:.openai/hosting.json",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/_headers",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/game-build.json",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.apple-touch-icon.png",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.audio.position.worklet.js",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.audio.worklet.js",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.html",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.icon.png",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.js",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.pck.part00",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.pck.part01",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.png",
+      "passed": true
+    },
+    {
+      "check": "member_path_safe:dist/index.wasm.gz",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:_headers",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.apple-touch-icon.png",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.audio.position.worklet.js",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.audio.worklet.js",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.html",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.icon.png",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.js",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.pck.part00",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.pck.part01",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.png",
+      "passed": true
+    },
+    {
+      "check": "manifest_file:index.wasm.gz",
+      "passed": true
+    },
+    {
+      "check": "exact_file_inventory_vs_manifest_plus_two_metadata_files",
+      "passed": true
+    },
+    {
+      "check": "pck_part:index.pck.part00",
+      "passed": true
+    },
+    {
+      "check": "pck_part:index.pck.part01",
+      "passed": true
+    },
+    {
+      "check": "concatenated_pck_matches_manifest",
+      "passed": true
+    },
+    {
+      "check": "decompressed_wasm_matches_manifest_raw_hash",
+      "passed": true
+    },
+    {
+      "check": "all_members_under_25MiB_matches_manifest_flag",
+      "passed": true
+    }
+  ],
+  "member_count": 15,
+  "regular_file_count": 13,
+  "directory_count": 2,
+  "hosting_project_matches": true,
+  "hosting_static_directory": "dist",
+  "game_source_sha": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "build_full_Title_entry_declared": true,
+  "pck_concat_bytes": 38096256,
+  "pck_concat_sha256": "0eabd893591bc97c6e7ad897e370759ba58b6e36419d47e80a0aefce638c6523",
+  "pck_magic_hex": "47445043",
+  "wasm_uncompressed_bytes": 39514754,
+  "wasm_uncompressed_sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+  "all_regular_members_under_25MiB": true,
+  "html_declares_pck_parts": true,
+  "html_declares_decompression_stream": true,
+  "html_declares_engine_start_game": true,
+  "checks_passed": 32,
+  "checks_failed": 0
+}

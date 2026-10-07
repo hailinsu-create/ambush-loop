@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 135, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 114, in main
+    variant,label=entry.split(':',1);r,g=analyze_run(variant,label);runs.append(r);groups.append(g)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 90, in analyze_run
+    require(set(p['process_token_values'])==set(TOKENS) and isinstance(p['bound_source_instance'],int) and p['bound_source_instance']>0 and all(isinstance(v,int) and v==p['bound_source_instance'] for v in p['process_token_values'].values()),'original token type/binding')
+  File "/tmp/pr15-metadata-scalar/analyze_metadata_pair.py", line 22, in require
+    if not value: raise ValueError(message)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: original token type/binding

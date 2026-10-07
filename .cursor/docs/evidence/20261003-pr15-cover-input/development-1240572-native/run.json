@@ -1,0 +1,22 @@
+{
+  "source_sha": "124057250ffbaf3390da7689fd968acf072ee1b4",
+  "argv": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-cover-124-godot",
+    "first_visit_journey_test.gd",
+    "--render"
+  ],
+  "env": {
+    "AMBUSH_JOURNEY_SCOPE": "yard"
+  },
+  "actual_exit": 1,
+  "uuid": "4bb3df7a7645467898da18b6561f23bb",
+  "checks": 113,
+  "failures": 1,
+  "script_errors": 0,
+  "engine_errors": 0,
+  "native_inputs": 28,
+  "native_pngs": 10,
+  "classification": "cover fix and actual yard two-wave WON passed, whole run excluded from formal because driver omitted mandatory handoff CTA; no product handoff defect claimed"
+}

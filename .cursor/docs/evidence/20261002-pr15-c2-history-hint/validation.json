@@ -1,0 +1,63 @@
+{
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "C2Help historical isolation and HUD/input recovery, software rendering; no battle-asset/final-art/device acceptance",
+  "baseline": {
+    "production_sha": "18dc381c04428a77b762b9fdb5fd1880beb45a2c",
+    "fixture_from_sha": "cf61721fdb84a3bd9376049d0547e3d74bb26833",
+    "fixture_sha256": "512fbd965b02383b0dc24fe0bb701dc78bf589c8c94076dcb63b0f1b9a51aff5",
+    "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture c2_history_hint_test.gd --render",
+    "exit_code": 1,
+    "marker": "C2_HISTORY_HINT_FAILED checks=30 failures=16",
+    "controls_ok": true,
+    "skill_controls_ok": true,
+    "log": "baseline.log",
+    "run_id": "cbfb0b0a8de145d7b49918a756719c11",
+    "sha256": "9c8dd995f5d5d367e4c5d291cc82bb171ff856921531f93034375d77df9b9a61",
+    "note": "Production code unchanged from18dc; added fixture/wrapper whitelist before fix. Earlier developer fixture reused mutable BattleLog after setup; corrected and rerun, old log retained separately."
+  },
+  "runs": [
+    {
+      "source_sha": "cf61721fdb84a3bd9376049d0547e3d74bb26833",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture c2_history_hint_test.gd --render",
+      "exit_code": 0,
+      "checks": 30,
+      "marker": "C2_HISTORY_HINT_OK checks=30 failures=0",
+      "run_id": "e98857ea8ecf4322b0a10d585f2edf22",
+      "log": "hint.log",
+      "sha256": "9c743c08d9adb9a4c6c60a6fef604b48aba5a8193b274271e5a6b53314ee6d0e"
+    },
+    {
+      "source_sha": "cf61721fdb84a3bd9376049d0547e3d74bb26833",
+      "command": "timeout 600 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "exit_code": 0,
+      "checks": 164,
+      "marker": "VISUAL_SNAPSHOT_OK checks=164 failures=0",
+      "run_id": "966845e4092c4dd496183f35913fe6e4",
+      "log": "hud.log",
+      "sha256": "8ec5015e2dda946338ae9e3fe112d8a473e6b563b4c8287867d0d5be147cf2c3"
+    },
+    {
+      "source_sha": "cf61721fdb84a3bd9376049d0547e3d74bb26833",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "exit_code": 0,
+      "checks": 32,
+      "marker": "PRESENTATION_LIFECYCLE_OK checks=32 failures=0",
+      "run_id": "b0ee0caa6c5442e4bd590e5c575d58d2",
+      "log": "lifecycle.log",
+      "sha256": "9a70269c18be90580cebb14c8d900c99aa674fe2c04ef4240f2c800545edf478"
+    }
+  ],
+  "capture": {
+    "source_sha": "cf61721fdb84a3bd9376049d0547e3d74bb26833",
+    "file": "c2_history_hint_desktop.png",
+    "sha256": "59e631f1c1439ac7743b343265da5bd04c8a19f89f07ddf9381a10d7b260ff7e",
+    "viewed": true
+  },
+  "pending": [
+    "dot independent recheck of cf61721",
+    "Windows test wrapper execution",
+    "R3 live/historical battlefield animation integration",
+    "full plan, final art, audio listening, environments, cloud optimization, APK",
+    "latest full smoke remains fixed7d34867; not rerun for hint-only change"
+  ]
+}

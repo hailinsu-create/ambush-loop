@@ -1,0 +1,160 @@
+{
+  "actual_mine_event": {
+    "actor_id": 1,
+    "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+    "event_id": "2a8b12c3f9da6288e75d6ade58892c7f:0:3",
+    "payload": {},
+    "playback_schema": 2,
+    "playback_tick": 1,
+    "position": "(80.0, 112.0)",
+    "schema": 2,
+    "seq": 3,
+    "target_id": -1,
+    "tick": 0,
+    "timeline_tick": 0,
+    "type": "mine",
+    "wave_id": 0
+  },
+  "checks": 3,
+  "corrupt_return_count": 0,
+  "corrupt_saved": [
+    {
+      "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+      "clock_domain": "playback",
+      "clock_tick": 1,
+      "confirmed": true,
+      "created_clock_tick": 1,
+      "created_pos": "(80.0, 112.0)",
+      "created_wave_id": 0,
+      "effect_id": "2a8b12c3f9da6288e75d6ade58892c7f:tool_fx:0",
+      "kind": "mine",
+      "level_id": "yard",
+      "local_tick": 0,
+      "original_event": {
+        "actor_id": 1,
+        "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+        "event_id": "2a8b12c3f9da6288e75d6ade58892c7f:0:3",
+        "position": "(80.0, 112.0)",
+        "seq": 3,
+        "target_id": -1,
+        "type": "mine",
+        "wave_id": 0
+      },
+      "owner_group": "ops",
+      "owner_id": 1,
+      "phase": 1,
+      "playback_schema": 2,
+      "position": "(80.0, 112.0)",
+      "radius": 20.0,
+      "schema": 1,
+      "seq": 0,
+      "tool_id": "2a8b12c3f9da6288e75d6ade58892c7f:tool:0",
+      "variant": "mine",
+      "victims": [
+        {
+          "damage": 120.0,
+          "group": "enemies",
+          "hp_after": -20.0,
+          "hp_before": 100.0,
+          "id": 1,
+          "pos": "(80.0, 112.0)"
+        }
+      ],
+      "wave_id": 0
+    },
+    {
+      "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+      "clock_domain": "playback",
+      "clock_tick": 1,
+      "confirmed": true,
+      "created_clock_tick": 1,
+      "created_pos": "(80.0, 112.0)",
+      "created_wave_id": 0,
+      "effect_id": "2a8b12c3f9da6288e75d6ade58892c7f:tool_fx:1",
+      "kind": "mine",
+      "level_id": "yard",
+      "local_tick": 0,
+      "original_event": {
+        "actor_id": 1,
+        "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+        "event_id": "2a8b12c3f9da6288e75d6ade58892c7f:0:3",
+        "position": "(80.0, 112.0)",
+        "seq": 3,
+        "target_id": -1,
+        "type": "mine",
+        "wave_id": 0
+      },
+      "owner_group": "ops",
+      "owner_id": 1,
+      "phase": 1,
+      "playback_schema": 2,
+      "position": "(80.0, 112.0)",
+      "radius": 20.0,
+      "schema": 1,
+      "seq": 1,
+      "tool_id": "2a8b12c3f9da6288e75d6ade58892c7f:tool:1",
+      "variant": "mine",
+      "victims": [
+        {
+          "damage": 120.0,
+          "group": "enemies",
+          "hp_after": -20.0,
+          "hp_before": 100.0,
+          "id": 1,
+          "pos": "(80.0, 112.0)"
+        }
+      ],
+      "wave_id": 0
+    }
+  ],
+  "failures": 0,
+  "legal": [
+    {
+      "age_ticks": 0,
+      "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+      "clock_domain": "playback",
+      "clock_tick": 1,
+      "confirmed": true,
+      "created_clock_tick": 1,
+      "created_pos": "(80.0, 112.0)",
+      "created_wave_id": 0,
+      "effect_id": "2a8b12c3f9da6288e75d6ade58892c7f:tool_fx:0",
+      "kind": "mine",
+      "level_id": "yard",
+      "local_tick": 0,
+      "original_event": {
+        "actor_id": 1,
+        "attempt_id": "2a8b12c3f9da6288e75d6ade58892c7f",
+        "event_id": "2a8b12c3f9da6288e75d6ade58892c7f:0:3",
+        "position": "(80.0, 112.0)",
+        "seq": 3,
+        "target_id": -1,
+        "type": "mine",
+        "wave_id": 0
+      },
+      "owner_group": "ops",
+      "owner_id": 1,
+      "phase": 1,
+      "playback_schema": 2,
+      "position": "(80.0, 112.0)",
+      "radius": 20.0,
+      "schema": 1,
+      "seq": 0,
+      "tool_id": "2a8b12c3f9da6288e75d6ade58892c7f:tool:0",
+      "variant": "mine",
+      "victims": [
+        {
+          "damage": 120.0,
+          "group": "enemies",
+          "hp_after": -20.0,
+          "hp_before": 100.0,
+          "id": 1,
+          "pos": "(80.0, 112.0)"
+        }
+      ],
+      "wave_id": 0
+    }
+  ],
+  "scope": "actual original mine with inventory grant/placement/directtick, then explicit cloned corrupt saved reference; normal writer/UI duplicate path not demonstrated; no render/FINAL/A3/device acceptance",
+  "source_sha": "a9b8ee068aee6b8345baf7064d90f9c08d67a80c"
+}

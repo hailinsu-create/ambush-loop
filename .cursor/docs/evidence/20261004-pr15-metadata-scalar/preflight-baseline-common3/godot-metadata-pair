@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+pair_args=()
+pair_replaced=0
+for pair_arg in "$@"; do
+  if [[ "$pair_arg" == res://scripts/a3_campaign_metrics_test.gd ]]; then
+    pair_args+=(res://scripts/metadata_pair_external.gd)
+    pair_replaced=$((pair_replaced + 1))
+  else
+    pair_args+=("$pair_arg")
+  fi
+done
+[[ "$pair_replaced" == 1 ]] || { printf 'Unexpected external fixture entry\n' >&2; exit 2; }
+exec /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 --audio-driver Dummy "${pair_args[@]}"

@@ -1,0 +1,2043 @@
+{
+  "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+  "runtime_source_sha": "d860056f2107836c08dfb375a034ebbe694baff6",
+  "formal_runs": 29,
+  "all_actual_exit_codes_zero": true,
+  "all_engine_errors_zero": true,
+  "captured_frames": 75,
+  "runtime_blobs": [
+    {
+      "path": "ambush_loop/scripts/main.gd",
+      "sha256": "deb2fab03976e502f4c4610c48e39831b369b06ffa31d8e61205a6e6ba62d4fb"
+    },
+    {
+      "path": "ambush_loop/scripts/replay/battle_log.gd",
+      "sha256": "426acb42ad4b2efb38ed6d17f61957704f6cbbb5c575bfbdba23f674b2a14697"
+    },
+    {
+      "path": "ambush_loop/scripts/replay/replay_player.gd",
+      "sha256": "a0036cb71524e78a810033b7c50916852322b1bcbdb1f1384782b1081e838490"
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/view_state.gd",
+      "sha256": "4d9397276a9de43ed8f2712db224a9ee68d25909021bba6fc32f6e36bcb7a723"
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/presenter_3d.gd",
+      "sha256": "d07254895d473bb076602d2ae37927f71e8d9fb88c016fd94100e3dbf9dea47e"
+    }
+  ],
+  "test_only_changes_since_runtime_source": [
+    "ambush_loop/scripts/campaign_replay_test.gd",
+    "ambush_loop/scripts/firearm_runtime_test.gd",
+    "ambush_loop/scripts/full_command_record_replay_test.gd",
+    "ambush_loop/scripts/utility_runtime_test.gd",
+    "ambush_loop/scripts/visual_snapshot_test.gd"
+  ],
+  "asset_paths_changed_since_67f": [],
+  "actual_legacy_schema1_source_sha": "874d3501fdd2b34b0966472e22a9e43a28a1b3dd",
+  "actual_legacy_schema1_binary_sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+  "campaign": [
+    {
+      "level": "yard",
+      "waves": [
+        1056,
+        227
+      ],
+      "battle_terminal_tick": 1283,
+      "events": 34,
+      "playback_terminal_tick": 1334,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:36,no_engage:36,no_engage:36,no_engage:36,return_fire:201,return_fire:201,return_fire:218,return_fire:218,fire:227,kill:227,return_fire:235,return_fire:252,return_fire:269,return_fire:286,op_down:286,fire:1055,kill:1055,spawn:12,no_engage:12,no_engage:12,fire:198,fire:205,return_fire:208,fire:212,fire:219,return_fire:225,fire:226,kill:226,terminal:227",
+      "reference_variants_per_mode": 3
+    },
+    {
+      "level": "warehouse",
+      "waves": [
+        315,
+        876
+      ],
+      "battle_terminal_tick": 1191,
+      "events": 67,
+      "playback_terminal_tick": 1242,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:48,no_engage:48,no_engage:48,no_engage:48,no_engage:66,no_engage:114,ambush_armed:162,no_engage:162,no_engage:162,fire:217,return_fire:217,kill:224,fire:314,kill:314,spawn:18,no_engage:18,no_engage:18,no_engage:18,spawn:54,no_engage:54,no_engage:54,no_engage:54,spawn:84,no_engage:84,no_engage:84,no_engage:84,no_engage:695,no_engage:701,fire:717,return_fire:717,fire:724,fire:731,no_engage:731,return_fire:734,no_engage:737,fire:738,fire:745,kill:745,fire:753,return_fire:753,fire:760,no_engage:761,no_engage:767,fire:767,return_fire:770,fire:774,fire:781,kill:781,fire:788,return_fire:788,fire:795,repack:795,return_fire:805,return_fire:822,return_fire:839,return_fire:856,fire:861,fire:868,return_fire:873,fire:875,kill:875,terminal:876",
+      "reference_variants_per_mode": 3
+    },
+    {
+      "level": "pump",
+      "waves": [
+        231,
+        676
+      ],
+      "battle_terminal_tick": 907,
+      "events": 34,
+      "playback_terminal_tick": 958,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:42,no_engage:42,no_engage:42,no_engage:42,fire:161,return_fire:161,fire:172,return_fire:178,kill:179,return_fire:180,return_fire:197,return_fire:214,fire:230,kill:230,spawn:18,no_engage:18,no_engage:18,no_engage:18,no_engage:288,no_engage:396,no_engage:519,fire:647,fire:654,fire:661,return_fire:662,fire:668,fire:675,kill:675,terminal:676",
+      "reference_variants_per_mode": 3
+    },
+    {
+      "level": "railcut",
+      "waves": [
+        117,
+        602
+      ],
+      "battle_terminal_tick": 719,
+      "events": 38,
+      "playback_terminal_tick": 770,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:36,no_engage:36,no_engage:36,no_engage:36,fire:58,fire:69,fire:80,kill:80,fire:94,fire:105,fire:116,kill:116,spawn:24,no_engage:24,no_engage:24,no_engage:24,spawn:60,no_engage:60,no_engage:60,no_engage:60,fire:537,fire:544,fire:551,fire:558,fire:565,kill:565,fire:573,fire:580,fire:587,fire:594,fire:601,kill:601,terminal:602",
+      "reference_variants_per_mode": 3
+    },
+    {
+      "level": "depot",
+      "waves": [
+        566,
+        391
+      ],
+      "battle_terminal_tick": 957,
+      "events": 35,
+      "playback_terminal_tick": 1008,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:24,no_engage:24,no_engage:24,no_engage:24,spawn:36,no_engage:36,no_engage:36,no_engage:36,fire:58,fire:69,fire:80,kill:80,fire:94,fire:105,fire:116,kill:116,fire:537,fire:544,fire:551,fire:558,fire:565,kill:565,spawn:24,no_engage:24,no_engage:24,no_engage:24,no_engage:339,kill:390,trip:390,terminal:391",
+      "reference_variants_per_mode": 3
+    },
+    {
+      "level": "radio",
+      "waves": [
+        574,
+        391,
+        448
+      ],
+      "battle_terminal_tick": 1413,
+      "events": 51,
+      "playback_terminal_tick": 1477,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:24,no_engage:24,no_engage:24,no_engage:24,spawn:36,no_engage:36,no_engage:36,no_engage:36,fire:58,fire:69,fire:80,kill:80,fire:94,fire:105,fire:116,kill:116,no_engage:206,no_engage:424,fire:539,fire:556,return_fire:564,no_engage:569,fire:573,kill:573,spawn:24,no_engage:24,no_engage:24,no_engage:24,no_engage:339,kill:390,trip:390,spawn:30,no_engage:30,no_engage:30,no_engage:30,no_engage:212,no_engage:405,fire:419,return_fire:419,fire:426,fire:433,return_fire:436,fire:440,fire:447,kill:447,terminal:448",
+      "reference_variants_per_mode": 3
+    }
+  ],
+  "runs": [
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "command-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "full_command_record_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin"
+      },
+      "run_id": "325a468d459e47a69f5ea05a6eecd7c8",
+      "actual_exit_code": 0,
+      "checks": 217,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "command-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "full_command_record_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_LEGACY_RECORD_FIXTURE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-full-record/actual-schema1-874d350/command-record-source-v1.bin",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "394b462e2968411e9c867179518b9adf",
+      "actual_exit_code": 0,
+      "checks": 224,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_live_0800.png",
+          "sha256": "d043357bda8b527a326fc77e32614f2254980a10a32bb0275507add172770f61",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/00_command_record_full_scout_live_0800.png",
+          "hash_verified": true
+        },
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_history_0800.png",
+          "sha256": "18794505c38fd1f40a5290633bfbc2e8c7d640f50349950c2468b6aa75fd68be",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/01_command_record_full_scout_history_0800.png",
+          "hash_verified": true
+        },
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_full_actual_schema1_history.png",
+          "sha256": "33bacd859660a77f0ecf075b976d7b91700695e247d8e81d491c27db462d5c8c",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/02_command_record_full_actual_schema1_history.png",
+          "hash_verified": true
+        },
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_live_sweep_0800.png",
+          "sha256": "120dfdbe35d3a355c54ad2cab6a54f7a12bf79688ba24f9688ca92400f032a5f",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/03_command_record_live_sweep_0800.png",
+          "hash_verified": true
+        },
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_history_sweep_0800.png",
+          "sha256": "2b787862020c5c9ba50c280d920d939fae50cd992c1859af0bd21d32f721f102",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/04_command_record_history_sweep_0800.png",
+          "hash_verified": true
+        },
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_escape.png",
+          "sha256": "df3fc27163ebb6da37397d4b2b5b7397ebc5c82b6a54e618e8d8e965e733ed07",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/05_command_record_full_failed_escape.png",
+          "hash_verified": true
+        },
+        {
+          "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_abort.png",
+          "sha256": "4fed104b63bb90951bd59fb58906efe6f2306576f50c6952c4f3a99739a13088",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/06_command_record_full_failed_abort.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 7,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "credits-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "radio_credits_viewport_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "2d157166d8304b90a287a751c8542287",
+      "actual_exit_code": 0,
+      "checks": 127,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1280_100_desktop",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_100_desktop.png",
+          "sha256": "8d5563bac79ca6b1ea47919dd602b986a3545e7faf79b318b3f2f61d72f65deb",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/00_viewport_radio_credits_journey1_1280_100_desktop.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1280_100_touch",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_100_touch.png",
+          "sha256": "e098fc74321019a823eadf96622f00de501d9e35ea29b172efc4d84d5c8fbb20",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/01_viewport_radio_credits_journey1_1280_100_touch.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1280_200_desktop",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_200_desktop.png",
+          "sha256": "27d83cdaa3654a8cfe0cea49695fe7090f592704b67a8869dc5455bcf909550a",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/02_viewport_radio_credits_journey1_1280_200_desktop.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1280_200_touch",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1280_200_touch.png",
+          "sha256": "5beb30126fc36f68c4040fdb886ea85dda334bcef47346b4d83389f1dd712a78",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/03_viewport_radio_credits_journey1_1280_200_touch.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1600_100_desktop",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_100_desktop.png",
+          "sha256": "2c3ef5cdbeedb02b462072056c43546a9e69c03e8d9c07cf2287505bb99a225c",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/04_viewport_radio_credits_journey1_1600_100_desktop.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1600_100_touch",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_100_touch.png",
+          "sha256": "ae79bd3a4846028bb3d20b64a1423d3ecbd606f1286983601d6c4695162b6e5d",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/05_viewport_radio_credits_journey1_1600_100_touch.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1600_200_desktop",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_200_desktop.png",
+          "sha256": "7a99c978731bd7554e2ffd321fc3405d2ebc209d23c75e0888bb9186ea47523f",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/06_viewport_radio_credits_journey1_1600_200_desktop.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1600_200_touch",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_200_touch.png",
+          "sha256": "6ff46b7c1a43e47d2094625b0659f366394ee70ff0ad28326e22c724f9c3e70f",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/07_viewport_radio_credits_journey1_1600_200_touch.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey1_1600_200_touch_scrolled",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey1_1600_200_touch_scrolled.png",
+          "sha256": "721c0e7b26d995b4b05e1ad9892d8dfa5de7e577e4b2f5f4c11477fca230627d",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/08_viewport_radio_credits_journey1_1600_200_touch_scrolled.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey2_1600_100_desktop",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey2_1600_100_desktop.png",
+          "sha256": "95d4232140daf3169470b2a34d855972c84f170d1a4de1512e997bbc860a2cd8",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/09_viewport_radio_credits_journey2_1600_100_desktop.png",
+          "hash_verified": true
+        },
+        {
+          "capture_source": "DisplayServer.screen_get_image native Window crop",
+          "id": "radio_credits_journey3_1600_200_desktop",
+          "image_size": [
+            1600,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_journey3_1600_200_desktop.png",
+          "sha256": "0346c94597d3d34d4bd51893ab3f6af408eaeb412caaf7595f00d223a08c6ea7",
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/10_viewport_radio_credits_journey3_1600_200_desktop.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 11,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "native_inputs": 26,
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-credits-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "lifecycle-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "presentation_lifecycle_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "e7b8eda8cafc43a1b52d3fa6cf88ba20",
+      "actual_exit_code": 0,
+      "checks": 32,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/replay_event_focus.png",
+          "sha256": "a1581e2bd36f889d49f2a25113e097670b6144fff00b97e7aa511ab4951b73b3",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/scout_backpack.png",
+          "sha256": "5d6d94bdd0d8469d1e52ade278117674336a8bcf3420b10b12ea53474ea9a421",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 2,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-lifecycle-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-yard-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "yard"
+      },
+      "run_id": "7a9fcc47909846efa7149c02c9cd874d",
+      "actual_exit_code": 0,
+      "checks": 2515,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-yard-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "campaign_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "yard",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "1998128791e1430db7399dcf52571d18",
+      "actual_exit_code": 0,
+      "checks": 2527,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+          "frame_seq": 0,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "yard_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_yard_scout.png",
+          "playback_tick": 0,
+          "recorded_phase": 0,
+          "sha256": "98eb02cc482d4957dbd1f1055509fc7ea3ec6d39b7a5cea66bc9c6312ba52fcb",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/00_full_record_yard_scout.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+          "frame_seq": 94,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "yard_wave0_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave0_alert.png",
+          "playback_tick": 547,
+          "recorded_phase": 1,
+          "sha256": "e7ec67b5ecba285d3a077e7d8d4a00d63750e68ed3be45df53b3441eb6a33562",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/01_full_record_yard_wave0_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+          "frame_seq": 186,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "yard_wave0_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave0_sweep.png",
+          "playback_tick": 1093,
+          "recorded_phase": 5,
+          "sha256": "ccba5b2ac38364dfbfcd455f28463128a1e28e17543ebd4419aafaf6791192c5",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/02_full_record_yard_wave0_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+          "frame_seq": 206,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "yard_wave1_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave1_alert.png",
+          "playback_tick": 1202,
+          "recorded_phase": 1,
+          "sha256": "0845e9afe5905f5f3a27b009c05d044af8d5f8cf79fc80c7b8138c72f64a83c0",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/03_full_record_yard_wave1_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+          "frame_seq": 229,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "yard_wave1_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_yard_wave1_sweep.png",
+          "playback_tick": 1333,
+          "recorded_phase": 5,
+          "sha256": "db0ae4b7ea67a2383f501144c2963e6542c212b3d070401c92ba6be8c7224b65",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/04_full_record_yard_wave1_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "4b97592b872321ed18547c30f5a8a219",
+          "frame_seq": 230,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "yard_won",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_yard_won.png",
+          "playback_tick": 1334,
+          "recorded_phase": 3,
+          "sha256": "db0ae4b7ea67a2383f501144c2963e6542c212b3d070401c92ba6be8c7224b65",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/05_full_record_yard_won.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-yard-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-warehouse-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "warehouse"
+      },
+      "run_id": "170ad5e792314ad89128d7e797740f26",
+      "actual_exit_code": 0,
+      "checks": 2659,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-warehouse-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "campaign_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "warehouse",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "5ab79908d1a94c4cbc2086e3f802e4be",
+      "actual_exit_code": 0,
+      "checks": 2671,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+          "frame_seq": 0,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "warehouse_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_scout.png",
+          "playback_tick": 0,
+          "recorded_phase": 0,
+          "sha256": "dcc4bee9e5defe8b02cf5e013324e52acd582c47adea92e9ef0f027f7b9301e8",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/00_full_record_warehouse_scout.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+          "frame_seq": 33,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "warehouse_wave0_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave0_alert.png",
+          "playback_tick": 181,
+          "recorded_phase": 1,
+          "sha256": "7e92e6d68987da2a8fb3b1c81350b00ab5512da0fb10cff0f965276c7fe012be",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/01_full_record_warehouse_wave0_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+          "frame_seq": 63,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "warehouse_wave0_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave0_sweep.png",
+          "playback_tick": 352,
+          "recorded_phase": 5,
+          "sha256": "5640a09696d3e816bc0172b9e3811f0034c781ecaf8fcf9683a247b5161bd380",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/02_full_record_warehouse_wave0_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+          "frame_seq": 137,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "warehouse_wave1_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave1_alert.png",
+          "playback_tick": 785,
+          "recorded_phase": 1,
+          "sha256": "8e1eb7ec31c213895407d69ac835c70b29782c753c2b270571cf0402d87daa5b",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/03_full_record_warehouse_wave1_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+          "frame_seq": 214,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "warehouse_wave1_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_wave1_sweep.png",
+          "playback_tick": 1241,
+          "recorded_phase": 5,
+          "sha256": "6b356aee91d2ecf3ee15906584eab436eced8ac714cfd993dcbc715a438ebf97",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/04_full_record_warehouse_wave1_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "a5456a48e253cb0de489be4c5746cf4f",
+          "frame_seq": 215,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "warehouse_won",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_warehouse_won.png",
+          "playback_tick": 1242,
+          "recorded_phase": 3,
+          "sha256": "6b356aee91d2ecf3ee15906584eab436eced8ac714cfd993dcbc715a438ebf97",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/05_full_record_warehouse_won.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-warehouse-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-pump-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "pump"
+      },
+      "run_id": "001d52f236534549bb816d49a28071b8",
+      "actual_exit_code": 0,
+      "checks": 1939,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-pump-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "campaign_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "pump",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "9736080a0906471ea7acc8e236e351b2",
+      "actual_exit_code": 0,
+      "checks": 1951,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "attempt_id": "f5d7158ec0c5ed7da1a3b45417161c61",
+          "frame_seq": 0,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "pump_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_pump_scout.png",
+          "playback_tick": 0,
+          "recorded_phase": 0,
+          "sha256": "6e24cd23d69d224b00182882b45ad927432b5bf072795b9d9796511347d7146d",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/00_full_record_pump_scout.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "f5d7158ec0c5ed7da1a3b45417161c61",
+          "frame_seq": 26,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "pump_wave0_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_pump_wave0_alert.png",
+          "playback_tick": 139,
+          "recorded_phase": 1,
+          "sha256": "d4e7cda210fc2eb5548ef55910da884b5f7885c892d34d972c4bf096a967538b",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/01_full_record_pump_wave0_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "f5d7158ec0c5ed7da1a3b45417161c61",
+          "frame_seq": 49,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "pump_wave0_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_pump_wave0_sweep.png",
+          "playback_tick": 268,
+          "recorded_phase": 5,
+          "sha256": "6d257691bd1c66378ec8ea172a3a051ff804d9b4cac41f5c1cd4f5c37df09d69",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/02_full_record_pump_wave0_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "f5d7158ec0c5ed7da1a3b45417161c61",
+          "frame_seq": 107,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "pump_wave1_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_pump_wave1_alert.png",
+          "playback_tick": 605,
+          "recorded_phase": 1,
+          "sha256": "f9f85f966fc4894c738db79172400346877017b8e95dd7ecd2303518b903f377",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/03_full_record_pump_wave1_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "f5d7158ec0c5ed7da1a3b45417161c61",
+          "frame_seq": 167,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "pump_wave1_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_pump_wave1_sweep.png",
+          "playback_tick": 957,
+          "recorded_phase": 5,
+          "sha256": "7fc4d37207cea79d83e45ac2060e5ca3db8b0ab1946ac63715d97560badd376a",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/04_full_record_pump_wave1_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "f5d7158ec0c5ed7da1a3b45417161c61",
+          "frame_seq": 168,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "pump_won",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_pump_won.png",
+          "playback_tick": 958,
+          "recorded_phase": 3,
+          "sha256": "7fc4d37207cea79d83e45ac2060e5ca3db8b0ab1946ac63715d97560badd376a",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/05_full_record_pump_won.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-pump-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-railcut-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "railcut"
+      },
+      "run_id": "f95f2b62bc36484b974e37f61401c9b1",
+      "actual_exit_code": 0,
+      "checks": 1684,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-railcut-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "campaign_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "railcut",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "89a2bf06188441988abe0107df948838",
+      "actual_exit_code": 0,
+      "checks": 1696,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "attempt_id": "0092eb9ee926186b08df9040563111ca",
+          "frame_seq": 0,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "railcut_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_railcut_scout.png",
+          "playback_tick": 0,
+          "recorded_phase": 0,
+          "sha256": "05a2f9e6e4240600560bd666cae9e07c5ae2693d56d3085ef38a4c099b2eaf0a",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/00_full_record_railcut_scout.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "0092eb9ee926186b08df9040563111ca",
+          "frame_seq": 16,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "railcut_wave0_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave0_alert.png",
+          "playback_tick": 79,
+          "recorded_phase": 1,
+          "sha256": "b7da1267a8b40bfdb26816c3a3d246856623dc3f1f715d1ff8b9c3bf348aff80",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/01_full_record_railcut_wave0_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "0092eb9ee926186b08df9040563111ca",
+          "frame_seq": 30,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "railcut_wave0_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave0_sweep.png",
+          "playback_tick": 154,
+          "recorded_phase": 5,
+          "sha256": "95f61326d058cf0bff7c62e3a36eadd7e2430ddcd3939b829fc8a75de8fb3601",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/02_full_record_railcut_wave0_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "0092eb9ee926186b08df9040563111ca",
+          "frame_seq": 82,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "railcut_wave1_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave1_alert.png",
+          "playback_tick": 455,
+          "recorded_phase": 1,
+          "sha256": "896f81aa64b39f6c7e6b08e195464449a79b26f596e3c3a7199339e1190f7ce6",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/03_full_record_railcut_wave1_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "0092eb9ee926186b08df9040563111ca",
+          "frame_seq": 136,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "railcut_wave1_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_railcut_wave1_sweep.png",
+          "playback_tick": 769,
+          "recorded_phase": 5,
+          "sha256": "1393779273b4cd6aae82e16b394823c3776d2baec422e4a9ba70cb36d255449c",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/04_full_record_railcut_wave1_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "0092eb9ee926186b08df9040563111ca",
+          "frame_seq": 137,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "railcut_won",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_railcut_won.png",
+          "playback_tick": 770,
+          "recorded_phase": 3,
+          "sha256": "1393779273b4cd6aae82e16b394823c3776d2baec422e4a9ba70cb36d255449c",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/05_full_record_railcut_won.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-railcut-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-depot-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "depot"
+      },
+      "run_id": "cd33590a70144f89bc583abe07349381",
+      "actual_exit_code": 0,
+      "checks": 2068,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-depot-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "campaign_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "depot",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "348dc07867694460ab9d9609fa344249",
+      "actual_exit_code": 0,
+      "checks": 2080,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "attempt_id": "fbb824f11ad8a256782e130e0757fa54",
+          "frame_seq": 0,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "depot_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_depot_scout.png",
+          "playback_tick": 0,
+          "recorded_phase": 0,
+          "sha256": "eff0b26c4d5b0096826e745ec6834dcb1f44d66dc95c8207cf4f5f94b5e9689f",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/00_full_record_depot_scout.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "fbb824f11ad8a256782e130e0757fa54",
+          "frame_seq": 54,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "depot_wave0_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_depot_wave0_alert.png",
+          "playback_tick": 307,
+          "recorded_phase": 1,
+          "sha256": "92a4326a2f89a46a9aecb8635b419c5aa76ac7445341a84223f55a0425b2ea12",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/01_full_record_depot_wave0_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "fbb824f11ad8a256782e130e0757fa54",
+          "frame_seq": 105,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/2",
+          "id": "depot_wave0_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_depot_wave0_sweep.png",
+          "playback_tick": 603,
+          "recorded_phase": 5,
+          "sha256": "463ebab294d1865aac9499ccab647cc5592aa6e3180ec17acbde5ba61fd49a1d",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/02_full_record_depot_wave0_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "fbb824f11ad8a256782e130e0757fa54",
+          "frame_seq": 139,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "depot_wave1_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_depot_wave1_alert.png",
+          "playback_tick": 796,
+          "recorded_phase": 1,
+          "sha256": "5810703c73972a7993b6ca3ab85338964a2f178920a6f425c07525c1682a2a86",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/03_full_record_depot_wave1_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "fbb824f11ad8a256782e130e0757fa54",
+          "frame_seq": 175,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "depot_wave1_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_depot_wave1_sweep.png",
+          "playback_tick": 1007,
+          "recorded_phase": 5,
+          "sha256": "532bea99fad9dac1a0c4ced0d77af3e89cc0ec149598c8114b9daddf71b18ea0",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/04_full_record_depot_wave1_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "fbb824f11ad8a256782e130e0757fa54",
+          "frame_seq": 176,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/2",
+          "id": "depot_won",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_depot_won.png",
+          "playback_tick": 1008,
+          "recorded_phase": 3,
+          "sha256": "532bea99fad9dac1a0c4ced0d77af3e89cc0ec149598c8114b9daddf71b18ea0",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/05_full_record_depot_won.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-depot-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-radio-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd",
+        "--headless"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "radio"
+      },
+      "run_id": "21e1f53e17f04ed9928d4b0adc02f4a9",
+      "actual_exit_code": 0,
+      "checks": 3163,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "campaign-radio-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "campaign_replay_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "AMBUSH_CAMPAIGN_LEVEL": "radio",
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "ddef8fa0a2d34d459134207ed4193c7d",
+      "actual_exit_code": 0,
+      "checks": 3179,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 0,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/3",
+          "id": "radio_scout",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_scout.png",
+          "playback_tick": 0,
+          "recorded_phase": 0,
+          "sha256": "dade50ebddb501232280c6119a71d557005c18aa7a963bee25a6664c9287964b",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/00_full_record_radio_scout.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 54,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/3",
+          "id": "radio_wave0_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave0_alert.png",
+          "playback_tick": 307,
+          "recorded_phase": 1,
+          "sha256": "2fa92f39ddefa1ec0469c450b4ea3438479928e780bc7cf4fa4f91fc3a4ed3c9",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/01_full_record_radio_wave0_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 106,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 1/3",
+          "id": "radio_wave0_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave0_sweep.png",
+          "playback_tick": 611,
+          "recorded_phase": 5,
+          "sha256": "6bf95d150aa49a7d52b8e501f449cf1be7abf1155e54abaa837431113227c155",
+          "source": "native Window crop after two draws",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/02_full_record_radio_wave0_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 140,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/3",
+          "id": "radio_wave1_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave1_alert.png",
+          "playback_tick": 804,
+          "recorded_phase": 1,
+          "sha256": "d2b596d3ce328f908c2e91719f81b683940bc3f174a8cad72331888163eba4fb",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/03_full_record_radio_wave1_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 176,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 2/3",
+          "id": "radio_wave1_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave1_sweep.png",
+          "playback_tick": 1015,
+          "recorded_phase": 5,
+          "sha256": "4560172bca5dd718560e737377ab7322eada640f5e389d9cda07d7d3d72e1941",
+          "source": "native Window crop after two draws",
+          "wave_id": 1,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/04_full_record_radio_wave1_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 215,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 3/3",
+          "id": "radio_wave2_alert",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave2_alert.png",
+          "playback_tick": 1238,
+          "recorded_phase": 1,
+          "sha256": "265e3c236c9f1bdbe8831db19eeb72986266712b1049a687c14b884f77909676",
+          "source": "native Window crop after two draws",
+          "wave_id": 2,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/05_full_record_radio_wave2_alert.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 256,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 3/3",
+          "id": "radio_wave2_sweep",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_wave2_sweep.png",
+          "playback_tick": 1476,
+          "recorded_phase": 5,
+          "sha256": "6446e4eaf2ab54b68a678043fc4e9dd762a61dd0ea8be80ac25c0139daa30de1",
+          "source": "native Window crop after two draws",
+          "wave_id": 2,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/06_full_record_radio_wave2_sweep.png",
+          "hash_verified": true
+        },
+        {
+          "attempt_id": "21d8a9457e5fc495476df0944880f00c",
+          "frame_seq": 257,
+          "header": "AMBUSH LOOP  ·  第 1 世  ·  波 3/3",
+          "id": "radio_won",
+          "image_size": [
+            1280,
+            720
+          ],
+          "path": "res://build/asset_review/pr15-runtime/full_record_radio_won.png",
+          "playback_tick": 1477,
+          "recorded_phase": 3,
+          "sha256": "6446e4eaf2ab54b68a678043fc4e9dd762a61dd0ea8be80ac25c0139daa30de1",
+          "source": "native Window crop after two draws",
+          "wave_id": 2,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/07_full_record_radio_won.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 8,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-campaign-radio-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "presentation_contract-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_contract_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "befaf1b927f848cab1d83c18dab023d7",
+      "actual_exit_code": 0,
+      "checks": 84042,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-presentation_contract-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-presentation_contract-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "replay_timeline-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "replay_timeline_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "e59ace134efd490da7ea17209a58f636",
+      "actual_exit_code": 0,
+      "checks": 67,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_timeline-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_timeline-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "camera_input-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "camera_input_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "67e81cbf298a4e45b9f14a4f5b0454e7",
+      "actual_exit_code": 0,
+      "checks": 23,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-camera_input-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-camera_input-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "presentation_lifecycle-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_lifecycle_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "a73c716c6793462683ae4a7d452f1a54",
+      "actual_exit_code": 0,
+      "checks": 30,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-presentation_lifecycle-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-presentation_lifecycle-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "equipment_freeze-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "equipment_freeze_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "f437676f4a6f4540b789be47fadfb42f",
+      "actual_exit_code": 0,
+      "checks": 66,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-equipment_freeze-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-equipment_freeze-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "utility_runtime-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "f79b362395f04275960ff7c4e1214d1b",
+      "actual_exit_code": 0,
+      "checks": 1041,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "command_pose_clock-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "command_pose_clock_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "a0fdafda463d4feda16e88e71dc51311",
+      "actual_exit_code": 0,
+      "checks": 27,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command_pose_clock-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-command_pose_clock-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "visual_snapshot-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "visual_snapshot_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "5141f3d01f534edfadb99f47eafc000b",
+      "actual_exit_code": 0,
+      "checks": 130,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "replay_fx_lifecycle-headless",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "replay_fx_lifecycle_test.gd",
+        "--headless"
+      ],
+      "environment": {},
+      "run_id": "871cd1e211a44b80a610a78e6853cb48",
+      "actual_exit_code": 0,
+      "checks": 30,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [],
+      "captured_frames": 0,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-headless/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-headless/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "utility_runtime-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "utility_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "b33f55c217d0456abc22e1b250847f46",
+      "actual_exit_code": 0,
+      "checks": 1047,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "action": "grenade_throw",
+          "event_id": "b703f3ec51d61c2892f5077dbdf1ea58:0:0",
+          "path": "res://build/asset_review/pr15-runtime/r5_scout_grenade_follow.png",
+          "phase": 0,
+          "sha256": "8068189fed1972fdc65f9765646404310e723a085c90cb4761392fcace3fa66e",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/00_r5_scout_grenade_follow.png",
+          "hash_verified": true
+        },
+        {
+          "action": "knife_stab",
+          "event_id": "71ed5cce33ff131a5cc4b62a18a4cfd5:0:0",
+          "path": "res://build/asset_review/pr15-runtime/r5_scout_knife_hit.png",
+          "phase": 0,
+          "sha256": "3b0e490b56121f83bdea61cbc59308ac86686988a956b305ce89a63892382f17",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/01_r5_scout_knife_hit.png",
+          "hash_verified": true
+        },
+        {
+          "action": "decoy_place",
+          "event_id": "71ed5cce33ff131a5cc4b62a18a4cfd5:0:1",
+          "path": "res://build/asset_review/pr15-runtime/r5_scout_decoy_release.png",
+          "phase": 0,
+          "sha256": "7b46e0e9b417bc1e0e1c58c01bf0aeec93cbda7e6ebc8ee875ab18b21fc7e2ee",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/02_r5_scout_decoy_release.png",
+          "hash_verified": true
+        },
+        {
+          "action": "grenade_throw",
+          "event_id": "f35d69c934039f79585978539e96f454:0:0",
+          "path": "res://build/asset_review/pr15-runtime/r5_alert_auto_grenade.png",
+          "phase": 1,
+          "sha256": "8d12461fba8e057396842f8c3dd1bbc303197efbb7257035a8f9415bcc56fb72",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/03_r5_alert_auto_grenade.png",
+          "hash_verified": true
+        },
+        {
+          "action": "knife_stab",
+          "event_id": "f35d69c934039f79585978539e96f454:0:1",
+          "path": "res://build/asset_review/pr15-runtime/r5_alert_knife_hit.png",
+          "phase": 1,
+          "sha256": "3343e884ab42ad9271ac9aa162f06701272f062a5e3da401d686c7c5f465dcab",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/04_r5_alert_knife_hit.png",
+          "hash_verified": true
+        },
+        {
+          "action": "grenade_throw",
+          "event_id": "f35d69c934039f79585978539e96f454:0:0",
+          "path": "res://build/asset_review/pr15-runtime/r5_history_auto_grenade.png",
+          "phase": 4,
+          "sha256": "d2d2753bdd29ea150508b0b6c8c4e156f4b157b6fe62a5c56ace0bbd9dfb9e00",
+          "wave_id": 0,
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/05_r5_history_auto_grenade.png",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-utility_runtime-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "firearm_runtime-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "firearm_runtime_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "eb22bccf1aa7418f82c0bbc19615198e",
+      "actual_exit_code": 0,
+      "checks": 7681,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/r4_runtime_actual_mg.png",
+          "sha256": "269811c9a9eca4c53fd4eb3d003bac782d1ea8955daee92f255da2dba5c8263c",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/r4_runtime_actual_fallback.png",
+          "sha256": "25acb2ce66d3844e408d3f21fd009551fb3e14aa489ce91829657589c7f31912",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/r4_runtime_actual_history_mg.png",
+          "sha256": "ff5b5713d2cbc99fb65dc46301bdc33bcb4e465069403cf79b58155b5dbd6d9b",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 3,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-firearm_runtime-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "visual_snapshot-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "visual_snapshot_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "2e7aa57a23a5424388b135542461e299",
+      "actual_exit_code": 0,
+      "checks": 164,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/history_hud_desktop.png",
+          "sha256": "0a0d5bf21a5984ae9a04dfd4935d871ebf444cee2ac8e913678e374fecd1e49c",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/history_hud_phone.png",
+          "sha256": "441011157bd4efc60ee67abc39a6bec7960087e93cee8b00a61e40766279c640",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 2,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-visual_snapshot-render/run.exit"
+    },
+    {
+      "actual_source_sha": "15c0783059bb7c2f9e9cd9b7252a9343e71f4168",
+      "validation_kind": "fixed-source-formal",
+      "name": "replay_fx_lifecycle-render",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "replay_fx_lifecycle_test.gd",
+        "--render"
+      ],
+      "environment": {
+        "DISPLAY": ":112",
+        "AMBUSH_TEST_X11_DISPLAY": ":112",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "run_id": "9f3d6de0692c4ce2833727f238c5f77d",
+      "actual_exit_code": 0,
+      "checks": 36,
+      "failures": 0,
+      "engine_error_lines": 0,
+      "captures": [
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/yard_history_fx_clear.png",
+          "sha256": "8f253cbd01f5c998166133b07fccdc6f48202a9c00f635e09abc7cd7041a473a",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/warehouse_history_fx_clear.png",
+          "sha256": "aacde2a6aa752f4316ffe2faa918b00a181548b314df129608fefe0fe9acd8b0",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/pump_history_fx_clear.png",
+          "sha256": "f76cfa3642e875a9710a320a29cf74543e310b274412dd510cf970a8f89c731a",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/railcut_history_fx_clear.png",
+          "sha256": "e734912c0f0dbadfed88c4790ca8ead40190e92eae6c59306f0d167a8887e14d",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/depot_history_fx_clear.png",
+          "sha256": "02d9f56b4815f1857d3f852d6a5a9f702cdf458926ef4fb7c45df3288dac2821",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        },
+        {
+          "retained_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/radio_history_fx_clear.png",
+          "sha256": "ba478b61c073e1c03b9646c56e91a38b913484e45103f6c58545b5123528d2a2",
+          "image_size": [
+            1280,
+            720
+          ],
+          "source": "root framebuffer",
+          "hash_verified": true
+        }
+      ],
+      "captured_frames": 6,
+      "limits": [
+        "Linux Godot4.7.2; software renderer is not device performance",
+        "Reference deployments/vacuum and controlled command deltas; not normal complete player journey",
+        "Known inherited title200 menu P2 is outside this formal replay gate; dedicated next slice"
+      ],
+      "log_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/run.log",
+      "exit_path": ".cursor/docs/evidence/20261003-pr15-full-record/formal-replay_fx_lifecycle-render/run.exit"
+    }
+  ],
+  "limits": [
+    "0.1s actual command samples plus real unsampled boundaries; not continuous video or exact root interpolation between samples",
+    "Reference deployments and vacuum; not normal complete six-level player journey",
+    "Controlled ALERT 30/60 timing and 2x/camera invariance are not measured device FPS",
+    "Native XTest mouse/keyboard and synthetic touch cancellation are not physical mobile touch",
+    "Full 3D FX/A3 budget, ears0/45 and0/6, title200 menu P2, original two focus crops, final smoke/QA/APK remain",
+    "No merge/production/height/G integration; no device/emulator testing"
+  ]
+}

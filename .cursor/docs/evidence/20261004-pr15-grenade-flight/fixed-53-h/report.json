@@ -1,0 +1,130 @@
+{
+  "captures": [],
+  "checks": 119,
+  "failures": 0,
+  "rows": [
+    {
+      "actual_duration_s": 0.18,
+      "actual_logic_pos": "(496.0, 240.0)",
+      "actual_progress": 0.0,
+      "actual_y": 0.0,
+      "case": "launch",
+      "expected_y": 0.0,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.18,
+      "actual_logic_pos": "(536.0, 227.2721)",
+      "actual_progress": 0.25,
+      "actual_y": 0.883883476257324,
+      "case": "quarter-flight",
+      "expected_y": 0.883883476483184,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.18,
+      "actual_logic_pos": "(576.0, 222.0)",
+      "actual_progress": 0.5,
+      "actual_y": 1.25,
+      "case": "mid-flight",
+      "expected_y": 1.25,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.18,
+      "actual_logic_pos": "(656.0, 240.0)",
+      "actual_progress": 1.0,
+      "actual_y": 0.000000000000000153080849955701,
+      "case": "first-land",
+      "expected_y": 0.000000000000000153080849893419,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.1,
+      "actual_logic_pos": "(656.0, 240.0)",
+      "actual_progress": 0.55,
+      "actual_y": 1.23461043834686,
+      "case": "bounce-start",
+      "expected_y": 1.23461042574392,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.1,
+      "actual_logic_pos": "(630.4, 234.2199)",
+      "actual_progress": 0.8,
+      "actual_y": 0.734731554985046,
+      "case": "bounce-flight",
+      "expected_y": 0.734731565365592,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.1,
+      "actual_logic_pos": "(664.0, 246.0)",
+      "actual_progress": 1.0,
+      "actual_y": 0.000000000000000153080849955701,
+      "case": "bounce-land",
+      "expected_y": 0.000000000000000153080849893419,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_duration_s": 0.1,
+      "actual_logic_pos": "(664.0, 246.0)",
+      "actual_progress": 1.0,
+      "actual_y": 0.000000000000000153080849955701,
+      "case": "settled",
+      "expected_y": 0.000000000000000153080849893419,
+      "phase": 0,
+      "scope": "original real throw/sim_step with explicit dt and presentation-clock fixture"
+    },
+    {
+      "actual_midflight_samples_checked": 1,
+      "case": "authentic-a05-yard",
+      "scope": "original native producer bytes consumed read-only; no new battle/new record",
+      "sha256": "4e27b9af88ad72199489ee11e987e1ab0e8200c47bc963e831f4c9eb1883c164"
+    },
+    {
+      "actual_midflight_samples_checked": 1,
+      "case": "authentic-a05-warehouse",
+      "scope": "original native producer bytes consumed read-only; no new battle/new record",
+      "sha256": "cba97cc34446a384d1853a6b7c7224afbd32c5c456ee215fbf5afffdc0015cfd"
+    },
+    {
+      "actual_midflight_samples_checked": 1,
+      "case": "authentic-a05-pump",
+      "scope": "original native producer bytes consumed read-only; no new battle/new record",
+      "sha256": "e0faee3000b85ae795737dfd7b39e510e4a0670560d40a0a01890e5acfba2b46"
+    },
+    {
+      "actual_midflight_samples_checked": 0,
+      "case": "authentic-a05-railcut",
+      "scope": "original native producer bytes consumed read-only; no new battle/new record",
+      "sha256": "19919a17225308894332b5cf9a849b4bc004792afa02f3c5e27d25b0f08f9628"
+    },
+    {
+      "actual_midflight_samples_checked": 0,
+      "case": "authentic-a05-depot",
+      "scope": "original native producer bytes consumed read-only; no new battle/new record",
+      "sha256": "1720fe0dc83bfa2647d22c0dcc74b5bea35ac11db2ce25a141e3fb734d156d6d"
+    },
+    {
+      "actual_midflight_samples_checked": 1,
+      "case": "authentic-a05-radio",
+      "scope": "original native producer bytes consumed read-only; no new battle/new record",
+      "sha256": "69926921f672c941f66bc2885ba15e0484f37923e7addae0670047cae0653d22"
+    },
+    {
+      "actual_midflight_samples_checked": 4,
+      "case": "authentic-old-coverage",
+      "scope": "zero means no old-flight height claim for that file; never regenerate old records"
+    }
+  ],
+  "scope": "actual original SCOUT throw/sim_step + explicit dt/clock/snapshot/consumer fixtures; no normal native battle, blast FX, FINAL/A3/device acceptance",
+  "source_sha": "53e2eeb937b48b1a593991af921329d0a7f65c6d"
+}

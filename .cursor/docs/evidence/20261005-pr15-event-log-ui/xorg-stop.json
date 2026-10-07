@@ -1,0 +1,19 @@
+{
+  "pid": 153896,
+  "verified_exact_argv": [
+    "/usr/lib/xorg/Xorg",
+    ":136",
+    "-noreset",
+    "-ac",
+    "-nolisten",
+    "tcp",
+    "-config",
+    "/tmp/pr15-web-controls/event-log-ui-20261005/xorg136.conf",
+    "-logfile",
+    "/tmp/pr15-web-controls/event-log-ui-20261005/xorg136.log"
+  ],
+  "uid": 1000,
+  "signal": "SIGTERM",
+  "after_engine_END": true,
+  "first_stop_attempt": "exact /usr/bin path did not match wrapper exec /usr/lib path; no signal was sent"
+}

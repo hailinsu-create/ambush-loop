@@ -1,0 +1,327 @@
+diff --git a/ambush_loop/scripts/main.gd b/ambush_loop/scripts/main.gd
+index ce68e00..226c147 100644
+--- a/ambush_loop/scripts/main.gd
++++ b/ambush_loop/scripts/main.gd
+@@ -1152,8 +1152,8 @@ func _refresh_touch_hud() -> void:
+ 			phase_name = "SWEEP"
+ 		_:
+ 			phase_name = "SETUP"
+-	var paused := phase == Phase.WATCHING and sim.paused
+-	var hi := phase == Phase.WATCHING and sim.speed >= 1.5
++	var paused := not replay.playing if phase == Phase.REPLAY else phase == Phase.WATCHING and sim.paused
++	var hi := replay.speed >= 1.5 if phase == Phase.REPLAY else phase == Phase.WATCHING and sim.speed >= 1.5
+ 	var has_pack := level != null and bool(level.has_ammo_pack)
+ 	var has_door := level != null and level.door_cell.x >= 0
+ 	_refresh_alarm_cta()
+@@ -1325,6 +1325,11 @@ func handle_app_focus_out() -> void:
+ 	_presentation_suspended = true
+ 	_cancel_world_input(true)
+ 	_gate_scene_audio(true)
++	if phase == Phase.REPLAY:
++		replay.pause()
++		_refresh_replay_transport()
++		_refresh_touch_hud()
++		return
+ 	# Freeze the sim clock whenever it can still step. Result panels are idle.
+ 	if phase == Phase.WATCHING and not sim.paused:
+ 		sim.paused = true
+@@ -3507,6 +3512,7 @@ func door_slam_dust_active() -> bool:
+ 
+ 
+ func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
++	replay.pause()
+ 	_cancel_world_input()
+ 	if sfx and sfx.has_method("stop_mission_audio"):
+ 		sfx.stop_mission_audio()
+@@ -3978,6 +3984,16 @@ func _unhandled_input(event: InputEvent) -> void:
+ 					_apply_replay_scrub()
+ 				KEY_SPACE:
+ 					_exit_replay_to_setup()
++				KEY_P:
++					_on_pause_pressed()
++				KEY_EQUAL, KEY_KP_ADD:
++					replay.set_speed(2.0)
++					_refresh_replay_transport()
++					_refresh_touch_hud()
++				KEY_MINUS, KEY_KP_SUBTRACT:
++					replay.set_speed(1.0)
++					_refresh_replay_transport()
++					_refresh_touch_hud()
+ 			get_viewport().set_input_as_handled()
+ 		return
+ 
+@@ -5136,6 +5152,13 @@ func _on_door_pressed() -> void:
+ 
+ 
+ func _on_speed_pressed() -> void:
++	if phase == Phase.REPLAY:
++		if _modal_blocks_input() or _presentation_suspended:
++			return
++		replay.set_speed(1.0 if replay.speed >= 1.5 else 2.0)
++		_refresh_replay_transport()
++		_refresh_touch_hud()
++		return
+ 	if phase != Phase.WATCHING:
+ 		return
+ 	sim.set_speed(1.0 if sim.speed >= 1.5 else 2.0)
+@@ -5146,6 +5169,16 @@ func _on_speed_pressed() -> void:
+ 
+ 
+ func _on_pause_pressed() -> void:
++	if phase == Phase.REPLAY:
++		if _modal_blocks_input() or _presentation_suspended:
++			return
++		if replay.playing:
++			replay.pause()
++		else:
++			replay.play()
++		_refresh_replay_transport()
++		_refresh_touch_hud()
++		return
+ 	if phase != Phase.WATCHING:
+ 		return
+ 	sim.toggle_pause()
+@@ -5445,6 +5478,10 @@ func _on_return_fired(from: EnemyRunner, to: OperatorUnit) -> void:
+ 
+ func _process(delta: float) -> void:
+ 	var presentation_paused := _presentation_suspended or (pause_overlay != null and pause_overlay.is_open())
++	if phase == Phase.REPLAY:
++		if not _presentation_suspended and not _modal_blocks_input() and replay.advance(delta):
++			_apply_replay_scrub()
++		return
+ 	# Command movement and presentation share the pause menu/focus gate. The
+ 	# battle clock remains authoritative in ALERT, including its existing 2x.
+ 	if _is_command_phase() and presentation_paused:
+@@ -6532,9 +6569,10 @@ func _on_replay_pressed() -> void:
+ 	_reset_presentation_fx()
+ 	result_panel.visible = false
+ 	replay.bind(battle_log)
++	replay.play(true)
+ 	if scrub_slider:
+ 		scrub_slider.visible = true
+-		scrub_slider.value = 1.0
++		scrub_slider.set_value_no_signal(0.0)
+ 	if replay_button:
+ 		replay_button.visible = false
+ 	# Hide live combat nodes; do not copy snapshot hp/ammo/alive onto them.
+@@ -6559,6 +6597,19 @@ func _on_scrub_changed(v: float) -> void:
+ 	_apply_replay_scrub()
+ 
+ 
++func _refresh_replay_transport() -> void:
++	if phase != Phase.REPLAY:
++		return
++	var available := replay.max_tick() > 0 and not replay.legacy_ambiguous
++	if pause_button:
++		pause_button.disabled = not available
++		pause_button.text = "暂停" if replay.playing else ("重播" if replay.scrub_tick >= replay.max_tick() else "继续")
++	if speed_button:
++		speed_button.disabled = not available
++		speed_button.text = "速度 2×" if replay.speed >= 1.5 else "速度 1×"
++	_refresh_phase_chip()
++
++
+ func _apply_replay_scrub() -> void:
+ 	if phase != Phase.REPLAY:
+ 		return
+@@ -6569,6 +6620,7 @@ func _apply_replay_scrub() -> void:
+ 	var clock_label := "播放" if replay.continuous_playback else "复盘"
+ 	_fill_event_list(replay.events_up_to(replay.scrub_tick), 12, "%s t=%.1fs · 点击定位" % [clock_label, float(replay.scrub_tick) / 60.0])
+ 	_update_replay_status()
++	_refresh_replay_transport()
+ 	_update_hud()
+ 
+ 
+@@ -6588,7 +6640,7 @@ func _update_replay_status() -> void:
+ 	elif not preload("res://scripts/presentation/actor_pose.gd").supported(data):
+ 		status_label.text = "历史动作版本暂不支持，使用简化人物显示；原记录保留。空格返回"
+ 	else:
+-		status_label.text = "只读时间轴 — 拖动滑条或 ←/→；点击事件定位对象。空格返回并恢复上轮计划"
++		status_label.text = "只读复盘 · P 暂停/继续 · +/- 倍速 · 滑条/←→/事件定位后暂停 · 空格返回"
+ 
+ 
+ func _paint_replay_snapshot(snap: Dictionary) -> void:
+@@ -6722,6 +6774,13 @@ func _clear_replay_layer() -> void:
+ 
+ 
+ func _exit_replay_to_setup() -> void:
++	replay.pause()
++	if pause_button:
++		pause_button.disabled = true
++		pause_button.text = "暂停"
++	if speed_button:
++		speed_button.disabled = true
++		speed_button.text = "速度 2×" if sim.speed >= 1.5 else "速度 1×"
+ 	_clear_replay_layer()
+ 	if scrub_slider:
+ 		scrub_slider.visible = false
+@@ -7651,7 +7710,7 @@ func _refresh_phase_chip() -> void:
+ 			phase_chip.text = "阶段 · 封锁成功"
+ 			phase_chip.add_theme_color_override("font_color", Color(0.55, 0.92, 0.48))
+ 		Phase.REPLAY:
+-			phase_chip.text = "阶段 · 只读复盘"
++			phase_chip.text = "复盘 %s %s t=%.1fs" % ["播放" if replay.playing else "暂停", "2×" if replay.speed >= 1.5 else "1×", float(replay.scrub_tick) / 60.0]
+ 			phase_chip.add_theme_color_override("font_color", Color(0.78, 0.70, 0.48))
+ 		_:
+ 			phase_chip.text = ""
+diff --git a/ambush_loop/scripts/replay/replay_player.gd b/ambush_loop/scripts/replay/replay_player.gd
+index 79a5fd3..137066d 100644
+--- a/ambush_loop/scripts/replay/replay_player.gd
++++ b/ambush_loop/scripts/replay/replay_player.gd
+@@ -7,6 +7,8 @@ extends RefCounted
+ var log: BattleLog = null
+ var scrub_tick: int = 0
+ var playing: bool = false
++var speed: float = 2.0
++var _subticks: float = 0.0
+ var legacy_ambiguous: bool = false
+ var continuous_playback: bool = false
+ var playback_unsupported: bool = false
+@@ -16,6 +18,8 @@ func bind(p_log: BattleLog) -> void:
+ 	log = p_log
+ 	scrub_tick = 0
+ 	playing = false
++	speed = 2.0
++	_subticks = 0.0
+ 	legacy_ambiguous = false
+ 	continuous_playback = log != null and log.playback_schema in [1, 2] and not log.playback_snapshots.is_empty()
+ 	playback_unsupported = log != null and log.playback_schema not in [0, 1, 2]
+@@ -73,9 +77,41 @@ func max_tick() -> int:
+ 
+ 
+ func set_tick(t: int) -> void:
++	# A seek selects a stable historical frame; old playback debt cannot follow it.
++	playing = false
++	_subticks = 0.0
+ 	scrub_tick = clampi(t, 0, max_tick())
+ 
+ 
++func set_speed(value: float) -> void:
++	speed = 1.0 if value < 1.5 else 2.0
++
++
++func play(restart: bool = false) -> void:
++	if restart or scrub_tick >= max_tick():
++		set_tick(0)
++	playing = log != null and not legacy_ambiguous and max_tick() > 0 and not _snapshots().is_empty()
++
++
++func pause() -> void:
++	playing = false
++
++
++func advance(real_delta: float) -> bool:
++	if not playing or not is_finite(real_delta) or real_delta <= 0.0:
++		return false
++	var previous := scrub_tick
++	# Independent display time. Never step combat or mutate the bound recording.
++	_subticks += minf(real_delta * speed * 60.0, float(max_tick() - scrub_tick))
++	var ticks := floori(_subticks + 0.000001)
++	_subticks = maxf(_subticks - ticks, 0.0)
++	scrub_tick = mini(scrub_tick + ticks, max_tick())
++	if scrub_tick >= max_tick():
++		playing = false
++		_subticks = 0.0
++	return scrub_tick != previous
++
++
+ func seek_ratio(r: float) -> void:
+ 	set_tick(int(round(clampf(r, 0.0, 1.0) * float(max_tick()))))
+ 
+diff --git a/ambush_loop/scripts/replay_autoplay_test.gd b/ambush_loop/scripts/replay_autoplay_test.gd
+index 6aef2c4..a12fbdc 100644
+--- a/ambush_loop/scripts/replay_autoplay_test.gd
++++ b/ambush_loop/scripts/replay_autoplay_test.gd
+@@ -166,8 +166,14 @@ func _native_case(touch: bool) -> void:
+ 	root.content_scale_factor = 2.0 if touch else 1.0
+ 	root.get_node("GameSettings").set_force_touch_hud(touch)
+ 	sample = "auto_200_compact" if touch else "auto_100_desktop"
++	print("REPLAY_AUTO_CASE " + sample)
+ 	main._update_hud()
+ 	await _draw()
++	_check(main.replay_button.is_visible_in_tree(), "original terminal replay button is reachable through normal UI")
++	if not main.replay_button.is_visible_in_tree():
++		rows.append({"id":sample,"entry":"blocked by hidden original BottomBar", "button":_rect(main.replay_button.get_global_rect())})
++		await _modal_capture(sample + "_entry_blocked")
++		return
+ 	# Before REPLAY, the reference fixture is idle; only the real replay is processed.
+ 	var probe := ClockProbe.new()
+ 	probe.host = main
+@@ -175,12 +181,7 @@ func _native_case(touch: bool) -> void:
+ 	root.add_child(probe)
+ 	probe.armed = true
+ 	main.set_process(true)
+-	if touch:
+-		main._event_log_open = false
+-		main._update_hud()
+-		await _native_click(main.touch_hud._btns.replay)
+-	else:
+-		await _native_click(main.replay_button)
++	await _native_click(main.replay_button)
+ 	await _draw()
+ 	_check(main.phase == main.Phase.REPLAY and main.replay.log == source, "native production button binds the original recording")
+ 	_check(main.replay.playing and main.replay.scrub_tick > 0 and float(main.replay.get("speed")) == 2.0, "ordinary native entry automatically advances at2x")
+diff --git a/ambush_loop/scripts/touch_hud.gd b/ambush_loop/scripts/touch_hud.gd
+index 38f669c..5426407 100644
+--- a/ambush_loop/scripts/touch_hud.gd
++++ b/ambush_loop/scripts/touch_hud.gd
+@@ -13,6 +13,8 @@ var _row_setup: HBoxContainer = null
+ var _row_watch: HBoxContainer = null
+ var _replay_controls: VBoxContainer = null
+ var _replay_time: Label = null
++var _replay_pause: Button = null
++var _replay_speed: Button = null
+ var _replay_scrub: HSlider = null
+ var _stack_secondary: VBoxContainer = null
+ var _twist_pair: HBoxContainer = null
+@@ -208,10 +210,26 @@ func _build() -> void:
+ 	_replay_controls.name = "ReplayControls"
+ 	_replay_controls.visible = false
+ 	col.add_child(_replay_controls)
++	var transport := HBoxContainer.new()
++	transport.add_theme_constant_override("separation", 4)
++	_replay_controls.add_child(transport)
+ 	_replay_time = Label.new()
+ 	_replay_time.theme = NightOps.theme()
+ 	_replay_time.mouse_filter = Control.MOUSE_FILTER_IGNORE
+-	_replay_controls.add_child(_replay_time)
++	_replay_time.size_flags_horizontal = Control.SIZE_EXPAND_FILL
++	_replay_time.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
++	_replay_time.add_theme_font_size_override("font_size", 12)
++	transport.add_child(_replay_time)
++	_replay_pause = Button.new()
++	_replay_pause.custom_minimum_size = Vector2(52, 32)
++	_replay_pause.focus_mode = Control.FOCUS_NONE
++	_replay_pause.pressed.connect(func() -> void: _host.apply_touch_command("pause"))
++	transport.add_child(_replay_pause)
++	_replay_speed = Button.new()
++	_replay_speed.custom_minimum_size = Vector2(44, 32)
++	_replay_speed.focus_mode = Control.FOCUS_NONE
++	_replay_speed.pressed.connect(func() -> void: _host.apply_touch_command("speed"))
++	transport.add_child(_replay_speed)
+ 	_replay_scrub = HSlider.new()
+ 	_replay_scrub.name = "ReplayScrub"
+ 	_replay_scrub.min_value = 0.0
+@@ -588,7 +606,12 @@ func refresh_phase(
+ 		_row_watch.visible = phase_name not in ["SETUP", "SWEEP", "REPLAY"]
+ 	_replay_controls.visible = phase_name == "REPLAY"
+ 	if _replay_controls.visible and _host != null:
+-		_replay_time.text = "复盘 %.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
++		_replay_time.text = "%.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
++		var ended: bool = _host.replay.scrub_tick >= _host.replay.max_tick()
++		_replay_pause.text = "暂停" if _host.replay.playing else ("重播" if ended else "继续")
++		_replay_speed.text = "2×" if speed_hi else "1×"
++		_replay_pause.disabled = _host.replay.max_tick() <= 0 or _host.replay.legacy_ambiguous
++		_replay_speed.disabled = _replay_pause.disabled
+ 		_replay_scrub.set_value_no_signal(float(_host.replay.scrub_tick) / maxf(float(_host.replay.max_tick()), 1.0))
+ 	match phase_name:
+ 		"SETUP":
+@@ -598,7 +621,7 @@ func refresh_phase(
+ 		"WATCHING":
+ 			set_hint("警报：暂停·倍速·中止 · 自动开火")
+ 		"REPLAY":
+-			set_hint("复盘只读 — 拖时间轴；警报钮返回搜刮")
++			set_hint("复盘只读 · 暂停/倍速 · 拖时间轴后暂停 · 返回")
+ 		_:
+ 			set_hint("点继续。菜单可清空记忆或回标题")
+ 	if _btns.has("pause"):

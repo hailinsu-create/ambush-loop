@@ -1,0 +1,882 @@
+{
+  "schema": 1,
+  "runs": [
+    {
+      "run": "run1-OFF",
+      "phases": {
+        "static": {
+          "samples": 50,
+          "tags": {
+            "capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows"
+        },
+        "advance": {
+          "samples": 47,
+          "tags": {
+            "capture_calls": {
+              "n": 47,
+              "median_us": 8,
+              "p95_us": 8,
+              "sum_us": 376,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "capture_us": {
+              "n": 47,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_calls": {
+              "n": 47,
+              "median_us": 8,
+              "p95_us": 8,
+              "sum_us": 376,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "hud_capture_us": {
+              "n": 47,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_calls": {
+              "n": 47,
+              "median_us": 2,
+              "p95_us": 2,
+              "sum_us": 94,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_us": {
+              "n": 47,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_calls": {
+              "n": 47,
+              "median_us": 50,
+              "p95_us": 50,
+              "sum_us": 2350,
+              "min_us": 50,
+              "max_us": 50
+            },
+            "style_us": {
+              "n": 47,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_calls": {
+              "n": 47,
+              "median_us": 2,
+              "p95_us": 2,
+              "sum_us": 94,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_capture_us": {
+              "n": 47,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              8
+            ],
+            "hud_capture_calls": [
+              8
+            ],
+            "touch_calls": [
+              2
+            ],
+            "style_calls": [
+              50
+            ],
+            "touch_capture_calls": [
+              2
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows"
+        }
+      }
+    },
+    {
+      "run": "run2-ON",
+      "phases": {
+        "static": {
+          "samples": 50,
+          "tags": {
+            "capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows"
+        },
+        "advance": {
+          "samples": 47,
+          "tags": {
+            "capture_calls": {
+              "n": 47,
+              "median_us": 8,
+              "p95_us": 8,
+              "sum_us": 376,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "capture_us": {
+              "n": 47,
+              "median_us": 5900,
+              "p95_us": 6400,
+              "sum_us": 290100,
+              "min_us": 5400,
+              "max_us": 18100
+            },
+            "hud_capture_calls": {
+              "n": 47,
+              "median_us": 8,
+              "p95_us": 8,
+              "sum_us": 376,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "hud_capture_us": {
+              "n": 47,
+              "median_us": 5900,
+              "p95_us": 6400,
+              "sum_us": 290100,
+              "min_us": 5400,
+              "max_us": 18100
+            },
+            "touch_calls": {
+              "n": 47,
+              "median_us": 2,
+              "p95_us": 2,
+              "sum_us": 94,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_us": {
+              "n": 47,
+              "median_us": 8700,
+              "p95_us": 9600,
+              "sum_us": 414400,
+              "min_us": 8300,
+              "max_us": 13000
+            },
+            "style_calls": {
+              "n": 47,
+              "median_us": 50,
+              "p95_us": 50,
+              "sum_us": 2350,
+              "min_us": 50,
+              "max_us": 50
+            },
+            "style_us": {
+              "n": 47,
+              "median_us": 4900,
+              "p95_us": 5800,
+              "sum_us": 232000,
+              "min_us": 4400,
+              "max_us": 6400
+            },
+            "touch_capture_calls": {
+              "n": 47,
+              "median_us": 2,
+              "p95_us": 2,
+              "sum_us": 94,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_capture_us": {
+              "n": 47,
+              "median_us": 1500,
+              "p95_us": 1600,
+              "sum_us": 68000,
+              "min_us": 1200,
+              "max_us": 1600
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              8
+            ],
+            "hud_capture_calls": [
+              8
+            ],
+            "touch_calls": [
+              2
+            ],
+            "style_calls": [
+              50
+            ],
+            "touch_capture_calls": [
+              2
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows",
+          "sum_fraction_of_HUD": {
+            "hud_capture_us": 0.3140630074699578,
+            "touch_us": 0.4486305077406084,
+            "style_us": 0.2511637977698387,
+            "touch_capture_us": 0.07361697520840099
+          },
+          "sum_fraction_of_root": {
+            "hud_capture_us": 0.28244572096193166,
+            "touch_us": 0.4034660695161133,
+            "style_us": 0.22587868756693602
+          },
+          "HUD_disjoint_partition_us": {
+            "capture_outside_touch": 222100,
+            "touch_inclusive": 414400,
+            "other_and_measurement": 287200
+          }
+        }
+      }
+    },
+    {
+      "run": "run3-ON",
+      "phases": {
+        "static": {
+          "samples": 50,
+          "tags": {
+            "capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_calls": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_us": {
+              "n": 50,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows"
+        },
+        "advance": {
+          "samples": 48,
+          "tags": {
+            "capture_calls": {
+              "n": 48,
+              "median_us": 8.0,
+              "p95_us": 8,
+              "sum_us": 384,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "capture_us": {
+              "n": 48,
+              "median_us": 5900.0,
+              "p95_us": 6400,
+              "sum_us": 284100,
+              "min_us": 5400,
+              "max_us": 7300
+            },
+            "hud_capture_calls": {
+              "n": 48,
+              "median_us": 8.0,
+              "p95_us": 8,
+              "sum_us": 384,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "hud_capture_us": {
+              "n": 48,
+              "median_us": 5900.0,
+              "p95_us": 6400,
+              "sum_us": 284100,
+              "min_us": 5400,
+              "max_us": 7300
+            },
+            "touch_calls": {
+              "n": 48,
+              "median_us": 2.0,
+              "p95_us": 2,
+              "sum_us": 96,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_us": {
+              "n": 48,
+              "median_us": 8500.0,
+              "p95_us": 11400,
+              "sum_us": 429200,
+              "min_us": 8100,
+              "max_us": 17100
+            },
+            "style_calls": {
+              "n": 48,
+              "median_us": 50.0,
+              "p95_us": 50,
+              "sum_us": 2400,
+              "min_us": 50,
+              "max_us": 50
+            },
+            "style_us": {
+              "n": 48,
+              "median_us": 4850.0,
+              "p95_us": 5600,
+              "sum_us": 234000,
+              "min_us": 4000,
+              "max_us": 6400
+            },
+            "touch_capture_calls": {
+              "n": 48,
+              "median_us": 2.0,
+              "p95_us": 2,
+              "sum_us": 96,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_capture_us": {
+              "n": 48,
+              "median_us": 1500.0,
+              "p95_us": 1600,
+              "sum_us": 69500,
+              "min_us": 1200,
+              "max_us": 1900
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              8
+            ],
+            "hud_capture_calls": [
+              8
+            ],
+            "touch_calls": [
+              2
+            ],
+            "style_calls": [
+              50
+            ],
+            "touch_capture_calls": [
+              2
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows",
+          "sum_fraction_of_HUD": {
+            "hud_capture_us": 0.2994308600337268,
+            "touch_us": 0.4523608768971332,
+            "style_us": 0.24662731871838112,
+            "touch_capture_us": 0.07325042158516021
+          },
+          "sum_fraction_of_root": {
+            "hud_capture_us": 0.26951902096575275,
+            "touch_us": 0.4071719950668817,
+            "style_us": 0.22199032349871928
+          },
+          "HUD_disjoint_partition_us": {
+            "capture_outside_touch": 214600,
+            "touch_inclusive": 429200,
+            "other_and_measurement": 305000
+          }
+        }
+      }
+    },
+    {
+      "run": "run4-OFF",
+      "phases": {
+        "static": {
+          "samples": 49,
+          "tags": {
+            "capture_calls": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "capture_us": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_calls": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_us": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_calls": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_us": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_calls": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_us": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_calls": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_us": {
+              "n": 49,
+              "median_us": 0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              0
+            ],
+            "hud_capture_calls": [
+              0
+            ],
+            "touch_calls": [
+              0
+            ],
+            "style_calls": [
+              0
+            ],
+            "touch_capture_calls": [
+              0
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows"
+        },
+        "advance": {
+          "samples": 48,
+          "tags": {
+            "capture_calls": {
+              "n": 48,
+              "median_us": 8.0,
+              "p95_us": 8,
+              "sum_us": 384,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "capture_us": {
+              "n": 48,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "hud_capture_calls": {
+              "n": 48,
+              "median_us": 8.0,
+              "p95_us": 8,
+              "sum_us": 384,
+              "min_us": 8,
+              "max_us": 8
+            },
+            "hud_capture_us": {
+              "n": 48,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_calls": {
+              "n": 48,
+              "median_us": 2.0,
+              "p95_us": 2,
+              "sum_us": 96,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_us": {
+              "n": 48,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "style_calls": {
+              "n": 48,
+              "median_us": 50.0,
+              "p95_us": 50,
+              "sum_us": 2400,
+              "min_us": 50,
+              "max_us": 50
+            },
+            "style_us": {
+              "n": 48,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            },
+            "touch_capture_calls": {
+              "n": 48,
+              "median_us": 2.0,
+              "p95_us": 2,
+              "sum_us": 96,
+              "min_us": 2,
+              "max_us": 2
+            },
+            "touch_capture_us": {
+              "n": 48,
+              "median_us": 0.0,
+              "p95_us": 0,
+              "sum_us": 0,
+              "min_us": 0,
+              "max_us": 0
+            }
+          },
+          "counts": {
+            "capture_calls": [
+              8
+            ],
+            "hud_capture_calls": [
+              8
+            ],
+            "touch_calls": [
+              2
+            ],
+            "style_calls": [
+              50
+            ],
+            "touch_capture_calls": [
+              2
+            ]
+          },
+          "scope": "capture in touch overlaps total HUD capture; style is nested in touch, do not sum inclusive rows"
+        }
+      }
+    }
+  ],
+  "scope": "fixed consumer/formal two ON repeats; elapsed not pureCPU/GPU; actual callcounts, no causal wholeframe percentage"
+}

@@ -1,0 +1,54 @@
+{
+  "source_sha": "ea54a613e07118cb812f1e54dcb961e3d643baad",
+  "actual_exit": 1,
+  "checks": 195,
+  "failures": 44,
+  "scope": "one-case1600x720/200%/desktop original production title, prior test fixture. Continue expected radio after actual Yard entry is a fixture error, not a production Continue finding. EngineERROR0.",
+  "command": "AMBUSH_TITLE_MATRIX=one bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-full-godot title_menu_viewport_test.gd --render",
+  "files": {
+    "viewport_title_1600_200_desktop_missions_end.png": {
+      "bytes": 80468,
+      "sha256": "a0aefd9d3d2bf23ad337afec4dbc5b99ed378b35b75cb4f08a19b0d54991634d"
+    },
+    "viewport_title_1600_200_desktop_quit.png": {
+      "bytes": 90271,
+      "sha256": "1e8e735b8c42db0ee2477eafa9589f208eea1786a0d118171e863eecf3290ee2"
+    },
+    "viewport_title_1600_200_desktop_settings_end.png": {
+      "bytes": 75256,
+      "sha256": "050dde6c78abd047e13dbc87c7f25b04fbdaae7e32ccb58d0fbb0ad8197f65df"
+    },
+    "pr15-title-negative.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "viewport_title_1600_200_desktop_help_end.png": {
+      "bytes": 232223,
+      "sha256": "d0936a6b2c86582b8bc74e97ce6aaf134b7ade6465cda40c88f23e3dfd85171d"
+    },
+    "pr15-title-negative.log": {
+      "bytes": 7360,
+      "sha256": "e2138dec00a179a551fd8857aaa56812b01d99efd0095bb3082ad1bec9ca495f"
+    },
+    "title-menu-report.json": {
+      "bytes": 19597,
+      "sha256": "0c432b5675d6a3124bb570360f88bb2419f6d0012b5bf76765dcbf6ebc9e2c03"
+    },
+    "viewport_title_1600_200_desktop_brief_radio.png": {
+      "bytes": 82214,
+      "sha256": "f813af0e7850d043bdb627c3fbaef5d4726c8a921ccec9b332fcf8badf423c48"
+    },
+    "viewport_title_1600_200_desktop_menu.png": {
+      "bytes": 139114,
+      "sha256": "bcd6302cc51f0577410e75245db70c5da3e4ccce9103db1bfc06ad57d306297c"
+    },
+    "viewport_title_1600_200_desktop_journal_end.png": {
+      "bytes": 142930,
+      "sha256": "4ec52e4ca495b662d576b7853c6997edffa36c09cb00c9d31c28c812b40894f9"
+    },
+    "viewport_title_1600_200_desktop_brief_yard.png": {
+      "bytes": 81454,
+      "sha256": "458162ca320c7a47051cf90847f16d08843ff99aadf3cc6d3da7d6fd0e3922a9"
+    }
+  }
+}

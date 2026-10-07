@@ -1,0 +1,148 @@
+{
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "Historical operator HUD and native phone scrub; graybox only, no final asset/device/sound quality claim",
+  "development": {
+    "source_sha": null,
+    "base_sha": "b43e1e38e97257a26a49b39e716bb4485c3bc1ac",
+    "source_state": "uncommitted development HUD worktree",
+    "exit_code": 0,
+    "result": "failed: SCRIPT ERROR despite green assertion marker; never counted as passing",
+    "log": "development-parser-failed.log",
+    "sha256": "e49cf6afb5a15545cdc08ab616ec90683364e6a6ff0b1f3c5441fb8d6b2f908d"
+  },
+  "runs": [
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "visual_snapshot_test.gd",
+      "command": "timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "VISUAL_SNAPSHOT_OK checks=162 failures=0",
+      "run_id": "5fd90f2312c14620ae7dbb2565f8268e",
+      "log": "hud-a932.log",
+      "sha256": "8b32e9ab83eb0565bb0d511ffab610c71aedcb975f284eb28057898137eb24be",
+      "result": "passed"
+    },
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "replay_timeline_test.gd",
+      "command": "timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 replay_timeline_test.gd",
+      "exit_code": 0,
+      "completion_marker": "REPLAY_TIMELINE_OK checks=66",
+      "run_id": "5c2a632e01404864b57e16e23fd72abe",
+      "log": "timeline-a932.log",
+      "sha256": "55132acf8cd7e6f35e740823a08e05d6fc1e6b151d61f376caa38a7e51ae8083",
+      "result": "passed"
+    },
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "presentation_contract_test.gd",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "exit_code": 0,
+      "completion_marker": "PRESENTATION_CONTRACT_OK checks=84039",
+      "run_id": "34a64ce34f0541548f2dfcc02735f18e",
+      "log": "contract-a932.log",
+      "sha256": "6f44f8666bf088b4945d19941824f4b36d58f1185e2d0c21ebcd4a6a9063e8d2",
+      "result": "passed"
+    },
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "phase_tools_test.gd",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture phase_tools_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "PHASE_TOOLS_OK checks=35 failures=0",
+      "run_id": "be3ebe07464841639cf600b0389e9112",
+      "log": "phase-a932.log",
+      "sha256": "e9e977aa7a6ca0569791e3f43b8f95773e93f8370e5a369484063f66e12d6958",
+      "result": "passed"
+    },
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "presentation_lifecycle_test.gd",
+      "command": "timeout 300 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "PRESENTATION_LIFECYCLE_OK checks=32 failures=0",
+      "run_id": "5dc62d70e1ae46cebcd14a90cb8c2bf5",
+      "log": "lifecycle-a932.log",
+      "sha256": "47b3df027bee3f8c413c53a0b42ee69797d62d521de459583fa5d5025718fb33",
+      "result": "passed"
+    },
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "equipment_freeze_test.gd",
+      "command": "timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "exit_code": 124,
+      "completion_marker": null,
+      "run_id": "11eb73aa28f54eb4973175334d7a7606",
+      "log": "freeze-a932.log",
+      "sha256": "2accedcc95f7dbed25d86ef0b7b74693e66faa7ba530fe7491224be58868e390",
+      "result": "timeout; no completion marker"
+    },
+    {
+      "source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "entry": "campaign_replay_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "exit_code": 0,
+      "completion_marker": "CAMPAIGN_REPLAY_OK checks=10296 failures=0",
+      "run_id": "9d6dc59086394c6989078d4446dcdf2c",
+      "log": "campaign-a932.log",
+      "sha256": "47b9976538f61c7f47e169083ec4b7182c50fac18064c77d6e2d8dff737d4bdb",
+      "result": "passed"
+    },
+    {
+      "source_sha": "92d2bc416ca33641e5e2c93c22f7f08e9e81e0a8",
+      "runtime_source_sha": "a93269474a8f7d29b290fa9514306b3333e126e3",
+      "runtime_tree_sha": "b6a8652d9d4bf2d2a5cef492d1da0c37ee7a6d7a",
+      "note": "92d2bc4 only adds planning docs; git diff --quiet a932694 92d2bc4 -- ambush_loop exited0",
+      "entry": "equipment_freeze_test.gd",
+      "command": "timeout 900 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 equipment_freeze_test.gd",
+      "exit_code": 0,
+      "completion_marker": "EQUIPMENT_FREEZE_OK checks=66",
+      "run_id": "13e318a4369643c88d4788510881b1bb",
+      "log": "freeze-retry-92d.log",
+      "sha256": "9f56099d680e468c9a5108119dcc0458c49749b197bf7df4d879f0cc677d65e7",
+      "result": "passed"
+    },
+    {
+      "source_sha": "ed673ed6e13498c7cb466634aacb4758daec6917",
+      "entry": "visual_snapshot_test.gd",
+      "command": "timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "VISUAL_SNAPSHOT_OK checks=164 failures=0",
+      "run_id": "bc89b1d857df4b1f82307e71d964b2f1",
+      "log": "hud-cleanup-ed673ed.log",
+      "sha256": "ff30bdad143fe9d072a764194ebdaae39e643b9579c3d346877430c26ecabcc3",
+      "result": "passed"
+    },
+    {
+      "source_sha": "ed673ed6e13498c7cb466634aacb4758daec6917",
+      "entry": "presentation_lifecycle_test.gd",
+      "command": "timeout 240 bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "exit_code": 0,
+      "completion_marker": "PRESENTATION_LIFECYCLE_OK checks=32 failures=0",
+      "run_id": "00ad55a6202b4b9bab51e8278126520b",
+      "log": "lifecycle-cleanup-ed673ed.log",
+      "sha256": "a3271cbf6c5fdfc4c1da20134c11c11c83d3498d19ef083e7fc881ecbd79a505",
+      "result": "passed"
+    }
+  ],
+  "images": [
+    {
+      "path": "history_hud_desktop.png",
+      "source_sha": "ed673ed6e13498c7cb466634aacb4758daec6917",
+      "capture_run_id": "bc89b1d857df4b1f82307e71d964b2f1",
+      "bytes": 217167,
+      "sha256": "fd77360e00010f5b5d5ebd153845d3af4b3108ab5b2ee6f4ba82f1114e3210f2",
+      "viewed": true,
+      "note": "Actual graybox HUD, not final asset/device visual acceptance"
+    },
+    {
+      "path": "history_hud_phone.png",
+      "source_sha": "ed673ed6e13498c7cb466634aacb4758daec6917",
+      "capture_run_id": "bc89b1d857df4b1f82307e71d964b2f1",
+      "bytes": 155387,
+      "sha256": "87baa1f2e456ceb5f2ba1111afa8cf696b943f4738026cde7e0c6b6e40b83c85",
+      "viewed": true,
+      "note": "Actual graybox HUD, not final asset/device visual acceptance"
+    }
+  ]
+}

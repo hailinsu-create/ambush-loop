@@ -1,0 +1,148 @@
+{
+  "checks": 261,
+  "failures": 0,
+  "rows": [
+    {
+      "admitted": 64,
+      "case": "actual66-tools-same-tick",
+      "first_seq": 16,
+      "last_seq": 63,
+      "next_seq": 64,
+      "original_events": 2,
+      "retained": 48,
+      "scope": "actual throws/fuses; granted inventory, explicit positions and retention clock fixture; no performance claim"
+    },
+    {
+      "case": "actual-unspent-tool-next-wave-api",
+      "effect": {
+        "attempt_id": "06d7df3bda95f9ef3db76c2b44ea1361",
+        "clock_domain": "playback",
+        "clock_tick": 50,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "06d7df3bda95f9ef3db76c2b44ea1361:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 246.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "06d7df3bda95f9ef3db76c2b44ea1361:tool:0",
+        "variant": "stiel",
+        "victims": [],
+        "wave_id": 1
+      },
+      "run_after": 6,
+      "run_before": 5,
+      "scope": "original next-wave API fixture, not completed full battle"
+    },
+    {
+      "case": "actual-terminal-wipe",
+      "effect": {
+        "attempt_id": "769eb45cf77e83cc77ff3af8a18b3f41",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "769eb45cf77e83cc77ff3af8a18b3f41:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 86.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "769eb45cf77e83cc77ff3af8a18b3f41:tool:0",
+        "variant": "stiel",
+        "victims": [
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 1,
+            "pos": "(80.0, 80.0)"
+          },
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 2,
+            "pos": "(80.0, 80.0)"
+          },
+          {
+            "damage": 1.0,
+            "group": "ops",
+            "hp_after": 0.0,
+            "hp_before": 1.0,
+            "id": 3,
+            "pos": "(80.0, 80.0)"
+          }
+        ],
+        "wave_id": 0
+      },
+      "snapshot_tick": 50,
+      "terminal_playback_tick": 50
+    },
+    {
+      "case": "actual-old-raw-neutral-schema1",
+      "events": 34,
+      "raw_unchanged": true,
+      "sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12"
+    },
+    {
+      "case": "actual-old-raw-neutral-yard",
+      "events": 30,
+      "raw_unchanged": true,
+      "sha256": "4e27b9af88ad72199489ee11e987e1ab0e8200c47bc963e831f4c9eb1883c164"
+    },
+    {
+      "case": "actual-old-raw-neutral-warehouse",
+      "events": 62,
+      "raw_unchanged": true,
+      "sha256": "cba97cc34446a384d1853a6b7c7224afbd32c5c456ee215fbf5afffdc0015cfd"
+    },
+    {
+      "case": "actual-old-raw-neutral-pump",
+      "events": 34,
+      "raw_unchanged": true,
+      "sha256": "e0faee3000b85ae795737dfd7b39e510e4a0670560d40a0a01890e5acfba2b46"
+    },
+    {
+      "case": "actual-old-raw-neutral-railcut",
+      "events": 45,
+      "raw_unchanged": true,
+      "sha256": "19919a17225308894332b5cf9a849b4bc004792afa02f3c5e27d25b0f08f9628"
+    },
+    {
+      "case": "actual-old-raw-neutral-depot",
+      "events": 40,
+      "raw_unchanged": true,
+      "sha256": "1720fe0dc83bfa2647d22c0dcc74b5bea35ac11db2ce25a141e3fb734d156d6d"
+    },
+    {
+      "case": "actual-old-raw-neutral-radio",
+      "events": 57,
+      "raw_unchanged": true,
+      "sha256": "69926921f672c941f66bc2885ba15e0484f37923e7addae0670047cae0653d22"
+    }
+  ],
+  "scope": "actual original tool callbacks with granted inventory/placed actors/direct APIs and explicit clock/corrupt-container fixtures; read-only authentic old logs. Structural source interface only; no full renderer/native normal/FINAL/A3/device acceptance",
+  "source_sha": "640a9840bb89012306017e5c01ea4e0452daba57"
+}

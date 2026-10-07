@@ -1,0 +1,28 @@
+{
+  "original_source_sha256": "f4291332d0869c153ab193769ea8cc8c2a5e4ab7c1b7c97587f45b6670deb25d",
+  "parts": [
+    {
+      "part": "alert",
+      "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-alert.gd",
+      "sha256": "65a76f5544f6317d143cefb8999b3f73b4cbf10fc6fb148666397d71ff166ba5"
+    },
+    {
+      "part": "paused_alert",
+      "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-paused_alert.gd",
+      "sha256": "ce7cf5ffb45d3085119835ed21f2364faea2577a1de789bbacd172430c272bb7"
+    },
+    {
+      "part": "replay",
+      "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-replay.gd",
+      "sha256": "f88b1a754e51ae56265976da64d2048de44b844628357d1423f9a9b0ba423e8a"
+    },
+    {
+      "part": "legal",
+      "path": "/tmp/pr15-web-controls/replay-touch-candidate-95daa-20261005/equipment-part-legal.gd",
+      "sha256": "6f24cb7c02c5b0d4a017da9190f2bdea08f10bc5463ae79682014fb80e2fff33"
+    }
+  ],
+  "max_each_s": 60,
+  "max_equipment_partition_package_s": 240,
+  "scope": "same original assertions/fixtures/handlers; only partition state loop lists and legal tail; no new runtime diff; original monolithic cap60 timeout remains failed; unique expected18+18+18+12=66"
+}

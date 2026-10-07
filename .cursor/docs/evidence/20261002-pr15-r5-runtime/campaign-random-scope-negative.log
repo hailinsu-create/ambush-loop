@@ -1,0 +1,49 @@
+TEST_RUN_ID=eebfad2382e84b9b9d12f8209c818cd5
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/eebfad2382e84b9b9d12f8209c818cd5/data
+TEST_ENTRY=campaign_replay_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/eebfad2382e84b9b9d12f8209c818cd5/data/godot/app_userdata/Ambush Loop run_id=eebfad2382e84b9b9d12f8209c818cd5
+ERROR: CAMPAIGN_REPLAY: yard complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:28)
+       [1] _run (res://scripts/campaign_replay_test.gd:45)
+       [2] _battle (res://scripts/campaign_replay_test.gd:119)
+CAMPAIGN_REPLAY_LEVEL yard waves=2 terminal=1283 events=34
+ERROR: CAMPAIGN_REPLAY: warehouse complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:28)
+       [1] _run (res://scripts/campaign_replay_test.gd:45)
+       [2] _battle (res://scripts/campaign_replay_test.gd:119)
+CAMPAIGN_REPLAY_LEVEL warehouse waves=2 terminal=1191 events=67
+ERROR: CAMPAIGN_REPLAY: pump complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:28)
+       [1] _run (res://scripts/campaign_replay_test.gd:45)
+       [2] _battle (res://scripts/campaign_replay_test.gd:119)
+CAMPAIGN_REPLAY_LEVEL pump waves=2 terminal=907 events=34
+ERROR: CAMPAIGN_REPLAY: railcut complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:28)
+       [1] _run (res://scripts/campaign_replay_test.gd:45)
+       [2] _battle (res://scripts/campaign_replay_test.gd:119)
+CAMPAIGN_REPLAY_LEVEL railcut waves=2 terminal=719 events=38
+ERROR: CAMPAIGN_REPLAY: depot complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:28)
+       [1] _run (res://scripts/campaign_replay_test.gd:45)
+       [2] _battle (res://scripts/campaign_replay_test.gd:119)
+CAMPAIGN_REPLAY_LEVEL depot waves=2 terminal=957 events=35
+ERROR: CAMPAIGN_REPLAY: radio complete multi-wave outcomes/events match at 30/60 FPS and 2x
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/campaign_replay_test.gd:28)
+       [1] _run (res://scripts/campaign_replay_test.gd:45)
+       [2] _battle (res://scripts/campaign_replay_test.gd:119)
+CAMPAIGN_REPLAY_LEVEL radio waves=3 terminal=1413 events=51
+CAMPAIGN_REPLAY_FAILED checks=10296 failures=6

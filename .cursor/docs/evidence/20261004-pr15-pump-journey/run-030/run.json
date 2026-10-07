@@ -1,0 +1,45 @@
+{
+  "source_sha": "03063234d40792f3b71454a0d3d2ca07905ae2b2",
+  "archived_at_utc": "2026-10-04T01:42:52.507670+00:00",
+  "argv": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-remaining-030-godot",
+    "first_visit_journey_test.gd",
+    "--render"
+  ],
+  "env": {
+    "AMBUSH_JOURNEY_START": "resume",
+    "AMBUSH_JOURNEY_SCOPE": "pump"
+  },
+  "actual_exit": 0,
+  "uuid": "5777ee8887964c7dbba55a7e13179be3",
+  "guard_passed": true,
+  "checks": 187,
+  "failures": 0,
+  "native_inputs": 65,
+  "script_errors": 0,
+  "engine_errors": 0,
+  "window": [
+    1280,
+    720
+  ],
+  "scale": 1.0,
+  "pngs": 13,
+  "records": [
+    {
+      "action": "archive actual native player battle and command recording",
+      "attempt": "894a6545a9d49ac514f40adbad264e06",
+      "level": "pump",
+      "path": "res://build/asset_review/pr15-runtime/native-player-pump-record.bin",
+      "playback_frames": 684,
+      "playback_schema": 2,
+      "playback_terminal_tick": 5088,
+      "sha256": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+      "raw_bytes": 9480140,
+      "archive": "native-player-pump-record.bin.gz",
+      "gzip_sha256": "271b6db376ab0c3bb3794646a2cb509984d356041d225631eb98d3d8fc1c0358"
+    }
+  ],
+  "classification": "Formal actual native title Continue from byte-identical b27 pump player save. Original SCOUT gear/cover/8deg MG turning/pack, default open door, real2wave ALERT+pause/SWEEP walking loot and authored ammo6 resupply, final extract WON and original Continue/handoff CTA/railcut2pages. 187/0 actual0 errors0, 13 native PNG. No automatic exhaustion pack refill observed; assigned only. No reference/grants/sim fast-forward. Only pump2waves and next teaching; remaining7waves/art/ears/device/performance/fullFX pending."
+}

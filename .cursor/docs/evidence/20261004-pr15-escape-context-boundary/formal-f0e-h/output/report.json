@@ -1,0 +1,1172 @@
+{
+  "captures": [],
+  "checks": 57,
+  "failures": 0,
+  "producer_source_sha": "877decb0ea14d6c3c0a833e4d6948c7ee549514f",
+  "raw_sha256": "cf77a08654aff89561723944176e38dcb7aa8b1b8d0a897cf77f39685b7a6c09",
+  "rows": [
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "original_third",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "invalid_fourth",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "invalid_stalled_playback",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "minimum_continuous",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1674,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "additional_phase_ticks",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1683,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "one_tick_short",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "backwards_playback",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "different_absolute_playback_offset",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 2675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "历史第1波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_yard_wave0_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 0
+        },
+        "level_id": "yard",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 0
+        },
+        "wave_id": 0
+      }
+    },
+    {
+      "advice": "历史第2波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_yard_wave1_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 1
+        },
+        "level_id": "yard",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 1
+        },
+        "wave_id": 1
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_yard_wave2_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_yard_wave-1_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第1波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_warehouse_wave0_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 0
+        },
+        "level_id": "warehouse",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 0
+        },
+        "wave_id": 0
+      }
+    },
+    {
+      "advice": "历史第2波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_warehouse_wave1_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 1
+        },
+        "level_id": "warehouse",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 1
+        },
+        "wave_id": 1
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_warehouse_wave2_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_warehouse_wave-1_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第1波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_pump_wave0_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 0
+        },
+        "level_id": "pump",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 0
+        },
+        "wave_id": 0
+      }
+    },
+    {
+      "advice": "历史第2波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_pump_wave1_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 1
+        },
+        "level_id": "pump",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 1
+        },
+        "wave_id": 1
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_pump_wave2_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_pump_wave-1_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第1波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_railcut_wave0_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 0
+        },
+        "level_id": "railcut",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 0
+        },
+        "wave_id": 0
+      }
+    },
+    {
+      "advice": "历史第2波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_railcut_wave1_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 1
+        },
+        "level_id": "railcut",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 1
+        },
+        "wave_id": 1
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_railcut_wave2_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_railcut_wave-1_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第1波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_depot_wave0_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 0
+        },
+        "level_id": "depot",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 0
+        },
+        "wave_id": 0
+      }
+    },
+    {
+      "advice": "历史第2波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_depot_wave1_of2",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 1
+        },
+        "level_id": "depot",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:1:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 1
+        },
+        "wave_id": 1
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_depot_wave2_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_depot_wave-1_of2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "历史第1波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_radio_wave0_of3",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 0
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:0:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 0
+        },
+        "wave_id": 0
+      }
+    },
+    {
+      "advice": "历史第3波 · 回波敌5 · 0.5→15.9s（出发→逃逸）；检查回波射界",
+      "case": "saved_radio_wave2_of3",
+      "expected_valid": true,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {
+        "actor_id": 5,
+        "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+        "escape": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:47",
+          "payload": {
+            "kind": "回",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 1675,
+          "position": "(1007.992, 623.1544)",
+          "schema": 2,
+          "seq": 47,
+          "target_id": -1,
+          "tick": 957,
+          "timeline_tick": 1671,
+          "type": "escape",
+          "wave_id": 2
+        },
+        "level_id": "radio",
+        "schema": 1,
+        "spawn": {
+          "actor_id": 5,
+          "attempt_id": "ac1700fe06d4bc8d39e3d06f5021ae27",
+          "event_id": "ac1700fe06d4bc8d39e3d06f5021ae27:2:43",
+          "payload": {
+            "kit": "echo",
+            "note": "灯塔回波",
+            "route": "echo"
+          },
+          "playback_schema": 2,
+          "playback_tick": 747,
+          "position": "(432.0, 112.0)",
+          "schema": 2,
+          "seq": 43,
+          "target_id": -1,
+          "tick": 30,
+          "timeline_tick": 744,
+          "type": "spawn",
+          "wave_id": 2
+        },
+        "wave_id": 2
+      }
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_radio_wave3_of3",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "saved_radio_wave-1_of3",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_context",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_context_schema_<null>",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_context_schema_99",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_context_schema_1",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_context_schema_0",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_spawn_<null>",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_spawn_1",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_spawn_99",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_spawn_2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_spawn_<null>",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_spawn_0",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_spawn_1",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_spawn_99",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_spawn_2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_escape_<null>",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_escape_1",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_escape_99",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "old_missing_unknown_event_schema_escape_2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_escape_<null>",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_escape_0",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_escape_1",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_escape_99",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    },
+    {
+      "advice": "旧情报 · 回波敌5 · 波次/入场未确认",
+      "case": "missing_unknown_playback_schema_escape_2",
+      "expected_valid": false,
+      "memory_unchanged": true,
+      "scope": "Explicit saved-context validator fixture over original877 values",
+      "validated": {}
+    }
+  ],
+  "scope": "Read-only actual877 archived escape/retry source; explicit corrupt context and cold3D formatter fixtures. No new battles/native input/fullrecord/FX/A3/FINAL/device acceptance.",
+  "source_sha": "f0ed44311775fa87ee63ebb911c7b11e12e65ab1",
+  "source_unchanged": true
+}

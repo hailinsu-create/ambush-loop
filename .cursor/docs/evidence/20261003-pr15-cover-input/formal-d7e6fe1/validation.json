@@ -1,0 +1,539 @@
+{
+  "archived_at_utc": "2026-10-04T00:04:04.414482+00:00",
+  "source_sha": "d7e6fe1fb3a9251ded4e3f0692d194880476cf07",
+  "production_fix_sha": "124057250ffbaf3390da7689fd968acf072ee1b4",
+  "game_tree": "2cbd46e0a089b595d87176caabe3cb5cf6475f5e",
+  "runs": [
+    {
+      "source_sha": "36144038025c3f78fe6f29bc436706cc194b2897",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-cover-361-godot",
+        "first_visit_journey_test.gd",
+        "--render"
+      ],
+      "env": {
+        "AMBUSH_JOURNEY_SCOPE": "yard"
+      },
+      "log": "negative-3614403/run.log",
+      "exit_file": "negative-3614403/run.exit",
+      "actual_exit": 1,
+      "uuid": "0d9af0d57bbc4fe199d4588c768f33e9",
+      "guard_passed": true,
+      "checks": 77,
+      "failures": 1,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "source_sha": "124057250ffbaf3390da7689fd968acf072ee1b4",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-cover-124-godot",
+        "first_visit_journey_test.gd",
+        "--render"
+      ],
+      "env": {
+        "AMBUSH_JOURNEY_SCOPE": "yard"
+      },
+      "log": "development-1240572-native/run.log",
+      "exit_file": "development-1240572-native/run.exit",
+      "actual_exit": 1,
+      "uuid": "4bb3df7a7645467898da18b6561f23bb",
+      "guard_passed": true,
+      "checks": 113,
+      "failures": 1,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "source_sha": "124057250ffbaf3390da7689fd968acf072ee1b4",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "cover_command_test.gd",
+        "--headless"
+      ],
+      "env": {},
+      "log": "formal-1240572/command-headless.log",
+      "exit_file": "formal-1240572/command-headless.exit",
+      "actual_exit": 0,
+      "uuid": "090fa5ed2ef24025be5d7f5050243d19",
+      "guard_passed": true,
+      "checks": 25,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "source_sha": "d7e6fe1fb3a9251ded4e3f0692d194880476cf07",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "cover_command_test.gd",
+        "--headless"
+      ],
+      "env": {},
+      "log": "formal-d7e6fe1/command-headless.log",
+      "exit_file": "formal-d7e6fe1/command-headless.exit",
+      "actual_exit": 0,
+      "uuid": "9187bb5b9b0e4b37a5e80e82b3c4b0d3",
+      "guard_passed": true,
+      "checks": 25,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "source_sha": "d7e6fe1fb3a9251ded4e3f0692d194880476cf07",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-full-godot",
+        "presentation_interaction_test.gd",
+        "--render"
+      ],
+      "env": {},
+      "log": "formal-d7e6fe1/interaction-render.log",
+      "exit_file": "formal-d7e6fe1/interaction-render.exit",
+      "actual_exit": 0,
+      "uuid": "d25af352c7754ca59efd70d488054181",
+      "guard_passed": true,
+      "checks": 38,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "source_sha": "d7e6fe1fb3a9251ded4e3f0692d194880476cf07",
+      "argv": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-cover-d7-godot",
+        "first_visit_journey_test.gd",
+        "--render"
+      ],
+      "env": {
+        "AMBUSH_JOURNEY_SCOPE": "yard"
+      },
+      "log": "formal-d7e6fe1/player-native.log",
+      "exit_file": "formal-d7e6fe1/player-native.exit",
+      "actual_exit": 0,
+      "uuid": "7bd62b208c484f9e87dc9a60230c7015",
+      "guard_passed": true,
+      "checks": 135,
+      "failures": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    }
+  ],
+  "packs": [
+    {
+      "receipt": "negative-3614403/pack-receipt.json",
+      "source_sha": "36144038025c3f78fe6f29bc436706cc194b2897",
+      "pack_sha256": "dd27fc48e1d78073152befc4681ce4880b4a2a28d05072544d9dce4853f75465",
+      "pack_bytes": 23414184,
+      "import_export_actual_exits": [
+        0,
+        0
+      ],
+      "shell_actual_exit": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "receipt": "development-1240572-native/pack-receipt.json",
+      "source_sha": "124057250ffbaf3390da7689fd968acf072ee1b4",
+      "pack_sha256": "ef098c34588093f42cb22f3f622481c2bfb4550e518942b2ba586acae2b29297",
+      "pack_bytes": 23419244,
+      "import_export_actual_exits": [
+        0,
+        0
+      ],
+      "shell_actual_exit": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    },
+    {
+      "receipt": "formal-d7e6fe1/pack-receipt.json",
+      "source_sha": "d7e6fe1fb3a9251ded4e3f0692d194880476cf07",
+      "pack_sha256": "3e3f112b67580b7717554db07976f61bab9a466ffc6ef58ce79d7ec405c5d709",
+      "pack_bytes": 23419468,
+      "import_export_actual_exits": [
+        0,
+        0
+      ],
+      "shell_actual_exit": 0,
+      "script_errors": 0,
+      "engine_errors": 0
+    }
+  ],
+  "images": [
+    {
+      "path": "negative-3614403/viewport_player_yard_1280_100_desktop_tutorial_page0.png",
+      "sha256": "d5e4006b0d161eb18999ee74b925e9719489edba084588a78f8d10a82ee6184c",
+      "bytes": 430988,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "negative-3614403/viewport_player_yard_1280_100_desktop_tutorial_page1.png",
+      "sha256": "66c1e87030084ccfd3ade8e0892c147a1b7e9767acd9a9bc2478de14ca016914",
+      "bytes": 408759,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "negative-3614403/viewport_player_yard_1280_100_desktop_tutorial_page2.png",
+      "sha256": "b0ae1bba673c16fecb116cd51ebd72f003c8ef17fe35fd3086d79c758de9dc78",
+      "bytes": 431874,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "negative-3614403/viewport_player_yard_1280_100_desktop_cover5_before.png",
+      "sha256": "a3ab9ff950b8a7ef6161a6532e7ca2f064729f0ffc8db5ae6b93ea80e2bbdefc",
+      "bytes": 1042040,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "negative-3614403/viewport_player_yard_1280_100_desktop_cover5_blocked.png",
+      "sha256": "4c026f567759685961ee0645f84894704cd43de86e6168cf50d14d8fc6072bca",
+      "bytes": 1042390,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_tutorial_page0.png",
+      "sha256": "0dd7bec5894cd3c6379c2bbc3e4eb8f2c1e3914cb4dac9807bf57a0afa2fea27",
+      "bytes": 430984,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_tutorial_page1.png",
+      "sha256": "17f7485ef393e042b040b426a71e14d256a83d9e3d403898b18041a751aed393",
+      "bytes": 408773,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_tutorial_page2.png",
+      "sha256": "e83bd01001a11ffa7d96643d081ce2240d15c2088381e7eb0d62449fc6beedc3",
+      "bytes": 431848,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_cover5_before.png",
+      "sha256": "b121c345cee611999d2a808cd26d5ae6e36d54fabdd76cedddeb6098726c9841",
+      "bytes": 1041949,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_armed_scout.png",
+      "sha256": "960db248ce9d0052079039f3dc7cd7298d8ce0ef8420175507d326cd9140a512",
+      "bytes": 1046629,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_wave0_alert.png",
+      "sha256": "d52f10f126b1ce292528247454f84e33d626c77ef30014615fb63f4cc61e93cc",
+      "bytes": 996670,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_wave0_sweep.png",
+      "sha256": "9251e2be43b851d9145e25d1a667b7d6db9e16c6ed5830b6abc94aa8645948cb",
+      "bytes": 1026355,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_wave1_alert.png",
+      "sha256": "2659165340477ffa61eab33f5aaf9244a770c90d803856a9cdb6ff7786021e48",
+      "bytes": 996438,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_wave1_sweep.png",
+      "sha256": "458af0fa833c9f30c83d33a5164e1d92342488ef2fc01fc1cc024f0631955f7f",
+      "bytes": 1029184,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "development-1240572-native/viewport_player_yard_1280_100_desktop_won.png",
+      "sha256": "edc69be78f48b9fd0dad19aecf1b09f847fe5809c44050b6acb76b364e8e8a8d",
+      "bytes": 700311,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_tutorial_page0.png",
+      "sha256": "c2c4ed3ec29ac729954387563359ef726e55cc76aed1c3ca64d60258f9a73a28",
+      "bytes": 430942,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_tutorial_page1.png",
+      "sha256": "1990cfeba3c73a62a170902a4558d78c659f3c75c9fac2d2f85ad26a0b45500a",
+      "bytes": 408739,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_tutorial_page2.png",
+      "sha256": "ad93117e48fdfda0af3551a0e701b066a0b442db8402c7e06627f2e88910910b",
+      "bytes": 431883,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_cover5_before.png",
+      "sha256": "4dd319dd629ce455839ffb19b0f1fa5492d6c249d79272410f1b2d80ea7b155c",
+      "bytes": 1042336,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_armed_scout.png",
+      "sha256": "cfebb4ffc591a034c53bd3f9ca8420d87a80613bf79a2f15a38096e9f92b17b2",
+      "bytes": 1046827,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_wave0_alert.png",
+      "sha256": "a2985c144576e8d6a91b449244e2cfb93ecaa81be4081c8bfb42979df95e0094",
+      "bytes": 996789,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_wave0_sweep.png",
+      "sha256": "f94b36ecf066f07bbc451082c3f51f7cd93ae04393163b2dca0b698d819a9aec",
+      "bytes": 1026582,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_wave1_alert.png",
+      "sha256": "1ae9016a0103c24c9db6e20d3a5cd2b705a669552c69d70dd8173d1011168e06",
+      "bytes": 996395,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_wave1_sweep.png",
+      "sha256": "2795b43f56e35eb066df0238620e0916db678ad5340ab53f8c560e8bf088c1dd",
+      "bytes": 1029882,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_won.png",
+      "sha256": "865d9dce15212d7ca75636c6520fe2ba6962be9276671062a861df37203656d5",
+      "bytes": 700304,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_yard_1280_100_desktop_next_night_handoff.png",
+      "sha256": "85accb54caf7cb9901d9ee85a657cb671f131c64f65621e3dc92fb5c9a04d48d",
+      "bytes": 192552,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_warehouse_1280_100_desktop_tutorial_page0.png",
+      "sha256": "d96c5ce2b683362d0cd311edf8f5a4a4d5853d39cb70f6a1fb48bf2f82673e99",
+      "bytes": 424855,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_warehouse_1280_100_desktop_tutorial_page1.png",
+      "sha256": "ea9b8c8907bf923af54afc61e1adcb3e4b2aed00f933dd0a68a6b6fb343034e9",
+      "bytes": 418085,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    },
+    {
+      "path": "formal-d7e6fe1/viewport_player_warehouse_1280_100_desktop_tutorial_page2.png",
+      "sha256": "196e439c857868c68e11c034c80e58d8c9d2c14af89531479889a85bfd31f2ed",
+      "bytes": 428567,
+      "size": [
+        1280,
+        720
+      ],
+      "capture_source": "DisplayServer.screen_get_image native Window crop"
+    }
+  ],
+  "formal_images_actually_viewed": [
+    "viewport_player_yard_1280_100_desktop_armed_scout.png",
+    "viewport_player_yard_1280_100_desktop_wave0_alert.png",
+    "viewport_player_yard_1280_100_desktop_wave1_sweep.png",
+    "viewport_player_yard_1280_100_desktop_won.png",
+    "viewport_player_yard_1280_100_desktop_next_night_handoff.png",
+    "viewport_player_warehouse_1280_100_desktop_tutorial_page2.png"
+  ],
+  "negative_images_actually_viewed": [
+    "viewport_player_yard_1280_100_desktop_cover5_before.png",
+    "viewport_player_yard_1280_100_desktop_cover5_blocked.png"
+  ],
+  "development124_images_actually_viewed": [
+    "viewport_player_yard_1280_100_desktop_armed_scout.png",
+    "viewport_player_yard_1280_100_desktop_wave0_alert.png",
+    "viewport_player_yard_1280_100_desktop_wave1_sweep.png",
+    "viewport_player_yard_1280_100_desktop_won.png"
+  ],
+  "formal_native_input_count": 32,
+  "formal_native_window": [
+    1280,
+    720
+  ],
+  "formal_content_scale_factor": 1.0,
+  "actual_yard_waves": [
+    450,
+    225
+  ],
+  "actual_yard_terminal_tick": 675,
+  "actual_yard_events": 27,
+  "actual_original_progress": "warehouse",
+  "synthetic_interaction_test_is_OS_touch": false,
+  "environment": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "rendering": "gl_compatibility llvmpipe",
+    "private_display": ":112",
+    "own_Godot_remaining": [],
+    "own_Xorg_pid": 76864,
+    "own_Xorg_actual_exit": 0,
+    "raw_xorg_gzip_sha256": "13e091bc5f794c7ddbd52a2345a42fd5d6c48ee8904bfaedafb93708dbd66f21",
+    "raw_xorg_uncompressed_sha256": "39f8afb4ccd80263cc1e37adc0546b3cfb4afc49cfb45cdc7ec8d2cc14b5d531"
+  },
+  "scope": "Normal fresh original title/main/teaching/walking/search/deploy/alarm/pause/two-wave SWEEP/extract/WON/handoff/tutorial, source-derived strategy; no grants or reference/vacuum helpers",
+  "unverified": [
+    "remaining five missions/eleven waves",
+    "SWEEP actual looting/resupply",
+    "depot/radio native tool selection and walk-near-mine",
+    "independent cover closure",
+    "full3D FX",
+    "A3 budgets and device performance",
+    "art acceptance",
+    "ears45cue/6soundscapes",
+    "same-candidate final fullsmoke/APK"
+  ],
+  "parent_independent_text_QA": {
+    "source_sha": "ddec86eacc051e0955164ee3f26d288a25aaade8",
+    "status": "P2-R1 scoped CLOSED; no new P1/P2",
+    "original_checks": [
+      6,
+      8
+    ],
+    "extended_checks": [
+      7552,
+      7560
+    ],
+    "callbacks_each": 128,
+    "all_actual_exits": 0,
+    "all_engine_errors": 0,
+    "ordinary_UI_source_switch": "UNPROVEN",
+    "evidence_authority": "parent thread01a0efe8-604e-7249-8093-d7921d952020 actual result report; independent artifact not read or rerun in this workspace",
+    "author_counts_kept_separate": true
+  }
+}

@@ -1,0 +1,4568 @@
+{
+  "schema": 2,
+  "seed": 194407,
+  "generator_sha256": "8aac9cb0c089b1a5959e3158d5554993ab93266eecf61142c3a7710139e43601",
+  "firearm_contract_sha256": "03494cadfe753c2916c9e74f8a5061cce2dad9a354ba093ffa59bafad92e29bd",
+  "canonicalizer_sha256": "203d95edad99d5221ffa956cf36f7554175369403dc4df115113774ad6182f5f",
+  "assets": [
+    {
+      "asset_id": "operator_rifle",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        1.842,
+        0.6285
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/operator_rifle_lod0.glb",
+          "sha256": "03cb85675413b1921afd7aa69e85aeee822f0a4974dd32ad43fd1b156c26e561",
+          "triangles": 5846,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_rifle_lod1.glb",
+          "sha256": "ba65bec487122595e9c94a9e210777a653036271ce86da0650f80668970a39f5",
+          "triangles": 2852,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_rifle_lod2.glb",
+          "sha256": "b81afbdb7167aa97b7856530f642a4a27b369bfb68c34ed804010970e44e9749",
+          "triangles": 1668,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "operator_mg",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        1.842,
+        0.6285
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/operator_mg_lod0.glb",
+          "sha256": "d8bc5f6a88a0617f015525d08ac096dfceddaedde3baee9ff34ff5b1f9866e63",
+          "triangles": 6210,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_mg_lod1.glb",
+          "sha256": "bc538bf63abc35be5e50c8699aa3c57cb8687d812cb5737f197ba477a7594a5b",
+          "triangles": 3216,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_mg_lod2.glb",
+          "sha256": "b3218e5dd2d553ccba65b2ddec1b55471fb9650c711474e6ba020595bb79e1bb",
+          "triangles": 1680,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "operator_scout",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        1.838,
+        0.6285
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/operator_scout_lod0.glb",
+          "sha256": "7f63965700d57d89c1f2c2e8aa3fa2b3a670f8407440e6c93dc33c56d6c9a423",
+          "triangles": 5750,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_scout_lod1.glb",
+          "sha256": "86228cbfd619aac7a5bade4496ae0bfeef31534e2abf1d3b96bb01840d4aaf56",
+          "triangles": 2752,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/operator_scout_lod2.glb",
+          "sha256": "eb6fbe31c4ead2e850f24be057cb5b1d512c56b550213b8f4df57be3f6184179",
+          "triangles": 1548,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_patrol",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        1.842,
+        0.632
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_patrol_lod0.glb",
+          "sha256": "94ab9f3dd7b4ce5e4ac61d78e1df3964f537fd7313078a1a89194e8a1e810054",
+          "triangles": 5902,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_patrol_lod1.glb",
+          "sha256": "625a5ed949b0c1ddf63469767dbc012a15f24a7a84d2ed43130efbfeb2ceb19c",
+          "triangles": 2884,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_patrol_lod2.glb",
+          "sha256": "c73a2b26d0ab0f261f0c94beae2fcc2674a0ae5944533cf287b0db7b5b7195a0",
+          "triangles": 1700,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_flank",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        1.824,
+        0.6285
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_flank_lod0.glb",
+          "sha256": "a55d0831b42e5b5c549c2ff17508056ac2f6e151af82ad0480dff77c24d4d7fe",
+          "triangles": 5756,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_flank_lod1.glb",
+          "sha256": "eccd1d2972ef4e023be412f55daa1a11051a10415fb6ded8e1f9b4c8f6232fe5",
+          "triangles": 2740,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_flank_lod2.glb",
+          "sha256": "e7cef85b331b8b01583a9fb1c4ebfea1e5563fbbefcc1f552428c56d855095f2",
+          "triangles": 1548,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_sneak",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        1.866,
+        0.6285
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_sneak_lod0.glb",
+          "sha256": "91e28a164ca9b3745d206dffbe58900885ab5ff9fa23731867084828d2243936",
+          "triangles": 5842,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_sneak_lod1.glb",
+          "sha256": "156704dcc9dffc7124655be83fba44f24dc24265720c15d3d7ff4fcacf69051c",
+          "triangles": 2788,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_sneak_lod2.glb",
+          "sha256": "a023d858321bede9ef7040cbd0706081aa03f1c970ecbd035af23d7eaf8596cb",
+          "triangles": 1604,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "enemy_radio",
+      "category": "character",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.6328,
+        2.15,
+        0.6365
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/enemy_radio_lod0.glb",
+          "sha256": "2e77e67e12df59c1f699bd74e95f76431c8ca145629de22601a556e743924dda",
+          "triangles": 5878,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_radio_lod1.glb",
+          "sha256": "bd35008776c8a78a9ad52c183f296504f45435bb4ad37153f4764411d1b6d5f5",
+          "triangles": 2884,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/enemy_radio_lod2.glb",
+          "sha256": "43cb3dbe7890608345068afd60fd8b6c5b94bd11254ea82661582f1762019401",
+          "triangles": 1700,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "clavicle.L",
+        "upper_arm.L",
+        "forearm.L",
+        "hand.L",
+        "thigh.L",
+        "shin.L",
+        "foot.L",
+        "clavicle.R",
+        "upper_arm.R",
+        "forearm.R",
+        "hand.R",
+        "thigh.R",
+        "shin.R",
+        "foot.R"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "walk",
+          "duration": 0.9,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "pickup",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "death",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "crouch",
+          "duration": 2.0,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "crouch_walk",
+          "duration": 1.1333333333333333,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "deploy",
+          "duration": 1.2666666666666666,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "hit",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "haul",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "ready_pistol",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_pistol",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_pistol",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_pistol",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_rifle",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_rifle",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_rifle",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_rifle",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_smg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_smg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_smg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_smg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_thompson",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_thompson",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_thompson",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_thompson",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_mg",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_mg",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_mg",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_mg",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "ready_scout",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "aim_scout",
+          "duration": 1.8,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "fire_scout",
+          "duration": 0.23333333333333334,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "raise_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "lower_scout",
+          "duration": 0.3,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1911",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_luger",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_m1_garand",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_thompson",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mp40",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_bar",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_mg42",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_springfield",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "reload_contact_kar98k_zf",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "utility_ready",
+          "duration": 2.4,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "knife_stab",
+          "duration": 0.8,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "grenade_throw",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "decoy_place",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_grab",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_drag",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_release",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_prone",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_dragged",
+          "duration": 1.2,
+          "loop": true,
+          "root_motion": false
+        },
+        {
+          "name": "death_prone",
+          "duration": 1.2,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lift",
+          "duration": 1.0,
+          "loop": false,
+          "root_motion": false
+        },
+        {
+          "name": "corpse_lower",
+          "duration": 0.7,
+          "loop": false,
+          "root_motion": false
+        }
+      ],
+      "sockets": {
+        "weapon_hand": {
+          "bone": "hand.R",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "support_hand": {
+          "bone": "hand.L",
+          "position_bone_local_m": [
+            0,
+            0.035,
+            0
+          ],
+          "rotation_bone_local_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "sight_eye": {
+          "bone": "head",
+          "position_bone_local_m": [
+            0.037,
+            0.139,
+            -0.106
+          ]
+        }
+      },
+      "lod_triangle_budget": [
+        8000,
+        4000,
+        1800
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "m1911",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.035,
+        0.1648,
+        0.2095
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/m1911_lod0.glb",
+          "sha256": "7bdc45c60c1dc8578225d139d03c5d19e3590aae51b928ade75ebf3a33445942",
+          "triangles": 352,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/m1911_lod1.glb",
+          "sha256": "6d7e85f1063d6ffbe526aeca2ccd2d8ca0f236ce60a721a104d2c001746b4390",
+          "triangles": 116,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.035,
+          -0.15
+        ],
+        "support_hand": null,
+        "pose_support": [
+          -0.035,
+          -0.035,
+          0
+        ],
+        "sight": [
+          0,
+          0.046,
+          -0.04
+        ],
+        "reload_contact": [
+          0,
+          -0.112,
+          0.015
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "luger",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.035,
+        0.1808,
+        0.2395
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/luger_lod0.glb",
+          "sha256": "6cf09c54b8dbd11294bd12e687c576ef28dda777ba8d2f911c7bced32e4173b4",
+          "triangles": 396,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/luger_lod1.glb",
+          "sha256": "b03f8d017083a240291eaee0d31e8f657444a8692e299f7f3c89883aa9103b7e",
+          "triangles": 128,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.035,
+          -0.18
+        ],
+        "support_hand": null,
+        "pose_support": [
+          -0.035,
+          -0.035,
+          0
+        ],
+        "sight": [
+          0,
+          0.054,
+          -0.025
+        ],
+        "reload_contact": [
+          0,
+          -0.112,
+          0.015
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "m1_garand",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.077,
+        0.195,
+        1.106
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/m1_garand_lod0.glb",
+          "sha256": "b4337e65dc1587fcabd5cefe579ebab33f5b4bbf481df94d649ea2df16125d5f",
+          "triangles": 1124,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/m1_garand_lod1.glb",
+          "sha256": "72c09386588d7734431caf8a1730485e8b23db0d755e29ee08727e22e74cb76b",
+          "triangles": 340,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8250000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.077,
+          -0.055
+        ],
+        "reload_contact": [
+          0,
+          0.074,
+          -0.035
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "kar98k",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.1104,
+        0.187,
+        1.116
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/kar98k_lod0.glb",
+          "sha256": "66f237f36d5233cba00497797ed7dfedc9d3ecee5ad21233a822858e3423cd97",
+          "triangles": 1164,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/kar98k_lod1.glb",
+          "sha256": "d7d17dff87ca4f7a12c5d13445d674546f92389dafa9293cc52743328e0b5c96",
+          "triangles": 352,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8350000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.077,
+          -0.055
+        ],
+        "reload_contact": [
+          0,
+          0.074,
+          -0.035
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "thompson",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.08,
+        0.236,
+        0.839
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/thompson_lod0.glb",
+          "sha256": "b061f45acd99f529f4f39131e9e245d5a6a44fe447086991523c4cfbd9e1847b",
+          "triangles": 1068,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/thompson_lod1.glb",
+          "sha256": "127a77db35b5fa18a771bf94956be0b1f8106f50872261e2a2c17188c83dd4ec",
+          "triangles": 340,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.49999999999999994
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          -0.05,
+          -0.29
+        ],
+        "sight": [
+          0,
+          0.077,
+          -0.055
+        ],
+        "reload_contact": [
+          -0.045,
+          -0.072,
+          -0.09
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required",
+      "legacy_r3_lods": [
+        {
+          "path": "art/v2/replay_r3/thompson_lod0.glb",
+          "sha256": "84ec7e572a363714b6b9820e36149d9fd81096226383a8ffb30d25ff5e8a3834"
+        },
+        {
+          "path": "art/v2/replay_r3/thompson_lod1.glb",
+          "sha256": "bdb5caf36061972fa0a652ee58b33d1e3c23c3926bd71bd7b25fd1232bd236e1"
+        }
+      ]
+    },
+    {
+      "asset_id": "mp40",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.066,
+        0.2485,
+        0.857
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/mp40_lod0.glb",
+          "sha256": "0907d81c74a2a6608b3bbe57f37430d198b039b024b5e092cd28015fd420416e",
+          "triangles": 1004,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/mp40_lod1.glb",
+          "sha256": "78c0f30dcca4e17dea12dd98784a228395903b673a5710820e01bc9b484c7147",
+          "triangles": 336,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.51
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.077,
+          -0.055
+        ],
+        "reload_contact": [
+          0,
+          -0.158,
+          -0.09
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "bar",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.2994,
+        0.2485,
+        1.219
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/bar_lod0.glb",
+          "sha256": "21584c559829563824ba31f59f0463387a918024e997523e70c50dd74866d7fa",
+          "triangles": 1048,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/bar_lod1.glb",
+          "sha256": "eec005af785a63672a07b9b8f56f04b90ddf4940440c608f0a1ace17d986b0ff",
+          "triangles": 348,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8799999999999999
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.077,
+          -0.055
+        ],
+        "reload_contact": [
+          0,
+          -0.158,
+          -0.09
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required",
+      "legacy_r3_lods": [
+        {
+          "path": "art/v2/replay_r3/bar_lod0.glb",
+          "sha256": "c986fbefeb77214f41f04841ebd66335ed4f0248e50e198ab32e25423567ab68"
+        },
+        {
+          "path": "art/v2/replay_r3/bar_lod1.glb",
+          "sha256": "edadeb7e566c460e5255f2704a2b3b550dd6b9eb57c83a6c571c1215833a2d7b"
+        }
+      ]
+    },
+    {
+      "asset_id": "mg42",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.2994,
+        0.2485,
+        1.239
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/mg42_lod0.glb",
+          "sha256": "c4e52b457fd569b21a4cf2c623bd49fd6b11ca0c080f54fbb12bd37d239b1f61",
+          "triangles": 1596,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/mg42_lod1.glb",
+          "sha256": "1a572f9b0241472bf76d9ca0b092a835b4d6b849ceeee019daf5a33b92c6ae3c",
+          "triangles": 576,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8999999999999999
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.077,
+          -0.055
+        ],
+        "reload_contact": [
+          -0.029,
+          0.045,
+          -0.06
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required",
+      "legacy_r3_lods": [
+        {
+          "path": "art/v2/replay_r3/mg42_lod0.glb",
+          "sha256": "d2ab09203f76df93da9b3df672974c93a7987c848d1cf8f151f231ec04f85537"
+        },
+        {
+          "path": "art/v2/replay_r3/mg42_lod1.glb",
+          "sha256": "a111328803a967ae9aac5452f4c22bbf28ac102b498b76ca338b667fe605e6bc"
+        }
+      ]
+    },
+    {
+      "asset_id": "springfield",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.1104,
+        0.238,
+        1.126
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/springfield_lod0.glb",
+          "sha256": "6e20861b04abc899ad703dafe82d1bce398c637924d0a8ed6ed0080a7b7c087e",
+          "triangles": 1268,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/springfield_lod1.glb",
+          "sha256": "461c7b1ef65739ae433221860a9944be2ff64cc38df9416d1f60c8253aafba20",
+          "triangles": 428,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8450000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.12,
+          0.048
+        ],
+        "reload_contact": [
+          0.07,
+          0.053,
+          -0.046
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "kar98k_zf",
+      "category": "weapon",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.1104,
+        0.238,
+        1.116
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/kar98k_zf_lod0.glb",
+          "sha256": "83cb584cbb4a3f80e589dd4882d07482e3891e17784aa6b2038ecef20c79d965",
+          "triangles": 1356,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/kar98k_zf_lod1.glb",
+          "sha256": "45fa2708488d84f93d8237a8809c11262c79b13b3d1d4d1d4985baff0ef1b850",
+          "triangles": 452,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "muzzle": [
+          0,
+          0.045,
+          -0.8350000000000001
+        ],
+        "support_hand": [
+          0,
+          0,
+          -0.26
+        ],
+        "pose_support": [
+          0,
+          0,
+          -0.26
+        ],
+        "sight": [
+          0,
+          0.12,
+          0.048
+        ],
+        "reload_contact": [
+          0.07,
+          0.053,
+          -0.046
+        ]
+      },
+      "lod_triangle_budget": [
+        3000,
+        1500
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "knife",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "weapon grip",
+      "logic_id": null,
+      "dimensions_m": [
+        0.072,
+        0.023,
+        0.3105
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/knife_lod0.glb",
+          "sha256": "d6030487b5906cc4e95e091f2657f749aad03ad25d2c8f8fcb6da5fb8f4e9ea3",
+          "triangles": 104,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/knife_lod1.glb",
+          "sha256": "359c233dc295f5a054723b7b25f04112c11abe2c4fe482f7402216a04eadb092",
+          "triangles": 40,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0,
+          0
+        ],
+        "tip": [
+          0,
+          0,
+          -0.238
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "grenade",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.086,
+        0.146,
+        0.0885
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/grenade_lod0.glb",
+          "sha256": "4d293048d9576cb243e39740869348e1917898e204304c966b2d79267c2d0157",
+          "triangles": 368,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/grenade_lod1.glb",
+          "sha256": "7dc64818ad2be21fc8db3d4bd31700cb6596e723db178397a497bd6cf9ee8b5c",
+          "triangles": 108,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0.06499999457597733,
+          0
+        ],
+        "fuse": [
+          0,
+          0.14599999457597732,
+          0
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "mine",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.27,
+        0.075,
+        0.27
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/mine_lod0.glb",
+          "sha256": "bddb254756887e327e7155b5b9f211668fc809e9a715444ad9aaad7ec455ad48",
+          "triangles": 168,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/mine_lod1.glb",
+          "sha256": "9ad8f1445c0208f74726ecb2c8b87ffe2971c80ea0389226237a3f3cdf662e73",
+          "triangles": 124,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0.115,
+          0.07500000022351742,
+          0
+        ],
+        "pressure_plate": [
+          0,
+          0.07500000022351742,
+          0
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "decoy",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.16,
+        0.34,
+        0.23
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/decoy_lod0.glb",
+          "sha256": "a7297a5a04cf08110730c6d50b54c0e8b08ccf47652f0571e4966d0a9e45242f",
+          "triangles": 280,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/decoy_lod1.glb",
+          "sha256": "ceaaa5a035e83c2a54ab06d03b42b8926be4f72536bc5c672fe12e52cc5d6695",
+          "triangles": 116,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0,
+          0.15500000208616257,
+          0.06
+        ],
+        "speaker": [
+          0,
+          0.11200000208616256,
+          -0.02
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    },
+    {
+      "asset_id": "ammo_pack",
+      "category": "tool",
+      "source": "ArtSource/v2/build_actors.py",
+      "editable_source": "ArtSource/v2/actors.blend",
+      "tool": "Blender 4.3.2",
+      "provenance": "Original authored geometry, material fields, rig and analytic animation; no third-party assets",
+      "usage": "Project-authored; same repository terms; generic equipment without insignia",
+      "unit": "metre",
+      "runtime_axes": "+Y up, -Z forward",
+      "origin": "ground centre",
+      "logic_id": null,
+      "dimensions_m": [
+        0.33,
+        0.289,
+        0.211
+      ],
+      "lods": [
+        {
+          "path": "art/v2/models/ammo_pack_lod0.glb",
+          "sha256": "b936928ac19373a903c1ce7a28ff6c55ebbff85845b1c37304a5d2253a93d9a6",
+          "triangles": 264,
+          "surfaces": 1
+        },
+        {
+          "path": "art/v2/models/ammo_pack_lod1.glb",
+          "sha256": "ab629d3861b644228cd252d684394a0b51a44636ead4f6f4296dba13b39a6761",
+          "triangles": 72,
+          "surfaces": 1
+        }
+      ],
+      "materials": [
+        "shared actor 1024px albedo/normal/ORM atlas"
+      ],
+      "collision": "visual_only",
+      "skeleton": [],
+      "animations": [],
+      "sockets": {
+        "grip": [
+          0.06,
+          0.2800000041723251,
+          0
+        ],
+        "support_hand": [
+          -0.06,
+          0.2800000041723251,
+          0
+        ]
+      },
+      "lod_triangle_budget": [
+        2000,
+        1000
+      ],
+      "lod_generation": "Constructive tessellation and feature tiers; no Decimate",
+      "validation_scene": "res://ArtSource/v2/actor_acceptance/review.gd",
+      "status": "repaired candidate; acceptance report required"
+    }
+  ],
+  "textures": [
+    {
+      "path": "art/v2/textures/actor_atlas_albedo.png",
+      "sha256": "9739afae52b182db5c2e9689ff152f7fd3d1c0395d9e2438c2d25b900e33f2c5"
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_normal.png",
+      "sha256": "3a92856dcfe0094bc8c470e2935672041d10d95ff00a4f13eff5516a6f68ab8a"
+    },
+    {
+      "path": "art/v2/textures/actor_atlas_orm.png",
+      "sha256": "25ddbcfd90ba98e86d63a933ff5544e64c7b9dda8f54e815a422406c47c31483"
+    }
+  ],
+  "source_commit": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+  "evidence_commit": "ebedb829e3263abbeb6dd266905f24a3869fa281",
+  "status": "R5_TOOL_RUNTIME_INTEGRATION_IN_PROGRESS_CORPSE_AND_FINAL_ART_PENDING",
+  "legacy_r3_revision": "00b270863ba5a2cd5425abf2a31e78965c72ae45",
+  "legacy_clip_count": 12,
+  "legacy_compatibility": "21 character geometry/rest/bind and 252 original clips identical; original sockets unchanged; six old rear-grip gun meshes preserved for R3 history",
+  "utility_contract_sha256": "440571311fff6590d5fc258ab2c50dffc9062b9e20f664f2e981e0d999bdbc8d",
+  "legacy_r4_revision": "194d9c41aaddbf014f05c70c14d40c09e6d8131b",
+  "legacy_r4_clip_count": 52,
+  "legacy_r4_compatibility": "21 characters: 1092 old animation key sets and all bone/rest/bind/geometry/material/socket semantics unchanged; 30 equipment GLBs and three atlas textures byte-identical. New 12 optional clips only."
+}

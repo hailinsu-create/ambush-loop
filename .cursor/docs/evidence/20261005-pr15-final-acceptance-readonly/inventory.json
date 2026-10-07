@@ -1,0 +1,256 @@
+{
+  "status": "READ_ONLY_INVENTORY_PASS_ENGINE_WINDOW_HELD_BY_PARENT_QA",
+  "checked_at_utc": "2026-10-05T15:22:59.138757+00:00",
+  "reviewed_delivery": "6cbb71ade950238f9a55e1f2ec8c4c3285980cb4",
+  "production_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "command": "python3 - (hash six sealed raw files; compare their producer receipts/manifests; git rev-parse for eighteen pinned source blobs)",
+  "actual_exit": 0,
+  "engine_browser_http_export_profile_audio_runs_this_turn": 0,
+  "runtime_acceptance_created_this_turn": false,
+  "raw_records": [
+    {
+      "level": "yard",
+      "producer_source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+      "producer_game_tree": "4f49a7c9cb5a789fbb570bceb947eab7df2eb54a",
+      "producer_json": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/run/yard-producer.json",
+      "manifest": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/manifest.json",
+      "path": ".cursor/docs/evidence/20261005-pr15-fresh-web-yard-pause/run/yard-record.bin",
+      "bytes": 19025696,
+      "sha256": "e850bb81212393478617a06700e8a26ea293b7d46672c06c0d9c780c405815d5",
+      "schema_from_producer_receipt": 2,
+      "attempt_from_producer_receipt": "93a9671c444c749f102a04a728c963a5",
+      "terminal_from_producer_receipt": 12678,
+      "reason_from_producer_receipt": "win",
+      "binary_hash_check": "PASS",
+      "runtime_decode_this_turn": "NOT_RUN"
+    },
+    {
+      "level": "warehouse",
+      "producer_source": "dab870595175eed37a6d2a012bc69a76062d48b0",
+      "producer_game_tree": "4f49a7c9cb5a789fbb570bceb947eab7df2eb54a",
+      "producer_json": ".cursor/docs/evidence/20261005-pr15-web-warehouse-single-producer/run/warehouse-producer.json",
+      "manifest": ".cursor/docs/evidence/20261005-pr15-web-warehouse-single-producer/manifest.json",
+      "path": ".cursor/docs/evidence/20261005-pr15-web-warehouse-single-producer/run/warehouse-record.bin",
+      "bytes": 26554792,
+      "sha256": "28c90902016e3a0323081c756ddde215ea2ec228223147231eed7ef66af33266",
+      "schema_from_producer_receipt": 2,
+      "attempt_from_producer_receipt": "1289c65c34af63cf62707bf18ddc4cca",
+      "terminal_from_producer_receipt": 16102,
+      "reason_from_producer_receipt": "win",
+      "binary_hash_check": "PASS",
+      "runtime_decode_this_turn": "NOT_RUN"
+    },
+    {
+      "level": "pump",
+      "producer_source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "producer_game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+      "producer_json": ".cursor/docs/evidence/20261005-pr15-web-pump-producer/run/pump-producer.json",
+      "manifest": ".cursor/docs/evidence/20261005-pr15-web-pump-producer/manifest.json",
+      "path": ".cursor/docs/evidence/20261005-pr15-web-pump-producer/run/pump-record.bin",
+      "bytes": 11203052,
+      "sha256": "a0e5b232a001671ead8156e97e29f902796f81cd7669d925d66045064d5709cf",
+      "schema_from_producer_receipt": 2,
+      "attempt_from_producer_receipt": "f9bfc48ef5288e4bfb4305a942b73546",
+      "terminal_from_producer_receipt": 6178,
+      "reason_from_producer_receipt": "win",
+      "binary_hash_check": "PASS",
+      "runtime_decode_this_turn": "NOT_RUN"
+    },
+    {
+      "level": "railcut",
+      "producer_source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "producer_game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+      "producer_json": ".cursor/docs/evidence/20261005-pr15-web-railcut-producer/run-v2/railcut-producer.json",
+      "manifest": ".cursor/docs/evidence/20261005-pr15-web-railcut-producer/manifest.json",
+      "path": ".cursor/docs/evidence/20261005-pr15-web-railcut-producer/run-v2/railcut-record.bin",
+      "bytes": 15373004,
+      "sha256": "b50e1f115538933e2e1bdc86402817f1988e6bdbd77525308615c3a96e2bbd3f",
+      "schema_from_producer_receipt": 2,
+      "attempt_from_producer_receipt": "da8ada7d495e14f0a7e1cd3b71058fa6",
+      "terminal_from_producer_receipt": 7610,
+      "reason_from_producer_receipt": "win",
+      "binary_hash_check": "PASS",
+      "runtime_decode_this_turn": "NOT_RUN"
+    },
+    {
+      "level": "depot",
+      "producer_source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+      "producer_game_tree": "45b88482e867ddc8e6b0bfdaad4db32e9dc1ca85",
+      "producer_json": ".cursor/docs/evidence/20261005-pr15-web-depot-producer/run/depot-producer.json",
+      "manifest": ".cursor/docs/evidence/20261005-pr15-web-depot-producer/manifest.json",
+      "path": ".cursor/docs/evidence/20261005-pr15-web-depot-producer/run/depot-record.bin",
+      "bytes": 17939460,
+      "sha256": "02a8b05a334c4c83279e01d5f0d7323265e4da540baf31a1b900eac917e4368e",
+      "schema_from_producer_receipt": 2,
+      "attempt_from_producer_receipt": "1f32042b812907b6d833285e37ad9a5c",
+      "terminal_from_producer_receipt": 10137,
+      "reason_from_producer_receipt": "win",
+      "binary_hash_check": "PASS",
+      "runtime_decode_this_turn": "NOT_RUN"
+    },
+    {
+      "level": "radio",
+      "producer_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "producer_game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+      "producer_json": ".cursor/docs/evidence/20261005-pr15-web-radio-producer/run/radio-producer.json",
+      "manifest": ".cursor/docs/evidence/20261005-pr15-web-radio-producer/manifest.json",
+      "path": ".cursor/docs/evidence/20261005-pr15-web-radio-producer/run/radio-record.bin",
+      "bytes": 14263460,
+      "sha256": "fd78f1f500455777b3c97e7d4a3ab466d162538782387b4df9b11d1ab7225196",
+      "schema_from_producer_receipt": 2,
+      "attempt_from_producer_receipt": "1b581d1574f29d83f44f04032601b7f6",
+      "terminal_from_producer_receipt": 7390,
+      "reason_from_producer_receipt": "win",
+      "binary_hash_check": "PASS",
+      "runtime_decode_this_turn": "NOT_RUN"
+    }
+  ],
+  "blob_comparisons": [
+    {
+      "path": "ambush_loop/scripts/operator.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "d6666a821b2d6cac10ed46e993d7a92b22523161",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "d6666a821b2d6cac10ed46e993d7a92b22523161",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/raid/landmine.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "b8a15ef5d6888835d7c59ff59b5430deb49af06b",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "b8a15ef5d6888835d7c59ff59b5430deb49af06b",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/raid/weapon_catalog.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "d488158ae63890dc6aeb003eeefa12ccba4024d8",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "d488158ae63890dc6aeb003eeefa12ccba4024d8",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/asset_library.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "3219ad1ec9985bbfaa87a1e9468a22573484843d",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "3219ad1ec9985bbfaa87a1e9468a22573484843d",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/view_state.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "afb0ea4379c6a4b8044b72992ac63bcc065f0bf5",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "afb0ea4379c6a4b8044b72992ac63bcc065f0bf5",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/shot_fx_frame.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "ed54e2fa318c9c371ba1ffbd0cb919a9adb7b052",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "ed54e2fa318c9c371ba1ffbd0cb919a9adb7b052",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/shot_fx_pool.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "1a3b365c6d20fe7e3e32fe58bb45946674489c78",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "1a3b365c6d20fe7e3e32fe58bb45946674489c78",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/tool_fx_frame.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "e31ac81cb96c64e24f495dd545fb4884e62cf07d",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "e31ac81cb96c64e24f495dd545fb4884e62cf07d",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/tool_fx_pool.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "ac4d0d99434adc2e6697e9dd3f3ede7d735f8900",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "ac4d0d99434adc2e6697e9dd3f3ede7d735f8900",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/replay/battle_log.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "b9126afc5e27cab52964dbc7d8e098230c37bbf6",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "b9126afc5e27cab52964dbc7d8e098230c37bbf6",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/replay/replay_player.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "137066dea357d08fbf1c3a0aee756f3bb476a9a1",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "137066dea357d08fbf1c3a0aee756f3bb476a9a1",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/replay/visual_snapshot.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "b6a2bf4026edf2885b7637f0950df89878205902",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "b6a2bf4026edf2885b7637f0950df89878205902",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/replay/shot_fx_recording.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "65a6eac33fe01d90559f75d97ff09b5372c5acd9",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "65a6eac33fe01d90559f75d97ff09b5372c5acd9",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/replay/tool_fx_recording.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "b50e9a08e38b37657b068d86dea1913b307e4316",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "b50e9a08e38b37657b068d86dea1913b307e4316",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/sfx/audio_director.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "55dd21c1a1f7d2ecb9de7d3bdae1ac4b626305af",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "55dd21c1a1f7d2ecb9de7d3bdae1ac4b626305af",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/sfx/audio_assets.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "68acea43047dffa960fc269038a0786340471eeb",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "68acea43047dffa960fc269038a0786340471eeb",
+      "same": true
+    },
+    {
+      "path": "ambush_loop/scripts/main.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "9386773c0b13d0040f275c0e49649e4735555deb",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "3b9d12b599ea0619beb2ed764b1e774da8ef902e",
+      "same": false
+    },
+    {
+      "path": "ambush_loop/scripts/presentation/presenter_3d.gd",
+      "historical_source": "a42ea2d7b50e79ee4a954ec9859a7281c577c174",
+      "historical_git_blob": "8961ad06fd876b519b9ee774f1f1c0874f056d5b",
+      "current_source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+      "current_git_blob": "16638ebbd6164d57b861d76cd660af83c07b86bc",
+      "same": false
+    }
+  ],
+  "scope_limit": "SHA/byte/source inventory only; no Godot decode, timeline, rendered consumer, natural producer, FPS, human listening or device acceptance."
+}

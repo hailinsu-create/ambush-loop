@@ -1,0 +1,145 @@
+TEST_RUN_ID=b4d55a6ad60b468d977fff3852ac966c
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/b4d55a6ad60b468d977fff3852ac966c/data
+TEST_ENTRY=title_focus_keyboard_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/b4d55a6ad60b468d977fff3852ac966c/data/godot/app_userdata/Ambush Loop run_id=b4d55a6ad60b468d977fff3852ac966c
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue Quit ShiftTab2 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue Quit ShiftTab3 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue Quit ShiftTab4 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue navigate @Button@658 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue navigate @Button@658 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue navigate @Button@658 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue natural Tab reaches @Button@658
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue navigate StartButton keeps focus in top layer
+SCRIPT ERROR: Invalid access to property or key 'name' on a base object of type 'previously freed'.
+          at: _tab_to (res://scripts/title_focus_keyboard_test.gd:49)
+          GDScript backtrace (most recent call first):
+              [0] _tab_to (res://scripts/title_focus_keyboard_test.gd:49)
+              [1] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [2] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+SCRIPT ERROR: Invalid access to property or key '_mission' on a base object of type 'previously freed'.
+          at: _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+          GDScript backtrace (most recent call first):
+              [0] _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+              [1] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [2] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'start_btn' on a base object of type 'previously freed'.
+          at: _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+          GDScript backtrace (most recent call first):
+              [0] _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+              [1] _run (res://scripts/title_focus_keyboard_test.gd:171)
+              [2] _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+              [3] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [4] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'start_btn' on a base object of type 'previously freed'.
+          at: _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+          GDScript backtrace (most recent call first):
+              [0] _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+              [1] _run (res://scripts/title_focus_keyboard_test.gd:171)
+              [2] _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+              [3] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [4] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'start_btn' on a base object of type 'previously freed'.
+          at: _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+          GDScript backtrace (most recent call first):
+              [0] _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+              [1] _run (res://scripts/title_focus_keyboard_test.gd:171)
+              [2] _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+              [3] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [4] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'start_btn' on a base object of type 'previously freed'.
+          at: _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+          GDScript backtrace (most recent call first):
+              [0] _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+              [1] _run (res://scripts/title_focus_keyboard_test.gd:171)
+              [2] _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+              [3] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [4] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'start_btn' on a base object of type 'previously freed'.
+          at: _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+          GDScript backtrace (most recent call first):
+              [0] _brief_case (res://scripts/title_focus_keyboard_test.gd:91)
+              [1] _run (res://scripts/title_focus_keyboard_test.gd:171)
+              [2] _brief_case (res://scripts/title_focus_keyboard_test.gd:94)
+              [3] _key (res://scripts/title_menu_viewport_test.gd:25)
+              [4] _settle (res://scripts/title_focus_keyboard_test.gd:16)
+TITLE_FOCUS_FAIL focus_1280_200_touch_continue all child keyboard actions preserve original progress bytes
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu initial keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu Tab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu Tab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu Tab2 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu Tab3 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu Tab4 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu Tab5 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu ShiftTab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu ShiftTab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu ShiftTab2 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu ShiftTab3 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu ShiftTab4 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh main menu ShiftTab5 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh native Escape opens original Quit
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Tab selects Quit settings
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Return opens settings and closes Quit
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings opened keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings after five natural Tabs keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Return acts only on settings, without opening background mission
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings cycle has enabled focusable controls
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings cycle initial keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings cycle Tab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings cycle Tab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings cycle ShiftTab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings cycle ShiftTab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate @Button@1084 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate @Button@1084 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate @Button@1084 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Tab reaches @Button@1084
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh settings return keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh original Start opens mission list
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh original control becomes fully reachable /root/Title/@CanvasLayer@1028/@PanelContainer@1030/@MarginContainer@1031/@VBoxContainer@1032/BodyScroll/@VBoxContainer@1035/MissionRow0/@Button@1038 [P: (350.0, 12.0), S: (24.0, 68.0)]
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh original mission action opens briefing
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh brief return 0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate HelpButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Tab reaches HelpButton
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Return opens Help
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Help has enabled focusable controls
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Help initial keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Help Tab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Help Tab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Help ShiftTab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Help ShiftTab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate JournalButton keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Tab reaches JournalButton
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Return opens Journal
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Journal has enabled focusable controls
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Journal initial keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Journal Tab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Journal Tab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Journal ShiftTab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Journal ShiftTab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Quit has enabled focusable controls
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Quit initial keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Quit Tab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Quit Tab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Quit ShiftTab0 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh Quit ShiftTab1 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate @Button@1056 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate @Button@1056 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh navigate @Button@1056 keeps focus in top layer
+TITLE_FOCUS_FAIL focus_1600_100_touch_fresh natural Tab reaches @Button@1056
+Terminated

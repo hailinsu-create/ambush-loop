@@ -1,0 +1,351 @@
+{
+  "status": "PASS_BOUNDED_REFRESH_FIX_WITH_ORIGINAL_NEGATIVE",
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "negative_source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a",
+  "sealed_at": "2026-10-05T14:25:31.991358+00:00",
+  "files": [
+    {
+      "path": "browser_refresh_fixed.py",
+      "bytes": 7996,
+      "sha256": "bcfb94b274d46f47aa44da2ca3e2d4b4bc2284928f4cf6d09d08ff4c9d92cfd1"
+    },
+    {
+      "path": "browser_refresh_negative.py",
+      "bytes": 7954,
+      "sha256": "86e7b6707359f8fb00b738eaa674a86d716822c8dfe615d3b27bb4ce08fa1bb5"
+    },
+    {
+      "path": "browser_refresh_negative_v2.py",
+      "bytes": 8049,
+      "sha256": "b636d7b938cdc1074b624335bfb8f45ffc6dbb25ecdb0c16f7fff6b5ed28ded0"
+    },
+    {
+      "path": "refresh-fixed/Continue_correct_pump_SCOUT.png",
+      "bytes": 1029032,
+      "sha256": "daafcdf85008c8f0b7ddf5de9d60398aa74223d18b4b53101a0fed59b25b128e"
+    },
+    {
+      "path": "refresh-fixed/Title_after_refresh_campaign_and_audio.png",
+      "bytes": 110290,
+      "sha256": "8cd0b5a2f4d52f89c8e79022c665ed5df2842ddb2cb3464d97ca80aa538798c6"
+    },
+    {
+      "path": "refresh-fixed/Title_correct_continue_pointer.png",
+      "bytes": 112677,
+      "sha256": "8348cbbca625e7063a3f3279d9cf73912f588d8f49b152d8a5a884aa133a3536"
+    },
+    {
+      "path": "refresh-fixed/after-M.json",
+      "bytes": 8841,
+      "sha256": "f5fb0db23ba16e70eed3c42ac09f5e1749c6ee680c1fb29e1c019b409c6f6421"
+    },
+    {
+      "path": "refresh-fixed/after-original-Title-refresh.json",
+      "bytes": 3714,
+      "sha256": "23077b9bb5e258ddcde3f61d1977fb73dbcf1f64ad771b9d9b359eda56d70f91"
+    },
+    {
+      "path": "refresh-fixed/browser-inputs-before-refresh.json",
+      "bytes": 1180,
+      "sha256": "4c769fec2bc36a1271f3f528e085d5d887c16657afdb8f385457a6b8dba4b745"
+    },
+    {
+      "path": "refresh-fixed/cold-before.json",
+      "bytes": 8353,
+      "sha256": "29d1cc4322ac89d7a86242bbd599f226c02508532f6a9ace6cbcfb528f018504"
+    },
+    {
+      "path": "refresh-fixed/cold_history_before_first_space.png",
+      "bytes": 910680,
+      "sha256": "556fbd7719b3c4db86a764078678b4cbf0b9d98d977ecc8af3196414a0c3f3b1"
+    },
+    {
+      "path": "refresh-fixed/driver-actions.jsonl",
+      "bytes": 226897,
+      "sha256": "5d8c5eb3313562439aed15cc73b4585a083ecaba37323286f67b963788325950"
+    },
+    {
+      "path": "refresh-fixed/http.log",
+      "bytes": 1167,
+      "sha256": "dcb2f912087c76e9104e8db63b3a33a1a1d66a28c96e9afe14bcded44156f54d"
+    },
+    {
+      "path": "refresh-fixed/loaded-script.py",
+      "bytes": 7996,
+      "sha256": "bcfb94b274d46f47aa44da2ca3e2d4b4bc2284928f4cf6d09d08ff4c9d92cfd1"
+    },
+    {
+      "path": "refresh-fixed/original-Title-after-M.json",
+      "bytes": 4008,
+      "sha256": "12a9014fdf2b2e098e79338c6db05fcccb505c4ea377b296a84e38b55a8ab510"
+    },
+    {
+      "path": "refresh-fixed/original_settings_before_title.png",
+      "bytes": 375666,
+      "sha256": "3456796c64bb2406e046a12d49c2d2082f2edea90fccdee4703af4d6180cdea4"
+    },
+    {
+      "path": "refresh-fixed/pump_tutorial_0.png",
+      "bytes": 430364,
+      "sha256": "e81c2a4e1fc0d0d2c206d467234aabd6c953d7b2550f6746484173657b6b5d51"
+    },
+    {
+      "path": "refresh-fixed/pump_tutorial_1.png",
+      "bytes": 446147,
+      "sha256": "e4da93ebd3ba1e3284f01ff3a8441254c83f860c94e0259d4e4b7503bc8eff47"
+    },
+    {
+      "path": "refresh-fixed/receipt-vault.json",
+      "bytes": 2270,
+      "sha256": "558370ad02dad98cad0ae68680fe8827b4b373208909bd3c866287736a5e3c33"
+    },
+    {
+      "path": "refresh-fixed/receipt.json",
+      "bytes": 2270,
+      "sha256": "558370ad02dad98cad0ae68680fe8827b4b373208909bd3c866287736a5e3c33"
+    },
+    {
+      "path": "refresh-fixed/replay_M_preserved_pointer.png",
+      "bytes": 880481,
+      "sha256": "49ddca1fc2bc0f0e4e1354dc4adb2b9b31bf45f4a3020236022b25b22b8f27e3"
+    },
+    {
+      "path": "refresh-fixed/request.json",
+      "bytes": 559,
+      "sha256": "b1807f704c3253517d7cc6e8ed33bd1b914eb179f7f0825f2109179b84f3f253"
+    },
+    {
+      "path": "refresh-fixed/result.json",
+      "bytes": 57588,
+      "sha256": "6f065bf499b43b9c3403c3cddeec2530a0c33d2af9349eec5015167ed63605cd"
+    },
+    {
+      "path": "refresh-fixed/settled-original-WON.json",
+      "bytes": 8758,
+      "sha256": "5824ad572dbc01cc5f303ca0635a5a3a0fb616520b013796b3fc127604eeb6aa"
+    },
+    {
+      "path": "refresh-fixed/settled_WON_before_history.png",
+      "bytes": 664941,
+      "sha256": "6f689a4622baa511b43c3b3aec45b8dd08bde926b39de57d949ad3d55f32ee7a"
+    },
+    {
+      "path": "refresh-fixed/trusted-inputs.json",
+      "bytes": 1167,
+      "sha256": "6e6161812e550753209dfe9139c0a5e7a02f336456d7d6bbfa79700710bd4ed2"
+    },
+    {
+      "path": "refresh-negative/Title_correct_continue_pointer.png",
+      "bytes": 112793,
+      "sha256": "80ad9f473a1b0dbb2ca3b72249e7305a70ee6b7fee7d03a92982cfcbc7c78492"
+    },
+    {
+      "path": "refresh-negative/after-M.json",
+      "bytes": 8856,
+      "sha256": "2d8b3effc2135b52048f812e3a80c45a136987af2f2defa5a33ae6a1296d5444"
+    },
+    {
+      "path": "refresh-negative/browser-inputs-before-refresh.json",
+      "bytes": 1179,
+      "sha256": "6266a5daf9165f3fce77b1760ecd5193bc52f741c1e6a822cc3747498675147f"
+    },
+    {
+      "path": "refresh-negative/cold-before.json",
+      "bytes": 8353,
+      "sha256": "12f3c73dbce79e74226b9e05215961695097e593c0c8c61cad8c39a57f2a2536"
+    },
+    {
+      "path": "refresh-negative/cold_history_before_first_space.png",
+      "bytes": 910680,
+      "sha256": "556fbd7719b3c4db86a764078678b4cbf0b9d98d977ecc8af3196414a0c3f3b1"
+    },
+    {
+      "path": "refresh-negative/driver-actions.jsonl",
+      "bytes": 252325,
+      "sha256": "4aa6f9beec062c4e9605762d1fc3915e16b5a2f6c40059528f598cd487cca537"
+    },
+    {
+      "path": "refresh-negative/http.log",
+      "bytes": 1212,
+      "sha256": "1003b04e4ed9549965fd3ef08ac10055203d37ed520bdef563f0ff59c64c730f"
+    },
+    {
+      "path": "refresh-negative/loaded-script.py",
+      "bytes": 7954,
+      "sha256": "86e7b6707359f8fb00b738eaa674a86d716822c8dfe615d3b27bb4ce08fa1bb5"
+    },
+    {
+      "path": "refresh-negative/original-Title-after-M.json",
+      "bytes": 4023,
+      "sha256": "722ee64a0a3c4dc29eaaf0810427f24478e167910cd88139b5866954031def03"
+    },
+    {
+      "path": "refresh-negative/original_settings_before_title.png",
+      "bytes": 375666,
+      "sha256": "3456796c64bb2406e046a12d49c2d2082f2edea90fccdee4703af4d6180cdea4"
+    },
+    {
+      "path": "refresh-negative/receipt-vault.json",
+      "bytes": 2979,
+      "sha256": "5588165af0e7d16f7054d12e6940874d56d2e895493dff83d86b630cded553e9"
+    },
+    {
+      "path": "refresh-negative/receipt.json",
+      "bytes": 2979,
+      "sha256": "5588165af0e7d16f7054d12e6940874d56d2e895493dff83d86b630cded553e9"
+    },
+    {
+      "path": "refresh-negative/replay_M_preserved_pointer.png",
+      "bytes": 880486,
+      "sha256": "46ca4b78d727373be19cbc29b11ef45a436af5ae382e9ed492b4c0a9d2433a62"
+    },
+    {
+      "path": "refresh-negative/request.json",
+      "bytes": 562,
+      "sha256": "d89e9f8394187ca9178685d7c9769583166a462e7053b79825e1bddf70f8fbe5"
+    },
+    {
+      "path": "refresh-negative/settled-original-WON.json",
+      "bytes": 8758,
+      "sha256": "acda4d58fc71a11978844e2155ecec0b79b1af608d6d28b6d2df8fa4ecf16f63"
+    },
+    {
+      "path": "refresh-negative/settled_WON_before_history.png",
+      "bytes": 664947,
+      "sha256": "9516170484d1465a3cabc8f08ed2fc81d847dcd9a859ea00db5a3ed48fcf1899"
+    },
+    {
+      "path": "refresh-negative-v2/Continue_correct_pump_SCOUT.png",
+      "bytes": 925024,
+      "sha256": "507908fe7b2ad9fc756848ee185adad602333955a17fbb250cbfe47ede5711a9"
+    },
+    {
+      "path": "refresh-negative-v2/Title_after_refresh_campaign_and_audio.png",
+      "bytes": 110688,
+      "sha256": "04a4abcbf351261f94619628097f09d2c5df1fbdb56979d1254bba49be9719f2"
+    },
+    {
+      "path": "refresh-negative-v2/Title_correct_continue_pointer.png",
+      "bytes": 112834,
+      "sha256": "0162c2f2263b67d2ee321e41f7ab6e84512a0da0ead1d93afebdd1efa6e936e0"
+    },
+    {
+      "path": "refresh-negative-v2/after-M.json",
+      "bytes": 8856,
+      "sha256": "fa670a0e89e04413baaa204a83bd000037c3c4a009475788132cbf0b942e5e76"
+    },
+    {
+      "path": "refresh-negative-v2/after-original-Title-refresh.json",
+      "bytes": 3729,
+      "sha256": "54a3fc7dcb1469b4d0061eb76956f870b0a2fca429e1223da0d72f7ddb84d461"
+    },
+    {
+      "path": "refresh-negative-v2/browser-inputs-before-refresh.json",
+      "bytes": 1178,
+      "sha256": "625ded29fec57e89dac607db5161e34e432b55425a129a3c5b6dbba9ec7b77a1"
+    },
+    {
+      "path": "refresh-negative-v2/cold-before.json",
+      "bytes": 8353,
+      "sha256": "5599303aa80071da9f68df963c487312e752b32b60de6ffe2a1a491033265b34"
+    },
+    {
+      "path": "refresh-negative-v2/cold_history_before_first_space.png",
+      "bytes": 910680,
+      "sha256": "556fbd7719b3c4db86a764078678b4cbf0b9d98d977ecc8af3196414a0c3f3b1"
+    },
+    {
+      "path": "refresh-negative-v2/driver-actions.jsonl",
+      "bytes": 178225,
+      "sha256": "3e5f17b756526f7d36f01bebb05e1dcd9f93881f7b657ae7daa582a0e72227a7"
+    },
+    {
+      "path": "refresh-negative-v2/http.log",
+      "bytes": 1167,
+      "sha256": "e1a08d076da19f683b10c3a341fc00db8f78417889d197b271685b23e53d0440"
+    },
+    {
+      "path": "refresh-negative-v2/loaded-script.py",
+      "bytes": 8049,
+      "sha256": "b636d7b938cdc1074b624335bfb8f45ffc6dbb25ecdb0c16f7fff6b5ed28ded0"
+    },
+    {
+      "path": "refresh-negative-v2/original-Title-after-M.json",
+      "bytes": 4023,
+      "sha256": "5208e944c82dd2e05fcff9467e6587ab952f962414a85fd6ef9b34a20dd175a9"
+    },
+    {
+      "path": "refresh-negative-v2/original_settings_before_title.png",
+      "bytes": 375648,
+      "sha256": "26ddadcd8b987cf56d78ca95c6af417ecda53d7e45ebf5a1e8e871f1bd949221"
+    },
+    {
+      "path": "refresh-negative-v2/receipt-vault.json",
+      "bytes": 2276,
+      "sha256": "fb58818e1263ee8288042d4d1d4ef457f29ad79f7fd37f79ac5ebb1d5bd58a41"
+    },
+    {
+      "path": "refresh-negative-v2/receipt.json",
+      "bytes": 2276,
+      "sha256": "fb58818e1263ee8288042d4d1d4ef457f29ad79f7fd37f79ac5ebb1d5bd58a41"
+    },
+    {
+      "path": "refresh-negative-v2/replay_M_preserved_pointer.png",
+      "bytes": 880483,
+      "sha256": "a26446c8b939274adcbb55b1fde139c66cd450bdb67e5e4db32d3759fbbe25c1"
+    },
+    {
+      "path": "refresh-negative-v2/request.json",
+      "bytes": 565,
+      "sha256": "b909de82e0f4715c84b8e0d85e271f4eb3f17b6c8b953cd7624566385dab92e4"
+    },
+    {
+      "path": "refresh-negative-v2/result.json",
+      "bytes": 57493,
+      "sha256": "fbda12c943a019c059c888c1156726974eb763487009c0b7d1aaec33709cfd86"
+    },
+    {
+      "path": "refresh-negative-v2/settled-original-WON.json",
+      "bytes": 8758,
+      "sha256": "b7a4eff9172840a6b60dcbd8de9d486472ed42ed8a80a13b0913ddd8e762221d"
+    },
+    {
+      "path": "refresh-negative-v2/settled_WON_before_history.png",
+      "bytes": 664941,
+      "sha256": "6f689a4622baa511b43c3b3aec45b8dd08bde926b39de57d949ad3d55f32ee7a"
+    },
+    {
+      "path": "refresh-negative-v2/trusted-inputs.json",
+      "bytes": 689,
+      "sha256": "07297336da6b57dfa11ee14bb2db4aa6730fa438ec7914bf438c558c4492b399"
+    }
+  ],
+  "file_count": 63,
+  "total_bytes": 12828732,
+  "accepted_png_viewed": 16,
+  "method_negative_png_unreviewed": 5,
+  "scope": "cold setup initial settlement declared; ordinary settled WON Replay M original settings Title canonical original URL refresh and real Continue; preference writes legitimate, campaign pointer protected; source bin and original activity profile unchanged; no whole/producer/performance proof",
+  "original_receipts": [
+    {
+      "start": "2026-10-05T14:14:54.513893+00:00",
+      "end": "2026-10-05T14:18:02.352292+00:00",
+      "actual_exit": 1,
+      "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05"
+    },
+    {
+      "start": "2026-10-05T14:18:15.212148+00:00",
+      "end": "2026-10-05T14:19:38.297508+00:00",
+      "actual_exit": 0,
+      "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05"
+    },
+    {
+      "start": "2026-10-05T14:20:07.458535+00:00",
+      "end": "2026-10-05T14:21:53.337877+00:00",
+      "actual_exit": 0,
+      "source": "1ec3198e9c0db367af96fc264604c5a286003b5e"
+    }
+  ],
+  "prior_100_files_reverified": true,
+  "services_ended": true
+}

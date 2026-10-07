@@ -1,0 +1,91 @@
+{
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/original-frozen-yard-first.png",
+      "scope": "DisplayServer crop outside timing; explicit frozen/API lifecycle control",
+      "sha256": "4b814fb23dfd6762175292a5ec3172eccf679baf74b635b9a665b6409de13f69"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/original-Title-unbound.png",
+      "scope": "DisplayServer crop outside timing; explicit frozen/API lifecycle control",
+      "sha256": "0a8db044707d7510e90108e4d190cf76a2e6095055d90cc6fbe80e84e25b181a"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/original-frozen-yard-rebound.png",
+      "scope": "DisplayServer crop outside timing; explicit frozen/API lifecycle control",
+      "sha256": "598a505da184003666bf1448da96ac9bfec3a557b15b451e9ef26428e1338ac6"
+    }
+  ],
+  "checks": 37,
+  "chunks": [
+    {
+      "first_frame": 1.0,
+      "first_usec": 24334942.0,
+      "included_count": 20,
+      "label": "first",
+      "last_frame": 35.0,
+      "last_usec": 29974581.0,
+      "path": "res://build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/first",
+      "raw_sha256": "c950f09c2a0b30ca29bccf99a4dbb967d2593c4a26fafa0847eda5a23811e081",
+      "row_count": 35
+    },
+    {
+      "first_frame": 36.0,
+      "first_usec": 32307232.0,
+      "included_count": 19,
+      "label": "second",
+      "last_frame": 62.0,
+      "last_usec": 36258941.0,
+      "path": "res://build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/second",
+      "raw_sha256": "8d51703b26ca740eb4d1731f9d750ab90686ce3ce260eb94d2850bba3ac6ad94",
+      "row_count": 27
+    },
+    {
+      "first_frame": 63.0,
+      "first_usec": 39042285.0,
+      "included_count": 14,
+      "label": "Title-and-rebound",
+      "last_frame": 118.0,
+      "last_usec": 48416894.0,
+      "path": "res://build/asset_review/pr15-runtime/a3-collector-probe-4372677ae2654d29a8119d065301949d/Title-and-rebound",
+      "raw_sha256": "e698933b6907beea82cfd4e0e73062121b9c6ef51c746573e8f90968cc933e28",
+      "row_count": 56
+    }
+  ],
+  "environment": {
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "api_version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "audio_driver": "Dummy",
+    "cgroup_scope": "visible mount-root limits; not proof of exclusive host CPU",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpu_count": 5,
+    "debug_build": true,
+    "display": "X11",
+    "driver": "opengl3",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "method": "gl_compatibility",
+    "os": "Linux",
+    "os_version": "13",
+    "pid": 117468,
+    "scope": "stationary original yard with main AND presenter automatic process stopped; not normal SCOUT/dynamic FX/mobile FPS",
+    "vendor": "Mesa",
+    "visible_cpu_effective": "0-4",
+    "visible_cpu_max": "400000 100000",
+    "visible_memory_max": "17179869184"
+  },
+  "failures": 0,
+  "format": 1,
+  "receipt_sha256": "771ed8c6b1b6208942c843452805044adf9bf9cc57c1df9108e307b8d19cbcdb",
+  "scope": "actual stationary Window positive seal/reset/restart/Title/rebind control only; not six-level A3/device/normal13",
+  "source_sha": "1dabd57d6694ef4630c9362086048ae818d3fd9f"
+}

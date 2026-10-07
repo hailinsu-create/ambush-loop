@@ -1,0 +1,148 @@
+{
+  "source_sha": "cd984a5be7c38f823123f6d116f1859137b166a4",
+  "validation_kind": "fixed-negative",
+  "command": [
+    "bash",
+    "ambush_loop/scripts/run_isolated_test.sh",
+    "/tmp/pr15-hud-godot",
+    "radio_credits_viewport_test.gd",
+    "--render"
+  ],
+  "run_id": "036a7d4710ca42c6ab0613731170c561",
+  "actual_exit_code": 1,
+  "engine_error_lines": 2,
+  "checks": 106,
+  "failures": 17,
+  "captured_frames": 10,
+  "native_inputs": 7,
+  "radio_reference_fixture_runs": 3,
+  "captures": [
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1280_100_desktop",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1280_100_desktop.png",
+      "sha256": "5eec0a1001c9f8d0b5f2ede38035c8550e1b0bcfeb4a74de4136b5992528582e",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/00_radio_credits_1280_100_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1280_100_touch",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1280_100_touch.png",
+      "sha256": "2cb18f1a288aa48dc0d8eb657233aa112b3c84ce60d4de2675857efefb084fcd",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/01_radio_credits_1280_100_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1280_200_desktop",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1280_200_desktop.png",
+      "sha256": "b6092a9dec29608a2cb8a72dd33c2ebeac8e10e5b4298729d17a2aa653264663",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/02_radio_credits_1280_200_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1280_200_touch",
+      "image_size": [
+        1280,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1280_200_touch.png",
+      "sha256": "f20b5c678fb7cad56f63e2fb954cf1cd78b0c8fcc16dfe0fd4e59deb370be2bf",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/03_radio_credits_1280_200_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1600_100_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1600_100_desktop.png",
+      "sha256": "c9e1bead4a2b3efd53b86a36919ec5679c9461c7d2c957958d1305b53c9655fe",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/04_radio_credits_1600_100_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1600_100_touch",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1600_100_touch.png",
+      "sha256": "df3750f54fabe51f89d21492f42f4f2580f5df8c5216973d77fbb07d3f685a61",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/05_radio_credits_1600_100_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1600_200_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1600_200_desktop.png",
+      "sha256": "2b8f7b3a0c5837bdda48d0d4823b348225d1e1c4788922dda166f1b6e882d9eb",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/06_radio_credits_1600_200_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1600_200_touch",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1600_200_touch.png",
+      "sha256": "9a9dc1a67333df384e2447e01f897e43bc4ff4e52b2112b2887c84fd63e95a39",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/07_radio_credits_1600_200_touch.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1600_100_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1600_100_desktop.png",
+      "sha256": "9632698231a21e2655e5036607ed96a8e5aa629ecddbb15033db38bbd3cb068a",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/08_radio_credits_1600_100_desktop.png",
+      "hash_verified": true
+    },
+    {
+      "capture_source": "DisplayServer.screen_get_image native Window crop",
+      "id": "radio_credits_1600_200_desktop",
+      "image_size": [
+        1600,
+        720
+      ],
+      "path": "res://build/asset_review/pr15-runtime/viewport_radio_credits_1600_200_desktop.png",
+      "sha256": "5b43be6be4377af164ed9e8675f9599979fba5c4c41b328543115b035b37a6ef",
+      "retained_path": ".cursor/docs/evidence/20261003-pr15-credits/negative-cd984a5/09_radio_credits_1600_200_desktop.png",
+      "hash_verified": true
+    }
+  ],
+  "inherited_continuous_command_sha": "47a6454ed745c96a6da0b89867c37cf54c79d83d",
+  "inherited_command_status": "Development98/0 only; fixed-source formal/graphical/fullcampaign pending. This credits run does not validate the backend.",
+  "limits": [
+    "Godot4.7.2 LinuxX11 Mesa llvmpipe; not device performance or physical touch",
+    "Reference deployment/vacuum helpers; not the normal six-level player journey",
+    "Original two focus-adjacent text crops still pending"
+  ]
+}

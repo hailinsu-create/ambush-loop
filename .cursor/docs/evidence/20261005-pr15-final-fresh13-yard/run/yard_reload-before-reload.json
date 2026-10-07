@@ -1,0 +1,138 @@
+{
+  "state": {
+    "briefing": false,
+    "continue_disabled": false,
+    "engine_frames": 967,
+    "fixture_ready": false,
+    "gui_focus": "/root/Title/UI/TitleScroll/@VBoxContainer@1258/Menu/StartButton",
+    "gui_hover": "/root/Title/UI/TitleScroll/@VBoxContainer@1258/Menu/StartButton",
+    "input_count": 88,
+    "input_tail": {
+      "attempt": "",
+      "echo": false,
+      "engine_frame": 958,
+      "keycode": 4194305,
+      "kind": "key",
+      "phase": -1,
+      "presents": 958,
+      "pressed": false,
+      "scene": "res://scenes/title.tscn",
+      "us": 400274200
+    },
+    "mission_select": false,
+    "observer_usec": 2358600,
+    "pending": "yard",
+    "presents": 967,
+    "scale": 1,
+    "scene": "res://scenes/title.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "02c3b271f6e96a32296417eff2133e38158a7ab2b6d02becce2e8df91f0e5683",
+          "text": "[progress]\n\nlevel_id=\"warehouse\"\nlevel_index=1\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "09bc2383fdcf558236d9310adec90ef4695b6c267f33221fe599025590ed2ef6",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "warehouse",
+          "loops": 0,
+          "perfect": false,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "pump",
+          "loops": 0,
+          "perfect": false,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "railcut",
+          "loops": 0,
+          "perfect": false,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": false
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "warehouse",
+      "persistence_error": "",
+      "persistence_status": "已保存到此浏览器",
+      "quality": "standard",
+      "seen": {
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "ticks_usec": 401201500,
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "public_checkpoint": {
+    "files": {
+      "ambush_loop.cfg": "[progress]\n\nlevel_id=\"warehouse\"\nlevel_index=1\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\n",
+      "ambush_loop_settings.cfg": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\n"
+    },
+    "schema": 1
+  },
+  "public_checkpoint_sha256": "6c958d082789325e7d2a32c9c34296707389e83062d40720de2c2f3e1a1cf7e5"
+}

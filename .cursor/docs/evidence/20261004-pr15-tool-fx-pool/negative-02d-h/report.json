@@ -1,0 +1,40 @@
+{
+  "captures": [],
+  "checks": 15,
+  "failures": 2,
+  "rows": [
+    {
+      "case": "actual-empty-and-explicit-duplicate",
+      "effect": {
+        "attempt_id": "6c7087315c1936c263f848e8dec6cb35",
+        "clock_domain": "playback",
+        "clock_tick": 49,
+        "confirmed": true,
+        "created_clock_tick": 1,
+        "created_pos": "(80.0, 80.0)",
+        "created_wave_id": 0,
+        "effect_id": "6c7087315c1936c263f848e8dec6cb35:tool_fx:0",
+        "kind": "grenade",
+        "level_id": "yard",
+        "local_tick": 48,
+        "original_event": {},
+        "owner_group": "ops",
+        "owner_id": 1,
+        "phase": 1,
+        "playback_schema": 2,
+        "position": "(88.0, 246.0)",
+        "radius": 78.0,
+        "schema": 1,
+        "seq": 0,
+        "tool_id": "6c7087315c1936c263f848e8dec6cb35:tool:0",
+        "variant": "stiel",
+        "victims": [],
+        "wave_id": 0
+      },
+      "original_event_count": 2,
+      "scope": "real fuse/bounce then explicit duplicate signal; no native player route"
+    }
+  ],
+  "scope": "actual original tool sources; explicit backend grants/placement/clock/reader/capacity/corrupt copies/consumer fixtures. Real Window crops only in render mode; not normal13/FINAL/A3/device acceptance",
+  "source_sha": "02d09d8de94ad1bddd5ba6b3175bcc10544903fe"
+}

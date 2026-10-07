@@ -15,6 +15,7 @@ const ShadowScript := preload("res://scripts/c2/shadow_layer.gd")
 const RingScript := preload("res://scripts/c2/sound_ring.gd")
 const PromptScript := preload("res://scripts/c2/context_prompt.gd")
 const WheelScript := preload("res://scripts/c2/skill_wheel.gd")
+const Space := preload("res://scripts/presentation/world_space.gd")
 
 var host: Node = null
 var sentries: Array = []
@@ -35,6 +36,7 @@ var quiet_yard: bool = false
 var spotted_bark: bool = false
 var cam_follow: bool = true
 var _hud_root: Control = null
+var _hint_tween: Tween
 
 
 func bind(main: Node) -> void:
@@ -115,8 +117,8 @@ func _ensure_hud() -> void:
 		minimap.anchor_right = 1.0
 		minimap.offset_left = -196.0
 		minimap.offset_right = -12.0
-		minimap.offset_top = 44.0
-		minimap.offset_bottom = 148.0
+		minimap.offset_top = 76.0
+		minimap.offset_bottom = 180.0
 		_hud_root.add_child(minimap)
 		minimap.bind(host)
 		minimap.pan_requested.connect(func(world: Vector2) -> void:
@@ -156,7 +158,7 @@ func _ensure_hud() -> void:
 
 
 func _is_phone() -> bool:
-	return host != null and host.has_method("_want_touch") and bool(host._want_touch())
+	return host != null and host.has_method("_use_touch_chrome") and bool(host._use_touch_chrome())
 
 
 func layout_chrome(phone: bool) -> void:
@@ -169,7 +171,10 @@ func layout_chrome(phone: bool) -> void:
 	if cursor:
 		cursor.visible = not phone
 	if help_chip:
-		help_chip.visible = not phone
+		if _in_replay():
+			_clear_live_hint()
+		else:
+			help_chip.visible = not phone
 	if prompt:
 		prompt.visible = phone
 
@@ -193,7 +198,7 @@ func _pin_portraits(phone: bool) -> void:
 		portraits.offset_top = 0.0
 		portraits.offset_right = 0.0
 		portraits.offset_bottom = 0.0
-		portraits.visible = true
+		portraits.visible = _portraits_needed(phone)
 	else:
 		if _hud_root == null:
 			return
@@ -206,7 +211,13 @@ func _pin_portraits(phone: bool) -> void:
 		portraits.offset_right = 168.0
 		portraits.offset_top = -272.0
 		portraits.offset_bottom = -158.0
-		portraits.visible = true
+		portraits.visible = _portraits_needed(phone)
+
+
+func _portraits_needed(phone: bool) -> bool:
+	# The 3D desktop already has selectable/historical left-rail cards.
+	# Keep the original strip for the phone rail and the legacy 2D desktop.
+	return phone or host==null or host.get("presentation_3d")==null
 
 
 func _on_portrait_long(idx: int) -> void:
@@ -405,7 +416,7 @@ func _tick_cursor() -> void:
 	if not bool(host._is_command_phase()):
 		cursor.set_mode(CursorScript.Mode.NONE)
 		return
-	var world: Vector2 = host.get_global_mouse_position() if host.has_method("get_global_mouse_position") else Vector2.ZERO
+	var world: Vector2 = host.pointer_logic_position() if host.has_method("pointer_logic_position") else Vector2.INF
 	var mode := CursorScript.Mode.WALK
 	for op in host.operators:
 		if op.visible and op.alive and op.global_position.distance_to(world) <= 22.0:
@@ -488,6 +499,11 @@ func _tick_arrows(delta: float) -> void:
 
 func _pan_to(world: Vector2) -> void:
 	if host == null:
+		return
+	if host.presentation_3d != null:
+		host.presentation_3d.cancel_input()
+		host.presentation_3d.rig.focus = Space.logic_to_world(world)
+		host.presentation_3d.rig.apply_pose()
 		return
 	var center := Vector2(640, 360)
 	host._cam_pan = (world - center) * 0.42
@@ -674,10 +690,13 @@ func _skill_knife(op: Node) -> bool:
 		_hint("正面惊动了岗哨")
 		return true
 	best.knock_out()
+	if host.has_method("_record_utility_action"):
+		host._record_utility_action(op, "knife_stab", best.global_position)
 	_spawn_ring(best.global_position, 36.0, Color(0.72, 0.22, 0.18, 0.4))
 	_hint("割喉 — 拖开或捆上")
 	if host.has_method("_spawn_loot_at"):
-		host._spawn_loot_at(best.global_position + Vector2(8, 6), 1, "ammo")
+		var dropped = host._spawn_loot_at(best.global_position + Vector2(8, 6), 1, "ammo")
+		host.visual_snapshot.corpses.remember(host, dropped, best, "sentries")
 	if host.has_method("_operator_bark"):
 		host._operator_bark(op, "ko")
 	if host.has_method("_sfx"):
@@ -774,25 +793,54 @@ func _spawn_ring(world: Vector2, r: float, col: Color) -> void:
 
 
 func _hint(text: String) -> void:
+	if _in_replay():
+		_clear_live_hint()
+		return
 	if _is_phone() and host != null and host.get("touch_hud") != null and host.touch_hud.has_method("set_hint"):
 		host.touch_hud.set_hint(text)
 		if host.get("status_label") != null and text.length() < 28:
 			host.status_label.text = text
 		return
 	if help_chip:
+		if _hint_tween != null:
+			_hint_tween.kill()
 		help_chip.text = text
 		help_chip.modulate.a = 1.0
-		var tw := help_chip.create_tween()
-		tw.tween_interval(3.2)
-		tw.tween_property(help_chip, "modulate:a", 0.35, 0.8)
+		_hint_tween = help_chip.create_tween()
+		_hint_tween.tween_interval(3.2)
+		_hint_tween.tween_property(help_chip, "modulate:a", 0.35, 0.8)
 	if host != null and host.get("status_label") != null:
 		host.status_label.text = text
+
+
+func _in_replay() -> bool:
+	return host != null and host.phase == host.Phase.REPLAY
+
+
+func _clear_live_hint() -> void:
+	if _hint_tween != null:
+		_hint_tween.kill()
+		_hint_tween = null
+	if help_chip:
+		help_chip.text = ""
+		help_chip.visible = false
+		help_chip.modulate.a = 1.0
 
 
 func refresh_hud() -> void:
 	refresh_hud_light()
 	var phone := _is_phone()
 	layout_chrome(phone)
+	if host != null and host.phase == host.Phase.REPLAY:
+		if skill_bar:
+			skill_bar.visible = false
+		if minimap:
+			minimap.bind_history(host.replay_hud_frame())
+		if cursor:
+			cursor.visible = false
+		if prompt:
+			prompt.visible = false
+		return
 	if skill_bar and host:
 		var cds: Dictionary = {}
 		if host.selected:
@@ -803,14 +851,19 @@ func refresh_hud() -> void:
 		minimap.bind(host)
 		minimap.visible = not phone
 	if portraits:
-		portraits.visible = true
+		portraits.visible = _portraits_needed(phone)
 	if cursor:
 		cursor.visible = not phone
 
 
 func refresh_hud_light() -> void:
+	if _in_replay():
+		_clear_live_hint()
 	if portraits and host:
-		portraits.bind_ops(host.operators, host.selected, bool(host._is_command_phase()) if host.has_method("_is_command_phase") else true)
+		if host.phase == host.Phase.REPLAY:
+			portraits.bind_history(host.replay_hud_frame())
+		else:
+			portraits.bind_ops(host.operators, host.selected, bool(host._is_command_phase()) if host.has_method("_is_command_phase") else true)
 
 
 func sentry_count() -> int:

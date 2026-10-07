@@ -1,0 +1,180 @@
+{
+  "captures": [
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_live_0800.png",
+      "sha256": "6980ed41cbc17d23197bb835068521870d75e4912828ae9d1a7a94b16123b1d5"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_scout_history_0800.png",
+      "sha256": "5ba5cd6f2b849245093e1c0acc3c9c5a8849509c3826e508e2180027485902cb"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_actual_schema1_history.png",
+      "sha256": "cf3bb08b10588847d442a4bc4e4ce4432031a3d5b6aab55fd06843af9ca275e9"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_live_sweep_0800.png",
+      "sha256": "de77db37b4809d7adb181658f3a7c974b987345fd1c5341e5ba4befb3fbba512"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_history_sweep_0800.png",
+      "sha256": "35e164c8b15655d9f3f5cc66aa58d390a6752b1fa3dfde7e60299079df713c18"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_escape.png",
+      "sha256": "df3fc27163ebb6da37397d4b2b5b7397ebc5c82b6a54e618e8d8e965e733ed07"
+    },
+    {
+      "path": "res://build/asset_review/pr15-runtime/command_record_full_failed_abort.png",
+      "sha256": "90dc6084dfb53ba206c7fdc9b41b43b0002255c338538840372cf79e9fa65887"
+    }
+  ],
+  "checks": 224,
+  "failures": 0,
+  "rows": [
+    {
+      "battle_terminal_tick": 1283,
+      "events": 34,
+      "playback_terminal_tick": 1415,
+      "seek_records": 5,
+      "source_binary_sha256": "1de456c1fc6677815ea3397c8e318ab83fc55ebf71f6a3e20001317d4904dd12",
+      "stage": "actual_legacy_schema1"
+    },
+    {
+      "actual_samples": 8,
+      "alarm_playback_tick": 52,
+      "attempt_survives_alarm": true,
+      "boundary_clock": 0.850000000000001,
+      "seek_checks": 16,
+      "stage": "scout_prelude"
+    },
+    {
+      "battle_terminal_tick": 1283,
+      "events": 34,
+      "fingerprint": "door:0,spawn:0,no_engage:0,no_engage:0,no_engage:0,spawn:36,no_engage:36,no_engage:36,no_engage:36,return_fire:201,return_fire:201,return_fire:218,return_fire:218,fire:227,kill:227,return_fire:235,return_fire:252,return_fire:269,return_fire:286,op_down:286,fire:1055,kill:1055,spawn:12,no_engage:12,no_engage:12,fire:198,fire:205,return_fire:208,fire:212,fire:219,return_fire:225,fire:226,kill:226,terminal:227",
+      "first_alarm_playback_tick": 1,
+      "frame_count": 234,
+      "playback_terminal_tick": 1418,
+      "terminal": "won"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.1,
+      "playback_tick": 1063,
+      "position": "(923.6666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.2,
+      "playback_tick": 1069,
+      "position": "(937.6664, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.3,
+      "playback_tick": 1075,
+      "position": "(951.6663, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.4,
+      "playback_tick": 1081,
+      "position": "(965.6662, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.5,
+      "playback_tick": 1087,
+      "position": "(979.6661, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.6,
+      "playback_tick": 1093,
+      "position": "(993.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.700000000000001,
+      "playback_tick": 1099,
+      "position": "(1007.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.800000000000001,
+      "playback_tick": 1105,
+      "position": "(1021.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.700000000000001,
+      "playback_tick": 1099,
+      "position": "(1007.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.6,
+      "playback_tick": 1093,
+      "position": "(993.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.5,
+      "playback_tick": 1087,
+      "position": "(979.6661, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.4,
+      "playback_tick": 1081,
+      "position": "(965.6662, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.3,
+      "playback_tick": 1075,
+      "position": "(951.6663, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.2,
+      "playback_tick": 1069,
+      "position": "(937.6664, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.1,
+      "playback_tick": 1063,
+      "position": "(923.6666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "command_clock": 0.800000000000001,
+      "playback_tick": 1105,
+      "position": "(1021.666, 528.0)"
+    },
+    {
+      "battle_tick": 1056,
+      "between_record_delta": 0.05,
+      "playback_tick": 1066
+    },
+    {
+      "battle_terminal_tick": 928,
+      "events": 19,
+      "playback_terminal_tick": 930,
+      "recorded_phase": 2,
+      "terminal": "escape"
+    },
+    {
+      "battle_terminal_tick": 0,
+      "events": 3,
+      "playback_terminal_tick": 2,
+      "recorded_phase": 2,
+      "terminal": "abort"
+    }
+  ],
+  "source_binary": {
+    "path": "res://build/asset_review/pr15-runtime/command-record-source-v2.bin",
+    "sha256": "ae9e55bf891c989655e84936a6ac34b338e1a5a41de66b15c9b862e77072ad77"
+  }
+}

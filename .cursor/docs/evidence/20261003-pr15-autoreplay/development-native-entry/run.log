@@ -1,0 +1,44 @@
+TEST_RUN_ID=f15b5c290ef54c98809e85bd0076cc03
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/f15b5c290ef54c98809e85bd0076cc03/data
+TEST_ENTRY=replay_autoplay_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/f15b5c290ef54c98809e85bd0076cc03/data/godot/app_userdata/Ambush Loop run_id=f15b5c290ef54c98809e85bd0076cc03
+REPLAY_AUTO_CASE auto_100_desktop
+REPLAY_AUTO_FAIL auto_100_desktop native production button binds the original recording
+REPLAY_AUTO_FAIL auto_100_desktop ordinary native entry automatically advances at2x
+REPLAY_AUTO_FAIL auto_100_desktop ordinary engine process advances replay without sample seeks
+REPLAY_AUTO_FAIL auto_100_desktop native pause freezes clock and original20-bone pose
+REPLAY_AUTO_FAIL auto_100_desktop native pause keeps live state frozen
+REPLAY_AUTO_FAIL auto_100_desktop native1x selection preserves paused state
+REPLAY_AUTO_FAIL auto_100_desktop native resume continues at selected rate
+REPLAY_AUTO_FAIL auto_100_desktop native slider seeks retained clock and remains paused
+REPLAY_AUTO_FAIL auto_100_desktop original right step remains6 ticks and pauses
+REPLAY_AUTO_FAIL auto_100_desktop event seeks original saved identity/time and pauses
+REPLAY_AUTO_FAIL auto_100_desktop event seek keeps live state frozen
+REPLAY_AUTO_FAIL auto_100_desktop closing original menu resumes prior playback state
+REPLAY_AUTO_FAIL auto_100_desktop focus gate keeps live state frozen
+REPLAY_AUTO_FAIL auto_100_desktop native automatic playback reaches the actual recorded endpoint and stops
+REPLAY_AUTO_FAIL auto_100_desktop native endpoint keeps live state frozen
+REPLAY_AUTO_FAIL auto_100_desktop native terminal control restarts the same recording
+REPLAY_AUTO_CASE auto_200_compact
+REPLAY_AUTO_FAIL auto_200_compact native production button binds the original recording
+REPLAY_AUTO_FAIL auto_200_compact ordinary native entry automatically advances at2x
+REPLAY_AUTO_FAIL auto_200_compact ordinary engine process advances replay without sample seeks
+REPLAY_AUTO_FAIL auto_200_compact native pause freezes clock and original20-bone pose
+REPLAY_AUTO_FAIL auto_200_compact native pause keeps live state frozen
+REPLAY_AUTO_FAIL auto_200_compact native1x selection preserves paused state
+REPLAY_AUTO_FAIL auto_200_compact native resume continues at selected rate
+REPLAY_AUTO_FAIL auto_200_compact native slider seeks retained clock and remains paused
+REPLAY_AUTO_FAIL auto_200_compact original right step remains6 ticks and pauses
+REPLAY_AUTO_FAIL auto_200_compact event seeks original saved identity/time and pauses
+REPLAY_AUTO_FAIL auto_200_compact event seek keeps live state frozen
+REPLAY_AUTO_FAIL auto_200_compact closing original menu resumes prior playback state
+REPLAY_AUTO_FAIL auto_200_compact focus gate keeps live state frozen
+REPLAY_AUTO_FAIL auto_200_compact native automatic playback reaches the actual recorded endpoint and stops
+REPLAY_AUTO_FAIL auto_200_compact native endpoint keeps live state frozen
+REPLAY_AUTO_FAIL auto_200_compact native terminal control restarts the same recording
+REPLAY_AUTO_TEST checks=134 failures=32

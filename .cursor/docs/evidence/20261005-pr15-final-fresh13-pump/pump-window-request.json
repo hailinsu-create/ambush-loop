@@ -1,0 +1,30 @@
+{
+  "START": "2026-10-05T21:15:06.941174+00:00",
+  "cap_seconds": 1430,
+  "steps": [
+    [
+      "preserved-title-pump-entry",
+      "initialize_pump.py",
+      180
+    ],
+    [
+      "pump-natural-two-waves",
+      "produce_pump.py",
+      900
+    ],
+    [
+      "pump-original-checkpoint-boundary",
+      "finish_pump.py",
+      300
+    ]
+  ],
+  "source": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/tmp/pr15-final-fresh13-1ec-20261005/browser_controller_pump.py"
+  ],
+  "profile_preserved": true
+}

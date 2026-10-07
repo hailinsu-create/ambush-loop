@@ -3,6 +3,7 @@ extends Control
 ## Title: brand, mission select, briefing, continue, how-to, quit confirm.
 
 const CampaignJournalScript := preload("res://scripts/ui/campaign_journal.gd")
+const ModalFocus := preload("res://scripts/ui/modal_focus.gd")
 
 const HOWTO := """北区补给链第三夜：院子 → 仓道 → 泵站 → 信号楼 → 油库 → 电台。
 搜刮组火力，埋伏后拉警报。清波打扫，战利品带进下一波。逃逸或全灭失败。
@@ -52,10 +53,10 @@ Esc / 返回键            标题：退出确认；战场：作战设置
 @onready var continue_btn: Button = $UI/Menu/ContinueButton
 @onready var help_btn: Button = $UI/Menu/HelpButton
 @onready var quit_btn: Button = $UI/Menu/QuitButton
+@onready var _menu: VBoxContainer = $UI/Menu
 
 var pause_ui: PauseOverlay
 var _sway_tween: Tween = null
-var _sway_base_top: float = 118.0
 var _brief: CanvasLayer
 var _brief_title: Label
 var _brief_body: Label
@@ -74,7 +75,9 @@ var _mission_accents: Array[ColorRect] = []
 var _mission_locks: Array[Label] = []
 var _quit: CanvasLayer
 var _pending_id: String = "yard"
-var _ops_stamp: HBoxContainer
+var _ops_stamp: HFlowContainer
+var _title_scroll: ScrollContainer
+var _title_flow: VBoxContainer
 var _modal_tween: Tween = null
 var _journal = null
 var _journal_btn: Button
@@ -105,9 +108,8 @@ func _ready() -> void:
 	_build_quit_confirm()
 	pause_ui = PauseOverlay.new()
 	add_child(pause_ui)
-	pause_ui.closed.connect(func() -> void: pass)
+	pause_ui.closed.connect(_restore_menu_focus)
 	pause_ui.return_to_title.connect(func() -> void: pause_ui.dismiss())
-	_play_intro()
 	_refresh_continue()
 	var gs = get_node_or_null("/root/GameSettings")
 	if gs and gs.has_signal("changed") and not gs.changed.is_connected(_on_settings_changed_title):
@@ -118,6 +120,10 @@ func _ready() -> void:
 	_build_journal()
 	_build_ops_stamp()
 	_refresh_campaign_title()
+	_build_title_flow()
+	get_viewport().size_changed.connect(_layout_title)
+	_layout_title()
+	_play_intro()
 
 
 func mission_row_count() -> int:
@@ -165,7 +171,7 @@ func journal_body_text() -> String:
 
 
 func open_journal() -> void:
-	if _journal:
+	if _journal and _top_modal() == null:
 		_journal.present()
 
 
@@ -193,14 +199,12 @@ func _refresh_continue() -> void:
 func _play_intro() -> void:
 	wordmark.modulate.a = 0.0
 	tagline.modulate.a = 0.0
-	$UI/Menu.modulate.a = 0.0
-	wordmark.offset_top = 96.0
+	_menu.modulate.a = 0.0
 	var tw := create_tween()
 	tw.set_parallel(true)
 	tw.tween_property(wordmark, "modulate:a", 1.0, 0.55)
-	tw.tween_property(wordmark, "offset_top", 118.0, 0.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tw.tween_property(tagline, "modulate:a", 1.0, 0.7).set_delay(0.15)
-	tw.tween_property($UI/Menu, "modulate:a", 1.0, 0.5).set_delay(0.28)
+	tw.tween_property(_menu, "modulate:a", 1.0, 0.5).set_delay(0.28)
 	start_btn.pivot_offset = Vector2(150, 24)
 	var pulse := create_tween().set_loops()
 	pulse.tween_property(start_btn, "modulate", Color(1.28, 1.30, 0.88), 0.72)
@@ -232,15 +236,12 @@ func _start_wordmark_sway() -> void:
 		_sway_tween = null
 	wordmark.pivot_offset = Vector2(wordmark.size.x * 0.5, wordmark.size.y * 0.45)
 	wordmark.rotation = 0.0
-	wordmark.offset_top = _sway_base_top
 	if _title_fx_paused():
 		return
 	_sway_tween = create_tween().set_loops()
 	_sway_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	_sway_tween.tween_property(wordmark, "rotation", 0.028, 1.7)
-	_sway_tween.parallel().tween_property(wordmark, "offset_top", _sway_base_top + 3.5, 1.7)
 	_sway_tween.tween_property(wordmark, "rotation", -0.028, 1.7)
-	_sway_tween.parallel().tween_property(wordmark, "offset_top", _sway_base_top - 2.5, 1.7)
 
 
 func handle_android_back() -> void:
@@ -281,7 +282,6 @@ func _set_title_background_paused(on: bool) -> void:
 			_sway_tween = null
 		if wordmark:
 			wordmark.rotation = 0.0
-			wordmark.offset_top = _sway_base_top
 	else:
 		_start_wordmark_sway()
 
@@ -299,19 +299,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 
+func _top_modal() -> CanvasLayer:
+	var top: CanvasLayer
+	for layer: CanvasLayer in [pause_ui, _journal, _quit, _brief, _howto, _mission]:
+		if is_instance_valid(layer) and layer.visible and (top == null or layer.layer > top.layer):
+			top = layer
+	return top
+
+
 func _on_back() -> void:
-	if _quit != null and _quit.visible:
-		_dismiss_modal(_quit)
-	elif _brief != null and _brief.visible:
-		_dismiss_modal(_brief)
-	elif _howto != null and _howto.visible:
-		_dismiss_modal(_howto)
-	elif _journal != null and _journal.is_open():
-		_journal.dismiss()
-	elif _mission != null and _mission.visible:
-		_dismiss_modal(_mission)
-	elif pause_ui != null and pause_ui.is_open():
+	var top := _top_modal()
+	if top == pause_ui and top != null:
 		pause_ui.dismiss()
+	elif top == _journal and top != null:
+		_journal.dismiss()
+	elif top != null:
+		_dismiss_modal(top)
 	else:
 		_show_quit_confirm()
 
@@ -321,7 +324,7 @@ func _on_start() -> void:
 
 
 func _on_continue() -> void:
-	if not GameSettings.has_progress():
+	if _top_modal() != null or not GameSettings.has_progress():
 		return
 	_enter_mission(GameSettings.progress_level_id())
 
@@ -511,28 +514,77 @@ func _modal_panel(layer: int, w: float, h: float) -> Dictionary:
 	root.add_child(dim)
 	var panel := PanelContainer.new()
 	panel.set_anchors_preset(Control.PRESET_CENTER)
-	panel.offset_left = -w * 0.5
-	panel.offset_right = w * 0.5
-	panel.offset_top = -h * 0.5
-	panel.offset_bottom = h * 0.5
 	panel.theme = NightOps.theme()
 	root.add_child(panel)
+	root.set_meta("panel", panel)
+	root.set_meta("preferred_size", Vector2(w, h))
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 22)
 	margin.add_theme_constant_override("margin_right", 22)
 	margin.add_theme_constant_override("margin_top", 18)
 	margin.add_theme_constant_override("margin_bottom", 18)
 	panel.add_child(margin)
+	var shell := VBoxContainer.new()
+	shell.add_theme_constant_override("separation", 12)
+	margin.add_child(shell)
+	var scroll := ScrollContainer.new()
+	scroll.name = "BodyScroll"
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	shell.add_child(scroll)
 	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 12)
-	margin.add_child(box)
+	scroll.add_child(box)
+	root.set_meta("scroll", scroll)
+	root.set_meta("shell", shell)
 	return {"root": root, "box": box}
+
+
+func _pin_modal_edges(layer: CanvasLayer, box: VBoxContainer, focus: Button) -> void:
+	# Keep the heading and return/accept controls visible while the body scrolls.
+	var shell: VBoxContainer = layer.get_meta("shell")
+	var heading := box.get_child(0)
+	var footer := box.get_child(box.get_child_count() - 1)
+	heading.reparent(shell)
+	shell.move_child(heading, 0)
+	footer.reparent(shell)
+	layer.set_meta("default_focus", focus)
+
+
+func _focus_loop(node: Node) -> void:
+	ModalFocus.loop(node)
+
+
+func _restore_menu_focus() -> void:
+	var top := _top_modal()
+	if top != null:
+		ModalFocus.ensure(top)
+		return
+	var focus := get_viewport().gui_get_focus_owner()
+	if focus == null or not focus.is_visible_in_tree() or not _menu.is_ancestor_of(focus):
+		start_btn.grab_focus()
 
 
 func _reveal_modal(layer: CanvasLayer) -> void:
 	if layer == null:
 		return
+	var top := _top_modal()
+	if top != null and top != layer:
+		return
+	var previous := get_viewport().gui_get_focus_owner()
+	if is_instance_valid(previous) and previous.is_visible_in_tree():
+		layer.set_meta("previous_focus", weakref(previous))
+	elif layer.has_meta("previous_focus"):
+		layer.remove_meta("previous_focus")
 	layer.visible = true
+	_layout_title()
+	(layer.get_meta("scroll") as ScrollContainer).scroll_vertical = 0
+	_focus_loop(layer)
+	var focus: Button = layer.get_meta("default_focus")
+	if focus != null and not focus.disabled:
+		focus.grab_focus()
 	# 0.15s fade; keep mouse filters so buttons stay live during the tween.
 	if _modal_tween != null:
 		_modal_tween.kill()
@@ -556,6 +608,15 @@ func _dismiss_modal(layer: CanvasLayer) -> void:
 			_modal_tween.tween_property(c, "modulate:a", 0.0, 0.15)
 	_modal_tween.chain().tween_callback(func() -> void:
 		layer.visible = false
+		var previous: Control
+		if layer.has_meta("previous_focus"):
+			var reference: WeakRef = layer.get_meta("previous_focus")
+			previous = reference.get_ref() as Control if reference else null
+			layer.remove_meta("previous_focus")
+		if _top_modal() == null and is_instance_valid(previous) and previous.is_visible_in_tree():
+			previous.grab_focus()
+		else:
+			_restore_menu_focus()
 	)
 
 
@@ -567,6 +628,7 @@ func _build_briefing() -> void:
 	kicker.text = "%s  ·  任务档案" % LevelDef.campaign_frame()
 	kicker.add_theme_color_override("font_color", NightOps.OLIVE_DIM)
 	kicker.add_theme_font_size_override("font_size", 13)
+	kicker.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(kicker)
 	_brief_night = Label.new()
 	_brief_night.name = "NightIndex"
@@ -609,7 +671,6 @@ func _build_briefing() -> void:
 	_brief_sit.add_theme_font_size_override("font_size", 14)
 	_brief_sit.add_theme_color_override("font_color", NightOps.TEXT)
 	_brief_sit.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_brief_sit.custom_minimum_size = Vector2(640, 0)
 	box.add_child(_brief_sit)
 	_brief_teach = VBoxContainer.new()
 	_brief_teach.name = "TeachBullets"
@@ -621,7 +682,7 @@ func _build_briefing() -> void:
 	box.add_child(_brief_chips)
 	_brief_body = Label.new()
 	_brief_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_brief_body.custom_minimum_size = Vector2(640, 96)
+	_brief_body.custom_minimum_size = Vector2(0, 96)
 	_brief_body.add_theme_font_size_override("font_size", 13)
 	_brief_body.add_theme_color_override("font_color", NightOps.MUTED)
 	box.add_child(_brief_body)
@@ -645,6 +706,7 @@ func _build_briefing() -> void:
 	_brief_go.add_theme_font_size_override("font_size", 18)
 	_brief_go.pressed.connect(func() -> void: _enter_mission(_pending_id))
 	row.add_child(_brief_go)
+	_pin_modal_edges(_brief, box, _brief_go)
 
 
 func _build_howto() -> void:
@@ -658,14 +720,14 @@ func _build_howto() -> void:
 	box.add_child(t)
 	var body := Label.new()
 	body.text = HOWTO
-	body.autowrap_mode = TextServer.AUTOWRAP_OFF
-	body.custom_minimum_size = Vector2(660, 360)
+	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(body)
 	var close := Button.new()
 	close.text = "关闭"
 	close.custom_minimum_size = Vector2(120, 48)
 	close.pressed.connect(func() -> void: _dismiss_modal(_howto))
 	box.add_child(close)
+	_pin_modal_edges(_howto, box, close)
 
 
 func _build_mission_select() -> void:
@@ -695,7 +757,7 @@ func _build_mission_select() -> void:
 	for i in GameSettings.LEVEL_ORDER.size():
 		var row := HBoxContainer.new()
 		row.name = "MissionRow%d" % i
-		row.custom_minimum_size = Vector2(520, 68)
+		row.custom_minimum_size = Vector2(0, 68)
 		row.add_theme_constant_override("separation", 8)
 		var accent := ColorRect.new()
 		accent.name = "Accent"
@@ -706,7 +768,7 @@ func _build_mission_select() -> void:
 		_mission_accents.append(accent)
 		var btn := Button.new()
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.custom_minimum_size = Vector2(420, 68)
+		btn.custom_minimum_size = Vector2(0, 68)
 		btn.add_theme_font_size_override("font_size", 15)
 		btn.clip_text = false
 		var idx := i
@@ -728,6 +790,7 @@ func _build_mission_select() -> void:
 	back.custom_minimum_size = Vector2(120, 48)
 	back.pressed.connect(func() -> void: _dismiss_modal(_mission))
 	_mission_box.add_child(back)
+	_pin_modal_edges(_mission, _mission_box, _mission_btns[0])
 
 
 func _build_quit_confirm() -> void:
@@ -751,19 +814,20 @@ func _build_quit_confirm() -> void:
 	box.add_child(row)
 	var cancel := Button.new()
 	cancel.text = "取消"
-	cancel.custom_minimum_size = Vector2(90, 36)
+	cancel.custom_minimum_size = Vector2(90, 48)
 	cancel.pressed.connect(func() -> void: _dismiss_modal(_quit))
 	row.add_child(cancel)
 	var settings := Button.new()
 	settings.text = "设置"
-	settings.custom_minimum_size = Vector2(90, 36)
+	settings.custom_minimum_size = Vector2(90, 48)
 	settings.pressed.connect(_open_settings_from_quit)
 	row.add_child(settings)
 	var yes := Button.new()
 	yes.text = "退出"
-	yes.custom_minimum_size = Vector2(90, 36)
+	yes.custom_minimum_size = Vector2(90, 48)
 	yes.pressed.connect(_confirm_quit)
 	row.add_child(yes)
+	_pin_modal_edges(_quit, box, cancel)
 
 
 func _build_ops_stamp() -> void:
@@ -772,7 +836,7 @@ func _build_ops_stamp() -> void:
 	var ui := get_node_or_null("UI") as Control
 	if ui == null:
 		return
-	var row := HBoxContainer.new()
+	var row := HFlowContainer.new()
 	row.name = "OpsStamp"
 	row.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	row.anchor_left = 0.0
@@ -781,8 +845,9 @@ func _build_ops_stamp() -> void:
 	row.offset_right = -20.0
 	row.offset_top = 10.0
 	row.offset_bottom = 44.0
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 10)
+	row.alignment = FlowContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("h_separation", 10)
+	row.add_theme_constant_override("v_separation", 6)
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ui.add_child(row)
 	_ops_stamp = row
@@ -792,21 +857,74 @@ func _build_ops_stamp() -> void:
 	row.add_child(_stamp_chip("CampaignChip", "第三夜", NightOps.OLIVE_DIM, Vector2(84, 28)))
 
 
+func _build_title_flow() -> void:
+	# A real scroll surface keeps every original entry reachable at large UI scale.
+	_title_scroll = ScrollContainer.new()
+	_title_scroll.name = "TitleScroll"
+	_title_scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_title_scroll.offset_left = 24
+	_title_scroll.offset_right = -24
+	_title_scroll.offset_top = 16
+	_title_scroll.offset_bottom = -16
+	_title_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_title_scroll.follow_focus = true
+	$UI.add_child(_title_scroll)
+	_title_flow = VBoxContainer.new()
+	_title_flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_title_flow.add_theme_constant_override("separation", 12)
+	_title_scroll.add_child(_title_flow)
+	var rule: Control = $UI/Rule
+	var foot: Label = $UI/Foot
+	for control in [_ops_stamp, wordmark, tagline, rule, _menu, foot]:
+		control.reparent(_title_flow)
+		control.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		tagline.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	foot.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	rule.custom_minimum_size = Vector2(180, 2)
+	rule.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_menu.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_menu.add_theme_constant_override("separation", 10)
+	_title_flow.sort_children.connect(func() -> void:
+		wordmark.pivot_offset = wordmark.size * Vector2(0.5, 0.45)
+	)
+	_focus_loop(_menu)
+
+
+func _layout_title() -> void:
+	var viewport := get_viewport().get_visible_rect().size
+	if _title_flow != null:
+		var font_size := clampi(int(viewport.y * 0.12), 36, 76)
+		var font := wordmark.get_theme_font("font")
+		while font_size > 24 and font.get_string_size(wordmark.text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x > viewport.x - 64:
+			font_size -= 1
+		wordmark.add_theme_font_size_override("font_size", font_size)
+		_title_flow.custom_minimum_size.y = viewport.y - 32
+		_title_flow.alignment = BoxContainer.ALIGNMENT_CENTER
+	for modal in [_brief, _howto, _mission, _quit]:
+		if modal == null:
+			continue
+		var panel: PanelContainer = modal.get_meta("panel")
+		var preferred: Vector2 = modal.get_meta("preferred_size")
+		var extent := preferred.min(viewport - Vector2(24, 24))
+		panel.offset_left = -extent.x * 0.5
+		panel.offset_right = extent.x * 0.5
+		panel.offset_top = -extent.y * 0.5
+		panel.offset_bottom = extent.y * 0.5
+
+
 func _build_journal() -> void:
 	_journal = CampaignJournalScript.new()
 	add_child(_journal)
-	var menu := get_node_or_null("UI/Menu") as VBoxContainer
-	if menu == null:
-		return
+	_journal.closed.connect(_restore_menu_focus)
 	_journal_btn = Button.new()
 	_journal_btn.name = "JournalButton"
 	_journal_btn.text = "战役档案"
 	_journal_btn.custom_minimum_size = Vector2(300, 48)
 	_journal_btn.add_theme_font_size_override("font_size", 16)
 	_journal_btn.pressed.connect(open_journal)
-	menu.add_child(_journal_btn)
-	menu.move_child(_journal_btn, mini(2, menu.get_child_count() - 1))
-	menu.offset_bottom = 300.0
+	_menu.add_child(_journal_btn)
+	_menu.move_child(_journal_btn, mini(2, _menu.get_child_count() - 1))
 
 
 func _refresh_campaign_title() -> void:
@@ -907,7 +1025,6 @@ func _fill_teach_bullets(teaching: String, must_bring: String = "") -> void:
 		lab.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		lab.add_theme_font_size_override("font_size", 15)
 		lab.add_theme_color_override("font_color", NightOps.TEXT)
-		lab.custom_minimum_size = Vector2(640, 0)
 		_brief_teach.add_child(lab)
 
 

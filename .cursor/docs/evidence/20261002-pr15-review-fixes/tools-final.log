@@ -1,0 +1,15 @@
+TEST_RUN_ID=cb3bca386ad04e4f9795b094c6ca14ba
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/cb3bca386ad04e4f9795b094c6ca14ba/data
+TEST_ENTRY=phase_tools_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/cb3bca386ad04e4f9795b094c6ca14ba/data/godot/app_userdata/Ambush Loop run_id=cb3bca386ad04e4f9795b094c6ca14ba
+PHASE_TOOLS_NATIVE phase=scout command=rotate_cw role=1 before=180.0 actual=188.0 expected=188.0 modal=false locked=false
+PHASE_TOOLS_NATIVE phase=scout command=rotate_ccw role=1 before=188.0 actual=180.0 expected=180.0 modal=false locked=false
+PHASE_TOOLS_NATIVE phase=sweep command=rotate_cw role=1 before=180.0 actual=188.0 expected=188.0 modal=false locked=false
+PHASE_TOOLS_NATIVE phase=sweep command=rotate_ccw role=1 before=188.0 actual=180.0 expected=180.0 modal=false locked=false
+PHASE_TOOLS_OK checks=35 failures=0
+TEST_LOG=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/cb3bca386ad04e4f9795b094c6ca14ba/run.log

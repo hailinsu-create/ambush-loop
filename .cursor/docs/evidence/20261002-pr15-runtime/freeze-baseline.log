@@ -1,0 +1,77 @@
+TEST_RUN_ID=ee0f71c7cb1345ef80d5e7174bb1c36c
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/ee0f71c7cb1345ef80d5e7174bb1c36c/data
+TEST_ENTRY=equipment_freeze_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/ee0f71c7cb1345ef80d5e7174bb1c36c/data/godot/app_userdata/Ambush Loop run_id=ee0f71c7cb1345ef80d5e7174bb1c36c
+ERROR: EQUIPMENT_FREEZE: alert I key rejects backpack
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:62)
+ERROR: EQUIPMENT_FREEZE: alert equip preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: alert pass preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: alert drop preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: alert auto preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: paused_alert I key rejects backpack
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:62)
+ERROR: EQUIPMENT_FREEZE: paused_alert equip preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: paused_alert pass preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: paused_alert drop preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: paused_alert auto preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: replay I key rejects backpack
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:62)
+ERROR: EQUIPMENT_FREEZE: replay equip preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: replay drop preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+ERROR: EQUIPMENT_FREEZE: replay auto preserves inventory and plan
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/equipment_freeze_test.gd:19)
+       [1] _run (res://scripts/equipment_freeze_test.gd:68)
+EQUIPMENT_FREEZE_FAILED failures=14 checks=28

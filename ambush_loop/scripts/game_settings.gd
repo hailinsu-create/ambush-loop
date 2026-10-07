@@ -8,8 +8,15 @@ const ANDROID_BACK_DEBOUNCE_MS := 200
 const LEVEL_ORDER := ["yard", "warehouse", "pump", "railcut", "depot", "radio"]
 const QUALITY_STANDARD := "standard"
 const QUALITY_POWER_SAVING := "power_saving"
+const WebConfigStore := preload("res://scripts/web_config_store.gd")
 
 signal changed
+signal persistence_changed
+
+var persistence_status: String = ""
+var persistence_error: String = ""
+var _browser_checkpoint_blocked := false
+var _browser_save_label: Label
 
 var muted: bool = false
 var master_volume: float = 1.0
@@ -121,8 +128,79 @@ func gate_background_audio(paused: bool) -> void:
 
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		_create_browser_save_feedback()
+		_restore_browser_checkpoint()
 	load_settings()
 	apply_audio()
+
+
+func _create_browser_save_feedback() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 95
+	layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(layer)
+	_browser_save_label = Label.new()
+	_browser_save_label.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	_browser_save_label.offset_left = -180
+	_browser_save_label.offset_right = 180
+	_browser_save_label.offset_top = -20
+	_browser_save_label.offset_bottom = -2
+	_browser_save_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_browser_save_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_browser_save_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_browser_save_label.add_theme_font_size_override("font_size", 12)
+	layer.add_child(_browser_save_label)
+
+
+func _set_persistence_status(status: String, error: String = "") -> void:
+	persistence_status = status
+	persistence_error = error
+	if _browser_save_label:
+		_browser_save_label.text = status
+	persistence_changed.emit()
+
+
+func _restore_browser_checkpoint() -> void:
+	var stored := WebConfigStore.read_browser()
+	if not stored.get("ok", false):
+		_browser_checkpoint_blocked = true
+		_set_persistence_status("浏览器存储不可用，尚未确认保存", str(stored.get("error", "read")))
+		return
+	if stored.get("text") == null:
+		return # First Web version: retain the original IDBFS ConfigFiles.
+	var decoded := WebConfigStore.decode(str(stored.text))
+	if not decoded.ok:
+		_browser_checkpoint_blocked = true
+		_set_persistence_status("浏览器存档无法读取，尚未确认保存", str(decoded.error))
+		return # Preserve unsupported/corrupt checkpoint; do not silently overwrite it.
+	var error := WebConfigStore.restore(decoded.files)
+	if error != OK:
+		_browser_checkpoint_blocked = true
+		_set_persistence_status("浏览器存档恢复失败", str(error))
+
+
+func save_config(cfg: ConfigFile, path: String) -> Error:
+	var error := cfg.save(path)
+	if error != OK:
+		_set_persistence_status("保存失败，请保留当前页面", str(error))
+		return error
+	if not OS.has_feature("web"):
+		return OK
+	if _browser_checkpoint_blocked:
+		return ERR_UNAVAILABLE
+	_set_persistence_status("正在保存到此浏览器…")
+	var checkpoint := WebConfigStore.snapshot()
+	var decoded := WebConfigStore.decode(checkpoint)
+	if not decoded.ok:
+		_set_persistence_status("保存未完成，请保留当前页面", str(decoded.error))
+		return ERR_INVALID_DATA
+	var stored := WebConfigStore.write_browser(checkpoint)
+	if not stored.get("ok", false):
+		_set_persistence_status("保存未完成：浏览器拒绝存储", str(stored.get("error", "readback")))
+		return ERR_CANT_CREATE
+	_set_persistence_status("已保存到此浏览器")
+	return OK
 
 
 func load_settings() -> void:
@@ -160,7 +238,7 @@ func save_settings() -> void:
 	for id in LEVEL_ORDER:
 		if seen_level_tutorials.has(id):
 			cfg.set_value("onboarding", "seen_" + id, bool(seen_level_tutorials[id]))
-	cfg.save(SETTINGS_PATH)
+	save_config(cfg, SETTINGS_PATH)
 
 
 func reset_to_defaults() -> void:
@@ -386,7 +464,7 @@ func record_clear_stats(level_id: String, loops: int = 0, perfect: bool = false)
 			cfg.set_value("stats", "%s_loops" % level_id, loops)
 	if perfect:
 		cfg.set_value("stats", "%s_perfect" % level_id, true)
-	cfg.save(PROGRESS_PATH)
+	save_config(cfg, PROGRESS_PATH)
 
 
 func record_win(level_id: String, loops: int = 0, perfect: bool = false) -> void:
@@ -408,7 +486,7 @@ func record_win(level_id: String, loops: int = 0, perfect: bool = false) -> void
 		cfg.set_value("progress", "level_id", next_id)
 		cfg.set_value("progress", "level_index", won_idx + 1)
 		cfg.set_value("progress", "complete", false)
-	cfg.save(PROGRESS_PATH)
+	save_config(cfg, PROGRESS_PATH)
 	record_clear_stats(level_id, loops, perfect)
 
 

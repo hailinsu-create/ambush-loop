@@ -1,0 +1,285 @@
+{
+  "source_sha": "03063234d40792f3b71454a0d3d2ca07905ae2b2",
+  "game_tree": "8d82125d2c2d56b5603a9e5bb529484281b0ed7a",
+  "native_run": {
+    "source_sha": "03063234d40792f3b71454a0d3d2ca07905ae2b2",
+    "archived_at_utc": "2026-10-04T01:42:52.507670+00:00",
+    "argv": [
+      "bash",
+      "ambush_loop/scripts/run_isolated_test.sh",
+      "/tmp/pr15-remaining-030-godot",
+      "first_visit_journey_test.gd",
+      "--render"
+    ],
+    "env": {
+      "AMBUSH_JOURNEY_START": "resume",
+      "AMBUSH_JOURNEY_SCOPE": "pump"
+    },
+    "actual_exit": 0,
+    "uuid": "5777ee8887964c7dbba55a7e13179be3",
+    "guard_passed": true,
+    "checks": 187,
+    "failures": 0,
+    "native_inputs": 65,
+    "script_errors": 0,
+    "engine_errors": 0,
+    "window": [
+      1280,
+      720
+    ],
+    "scale": 1.0,
+    "pngs": 13,
+    "records": [
+      {
+        "action": "archive actual native player battle and command recording",
+        "attempt": "894a6545a9d49ac514f40adbad264e06",
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-runtime/native-player-pump-record.bin",
+        "playback_frames": 684,
+        "playback_schema": 2,
+        "playback_terminal_tick": 5088,
+        "sha256": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+        "raw_bytes": 9480140,
+        "archive": "native-player-pump-record.bin.gz",
+        "gzip_sha256": "271b6db376ab0c3bb3794646a2cb509984d356041d225631eb98d3d8fc1c0358"
+      }
+    ],
+    "classification": "Formal actual native title Continue from byte-identical b27 pump player save. Original SCOUT gear/cover/8deg MG turning/pack, default open door, real2wave ALERT+pause/SWEEP walking loot and authored ammo6 resupply, final extract WON and original Continue/handoff CTA/railcut2pages. 187/0 actual0 errors0, 13 native PNG. No automatic exhaustion pack refill observed; assigned only. No reference/grants/sim fast-forward. Only pump2waves and next teaching; remaining7waves/art/ears/device/performance/fullFX pending."
+  },
+  "pack": {
+    "source_sha": "03063234d40792f3b71454a0d3d2ca07905ae2b2",
+    "game_tree": "8d82125d2c2d56b5603a9e5bb529484281b0ed7a",
+    "commands": [
+      {
+        "command": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--headless",
+          "--editor",
+          "--path",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/03063234d407/source",
+          "--import"
+        ],
+        "actual_exit": 0
+      },
+      {
+        "command": [
+          "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "--headless",
+          "--path",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/03063234d407/source",
+          "--export-pack",
+          "Linux Desktop",
+          "/workspace/ambush-pr15/ambush_loop/build/player_journey/03063234d407/player-journey.pck"
+        ],
+        "actual_exit": 0
+      }
+    ],
+    "pack": "/workspace/ambush-pr15/ambush_loop/build/player_journey/03063234d407/player-journey.pck",
+    "sha256": "8305ce5795c4035e131b3d95b7b63528321d2b7bd54d6ba53b7ea4ccb9d68332",
+    "bytes": 23427676,
+    "staging_changes": "Only Linux Desktop custom_features=a0_preview; original title/main scene and rendering configuration kept",
+    "asset_generators_run": false
+  },
+  "pack_shell_actual_exit": 0,
+  "import_export_SCRIPT_ERROR": 0,
+  "import_export_ERROR": 0,
+  "record_inspection": {
+    "attempt": "894a6545a9d49ac514f40adbad264e06",
+    "checks": 2978,
+    "event_counts": {
+      "door": 1,
+      "fire": 6,
+      "kill": 3,
+      "loot": 3,
+      "no_engage": 14,
+      "return_fire": 3,
+      "spawn": 3,
+      "terminal": 1
+    },
+    "events": 34,
+    "failures": 0,
+    "frames": 684,
+    "global_wave_offsets": {
+      "0": 0,
+      "1": 254
+    },
+    "mine_events": [],
+    "phase_sequence": [
+      0,
+      1,
+      5,
+      1,
+      5,
+      3
+    ],
+    "playback_terminal_tick": 5088,
+    "raw_sha256": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+    "scope": "Read-only original native serialized record metadata; no gameplay scene, simulation, replay rendering or fixture mutation.",
+    "terminal_tick": 935,
+    "wave_event_counts": {
+      "0": 16,
+      "1": 18
+    },
+    "command_receipt": "native-record-inspect-receipt.json",
+    "actual_exit": 0,
+    "SCRIPT_ERROR": 0,
+    "ERROR": 0
+  },
+  "visual": {
+    "total_formal_png": 13,
+    "unique_id": 13,
+    "unique_sha256": 13,
+    "all_hashes_checked": true,
+    "actually_viewed": [
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_cover5_before_deploy1",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_cover5_before_deploy1.png",
+        "sha256": "01579385be546fe56e5434fe6469d7137d25272be97ed4e92b9f4b6fef4cde8f"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_armed_scout",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_armed_scout.png",
+        "sha256": "daf155404b9d6d342cc0792d126c2f146b2ea7fac3a7f1463527970f3e35251f"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_wave0_sweep",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_wave0_sweep.png",
+        "sha256": "e1624673ea01839a31a70c861aa7163cb08444d301fd4554b8e515b5352f04ad"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_wave0_sweep_looted",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_wave0_sweep_looted.png",
+        "sha256": "ba190c884cc60af886fa741f264d5afb1f73e594b5f968c8f711e908094759cf"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_wave1_alert",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_wave1_alert.png",
+        "sha256": "a1c00fb2734a4e38ceb1243a27471b19b344543e1ffcd43779187de35f63e886"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_wave1_sweep",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_wave1_sweep.png",
+        "sha256": "cd61461c500fd8b23a6cfc62a99891b9b5b9a3a99d8b3b5d6237c563dd84b061"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_wave1_sweep_looted",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_wave1_sweep_looted.png",
+        "sha256": "552713984fa7273d2e4c55a6acc647c61d87cc29c774c91f77d53b0020765e0a"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_won",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_won.png",
+        "sha256": "a9fcc4d137b514ee54ee59227add1c2fca9038b52432063d2746442c73e75402"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_pump_1280_100_desktop_next_night_handoff",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_pump_1280_100_desktop_next_night_handoff.png",
+        "sha256": "2b92a8efbf1ea9a462e1790688ea998c4e5f9b0dd1e2fdd426b6714397d36a84"
+      },
+      {
+        "capture_source": "DisplayServer.screen_get_image native Window crop",
+        "id": "player_railcut_1280_100_desktop_tutorial_page1",
+        "image_size": [
+          1280,
+          720
+        ],
+        "path": "res://build/asset_review/pr15-runtime/viewport_player_railcut_1280_100_desktop_tutorial_page1.png",
+        "sha256": "caccbb8ba97384c169219ee8b26de80601289890f2fbaa6755cd6726d320db74"
+      }
+    ],
+    "scope": "Bounded actual native pump original UI/input/behavior; default open door only, no whole-art/FX/device/readability certification."
+  },
+  "automatic_ammo_pack": {
+    "observations": [],
+    "actual_exhaustion_refill_verified": false,
+    "assigned_operator": 2,
+    "final_ammo": 16,
+    "final_used": false,
+    "boundary": "Original UI assignment only. Ground loot and authored ammo6 resupply are distinct; no true ammo-zero pack refill signal occurred."
+  },
+  "new_observation": {
+    "kind": "original result highlight wording does not match actual open-door route",
+    "image": "viewport_player_pump_1280_100_desktop_won.png",
+    "actual_route": "door open throughout native pump journey",
+    "original_static_highlight": "锁门后紫线改道被你罩住",
+    "source": "scripts/main.gd:_fill_result_stats reads level.highlight_hook unconditionally; scripts/level/level_def.gd:make_pump",
+    "status": "Observed text mismatch retained; not fixed in this test-only slice, closed-door purple route pending."
+  },
+  "prior_development_runs": [],
+  "ownership": {
+    "production_runtime_changed": false,
+    "changed_game_files": [
+      "scripts/first_visit_journey_test.gd"
+    ],
+    "asset_generators_run": false,
+    "asset_source_sha": "29749157c5db064bfea626c3ed9d75d9a1791ece",
+    "asset_delivery_sha": "ebedb829e3263abbeb6dd266905f24a3869fa281"
+  },
+  "xorg": {
+    "display": ":112",
+    "owned_pid": 84196,
+    "actual_exit": 0,
+    "raw_log_sha256": "a0c6fae14602e78a76b56c08db34460dea84f9da9e97bccd2b61f4327fa79610",
+    "lossless_archive": "../xorg.log.gz",
+    "raw_stdout_sha256": "195aad426a7a24ea410368e9bf7282cf65a36db0eaa41a002b0d17f037aad671",
+    "stdout_lossless_archive": "../xorg.stdout.gz"
+  },
+  "warehouse_history": {
+    "manifest": "../20261004-pr15-remaining-journey/file-manifest.json",
+    "original_84_files_byte_hashes_rechecked": true,
+    "errata": "../../AMBUSH_PR15_WAREHOUSE_RECEIPT_ERRATA_20261004.md",
+    "original_receipts_changed": false,
+    "actual_pump_tutorial_pages": 2
+  },
+  "next": "Resume authentic ending-player-progress/railcut via original title Continue, bounded railcut2waves next; depot2/radio3 remain. Current pump Native record available for independent readonly 3D replay QA. FullFX/A3/ears/APK/device and actual ammo exhaustion pack refill remain pending.",
+  "archive_diff_check": {
+    "initial_result": 2,
+    "cause": "Original raw Xorg stdout contains a trailing space in its version line",
+    "correction": "Store stdout as lossless gzip and retain original raw hash; no bytes trimmed, no runtime/source changes or native rerun"
+  }
+}

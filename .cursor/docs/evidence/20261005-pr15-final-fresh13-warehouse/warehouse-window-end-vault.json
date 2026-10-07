@@ -1,0 +1,58 @@
+{
+  "START": "2026-10-05T20:53:55.218809+00:00",
+  "cap_seconds": 1430,
+  "steps": [
+    [
+      "preserved-title-warehouse-entry",
+      "initialize_warehouse.py",
+      180
+    ],
+    [
+      "warehouse-natural-two-waves",
+      "produce_warehouse.py",
+      900
+    ],
+    [
+      "warehouse-original-checkpoint-boundary",
+      "finish_warehouse.py",
+      300
+    ]
+  ],
+  "source": {
+    "source": "b74f1fc2f190f574cd0c31aba04e495829337214",
+    "game_tree": "1e8af45ee23098f763acc139b56f8f7e0f41665a"
+  },
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/tmp/pr15-final-fresh13-1ec-20261005/browser_controller_warehouse.py"
+  ],
+  "profile_preserved": true,
+  "END": "2026-10-05T21:06:14.497592+00:00",
+  "wall_seconds": 739.278459971014,
+  "actual_exit": 0,
+  "timed_out": false,
+  "request_results": [
+    {
+      "label": "preserved-title-warehouse-entry",
+      "actual_exit": 0,
+      "wall_seconds": 18.962605,
+      "cap_seconds": 180,
+      "within_cap": true
+    },
+    {
+      "label": "warehouse-natural-two-waves",
+      "actual_exit": 0,
+      "wall_seconds": 630.899481,
+      "cap_seconds": 900,
+      "within_cap": true
+    },
+    {
+      "label": "warehouse-original-checkpoint-boundary",
+      "actual_exit": 0,
+      "wall_seconds": 87.190826,
+      "cap_seconds": 300,
+      "within_cap": true
+    }
+  ],
+  "all_steps_passed": true
+}

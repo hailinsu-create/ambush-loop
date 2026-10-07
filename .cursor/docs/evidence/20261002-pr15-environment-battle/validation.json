@@ -1,0 +1,925 @@
+{
+  "fixed_environment_source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+  "game_tree": "d1af602b27c23730852ef695ba1084507123ff45",
+  "scope": "actual six 40x22 tactical layouts, 13 authored waves with reference equipment / authored-loot vacuum fixture; versioned pure-copy environment; cloud-rendering only",
+  "runs": [
+    {
+      "entry": "environment_battle_test.gd",
+      "source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+      "run_id": "a97ac78cd7454d4bab998e13934af29e",
+      "actual_exit_code": 0,
+      "log": "environment_battle_test.log",
+      "sha256": "787b06fb3e6911f3abc88a5962184f9f64d1626fffcc5ad256ecc4c2f89dc1c7",
+      "markers": [
+        "ENVIRONMENT_BATTLE_OK checks=283 failures=0 levels=6 captures=50"
+      ],
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture environment_battle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15"
+    },
+    {
+      "entry": "campaign_replay_test.gd",
+      "source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+      "run_id": "761063dbd05541cebad93cbf9c7d0af6",
+      "actual_exit_code": 0,
+      "log": "campaign_replay_test.log",
+      "sha256": "169f8a7d2b1792fcc53816224cdc1bdec9286bb3a6d24ba387ed61c2aebfe565",
+      "markers": [
+        "CAMPAIGN_REPLAY_OK checks=10296 failures=0"
+      ],
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_replay_test.gd",
+      "cwd": "/workspace/ambush-pr15"
+    },
+    {
+      "entry": "presentation_contract_test.gd",
+      "source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+      "run_id": "c8cbf54878e1462d8b9ccebdb762de40",
+      "actual_exit_code": 0,
+      "log": "presentation_contract_test.log",
+      "sha256": "01e9c6608e11497fdaeefb423e5f8d1a8a10bfe6e8edd45c32533b0848dd6358",
+      "markers": [
+        "PRESENTATION_CONTRACT_OK checks=84039"
+      ],
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 presentation_contract_test.gd",
+      "cwd": "/workspace/ambush-pr15"
+    },
+    {
+      "entry": "visual_snapshot_test.gd",
+      "source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+      "run_id": "77ff0961133b44d7bbcf1b7b80c77557",
+      "actual_exit_code": 0,
+      "log": "visual_snapshot_test.log",
+      "sha256": "e0244352be492db919fc383159ec4b4eaf08fb8ba5a02a4b9a890fb31ec9f3f1",
+      "markers": [
+        "VISUAL_SNAPSHOT_OK checks=164 failures=0"
+      ],
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture visual_snapshot_test.gd --render",
+      "cwd": "/workspace/ambush-pr15"
+    },
+    {
+      "entry": "presentation_lifecycle_test.gd",
+      "source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+      "run_id": "d6628e4fc74647c2998e3929be0629c1",
+      "actual_exit_code": 0,
+      "log": "presentation_lifecycle_test.log",
+      "sha256": "7178ab35aafb6ff726021106c884d24737bc54cba22c367a018941f32784ce67",
+      "markers": [
+        "PRESENTATION_LIFECYCLE_OK checks=32 failures=0"
+      ],
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+      "cwd": "/workspace/ambush-pr15"
+    },
+    {
+      "entry": "command_pose_clock_test.gd",
+      "source": "ffb95a670b4b58cbe420571bd9f884fed3a1a41b",
+      "run_id": "44cda408f2934f989d93a6441322d49c",
+      "actual_exit_code": 0,
+      "log": "command_pose_clock_test.log",
+      "sha256": "ebc8a46e620f54871f23c0a01b3f7aeb0197481fd8a3c9e3ffcaa373d9426215",
+      "markers": [
+        "COMMAND_POSE_CLOCK_OK checks=29 failures=0"
+      ],
+      "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture command_pose_clock_test.gd --render",
+      "cwd": "/workspace/ambush-pr15"
+    }
+  ],
+  "battle_validation": {
+    "captures": [
+      {
+        "draw_calls": 187,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_search_half.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "0c8337a387560efa659d9a6d20bb87101422bfb4c56266f0d4fbbf5bb14ab911",
+        "tick": 0,
+        "triangles": 54906,
+        "view_size": 18.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 189,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_search_empty.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "9b72fe7bcea9393e5437138014f50af6ea2b2ebd0bd83d62f5180519e9f850ac",
+        "tick": 0,
+        "triangles": 55258,
+        "view_size": 18.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 199,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_scout.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "f85d1e5e318b5f60e5831959550af4d602094270552b2d7d2e821af873cefa50",
+        "tick": 0,
+        "triangles": 57078,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 192,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_alert.png",
+        "phase": 1,
+        "pitch": 55.0,
+        "sha256": "77b1226f5b18855289066c6229ac19a0a10442a92eac2a4982e9f2ea4b9fddb6",
+        "tick": 0,
+        "triangles": 53826,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 190,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw0.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "2dfd06d566380d09ad6f28f382a19bf29b77c31971c408ebc525de1245b70eed",
+        "tick": 1056,
+        "triangles": 59444,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 0.0
+      },
+      {
+        "draw_calls": 194,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw90.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "5a85256f05797e33133181c9edc01197b299749f55e6f048e25c37a17944dc0b",
+        "tick": 1056,
+        "triangles": 59012,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 90.0
+      },
+      {
+        "draw_calls": 180,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw180.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "592cb4d3d624a424b5dbd4de3a2e55380c5c525e0064dcc92e8090ad179848cd",
+        "tick": 1056,
+        "triangles": 57368,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 180.0
+      },
+      {
+        "draw_calls": 194,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_sweep_low_yaw270.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "49bb66f0975257308e84356a4b749b81fa958a232392b3129790750e640a19a2",
+        "tick": 1056,
+        "triangles": 59696,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 270.0
+      },
+      {
+        "draw_calls": 202,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_sweep_high.png",
+        "phase": 5,
+        "pitch": 65.0,
+        "sha256": "e8eb084ce222bd4412dcc3d6d6e921c6587e94a8e47c03fb4858aff810c6ecb3",
+        "tick": 1056,
+        "triangles": 61092,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 198,
+        "level": "yard",
+        "path": "res://build/asset_review/pr15-environment-battle/yard_history.png",
+        "phase": 4,
+        "pitch": 55.0,
+        "sha256": "be07ecaabc02b16ee440aa453fe320c48e1a8dc79d0e82b47433dcb5bd32e32c",
+        "tick": 0,
+        "triangles": 57066,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 179,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_scout.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "41549c391e799f47e0eeb811acd3c77d37f6c0dc1b221ca10af6f7b8ba139b21",
+        "tick": 0,
+        "triangles": 96992,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 172,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_alert.png",
+        "phase": 1,
+        "pitch": 55.0,
+        "sha256": "d1f53c3959641c9e0be7c3582d6f0cafd8a42d061a21d8cd240604c878bed527",
+        "tick": 0,
+        "triangles": 93740,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 178,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw0.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "25d93280a97a37b7079963206f36b268aa1197e974c8f3fd3e8700fc30e797b3",
+        "tick": 315,
+        "triangles": 99772,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 0.0
+      },
+      {
+        "draw_calls": 174,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw90.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "191882193a8b609753d98e9fa4ed264e208eeed528898400bdc2bbb4d978c440",
+        "tick": 315,
+        "triangles": 97376,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 90.0
+      },
+      {
+        "draw_calls": 176,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw180.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "043927d3f6107a037a6ed82cf8ac177699232e438ce428e1701c99f15d3d06e1",
+        "tick": 315,
+        "triangles": 99508,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 180.0
+      },
+      {
+        "draw_calls": 174,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_sweep_low_yaw270.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "aa934c0dd4e7b1b277ac454553d8bec140a254bf71edbd740c831947e4ce07b4",
+        "tick": 315,
+        "triangles": 90668,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 270.0
+      },
+      {
+        "draw_calls": 180,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_sweep_high.png",
+        "phase": 5,
+        "pitch": 65.0,
+        "sha256": "2af7e89b2738b7564bf08d39a6d240305158916236b9cbd281c5d2292d4eae58",
+        "tick": 315,
+        "triangles": 100036,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 178,
+        "level": "warehouse",
+        "path": "res://build/asset_review/pr15-environment-battle/warehouse_history.png",
+        "phase": 4,
+        "pitch": 55.0,
+        "sha256": "2a1f998417f2066076b80c2c89a33fbfe2348000d09b3b0982683cb4e4d889a2",
+        "tick": 0,
+        "triangles": 96980,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 343,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_scout.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "79da4e86268c385998e1d1fa79c44eb4ad88f3133af76c7bc9284b8e501908f0",
+        "tick": 0,
+        "triangles": 124894,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 336,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_alert.png",
+        "phase": 1,
+        "pitch": 55.0,
+        "sha256": "54d5f503e67766b05bbbc419231ba24dba843a0cf3f7715b24d05a5dda64d40c",
+        "tick": 0,
+        "triangles": 121642,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 350,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw0.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "f629cab6c71e90c3d2921ce97a2df5598fedc28bdad9cb8cdd4b224e863bfd3e",
+        "tick": 231,
+        "triangles": 132850,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 0.0
+      },
+      {
+        "draw_calls": 348,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw90.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "4b55b8b9606f5253d48d87c711cec278070f519861f727217ca91d19902bad66",
+        "tick": 231,
+        "triangles": 128574,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 90.0
+      },
+      {
+        "draw_calls": 356,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw180.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "b8f63aa03061eea02cf05257e760ca56626a5b43810bff61c72d3f401102c432",
+        "tick": 231,
+        "triangles": 134298,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 180.0
+      },
+      {
+        "draw_calls": 344,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_sweep_low_yaw270.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "8f10f7c550aef0cf0a75399e86133066a56305b2cc1fea789fdc76410f638f8c",
+        "tick": 231,
+        "triangles": 124354,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 270.0
+      },
+      {
+        "draw_calls": 335,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_sweep_high.png",
+        "phase": 5,
+        "pitch": 65.0,
+        "sha256": "7f59ba6e76801d21da6b1be327a1f051b4a5dca711dbca1d573a9c41f585e2ea",
+        "tick": 231,
+        "triangles": 124122,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 342,
+        "level": "pump",
+        "path": "res://build/asset_review/pr15-environment-battle/pump_history.png",
+        "phase": 4,
+        "pitch": 55.0,
+        "sha256": "2525bb33906a235f5b267f8401471ec1ee8533ad1025501b24239cabc4569999",
+        "tick": 0,
+        "triangles": 124882,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 344,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_scout.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "b29ec274ad3b06fe1b797b5fb85686d2e6d33b1f269d98d6a897e285e45f1707",
+        "tick": 0,
+        "triangles": 125150,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 330,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_alert.png",
+        "phase": 1,
+        "pitch": 55.0,
+        "sha256": "00aefb4923e50691ca9ed903893230dc0a507845f2a2df334d26cc039fe1b259",
+        "tick": 0,
+        "triangles": 118646,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 344,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw0.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "0ce00f0b9785ac1330d5668bf42954ba1d039d610e3f93f2cbaa8e5721f57c09",
+        "tick": 117,
+        "triangles": 129854,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 0.0
+      },
+      {
+        "draw_calls": 340,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw90.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "277bdd3d3a9d6633c32533a09ed153f0f9f46ab6e645aacbf4592bda8c794f86",
+        "tick": 117,
+        "triangles": 124942,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 90.0
+      },
+      {
+        "draw_calls": 350,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw180.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "f459b3af58caba82e4a6473e0d35f9e25b0394e45c66b08a266b21c0159ca17a",
+        "tick": 117,
+        "triangles": 130482,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 180.0
+      },
+      {
+        "draw_calls": 342,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_sweep_low_yaw270.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "dc01f951ecb6a53cf951c3bb57b209d8e3cd06658c0ce72cee902b3ae429fcd7",
+        "tick": 117,
+        "triangles": 122386,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 270.0
+      },
+      {
+        "draw_calls": 329,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_sweep_high.png",
+        "phase": 5,
+        "pitch": 65.0,
+        "sha256": "874d65a05d8cecbfcd6da74b8b39e00ce06af8456246f374a840ec3f09a812b2",
+        "tick": 117,
+        "triangles": 121126,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 336,
+        "level": "railcut",
+        "path": "res://build/asset_review/pr15-environment-battle/railcut_history.png",
+        "phase": 4,
+        "pitch": 55.0,
+        "sha256": "2ac065a991fa241f89dd3e47cf5524238239ec7c3f4b4c09438efa758eeb97e0",
+        "tick": 0,
+        "triangles": 121886,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 348,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_scout.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "275529ef91bd46fa2755abcc0d20ff2ecfe8d538c8bcd312704f12b1c94bc2ab",
+        "tick": 0,
+        "triangles": 119344,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 334,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_alert.png",
+        "phase": 1,
+        "pitch": 55.0,
+        "sha256": "6aef1bfebdcd42bce11aff2c37874eff2578ed22237178eb352b6268a10a9f88",
+        "tick": 0,
+        "triangles": 112840,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 350,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw0.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "5327e99404a7462a6f4876e1f59a31bc41fef044acf5090a0fc814ad9aefc114",
+        "tick": 566,
+        "triangles": 126416,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 0.0
+      },
+      {
+        "draw_calls": 344,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw90.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "89e7e689479dd3632da5b5e18fe10afbda6fee6c61d386f19fe8be0e52b708c8",
+        "tick": 566,
+        "triangles": 118356,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 90.0
+      },
+      {
+        "draw_calls": 354,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw180.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "ccba40287712f8aae78deb4310ed535b12e07a8796fb88c17cc1fbb14f73a966",
+        "tick": 566,
+        "triangles": 125176,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 180.0
+      },
+      {
+        "draw_calls": 346,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_sweep_low_yaw270.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "cd2491b46c3eeb16a8a8f7834a2d83c386819c36e106874856fd4d682044927c",
+        "tick": 566,
+        "triangles": 121504,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 270.0
+      },
+      {
+        "draw_calls": 337,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_sweep_high.png",
+        "phase": 5,
+        "pitch": 65.0,
+        "sha256": "6d5bc6f1abebf498aaff7d98fb443685537e5a3ff78802a99e5100270e86dd65",
+        "tick": 566,
+        "triangles": 118324,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 340,
+        "level": "depot",
+        "path": "res://build/asset_review/pr15-environment-battle/depot_history.png",
+        "phase": 4,
+        "pitch": 55.0,
+        "sha256": "020251d76f0367b448f86c89268eb1a4e05a64781121f95b815a924222a136dc",
+        "tick": 0,
+        "triangles": 116080,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 418,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_scout.png",
+        "phase": 0,
+        "pitch": 55.0,
+        "sha256": "9d8657f909b2089eae4a7356e500aac482170d36ae4b957e4c98c37d4c0ec2d1",
+        "tick": 0,
+        "triangles": 160404,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 404,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_alert.png",
+        "phase": 1,
+        "pitch": 55.0,
+        "sha256": "ac1ef2338f6710ae962adc783ed326741e0929b0bd7af1419e53c70968850239",
+        "tick": 0,
+        "triangles": 153900,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 420,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw0.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "4f4e621d7a47d59bb907236f4d7fc522b27e6462a0d96860410fd0027618ed2f",
+        "tick": 574,
+        "triangles": 167016,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 0.0
+      },
+      {
+        "draw_calls": 414,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw90.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "20f92d6c29ac77c960cca57c19982e642c225246d22a92eeedcac34d7e89d6d1",
+        "tick": 574,
+        "triangles": 161928,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 90.0
+      },
+      {
+        "draw_calls": 424,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw180.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "cd3205b04261ab42451b16e0cb02e7ac8e923dd9ecdaa6f967885d3bf13144a7",
+        "tick": 574,
+        "triangles": 168748,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 180.0
+      },
+      {
+        "draw_calls": 416,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_sweep_low_yaw270.png",
+        "phase": 5,
+        "pitch": 35.0,
+        "sha256": "d637dba71a6540bf998b9588f6251b2f3fa472931e6c5ec1829a2d0bd3d54d5f",
+        "tick": 574,
+        "triangles": 163024,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 270.0
+      },
+      {
+        "draw_calls": 407,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_sweep_high.png",
+        "phase": 5,
+        "pitch": 65.0,
+        "sha256": "aed92e6c667e8e46b46bd7e67705270fda9bc4fb2afb60b92c013ec556b83d1f",
+        "tick": 574,
+        "triangles": 159384,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      },
+      {
+        "draw_calls": 410,
+        "level": "radio",
+        "path": "res://build/asset_review/pr15-environment-battle/radio_history.png",
+        "phase": 4,
+        "pitch": 55.0,
+        "sha256": "9a2dc909feb39c9fd2ea2cfbf2aaec0cf689cd463e2ff4434907b5e071859601",
+        "tick": 0,
+        "triangles": 157140,
+        "view_size": 24.0,
+        "wave": 0,
+        "yaw": 35.0
+      }
+    ],
+    "checks": 283,
+    "environment_revision": "50ef7883285c4419dbd8339b935433dc6bb5e3f8",
+    "failures": 0,
+    "levels": [
+      {
+        "blocked_cells": 263,
+        "events": 34,
+        "level": "yard",
+        "local_wave_ticks": [
+          1056,
+          227
+        ],
+        "terminal_tick": 1283,
+        "waves": 2
+      },
+      {
+        "blocked_cells": 236,
+        "events": 67,
+        "level": "warehouse",
+        "local_wave_ticks": [
+          315,
+          876
+        ],
+        "terminal_tick": 1191,
+        "waves": 2
+      },
+      {
+        "blocked_cells": 227,
+        "events": 34,
+        "level": "pump",
+        "local_wave_ticks": [
+          231,
+          676
+        ],
+        "terminal_tick": 907,
+        "waves": 2
+      },
+      {
+        "blocked_cells": 344,
+        "events": 38,
+        "level": "railcut",
+        "local_wave_ticks": [
+          117,
+          602
+        ],
+        "terminal_tick": 719,
+        "waves": 2
+      },
+      {
+        "blocked_cells": 311,
+        "events": 35,
+        "level": "depot",
+        "local_wave_ticks": [
+          566,
+          391
+        ],
+        "terminal_tick": 957,
+        "waves": 2
+      },
+      {
+        "blocked_cells": 303,
+        "events": 51,
+        "level": "radio",
+        "local_wave_ticks": [
+          574,
+          391,
+          448
+        ],
+        "terminal_tick": 1413,
+        "waves": 3
+      }
+    ],
+    "rendering": "X11",
+    "scope": "actual 6 levels / 13 authored waves; ref equipment and loot-vacuum fixture, cloud rendering only"
+  },
+  "development": {
+    "first_render": {
+      "checks": 277,
+      "failures": 1,
+      "actual_exit_code": 1,
+      "cause": "test expected no id for decorative empty crate; actual picker correctly returns ground id=-1; corrected test only",
+      "log": "development-first-render.log",
+      "fixture": "development-first-fixture.gd"
+    },
+    "second_headless": {
+      "checks": 233,
+      "failures": 0,
+      "actual_exit_code": 0,
+      "run_id": "2a08f8cf64b440ac9f43372a13b10d56",
+      "source": "development working tree; not substituted for fixed-source formal evidence"
+    }
+  },
+  "immutable_bytes": {
+    "runtime_files": 85,
+    "reuse_dependencies": 11,
+    "mismatches": []
+  },
+  "budget": {
+    "viewport_visible_draw_calls": [
+      172,
+      424
+    ],
+    "viewport_visible_primitives": [
+      53826,
+      168748
+    ],
+    "environment": "Godot 4.7.2 ed1daf0bf, Compatibility Mesa llvmpipe, Dummy audio",
+    "device_performance_pass": false
+  },
+  "remaining": [
+    "R5 utility/corpse actions",
+    "complete HUD/FX and final visual acceptance",
+    "A3 cloud optimization",
+    "continuous SWEEP timeline, FAILED/abort terminal and final full smoke",
+    "traceable complete APK",
+    "ear listening / device stage after production"
+  ],
+  "observed_visual_issue": "live FX repaired in 2ce (independent 36/18fail to 36/0); filled selection marker repaired to outline in 05a9026. HUD space and crate/body contact require remaining R5/HUD work.",
+  "followups": {
+    "fx_source": "2ce6c602e31fb29556c85961704778185ca5a776",
+    "focus_test_source": "738534274fb54bade2e6201c859b2b406907956a",
+    "outline_source": "05a90268086dde694cc2f8313e808b5b23b629ba",
+    "scope": "minor display marker fix and test camera focus; original six-level fixed-source evidence remains ffb",
+    "runs": [
+      {
+        "source": "738534274fb54bade2e6201c859b2b406907956a",
+        "entry": "environment_battle_test.gd",
+        "actual_exit_code": 0,
+        "run_id": "5d770d0b54b14f17a66f2b8617ab5be1",
+        "command": "AMBUSH_ENV_TEST_SCOPE=crate_only bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture environment_battle_test.gd --render",
+        "cwd": "/workspace/ambush-pr15",
+        "log": "crate-focus-final.log",
+        "sha256": "b2c08d67055f4c72f680abd47de4203c66d917931b544f1dbc21643ceb036e4b",
+        "markers": [
+          "ENVIRONMENT_CRATE_VISUAL_OK checks=11 failures=0"
+        ]
+      },
+      {
+        "source": "05a90268086dde694cc2f8313e808b5b23b629ba",
+        "entry": "environment_battle_test.gd",
+        "actual_exit_code": 0,
+        "run_id": "2719bb1ee5734e95a819bb3e769545d6",
+        "command": "AMBUSH_ENV_TEST_SCOPE=crate_only bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture environment_battle_test.gd --render",
+        "cwd": "/workspace/ambush-pr15",
+        "log": "ring-environment_battle_test.log",
+        "sha256": "de1818e89238febe6c940c9a275110d981f131699c3aec71dda6be2f0c80e26b",
+        "markers": [
+          "ENVIRONMENT_CRATE_VISUAL_OK checks=11 failures=0"
+        ]
+      },
+      {
+        "source": "05a90268086dde694cc2f8313e808b5b23b629ba",
+        "entry": "presentation_lifecycle_test.gd",
+        "actual_exit_code": 0,
+        "run_id": "9aa8b9b64477415cb5eaeaf993bd5ff8",
+        "command": "bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/bin/godot-capture presentation_lifecycle_test.gd --render",
+        "cwd": "/workspace/ambush-pr15",
+        "log": "ring-presentation_lifecycle_test.log",
+        "sha256": "c3ad812aeb75e5f6628594a32a17415994c60078f03662572b9e3e70ba12fa6a",
+        "markers": [
+          "PRESENTATION_LIFECYCLE_OK checks=32 failures=0"
+        ]
+      }
+    ],
+    "captures": [
+      {
+        "path": "yard_search_half_focused_outline.png",
+        "sha256": "7d217866d66fe3b4f3eee76da2ac5b5ccc15c66ec291727488affcf893cd0b8b"
+      },
+      {
+        "path": "yard_search_empty_focused_outline.png",
+        "sha256": "63b5b9d5630807a03878bf4e8094bb75b2cf46c49a634770d1da3f33a4c7abab"
+      }
+    ]
+  },
+  "pack": {
+    "fixed_source": "2ce6c602e31fb29556c85961704778185ca5a776",
+    "path": "/tmp/pr15-environment-runtime.pck",
+    "bytes": 24521472,
+    "sha256": "f78aa89b1d2bd2cde659b0d4fc26181dbea997d3462f9b6b5a6af1e9ce7f2da0",
+    "actual_export_exit_code": 0,
+    "actual_test_exit_code": 0,
+    "checks": 1512,
+    "failures": 0,
+    "run_id": "923cffde0e8f49ffacda57076f3d6805",
+    "scope": "empty physical project, resource and actual six grids x 2 LOD assembly; technical PCK, not APK; predates outline-only cosmetic followup"
+  }
+}

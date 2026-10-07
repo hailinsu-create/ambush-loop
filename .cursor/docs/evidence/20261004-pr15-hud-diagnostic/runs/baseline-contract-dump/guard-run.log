@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop run_id=954c4786d5cb4c1792c9c31f5fdc6f79
+PRESENTATION_PICK_MATRIX samples=48416 poses=72
+DIAG_BATTLE_DUMP=/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop/battle-0.bin
+DIAG_BATTLE_DUMP=/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop/battle-1.bin
+DIAG_BATTLE_DUMP=/workspace/pr15-metadata-candidate-a42/ambush_loop/build/ambush_test_runs/954c4786d5cb4c1792c9c31f5fdc6f79/data/godot/app_userdata/Ambush Loop/battle-2.bin
+ERROR: PRESENTATION_CONTRACT: 30 FPS rotating and 60 FPS static outcomes/events are identical
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/presentation_contract_test.gd:23)
+       [1] _run (res://scripts/presentation_contract_test.gd:107)
+ERROR: PRESENTATION_CONTRACT: 2x presentation keeps identical simulation result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/presentation_contract_test.gd:23)
+       [1] _run (res://scripts/presentation_contract_test.gd:108)
+PRESENTATION_BATTLE tick=1056 events=22
+PRESENTATION_CONTRACT_FAILED failures=2 checks=84042

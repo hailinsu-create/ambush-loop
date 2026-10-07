@@ -1,0 +1,1 @@
+6.1-sol只读agent /root/fx_source_interface_audit，固定9f6f83ead818993114b8519266e1a7131acc5f05：真实shooter存在/group-specific id与event.actor_id均TYPE_INT且相同；confirm/finish均经过该门。operator.op_id/enemy.label_id原字段均int，合法return callback使用同from.label_id。pack/pistol不改op_id、原confirm仍在伤害与换枪前，main两包装路径同步begin/attack/finish。未运行引擎或编辑文件。另提示同射手旧事件/错误时钟与重复descriptor覆盖为未复现后续接口风险；普通main紧接新prelog。此审计不代运行验收。

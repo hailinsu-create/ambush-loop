@@ -1,0 +1,29 @@
+{
+  "provenance": "parent thread 01a0efe8-604e-7249-8093-d7921d952020 reports; not root reruns or received raw QA artifacts",
+  "qa_end": "2026-10-05T04:15:19Z",
+  "reported_counts": "native22/0 E0/S0; timing18/0; paired7/0; unchanged production export4/0 actual0",
+  "fast_boundary": {
+    "method": "trusted M; QA schedules reload microtask after original FS.close returns; no added wait/sync/IDB delay/cfg write/clock change",
+    "old_ms": {"keydown":2575.6,"cfg_close":2583.2,"reload_begin":2689.5,"syncfs_begin":2696.8},
+    "old_loaded_mute": false,
+    "new_ms": {"keydown":2764.4,"cfg_close":2774.7,"localStorage_write_and_exact_read":2778.4,"UI_complete":2778.6,"reload_begin":2896.4,"syncfs_begin":2904},
+    "new_loaded_mute": true,
+    "limit": "controlled lifecycle counterexample; old navigation completion/IDB completion were not captured, does not prove bytes never persisted; FS.close observation is not direct ConfigFile.save-return observation"
+  },
+  "this_800ms_pair": {
+    "old_syncfs_begin_done_ms": [2707,3224], "old_reload_begin_ms":4082,
+    "new_syncfs_begin_done_ms": [2683,3077], "new_reload_begin_ms":3941,
+    "reported_python_wait_to_reload_seconds": [0.890645,0.868567],
+    "actual_CDP_confirmed_state_to_reload_ms": [992.5,960],
+    "actual_keydown_to_reload_ms": [1510.7,1367.5],
+    "limit": "both passed this pair; does not overwrite original 800ms failure or establish sufficient universal wait"
+  },
+  "independent_new_pck": {
+    "bytes":38082176,"sha256":"5d192052281f4a0a61f9b996a0381efd3c1eacd4a3b97d9fcaef005fa41a3599",
+    "relative_to_author_bytes":96,"source":"dab870595175eed37a6d2a012bc69a76062d48b0",
+    "game_tree":"4f49a7c9cb5a789fbb570bceb947eab7df2eb54a",
+    "reported_tracked_identical":997,
+    "limit":"untracked warm caches not compared item by item; +96 does not explain old +32 or tar serialization; pending"
+  },
+  "still_unverified": ["production origin browser","actual background exit","performance budget","Library transfer"]
+}

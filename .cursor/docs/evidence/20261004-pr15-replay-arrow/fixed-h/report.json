@@ -1,0 +1,100 @@
+{
+  "checks": 26,
+  "failures": 0,
+  "producer_source_sha": "a05fa959093ef5b6733466091a04fbb46647f97b",
+  "raw_sha256": "4e27b9af88ad72199489ee11e987e1ab0e8200c47bc963e831f4c9eb1883c164",
+  "rows": [
+    {
+      "echo": false,
+      "expected": 106,
+      "label": "logical-only right",
+      "logical": 4194321,
+      "physical": 0,
+      "pressed": true,
+      "tick": 106
+    },
+    {
+      "echo": false,
+      "expected": 94,
+      "label": "logical-only left",
+      "logical": 4194319,
+      "physical": 0,
+      "pressed": true,
+      "tick": 94
+    },
+    {
+      "echo": false,
+      "expected": 106,
+      "label": "physical-only right",
+      "logical": 0,
+      "physical": 4194321,
+      "pressed": true,
+      "tick": 106
+    },
+    {
+      "echo": false,
+      "expected": 94,
+      "label": "physical-only left",
+      "logical": 0,
+      "physical": 4194319,
+      "pressed": true,
+      "tick": 94
+    },
+    {
+      "echo": false,
+      "expected": 106,
+      "label": "physical right wins foreign logical left",
+      "logical": 4194319,
+      "physical": 4194321,
+      "pressed": true,
+      "tick": 106
+    },
+    {
+      "echo": false,
+      "expected": 94,
+      "label": "physical left wins foreign logical right",
+      "logical": 4194321,
+      "physical": 4194319,
+      "pressed": true,
+      "tick": 94
+    },
+    {
+      "echo": false,
+      "expected": 100,
+      "label": "released logical right",
+      "logical": 4194321,
+      "physical": 0,
+      "pressed": false,
+      "tick": 100
+    },
+    {
+      "echo": true,
+      "expected": 100,
+      "label": "echo logical right",
+      "logical": 4194321,
+      "physical": 0,
+      "pressed": true,
+      "tick": 100
+    },
+    {
+      "echo": false,
+      "expected": 100,
+      "label": "unknown key",
+      "logical": 0,
+      "physical": 0,
+      "pressed": true,
+      "tick": 100
+    },
+    {
+      "echo": false,
+      "expected": 100,
+      "label": "other logical shortcut keeps existing rule",
+      "logical": 80,
+      "physical": 0,
+      "pressed": true,
+      "tick": 100
+    }
+  ],
+  "scope": "Synthetic InputEventKey dispatch directly into original unhandled-input seam over authentic a05 saved source. Cold3D node construction, not normal gameplay or native XTest/rendered/final FX-A3 acceptance.",
+  "source_sha": "d9c67256545a227c78bf5c3264818b8ad86b2c78"
+}

@@ -1,0 +1,864 @@
+{
+  "runtime_source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+  "ambush_loop_tree": "ad4af11cd8aa79da4700c044b4dfc8f36a3607e5",
+  "remote_status": "local_only; last read-only verified remote a575d9ec9b7eed1b934218a727c41c2a6d0ff226; auth writes/retries stopped per parent",
+  "engine": "Godot 4.7.2 stable official ed1daf0bf",
+  "graphics": "private Xorg :110, actual view size12, viewport1280x720, llvmpipe; not QA camera4 or device performance",
+  "formal_run_count": 18,
+  "formal_runs": [
+    {
+      "label": "boundary",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "corpse_pairing_boundary_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-hud-godot",
+        "corpse_pairing_boundary_test.gd",
+        "--render"
+      ],
+      "exit_code": 0,
+      "checks": 2978,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "5883c712545f443db44015fc8a30bc9d",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-boundary.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-boundary.exit",
+      "entry_sha256": "d792fa3f4100ad09466b6e3127bc562659548ea78cc7d67f8ad8bae048838f70",
+      "wall_seconds": null,
+      "environment": {
+        "AMBUSH_BOUNDARY_REFERENCE": "/workspace/ambush-pr15/.cursor/docs/evidence/20261003-pr15-corpse-boundary/negative-b6487b7/corpse-boundary-report.json"
+      }
+    },
+    {
+      "label": "quality",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "corpse_pose_quality_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-hud-godot",
+        "corpse_pose_quality_test.gd",
+        "--render"
+      ],
+      "exit_code": 0,
+      "checks": 2695,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "2b7ee18e30b948ce9f5f0e07bd0c2a84",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-quality.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-quality.exit",
+      "entry_sha256": "fe1717b9ef47fe23a948c5133313e6bb6e493bd214da521f63f4d0f4ef84fd18",
+      "wall_seconds": null
+    },
+    {
+      "label": "campaign",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "campaign_replay_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "campaign_replay_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 10332,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "a8bc49a9cb964a0aa257fdab064f5345",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-campaign.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-campaign.exit",
+      "entry_sha256": "9c1a4c622d501f9119ea14f9686e0629ccf0a7e035580ec136886ed5854cbc11",
+      "wall_seconds": null
+    },
+    {
+      "label": "contract",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "presentation_contract_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_contract_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 84042,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "8c16109febe64128b6e91a6ec677c386",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-contract.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-contract.exit",
+      "entry_sha256": "f0d50621587ab5f6c786290847c495574e09b47d70157d6631c98d0ab64b4ba8",
+      "wall_seconds": null
+    },
+    {
+      "label": "corpse",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "corpse_runtime_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "corpse_runtime_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 1203,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "b1371a799a4e4def980ffcd97acd0483",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-corpse.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-corpse.exit",
+      "entry_sha256": "65dc4ee32ea438685dec32fefa471b1685e172d7aeb78db18d8ef9d5b9a805e2",
+      "wall_seconds": null
+    },
+    {
+      "label": "actor",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "actor_visual_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "actor_visual_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 21818,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "d932cec7f68348da97529894d59a827c",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-actor.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-actor.exit",
+      "entry_sha256": "0fce26d79d8087f448a5faf271b7dd5d4cb607fe3ab8e2db2a58f32b7487a6da",
+      "wall_seconds": null
+    },
+    {
+      "label": "depot-radio",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "presentation_quality_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-hud-godot",
+        "presentation_quality_test.gd",
+        "--render"
+      ],
+      "exit_code": 0,
+      "checks": 106,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "699d0180f4b04225818770e6c646753f",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-depot-radio.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-depot-radio.exit",
+      "entry_sha256": "3fb1e02c78ff95989beff164b120ded37190adbfd48971e1c32c92c4dae402f1",
+      "wall_seconds": null
+    },
+    {
+      "label": "equipment_freeze",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "equipment_freeze_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "equipment_freeze_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 66,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "bf292ddcd9db4d588667100f9a88546f",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-equipment_freeze.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-equipment_freeze.exit",
+      "entry_sha256": "f4291332d0869c153ab193769ea8cc8c2a5e4ab7c1b7c97587f45b6670deb25d",
+      "wall_seconds": 227.567
+    },
+    {
+      "label": "presentation_lifecycle",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "presentation_lifecycle_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_lifecycle_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 30,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "94a4be88137f481ea77e690fe51a8991",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-presentation_lifecycle.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-presentation_lifecycle.exit",
+      "entry_sha256": "163bedd24b961e534aa424ffa034a7109fdb0af2f0bac0180f9165e37b4ac733",
+      "wall_seconds": 31.724
+    },
+    {
+      "label": "camera_input",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "camera_input_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "camera_input_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 23,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "a126c8b62f1b41ae99266fcbeb5fda67",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-camera_input.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-camera_input.exit",
+      "entry_sha256": "cab7ce3b6ad22d2857c5b43108d7d8fb287c76c5312aa4d2b2db9bab8e702ee2",
+      "wall_seconds": 0.624
+    },
+    {
+      "label": "presentation_interaction",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "presentation_interaction_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "presentation_interaction_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 38,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "2e731fa896ec4cbfa14b009b68673782",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-presentation_interaction.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-presentation_interaction.exit",
+      "entry_sha256": "ef101bb8fdc7ee4c248af48046cd40331566622fca1d8bca8ac222c6ed6add17",
+      "wall_seconds": 41.294
+    },
+    {
+      "label": "command_pose_clock",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "command_pose_clock_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "command_pose_clock_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 27,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "12f2cd06ed1b4bbba80973930a139460",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-command_pose_clock.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-command_pose_clock.exit",
+      "entry_sha256": "58ada0dc1ab81ed206bcf34ba2b887c6bd25ff3a66505301274c4dcb29634bb0",
+      "wall_seconds": 29.246
+    },
+    {
+      "label": "replay_timeline",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "replay_timeline_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "replay_timeline_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 66,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "f6783d3deeab49a59c640a2be99b7522",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-replay_timeline.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-replay_timeline.exit",
+      "entry_sha256": "61e8d2fb63916becaf553477a4923e0f17b7ab0a21e14a08a968545db1cda294",
+      "wall_seconds": 19.477
+    },
+    {
+      "label": "utility_runtime",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "utility_runtime_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "utility_runtime_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 1041,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "587a19738195469b903aaf1ba8014b0e",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-utility_runtime.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-utility_runtime.exit",
+      "entry_sha256": "f78f4aeb780e07739217bbefe0925b210d17b5af8e8a6f5c7dad5d5c0b5be0d3",
+      "wall_seconds": 69.721
+    },
+    {
+      "label": "c2_history_hint",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "c2_history_hint_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+        "c2_history_hint_test.gd"
+      ],
+      "exit_code": 0,
+      "checks": 29,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "be076fbf0ed84ac2ac2ce7fa7f7f293f",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-c2_history_hint.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-c2_history_hint.exit",
+      "entry_sha256": "512fbd965b02383b0dc24fe0bb701dc78bf589c8c94076dcb63b0f1b9a51aff5",
+      "wall_seconds": 41.344
+    },
+    {
+      "label": "hud-render",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "presentation_interaction_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-hud-godot",
+        "presentation_interaction_test.gd",
+        "--render"
+      ],
+      "exit_code": 0,
+      "checks": 38,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "ba94228503be437882171a32c3d79011",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-hud-render.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-hud-render.exit",
+      "entry_sha256": "ef101bb8fdc7ee4c248af48046cd40331566622fca1d8bca8ac222c6ed6add17",
+      "wall_seconds": 68.387
+    },
+    {
+      "label": "lifecycle-render",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "presentation_lifecycle_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-hud-godot",
+        "presentation_lifecycle_test.gd",
+        "--render"
+      ],
+      "exit_code": 0,
+      "checks": 32,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "848d706beb4c47be8ba0ffd64afa5c63",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-lifecycle-render.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-lifecycle-render.exit",
+      "entry_sha256": "163bedd24b961e534aa424ffa034a7109fdb0af2f0bac0180f9165e37b4ac733",
+      "wall_seconds": 57.5
+    },
+    {
+      "label": "visual-snapshot",
+      "source_sha": "f7fcfdbab1adac3ff545ecadbe9b8d74ec9306d3",
+      "entry": "visual_snapshot_test.gd",
+      "command": [
+        "bash",
+        "ambush_loop/scripts/run_isolated_test.sh",
+        "/tmp/pr15-hud-godot",
+        "visual_snapshot_test.gd",
+        "--render"
+      ],
+      "exit_code": 0,
+      "checks": 164,
+      "failures": 0,
+      "ERROR_count": 0,
+      "storage_run_id": "9374ab3aa945440aa7eebe7c6eb7f05f",
+      "log": "formal-f7fcfdb/pr15-f7fcfdb-visual-snapshot.log",
+      "durable_exit": "formal-f7fcfdb/pr15-f7fcfdb-visual-snapshot.exit",
+      "entry_sha256": "a284c2a3f99d75d43f233d16bae6f4dc26c03348bafddc908cd40170f30ea6d8",
+      "wall_seconds": null
+    }
+  ],
+  "metrics": {
+    "critical36": {
+      "left_m": 6.02714692377049e-07,
+      "right_m": 5.36441802978516e-07,
+      "carrier_skin_m": 2.13740622712066e-05,
+      "body_skin_m": 0.0,
+      "bone_position_m": 1.61985553859267e-05,
+      "bone_angle_rad": 0.0009765625,
+      "body_root_m": 0.0
+    },
+    "dense1350": {
+      "left_m": 0.00125951913651079,
+      "right_m": 0.00138702662661672,
+      "carrier_skin_m": 0.00149367598351091,
+      "body_skin_m": 0.000268108356976882,
+      "bone_position_m": 0.00134985172189772,
+      "bone_angle_rad": 0.00556726986542344,
+      "body_root_m": 3.814697265625e-06
+    },
+    "old_schema1_exact_cases": 36,
+    "old_schema1_exact_pose_digests": 72,
+    "native17_body_floor_m": [
+      0.00599998235702515,
+      0.00600002706050873
+    ],
+    "native17_carrier_floor_m": [
+      -0.000172651853063144,
+      2.38328902923968e-05
+    ],
+    "fixture864_carrier_floor_m": [
+      -0.00170499342493713,
+      0.00014145539898891
+    ],
+    "gripped_fixture_contact_max_m": 3.07195307414077e-07,
+    "native_wall_vertices_max": 0
+  },
+  "captures": {
+    "boundary_captured": 7,
+    "boundary_retained_verified": 4,
+    "boundary_missing_auxiliary": [
+      {
+        "path": "res://build/asset_review/pr15-runtime/contact_qa_exact.png",
+        "recorded_sha256": "f57572af9822cc2fe8199f8771468bede2d6459c9c247f6484e39a29d3836201",
+        "reason": "Auxiliary basename overwritten by later quality capture before separate archival; not retained, not a hash verification."
+      },
+      {
+        "path": "res://build/asset_review/pr15-runtime/contact_quality_history.png",
+        "recorded_sha256": "0ff796d35bcfb8de33eea95801aee809efc3d98c880320c2623a7ab69940152c",
+        "reason": "Auxiliary basename overwritten by later quality capture before separate archival; not retained, not a hash verification."
+      },
+      {
+        "path": "res://build/asset_review/pr15-runtime/contact_quality_history_desktop.png",
+        "recorded_sha256": "a8e375ba339dfee1409d319f11dcaa466ea20b6fd4f9cade472698d9b7558afe",
+        "reason": "Auxiliary basename overwritten by later quality capture before separate archival; not retained, not a hash verification."
+      }
+    ],
+    "quality_retained_verified": 9,
+    "depot_radio_retained": 4,
+    "viewed_formal": [
+      "boundary/contact_boundary_release_0.5.png",
+      "boundary/contact_boundary_release_0.5001.png",
+      "boundary/contact_boundary_grab_0.1999.png",
+      "boundary/contact_boundary_grab_0.2.png",
+      "quality/contact_quality_grab_desktop_front.png",
+      "quality/contact_quality_release_desktop_rear.png",
+      "quality/contact_quality_history_desktop.png"
+    ]
+  },
+  "negative_source": {
+    "sha": "b6487b7b756c186fbdd0a9575d3a4606c8e90b11",
+    "checks": 241,
+    "failures": 110,
+    "exit_code": 1,
+    "ERROR_count": 0,
+    "uuid": "0941f106f9984ff995bb748178d7c5cf",
+    "native_release_palms_m": [
+      0.38737607002258,
+      0.38737604022026
+    ],
+    "native_skin_max_m": 0.39313811063766
+  },
+  "excluded": [
+    "ec9fcb8 initial diagnostic duplicated labels and leaked inherited reference rig; not formal negative",
+    "development-2/3/4 uncommitted failed experiments",
+    "development-5 passed older one-sided convergence test; not fixed-source formal proof"
+  ],
+  "scope": "author passed current schema2 on original native MG path and named fixtures; independent P2 QA open; no whole-game or device acceptance",
+  "remaining": [
+    "independent IK/HUD QA",
+    "focus-adjacent right camera text clipping reproduction",
+    "normal minimap/checklist text layering review",
+    "FAILED/WON200 result dialogs",
+    "complete 3D FX and versioned continuous command replay",
+    "A3 budgets, complete13wave visuals and normal player journey",
+    "single-final-candidate fullsmoke/QA/APK",
+    "auditory0/45 and0/6; devices after full cloud plan",
+    "GitHub write authentication and official Library download/materialization blocked; no bypass"
+  ],
+  "files": [
+    {
+      "path": "development-2/corpse-boundary-report.json",
+      "bytes": 661973,
+      "sha256": "5ea9b2617a48a91ba6cbe749e3da04ec0144140ab029a6c69c9649b4dbd5c813"
+    },
+    {
+      "path": "development-2/pr15-boundary-development-2.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "development-2/pr15-boundary-development-2.log",
+      "bytes": 108204,
+      "sha256": "0805bc2e3b243ec7427aaf5585319f94ee746a953bafebe806dd36236bc6a03b"
+    },
+    {
+      "path": "development-3/corpse-boundary-report.json",
+      "bytes": 661869,
+      "sha256": "41d31ba0da2e7cdd156d552308e7f78a68a794aef85388083378cdd00cc8ba5a"
+    },
+    {
+      "path": "development-3/pr15-boundary-development-3.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "development-3/pr15-boundary-development-3.log",
+      "bytes": 94701,
+      "sha256": "ad976d6e44c62993bd8e5120ed3829cc164ff4668dbc32a6ea652db4e8a3a059"
+    },
+    {
+      "path": "development-4/corpse-boundary-report.json",
+      "bytes": 1326795,
+      "sha256": "cd632425005f6b8e31179f3131f7e0fa802abe10cff206402cfe1cb4a9ab18d8"
+    },
+    {
+      "path": "development-4/pr15-boundary-development-4.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "development-4/pr15-boundary-development-4.log",
+      "bytes": 7360,
+      "sha256": "a2e717dadc4285c23a6a23e2696ee35e07e6322133f17dc614ef35cbf3f79a3f"
+    },
+    {
+      "path": "development-5/corpse-boundary-report.json",
+      "bytes": 1329183,
+      "sha256": "c46265d92b29f52e05b4643d05c95c21a7b9b8cd7bd9c01a9d7e79855a324230"
+    },
+    {
+      "path": "development-5/pr15-boundary-development-5.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "development-5/pr15-boundary-development-5.log",
+      "bytes": 631,
+      "sha256": "e470bd17a64c2ad68a7ebb47732538acafe1b12a21f20ef436c4a6b5bb4940a8"
+    },
+    {
+      "path": "formal-f7fcfdb/boundary/contact_boundary_grab_0.1999.png",
+      "bytes": 1028585,
+      "sha256": "566a299a19995fb37972f45c4337951c40dc786d09468675f5969821a27fbb12"
+    },
+    {
+      "path": "formal-f7fcfdb/boundary/contact_boundary_grab_0.2.png",
+      "bytes": 1028600,
+      "sha256": "a799f99937fd616e794e7be40d6212303ab02a18f770f3c915c0c213f5e18c8d"
+    },
+    {
+      "path": "formal-f7fcfdb/boundary/contact_boundary_release_0.5.png",
+      "bytes": 1028544,
+      "sha256": "fdb1b19b2781887927803ccc636ce0b6fc065743112abd133431251b0dc07a24"
+    },
+    {
+      "path": "formal-f7fcfdb/boundary/contact_boundary_release_0.5001.png",
+      "bytes": 1028526,
+      "sha256": "859600c4d895b76fc84cbe966b02c76c35314d18958a092041ff34270e8d63af"
+    },
+    {
+      "path": "formal-f7fcfdb/boundary/corpse-boundary-report.json",
+      "bytes": 1892257,
+      "sha256": "deda329c663270bb9637c0fcd2ebf12ff9bfdfc34407fc63df8b3c65080f6282"
+    },
+    {
+      "path": "formal-f7fcfdb/depot-radio/depot-radio-quality-report.json",
+      "bytes": 3876,
+      "sha256": "31c1d1738f06652d79a8acaad42da7a511471c8284960acc274c0c5a9c24b181"
+    },
+    {
+      "path": "formal-f7fcfdb/depot-radio/quality_depot_sweep_low.png",
+      "bytes": 736878,
+      "sha256": "f5d6c011ff160fba9d87fb1eabbe019542fca80158d259afcf83c84d623707dc"
+    },
+    {
+      "path": "formal-f7fcfdb/depot-radio/quality_radio_history.png",
+      "bytes": 1428355,
+      "sha256": "d2a4661b428ce350229544ad2c0c1c603c00784fd0800f450e0bdcd702267598"
+    },
+    {
+      "path": "formal-f7fcfdb/depot-radio/quality_radio_yaw345_pitch35_size14.png",
+      "bytes": 1421718,
+      "sha256": "edae0d5698cc6b3dbb15e387fd34d9e07541ad36afee3257cb1fa8c9664ff817"
+    },
+    {
+      "path": "formal-f7fcfdb/depot-radio/quality_radio_yaw345_pitch55_size30.png",
+      "bytes": 954424,
+      "sha256": "1c6cbbe350747aacfe14c08f1f2131dff5be30cb6c537a3069f0f5c5cd2a3832"
+    },
+    {
+      "path": "formal-f7fcfdb/hud-snapshot/history_hud_desktop.png",
+      "bytes": 886187,
+      "sha256": "6ab4cc2324f77fe2e7ab8016535560c6feb31a5ee0cb4b7ab0c57c687b1f028f"
+    },
+    {
+      "path": "formal-f7fcfdb/hud-snapshot/history_hud_phone.png",
+      "bytes": 931013,
+      "sha256": "36064143687dda5db3ba949f3ac46150ba9dd50fc4a5008cf78e466532cc123d"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-actor.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-actor.log",
+      "bytes": 777,
+      "sha256": "029ac4f688b6a3335828a534de502bec606bac6d6e4c4203cafb6018f602e4c2"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-boundary.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-boundary.log",
+      "bytes": 926,
+      "sha256": "bb789ed888a96b72fcb95b1a42c27a54760d806e29f0f8a1c321d650ead0bf55"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-c2_history_hint.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-c2_history_hint.log",
+      "bytes": 692,
+      "sha256": "a000ac96879f44f046b9a20ed465ab8877433ed8f05d8e2fec9c78600c14c08f"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-camera_input.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-camera_input.log",
+      "bytes": 604,
+      "sha256": "8532d7692959fc0f4e77928be72ddb3021bf16c21934edb4c0db0161abda6319"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-campaign.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-campaign.log",
+      "bytes": 974,
+      "sha256": "339078343688a0c53ac86eeff9a2031fded379cbe0e12daad0d040855a2fa8fb"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-command_pose_clock.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-command_pose_clock.log",
+      "bytes": 707,
+      "sha256": "3c3c8951da6d826e580cfc268f9c56c635e06ff0ed271c0bb7565f6404544df5"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-contract.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-contract.log",
+      "bytes": 702,
+      "sha256": "76d0a3b0a197aa3421bed4daa919e3d0d7c5d7d100e4e992b8d28437492f93ee"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-corpse.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-corpse.log",
+      "bytes": 610,
+      "sha256": "8426833df56823ffdffc62dc94ab6f56000baa42f3f9e10491f07584474f3fb0"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-depot-radio.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-depot-radio.log",
+      "bytes": 916,
+      "sha256": "f19f6c97f0f0979ee1d5ac0aafdf27c3e129c73b6f70f00efc63d5b18ac0e68f"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-equipment_freeze.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-equipment_freeze.log",
+      "bytes": 601,
+      "sha256": "51de043d5e11328f5fe0422603d435403eaf4dff9a579ae893bc1004cf5bef01"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-hud-render.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-hud-render.log",
+      "bytes": 923,
+      "sha256": "1d6aad03ea35cb0437f786e3bdf6164f294f32f2f8e7a9e437e3e42a1e47085e"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-lifecycle-render.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-lifecycle-render.log",
+      "bytes": 919,
+      "sha256": "460dcdc0f8b46e8c6dfa0af32417bce88b40271f55141b75036ab5222ce44de9"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-presentation_interaction.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-presentation_interaction.log",
+      "bytes": 628,
+      "sha256": "cdfa05d5f3250207646ab5f1833967cf50a5cc8bcea421521e2ec35931dbb3fc"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-presentation_lifecycle.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-presentation_lifecycle.log",
+      "bytes": 624,
+      "sha256": "fcc463ff749cec37b1630bed9ad98bddfec26690e06e51ece04dc7d93fbb6224"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-quality.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-quality.log",
+      "bytes": 915,
+      "sha256": "08088bbb718b970ef3c3b457c93f061df2eebdea7dcf38b271be9c15a85e390d"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-replay_timeline.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-replay_timeline.log",
+      "bytes": 599,
+      "sha256": "b79cbfc889f941c1e1bd9f417cb166b7465c4c961c1b8810425be0bc6f39a09a"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-utility_runtime.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-utility_runtime.log",
+      "bytes": 623,
+      "sha256": "0e04005a621ebafade7fd451cd8fe04b76bb7d7e507ed8c06e28cab509695771"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-visual-snapshot.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "formal-f7fcfdb/pr15-f7fcfdb-visual-snapshot.log",
+      "bytes": 1076,
+      "sha256": "7c34d8f8953c901d224311071f65f3046c4281260e40dc9d69aef18c81d623cf"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_qa_exact.png",
+      "bytes": 1029028,
+      "sha256": "a10e40eec9a277b5ea9589ab1f0070873b58f508431b59fb84e8b253a449dace"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_grab_desktop_front.png",
+      "bytes": 1126168,
+      "sha256": "b8795cdb77df0fdac75049e9f9bd726b2fc6159399d12c49b7d8c8a0b8ddf1cf"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_grab_desktop_rear.png",
+      "bytes": 1113409,
+      "sha256": "04475f70c6db29803c63b423d89ef50a8984e30d5b3f5f1de59b43e9306c7e67"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_grab_half.png",
+      "bytes": 1028124,
+      "sha256": "156279c9ee8aaf7317e9200494f45cd165a7c6482d9f1a8fa47a40bd245104f4"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_history.png",
+      "bytes": 1023110,
+      "sha256": "6efb60ebb6638d80b40cbbbaa763dd8e8740ca48a6c609ae9b1e2ef767e6f18f"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_history_desktop.png",
+      "bytes": 1131087,
+      "sha256": "59626876d94e1f56a134cc487a285b26f4f73bbe664d1d24488b342d3639a870"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_release_desktop_front.png",
+      "bytes": 1126514,
+      "sha256": "c6b70de4a5941f4306a54a489364900261d1a72b9b0188ad87c9dc787c67e450"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_release_desktop_rear.png",
+      "bytes": 1113485,
+      "sha256": "e11ddfc61a4a4c762b67222abb7dd50366948d98d583b2e128b4e69f515bd291"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/contact_quality_release_half.png",
+      "bytes": 1027843,
+      "sha256": "a30aa31c6b5b91e48b6064a1fb260176986410dbfefdfce7f71c18d5d2b9f63b"
+    },
+    {
+      "path": "formal-f7fcfdb/quality/corpse-pose-quality-report.json",
+      "bytes": 352655,
+      "sha256": "7fdbad31d5d32715188609d39b46ef921b2a78388bbdf69a4ef568280062e4c2"
+    },
+    {
+      "path": "negative-b6487b7/contact_boundary_grab_0.1999.png",
+      "bytes": 1028056,
+      "sha256": "3ae42ef5a80f990f0fc4a2621deb6865874c2747d55864ebc584b625303a3a97"
+    },
+    {
+      "path": "negative-b6487b7/contact_boundary_grab_0.2.png",
+      "bytes": 1028588,
+      "sha256": "84b80f807573cd41e60ca402108a6be0a51e557dd6cea1455aaf88a899eefeda"
+    },
+    {
+      "path": "negative-b6487b7/contact_boundary_release_0.5.png",
+      "bytes": 1028497,
+      "sha256": "f59a2d81e455fd4485cd61c61a775dec48d765bd32b610b68ed2ece8108aa6a3"
+    },
+    {
+      "path": "negative-b6487b7/contact_boundary_release_0.5001.png",
+      "bytes": 1027984,
+      "sha256": "26a2183144d5501a14579d217548aedbe24ab108640286579ac0bb18e0f87c87"
+    },
+    {
+      "path": "negative-b6487b7/corpse-boundary-report.json",
+      "bytes": 52854,
+      "sha256": "bc9db79afd430dc2a14d568c4c1ccf0803bcaa0a9ce9f0ea89213589b193f620"
+    },
+    {
+      "path": "negative-b6487b7/pr15-boundary-negative-render.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "negative-b6487b7/pr15-boundary-negative-render.log",
+      "bytes": 59194,
+      "sha256": "7aaccee23f9dfc8acc7cba73f0bc6660ddeea697016f0f4ed06184dca0f1373d"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "source": "8532c4c3084d1a5672bbe28dc96e1c02522a8f05",
+  "state": {
+    "briefing": false,
+    "continue_disabled": false,
+    "engine_frames": 5,
+    "fixture_ready": false,
+    "gui_focus": "",
+    "gui_hover": "",
+    "input_count": 0,
+    "input_tail": null,
+    "mission_select": false,
+    "observer_usec": 13400,
+    "pending": "yard",
+    "presents": 5,
+    "scale": 1,
+    "scene": "res://scenes/title.tscn",
+    "screen_transform": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "settings": {
+      "complete": false,
+      "configs": {
+        "ambush_loop.cfg": {
+          "sha256": "050864ec68d3819eb4275bce4e106ba64299f6635b648cf736f0e68903d57b7c",
+          "text": "[progress]\n\nlevel_id=\"depot\"\nlevel_index=4\ncomplete=false\nloop_index=1\ncleared=PackedStringArray(\"yard\", \"warehouse\", \"pump\", \"railcut\")\n\n[audio]\n\nmuted=false\n\n[stats]\n\nyard_loops=1\nyard_perfect=true\nwarehouse_loops=1\nwarehouse_perfect=true\npump_loops=1\npump_perfect=true\nrailcut_loops=1\nrailcut_perfect=true\n"
+        },
+        "ambush_loop_settings.cfg": {
+          "sha256": "5610ba32c76ec210bb5e3baf24ad8d17ad53702c14e9b05dd45cf0b3fd55042e",
+          "text": "[audio]\n\nmuted=false\nmaster_volume=1.0\nmusic_volume=1.0\nsfx_volume=1.0\n\n[input]\n\nforce_touch_hud=false\n\n[graphics]\n\nquality_tier=\"standard\"\n\n[onboarding]\n\nseen_tutorial=true\nseen_yard=true\nseen_warehouse=true\nseen_pump=true\nseen_railcut=true\nseen_depot=true\n"
+        }
+      },
+      "force_touch_hud": false,
+      "has_progress": true,
+      "missions": [
+        {
+          "cleared": true,
+          "id": "yard",
+          "loops": 1,
+          "perfect": true,
+          "title": "第1关 · 院子：交叉封锁",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "warehouse",
+          "loops": 1,
+          "perfect": true,
+          "title": "第2关 · 仓道：弹药窗口",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "pump",
+          "loops": 1,
+          "perfect": true,
+          "title": "第3关 · 泵站：关门之后",
+          "unlocked": true
+        },
+        {
+          "cleared": true,
+          "id": "railcut",
+          "loops": 1,
+          "perfect": true,
+          "title": "第4关 · 信号楼：双走廊延迟",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "depot",
+          "loops": 0,
+          "perfect": false,
+          "title": "第5关 · 油库：三路合围",
+          "unlocked": true
+        },
+        {
+          "cleared": false,
+          "id": "radio",
+          "loops": 0,
+          "perfect": false,
+          "title": "第6关 · 电台：灯塔回波",
+          "unlocked": false
+        }
+      ],
+      "music_volume": 1,
+      "muted": false,
+      "next": "depot",
+      "persistence_error": "",
+      "persistence_status": "",
+      "quality": "standard",
+      "seen": {
+        "depot": true,
+        "pump": true,
+        "railcut": true,
+        "warehouse": true,
+        "yard": true
+      },
+      "sfx_volume": 1
+    },
+    "ticks_usec": 3041600,
+    "viewport": [
+      0,
+      0,
+      1280,
+      720
+    ],
+    "window_size": [
+      1280,
+      720
+    ]
+  },
+  "cfg_text_and_sha_exact": true,
+  "public_checkpoint_exact": true,
+  "public_checkpoint_sha256": "38792659f3d94dcf8f24ee838783c9445a0d255ebbba1fc3963f50835d38e162",
+  "single_page": 1,
+  "url": "http://127.0.0.1:12815/index.html",
+  "fixture_ready": false,
+  "seed": false
+}

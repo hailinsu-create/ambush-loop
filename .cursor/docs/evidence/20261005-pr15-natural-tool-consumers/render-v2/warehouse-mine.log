@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+SCRIPT ERROR: Parse Error: Invalid operands "String" and "Dictionary" for "==" operator.
+          at: GDScript::reload (/tmp/pr15-natural-tool-render-v2-20261005/render.gd:106)
+SCRIPT ERROR: Parse Error: Value of type "String" cannot be assigned to a variable of type "Dictionary".
+          at: GDScript::reload (/tmp/pr15-natural-tool-render-v2-20261005/render.gd:127)
+ERROR: Failed to load script "/tmp/pr15-natural-tool-render-v2-20261005/render.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)

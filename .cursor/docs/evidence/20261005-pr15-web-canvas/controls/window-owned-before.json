@@ -1,0 +1,110 @@
+{
+  "utc": "2026-10-05T01:36:27.593021+00:00",
+  "caller_uid": 1000,
+  "processes": [
+    {
+      "pid": 132306,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/browser-controller.py"
+      ]
+    },
+    {
+      "pid": 132325,
+      "uid": 1000,
+      "argv": [
+        "/usr/lib/chromium/chromium",
+        "--show-component-extension-options",
+        "--enable-gpu-rasterization",
+        "--no-default-browser-check",
+        "--disable-pings",
+        "--media-router=0",
+        "--enable-remote-extensions",
+        "--load-extension=",
+        "--remote-debugging-port=0",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--disable-background-networking",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-component-update",
+        "--disable-default-apps",
+        "--disable-hang-monitor",
+        "--disable-popup-blocking",
+        "--disable-prompt-on-repost",
+        "--disable-sync",
+        "--disable-features=Translate",
+        "--enable-features=NetworkService,NetworkServiceInProcess,WebMCPTesting,DevToolsWebMCPSupport",
+        "--metrics-recording-only",
+        "--password-store=basic",
+        "--use-mock-keychain",
+        "--headless=new",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--proxy-server=http://proxy:8080",
+        "--proxy-bypass-list=localhost,127.0.0.1,::1",
+        "--user-data-dir=/workspace/.ambush-loop-env/web-browser-state-held",
+        "--window-size=1280,720",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-breakpad"
+      ]
+    },
+    {
+      "pid": 135915,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/portable-server.py"
+      ]
+    },
+    {
+      "pid": 136193,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/qa-server.py"
+      ]
+    },
+    {
+      "pid": 137807,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/polygon-caller-diagnostic/server.py"
+      ]
+    },
+    {
+      "pid": 138167,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/polygon-caller-diagnostic-v2/server.py"
+      ]
+    },
+    {
+      "pid": 138538,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/polygon-compat-prototype/server.py"
+      ]
+    },
+    {
+      "pid": 138932,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/main-canvas-gate-prototype/server.py"
+      ]
+    },
+    {
+      "pid": 140006,
+      "uid": 1000,
+      "argv": [
+        "python3",
+        "/tmp/pr15-web-controls/main-canvas-gate-candidate-qa/server.py"
+      ]
+    }
+  ]
+}

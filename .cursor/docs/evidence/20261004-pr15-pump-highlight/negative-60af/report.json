@@ -1,0 +1,153 @@
+{
+  "captures": [],
+  "checks": 34,
+  "failures": 14,
+  "rows": [
+    {
+      "attempt": "894a6545a9d49ac514f40adbad264e06",
+      "case": "authentic030_readonly_formatter",
+      "formatter": "本关高光：锁门后紫线改道被你罩住",
+      "path": "/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime/native-player-pump-record.bin",
+      "raw_sha256": "48f2305b9dcdc562a8d0cb9c2ce44ca02ea474c579e91116b75d187960d96eb4",
+      "scope": "Original native record read only; no replay binding/rendering or source rewrite."
+    },
+    {
+      "case": "pump_highlight_open_won",
+      "door_events": [
+        {
+          "actor_id": -1,
+          "attempt_id": "300202d37279804c9f1e513e14b499e3",
+          "event_id": "300202d37279804c9f1e513e14b499e3:0:0",
+          "payload": {
+            "locked": false
+          },
+          "playback_schema": 2,
+          "playback_tick": 1,
+          "position": "(0.0, 0.0)",
+          "schema": 2,
+          "seq": 0,
+          "target_id": -1,
+          "tick": 0,
+          "timeline_tick": 0,
+          "type": "door",
+          "wave_id": 0
+        }
+      ],
+      "door_locked": false,
+      "failure_dossier": "",
+      "formatter": "本关高光：锁门后紫线改道被你罩住",
+      "phase": 3,
+      "result_body": "任务完成。\n+解锁下一关 · 「信号」\n本关用了 1 世。\n终局摘要：零逃逸，封锁成功；第一枪是灰狼。\n第一枪是灰狼 → 敌1\n本关高光：锁门后紫线改道被你罩住\n泵停了。信号楼还在调度西廊和东廊的巡轨。\n初阵✓  深仓✓  闸站✓  下一夜：信号\n★ 完美封锁：零逃逸\n\n—— 关键事件 ——\n14.9s  敌2 还击 → 队员2\n15.0s  铁砧 开火 → 敌2\n15.1s  铁砧 开火 → 敌2\n15.1s  敌2 被击毙\n15.1s  终局：win",
+      "route_choice": [],
+      "stats": "世数  1\n第一枪是  灰狼\n逃逸  无\n用时  15.1s\n高光  锁门后紫线改道被你罩住",
+      "terminal": 907
+    },
+    {
+      "case": "pump_highlight_locked_won",
+      "door_events": [
+        {
+          "actor_id": -1,
+          "attempt_id": "cade8110711bb098ee5ade30edb3d5cc",
+          "event_id": "cade8110711bb098ee5ade30edb3d5cc:0:0",
+          "payload": {
+            "locked": true
+          },
+          "playback_schema": 2,
+          "playback_tick": 1,
+          "position": "(0.0, 0.0)",
+          "schema": 2,
+          "seq": 0,
+          "target_id": -1,
+          "tick": 0,
+          "timeline_tick": 0,
+          "type": "door",
+          "wave_id": 0
+        }
+      ],
+      "door_locked": true,
+      "failure_dossier": "",
+      "formatter": "打中了：锁门后紫线改道被你罩住",
+      "phase": 3,
+      "result_body": "任务完成。\n+解锁下一关 · 「信号」\n本关用了 1 世。\n终局摘要：零逃逸，封锁成功；第一枪是灰狼；门锁后紫线改道被你罩住。\n第一枪是灰狼 → 敌1\n打中了：锁门后紫线改道被你罩住\n泵停了。信号楼还在调度西廊和东廊的巡轨。\n初阵✓  深仓✓  闸站✓  下一夜：信号\n★ 完美封锁：零逃逸\n\n—— 关键事件 ——\n15.8s  铁砧 开火 → 敌2\n15.8s  敌2 还击 → 队员2\n15.9s  铁砧 开火 → 敌2\n15.9s  敌2 被击毙\n15.9s  终局：win",
+      "route_choice": [
+        {
+          "actor_id": 2,
+          "attempt_id": "cade8110711bb098ee5ade30edb3d5cc",
+          "event_id": "cade8110711bb098ee5ade30edb3d5cc:1:23",
+          "payload": {
+            "covered": true
+          },
+          "playback_schema": 2,
+          "playback_tick": 290,
+          "position": "(432.0, 158.6668)",
+          "schema": 2,
+          "seq": 23,
+          "target_id": -1,
+          "tick": 57,
+          "timeline_tick": 288,
+          "type": "route_choice",
+          "wave_id": 1
+        }
+      ],
+      "stats": "世数  1\n第一枪是  灰狼\n逃逸  无\n用时  15.9s\n高光  锁门后紫线改道被你罩住",
+      "terminal": 953
+    },
+    {
+      "case": "pump_highlight_locked_failed",
+      "door_events": [
+        {
+          "actor_id": -1,
+          "attempt_id": "60ddbf453227580a597df8977beeba09",
+          "event_id": "60ddbf453227580a597df8977beeba09:0:0",
+          "payload": {
+            "locked": true
+          },
+          "playback_schema": 2,
+          "playback_tick": 1,
+          "position": "(0.0, 0.0)",
+          "schema": 2,
+          "seq": 0,
+          "target_id": -1,
+          "tick": 0,
+          "timeline_tick": 0,
+          "type": "door",
+          "wave_id": 0
+        }
+      ],
+      "door_locked": true,
+      "failure_dossier": "情报已记录 · 锁门后从西侧紫备用接近漏出\n终局摘要：敌军沿备用接近从逃逸口越界；第一枪是灰狼；门锁后敌改走备用接近。\n第一枪是灰狼 → 敌1\n下一波：已全部进场（情报截止 21.0s）\n打中过：锁门后紫线改道被你罩住（还没封锁）\n截获 · 阀廊：东门关上了。改走西管。出水口还没人守。\n本世罩住：主路  ·  缺口：备用\n没打中第二层：第二层：锁门后改走紫线\n—— 情报墙 ——\n第1世 · 逃逸 · 21.0s · 锁门后从西侧紫备用接近漏出\n逃逸口已在地图上闪烁。\n—— 事件摘要（点击右侧日志定位）——\n4.2s  队员1 无法交战 敌2（射界）\n4.2s  队员2 无法交战 敌2（射程）\n4.2s  队员3 无法交战 敌2（射程）\n4.8s  敌2 改走紫色备用接近\n8.9s  队员1 无法交战 敌2（射程）\n15.3s  队员3 无法交战 敌2（射界）\n15.4s  队员2 无法交战 敌2（射界）\n23.2s  队员2 无法交战 敌2（射程）\n24.8s  敌2 沿备用接近越界逃逸\n24.8s  终局：escape",
+      "formatter": "打中过：锁门后紫线改道被你罩住（还没封锁）",
+      "phase": 2,
+      "result_body": "第2波漏网：备用 · 敌2 · 0.6s出发 · 西侧紫备用接近\n改一处就能赢：锁门后把青弧转向西侧紫备用接近，夜枭锁出水口。\n带着情报穿梭回去",
+      "route_choice": [
+        {
+          "actor_id": 2,
+          "attempt_id": "60ddbf453227580a597df8977beeba09",
+          "event_id": "60ddbf453227580a597df8977beeba09:1:23",
+          "payload": {
+            "covered": false
+          },
+          "playback_schema": 2,
+          "playback_tick": 290,
+          "position": "(432.0, 158.6668)",
+          "schema": 2,
+          "seq": 23,
+          "target_id": -1,
+          "tick": 57,
+          "timeline_tick": 288,
+          "type": "route_choice",
+          "wave_id": 1
+        }
+      ],
+      "stats": "",
+      "terminal": 1489
+    }
+  ],
+  "scale": 1.0,
+  "scope": "Bounded reference domain SCOUT door command, grants/cover snaps, direct tick and vacuum fixtures reach original terminal UI; not normal input, not native journey, not closed-route performance/art QA. Authentic030 source only read by formatter. No replay mutation.",
+  "source_sha": "60af18172b7cbb5640001e5b89611870d08b0e92",
+  "window": [
+    1280,
+    720
+  ]
+}

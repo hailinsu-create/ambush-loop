@@ -1,0 +1,126 @@
+{
+	"attempt": "e62d12a26a5c23f80e90b284fcd61797",
+	"checks": 18,
+	"failures": [],
+	"scope": "original saved utility identity and pure pose selection; no BattleLog throw fabrication, renderer/whole UNRUN",
+	"throws": {
+		"c32a1ca6721a32e311315b468530a799:0:0": {
+			"first_playback": 6229,
+			"last_playback": 6253,
+			"original_state": {
+				"action": "grenade_throw",
+				"actor_id": 1,
+				"attempt_id": "e62d12a26a5c23f80e90b284fcd61797",
+				"battle_seq_floor": 13,
+				"clock_domain": "simulation",
+				"event_id": "c32a1ca6721a32e311315b468530a799:0:0",
+				"phase": 1,
+				"schema": 1,
+				"scope_id": "c32a1ca6721a32e311315b468530a799",
+				"seq": 0,
+				"since": 3.73333333333333,
+				"target": "(432.0, 318.5)",
+				"wave_id": 0,
+				"weapon": "kar98k"
+			},
+			"saved_frames": 5,
+			"selected_pose_samples": [
+				{
+					"actor_id": 1,
+					"playback_tick": 6229,
+					"pose": {
+						"action": "grenade_throw",
+						"base_action": "idle",
+						"base_seconds": 3.8,
+						"event_id": "c32a1ca6721a32e311315b468530a799:0:0",
+						"fallback": "",
+						"preserve_upper_world_basis": false,
+						"seconds": 0.566666666666666,
+						"upper_action": "grenade_throw",
+						"upper_seconds": 0.566666666666666,
+						"upper_yaw_rad": -0.905098342615586,
+						"utility": true,
+						"visual_item": ""
+					},
+					"weapon": "kar98k"
+				},
+				{
+					"actor_id": 1,
+					"playback_tick": 6235,
+					"pose": {
+						"action": "grenade_throw",
+						"base_action": "idle",
+						"base_seconds": 3.9,
+						"event_id": "c32a1ca6721a32e311315b468530a799:0:0",
+						"fallback": "",
+						"preserve_upper_world_basis": false,
+						"seconds": 0.666666666666667,
+						"upper_action": "grenade_throw",
+						"upper_seconds": 0.666666666666667,
+						"upper_yaw_rad": -0.905098342615586,
+						"utility": true,
+						"visual_item": ""
+					},
+					"weapon": "kar98k"
+				},
+				{
+					"actor_id": 1,
+					"playback_tick": 6241,
+					"pose": {
+						"action": "grenade_throw",
+						"base_action": "idle",
+						"base_seconds": 4.0,
+						"event_id": "c32a1ca6721a32e311315b468530a799:0:0",
+						"fallback": "",
+						"preserve_upper_world_basis": false,
+						"seconds": 0.766666666666667,
+						"upper_action": "grenade_throw",
+						"upper_seconds": 0.766666666666667,
+						"upper_yaw_rad": -0.905098342615586,
+						"utility": true,
+						"visual_item": ""
+					},
+					"weapon": "kar98k"
+				},
+				{
+					"actor_id": 1,
+					"playback_tick": 6247,
+					"pose": {
+						"action": "grenade_throw",
+						"base_action": "idle",
+						"base_seconds": 4.1,
+						"event_id": "c32a1ca6721a32e311315b468530a799:0:0",
+						"fallback": "",
+						"preserve_upper_world_basis": false,
+						"seconds": 0.866666666666666,
+						"upper_action": "grenade_throw",
+						"upper_seconds": 0.866666666666666,
+						"upper_yaw_rad": -0.905098342615586,
+						"utility": true,
+						"visual_item": ""
+					},
+					"weapon": "kar98k"
+				},
+				{
+					"actor_id": 1,
+					"playback_tick": 6253,
+					"pose": {
+						"action": "grenade_throw",
+						"base_action": "idle",
+						"base_seconds": 4.2,
+						"event_id": "c32a1ca6721a32e311315b468530a799:0:0",
+						"fallback": "",
+						"preserve_upper_world_basis": false,
+						"seconds": 0.966666666666667,
+						"upper_action": "grenade_throw",
+						"upper_seconds": 0.966666666666667,
+						"upper_yaw_rad": -0.905098342615586,
+						"utility": true,
+						"visual_item": ""
+					},
+					"weapon": "kar98k"
+				}
+			]
+		}
+	}
+}

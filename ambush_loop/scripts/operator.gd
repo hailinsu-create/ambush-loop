@@ -394,6 +394,8 @@ func in_throw_cone(world_pos: Vector2, half_deg: float = 52.0) -> bool:
 
 
 func equip_from_pack(kind: String) -> Dictionary:
+	if locked:
+		return {"ok": false, "text": "装备已冻结"}
 	if pack == null or not pack.has_kind(kind):
 		return {"ok": false, "text": "包里没有"}
 	if not Weapons.is_firearm(kind):
@@ -403,6 +405,8 @@ func equip_from_pack(kind: String) -> Dictionary:
 
 
 func drop_from_pack(kind: String) -> Dictionary:
+	if locked:
+		return {"ok": false, "text": "装备已冻结", "amount": 0}
 	if pack == null or not pack.has_kind(kind):
 		return {"ok": false, "text": "包里没有", "amount": 0}
 	var amt := 1
@@ -693,6 +697,8 @@ func inventory_line() -> String:
 
 
 func transfer_to(other: OperatorUnit, kind: String = "auto") -> Dictionary:
+	if locked or (other != null and other.locked):
+		return {"ok": false, "text": "装备已冻结"}
 	if other == null or other == self or not other.alive or not alive:
 		return {"ok": false, "text": "无人可递"}
 	var k := kind

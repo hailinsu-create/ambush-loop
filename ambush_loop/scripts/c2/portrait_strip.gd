@@ -9,6 +9,7 @@ signal follow_toggled(idx: int)
 
 const RoleGlyphScript := preload("res://scripts/ui/role_glyph.gd")
 const GunStampScript := preload("res://scripts/ui/gun_stamp.gd")
+const HudRecord := preload("res://scripts/replay/hud_record.gd")
 
 var _cards: Array = []
 var _stance: Array = []
@@ -18,6 +19,7 @@ var _hold_msec: int = 0
 var _hold_fired: bool = false
 var _ignore_pick: bool = false
 var _press_follow: bool = false
+var _historical := false
 const LONG_MS := 350
 const FOLLOW_CHIP := Vector2(42, 22)
 const FOLLOW_PAD := 0.0
@@ -44,6 +46,8 @@ func _ready() -> void:
 		b.theme = NightOps.theme()
 		var idx := i
 		b.gui_input.connect(func(ev: InputEvent) -> void:
+			if _historical:
+				return
 			if not (ev is InputEventMouseButton) or ev.button_index != MOUSE_BUTTON_LEFT:
 				return
 			var screen: Vector2 = ev.global_position
@@ -249,6 +253,8 @@ func hit_test_at(screen: Vector2) -> Dictionary:
 
 
 func dispatch_tap(screen: Vector2) -> String:
+	if _historical:
+		return ""
 	var hit: Dictionary = hit_test_at(screen)
 	var kind := str(hit.get("kind", ""))
 	var idx := int(hit.get("idx", -1))
@@ -278,8 +284,10 @@ func _process(delta: float) -> void:
 
 
 func bind_ops(ops: Array, selected: Node, command_phase: bool) -> void:
+	_historical = false
 	for i in _cards.size():
 		var b: Button = _cards[i]
+		b.remove_theme_stylebox_override("disabled")
 		if i >= ops.size() or ops[i] == null:
 			b.visible = false
 			continue
@@ -304,6 +312,7 @@ func bind_ops(ops: Array, selected: Node, command_phase: bool) -> void:
 			b.modulate = Color.WHITE
 		var gly = b.get_node_or_null("Glyph")
 		if gly:
+			gly.visible = true
 			gly.set("role", op.role)
 		var gun = b.get_node_or_null("Gun")
 		if gun:
@@ -313,6 +322,7 @@ func bind_ops(ops: Array, selected: Node, command_phase: bool) -> void:
 			nam.text = str(op.display_name)
 		var hp: ColorRect = b.get_node_or_null("Hp")
 		if hp:
+			hp.visible = true
 			var ratio := clampf((op.hp if op.alive else 0.0) / OperatorUnit.MAX_HP, 0.0, 1.0)
 			hp.size.x = 84.0 * ratio
 			hp.color = NightOps.hp_color(ratio)
@@ -342,6 +352,48 @@ func bind_ops(ops: Array, selected: Node, command_phase: bool) -> void:
 				cap.text = "跟上" if on_follow else "跟"
 				cap.add_theme_color_override("font_color", Color(0.96, 0.90, 0.62) if on_follow else Color(0.82, 0.78, 0.58))
 		b.disabled = not command_phase and not sel
+
+
+func bind_history(frame: Dictionary) -> void:
+	_historical = true
+	_hold_idx = -1
+	_press_follow = false
+	_hold_fired = false
+	for i in _cards.size():
+		var b: Button = _cards[i]
+		var op := HudRecord.operator_at(frame, i)
+		b.visible = not op.is_empty()
+		b.disabled = true
+		if not b.visible:
+			continue
+		var selected := int(op.get("id", -2)) == int(frame.get("selected_id", -1))
+		var kit := OperatorUnit.role_kit_color(int(op.get("role", 0)))
+		var border := NightOps.OLIVE_HI if selected else Color(kit.r, kit.g, kit.b, 0.70)
+		var bg := Color(0.12, 0.11, 0.06, 0.98) if selected else Color(0.06, 0.055, 0.04, 0.94)
+		b.add_theme_stylebox_override("disabled", NightOps.flat(bg, border, 2 if selected else 1, 6, 6))
+		b.set_meta("sel", "1" if selected else "0")
+		b.modulate = Color.WHITE if bool(op.get("alive", true)) else Color(0.45, 0.42, 0.40, 0.7)
+		var glyph = b.get_node("Glyph")
+		glyph.set("role", int(op.get("role", 0)))
+		glyph.visible = op.has("role_label")
+		b.get_node("Gun").set("weapon_id", str(op.get("weapon", "")))
+		b.get_node("Nam").text = HudRecord.operator_name(op)
+		var hp: ColorRect = b.get_node("Hp")
+		hp.visible = op.has("hp") and op.has("max_hp")
+		var ratio := clampf(float(op.get("hp", 0.0)) / maxf(float(op.get("max_hp", 100.0)), 1.0), 0.0, 1.0) if bool(op.get("alive", true)) else 0.0
+		hp.size.x = 84.0 * ratio
+		hp.color = NightOps.hp_color(ratio)
+		var bits := PackedStringArray()
+		if int(op.get("stance", 0)) == 1:
+			bits.append("匍")
+		if bool(op.get("sprinting", false)):
+			bits.append("奔")
+		if bool(op.get("hidden", false)):
+			bits.append("隐")
+		if bool(op.get("follow_lead", false)) and not selected:
+			bits.append("跟")
+		b.get_node("Stance").text = " ".join(bits)
+		b.get_node("Follow").visible = false
 
 
 func _phone_strip() -> bool:

@@ -1,0 +1,36 @@
+{
+  "actual_exit": 0,
+  "source": "1ec3198e9c0db367af96fc264604c5a286003b5e",
+  "class_count": 53,
+  "complete_class_blocks_equal": true,
+  "all_payload_md5_verified": true,
+  "changes": {
+    "qa_vs_old": {
+      "added": [
+        "scripts/replay_progress_save_test.gd.remap",
+        "scripts/replay_progress_save_test.gdc"
+      ],
+      "removed": [],
+      "changed": [
+        ".godot/global_script_class_cache.cfg",
+        ".godot/uid_cache.bin",
+        "scripts/main.gdc"
+      ]
+    },
+    "qa_vs_production": {
+      "added": [
+        "qa/event_log_observer.gd.remap",
+        "qa/event_log_observer.gdc",
+        "qa/warehouse-record.bin"
+      ],
+      "removed": [],
+      "changed": [
+        ".godot/global_script_class_cache.cfg",
+        ".godot/uid_cache.bin",
+        "project.binary"
+      ]
+    }
+  },
+  "asset_payloads_unchanged_vs_prior_QA": true,
+  "production_bit_identical": false
+}

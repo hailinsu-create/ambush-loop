@@ -1,0 +1,17 @@
+TEST_RUN_ID=af920d1c2b804f4ab413fd8b31488366
+TEST_DATA_ROOT=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/af920d1c2b804f4ab413fd8b31488366/data
+TEST_ENTRY=presentation_lifecycle_test.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TEST_STORAGE_ISOLATED user_dir=/workspace/ambush-pr15/ambush_loop/build/ambush_test_runs/af920d1c2b804f4ab413fd8b31488366/data/godot/app_userdata/Ambush Loop run_id=af920d1c2b804f4ab413fd8b31488366
+ERROR: PRESENTATION_LIFECYCLE: backward scrub before the focused event clears its future ring within the same wave
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://scripts/presentation_lifecycle_test.gd:20)
+       [1] _run (res://scripts/presentation_lifecycle_test.gd:129)
+       [2] _key (res://scripts/presentation_lifecycle_test.gd:46)
+       [3] _send (res://scripts/presentation_lifecycle_test.gd:26)
+PRESENTATION_LIFECYCLE_FAILED checks=32 failures=1

@@ -1,0 +1,64 @@
+{
+  "source_sha": "a7942a96415c844701cdaa1f2bd2654ef3a52b14",
+  "game_tree": "64eb84b9afcbce282bf1b05f0d4932b8f4f77a92",
+  "runs": [
+    {
+      "stage": "dev-56e7-h",
+      "source_sha": "56e7c40c8da58962ea925363c9ac5c06d13ef465",
+      "actual_exit": 1,
+      "checks": 189,
+      "failures": 80,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "7637e7b79cb946f0be71f59b076dc3b3",
+      "command": "AMBUSH_TEST_SOURCE_SHA=56e7c40c8da58962ea925363c9ac5c06d13ef465 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_result_copy_test.gd --headless"
+    },
+    {
+      "stage": "negative-9918-h",
+      "source_sha": "99186ec1a4e8f0a173c630fb5eddde41b4eff373",
+      "actual_exit": 1,
+      "checks": 193,
+      "failures": 80,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "24a29fa404ac431db6148b8def6f1145",
+      "command": "AMBUSH_TEST_SOURCE_SHA=99186ec1a4e8f0a173c630fb5eddde41b4eff373 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_result_copy_test.gd --headless"
+    },
+    {
+      "stage": "fixed-a794-h",
+      "source_sha": "a7942a96415c844701cdaa1f2bd2654ef3a52b14",
+      "actual_exit": 0,
+      "checks": 193,
+      "failures": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "8d26f46a2b5f4792aceda06467239c84",
+      "command": "AMBUSH_TEST_SOURCE_SHA=a7942a96415c844701cdaa1f2bd2654ef3a52b14 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /workspace/.ambush-loop-env/godot/4.7.2/Godot_v4.7.2-stable_linux.x86_64 campaign_result_copy_test.gd --headless"
+    },
+    {
+      "stage": "fixed-a794-r",
+      "source_sha": "a7942a96415c844701cdaa1f2bd2654ef3a52b14",
+      "actual_exit": 0,
+      "checks": 221,
+      "failures": 0,
+      "SCRIPT_ERROR": 0,
+      "ERROR": 0,
+      "run_id": "6a34b2d1b6e04735a13da43ae999d060",
+      "command": "DISPLAY=:112 AMBUSH_TEST_X11_DISPLAY=:112 LIBGL_ALWAYS_SOFTWARE=1 AMBUSH_TEST_SOURCE_SHA=a7942a96415c844701cdaa1f2bd2654ef3a52b14 AMBUSH_NATIVE_RECORD_DIR=/workspace/ambush-pr15/ambush_loop/build/asset_review/pr15-runtime bash ambush_loop/scripts/run_isolated_test.sh /tmp/pr15-result-godot.sh campaign_result_copy_test.gd --render"
+    }
+  ],
+  "captures_hashed": 14,
+  "captures_viewed": [
+    "viewport_facts_3d_radio_failed_no_mine_scroll1.png",
+    "viewport_facts_3d_radio_failed_no_mine_scroll2.png",
+    "viewport_facts_3d_depot_won_no_mine.png",
+    "viewport_facts_3d_depot_won_mine.png",
+    "viewport_facts_3d_radio_won_no_mine.png",
+    "viewport_facts_legacy2d_depot_won_no_mine.png",
+    "viewport_facts_legacy2d_radio_failed_no_mine_scroll2.png"
+  ],
+  "native_inputs": 8,
+  "xorg_actual_exit": 0,
+  "original_record_boundaries": "Five immutable original records checked by hash; no replay render/rewrite. Railcut original formatter case is the new neutral-output contract, not proof its tactic actually failed. Yard is source audit/synthetic only. Pump QA already closed, preserved wording only.",
+  "remaining": "Current-wave hint known real radio3b defect, pending separate source. Original total-table teaching/route timeline/advice text audited but not fixed or accepted by this test. No normal fresh final-candidate six-level journey, no device/performance/art/FX/audio/whole legacy2D claim. Development56e7 weak fixture3 terminal failures retained; not counted as production copy failures. Direct launcher126 was pre-engine setup and kept separately."
+}
