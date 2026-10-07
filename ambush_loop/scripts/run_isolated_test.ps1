@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotExe,
     [ValidateSet(
+		'cb2_height_test.gd', 'm1_height_fire_gate.gd',
         'web_config_store_test.gd', 'replay_progress_save_test.gd',
         'first_visit_journey_test.gd', 'title_focus_keyboard_test.gd', 'title_menu_viewport_test.gd',
         'replay_autoplay_test.gd', 'replay_event_text_source_test.gd', 'cover_command_test.gd',

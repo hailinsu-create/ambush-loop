@@ -26,7 +26,7 @@ func sync(item: Dictionary, frame: Dictionary, lod: int, carrier: Actor, walls: 
 		return false
 	# Root is always the historical gameplay loot position. Each refresh resets
 	# the child transform before socket alignment, so seeks cannot accumulate it.
-	position = Space.logic_to_world(item.pos)
+	position = Space.logic_to_surface(frame, item.pos)
 	body.transform = Transform3D.IDENTITY
 	body.mount_item("")
 	var age := Pose.age(item, frame, "transition_age_s")
@@ -60,12 +60,12 @@ func sync(item: Dictionary, frame: Dictionary, lod: int, carrier: Actor, walls: 
 	else:
 		# Lift/lower use the held endpoint anchor, not a moving intermediate
 		# shoulder marker. The authored 20cm backshift is applied by the clip once.
-		palms = Space.logic_to_world(anchor.pos) + Basis(Vector3.UP, Space.facing_yaw(float(anchor.facing))) * _reference_palms(anchor, lod)
+		palms = Space.logic_to_surface(frame, anchor.pos) + Basis(Vector3.UP, Space.facing_yaw(float(anchor.facing))) * _reference_palms(anchor, lod)
 	var correction := palms - shoulders
 	body.sample_pose(clip, seconds)
 	body.position += correction
 	var local_bounds := _display_bounds(clip,seconds) if pairing_policy else AABB()
-	var floor_adjust := Pairing.FLOOR_Y-(body.global_transform*local_bounds).position.y if pairing_policy else 0.0
+	var floor_adjust := Space.height_at(frame, item.pos) + Pairing.FLOOR_Y-(body.global_transform*local_bounds).position.y if pairing_policy else 0.0
 	body.position.y+=floor_adjust
 	set_meta("contact_supported",int(frame.get("corpse_contact_schema",0))==Contact.FORMAT and bool(frame.get("environment_supported",false)) and not walls.is_empty())
 	set_meta("contact_resolved",true)
@@ -78,7 +78,7 @@ func sync(item: Dictionary, frame: Dictionary, lod: int, carrier: Actor, walls: 
 		var bounds := _pose_bounds(str(item.model),clip,seconds,pairing_policy)
 		if pairing_policy:
 			bounds=bounds.merge(local_bounds)
-		var contact := Contact.choose(bounds,local_shoulders,local_palms,Space.logic_to_world(anchor.pos),float(anchor.facing),walls)
+		var contact := Contact.choose(bounds,local_shoulders,local_palms,Space.logic_to_surface(frame, anchor.pos),float(anchor.facing),walls)
 		set_meta("contact_resolved",bool(contact.resolved))
 		if bool(contact.resolved):
 			body.global_transform=contact.transform

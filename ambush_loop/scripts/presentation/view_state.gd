@@ -1,6 +1,7 @@
 extends RefCounted
 
 const VisualSnapshot := preload("res://scripts/replay/visual_snapshot.gd")
+const Space := preload("res://scripts/presentation/world_space.gd")
 const ActorPose := preload("res://scripts/presentation/actor_pose.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
 const GROUPS := ["ops", "enemies", "sentries", "stashes", "covers", "loot", "barrels", "tripwires", "mines", "grenades", "decoys", "environment_objects", "corpses"]
@@ -12,7 +13,7 @@ static func capture(host: Node) -> Dictionary:
 	var snap: Dictionary = host.replay.snapshot_at_or_before(host.replay.scrub_tick) if historical else {}
 	var data: Dictionary = snap.get("data", {}) if historical else host._snapshot_data()
 	var visual_schema := int(data.get("visual_schema", 0))
-	var unsupported := visual_schema > VisualSnapshot.FORMAT_VERSION or visual_schema < 0
+	var unsupported := visual_schema > VisualSnapshot.FORMAT_VERSION or visual_schema < 0 or not Space.terrain_supported(data)
 	if unsupported:
 		data = {}
 	var continuous: bool = historical and host.replay.continuous_playback
@@ -72,6 +73,10 @@ static func capture(host: Node) -> Dictionary:
 		"event_pose_schema": 1 if event_clock_valid else 0,
 		"event_pose_clock_s": float(raw_event_clock) + (snapshot_delta if advance_pose else 0.0) if event_clock_valid else 0.0,
 		"level_id": str(data.get("level_id", "")), "blocked": data.get("blocked", PackedByteArray()).duplicate(),
+		"height_schema": int(data.get("height_schema", 0)),
+		"elevation_tier": data.get("elevation_tier", PackedByteArray()).duplicate(),
+		"occlusion_kind": data.get("occlusion_kind", PackedByteArray()).duplicate(),
+		"ramp_links": data.get("ramp_links", {}).duplicate(),
 		"selected_id": int(data.get("selected_id", -1)), "escape": data.get("escape", Vector2.ZERO),
 		"door_locked": bool(data.get("door_locked", false)), "replay": historical,
 		"has_door": bool(data.get("has_door", false)), "door_pos": data.get("door_pos", Vector2.ZERO),

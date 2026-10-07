@@ -1,6 +1,7 @@
 extends Node3D
 
 const Space := preload("res://scripts/presentation/world_space.gd")
+const TerrainGrid := preload("res://scripts/grid.gd")
 const ViewState := preload("res://scripts/presentation/view_state.gd")
 const Rig := preload("res://scripts/presentation/camera_rig_3d.gd")
 const Picker := preload("res://scripts/presentation/world_picker_3d.gd")
@@ -26,6 +27,7 @@ var rig: Node3D
 var gestures := CameraInput.new()
 var touch_intent: Node
 var frame: Dictionary = {}
+var terrain_grid: RefCounted
 var geometry := Node3D.new()
 var proxies := Node3D.new()
 var walls: Array = []
@@ -277,7 +279,7 @@ func refresh() -> void:
 		_environment_lod = 1
 	elif rig.view_size < 22.0:
 		_environment_lod = 0
-	var layout_hash: int = hash([frame.level_id, frame.blocked, frame.environment_supported,
+	var layout_hash: int = hash([frame.level_id, frame.blocked, frame.get("elevation_tier", []), frame.get("ramp_links", {}), frame.environment_supported,
 		frame.environment_revision, frame.environment_layout_revision, frame.environment_cutaway_schema, frame.has_door, frame.door_pos, _environment_lod])
 	if layout_hash != _layout_hash:
 		_layout_hash = layout_hash
@@ -295,7 +297,7 @@ func refresh() -> void:
 	for op in frame.ops:
 		if op.id == frame.selected_id and op.active and op.alive:
 			_selected_ring.visible = true
-			_selected_ring.position = Space.logic_to_world(op.pos, 0.035)
+			_selected_ring.position = Space.logic_to_surface(frame, op.pos, 0.035)
 	if _occlusion_acc >= 0.1 or rig.camera.global_transform != _last_pose:
 		var targets: Array = []
 		for group in [frame.ops, frame.enemies, frame.sentries, frame.stashes, frame.loot]:
@@ -410,6 +412,7 @@ func _rebuild_geometry() -> void:
 				rect.position.y - 11 + rect.size.y * 0.5)
 			var mesh := Geometry.box(geometry, size - Vector3(0.03, 0, 0.03), at, wall_mat)
 			walls.append({"mesh": mesh, "bounds": AABB(at - size * 0.5, size)})
+	_build_terrain()
 	if frame.visual_schema == 0 or frame.visual_unsupported:
 		return
 	var exit_mat := Geometry.material(Color("8bac9c"), true)
@@ -421,6 +424,26 @@ func _rebuild_geometry() -> void:
 	exit_label.font_size = 40
 	exit_label.pixel_size = 0.008
 	geometry.add_child(exit_label)
+
+
+func _build_terrain() -> void:
+	terrain_grid = null
+	if int(frame.get("height_schema", 0)) != 1:
+		return
+	var tiers: PackedByteArray = frame.get("elevation_tier", PackedByteArray())
+	if tiers.size() != 880:
+		return
+	terrain_grid = TerrainGrid.new()
+	terrain_grid.blocked = frame.blocked.duplicate()
+	terrain_grid.elevation_tier = tiers.duplicate()
+	terrain_grid.occlusion_kind = frame.occlusion_kind.duplicate()
+	terrain_grid.ramp_links = frame.ramp_links.duplicate()
+	var mat := Geometry.material(Color("777b70"))
+	for index in tiers.size():
+		if tiers[index] != 1:
+			continue
+		var pos := Vector2((index % 40 + 0.5) * 32.0, (index / 40 + 0.5) * 32.0)
+		Geometry.box(geometry, Vector3(1.0, 1.0, 1.0), Space.logic_to_world(pos, 0.5), mat)
 
 
 func _sync_actors() -> void:
@@ -450,7 +473,7 @@ func _sync_actors() -> void:
 				proxy.add_child(label)
 				actors[key] = proxy
 			var proxy: Node3D = actors[key]
-			proxy.position = Space.logic_to_world(item.pos)
+			proxy.position = Space.logic_to_surface(frame, item.pos)
 			proxy.visible = item.active
 			_sync_body(proxy, item, group)
 			if not item.alive and CorpsePose.supported(frame):
@@ -537,7 +560,7 @@ func _sync_objects() -> void:
 				else:
 					Geometry.box(proxy, Vector3(0.4, 0.16, 0.3), Vector3(0, 0.1, 0), _crate)
 				objects[key] = proxy
-			objects[key].position = Space.logic_to_world(item.pos)
+			objects[key].position = Space.logic_to_surface(frame, item.pos)
 			objects[key].visible = bool(item.get("active", true))
 			var visual := objects[key].get_node_or_null("EnvironmentVisual") as Node3D
 			if visual != null:
@@ -619,8 +642,11 @@ func _sync_cones() -> void:
 				proxies.add_child(instance)
 				cones[key] = instance
 			var instance: MeshInstance3D = cones[key]
-			instance.position = Space.logic_to_world(item.pos, 0.055)
+			instance.position = Space.logic_to_surface(frame, item.pos, 0.055)
 			var mesh: ImmediateMesh = instance.mesh
+			if terrain_grid != null and item.has("range_px"):
+				_sync_height_coverage(instance, item)
+				continue
 			mesh.clear_surfaces()
 			mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 			for i in range(1, points.size() - 1):
@@ -631,6 +657,38 @@ func _sync_cones() -> void:
 		if not seen.has(key):
 			cones[key].free()
 			cones.erase(key)
+
+
+func _sync_height_coverage(instance: MeshInstance3D, item: Dictionary) -> void:
+	instance.position = Vector3.ZERO
+	var signature := hash([_layout_hash, item.pos, item.facing, item.range_px, item.half_angle, item.melee])
+	if instance.get_meta("coverage", -1) == signature:
+		return
+	instance.set_meta("coverage", signature)
+	var mesh: ImmediateMesh = instance.mesh
+	mesh.clear_surfaces()
+	var began := false
+	var radius := int(ceil(float(item.range_px) / 32.0))
+	var cell: Vector2i = terrain_grid.world_to_cell(item.pos)
+	for y in range(maxi(0, cell.y-radius), mini(22, cell.y+radius+1)):
+		for x in range(maxi(0, cell.x-radius), mini(40, cell.x+radius+1)):
+			var target: Vector2 = terrain_grid.cell_to_world_center(Vector2i(x,y))
+			var delta: Vector2 = target-item.pos
+			if delta.length() < 8.0 or delta.length() > float(item.range_px):
+				continue
+			if absf(fposmod(rad_to_deg(delta.angle())-float(item.facing)+180.0,360.0)-180.0) > float(item.half_angle):
+				continue
+			var clear: bool = terrain_grid.has_los(item.pos,target) if bool(item.melee) else terrain_grid.has_height_los(item.pos,target)
+			if not clear or terrain_grid.is_blocked(x,y):
+				continue
+			if not began:
+				mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+				began = true
+			var at := Space.logic_to_surface(frame, target, 0.06)
+			for offset in [Vector3(-0.44,0,-0.44),Vector3(0.44,0,-0.44),Vector3(0.44,0,0.44),Vector3(-0.44,0,-0.44),Vector3(0.44,0,0.44),Vector3(-0.44,0,0.44)]:
+				mesh.surface_add_vertex(at+offset)
+	if began:
+		mesh.surface_end()
 
 
 func _input(event: InputEvent) -> void:
@@ -701,7 +759,7 @@ func focus_event(pos: Vector2, event: Dictionary) -> void:
 	_focus_wave = int(event.get("wave_id", -1))
 	_focus_tick = BattleLog.record_tick(event)
 	_focus_playback_tick = host.replay.playback_time(event) if host.phase == host.Phase.REPLAY else int(event.get("playback_tick", _focus_tick))
-	_event_ring.position = Space.logic_to_world(pos, 0.065)
+	_event_ring.position = Space.logic_to_surface(frame, pos, 0.065)
 	_event_ring.visible = true
 	rig.focus = Space.logic_to_world(pos)
 	rig.apply_pose()

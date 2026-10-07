@@ -102,6 +102,9 @@ func capture(host: Node) -> Dictionary:
 		"event_pose_schema": 1, "event_pose_clock_s": event_clock,
 		"level_title": str(host.level.title), "attempt_number": host.loop_index, "wave_count": host.wave_total(),
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
+		"height_schema": 1, "elevation_tier": host.grid.elevation_tier.duplicate(),
+		"occlusion_kind": host.grid.occlusion_kind.duplicate(),
+		"ramp_links": host.grid.ramp_links.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,
 		"has_door": host.level.door_cell.x >= 0, "door_pos": host.grid.cell_to_world_center(host.level.door_cell) if host.level.door_cell.x >= 0 else Vector2.ZERO,
 		"selected_id": host.selected.op_id if host.selected != null else -1,
@@ -134,6 +137,7 @@ func capture(host: Node) -> Dictionary:
 			"follow_lead": op.follow_lead, "cover_label": op.slot.label_text if op.slot != null else "机动",
 			"hp": op.hp, "ammo": op.ammo, "alive": op.alive, "facing": op.facing_deg,
 			"role": op.role, "weapon": op.weapon_id, "moving": op.is_moving(),
+			"range_px": op.range_px, "half_angle": op.half_angle_deg, "melee": op.melee,
 			"stance": op.stance, "sprinting": op.sprinting, "hidden": op.hidden_in_shadow,
 			"hauling": op.is_hauling(), "searching": op.is_searching(), "search_t": op.search_t,
 			"action": action, "shot_cd": op.shot_cd, "shot_interval": op.shot_interval,
@@ -166,6 +170,7 @@ func capture(host: Node) -> Dictionary:
 				"visual_model": "enemy_patrol", "visual_weapon": "kar98k",
 				"active": sentry.visible, "alive": not sentry.is_down(), "facing": sentry.facing_deg,
 				"state": sentry.state, "suspicion": sentry.suspicion, "frozen": sentry.frozen,
+				"range_px": sentry.SEE_R, "half_angle": sentry.HALF_ANG, "melee": false,
 				"action": "death" if sentry.is_down() else ("idle" if sentry.frozen else "walk"),
 				"cone": sentry.cone.polygon.duplicate() if sentry.cone != null else PackedVector2Array()})
 	for slot in host.cover_slots:

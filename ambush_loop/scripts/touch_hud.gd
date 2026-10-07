@@ -609,7 +609,7 @@ func refresh_phase(
 		_row_watch.visible = phase_name not in ["SETUP", "SWEEP", "REPLAY"]
 	_replay_controls.visible = phase_name == "REPLAY"
 	if _replay_controls.visible and _host != null:
-		_replay_time.text = "%.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
+		_replay_time.text = "复盘 %.1fs / %.1fs" % [float(_host.replay.scrub_tick) / 60.0, float(_host.replay.max_tick()) / 60.0]
 		var ended: bool = _host.replay.scrub_tick >= _host.replay.max_tick()
 		_replay_pause.text = "暂停" if _host.replay.playing else ("重播" if ended else "继续")
 		_replay_speed.text = "2×" if speed_hi else "1×"

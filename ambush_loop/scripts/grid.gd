@@ -7,20 +7,42 @@ const TILE := 32
 const COLS := 40
 const ROWS := 22
 
+const HEIGHT_GROUND := 0
+const HEIGHT_PLATFORM := 1
+const OCCLUSION_INHERIT := 0
+const OCCLUSION_NONE := 1
+const OCCLUSION_LOW := 2
+const OCCLUSION_FULL := 3
+const OCCLUSION_LOW_HEIGHT := 1.0
+const OCCLUSION_FULL_HEIGHT := 3.0
+
 var blocked: PackedByteArray = PackedByteArray()
+## Explicit terrain tiers and occluders are additive; legacy blocked cells keep
+## their full-height sight behavior unless a level opts into a new occlusion kind.
+var elevation_tier: PackedByteArray = PackedByteArray()
+var occlusion_kind: PackedByteArray = PackedByteArray()
+var ramp_links: Dictionary = {}
 var layout_id: String = "yard"
 var door_cell: Vector2i = Vector2i(-1, -1)
 var door_locked: bool = false
+var tactical_revision: int = 0
 
 
 func _init() -> void:
-	blocked.resize(COLS * ROWS)
+	var cell_count := COLS * ROWS
+	blocked.resize(cell_count)
+	elevation_tier.resize(cell_count)
+	occlusion_kind.resize(cell_count)
 	rebuild("yard")
 
 
 func rebuild(level_id: String) -> void:
+	tactical_revision += 1
 	layout_id = level_id
 	blocked.fill(0)
+	elevation_tier.fill(HEIGHT_GROUND)
+	occlusion_kind.fill(OCCLUSION_INHERIT)
+	ramp_links.clear()
 	_build_shell()
 	match level_id:
 		"warehouse":
@@ -85,6 +107,12 @@ func _build_yard() -> void:
 	_block_rect(18, 9, 22, 12)
 	_block_rect(27, 8, 30, 10)
 	_block_rect(16, 14, 20, 16)
+	# M1-B2 loading dock. The existing SMG cache at (17,12) stays on top;
+	# the only height transition is the south ramp at x=15.
+	for x in range(15, 18):
+		for y in range(10, 13):
+			set_elevation_tier(x, y, HEIGHT_PLATFORM)
+	set_ramp_link(Vector2i(15, 13), Vector2i(15, 12))
 
 
 func _build_warehouse() -> void:
@@ -159,7 +187,132 @@ func is_blocked(x: int, y: int) -> bool:
 
 func set_blocked(x: int, y: int, value: bool) -> void:
 	if in_bounds(x, y):
-		blocked[idx(x, y)] = 1 if value else 0
+		var next_value := 1 if value else 0
+		var index := idx(x, y)
+		if blocked[index] != next_value:
+			blocked[index] = next_value
+			tactical_revision += 1
+
+
+func set_elevation_tier(x: int, y: int, tier: int) -> bool:
+	if not in_bounds(x, y) or is_blocked(x, y) or tier < HEIGHT_GROUND or tier > HEIGHT_PLATFORM:
+		return false
+	var index := idx(x, y)
+	if elevation_tier[index] != tier:
+		elevation_tier[index] = tier
+		tactical_revision += 1
+	return true
+
+
+func get_elevation_tier(x: int, y: int) -> int:
+	if not in_bounds(x, y):
+		return HEIGHT_GROUND
+	return int(elevation_tier[idx(x, y)])
+
+
+func set_occlusion_kind(x: int, y: int, kind: int) -> bool:
+	if not in_bounds(x, y) or kind < OCCLUSION_INHERIT or kind > OCCLUSION_FULL:
+		return false
+	var index := idx(x, y)
+	if occlusion_kind[index] != kind:
+		occlusion_kind[index] = kind
+		tactical_revision += 1
+	return true
+
+
+func get_occlusion_kind(x: int, y: int) -> int:
+	if not in_bounds(x, y):
+		return OCCLUSION_FULL
+	return int(occlusion_kind[idx(x, y)])
+
+
+func occlusion_height_at(x: int, y: int) -> float:
+	if not in_bounds(x, y):
+		return INF
+	match get_occlusion_kind(x, y):
+		OCCLUSION_NONE:
+			return 0.0
+		OCCLUSION_LOW:
+			return OCCLUSION_LOW_HEIGHT
+		OCCLUSION_FULL:
+			return OCCLUSION_FULL_HEIGHT
+		_:
+			return OCCLUSION_FULL_HEIGHT if is_blocked(x, y) else 0.0
+
+
+func set_ramp_link(a: Vector2i, b: Vector2i, enabled: bool = true) -> bool:
+	if not in_bounds(a.x, a.y) or not in_bounds(b.x, b.y):
+		return false
+	if is_blocked(a.x, a.y) or is_blocked(b.x, b.y):
+		return false
+	if absi(a.x - b.x) + absi(a.y - b.y) != 1:
+		return false
+	var edge := _ramp_edge_key(a, b)
+	if enabled:
+		if not ramp_links.has(edge):
+			ramp_links[edge] = true
+			tactical_revision += 1
+	else:
+		if ramp_links.has(edge):
+			ramp_links.erase(edge)
+			tactical_revision += 1
+	return true
+
+
+func has_ramp_link(a: Vector2i, b: Vector2i) -> bool:
+	if not in_bounds(a.x, a.y) or not in_bounds(b.x, b.y):
+		return false
+	return ramp_links.has(_ramp_edge_key(a, b))
+
+
+func can_traverse_height(a: Vector2i, b: Vector2i) -> bool:
+	if not in_bounds(a.x, a.y) or not in_bounds(b.x, b.y):
+		return false
+	if absi(a.x - b.x) + absi(a.y - b.y) != 1:
+		return false
+	if is_blocked(a.x, a.y) or is_blocked(b.x, b.y):
+		return false
+	if get_elevation_tier(a.x, a.y) == get_elevation_tier(b.x, b.y):
+		return true
+	return has_ramp_link(a, b)
+
+
+func uses_height_topology() -> bool:
+	if not ramp_links.is_empty():
+		return true
+	for tier in elevation_tier:
+		if int(tier) != HEIGHT_GROUND:
+			return true
+	return false
+
+
+func world_segment_traversable(from_world: Vector2, to_world: Vector2, max_sample_px: float = 8.0) -> bool:
+	## Validate every cell boundary crossed by a world-space movement segment.
+	## Short samples make diagonal corner cuts fail closed instead of skipping an edge.
+	var from_cell := world_to_cell(from_world)
+	var to_cell := world_to_cell(to_world)
+	if not in_bounds(from_cell.x, from_cell.y) or not in_bounds(to_cell.x, to_cell.y):
+		return false
+	if is_blocked(from_cell.x, from_cell.y):
+		return false
+	var sample_px := maxf(max_sample_px, 1.0)
+	var sample_count := maxi(1, int(ceil(from_world.distance_to(to_world) / sample_px)))
+	var previous := from_cell
+	for i in range(1, sample_count + 1):
+		var point := from_world.lerp(to_world, float(i) / float(sample_count))
+		var current := world_to_cell(point)
+		if current == previous:
+			continue
+		if not can_traverse_height(previous, current):
+			return false
+		previous = current
+	return previous == to_cell
+
+
+func _ramp_edge_key(a: Vector2i, b: Vector2i) -> Vector2i:
+	var ia := idx(a.x, a.y)
+	var ib := idx(b.x, b.y)
+	return Vector2i(mini(ia, ib), maxi(ia, ib))
 
 
 func world_to_cell(pos: Vector2) -> Vector2i:
@@ -168,6 +321,68 @@ func world_to_cell(pos: Vector2) -> Vector2i:
 
 func cell_to_world_center(cell: Vector2i) -> Vector2:
 	return Vector2((cell.x + 0.5) * TILE, (cell.y + 0.5) * TILE)
+
+
+func has_height_los(from: Vector2, to: Vector2) -> bool:
+	## M1-C1 opt-in geometry only: cell-center Bresenham, not pixel supercover.
+	## Eye height is tier + 0.5; contact with a low occluder's top blocks sight.
+	## Keep legacy has_los and all production consumers unchanged until migration.
+	if not from.is_finite() or not to.is_finite():
+		return false
+	if from.x < 0.0 or from.y < 0.0 or to.x < 0.0 or to.y < 0.0:
+		return false
+	if from.x >= COLS * TILE or to.x >= COLS * TILE or from.y >= ROWS * TILE or to.y >= ROWS * TILE:
+		return false
+	var a := world_to_cell(from)
+	var b := world_to_cell(to)
+	if is_blocked(a.x, a.y) or is_blocked(b.x, b.y):
+		return false
+	var tier_a := get_elevation_tier(a.x, a.y)
+	var tier_b := get_elevation_tier(b.x, b.y)
+	if tier_a < HEIGHT_GROUND or tier_a > HEIGHT_PLATFORM or tier_b < HEIGHT_GROUND or tier_b > HEIGHT_PLATFORM:
+		return false
+	if a == b:
+		return true
+	# Canonicalize before rasterization: Bresenham tie choices can be directional.
+	if idx(a.x, a.y) > idx(b.x, b.y):
+		var swap := a
+		a = b
+		b = swap
+		tier_a = get_elevation_tier(a.x, a.y)
+		tier_b = get_elevation_tier(b.x, b.y)
+	var origin := cell_to_world_center(a)
+	var delta := cell_to_world_center(b) - origin
+	var distance_squared := delta.length_squared()
+	var x := a.x
+	var y := a.y
+	var dx := absi(b.x - a.x)
+	var dy := -absi(b.y - a.y)
+	var sx := 1 if a.x < b.x else -1
+	var sy := 1 if a.y < b.y else -1
+	var err := dx + dy
+	while true:
+		var cell := Vector2i(x, y)
+		if cell != a and cell != b:
+			var kind := get_occlusion_kind(x, y)
+			if kind < OCCLUSION_INHERIT or kind > OCCLUSION_FULL:
+				return false
+			if kind == OCCLUSION_FULL or (kind == OCCLUSION_INHERIT and is_blocked(x, y)):
+				return false
+			var t := clampf((cell_to_world_center(cell) - origin).dot(delta) / distance_squared, 0.0, 1.0)
+			var ray_height := lerpf(float(tier_a) + 0.5, float(tier_b) + 0.5, t)
+			var obstacle_height := occlusion_height_at(x, y)
+			if obstacle_height > 0.0 and obstacle_height >= ray_height:
+				return false
+		if cell == b:
+			break
+		var e2 := 2 * err
+		if e2 >= dy:
+			err += dy
+			x += sx
+		if e2 <= dx:
+			err += dx
+			y += sy
+	return true
 
 
 func has_los(from: Vector2, to: Vector2) -> bool:

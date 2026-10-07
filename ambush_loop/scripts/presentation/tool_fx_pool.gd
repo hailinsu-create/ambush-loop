@@ -70,7 +70,7 @@ func update_frame(frame: Dictionary, power_saving: bool = false) -> void:
 	var limit := SAVING_CAPACITY if power_saving else CAPACITY
 	for index in range(maxi(0,samples.size() - limit),samples.size()):
 		var source: Dictionary = samples[index]
-		var center := Space.logic_to_world(source.position)
+		var center := Space.logic_to_surface(frame, source.position)
 		var radius: float = float(source.radius) / Space.PIXELS_PER_METRE
 		var age: int = source.age_ticks
 		var flash_size := 0.65 + float(age) * 0.09

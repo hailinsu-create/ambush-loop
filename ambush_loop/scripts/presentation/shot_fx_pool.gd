@@ -94,11 +94,12 @@ func update_frame(frame: Dictionary, power_saving: bool = false) -> void:
 		var shot: Dictionary = samples[index]
 		var saved := shot.duplicate(true)
 		saved.erase("age_ticks")
+		saved["surface_height"] = Space.height_at(frame, shot.source_pos)
 		var socket := _saved_muzzle(saved)
 		if socket.is_empty(): continue
 		var slot: Dictionary = _slots[_active.size()]
 		var muzzle: Vector3 = socket.position
-		var target := Space.logic_to_world(shot.target_pos,TARGET_HEIGHT)
+		var target := Space.logic_to_surface(frame, shot.target_pos,TARGET_HEIGHT)
 		var age: int = shot.age_ticks
 		var delta := target-muzzle
 		var length := delta.length()
@@ -134,7 +135,7 @@ func _saved_muzzle(saved: Dictionary) -> Dictionary:
 		# A hash is only a fast prefilter, never evidence of descriptor equality.
 		if entry.key==key and entry.saved==saved: return {"position":entry.position}
 	_sample_calls += 1
-	_sampler.position = Space.logic_to_world(saved.source_pos)
+	_sampler.position = Space.logic_to_world(saved.source_pos, float(saved.get("surface_height", 0.0)))
 	_sampler.rotation = Vector3(0,Space.facing_yaw(float(saved.pose.get("visual_facing",saved.source_facing))),0)
 	_sampler.scale = Vector3.ONE
 	if not _sampler.set_asset(saved.visual_model,SAMPLE_LOD,saved.actor_asset_revision) or not _sampler.mount_item(saved.visual_weapon) or not _sampler.sample_layers(saved.pose):
