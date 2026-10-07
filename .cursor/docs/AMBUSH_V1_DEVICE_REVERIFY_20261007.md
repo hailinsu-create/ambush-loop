@@ -2,6 +2,10 @@
 
 ## 用户重插后的实际续测
 
+### 再试长时间卡顿测试
+
+用户要求再次进行长期采样。devices起初仍显示authorized transport7，但只读pidof在10秒限时内未响应，取消的是本轮电脑端查询客户端。无安装/测试进程待结束后重启ADB server，设备变为 `(no serial number) offline transport1`；再次devices仍offline，mdns services无已发现无线调试端点。没有执行新游戏输入、重装、卸载、清档或修改手机设置。由于无法读进程/帧时间/内存/温度，长稳采样尚未开始，不能登记通过或据通信离线认定游戏卡顿/崩溃。需用户重新建立USB授权或无线调试连接后继续代表性标准/低档运行采样。
+
 重插后authorized transport6恢复，pm path退出0；设备base.apk SHA256=796579006b192860f4e1cdb170a243d5bc5f35c69dbb3e8b4256c513cde09f3f，确认上次仍为旧f8ad51c包，才开始单次原位更新。新版 `install -r --no-streaming` 实际Success、INSTALL_EXIT0（31,305,849字节）。没有卸载、清档。
 
 初次直接启动非exported GodotApp被系统拒绝，随后通过cmd package resolve-activity取得正确GodotAppLauncher，实际启动成功，PID29188。普通游戏UI：标题→开始行动→选择院子→接受任务→2D准备→查看3D院子→展开战术，截图逐步确认。新版冷色地面/砖墙、仓库卷帘/檐口、补给暖灯及compact卡片均实际可见；接受任务此次未退出。不注入关卡、资源或胜利状态。
