@@ -115,7 +115,9 @@ func _actual() -> void:
 	await _capture("ground")
 	# Read-only seek with poisoned live actor/clock and a later unrelated wave.
 	var log := BattleLog.new()
-	log.attempt_id = ""
+	# Replay envelope and copied corpse transition must share the source attempt;
+	# only the live host identity is poisoned below.
+	log.attempt_id = str(grab.corpses[0].transition.attempt_id)
 	log.wave_id = 0
 	log.add_snapshot(0,grab)
 	log.add_snapshot(60,held)
@@ -125,6 +127,7 @@ func _actual() -> void:
 	op.global_position += Vector2(160,96)
 	op.facing_deg += 91.0
 	op.apply_weapon("knife",false)
+	main.battle_log.attempt_id = "poisoned-live-attempt"
 	main.run_id += 900
 	main._pose_command_clock_s = 999.0
 	main.battle_log.wave_id += 9

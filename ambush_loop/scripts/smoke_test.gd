@@ -8,6 +8,7 @@ extends SceneTree
 const SAVE_PATH := "user://ambush_loop.cfg"
 const SETTINGS_PATH := "user://ambush_loop_settings.cfg"
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
+const RaidPathfinderScript := preload("res://scripts/raid/pathfinder.gd")
 
 
 func _init() -> void:
@@ -3632,11 +3633,15 @@ func _assert_touch_feel_052(main) -> bool:
 		push_error("SMOKE_FOLLOW_STUCK")
 		quit(44)
 		return false
+	main._select_op(0)
+	main.operators[0].stop_move()
+	# Earlier camera checks may leave the legacy 2D camera at its pan limit.
+	# Start from a known interior position so this directional drag tests input,
+	# not whether the fixture happened to push farther past a clamp.
+	main._reset_cam_view()
 	var xf: Transform2D = main.get_viewport().get_canvas_transform()
 	var clear: Vector2 = _empty_probe_world(main)
 	var home: Vector2 = main.operators[0].global_position
-	main._select_op(0)
-	main.operators[0].stop_move()
 	if home.distance_to(clear) < 48.0:
 		clear = home + Vector2(96, 0)
 	var pan0: Vector2 = main._cam_pan
@@ -3671,10 +3676,15 @@ func _assert_touch_feel_052(main) -> bool:
 	main._cam_pan = pan0
 	if main.has_method("_apply_cam"):
 		main._apply_cam()
+	var sprint_world: Vector2 = _reachable_probe_world(main, main.selected)
+	if not sprint_world.is_finite():
+		push_error("SMOKE_NO_REACHABLE_SPRINT_TARGET")
+		quit(44)
+		return false
 	var press2 := InputEventScreenTouch.new()
 	press2.index = 0
 	press2.pressed = true
-	press2.position = xf * clear
+	press2.position = xf * sprint_world
 	main._unhandled_input(press2)
 	main._cover_hold_msec = Time.get_ticks_msec() - 320
 	main._cover_hold_slot = null
@@ -3693,7 +3703,20 @@ func _assert_touch_feel_052(main) -> bool:
 		quit(44)
 		return false
 	if main.selected == null or not bool(main.selected.sprinting):
-		push_error("SMOKE_SPRINT_NOT_SET")
+		push_error(
+			"SMOKE_SPRINT_NOT_SET selected=%s sprint=%s stance=%s hauling=%s moving=%s path=%s from=%s target=%s pending=%s"
+			% [
+				main.selected != null,
+				main.selected.sprinting if main.selected else false,
+				main.selected.stance if main.selected else -1,
+				main.selected.is_hauling() if main.selected else false,
+				main.selected.is_moving() if main.selected else false,
+				main.selected.move_path.size() if main.selected else -1,
+				main.selected.grid_cell() if main.selected else Vector2i(-1, -1),
+				main.grid.world_to_cell(sprint_world),
+				main._c2_sprint_next,
+			]
+		)
 		quit(44)
 		return false
 	print("SMOKE_OK_GESTURE_SPRINT")
@@ -3702,6 +3725,40 @@ func _assert_touch_feel_052(main) -> bool:
 	main.operators[0].global_position = home
 	print("SMOKE_OK_TOUCH_FEEL")
 	return true
+
+
+func _reachable_probe_world(main, op) -> Vector2:
+	if main.grid == null or op == null:
+		return Vector2.INF
+	var start: Vector2i = op.grid_cell()
+	# Keep the probe inside the playable courtyard. Cells beyond the yard's
+	# perimeter walls may be graph-reachable via the north entrance but are not
+	# valid player destinations for this touch-command check.
+	for x in range(5, 35):
+		for y in range(5, 18):
+			var cell := Vector2i(x, y)
+			if cell == start or main.grid.is_blocked(x, y) or main._cell_taken(cell, op):
+				continue
+			var occupied := false
+			for other in main.operators:
+				if other != op and other.visible and other.alive and other.grid_cell() == cell:
+					occupied = true
+					break
+			if occupied:
+				continue
+			var world: Vector2 = main.grid.cell_to_world_center(cell)
+			if main._nearest_slot(world, 40.0) != null:
+				continue
+			var stash_near := false
+			for stash in main.raid_stashes:
+				if stash != null and is_instance_valid(stash) and world.distance_to(stash.global_position) < 48.0:
+					stash_near = true
+					break
+			if stash_near:
+				continue
+			if RaidPathfinderScript.find_path(main.grid, start, cell).size() > 1:
+				return world
+	return Vector2.INF
 
 
 func _assert_touch_feel_053(main) -> bool:

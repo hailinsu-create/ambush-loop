@@ -27,7 +27,7 @@ func _run() -> void:
 	_check(doc.assets.size() == 40 and doc.runtime_files.size() == 85 and doc.reuse_dependencies.size() == 11, "exact adoption boundary")
 	_check(doc.source_commit == Assets.ENVIRONMENT_REVISION and doc.delivery_commit == "9c06f04cf7795faf69d9d69d0f853f30ccf80838", "fixed provenance")
 	for row in doc.runtime_files + doc.reuse_dependencies:
-		_check(FileAccess.get_sha256("res://" + row.path) == row.sha256, "original bytes " + row.path)
+		_check(_source_sha256(str(row.path)) == row.sha256, "canonical source bytes " + row.path)
 	_check(not Assets.has_asset("env_ammo_can", 2) and not Assets.has_asset("env_ammo_can", -1) and not Assets.has_asset("env_ammo_can", 0, "unknown"), "bad LOD/revision refused")
 	_check(not Assets.has_asset("env_../main") and not Assets.has_asset("m1_garand", 0, Assets.ENVIRONMENT_REVISION), "namespace and revision are not interchangeable")
 	var material := Assets.material_for_slot("environment_v2_atlas")
@@ -111,6 +111,16 @@ func _run() -> void:
 	await create_timer(0.1).timeout
 	print("ENVIRONMENT_ASSETS_OK" if failures == 0 else "ENVIRONMENT_ASSETS_FAILED", " checks=", checks, " failures=", failures, " assets=40 lods=80")
 	quit(0 if failures == 0 else 1)
+
+
+func _source_sha256(path: String) -> String:
+	var uri := "res://" + path
+	var ext := path.get_extension().to_lower()
+	if ext in ["cfg", "gd", "gdshader", "json", "md", "tres", "tscn", "txt"]:
+		# The adoption manifest records Git-source LF bytes. core.autocrlf may
+		# materialize those same tracked text assets with CRLF on Windows.
+		return FileAccess.get_file_as_string(uri).replace("\r\n", "\n").sha256_text()
+	return FileAccess.get_sha256(uri)
 
 
 func _triangles(node: Node) -> int:
