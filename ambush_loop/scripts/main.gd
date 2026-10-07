@@ -3054,7 +3054,20 @@ func _layout_checklist() -> void:
 	checklist_strip.anchor_bottom = 0.0
 	# Beside the route timeline, under the phase chip — never over the left cards.
 	checklist_strip.offset_left = -520.0
-	if _want_touch():
+	if presentation_3d != null:
+		# The 3D phase chip occupies the first north row even with touch chrome.
+		# Repeated readiness refreshes must preserve the separate compact row.
+		if _compact_hud():
+			checklist_strip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+			checklist_strip.offset_left = 8.0
+			checklist_strip.offset_top = 56.0 + maxf(0.0, pad.y - 4.0)
+			checklist_strip.offset_bottom = 78.0 + maxf(0.0, pad.y - 4.0)
+			if box:
+				box.alignment = BoxContainer.ALIGNMENT_BEGIN
+		else:
+			checklist_strip.offset_top = 38.0 + maxf(0.0, pad.y - 4.0)
+			checklist_strip.offset_bottom = 72.0 + maxf(0.0, pad.y - 4.0)
+	elif _want_touch():
 		checklist_strip.offset_top = 8.0 + maxf(0.0, pad.y - 4.0)
 		checklist_strip.offset_bottom = 36.0 + maxf(0.0, pad.y - 4.0)
 	else:
