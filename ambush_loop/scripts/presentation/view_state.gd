@@ -77,7 +77,6 @@ static func capture(host: Node) -> Dictionary:
 		"elevation_tier": data.get("elevation_tier", PackedByteArray()).duplicate(),
 		"occlusion_kind": data.get("occlusion_kind", PackedByteArray()).duplicate(),
 		"ramp_links": data.get("ramp_links", {}).duplicate(),
-		"tactical_revision": int(data.get("tactical_revision", 0)),
 		"selected_id": int(data.get("selected_id", -1)), "escape": data.get("escape", Vector2.ZERO),
 		"door_locked": bool(data.get("door_locked", false)), "replay": historical,
 		"has_door": bool(data.get("has_door", false)), "door_pos": data.get("door_pos", Vector2.ZERO),

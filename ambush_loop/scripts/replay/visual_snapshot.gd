@@ -104,7 +104,7 @@ func capture(host: Node) -> Dictionary:
 		"level_id": str(host.level.level_id), "blocked": host.grid.blocked.duplicate(),
 		"height_schema": 1, "elevation_tier": host.grid.elevation_tier.duplicate(),
 		"occlusion_kind": host.grid.occlusion_kind.duplicate(),
-		"ramp_links": host.grid.ramp_links.duplicate(), "tactical_revision": host.grid.tactical_revision,
+		"ramp_links": host.grid.ramp_links.duplicate(),
 		"escape": host.escape_world, "door_locked": host.door_locked,
 		"has_door": host.level.door_cell.x >= 0, "door_pos": host.grid.cell_to_world_center(host.level.door_cell) if host.level.door_cell.x >= 0 else Vector2.ZERO,
 		"selected_id": host.selected.op_id if host.selected != null else -1,
