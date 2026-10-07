@@ -642,6 +642,9 @@ func _input(event: InputEvent) -> void:
 			gestures.touch(event, rig, true)
 		return
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		if touch_intent.consume_face_touch(event):
+			get_viewport().set_input_as_handled()
+			return
 		var blocked: bool = pointer_over_ui(event.position)
 		var result: Dictionary = gestures.touch(event, rig, blocked)
 		if gestures.multi_latched or (event is InputEventScreenTouch and event.canceled) or (event is InputEventScreenDrag and gestures.tap_cancelled):
