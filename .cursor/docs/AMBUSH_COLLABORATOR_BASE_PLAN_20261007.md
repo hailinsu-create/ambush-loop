@@ -143,5 +143,6 @@
 - 已确认：以协作者完整 3D 版本为后续基座；固定源为 PR #15 的 `891f967` / 产品树 `1e8af45`。
 - CB0 本地隔离测试已通过：六关 yard/warehouse/pump/railcut/depot/radio 的 `smoke_test.gd` run `fafe8fb74dd94c849b85c4b6b5d54ab4` 输出 `SMOKE_SLICE_COMPLETE`、逐关结果与 `SMOKE_OK_TYPICAL_LOOPS`，wrapper/engine 均 exit 0、`PLAYER_DATA_UNCHANGED=1`。修正了两个被旧镜头边界/外围选点污染的触控夹具；另修 Windows CRLF 对资源清单 SHA 的误判和尸体历史帧夹具的 attempt envelope。资源/角色/尸体/回放/3D 输入矩阵通过：环境 618、actor visual 21,834、asset library 4,101、corpse runtime 1,207；replay FX 36、演出生命周期 32、3D 拾取合同 84,048、画质合同 106 均零失败。专项矩阵 wrapper exit 0，engine exit 0，`PLAYER_DATA_UNCHANGED=1`。这些是本机测试证据，未代替云端构建、导出 PCK 资源门或真机验收。
 - CB1 首个 UI 子切片已实现：提交 `72839ef` 将协作者 3D 镜头工具大面板改为默认收起，保留常显小型“镜头”入口；点击展开/收起不改战术状态。实际触控/鼠标交互 run `e6dfac40308e45a4aa90a18495f623d8`：45/0、wrapper exit 0、玩家数据未变；画质/布局 run `cb1bf7aa8b214f419025477e84011603`：106/0、wrapper exit 0、玩家数据未变。
+- CB1 第二个 UI 子切片已实现：`3ef8527`修复实际渲染发现的阶段条/检查条重叠；保留4条原红灯，62项事件与布局、106项画质合同、12张实际渲染均wrapper/engine0、runtime_errors0、玩家数据未变。默认/报警两张已目检，其余10张保留未逐图验收；见[北侧HUD记录](AMBUSH_CB1_NORTH_HUD_20261007.md)。
 - 尚未完成：其余手机 UI 收敛、危险线条来源审计、触控确认/取消迁移、高度/弹药/双部署等本地规则迁移；未运行真机或 30 分钟手机性能门。外部 GPT 对本计划仍 unavailable，未取得新 PLAN/REVIEW。
-- 下一步：继续 CB1，先基于实际 3D 截图/数据辨认杂线来源，再做一个仅影响显示的独立切片；之后统一点选/预览/确认/取消的输入所有权。真机与长局按工作区规则留后续设备门，不能把本轮云端结果当成手机验收。
+- 下一步：继续 CB1 的触屏点选/预览/确认/取消与目标附近避让布局，同时审计杂线来源和底部占地。当前射界源码已仅显示选中我方与岗哨锥体，不能为迎合反馈而重复删除已有筛选。设备/长局留对应门，本轮本地结果不代手机验收。
