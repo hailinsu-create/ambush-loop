@@ -22,7 +22,7 @@ func _expect(value: bool, marker: String) -> void:
 
 
 func _run() -> void:
-	if change_scene_to_file("res://scenes/main.tscn") != OK:
+	if change_scene_to_file(_scene_path()) != OK:
 		quit(2)
 		return
 	for _i in 14:
@@ -92,10 +92,12 @@ func _run() -> void:
 	main.battle_log.clear()
 	var before_op_hp := op.hp
 	var damage := op.damage_per_shot
+	_prepare_high_recording(main)
 	main._sim_tick()
 	_expect(fired_count == 1 and op.ammo == initial_ammo - 1 and is_equal_approx(enemy.hp, initial_hp - damage), "C2_HIGH_NORMAL_SHOT_AND_DAMAGE")
 	_expect(return_count == 1 and is_equal_approx(op.hp, before_op_hp - EnemyRunner.RETURN_DAMAGE), "C2_HIGH_NORMAL_RETURN_DAMAGE")
 	_expect(not main.battle_log.first_of_type("fire").is_empty() and not main.battle_log.first_of_type("return_fire").is_empty(), "C2_REAL_RECORDED_SHOTS")
+	await _after_high_shots(main)
 	var replay = ReplayScript.new()
 	replay.bind(main.battle_log)
 	var recorded_events: Array = main.battle_log.events.duplicate(true)
@@ -146,3 +148,15 @@ func _run() -> void:
 		return
 	print("M1_HEIGHT_FIRE_GATE_OK height_fire_authority=1 friendly_low_blocked=1 friendly_high_clear=1 enemy_low_blocked=1 enemy_high_clear=1 full_blocks_high=1 target_preview_matches=1 cone_non_authoritative=1 replay_event_source=1 damage_unchanged=1 range_unchanged=1 melee_legacy=1 nonfire_los_unchanged=1")
 	quit(0)
+
+
+func _scene_path() -> String:
+	return "res://scenes/main.tscn"
+
+
+func _after_high_shots(_main: Node) -> void:
+	pass
+
+
+func _prepare_high_recording(_main: Node) -> void:
+	pass

@@ -4,7 +4,8 @@ extends Node3D
 ## nothing in this class creates tactical blockers, physics or navigation.
 const FORMAT := 1
 const REVISION := "50ef7883285c4419dbd8339b935433dc6bb5e3f8"
-const LAYOUT_REVISION := "six_level_grid_assembly_1"
+const LEGACY_LAYOUT_REVISION := "six_level_grid_assembly_1"
+const LAYOUT_REVISION := "six_level_grid_assembly_2"
 const Assets := preload("res://scripts/presentation/asset_library.gd")
 const Space := preload("res://scripts/presentation/world_space.gd")
 const Geometry := preload("res://scripts/presentation/graybox_geometry.gd")
@@ -25,14 +26,14 @@ var _cutaway_schema := 0
 
 
 static func supported(data: Dictionary) -> bool:
-	return int(data.get("environment_schema", 0)) == FORMAT and str(data.get("environment_revision", "")) == REVISION and str(data.get("environment_layout_revision", "")) == LAYOUT_REVISION and str(data.get("level_id", "")) in LANDMARKS and data.get("blocked") is PackedByteArray and data.blocked.size() == 880
+	return int(data.get("environment_schema", 0)) == FORMAT and str(data.get("environment_revision", "")) == REVISION and str(data.get("environment_layout_revision", "")) in [LEGACY_LAYOUT_REVISION, LAYOUT_REVISION] and str(data.get("level_id", "")) in LANDMARKS and data.get("blocked") is PackedByteArray and data.blocked.size() == 880
 
 
 func build(frame: Dictionary, detail: int) -> void:
 	_detail = detail
 	_cutaway_schema=int(frame.get("environment_cutaway_schema",0))
 	set_meta("environment_revision", REVISION)
-	set_meta("environment_layout_revision", LAYOUT_REVISION)
+	set_meta("environment_layout_revision", str(frame.environment_layout_revision))
 	set_meta("recorded_layout_hash", hash(frame.blocked))
 	set_meta("theme", str(frame.level_id))
 	var blocked: PackedByteArray = frame.blocked.duplicate()
@@ -55,7 +56,7 @@ func build(frame: Dictionary, detail: int) -> void:
 		# A low footprint keeps the existing no-go region legible when a wall/roof
 		# is cut away. Its size is copied grid geometry, never a GLB-derived rule.
 		Geometry.box(self, Vector3(rect.size.x, 0.035, rect.size.y), center + Vector3(0, 0.006, 0), Geometry.material(Color("343b3d")))
-		if _low_footprint(frame,rect):
+		if str(frame.environment_layout_revision) == LAYOUT_REVISION and _low_footprint(frame,rect):
 			for y in range(rect.position.y,rect.end.y):
 				for x in range(rect.position.x,rect.end.x):
 					var crate := _place("env_yard_crate",Vector3(x-19.5,0,y-10.5))
