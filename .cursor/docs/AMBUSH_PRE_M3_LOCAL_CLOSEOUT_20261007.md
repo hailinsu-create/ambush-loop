@@ -2,6 +2,8 @@
 
 ## 2026-10-07 最新终态与外审修正（覆盖下方历史状态）
 
+12:31终态：原聊天实际读取iteration7，STATE DONE，REVIEWED_SOURCE ec832057582c1ad567cc1aa3bc72b7437bfac45b，PRODUCTION_CORRECTION1d27c42。GPT通过只读包核实三项iteration6问题均修复：终态历史定位且不seek、中性回放姿态明确标注、candidate48逻辑px；此前magnify/纯预览、墙分区、事件索引、模态与opt-in保持正确。实际读取execution_output93，stdout不是wrapper证据，终态后检另据receipt。批准仅限本次本地P2–P5收尾，不覆盖手机/人体触摸/热内存/最终美术/M2或M2.5整体，也不关闭c2c_a619。所列本地回归与外审已完成，报告同步后停用本次回归跟踪；设备列表仍空，真机待连接后继续。默认3D仍false，旧红灯/聊天/连接/B1脏工作区保留。
+
 12:16续收：B1连接doctor全绿，原聊天真实内容仍为iteration6。已准备只读包 `.cursor/review_packets/m25-closeout-ec83205`：完整archive解包遇中文文档路径错误，另对scripts/project.godot定向archive成功解包exit0；评审所需脚本以该定向包为准，不声称整仓解包无误。iteration7执行摘要与smoke stdout已记录。原聊天填写并Enter提交iteration7成功返回，但随后DOM两次读取超时，**消息送达/新回复未确认**；禁止重复发送。原c2c_a619 checkpoint、dirty B1源码和连接未改。下次只读取原聊天末尾核验iteration7，不重跑已绿回归。设备/真人仍未验。
 
 2026-10-07 11:46终态：冻结测试源码ec832057582c1ad567cc1aa3bc72b7437bfac45b（生产1d27c42）的完整六关b213d0b5e3974424a21c484e079d283e已从统一会话20164取得最终退出0：yard/warehouse/pump/railcut/depot/radio均raid won，SMOKE_OK_RAID_LOOP、SMOKE_OK_TYPICAL_LOOPS、SMOKE_SLICE_COMPLETE齐全；TEST_RUNTIME_ERRORS=0、PLAYER_DATA_UNCHANGED=1、TEST_ENGINE_EXIT=0、SEQUENTIAL_WRAPPER_EXIT=0 ENTRY=smoke_test.gd。对应Godot进程已结束。新源Forward+、复盘生命周期、准备恢复与完整六关所列门均有绿灯，不再等待此长组，不重复启动。旧红灯保留。精确新源GPT复审仍待，设备仍无ADB连接、APK未安装，真人门未验；不宣布M2/M2.5或M3入口通过，跟踪暂不停用。
