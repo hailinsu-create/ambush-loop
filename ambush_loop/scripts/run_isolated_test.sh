@@ -4,6 +4,7 @@ set -euo pipefail
 godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 case "$entry" in
+  yard_v1_visual_gate.gd) ;;
   m25_pre_m3_closeout_gate.gd) ;;
   m2_preparation_checkpoint_gate.gd) ;;
   m2_c_team_fire_gate.gd) ;;

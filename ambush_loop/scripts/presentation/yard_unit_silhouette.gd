@@ -61,6 +61,14 @@ static func build(body: MeshInstance3D, role: int, hostile: bool = false) -> voi
 
 static func pose(body: MeshInstance3D, title: String, alive: bool, moving: bool, searching: bool, aiming: bool, tick: int) -> void:
 	## Pose only; no timers, gameplay mutation, or per-frame resources.
+	var fire_age := tick - int(body.get_meta("fire_tick", -1000))
+	var hit_age := tick - int(body.get_meta("hit_tick", -1000))
+	var signature := [title, alive, moving, searching, aiming, tick if moving and alive else 0, clampi(fire_age, -1, 6), clampi(hit_age, -1, 6)]
+	if body.get_meta("pose_signature", []) == signature:
+		body.set_meta("pose_skips", int(body.get_meta("pose_skips", 0)) + 1)
+		return
+	body.set_meta("pose_signature", signature)
+	body.set_meta("pose_applies", int(body.get_meta("pose_applies", 0)) + 1)
 	var stride := sin(float(tick) * 0.45) * 0.45 if moving and alive else 0.0
 	body.get_node("LeftBoot").rotation.x = stride
 	body.get_node("RightBoot").rotation.x = -stride
@@ -73,9 +81,7 @@ static func pose(body: MeshInstance3D, title: String, alive: bool, moving: bool,
 	label.text = title + (" · 开匣…" if searching else (" · 倒地" if not alive else ""))
 	var weapon: MeshInstance3D = body.get_node("Weapon")
 	weapon.visible = not searching
-	var fire_age := tick - int(body.get_meta("fire_tick", -1000))
 	weapon.rotation.x = -0.15 * (1.0 - float(fire_age) / 6.0) if fire_age >= 0 and fire_age < 6 else 0.0
-	var hit_age := tick - int(body.get_meta("hit_tick", -1000))
 	(body.material_override as StandardMaterial3D).albedo_color = Color("f2c6a8") if hit_age >= 0 and hit_age < 6 else body.get_meta("uniform")
 
 
