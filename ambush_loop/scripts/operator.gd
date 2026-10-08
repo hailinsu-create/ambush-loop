@@ -1980,6 +1980,8 @@ func observation_ring_visible() -> bool:
 
 func kit_blurb() -> String:
 	var inv := inventory_line()
+	if explicit_ammo:
+		return "%s · 弹药有限，先搜补给；装备不会补弹。%s" % [display_name, inv]
 	match role:
 		Role.MG:
 			return "铁砧 · 慢步重火。开局只有刀，去找机枪/手雷。%s" % inv

@@ -8053,10 +8053,15 @@ func wave_total() -> int:
 
 
 func _wipe_squad_inventory() -> void:
-	for op in operators:
+	for i in operators.size():
+		var op = operators[i]
 		if op:
+			op.explicit_ammo = level != null and level.explicit_ammo
 			op.wipe_inventory()
 			op.reset_loadout()
+			if level != null and i < level.starting_loadouts.size():
+				var kit: Dictionary = level.starting_loadouts[i]
+				op.receive_item(str(kit.get("weapon", "knife")), int(kit.get("ammo", 0)))
 
 
 func _place_squad_insert() -> void:
@@ -12699,6 +12704,11 @@ func raid_prepare_ref(slots: Array, facings: Array, extra: Dictionary = {}) -> v
 	## Smoke/reference: grant role firearms, optional mines, snap to covers.
 	if operators.size() < 3:
 		return
+	# This explicitly granted regression fixture is not an authored-budget proof.
+	if level != null and level.explicit_ammo:
+		for op in operators:
+			op.wipe_inventory()
+			op.reset_loadout()
 	operators[0].receive_item("rifle", 7)
 	operators[1].receive_item("mg", 12)
 	operators[2].receive_item("scout", 6)
