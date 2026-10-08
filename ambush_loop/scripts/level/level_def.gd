@@ -427,7 +427,7 @@ static func make_yard() -> LevelDef:
 			Vector2i(13, 15), Vector2i(13, 17), Vector2i(24, 17), Vector2i(31, 17), Vector2i(31, 19)
 		],
 		"flank": [
-			Vector2i(13, 3), Vector2i(13, 5), Vector2i(16, 6), Vector2i(23, 6),
+			Vector2i(16, 6), Vector2i(23, 6),
 			Vector2i(32, 6), Vector2i(32, 11), Vector2i(32, 15), Vector2i(31, 17), Vector2i(31, 19)
 		],
 	}
