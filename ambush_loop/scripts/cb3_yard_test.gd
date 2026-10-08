@@ -43,6 +43,7 @@ func _run() -> void:
 		{"strategy":"ground","offset":Vector2.ZERO,"angle":0.0},
 		{"strategy":"ground","offset":Vector2(4,4),"angle":5.0},
 		{"strategy":"ground","offset":Vector2(-4,-4),"angle":-5.0},
+		{"strategy":"ground","offset":Vector2.ZERO,"angle":0.0,"no_mine":true},
 		{"strategy":"high","offset":Vector2.ZERO,"angle":0.0,"negative":"ammo"},
 		{"strategy":"high","offset":Vector2.ZERO,"angle":0.0,"negative":"flank"},
 		{"strategy":"ground","offset":Vector2.ZERO,"angle":0.0,"negative":"tool"},
@@ -59,7 +60,7 @@ func _run() -> void:
 		_check(main.operators.map(func(op): return op.ammo) == [7,50,6], "real authored primary budget " + strategy)
 		var cells := [Vector2i(24,7),Vector2i(15,12),Vector2i(15,10)] if strategy == "high" else [Vector2i(7,11),Vector2i(24,7),Vector2i(28,16)]
 		var facings := [180.0,270.0,240.0] if strategy == "high" else [0.0,180.0,180.0]
-		if strategy == "ground" and negative != "tool":
+		if strategy == "ground" and not scenario.get("no_mine",false):
 			_collect(main, 0, "mine")
 			main._select_op(0)
 			main.selected.global_position = main.grid.cell_to_world_center(Vector2i(13,12))
@@ -68,7 +69,7 @@ func _run() -> void:
 		for i in 3:
 			var op: OperatorUnit = main.operators[i]
 			_check(not main.grid.is_blocked(cells[i].x,cells[i].y) and not Paths.find_path(main.grid, main.level.insert_cell_for(i), cells[i]).is_empty(), "authored position reachable " + strategy + str(i))
-			op.slot = null
+			op.slot = main.cover_slots[([2,6,7] if strategy == "high" else [0,2,5])[i]]
 			op.global_position = main.grid.cell_to_world_center(cells[i]) + scenario.offset
 			op.set_facing(facings[i] + scenario.angle)
 			op.auto_grenade = false
@@ -77,6 +78,8 @@ func _run() -> void:
 				op.ammo_pool.clear()
 			if negative == "flank" and i in [0,1]:
 				op.set_facing(90.0)
+			if negative == "tool" and i == 1:
+				op.apply_weapon("knife",false)
 		main.raid_force_alarm()
 		var limit := 0
 		while main.phase == main.Phase.WATCHING and limit < 3000:
@@ -87,6 +90,7 @@ func _run() -> void:
 			_check(main.phase == main.Phase.FAILED, "causal missing " + negative + " fails rather than free win")
 		else:
 			_check(main.phase == main.Phase.SWEEP, "actual budget strategy wins " + strategy)
+			_check(main.operators.all(func(op): return op.alive), "both authored solutions preserve squad " + strategy)
 		if main.phase == main.Phase.SWEEP and negative.is_empty():
 			main._on_sweep_commit()
 			_check(main.phase == main.Phase.WON, "one encounter extracts " + strategy)

@@ -417,6 +417,8 @@ static func make_yard() -> LevelDef:
 		{"cell": Vector2i(25, 13), "name": "中庭掩体", "face": 90.0, "protect": 270.0},
 		{"cell": Vector2i(12, 15), "name": "南廊掩体", "face": 0.0, "protect": 180.0},
 		{"cell": Vector2i(28, 16), "name": "出口掩体", "face": 180.0, "protect": 0.0},
+		{"cell": Vector2i(15, 12), "name": "高台南侧", "face": 270.0, "protect": 270.0},
+		{"cell": Vector2i(15, 10), "name": "高台北侧", "face": 240.0, "protect": 270.0},
 	]
 	# Waypoints stay off crates; south bend goes around (16-20,14-16).
 	l.route_cells = {
