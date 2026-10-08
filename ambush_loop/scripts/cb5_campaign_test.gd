@@ -150,8 +150,16 @@ func _battle(main: Node, case: Array, fps: int, speed: float, rotate: bool) -> D
 	_normalize_identity(final, utility_scope, main.battle_log.attempt_id)
 	var events: Array = log.events.duplicate(true)
 	for ev in events:
+		var fx: Dictionary = ev.get("payload", {}).get("fx", {})
+		if not fx.is_empty():
+			_check(fx.get("attempt_id") == log.attempt_id and fx.get("event_id") == ev.event_id, "nested shot FX keeps its actual source identity before normalization")
+			if fx.get("pose") is Dictionary:
+				_check(fx.pose.get("event_id") == ev.event_id, "nested pose belongs to the actual shot, not another event")
 		ev.erase("attempt_id")
 		ev.erase("event_id")
+	# Independent attempts deliberately differ in every nested source prefix.
+	# Normalize only those prefixes, retaining wave/seq/timing/geometry/payload.
+	_normalize_identity(events, utility_scope, log.attempt_id)
 	main._on_replay_pressed()
 	var live_before: Dictionary = main._snapshot_data().duplicate(true)
 	var stream_before: Array=log.playback_snapshots.duplicate(true)
