@@ -9,6 +9,7 @@ const UtilityPose := preload("res://scripts/presentation/utility_pose.gd")
 const CorpseRecording := preload("res://scripts/replay/corpse_recording.gd")
 const ToolFxRecording := preload("res://scripts/replay/tool_fx_recording.gd")
 const EnvironmentScene := preload("res://scripts/presentation/environment_scene.gd")
+const YardGuide := preload("res://scripts/raid/yard_guide.gd")
 var _identity := ""
 var _objects := {}
 var _next_ids := {}
@@ -108,6 +109,7 @@ func capture(host: Node) -> Dictionary:
 		"escape": host.escape_world, "door_locked": host.door_locked,
 		"has_door": host.level.door_cell.x >= 0, "door_pos": host.grid.cell_to_world_center(host.level.door_cell) if host.level.door_cell.x >= 0 else Vector2.ZERO,
 		"selected_id": host.selected.op_id if host.selected != null else -1,
+		"yard_guide": YardGuide.line(host),
 		"ops": [], "enemies": [], "sentries": [], "covers": [], "stashes": [],
 		"loot": [], "barrels": [], "tripwires": [], "mines": [], "grenades": [], "decoys": [],
 		"environment_objects": _empty_stashes.duplicate(true)}
