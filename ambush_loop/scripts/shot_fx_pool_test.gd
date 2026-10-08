@@ -284,7 +284,10 @@ func _history_cases() -> void:
 	_bind_pool()
 	var foreign_op: OperatorUnit=pair[0]
 	var foreign_enemy: EnemyRunner=pair[1]
+	# Explicit FX fixture supply: equipping alone must not mint pistol rounds.
+	foreign_op.receive_item("pistol", 3)
 	foreign_op.apply_weapon("pistol",true)
+	_check(foreign_op.ammo == 3, "foreign pistol shot has explicit fixture ammunition, not an equipment grant")
 	var foreign_event:=_event(foreign_op,foreign_enemy)
 	_check(main._try_fire_with_recorded_fx(foreign_op,foreign_enemy,foreign_event) and foreign_event.payload.has("fx"),"foreign current log has an actual new successful pistol shot")
 	var foreign: BattleLog=main.battle_log
