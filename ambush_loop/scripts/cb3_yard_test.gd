@@ -31,11 +31,14 @@ func _collect(main: Node, index: int, kind: String) -> void:
 func _run() -> void:
 	root.get_node("GameSettings").mark_tutorial_seen("yard")
 	root.get_node("GameSettings").pending_level_id = "yard"
-	change_scene_to_file("res://scenes/main.tscn")
+	var rendered_3d := OS.get_environment("AMBUSH_YARD_RENDER3D") == "1"
+	change_scene_to_file("res://scenes/presentation/yard_3d.tscn" if rendered_3d else "res://scenes/main.tscn")
 	await process_frame
 	await process_frame
 	var main = current_scene
 	main.set_process(false)
+	if main.presentation_3d != null:
+		main.presentation_3d.set_process(false)
 	for scenario in [
 		{"strategy":"high","offset":Vector2.ZERO,"angle":0.0},
 		{"strategy":"high","offset":Vector2(4,4),"angle":5.0},
@@ -80,6 +83,8 @@ func _run() -> void:
 				op.set_facing(90.0)
 			if negative == "tool" and i == 1:
 				op.apply_weapon("knife",false)
+		if rendered_3d and scenario.offset == Vector2.ZERO and negative.is_empty() and not scenario.get("no_mine",false):
+			await _capture(main,strategy + "-prepared")
 		main.raid_force_alarm()
 		var limit := 0
 		while main.phase == main.Phase.WATCHING and limit < 3000:
@@ -92,7 +97,27 @@ func _run() -> void:
 			_check(main.phase == main.Phase.SWEEP, "actual budget strategy wins " + strategy)
 			_check(main.operators.all(func(op): return op.alive), "both authored solutions preserve squad " + strategy)
 		if main.phase == main.Phase.SWEEP and negative.is_empty():
+			if rendered_3d and scenario.offset == Vector2.ZERO and not scenario.get("no_mine",false):
+				await _capture(main,strategy + "-cleared")
 			main._on_sweep_commit()
 			_check(main.phase == main.Phase.WON, "one encounter extracts " + strategy)
 	print("CB3_YARD_CHECKED checks=",checks," failures=",failures)
 	quit(0 if failures == 0 else 1)
+
+func _capture(main: Node, label: String) -> void:
+	var before: Dictionary = main._snapshot_data().duplicate(true)
+	main.presentation_3d.refresh()
+	_check(main._snapshot_data() == before, "3D refresh does not alter authored battle " + label)
+	if DisplayServer.get_name() == "headless":
+		return
+	root.size = Vector2i(1280,720)
+	main.presentation_3d.rig.reset_view()
+	main.presentation_3d.refresh()
+	for draw in 2:
+		await process_frame
+		await RenderingServer.frame_post_draw
+	var directory := "res://build/ambush_test_runs/%s/captures" % OS.get_environment("AMBUSH_TEST_RUN_ID")
+	DirAccess.make_dir_recursive_absolute(directory)
+	var path := directory + "/" + label + ".png"
+	_check(root.get_texture().get_image().save_png(path) == OK, "save actual 3D " + label)
+	print("CB3_YARD_CAPTURE ",ProjectSettings.globalize_path(path))
