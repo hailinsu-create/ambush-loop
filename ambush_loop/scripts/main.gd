@@ -110,6 +110,8 @@ var level: LevelDef = null
 var level_index: int = 0
 var sim: SimClock = SimClock.new()
 var battle_log: BattleLog = BattleLog.new()
+var preparation_checkpoint = preload("res://scripts/raid/world_checkpoint.gd").new()
+var _checkpoint_restoring := false
 var visual_snapshot := VisualSnapshotScript.new()
 var shot_fx_recording := ShotFxRecordingScript.new()
 var last_plan: PlanState = PlanState.new()
@@ -3550,6 +3552,8 @@ func door_slam_dust_active() -> bool:
 
 
 func _start_setup(keep_intel: bool, restore_plan: bool) -> void:
+	if not _checkpoint_restoring:
+		preparation_checkpoint.clear()
 	replay.pause()
 	_restore_replay_button()
 	_cancel_world_input()
@@ -5283,6 +5287,7 @@ func _on_alarm_pressed() -> void:
 	_alarm_pulled_unarmed = not squad_has_firearm()
 	battle_log.add_command_snapshot(sim.tick, _snapshot_data())
 	_capture_plan()
+	preparation_checkpoint.capture(self)
 	frozen_plan = last_plan.duplicate_plan()
 	run_id += 1
 	_cancel_world_input()
@@ -6880,6 +6885,9 @@ func _exit_replay_to_setup() -> void:
 		return
 	if replay_return_phase == Phase.FAILED:
 		loop_index += 1
+		phase = Phase.FAILED
+		if preparation_checkpoint.restore(self):
+			return
 	_start_setup(true, true)
 
 
@@ -7172,7 +7180,8 @@ func _on_continue_pressed() -> void:
 		var advice := _leak_advice_line() if was_escape else ""
 		leak_advice_shown = advice
 		loop_index += 1
-		_start_setup(true, true)
+		if not preparation_checkpoint.restore(self):
+			_start_setup(true, true)
 		if was_escape:
 			_play_intel_path_ghost()
 		if leak != "":
