@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotExe,
     [ValidateSet(
-		'cb4_teaching_test.gd', 'cb4_checkpoint_test.gd', 'cb3_yard_test.gd', 'cb3_ammo_test.gd', 'cb2_height_test.gd', 'm1_height_fire_gate.gd', 'cb2_height_visual_test.gd',
+		'cb5_campaign_test.gd', 'cb4_teaching_test.gd', 'cb4_checkpoint_test.gd', 'cb3_yard_test.gd', 'cb3_ammo_test.gd', 'cb2_height_test.gd', 'm1_height_fire_gate.gd', 'cb2_height_visual_test.gd',
         'web_config_store_test.gd', 'replay_progress_save_test.gd',
         'first_visit_journey_test.gd', 'title_focus_keyboard_test.gd', 'title_menu_viewport_test.gd',
         'replay_autoplay_test.gd', 'replay_event_text_source_test.gd', 'cover_command_test.gd',
@@ -85,6 +85,7 @@ $previousLocalAppData = $env:LOCALAPPDATA
 $previousDataRoot = $env:AMBUSH_TEST_DATA_ROOT
 $previousRunId = $env:AMBUSH_TEST_RUN_ID
 $previousPackRoot = $env:AMBUSH_ASSET_PACK_ROOT
+$previousSourceSha = $env:AMBUSH_TEST_SOURCE_SHA
 $realDataDir = Join-Path $previousAppData 'Godot/app_userdata/Ambush Loop'
 $realSave = Join-Path $realDataDir 'ambush_loop.cfg'
 $realSettings = Join-Path $realDataDir 'ambush_loop_settings.cfg'
@@ -98,11 +99,13 @@ function Get-ReadOnlyHash([string]$filePath) {
 
 $beforeSave = Get-ReadOnlyHash $realSave
 $beforeSettings = Get-ReadOnlyHash $realSettings
+$sourceSha = (& git -C $projectRoot rev-parse HEAD).Trim()
 try {
     $env:APPDATA = $dataRoot
     $env:LOCALAPPDATA = $dataRoot
     $env:AMBUSH_TEST_DATA_ROOT = $dataRoot.Replace('\', '/')
     $env:AMBUSH_TEST_RUN_ID = $runId
+    $env:AMBUSH_TEST_SOURCE_SHA = $sourceSha
     Write-Output "TEST_RUN_ID=$runId"
     Write-Output "TEST_DATA_ROOT=$dataRoot"
     if ($ImportOnly) {
@@ -130,13 +133,21 @@ try {
             Tee-Object -FilePath $runLog
     }
     $engineExit = $LASTEXITCODE
-    if ((Get-ReadOnlyHash $realSave) -ne $beforeSave -or
-        (Get-ReadOnlyHash $realSettings) -ne $beforeSettings) {
-        throw 'The real user save or settings changed during the isolated test.'
-    }
-    Write-Output "PLAYER_DATA_UNCHANGED=1"
+    $unchanged = ((Get-ReadOnlyHash $realSave) -eq $beforeSave -and
+        (Get-ReadOnlyHash $realSettings) -eq $beforeSettings)
+    $runtimeErrors = @(Select-String -LiteralPath $runLog -Pattern '^(SCRIPT ERROR:|ERROR:)' -ErrorAction Stop).Count
+    $wrapperExit = $engineExit
+    if ($engineExit -eq 0 -and $runtimeErrors -gt 0) { $wrapperExit = 93 }
+    if (-not $unchanged) { $wrapperExit = 92 }
+    $result = @{run_id=$runId; source_sha=$sourceSha; entry=$Entry; engine_exit=$engineExit;
+        wrapper_exit=$wrapperExit; runtime_errors=$runtimeErrors; player_data_unchanged=[int]$unchanged}
+    [IO.File]::WriteAllText((Join-Path $runDir 'wrapper-result.json'), ($result | ConvertTo-Json))
+    Write-Output "TEST_ENGINE_EXIT=$engineExit"
+    Write-Output "TEST_RUNTIME_ERRORS=$runtimeErrors"
+    Write-Output "PLAYER_DATA_UNCHANGED=$([int]$unchanged)"
+    Write-Output "TEST_WRAPPER_EXIT=$wrapperExit"
     Write-Output "TEST_LOG=$runLog"
-    exit $engineExit
+    exit $wrapperExit
 }
 finally {
     $env:APPDATA = $previousAppData
@@ -144,4 +155,5 @@ finally {
     $env:AMBUSH_TEST_DATA_ROOT = $previousDataRoot
     $env:AMBUSH_TEST_RUN_ID = $previousRunId
     $env:AMBUSH_ASSET_PACK_ROOT = $previousPackRoot
+    $env:AMBUSH_TEST_SOURCE_SHA = $previousSourceSha
 }

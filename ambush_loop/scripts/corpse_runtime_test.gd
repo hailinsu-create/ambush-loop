@@ -25,8 +25,8 @@ func _check(ok: bool, message: String) -> void:
 		failures += 1
 		push_error("CORPSE_RUNTIME: " + message)
 
-func _reset() -> void:
-	main._load_level("yard", false, false)
+func _reset(level_id: String = "yard") -> void:
+	main._load_level(level_id, false, false)
 	main.raid_prepare_ref([1,2,5], [90.0,180.0,180.0], {"grenades":2,"mines":0})
 	main._select_op(0)
 	view.refresh()
@@ -238,8 +238,8 @@ func _matrix() -> void:
 	stage.free()
 	completed += 1
 
-func _ko() -> Node:
-	_reset()
+func _ko(level_id: String = "yard") -> Node:
+	_reset(level_id)
 	var op=main.selected
 	var sentry=main.c2.sentries.front()
 	op.global_position=sentry.backstab_world()
@@ -293,17 +293,20 @@ func _cancellations() -> void:
 	op.pack.add_item("mg42",1)
 	main._on_pack_equip("mg42")
 	_check(_actor().sampled_action!="corpse_release" and view.frame.corpses[0].mode=="ground","actual equip interrupts release to ground")
-	loot=_ko()
+	loot=_ko("warehouse")
 	op=main.selected
 	var source_wave: int = view.frame.wave_id
 	id=view.frame.corpses[0].id
 	main.raid_force_alarm()
 	view.refresh()
 	_check(op.is_hauling() and view.frame.corpses[0].id==id and view.frame.corpses[0].source_wave_id==source_wave and view.frame.corpses[0].transition.is_empty() and _actor().sampled_action not in ["corpse_grab","corpse_drag"],"ALERT preserves original haul and source identity while cancelling command pairing")
+	_check(main.level.wave_count() > 1, "cross-wave fixture uses an authored multi-wave mission")
 	main._begin_next_wave()
 	view.refresh()
 	_check(view.frame.wave_id==source_wave+1 and view.frame.corpses[0].id==id and view.frame.corpses[0].source_wave_id==source_wave and view.frame.corpses[0].transition.is_empty(),"cross-wave cannot rebind old body/event to new wave")
 	# Actual EnemyRunner.kill signal, without introducing a synthetic body item.
+	_check(not main.pending_spawns.is_empty(), "authored next wave supplies a real enemy")
+	if main.pending_spawns.is_empty(): return
 	main._spawn_one(main.pending_spawns.front())
 	var enemy=main.enemies.front()
 	enemy.kill()

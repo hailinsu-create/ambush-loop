@@ -5,7 +5,7 @@ godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 render_mode="${3:---headless}"
 case "$entry" in
-	cb4_teaching_test.gd|cb4_checkpoint_test.gd|cb3_yard_test.gd|cb3_ammo_test.gd|cb2_height_test.gd|m1_height_fire_gate.gd|cb2_height_visual_test.gd) ;;
+	cb5_campaign_test.gd|cb4_teaching_test.gd|cb4_checkpoint_test.gd|cb3_yard_test.gd|cb3_ammo_test.gd|cb2_height_test.gd|m1_height_fire_gate.gd|cb2_height_visual_test.gd) ;;
 	web_config_store_test.gd) ;;
   replay_progress_save_test.gd) ;;
   tool_fx_raw_envelope_test.gd|a3_collector_contract_test.gd|a3_collector_probe_test.gd|a3_collector_overhead_test.gd|a3_campaign_metrics_test.gd|movement_dust_source_boundary_test.gd|movement_dust_test.gd|tool_fx_visible_test.gd|tool_fx_mine_reference_test.gd|tool_fx_pool_test.gd|tool_fx_source_boundary_test.gd|tool_fx_source_test.gd|grenade_flight_height_test.gd|shot_fx_shooter_binding_test.gd|shot_fx_visible_test.gd|shot_fx_pool_test.gd|shot_fx_frame_test.gd|escape_context_boundary_test.gd|shot_fx_boundary_test.gd|shot_fx_source_test.gd|replay_arrow_input_test.gd|smoke_contract_test.gd|escape_intel_source_test.gd|static_teaching_context_test.gd|loot_event_text_test.gd|live_wave_timeline_test.gd|current_wave_hint_test.gd|campaign_result_copy_test.gd|result_highlight_test.gd|cover_command_test.gd|replay_event_text_source_test.gd|first_visit_journey_test.gd|title_focus_keyboard_test.gd|title_menu_viewport_test.gd|replay_autoplay_test.gd) ;;
@@ -24,6 +24,14 @@ if [[ "$entry" == event_log_layout_test.gd || "$entry" == *capture.gd || "$entry
 fi
 
 project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_sha="$(git -C "$project_root" rev-parse HEAD)"
+export AMBUSH_TEST_SOURCE_SHA="$source_sha"
+real_data="${XDG_DATA_HOME:-$HOME/.local/share}/godot/app_userdata/Ambush Loop"
+read_hash() {
+  if [[ -f "$1" ]]; then sha256sum -- "$1" | cut -d' ' -f1; else printf '<absent>'; fi
+}
+before_save="$(read_hash "$real_data/ambush_loop.cfg")"
+before_settings="$(read_hash "$real_data/ambush_loop_settings.cfg")"
 run_id="$(python3 -c 'import uuid; print(uuid.uuid4().hex)')"
 run_dir="$project_root/build/ambush_test_runs/$run_id"
 data_root="$run_dir/data"
@@ -45,9 +53,24 @@ if [[ "$entry" == asset_pack_test.gd ]]; then
   engine_flags+=(--main-pack "$test_pack" --audio-driver Dummy)
 fi
 printf 'TEST_RUN_ID=%s\nTEST_DATA_ROOT=%s\nTEST_ENTRY=%s\n' "$run_id" "$data_root" "$entry"
+set +e
 if [[ "$entry" == editor_import ]]; then
   "$godot_bin" --headless --editor --path "$project_root" --import 2>&1 | tee "$run_dir/run.log"
+  pipeline_status=("${PIPESTATUS[@]}")
 else
   "$godot_bin" "${engine_flags[@]}" --path "$launch_root" -s "res://scripts/$entry" 2>&1 | tee "$run_dir/run.log"
+  pipeline_status=("${PIPESTATUS[@]}")
 fi
+set -e
+engine_exit="${pipeline_status[0]}"
+wrapper_exit="$engine_exit"
+runtime_errors="$(grep -cE '^(SCRIPT ERROR:|ERROR:)' "$run_dir/run.log" || true)"
+unchanged=1
+if [[ "$(read_hash "$real_data/ambush_loop.cfg")" != "$before_save" || "$(read_hash "$real_data/ambush_loop_settings.cfg")" != "$before_settings" ]]; then unchanged=0; fi
+if [[ "$engine_exit" == 0 && "$runtime_errors" != 0 ]]; then wrapper_exit=93; fi
+if [[ "${pipeline_status[1]}" != 0 ]]; then wrapper_exit=95; fi
+if [[ "$unchanged" != 1 ]]; then wrapper_exit=92; fi
+printf '{"run_id":"%s","source_sha":"%s","entry":"%s","engine_exit":%s,"wrapper_exit":%s,"runtime_errors":%s,"player_data_unchanged":%s}\n' "$run_id" "$source_sha" "$entry" "$engine_exit" "$wrapper_exit" "$runtime_errors" "$unchanged" > "$run_dir/wrapper-result.json"
+printf 'TEST_ENGINE_EXIT=%s\nTEST_RUNTIME_ERRORS=%s\nPLAYER_DATA_UNCHANGED=%s\nTEST_WRAPPER_EXIT=%s\n' "$engine_exit" "$runtime_errors" "$unchanged" "$wrapper_exit"
 printf 'TEST_LOG=%s\n' "$run_dir/run.log"
+exit "$wrapper_exit"

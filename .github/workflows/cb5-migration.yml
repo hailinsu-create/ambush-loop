@@ -1,0 +1,74 @@
+name: CB5 migration regression and QA pack
+
+on:
+  push:
+    branches: ["codex/cb5-migration-closeout-20261008"]
+    paths: ["ambush_loop/**", ".github/workflows/cb5-migration.yml"]
+  pull_request:
+    paths: ["ambush_loop/**", ".github/workflows/cb5-migration.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cb5-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  migration:
+    if: github.event_name != 'pull_request' || github.head_ref != 'codex/cb5-migration-closeout-20261008'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install verified official Godot 4.7.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          curl -fL --retry 3 -o godot.zip https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          echo 'cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4  godot.zip' | sha256sum -c -
+          unzip -q godot.zip -d godot
+          chmod +x godot/Godot_v4.7.2-stable_linux.x86_64
+          echo "GODOT=$RUNNER_TEMP/godot/Godot_v4.7.2-stable_linux.x86_64" >> "$GITHUB_ENV"
+          curl -fL --retry 3 -o templates.tpz https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz
+          echo 'f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011  templates.tpz' | sha256sum -c -
+          unzip -q templates.tpz -d extracted-templates
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.7.2.stable"
+          cp extracted-templates/templates/* "$HOME/.local/share/godot/export_templates/4.7.2.stable/"
+      - name: Import in isolated user storage
+        shell: bash
+        run: bash ambush_loop/scripts/run_isolated_test.sh "$GODOT" editor_import
+      - name: Complete six-level simulation and recorded replay matrix
+        shell: bash
+        run: bash ambush_loop/scripts/run_isolated_test.sh "$GODOT" cb5_campaign_test.gd
+      - name: Affected migration gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          for entry in cb3_yard_test.gd cb3_ammo_test.gd cb4_checkpoint_test.gd cb4_teaching_test.gd cb2_height_visual_test.gd presentation_interaction_test.gd corpse_runtime_test.gd; do
+            bash ambush_loop/scripts/run_isolated_test.sh "$GODOT" "$entry"
+          done
+      - name: Export actual QA PCK and test from empty physical project
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ambush_loop/build/cb5-ci
+          "$GODOT" --headless --path ambush_loop --export-pack 'Linux Desktop' "$GITHUB_WORKSPACE/ambush_loop/build/cb5-ci/AmbushLoop-QA.pck"
+          export AMBUSH_TEST_PACK="$GITHUB_WORKSPACE/ambush_loop/build/cb5-ci/AmbushLoop-QA.pck"
+          bash ambush_loop/scripts/run_isolated_test.sh "$GODOT" asset_pack_test.gd
+          sha256sum "$AMBUSH_TEST_PACK" > ambush_loop/build/cb5-ci/SHA256SUMS
+          git rev-parse HEAD > ambush_loop/build/cb5-ci/SOURCE_SHA
+      - name: Retain actual results even after failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cb5-${{ github.sha }}
+          path: |
+            ambush_loop/build/ambush_test_runs/**/run.log
+            ambush_loop/build/ambush_test_runs/**/wrapper-result.json
+            ambush_loop/build/asset_review/pr15-runtime/cb5-full-campaign-*.json
+            ambush_loop/build/cb5-ci/*
+          if-no-files-found: warn
+          retention-days: 14
