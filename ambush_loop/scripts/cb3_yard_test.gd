@@ -32,6 +32,8 @@ func _run() -> void:
 	root.get_node("GameSettings").mark_tutorial_seen("yard")
 	root.get_node("GameSettings").pending_level_id = "yard"
 	var rendered_3d := OS.get_environment("AMBUSH_YARD_RENDER3D") == "1"
+	if rendered_3d:
+		root.get_node("GameSettings").set_force_touch_hud(true)
 	change_scene_to_file("res://scenes/presentation/yard_3d.tscn" if rendered_3d else "res://scenes/main.tscn")
 	await process_frame
 	await process_frame
@@ -84,6 +86,7 @@ func _run() -> void:
 			if negative == "tool" and i == 1:
 				op.apply_weapon("knife",false)
 		if rendered_3d and scenario.offset == Vector2.ZERO and negative.is_empty() and not scenario.get("no_mine",false):
+			main._select_op(1)
 			await _capture(main,strategy + "-prepared")
 		main.raid_force_alarm()
 		var limit := 0
@@ -105,6 +108,11 @@ func _run() -> void:
 	quit(0 if failures == 0 else 1)
 
 func _capture(main: Node, label: String) -> void:
+	if label.ends_with("cleared"):
+		# The terminal frame begins the death clip. Advance genuine SWEEP
+		# presentation time before reviewing bodies, never re-simulate combat.
+		for elapsed in 8:
+			main._process(0.1)
 	var before: Dictionary = main._snapshot_data().duplicate(true)
 	main.presentation_3d.refresh()
 	_check(main._snapshot_data() == before, "3D refresh does not alter authored battle " + label)
