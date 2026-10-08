@@ -81,6 +81,7 @@ func _run() -> void:
 
 func _capture(main: Node, name: String) -> void:
 	if DisplayServer.get_name() == "headless": return
+	main._update_hud()
 	main.presentation_3d.refresh()
 	for frame in 3:
 		await process_frame

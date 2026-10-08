@@ -179,7 +179,7 @@ func _probe() -> Array:
 				cands.append({"d": d2, "pri": 1, "kind": "corpse", "world": loot.global_position, "node": loot})
 	if not moving and host.has_method("_nearest_slot"):
 		var slot = host._nearest_slot(origin, PROBE_COVER)
-		if slot != null and _on_cell(origin, slot.global_position):
+		if slot != null and op.slot != slot and _on_cell(origin, slot.global_position):
 			cands.append({"d": origin.distance_to(slot.global_position), "pri": 6, "kind": "cover", "world": slot.global_position, "node": slot})
 	var c2 = host.get("c2")
 	if c2 != null and c2.get("sentries") != null:
