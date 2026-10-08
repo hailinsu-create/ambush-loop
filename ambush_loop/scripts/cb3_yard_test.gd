@@ -74,7 +74,9 @@ func _run() -> void:
 		for i in 3:
 			var op: OperatorUnit = main.operators[i]
 			_check(not main.grid.is_blocked(cells[i].x,cells[i].y) and not Paths.find_path(main.grid, main.level.insert_cell_for(i), cells[i]).is_empty(), "authored position reachable " + strategy + str(i))
-			op.slot = main.cover_slots[([2,6,7] if strategy == "high" else [0,2,5])[i]]
+			main._select_op(i)
+			main._deploy_selected_to(main.cover_slots[([2,6,7] if strategy == "high" else [0,2,5])[i]],false)
+			_check(op.slot != null and op.slot.occupied_by == op, "real deployment owns cover " + strategy + str(i))
 			op.global_position = main.grid.cell_to_world_center(cells[i]) + scenario.offset
 			op.set_facing(facings[i] + scenario.angle)
 			op.auto_grenade = false

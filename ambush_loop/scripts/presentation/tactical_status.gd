@@ -19,7 +19,7 @@ static func line(frame: Dictionary) -> String:
 	elif not bool(selected.melee) and int(selected.ammo) <= 0:
 		status = "缺弹"
 	elif float(selected.shot_cd) > 0.0:
-		status = "冷却 %.1fs" % float(selected.shot_cd)
+		status = "冷却 <0.1s" if float(selected.shot_cd) < 0.1 else "冷却 %.1fs" % float(selected.shot_cd)
 	elif bool(selected.melee):
 		status = "近战：不享高点穿透"
 	var ammo := "刀" if bool(selected.get("melee", false)) else "弹%s" % str(selected.get("ammo", "—"))
