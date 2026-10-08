@@ -56,6 +56,7 @@ static func capture(host: Node) -> Dictionary:
 		"hud_schema": int(data.get("hud_schema", 0)), "level_title": str(data.get("level_title", "历史关卡")),
 		"attempt_number": int(data.get("attempt_number", -1)), "wave_count": int(data.get("wave_count", -1)),
 		"visual_unsupported": unsupported,
+		"yard_guide": data.get("yard_guide", "") if data.get("yard_guide", "") is String else "",
 		"animation_schema": int(data.get("animation_schema", 0)),
 		"actor_asset_revision": str(data.get("actor_asset_revision", "")),
 		"pose_clock_domain": str(data.get("pose_clock_domain", "")),
