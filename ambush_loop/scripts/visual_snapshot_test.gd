@@ -38,15 +38,18 @@ func _plain(value: Variant) -> bool:
 
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
-	root.get_node("GameSettings").mark_tutorial_seen("yard")
-	root.get_node("GameSettings").pending_level_id = "yard"
+	# Yard deliberately has one encounter after CB3. Use the authored
+	# two-wave warehouse for the unchanged cross-wave history assertions.
+	root.get_node("GameSettings").mark_tutorial_seen("warehouse")
+	root.get_node("GameSettings").pending_level_id = "warehouse"
 	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
 	await process_frame
 	await process_frame
 	var main = current_scene
 	main.set_process(false)
 	main.presentation_3d.set_process(false)
-	main.raid_prepare_ref([1, 2, 5], [90.0, 180.0, 180.0])
+	main.raid_prepare_ref([1, 3, 5], [180.0, 0.0, 180.0])
+	main._play_hold_pack(1)
 	var initial_kit: String = main.operators[1].weapon_id
 	main.operators[1].receive_item("m1911", 5)
 	main.operators[1].equip_from_pack(initial_kit)
