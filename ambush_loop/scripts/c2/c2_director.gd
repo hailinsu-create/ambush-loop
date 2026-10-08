@@ -33,6 +33,7 @@ var last_click_world: Vector2 = Vector2.INF
 var skill_cds: Dictionary = {} ## op_id -> {id: float}
 var binoculars_t: float = 0.0
 var quiet_yard: bool = false
+var quiet_reward_granted: bool = false
 var spotted_bark: bool = false
 var cam_follow: bool = true
 var _hud_root: Control = null
@@ -241,6 +242,7 @@ func _on_portrait_long(idx: int) -> void:
 func begin_scout() -> void:
 	spotted_bark = false
 	quiet_yard = false
+	quiet_reward_granted = false
 	binoculars_t = 0.0
 	skill_cds.clear()
 	_clear_sentries()
@@ -258,8 +260,9 @@ func begin_scout() -> void:
 
 func begin_alert() -> void:
 	quiet_yard = _all_sentries_down()
-	if quiet_yard and host and host.operators.size() > 0:
+	if quiet_yard and not quiet_reward_granted and host and host.operators.size() > 0:
 		host.operators[0].receive_item("grenade", 1)
+		quiet_reward_granted = true
 		_hint("无声院子 — 多带一枚手雷")
 	_clear_sentries()
 	if dest_flag:

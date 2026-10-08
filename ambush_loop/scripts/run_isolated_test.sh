@@ -5,7 +5,7 @@ godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-smoke_test.gd}"
 render_mode="${3:---headless}"
 case "$entry" in
-	cb3_yard_test.gd|cb3_ammo_test.gd|cb2_height_test.gd|m1_height_fire_gate.gd|cb2_height_visual_test.gd) ;;
+	cb4_checkpoint_test.gd|cb3_yard_test.gd|cb3_ammo_test.gd|cb2_height_test.gd|m1_height_fire_gate.gd|cb2_height_visual_test.gd) ;;
 	web_config_store_test.gd) ;;
   replay_progress_save_test.gd) ;;
   tool_fx_raw_envelope_test.gd|a3_collector_contract_test.gd|a3_collector_probe_test.gd|a3_collector_overhead_test.gd|a3_campaign_metrics_test.gd|movement_dust_source_boundary_test.gd|movement_dust_test.gd|tool_fx_visible_test.gd|tool_fx_mine_reference_test.gd|tool_fx_pool_test.gd|tool_fx_source_boundary_test.gd|tool_fx_source_test.gd|grenade_flight_height_test.gd|shot_fx_shooter_binding_test.gd|shot_fx_visible_test.gd|shot_fx_pool_test.gd|shot_fx_frame_test.gd|escape_context_boundary_test.gd|shot_fx_boundary_test.gd|shot_fx_source_test.gd|replay_arrow_input_test.gd|smoke_contract_test.gd|escape_intel_source_test.gd|static_teaching_context_test.gd|loot_event_text_test.gd|live_wave_timeline_test.gd|current_wave_hint_test.gd|campaign_result_copy_test.gd|result_highlight_test.gd|cover_command_test.gd|replay_event_text_source_test.gd|first_visit_journey_test.gd|title_focus_keyboard_test.gd|title_menu_viewport_test.gd|replay_autoplay_test.gd) ;;
