@@ -21,6 +21,9 @@ func _check(ok: bool, label: String) -> void:
 
 func _run() -> void:
 	var gs = root.get_node("GameSettings")
+	if DisplayServer.get_name() != "headless":
+		root.size = Vector2i(1280,720)
+		gs.set_force_touch_hud(true)
 	gs.mark_tutorial_seen("yard")
 	gs.pending_level_id = "yard"
 	change_scene_to_file("res://scenes/presentation/yard_3d.tscn")
@@ -31,6 +34,7 @@ func _run() -> void:
 	main.presentation_3d.set_process(false)
 	_check(TutorialOverlay.pages_for("yard").size() == 4, "four short pages")
 	_check(Guide.line(main).begins_with("1/4"), "fresh world asks for supplies")
+	await _capture(main, "collect")
 	var op = main.operators[0]
 	var stash = main.raid_stashes[0]
 	op.global_position = stash.global_position
@@ -48,6 +52,7 @@ func _run() -> void:
 	for i in 3:
 		main.operators[i].set_facing([180.0,270.0,240.0][i])
 	_check(Guide.line(main).begins_with("4/4"), "two covered routes ask for final resource check, not guaranteed win")
+	await _capture(main, "ready")
 	var world: Dictionary = main._snapshot_data().duplicate(true)
 	var before: String = main.battle_log.fingerprint()
 	var frame: Dictionary = ViewState.capture(main)
@@ -73,3 +78,13 @@ func _run() -> void:
 	_check(Guide.line(main).is_empty(), "yard guide never leaks into other missions")
 	print("CB4_TEACHING_RESULT checks=%d failures=%d" % [checks,failures])
 	quit(0 if failures == 0 else 1)
+
+func _capture(main: Node, name: String) -> void:
+	if DisplayServer.get_name() == "headless": return
+	main.presentation_3d.refresh()
+	for frame in 3:
+		await process_frame
+		await RenderingServer.frame_post_draw
+	var dir := OS.get_environment("AMBUSH_TEST_DATA_ROOT").get_base_dir().path_join("captures")
+	DirAccess.make_dir_recursive_absolute(dir)
+	_check(root.get_texture().get_image().save_png(dir.path_join("guide-" + name + ".png")) == OK, "actual rendered guide capture " + name)
