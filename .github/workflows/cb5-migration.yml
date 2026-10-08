@@ -3,6 +3,7 @@ name: CB5 migration regression and QA pack
 on:
   push:
     branches: ["codex/cb5-migration-closeout-20261008"]
+    paths: ["ambush_loop/**", ".github/workflows/cb5-migration.yml"]
   pull_request:
     paths: ["ambush_loop/**", ".github/workflows/cb5-migration.yml"]
   workflow_dispatch:
@@ -16,6 +17,7 @@ concurrency:
 
 jobs:
   migration:
+    if: github.event_name != 'pull_request' || github.head_ref != 'codex/cb5-migration-closeout-20261008'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
