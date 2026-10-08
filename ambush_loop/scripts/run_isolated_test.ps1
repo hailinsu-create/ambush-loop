@@ -85,6 +85,7 @@ $previousLocalAppData = $env:LOCALAPPDATA
 $previousDataRoot = $env:AMBUSH_TEST_DATA_ROOT
 $previousRunId = $env:AMBUSH_TEST_RUN_ID
 $previousPackRoot = $env:AMBUSH_ASSET_PACK_ROOT
+$previousSourceSha = $env:AMBUSH_TEST_SOURCE_SHA
 $realDataDir = Join-Path $previousAppData 'Godot/app_userdata/Ambush Loop'
 $realSave = Join-Path $realDataDir 'ambush_loop.cfg'
 $realSettings = Join-Path $realDataDir 'ambush_loop_settings.cfg'
@@ -98,11 +99,13 @@ function Get-ReadOnlyHash([string]$filePath) {
 
 $beforeSave = Get-ReadOnlyHash $realSave
 $beforeSettings = Get-ReadOnlyHash $realSettings
+$sourceSha = (& git -C $projectRoot rev-parse HEAD).Trim()
 try {
     $env:APPDATA = $dataRoot
     $env:LOCALAPPDATA = $dataRoot
     $env:AMBUSH_TEST_DATA_ROOT = $dataRoot.Replace('\', '/')
     $env:AMBUSH_TEST_RUN_ID = $runId
+    $env:AMBUSH_TEST_SOURCE_SHA = $sourceSha
     Write-Output "TEST_RUN_ID=$runId"
     Write-Output "TEST_DATA_ROOT=$dataRoot"
     if ($ImportOnly) {
@@ -136,7 +139,6 @@ try {
     $wrapperExit = $engineExit
     if ($engineExit -eq 0 -and $runtimeErrors -gt 0) { $wrapperExit = 93 }
     if (-not $unchanged) { $wrapperExit = 92 }
-    $sourceSha = (& git -C $projectRoot rev-parse HEAD).Trim()
     $result = @{run_id=$runId; source_sha=$sourceSha; entry=$Entry; engine_exit=$engineExit;
         wrapper_exit=$wrapperExit; runtime_errors=$runtimeErrors; player_data_unchanged=[int]$unchanged}
     [IO.File]::WriteAllText((Join-Path $runDir 'wrapper-result.json'), ($result | ConvertTo-Json))
@@ -153,4 +155,5 @@ finally {
     $env:AMBUSH_TEST_DATA_ROOT = $previousDataRoot
     $env:AMBUSH_TEST_RUN_ID = $previousRunId
     $env:AMBUSH_ASSET_PACK_ROOT = $previousPackRoot
+    $env:AMBUSH_TEST_SOURCE_SHA = $previousSourceSha
 }

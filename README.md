@@ -1,5 +1,7 @@
 # Ambush Loop
 
+当前开发候选已迁移到协作者完整3D基座，接入触屏确认/朝向、高点坡道、首关真实弹药双解、完整准备重试与四步提示。接手先读[迁移整体收口](.cursor/docs/AMBUSH_CB5_MIGRATION_CLOSEOUT_20261008.md)和[当前规划索引](.cursor/docs/PLANNING_INDEX.md)。以下版本号和R45文字是旧发行历史，不是当前迁移进度；候选尚未代替真机/真人验收或正式发行。
+
 《Ambush Loop》是 Godot 4.7.2 制作的安卓横屏、离线六夜夜袭战术游戏。本次规划发布沿用已入库游戏基线 0.6.28（Android versionCode 77）；R45 的在制版本 0.6.29 / 78 不包含在本次文档发布中。游戏仍处于开发与试玩阶段，不是 1.0 成品。
 
 Godot 工程位于 [`ambush_loop/`](ambush_loop/)，运行、操作和导出说明见 [游戏 README](ambush_loop/README.md)。在仓库根目录可用 `godot --path ambush_loop` 启动。会清理测试存档的冒烟测试必须通过 `ambush_loop/scripts/run_isolated_test.ps1`（Windows）或 `run_isolated_test.sh`（Linux）启动；不要直接执行 `smoke_test.gd`。

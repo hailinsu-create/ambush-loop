@@ -24,6 +24,8 @@ if [[ "$entry" == event_log_layout_test.gd || "$entry" == *capture.gd || "$entry
 fi
 
 project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source_sha="$(git -C "$project_root" rev-parse HEAD)"
+export AMBUSH_TEST_SOURCE_SHA="$source_sha"
 real_data="${XDG_DATA_HOME:-$HOME/.local/share}/godot/app_userdata/Ambush Loop"
 read_hash() {
   if [[ -f "$1" ]]; then sha256sum -- "$1" | cut -d' ' -f1; else printf '<absent>'; fi
@@ -68,7 +70,6 @@ if [[ "$(read_hash "$real_data/ambush_loop.cfg")" != "$before_save" || "$(read_h
 if [[ "$engine_exit" == 0 && "$runtime_errors" != 0 ]]; then wrapper_exit=93; fi
 if [[ "${pipeline_status[1]}" != 0 ]]; then wrapper_exit=95; fi
 if [[ "$unchanged" != 1 ]]; then wrapper_exit=92; fi
-source_sha="$(git -C "$project_root" rev-parse HEAD)"
 printf '{"run_id":"%s","source_sha":"%s","entry":"%s","engine_exit":%s,"wrapper_exit":%s,"runtime_errors":%s,"player_data_unchanged":%s}\n' "$run_id" "$source_sha" "$entry" "$engine_exit" "$wrapper_exit" "$runtime_errors" "$unchanged" > "$run_dir/wrapper-result.json"
 printf 'TEST_ENGINE_EXIT=%s\nTEST_RUNTIME_ERRORS=%s\nPLAYER_DATA_UNCHANGED=%s\nTEST_WRAPPER_EXIT=%s\n' "$engine_exit" "$runtime_errors" "$unchanged" "$wrapper_exit"
 printf 'TEST_LOG=%s\n' "$run_dir/run.log"
