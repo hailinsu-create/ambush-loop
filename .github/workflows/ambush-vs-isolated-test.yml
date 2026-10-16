@@ -1,0 +1,45 @@
+# Minimal free-runner CI for Ambush VS skeleton (headless isolated empty test).
+# Does not merge to main; does not spend paid minutes beyond public GitHub Actions quota.
+name: ambush-vs-isolated-test
+
+on:
+  push:
+    paths:
+      - "ambush_vs/**"
+      - ".github/workflows/ambush-vs-isolated-test.yml"
+  pull_request:
+    paths:
+      - "ambush_vs/**"
+      - ".github/workflows/ambush-vs-isolated-test.yml"
+
+jobs:
+  empty-isolated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Godot 4.7.2
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/godot.zip \
+            "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip"
+          sudo unzip -o /tmp/godot.zip -d /usr/local/bin
+          sudo chmod +x /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64
+          /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --version
+
+      - name: Isolated empty test (expect 0)
+        run: |
+          set -euo pipefail
+          chmod +x ambush_vs/scripts/run_isolated_test.sh
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 empty_test.gd
+
+      - name: Direct entry rejected (expect 91)
+        run: |
+          set -euo pipefail
+          set +e
+          /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_vs -s res://scripts/empty_test.gd
+          code=$?
+          set -e
+          echo "direct_entry_exit=$code"
+          test "$code" -eq 91
