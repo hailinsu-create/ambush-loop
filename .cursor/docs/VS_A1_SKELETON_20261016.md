@@ -8,3 +8,8 @@
 - **chatgpt：**unavailable（Cloud Agent；未冒充网页额度）。
 
 状态：骨架已实现；空测试结果见 PR / 本机跑通记录。合入 main 仍属【授权 A4】。
+
+- **远端提交（已核对）：**`07aae82b918dc7a54851dbff4b3a05ee56b7092e` on `origin/vs/core`
+- **Draft PR：**https://github.com/hailinsu-create/ambush-loop/pull/54 （`vs/core` → `main`）
+- **空测试：**隔离入口 exit 0；直接入口 exit 91（Godot 4.7.2.stable.official.ed1daf0bf）
+
