@@ -18,8 +18,8 @@ enum ArtMode { G3, G2, G1 }
 ## World-space UV: texture spans this many cells (seamless, no cell grid).
 ## Cobble atlas ≈11 stones wide → period ~1.5 ⇒ ~7 stones/cell (target 6–8).
 const G3_TEX_CELLS := 4.0 ## default for mud/grass/planks
-const G3_COBBLE_CELLS := 1.5 ## fine cobble: many stones per cell
-const G3_ROOF_CELLS := 5.5 ## larger shingle texel so roofs read
+const G3_COBBLE_CELLS := 0.85 ## ~7 stones/cell (atlas dominant period ≈43px)
+const G3_ROOF_CELLS := 4.5 ## larger shingle texel so roofs read
 const G3_UNIT_SCALE := 1.6
 const G3_WALL_STRIP := 0.36 ## ~1/3 cell dry-stone wall width
 
@@ -1111,46 +1111,58 @@ func _draw_sandbag_sprite_run(
 	ox: int, oy: int, length: int, horizontal: bool, bag: Texture2D, bag_end: Texture2D
 ) -> void:
 	## Chunky burlap pile: bags ~0.45 cell, 2 staggered rows, dark gaps (phone-readable).
+	## Sprites are sparse in atlas — draw as filled bag capsules so piles read at phone size.
 	var bag_w := cell_px * 0.45
-	var bag_h := cell_px * 0.36
+	var bag_h := cell_px * 0.34
 	var rows := 2
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
 		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
 	var run_len := float(length) * cell_px
 	if horizontal:
-		base += Vector2(0.0, cell_px * 0.12)
+		base += Vector2(0.0, cell_px * 0.18)
 	else:
-		base += Vector2(cell_px * 0.12, 0.0)
-	# Ground shadow under the whole pile.
+		base += Vector2(cell_px * 0.18, 0.0)
 	var sh_size := Vector2(
-		run_len * 0.96 if horizontal else cell_px * 0.92,
-		cell_px * 0.78 if horizontal else run_len * 0.96
+		run_len * 0.96 if horizontal else cell_px * 0.95,
+		cell_px * 0.85 if horizontal else run_len * 0.96
 	)
-	draw_rect(Rect2(base + Vector2(cell_px * 0.04, cell_px * 0.32), sh_size), Color(0, 0, 0, 0.55), true)
+	draw_rect(Rect2(base + Vector2(cell_px * 0.03, cell_px * 0.30), sh_size), Color(0, 0, 0, 0.58), true)
 	if g3.drop_shadow:
-		draw_texture_rect(g3.drop_shadow, Rect2(base + Vector2(cell_px * 0.02, cell_px * 0.28), sh_size), false, Color(1, 1, 1, 0.85))
-	var burlap := Color(0.78, 0.62, 0.38, 1.0)
-	var burlap_dark := Color(0.42, 0.32, 0.18, 1.0)
+		draw_texture_rect(g3.drop_shadow, Rect2(base + Vector2(cell_px * 0.01, cell_px * 0.26), sh_size), false, Color(1, 1, 1, 0.88))
+	var burlap := Color(0.82, 0.66, 0.40, 1.0)
+	var burlap_mid := Color(0.62, 0.48, 0.28, 1.0)
+	var burlap_dark := Color(0.28, 0.20, 0.10, 0.85)
 	for row in range(rows):
-		var stagger := (row % 2) * (bag_w * 0.48)
-		var row_y := cell_px * 0.14 + float(row) * (bag_h * 0.58)
+		var stagger := (row % 2) * (bag_w * 0.50)
+		var row_y := cell_px * 0.10 + float(row) * (bag_h * 0.62)
 		var along := cell_px * 0.02
 		var i := 0
 		while along < run_len - bag_w * 0.05:
-			var tex: Texture2D = bag_end if (i == 0 or along + bag_w >= run_len) else bag
 			var dest: Rect2
 			if horizontal:
 				dest = Rect2(base + Vector2(along + stagger, row_y), Vector2(bag_w, bag_h))
 			else:
-				dest = Rect2(base + Vector2(cell_px * 0.14 + stagger * 0.3, along + cell_px * 0.05), Vector2(bag_w, bag_h))
-			# Dark contact shadow between bags.
-			draw_rect(Rect2(dest.position + Vector2(1, dest.size.y * 0.55), Vector2(dest.size.x - 2, dest.size.y * 0.45)), burlap_dark, true)
-			draw_texture_rect(tex, dest, false, burlap)
-			# Soft top highlight so bags read as stacked volumes.
-			draw_rect(Rect2(dest.position + Vector2(2, 1), Vector2(dest.size.x - 4, maxf(2.0, dest.size.y * 0.18))), Color(0.92, 0.78, 0.52, 0.35), true)
-			along += bag_w * 0.50
+				dest = Rect2(base + Vector2(cell_px * 0.12 + stagger * 0.35, along + cell_px * 0.04), Vector2(bag_w, bag_h))
+			_draw_g3_bag_capsule(dest, burlap, burlap_mid, burlap_dark)
+			# Optional sprite grain on top (tight atlas content).
+			var tex: Texture2D = bag_end if (i == 0 or along + bag_w >= run_len) else bag
+			if tex:
+				draw_texture_rect(tex, dest.grow(-1.0), false, Color(1, 1, 1, 0.55))
+			along += bag_w * 0.48
 			i += 1
+
+
+func _draw_g3_bag_capsule(dest: Rect2, fill: Color, mid: Color, dark: Color) -> void:
+	## Solid readable sandbag body (atlas sprites alone are too sparse).
+	draw_rect(Rect2(dest.position + Vector2(1, dest.size.y * 0.55), Vector2(dest.size.x, dest.size.y * 0.5)), dark, true)
+	draw_rect(dest, fill, true)
+	# End caps (read as rounded bags).
+	var r := dest.size.y * 0.5
+	draw_circle(dest.position + Vector2(r, dest.size.y * 0.5), r, fill)
+	draw_circle(dest.position + Vector2(dest.size.x - r, dest.size.y * 0.5), r, fill)
+	draw_rect(Rect2(dest.position + Vector2(2, 1), Vector2(dest.size.x - 4, dest.size.y * 0.28)), Color(fill.r + 0.12, fill.g + 0.10, fill.b + 0.06, 0.55), true)
+	draw_rect(Rect2(dest.position + Vector2(3, dest.size.y * 0.42), Vector2(dest.size.x - 6, 2.0)), mid, true)
 
 
 func _draw_g2_props() -> void:
