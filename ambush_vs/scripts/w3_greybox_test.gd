@@ -2,6 +2,7 @@ extends SceneTree
 
 ## W3 greybox headless: interactive sim API + G1 assets + greybox scene auto plan A.
 ## Asserts t0=280 and standard_ambush (view must not change outcomes).
+## PLAY-1: blank start not startable; scripted placement reaches result; MG42 not in kit.
 
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
 const SimRunner := preload("res://sim/runner.gd")
@@ -29,6 +30,9 @@ func _run_all() -> void:
 	_test_g1_assets_load()
 	_test_g2_assets_load()
 	_test_g3_assets_load()
+	_test_mg42_not_in_starting_kit()
+	await _test_blank_start_not_startable()
+	await _test_scripted_placement_reaches_result()
 	await _test_greybox_scene_boots()
 	print("W3_GREYBOX_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -123,12 +127,116 @@ func _test_g3_assets_load() -> void:
 	_assert(a.units.get("enemy_officer") != null, "g3 enemy officer")
 
 
+func _test_mg42_not_in_starting_kit() -> void:
+	## PLAY-1: MG42 is locked until hidden cache; must not appear in loadout_start kit.
+	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	var kit_ids: Array = []
+	for w in level.get("loadout_start", {}).get("weapons", []):
+		kit_ids.append(str(w.get("weapon_id", "")))
+	_assert(not kit_ids.has("mg42"), "MG42 not in loadout_start weapons got=%s" % str(kit_ids))
+	_assert(kit_ids.has("kar98k") and kit_ids.has("mp40"), "kit has kar98k+mp40")
+	# Hidden supply is the only MG42 source in yard data.
+	var hidden_has_mg42 := false
+	for s in level.get("supplies", []):
+		if str(s.get("visibility", "")) != "hidden" and not bool(s.get("hidden", false)):
+			continue
+		for c in s.get("contents", []):
+			if str(c.get("weapon_id", "")) == "mg42":
+				hidden_has_mg42 = true
+	_assert(hidden_has_mg42, "hidden supply contains MG42")
+
+
+func _wait_scene_ready(max_frames: int = 60) -> Node:
+	for _i in range(max_frames):
+		await process_frame
+		var scene = current_scene
+		if scene != null and scene.has_method("can_start_wait"):
+			return scene
+	return current_scene
+
+
+func _test_blank_start_not_startable() -> void:
+	## Untouched blank start must NOT be startable (no auto-win path).
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "blank start change_scene err=%s" % err)
+	var scene = await _wait_scene_ready()
+	_assert(scene != null and scene.has_method("can_start_wait"), "blank start scene has can_start_wait")
+	if scene == null:
+		return
+	_assert(scene.can_start_wait() == false, "untouched blank start not startable")
+	_assert(str(scene.start_block_reason()) != "", "blank start has Chinese block reason")
+	# Operators must be at squad_insertion, not plan A coords.
+	var ops: Array = scene.plan.get("operators", [])
+	_assert(ops.size() == 3, "blank start has 3 operators")
+	var at_a_barn := false
+	for op in ops:
+		if int(op.get("x", -1)) == 5 and int(op.get("y", -1)) == 9:
+			at_a_barn = true
+	_assert(not at_a_barn, "blank start not at plan A barn slot")
+	var insertion: Array = scene.level.get("squad_insertion", [])
+	_assert(insertion.size() == 3, "yard.json squad_insertion present")
+	for i in range(mini(ops.size(), insertion.size())):
+		_assert(
+			int(ops[i]["x"]) == int(insertion[i]["x"]) and int(ops[i]["y"]) == int(insertion[i]["y"]),
+			"op[%d] at insertion (%d,%d)" % [i, int(insertion[i]["x"]), int(insertion[i]["y"])]
+		)
+	# HUD must not expose internal ids like op_kar_L on display names.
+	var names: Dictionary = scene.op_display_names
+	for k in names.keys():
+		var n := str(names[k])
+		_assert(not n.begins_with("op_"), "display name not internal id: %s" % n)
+	_assert(scene.is_mg42_in_starting_kit() == false, "controller: MG42 not in starting kit")
+	if scene.btn_start:
+		_assert(scene.btn_start.disabled == true, "StartButton disabled on blank start")
+
+
+func _test_scripted_placement_reaches_result() -> void:
+	## Scripted player placement (plan-A-like) reaches a finished result.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "scripted placement change_scene err=%s" % err)
+	var scene = await _wait_scene_ready()
+	_assert(scene != null, "scripted placement scene ready")
+	if scene == null:
+		return
+	var ops: Array = scene.plan.get("operators", [])
+	_assert(ops.size() >= 3, "scripted placement has operators")
+	var id0 := str(ops[0]["id"])
+	var id1 := str(ops[1]["id"])
+	var id2 := str(ops[2]["id"])
+	_assert(scene.scripted_place_operator(id0, 5, 9, 0.0), "place op0 barn high")
+	_assert(scene.scripted_place_operator(id1, 13, 7, 15.0), "place op1 low-wall high")
+	_assert(scene.scripted_place_operator(id2, 11, 2, 90.0), "place op2 south")
+	# Assign weapons like a kit pick, then set cross_marker like plan A.
+	scene._on_op_weapon_picked(id0, "kar98k")
+	scene._on_op_weapon_picked(id1, "mp40")
+	scene._on_op_weapon_picked(id2, "grenade")
+	scene.scripted_place_cross_marker(10, 7, 12, 7)
+	_assert(scene.can_start_wait() == true, "after full placement can start")
+	scene._start_wait()
+	_assert(scene.sim != null, "sim started after placement")
+	if scene.sim == null:
+		return
+	scene.paused = true
+	var guard := 0
+	while not scene.sim.is_finished() and guard < 20000:
+		scene.sim.advance_one_tick()
+		guard += 1
+	_assert(scene.sim.is_finished(), "scripted placement sim finished guard=%d" % guard)
+	scene._show_result()
+	var ls: Dictionary = scene.last_summary
+	_assert(not ls.is_empty(), "scripted placement has outcome summary")
+	_assert(str(ls.get("outcome", "")) in ["win", "lose"], "scripted placement outcome win|lose got=%s" % ls.get("outcome"))
+	_assert(int(ls.get("detonate_tick", -1)) >= 0, "scripted placement detonated")
+
+
 func _test_greybox_scene_boots() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "change_scene greybox err=%s" % err)
 	# Wait for deferred auto-run + a few frames of RESULT.
-	for i in range(120):
+	for i in range(200):
 		await process_frame
 		var scene = current_scene
 		if scene != null and scene.get("last_summary") is Dictionary:

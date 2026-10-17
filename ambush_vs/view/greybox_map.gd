@@ -52,6 +52,8 @@ var use_g2_art: bool = false ## legacy; derived from art_mode
 var selected_op_id: String = ""
 var threat_slot_cells: Array = [] ## Vector2i
 var night: bool = true
+var highlight_high_slots: bool = false ## SETUP: gold wash on high_slots
+var op_display_names: Dictionary = {} ## op_id → Chinese label (never show raw ids)
 var _high_cells: Dictionary = {} ## "x,y" → high_slot id
 var _out_of_yard: Dictionary = {} ## "x,y" → border-touching wall mass (not a building)
 var _inner_wall: Dictionary = {} ## "x,y" → interior low-wall cells (stone strips)
@@ -210,6 +212,8 @@ func apply_snapshot(snap: Dictionary) -> void:
 	preview_cell = snap.get("preview_cell", Vector2i(-1, -1))
 	preview_seers = snap.get("preview_seers", [])
 	selected_op_id = str(snap.get("selected_op_id", selected_op_id))
+	highlight_high_slots = bool(snap.get("highlight_high_slots", false))
+	op_display_names = snap.get("op_display_names", {}) as Dictionary
 	queue_redraw()
 
 
@@ -300,6 +304,7 @@ func _draw() -> void:
 			_draw_g2_props()
 		_:
 			pass
+	_draw_high_slot_highlights()
 	# G1 readability overlays always on top of terrain/props.
 	if show_cones:
 		_draw_enemy_cones()
@@ -310,6 +315,24 @@ func _draw() -> void:
 	_draw_preview()
 	_draw_units()
 	_draw_alert_badge()
+
+
+func _supply_is_hidden(s: Dictionary) -> bool:
+	return str(s.get("visibility", "")) == "hidden" or bool(s.get("hidden", false))
+
+
+func _draw_high_slot_highlights() -> void:
+	if not highlight_high_slots:
+		return
+	for hs in level.get("high_slots", []):
+		for c in hs.get("cells", []):
+			var x := int(c.get("x", -1))
+			var y := int(c.get("y", -1))
+			if x < 0:
+				continue
+			var r := Rect2(Vector2(x * cell_px, (grid_h - 1 - y) * cell_px), Vector2(cell_px, cell_px))
+			draw_rect(r, Color(1.0, 0.82, 0.25, 0.22), true)
+			draw_rect(r.grow(-1.0), Color(1.0, 0.88, 0.35, 0.55), false, 1.5)
 
 
 func _draw_tiles() -> void:
@@ -1088,8 +1111,10 @@ func _draw_g3_props() -> void:
 		var y := int(s.get("y", -1))
 		if x < 0:
 			continue
-		var hid := bool(s.get("hidden", false))
-		var tex: Texture2D = g3.props.get("ammo_crate" if hid else "crate_stack", null)
+		# yard.json uses visibility:"hidden"; legacy "hidden":true also accepted.
+		if _supply_is_hidden(s):
+			continue
+		var tex: Texture2D = g3.props.get("crate_stack", null)
 		if tex:
 			_draw_g3_prop_sprite(x, y, tex, 0.70)
 	var accents := [
@@ -1320,9 +1345,10 @@ func _draw_g2_props() -> void:
 		var y := int(s.get("y", -1))
 		if x < 0:
 			continue
+		if _supply_is_hidden(s):
+			continue
 		var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
-		var hid := bool(s.get("hidden", false))
-		var tex: Texture2D = g2.prop_ammo_box if hid else g2.prop_crate
+		var tex: Texture2D = g2.prop_crate
 		if tex:
 			draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.1), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
 	if g2.prop_barrel:
@@ -1576,7 +1602,8 @@ func _draw_units() -> void:
 			var hp2 := cell_to_screen(float(op["x"]), float(op["y"]))
 			draw_arc(hp2, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
 		var sp := cell_to_screen(float(op["x"]), float(op["y"]))
-		draw_string(ThemeDB.fallback_font, sp + Vector2(-10, -cell_px * 0.55), str(op["id"]).substr(0, 6), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.9, 0.95, 1.0))
+		var label := str(op_display_names.get(str(op["id"]), op.get("display_name", "队员")))
+		draw_string(ThemeDB.fallback_font, sp + Vector2(-18, -cell_px * 0.55), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.9, 0.95, 1.0))
 
 
 func _draw_unit_tex(tex: Texture2D, x: float, y: float, facing_deg: float, selected: bool) -> void:

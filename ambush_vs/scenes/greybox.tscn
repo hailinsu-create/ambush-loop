@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 56.0
-offset_right = -272.0
+offset_right = -280.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -67,13 +67,13 @@ theme_override_constants/separation = 16
 [node name="PhaseLabel" type="Label" parent="HUD/TopBar"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "布阵 SETUP"
+text = "布阵"
 
 [node name="InfoLabel" type="Label" parent="HUD/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-text = "加载方案 A/B 开始"
+theme_override_font_sizes/font_size = 15
+text = "从南门入场位开始布阵"
 
 [node name="AlertLabel" type="Label" parent="HUD/TopBar"]
 layout_mode = 2
@@ -85,82 +85,71 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -268.0
+offset_left = -276.0
 offset_top = 56.0
 offset_right = -8.0
-offset_bottom = 420.0
+offset_bottom = -8.0
 grow_horizontal = 0
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
+
+[node name="ExamplePlansButton" type="Button" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "示例方案"
 
 [node name="PlanAButton" type="Button" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 48)
+visible = false
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "预设方案 A（高点）"
+theme_override_font_sizes/font_size = 15
+text = "示例 A（高点）"
 
 [node name="PlanBButton" type="Button" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 48)
+visible = false
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "预设方案 B（地雷）"
+theme_override_font_sizes/font_size = 15
+text = "示例 B（地雷）"
+
+[node name="OpCards" type="VBoxContainer" parent="HUD/SetupPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="KitRow" type="HBoxContainer" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="TriggerOption" type="OptionButton" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 15
 
 [node name="PreviewButton" type="Button" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "点地面看谁能看见"
 
 [node name="G2ArtButton" type="Button" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "美术：G3"
 
-
-[node name="WeaponIcons" type="HBoxContainer" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 48)
+[node name="StartReasonLabel" type="Label" parent="HUD/SetupPanel"]
 layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="kar98k" type="TextureRect" parent="HUD/SetupPanel/WeaponIcons"]
-custom_minimum_size = Vector2(44, 44)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="mp40" type="TextureRect" parent="HUD/SetupPanel/WeaponIcons"]
-custom_minimum_size = Vector2(44, 44)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="mg42" type="TextureRect" parent="HUD/SetupPanel/WeaponIcons"]
-custom_minimum_size = Vector2(44, 44)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="grenade" type="TextureRect" parent="HUD/SetupPanel/WeaponIcons"]
-custom_minimum_size = Vector2(44, 44)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="mine" type="TextureRect" parent="HUD/SetupPanel/WeaponIcons"]
-custom_minimum_size = Vector2(44, 44)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.95, 0.72, 0.35, 1)
+text = "请放置全部队员"
+autowrap_mode = 3
 
 [node name="StartButton" type="Button" parent="HUD/SetupPanel"]
-custom_minimum_size = Vector2(0, 56)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
+disabled = true
 text = "开始等待"
 
 [node name="WaitPanel" type="VBoxContainer" parent="HUD"]
@@ -169,7 +158,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -268.0
+offset_left = -276.0
 offset_top = 56.0
 offset_right = -8.0
 offset_bottom = 360.0
