@@ -33,6 +33,7 @@ func _run_all() -> void:
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
+	await _test_hud_layout_no_overlap()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -329,6 +330,8 @@ func _test_wait_reaim_one_order() -> void:
 		if scene == null or scene.map_view == null:
 			continue
 		# Load plan A and enter wait without finishing night.
+		scene.apply_layout_size(1280, 720)
+		await process_frame
 		scene._load_preset("A")
 		scene._start_wait()
 		await process_frame
@@ -336,6 +339,9 @@ func _test_wait_reaim_one_order() -> void:
 			continue
 		scene.paused = true
 		var map = scene.map_view
+		map.reset_camera()
+		map._fit_cell_px()
+		await process_frame
 		var oid := str(scene.sim.operators[1]["id"]) ## Kar
 		var op = scene.sim.operators[1]
 		var facing0 := float(op["facing_deg"])
@@ -343,18 +349,25 @@ func _test_wait_reaim_one_order() -> void:
 		map.selected_op_id = oid
 		scene._facing_submit_count = 0
 		var origin: Vector2 = map.cell_to_screen(float(op["x"]), float(op["y"]))
+		## Keep drag radius in cells so aim angle stays stable if cell_px shrinks.
+		var drag_px: float = maxf(80.0, map.cell_px * 2.5)
 		map.inject_input(_touch(origin, true))
 		# 20 motion steps sweeping ~90°.
 		for s in range(20):
 			var ang := deg_to_rad(facing0 + float(s + 1) * 4.5)
-			var p := origin + Vector2(cos(ang), -sin(ang)) * 80.0
+			var p := origin + Vector2(cos(ang), -sin(ang)) * drag_px
 			map.gesture.inject_move(p)
 			# During drag, sim facing must stay.
 			_assert(is_equal_approx(float(op["facing_deg"]), facing0), "facing unchanged mid-drag step %d" % s)
-		var end := origin + Vector2(cos(deg_to_rad(facing0 + 90.0)), -sin(deg_to_rad(facing0 + 90.0))) * 80.0
+		var end := origin + Vector2(cos(deg_to_rad(facing0 + 90.0)), -sin(deg_to_rad(facing0 + 90.0))) * drag_px
 		map.inject_input(_touch(end, false))
 		_assert(scene._facing_submit_count == 1, "exactly one turn order got=%d" % scene._facing_submit_count)
-		_assert(int(op.get("turn_ticks_left", 0)) == 40, "90° → 40 ticks got=%s" % op.get("turn_ticks_left"))
+		var facing1 := float(op["facing_deg"])
+		var delta := absf(facing1 - facing0)
+		while delta > 180.0:
+			delta = absf(delta - 360.0)
+		_assert(int(op.get("turn_ticks_left", 0)) == 40,
+			"90° → 40 ticks got=%s facing %s→%s Δ=%s" % [op.get("turn_ticks_left"), facing0, facing1, delta])
 		# Cancel path: drag out then back.
 		scene._facing_submit_count = 0
 		var f2 := float(op["facing_deg"])
@@ -370,7 +383,8 @@ func _test_wait_reaim_one_order() -> void:
 
 
 func _test_hud_touch_sizing() -> void:
-	## PR-5: ≥88 design-px targets, body text ≥22, pause restart confirm, long-press detonate.
+	## PR-5: primary/portrait ≥88 design-px; body text ≥22; pause confirm; long-press detonate.
+	## Panel chips are compact (CHIP_MIN) so the right column fits without overlap.
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
@@ -380,12 +394,21 @@ func _test_hud_touch_sizing() -> void:
 		var scene = current_scene
 		if scene == null or scene.thumb_bar == null:
 			continue
-		DisplayServer.window_set_size(Vector2i(1280, 720))
+		scene.apply_layout_size(1280, 720)
 		await process_frame
 		await process_frame
 		var scale_pt := 0.542 ## 844×390 phone CSS pt vs 1280×720 design
+		var primary: Array = []
+		if scene.thumb_bar:
+			for c in scene.thumb_bar.get_children():
+				if c is BaseButton and (c as BaseButton).is_visible_in_tree():
+					primary.append(c)
+		if scene.portrait_strip:
+			for c in scene.portrait_strip.get_children():
+				if c is BaseButton and (c as BaseButton).is_visible_in_tree():
+					primary.append(c)
 		var bad_btn := ""
-		for b in _visible_buttons(scene):
+		for b in primary:
 			var ms: Vector2 = b.custom_minimum_size
 			var dim := minf(ms.x if ms.x > 0.0 else b.size.x, ms.y if ms.y > 0.0 else b.size.y)
 			if dim < 88.0 - 1e-3:
@@ -394,7 +417,9 @@ func _test_hud_touch_sizing() -> void:
 			if dim * scale_pt < 44.0 - 1e-3:
 				bad_btn = "%s scaled=%s" % [b.name, dim * scale_pt]
 				break
-		_assert(bad_btn == "", "all visible buttons ≥88 design-px (%s)" % bad_btn)
+		_assert(bad_btn == "", "primary/portrait buttons ≥88 design-px (%s)" % bad_btn)
+		_assert(scene.right_column != null, "opaque right column exists")
+		_assert(scene.right_scroll != null, "right column scrolls")
 		var bad_lab := ""
 		for lab in [scene.label_info, scene.label_phase, scene.label_alert]:
 			if lab == null or not lab.visible:
@@ -762,3 +787,204 @@ func _test_desktop_shortcuts() -> void:
 		return
 	_assert(false, "shortcuts scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_hud_layout_no_overlap() -> void:
+	## Layout contract: no interactive/label rect overlaps (except parent-child);
+	## no HUD control intersects map viewport except portrait strip + top bar.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "layout scene err=%s" % err)
+	for _i in range(220):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_host == null or scene.right_column == null:
+			continue
+		if scene.plan.is_empty():
+			continue
+		for size_pair in [Vector2i(1280, 720), Vector2i(844, 390)]:
+			for phase_name in ["setup", "scout", "wait", "result"]:
+				scene.apply_layout_size(size_pair.x, size_pair.y)
+				await process_frame
+				match phase_name:
+					"setup":
+						if scene.ui_phase != scene.UiPhase.SETUP:
+							OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+							scene._init_blank_plan()
+							scene._build_op_cards()
+							scene._build_kit_row()
+							scene._set_ui_phase(scene.UiPhase.SETUP)
+					"scout":
+						scene._start_scout_phase()
+					"wait":
+						if scene.ui_phase != scene.UiPhase.SETUP:
+							scene._init_blank_plan()
+							scene._build_op_cards()
+							scene._set_ui_phase(scene.UiPhase.SETUP)
+						scene._load_preset("A")
+						scene._start_wait()
+						await process_frame
+						if scene.sim:
+							scene.paused = true
+					"result":
+						if scene.ui_phase != scene.UiPhase.WAIT:
+							scene._load_preset("A")
+							scene._start_wait()
+							await process_frame
+						scene._set_ui_phase(scene.UiPhase.RESULT)
+				# Close modals that are allowed overlays (not part of steady HUD).
+				if scene.pause_menu:
+					scene.pause_menu.visible = false
+				if scene.shortcuts_help:
+					scene.shortcuts_help.visible = false
+				if scene.info_card:
+					scene.info_card.visible = false
+				if scene.dev_menu:
+					scene.dev_menu.visible = false
+				scene.apply_layout_size(size_pair.x, size_pair.y)
+				await process_frame
+				await process_frame
+				var tag := "%s@%dx%d" % [phase_name, size_pair.x, size_pair.y]
+				var overlap := _find_hud_overlap(scene)
+				_assert(overlap == "", "no HUD overlap %s (%s)" % [tag, overlap])
+				var map_hit := _find_map_intersection(scene)
+				_assert(map_hit == "", "HUD clears map viewport %s (%s)" % [tag, map_hit])
+				if phase_name == "setup":
+					_assert(scene.right_column.visible, "right column visible in setup %s" % tag)
+					var want_w: float = scene._right_column_width()
+					var col_w: float = scene.right_column.get_global_rect().size.x
+					_assert(absf(col_w - want_w) <= 4.0 or absf(col_w - (want_w - 2.0)) <= 4.0,
+						"right col width~%.0f got %.1f %s" % [want_w, col_w, tag])
+					var frac: float = want_w / float(size_pair.x)
+					var lo := 0.24 if size_pair.x >= 1000 else 0.22
+					var hi := 0.36 if size_pair.x >= 1000 else 0.38
+					_assert(frac >= lo and frac <= hi, "right col ~30%% got %.2f %s" % [frac, tag])
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "layout scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _layout_ignore_names() -> Dictionary:
+	return {
+		"ShortcutsHelp": true,
+		"PauseMenu": true,
+		"InfoCard": true,
+		"DevMenu": true,
+		"ResultPanel": true,
+	}
+
+
+func _is_layout_relevant(c: Control) -> bool:
+	if c == null or not c.is_visible_in_tree():
+		return false
+	if c is ScrollContainer or c is MarginContainer or c is PanelContainer or c is VBoxContainer \
+			or c is HBoxContainer or c is GridContainer or c is SubViewportContainer:
+		## Containers themselves may tightly wrap children; compare leaves.
+		if c.get_child_count() > 0 and not (c is BaseButton or c is Label or c is RichTextLabel):
+			return false
+	if c is BaseButton or c is Label or c is RichTextLabel or c is OptionButton or c is LineEdit:
+		return true
+	return false
+
+
+func _collect_layout_controls(n: Node, out: Array, ignore: Dictionary) -> void:
+	if n is Control:
+		var c := n as Control
+		var nm := str(c.name)
+		if ignore.has(nm):
+			return
+		## Skip ResultPanel subtree when invisible; when visible it is modal.
+		if nm == "ResultPanel":
+			return
+		if _is_layout_relevant(c):
+			var r := c.get_global_rect()
+			if r.size.x >= 2.0 and r.size.y >= 2.0:
+				out.append(c)
+	for ch in n.get_children():
+		_collect_layout_controls(ch, out, ignore)
+
+
+func _is_ancestor(a: Node, b: Node) -> bool:
+	var p := b.get_parent()
+	while p != null:
+		if p == a:
+			return true
+		p = p.get_parent()
+	return false
+
+
+func _rects_overlap(a: Rect2, b: Rect2) -> bool:
+	## Require a meaningful intersection (>2px) to ignore hairline adjacency.
+	var i := a.intersection(b)
+	return i.size.x > 2.0 and i.size.y > 2.0
+
+
+func _clipped_global_rect(c: Control) -> Rect2:
+	## Intersect with clipping ancestors so scrolled-off scroll content is ignored.
+	var r := c.get_global_rect()
+	var p: Node = c.get_parent()
+	while p != null:
+		if p is Control:
+			var pc := p as Control
+			if pc is ScrollContainer or pc.clip_contents:
+				r = r.intersection(pc.get_global_rect())
+				if r.size.x <= 2.0 or r.size.y <= 2.0:
+					return Rect2()
+		p = p.get_parent()
+	return r
+
+
+func _find_hud_overlap(scene) -> String:
+	var ctrls: Array = []
+	_collect_layout_controls(scene.hud, ctrls, _layout_ignore_names())
+	for i in range(ctrls.size()):
+		var a: Control = ctrls[i]
+		var ra := _clipped_global_rect(a)
+		if ra.size.x <= 2.0 or ra.size.y <= 2.0:
+			continue
+		for j in range(i + 1, ctrls.size()):
+			var b: Control = ctrls[j]
+			if _is_ancestor(a, b) or _is_ancestor(b, a):
+				continue
+			var rb := _clipped_global_rect(b)
+			if rb.size.x <= 2.0 or rb.size.y <= 2.0:
+				continue
+			if _rects_overlap(ra, rb):
+				return "%s ∩ %s" % [a.get_path(), b.get_path()]
+	return ""
+
+
+func _find_map_intersection(scene) -> String:
+	var map_r: Rect2 = scene.map_viewport_rect()
+	if map_r.size.x < 4.0 or map_r.size.y < 4.0:
+		return "map rect empty"
+	var allow := {
+		"TopBar": true,
+		"PhaseLabel": true,
+		"InfoLabel": true,
+		"AlertLabel": true,
+		"PortraitStrip": true,
+		"PortraitBackdrop": true,
+	}
+	## Portrait buttons are allowed over the reserved margin; map_host excludes them.
+	var ctrls: Array = []
+	_collect_layout_controls(scene.hud, ctrls, _layout_ignore_names())
+	for c in ctrls:
+		var ctl: Control = c
+		var nm := str(ctl.name)
+		if allow.has(nm):
+			continue
+		## Portrait_* buttons live under PortraitBackdrop — allowed.
+		if str(ctl.get_path()).contains("Portrait"):
+			continue
+		## TopBar children already named; also allow anything under TopBar.
+		if str(ctl.get_path()).contains("/TopBar"):
+			continue
+		var r := _clipped_global_rect(ctl)
+		if r.size.x <= 2.0 or r.size.y <= 2.0:
+			continue
+		if _rects_overlap(r, map_r):
+			return "%s ∩ MapHost" % ctl.get_path()
+	return ""

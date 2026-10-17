@@ -136,10 +136,16 @@ var setup_tool: String = "op" ## op | mine | trigger
 var _trip_drag_start: Vector2i = Vector2i(-1, -1)
 var pending_place_cell: Vector2i = Vector2i(-1, -1) ## ghost confirm cell
 var _last_unit_drag_cell: Vector2i = Vector2i(-1, -1)
-## PLAY-UX PR-5: touch HUD (≥88px), thumb cluster, pause menu, long-press detonate.
+## PLAY-UX PR-5: touch HUD (≥88px primary), thumb cluster, pause menu, long-press detonate.
 const TOUCH_MIN_PX := 88.0
-const BODY_FONT_PX := 24 ## ≥22 design-px; ≥12 pt at 0.542 phone scale
+const CHIP_MIN_PX := 48.0 ## compact panel chips (right column)
+const BODY_FONT_PX := 22 ## ≥22 design-px; ≥12 pt at 0.542 phone scale
+const CHIP_FONT_PX := 15
 const DETONATE_LONGPRESS_MS := 500
+const RIGHT_COL_FRAC := 0.30 ## ~384px at 1280
+const RIGHT_COL_MIN_PX := 240.0
+const TOP_BAR_H := 44.0
+const PORTRAIT_H := 104.0
 var thumb_bar: HBoxContainer = null
 var btn_thumb_start: Button = null
 var btn_thumb_begin: Button = null
@@ -168,6 +174,7 @@ const UNDO_MAX := 30
 var undo_stack: Array = [] ## deep-copied plan snapshots
 var btn_undo: Button = null
 var btn_cancel: Button = null
+var btn_fit_camera: Button = null
 var _aim_drag_active: bool = false
 var _facing_before_aim: float = NAN
 var _skip_next_place_undo: bool = false
@@ -182,6 +189,18 @@ var info_now_ms_fn: Callable = Callable()
 ## PLAY-UX PR-10: shortcuts help overlay.
 var shortcuts_help: PanelContainer = null
 var btn_shortcuts_help: Button = null
+## PLAY-UX layout: opaque right column + map left (containers, not absolute stacks).
+var map_host: Control = null
+var right_column: Control = null
+var right_column_bg: Panel = null
+var right_column_vbox: VBoxContainer = null
+var right_scroll: ScrollContainer = null
+var right_scroll_body: VBoxContainer = null
+var action_footer: HBoxContainer = null
+var utility_bar: HBoxContainer = null
+var portrait_backdrop: PanelContainer = null
+var _hud_layout_ready: bool = false
+var layout_size_override: Vector2 = Vector2.ZERO ## tests/capture: stable size when window resize is ignored
 
 
 func _ready() -> void:
@@ -211,6 +230,7 @@ func _ready() -> void:
 	map_view.cell_long_pressed.connect(_on_cell_long_pressed)
 	map_view.cell_right_clicked.connect(_on_cell_right_clicked)
 	map_view.unit_hit_radius_cells = 0.8
+	map_host = $MapHost
 	_build_portrait_strip()
 	_build_setup_tool_bars()
 	_build_touch_hud()
@@ -218,6 +238,7 @@ func _ready() -> void:
 	_build_info_card()
 	_build_shortcuts_help()
 	_strip_all_tooltips()
+	_install_hud_layout()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -247,6 +268,7 @@ func _ready() -> void:
 	_fill_trigger_options()
 	_set_example_plans_visible(false)
 	_apply_touch_sizing()
+	_relayout_hud()
 
 	# Headless automation hooks (W3 test / PNG capture).
 	_headless_auto = str(OS.get_environment("AMBUSH_GREYBOX_AUTO")).to_lower() in ["1", "true", "a"]
@@ -510,68 +532,74 @@ func _build_kit_row() -> void:
 	for c in kit_row.get_children():
 		c.queue_free()
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	kit_row.add_theme_constant_override("separation", 4)
+	kit_row.custom_minimum_size = Vector2(0, CHIP_MIN_PX + 4)
 	var title := Label.new()
+	title.name = "KitTitle"
 	title.text = "起始套件"
-	title.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	title.add_theme_font_size_override("font_size", CHIP_FONT_PX)
 	if font_res:
 		title.add_theme_font_override("font", font_res)
 	kit_row.add_child(title)
 	for wid in ["kar98k", "mp40", "grenade", "mine", "mg42"]:
-		var box := VBoxContainer.new()
-		box.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
-		var tr := TextureRect.new()
-		tr.custom_minimum_size = Vector2(48, 48)
-		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		if g3_assets and g3_assets.weapon_icons.has(wid):
-			tr.texture = g3_assets.weapon_icons[wid]
-		var lab := Label.new()
-		lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lab.add_theme_font_size_override("font_size", BODY_FONT_PX)
+		var chip := Button.new()
+		chip.name = "Kit_%s" % wid
+		chip.custom_minimum_size = Vector2(28, CHIP_MIN_PX)
+		chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		chip.focus_mode = Control.FOCUS_NONE
+		chip.disabled = true ## summary only; not interactive
+		chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		chip.clip_text = true
+		chip.add_theme_font_size_override("font_size", 11)
 		if font_res:
-			lab.add_theme_font_override("font", font_res)
+			chip.add_theme_font_override("font", font_res)
 		if wid == "mg42" and not is_mg42_unlocked():
-			tr.modulate = Color(0.45, 0.45, 0.45, 0.85)
-			lab.text = "MG42"
-			lab.modulate = Color(0.55, 0.55, 0.55)
+			chip.text = "MG42"
+			chip.modulate = Color(0.55, 0.55, 0.55)
 		else:
-			lab.text = str(WEAPON_LABEL_ZH.get(wid, wid))
+			chip.text = str(WEAPON_LABEL_ZH.get(wid, wid))
 			if wid == "mg42":
-				lab.modulate = Color(1.0, 0.92, 0.45)
-		box.add_child(tr)
-		box.add_child(lab)
-		kit_row.add_child(box)
+				chip.modulate = Color(1.0, 0.92, 0.45)
+		kit_row.add_child(chip)
 
 
 func _build_op_cards() -> void:
+	## Compact: one HBox per operator — name select + 4 weapon chips in a single row.
 	if op_cards == null:
 		return
 	for c in op_cards.get_children():
 		c.queue_free()
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	op_cards.add_theme_constant_override("separation", 6)
 	for op in plan.get("operators", []):
 		var oid := str(op["id"])
-		var card := VBoxContainer.new()
+		var card := HBoxContainer.new()
 		card.name = "Card_%s" % oid
 		card.add_theme_constant_override("separation", 4)
+		card.custom_minimum_size = Vector2(0, CHIP_MIN_PX)
 		var head := Button.new()
 		head.name = "Select"
-		head.custom_minimum_size = Vector2(0, TOUCH_MIN_PX)
-		head.add_theme_font_size_override("font_size", BODY_FONT_PX)
+		head.custom_minimum_size = Vector2(64, CHIP_MIN_PX)
+		head.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		head.size_flags_stretch_ratio = 1.2
+		head.add_theme_font_size_override("font_size", CHIP_FONT_PX)
 		if font_res:
 			head.add_theme_font_override("font", font_res)
 		head.pressed.connect(_on_op_card_pressed.bind(oid))
 		card.add_child(head)
 		var wrow := HBoxContainer.new()
 		wrow.name = "Weapons"
-		wrow.add_theme_constant_override("separation", 4)
+		wrow.add_theme_constant_override("separation", 2)
+		wrow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		wrow.size_flags_stretch_ratio = 2.0
 		for wid in _assignable_weapon_ids():
 			var wb := Button.new()
 			wb.name = "W_%s" % wid
 			wb.text = str(WEAPON_LABEL_ZH.get(wid, wid))
-			wb.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
+			wb.custom_minimum_size = Vector2(28, CHIP_MIN_PX)
 			wb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			wb.add_theme_font_size_override("font_size", BODY_FONT_PX)
+			wb.clip_text = true
+			wb.add_theme_font_size_override("font_size", 11)
 			if font_res:
 				wb.add_theme_font_override("font", font_res)
 			wb.pressed.connect(_on_op_weapon_picked.bind(oid, wid))
@@ -581,9 +609,10 @@ func _build_op_cards() -> void:
 			mg.name = "W_mg42"
 			mg.text = "MG42"
 			mg.disabled = true
-			mg.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
+			mg.custom_minimum_size = Vector2(28, CHIP_MIN_PX)
 			mg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			mg.add_theme_font_size_override("font_size", BODY_FONT_PX)
+			mg.clip_text = true
+			mg.add_theme_font_size_override("font_size", 11)
 			if font_res:
 				mg.add_theme_font_override("font", font_res)
 			wrow.add_child(mg)
@@ -606,10 +635,11 @@ func _refresh_op_cards() -> void:
 			var wlab := str(WEAPON_LABEL_ZH.get(str(op.get("weapon_id", "")), op.get("weapon_id", "")))
 			var placed := bool(op_placed.get(oid, false))
 			var mark := "✓" if placed else "·"
-			var sel := "▸ " if oid == selected_op_id else ""
+			var sel := "▸" if oid == selected_op_id else ""
 			var ammo_n := _op_ammo_display(oid, op)
-			var hp_bit := _op_hp_display(oid, op)
-			head.text = "%s%s %s · %s · 弹%d%s" % [sel, mark, dname, wlab, ammo_n, hp_bit]
+			head.text = "%s%s%s ·%s" % [sel, mark, dname, wlab]
+			head.clip_text = true
+			head.tooltip_text = "" ## ammo in portrait strip; keep row single-line
 		var wrow := card.get_node_or_null("Weapons")
 		if wrow:
 			for wid in _assignable_weapon_ids():
@@ -783,35 +813,28 @@ func _apply_trigger_type(t: String) -> void:
 
 
 func _build_setup_tool_bars() -> void:
+	## Built unparented; `_install_hud_layout` inserts them into SetupPanel scroll body.
 	if tool_bar != null:
 		return
 	tool_bar = HBoxContainer.new()
 	tool_bar.name = "ToolBar"
-	tool_bar.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	tool_bar.offset_left = -420
-	tool_bar.offset_top = 52
-	tool_bar.offset_right = -8
-	tool_bar.offset_bottom = 140
-	tool_bar.add_theme_constant_override("separation", 6)
-	$HUD.add_child(tool_bar)
+	tool_bar.add_theme_constant_override("separation", 4)
+	tool_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for pair in [["op", "队员"], ["mine", "地雷"], ["trigger", "触发线"]]:
 		var b := Button.new()
 		b.name = "Tool_%s" % pair[0]
 		b.text = str(pair[1])
-		b.custom_minimum_size = Vector2(100, 88)
+		b.custom_minimum_size = Vector2(36, CHIP_MIN_PX)
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		b.toggle_mode = true
-		b.add_theme_font_size_override("font_size", 18)
+		b.clip_text = true
+		b.add_theme_font_size_override("font_size", CHIP_FONT_PX)
 		b.pressed.connect(_on_tool_chip.bind(str(pair[0])))
 		tool_bar.add_child(b)
 	trigger_chip_row = HBoxContainer.new()
 	trigger_chip_row.name = "TriggerChips"
-	trigger_chip_row.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	trigger_chip_row.offset_left = -420
-	trigger_chip_row.offset_top = 148
-	trigger_chip_row.offset_right = -8
-	trigger_chip_row.offset_bottom = 236
 	trigger_chip_row.add_theme_constant_override("separation", 4)
-	$HUD.add_child(trigger_chip_row)
+	trigger_chip_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for pair in [
 		["see_first_enemy", "见首敌"],
 		["mine_detonate", "地雷"],
@@ -821,9 +844,11 @@ func _build_setup_tool_bars() -> void:
 		var c := Button.new()
 		c.name = "Trig_%s" % pair[0]
 		c.text = str(pair[1])
-		c.custom_minimum_size = Vector2(88, 88)
+		c.custom_minimum_size = Vector2(32, CHIP_MIN_PX)
+		c.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		c.toggle_mode = true
-		c.add_theme_font_size_override("font_size", 16)
+		c.clip_text = true
+		c.add_theme_font_size_override("font_size", 12)
 		c.pressed.connect(_on_trigger_chip.bind(str(pair[0])))
 		trigger_chip_row.add_child(c)
 	_refresh_tool_chips()
@@ -891,17 +916,25 @@ func _update_setup_chrome_visibility() -> void:
 
 
 func _update_legal_highlights() -> void:
+	## Only valid cells for the active tool — subtle fill drawn in map view.
 	if map_view == null or grid == null:
 		return
 	var cells: Array = []
 	if ui_phase != UiPhase.SETUP:
 		map_view.legal_cells = []
+		map_view.queue_redraw()
 		return
-	if setup_tool == "mine" or setup_tool == "op":
-		for y in range(grid.height):
-			for x in range(grid.width):
-				if grid.walkable(x, y):
-					cells.append(Vector2i(x, y))
+	match setup_tool:
+		"mine", "op":
+			for y in range(grid.height):
+				for x in range(grid.width):
+					if grid.walkable(x, y):
+						cells.append(Vector2i(x, y))
+		"trigger":
+			## Trip line uses drag endpoints; no full-yard flood fill.
+			cells = []
+		_:
+			cells = []
 	map_view.legal_cells = cells
 	map_view.queue_redraw()
 
@@ -914,25 +947,29 @@ func _mk_touch_btn(text: String, min_w: float = TOUCH_MIN_PX) -> Button:
 	return b
 
 
+func _mk_chip_btn(text: String, min_w: float = CHIP_MIN_PX) -> Button:
+	var b := Button.new()
+	b.text = text
+	b.custom_minimum_size = Vector2(min_w, CHIP_MIN_PX)
+	b.add_theme_font_size_override("font_size", CHIP_FONT_PX)
+	return b
+
+
 func _build_touch_hud() -> void:
-	## Bottom-right thumb cluster + pause menu + top-left dev menu (PR-5).
+	## Primary action footer lives in right column after `_install_hud_layout`.
 	thumb_bar = HBoxContainer.new()
 	thumb_bar.name = "ThumbBar"
-	thumb_bar.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	thumb_bar.offset_left = -520
-	thumb_bar.offset_top = -120
-	thumb_bar.offset_right = -8
-	thumb_bar.offset_bottom = -8
-	thumb_bar.add_theme_constant_override("separation", 8)
+	thumb_bar.add_theme_constant_override("separation", 6)
+	thumb_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	thumb_bar.mouse_filter = Control.MOUSE_FILTER_STOP
-	$HUD.add_child(thumb_bar)
-	btn_thumb_begin = _mk_touch_btn("开始布阵", 140)
-	btn_thumb_start = _mk_touch_btn("开始等待", 140)
-	btn_thumb_pause = _mk_touch_btn("暂停", 100)
+	btn_thumb_begin = _mk_touch_btn("开始布阵", 120)
+	btn_thumb_start = _mk_touch_btn("开始等待", 120)
+	btn_thumb_pause = _mk_touch_btn("暂停", 88)
 	btn_thumb_speed = _mk_touch_btn("倍速 1×", 100)
-	btn_thumb_detonate = _mk_touch_btn("长按起爆", 140)
+	btn_thumb_detonate = _mk_touch_btn("长按起爆", 120)
 	btn_thumb_detonate.modulate = Color(1.0, 0.55, 0.45)
 	for b in [btn_thumb_begin, btn_thumb_start, btn_thumb_pause, btn_thumb_speed, btn_thumb_detonate]:
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		thumb_bar.add_child(b)
 	btn_thumb_begin.pressed.connect(func(): _ui_tap(); begin_setup_from_scout())
 	btn_thumb_start.pressed.connect(func(): _ui_tap(); _start_wait())
@@ -944,7 +981,7 @@ func _build_touch_hud() -> void:
 		btn_detonate.visible = false
 		btn_detonate.button_down.connect(_on_detonate_down)
 		btn_detonate.button_up.connect(_on_detonate_up)
-	# Hide side-panel duplicates of primary actions (thumb cluster owns them).
+	# Hide side-panel duplicates of primary actions (footer owns them).
 	if btn_start:
 		btn_start.visible = false
 	if btn_begin_setup:
@@ -1009,34 +1046,17 @@ func _build_pause_menu() -> void:
 
 
 func _build_undo_cancel_buttons() -> void:
-	btn_undo = _mk_touch_btn("↶", 88)
+	## Utility chips; placed into `utility_bar` by `_install_hud_layout`.
+	btn_undo = _mk_chip_btn("↶", CHIP_MIN_PX)
 	btn_undo.name = "UndoButton"
-	btn_undo.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	btn_undo.offset_left = 116
-	btn_undo.offset_top = 52
-	btn_undo.offset_right = 204
-	btn_undo.offset_bottom = 140
 	btn_undo.tooltip_text = ""
-	$HUD.add_child(btn_undo)
 	btn_undo.pressed.connect(func(): _ui_tap(); _undo())
-	btn_cancel = _mk_touch_btn("✕", 88)
+	btn_cancel = _mk_chip_btn("✕", CHIP_MIN_PX)
 	btn_cancel.name = "CancelButton"
-	btn_cancel.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	btn_cancel.offset_left = 212
-	btn_cancel.offset_top = 52
-	btn_cancel.offset_right = 300
-	btn_cancel.offset_bottom = 140
-	$HUD.add_child(btn_cancel)
 	btn_cancel.pressed.connect(func(): _ui_tap(); _cancel_mode())
-	var btn_fit := _mk_touch_btn("全图", 88)
-	btn_fit.name = "FitCameraButton"
-	btn_fit.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	btn_fit.offset_left = 308
-	btn_fit.offset_top = 52
-	btn_fit.offset_right = 396
-	btn_fit.offset_bottom = 140
-	$HUD.add_child(btn_fit)
-	btn_fit.pressed.connect(func():
+	btn_fit_camera = _mk_chip_btn("全图", CHIP_MIN_PX)
+	btn_fit_camera.name = "FitCameraButton"
+	btn_fit_camera.pressed.connect(func():
 		_ui_tap()
 		if map_view:
 			map_view.reset_camera()
@@ -1323,14 +1343,8 @@ func _on_cell_right_clicked(cell: Vector2i) -> void:
 
 
 func _build_shortcuts_help() -> void:
-	btn_shortcuts_help = _mk_touch_btn("?", 88)
+	btn_shortcuts_help = _mk_chip_btn("?", CHIP_MIN_PX)
 	btn_shortcuts_help.name = "ShortcutsHelpButton"
-	btn_shortcuts_help.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	btn_shortcuts_help.offset_left = 404
-	btn_shortcuts_help.offset_top = 52
-	btn_shortcuts_help.offset_right = 492
-	btn_shortcuts_help.offset_bottom = 140
-	$HUD.add_child(btn_shortcuts_help)
 	btn_shortcuts_help.pressed.connect(func(): _ui_tap(); _toggle_shortcuts_help())
 	shortcuts_help = PanelContainer.new()
 	shortcuts_help.name = "ShortcutsHelp"
@@ -1359,20 +1373,14 @@ func _toggle_shortcuts_help() -> void:
 
 
 func _build_dev_menu() -> void:
-	btn_dev_toggle = _mk_touch_btn("开发", 100)
+	btn_dev_toggle = _mk_chip_btn("开发", 72)
 	btn_dev_toggle.name = "DevMenuToggle"
-	btn_dev_toggle.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	btn_dev_toggle.offset_left = 8
-	btn_dev_toggle.offset_top = 52
-	btn_dev_toggle.offset_right = 108
-	btn_dev_toggle.offset_bottom = 140
-	$HUD.add_child(btn_dev_toggle)
 	dev_menu = VBoxContainer.new()
 	dev_menu.name = "DevMenu"
 	dev_menu.visible = false
 	dev_menu.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	dev_menu.offset_left = 8
-	dev_menu.offset_top = 148
+	dev_menu.offset_top = TOP_BAR_H + CHIP_MIN_PX + 12
 	dev_menu.offset_right = 280
 	dev_menu.offset_bottom = 520
 	dev_menu.add_theme_constant_override("separation", 6)
@@ -1385,11 +1393,12 @@ func _build_dev_menu() -> void:
 	for b in [btn_example, btn_plan_a, btn_plan_b, btn_preview, btn_g2_art, btn_scout_preview]:
 		if b == null:
 			continue
-		b.get_parent().remove_child(b)
+		if b.get_parent():
+			b.get_parent().remove_child(b)
 		dev_menu.add_child(b)
 		b.visible = true
-		b.custom_minimum_size = Vector2(240, TOUCH_MIN_PX)
-		b.add_theme_font_size_override("font_size", BODY_FONT_PX)
+		b.custom_minimum_size = Vector2(240, CHIP_MIN_PX)
+		b.add_theme_font_size_override("font_size", CHIP_FONT_PX)
 	# Plan A/B stay hidden until example toggle.
 	if btn_plan_a:
 		btn_plan_a.visible = false
@@ -1398,28 +1407,269 @@ func _build_dev_menu() -> void:
 
 
 func _apply_touch_sizing() -> void:
-	## Enforce ≥88 design-px touch targets and ≥22 body text.
+	## Primary actions ≥88; body text ≥22. Panel chips stay compact (CHIP_MIN).
 	for n in [label_phase, label_info, label_alert, label_start_reason, label_scout_clock, label_scout_kit]:
 		if n:
 			n.add_theme_font_size_override("font_size", maxi(BODY_FONT_PX, int(n.get_theme_font_size("font_size"))))
-	for b in [btn_start, btn_begin_setup, btn_pause, btn_speed, btn_detonate, btn_restart, btn_rescout, btn_restart_wait]:
+	for b in [btn_thumb_start, btn_thumb_begin, btn_thumb_pause, btn_thumb_speed, btn_thumb_detonate,
+			btn_restart, btn_rescout, btn_pause_resume, btn_pause_restart, btn_pause_confirm]:
 		if b == null:
 			continue
 		var sz: Vector2 = b.custom_minimum_size
 		b.custom_minimum_size = Vector2(maxf(sz.x, TOUCH_MIN_PX), maxf(sz.y, TOUCH_MIN_PX))
 		b.add_theme_font_size_override("font_size", maxi(BODY_FONT_PX, int(b.get_theme_font_size("font_size"))))
 	if trigger_option:
-		trigger_option.custom_minimum_size = Vector2(0, TOUCH_MIN_PX)
-	# Side panels become lighter overlays (map is full-bleed).
-	if setup_panel:
-		setup_panel.offset_left = -300.0
-		setup_panel.offset_bottom = -130.0
-	if scout_panel:
-		scout_panel.offset_left = -300.0
-		scout_panel.offset_bottom = -130.0
-	if wait_panel:
-		wait_panel.offset_left = -300.0
-		wait_panel.offset_bottom = -130.0
+		trigger_option.visible = false
+		trigger_option.custom_minimum_size = Vector2(0, CHIP_MIN_PX)
+
+
+func _opaque_panel_style() -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.07, 0.08, 0.10, 0.96)
+	sb.border_width_left = 1
+	sb.border_color = Color(0.35, 0.40, 0.48, 0.7)
+	sb.content_margin_left = 8
+	sb.content_margin_right = 8
+	sb.content_margin_top = 8
+	sb.content_margin_bottom = 8
+	return sb
+
+
+func _install_hud_layout() -> void:
+	## Container layout: map left; opaque scrollable right column; portraits over map margin.
+	if _hud_layout_ready:
+		return
+	_hud_layout_ready = true
+	# Top bar: phase + info/tool + alert only (already HBox in scene).
+	var top: Control = $HUD/TopBar
+	top.offset_top = 4
+	top.offset_bottom = TOP_BAR_H
+	top.offset_left = 8
+	top.offset_right = -8
+
+	# Utility bar under top bar, over map margin (left of right column).
+	utility_bar = HBoxContainer.new()
+	utility_bar.name = "UtilityBar"
+	utility_bar.add_theme_constant_override("separation", 4)
+	utility_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	$HUD.add_child(utility_bar)
+	for b in [btn_dev_toggle, btn_undo, btn_cancel, btn_fit_camera, btn_shortcuts_help]:
+		if b == null:
+			continue
+		if b.get_parent():
+			b.get_parent().remove_child(b)
+		utility_bar.add_child(b)
+
+	# Right column shell (Control, not PanelContainer — children must not expand width).
+	right_column = Control.new()
+	right_column.name = "RightColumn"
+	right_column.mouse_filter = Control.MOUSE_FILTER_STOP
+	right_column.clip_contents = true
+	$HUD.add_child(right_column)
+	right_column_bg = Panel.new()
+	right_column_bg.name = "RightColumnBg"
+	right_column_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	right_column_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	right_column_bg.add_theme_stylebox_override("panel", _opaque_panel_style())
+	right_column.add_child(right_column_bg)
+	right_column_vbox = VBoxContainer.new()
+	right_column_vbox.name = "RightColumnVBox"
+	right_column_vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	right_column_vbox.offset_left = 8
+	right_column_vbox.offset_top = 8
+	right_column_vbox.offset_right = -8
+	right_column_vbox.offset_bottom = -8
+	right_column_vbox.add_theme_constant_override("separation", 6)
+	right_column.add_child(right_column_vbox)
+	right_scroll = ScrollContainer.new()
+	right_scroll.name = "RightScroll"
+	right_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	right_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	right_scroll.clip_contents = true
+	right_column_vbox.add_child(right_scroll)
+	right_scroll_body = VBoxContainer.new()
+	right_scroll_body.name = "RightScrollBody"
+	right_scroll_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right_scroll_body.add_theme_constant_override("separation", 8)
+	right_scroll.add_child(right_scroll_body)
+
+	# Reparent phase panels into scroll body (containers, no absolute offsets).
+	for p in [scout_panel, setup_panel, wait_panel]:
+		if p == null:
+			continue
+		if p.get_parent():
+			p.get_parent().remove_child(p)
+		right_scroll_body.add_child(p)
+		_clear_control_anchors(p)
+		p.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if p is VBoxContainer:
+			(p as VBoxContainer).add_theme_constant_override("separation", 8)
+
+	# Tool / trigger chips at top of SetupPanel.
+	if setup_panel and tool_bar and tool_bar.get_parent() == null:
+		setup_panel.add_child(tool_bar)
+		setup_panel.move_child(tool_bar, 0)
+	if setup_panel and trigger_chip_row and trigger_chip_row.get_parent() == null:
+		setup_panel.add_child(trigger_chip_row)
+		setup_panel.move_child(trigger_chip_row, 1)
+	# Keep StartButton/StartReason in panel but Start is footer-owned.
+	if btn_start:
+		btn_start.visible = false
+	if trigger_option:
+		trigger_option.visible = false
+
+	# Fixed primary action footer (bottom of right column).
+	action_footer = HBoxContainer.new()
+	action_footer.name = "ActionFooter"
+	action_footer.add_theme_constant_override("separation", 6)
+	action_footer.custom_minimum_size = Vector2(0, TOUCH_MIN_PX + 4)
+	action_footer.size_flags_vertical = Control.SIZE_SHRINK_END
+	action_footer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right_column_vbox.add_child(action_footer)
+	if thumb_bar:
+		if thumb_bar.get_parent():
+			thumb_bar.get_parent().remove_child(thumb_bar)
+		action_footer.add_child(thumb_bar)
+		thumb_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	# Portrait strip over darkened map margin (bottom-left).
+	portrait_backdrop = PanelContainer.new()
+	portrait_backdrop.name = "PortraitBackdrop"
+	portrait_backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
+	var pstyle := StyleBoxFlat.new()
+	pstyle.bg_color = Color(0.05, 0.06, 0.08, 0.82)
+	pstyle.content_margin_left = 6
+	pstyle.content_margin_right = 6
+	pstyle.content_margin_top = 4
+	pstyle.content_margin_bottom = 4
+	portrait_backdrop.add_theme_stylebox_override("panel", pstyle)
+	$HUD.add_child(portrait_backdrop)
+	if portrait_strip:
+		if portrait_strip.get_parent():
+			portrait_strip.get_parent().remove_child(portrait_strip)
+		_clear_control_anchors(portrait_strip)
+		portrait_backdrop.add_child(portrait_strip)
+
+	# Result stays centered overlay; raise above column.
+	if result_panel:
+		$HUD.move_child(result_panel, -1)
+	if pause_menu:
+		$HUD.move_child(pause_menu, -1)
+	if shortcuts_help:
+		$HUD.move_child(shortcuts_help, -1)
+	if info_card:
+		$HUD.move_child(info_card, -1)
+	if dev_menu:
+		$HUD.move_child(dev_menu, -1)
+
+
+func _clear_control_anchors(c: Control) -> void:
+	c.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	c.anchor_left = 0
+	c.anchor_top = 0
+	c.anchor_right = 0
+	c.anchor_bottom = 0
+	c.offset_left = 0
+	c.offset_top = 0
+	c.offset_right = 0
+	c.offset_bottom = 0
+	c.grow_horizontal = Control.GROW_DIRECTION_END
+	c.grow_vertical = Control.GROW_DIRECTION_END
+
+
+func _view_size() -> Vector2:
+	## Prefer explicit override (headless window_set_size is often a no-op).
+	if layout_size_override.x > 8.0 and layout_size_override.y > 8.0:
+		return layout_size_override
+	if size.x > 8.0 and size.y > 8.0:
+		return size
+	var win := DisplayServer.window_get_size()
+	if win.x > 8 and win.y > 8:
+		return Vector2(win)
+	return Vector2(1280, 720)
+
+
+func apply_layout_size(w: int, h: int, resize_window: bool = false) -> void:
+	## Force chrome geometry for a logical viewport (tests + capture).
+	## Default: do not resize the OS window — keep a large framebuffer and crop.
+	layout_size_override = Vector2(w, h)
+	if resize_window:
+		DisplayServer.window_set_size(Vector2i(w, h))
+		var win := get_window()
+		if win:
+			win.size = Vector2i(w, h)
+	_relayout_hud()
+
+
+func _right_column_width() -> float:
+	var w := _view_size().x
+	## On very short phone widths keep a usable column without eating the whole map.
+	var frac_w := w * RIGHT_COL_FRAC
+	if w <= 900.0:
+		return clampf(maxf(RIGHT_COL_MIN_PX, frac_w), 200.0, w * 0.36)
+	return maxf(RIGHT_COL_MIN_PX, frac_w)
+
+
+func _relayout_hud() -> void:
+	if not _hud_layout_ready or map_host == null or right_column == null:
+		return
+	var view := _view_size()
+	var view_w := view.x
+	var view_h := view.y
+	var col_w := _right_column_width()
+	var util_h := CHIP_MIN_PX + 4
+	var map_top := TOP_BAR_H + util_h + 6
+	var map_bottom := view_h - PORTRAIT_H - 4
+	var map_right := view_w - col_w - 4
+	## Absolute offsets from logical view size (works even when window buffer is larger).
+	_place_rect(map_host, 4, map_top, map_right, map_bottom)
+	_place_rect(right_column, view_w - col_w, TOP_BAR_H + 2, view_w - 2, view_h - 2)
+	if right_scroll_body:
+		right_scroll_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for p in [setup_panel, scout_panel, wait_panel]:
+		if p:
+			p.custom_minimum_size = Vector2(0, 0)
+
+	var top: Control = $HUD/TopBar
+	if top:
+		_place_rect(top, 8, 4, view_w - 8, TOP_BAR_H)
+
+	if utility_bar:
+		_place_rect(utility_bar, 8, TOP_BAR_H + 2, minf(420, map_right - 8), TOP_BAR_H + 2 + CHIP_MIN_PX)
+
+	if portrait_backdrop:
+		_place_rect(portrait_backdrop, 4, view_h - PORTRAIT_H, minf(420, map_right - 4), view_h - 4)
+
+	if map_view:
+		map_view._fit_cell_px()
+		map_view.queue_redraw()
+
+
+func _place_rect(c: Control, left: float, top: float, right: float, bottom: float) -> void:
+	c.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	c.anchor_left = 0
+	c.anchor_top = 0
+	c.anchor_right = 0
+	c.anchor_bottom = 0
+	c.offset_left = left
+	c.offset_top = top
+	c.offset_right = right
+	c.offset_bottom = bottom
+	c.grow_horizontal = Control.GROW_DIRECTION_END
+	c.grow_vertical = Control.GROW_DIRECTION_END
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		_relayout_hud()
+
+
+func map_viewport_rect() -> Rect2:
+	## Screen-space rect of the map host (for layout tests).
+	if map_host == null:
+		return Rect2()
+	return map_host.get_global_rect()
 
 
 func _refresh_thumb_visibility() -> void:
@@ -2207,8 +2457,8 @@ func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, c
 		label_info.text = "转向已取消"
 		_push_map_snapshot()
 		return
-	# ONE turn order on release.
-	sim.request_operator_facing(op_id, preview_deg)
+	# ONE turn order on release. Integer degrees avoid ceil(90/45) float edge → 3 steps.
+	sim.request_operator_facing(op_id, roundf(preview_deg))
 	_facing_submit_count += 1
 	_facing_before_aim = NAN
 	var op := _sim_op(op_id)
@@ -2354,13 +2604,10 @@ func _build_portrait_strip() -> void:
 		return
 	portrait_strip = HBoxContainer.new()
 	portrait_strip.name = "PortraitStrip"
-	portrait_strip.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
-	portrait_strip.offset_left = 8
-	portrait_strip.offset_top = -120
-	portrait_strip.offset_right = 420
-	portrait_strip.offset_bottom = -8
-	portrait_strip.add_theme_constant_override("separation", 8)
+	portrait_strip.add_theme_constant_override("separation", 6)
 	portrait_strip.mouse_filter = Control.MOUSE_FILTER_STOP
+	portrait_strip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# Parent becomes PortraitBackdrop in `_install_hud_layout`.
 	$HUD.add_child(portrait_strip)
 	_refresh_portrait_strip()
 
@@ -2384,7 +2631,7 @@ func _refresh_portrait_strip() -> void:
 		var oid := str(op.get("id", ""))
 		var btn := Button.new()
 		btn.name = "Portrait_%s" % oid
-		btn.custom_minimum_size = Vector2(96, 96)
+		btn.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
 		btn.toggle_mode = true
 		btn.button_pressed = oid == selected_op_id
 		var dname := str(op_display_names.get(oid, op.get("display_name", "%d号" % i)))
@@ -2406,7 +2653,7 @@ func _refresh_portrait_strip() -> void:
 						status = "\n禁火"
 					break
 		btn.text = "%s\n%s\nHP%d 弹%d%s" % [dname, wlab, hp_n, ammo_n, status]
-		btn.add_theme_font_size_override("font_size", 14)
+		btn.add_theme_font_size_override("font_size", 12)
 		if font_res:
 			btn.add_theme_font_override("font", font_res)
 		if oid == selected_op_id:

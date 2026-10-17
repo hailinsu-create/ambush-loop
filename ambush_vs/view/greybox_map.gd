@@ -502,13 +502,17 @@ func _draw_supply_state_badge(sid: String, x: int, y: int) -> void:
 
 
 func _draw_legal_cells() -> void:
+	## Subtle fill for valid tool cells; outline only when few cells (avoid yard-grid look).
 	if legal_cells.is_empty():
 		return
+	var outline := legal_cells.size() <= 12
 	for c in legal_cells:
 		var cell: Vector2i = c
 		var p := Vector2(cell.x * cell_px, (grid_h - 1 - cell.y) * cell_px)
-		draw_rect(Rect2(p, Vector2(cell_px, cell_px)), Color(0.25, 0.85, 0.40, 0.18), true)
-		draw_rect(Rect2(p + Vector2(1, 1), Vector2(cell_px - 2, cell_px - 2)), Color(0.35, 0.95, 0.50, 0.35), false, 1.5)
+		var r := Rect2(p + Vector2(2, 2), Vector2(cell_px - 4, cell_px - 4))
+		draw_rect(r, Color(0.55, 0.82, 0.60, 0.055), true)
+		if outline:
+			draw_rect(r, Color(0.65, 0.88, 0.70, 0.22), false, 1.0)
 
 
 func _draw_place_ghost() -> void:
