@@ -179,6 +179,9 @@ var _hover_info_ms: int = 0
 var _hover_info_armed: bool = false
 const HOVER_INFO_MS := 300
 var info_now_ms_fn: Callable = Callable()
+## PLAY-UX PR-10: shortcuts help overlay.
+var shortcuts_help: PanelContainer = null
+var btn_shortcuts_help: Button = null
 
 
 func _ready() -> void:
@@ -206,12 +209,14 @@ func _ready() -> void:
 	map_view.ground_drag_ended.connect(_on_ground_drag_ended)
 	map_view.cell_hovered.connect(_on_cell_hovered)
 	map_view.cell_long_pressed.connect(_on_cell_long_pressed)
+	map_view.cell_right_clicked.connect(_on_cell_right_clicked)
 	map_view.unit_hit_radius_cells = 0.8
 	_build_portrait_strip()
 	_build_setup_tool_bars()
 	_build_touch_hud()
 	_build_undo_cancel_buttons()
 	_build_info_card()
+	_build_shortcuts_help()
 	_strip_all_tooltips()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
@@ -1158,11 +1163,65 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var k := event as InputEventKey
 		if k.keycode == KEY_ESCAPE or k.keycode == KEY_BACK:
-			_cancel_mode()
+			if shortcuts_help and shortcuts_help.visible:
+				shortcuts_help.visible = false
+			else:
+				_cancel_mode()
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode == KEY_Z and k.ctrl_pressed:
 			_undo()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_SPACE:
+			_toggle_pause()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_EQUAL or k.keycode == KEY_KP_ADD or k.keycode == KEY_PLUS:
+			_cycle_speed()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_MINUS or k.keycode == KEY_KP_SUBTRACT:
+			speed_mul = 2.0
+			_cycle_speed() ## toggles back toward 1×
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_TAB:
+			_cycle_setup_tool()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_M:
+			if ui_phase == UiPhase.SETUP:
+				_on_tool_chip("mine")
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_L:
+			if ui_phase == UiPhase.SETUP:
+				_on_tool_chip("trigger")
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_SLASH and k.shift_pressed: ## ?
+			_toggle_shortcuts_help()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode in [KEY_1, KEY_2, KEY_3, KEY_KP_1, KEY_KP_2, KEY_KP_3]:
+			var idx := 0
+			match k.keycode:
+				KEY_1, KEY_KP_1:
+					idx = 0
+				KEY_2, KEY_KP_2:
+					idx = 1
+				KEY_3, KEY_KP_3:
+					idx = 2
+			_select_op_by_index(idx)
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_Q:
+			_nudge_facing(-15.0)
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_E:
+			_nudge_facing(15.0)
 			get_viewport().set_input_as_handled()
 			return
 		# PR-8: WASD pan.
@@ -1181,6 +1240,122 @@ func _unhandled_input(event: InputEvent) -> void:
 			map_view.queue_redraw()
 			get_viewport().set_input_as_handled()
 			return
+
+
+func _select_op_by_index(idx: int) -> void:
+	var ops: Array = []
+	if ui_phase == UiPhase.SCOUT and scout:
+		ops = scout.operators
+	elif ui_phase == UiPhase.WAIT and sim:
+		ops = sim.operators
+	else:
+		ops = plan.get("operators", [])
+	if idx < 0 or idx >= ops.size():
+		return
+	var oid := str(ops[idx]["id"])
+	selected_op_id = oid
+	if map_view:
+		map_view.selected_op_id = oid
+	_on_unit_selected(oid)
+
+
+func _nudge_facing(delta_deg: float) -> void:
+	if selected_op_id == "":
+		return
+	if ui_phase == UiPhase.SETUP:
+		_push_undo()
+		for op in plan.get("operators", []):
+			if str(op["id"]) == selected_op_id:
+				op["facing_deg"] = float(op.get("facing_deg", 0.0)) + delta_deg
+				break
+		_push_map_snapshot()
+		return
+	if ui_phase == UiPhase.WAIT and sim != null and not sim.plan_locked:
+		var op := _sim_op(selected_op_id)
+		var cur := float(op.get("facing_deg", 0.0))
+		sim.request_operator_facing(selected_op_id, cur + delta_deg)
+		_facing_submit_count += 1
+		_refresh_portrait_strip()
+		_push_map_snapshot()
+
+
+func _cycle_setup_tool() -> void:
+	if ui_phase != UiPhase.SETUP:
+		return
+	var order := ["op", "mine", "trigger"]
+	var i := order.find(setup_tool)
+	_on_tool_chip(order[(i + 1) % order.size()])
+
+
+func _on_cell_right_clicked(cell: Vector2i) -> void:
+	## Desktop: right-click sets facing toward cell (or cancel if no selection).
+	if selected_op_id == "":
+		_cancel_mode()
+		return
+	var origin := Vector2.ZERO
+	if ui_phase == UiPhase.SETUP:
+		for op in plan.get("operators", []):
+			if str(op["id"]) == selected_op_id:
+				origin = Vector2(float(op["x"]), float(op["y"]))
+				break
+		var dir := Vector2(float(cell.x) - origin.x, float(cell.y) - origin.y)
+		if dir.length() < 0.01:
+			return
+		_push_undo()
+		var facing := rad_to_deg(atan2(dir.y, dir.x))
+		for op2 in plan.get("operators", []):
+			if str(op2["id"]) == selected_op_id:
+				op2["facing_deg"] = facing
+				break
+		label_info.text = "朝向 %.0f°" % facing
+		_push_map_snapshot()
+		return
+	if ui_phase == UiPhase.WAIT and sim != null and not sim.plan_locked:
+		var opw := _sim_op(selected_op_id)
+		origin = Vector2(float(opw.get("x", 0)), float(opw.get("y", 0)))
+		var dirw := Vector2(float(cell.x) - origin.x, float(cell.y) - origin.y)
+		if dirw.length() < 0.01:
+			return
+		var facing_w := rad_to_deg(atan2(dirw.y, dirw.x))
+		sim.request_operator_facing(selected_op_id, facing_w)
+		_facing_submit_count += 1
+		_push_map_snapshot()
+
+
+func _build_shortcuts_help() -> void:
+	btn_shortcuts_help = _mk_touch_btn("?", 88)
+	btn_shortcuts_help.name = "ShortcutsHelpButton"
+	btn_shortcuts_help.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	btn_shortcuts_help.offset_left = 404
+	btn_shortcuts_help.offset_top = 52
+	btn_shortcuts_help.offset_right = 492
+	btn_shortcuts_help.offset_bottom = 140
+	$HUD.add_child(btn_shortcuts_help)
+	btn_shortcuts_help.pressed.connect(func(): _ui_tap(); _toggle_shortcuts_help())
+	shortcuts_help = PanelContainer.new()
+	shortcuts_help.name = "ShortcutsHelp"
+	shortcuts_help.visible = false
+	shortcuts_help.set_anchors_preset(Control.PRESET_CENTER)
+	shortcuts_help.offset_left = -260
+	shortcuts_help.offset_top = -200
+	shortcuts_help.offset_right = 260
+	shortcuts_help.offset_bottom = 200
+	var lab := Label.new()
+	lab.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	lab.text = "快捷键\n1/2/3 选人\nQ/E 旋转 ±15°\n右键 朝向\n空格 暂停\n+/- 倍速\nTab/M/L 工具\nCtrl+Z 撤销\nEsc 取消\nWASD 平移\n滚轮 缩放"
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 16)
+	margin.add_theme_constant_override("margin_right", 16)
+	margin.add_theme_constant_override("margin_top", 12)
+	margin.add_theme_constant_override("margin_bottom", 12)
+	shortcuts_help.add_child(margin)
+	margin.add_child(lab)
+	$HUD.add_child(shortcuts_help)
+
+
+func _toggle_shortcuts_help() -> void:
+	if shortcuts_help:
+		shortcuts_help.visible = not shortcuts_help.visible
 
 
 func _build_dev_menu() -> void:
@@ -2221,7 +2396,16 @@ func _refresh_portrait_strip() -> void:
 				if str(sop.get("id", "")) == oid:
 					hp_n = int(sop.get("hp", hp_n))
 					break
-		btn.text = "%s\n%s\nHP%d 弹%d" % [dname, wlab, hp_n, ammo_n]
+		var status := ""
+		if ui_phase == UiPhase.WAIT and sim != null:
+			for sop in sim.operators:
+				if str(sop.get("id", "")) == oid:
+					if int(sop.get("turn_ticks_left", 0)) > 0:
+						status = "\n禁火"
+					elif not bool(sop.get("can_fire", true)):
+						status = "\n禁火"
+					break
+		btn.text = "%s\n%s\nHP%d 弹%d%s" % [dname, wlab, hp_n, ammo_n, status]
 		btn.add_theme_font_size_override("font_size", 14)
 		if font_res:
 			btn.add_theme_font_override("font", font_res)

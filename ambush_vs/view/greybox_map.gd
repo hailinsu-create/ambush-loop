@@ -23,6 +23,7 @@ signal ground_drag_started(start_cell: Vector2i, pos: Vector2)
 signal ground_drag_moved(cell: Vector2i, start_cell: Vector2i, pos: Vector2)
 signal ground_drag_ended(end_cell: Vector2i, start_cell: Vector2i, cancelled: bool)
 signal cell_hovered(cell: Vector2i) ## desktop hover (no button)
+signal cell_right_clicked(cell: Vector2i) ## desktop right-click aim
 
 enum ArtMode { G3, G2, G1 }
 
@@ -2084,6 +2085,11 @@ func _draw_units() -> void:
 			draw_arc(hp, cell_px * 0.95, 0, TAU, 36, Color(1.0, 0.85, 0.2, 0.55 * pulse), rw * 0.6)
 		else:
 			draw_arc(hp, cell_px * 0.72, 0, TAU, 24, Color(1.0, 0.88, 0.25, 0.35), unsel_ring_width)
+		# PR-10: see_first_enemy observer eye.
+		if str(trigger.get("type", "")) == "see_first_enemy" and str(trigger.get("bind", "")) == str(op["id"]):
+			draw_circle(hp + Vector2(0, -cell_px * 0.75), cell_px * 0.18, Color(0.3, 0.85, 1.0, 0.95))
+			draw_circle(hp + Vector2(0, -cell_px * 0.75), cell_px * 0.08, Color(0.05, 0.1, 0.15, 0.95))
+			draw_string(ThemeDB.fallback_font, hp + Vector2(-8, -cell_px * 1.05), "眼", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.6, 0.95, 1.0, 0.95))
 		if high:
 			draw_arc(hp, cell_px * (1.05 if is_sel else 0.88), 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.7 if is_sel else 0.35), 1.6)
 		# PLAY-6 wounded: orange ring + label.
@@ -2179,6 +2185,9 @@ func _handle_camera_input(event: InputEvent) -> bool:
 		return true
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
+		if mb.button_index == MOUSE_BUTTON_RIGHT and mb.pressed:
+			cell_right_clicked.emit(screen_to_cell(mb.position))
+			return true
 		if mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
 			zoom_at(mb.position, 1.1)
 			return true

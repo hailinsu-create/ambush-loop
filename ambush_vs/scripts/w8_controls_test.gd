@@ -32,6 +32,7 @@ func _run_all() -> void:
 	await _test_undo_cancel()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
+	await _test_desktop_shortcuts()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -708,4 +709,56 @@ func _test_info_card() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "info card scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _key(code: Key, ctrl: bool = false, shift: bool = false) -> InputEventKey:
+	var e := InputEventKey.new()
+	e.keycode = code
+	e.pressed = true
+	e.ctrl_pressed = ctrl
+	e.shift_pressed = shift
+	return e
+
+
+func _test_desktop_shortcuts() -> void:
+	## PR-10: 1-3 select, Q/E rotate, Space pause, Tab/M tool, right-click aim, help.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "shortcuts scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.plan.is_empty():
+			continue
+		_assert(scene.shortcuts_help != null and scene.btn_shortcuts_help != null, "shortcuts help UI")
+		var ops: Array = scene.plan.get("operators", [])
+		scene._unhandled_input(_key(KEY_2))
+		_assert(str(scene.selected_op_id) == str(ops[1]["id"]), "key 2 selects op1")
+		var f0 := float(ops[1]["facing_deg"])
+		scene._unhandled_input(_key(KEY_E))
+		_assert(absf(float(ops[1]["facing_deg"]) - (f0 + 15.0)) < 0.01, "E rotates +15")
+		scene._unhandled_input(_key(KEY_Q))
+		_assert(absf(float(ops[1]["facing_deg"]) - f0) < 0.01, "Q rotates -15")
+		scene.paused = false
+		scene._unhandled_input(_key(KEY_SPACE))
+		_assert(scene.paused == true, "Space pauses")
+		scene._unhandled_input(_key(KEY_M))
+		_assert(str(scene.setup_tool) == "mine", "M selects mine tool")
+		scene._unhandled_input(_key(KEY_TAB))
+		_assert(str(scene.setup_tool) == "trigger", "Tab cycles tool")
+		# Right-click aim toward (10,7).
+		scene._on_tool_chip("op")
+		scene.selected_op_id = str(ops[1]["id"])
+		var ox := float(ops[1]["x"])
+		var oy := float(ops[1]["y"])
+		scene._on_cell_right_clicked(Vector2i(10, 7))
+		var want := rad_to_deg(atan2(7.0 - oy, 10.0 - ox))
+		_assert(absf(float(ops[1]["facing_deg"]) - want) < 1.0, "right-click aim err=%s" % absf(float(ops[1]["facing_deg"]) - want))
+		scene._toggle_shortcuts_help()
+		_assert(scene.shortcuts_help.visible, "help overlay opens")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "shortcuts scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
