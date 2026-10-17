@@ -1609,7 +1609,11 @@ func _auto_run_plan(which: String) -> void:
 	var captured_reaim := false
 	var captured_cover_fire := false
 	var captured_wounded := false
-	var force_leak := str(OS.get_environment("AMBUSH_GREYBOX_FORCE_LEAK")).to_lower() in ["1", "true"]
+	## Capture-only helper; never arm during normal AUTO tests (require CAPTURE dir).
+	var force_leak := (
+		_capture_path != ""
+		and str(OS.get_environment("AMBUSH_GREYBOX_FORCE_LEAK")).to_lower() in ["1", "true"]
+	)
 	var leak_armed := false
 	while sim != null and not sim.is_finished():
 		sim.advance_one_tick()
