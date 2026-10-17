@@ -2,7 +2,8 @@
 
 | 字段 | 值 |
 |------|-----|
-| 状态 | **纸面 v1.1（对齐 ADR v1）** |
+| 状态 | **历史（由 [v1.2](yard_paper_v1_2.md) 替代）** |
+| 后继 | [yard_paper_v1_2.md](yard_paper_v1_2.md) |
 | 日期 | 2026-10-17 |
 | 前版 | [yard_paper_v1.md](yard_paper_v1.md)（保留历史） |
 | 依据 | TERMS_AND_TICK_ORDER、ADR-TRIGGER/ALERT/HEIGHT v1、Opus 复核 F1/F2/F3/M7 |

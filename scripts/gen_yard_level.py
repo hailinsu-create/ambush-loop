@@ -69,14 +69,36 @@ def main() -> None:
             cell.pop("tier", None)
             cell.pop("cover", None)
             break
-    # Road-side `w` at (12,9)/(12,10) blocks MP@(16,8)→column LOS; paper B still
-    # claims standard ambush. Clear cover on those two cells (see W2_DISCREPANCIES).
+    # v1.2: road-side (12,9)/(12,10) stay clear for B MP→column LOS.
     for cell in cells:
         if (cell["x"], cell["y"]) in ((12, 9), (12, 10)):
             cell.pop("cover", None)
+    # v1.2 H-01: low-cover island west of main road (x=7–9) + north strip y=11–12.
+    # Stays off MP@(16,8)→column corridor (x=12–15, y=7–10). Target: in the
+    # (5,9)∩(6,9) cone, high blocked < 50% of ground blocked (ADR-HEIGHT).
+    for y in range(7, 13):
+        for x in range(7, 10):
+            for cell in cells:
+                if (
+                    cell["x"] == x
+                    and cell["y"] == y
+                    and cell.get("kind") in ("ground", "road", "alley")
+                ):
+                    cell["cover"] = {"height": "low", "blocks_los_same_level": True}
+                    break
+    for y in (11, 12):
+        for x in range(10, 16):
+            for cell in cells:
+                if (
+                    cell["x"] == x
+                    and cell["y"] == y
+                    and cell.get("kind") in ("ground", "road", "alley")
+                ):
+                    cell["cover"] = {"height": "low", "blocks_los_same_level": True}
+                    break
     level = {
         "id": "yard",
-        "version": 2,
+        "version": 3,
         "title": "院子",
         "night": True,
         "ambush_targets": ["E1", "E2", "E3", "E4", "F1", "F2"],
