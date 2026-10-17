@@ -388,6 +388,12 @@ func _push_map_snapshot() -> void:
 func _auto_run_plan_a() -> void:
 	## Headless: load A, optionally capture, run to result via sim ticks (paused wall-clock).
 	_load_preset("A")
+	# Wait for layout/resize so map cell_px fits and first draw lands.
+	for _i in range(8):
+		await get_tree().process_frame
+	map_view._fit_cell_px()
+	_push_map_snapshot()
+	await get_tree().process_frame
 	await get_tree().process_frame
 	_try_capture("setup")
 	_start_wait()
@@ -397,9 +403,11 @@ func _auto_run_plan_a() -> void:
 		if sim.tick == 140:
 			_push_map_snapshot()
 			await get_tree().process_frame
+			await get_tree().process_frame
 			_try_capture("wait")
 	_push_map_snapshot()
 	_show_result()
+	await get_tree().process_frame
 	await get_tree().process_frame
 	_try_capture("result")
 	print(

@@ -56,8 +56,26 @@ func configure(level_data: Dictionary, sim_grid, weapons_table: Dictionary) -> v
 	grid_h = int(level.get("grid", {}).get("height", 16))
 	night = bool(level.get("night", true))
 	_collect_threat_slots()
-	custom_minimum_size = Vector2(grid_w * cell_px, grid_h * cell_px)
+	_fit_cell_px()
 	queue_redraw()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		_fit_cell_px()
+		queue_redraw()
+
+
+func _fit_cell_px() -> void:
+	if grid_w <= 0 or grid_h <= 0:
+		return
+	var avail := size
+	if avail.x < 8.0 or avail.y < 8.0:
+		avail = get_parent_area_size() if get_parent() else Vector2(960, 640)
+	if avail.x < 8.0 or avail.y < 8.0:
+		avail = Vector2(960, 640)
+	cell_px = minf(avail.x / float(grid_w), avail.y / float(grid_h))
+	custom_minimum_size = Vector2(grid_w * cell_px, grid_h * cell_px)
 
 
 func apply_snapshot(snap: Dictionary) -> void:
