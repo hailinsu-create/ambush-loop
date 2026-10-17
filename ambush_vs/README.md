@@ -6,6 +6,8 @@ W2：`sim/` 纯 RefCounted 一夜模拟（无渲染）。规则见 `docs/TERMS_A
 
 W3：院子灰盒可玩视图（`scenes/greybox.tscn`）+ G1 可读资产（`assets/g1/`）。视图只读 sim；金标结果不得因视图改变。
 
+Web（分支 `vs/web`）：export preset **Web**（单线程、adaptive canvas）→ `build/web/greybox/`；GitHub Pages 预期地址 `https://hailinsu-create.github.io/ambush-loop/greybox/`（见 `.cursor/docs/VS_WEB_GREYBOX_PAGES_20261017.md`）。构建走 CI，不提交 `build/`。
+
 ## 隔离测试
 
 ```bash
