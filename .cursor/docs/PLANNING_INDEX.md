@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS G2 资产批 2026-10-17](VS_G2_ASSETS_20261017.md) | **当前 VS 美术切片**：分支 `vs/g2`（自 `vs/web` @ 8ad7068）程序生成院子/五武器/SFX，灰盒默认 G2 美术+警报音接线；PR → `vs/web`。所有者覆盖 G2 真机门禁。**不合并 main / 不动 PR #54/#55 merges**。 |
+| [VS G3 高细节美术 2026-10-17](VS_G3_ART_20261017.md) | **当前 VS 美术切片**：分支 `vs/g3`（自 `vs/g2` @ a18ab4f）项目自有高细节源图 + `build_g3_assets.py`；灰盒「美术」G3/G2/G1；PR → `vs/g2`。**不合并 main**。 |
+| [VS G2 资产批 2026-10-17](VS_G2_ASSETS_20261017.md) | G2 程序生成院子/五武器/SFX；已被 G3 批作为可切换回退保留。PR #56 → `vs/web`。 |
 | [VS Web greybox Pages 2026-10-17](VS_WEB_GREYBOX_PAGES_20261017.md) | **Web 试玩切片**：分支 `vs/web`（自 `vs/core` @ fa6bd08）导出灰盒到 GitHub Pages `/greybox/`。本地导出+Chromium smoke 已过；Pages API 启用被拒，待所有者打开 Actions Pages + `vs/web` 环境分支。**不合并 main / 不动 PR #54**。 |
 | [VS W2 模拟核心 v0 2026-10-17](VS_W2_SIM_V0_20261017.md) | **当前 VS 执行入口**：`ambush_vs/sim/` headless 一夜模拟；院子纸面 **v1.2**；A/B 金标；隔离测试。在 `vs/core` / PR #54，**未合入 main**。 |
 | [VS ADR v1 同步 2026-10-17](VS_ADR_V1_SYNC_20261017.md) | VS 规则文档：TERMS + 三 ADR 已采纳 v1 + 院子纸面 v1.1 + 资产生成门禁。已被 W2 实现消费。 |

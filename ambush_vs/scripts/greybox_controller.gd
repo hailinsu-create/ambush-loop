@@ -12,6 +12,7 @@ const SimGeom := preload("res://sim/geom.gd")
 const GreyboxMapScript := preload("res://view/greybox_map.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
 const G2SfxPlayerScript := preload("res://view/g2_sfx_player.gd")
+const G3AssetsScript := preload("res://view/g3_assets.gd")
 
 enum UiPhase { SETUP, WAIT, RESULT }
 
@@ -31,7 +32,8 @@ var selected_op_id: String = ""
 var last_summary: Dictionary = {}
 var _headless_auto: bool = false
 var _capture_path: String = ""
-var use_g2_art: bool = true
+var use_g2_art: bool = false
+var art_mode_name: String = "G3"
 var _last_alert: String = "quiet"
 var _detonate_sfx_played: bool = false
 var g2_assets = null
@@ -70,7 +72,8 @@ func _ready() -> void:
 	weapons = SimWeapons.load_csv()
 	grid = SimLevelLoader.build_grid(level)
 	map_view.configure(level, grid, weapons)
-	map_view.set_use_g2_art(use_g2_art)
+	map_view.set_art_mode(map_view.ArtMode.G3)
+	art_mode_name = "G3"
 	map_view.cell_tapped.connect(_on_cell_tapped)
 	map_view.cell_dragged.connect(_on_cell_dragged)
 	map_view.unit_selected.connect(_on_unit_selected)
@@ -85,8 +88,9 @@ func _ready() -> void:
 	btn_restart.pressed.connect(func(): _ui_tap(); _restart())
 	btn_restart_wait.pressed.connect(func(): _ui_tap(); _restart())
 	if btn_g2_art:
-		btn_g2_art.pressed.connect(_toggle_g2_art)
-		_refresh_g2_button()
+		btn_g2_art.pressed.connect(_cycle_art)
+		_refresh_art_button()
+	_setup_weapon_icons()
 
 	_fill_trigger_options()
 	_load_preset("A")
@@ -95,11 +99,15 @@ func _ready() -> void:
 	# Headless automation hooks (W3 test / PNG capture).
 	_headless_auto = str(OS.get_environment("AMBUSH_GREYBOX_AUTO")).to_lower() in ["1", "true", "a"]
 	_capture_path = str(OS.get_environment("AMBUSH_GREYBOX_CAPTURE"))
-	var g2_env := str(OS.get_environment("AMBUSH_GREYBOX_G2")).to_lower()
-	if g2_env in ["0", "false", "off"]:
-		use_g2_art = false
-		map_view.set_use_g2_art(false)
-		_refresh_g2_button()
+	var art_env := str(OS.get_environment("AMBUSH_GREYBOX_ART")).to_lower()
+	if art_env in ["g1", "1"]:
+		map_view.set_art_mode(map_view.ArtMode.G1)
+		art_mode_name = "G1"
+		_refresh_art_button()
+	elif art_env in ["g2", "2"]:
+		map_view.set_art_mode(map_view.ArtMode.G2)
+		art_mode_name = "G2"
+		_refresh_art_button()
 	if _headless_auto:
 		call_deferred("_auto_run_plan_a")
 
@@ -122,18 +130,34 @@ func _ui_tap() -> void:
 		sfx.play("ui_tap", -8.0)
 
 
-func _toggle_g2_art() -> void:
+func _cycle_art() -> void:
 	_ui_tap()
-	use_g2_art = not use_g2_art
-	map_view.set_use_g2_art(use_g2_art)
-	_refresh_g2_button()
-	label_info.text = "G2 美术：%s（G1 锥/扇/标记仍叠加）" % ("开" if use_g2_art else "关")
+	var mode = map_view.cycle_art_mode()
+	art_mode_name = map_view.art_mode_label()
+	_refresh_art_button()
+	label_info.text = "美术：%s（G1 锥/扇/标记仍叠加）" % art_mode_name
 
 
-func _refresh_g2_button() -> void:
+func _refresh_art_button() -> void:
 	if btn_g2_art == null:
 		return
-	btn_g2_art.text = "G2 美术：开" if use_g2_art else "G2 美术：关"
+	btn_g2_art.text = "美术：%s" % art_mode_name
+
+
+func _setup_weapon_icons() -> void:
+	## Show G3 weapon collectible icons in setup panel (mapped to weapons.csv ids).
+	var host := setup_panel.get_node_or_null("WeaponIcons")
+	if host == null:
+		return
+	var g3a = G3AssetsScript.new()
+	g3a.load_all()
+	for wid in ["kar98k", "mp40", "mg42", "grenade", "mine"]:
+		var tr := host.get_node_or_null(wid)
+		if tr == null:
+			continue
+		var tex: Texture2D = g3a.weapon_icons.get(wid, null)
+		if tex:
+			tr.texture = tex
 
 
 func _fill_trigger_options() -> void:

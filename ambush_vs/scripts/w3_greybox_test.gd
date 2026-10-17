@@ -10,6 +10,7 @@ const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
 const G1AssetsScript := preload("res://view/g1_assets.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
+const G3AssetsScript := preload("res://view/g3_assets.gd")
 
 var _failed := 0
 var _passed := 0
@@ -27,6 +28,7 @@ func _run_all() -> void:
 	_test_view_snapshot_does_not_mutate_sim()
 	_test_g1_assets_load()
 	_test_g2_assets_load()
+	_test_g3_assets_load()
 	await _test_greybox_scene_boots()
 	print("W3_GREYBOX_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -104,6 +106,21 @@ func _test_g2_assets_load() -> void:
 			missing.append(spath)
 	_assert(missing.is_empty(), "g2 all referenced paths load missing=%s" % str(missing))
 	_assert(a.weapon_icons.size() == 5 and a.weapon_units.size() == 5, "g2 five weapons icons+units")
+
+
+func _test_g3_assets_load() -> void:
+	## All referenced G3 WebP paths must load (high-detail art batch).
+	var a = G3AssetsScript.new()
+	a.load_all()
+	_assert(a.all_textures_ok(), "g3 textures ok")
+	var missing: Array = []
+	for path in G3AssetsScript.referenced_texture_paths():
+		if load(path) as Texture2D == null:
+			missing.append(path)
+	_assert(missing.is_empty(), "g3 all referenced paths load missing=%s" % str(missing))
+	_assert(a.weapon_icons.size() == 5, "g3 five weapon icons")
+	_assert(a.friendly_unit_for_weapon("mg42") != null, "g3 friendly mg42 unit")
+	_assert(a.units.get("enemy_officer") != null, "g3 enemy officer")
 
 
 func _test_greybox_scene_boots() -> void:
