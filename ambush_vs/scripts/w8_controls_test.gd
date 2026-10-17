@@ -1047,6 +1047,9 @@ func _test_phase_camera_frames_content() -> void:
 				var tag := "%s@%dx%d" % [phase_name, size_pair.x, size_pair.y]
 				var map = scene.map_view
 				_assert(map.cell_px > 0.0, "cell_px>0 %s" % tag)
+				if size_pair.y < 500:
+					_assert(scene._portrait_strip_height() <= 56.0 + 1e-3,
+						"phone portrait strip ≤56px got=%s %s" % [scene._portrait_strip_height(), tag])
 				var ops: Array = map.operators
 				_assert(not ops.is_empty(), "ops present %s" % tag)
 				for op in ops:
@@ -1055,9 +1058,17 @@ func _test_phase_camera_frames_content() -> void:
 					var cell := Vector2i(int(op["x"]), int(op["y"]))
 					_assert(map.cell_in_visible_view(cell),
 						"op %s cell %s in view %s" % [op.get("id", "?"), cell, tag])
+					_assert(map.cell_in_safe_view(cell),
+						"op %s cell %s in safe view %s" % [op.get("id", "?"), cell, tag])
+					_assert(not scene.cell_under_hud_overlay(cell),
+						"op %s cell %s clear of HUD %s" % [op.get("id", "?"), cell, tag])
 				for spawn in map.enemy_spawn_cells():
 					_assert(map.cell_in_visible_view(spawn),
 						"spawn %s in view %s" % [spawn, tag])
+					_assert(map.cell_in_safe_view(spawn),
+						"spawn %s in safe view %s" % [spawn, tag])
+					_assert(not scene.cell_under_hud_overlay(spawn),
+						"spawn %s clear of HUD %s" % [spawn, tag])
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "camera-frame scene not ready")

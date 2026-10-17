@@ -103,8 +103,9 @@ var _dragging_ground: bool = false
 var _ground_start_cell: Vector2i = Vector2i(-1, -1)
 var _last_hover_cell: Vector2i = Vector2i(-999, -999)
 ## PLAY-UX PR-8: camera zoom/pan (map-local pixels).
-## Zoom 1 = whole yard (contain-fit into MapHost). Zoom >1 = content framing / pinch.
-const CAM_ZOOM_MIN := 1.0
+## Zoom 1 = whole yard (contain-fit into MapHost). Framing may go slightly below 1
+## so content clears HUD exclusion zones (portrait strip / utility bar).
+const CAM_ZOOM_MIN := 0.7
 const CAM_ZOOM_MAX := 2.5
 const FRAME_MARGIN_CELLS := 0.5
 var cam_zoom: float = 1.0
@@ -119,6 +120,7 @@ var _pan_last: Vector2 = Vector2.ZERO
 var allow_ground_pan: bool = true ## controller clears when trip tool active
 var _mid_dragging: bool = false
 var map_host_letterbox: ColorRect = null ## dark ground behind contain-fit map
+var _frame_exclusions: Array = [] ## Rect2 in map view-space (HUD overlays)
 
 
 func _ready() -> void:
@@ -360,19 +362,68 @@ func reset_camera() -> void:
 	queue_redraw()
 
 
+func set_frame_exclusions(rects: Array) -> void:
+	_frame_exclusions = rects.duplicate()
+
+
+func _safe_view_rect() -> Rect2:
+	## View-space rect not covered by HUD exclusion zones (portrait / utility).
+	var full := Rect2(Vector2.ZERO, size)
+	if size.x < 8.0 or size.y < 8.0:
+		return full
+	var top_cut := 0.0
+	var bottom_cut := 0.0
+	var left_cut := 0.0
+	var right_cut := 0.0
+	for r in _frame_exclusions:
+		if not (r is Rect2):
+			continue
+		var er: Rect2 = r
+		var hit := er.intersection(full)
+		if hit.size.x < 1.0 or hit.size.y < 1.0:
+			continue
+		## Cut the view edge the overlay hugs (nearest to hit center).
+		var cx := hit.get_center().x
+		var cy := hit.get_center().y
+		var d_top := cy
+		var d_bottom := size.y - cy
+		var d_left := cx
+		var d_right := size.x - cx
+		var d_min := minf(minf(d_top, d_bottom), minf(d_left, d_right))
+		if is_equal_approx(d_min, d_top):
+			top_cut = maxf(top_cut, hit.position.y + hit.size.y)
+		elif is_equal_approx(d_min, d_bottom):
+			bottom_cut = maxf(bottom_cut, size.y - hit.position.y)
+		elif is_equal_approx(d_min, d_left):
+			left_cut = maxf(left_cut, hit.position.x + hit.size.x)
+		else:
+			right_cut = maxf(right_cut, size.x - hit.position.x)
+	var x0 := clampf(left_cut, 0.0, size.x * 0.35)
+	var y0 := clampf(top_cut, 0.0, size.y * 0.40)
+	var x1 := clampf(size.x - right_cut, size.x * 0.65, size.x)
+	var y1 := clampf(size.y - bottom_cut, size.y * 0.60, size.y)
+	if x1 <= x0 + 32.0 or y1 <= y0 + 32.0:
+		return full
+	return Rect2(Vector2(x0, y0), Vector2(x1 - x0, y1 - y0))
+
+
 func frame_yard() -> void:
-	reset_camera()
+	## Fit whole yard into the safe view (may zoom slightly below 1 to clear HUD).
+	var map_size := Vector2(float(grid_w) * cell_px, float(grid_h) * cell_px)
+	frame_map_rect_px(Rect2(Vector2.ZERO, map_size))
 
 
 func frame_map_rect_px(bbox: Rect2) -> void:
-	## Fit an axis-aligned map-pixel rect into the view with current size.
+	## Fit an axis-aligned map-pixel rect into the safe view (exclusions applied).
 	if bbox.size.x < 1.0 or bbox.size.y < 1.0 or size.x < 8.0 or size.y < 8.0:
-		frame_yard()
+		reset_camera()
 		return
-	var zx := size.x / bbox.size.x
-	var zy := size.y / bbox.size.y
+	var safe := _safe_view_rect()
+	var zx := safe.size.x / bbox.size.x
+	var zy := safe.size.y / bbox.size.y
 	var z := clampf(minf(zx, zy), CAM_ZOOM_MIN, CAM_ZOOM_MAX)
-	var pan := bbox.position + bbox.size * 0.5 - size * 0.5 / z
+	## Center content in the safe rect (not the full view).
+	var pan := bbox.position + bbox.size * 0.5 - safe.get_center() / z
 	set_camera(z, pan)
 
 
@@ -504,6 +555,14 @@ func cell_in_visible_view(cell: Vector2i, inset_px: float = 1.0) -> bool:
 	return r.has_point(v)
 
 
+func cell_in_safe_view(cell: Vector2i) -> bool:
+	## Visible and not under HUD exclusion zones (portrait / utility).
+	if not cell_in_visible_view(cell):
+		return false
+	var v := _map_to_view(_cell_center_map_px(float(cell.x), float(cell.y)))
+	return _safe_view_rect().has_point(v)
+
+
 func center_on_cell(x: float, y: float) -> void:
 	var c := _cell_center_map_px(x, y)
 	cam_pan = c - size * 0.5 / maxf(cam_zoom, 0.01)
@@ -524,12 +583,14 @@ func zoom_at(view_pos: Vector2, factor: float) -> void:
 func _clamp_camera() -> void:
 	var map_size := Vector2(float(grid_w) * cell_px, float(grid_h) * cell_px)
 	var view_map := size / maxf(cam_zoom, 0.01)
+	## When zoomed out (view larger than map), allow pan so framing can sit the
+	## map inside the HUD-safe band instead of hard-centering in the full view.
 	if view_map.x >= map_size.x:
-		cam_pan.x = (map_size.x - view_map.x) * 0.5
+		cam_pan.x = clampf(cam_pan.x, map_size.x - view_map.x, 0.0)
 	else:
 		cam_pan.x = clampf(cam_pan.x, 0.0, map_size.x - view_map.x)
 	if view_map.y >= map_size.y:
-		cam_pan.y = (map_size.y - view_map.y) * 0.5
+		cam_pan.y = clampf(cam_pan.y, map_size.y - view_map.y, 0.0)
 	else:
 		cam_pan.y = clampf(cam_pan.y, 0.0, map_size.y - view_map.y)
 

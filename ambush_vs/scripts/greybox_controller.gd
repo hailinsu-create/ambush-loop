@@ -149,7 +149,8 @@ const DRAWER_TAB_W := 36.0
 const WAIT_RAIL_DESKTOP_W := 84.0
 const WAIT_RAIL_PHONE_W := 68.0
 const TOP_BAR_H := 36.0
-const PORTRAIT_H := 96.0
+const PORTRAIT_H := 96.0 ## desktop text cards
+const PORTRAIT_H_PHONE := 56.0 ## compact round portraits + pips
 const PHONE_H_MAX := 500.0 ## design-px height → phone chrome
 var thumb_bar: HBoxContainer = null
 var btn_thumb_start: Button = null
@@ -1800,9 +1801,11 @@ func _relayout_hud() -> void:
 		utility_backdrop.visible = ui_phase != UiPhase.RESULT
 
 	if portrait_backdrop:
-		var pw := minf(400.0, (map_right - map_left) * 0.55)
-		_place_rect(portrait_backdrop, map_left + 6, map_bottom - PORTRAIT_H - 4, map_left + 6 + pw, map_bottom - 4)
+		var ph := _portrait_strip_height()
+		var pw := minf(280.0 if _is_phone_layout() else 400.0, (map_right - map_left) * (0.42 if _is_phone_layout() else 0.55))
+		_place_rect(portrait_backdrop, map_left + 6, map_bottom - ph - 4, map_left + 6 + pw, map_bottom - 4)
 		portrait_backdrop.visible = ui_phase != UiPhase.RESULT
+		_refresh_portrait_strip()
 
 	if map_view:
 		map_view._fit_cell_px()
@@ -1810,10 +1813,40 @@ func _relayout_hud() -> void:
 		map_view.queue_redraw()
 
 
+func _portrait_strip_height() -> float:
+	return PORTRAIT_H_PHONE if _is_phone_layout() else PORTRAIT_H
+
+
+func _hud_exclusion_rects_map_view() -> Array:
+	## Overlay rects in GreyboxMap view-space (for framing safe area).
+	var out: Array = []
+	if map_view == null or map_host == null:
+		return out
+	var svc := map_host.get_node_or_null("SubViewportContainer") as Control
+	if svc == null:
+		return out
+	var host_g: Rect2 = map_host.get_global_rect()
+	for overlay in [utility_backdrop, portrait_backdrop]:
+		if overlay == null or not overlay.visible:
+			continue
+		var og: Rect2 = overlay.get_global_rect()
+		if og.size.x < 2.0 or og.size.y < 2.0:
+			continue
+		## MapHost-local → subtract SVC origin → map view coords.
+		var in_host := Rect2(og.position - host_g.position, og.size)
+		var in_map := Rect2(in_host.position - svc.position, in_host.size)
+		## Inflate slightly so unit markers aren't kissing the chrome.
+		in_map = in_map.grow(4.0)
+		out.append(in_map)
+	return out
+
+
 func _apply_default_camera() -> void:
 	## Per-phase default framing (scout = yard; setup/wait = content bbox).
 	if map_view == null:
 		return
+	var exclusions := _hud_exclusion_rects_map_view()
+	map_view.set_frame_exclusions(exclusions)
 	match ui_phase:
 		UiPhase.SCOUT:
 			map_view.frame_for_phase("scout")
@@ -1827,6 +1860,26 @@ func _apply_default_camera() -> void:
 			map_view.frame_for_phase("wait" if ui_phase == UiPhase.WAIT else "setup")
 		_:
 			map_view.frame_yard()
+
+
+func cell_under_hud_overlay(cell: Vector2i) -> bool:
+	## True if cell center lies under portrait strip or utility bar (global space).
+	if map_view == null or map_host == null:
+		return false
+	var svc := map_host.get_node_or_null("SubViewportContainer") as Control
+	if svc == null:
+		return false
+	## Map lives in a SubViewport — transform through the container, not the
+	## inner Control's canvas (which ignores the SVC offset).
+	var local: Vector2 = map_view.cell_to_screen(float(cell.x), float(cell.y))
+	var gpos: Vector2 = svc.get_global_transform_with_canvas() * local
+	for overlay in [utility_backdrop, portrait_backdrop]:
+		if overlay == null or not overlay.visible:
+			continue
+		var r: Rect2 = overlay.get_global_rect().grow(2.0)
+		if r.has_point(gpos):
+			return true
+	return false
 
 
 func _place_rect(c: Control, left: float, top: float, right: float, bottom: float) -> void:
@@ -2814,10 +2867,37 @@ func _build_portrait_strip() -> void:
 	portrait_strip.name = "PortraitStrip"
 	portrait_strip.add_theme_constant_override("separation", 6)
 	portrait_strip.mouse_filter = Control.MOUSE_FILTER_STOP
-	portrait_strip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	portrait_strip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	portrait_strip.alignment = BoxContainer.ALIGNMENT_BEGIN
 	# Parent becomes PortraitBackdrop in `_install_hud_layout`.
 	$HUD.add_child(portrait_strip)
 	_refresh_portrait_strip()
+
+
+func _round_portrait_style(selected: bool) -> StyleBoxFlat:
+	var s := StyleBoxFlat.new()
+	s.bg_color = Color(0.12, 0.14, 0.18, 0.95) if not selected else Color(0.42, 0.36, 0.12, 0.95)
+	s.border_color = Color(1.0, 0.9, 0.45, 0.95) if selected else Color(0.55, 0.58, 0.62, 0.8)
+	s.set_border_width_all(2)
+	s.set_corner_radius_all(999)
+	s.content_margin_left = 2
+	s.content_margin_right = 2
+	s.content_margin_top = 2
+	s.content_margin_bottom = 2
+	return s
+
+
+func _mk_pip_row(filled: int, total: int, fill_col: Color, empty_col: Color) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 2)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	var n := maxi(1, total)
+	for i in range(n):
+		var pip := ColorRect.new()
+		pip.custom_minimum_size = Vector2(5, 5)
+		pip.color = fill_col if i < filled else empty_col
+		row.add_child(pip)
+	return row
 
 
 func _refresh_portrait_strip() -> void:
@@ -2826,6 +2906,9 @@ func _refresh_portrait_strip() -> void:
 	for c in portrait_strip.get_children():
 		c.queue_free()
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	var phone := _is_phone_layout()
+	portrait_strip.add_theme_constant_override("separation", 4 if phone else 6)
+	portrait_strip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if phone else Control.SIZE_EXPAND_FILL
 	var ops: Array = []
 	if ui_phase == UiPhase.SCOUT and scout != null:
 		ops = scout.operators
@@ -2837,37 +2920,65 @@ func _refresh_portrait_strip() -> void:
 	for op in ops:
 		i += 1
 		var oid := str(op.get("id", ""))
-		var btn := Button.new()
-		btn.name = "Portrait_%s" % oid
-		btn.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
-		btn.toggle_mode = true
-		btn.button_pressed = oid == selected_op_id
 		var dname := str(op_display_names.get(oid, op.get("display_name", "%d号" % i)))
 		var wlab := str(WEAPON_LABEL_ZH.get(str(op.get("weapon_id", "")), op.get("weapon_id", "")))
 		var ammo_n := _op_ammo_display(oid, op)
 		var hp_n := int(op.get("hp", SimConstants.OP_MAX_HP))
+		var hp_max := int(SimConstants.OP_MAX_HP)
 		if sim != null:
 			for sop in sim.operators:
 				if str(sop.get("id", "")) == oid:
 					hp_n = int(sop.get("hp", hp_n))
 					break
-		var status := ""
-		if ui_phase == UiPhase.WAIT and sim != null:
-			for sop in sim.operators:
-				if str(sop.get("id", "")) == oid:
-					if int(sop.get("turn_ticks_left", 0)) > 0:
-						status = "\n禁火"
-					elif not bool(sop.get("can_fire", true)):
-						status = "\n禁火"
-					break
-		btn.text = "%s\n%s\nHP%d 弹%d%s" % [dname, wlab, hp_n, ammo_n, status]
-		btn.add_theme_font_size_override("font_size", 12)
-		if font_res:
-			btn.add_theme_font_override("font", font_res)
-		if oid == selected_op_id:
-			btn.modulate = Color(1.0, 0.95, 0.55)
-		btn.pressed.connect(_on_portrait_pressed.bind(oid))
-		portrait_strip.add_child(btn)
+		var selected := oid == selected_op_id
+		if phone:
+			## Compact: round face + HP/ammo pips, ~56px tall, left-aligned.
+			var card := VBoxContainer.new()
+			card.name = "Portrait_%s" % oid
+			card.add_theme_constant_override("separation", 2)
+			card.custom_minimum_size = Vector2(48, PORTRAIT_H_PHONE - 8)
+			var face := Button.new()
+			face.name = "Face"
+			face.text = str(i)
+			face.custom_minimum_size = Vector2(40, 40)
+			face.toggle_mode = true
+			face.button_pressed = selected
+			face.add_theme_font_size_override("font_size", 16)
+			if font_res:
+				face.add_theme_font_override("font", font_res)
+			var st := _round_portrait_style(selected)
+			face.add_theme_stylebox_override("normal", st)
+			face.add_theme_stylebox_override("hover", st)
+			face.add_theme_stylebox_override("pressed", st)
+			face.add_theme_stylebox_override("focus", st)
+			face.tooltip_text = "%s · %s" % [dname, wlab]
+			face.pressed.connect(_on_portrait_pressed.bind(oid))
+			card.add_child(face)
+			card.add_child(_mk_pip_row(hp_n, hp_max, Color(0.85, 0.25, 0.25), Color(0.25, 0.2, 0.2)))
+			var ammo_pips := mini(5, maxi(0, int(ceil(float(ammo_n) / 10.0))))
+			card.add_child(_mk_pip_row(ammo_pips, 5, Color(0.85, 0.75, 0.3), Color(0.25, 0.25, 0.2)))
+			portrait_strip.add_child(card)
+		else:
+			var btn := Button.new()
+			btn.name = "Portrait_%s" % oid
+			btn.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
+			btn.toggle_mode = true
+			btn.button_pressed = selected
+			var status := ""
+			if ui_phase == UiPhase.WAIT and sim != null:
+				for sop in sim.operators:
+					if str(sop.get("id", "")) == oid:
+						if int(sop.get("turn_ticks_left", 0)) > 0 or not bool(sop.get("can_fire", true)):
+							status = "\n禁火"
+						break
+			btn.text = "%s\n%s\nHP%d 弹%d%s" % [dname, wlab, hp_n, ammo_n, status]
+			btn.add_theme_font_size_override("font_size", 12)
+			if font_res:
+				btn.add_theme_font_override("font", font_res)
+			if selected:
+				btn.modulate = Color(1.0, 0.95, 0.55)
+			btn.pressed.connect(_on_portrait_pressed.bind(oid))
+			portrait_strip.add_child(btn)
 	portrait_strip.visible = ui_phase != UiPhase.RESULT
 
 
