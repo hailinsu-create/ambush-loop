@@ -16,7 +16,10 @@ signal unit_selected(op_id: String)
 enum ArtMode { G3, G2, G1 }
 
 ## World-space UV: texture spans this many cells (seamless, no cell grid).
-const G3_TEX_CELLS := 12.0 ## finer world UV so shingles/cobbles don't read as 1-cell grid
+## Cobble atlas ≈11 stones wide → period ~1.5 ⇒ ~7 stones/cell (target 6–8).
+const G3_TEX_CELLS := 4.0 ## default for mud/grass/planks
+const G3_COBBLE_CELLS := 1.5 ## fine cobble: many stones per cell
+const G3_ROOF_CELLS := 5.5 ## larger shingle texel so roofs read
 const G3_UNIT_SCALE := 1.6
 const G3_WALL_STRIP := 0.36 ## ~1/3 cell dry-stone wall width
 
@@ -326,100 +329,136 @@ func _draw_tiles() -> void:
 				draw_texture_rect(tex, Rect2(p, Vector2(cell_px, cell_px)), false)
 
 
+func _g3_period(surf: String) -> float:
+	match surf:
+		"cobble":
+			return G3_COBBLE_CELLS
+		"roof_slate", "roof_shingle":
+			return G3_ROOF_CELLS
+		"grass":
+			return 3.2
+		"mud", "outside":
+			return G3_TEX_CELLS
+		"stonewall":
+			return 2.5
+		_:
+			return G3_TEX_CELLS
+
+
+func _g3_ground_mod(surf: String) -> Color:
+	## Single moonlight modulate per surface (no per-cell tint patches).
+	match surf:
+		"cobble":
+			return Color(0.70, 0.74, 0.86, 1.0)
+		"grass":
+			return Color(0.46, 0.56, 0.52, 1.0)
+		"mud":
+			return Color(0.52, 0.48, 0.44, 1.0)
+		"planks":
+			return Color(0.60, 0.56, 0.48, 1.0)
+		_:
+			return Color(0.58, 0.58, 0.62, 1.0)
+
+
+func _yard_surf_at(x: int, y: int) -> String:
+	## Visual ground class for open yard cells (buildings/outside/inner walls excluded).
+	if x < 0 or y < 0 or x >= grid_w or y >= grid_h:
+		return ""
+	if _out_of_yard.has("%d,%d" % [x, y]) or _inner_wall.has("%d,%d" % [x, y]):
+		return ""
+	var cell: Dictionary = grid.get_cell(x, y)
+	var kind := str(cell.get("kind", ""))
+	var tier := str(cell.get("tier", ""))
+	if _is_building_cell(kind, tier, x, y) or _is_wall_kind(kind, cell):
+		return ""
+	if kind in ["road", "gate_n", "gate_s", "gate_e"]:
+		return "cobble"
+	if kind == "alley":
+		return "mud"
+	if kind in ["ramp", "slope"]:
+		return "planks"
+	return _yard_ground_key(x, y)
+
+
 func _draw_g3_terrain() -> void:
-	## Zone fills (not per-cell) so cobble/mud/grass/outside have no cell seams.
+	## Continuous world-UV fills + soft noisy edges (no per-cell tint checkerboard).
 	var map_rect := Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px))
-	# Base mud under everything in the yard footprint.
-	_draw_g3_world_rect(g3.tile_mud, 0.0, 0.0, float(grid_w), float(grid_h), map_rect, Color(0.55, 0.52, 0.48, 1.0))
-	# Outside: dark night earth (draw first over base for border masses).
+	_draw_g3_world_rect(
+		g3.tile_mud, 0.0, 0.0, float(grid_w), float(grid_h), map_rect, _g3_ground_mod("mud"), G3_TEX_CELLS
+	)
+	# Outside: dark night earth.
 	for y in range(grid_h):
 		for x in range(grid_w):
 			if not _out_of_yard.has("%d,%d" % [x, y]):
 				continue
 			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 			var rect := Rect2(p - Vector2(1.0, 1.0), Vector2(cell_px + 2.0, cell_px + 2.0))
-			_draw_g3_world_sample(g3.tile_mud, x, y, rect, Color(0.40, 0.44, 0.38, 1.0))
-			_draw_g3_world_sample(g3.tile_grass, x, y, rect, Color(0.32, 0.40, 0.36, 0.65))
+			_draw_g3_world_sample(g3.tile_mud, x, y, rect, Color(0.40, 0.44, 0.38, 1.0), G3_TEX_CELLS)
+			_draw_g3_world_sample(g3.tile_grass, x, y, rect, Color(0.32, 0.40, 0.36, 0.55), 3.2)
 			draw_rect(rect, Color(0.02, 0.04, 0.09, 0.58), true)
-	# Cobble courtyard zones (axis-aligned blobs).
-	for z in [
-		[8, 13, 1, 14],
-		[14, 17, 5, 10],
-	]:
-		_fill_g3_zone(z[0], z[1], z[2], z[3], "cobble", Color(0.68, 0.72, 0.84, 1.0))
-	# Grass plots.
-	for z in [
-		[4, 7, 2, 7],
-		[12, 16, 2, 4],
-		[15, 18, 11, 13],
-	]:
-		_fill_g3_zone(z[0], z[1], z[2], z[3], "grass", Color(0.48, 0.58, 0.55, 1.0))
-	# Roads / gates / alleys / ramps (per-cell but overlapping; rare).
+	# Paint yard surfaces as horizontal runs (continuous UV, uniform modulate).
+	for y in range(grid_h):
+		var x := 0
+		while x < grid_w:
+			var surf := _yard_surf_at(x, y)
+			if surf == "" or surf == "mud":
+				x += 1
+				continue
+			var x0 := x
+			while x < grid_w and _yard_surf_at(x, y) == surf:
+				x += 1
+			var x1 := x - 1
+			var px := float(x0) * cell_px
+			var py := float(grid_h - 1 - y) * cell_px
+			var w := float(x1 - x0 + 1) * cell_px
+			var dest := Rect2(px - 0.75, py - 0.75, w + 1.5, cell_px + 1.5)
+			_draw_g3_world_rect(
+				_g3_tex(surf), float(x0), float(y), float(x1 - x0 + 1), 1.0, dest, _g3_ground_mod(surf), _g3_period(surf)
+			)
+	# Building underlays.
 	for y in range(grid_h):
 		for x in range(grid_w):
-			if _out_of_yard.has("%d,%d" % [x, y]):
-				continue
 			var cell: Dictionary = grid.get_cell(x, y)
 			var kind := str(cell.get("kind", ""))
 			var tier := str(cell.get("tier", ""))
 			if _is_building_cell(kind, tier, x, y):
 				var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 				draw_rect(Rect2(p, Vector2(cell_px, cell_px)), Color(0.22, 0.22, 0.26, 1.0), true)
-				continue
-			if _inner_wall.has("%d,%d" % [x, y]):
-				continue
-			var surf := ""
-			if kind in ["road", "gate_n", "gate_s", "gate_e"]:
-				surf = "cobble"
-			elif kind == "alley":
-				surf = "mud"
-			elif kind in ["ramp", "slope"]:
-				surf = "planks"
-			else:
-				continue
-			var p2 := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
-			var rect2 := Rect2(p2 - Vector2(1.0, 1.0), Vector2(cell_px + 2.0, cell_px + 2.0))
-			var mod := Color(0.68, 0.72, 0.84, 1.0)
-			if surf == "mud":
-				mod = Color(0.55, 0.52, 0.48, 1.0)
-			elif surf == "planks":
-				mod = Color(0.62, 0.58, 0.50, 1.0)
-			_draw_g3_world_sample(_g3_tex(surf), x, y, rect2, mod)
+	_blend_g3_ground_edges()
 
 
-func _fill_g3_zone(min_x: int, max_x: int, min_y: int, max_y: int, surf: String, modulate: Color) -> void:
-	## Fill open yard cells in bbox with one continuous world-UV rect (skip outside/buildings).
-	var x0 := 999
-	var x1 := -1
-	var y0 := 999
-	var y1 := -1
-	var any := false
-	for y in range(min_y, max_y + 1):
-		for x in range(min_x, max_x + 1):
-			if x < 0 or y < 0 or x >= grid_w or y >= grid_h:
+func _blend_g3_ground_edges() -> void:
+	## Soft/noisy transition strips between ground types (not hard cell squares).
+	var dirs := [[1, 0, "e"], [-1, 0, "w"], [0, 1, "n"], [0, -1, "s"]]
+	for y in range(grid_h):
+		for x in range(grid_w):
+			var surf := _yard_surf_at(x, y)
+			if surf == "":
 				continue
-			if _out_of_yard.has("%d,%d" % [x, y]) or _inner_wall.has("%d,%d" % [x, y]):
-				continue
-			var cell: Dictionary = grid.get_cell(x, y)
-			var kind := str(cell.get("kind", ""))
-			var tier := str(cell.get("tier", ""))
-			if _is_building_cell(kind, tier, x, y):
-				continue
-			if _is_wall_kind(kind, cell):
-				continue
-			any = true
-			x0 = mini(x0, x)
-			x1 = maxi(x1, x)
-			y0 = mini(y0, y)
-			y1 = maxi(y1, y)
-	if not any:
-		return
-	var px := float(x0) * cell_px
-	var py := float(grid_h - 1 - y1) * cell_px
-	var w := float(x1 - x0 + 1) * cell_px
-	var h := float(y1 - y0 + 1) * cell_px
-	var dest := Rect2(px - 0.5, py - 0.5, w + 1.0, h + 1.0)
-	_draw_g3_world_rect(_g3_tex(surf), float(x0), float(y0), float(x1 - x0 + 1), float(y1 - y0 + 1), dest, modulate)
+			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
+			for d in dirs:
+				var nx: int = x + int(d[0])
+				var ny: int = y + int(d[1])
+				var nsurf := _yard_surf_at(nx, ny)
+				if nsurf == "" or nsurf == surf:
+					continue
+				# Deterministic noise so edges look organic, not a ruler line.
+				var n := float(((x * 17 + y * 31 + int(d[0]) * 7) % 10)) / 10.0
+				var t := 0.28 + n * 0.22
+				var strip: Rect2
+				match str(d[2]):
+					"e":
+						strip = Rect2(p + Vector2(cell_px * (1.0 - t), cell_px * 0.02), Vector2(cell_px * t, cell_px * 0.96))
+					"w":
+						strip = Rect2(p + Vector2(0, cell_px * 0.02), Vector2(cell_px * t, cell_px * 0.96))
+					"n":
+						strip = Rect2(p + Vector2(cell_px * 0.02, 0), Vector2(cell_px * 0.96, cell_px * t))
+					_:
+						strip = Rect2(p + Vector2(cell_px * 0.02, cell_px * (1.0 - t)), Vector2(cell_px * 0.96, cell_px * t))
+				var a := 0.38 + n * 0.18
+				var mod := _g3_ground_mod(nsurf)
+				mod.a = a
+				_draw_g3_world_sample(_g3_tex(nsurf), nx, ny, strip, mod, _g3_period(nsurf))
 
 
 func _is_wall_kind(kind: String, cell: Dictionary) -> bool:
@@ -648,7 +687,7 @@ func _stroke_stone_strip(strip: Rect2, x: int, y: int) -> void:
 	# Prefer continuous UV along the long axis of the strip.
 	var cells_w := maxf(0.25, strip.size.x / cell_px)
 	var cells_h := maxf(0.25, strip.size.y / cell_px)
-	_draw_g3_world_rect(g3.tile_stonewall, float(x), float(y), cells_w, cells_h, strip)
+	_draw_g3_world_rect(g3.tile_stonewall, float(x), float(y), cells_w, cells_h, strip, Color(1, 1, 1, 1), 2.5)
 	# Drop shadow at base (south) + soft east bias (concept wall depth).
 	draw_rect(
 		Rect2(strip.position + Vector2(1.5, strip.size.y * 0.55), Vector2(strip.size.x + 3.0, strip.size.y * 0.55)),
@@ -737,24 +776,30 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 	surf = _surface_key(mid_cell, mk, mt, int((min_x + max_x) / 2), int((min_y + max_y) / 2))
 	if not surf.begins_with("roof"):
 		surf = "roof_slate"
-	# Row strips (correct grid-y ↔ screen-y) with horizontal continuity — no cell seams.
+	# Row strips (correct grid-y ↔ screen-y) with larger shingle texel.
 	var cells_w := float(max_x - min_x + 1)
+	var roof_period := _g3_period(surf)
 	for gy in range(max_y, min_y - 1, -1):
 		var row_py := float(grid_h - 1 - gy) * cell_px
 		var row := Rect2(x0 - 0.5, row_py - 0.5, w + 1.0, cell_px + 1.0)
-		_draw_g3_world_rect(_g3_tex(surf), float(min_x), float(gy), cells_w, 1.0, row)
+		_draw_g3_world_rect(_g3_tex(surf), float(min_x), float(gy), cells_w, 1.0, row, Color(1, 1, 1, 1), roof_period)
+	# Visible south wall face under eaves (concept house mass).
+	var wall_h := cell_px * 0.28
+	var wall_face := Rect2(footprint.position + Vector2(cell_px * 0.04, h - wall_h * 0.15), Vector2(w - cell_px * 0.08, wall_h))
+	_draw_g3_world_rect(g3.tile_stonewall, float(min_x), float(min_y), cells_w, 0.35, wall_face, Color(0.72, 0.72, 0.76, 1.0), 2.5)
+	draw_rect(Rect2(wall_face.position, Vector2(wall_face.size.x, 2.0)), Color(0.55, 0.56, 0.60, 0.65), true)
 	# Soft shadow on ground just south of the building (outside the roof face).
-	var eaves := Rect2(footprint.position + Vector2(cell_px * 0.05, h + 1), Vector2(w * 1.0, cell_px * 0.42))
-	draw_rect(eaves, Color(0, 0, 0, 0.45), true)
+	var eaves := Rect2(footprint.position + Vector2(cell_px * 0.02, h + wall_h * 0.55), Vector2(w * 1.02, cell_px * 0.48))
+	draw_rect(eaves, Color(0, 0, 0, 0.50), true)
 	if g3.drop_shadow:
 		draw_texture_rect(
 			g3.drop_shadow,
-			Rect2(eaves.position, Vector2(eaves.size.x, cell_px * 0.55)),
+			Rect2(eaves.position, Vector2(eaves.size.x, cell_px * 0.60)),
 			false,
-			Color(1, 1, 1, 0.85)
+			Color(1, 1, 1, 0.90)
 		)
-	# Subtle eaves darken only the southmost roof edge (one strip, not every cell).
-	draw_rect(Rect2(footprint.position + Vector2(0, h - cell_px * 0.18), Vector2(w, cell_px * 0.18)), Color(0, 0, 0, 0.35), true)
+	# Eaves darken south roof lip.
+	draw_rect(Rect2(footprint.position + Vector2(0, h - cell_px * 0.16), Vector2(w, cell_px * 0.16)), Color(0, 0, 0, 0.40), true)
 	# Ridge along long axis.
 	var long_h := w >= h
 	if long_h:
@@ -765,27 +810,38 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 		var mid_x := footprint.position.x + w * 0.5
 		draw_line(Vector2(mid_x, footprint.position.y + 3), Vector2(mid_x, footprint.position.y + h - 3), Color(0.07, 0.08, 0.10, 0.95), 3.5)
 		draw_line(Vector2(mid_x - 2, footprint.position.y + 3), Vector2(mid_x - 2, footprint.position.y + h - 3), Color(0.42, 0.44, 0.50, 0.55), 1.5)
-	# Soft building lip (no harsh per-cell grid).
+	# Soft building lip.
 	draw_rect(footprint.grow(-0.5), Color(0.05, 0.05, 0.07, 0.65), false, 1.8)
 
 
-func _draw_g3_world_sample(tex: Texture2D, cell_x: int, cell_y: int, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)) -> void:
+func _draw_g3_world_sample(
+	tex: Texture2D, cell_x: int, cell_y: int, dest: Rect2, modulate: Color = Color(1, 1, 1, 1), period: float = -1.0
+) -> void:
 	## One logical cell of world UV into dest (dest may overlap neighbors for seam kill).
 	if tex == null:
 		return
-	_draw_g3_world_rect(tex, float(cell_x), float(cell_y), 1.0, 1.0, dest, modulate)
+	var p := period if period > 0.0 else G3_TEX_CELLS
+	_draw_g3_world_rect(tex, float(cell_x), float(cell_y), 1.0, 1.0, dest, modulate, p)
 
 
 func _draw_g3_world_rect(
-	tex: Texture2D, cell_x: float, cell_y: float, cells_w: float, cells_h: float, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)
+	tex: Texture2D,
+	cell_x: float,
+	cell_y: float,
+	cells_w: float,
+	cells_h: float,
+	dest: Rect2,
+	modulate: Color = Color(1, 1, 1, 1),
+	period: float = -1.0
 ) -> void:
-	## World-space UV scaled to destination size in cells (seamless multi-cell fills).
+	## World-space UV; `period` = cells spanned by one texture repeat.
 	if tex == null:
 		return
+	var tex_cells := period if period > 0.0 else G3_TEX_CELLS
 	var tw := float(tex.get_width())
 	var th := float(tex.get_height())
 	# Chunk so each sample spans < one texture period (wrapped helper handles one wrap).
-	var max_chunk := G3_TEX_CELLS * 0.9
+	var max_chunk := tex_cells * 0.9
 	var x_cells := 0.0
 	while x_cells < cells_w - 0.001:
 		var cw := minf(max_chunk, cells_w - x_cells)
@@ -796,10 +852,10 @@ func _draw_g3_world_rect(
 				dest.position + Vector2(dest.size.x * (x_cells / cells_w), dest.size.y * (y_cells / cells_h)),
 				Vector2(dest.size.x * (cw / cells_w), dest.size.y * (ch / cells_h))
 			)
-			var uw := tw / G3_TEX_CELLS * cw
-			var vh := th / G3_TEX_CELLS * ch
-			var u0 := fposmod((cell_x + x_cells) * (tw / G3_TEX_CELLS), tw)
-			var v0 := fposmod((cell_y + y_cells) * (th / G3_TEX_CELLS), th)
+			var uw := tw / tex_cells * cw
+			var vh := th / tex_cells * ch
+			var u0 := fposmod((cell_x + x_cells) * (tw / tex_cells), tw)
+			var v0 := fposmod((cell_y + y_cells) * (th / tex_cells), th)
 			_draw_region_wrapped(tex, sub, u0, v0, uw, vh, tw, th, modulate)
 			y_cells += ch
 		x_cells += cw
@@ -928,22 +984,37 @@ func _draw_night_dim() -> void:
 
 
 func _draw_g3_grade() -> void:
-	## Cool moonlit night + warm lantern pools on house roofs only (yard_concept).
+	## Cool moonlit night + warm lantern pools on roofs and ground by eaves (yard_concept).
 	if not night:
 		return
 	draw_rect(Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), Color(0.08, 0.12, 0.26, 0.12), true)
 	if g3.vignette:
 		draw_texture_rect(g3.vignette, Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), false, Color(1, 1, 1, 0.55))
 	if g3.lantern_glow:
-		# One warm pool per roof mass: west barn, north pad, east pad.
-		for c in [Vector2i(4, 10), Vector2i(8, 13), Vector2i(14, 6)]:
-			var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
-			var sz := cell_px * 1.75
+		# Roof accent + ground pool south of each house (west barn, north pad, east pad).
+		var houses := [
+			[Vector2i(4, 10), Vector2i(5, 8)],
+			[Vector2i(8, 13), Vector2i(8, 12)],
+			[Vector2i(14, 6), Vector2i(14, 5)],
+		]
+		for hpair in houses:
+			var roof_c: Vector2i = hpair[0]
+			var ground_c: Vector2i = hpair[1]
+			var pr := Vector2(roof_c.x * cell_px, (grid_h - 1 - roof_c.y) * cell_px)
+			var sz_r := cell_px * 1.55
 			draw_texture_rect(
 				g3.lantern_glow,
-				Rect2(p + Vector2(cell_px * 0.5 - sz * 0.5, cell_px * 0.5 - sz * 0.5), Vector2(sz, sz)),
+				Rect2(pr + Vector2(cell_px * 0.5 - sz_r * 0.5, cell_px * 0.5 - sz_r * 0.5), Vector2(sz_r, sz_r)),
 				false,
-				Color(1.0, 0.62, 0.22, 0.95)
+				Color(1.0, 0.62, 0.22, 0.88)
+			)
+			var pg := Vector2(ground_c.x * cell_px, (grid_h - 1 - ground_c.y) * cell_px)
+			var sz_g := cell_px * 2.35
+			draw_texture_rect(
+				g3.lantern_glow,
+				Rect2(pg + Vector2(cell_px * 0.5 - sz_g * 0.5, cell_px * 0.15 - sz_g * 0.25), Vector2(sz_g, sz_g)),
+				false,
+				Color(1.0, 0.55, 0.18, 0.78)
 			)
 
 
@@ -1039,39 +1110,46 @@ func _draw_g3_sandbag_runs() -> void:
 func _draw_sandbag_sprite_run(
 	ox: int, oy: int, length: int, horizontal: bool, bag: Texture2D, bag_end: Texture2D
 ) -> void:
-	## Chunky stacked bags (~0.45–0.5 cell, 2 rows) like yard_concept emplacements.
-	var bag_w := cell_px * 0.50
-	var bag_h := cell_px * 0.42
+	## Chunky burlap pile: bags ~0.45 cell, 2 staggered rows, dark gaps (phone-readable).
+	var bag_w := cell_px * 0.45
+	var bag_h := cell_px * 0.36
 	var rows := 2
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
 		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
 	var run_len := float(length) * cell_px
-	# Center the pile on the cover cell rather than a thin rim worm.
 	if horizontal:
-		base += Vector2(0.0, cell_px * 0.08)
+		base += Vector2(0.0, cell_px * 0.12)
 	else:
-		base += Vector2(cell_px * 0.05, 0.0)
+		base += Vector2(cell_px * 0.12, 0.0)
+	# Ground shadow under the whole pile.
+	var sh_size := Vector2(
+		run_len * 0.96 if horizontal else cell_px * 0.92,
+		cell_px * 0.78 if horizontal else run_len * 0.96
+	)
+	draw_rect(Rect2(base + Vector2(cell_px * 0.04, cell_px * 0.32), sh_size), Color(0, 0, 0, 0.55), true)
 	if g3.drop_shadow:
-		var sh := Rect2(
-			base + Vector2(cell_px * 0.04, cell_px * 0.28),
-			Vector2(run_len * 0.94 if horizontal else cell_px * 0.90, cell_px * 0.70 if horizontal else run_len * 0.94)
-		)
-		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.82))
+		draw_texture_rect(g3.drop_shadow, Rect2(base + Vector2(cell_px * 0.02, cell_px * 0.28), sh_size), false, Color(1, 1, 1, 0.85))
+	var burlap := Color(0.78, 0.62, 0.38, 1.0)
+	var burlap_dark := Color(0.42, 0.32, 0.18, 1.0)
 	for row in range(rows):
-		var stagger := (row % 2) * (bag_w * 0.42)
-		var row_y := cell_px * 0.16 + float(row) * (bag_h * 0.62)
-		var along := cell_px * 0.04
+		var stagger := (row % 2) * (bag_w * 0.48)
+		var row_y := cell_px * 0.14 + float(row) * (bag_h * 0.58)
+		var along := cell_px * 0.02
 		var i := 0
-		while along < run_len - bag_w * 0.08:
-			var tex: Texture2D = bag_end if (i == 0 or along + bag_w * 0.95 >= run_len) else bag
+		while along < run_len - bag_w * 0.05:
+			var tex: Texture2D = bag_end if (i == 0 or along + bag_w >= run_len) else bag
 			var dest: Rect2
 			if horizontal:
 				dest = Rect2(base + Vector2(along + stagger, row_y), Vector2(bag_w, bag_h))
 			else:
-				dest = Rect2(base + Vector2(cell_px * 0.16 + stagger * 0.25, along + cell_px * 0.06), Vector2(bag_w, bag_h))
-			draw_texture_rect(tex, dest, false)
-			along += bag_w * 0.62
+				dest = Rect2(base + Vector2(cell_px * 0.14 + stagger * 0.3, along + cell_px * 0.05), Vector2(bag_w, bag_h))
+			# Dark contact shadow between bags.
+			draw_rect(Rect2(dest.position + Vector2(1, dest.size.y * 0.55), Vector2(dest.size.x - 2, dest.size.y * 0.45)), burlap_dark, true)
+			draw_texture_rect(tex, dest, false, burlap)
+			# Soft top highlight so bags read as stacked volumes.
+			draw_rect(Rect2(dest.position + Vector2(2, 1), Vector2(dest.size.x - 4, maxf(2.0, dest.size.y * 0.18))), Color(0.92, 0.78, 0.52, 0.35), true)
+			along += bag_w * 0.50
 			i += 1
 
 
