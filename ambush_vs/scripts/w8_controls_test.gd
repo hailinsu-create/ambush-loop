@@ -27,6 +27,7 @@ func _run_all() -> void:
 	await _test_selection_hit_and_portraits()
 	await _test_wait_reaim_one_order()
 	await _test_setup_toolbar_and_trip()
+	await _test_hud_touch_sizing()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -361,3 +362,95 @@ func _test_wait_reaim_one_order() -> void:
 		return
 	_assert(false, "reaim scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_hud_touch_sizing() -> void:
+	## PR-5: ≥88 design-px targets, body text ≥22, pause restart confirm, long-press detonate.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "hud scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.thumb_bar == null:
+			continue
+		DisplayServer.window_set_size(Vector2i(1280, 720))
+		await process_frame
+		await process_frame
+		var scale_pt := 0.542 ## 844×390 phone CSS pt vs 1280×720 design
+		var bad_btn := ""
+		for b in _visible_buttons(scene):
+			var ms: Vector2 = b.custom_minimum_size
+			var dim := minf(ms.x if ms.x > 0.0 else b.size.x, ms.y if ms.y > 0.0 else b.size.y)
+			if dim < 88.0 - 1e-3:
+				bad_btn = "%s min=%s size=%s" % [b.name, ms, b.size]
+				break
+			if dim * scale_pt < 44.0 - 1e-3:
+				bad_btn = "%s scaled=%s" % [b.name, dim * scale_pt]
+				break
+		_assert(bad_btn == "", "all visible buttons ≥88 design-px (%s)" % bad_btn)
+		var bad_lab := ""
+		for lab in [scene.label_info, scene.label_phase, scene.label_alert]:
+			if lab == null or not lab.visible:
+				continue
+			var fs := int(lab.get_theme_font_size("font_size"))
+			if fs < 22:
+				bad_lab = "%s font=%d" % [lab.name, fs]
+				break
+			if float(fs) * scale_pt < 12.0 - 1e-3:
+				bad_lab = "%s pt=%s" % [lab.name, float(fs) * scale_pt]
+				break
+		_assert(bad_lab == "", "body labels ≥22 design-px / ≥12pt (%s)" % bad_lab)
+		_assert(scene.btn_restart_wait == null or not scene.btn_restart_wait.visible,
+			"wait panel restart hidden")
+		_assert(scene.pause_menu != null, "pause menu exists")
+		_assert(scene.btn_dev_toggle != null and scene.dev_menu != null, "dev menu exists")
+		_assert(scene.btn_g2_art != null and scene.btn_g2_art.get_parent() == scene.dev_menu,
+			"art toggle in dev menu")
+		# Pause → restart requires confirm.
+		scene._load_preset("A")
+		scene._start_wait()
+		await process_frame
+		scene.paused = false
+		scene._toggle_pause()
+		_assert(scene.pause_menu.visible, "pause menu opens")
+		var restarted := {"n": 0}
+		# Confirm path: arm then confirm calls _restart.
+		scene._restart_confirm_armed = false
+		scene.btn_pause_restart.pressed.emit()
+		_assert(scene._restart_confirm_armed, "restart armed after first click")
+		_assert(scene.btn_pause_confirm.visible, "confirm button visible")
+		# Long-press detonate: short hold no-op; ≥500ms fires.
+		var md0: int = int(scene.sim.manual_detonate_tick)
+		scene.detonate_now_ms_fn = func(): return 1000
+		scene._on_detonate_down()
+		scene.detonate_now_ms_fn = func(): return 1200 ## 200ms
+		scene._on_detonate_up()
+		_assert(int(scene.sim.manual_detonate_tick) == md0, "short press does not detonate")
+		scene.detonate_now_ms_fn = func(): return 2000
+		scene._on_detonate_down()
+		scene.detonate_now_ms_fn = func(): return 2000 + scene.DETONATE_LONGPRESS_MS + 10
+		scene._on_detonate_up()
+		_assert(int(scene.sim.manual_detonate_tick) >= 0, "long-press sets manual_detonate_tick")
+		_assert(str(scene.label_info.text).contains("手动起爆"),
+			"long-press detonate info=%s" % scene.label_info.text)
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "hud scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _visible_buttons(root: Node) -> Array:
+	var out: Array = []
+	_collect_buttons(root, out)
+	return out
+
+
+func _collect_buttons(n: Node, out: Array) -> void:
+	if n is BaseButton:
+		var b := n as BaseButton
+		if b.is_visible_in_tree() and not b.disabled:
+			out.append(b)
+	for c in n.get_children():
+		_collect_buttons(c, out)

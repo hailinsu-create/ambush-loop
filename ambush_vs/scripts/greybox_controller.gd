@@ -136,6 +136,26 @@ var setup_tool: String = "op" ## op | mine | trigger
 var _trip_drag_start: Vector2i = Vector2i(-1, -1)
 var pending_place_cell: Vector2i = Vector2i(-1, -1) ## ghost confirm cell
 var _last_unit_drag_cell: Vector2i = Vector2i(-1, -1)
+## PLAY-UX PR-5: touch HUD (≥88px), thumb cluster, pause menu, long-press detonate.
+const TOUCH_MIN_PX := 88.0
+const BODY_FONT_PX := 24 ## ≥22 design-px; ≥12 pt at 0.542 phone scale
+const DETONATE_LONGPRESS_MS := 500
+var thumb_bar: HBoxContainer = null
+var btn_thumb_start: Button = null
+var btn_thumb_begin: Button = null
+var btn_thumb_pause: Button = null
+var btn_thumb_speed: Button = null
+var btn_thumb_detonate: Button = null
+var pause_menu: PanelContainer = null
+var btn_pause_restart: Button = null
+var btn_pause_confirm: Button = null
+var btn_pause_resume: Button = null
+var dev_menu: VBoxContainer = null
+var btn_dev_toggle: Button = null
+var _detonate_press_ms: int = 0
+var _detonate_holding: bool = false
+var _restart_confirm_armed: bool = false
+var detonate_now_ms_fn: Callable = Callable() ## test clock
 
 
 func _ready() -> void:
@@ -163,6 +183,7 @@ func _ready() -> void:
 	map_view.unit_hit_radius_cells = 0.8
 	_build_portrait_strip()
 	_build_setup_tool_bars()
+	_build_touch_hud()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -171,9 +192,14 @@ func _ready() -> void:
 	btn_preview.pressed.connect(func(): _ui_tap(); _toggle_preview_hint())
 	btn_pause.pressed.connect(func(): _ui_tap(); _toggle_pause())
 	btn_speed.pressed.connect(func(): _ui_tap(); _cycle_speed())
-	btn_detonate.pressed.connect(func(): _ui_tap(); _manual_detonate())
+	# Detonate: long-press only (PR-5) — disconnect instant press.
+	if btn_detonate:
+		for c in btn_detonate.pressed.get_connections():
+			btn_detonate.pressed.disconnect(c.callable)
 	btn_restart.pressed.connect(func(): _ui_tap(); _restart())
-	btn_restart_wait.pressed.connect(func(): _ui_tap(); _restart())
+	if btn_restart_wait:
+		btn_restart_wait.visible = false
+		btn_restart_wait.disabled = true
 	if btn_rescout:
 		btn_rescout.pressed.connect(func(): _ui_tap(); _restart_scout())
 	if btn_begin_setup:
@@ -186,6 +212,7 @@ func _ready() -> void:
 
 	_fill_trigger_options()
 	_set_example_plans_visible(false)
+	_apply_touch_sizing()
 
 	# Headless automation hooks (W3 test / PNG capture).
 	_headless_auto = str(OS.get_environment("AMBUSH_GREYBOX_AUTO")).to_lower() in ["1", "true", "a"]
@@ -450,22 +477,22 @@ func _build_kit_row() -> void:
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
 	var title := Label.new()
 	title.text = "起始套件"
-	title.add_theme_font_size_override("font_size", 14)
+	title.add_theme_font_size_override("font_size", BODY_FONT_PX)
 	if font_res:
 		title.add_theme_font_override("font", font_res)
 	kit_row.add_child(title)
 	for wid in ["kar98k", "mp40", "grenade", "mine", "mg42"]:
 		var box := VBoxContainer.new()
-		box.custom_minimum_size = Vector2(48, 64)
+		box.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
 		var tr := TextureRect.new()
-		tr.custom_minimum_size = Vector2(40, 40)
+		tr.custom_minimum_size = Vector2(48, 48)
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		if g3_assets and g3_assets.weapon_icons.has(wid):
 			tr.texture = g3_assets.weapon_icons[wid]
 		var lab := Label.new()
 		lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lab.add_theme_font_size_override("font_size", 11)
+		lab.add_theme_font_size_override("font_size", BODY_FONT_PX)
 		if font_res:
 			lab.add_theme_font_override("font", font_res)
 		if wid == "mg42" and not is_mg42_unlocked():
@@ -497,8 +524,8 @@ func _build_op_cards() -> void:
 		card.add_theme_constant_override("separation", 4)
 		var head := Button.new()
 		head.name = "Select"
-		head.custom_minimum_size = Vector2(0, 36)
-		head.add_theme_font_size_override("font_size", 15)
+		head.custom_minimum_size = Vector2(0, TOUCH_MIN_PX)
+		head.add_theme_font_size_override("font_size", BODY_FONT_PX)
 		if font_res:
 			head.add_theme_font_override("font", font_res)
 		head.pressed.connect(_on_op_card_pressed.bind(oid))
@@ -510,9 +537,9 @@ func _build_op_cards() -> void:
 			var wb := Button.new()
 			wb.name = "W_%s" % wid
 			wb.text = str(WEAPON_LABEL_ZH.get(wid, wid))
-			wb.custom_minimum_size = Vector2(0, 32)
+			wb.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
 			wb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			wb.add_theme_font_size_override("font_size", 12)
+			wb.add_theme_font_size_override("font_size", BODY_FONT_PX)
 			if font_res:
 				wb.add_theme_font_override("font", font_res)
 			wb.pressed.connect(_on_op_weapon_picked.bind(oid, wid))
@@ -523,9 +550,9 @@ func _build_op_cards() -> void:
 			mg.text = "MG42"
 			mg.disabled = true
 			mg.tooltip_text = "需在隐蔽补给点找到"
-			mg.custom_minimum_size = Vector2(0, 32)
+			mg.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
 			mg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			mg.add_theme_font_size_override("font_size", 12)
+			mg.add_theme_font_size_override("font_size", BODY_FONT_PX)
 			if font_res:
 				mg.add_theme_font_override("font", font_res)
 			wrow.add_child(mg)
@@ -844,6 +871,218 @@ func _update_legal_highlights() -> void:
 	map_view.queue_redraw()
 
 
+func _mk_touch_btn(text: String, min_w: float = TOUCH_MIN_PX) -> Button:
+	var b := Button.new()
+	b.text = text
+	b.custom_minimum_size = Vector2(min_w, TOUCH_MIN_PX)
+	b.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	return b
+
+
+func _build_touch_hud() -> void:
+	## Bottom-right thumb cluster + pause menu + top-left dev menu (PR-5).
+	thumb_bar = HBoxContainer.new()
+	thumb_bar.name = "ThumbBar"
+	thumb_bar.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	thumb_bar.offset_left = -520
+	thumb_bar.offset_top = -120
+	thumb_bar.offset_right = -8
+	thumb_bar.offset_bottom = -8
+	thumb_bar.add_theme_constant_override("separation", 8)
+	thumb_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	$HUD.add_child(thumb_bar)
+	btn_thumb_begin = _mk_touch_btn("开始布阵", 140)
+	btn_thumb_start = _mk_touch_btn("开始等待", 140)
+	btn_thumb_pause = _mk_touch_btn("暂停", 100)
+	btn_thumb_speed = _mk_touch_btn("倍速 1×", 100)
+	btn_thumb_detonate = _mk_touch_btn("长按起爆", 140)
+	btn_thumb_detonate.modulate = Color(1.0, 0.55, 0.45)
+	for b in [btn_thumb_begin, btn_thumb_start, btn_thumb_pause, btn_thumb_speed, btn_thumb_detonate]:
+		thumb_bar.add_child(b)
+	btn_thumb_begin.pressed.connect(func(): _ui_tap(); begin_setup_from_scout())
+	btn_thumb_start.pressed.connect(func(): _ui_tap(); _start_wait())
+	btn_thumb_pause.pressed.connect(func(): _ui_tap(); _toggle_pause())
+	btn_thumb_speed.pressed.connect(func(): _ui_tap(); _cycle_speed())
+	btn_thumb_detonate.button_down.connect(_on_detonate_down)
+	btn_thumb_detonate.button_up.connect(_on_detonate_up)
+	if btn_detonate:
+		btn_detonate.visible = false
+		btn_detonate.button_down.connect(_on_detonate_down)
+		btn_detonate.button_up.connect(_on_detonate_up)
+	# Hide side-panel duplicates of primary actions (thumb cluster owns them).
+	if btn_start:
+		btn_start.visible = false
+	if btn_begin_setup:
+		btn_begin_setup.visible = false
+	if btn_pause:
+		btn_pause.visible = false
+	if btn_speed:
+		btn_speed.visible = false
+	if btn_restart_wait:
+		btn_restart_wait.visible = false
+	_build_pause_menu()
+	_build_dev_menu()
+	_refresh_thumb_visibility()
+
+
+func _build_pause_menu() -> void:
+	pause_menu = PanelContainer.new()
+	pause_menu.name = "PauseMenu"
+	pause_menu.visible = false
+	pause_menu.set_anchors_preset(Control.PRESET_CENTER)
+	pause_menu.offset_left = -180
+	pause_menu.offset_top = -160
+	pause_menu.offset_right = 180
+	pause_menu.offset_bottom = 160
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 10)
+	pause_menu.add_child(vb)
+	var title := Label.new()
+	title.text = "已暂停"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 26)
+	vb.add_child(title)
+	btn_pause_resume = _mk_touch_btn("继续", 200)
+	btn_pause_restart = _mk_touch_btn("重新开始", 200)
+	btn_pause_confirm = _mk_touch_btn("确认重新开始", 200)
+	btn_pause_confirm.visible = false
+	btn_pause_confirm.modulate = Color(1.0, 0.5, 0.4)
+	vb.add_child(btn_pause_resume)
+	vb.add_child(btn_pause_restart)
+	vb.add_child(btn_pause_confirm)
+	$HUD.add_child(pause_menu)
+	btn_pause_resume.pressed.connect(func():
+		_ui_tap()
+		if paused:
+			_toggle_pause()
+	)
+	btn_pause_restart.pressed.connect(func():
+		_ui_tap()
+		_restart_confirm_armed = true
+		btn_pause_confirm.visible = true
+		label_info.text = "再点「确认重新开始」才会清空本局"
+	)
+	btn_pause_confirm.pressed.connect(func():
+		_ui_tap()
+		if _restart_confirm_armed:
+			_restart_confirm_armed = false
+			btn_pause_confirm.visible = false
+			if pause_menu:
+				pause_menu.visible = false
+			_restart()
+	)
+
+
+func _build_dev_menu() -> void:
+	btn_dev_toggle = _mk_touch_btn("开发", 100)
+	btn_dev_toggle.name = "DevMenuToggle"
+	btn_dev_toggle.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	btn_dev_toggle.offset_left = 8
+	btn_dev_toggle.offset_top = 52
+	btn_dev_toggle.offset_right = 108
+	btn_dev_toggle.offset_bottom = 140
+	$HUD.add_child(btn_dev_toggle)
+	dev_menu = VBoxContainer.new()
+	dev_menu.name = "DevMenu"
+	dev_menu.visible = false
+	dev_menu.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	dev_menu.offset_left = 8
+	dev_menu.offset_top = 148
+	dev_menu.offset_right = 280
+	dev_menu.offset_bottom = 520
+	dev_menu.add_theme_constant_override("separation", 6)
+	$HUD.add_child(dev_menu)
+	btn_dev_toggle.pressed.connect(func():
+		_ui_tap()
+		dev_menu.visible = not dev_menu.visible
+	)
+	# Move debug controls into the menu (reparent keeps signal connections).
+	for b in [btn_example, btn_plan_a, btn_plan_b, btn_preview, btn_g2_art, btn_scout_preview]:
+		if b == null:
+			continue
+		b.get_parent().remove_child(b)
+		dev_menu.add_child(b)
+		b.visible = true
+		b.custom_minimum_size = Vector2(240, TOUCH_MIN_PX)
+		b.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	# Plan A/B stay hidden until example toggle.
+	if btn_plan_a:
+		btn_plan_a.visible = false
+	if btn_plan_b:
+		btn_plan_b.visible = false
+
+
+func _apply_touch_sizing() -> void:
+	## Enforce ≥88 design-px touch targets and ≥22 body text.
+	for n in [label_phase, label_info, label_alert, label_start_reason, label_scout_clock, label_scout_kit]:
+		if n:
+			n.add_theme_font_size_override("font_size", maxi(BODY_FONT_PX, int(n.get_theme_font_size("font_size"))))
+	for b in [btn_start, btn_begin_setup, btn_pause, btn_speed, btn_detonate, btn_restart, btn_rescout, btn_restart_wait]:
+		if b == null:
+			continue
+		var sz: Vector2 = b.custom_minimum_size
+		b.custom_minimum_size = Vector2(maxf(sz.x, TOUCH_MIN_PX), maxf(sz.y, TOUCH_MIN_PX))
+		b.add_theme_font_size_override("font_size", maxi(BODY_FONT_PX, int(b.get_theme_font_size("font_size"))))
+	if trigger_option:
+		trigger_option.custom_minimum_size = Vector2(0, TOUCH_MIN_PX)
+	# Side panels become lighter overlays (map is full-bleed).
+	if setup_panel:
+		setup_panel.offset_left = -300.0
+		setup_panel.offset_bottom = -130.0
+	if scout_panel:
+		scout_panel.offset_left = -300.0
+		scout_panel.offset_bottom = -130.0
+	if wait_panel:
+		wait_panel.offset_left = -300.0
+		wait_panel.offset_bottom = -130.0
+
+
+func _refresh_thumb_visibility() -> void:
+	if thumb_bar == null:
+		return
+	var scout := ui_phase == UiPhase.SCOUT
+	var setup := ui_phase == UiPhase.SETUP
+	var wait := ui_phase == UiPhase.WAIT
+	if btn_thumb_begin:
+		btn_thumb_begin.visible = scout
+	if btn_thumb_start:
+		btn_thumb_start.visible = setup
+	if btn_thumb_pause:
+		btn_thumb_pause.visible = wait
+	if btn_thumb_speed:
+		btn_thumb_speed.visible = wait
+	if btn_thumb_detonate:
+		btn_thumb_detonate.visible = wait
+	thumb_bar.visible = scout or setup or wait
+
+
+func _detonate_now_ms() -> int:
+	if detonate_now_ms_fn.is_valid():
+		return int(detonate_now_ms_fn.call())
+	return Time.get_ticks_msec()
+
+
+func _on_detonate_down() -> void:
+	_detonate_holding = true
+	_detonate_press_ms = _detonate_now_ms()
+	if btn_thumb_detonate:
+		btn_thumb_detonate.text = "按住…"
+
+
+func _on_detonate_up() -> void:
+	if not _detonate_holding:
+		return
+	var held := _detonate_now_ms() - _detonate_press_ms
+	_detonate_holding = false
+	if btn_thumb_detonate:
+		btn_thumb_detonate.text = "长按起爆"
+	if held >= DETONATE_LONGPRESS_MS:
+		_ui_tap()
+		_manual_detonate()
+	else:
+		label_info.text = "起爆需长按 %.1f 秒" % (float(DETONATE_LONGPRESS_MS) / 1000.0)
+
+
 func _set_ui_phase(p: UiPhase) -> void:
 	ui_phase = p
 	if scout_panel:
@@ -860,11 +1099,15 @@ func _set_ui_phase(p: UiPhase) -> void:
 			label_phase.text = "等待"
 		UiPhase.RESULT:
 			label_phase.text = "结算"
+	if pause_menu and p != UiPhase.WAIT:
+		pause_menu.visible = false
+		_restart_confirm_armed = false
 	_refresh_portrait_strip()
 	_update_setup_chrome_visibility()
 	_update_legal_highlights()
 	_refresh_tool_chips()
 	_refresh_trigger_chips()
+	_refresh_thumb_visibility()
 
 
 func start_block_reason() -> String:
@@ -924,6 +1167,12 @@ func _refresh_start_gate() -> void:
 	var reason := start_block_reason()
 	if btn_start:
 		btn_start.disabled = not reason.is_empty()
+	if btn_thumb_start:
+		btn_thumb_start.disabled = not reason.is_empty()
+		if reason.is_empty():
+			btn_thumb_start.text = "开始等待"
+		else:
+			btn_thumb_start.text = reason if reason.length() <= 10 else "开始等待"
 	if label_start_reason:
 		label_start_reason.text = reason
 		label_start_reason.visible = not reason.is_empty()
@@ -964,16 +1213,30 @@ func _start_wait() -> void:
 
 func _toggle_pause() -> void:
 	paused = not paused
-	btn_pause.text = "继续" if paused else "暂停"
+	var t := "继续" if paused else "暂停"
+	if btn_pause:
+		btn_pause.text = t
+	if btn_thumb_pause:
+		btn_thumb_pause.text = t
+	if pause_menu:
+		pause_menu.visible = paused and ui_phase == UiPhase.WAIT
+		if not paused:
+			_restart_confirm_armed = false
+			if btn_pause_confirm:
+				btn_pause_confirm.visible = false
 
 
 func _cycle_speed() -> void:
 	if speed_mul < 1.5:
 		speed_mul = 2.0
 		btn_speed.text = "倍速 2×"
+		if btn_thumb_speed:
+			btn_thumb_speed.text = "倍速 2×"
 	else:
 		speed_mul = 1.0
 		btn_speed.text = "倍速 1×"
+		if btn_thumb_speed:
+			btn_thumb_speed.text = "倍速 1×"
 
 
 func _manual_detonate() -> void:
