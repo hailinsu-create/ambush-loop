@@ -1674,18 +1674,44 @@ func _auto_run_plan(which: String) -> void:
 			captured_midfight = true
 		# PLAY-6 evidence shots: enemy in cover returning fire; wounded operator.
 		if not captured_cover_fire and sim.detonate_tick >= 0:
-			var any_cover_fire := false
+			var cover_actor := ""
 			for e in sim.enemies:
 				if bool(e.get("in_cover", false)) and bool(e.get("alive", false)):
-					any_cover_fire = true
+					cover_actor = str(e.get("id", ""))
 					break
-			if any_cover_fire:
+			var saw_cover_shot := false
+			if cover_actor != "":
+				for ev in sim.log.events:
+					if str(ev.get("type", "")) == "enemy_fire" and str(ev.get("actor", "")) == cover_actor:
+						saw_cover_shot = true
+						break
+			# Fallback: any living cover-seeker that has fired (plan A rarely reaches full in_cover).
+			if cover_actor == "" or not saw_cover_shot:
+				for e in sim.enemies:
+					if not bool(e.get("alive", false)) or str(e.get("mode", "")) != "cover":
+						continue
+					for ev in sim.log.events:
+						if str(ev.get("type", "")) == "enemy_fire" and str(ev.get("actor", "")) == str(e.get("id", "")):
+							cover_actor = str(e.get("id", ""))
+							saw_cover_shot = true
+							break
+					if saw_cover_shot:
+						break
+			if cover_actor != "" and saw_cover_shot:
 				_push_map_snapshot()
 				await get_tree().process_frame
 				await get_tree().process_frame
 				_try_capture("cover_fire")
 				captured_cover_fire = true
 		if not captured_wounded and not (sim.wounded_ids as Array).is_empty():
+			# Hold a beat so the 负伤 ring is on-screen with active tracers.
+			for _w in range(3):
+				if sim.is_finished():
+					break
+				sim.advance_one_tick()
+				_consume_sim_log()
+				if map_view and map_view.combat_fx:
+					map_view.combat_fx.advance(SimConstants.DT_S)
 			_push_map_snapshot()
 			await get_tree().process_frame
 			await get_tree().process_frame
