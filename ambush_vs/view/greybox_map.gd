@@ -1212,7 +1212,6 @@ func _draw_g3_bag_pile(x: int, y: int) -> void:
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
 	var sz := cell_px * 0.92
 	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.30), Vector2(sz, sz))
-	_draw_g3_soft_contact(dest)
 	draw_texture_rect(pile, dest, false, _g3_bag_night_mod())
 
 
@@ -1235,15 +1234,14 @@ func _draw_g3_bag_joint(x: int, y: int) -> void:
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
 	var sz := cell_px * 0.92
 	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.28), Vector2(sz, sz))
-	_draw_g3_soft_contact(dest)
 	draw_texture_rect(tex, dest, false, _g3_bag_night_mod())
 
 
 func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> void:
-	## One straight tile per cell, overlapping neighbors — continuous wall, full cell span.
-	var tex: Texture2D = _g3_bag("sandbag_straight_s")
+	## Continuous run: tile straight segments with heavy overlap (no per-cell gaps / backings).
+	var tex: Texture2D = _g3_bag("sandbag_straight_m")
 	if tex == null:
-		tex = _g3_bag("sandbag_straight_m")
+		tex = _g3_bag("sandbag_straight_s")
 	if tex == null:
 		tex = _g3_bag("sandbag_straight")
 	if tex == null:
@@ -1252,44 +1250,38 @@ func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> v
 	var tw := float(tex.get_width())
 	var th := float(tex.get_height())
 	var aspect := tw / maxf(1.0, th)
-	# Span full cell along the run; preserve aspect → thickness ≈ cell/aspect for S (~0.47).
-	var along_span := cell_px * 1.14 ## overlap kills seams
-	var thick := clampf(along_span / aspect, cell_px * 0.42, cell_px * 0.78)
-	for i in range(length):
-		var x := ox + i if horizontal else ox
-		var y := oy if horizontal else oy + i
-		var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
+	## Fill cell width along the run; thickness ~0.72 cell (mild aspect squeeze OK for wall read).
+	var thick := cell_px * 0.72
+	var tile_along := thick * aspect ## ~2.25 cells for M
+	var run_len := float(length) * cell_px
+	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
+	if not horizontal:
+		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
+	var along := -cell_px * 0.08
+	while along < run_len + cell_px * 0.08:
+		var seg_w := tile_along
 		if horizontal:
 			var dest := Rect2(
-				base + Vector2((cell_px - along_span) * 0.5, (cell_px - thick) * 0.42),
-				Vector2(along_span, thick)
+				base + Vector2(along, (cell_px - thick) * 0.38),
+				Vector2(seg_w, thick)
 			)
-			_draw_g3_soft_contact(dest)
 			draw_texture_rect(tex, dest, false, mod)
 		else:
-			# Rotate horizontal sheet art 90° around cell center (matrix, not fragile set_transform).
 			var cx := base.x + cell_px * 0.5
-			var cy := base.y + cell_px * 0.5
+			var cy := base.y + along + seg_w * 0.5
 			var xform := Transform2D(Vector2(0.0, -1.0), Vector2(1.0, 0.0), Vector2(cx, cy))
 			draw_set_transform_matrix(xform)
-			var dest_v := Rect2(Vector2(-along_span * 0.5, -thick * 0.5), Vector2(along_span, thick))
-			# Soft contact in local space (after rotation → thin strip along vertical run).
-			_draw_g3_soft_contact(dest_v)
-			draw_texture_rect(tex, dest_v, false, mod)
+			draw_texture_rect(tex, Rect2(Vector2(-seg_w * 0.5, -thick * 0.5), Vector2(seg_w, thick)), false, mod)
 			draw_set_transform_matrix(Transform2D.IDENTITY)
-	# Caps / joints only at true elbows (not every thick-pad side).
+		along += seg_w * 0.72 ## heavy overlap → continuous burlap wall
+	# Caps / joints only at true elbows.
 	if length < 2:
 		return
 	var cap: Texture2D = _g3_bag("sandbag_end_cap")
-	var ends: Array = []
-	if horizontal:
-		ends = [[ox, oy, true], [ox + length - 1, oy, false]]
-	else:
-		ends = [[ox, oy, true], [ox, oy + length - 1, false]]
+	var ends: Array = [[ox, oy], [ox + length - 1, oy]] if horizontal else [[ox, oy], [ox, oy + length - 1]]
 	for e in ends:
 		var ex: int = e[0]
 		var ey: int = e[1]
-		# True turn: exactly one perpendicular cover neighbor and no continuation past end.
 		var n := _cover_at(ex, ey + 1)
 		var s := _cover_at(ex, ey - 1)
 		var ee := _cover_at(ex + 1, ey)
@@ -1304,7 +1296,7 @@ func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> v
 		if cap == null:
 			continue
 		var base2 := Vector2(float(ex) * cell_px, float(grid_h - 1 - ey) * cell_px)
-		var cap_sz := cell_px * 0.50
+		var cap_sz := cell_px * 0.48
 		draw_texture_rect(
 			cap,
 			Rect2(base2 + Vector2((cell_px - cap_sz) * 0.5, (cell_px - cap_sz) * 0.40), Vector2(cap_sz, cap_sz)),
