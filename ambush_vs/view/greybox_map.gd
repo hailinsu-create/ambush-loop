@@ -15,6 +15,10 @@ signal unit_selected(op_id: String)
 
 enum ArtMode { G3, G2, G1 }
 
+## World-space UV: texture spans this many cells (keeps native detail).
+const G3_TEX_CELLS := 4.0
+const G3_UNIT_SCALE := 1.6
+
 var assets: G1Assets
 var g2: G2Assets
 var g3: G3Assets
@@ -268,18 +272,93 @@ func _g3_tex(surface: String) -> Texture2D:
 
 func _draw_g3_cell(cell: Dictionary, kind: String, tier: String, x: int, y: int, rect: Rect2) -> void:
 	var surf := _surface_key(cell, kind, tier, x, y)
-	var tex := _g3_tex(surf)
-	if tex:
-		draw_texture_rect(tex, rect, false)
-	if surf in ["mud", "grass", "cobble", "planks"]:
-		_blend_g3_edges(x, y, surf, rect)
+	# Structures: ground under shed, not a grey wall fill.
+	if kind == "structure":
+		_draw_g3_world_sample(g3.tile_planks, x, y, rect)
+		return
+	if surf == "stonewall":
+		_draw_g3_world_sample(g3.tile_stonewall, x, y, rect)
+		# Height / thickness shadow along south edge (screen-bottom).
+		draw_rect(Rect2(rect.position + Vector2(0, rect.size.y * 0.72), Vector2(rect.size.x, rect.size.y * 0.28)), Color(0, 0, 0, 0.35), true)
+		draw_rect(Rect2(rect.position, Vector2(rect.size.x, 2)), Color(0, 0, 0, 0.25), true)
+		return
 	if surf.begins_with("roof"):
+		# Drop shadow first so roof sits above neighbors.
 		if g3.drop_shadow:
-			draw_texture_rect(g3.drop_shadow, Rect2(rect.position + Vector2(2, 3), rect.size), false)
-			if tex:
-				draw_texture_rect(tex, rect, false)
+			draw_texture_rect(g3.drop_shadow, Rect2(rect.position + Vector2(3, 5), rect.size), false)
+		_draw_g3_world_sample(_g3_tex(surf), x, y, rect)
+		# Ridge line (gable) for concept readability.
+		var mid_x := rect.position.x + rect.size.x * 0.5
+		draw_line(Vector2(mid_x, rect.position.y + 2), Vector2(mid_x, rect.position.y + rect.size.y - 2), Color(0.12, 0.13, 0.16, 0.95), 2.0)
+		# Eaves shadow along south.
+		draw_rect(Rect2(rect.position + Vector2(0, rect.size.y * 0.78), Vector2(rect.size.x, rect.size.y * 0.22)), Color(0, 0, 0, 0.28), true)
 		if g3.high_edge:
 			draw_texture_rect(g3.high_edge, rect, false)
+		return
+	# Ground types — world-space UV + soft neighbor blend.
+	_draw_g3_world_sample(_g3_tex(surf), x, y, rect)
+	if surf in ["mud", "grass", "cobble", "planks"]:
+		_blend_g3_edges(x, y, surf, rect)
+
+
+func _draw_g3_world_sample(tex: Texture2D, cell_x: int, cell_y: int, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)) -> void:
+	if tex == null:
+		return
+	var tw := float(tex.get_width())
+	var th := float(tex.get_height())
+	var uw := tw / G3_TEX_CELLS
+	var vh := th / G3_TEX_CELLS
+	var u0 := fposmod(float(cell_x) * uw, tw)
+	var v0 := fposmod(float(cell_y) * vh, th)
+	_draw_region_wrapped(tex, dest, u0, v0, uw, vh, tw, th, modulate)
+
+
+func _draw_region_wrapped(
+	tex: Texture2D, dest: Rect2, u0: float, v0: float, uw: float, vh: float, tw: float, th: float, modulate: Color
+) -> void:
+	## Seamless textures: split dest if the source region wraps the atlas edge.
+	var u1 := u0 + uw
+	var v1 := v0 + vh
+	if u1 <= tw and v1 <= th:
+		draw_texture_rect_region(tex, dest, Rect2(u0, v0, uw, vh), modulate)
+		return
+	var u_right := maxf(0.0, u1 - tw)
+	var u_left := uw - u_right
+	var v_bot := maxf(0.0, v1 - th)
+	var v_top := vh - v_bot
+	var x_split := dest.size.x * (u_left / uw) if u_right > 0.0 else dest.size.x
+	var y_split := dest.size.y * (v_top / vh) if v_bot > 0.0 else dest.size.y
+	# TL
+	draw_texture_rect_region(
+		tex,
+		Rect2(dest.position, Vector2(x_split, y_split)),
+		Rect2(u0, v0, u_left if u_right > 0.0 else uw, v_top if v_bot > 0.0 else vh),
+		modulate
+	)
+	# TR
+	if u_right > 0.0:
+		draw_texture_rect_region(
+			tex,
+			Rect2(dest.position + Vector2(x_split, 0), Vector2(dest.size.x - x_split, y_split)),
+			Rect2(0, v0, u_right, v_top if v_bot > 0.0 else vh),
+			modulate
+		)
+	# BL
+	if v_bot > 0.0:
+		draw_texture_rect_region(
+			tex,
+			Rect2(dest.position + Vector2(0, y_split), Vector2(x_split, dest.size.y - y_split)),
+			Rect2(u0, 0, u_left if u_right > 0.0 else uw, v_bot),
+			modulate
+		)
+	# BR
+	if u_right > 0.0 and v_bot > 0.0:
+		draw_texture_rect_region(
+			tex,
+			Rect2(dest.position + Vector2(x_split, y_split), Vector2(dest.size.x - x_split, dest.size.y - y_split)),
+			Rect2(0, 0, u_right, v_bot),
+			modulate
+		)
 
 
 func _blend_g3_edges(x: int, y: int, surf: String, rect: Rect2) -> void:
@@ -305,7 +384,19 @@ func _blend_g3_edges(x: int, y: int, surf: String, rect: Rect2) -> void:
 		var ntex := _g3_tex(nsurf)
 		if ntex == null:
 			continue
-		draw_texture_rect(ntex, rect, false, Color(1, 1, 1, 0.28))
+		# Soft strip along shared edge only (not full-cell wash).
+		var strip := rect
+		var t := 0.32
+		match str(d[2]):
+			"n":
+				strip = Rect2(rect.position, Vector2(rect.size.x, rect.size.y * t))
+			"s":
+				strip = Rect2(rect.position + Vector2(0, rect.size.y * (1.0 - t)), Vector2(rect.size.x, rect.size.y * t))
+			"w":
+				strip = Rect2(rect.position, Vector2(rect.size.x * t, rect.size.y))
+			"e":
+				strip = Rect2(rect.position + Vector2(rect.size.x * (1.0 - t), 0), Vector2(rect.size.x * t, rect.size.y))
+		_draw_g3_world_sample(ntex, nx, ny, strip, Color(1, 1, 1, 0.40))
 
 
 func _tile_tex_for(cell: Dictionary, kind: String, tier: String, x: int, y: int) -> Texture2D:
@@ -345,16 +436,23 @@ func _draw_night_dim() -> void:
 
 
 func _draw_g3_grade() -> void:
+	## Moonlit but readable — very light cool wash (yard_concept), keep mud/grass/cobble hues.
 	if not night:
 		return
-	draw_rect(Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), Color(0.15, 0.28, 0.45, 0.28), true)
+	draw_rect(Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), Color(0.12, 0.16, 0.26, 0.05), true)
 	if g3.vignette:
-		draw_texture_rect(g3.vignette, Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), false)
+		draw_texture_rect(g3.vignette, Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), false, Color(1, 1, 1, 0.32))
 	if g3.lantern_glow:
-		for c in [Vector2i(11, 1), Vector2i(5, 10), Vector2i(14, 7), Vector2i(19, 8), Vector2i(10, 14)]:
+		# Few small warm lamps (shed / barn / crates) — not map-washing discs.
+		for c in [Vector2i(5, 10), Vector2i(14, 7), Vector2i(11, 1)]:
 			var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
-			var sz := cell_px * 2.4
-			draw_texture_rect(g3.lantern_glow, Rect2(p + Vector2(cell_px * 0.5 - sz * 0.5, cell_px * 0.5 - sz * 0.5), Vector2(sz, sz)), false)
+			var sz := cell_px * 0.85
+			draw_texture_rect(
+				g3.lantern_glow,
+				Rect2(p + Vector2(cell_px * 0.5 - sz * 0.5, cell_px * 0.5 - sz * 0.5), Vector2(sz, sz)),
+				false,
+				Color(1.0, 0.72, 0.35, 0.95)
+			)
 
 
 func _draw_g3_props() -> void:
@@ -369,7 +467,9 @@ func _draw_g3_props() -> void:
 			if kind == "structure":
 				var shed: Texture2D = g3.props.get("shed_roof", null)
 				if shed:
-					draw_texture_rect(shed, rect, false)
+					if g3.drop_shadow:
+						draw_texture_rect(g3.drop_shadow, Rect2(rect.position + Vector2(2, 4), rect.size), false)
+					draw_texture_rect(shed, Rect2(rect.position - Vector2(cell_px * 0.05, cell_px * 0.08), rect.size * 1.1), false)
 			if bool(cell.get("low_cover", false)):
 				var bag_name := "sandbag_straight" if ((x + y) % 2) == 0 else "sandbag_curve"
 				var bag: Texture2D = g3.props.get(bag_name, null)
@@ -442,14 +542,16 @@ func _draw_enemy_cones() -> void:
 	for s in sentries:
 		var sp := _observer_xy(s)
 		var cone_s: Dictionary = s.get("cone", {})
+		var ca := 0.11 if art_mode == ArtMode.G3 else 0.28
+		var ce := 0.12 if art_mode == ArtMode.G3 else 0.35
 		_draw_one_cone(
 			sp.x, sp.y,
 			float(cone_s.get("facing_deg", 0)),
 			float(cone_s.get("angle_deg", 50)) * 0.5,
 			float(cone_s.get("range_cells", 8)),
 			str(s.get("tier", "ground")),
-			Color(1.0, 0.55, 0.15, 0.28),
-			Color(0.85, 0.3, 0.85, 0.35)
+			Color(1.0, 0.55, 0.15, ca),
+			Color(0.85, 0.3, 0.85, ce)
 		)
 	for p in patrols:
 		var cone: Dictionary = p.get("cone", {})
@@ -459,13 +561,15 @@ func _draw_enemy_cones() -> void:
 			if ar.has("facing_deg"):
 				facing = float(ar["facing_deg"])
 		var pp := _observer_xy(p)
+		var pa := 0.09 if art_mode == ArtMode.G3 else 0.22
+		var pe := 0.11 if art_mode == ArtMode.G3 else 0.35
 		_draw_one_cone(
 			pp.x, pp.y, facing,
 			float(cone.get("angle_deg", 50)) * 0.5,
 			float(cone.get("range_cells", 6)),
 			SimConstants.TIER_GROUND,
-			Color(1.0, 0.55, 0.15, 0.22),
-			Color(0.85, 0.3, 0.85, 0.35)
+			Color(1.0, 0.55, 0.15, pa),
+			Color(0.85, 0.3, 0.85, pe)
 		)
 
 
@@ -475,6 +579,10 @@ func _draw_one_cone(
 ) -> void:
 	## Ground-length wedge + distinct ×1.5 high-target extension outline.
 	_draw_wedge(ox, oy, facing, half, rng, col_ground, false)
+	if art_mode == ArtMode.G3:
+		# Readable outline so light fill does not rely on opaque blocks.
+		var outline := Color(col_ground.r, col_ground.g, col_ground.b, minf(0.85, col_ground.a + 0.55))
+		_draw_wedge(ox, oy, facing, half, rng, outline, true)
 	if night:
 		_draw_wedge(ox, oy, facing, half, rng * SimConstants.SILHOUETTE_MUL, col_ext, true)
 
@@ -521,7 +629,12 @@ func _draw_weapon_sectors() -> void:
 		var oy := float(op["y"])
 		var facing := float(op["facing_deg"])
 		var tier := str(op.get("tier", "ground"))
-		# Use sim geometry for clear vs blocked (preview = sim).
+		if art_mode == ArtMode.G3:
+			# No per-cell green/grey fills — outline + soft wedge tint only (≤15%).
+			_draw_wedge(ox, oy, facing, half, rng, Color(0.40, 0.90, 0.50, 0.10), false)
+			_draw_wedge(ox, oy, facing, half, rng, Color(0.45, 0.95, 0.55, 0.72), true)
+			continue
+		# G1/G2: cell fills show clear vs blocked (preview = sim).
 		var r_ceil := int(ceil(rng)) + 1
 		var oxi := int(floor(ox))
 		var oyi := int(floor(oy))
@@ -544,9 +657,10 @@ func _draw_weapon_sectors() -> void:
 func _draw_threat_slots() -> void:
 	if assets.threat_slot == null:
 		return
+	var mod := Color(1, 1, 1, 0.55) if art_mode == ArtMode.G3 else Color(1, 1, 1, 1)
 	for c in threat_slot_cells:
 		var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
-		draw_texture_rect(assets.threat_slot, Rect2(p, Vector2(cell_px, cell_px)), false)
+		draw_texture_rect(assets.threat_slot, Rect2(p, Vector2(cell_px, cell_px)), false, mod)
 
 
 func _draw_marker_and_mines() -> void:
@@ -634,10 +748,18 @@ func _draw_units() -> void:
 			var g2u: Texture2D = g2.weapon_units.get(wid, null)
 			if g2u != null:
 				tex = g2u
-		_draw_unit_tex(tex, float(op["x"]), float(op["y"]), float(op["facing_deg"]), str(op["id"]) == selected_op_id)
-		if high and art_mode != ArtMode.G1:
+		var is_sel := str(op["id"]) == selected_op_id
+		_draw_unit_tex(tex, float(op["x"]), float(op["y"]), float(op["facing_deg"]), is_sel)
+		# Team ring on every friendly (selected = brighter); high keeps gold accent.
+		if art_mode == ArtMode.G3:
 			var hp := cell_to_screen(float(op["x"]), float(op["y"]))
-			draw_arc(hp, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
+			var ring_col := Color(1.0, 0.95, 0.35, 0.95) if is_sel else Color(1.0, 0.88, 0.25, 0.72)
+			draw_arc(hp, cell_px * 0.78, 0, TAU, 28, ring_col, 2.2 if is_sel else 1.8)
+			if high:
+				draw_arc(hp, cell_px * 0.92, 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.85), 1.6)
+		elif high:
+			var hp2 := cell_to_screen(float(op["x"]), float(op["y"]))
+			draw_arc(hp2, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
 		var sp := cell_to_screen(float(op["x"]), float(op["y"]))
 		draw_string(ThemeDB.fallback_font, sp + Vector2(-10, -cell_px * 0.55), str(op["id"]).substr(0, 6), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.9, 0.95, 1.0))
 
@@ -646,13 +768,16 @@ func _draw_unit_tex(tex: Texture2D, x: float, y: float, facing_deg: float, selec
 	if tex == null:
 		return
 	var p := cell_to_screen(x, y)
-	var sz := Vector2(cell_px * 0.85, cell_px * 0.85)
-	var rect := Rect2(p - sz * 0.5, sz)
+	var scale := G3_UNIT_SCALE if art_mode == ArtMode.G3 else 0.85
+	var sz := Vector2(cell_px * scale, cell_px * scale)
+	if art_mode == ArtMode.G3 and g3 != null and g3.drop_shadow:
+		var sh := sz * 0.95
+		draw_texture_rect(g3.drop_shadow, Rect2(p - sh * 0.5 + Vector2(3, 5), sh), false, Color(1, 1, 1, 0.85))
 	# Rotate around center: draw via transform
 	draw_set_transform(p, deg_to_rad(-facing_deg), Vector2.ONE) # screen y flip ⇒ negate angle
 	draw_texture_rect(tex, Rect2(-sz * 0.5, sz), false)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-	if selected:
+	if selected and art_mode != ArtMode.G3:
 		draw_arc(p, cell_px * 0.55, 0, TAU, 24, Color(1, 1, 0.4, 0.9), 2.0)
 
 

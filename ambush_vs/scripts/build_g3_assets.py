@@ -204,33 +204,51 @@ def soft_edge_masks(size: int = 64) -> dict[str, Image.Image]:
 	return masks
 
 
-def make_lantern_glow(size: int = 128) -> Image.Image:
+def make_lantern_glow(size: int = 72) -> Image.Image:
+	"""Small warm localized glow (not map-washing discs)."""
 	im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
 	d = ImageDraw.Draw(im)
 	cx = cy = size // 2
-	for r, a in ((size // 2, 35), (size // 3, 70), (size // 6, 120), (8, 200)):
-		d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(255, 180, 70, a))
+	for r, a in ((size // 2, 22), (size // 3, 48), (size // 6, 120), (5, 210)):
+		d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(255, 150, 40, a))
 	return im
 
 
-def make_drop_shadow(size: int = 64) -> Image.Image:
+def make_drop_shadow(size: int = 96) -> Image.Image:
 	im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
 	d = ImageDraw.Draw(im)
-	d.ellipse((8, 14, size - 4, size - 2), fill=(0, 0, 0, 110))
-	return im.filter(ImageFilter.GaussianBlur(3))
+	d.ellipse((10, 20, size - 6, size - 4), fill=(0, 0, 0, 100))
+	return im.filter(ImageFilter.GaussianBlur(5))
 
 
 def make_high_edge_trim(size: int = 64) -> Image.Image:
-	"""Yellow-ish edge trim for high-tier readability (ADR-HEIGHT)."""
+	"""Thin warm edge trim for high-tier readability (ADR-HEIGHT)."""
 	im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
 	d = ImageDraw.Draw(im)
-	d.rectangle((1, 1, size - 2, size - 2), outline=(255, 210, 40, 220), width=3)
+	d.rectangle((1, 1, size - 2, size - 2), outline=(255, 214, 96, 200), width=2)
+	return im
+
+
+
+def add_roof_detail(im: Image.Image) -> Image.Image:
+	"""Ridge line + eaves darkening so high cells read as roofs, not grey fills."""
+	im = im.copy()
+	d = ImageDraw.Draw(im)
+	w, h = im.size
+	cx = w // 2
+	# ridge
+	d.line([(cx, 2), (cx, h - 2)], fill=(28, 30, 36, 255), width=max(2, w // 48))
+	d.line([(cx - 1, 2), (cx - 1, h - 2)], fill=(55, 58, 66, 180), width=1)
+	# eaves strip (south / bottom in top-down)
+	for y in range(h - h // 5, h):
+		a = int(90 * (y - (h - h // 5)) / max(1, h // 5))
+		d.line([(0, y), (w, y)], fill=(10, 10, 14, a))
 	return im
 
 
 def moonlight_grade_swatch() -> Image.Image:
-	"""Lookup-ish overlay: cool blue multiply sample for docs/contact."""
-	im = Image.new("RGBA", (64, 64), (40, 70, 110, 90))
+	"""Lookup-ish overlay: very light cool wash for docs/contact."""
+	im = Image.new("RGBA", (64, 64), (40, 48, 62, 22))
 	return im
 
 
@@ -243,15 +261,26 @@ def build_tiles() -> dict:
 		"stonewall": "tex_stonewall.jpg",
 	}
 	meta = {}
+	# Per-material lift so mud/grass/cobble stay distinguishable under moonlight.
+	boosts = {
+		"mud": (1.22, 8.0, (1.12, 0.98, 0.88)),  # warmer brown
+		"grass": (1.18, 6.0, (0.90, 1.18, 0.92)),  # greener
+		"cobble": (1.20, 10.0, (1.05, 1.02, 0.92)),  # less blue-grey
+		"planks": (1.16, 8.0, (1.10, 1.00, 0.90)),
+		"stonewall": (1.14, 8.0, (1.02, 1.00, 0.96)),
+	}
 	for name, src_name in mapping.items():
 		im = Image.open(SRC / src_name)
 		tile = make_seamless(im, TILE_PX)
-		# slight night cool grade baked lightly into tile (still blendable)
+		mul, add, tint = boosts[name]
 		arr = np.asarray(tile).astype(np.float32)
-		arr[..., 0] *= 0.88
-		arr[..., 1] *= 0.92
-		arr[..., 2] = np.clip(arr[..., 2] * 1.05 + 8, 0, 255)
-		tile = Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8), "RGBA")
+		rgb = arr[..., :3] * mul + add
+		rgb *= np.array(tint, dtype=np.float32)
+		# Mild local contrast so world-UV detail reads at map scale.
+		mean = rgb.mean(axis=(0, 1), keepdims=True)
+		rgb = mean + (rgb - mean) * 1.15
+		arr[..., :3] = np.clip(rgb, 0, 255)
+		tile = Image.fromarray(arr.astype(np.uint8), "RGBA")
 		save_webp(tile, f"tiles/{name}.webp")
 		meta[name] = f"tiles/{name}.webp"
 
@@ -259,8 +288,14 @@ def build_tiles() -> dict:
 	w, h = roof.size
 	left = roof.crop((0, 0, w // 2, h))
 	right = roof.crop((w // 2, 0, w, h))
-	slate = make_seamless(left, TILE_PX)
-	shingle = make_seamless(right, TILE_PX)
+
+	def _lift_roof(im: Image.Image) -> Image.Image:
+		arr = np.asarray(im).astype(np.float32)
+		arr[..., :3] = np.clip(arr[..., :3] * 1.18 + 10.0, 0, 255)
+		return Image.fromarray(arr.astype(np.uint8), "RGBA")
+
+	slate = add_roof_detail(_lift_roof(make_seamless(left, TILE_PX)))
+	shingle = add_roof_detail(_lift_roof(make_seamless(right, TILE_PX)))
 	save_webp(slate, "tiles/roof_slate.webp")
 	save_webp(shingle, "tiles/roof_shingle.webp")
 	meta["roof_slate"] = "tiles/roof_slate.webp"
@@ -348,8 +383,8 @@ def build_weapons() -> dict:
 
 
 def build_fx() -> dict:
-	save_webp(make_lantern_glow(128), "fx/lantern_glow.webp", quality=80)
-	save_webp(make_drop_shadow(64), "fx/drop_shadow.webp", quality=80)
+	save_webp(make_lantern_glow(72), "fx/lantern_glow.webp", quality=80)
+	save_webp(make_drop_shadow(96), "fx/drop_shadow.webp", quality=80)
 	save_webp(make_high_edge_trim(64), "fx/high_edge.webp", quality=90)
 	save_webp(moonlight_grade_swatch(), "fx/moonlight_tint.webp", quality=80)
 	# vignette (white=keep, black=darken) stored as alpha mask style
@@ -362,9 +397,9 @@ def build_fx() -> dict:
 			dx = (x - cx) / cx
 			dy = (y - cy) / cy
 			r = math.sqrt(dx * dx + dy * dy)
-			v = int(np.clip((r - 0.55) / 0.65, 0, 1) * 160)
+			v = int(np.clip((r - 0.82) / 0.50, 0, 1) * 42)
 			px[x, y] = v
-	vig_rgba = Image.merge("RGBA", (Image.new("L", (size, size), 8), Image.new("L", (size, size), 12), Image.new("L", (size, size), 28), vig))
+	vig_rgba = Image.merge("RGBA", (Image.new("L", (size, size), 6), Image.new("L", (size, size), 8), Image.new("L", (size, size), 18), vig))
 	save_webp(vig_rgba, "fx/vignette.webp", quality=80)
 	masks = soft_edge_masks(64)
 	for k, m in masks.items():
