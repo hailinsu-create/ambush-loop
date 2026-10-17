@@ -890,7 +890,26 @@ func _test_briefing_and_phase_tips() -> void:
 		var scene = current_scene
 		if scene == null or scene.map_view == null or scene.briefing_card == null:
 			continue
+		## Fit asserts at both playable viewports before content checks.
+		for size_pair in [Vector2i(1280, 720), Vector2i(844, 390)]:
+			scene.apply_layout_size(size_pair.x, size_pair.y)
+			scene._show_briefing_card()
+			await process_frame
+			await process_frame
+			await process_frame
+			var tag := "%dx%d" % [size_pair.x, size_pair.y]
+			_assert(scene.briefing_card.visible, "briefing visible %s" % tag)
+			_assert(scene.briefing_dimmer != null and scene.briefing_dimmer.visible,
+				"dimmer visible %s" % tag)
+			var lay: Dictionary = scene.briefing_layout_ok(float(size_pair.x), float(size_pair.y))
+			_assert(bool(lay.get("card_in", false)), "briefing card on-screen %s got=%s" % [tag, lay])
+			_assert(bool(lay.get("btn_in", false)), "briefing dismiss on-screen %s got=%s" % [tag, lay])
+			_assert(float(lay.get("btn_h", 0.0)) + 1e-3 >= 44.0,
+				"briefing dismiss ≥44px %s h=%s" % [tag, lay.get("btn_h")])
+			_assert(not bool(lay.get("text_clip", true)), "briefing text not clipped %s got=%s" % [tag, lay])
+			_assert(bool(lay.get("ok", false)), "briefing layout ok %s got=%s" % [tag, lay])
 		scene.apply_layout_size(1280, 720)
+		scene._show_briefing_card()
 		await process_frame
 		await process_frame
 		_assert(scene.briefing_card.visible, "briefing visible on first boot")
@@ -908,6 +927,7 @@ func _test_briefing_and_phase_tips() -> void:
 		scene.btn_briefing_dismiss.pressed.emit()
 		await process_frame
 		_assert(not scene.briefing_card.visible, "briefing closes on 知道了")
+		_assert(scene.briefing_dimmer == null or not scene.briefing_dimmer.visible, "dimmer hides with card")
 		_assert(scene.briefing_dismiss_count >= 1, "briefing dismiss counted")
 		## Scout tip after dismiss (first scout entry may have been blocked by briefing).
 		scene._phase_tip_seen.erase("scout")

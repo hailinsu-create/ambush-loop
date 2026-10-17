@@ -10,7 +10,8 @@ const TITLE := "今夜简报"
 
 const BODY := """目标：全歼来犯，不放跑任何人。
 
-三个出口：北门、南门、东巷——任一有人逃脱即失败。
+三个出口：北门、南门、东巷。
+任一有人逃脱即失败。
 
 五拍流程：
 1. 侦察——摸清路线与动静
@@ -20,6 +21,13 @@ const BODY := """目标：全歼来犯，不放跑任何人。
 5. 起爆——长按起爆，按预案开火
 
 点「知道了」关闭。随时点右上「?」可再打开。"""
+
+## Compact phone-landscape copy — shorter lines so 844x390 fits with pinned dismiss.
+const BODY_PHONE := """目标：全歼来犯，不放跑任何人。
+出口：北门、南门、东巷。
+任一有人逃脱即失败。
+五拍：1侦察 2搜集 3布阵 4等待 5起爆
+点「知道了」关闭；右上「?」可再开。"""
 
 const DISMISS := "知道了"
 
@@ -33,7 +41,7 @@ const TIP_CLOSE := "关闭"
 
 static func all_teaching_texts() -> PackedStringArray:
 	return PackedStringArray([
-		TITLE, BODY, DISMISS,
+		TITLE, BODY, BODY_PHONE, DISMISS,
 		TIP_SCOUT, TIP_SETUP, TIP_WAIT, TIP_RESULT, TIP_CLOSE,
 	])
 

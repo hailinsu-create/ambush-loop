@@ -197,7 +197,12 @@ var shortcuts_help: PanelContainer = null
 var btn_shortcuts_help: Button = null
 ## P0-3: opening briefing + once-per-phase tips (neutral copy only).
 const BriefingCopy := preload("res://ui/briefing_copy.gd")
-var briefing_card: PanelContainer = null
+const BRIEFING_BTN_MIN_PX := 44.0 ## touch target floor for 「知道了」
+var briefing_dimmer: ColorRect = null
+var briefing_card: Control = null ## opaque shell (fill + panel)
+var briefing_panel: PanelContainer = null
+var briefing_title: Label = null
+var briefing_scroll: ScrollContainer = null
 var briefing_body: Label = null
 var btn_briefing_dismiss: Button = null
 var phase_tip_bar: PanelContainer = null
@@ -1411,51 +1416,157 @@ func _toggle_shortcuts_help() -> void:
 		shortcuts_help.visible = not shortcuts_help.visible
 
 
+func _briefing_border_style() -> StyleBoxFlat:
+	## Border-only style — ColorRect provides the opaque fill.
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0, 0, 0, 0)
+	sb.draw_center = false
+	sb.border_width_left = 2
+	sb.border_width_top = 2
+	sb.border_width_right = 2
+	sb.border_width_bottom = 2
+	sb.border_color = Color(0.65, 0.72, 0.82, 1.0)
+	sb.corner_radius_top_left = 8
+	sb.corner_radius_top_right = 8
+	sb.corner_radius_bottom_right = 8
+	sb.corner_radius_bottom_left = 8
+	sb.content_margin_left = 0
+	sb.content_margin_right = 0
+	sb.content_margin_top = 0
+	sb.content_margin_bottom = 0
+	return sb
+
+
 func _build_briefing_card() -> void:
-	briefing_card = PanelContainer.new()
+	## Full-screen dimmer + opaque card; title/scroll/dismiss manually pinned so
+	## PanelContainer/VBox min-size never pushes 「知道了」 off-screen on 844x390.
+	briefing_dimmer = ColorRect.new()
+	briefing_dimmer.name = "BriefingDimmer"
+	briefing_dimmer.color = Color(0.01, 0.02, 0.03, 0.88)
+	briefing_dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
+	briefing_dimmer.visible = false
+	briefing_dimmer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	$HUD.add_child(briefing_dimmer)
+
+	briefing_card = Control.new()
 	briefing_card.name = "BriefingCard"
 	briefing_card.visible = false
 	briefing_card.mouse_filter = Control.MOUSE_FILTER_STOP
-	briefing_card.set_anchors_preset(Control.PRESET_CENTER)
-	briefing_card.offset_left = -300
-	briefing_card.offset_top = -260
-	briefing_card.offset_right = 300
-	briefing_card.offset_bottom = 260
-	briefing_card.add_theme_stylebox_override("panel", _opaque_panel_style())
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 20)
-	margin.add_theme_constant_override("margin_right", 20)
-	margin.add_theme_constant_override("margin_top", 16)
-	margin.add_theme_constant_override("margin_bottom", 16)
-	briefing_card.add_child(margin)
-	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 12)
-	margin.add_child(vbox)
-	var title := Label.new()
-	title.name = "BriefingTitle"
-	title.text = BriefingCopy.TITLE
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", maxi(BODY_FONT_PX + 4, 26))
-	vbox.add_child(title)
+	briefing_card.clip_contents = true
+	briefing_card.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	var fill := ColorRect.new()
+	fill.name = "BriefingOpaqueFill"
+	fill.color = Color(0.08, 0.09, 0.11, 1.0)
+	fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fill.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	briefing_card.add_child(fill)
+	briefing_panel = PanelContainer.new()
+	briefing_panel.name = "BriefingPanel"
+	briefing_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	briefing_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	briefing_panel.add_theme_stylebox_override("panel", _briefing_border_style())
+	briefing_card.add_child(briefing_panel)
+
+	briefing_title = Label.new()
+	briefing_title.name = "BriefingTitle"
+	briefing_title.text = BriefingCopy.TITLE
+	briefing_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	briefing_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	briefing_title.autowrap_mode = TextServer.AUTOWRAP_OFF
+	briefing_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	briefing_card.add_child(briefing_title)
+
+	briefing_scroll = ScrollContainer.new()
+	briefing_scroll.name = "BriefingScroll"
+	briefing_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	briefing_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	briefing_scroll.mouse_filter = Control.MOUSE_FILTER_STOP
+	## Cap min size so content never forces the card taller than the viewport.
+	briefing_scroll.custom_minimum_size = Vector2(0, 24)
+	briefing_card.add_child(briefing_scroll)
+
 	briefing_body = Label.new()
 	briefing_body.name = "BriefingBody"
 	briefing_body.text = BriefingCopy.BODY
-	briefing_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	briefing_body.add_theme_font_size_override("font_size", BODY_FONT_PX)
-	vbox.add_child(briefing_body)
+	## CJK has no spaces — WORD_SMART can refuse to break and clip at the card edge.
+	briefing_body.autowrap_mode = TextServer.AUTOWRAP_ARBITRARY
+	briefing_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	briefing_body.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	briefing_scroll.add_child(briefing_body)
+
 	btn_briefing_dismiss = Button.new()
 	btn_briefing_dismiss.name = "BriefingDismiss"
 	btn_briefing_dismiss.text = BriefingCopy.DISMISS
-	btn_briefing_dismiss.custom_minimum_size = Vector2(0, TOUCH_MIN_PX)
-	btn_briefing_dismiss.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	btn_briefing_dismiss.custom_minimum_size = Vector2(0, BRIEFING_BTN_MIN_PX)
 	btn_briefing_dismiss.pressed.connect(func(): _ui_tap(); _dismiss_briefing_card(true))
-	vbox.add_child(btn_briefing_dismiss)
+	briefing_card.add_child(btn_briefing_dismiss)
+
 	$HUD.add_child(briefing_card)
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
 	if font_res:
-		title.add_theme_font_override("font", font_res)
+		briefing_title.add_theme_font_override("font", font_res)
 		briefing_body.add_theme_font_override("font", font_res)
 		btn_briefing_dismiss.add_theme_font_override("font", font_res)
+	_layout_briefing_card()
+
+
+func _layout_briefing_card() -> void:
+	## Explicit pin: title top, dismiss bottom (≥44px), scroll fills middle — both phone & desktop.
+	if briefing_card == null or briefing_dimmer == null:
+		return
+	var vs := _view_size()
+	briefing_dimmer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	briefing_dimmer.offset_left = 0
+	briefing_dimmer.offset_top = 0
+	briefing_dimmer.offset_right = 0
+	briefing_dimmer.offset_bottom = 0
+	var phone := vs.y < 500.0
+	var edge := 6.0 if phone else 24.0
+	var pad := 8.0 if phone else 16.0
+	var card_w := (vs.x - edge * 2.0) if phone else minf(520.0, vs.x - edge * 2.0)
+	var card_h := vs.y - edge * 2.0
+	briefing_card.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	briefing_card.anchor_right = 0.0
+	briefing_card.anchor_bottom = 0.0
+	briefing_card.position = Vector2((vs.x - card_w) * 0.5, (vs.y - card_h) * 0.5)
+	briefing_card.size = Vector2(card_w, card_h)
+
+	var title_fs := 15 if phone else 26
+	var body_fs := 12 if phone else 20
+	var btn_fs := 14 if phone else BODY_FONT_PX
+	var btn_h := maxf(BRIEFING_BTN_MIN_PX, 44.0)
+	if not phone:
+		btn_h = maxf(TOUCH_MIN_PX, BRIEFING_BTN_MIN_PX)
+	var sep := 4.0 if phone else 8.0
+	var title_h := float(title_fs) + 8.0
+
+	## Phone landscape: two-column body so five beats fit without mid-glyph crop.
+	if phone and briefing_body:
+		briefing_body.text = BriefingCopy.BODY_PHONE
+	elif briefing_body:
+		briefing_body.text = BriefingCopy.BODY
+
+	if briefing_title:
+		briefing_title.add_theme_font_size_override("font_size", title_fs)
+		briefing_title.position = Vector2(pad, pad)
+		briefing_title.size = Vector2(card_w - pad * 2.0, title_h)
+	if btn_briefing_dismiss:
+		btn_briefing_dismiss.custom_minimum_size = Vector2(0, btn_h)
+		btn_briefing_dismiss.add_theme_font_size_override("font_size", btn_fs)
+		btn_briefing_dismiss.position = Vector2(pad, card_h - pad - btn_h)
+		btn_briefing_dismiss.size = Vector2(card_w - pad * 2.0, btn_h)
+	if briefing_scroll:
+		var scroll_y := pad + title_h + sep
+		var scroll_bottom := card_h - pad - btn_h - sep
+		var scroll_h := maxf(24.0, scroll_bottom - scroll_y)
+		briefing_scroll.position = Vector2(pad, scroll_y)
+		briefing_scroll.size = Vector2(card_w - pad * 2.0, scroll_h)
+	if briefing_body:
+		briefing_body.add_theme_font_size_override("font_size", body_fs)
+		## Leave room for the vertical scrollbar (~12px) so glyphs never clip the edge.
+		var inner_w := maxf(80.0, card_w - pad * 2.0 - 14.0)
+		briefing_body.custom_minimum_size = Vector2(inner_w, 0)
+		briefing_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 
 func _build_phase_tip_bar() -> void:
@@ -1492,23 +1603,48 @@ func _build_phase_tip_bar() -> void:
 		btn_phase_tip_close.add_theme_font_override("font", font_res)
 
 
+func _set_briefing_chrome_suppressed(suppressed: bool) -> void:
+	## Hide right drawer / floating chrome so nothing bleeds through or beside the card.
+	if suppressed:
+		if right_column:
+			right_column.visible = false
+		if utility_backdrop:
+			utility_backdrop.visible = false
+		if portrait_backdrop:
+			portrait_backdrop.visible = false
+		if btn_drawer_tab:
+			btn_drawer_tab.visible = false
+	else:
+		_relayout_hud()
+
+
 func _show_briefing_card() -> void:
 	if briefing_card == null:
 		return
 	if shortcuts_help:
 		shortcuts_help.visible = false
 	_hide_phase_tip()
+	_set_briefing_chrome_suppressed(true)
+	_layout_briefing_card()
+	if briefing_dimmer:
+		briefing_dimmer.visible = true
+		$HUD.move_child(briefing_dimmer, -1)
 	briefing_card.visible = true
 	_briefing_shown_this_run = true
 	briefing_show_count += 1
 	$HUD.move_child(briefing_card, -1)
+	## Second pass after size settles so wrap width matches scroll.
+	call_deferred("_layout_briefing_card")
 
 
 func _dismiss_briefing_card(count: bool = true) -> void:
 	if briefing_card and briefing_card.visible and count:
 		briefing_dismiss_count += 1
+	if briefing_dimmer:
+		briefing_dimmer.visible = false
 	if briefing_card:
 		briefing_card.visible = false
+	_set_briefing_chrome_suppressed(false)
 
 
 func _toggle_briefing_card() -> void:
@@ -1576,6 +1712,58 @@ func dismiss_overlays_for_layout_test() -> void:
 		pause_menu.visible = false
 	if dev_menu:
 		dev_menu.visible = false
+
+
+func briefing_layout_ok(view_w: float = -1.0, view_h: float = -1.0) -> Dictionary:
+	## Test helper: card + dismiss on-screen; body wraps without horizontal clip.
+	var vs := _view_size()
+	if view_w > 0.0 and view_h > 0.0:
+		vs = Vector2(view_w, view_h)
+	var out := {
+		"ok": false,
+		"card_in": false,
+		"btn_in": false,
+		"btn_h": 0.0,
+		"text_clip": true,
+		"dimmer": false,
+	}
+	if briefing_card == null or btn_briefing_dismiss == null or briefing_body == null:
+		return out
+	out["dimmer"] = briefing_dimmer != null and briefing_dimmer.visible and briefing_card.visible
+	var screen := Rect2(Vector2.ZERO, vs)
+	var card_r: Rect2 = briefing_card.get_global_rect()
+	## Map into logical coords if HUD is identity-scaled under layout_size_override.
+	out["card_in"] = screen.encloses(card_r.grow(-0.5)) or (
+		card_r.position.x >= -0.5 and card_r.position.y >= -0.5
+		and card_r.end.x <= vs.x + 0.5 and card_r.end.y <= vs.y + 0.5
+	)
+	var btn_r: Rect2 = btn_briefing_dismiss.get_global_rect()
+	out["btn_in"] = (
+		btn_r.position.x >= -0.5 and btn_r.position.y >= -0.5
+		and btn_r.end.x <= vs.x + 0.5 and btn_r.end.y <= vs.y + 0.5
+		and card_r.encloses(btn_r.grow(-0.5))
+	)
+	out["btn_h"] = btn_r.size.y
+	## Horizontal clip: wrapped label width must not exceed its scroll viewport.
+	var scroll_w := briefing_scroll.size.x if briefing_scroll else card_r.size.x
+	var body_w := briefing_body.size.x
+	var clip := body_w > scroll_w + 2.0
+	## Also flag if any body line's measured advance exceeds the wrap width.
+	var font: Font = briefing_body.get_theme_font("font")
+	var fsize := briefing_body.get_theme_font_size("font_size")
+	if font != null and scroll_w > 8.0:
+		for line in str(briefing_body.text).split("\n"):
+			if line.is_empty():
+				continue
+			var adv := font.get_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, -1, fsize).x
+			## With ARBITRARY wrap, long lines break; only flag if a hard line is wider
+			## than the wrap box *and* the label refuses to shrink (body_w check above).
+			if adv > scroll_w + 4.0 and body_w > scroll_w + 2.0:
+				clip = true
+				break
+	out["text_clip"] = clip
+	out["ok"] = bool(out["card_in"]) and bool(out["btn_in"]) and float(out["btn_h"]) + 1e-3 >= BRIEFING_BTN_MIN_PX and (not bool(out["text_clip"])) and bool(out["dimmer"])
+	return out
 
 
 func _build_dev_menu() -> void:
@@ -1790,6 +1978,8 @@ func _install_hud_layout() -> void:
 		$HUD.move_child(info_card, -1)
 	if phase_tip_bar:
 		$HUD.move_child(phase_tip_bar, -1)
+	if briefing_dimmer:
+		$HUD.move_child(briefing_dimmer, -1)
 	if briefing_card:
 		$HUD.move_child(briefing_card, -1)
 	if dev_menu:
@@ -2014,6 +2204,15 @@ func _relayout_hud() -> void:
 		map_view._fit_cell_px()
 		_apply_default_camera()
 		map_view.queue_redraw()
+	## Keep briefing card fitted if open (phone / desktop resize).
+	## Re-suppress chrome after layout — _relayout_hud would otherwise re-show the drawer.
+	if briefing_card and briefing_card.visible:
+		_set_briefing_chrome_suppressed(true)
+		_layout_briefing_card()
+		if briefing_dimmer:
+			briefing_dimmer.visible = true
+			$HUD.move_child(briefing_dimmer, -1)
+		$HUD.move_child(briefing_card, -1)
 
 
 func _portrait_strip_height() -> float:

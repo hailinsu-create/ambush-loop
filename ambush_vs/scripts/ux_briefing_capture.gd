@@ -38,6 +38,7 @@ func _run() -> void:
 			await process_frame
 			scene._show_briefing_card()
 			scene.apply_layout_size(size_pair.x, size_pair.y)
+			scene._layout_briefing_card()
 			await process_frame
 			await process_frame
 			await process_frame
