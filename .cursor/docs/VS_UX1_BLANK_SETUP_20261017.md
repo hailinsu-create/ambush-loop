@@ -2,7 +2,7 @@
 
 - 日期：2026-10-17
 - 分支：`vs/g3`（Pages 重部署；**不合并** `vs/g2`）
-- 状态：**已实现 / 待本机与 CI 验证**
+- 状态：**已实现 / 本机隔离测试已绿**（W2 61 / W3 56）；CI/Pages 随 `vs/g3` `66b21ae` 推送
 - 来源：所有者试玩差距报告 fix #1（`gap_report` VS-UX1）
 
 ## 目标
@@ -27,10 +27,10 @@
 
 ## 验收
 
-- W3：未触碰开局不可开始；脚本化放置能跑到结算；MG42 不在起始套件。
-- W2：金标哈希不变。
-- 截图：blank / mid / wait / result。
-- Pages 随 `vs/g3` 推送重部署。
+- W3：未触碰开局不可开始；脚本化放置能跑到结算；MG42 不在起始套件。**56 passed, exit 0**
+- W2：金标哈希不变。**61 passed, exit 0**
+- 截图：`play1_blank` / `play1_mid` / `play1_wait` / `play1_result`（artifact）
+- Pages：已推 `vs/g3` → `66b21ae`，等 Actions 部署
 
 ## 非目标（后续切片）
 
