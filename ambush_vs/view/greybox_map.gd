@@ -16,7 +16,7 @@ signal unit_selected(op_id: String)
 enum ArtMode { G3, G2, G1 }
 
 ## World-space UV: texture spans this many cells (seamless, no cell grid).
-## Cobble atlas ≈11 stones wide → period ~1.5 ⇒ ~7 stones/cell (target 6–8).
+## Cobble atlas dominant ~43px stones → period 0.7 ⇒ ~7–8 stones/cell.
 const G3_TEX_CELLS := 4.0 ## default for mud/grass/planks
 const G3_COBBLE_CELLS := 0.7 ## ~8–9 stones/cell (atlas dominant period ≈43px)
 const G3_ROOF_CELLS := 4.5 ## larger shingle texel so roofs read
