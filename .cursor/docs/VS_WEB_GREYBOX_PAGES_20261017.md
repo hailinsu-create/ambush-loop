@@ -32,6 +32,10 @@ chatgpt:unavailable（Cloud Agent；无网页 ChatGPT 桥）
 | Chromium smoke（页面 200、canvas 渲染、无 fatal console） | 已验证（本地） |
 | Pages API `build_type=workflow` | **被拒**（integration 403） |
 | `github-pages` 环境允许 `vs/web` | **被拒**（integration 403） |
+| CI `ambush-vs-isolated-test` | **success**（push + PR） |
+| CI `deploy-greybox-pages` build | **success**（导出+artifact） |
+| CI `deploy-greybox-pages` deploy | **failed**：`Ensure GitHub Pages has been enabled`（404） |
+| PR | [#55](https://github.com/hailinsu-create/ambush-loop/pull/55) @ `5507300` |
 
 ## 验收门槛
 
