@@ -1638,17 +1638,25 @@ func _draw_combat_fx() -> void:
 		var b := cell_to_screen(float(tr["x1"]), float(tr["y1"]))
 		var t := 1.0 - float(tr["age"]) / maxf(0.001, float(tr["life"]))
 		var wid := str(tr.get("weapon_id", ""))
-		var col := Color(1.0, 0.85, 0.35, 0.85 * t)
-		var width := 2.2
+		# Phone-readable tracers: thicker core + short soft glow halo.
+		var col := Color(1.0, 0.92, 0.45, 0.95 * t)
+		var glow_col := Color(1.0, 0.75, 0.25, 0.42 * t)
+		var width := 4.5
+		var glow_w := 9.0
 		if wid == "mg42":
-			col = Color(1.0, 0.55, 0.18, 0.9 * t)
-			width = 3.0
+			col = Color(1.0, 0.62, 0.22, 0.98 * t)
+			glow_col = Color(1.0, 0.4, 0.1, 0.5 * t)
+			width = 5.5
+			glow_w = 11.0
 		elif wid == "mp40":
-			col = Color(1.0, 0.75, 0.4, 0.8 * t)
-			width = 2.0
+			col = Color(1.0, 0.82, 0.48, 0.92 * t)
+			glow_col = Color(1.0, 0.65, 0.3, 0.4 * t)
+			width = 4.0
+			glow_w = 8.0
+		draw_line(a, b, glow_col, glow_w)
 		draw_line(a, b, col, width)
-		# bright tip
-		draw_circle(b, 2.5, Color(1.0, 0.95, 0.7, 0.9 * t))
+		draw_circle(b, 4.0, Color(1.0, 0.98, 0.82, 0.95 * t))
+		draw_circle(b, 7.0, Color(1.0, 0.85, 0.4, 0.35 * t))
 	for fl in combat_fx.flashes:
 		var p := cell_to_screen(float(fl["x"]), float(fl["y"]))
 		var facing := float(fl.get("facing_deg", 0.0))
@@ -1656,19 +1664,22 @@ func _draw_combat_fx() -> void:
 		var ang := deg_to_rad(-facing)
 		var t := 1.0 - float(fl["age"]) / maxf(0.001, float(fl["life"]))
 		var wid := str(fl.get("weapon_id", ""))
-		var reach := cell_px * (0.55 if wid == "mg42" else 0.38)
+		var reach := cell_px * (0.85 if wid == "mg42" else 0.62)
 		var tip := p + Vector2(cos(ang), sin(ang)) * reach
 		var side := Vector2(-sin(ang), cos(ang))
-		var hw := cell_px * (0.22 if wid == "mg42" else 0.14)
+		var hw := cell_px * (0.38 if wid == "mg42" else 0.26)
 		var poly := PackedVector2Array([
 			tip,
-			p + side * hw * 0.4,
-			p - Vector2(cos(ang), sin(ang)) * cell_px * 0.08,
-			p - side * hw * 0.4,
+			p + side * hw * 0.45,
+			p - Vector2(cos(ang), sin(ang)) * cell_px * 0.12,
+			p - side * hw * 0.45,
 		])
-		var glow := Color(1.0, 0.55, 0.15, 0.75 * t) if wid == "mg42" else Color(1.0, 0.78, 0.3, 0.7 * t)
+		var glow := Color(1.0, 0.55, 0.15, 0.85 * t) if wid == "mg42" else Color(1.0, 0.82, 0.35, 0.8 * t)
+		# Soft bloom behind the flash cone (phone-readable).
+		draw_circle(p + Vector2(cos(ang), sin(ang)) * reach * 0.35, cell_px * 0.42, Color(glow.r, glow.g, glow.b, 0.35 * t))
 		draw_colored_polygon(poly, glow)
-		draw_circle(tip, cell_px * 0.08, Color(1.0, 0.95, 0.75, 0.95 * t))
+		draw_circle(tip, cell_px * 0.16, Color(1.0, 0.97, 0.8, 0.98 * t))
+		draw_circle(tip, cell_px * 0.28, Color(1.0, 0.85, 0.4, 0.4 * t))
 	for h in combat_fx.hits:
 		var p := cell_to_screen(float(h["x"]), float(h["y"]))
 		var t := 1.0 - float(h["age"]) / maxf(0.001, float(h["life"]))
@@ -1727,15 +1738,30 @@ func _draw_units() -> void:
 		var is_sel := str(op["id"]) == selected_op_id
 		_draw_unit_tex(tex, float(op["x"]), float(op["y"]), float(op["facing_deg"]), is_sel)
 		# Team ring on every friendly (selected = brighter); high keeps gold accent.
+		var hp := cell_to_screen(float(op["x"]), float(op["y"]))
 		if art_mode == ArtMode.G3:
-			var hp := cell_to_screen(float(op["x"]), float(op["y"]))
 			var ring_col := Color(1.0, 0.95, 0.35, 0.95) if is_sel else Color(1.0, 0.88, 0.25, 0.72)
 			draw_arc(hp, cell_px * 0.78, 0, TAU, 28, ring_col, 2.2 if is_sel else 1.8)
 			if high:
 				draw_arc(hp, cell_px * 0.92, 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.85), 1.6)
 		elif high:
-			var hp2 := cell_to_screen(float(op["x"]), float(op["y"]))
-			draw_arc(hp2, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
+			draw_arc(hp, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
+		# WAIT re-aim: turning indicator while turn_ticks_left > 0 (can't fire).
+		var turn_left := int(op.get("turn_ticks_left", 0))
+		if turn_left > 0:
+			var spin := Time.get_ticks_msec() * 0.008
+			var r := cell_px * (0.95 if art_mode == ArtMode.G3 else 0.62)
+			draw_arc(hp, r, spin, spin + TAU * 0.72, 32, Color(0.55, 0.85, 1.0, 0.9), 3.0)
+			draw_arc(hp, r * 0.82, -spin, -spin + TAU * 0.45, 24, Color(0.35, 0.7, 1.0, 0.55), 2.0)
+			draw_string(
+				ThemeDB.fallback_font,
+				hp + Vector2(-14, cell_px * 0.72),
+				"转向",
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				12,
+				Color(0.7, 0.9, 1.0, 0.95)
+			)
 		var sp := cell_to_screen(float(op["x"]), float(op["y"]))
 		var label := str(op_display_names.get(str(op["id"]), op.get("display_name", "队员")))
 		draw_string(ThemeDB.fallback_font, sp + Vector2(-18, -cell_px * 0.55), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.9, 0.95, 1.0))

@@ -163,7 +163,7 @@ func _test_ambush_golden_unchanged_after_scout_module() -> void:
 	while not sim.is_finished():
 		sim.advance_one_tick()
 	var summary := sim.outcome_summary()
-	_assert(int(summary.get("detonate_tick", -1)) == 280, "after scout module plan A t0=280")
+	_assert(int(summary.get("detonate_tick", -1)) == 520, "after scout module plan A t0=520")
 	_assert(bool(summary.get("standard_ambush", false)) == true, "after scout module standard_ambush")
 	var batch: Dictionary = SimRunner.run_plan("res://data/fixtures/plan_a.json")
 	_assert(str(summary.get("log_hash", "")) == str(batch.get("log_hash", "")), "after scout module hash matches run()")

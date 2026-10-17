@@ -65,6 +65,15 @@ const RESULT_DELAY_AFTER_KILL_S := 2.0
 const SLOW_MO_S := 0.35
 const SLOW_MO_MUL := 0.28
 
+## PLAY-4 wait UX (view hooks into existing NightSim turn + audio).
+var _enemy_prev_pos: Dictionary = {} ## enemy_id → Vector2
+var _enemy_in_cone: Dictionary = {} ## enemy_id → bool (any op cone)
+const FOOT_NEAR_CELLS := 4.0
+const FOOT_FAR_CELLS := 18.0
+## Yard pacing after +12 s spawn shift (PLAY-4): t0_A=520, t0_B=560.
+const T0_EARLY_TICK := 520
+const T0_LATE_TICK := 560
+
 ## PLAY-1 setup state (view/controller only; not consumed by sim).
 var place_mode: PlaceMode = PlaceMode.NONE
 var op_placed: Dictionary = {} ## op_id → bool
@@ -703,11 +712,15 @@ func _start_wait() -> void:
 	_slow_mo_left = 0.0
 	_fx_fires_total = 0
 	_fx_kills_total = 0
+	_enemy_prev_pos.clear()
+	_enemy_in_cone.clear()
 	if map_view and map_view.combat_fx:
 		map_view.combat_fx.reset()
 		map_view.shake_offset = Vector2.ZERO
 	btn_speed.text = "倍速 1×"
 	_set_ui_phase(UiPhase.WAIT)
+	if sfx:
+		sfx.start_ambient("ambient_yard", -14.0)
 	_push_map_snapshot()
 
 
@@ -883,17 +896,39 @@ func _move_selected_op(cell: Vector2i) -> void:
 
 
 func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
-	if ui_phase != UiPhase.SETUP or selected_op_id == "":
+	if selected_op_id == "":
 		return
 	if world_dir.length() < 8.0:
 		return
 	# Convert screen drag to world facing: screen +x=east, +y=south-screen = -world-y
 	var facing := rad_to_deg(atan2(-world_dir.y, world_dir.x))
-	for op in plan.get("operators", []):
-		if str(op["id"]) == selected_op_id:
-			op["facing_deg"] = facing
-			break
-	_push_map_snapshot()
+	if ui_phase == UiPhase.SETUP:
+		for op in plan.get("operators", []):
+			if str(op["id"]) == selected_op_id:
+				op["facing_deg"] = facing
+				break
+		_push_map_snapshot()
+		return
+	if ui_phase == UiPhase.WAIT and sim != null and not sim.plan_locked:
+		# PLAY-4: expose NightSim.request_operator_facing (1 s / 45°; blocks fire).
+		sim.request_operator_facing(selected_op_id, facing)
+		var op := _sim_op(selected_op_id)
+		var left := int(op.get("turn_ticks_left", 0))
+		var dname := str(op_display_names.get(selected_op_id, "队员"))
+		if left > 0:
+			label_info.text = "%s 转向中 · %.1fs · 不能开火" % [dname, float(left) * SimConstants.DT_S]
+		else:
+			label_info.text = "%s 朝向已更新" % dname
+		_push_map_snapshot()
+
+
+func _sim_op(op_id: String) -> Dictionary:
+	if sim == null:
+		return {}
+	for op in sim.operators:
+		if str(op["id"]) == op_id:
+			return op
+	return {}
 
 
 func _on_unit_selected(op_id: String) -> void:
@@ -901,6 +936,10 @@ func _on_unit_selected(op_id: String) -> void:
 	var dname := str(op_display_names.get(op_id, "队员"))
 	if ui_phase == UiPhase.SCOUT:
 		label_info.text = "选中 %s · 点格行走开箱" % dname
+		_push_map_snapshot()
+		return
+	if ui_phase == UiPhase.WAIT:
+		label_info.text = "选中 %s · 拖拽重瞄（转向耗时，期间不能开火）" % dname
 		_push_map_snapshot()
 		return
 	place_mode = PlaceMode.OP
@@ -976,6 +1015,7 @@ func _process(delta: float) -> void:
 		_accum_s -= dt2
 		sim.advance_one_tick()
 		_consume_sim_log()
+		_tick_wait_audio()
 		if sim.is_finished():
 			break
 	_push_map_snapshot()
@@ -984,6 +1024,67 @@ func _process(delta: float) -> void:
 		_pending_result = true
 		_result_delay_left = RESULT_DELAY_AFTER_KILL_S
 		label_info.text = "清场…结算将在 %.0f 秒后显示" % RESULT_DELAY_AFTER_KILL_S
+
+
+func _tick_wait_audio() -> void:
+	## PLAY-4: distance-based march footsteps + tension when enemy enters a cone.
+	if sim == null or sfx == null:
+		return
+	_tick_footsteps()
+	_tick_cone_tension()
+
+
+func _tick_footsteps() -> void:
+	var nearest_d := 1e9
+	var moved := false
+	for e in sim.enemies:
+		if not e.get("alive", true) or not e.get("entered", false) or e.get("escaped", false):
+			continue
+		var eid := str(e["id"])
+		var pos := Vector2(float(e["x"]), float(e["y"]))
+		if _enemy_prev_pos.has(eid):
+			if pos.distance_to(_enemy_prev_pos[eid]) > 0.01:
+				moved = true
+		_enemy_prev_pos[eid] = pos
+		for op in sim.operators:
+			if not op.get("alive", true):
+				continue
+			var d := SimGeom.dist_centers(float(op["x"]), float(op["y"]), pos.x, pos.y)
+			if d < nearest_d:
+				nearest_d = d
+	if not moved or nearest_d >= FOOT_FAR_CELLS:
+		return
+	var t := clampf((nearest_d - FOOT_NEAR_CELLS) / maxf(0.001, FOOT_FAR_CELLS - FOOT_NEAR_CELLS), 0.0, 1.0)
+	var gain := lerpf(-4.0, -22.0, t)
+	sfx.play_foot("dirt", gain)
+
+
+func _tick_cone_tension() -> void:
+	for e in sim.enemies:
+		if not e.get("alive", true) or not e.get("entered", false) or e.get("escaped", false):
+			continue
+		var eid := str(e["id"])
+		var in_any := false
+		for op in sim.operators:
+			if not op.get("alive", true):
+				continue
+			var wid := str(op.get("weapon_id", ""))
+			var w: Dictionary = weapons.get(wid, {})
+			if w.is_empty():
+				continue
+			var half := float(w.get("sector_deg", 0)) * 0.5
+			var rng := float(w.get("max_range", 0))
+			if SimGeom.in_cone(
+				float(op["x"]), float(op["y"]), float(op["facing_deg"]), half, rng,
+				float(e["x"]), float(e["y"])
+			):
+				in_any = true
+				break
+		var was := bool(_enemy_in_cone.get(eid, false))
+		_enemy_in_cone[eid] = in_any
+		if in_any and not was:
+			sfx.play_tension()
+			return
 
 
 func _consume_sim_log() -> void:
@@ -1100,6 +1201,8 @@ func _alert_zh(a: String) -> String:
 
 func _show_result() -> void:
 	last_summary = sim.outcome_summary()
+	if sfx:
+		sfx.stop_ambient()
 	_set_ui_phase(UiPhase.RESULT)
 	var reason := _reason_zh(last_summary)
 	result_label.text = "\n".join([
@@ -1121,9 +1224,9 @@ func _reason_zh(s: Dictionary) -> String:
 		return "被岗哨/巡逻发现升至全图警报"
 	if r == "enemy_escape":
 		var t0 := int(s.get("detonate_tick", -1))
-		if t0 >= 0 and t0 < 280:
+		if t0 >= 0 and t0 < T0_EARLY_TICK:
 			return "起爆过早（侧翼未入杀伤区）"
-		if t0 > 320:
+		if t0 > T0_LATE_TICK:
 			return "起爆过晚"
 		return "敌人逃脱"
 	if r == "clear":
@@ -1252,9 +1355,11 @@ func _auto_run_plan_a() -> void:
 	paused = true ## prevent _process double-ticking during auto
 	var captured_trigger := false
 	var captured_midfight := false
+	var captured_reaim := false
 	while sim != null and not sim.is_finished():
 		sim.advance_one_tick()
 		_consume_sim_log()
+		_tick_wait_audio()
 		if map_view and map_view.combat_fx:
 			map_view.combat_fx.advance(SimConstants.DT_S)
 		if sim.tick == 140:
@@ -1262,6 +1367,25 @@ func _auto_run_plan_a() -> void:
 			await get_tree().process_frame
 			await get_tree().process_frame
 			_try_capture("wait")
+		# PLAY-4 mid-wait re-aim shot only when capturing (must not alter AUTO golden fire counts).
+		if (
+			not captured_reaim
+			and _capture_path != ""
+			and sim.tick == 200
+			and sim.detonate_tick < 0
+		):
+			var kar_id := _op_id_for_weapon("kar98k")
+			if kar_id == "" and sim.operators:
+				kar_id = str(sim.operators[0]["id"])
+			if kar_id != "":
+				selected_op_id = kar_id
+				var cur := float(_sim_op(kar_id).get("facing_deg", 0.0))
+				sim.request_operator_facing(kar_id, cur + 90.0)
+				_push_map_snapshot()
+				await get_tree().process_frame
+				await get_tree().process_frame
+				_try_capture("reaim")
+				captured_reaim = true
 		# Trigger moment: a few ticks after detonate with tracers live.
 		if not captured_trigger and sim.detonate_tick >= 0 and sim.tick >= sim.detonate_tick + 2:
 			_push_map_snapshot()
@@ -1293,12 +1417,19 @@ func _auto_run_plan_a() -> void:
 	await get_tree().process_frame
 	_try_capture("result")
 	var fxst := combat_fx_stats()
+	var log_fires := 0
+	if sim != null:
+		for ev in sim.log.events:
+			if str(ev.get("type", "")) == "fire":
+				log_fires += 1
 	print(
 		"GREYBOX_AUTO_DONE detonate_tick=", last_summary.get("detonate_tick"),
 		" standard_ambush=", last_summary.get("standard_ambush"),
 		" outcome=", last_summary.get("outcome"),
 		" has_mg42=", is_mg42_unlocked(),
 		" fx_fires=", fxst.get("fires", 0),
+		" fx_fires_ctrl=", fxst.get("fires_controller", _fx_fires_total),
+		" log_fires=", log_fires,
 		" fx_kills=", fxst.get("kills", 0),
 		" fx_bodies=", fxst.get("bodies", 0)
 	)

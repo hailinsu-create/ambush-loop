@@ -225,6 +225,7 @@ func request_manual_detonate() -> void:
 
 func request_operator_facing(op_id: String, new_facing_deg: float) -> void:
 	## WAIT turn cost: 1.0 s per 45° (ADR-TRIGGER §3.2 / TERMS §9.3). SETUP should set facing before begin_wait.
+	## Facing snaps to the aim; fire is blocked for the turn duration (view shows a turning indicator).
 	if phase != C.PHASE_WAIT or plan_locked:
 		return
 	var op := _find_op(op_id)
@@ -232,11 +233,14 @@ func request_operator_facing(op_id: String, new_facing_deg: float) -> void:
 		return
 	var delta := SimGeom.abs_angle_delta_deg(float(op["facing_deg"]), new_facing_deg)
 	var steps := int(ceil(delta / 45.0 - 1e-9))
-	if steps <= 0:
-		op["facing_deg"] = new_facing_deg
-		return
 	op["facing_deg"] = new_facing_deg
+	if steps <= 0:
+		op["turn_ticks_left"] = 0
+		if not bool(op.get("climbing", false)):
+			op["can_fire"] = true
+		return
 	op["turn_ticks_left"] = maxi(int(op.get("turn_ticks_left", 0)), steps * C.TICK_HZ)
+	op["can_fire"] = false
 
 
 func observers_seeing_cell(tx: float, ty: float, target_tier: String) -> Array:
@@ -318,6 +322,8 @@ func _step_turn_cooldowns() -> void:
 		var left := int(op.get("turn_ticks_left", 0))
 		if left > 0:
 			op["turn_ticks_left"] = left - 1
+			if int(op["turn_ticks_left"]) <= 0 and not bool(op.get("climbing", false)):
+				op["can_fire"] = true
 
 
 func _set_phase(t: int, p: String) -> void:

@@ -1,7 +1,7 @@
 extends SceneTree
 
 ## W3 greybox headless: interactive sim API + G1 assets + greybox scene auto plan A.
-## Asserts t0=280 and standard_ambush (view must not change outcomes).
+## Asserts t0=520 (PLAY-4 pacing) and standard_ambush (view must not change outcomes).
 ## PLAY-1: blank start not startable; scripted placement reaches result; MG42 not in kit.
 
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
@@ -57,7 +57,7 @@ func _test_plan_a_via_interactive_api() -> void:
 	while not sim.is_finished():
 		sim.advance_one_tick()
 	var s := sim.outcome_summary()
-	_assert(int(s.get("detonate_tick", -1)) == 280, "greybox API plan A t0=280 got=%s" % s.get("detonate_tick"))
+	_assert(int(s.get("detonate_tick", -1)) == 520, "greybox API plan A t0=520 got=%s" % s.get("detonate_tick"))
 	_assert(bool(s.get("standard_ambush", false)) == true, "greybox API plan A standard_ambush")
 	_assert(str(s.get("outcome", "")) == "win", "greybox API plan A win")
 	_assert(str(s.get("trigger", "")) == "cross_marker", "greybox API plan A trigger")
@@ -80,7 +80,7 @@ func _test_view_snapshot_does_not_mutate_sim() -> void:
 	while not sim.is_finished():
 		sim.advance_one_tick()
 	var s := sim.outcome_summary()
-	_assert(int(s.get("detonate_tick", -1)) == 280, "preview queries leave t0=280")
+	_assert(int(s.get("detonate_tick", -1)) == 520, "preview queries leave t0=520")
 	_assert(bool(s.get("standard_ambush", false)) == true, "preview queries leave standard_ambush")
 
 
@@ -253,7 +253,7 @@ func _test_greybox_scene_boots() -> void:
 		if scene != null and scene.get("last_summary") is Dictionary:
 			var ls: Dictionary = scene.last_summary
 			if not ls.is_empty():
-				_assert(int(ls.get("detonate_tick", -1)) == 280, "scene auto plan A t0=280 got=%s" % ls.get("detonate_tick"))
+				_assert(int(ls.get("detonate_tick", -1)) == 520, "scene auto plan A t0=520 got=%s" % ls.get("detonate_tick"))
 				_assert(bool(ls.get("standard_ambush", false)) == true, "scene auto standard_ambush")
 				_assert(str(ls.get("outcome", "")) == "win", "scene auto win")
 				OS.set_environment("AMBUSH_GREYBOX_AUTO", "")

@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS-FX1 起爆战斗表现 2026-10-17](VS_FX1_COMBAT_FEEDBACK_20261017.md) | **当前 VS 玩法切片（PLAY-3）**：`vs/g3` 视图消费 fire/hit/kill；枪口火/曳光/命中/地雷震/尸体；分武器枪声；末杀慢动作；结算延迟 2 s。W2 金标不变。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-PLAY4 等待重瞄与节奏 2026-10-17](VS_PLAY4_WAIT_UX_20261017.md) | **当前 VS 玩法切片（PLAY-4）**：`vs/g3` WAIT 拖拽重瞄（`request_operator_facing`）；转向指示/禁射；脚步/环境床/tension；院子 `enter_t` +12 s → t0 520/560；金标因节奏更新。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-FX1 起爆战斗表现 2026-10-17](VS_FX1_COMBAT_FEEDBACK_20261017.md) | PLAY-3：视图消费 fire/hit/kill；枪口火/曳光/命中/地雷震/尸体。PLAY-4 起曳光加粗加亮、枪口放大。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-W4a 侦察搜集 2026-10-17](VS_W4A_SCOUT_GATHER_20261017.md) | PLAY-2 侦察搜集（ScoutSim）。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-UX1 空白布阵起手 2026-10-17](VS_UX1_BLANK_SETUP_20261017.md) | PLAY-1 空白板布阵（已被 PLAY-2 接在侦察之后）。G3 美术 Round 8 后暂停。PR #57 → `vs/g2`。**不合并**。 |
 | [VS G3 高细节美术 2026-10-17](VS_G3_ART_20261017.md) | VS 美术切片（**已暂停**）：`vs/g3` Round 8 — 连续沙袋墙 + 去格背板。PR #57 → `vs/g2`。**不合并**；不再做 G3 打磨直至所有者要求。 |

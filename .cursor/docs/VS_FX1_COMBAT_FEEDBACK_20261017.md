@@ -24,3 +24,7 @@
 | W5 combat FX | 19（plan A fire/kill 计数与 log 一致；bodies==kills；金标不变） |
 
 截图：`trigger` / `midfight` / `bodies`。
+
+## PLAY-4 补丁（同分支）
+
+手机可读性：曳光加粗加亮并加短 glow；枪口火放大。详见 [VS_PLAY4_WAIT_UX_20261017](VS_PLAY4_WAIT_UX_20261017.md)。

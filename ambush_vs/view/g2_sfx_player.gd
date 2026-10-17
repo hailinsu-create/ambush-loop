@@ -9,21 +9,30 @@ var _players: Array = [] ## AudioStreamPlayer pool
 var _extra: Dictionary = {} ## cue → AudioStream (art/audio_v2)
 var enabled: bool = true
 var _mg42_gate_s: float = 0.0
+var _foot_gate_s: float = 0.0
+var _tension_gate_s: float = 0.0
+var _ambient_player: AudioStreamPlayer = null
+var _ambient_cue: String = ""
 
 
 func configure(g2_assets) -> void:
 	assets = g2_assets
-	for i in range(10):
+	for i in range(12):
 		var p := AudioStreamPlayer.new()
 		p.bus = "Master"
 		add_child(p)
 		_players.append(p)
+	_ambient_player = AudioStreamPlayer.new()
+	_ambient_player.bus = "Master"
+	add_child(_ambient_player)
 	_extra.clear()
 	for pair in [
 		["hit", "res://art/audio_v2/hit.wav"],
 		["body_drop", "res://art/audio_v2/body_drop.wav"],
 		["alert_shout", "res://art/audio_v2/alarm.wav"],
 		["kill", "res://art/audio_v2/kill.wav"],
+		["tension", "res://art/audio_v2/tension.wav"],
+		["ambient_yard", "res://art/audio_v2/ambient_yard.wav"],
 	]:
 		var stream := load(str(pair[1])) as AudioStream
 		if stream:
@@ -99,6 +108,60 @@ func play_grenade_throw() -> void:
 	play("weapon_grenade_throw", -4.0)
 
 
+func play_foot(surface: String, gain_db: float) -> void:
+	## Distance-attenuated march footsteps (PLAY-4).
+	if _foot_gate_s > 0.0:
+		return
+	_foot_gate_s = 0.28
+	var cue := "foot_dirt"
+	match surface:
+		"mud":
+			cue = "foot_mud"
+		"cobble":
+			cue = "foot_cobble"
+		"grass":
+			cue = "foot_grass"
+		_:
+			cue = "foot_dirt"
+	play(cue, gain_db)
+
+
+func play_tension() -> void:
+	## Heartbeat / tension sting when an enemy enters a friendly cone.
+	if _tension_gate_s > 0.0:
+		return
+	_tension_gate_s = 2.4
+	play("tension", -4.0)
+
+
+func start_ambient(cue: String = "ambient_yard", gain_db: float = -14.0) -> void:
+	if not enabled or _ambient_player == null:
+		return
+	var stream: AudioStream = _extra.get(cue, null)
+	if stream == null and assets != null:
+		stream = assets.sfx_streams.get(cue, null)
+	if stream == null:
+		return
+	if stream is AudioStreamWAV:
+		var wav := stream as AudioStreamWAV
+		wav.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	_ambient_player.stream = stream
+	_ambient_player.volume_db = gain_db
+	_ambient_cue = cue
+	if not _ambient_player.playing:
+		_ambient_player.play()
+
+
+func stop_ambient() -> void:
+	if _ambient_player != null and _ambient_player.playing:
+		_ambient_player.stop()
+	_ambient_cue = ""
+
+
 func tick_gates(delta: float) -> void:
 	if _mg42_gate_s > 0.0:
 		_mg42_gate_s = maxf(0.0, _mg42_gate_s - delta)
+	if _foot_gate_s > 0.0:
+		_foot_gate_s = maxf(0.0, _foot_gate_s - delta)
+	if _tension_gate_s > 0.0:
+		_tension_gate_s = maxf(0.0, _tension_gate_s - delta)

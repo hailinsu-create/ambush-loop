@@ -78,7 +78,7 @@ func _test_golden_hash_unchanged() -> void:
 	var batch: Dictionary = SimRunner.run_plan("res://data/fixtures/plan_a.json")
 	var golden: Dictionary = SimRunner.load_json("res://data/golden/hashes.json")
 	_assert(str(batch.get("log_hash", "")) == str(golden.get("plan_a", "")), "plan A golden hash unchanged with FX module present")
-	_assert(int(batch.get("detonate_tick", -1)) == int(golden.get("t0_a", 280)), "plan A t0=280")
+	_assert(int(batch.get("detonate_tick", -1)) == int(golden.get("t0_a", 520)), "plan A t0=520")
 
 
 func _test_greybox_scene_fx_counts() -> void:
@@ -93,7 +93,7 @@ func _test_greybox_scene_fx_counts() -> void:
 			continue
 		if scene.get("last_summary") is Dictionary and not (scene.last_summary as Dictionary).is_empty():
 			var ls: Dictionary = scene.last_summary
-			_assert(int(ls.get("detonate_tick", -1)) == 280, "scene fx path t0=280")
+			_assert(int(ls.get("detonate_tick", -1)) == 520, "scene fx path t0=520")
 			_assert(bool(ls.get("standard_ambush", false)) == true, "scene fx path standard_ambush")
 			# Rebuild expected counts from a fresh sim (same plan A).
 			var level := SimLevelLoader.load_path("res://data/levels/yard.json")
