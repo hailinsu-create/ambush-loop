@@ -422,8 +422,8 @@ func _g3_tex(surface: String) -> Texture2D:
 func _draw_g3_cell(cell: Dictionary, kind: String, tier: String, x: int, y: int, rect: Rect2) -> void:
 	var surf := _surface_key(cell, kind, tier, x, y)
 	if surf.begins_with("roof"):
-		# Placeholder under continuous footprint fill (drawn in _draw_g3_roof_footprints).
-		_draw_g3_world_sample(_g3_tex(surf), x, y, rect, Color(0.55, 0.55, 0.58, 1.0))
+		# Underlay only — continuous footprint fill draws the seamless roof face.
+		draw_rect(rect, Color(0.22, 0.22, 0.26, 1.0), true)
 		return
 	if surf == "outside":
 		# Dark night grass/earth beyond the dry-stone perimeter (vignette finishes the read).
@@ -641,7 +641,9 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 	surf = _surface_key(mid_cell, mk, mt, int((min_x + max_x) / 2), int((min_y + max_y) / 2))
 	if not surf.begins_with("roof"):
 		surf = "roof_slate"
-	_draw_g3_world_sample(_g3_tex(surf), min_x, min_y, footprint)
+	var cells_w := float(max_x - min_x + 1)
+	var cells_h := float(max_y - min_y + 1)
+	_draw_g3_world_rect(_g3_tex(surf), float(min_x), float(min_y), cells_w, cells_h, footprint)
 	# Soft shadow on ground just south of the building (outside the roof face).
 	var eaves := Rect2(footprint.position + Vector2(cell_px * 0.05, h + 1), Vector2(w * 1.0, cell_px * 0.42))
 	draw_rect(eaves, Color(0, 0, 0, 0.45), true)
@@ -669,11 +671,10 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 
 
 func _draw_g3_world_sample(tex: Texture2D, cell_x: int, cell_y: int, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)) -> void:
+	## One logical cell of world UV into dest (dest may overlap neighbors for seam kill).
 	if tex == null:
 		return
-	var cells_w := maxf(1.0, dest.size.x / cell_px)
-	var cells_h := maxf(1.0, dest.size.y / cell_px)
-	_draw_g3_world_rect(tex, float(cell_x), float(cell_y), cells_w, cells_h, dest, modulate)
+	_draw_g3_world_rect(tex, float(cell_x), float(cell_y), 1.0, 1.0, dest, modulate)
 
 
 func _draw_g3_world_rect(
@@ -850,18 +851,7 @@ func _draw_g3_grade() -> void:
 func _draw_g3_props() -> void:
 	if g3 == null:
 		return
-	# Shed prop accents on structure cells (roof already drawn as tiles).
-	for y in range(grid_h):
-		for x in range(grid_w):
-			var cell: Dictionary = grid.get_cell(x, y)
-			if str(cell.get("kind", "")) != "structure":
-				continue
-			var shed: Texture2D = g3.props.get("shed_roof", null)
-			if shed == null:
-				continue
-			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
-			var rect := Rect2(p - Vector2(cell_px * 0.05, cell_px * 0.1), Vector2(cell_px * 1.1, cell_px * 1.1))
-			draw_texture_rect(shed, rect, false, Color(1, 1, 1, 0.92))
+	# No per-cell shed_roof props — continuous footprint roofs already read as houses.
 	_draw_g3_sandbag_runs()
 	for s in level.get("supplies", []):
 		var x := int(s.get("x", -1))
