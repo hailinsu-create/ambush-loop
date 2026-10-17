@@ -34,6 +34,11 @@ jobs:
           chmod +x ambush_vs/scripts/run_isolated_test.sh
           ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 empty_test.gd
 
+      - name: Isolated W2 sim tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w2_sim_test.gd
+
       - name: Direct entry rejected (expect 91)
         run: |
           set -euo pipefail

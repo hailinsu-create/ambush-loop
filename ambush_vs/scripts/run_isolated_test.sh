@@ -7,9 +7,9 @@ set -euo pipefail
 godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-empty_test.gd}"
 case "$entry" in
-  empty_test.gd) ;;
+  empty_test.gd|w2_sim_test.gd|w2_sim_cli.gd) ;;
   *)
-    printf 'Unsupported test entry for ambush_vs skeleton: %s\n' "$entry" >&2
+    printf 'Unsupported test entry for ambush_vs: %s\n' "$entry" >&2
     exit 2
     ;;
 esac
