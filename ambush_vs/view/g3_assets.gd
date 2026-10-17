@@ -33,7 +33,10 @@ func load_all() -> void:
 	tile_roof_slate = _load("tiles/roof_slate.webp")
 	tile_roof_shingle = _load("tiles/roof_shingle.webp")
 	for name in [
-		"sandbag_curve", "sandbag_straight", "ammo_crate", "crate_stack",
+		"sandbag_curve", "sandbag_straight",
+		"sandbag_straight_s", "sandbag_straight_m", "sandbag_straight_l",
+		"sandbag_corner_l", "sandbag_junction_t", "sandbag_end_cap", "sandbag_pile_round",
+		"ammo_crate", "crate_stack",
 		"barrel", "hay_bale", "cart", "shed_roof",
 	]:
 		props[name] = _load("props/%s.webp" % name)
@@ -65,7 +68,10 @@ static func referenced_texture_paths() -> Array:
 	]:
 		out.append(BASE + rel)
 	for name in [
-		"sandbag_curve", "sandbag_straight", "ammo_crate", "crate_stack",
+		"sandbag_curve", "sandbag_straight",
+		"sandbag_straight_s", "sandbag_straight_m", "sandbag_straight_l",
+		"sandbag_corner_l", "sandbag_junction_t", "sandbag_end_cap", "sandbag_pile_round",
+		"ammo_crate", "crate_stack",
 		"barrel", "hay_bale", "cart", "shed_roof",
 	]:
 		out.append(BASE + "props/%s.webp" % name)
@@ -95,7 +101,9 @@ func all_textures_ok() -> bool:
 		elif props.get(name) == null and units.get(name) == null:
 			# props check separately
 			pass
-	if props.get("sandbag_straight") == null or props.get("shed_roof") == null:
+	if props.get("sandbag_straight_m") == null and props.get("sandbag_straight") == null:
+		return false
+	if props.get("shed_roof") == null:
 		return false
 	return true
 

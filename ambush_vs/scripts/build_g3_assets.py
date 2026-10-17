@@ -307,6 +307,66 @@ def build_tiles() -> dict:
 	return meta
 
 
+def chroma_key_magenta_strong(im: Image.Image) -> Image.Image:
+	"""Key compressed JPG magenta + purple fringe (despill). Returns RGBA."""
+	# Slightly looser thresh for JPEG fringing around #FF00FF.
+	return chroma_key_magenta(im, thresh=55.0, soft=48.0)
+
+
+def cut_sandbag_sheet() -> dict:
+	"""Cut dedicated sandbag sheet → straight×3, L, T, end, round pile."""
+	src_path = SRC / "sandbag_sheet_magenta.jpg"
+	if not src_path.is_file():
+		print("WARN missing", src_path)
+		return {}
+	sheet = Image.open(src_path)
+	keyed = chroma_key_magenta_strong(sheet)
+	# Hand-tuned content boxes from projection (1280×720 sheet).
+	# (name, x0, y0, x1, y1) inclusive-ish; pad applied after.
+	boxes = [
+		("sandbag_straight_s", 40, 128, 325, 262),
+		("sandbag_straight_m", 360, 128, 800, 265),
+		("sandbag_straight_l", 808, 125, 1248, 265),
+		("sandbag_corner_l", 55, 330, 340, 595),
+		("sandbag_junction_t", 365, 340, 725, 595),
+		("sandbag_end_cap", 760, 365, 910, 600),
+		("sandbag_pile_round", 970, 365, 1220, 605),
+	]
+	meta: dict = {}
+	for name, x0, y0, x1, y1 in boxes:
+		cell = keyed.crop((x0, y0, x1, y1))
+		cell = bbox_content(cell, pad=6)
+		# Preserve aspect on transparent canvas (do not stretch bags).
+		# Straights stay wide; piles stay roughly square.
+		pw, ph = cell.size
+		max_side = 256 if "straight" in name or "junction" in name or "corner" in name else 192
+		scale = min(max_side / max(pw, 1), max_side / max(ph, 1), 1.0)
+		# Upscale small cuts a bit for phone readability.
+		if max(pw, ph) < 180:
+			scale = max_side / max(pw, ph)
+		nw, nh = max(1, int(pw * scale)), max(1, int(ph * scale))
+		cell = cell.resize((nw, nh), Image.Resampling.LANCZOS)
+		canvas = Image.new("RGBA", (nw + 8, nh + 8), (0, 0, 0, 0))
+		canvas.paste(cell, (4, 4), cell)
+		# Cool night grade: slight blue rim / darker burlap to match moonlight scene.
+		arr = np.asarray(canvas).astype(np.float32)
+		rgb, a = arr[..., :3], arr[..., 3:4] / 255.0
+		rgb = rgb * np.array([0.92, 0.94, 1.02], dtype=np.float32)
+		rgb = np.clip(rgb * 0.90, 0, 255)
+		out = np.dstack([rgb, arr[..., 3]]).astype(np.uint8)
+		prop = Image.fromarray(out, "RGBA")
+		save_webp(prop, f"props/{name}.webp", quality=88)
+		meta[name] = f"props/{name}.webp"
+	# Legacy aliases used by older paths / W3 checks.
+	if "sandbag_straight_m" in meta:
+		Image.open(OUT / meta["sandbag_straight_m"]).save(OUT / "props/sandbag_straight.webp", "WEBP", quality=88, method=4)
+		meta["sandbag_straight"] = "props/sandbag_straight.webp"
+	if "sandbag_corner_l" in meta:
+		Image.open(OUT / meta["sandbag_corner_l"]).save(OUT / "props/sandbag_curve.webp", "WEBP", quality=88, method=4)
+		meta["sandbag_curve"] = "props/sandbag_curve.webp"
+	return meta
+
+
 def build_props() -> dict:
 	sheet = Image.open(SRC / "props_sheet_magenta.jpg")
 	keyed = chroma_key_magenta(sheet)
@@ -323,9 +383,13 @@ def build_props() -> dict:
 	]
 	meta = {}
 	for name, cell in zip(names, cells):
+		# Skip legacy sandbags — replaced by dedicated sheet below.
+		if name.startswith("sandbag_"):
+			continue
 		prop = fit_square(cell, PROP_PX)
 		save_webp(prop, f"props/{name}.webp", quality=85)
 		meta[name] = f"props/{name}.webp"
+	meta.update(cut_sandbag_sheet())
 	return meta
 
 

@@ -346,14 +346,14 @@ func _g3_period(surf: String) -> float:
 
 
 func _g3_ground_mod(surf: String) -> Color:
-	## Single moonlight modulate per surface (no per-cell tint patches).
+	## Single moonlight modulate per surface (grass/mud kept close to kill square tint patches).
 	match surf:
 		"cobble":
 			return Color(0.70, 0.74, 0.86, 1.0)
 		"grass":
-			return Color(0.46, 0.56, 0.52, 1.0)
+			return Color(0.50, 0.54, 0.50, 1.0)
 		"mud":
-			return Color(0.52, 0.48, 0.44, 1.0)
+			return Color(0.50, 0.48, 0.46, 1.0)
 		"planks":
 			return Color(0.60, 0.56, 0.48, 1.0)
 		_:
@@ -396,12 +396,12 @@ func _draw_g3_terrain() -> void:
 			_draw_g3_world_sample(g3.tile_mud, x, y, rect, Color(0.40, 0.44, 0.38, 1.0), G3_TEX_CELLS)
 			_draw_g3_world_sample(g3.tile_grass, x, y, rect, Color(0.32, 0.40, 0.36, 0.55), 3.2)
 			draw_rect(rect, Color(0.02, 0.04, 0.09, 0.58), true)
-	# Paint yard surfaces as horizontal runs (continuous UV, uniform modulate).
+	# Cobble / planks as horizontal runs; grass as continuous zone bboxes (kills square tint).
 	for y in range(grid_h):
 		var x := 0
 		while x < grid_w:
 			var surf := _yard_surf_at(x, y)
-			if surf == "" or surf == "mud":
+			if surf != "cobble" and surf != "planks":
 				x += 1
 				continue
 			var x0 := x
@@ -415,6 +415,12 @@ func _draw_g3_terrain() -> void:
 			_draw_g3_world_rect(
 				_g3_tex(surf), float(x0), float(y), float(x1 - x0 + 1), 1.0, dest, _g3_ground_mod(surf), _g3_period(surf)
 			)
+	for z in [
+		[4, 7, 2, 7],
+		[12, 16, 2, 4],
+		[15, 18, 11, 13],
+	]:
+		_fill_g3_surf_zone(z[0], z[1], z[2], z[3], "grass")
 	# Building underlays.
 	for y in range(grid_h):
 		for x in range(grid_w):
@@ -427,8 +433,36 @@ func _draw_g3_terrain() -> void:
 	_blend_g3_ground_edges()
 
 
+func _fill_g3_surf_zone(min_x: int, max_x: int, min_y: int, max_y: int, surf: String) -> void:
+	## One continuous world-UV rect for a ground zone (uniform modulate).
+	var x0 := 999
+	var x1 := -1
+	var y0 := 999
+	var y1 := -1
+	var any := false
+	for y in range(min_y, max_y + 1):
+		for x in range(min_x, max_x + 1):
+			if _yard_surf_at(x, y) != surf:
+				continue
+			any = true
+			x0 = mini(x0, x)
+			x1 = maxi(x1, x)
+			y0 = mini(y0, y)
+			y1 = maxi(y1, y)
+	if not any:
+		return
+	var px := float(x0) * cell_px
+	var py := float(grid_h - 1 - y1) * cell_px
+	var w := float(x1 - x0 + 1) * cell_px
+	var h := float(y1 - y0 + 1) * cell_px
+	var dest := Rect2(px - 1.0, py - 1.0, w + 2.0, h + 2.0)
+	_draw_g3_world_rect(
+		_g3_tex(surf), float(x0), float(y0), float(x1 - x0 + 1), float(y1 - y0 + 1), dest, _g3_ground_mod(surf), _g3_period(surf)
+	)
+
+
 func _blend_g3_ground_edges() -> void:
-	## Soft/noisy transition strips between ground types (not hard cell squares).
+	## Soft irregular feather between ground types (especially grass↔mud on the east yard).
 	var dirs := [[1, 0, "e"], [-1, 0, "w"], [0, 1, "n"], [0, -1, "s"]]
 	for y in range(grid_h):
 		for x in range(grid_w):
@@ -442,23 +476,30 @@ func _blend_g3_ground_edges() -> void:
 				var nsurf := _yard_surf_at(nx, ny)
 				if nsurf == "" or nsurf == surf:
 					continue
-				# Deterministic noise so edges look organic, not a ruler line.
+				# Skip high-contrast cobble edges less; feather grass/mud heavily.
+				var grass_mud := (surf in ["grass", "mud"] and nsurf in ["grass", "mud"])
 				var n := float(((x * 17 + y * 31 + int(d[0]) * 7) % 10)) / 10.0
-				var t := 0.28 + n * 0.22
+				var t := (0.42 + n * 0.28) if grass_mud else (0.22 + n * 0.18)
 				var strip: Rect2
 				match str(d[2]):
 					"e":
-						strip = Rect2(p + Vector2(cell_px * (1.0 - t), cell_px * 0.02), Vector2(cell_px * t, cell_px * 0.96))
+						strip = Rect2(p + Vector2(cell_px * (1.0 - t), cell_px * (0.05 + n * 0.1)), Vector2(cell_px * t, cell_px * (0.85 - n * 0.1)))
 					"w":
-						strip = Rect2(p + Vector2(0, cell_px * 0.02), Vector2(cell_px * t, cell_px * 0.96))
+						strip = Rect2(p + Vector2(0, cell_px * (0.05 + n * 0.1)), Vector2(cell_px * t, cell_px * (0.85 - n * 0.1)))
 					"n":
-						strip = Rect2(p + Vector2(cell_px * 0.02, 0), Vector2(cell_px * 0.96, cell_px * t))
+						strip = Rect2(p + Vector2(cell_px * (0.05 + n * 0.1), 0), Vector2(cell_px * (0.85 - n * 0.1), cell_px * t))
 					_:
-						strip = Rect2(p + Vector2(cell_px * 0.02, cell_px * (1.0 - t)), Vector2(cell_px * 0.96, cell_px * t))
-				var a := 0.38 + n * 0.18
+						strip = Rect2(p + Vector2(cell_px * (0.05 + n * 0.1), cell_px * (1.0 - t)), Vector2(cell_px * (0.85 - n * 0.1), cell_px * t))
+				var a := (0.55 + n * 0.25) if grass_mud else (0.32 + n * 0.15)
 				var mod := _g3_ground_mod(nsurf)
 				mod.a = a
 				_draw_g3_world_sample(_g3_tex(nsurf), nx, ny, strip, mod, _g3_period(nsurf))
+				# Second jittered pass breaks remaining square tint.
+				if grass_mud:
+					var strip2 := strip.grow(-cell_px * 0.06)
+					strip2.position += Vector2((n - 0.5) * cell_px * 0.12, (0.5 - n) * cell_px * 0.12)
+					mod.a = a * 0.55
+					_draw_g3_world_sample(_g3_tex(nsurf), nx, ny, strip2, mod, _g3_period(nsurf))
 
 
 func _is_wall_kind(kind: String, cell: Dictionary) -> bool:
@@ -1070,103 +1111,157 @@ func _cover_edge(x: int, y: int) -> bool:
 	return false
 
 
+func _g3_bag(name: String) -> Texture2D:
+	return g3.props.get(name, null) as Texture2D
+
+
 func _draw_g3_sandbag_runs() -> void:
-	## Perimeter cover only: continuous stacked sandbag lines (concept emplacement).
-	var bag: Texture2D = g3.props.get("sandbag_straight", null)
-	var bag_curve: Texture2D = g3.props.get("sandbag_curve", bag)
-	if bag == null:
+	## Cover rim → dedicated sheet sprites (straight / L / end / round). No yellow bars.
+	if _g3_bag("sandbag_straight_m") == null and _g3_bag("sandbag_straight") == null:
 		return
-	var visited: Dictionary = {}
+	var corners: Dictionary = {}
 	for y in range(grid_h):
 		for x in range(grid_w):
 			if not _cover_edge(x, y):
 				continue
+			var h_nb := _cover_edge(x - 1, y) or _cover_edge(x + 1, y)
+			var v_nb := _cover_edge(x, y - 1) or _cover_edge(x, y + 1)
+			if h_nb and v_nb:
+				corners["%d,%d" % [x, y]] = true
+	var visited: Dictionary = {}
+	# Horizontal straight runs (skip pure corner cells).
+	for y in range(grid_h):
+		var x := 0
+		while x < grid_w:
 			var key := "%d,%d" % [x, y]
-			if visited.has(key):
+			if not _cover_edge(x, y) or corners.has(key) or visited.has(key):
+				x += 1
 				continue
 			var x0 := x
-			while _cover_edge(x0 - 1, y):
-				x0 -= 1
-			var x1 := x
-			while _cover_edge(x1 + 1, y):
-				x1 += 1
+			while x < grid_w and _cover_edge(x, y) and not corners.has("%d,%d" % [x, y]):
+				visited["%d,%d" % [x, y]] = true
+				x += 1
+			var len_h := x - x0
+			if len_h >= 2:
+				_draw_g3_bag_straight(x0, y, len_h, true)
+			elif len_h == 1:
+				_draw_g3_bag_pile(x0, y)
+	# Vertical straight runs.
+	for x in range(grid_w):
+		var y := 0
+		while y < grid_h:
+			var key2 := "%d,%d" % [x, y]
+			if not _cover_edge(x, y) or corners.has(key2) or visited.has(key2):
+				y += 1
+				continue
 			var y0 := y
-			while _cover_edge(x, y0 - 1):
-				y0 -= 1
-			var y1 := y
-			while _cover_edge(x, y1 + 1):
-				y1 += 1
-			var h_len := x1 - x0 + 1
-			var v_len := y1 - y0 + 1
-			if h_len >= v_len and h_len >= 2:
-				for xi in range(x0, x1 + 1):
-					visited["%d,%d" % [xi, y]] = true
-				_draw_sandbag_sprite_run(x0, y, h_len, true, bag, bag_curve)
-			elif v_len >= 2:
-				for yi in range(y0, y1 + 1):
-					visited["%d,%d" % [x, yi]] = true
-				_draw_sandbag_sprite_run(x, y0, v_len, false, bag, bag_curve)
-			else:
-				visited[key] = true
-				_draw_sandbag_sprite_run(x, y, 1, true, bag_curve if bag_curve else bag, bag)
+			while y < grid_h and _cover_edge(x, y) and not corners.has("%d,%d" % [x, y]):
+				visited["%d,%d" % [x, y]] = true
+				y += 1
+			var len_v := y - y0
+			if len_v >= 2:
+				_draw_g3_bag_straight(x, y0, len_v, false)
+			elif len_v == 1:
+				_draw_g3_bag_pile(x, y0)
+	# Corners / T joints.
+	for ckey in corners.keys():
+		var parts := str(ckey).split(",")
+		_draw_g3_bag_corner(int(parts[0]), int(parts[1]))
 
 
-func _draw_sandbag_sprite_run(
-	ox: int, oy: int, length: int, horizontal: bool, bag: Texture2D, bag_end: Texture2D
-) -> void:
-	## Chunky burlap pile: bags ~0.45 cell, 2 staggered rows, dark gaps (phone-readable).
-	## Sprites are sparse in atlas — draw as filled bag capsules so piles read at phone size.
-	var bag_w := cell_px * 0.45
-	var bag_h := cell_px * 0.34
-	var rows := 2
+func _g3_bag_night_mod() -> Color:
+	return Color(0.78, 0.82, 0.92, 1.0)
+
+
+func _draw_g3_bag_shadow(rect: Rect2) -> void:
+	draw_rect(rect, Color(0, 0, 0, 0.42), true)
+	if g3.drop_shadow:
+		draw_texture_rect(g3.drop_shadow, rect, false, Color(1, 1, 1, 0.78))
+
+
+func _draw_g3_bag_pile(x: int, y: int) -> void:
+	var pile: Texture2D = _g3_bag("sandbag_pile_round")
+	if pile == null:
+		pile = _g3_bag("sandbag_end_cap")
+	if pile == null:
+		return
+	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
+	var sz := cell_px * 0.95
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.45), Vector2(sz, sz))
+	_draw_g3_bag_shadow(dest.grow(cell_px * 0.08))
+	draw_texture_rect(pile, dest, false, _g3_bag_night_mod())
+
+
+func _draw_g3_bag_corner(x: int, y: int) -> void:
+	var corner: Texture2D = _g3_bag("sandbag_corner_l")
+	if corner == null:
+		corner = _g3_bag("sandbag_junction_t")
+	if corner == null:
+		return
+	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
+	var sz := cell_px * 1.1
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.4), Vector2(sz, sz))
+	_draw_g3_bag_shadow(dest.grow(cell_px * 0.06))
+	draw_texture_rect(corner, dest, false, _g3_bag_night_mod())
+
+
+func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> void:
+	## Tile straight S/M/L segments; bag stack depth ≈ 0.9 cell; preserve aspect (no stretch).
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
 		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
 	var run_len := float(length) * cell_px
-	if horizontal:
-		base += Vector2(0.0, cell_px * 0.18)
-	else:
-		base += Vector2(cell_px * 0.18, 0.0)
-	var sh_size := Vector2(
-		run_len * 0.96 if horizontal else cell_px * 0.95,
-		cell_px * 0.85 if horizontal else run_len * 0.96
+	var sh := Rect2(
+		base + Vector2(cell_px * 0.04, cell_px * 0.32),
+		Vector2(run_len * 0.96 if horizontal else cell_px * 0.88, cell_px * 0.72 if horizontal else run_len * 0.96)
 	)
-	draw_rect(Rect2(base + Vector2(cell_px * 0.03, cell_px * 0.30), sh_size), Color(0, 0, 0, 0.58), true)
-	if g3.drop_shadow:
-		draw_texture_rect(g3.drop_shadow, Rect2(base + Vector2(cell_px * 0.01, cell_px * 0.26), sh_size), false, Color(1, 1, 1, 0.88))
-	var burlap := Color(0.82, 0.66, 0.40, 1.0)
-	var burlap_mid := Color(0.62, 0.48, 0.28, 1.0)
-	var burlap_dark := Color(0.28, 0.20, 0.10, 0.85)
-	for row in range(rows):
-		var stagger := (row % 2) * (bag_w * 0.50)
-		var row_y := cell_px * 0.10 + float(row) * (bag_h * 0.62)
-		var along := cell_px * 0.02
-		var i := 0
-		while along < run_len - bag_w * 0.05:
-			var dest: Rect2
-			if horizontal:
-				dest = Rect2(base + Vector2(along + stagger, row_y), Vector2(bag_w, bag_h))
-			else:
-				dest = Rect2(base + Vector2(cell_px * 0.12 + stagger * 0.35, along + cell_px * 0.04), Vector2(bag_w, bag_h))
-			_draw_g3_bag_capsule(dest, burlap, burlap_mid, burlap_dark)
-			# Optional sprite grain on top (tight atlas content).
-			var tex: Texture2D = bag_end if (i == 0 or along + bag_w >= run_len) else bag
-			if tex:
-				draw_texture_rect(tex, dest.grow(-1.0), false, Color(1, 1, 1, 0.55))
-			along += bag_w * 0.48
-			i += 1
-
-
-func _draw_g3_bag_capsule(dest: Rect2, fill: Color, mid: Color, dark: Color) -> void:
-	## Solid readable sandbag body (atlas sprites alone are too sparse).
-	draw_rect(Rect2(dest.position + Vector2(1, dest.size.y * 0.55), Vector2(dest.size.x, dest.size.y * 0.5)), dark, true)
-	draw_rect(dest, fill, true)
-	# End caps (read as rounded bags).
-	var r := dest.size.y * 0.5
-	draw_circle(dest.position + Vector2(r, dest.size.y * 0.5), r, fill)
-	draw_circle(dest.position + Vector2(dest.size.x - r, dest.size.y * 0.5), r, fill)
-	draw_rect(Rect2(dest.position + Vector2(2, 1), Vector2(dest.size.x - 4, dest.size.y * 0.28)), Color(fill.r + 0.12, fill.g + 0.10, fill.b + 0.06, 0.55), true)
-	draw_rect(Rect2(dest.position + Vector2(3, dest.size.y * 0.42), Vector2(dest.size.x - 6, 2.0)), mid, true)
+	_draw_g3_bag_shadow(sh)
+	var along := 0.0
+	var wall_h := cell_px * 0.90
+	var mod := _g3_bag_night_mod()
+	while along < run_len - cell_px * 0.04:
+		var remain := run_len - along
+		var tex: Texture2D
+		if remain >= cell_px * 2.5:
+			tex = _g3_bag("sandbag_straight_l")
+		elif remain >= cell_px * 1.7:
+			tex = _g3_bag("sandbag_straight_m")
+		else:
+			tex = _g3_bag("sandbag_straight_s")
+		if tex == null:
+			tex = _g3_bag("sandbag_straight_m")
+		if tex == null:
+			tex = _g3_bag("sandbag_straight")
+		if tex == null:
+			break
+		var tw := float(tex.get_width())
+		var th := float(tex.get_height())
+		var aspect := tw / maxf(1.0, th)
+		var dest_h := wall_h
+		var dest_w := dest_h * aspect
+		if dest_w > remain + cell_px * 0.08:
+			dest_w = remain + cell_px * 0.04
+			dest_h = dest_w / aspect
+		if horizontal:
+			var dest := Rect2(base + Vector2(along, (cell_px - dest_h) * 0.52), Vector2(dest_w, dest_h))
+			draw_texture_rect(tex, dest, false, mod)
+		else:
+			# Rotate horizontal sheet art 90° for vertical runs.
+			var cx := base.x + cell_px * 0.5
+			var cy := base.y + along + dest_w * 0.5
+			draw_set_transform(Vector2(cx, cy), -PI * 0.5, Vector2.ONE)
+			draw_texture_rect(tex, Rect2(Vector2(-dest_w * 0.5, -dest_h * 0.5), Vector2(dest_w, dest_h)), false, mod)
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		along += dest_w * 0.90
+	var cap: Texture2D = _g3_bag("sandbag_end_cap")
+	if cap and length >= 2:
+		var cap_sz := cell_px * 0.52
+		if horizontal:
+			draw_texture_rect(cap, Rect2(base + Vector2(-cap_sz * 0.2, (cell_px - cap_sz) * 0.5), Vector2(cap_sz, cap_sz)), false, mod)
+			draw_texture_rect(cap, Rect2(base + Vector2(run_len - cap_sz * 0.8, (cell_px - cap_sz) * 0.5), Vector2(cap_sz, cap_sz)), false, mod)
+		else:
+			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, -cap_sz * 0.2), Vector2(cap_sz, cap_sz)), false, mod)
+			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, run_len - cap_sz * 0.8), Vector2(cap_sz, cap_sz)), false, mod)
 
 
 func _draw_g2_props() -> void:
