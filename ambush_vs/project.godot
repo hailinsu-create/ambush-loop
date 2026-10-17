@@ -6,8 +6,8 @@ config_version=5
 
 config/name="Ambush Loop"
 config/version="0.7.0-vs"
-config/description="Ambush VS vertical slice (skeleton). Same Android applicationId as 0.6.28 for future overlay upgrade tests."
-run/main_scene="res://scenes/boot.tscn"
+config/description="Ambush VS yard greybox (W3). Same Android applicationId as 0.6.28 for future overlay upgrade tests."
+run/main_scene="res://scenes/greybox.tscn"
 config/features=PackedStringArray("4.7", "Mobile", "GL Compatibility")
 config/icon="res://icon.svg"
 config/quit_on_go_back=false
@@ -19,6 +19,7 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
 window/handheld/orientation=0
+window/size/mode=0
 
 [input_devices]
 

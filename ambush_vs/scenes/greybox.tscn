@@ -1,0 +1,176 @@
+[gd_scene load_steps=3 format=3 uid="uid://ambushvsgreybox01"]
+
+[ext_resource type="Script" path="res://scripts/greybox_controller.gd" id="1_ctrl"]
+[ext_resource type="Script" path="res://view/greybox_map.gd" id="2_map"]
+
+[node name="GreyboxRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ctrl")
+
+[node name="MapHost" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = -280.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GreyboxMap" type="Control" parent="MapHost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_map")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="PhaseLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "布阵 SETUP"
+
+[node name="InfoLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "加载方案 A/B 开始"
+
+[node name="AlertLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "警报：安静"
+
+[node name="SetupPanel" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -268.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = 420.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="PlanAButton" type="Button" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "预设方案 A（高点）"
+
+[node name="PlanBButton" type="Button" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "预设方案 B（地雷）"
+
+[node name="TriggerOption" type="OptionButton" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="PreviewButton" type="Button" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "点地面看谁能看见"
+
+[node name="StartButton" type="Button" parent="HUD/SetupPanel"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "开始等待"
+
+[node name="WaitPanel" type="VBoxContainer" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -268.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = 360.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="PauseButton" type="Button" parent="HUD/WaitPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "暂停"
+
+[node name="SpeedButton" type="Button" parent="HUD/WaitPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "倍速 1×"
+
+[node name="DetonateButton" type="Button" parent="HUD/WaitPanel"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "手动起爆"
+
+[node name="RestartWaitButton" type="Button" parent="HUD/WaitPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "重新开始"
+
+[node name="ResultPanel" type="VBoxContainer" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -160.0
+offset_right = 280.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "结算"
+autowrap_mode = 3
+
+[node name="RestartButton" type="Button" parent="HUD/ResultPanel"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "再来一局"

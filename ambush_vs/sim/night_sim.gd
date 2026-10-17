@@ -152,6 +152,18 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 
 
 func run() -> Dictionary:
+	begin_wait()
+	while not _done and tick <= max_ticks:
+		advance_one_tick()
+	if not _done:
+		_finish("lose", "timeout")
+	return outcome_summary()
+
+
+## Interactive / greybox API (thin wrappers; tick rules unchanged).
+
+func begin_wait() -> void:
+	## SETUP is instantaneous; emit mine_place then enter WAIT at tick 0.
 	log.emit(0, "sim_start", {
 		"actor": "system",
 		"payload": {
@@ -160,7 +172,6 @@ func run() -> Dictionary:
 			"ambush_targets": level.get("ambush_targets", []),
 		},
 	})
-	# SETUP is instantaneous (布阵不计时); mine_place events then WAIT.
 	for m in mines:
 		log.emit(0, "mine_place", {
 			"actor": str(m["id"]),
@@ -169,15 +180,26 @@ func run() -> Dictionary:
 		})
 	_set_phase(0, C.PHASE_WAIT)
 
-	while not _done and tick <= max_ticks:
-		_tick_once()
-		if _done:
-			break
-		tick += 1
 
-	if not _done:
+func advance_one_tick() -> bool:
+	## Process current tick then increment. Returns true when night finished.
+	if _done:
+		return true
+	_tick_once()
+	if _done:
+		return true
+	tick += 1
+	if tick > max_ticks:
 		_finish("lose", "timeout")
+		return true
+	return false
 
+
+func is_finished() -> bool:
+	return _done
+
+
+func outcome_summary() -> Dictionary:
 	var h := log.hash_sha256()
 	var summary := {
 		"outcome": _outcome,
@@ -188,15 +210,84 @@ func run() -> Dictionary:
 		"kills": killed_ids.duplicate(),
 		"escapes": escaped_ids.duplicate(),
 		"log_hash": h,
+		"reason": _end_reason(),
 	}
 	log.set_summary(summary)
 	return summary
+
+
+func request_manual_detonate() -> void:
+	## Arms manual trigger for the next processed tick (ADR-TRIGGER T-05).
+	if phase != C.PHASE_WAIT or detonate_tick >= 0:
+		return
+	manual_detonate_tick = tick
+
+
+func request_operator_facing(op_id: String, new_facing_deg: float) -> void:
+	## WAIT turn cost: 1.0 s per 45° (ADR-TRIGGER §3.2 / TERMS §9.3). SETUP should set facing before begin_wait.
+	if phase != C.PHASE_WAIT or plan_locked:
+		return
+	var op := _find_op(op_id)
+	if op.is_empty() or not op["alive"]:
+		return
+	var delta := SimGeom.abs_angle_delta_deg(float(op["facing_deg"]), new_facing_deg)
+	var steps := int(ceil(delta / 45.0 - 1e-9))
+	if steps <= 0:
+		op["facing_deg"] = new_facing_deg
+		return
+	op["facing_deg"] = new_facing_deg
+	op["turn_ticks_left"] = maxi(int(op.get("turn_ticks_left", 0)), steps * C.TICK_HZ)
+
+
+func observers_seeing_cell(tx: float, ty: float, target_tier: String) -> Array:
+	## Preview: which sentries/patrols see this cell (A-05; uses same geometry as expose).
+	var out: Array = []
+	for s in sentries:
+		if _observer_sees(s, float(s["x"]), float(s["y"]), str(s.get("tier", "ground")), tx, ty, target_tier):
+			out.append({"kind": "sentry", "id": str(s.get("id", "sentry")), "x": s["x"], "y": s["y"]})
+	for p in patrols:
+		if _observer_sees(p, float(p["x"]), float(p["y"]), SimConstants.TIER_GROUND, tx, ty, target_tier):
+			out.append({"kind": "patrol", "id": str(p.get("id", "patrol")), "x": p["x"], "y": p["y"]})
+	return out
+
+
+func sector_clear_and_blocked(
+	ox: float, oy: float, facing: float, half: float, rng: float, tier: String
+) -> Dictionary:
+	## Clear LOS cells + grey occlusion gaps inside cone (ADR-HEIGHT §3.2).
+	var clear_cells: Array = []
+	var blocked_cells: Array = []
+	var r_ceil := int(ceil(rng)) + 1
+	var oxi := int(floor(ox))
+	var oyi := int(floor(oy))
+	for y in range(oyi - r_ceil, oyi + r_ceil + 1):
+		for x in range(oxi - r_ceil, oxi + r_ceil + 1):
+			if x < 0 or y < 0 or x >= grid.width or y >= grid.height:
+				continue
+			if not SimGeom.in_cone(ox, oy, facing, half, rng, float(x), float(y)):
+				continue
+			var tt := grid.tier_at(float(x), float(y))
+			if grid.los_clear(ox, oy, tier, float(x), float(y), tt):
+				clear_cells.append(Vector2i(x, y))
+			else:
+				blocked_cells.append(Vector2i(x, y))
+	return {"clear": clear_cells, "blocked": blocked_cells}
+
+
+func _end_reason() -> String:
+	## Best-effort reason from last sim_end event for result UI.
+	for i in range(log.events.size() - 1, -1, -1):
+		var e: Dictionary = log.events[i]
+		if str(e.get("type", "")) == "sim_end":
+			return str(e.get("payload", {}).get("reason", ""))
+	return ""
 
 
 func _tick_once() -> void:
 	## 1 input
 	if phase == C.PHASE_WAIT and manual_detonate_tick >= 0 and tick == manual_detonate_tick:
 		_enter_detonate("manual", "system")
+	_step_turn_cooldowns()
 
 	## 2 move
 	_step_move()
@@ -220,6 +311,13 @@ func _tick_once() -> void:
 		_step_grenades()
 		_check_escapes()
 		_check_end()
+
+
+func _step_turn_cooldowns() -> void:
+	for op in operators:
+		var left := int(op.get("turn_ticks_left", 0))
+		if left > 0:
+			op["turn_ticks_left"] = left - 1
 
 
 func _set_phase(t: int, p: String) -> void:
