@@ -67,20 +67,56 @@ theme_override_constants/separation = 16
 [node name="PhaseLabel" type="Label" parent="HUD/TopBar"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "布阵"
+text = "侦察"
 
 [node name="InfoLabel" type="Label" parent="HUD/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
-text = "从南门入场位开始布阵"
+text = "夜色下搜集补给，再布阵"
 
 [node name="AlertLabel" type="Label" parent="HUD/TopBar"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "警报：安静"
 
+[node name="ScoutPanel" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="ClockLabel" type="Label" parent="HUD/ScoutPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "夜时剩余 90 秒"
+
+[node name="KitLabel" type="Label" parent="HUD/ScoutPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "套件："
+autowrap_mode = 3
+
+[node name="PreviewButton" type="Button" parent="HUD/ScoutPanel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "点地面看谁能看见"
+
+[node name="BeginSetupButton" type="Button" parent="HUD/ScoutPanel"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "开始布阵"
+
 [node name="SetupPanel" type="VBoxContainer" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

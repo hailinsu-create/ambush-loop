@@ -163,4 +163,6 @@
 - `scripts/run_isolated_test.sh`、`scripts/run_isolated_test.ps1`
 - `art/audio_v2/LICENSE`（CB5 tip 缺失，按 manifest CC0-1.0 补回）
 - `PROVENANCE_VS.md`、`THIRD_PARTY_NOTICES.md`、`README.md`
+- `sim/pathfinder.gd`：逻辑改编自 `ambush_loop/scripts/raid/pathfinder.gd`（main / tip `989f8ebb5bdf5f6ff2bef3542f93349c06f40117`），改为 `SimGrid` 可变宽高；非字节拷贝
+- `sim/scout_sim.gd`、`scripts/w4_scout_test.gd`：PLAY-2 侦察阶段（本分支新建）
 

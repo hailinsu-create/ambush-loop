@@ -54,6 +54,7 @@ var threat_slot_cells: Array = [] ## Vector2i
 var night: bool = true
 var highlight_high_slots: bool = false ## SETUP: gold wash on high_slots
 var op_display_names: Dictionary = {} ## op_id → Chinese label (never show raw ids)
+var supply_states: Dictionary = {} ## supply_id → {revealed, opened, opening, state, x, y}
 var _high_cells: Dictionary = {} ## "x,y" → high_slot id
 var _out_of_yard: Dictionary = {} ## "x,y" → border-touching wall mass (not a building)
 var _inner_wall: Dictionary = {} ## "x,y" → interior low-wall cells (stone strips)
@@ -214,6 +215,7 @@ func apply_snapshot(snap: Dictionary) -> void:
 	selected_op_id = str(snap.get("selected_op_id", selected_op_id))
 	highlight_high_slots = bool(snap.get("highlight_high_slots", false))
 	op_display_names = snap.get("op_display_names", {}) as Dictionary
+	supply_states = snap.get("supply_states", {}) as Dictionary
 	queue_redraw()
 
 
@@ -319,6 +321,36 @@ func _draw() -> void:
 
 func _supply_is_hidden(s: Dictionary) -> bool:
 	return str(s.get("visibility", "")) == "hidden" or bool(s.get("hidden", false))
+
+
+func _supply_should_draw(s: Dictionary, sid: String) -> bool:
+	## Scout/setup: honor supply_states.revealed; otherwise skip visibility:hidden.
+	if supply_states.has(sid):
+		return bool(supply_states[sid].get("revealed", false))
+	return not _supply_is_hidden(s)
+
+
+func _draw_supply_state_badge(sid: String, x: int, y: int) -> void:
+	if not supply_states.has(sid):
+		return
+	var st: Dictionary = supply_states[sid]
+	var state := str(st.get("state", ""))
+	var p := cell_to_screen(float(x), float(y)) + Vector2(-cell_px * 0.35, cell_px * 0.35)
+	var label := ""
+	var col := Color(0.85, 0.9, 1.0, 0.95)
+	match state:
+		"unsearched":
+			label = "未搜"
+			col = Color(1.0, 0.92, 0.45, 0.95)
+		"searching":
+			label = "搜%d%%" % int(float(st.get("open_progress", 0.0)) * 100.0)
+			col = Color(0.55, 0.95, 1.0, 0.95)
+		"searched":
+			label = "已搜"
+			col = Color(0.55, 0.9, 0.55, 0.95)
+		_:
+			return
+	draw_string(ThemeDB.fallback_font, p, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, col)
 
 
 func _draw_high_slot_highlights() -> void:
@@ -1107,16 +1139,17 @@ func _draw_g3_props() -> void:
 	# No per-cell shed_roof props — continuous footprint roofs already read as houses.
 	_draw_g3_sandbag_runs()
 	for s in level.get("supplies", []):
+		var sid := str(s.get("id", ""))
 		var x := int(s.get("x", -1))
 		var y := int(s.get("y", -1))
 		if x < 0:
 			continue
-		# yard.json uses visibility:"hidden"; legacy "hidden":true also accepted.
-		if _supply_is_hidden(s):
+		if not _supply_should_draw(s, sid):
 			continue
 		var tex: Texture2D = g3.props.get("crate_stack", null)
 		if tex:
 			_draw_g3_prop_sprite(x, y, tex, 0.70)
+		_draw_supply_state_badge(sid, x, y)
 	var accents := [
 		[Vector2i(9, 2), "barrel"],
 		[Vector2i(14, 3), "barrel"],
@@ -1341,16 +1374,18 @@ func _draw_g2_props() -> void:
 			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 			draw_texture_rect(g2.prop_shed, Rect2(p, Vector2(cell_px, cell_px)), false)
 	for s in level.get("supplies", []):
+		var sid := str(s.get("id", ""))
 		var x := int(s.get("x", -1))
 		var y := int(s.get("y", -1))
 		if x < 0:
 			continue
-		if _supply_is_hidden(s):
+		if not _supply_should_draw(s, sid):
 			continue
 		var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 		var tex: Texture2D = g2.prop_crate
 		if tex:
 			draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.1), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
+		_draw_supply_state_badge(sid, x, y)
 	if g2.prop_barrel:
 		for c in [Vector2i(9, 2), Vector2i(14, 3)]:
 			var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)

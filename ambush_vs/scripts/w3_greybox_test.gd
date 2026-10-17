@@ -146,7 +146,7 @@ func _test_mg42_not_in_starting_kit() -> void:
 	_assert(hidden_has_mg42, "hidden supply contains MG42")
 
 
-func _wait_scene_ready(max_frames: int = 60) -> Node:
+func _wait_scene_ready(max_frames: int = 90) -> Node:
 	for _i in range(max_frames):
 		await process_frame
 		var scene = current_scene
@@ -156,17 +156,23 @@ func _wait_scene_ready(max_frames: int = 60) -> Node:
 
 
 func _test_blank_start_not_startable() -> void:
-	## Untouched blank start must NOT be startable (no auto-win path).
+	## Untouched setup (after scout→布阵, no placement) must NOT be startable.
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "blank start change_scene err=%s" % err)
 	var scene = await _wait_scene_ready()
 	_assert(scene != null and scene.has_method("can_start_wait"), "blank start scene has can_start_wait")
 	if scene == null:
 		return
+	# PLAY-2 boots into scout; enter setup without gathering MG42.
+	if scene.has_method("begin_setup_from_scout"):
+		scene.begin_setup_from_scout()
+		for _i in range(4):
+			await process_frame
 	_assert(scene.can_start_wait() == false, "untouched blank start not startable")
 	_assert(str(scene.start_block_reason()) != "", "blank start has Chinese block reason")
-	# Operators must be at squad_insertion, not plan A coords.
+	# Operators must be at squad_insertion (or scout end=entry), not plan A coords.
 	var ops: Array = scene.plan.get("operators", [])
 	_assert(ops.size() == 3, "blank start has 3 operators")
 	var at_a_barn := false
@@ -187,6 +193,7 @@ func _test_blank_start_not_startable() -> void:
 		var n := str(names[k])
 		_assert(not n.begins_with("op_"), "display name not internal id: %s" % n)
 	_assert(scene.is_mg42_in_starting_kit() == false, "controller: MG42 not in starting kit")
+	_assert(scene.is_mg42_unlocked() == false, "MG42 still locked without scout pickup")
 	if scene.btn_start:
 		_assert(scene.btn_start.disabled == true, "StartButton disabled on blank start")
 
@@ -200,6 +207,10 @@ func _test_scripted_placement_reaches_result() -> void:
 	_assert(scene != null, "scripted placement scene ready")
 	if scene == null:
 		return
+	if scene.has_method("begin_setup_from_scout"):
+		scene.begin_setup_from_scout()
+		for _i in range(4):
+			await process_frame
 	var ops: Array = scene.plan.get("operators", [])
 	_assert(ops.size() >= 3, "scripted placement has operators")
 	var id0 := str(ops[0]["id"])
@@ -235,8 +246,8 @@ func _test_greybox_scene_boots() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "change_scene greybox err=%s" % err)
-	# Wait for deferred auto-run + a few frames of RESULT.
-	for i in range(200):
+	# Wait for deferred auto-run (includes scout walk) + RESULT.
+	for i in range(2000):
 		await process_frame
 		var scene = current_scene
 		if scene != null and scene.get("last_summary") is Dictionary:
