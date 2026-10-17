@@ -316,8 +316,8 @@ func _draw_tiles() -> void:
 			var kind := str(cell.get("kind", "wall"))
 			var tier := str(cell.get("tier", ""))
 			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
-			# Slight overlap kills 1px cell seams (world UV already continuous).
-			var rect := Rect2(p - Vector2(0.6, 0.6), Vector2(cell_px + 1.2, cell_px + 1.2))
+			# Overlap kills cell seams (world UV already continuous).
+			var rect := Rect2(p - Vector2(1.25, 1.25), Vector2(cell_px + 2.5, cell_px + 2.5))
 			if art_mode == ArtMode.G3 and g3 != null:
 				_draw_g3_cell(cell, kind, tier, x, y, rect)
 			else:
@@ -356,16 +356,25 @@ func _surface_key(cell: Dictionary, kind: String, tier: String, x: int, y: int) 
 
 
 func _yard_ground_key(x: int, y: int) -> String:
-	## Cobble courtyard around the road/central yard; mud paths; grass plots (yard_concept).
-	var near_road: bool = abs(x - 10) <= 3 or abs(x - 11) <= 3
-	if near_road and y >= 1 and y <= 14 and ((x + y) % 4) != 0:
+	## Large coherent zones (not per-cell checker): cobble courtyard, mud tracks, grass plots.
+	# Vertical cobble court around the road spine.
+	if x >= 8 and x <= 13 and y >= 1 and y <= 14:
 		return "cobble"
-	if x >= 8 and x <= 15 and y >= 3 and y <= 12 and ((x * 2 + y) % 5) != 0:
+	# East court toward alley / east pad.
+	if x >= 14 and x <= 17 and y >= 5 and y <= 10:
 		return "cobble"
-	if _near_building(x, y, 1) and ((x + 2 * y) % 5) == 0:
-		return "cobble"
-	if ((x * 3 + y * 5) % 3) == 0:
+	# Grass plots west of barn / between inner walls (concept enclosed greens).
+	if x >= 4 and x <= 7 and y >= 2 and y <= 7:
 		return "grass"
+	if x >= 12 and x <= 16 and y >= 2 and y <= 4:
+		return "grass"
+	if x >= 15 and x <= 18 and y >= 11 and y <= 13:
+		return "grass"
+	# Mud paths: south approach + west track beside barn.
+	if y <= 3 and x >= 5 and x <= 14:
+		return "mud"
+	if x >= 5 and x <= 7 and y >= 8 and y <= 12:
+		return "mud"
 	return "mud"
 
 
@@ -413,65 +422,111 @@ func _g3_tex(surface: String) -> Texture2D:
 func _draw_g3_cell(cell: Dictionary, kind: String, tier: String, x: int, y: int, rect: Rect2) -> void:
 	var surf := _surface_key(cell, kind, tier, x, y)
 	if surf.begins_with("roof"):
-		_draw_g3_roof_cell(surf, x, y, rect)
+		# Placeholder under continuous footprint fill (drawn in _draw_g3_roof_footprints).
+		_draw_g3_world_sample(_g3_tex(surf), x, y, rect, Color(0.55, 0.55, 0.58, 1.0))
 		return
 	if surf == "outside":
 		# Dark night grass/earth beyond the dry-stone perimeter (vignette finishes the read).
-		var night_earth := Color(0.28, 0.32, 0.38, 1.0)
-		_draw_g3_world_sample(_g3_tex("outside"), x, y, rect, night_earth)
-		draw_rect(rect, Color(0.04, 0.06, 0.12, 0.42), true)
+		var night_earth := Color(0.42, 0.46, 0.40, 1.0)
+		_draw_g3_world_sample(g3.tile_mud if g3.tile_mud else _g3_tex("outside"), x, y, rect, night_earth)
+		_draw_g3_world_sample(_g3_tex("outside"), x, y, rect, Color(0.35, 0.42, 0.38, 0.55))
+		draw_rect(rect, Color(0.03, 0.05, 0.10, 0.55), true)
 		return
-	# Yard ground — cool blue-grey moonlight.
-	var ground_mod := Color(0.72, 0.76, 0.88, 1.0)
+	# Yard ground — cool blue-grey moonlight (no per-cell edge wash → no checker seams).
+	var ground_mod := Color(0.62, 0.68, 0.82, 1.0)
+	if surf == "grass":
+		ground_mod = Color(0.48, 0.58, 0.55, 1.0)
+	elif surf == "mud":
+		ground_mod = Color(0.55, 0.52, 0.48, 1.0)
+	elif surf == "cobble":
+		ground_mod = Color(0.68, 0.72, 0.84, 1.0)
 	_draw_g3_world_sample(_g3_tex(surf), x, y, rect, ground_mod)
-	if surf in ["mud", "grass", "cobble", "planks"]:
-		_blend_g3_edges(x, y, surf, rect)
-
-
-func _draw_g3_roof_cell(surf: String, x: int, y: int, rect: Rect2) -> void:
-	## Full-cell slate/shingle only — eaves/ridge applied once per building footprint.
-	_draw_g3_world_sample(_g3_tex(surf), x, y, rect)
 
 
 func _draw_g3_stone_walls() -> void:
-	## Continuous dry-stone perimeter (~1/3 cell) + inner plot dividers as narrow strips.
+	## Continuous dry-stone perimeter runs (~1/3 cell) + inner plot dividers as narrow strips.
+	_draw_g3_perimeter_runs()
 	for y in range(grid_h):
 		for x in range(grid_w):
-			var key := "%d,%d" % [x, y]
-			if _out_of_yard.has(key):
-				_draw_g3_perimeter_edges(x, y)
-			elif _inner_wall.has(key):
+			if _inner_wall.has("%d,%d" % [x, y]):
 				var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 				_draw_g3_wall_strip(x, y, Rect2(p, Vector2(cell_px, cell_px)))
 
 
-func _draw_g3_perimeter_edges(x: int, y: int) -> void:
-	## Stone strip on each yard-facing edge of an out-of-yard cell.
+func _perimeter_edge(x: int, y: int, dir: String) -> bool:
+	## True when out-of-yard cell (x,y) faces yard in dir (e/w/n/s in grid space).
+	if not _out_of_yard.has("%d,%d" % [x, y]):
+		return false
+	var nx := x
+	var ny := y
+	match dir:
+		"e":
+			nx += 1
+		"w":
+			nx -= 1
+		"n":
+			ny += 1
+		"s":
+			ny -= 1
+	return _cell_yard(nx, ny)
+
+
+func _draw_g3_perimeter_runs() -> void:
+	## Merge adjacent perimeter edges into long strips so the wall reads continuous (concept outer wall).
 	var t := G3_WALL_STRIP
-	var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
-	var dirs := [
-		[1, 0, "e"],
-		[-1, 0, "w"],
-		[0, 1, "n"],
-		[0, -1, "s"],
-	]
-	for d in dirs:
-		var nx: int = x + int(d[0])
-		var ny: int = y + int(d[1])
-		if not _cell_yard(nx, ny):
-			continue
-		var strip: Rect2
-		match str(d[2]):
-			"e":
-				strip = Rect2(p + Vector2(cell_px * (1.0 - t), cell_px * 0.02), Vector2(cell_px * t, cell_px * 0.96))
-			"w":
-				strip = Rect2(p + Vector2(0, cell_px * 0.02), Vector2(cell_px * t, cell_px * 0.96))
-			"n":
-				# Screen-north = smaller screen-y (grid y grows up).
-				strip = Rect2(p + Vector2(cell_px * 0.02, 0), Vector2(cell_px * 0.96, cell_px * t))
-			_:
-				strip = Rect2(p + Vector2(cell_px * 0.02, cell_px * (1.0 - t)), Vector2(cell_px * 0.96, cell_px * t))
-		_stroke_stone_strip(strip, x, y)
+	var visited_h: Dictionary = {} ## horizontal runs keyed by "y,dir,x"
+	var visited_v: Dictionary = {}
+	# Horizontal runs (along x) for north/south faces.
+	for dir in ["n", "s"]:
+		for y in range(grid_h):
+			var x := 0
+			while x < grid_w:
+				if not _perimeter_edge(x, y, dir):
+					x += 1
+					continue
+				var x0 := x
+				while x < grid_w and _perimeter_edge(x, y, dir):
+					x += 1
+				var x1 := x - 1
+				var key := "%s,%d,%d-%d" % [dir, y, x0, x1]
+				if visited_h.has(key):
+					continue
+				visited_h[key] = true
+				var px := float(x0) * cell_px
+				var py := float(grid_h - 1 - y) * cell_px
+				var w := float(x1 - x0 + 1) * cell_px
+				var strip: Rect2
+				if dir == "n":
+					strip = Rect2(Vector2(px + 1.0, py), Vector2(w - 2.0, cell_px * t))
+				else:
+					strip = Rect2(Vector2(px + 1.0, py + cell_px * (1.0 - t)), Vector2(w - 2.0, cell_px * t))
+				_stroke_stone_strip(strip, x0, y)
+	# Vertical runs (along y) for east/west faces.
+	for dir in ["e", "w"]:
+		for x in range(grid_w):
+			var y := 0
+			while y < grid_h:
+				if not _perimeter_edge(x, y, dir):
+					y += 1
+					continue
+				var y0 := y
+				while y < grid_h and _perimeter_edge(x, y, dir):
+					y += 1
+				var y1 := y - 1
+				var key2 := "%s,%d,%d-%d" % [dir, x, y0, y1]
+				if visited_v.has(key2):
+					continue
+				visited_v[key2] = true
+				var px2 := float(x) * cell_px
+				# Screen y: higher grid y → smaller screen y; span from y1 down to y0.
+				var py2 := float(grid_h - 1 - y1) * cell_px
+				var h := float(y1 - y0 + 1) * cell_px
+				var strip2: Rect2
+				if dir == "e":
+					strip2 = Rect2(Vector2(px2 + cell_px * (1.0 - t), py2 + 1.0), Vector2(cell_px * t, h - 2.0))
+				else:
+					strip2 = Rect2(Vector2(px2, py2 + 1.0), Vector2(cell_px * t, h - 2.0))
+				_stroke_stone_strip(strip2, x, y0)
 
 
 func _draw_g3_wall_strip(x: int, y: int, rect: Rect2) -> void:
@@ -577,7 +632,16 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 	var y0 := float(grid_h - 1 - max_y) * cell_px
 	var w := float(max_x - min_x + 1) * cell_px
 	var h := float(max_y - min_y + 1) * cell_px
-	var footprint := Rect2(x0, y0, w, h)
+	var footprint := Rect2(x0 - 0.5, y0 - 0.5, w + 1.0, h + 1.0)
+	# Continuous roof face (one world-UV sample across the whole mass — no cell seams).
+	var surf := "roof_slate"
+	var mid_cell: Dictionary = grid.get_cell(int((min_x + max_x) / 2), int((min_y + max_y) / 2))
+	var mk := str(mid_cell.get("kind", ""))
+	var mt := str(mid_cell.get("tier", ""))
+	surf = _surface_key(mid_cell, mk, mt, int((min_x + max_x) / 2), int((min_y + max_y) / 2))
+	if not surf.begins_with("roof"):
+		surf = "roof_slate"
+	_draw_g3_world_sample(_g3_tex(surf), min_x, min_y, footprint)
 	# Soft shadow on ground just south of the building (outside the roof face).
 	var eaves := Rect2(footprint.position + Vector2(cell_px * 0.05, h + 1), Vector2(w * 1.0, cell_px * 0.42))
 	draw_rect(eaves, Color(0, 0, 0, 0.45), true)
@@ -601,19 +665,44 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 		draw_line(Vector2(mid_x, footprint.position.y + 3), Vector2(mid_x, footprint.position.y + h - 3), Color(0.07, 0.08, 0.10, 0.95), 3.5)
 		draw_line(Vector2(mid_x - 2, footprint.position.y + 3), Vector2(mid_x - 2, footprint.position.y + h - 3), Color(0.42, 0.44, 0.50, 0.55), 1.5)
 	# Soft building lip (no harsh per-cell grid).
-	draw_rect(footprint.grow(-0.5), Color(0.05, 0.05, 0.07, 0.75), false, 2.0)
+	draw_rect(footprint.grow(-0.5), Color(0.05, 0.05, 0.07, 0.65), false, 1.8)
 
 
 func _draw_g3_world_sample(tex: Texture2D, cell_x: int, cell_y: int, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)) -> void:
 	if tex == null:
 		return
+	var cells_w := maxf(1.0, dest.size.x / cell_px)
+	var cells_h := maxf(1.0, dest.size.y / cell_px)
+	_draw_g3_world_rect(tex, float(cell_x), float(cell_y), cells_w, cells_h, dest, modulate)
+
+
+func _draw_g3_world_rect(
+	tex: Texture2D, cell_x: float, cell_y: float, cells_w: float, cells_h: float, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)
+) -> void:
+	## World-space UV scaled to destination size in cells (seamless multi-cell fills).
+	if tex == null:
+		return
 	var tw := float(tex.get_width())
 	var th := float(tex.get_height())
-	var uw := tw / G3_TEX_CELLS
-	var vh := th / G3_TEX_CELLS
-	var u0 := fposmod(float(cell_x) * uw, tw)
-	var v0 := fposmod(float(cell_y) * vh, th)
-	_draw_region_wrapped(tex, dest, u0, v0, uw, vh, tw, th, modulate)
+	# Chunk so each sample spans < one texture period (wrapped helper handles one wrap).
+	var max_chunk := G3_TEX_CELLS * 0.9
+	var x_cells := 0.0
+	while x_cells < cells_w - 0.001:
+		var cw := minf(max_chunk, cells_w - x_cells)
+		var y_cells := 0.0
+		while y_cells < cells_h - 0.001:
+			var ch := minf(max_chunk, cells_h - y_cells)
+			var sub := Rect2(
+				dest.position + Vector2(dest.size.x * (x_cells / cells_w), dest.size.y * (y_cells / cells_h)),
+				Vector2(dest.size.x * (cw / cells_w), dest.size.y * (ch / cells_h))
+			)
+			var uw := tw / G3_TEX_CELLS * cw
+			var vh := th / G3_TEX_CELLS * ch
+			var u0 := fposmod((cell_x + x_cells) * (tw / G3_TEX_CELLS), tw)
+			var v0 := fposmod((cell_y + y_cells) * (th / G3_TEX_CELLS), th)
+			_draw_region_wrapped(tex, sub, u0, v0, uw, vh, tw, th, modulate)
+			y_cells += ch
+		x_cells += cw
 
 
 func _draw_region_wrapped(
@@ -861,9 +950,9 @@ func _draw_g3_sandbag_runs() -> void:
 func _draw_sandbag_sprite_run(
 	ox: int, oy: int, length: int, horizontal: bool, bag: Texture2D, bag_end: Texture2D
 ) -> void:
-	## Chunky stacked bags (~0.4 cell, 2 rows) like yard_concept emplacements.
-	var bag_w := cell_px * 0.42
-	var bag_h := cell_px * 0.40
+	## Chunky stacked bags (~0.45 cell, 2 rows) like yard_concept emplacements.
+	var bag_w := cell_px * 0.48
+	var bag_h := cell_px * 0.44
 	var rows := 2
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
@@ -871,24 +960,24 @@ func _draw_sandbag_sprite_run(
 	var run_len := float(length) * cell_px
 	if g3.drop_shadow:
 		var sh := Rect2(
-			base + Vector2(cell_px * 0.08, cell_px * 0.28),
-			Vector2(run_len * 0.9 if horizontal else cell_px * 0.75, cell_px * 0.55 if horizontal else run_len * 0.9)
+			base + Vector2(cell_px * 0.06, cell_px * 0.30),
+			Vector2(run_len * 0.92 if horizontal else cell_px * 0.85, cell_px * 0.65 if horizontal else run_len * 0.92)
 		)
-		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.75))
+		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.8))
 	for row in range(rows):
-		var stagger := (row % 2) * (bag_w * 0.45)
-		var row_y := cell_px * 0.22 + float(row) * (bag_h * 0.55)
-		var along := cell_px * 0.08
+		var stagger := (row % 2) * (bag_w * 0.40)
+		var row_y := cell_px * 0.18 + float(row) * (bag_h * 0.58)
+		var along := cell_px * 0.05
 		var i := 0
-		while along < run_len - bag_w * 0.15:
+		while along < run_len - bag_w * 0.1:
 			var tex: Texture2D = bag_end if (i == 0 or along + bag_w * 0.95 >= run_len) else bag
 			var dest: Rect2
 			if horizontal:
 				dest = Rect2(base + Vector2(along + stagger, row_y), Vector2(bag_w, bag_h))
 			else:
-				dest = Rect2(base + Vector2(cell_px * 0.22 + stagger * 0.2, along + cell_px * 0.12), Vector2(bag_w, bag_h))
+				dest = Rect2(base + Vector2(cell_px * 0.18 + stagger * 0.2, along + cell_px * 0.08), Vector2(bag_w, bag_h))
 			draw_texture_rect(tex, dest, false)
-			along += bag_w * 0.72
+			along += bag_w * 0.68
 			i += 1
 
 
