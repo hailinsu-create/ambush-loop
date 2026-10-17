@@ -195,6 +195,31 @@ var info_now_ms_fn: Callable = Callable()
 ## PLAY-UX PR-10: shortcuts help overlay.
 var shortcuts_help: PanelContainer = null
 var btn_shortcuts_help: Button = null
+## P0-3: opening briefing + once-per-phase tips (neutral copy only).
+const BriefingCopy := preload("res://ui/briefing_copy.gd")
+const BRIEFING_BTN_MIN_PX := 44.0 ## touch target floor for 「知道了」
+var briefing_dimmer: ColorRect = null
+var briefing_card: Control = null ## opaque shell (fill + panel)
+var briefing_panel: PanelContainer = null
+var briefing_title: Label = null
+var briefing_scroll: ScrollContainer = null
+var briefing_content: VBoxContainer = null
+var briefing_body: Label = null ## aggregate text for W8 content asserts
+var briefing_goal_body: Label = null
+var briefing_exit_body: Label = null
+var briefing_beat_hint: Label = null
+var briefing_tip: Label = null
+var briefing_beats_row: HBoxContainer = null
+var briefing_beat_chips: Array = [] ## Label chips
+var btn_briefing_dismiss: Button = null
+var phase_tip_bar: PanelContainer = null
+var phase_tip_label: Label = null
+var btn_phase_tip_close: Button = null
+var _briefing_shown_this_run: bool = false
+var _phase_tip_seen: Dictionary = {} ## phase_name → true
+var briefing_show_count: int = 0 ## test
+var briefing_dismiss_count: int = 0 ## test
+var phase_tip_show_count: int = 0 ## test
 ## PLAY-UX layout: opaque right column + map left (containers, not absolute stacks).
 var map_host: Control = null
 var right_column: Control = null
@@ -247,6 +272,8 @@ func _ready() -> void:
 	_build_undo_cancel_buttons()
 	_build_info_card()
 	_build_shortcuts_help()
+	_build_briefing_card()
+	_build_phase_tip_bar()
 	_strip_all_tooltips()
 	_install_hud_layout()
 
@@ -293,6 +320,7 @@ func _ready() -> void:
 		art_mode_name = "G2"
 		_refresh_art_button()
 	var skip_scout := str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]
+	var skip_brief := str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]
 	if skip_scout:
 		gathered_kit = level.get("loadout_start", {}).duplicate(true)
 		_init_blank_plan()
@@ -303,6 +331,11 @@ func _ready() -> void:
 	else:
 		_start_scout_phase()
 	_load_next_night_loot_stub()
+	## Opening briefing on first interactive boot (not AUTO / explicit skip).
+	if (not _headless_auto) and (not skip_brief) and (not skip_scout):
+		call_deferred("_show_briefing_card")
+	elif skip_brief or skip_scout or _headless_auto:
+		_dismiss_briefing_card(false)
 	if _headless_auto:
 		var plan_env := str(OS.get_environment("AMBUSH_GREYBOX_PLAN")).to_upper()
 		if plan_env == "B":
@@ -1167,6 +1200,8 @@ func _cancel_aim_drag() -> void:
 		map_view._dragging_op = ""
 		map_view.aim_preview_op = ""
 		map_view.aim_preview_deg = NAN
+		map_view.aim_snap_label = ""
+		map_view._set_aim_magnifier(false)
 		map_view.queue_redraw()
 	label_info.text = "转向已取消"
 	_push_map_snapshot()
@@ -1190,10 +1225,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var k := event as InputEventKey
 		if k.keycode == KEY_ESCAPE or k.keycode == KEY_BACK:
-			if shortcuts_help and shortcuts_help.visible:
+			if briefing_card and briefing_card.visible:
+				_dismiss_briefing_card(true)
+			elif phase_tip_bar and phase_tip_bar.visible:
+				_hide_phase_tip()
+			elif shortcuts_help and shortcuts_help.visible:
 				shortcuts_help.visible = false
 			else:
 				_cancel_mode()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_F1:
+			_toggle_shortcuts_help()
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode == KEY_Z and k.ctrl_pressed:
@@ -1228,7 +1271,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode == KEY_SLASH and k.shift_pressed: ## ?
-			_toggle_shortcuts_help()
+			_toggle_briefing_card()
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode in [KEY_1, KEY_2, KEY_3, KEY_KP_1, KEY_KP_2, KEY_KP_3]:
@@ -1350,9 +1393,10 @@ func _on_cell_right_clicked(cell: Vector2i) -> void:
 
 
 func _build_shortcuts_help() -> void:
+	## "?" chip opens the briefing card (P0-3). Desktop shortcuts stay on F1 / Shift+/.
 	btn_shortcuts_help = _mk_chip_btn("?", CHIP_MIN_PX)
 	btn_shortcuts_help.name = "ShortcutsHelpButton"
-	btn_shortcuts_help.pressed.connect(func(): _ui_tap(); _toggle_shortcuts_help())
+	btn_shortcuts_help.pressed.connect(func(): _ui_tap(); _toggle_briefing_card())
 	shortcuts_help = PanelContainer.new()
 	shortcuts_help.name = "ShortcutsHelp"
 	shortcuts_help.visible = false
@@ -1363,7 +1407,7 @@ func _build_shortcuts_help() -> void:
 	shortcuts_help.offset_bottom = 200
 	var lab := Label.new()
 	lab.add_theme_font_size_override("font_size", BODY_FONT_PX)
-	lab.text = "快捷键\n1/2/3 选人\nQ/E 旋转 ±15°\n右键 朝向\n空格 暂停\n+/- 倍速\nTab/M/L 工具\nCtrl+Z 撤销\nEsc 取消\nWASD 平移\n滚轮 缩放"
+	lab.text = "快捷键\n1/2/3 选人\nQ/E 旋转 ±15°\n右键 朝向\n空格 暂停\n+/- 倍速\nTab/M/L 工具\nCtrl+Z 撤销\nEsc 取消\nF1 本面板\nWASD 平移\n滚轮 缩放"
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 16)
 	margin.add_theme_constant_override("margin_right", 16)
@@ -1377,6 +1421,589 @@ func _build_shortcuts_help() -> void:
 func _toggle_shortcuts_help() -> void:
 	if shortcuts_help:
 		shortcuts_help.visible = not shortcuts_help.visible
+
+
+func _briefing_border_style() -> StyleBoxFlat:
+	## Border-only style — ColorRect provides the opaque fill.
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0, 0, 0, 0)
+	sb.draw_center = false
+	sb.border_width_left = 2
+	sb.border_width_top = 2
+	sb.border_width_right = 2
+	sb.border_width_bottom = 2
+	sb.border_color = Color(0.72, 0.62, 0.38, 1.0) ## muted brass — night military
+	sb.corner_radius_top_left = 6
+	sb.corner_radius_top_right = 6
+	sb.corner_radius_bottom_right = 6
+	sb.corner_radius_bottom_left = 6
+	sb.content_margin_left = 0
+	sb.content_margin_right = 0
+	sb.content_margin_top = 0
+	sb.content_margin_bottom = 0
+	return sb
+
+
+func _briefing_primary_btn_style(pressed: bool = false) -> StyleBoxFlat:
+	## Solid primary CTA — amber/brass fill matching HUD accents.
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.72, 0.52, 0.18, 1.0) if not pressed else Color(0.55, 0.38, 0.12, 1.0)
+	sb.draw_center = true
+	sb.border_width_left = 1
+	sb.border_width_top = 1
+	sb.border_width_right = 1
+	sb.border_width_bottom = 1
+	sb.border_color = Color(0.92, 0.78, 0.42, 1.0)
+	sb.corner_radius_top_left = 4
+	sb.corner_radius_top_right = 4
+	sb.corner_radius_bottom_right = 4
+	sb.corner_radius_bottom_left = 4
+	sb.content_margin_left = 12
+	sb.content_margin_right = 12
+	sb.content_margin_top = 6
+	sb.content_margin_bottom = 6
+	return sb
+
+
+func _briefing_beat_chip_style() -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.14, 0.16, 0.20, 1.0)
+	sb.draw_center = true
+	sb.border_width_left = 1
+	sb.border_width_top = 1
+	sb.border_width_right = 1
+	sb.border_width_bottom = 1
+	sb.border_color = Color(0.55, 0.58, 0.48, 0.9)
+	sb.corner_radius_top_left = 3
+	sb.corner_radius_top_right = 3
+	sb.corner_radius_bottom_right = 3
+	sb.corner_radius_bottom_left = 3
+	sb.content_margin_left = 8
+	sb.content_margin_right = 8
+	sb.content_margin_top = 4
+	sb.content_margin_bottom = 4
+	return sb
+
+
+func _mk_briefing_section_head(text: String) -> Label:
+	var lab := Label.new()
+	lab.text = text
+	lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	lab.autowrap_mode = TextServer.AUTOWRAP_OFF
+	lab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lab.add_theme_color_override("font_color", Color(0.92, 0.82, 0.48, 1.0))
+	return lab
+
+
+func _mk_briefing_body_label(text: String) -> Label:
+	var lab := Label.new()
+	lab.text = text
+	lab.autowrap_mode = TextServer.AUTOWRAP_ARBITRARY
+	lab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lab.add_theme_color_override("font_color", Color(0.88, 0.90, 0.92, 1.0))
+	return lab
+
+
+func _build_briefing_card() -> void:
+	## Dimmer + opaque centered card; structured sections; pinned solid 「知道了」.
+	briefing_dimmer = ColorRect.new()
+	briefing_dimmer.name = "BriefingDimmer"
+	briefing_dimmer.color = Color(0.01, 0.02, 0.03, 0.88)
+	briefing_dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
+	briefing_dimmer.visible = false
+	briefing_dimmer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	$HUD.add_child(briefing_dimmer)
+
+	briefing_card = Control.new()
+	briefing_card.name = "BriefingCard"
+	briefing_card.visible = false
+	briefing_card.mouse_filter = Control.MOUSE_FILTER_STOP
+	briefing_card.clip_contents = true
+	briefing_card.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	var fill := ColorRect.new()
+	fill.name = "BriefingOpaqueFill"
+	fill.color = Color(0.07, 0.08, 0.10, 1.0)
+	fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fill.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	briefing_card.add_child(fill)
+	briefing_panel = PanelContainer.new()
+	briefing_panel.name = "BriefingPanel"
+	briefing_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	briefing_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	briefing_panel.add_theme_stylebox_override("panel", _briefing_border_style())
+	briefing_card.add_child(briefing_panel)
+
+	briefing_title = Label.new()
+	briefing_title.name = "BriefingTitle"
+	briefing_title.text = BriefingCopy.TITLE
+	briefing_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	briefing_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	briefing_title.autowrap_mode = TextServer.AUTOWRAP_OFF
+	briefing_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	briefing_title.add_theme_color_override("font_color", Color(0.95, 0.90, 0.70, 1.0))
+	briefing_card.add_child(briefing_title)
+
+	briefing_scroll = ScrollContainer.new()
+	briefing_scroll.name = "BriefingScroll"
+	briefing_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	briefing_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	briefing_scroll.mouse_filter = Control.MOUSE_FILTER_STOP
+	briefing_scroll.custom_minimum_size = Vector2(0, 24)
+	briefing_card.add_child(briefing_scroll)
+
+	briefing_content = VBoxContainer.new()
+	briefing_content.name = "BriefingContent"
+	briefing_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	briefing_content.add_theme_constant_override("separation", 6)
+	briefing_scroll.add_child(briefing_content)
+
+	## Hidden aggregate for W8 keyword asserts.
+	briefing_body = Label.new()
+	briefing_body.name = "BriefingBody"
+	briefing_body.text = BriefingCopy.BODY
+	briefing_body.visible = false
+	briefing_body.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	briefing_content.add_child(briefing_body)
+
+	var goal_head := _mk_briefing_section_head(BriefingCopy.SEC_GOAL)
+	goal_head.name = "BriefingGoalHead"
+	briefing_content.add_child(goal_head)
+	briefing_goal_body = _mk_briefing_body_label(BriefingCopy.GOAL_BODY)
+	briefing_goal_body.name = "BriefingGoalBody"
+	briefing_content.add_child(briefing_goal_body)
+
+	var exit_head := _mk_briefing_section_head(BriefingCopy.SEC_EXIT)
+	exit_head.name = "BriefingExitHead"
+	briefing_content.add_child(exit_head)
+	briefing_exit_body = _mk_briefing_body_label(BriefingCopy.EXIT_BODY)
+	briefing_exit_body.name = "BriefingExitBody"
+	briefing_content.add_child(briefing_exit_body)
+
+	var beats_head := _mk_briefing_section_head(BriefingCopy.SEC_BEATS)
+	beats_head.name = "BriefingBeatsHead"
+	briefing_content.add_child(beats_head)
+	briefing_beats_row = HBoxContainer.new()
+	briefing_beats_row.name = "BriefingBeatsRow"
+	briefing_beats_row.add_theme_constant_override("separation", 6)
+	briefing_beats_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	briefing_content.add_child(briefing_beats_row)
+	briefing_beat_chips.clear()
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	for beat in BriefingCopy.BEATS:
+		var chip := PanelContainer.new()
+		chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		chip.add_theme_stylebox_override("panel", _briefing_beat_chip_style())
+		chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var chip_lab := Label.new()
+		chip_lab.text = "%s %s" % [beat["n"], beat["name"]]
+		chip_lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		chip_lab.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		chip_lab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		chip_lab.add_theme_color_override("font_color", Color(0.90, 0.92, 0.88, 1.0))
+		if font_res:
+			chip_lab.add_theme_font_override("font", font_res)
+		chip.add_child(chip_lab)
+		briefing_beats_row.add_child(chip)
+		briefing_beat_chips.append(chip_lab)
+
+	briefing_beat_hint = _mk_briefing_body_label(BriefingCopy.BEAT_HINT)
+	briefing_beat_hint.name = "BriefingBeatHint"
+	briefing_beat_hint.add_theme_color_override("font_color", Color(0.70, 0.74, 0.78, 1.0))
+	briefing_content.add_child(briefing_beat_hint)
+
+	briefing_tip = _mk_briefing_body_label(BriefingCopy.TIP)
+	briefing_tip.name = "BriefingTip"
+	briefing_tip.add_theme_color_override("font_color", Color(0.62, 0.66, 0.70, 1.0))
+	briefing_content.add_child(briefing_tip)
+
+	btn_briefing_dismiss = Button.new()
+	btn_briefing_dismiss.name = "BriefingDismiss"
+	btn_briefing_dismiss.text = BriefingCopy.DISMISS
+	btn_briefing_dismiss.custom_minimum_size = Vector2(0, BRIEFING_BTN_MIN_PX)
+	btn_briefing_dismiss.add_theme_stylebox_override("normal", _briefing_primary_btn_style(false))
+	btn_briefing_dismiss.add_theme_stylebox_override("hover", _briefing_primary_btn_style(false))
+	btn_briefing_dismiss.add_theme_stylebox_override("pressed", _briefing_primary_btn_style(true))
+	btn_briefing_dismiss.add_theme_stylebox_override("focus", _briefing_primary_btn_style(false))
+	btn_briefing_dismiss.add_theme_color_override("font_color", Color(0.08, 0.07, 0.04, 1.0))
+	btn_briefing_dismiss.add_theme_color_override("font_hover_color", Color(0.05, 0.04, 0.02, 1.0))
+	btn_briefing_dismiss.add_theme_color_override("font_pressed_color", Color(0.12, 0.10, 0.05, 1.0))
+	btn_briefing_dismiss.pressed.connect(func(): _ui_tap(); _dismiss_briefing_card(true))
+	briefing_card.add_child(btn_briefing_dismiss)
+
+	$HUD.add_child(briefing_card)
+	if font_res:
+		briefing_title.add_theme_font_override("font", font_res)
+		btn_briefing_dismiss.add_theme_font_override("font", font_res)
+		for n in [briefing_goal_body, briefing_exit_body, briefing_beat_hint, briefing_tip]:
+			if n:
+				n.add_theme_font_override("font", font_res)
+		for child in briefing_content.get_children():
+			if child is Label and str(child.name).ends_with("Head"):
+				child.add_theme_font_override("font", font_res)
+	_layout_briefing_card()
+
+
+func _layout_briefing_card() -> void:
+	## Centered ~70% width card; height-adaptive type fills the middle; CTA pinned.
+	if briefing_card == null or briefing_dimmer == null:
+		return
+	var vs := _view_size()
+	briefing_dimmer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	briefing_dimmer.offset_left = 0
+	briefing_dimmer.offset_top = 0
+	briefing_dimmer.offset_right = 0
+	briefing_dimmer.offset_bottom = 0
+	var phone := vs.y < 500.0
+	var edge_y := 14.0 if phone else 36.0
+	var pad := 14.0 if phone else 20.0
+	## Width ≈ 70% of screen (desktop slightly narrower for readability).
+	var card_w := clampf(vs.x * 0.70, 300.0, vs.x - 28.0)
+	if not phone:
+		card_w = clampf(minf(580.0, vs.x * 0.52), 380.0, vs.x - 48.0)
+	## Hug content a bit on phone so the card isn't a tall empty slab.
+	var card_h := vs.y - edge_y * 2.0
+	if phone:
+		card_h = clampf(vs.y * 0.88, 300.0, vs.y - edge_y * 2.0)
+	briefing_card.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	briefing_card.anchor_right = 0.0
+	briefing_card.anchor_bottom = 0.0
+	briefing_card.position = Vector2((vs.x - card_w) * 0.5, (vs.y - card_h) * 0.5)
+	briefing_card.size = Vector2(card_w, card_h)
+
+	var btn_h := maxf(BRIEFING_BTN_MIN_PX, clampf(vs.y * 0.13, 44.0, 64.0))
+	if not phone:
+		btn_h = maxf(TOUCH_MIN_PX * 0.65, 52.0)
+	var btn_fs := int(clampf(vs.y * 0.048, 16.0, 24.0))
+	## Start mid; shrink if overflow, then grow to fill leftover (phone can go large).
+	var title_fs := int(clampf(vs.y * (0.070 if phone else 0.048), 20.0, 36.0))
+	var head_fs := int(clampf(vs.y * (0.055 if phone else 0.038), 16.0, 28.0))
+	var body_fs := int(clampf(vs.y * (0.050 if phone else 0.034), 15.0, 26.0))
+	var chip_fs := int(clampf(vs.y * (0.048 if phone else 0.032), 14.0, 24.0))
+	var hint_fs := int(clampf(vs.y * (0.036 if phone else 0.026), 12.0, 18.0))
+	var sep := 10 if phone else 12
+	var body_fs_cap := 28 if phone else 22
+	var chip_fs_cap := 24 if phone else 20
+	var title_h := float(title_fs) + 12.0
+	var scroll_y := pad + title_h + 6.0
+	var scroll_bottom := card_h - pad - btn_h - 8.0
+	var scroll_h := maxf(40.0, scroll_bottom - scroll_y)
+	var inner_w := maxf(80.0, card_w - pad * 2.0 - 4.0)
+
+	if briefing_body:
+		briefing_body.text = BriefingCopy.BODY
+	## Phone: chips carry the five beats; drop long hint, use short tip so type can grow.
+	if briefing_beat_hint:
+		briefing_beat_hint.visible = not phone
+	if briefing_tip:
+		briefing_tip.text = BriefingCopy.TIP_PHONE if phone else BriefingCopy.TIP
+		briefing_tip.visible = true
+
+	## Fit-pass: shrink until it fits, then grow type/sep to fill leftover room.
+	var est := 0.0
+	for _pass in range(8):
+		_briefing_apply_type(head_fs, body_fs, chip_fs, hint_fs, sep, inner_w)
+		est = _briefing_estimate_content_h(inner_w, body_fs, head_fs, chip_fs, hint_fs, sep, phone)
+		if est <= scroll_h - 2.0:
+			break
+		title_fs = maxi(18, title_fs - 1)
+		head_fs = maxi(14, head_fs - 1)
+		body_fs = maxi(13, body_fs - 1)
+		chip_fs = maxi(12, chip_fs - 1)
+		hint_fs = maxi(11, hint_fs - 1)
+		sep = maxi(6, sep - 1)
+		title_h = float(title_fs) + 12.0
+		scroll_y = pad + title_h + 6.0
+		scroll_h = maxf(40.0, scroll_bottom - scroll_y)
+	## Grow to fill: prefer larger body/chips, then separation.
+	for _grow in range(16):
+		est = _briefing_estimate_content_h(inner_w, body_fs, head_fs, chip_fs, hint_fs, sep, phone)
+		if est >= scroll_h * 0.88:
+			break
+		if body_fs < body_fs_cap:
+			body_fs += 1
+			head_fs = mini(head_fs + 1, body_fs + 3)
+			chip_fs = mini(chip_fs + 1, chip_fs_cap)
+			title_fs = mini(title_fs + 1, 36)
+			hint_fs = mini(hint_fs + 1, maxi(12, body_fs - 4))
+		elif sep < 22:
+			sep += 2
+		else:
+			break
+		_briefing_apply_type(head_fs, body_fs, chip_fs, hint_fs, sep, inner_w)
+	title_h = float(title_fs) + 12.0
+	scroll_y = pad + title_h + 6.0
+	scroll_h = maxf(40.0, scroll_bottom - scroll_y)
+	_briefing_apply_type(head_fs, body_fs, chip_fs, hint_fs, sep, inner_w)
+
+	if briefing_title:
+		briefing_title.add_theme_font_size_override("font_size", title_fs)
+		briefing_title.position = Vector2(pad, pad)
+		briefing_title.size = Vector2(card_w - pad * 2.0, title_h)
+	if btn_briefing_dismiss:
+		btn_briefing_dismiss.custom_minimum_size = Vector2(0, btn_h)
+		btn_briefing_dismiss.add_theme_font_size_override("font_size", btn_fs)
+		btn_briefing_dismiss.add_theme_stylebox_override("normal", _briefing_primary_btn_style(false))
+		btn_briefing_dismiss.add_theme_stylebox_override("hover", _briefing_primary_btn_style(false))
+		btn_briefing_dismiss.add_theme_stylebox_override("pressed", _briefing_primary_btn_style(true))
+		btn_briefing_dismiss.add_theme_stylebox_override("focus", _briefing_primary_btn_style(false))
+		btn_briefing_dismiss.position = Vector2(pad, card_h - pad - btn_h)
+		btn_briefing_dismiss.size = Vector2(card_w - pad * 2.0, btn_h)
+	if briefing_scroll:
+		briefing_scroll.position = Vector2(pad, scroll_y)
+		briefing_scroll.size = Vector2(card_w - pad * 2.0, scroll_h)
+		## Prefer no scrollbar on phone once type fits.
+		briefing_scroll.vertical_scroll_mode = (
+			ScrollContainer.SCROLL_MODE_DISABLED if phone else ScrollContainer.SCROLL_MODE_AUTO
+		)
+		briefing_scroll.scroll_vertical = 0
+	if briefing_content:
+		briefing_content.custom_minimum_size = Vector2(inner_w, 0)
+
+
+func _briefing_apply_type(head_fs: int, body_fs: int, chip_fs: int, hint_fs: int, sep: int, inner_w: float) -> void:
+	if briefing_content:
+		briefing_content.add_theme_constant_override("separation", sep)
+		briefing_content.custom_minimum_size = Vector2(inner_w, 0)
+		for child in briefing_content.get_children():
+			if child is Label and str(child.name).ends_with("Head"):
+				child.add_theme_font_size_override("font_size", head_fs)
+	for lab in [briefing_goal_body, briefing_exit_body]:
+		if lab:
+			lab.add_theme_font_size_override("font_size", body_fs)
+			lab.custom_minimum_size = Vector2(inner_w, 0)
+	if briefing_beat_hint:
+		briefing_beat_hint.add_theme_font_size_override("font_size", hint_fs)
+		briefing_beat_hint.custom_minimum_size = Vector2(inner_w, 0)
+	if briefing_tip:
+		briefing_tip.add_theme_font_size_override("font_size", hint_fs)
+		briefing_tip.custom_minimum_size = Vector2(inner_w, 0)
+	for chip_lab in briefing_beat_chips:
+		if chip_lab:
+			chip_lab.add_theme_font_size_override("font_size", chip_fs)
+	## Taller chips on phone so the beat row reads as a filled band.
+	var chip_style := _briefing_beat_chip_style()
+	chip_style.content_margin_top = 6 if chip_fs >= 15 else 4
+	chip_style.content_margin_bottom = 6 if chip_fs >= 15 else 4
+	if briefing_beats_row:
+		for chip in briefing_beats_row.get_children():
+			if chip is PanelContainer:
+				chip.add_theme_stylebox_override("panel", chip_style)
+
+
+func _briefing_estimate_content_h(inner_w: float, body_fs: int, head_fs: int, chip_fs: int, hint_fs: int, sep: int, phone: bool) -> float:
+	## Rough wrapped height so we can scale type to fill without overflowing.
+	var tip_text := BriefingCopy.TIP_PHONE if phone else BriefingCopy.TIP
+	var h := 0.0
+	var char_w := float(body_fs) * 0.92
+	var lines_goal := maxi(1, int(ceil(float(BriefingCopy.GOAL_BODY.length()) * char_w / maxf(inner_w, 1.0))))
+	var lines_exit := maxi(1, int(ceil(float(BriefingCopy.EXIT_BODY.length()) * char_w / maxf(inner_w, 1.0))))
+	var lines_tip := maxi(1, int(ceil(float(tip_text.length()) * float(hint_fs) * 0.92 / maxf(inner_w, 1.0))))
+	var n_rows := 7 ## 3 heads + 2 bodies + chips + tip
+	h += float(head_fs + 4) + float(lines_goal) * float(body_fs + 4)
+	h += float(sep)
+	h += float(head_fs + 4) + float(lines_exit) * float(body_fs + 4)
+	h += float(sep)
+	h += float(head_fs + 4) + float(chip_fs + 20)
+	h += float(sep)
+	if not phone:
+		var lines_hint := maxi(1, int(ceil(float(BriefingCopy.BEAT_HINT.length()) * float(hint_fs) * 0.92 / maxf(inner_w, 1.0))))
+		h += float(lines_hint) * float(hint_fs + 3)
+		h += float(sep)
+		n_rows += 1
+	h += float(lines_tip) * float(hint_fs + 3)
+	h += float(sep * maxi(0, n_rows - 1))
+	return h
+
+
+func _build_phase_tip_bar() -> void:
+	phase_tip_bar = PanelContainer.new()
+	phase_tip_bar.name = "PhaseTipBar"
+	phase_tip_bar.visible = false
+	phase_tip_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	phase_tip_bar.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	phase_tip_bar.offset_left = 8
+	phase_tip_bar.offset_top = TOP_BAR_H + 4
+	phase_tip_bar.offset_right = -8
+	phase_tip_bar.offset_bottom = TOP_BAR_H + 56
+	phase_tip_bar.add_theme_stylebox_override("panel", _opaque_panel_style())
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	phase_tip_bar.add_child(row)
+	phase_tip_label = Label.new()
+	phase_tip_label.name = "PhaseTipLabel"
+	phase_tip_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	phase_tip_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	phase_tip_label.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	row.add_child(phase_tip_label)
+	btn_phase_tip_close = Button.new()
+	btn_phase_tip_close.name = "PhaseTipClose"
+	btn_phase_tip_close.text = BriefingCopy.TIP_CLOSE
+	btn_phase_tip_close.custom_minimum_size = Vector2(96, CHIP_MIN_PX)
+	btn_phase_tip_close.add_theme_font_size_override("font_size", CHIP_FONT_PX)
+	btn_phase_tip_close.pressed.connect(func(): _ui_tap(); _hide_phase_tip())
+	row.add_child(btn_phase_tip_close)
+	$HUD.add_child(phase_tip_bar)
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	if font_res:
+		phase_tip_label.add_theme_font_override("font", font_res)
+		btn_phase_tip_close.add_theme_font_override("font", font_res)
+
+
+func _set_briefing_chrome_suppressed(suppressed: bool) -> void:
+	## Hide right drawer / floating chrome so nothing bleeds through or beside the card.
+	if suppressed:
+		if right_column:
+			right_column.visible = false
+		if utility_backdrop:
+			utility_backdrop.visible = false
+		if portrait_backdrop:
+			portrait_backdrop.visible = false
+		if btn_drawer_tab:
+			btn_drawer_tab.visible = false
+	else:
+		_relayout_hud()
+
+
+func _show_briefing_card() -> void:
+	if briefing_card == null:
+		return
+	if shortcuts_help:
+		shortcuts_help.visible = false
+	_hide_phase_tip()
+	_set_briefing_chrome_suppressed(true)
+	_layout_briefing_card()
+	if briefing_dimmer:
+		briefing_dimmer.visible = true
+		$HUD.move_child(briefing_dimmer, -1)
+	briefing_card.visible = true
+	_briefing_shown_this_run = true
+	briefing_show_count += 1
+	$HUD.move_child(briefing_card, -1)
+	## Second pass after size settles so wrap width matches scroll.
+	call_deferred("_layout_briefing_card")
+
+
+func _dismiss_briefing_card(count: bool = true) -> void:
+	if briefing_card and briefing_card.visible and count:
+		briefing_dismiss_count += 1
+	if briefing_dimmer:
+		briefing_dimmer.visible = false
+	if briefing_card:
+		briefing_card.visible = false
+	_set_briefing_chrome_suppressed(false)
+
+
+func _toggle_briefing_card() -> void:
+	if briefing_card == null:
+		return
+	if briefing_card.visible:
+		_dismiss_briefing_card(true)
+	else:
+		_show_briefing_card()
+
+
+func _phase_name(p: UiPhase) -> String:
+	match p:
+		UiPhase.SCOUT:
+			return "scout"
+		UiPhase.SETUP:
+			return "setup"
+		UiPhase.WAIT:
+			return "wait"
+		UiPhase.RESULT:
+			return "result"
+		_:
+			return ""
+
+
+func _maybe_show_phase_tip(p: UiPhase) -> void:
+	if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]:
+		return
+	## Isolation / layout smokes set SKIP_SCOUT — don't inject tips under asserts.
+	if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]:
+		return
+	if _headless_auto:
+		return
+	if briefing_card and briefing_card.visible:
+		return ## don't stack tip under opening briefing
+	var key := _phase_name(p)
+	if key == "" or bool(_phase_tip_seen.get(key, false)):
+		return
+	var tip := BriefingCopy.phase_tip(key)
+	if tip == "":
+		return
+	_phase_tip_seen[key] = true
+	if phase_tip_label:
+		phase_tip_label.text = tip
+	if phase_tip_bar:
+		phase_tip_bar.visible = true
+		phase_tip_show_count += 1
+		$HUD.move_child(phase_tip_bar, -1)
+
+
+func _hide_phase_tip() -> void:
+	if phase_tip_bar:
+		phase_tip_bar.visible = false
+
+
+func dismiss_overlays_for_layout_test() -> void:
+	## W8 layout asserts: briefing/tips must not cover the map.
+	_dismiss_briefing_card(false)
+	_hide_phase_tip()
+	if shortcuts_help:
+		shortcuts_help.visible = false
+	if info_card:
+		info_card.visible = false
+	if pause_menu:
+		pause_menu.visible = false
+	if dev_menu:
+		dev_menu.visible = false
+
+
+func briefing_layout_ok(view_w: float = -1.0, view_h: float = -1.0) -> Dictionary:
+	## Test helper: card + dismiss on-screen; visible labels wrap without horizontal clip.
+	var vs := _view_size()
+	if view_w > 0.0 and view_h > 0.0:
+		vs = Vector2(view_w, view_h)
+	var out := {
+		"ok": false,
+		"card_in": false,
+		"btn_in": false,
+		"btn_h": 0.0,
+		"text_clip": true,
+		"dimmer": false,
+	}
+	if briefing_card == null or btn_briefing_dismiss == null or briefing_body == null:
+		return out
+	out["dimmer"] = briefing_dimmer != null and briefing_dimmer.visible and briefing_card.visible
+	var card_r: Rect2 = briefing_card.get_global_rect()
+	out["card_in"] = (
+		card_r.position.x >= -0.5 and card_r.position.y >= -0.5
+		and card_r.end.x <= vs.x + 0.5 and card_r.end.y <= vs.y + 0.5
+	)
+	var btn_r: Rect2 = btn_briefing_dismiss.get_global_rect()
+	out["btn_in"] = (
+		btn_r.position.x >= -0.5 and btn_r.position.y >= -0.5
+		and btn_r.end.x <= vs.x + 0.5 and btn_r.end.y <= vs.y + 0.5
+		and card_r.encloses(btn_r.grow(-0.5))
+	)
+	out["btn_h"] = btn_r.size.y
+	var scroll_w := briefing_scroll.size.x if briefing_scroll else card_r.size.x
+	var clip := false
+	## Visible section bodies + tip must sit inside the scroll width.
+	for lab in [briefing_goal_body, briefing_exit_body, briefing_beat_hint, briefing_tip]:
+		if lab == null or not lab.visible:
+			continue
+		if lab.size.x > scroll_w + 2.0:
+			clip = true
+			break
+	## Beat row must not spill past the card (chips share width via EXPAND_FILL).
+	if briefing_beats_row and briefing_beats_row.size.x > scroll_w + 4.0:
+		clip = true
+	out["text_clip"] = clip
+	out["ok"] = bool(out["card_in"]) and bool(out["btn_in"]) and float(out["btn_h"]) + 1e-3 >= BRIEFING_BTN_MIN_PX and (not bool(out["text_clip"])) and bool(out["dimmer"])
+	return out
 
 
 func _build_dev_menu() -> void:
@@ -1589,6 +2216,12 @@ func _install_hud_layout() -> void:
 		$HUD.move_child(shortcuts_help, -1)
 	if info_card:
 		$HUD.move_child(info_card, -1)
+	if phase_tip_bar:
+		$HUD.move_child(phase_tip_bar, -1)
+	if briefing_dimmer:
+		$HUD.move_child(briefing_dimmer, -1)
+	if briefing_card:
+		$HUD.move_child(briefing_card, -1)
 	if dev_menu:
 		$HUD.move_child(dev_menu, -1)
 	if utility_backdrop:
@@ -1811,6 +2444,15 @@ func _relayout_hud() -> void:
 		map_view._fit_cell_px()
 		_apply_default_camera()
 		map_view.queue_redraw()
+	## Keep briefing card fitted if open (phone / desktop resize).
+	## Re-suppress chrome after layout — _relayout_hud would otherwise re-show the drawer.
+	if briefing_card and briefing_card.visible:
+		_set_briefing_chrome_suppressed(true)
+		_layout_briefing_card()
+		if briefing_dimmer:
+			briefing_dimmer.visible = true
+			$HUD.move_child(briefing_dimmer, -1)
+		$HUD.move_child(briefing_card, -1)
 
 
 func _portrait_strip_height() -> float:
@@ -2004,6 +2646,7 @@ func _set_ui_phase(p: UiPhase) -> void:
 			drawer_open = true
 	_relayout_hud()
 	_apply_default_camera()
+	_maybe_show_phase_tip(p)
 	if p == UiPhase.SETUP and undo_stack.is_empty() and not plan.is_empty():
 		# Baseline so first undo after mutations is meaningful.
 		pass
@@ -2669,6 +3312,8 @@ func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
 	if world_dir.length() < 8.0:
 		return
 	var facing := rad_to_deg(atan2(-world_dir.y, world_dir.x))
+	if map_view and not is_nan(map_view.aim_preview_deg):
+		facing = float(map_view.aim_preview_deg)
 	if ui_phase == UiPhase.SETUP:
 		# Live facing while aiming near unit; place ghost when over a cell.
 		_last_unit_drag_cell = _cell
@@ -2683,11 +3328,20 @@ func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
 		return
 	if ui_phase == UiPhase.WAIT and sim != null and not sim.plan_locked:
 		# Preview cost text only — do NOT call request_operator_facing here.
-		var delta := _facing_delta_deg(float(_sim_op(selected_op_id).get("facing_deg", 0.0)), facing)
+		## Prefer map snapped preview when aim-dragging.
+		var preview := facing
+		var snap_lbl := ""
+		if map_view and not is_nan(map_view.aim_preview_deg):
+			preview = float(map_view.aim_preview_deg)
+			snap_lbl = str(map_view.aim_snap_label)
+		var delta := _facing_delta_deg(float(_sim_op(selected_op_id).get("facing_deg", 0.0)), preview)
 		var steps := int(ceil(delta / 45.0 - 1e-9))
 		var cost_s := float(steps) * SimConstants.TURN_COST_S_PER_45
 		var dname := str(op_display_names.get(selected_op_id, "队员"))
-		label_info.text = "%s 预览转向 %.0f° · 约 %.1fs · 松手确认 / 拖回取消" % [dname, delta, cost_s]
+		if snap_lbl != "":
+			label_info.text = "%s 吸附「%s」%.0f° · 约 %.1fs · 松手确认" % [dname, snap_lbl, preview, cost_s]
+		else:
+			label_info.text = "%s 预览转向 %.0f° · 约 %.1fs · 松手确认 / 拖回取消" % [dname, delta, cost_s]
 		_push_map_snapshot()
 
 
@@ -2718,8 +3372,8 @@ func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, c
 		label_info.text = "转向已取消"
 		_push_map_snapshot()
 		return
-	# ONE turn order on release. Integer degrees avoid ceil(90/45) float edge → 3 steps.
-	sim.request_operator_facing(op_id, roundf(preview_deg))
+	# ONE turn order on release. preview_deg already snap-quantized by the map.
+	sim.request_operator_facing(op_id, float(preview_deg))
 	_facing_submit_count += 1
 	_facing_before_aim = NAN
 	var op := _sim_op(op_id)
@@ -2728,7 +3382,7 @@ func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, c
 	if left > 0:
 		label_info.text = "%s 转向中 · %.1fs · 不能开火" % [dname, float(left) * SimConstants.DT_S]
 	else:
-		label_info.text = "%s 朝向已更新" % dname
+		label_info.text = "%s 朝向已更新 · %.0f°" % [dname, float(preview_deg)]
 	_refresh_portrait_strip()
 	_push_map_snapshot()
 

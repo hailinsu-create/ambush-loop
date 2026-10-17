@@ -83,9 +83,10 @@ func _test_golden_a() -> void:
 func _test_a_facing_stability() -> void:
 	## t0 must stay 520 under Kar facing ±1° (cross_marker is facing-independent;
 	## also assert kill-zone still covers F1 so standard ambush holds).
+	## P0-2: published Kar aim is 巷口 (~11°), not the old 15° cone-edge guess.
 	var base: Dictionary = _plan_a()
 	var base_facing := float(base["operators"][1]["facing_deg"])
-	_assert(is_equal_approx(base_facing, 15.0), "A Kar facing clean 15° got=%s" % base_facing)
+	_assert(is_equal_approx(base_facing, 11.0), "A Kar facing clean 11° got=%s" % base_facing)
 	for delta in [-1.0, 0.0, 1.0]:
 		var plan: Dictionary = _plan_a()
 		plan["operators"][1]["facing_deg"] = base_facing + delta
