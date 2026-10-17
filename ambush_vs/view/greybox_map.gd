@@ -16,7 +16,7 @@ signal unit_selected(op_id: String)
 enum ArtMode { G3, G2, G1 }
 
 ## World-space UV: texture spans this many cells (seamless, no cell grid).
-const G3_TEX_CELLS := 8.0
+const G3_TEX_CELLS := 12.0 ## finer world UV so shingles/cobbles don't read as 1-cell grid
 const G3_UNIT_SCALE := 1.6
 const G3_WALL_STRIP := 0.36 ## ~1/3 cell dry-stone wall width
 
@@ -1039,34 +1039,39 @@ func _draw_g3_sandbag_runs() -> void:
 func _draw_sandbag_sprite_run(
 	ox: int, oy: int, length: int, horizontal: bool, bag: Texture2D, bag_end: Texture2D
 ) -> void:
-	## Chunky stacked bags (~0.5 cell, 2 rows) like yard_concept emplacements.
-	var bag_w := cell_px * 0.52
-	var bag_h := cell_px * 0.46
+	## Chunky stacked bags (~0.45–0.5 cell, 2 rows) like yard_concept emplacements.
+	var bag_w := cell_px * 0.50
+	var bag_h := cell_px * 0.42
 	var rows := 2
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
 		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
 	var run_len := float(length) * cell_px
+	# Center the pile on the cover cell rather than a thin rim worm.
+	if horizontal:
+		base += Vector2(0.0, cell_px * 0.08)
+	else:
+		base += Vector2(cell_px * 0.05, 0.0)
 	if g3.drop_shadow:
 		var sh := Rect2(
-			base + Vector2(cell_px * 0.06, cell_px * 0.30),
-			Vector2(run_len * 0.92 if horizontal else cell_px * 0.85, cell_px * 0.65 if horizontal else run_len * 0.92)
+			base + Vector2(cell_px * 0.04, cell_px * 0.28),
+			Vector2(run_len * 0.94 if horizontal else cell_px * 0.90, cell_px * 0.70 if horizontal else run_len * 0.94)
 		)
-		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.8))
+		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.82))
 	for row in range(rows):
-		var stagger := (row % 2) * (bag_w * 0.40)
-		var row_y := cell_px * 0.18 + float(row) * (bag_h * 0.58)
-		var along := cell_px * 0.05
+		var stagger := (row % 2) * (bag_w * 0.42)
+		var row_y := cell_px * 0.16 + float(row) * (bag_h * 0.62)
+		var along := cell_px * 0.04
 		var i := 0
-		while along < run_len - bag_w * 0.1:
+		while along < run_len - bag_w * 0.08:
 			var tex: Texture2D = bag_end if (i == 0 or along + bag_w * 0.95 >= run_len) else bag
 			var dest: Rect2
 			if horizontal:
 				dest = Rect2(base + Vector2(along + stagger, row_y), Vector2(bag_w, bag_h))
 			else:
-				dest = Rect2(base + Vector2(cell_px * 0.18 + stagger * 0.2, along + cell_px * 0.08), Vector2(bag_w, bag_h))
+				dest = Rect2(base + Vector2(cell_px * 0.16 + stagger * 0.25, along + cell_px * 0.06), Vector2(bag_w, bag_h))
 			draw_texture_rect(tex, dest, false)
-			along += bag_w * 0.68
+			along += bag_w * 0.62
 			i += 1
 
 
