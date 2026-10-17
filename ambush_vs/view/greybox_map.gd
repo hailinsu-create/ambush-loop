@@ -349,6 +349,7 @@ func _draw() -> void:
 		_draw_enemy_cones()
 	if show_sectors:
 		_draw_weapon_sectors()
+	_draw_aim_preview()
 	_draw_threat_slots()
 	_draw_marker_and_mines()
 	_draw_preview()
@@ -1525,6 +1526,64 @@ func _draw_line_clipped(a: Vector2, b: Vector2, col: Color, width: float, rect: 
 	if aa.distance_squared_to(bb) < 0.25:
 		return
 	draw_line(aa, bb, col, width)
+
+
+func _draw_aim_preview() -> void:
+	## Ghost cone + tip handle while re-aim dragging (WAIT / SETUP preview).
+	if aim_preview_op == "" or is_nan(aim_preview_deg):
+		# Still draw aim handle on selected unit tip when idle-selected.
+		if selected_op_id == "":
+			return
+		var sop := {}
+		for o in operators:
+			if str(o.get("id", "")) == selected_op_id and bool(o.get("alive", true)):
+				sop = o
+				break
+		if sop.is_empty():
+			return
+		var wid0 := str(sop.get("weapon_id", ""))
+		var w0: Dictionary = weapons.get(wid0, {})
+		var rng0 := float(w0.get("max_range", 6.0))
+		var tip0 := cell_to_screen(
+			float(sop["x"]) + cos(deg_to_rad(float(sop["facing_deg"]))) * minf(rng0, 3.0),
+			float(sop["y"]) + sin(deg_to_rad(float(sop["facing_deg"]))) * minf(rng0, 3.0)
+		)
+		draw_circle(tip0, 10.0, Color(0.95, 0.9, 0.35, 0.85))
+		draw_arc(tip0, 14.0, 0, TAU, 20, Color(1.0, 0.95, 0.4, 0.7), 2.0)
+		return
+	var op := {}
+	for o in operators:
+		if str(o.get("id", "")) == aim_preview_op:
+			op = o
+			break
+	if op.is_empty():
+		return
+	var wid := str(op.get("weapon_id", ""))
+	var w: Dictionary = weapons.get(wid, {})
+	var half := float(w.get("sector_deg", 40)) * 0.5
+	var rng := float(w.get("max_range", 8.0))
+	var ox := float(op["x"])
+	var oy := float(op["y"])
+	_draw_wedge(ox, oy, aim_preview_deg, half, rng, Color(0.55, 0.85, 1.0, 0.14), false)
+	_draw_wedge(ox, oy, aim_preview_deg, half, rng, Color(0.6, 0.9, 1.0, 0.85), true)
+	var tip := cell_to_screen(
+		ox + cos(deg_to_rad(aim_preview_deg)) * minf(rng, 3.0),
+		oy + sin(deg_to_rad(aim_preview_deg)) * minf(rng, 3.0)
+	)
+	draw_circle(tip, 12.0, Color(0.55, 0.9, 1.0, 0.95))
+	var cur := float(op.get("facing_deg", 0.0))
+	var delta := SimGeom.abs_angle_delta_deg(cur, aim_preview_deg)
+	var steps := int(ceil(delta / 45.0 - 1e-9))
+	var cost_s := float(steps) * SimConstants.TURN_COST_S_PER_45
+	draw_string(
+		ThemeDB.fallback_font,
+		tip + Vector2(14, -8),
+		"转向 %.0fs" % cost_s,
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		16,
+		Color(0.75, 0.95, 1.0, 0.98)
+	)
 
 
 func _draw_weapon_sectors() -> void:

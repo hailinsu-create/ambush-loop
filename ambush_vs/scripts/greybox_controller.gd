@@ -149,6 +149,7 @@ func _ready() -> void:
 	map_view.cell_tapped.connect(_on_cell_tapped)
 	map_view.cell_dragged.connect(_on_cell_dragged)
 	map_view.unit_selected.connect(_on_unit_selected)
+	map_view.aim_drag_ended.connect(_on_aim_drag_ended)
 	map_view.unit_hit_radius_cells = 0.8
 	_build_portrait_strip()
 
@@ -1011,11 +1012,11 @@ func _move_selected_op(cell: Vector2i) -> void:
 
 
 func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
+	## SETUP: live facing preview while dragging. WAIT: preview only (commit on aim_drag_ended).
 	if selected_op_id == "":
 		return
 	if world_dir.length() < 8.0:
 		return
-	# Convert screen drag to world facing: screen +x=east, +y=south-screen = -world-y
 	var facing := rad_to_deg(atan2(-world_dir.y, world_dir.x))
 	if ui_phase == UiPhase.SETUP:
 		for op in plan.get("operators", []):
@@ -1025,16 +1026,38 @@ func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
 		_push_map_snapshot()
 		return
 	if ui_phase == UiPhase.WAIT and sim != null and not sim.plan_locked:
-		# PLAY-4: expose NightSim.request_operator_facing (1 s / 45°; blocks fire).
-		sim.request_operator_facing(selected_op_id, facing)
-		var op := _sim_op(selected_op_id)
-		var left := int(op.get("turn_ticks_left", 0))
+		# Preview cost text only — do NOT call request_operator_facing here.
+		var delta := _facing_delta_deg(float(_sim_op(selected_op_id).get("facing_deg", 0.0)), facing)
+		var steps := int(ceil(delta / 45.0 - 1e-9))
+		var cost_s := float(steps) * SimConstants.TURN_COST_S_PER_45
 		var dname := str(op_display_names.get(selected_op_id, "队员"))
-		if left > 0:
-			label_info.text = "%s 转向中 · %.1fs · 不能开火" % [dname, float(left) * SimConstants.DT_S]
-		else:
-			label_info.text = "%s 朝向已更新" % dname
+		label_info.text = "%s 预览转向 %.0f° · 约 %.1fs · 松手确认 / 拖回取消" % [dname, delta, cost_s]
 		_push_map_snapshot()
+
+
+func _facing_delta_deg(from_deg: float, to_deg: float) -> float:
+	return SimGeom.abs_angle_delta_deg(from_deg, to_deg)
+
+
+func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool) -> void:
+	if ui_phase != UiPhase.WAIT or sim == null or sim.plan_locked:
+		return
+	if cancelled or op_id == "" or world_dir.length() < 8.0 or is_nan(preview_deg):
+		label_info.text = "转向已取消"
+		_push_map_snapshot()
+		return
+	# ONE turn order on release.
+	sim.request_operator_facing(op_id, preview_deg)
+	_facing_submit_count += 1
+	var op := _sim_op(op_id)
+	var left := int(op.get("turn_ticks_left", 0))
+	var dname := str(op_display_names.get(op_id, "队员"))
+	if left > 0:
+		label_info.text = "%s 转向中 · %.1fs · 不能开火" % [dname, float(left) * SimConstants.DT_S]
+	else:
+		label_info.text = "%s 朝向已更新" % dname
+	_refresh_portrait_strip()
+	_push_map_snapshot()
 
 
 func _sim_op(op_id: String) -> Dictionary:

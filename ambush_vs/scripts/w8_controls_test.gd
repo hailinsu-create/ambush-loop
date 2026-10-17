@@ -25,6 +25,7 @@ func _run_all() -> void:
 	_test_gesture_drag_back_cancels()
 	await _test_map_router_wired()
 	await _test_selection_hit_and_portraits()
+	await _test_wait_reaim_one_order()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -216,4 +217,56 @@ func _test_selection_hit_and_portraits() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "selection scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_wait_reaim_one_order() -> void:
+	## Drag 90° with many motions → exactly one request_operator_facing.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "reaim scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null:
+			continue
+		# Load plan A and enter wait without finishing night.
+		scene._load_preset("A")
+		scene._start_wait()
+		await process_frame
+		if scene.sim == null:
+			continue
+		scene.paused = true
+		var map = scene.map_view
+		var oid := str(scene.sim.operators[1]["id"]) ## Kar
+		var op = scene.sim.operators[1]
+		var facing0 := float(op["facing_deg"])
+		scene.selected_op_id = oid
+		map.selected_op_id = oid
+		scene._facing_submit_count = 0
+		var origin: Vector2 = map.cell_to_screen(float(op["x"]), float(op["y"]))
+		map.inject_input(_touch(origin, true))
+		# 20 motion steps sweeping ~90°.
+		for s in range(20):
+			var ang := deg_to_rad(facing0 + float(s + 1) * 4.5)
+			var p := origin + Vector2(cos(ang), -sin(ang)) * 80.0
+			map.gesture.inject_move(p)
+			# During drag, sim facing must stay.
+			_assert(is_equal_approx(float(op["facing_deg"]), facing0), "facing unchanged mid-drag step %d" % s)
+		var end := origin + Vector2(cos(deg_to_rad(facing0 + 90.0)), -sin(deg_to_rad(facing0 + 90.0))) * 80.0
+		map.inject_input(_touch(end, false))
+		_assert(scene._facing_submit_count == 1, "exactly one turn order got=%d" % scene._facing_submit_count)
+		_assert(int(op.get("turn_ticks_left", 0)) == 40, "90° → 40 ticks got=%s" % op.get("turn_ticks_left"))
+		# Cancel path: drag out then back.
+		scene._facing_submit_count = 0
+		var f2 := float(op["facing_deg"])
+		map.inject_input(_touch(origin, true))
+		map.gesture.inject_move(origin + Vector2(80, 0))
+		map.inject_input(_touch(origin + Vector2(5, 0), false))
+		_assert(scene._facing_submit_count == 0, "drag-back cancels turn order")
+		_assert(is_equal_approx(float(op["facing_deg"]), f2), "facing unchanged on cancel")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "reaim scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
