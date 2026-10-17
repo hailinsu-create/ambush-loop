@@ -309,8 +309,43 @@ def build_tiles() -> dict:
 
 def chroma_key_magenta_strong(im: Image.Image) -> Image.Image:
 	"""Key compressed JPG magenta + purple fringe (despill). Returns RGBA."""
-	# Slightly looser thresh for JPEG fringing around #FF00FF.
-	return chroma_key_magenta(im, thresh=55.0, soft=48.0)
+	rgba = im.convert("RGBA")
+	arr = np.asarray(rgba).astype(np.float32)
+	rgb = arr[..., :3]
+	r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+	dist = np.linalg.norm(rgb - MAGENTA, axis=-1)
+	# JPEG #FF00FF fringes into purple/pink — catch high R+B / low G aggressively.
+	rb = (r + b) * 0.5
+	magentaish = (r > 150) & (b > 150) & (g < 140) & (rb > g * 1.35)
+	purple_fringe = (r > 90) & (b > 110) & (g < 110) & (b > g + 25) & (r > g + 15)
+	dist = np.where(magentaish | purple_fringe, np.minimum(dist, 28.0), dist)
+	thresh, soft = 48.0, 55.0
+	alpha = np.clip((dist - thresh) / soft, 0.0, 1.0)
+	alpha = np.where(dist < thresh * 0.85, 0.0, alpha)
+	# Despill: remove magenta cast on remaining fringe / semi-opaque edge.
+	spill = np.clip(1.0 - (dist / (thresh + soft * 1.6)), 0.0, 1.0)
+	spill = np.maximum(spill, np.clip(purple_fringe.astype(np.float32) * 0.85, 0.0, 1.0))
+	# Pull R/B down toward G (burlap-safe) rather than flat grey.
+	target = np.stack(
+		[
+			np.minimum(r, g * 1.08 + 18.0),
+			g,
+			np.minimum(b, g * 1.05 + 22.0),
+		],
+		axis=-1,
+	)
+	rgb = rgb * (1.0 - 0.88 * spill[..., None]) + target * (0.88 * spill[..., None])
+	# Erode thin keyed fringe so phone-size edges don't read as purple outlines.
+	a_img = Image.fromarray((np.clip(alpha, 0, 1) * 255).astype(np.uint8), "L")
+	a_img = a_img.filter(ImageFilter.MinFilter(3))
+	a_img = a_img.filter(ImageFilter.GaussianBlur(0.6))
+	alpha = np.asarray(a_img).astype(np.float32) / 255.0
+	# Hard-kill residual near-magenta after despill.
+	r2, g2, b2 = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+	still_mag = (r2 > 140) & (b2 > 140) & (g2 < r2 * 0.78) & (g2 < b2 * 0.78)
+	alpha = np.where(still_mag, 0.0, alpha)
+	out = np.dstack([np.clip(rgb, 0, 255), alpha * 255.0]).astype(np.uint8)
+	return Image.fromarray(out, "RGBA")
 
 
 def cut_sandbag_sheet() -> dict:
@@ -335,7 +370,7 @@ def cut_sandbag_sheet() -> dict:
 	meta: dict = {}
 	for name, x0, y0, x1, y1 in boxes:
 		cell = keyed.crop((x0, y0, x1, y1))
-		cell = bbox_content(cell, pad=6)
+		cell = bbox_content(cell, pad=4)
 		# Preserve aspect on transparent canvas (do not stretch bags).
 		# Straights stay wide; piles stay roughly square.
 		pw, ph = cell.size
@@ -348,12 +383,19 @@ def cut_sandbag_sheet() -> dict:
 		cell = cell.resize((nw, nh), Image.Resampling.LANCZOS)
 		canvas = Image.new("RGBA", (nw + 8, nh + 8), (0, 0, 0, 0))
 		canvas.paste(cell, (4, 4), cell)
-		# Cool night grade: slight blue rim / darker burlap to match moonlight scene.
+		# Cool night grade: darker burlap + cool rim; no magenta left in edge.
 		arr = np.asarray(canvas).astype(np.float32)
-		rgb, a = arr[..., :3], arr[..., 3:4] / 255.0
-		rgb = rgb * np.array([0.92, 0.94, 1.02], dtype=np.float32)
-		rgb = np.clip(rgb * 0.90, 0, 255)
-		out = np.dstack([rgb, arr[..., 3]]).astype(np.uint8)
+		rgb, aa = arr[..., :3], arr[..., 3]
+		# Final edge despill on resized fringe.
+		r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+		edge = (aa > 8) & (aa < 230)
+		purp = edge & (r > 95) & (b > 105) & (g < 115) & ((r + b) * 0.5 > g + 28)
+		rgb[..., 0] = np.where(purp, np.minimum(r, g * 1.05 + 12), r)
+		rgb[..., 2] = np.where(purp, np.minimum(b, g * 1.02 + 16), b)
+		aa = np.where(purp & (aa < 120), 0.0, aa)
+		rgb = rgb * np.array([0.90, 0.93, 1.04], dtype=np.float32)
+		rgb = np.clip(rgb * 0.88, 0, 255)
+		out = np.dstack([rgb, aa]).astype(np.uint8)
 		prop = Image.fromarray(out, "RGBA")
 		save_webp(prop, f"props/{name}.webp", quality=88)
 		meta[name] = f"props/{name}.webp"

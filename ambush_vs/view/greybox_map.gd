@@ -346,14 +346,14 @@ func _g3_period(surf: String) -> float:
 
 
 func _g3_ground_mod(surf: String) -> Color:
-	## Single moonlight modulate per surface (grass/mud kept close to kill square tint patches).
+	## Single moonlight modulate per surface (grass/mud nearly identical value to kill cell tint).
 	match surf:
 		"cobble":
 			return Color(0.70, 0.74, 0.86, 1.0)
 		"grass":
-			return Color(0.50, 0.54, 0.50, 1.0)
+			return Color(0.48, 0.50, 0.47, 1.0)
 		"mud":
-			return Color(0.50, 0.48, 0.46, 1.0)
+			return Color(0.49, 0.47, 0.45, 1.0)
 		"planks":
 			return Color(0.60, 0.56, 0.48, 1.0)
 		_:
@@ -421,6 +421,10 @@ func _draw_g3_terrain() -> void:
 		[15, 18, 11, 13],
 	]:
 		_fill_g3_surf_zone(z[0], z[1], z[2], z[3], "grass")
+	# Soft oversized grass washes (no per-cell strips) — kills right-yard square tint.
+	_wash_g3_grass_soft(4, 7, 2, 7)
+	_wash_g3_grass_soft(12, 16, 2, 4)
+	_wash_g3_grass_soft(14, 18, 10, 14)
 	# Building underlays.
 	for y in range(grid_h):
 		for x in range(grid_w):
@@ -461,13 +465,36 @@ func _fill_g3_surf_zone(min_x: int, max_x: int, min_y: int, max_y: int, surf: St
 	)
 
 
+func _wash_g3_grass_soft(min_x: int, max_x: int, min_y: int, max_y: int) -> void:
+	## Continuous low-alpha grass over mud neighborhood — breaks cell-aligned tint patches.
+	if g3 == null or g3.tile_grass == null:
+		return
+	var pad := 1.35
+	var x0 := float(min_x) - pad
+	var y0 := float(min_y) - pad
+	var x1 := float(max_x) + pad
+	var y1 := float(max_y) + pad
+	var px := x0 * cell_px
+	var py := float(grid_h) * cell_px - y1 * cell_px
+	var dest := Rect2(px, py, (x1 - x0) * cell_px, (y1 - y0) * cell_px)
+	var mod := Color(0.47, 0.49, 0.46, 0.34)
+	_draw_g3_world_rect(g3.tile_grass, x0, y0, x1 - x0, y1 - y0, dest, mod, 3.6)
+	# Second, smaller, slightly greener wash — organic, not grid-aligned.
+	var inset := 0.55
+	var dest2 := dest.grow(-cell_px * inset)
+	mod.a = 0.22
+	_draw_g3_world_rect(
+		g3.tile_grass, x0 + inset, y0 + inset, (x1 - x0) - inset * 2.0, (y1 - y0) - inset * 2.0, dest2, mod, 4.1
+	)
+
+
 func _blend_g3_ground_edges() -> void:
-	## Soft irregular feather between ground types (especially grass↔mud on the east yard).
+	## Soft feather at cobble/plank boundaries only — grass↔mud uses zone washes (no square strips).
 	var dirs := [[1, 0, "e"], [-1, 0, "w"], [0, 1, "n"], [0, -1, "s"]]
 	for y in range(grid_h):
 		for x in range(grid_w):
 			var surf := _yard_surf_at(x, y)
-			if surf == "":
+			if surf == "" or surf in ["grass", "mud"]:
 				continue
 			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 			for d in dirs:
@@ -476,10 +503,8 @@ func _blend_g3_ground_edges() -> void:
 				var nsurf := _yard_surf_at(nx, ny)
 				if nsurf == "" or nsurf == surf:
 					continue
-				# Skip high-contrast cobble edges less; feather grass/mud heavily.
-				var grass_mud := (surf in ["grass", "mud"] and nsurf in ["grass", "mud"])
 				var n := float(((x * 17 + y * 31 + int(d[0]) * 7) % 10)) / 10.0
-				var t := (0.42 + n * 0.28) if grass_mud else (0.22 + n * 0.18)
+				var t := 0.20 + n * 0.16
 				var strip: Rect2
 				match str(d[2]):
 					"e":
@@ -490,16 +515,9 @@ func _blend_g3_ground_edges() -> void:
 						strip = Rect2(p + Vector2(cell_px * (0.05 + n * 0.1), 0), Vector2(cell_px * (0.85 - n * 0.1), cell_px * t))
 					_:
 						strip = Rect2(p + Vector2(cell_px * (0.05 + n * 0.1), cell_px * (1.0 - t)), Vector2(cell_px * (0.85 - n * 0.1), cell_px * t))
-				var a := (0.55 + n * 0.25) if grass_mud else (0.32 + n * 0.15)
 				var mod := _g3_ground_mod(nsurf)
-				mod.a = a
+				mod.a = 0.28 + n * 0.14
 				_draw_g3_world_sample(_g3_tex(nsurf), nx, ny, strip, mod, _g3_period(nsurf))
-				# Second jittered pass breaks remaining square tint.
-				if grass_mud:
-					var strip2 := strip.grow(-cell_px * 0.06)
-					strip2.position += Vector2((n - 0.5) * cell_px * 0.12, (0.5 - n) * cell_px * 0.12)
-					mod.a = a * 0.55
-					_draw_g3_world_sample(_g3_tex(nsurf), nx, ny, strip2, mod, _g3_period(nsurf))
 
 
 func _is_wall_kind(kind: String, cell: Dictionary) -> bool:
@@ -1186,9 +1204,9 @@ func _draw_g3_bag_pile(x: int, y: int) -> void:
 	if pile == null:
 		return
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
-	var sz := cell_px * 0.95
-	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.45), Vector2(sz, sz))
-	_draw_g3_bag_shadow(dest.grow(cell_px * 0.08))
+	var sz := cell_px * 0.72
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.42), Vector2(sz, sz))
+	_draw_g3_bag_shadow(dest.grow(cell_px * 0.06))
 	draw_texture_rect(pile, dest, false, _g3_bag_night_mod())
 
 
@@ -1199,25 +1217,26 @@ func _draw_g3_bag_corner(x: int, y: int) -> void:
 	if corner == null:
 		return
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
-	var sz := cell_px * 1.1
-	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.4), Vector2(sz, sz))
-	_draw_g3_bag_shadow(dest.grow(cell_px * 0.06))
+	var sz := cell_px * 0.78
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.38), Vector2(sz, sz))
+	_draw_g3_bag_shadow(dest.grow(cell_px * 0.05))
 	draw_texture_rect(corner, dest, false, _g3_bag_night_mod())
 
 
 func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> void:
-	## Tile straight S/M/L segments; bag stack depth ≈ 0.9 cell; preserve aspect (no stretch).
+	## Tile straight S/M/L segments; stack height ≈ 0.48 cell; preserve aspect (no stretch).
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
 		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
 	var run_len := float(length) * cell_px
 	var sh := Rect2(
-		base + Vector2(cell_px * 0.04, cell_px * 0.32),
-		Vector2(run_len * 0.96 if horizontal else cell_px * 0.88, cell_px * 0.72 if horizontal else run_len * 0.96)
+		base + Vector2(cell_px * 0.06, cell_px * 0.42),
+		Vector2(run_len * 0.92 if horizontal else cell_px * 0.55, cell_px * 0.42 if horizontal else run_len * 0.92)
 	)
 	_draw_g3_bag_shadow(sh)
 	var along := 0.0
-	var wall_h := cell_px * 0.90
+	## Stack height ≈ 0.45 cell so individual bags read ~phone-readable, not stretched planks.
+	var wall_h := cell_px * 0.48
 	var mod := _g3_bag_night_mod()
 	while along < run_len - cell_px * 0.04:
 		var remain := run_len - along
