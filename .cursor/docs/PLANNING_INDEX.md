@@ -6,7 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS G3 高细节美术 2026-10-17](VS_G3_ART_20261017.md) | **当前 VS 美术切片**：`vs/g3` tip Round 7 — 沙袋专用 sheet 精灵（非黄木条）+ 草泥软洗；鹅卵石保持 R6。PR #57 → `vs/g2`。**不合并**。 |
+| [VS G3 高细节美术 2026-10-17](VS_G3_ART_20261017.md) | **当前 VS 美术切片**：`vs/g3` Round 8 — 连续沙袋墙（greedy runs + overlapping straights）+ 去格背板；鹅卵石保持 R6。PR #57 → `vs/g2`。**不合并**。 |
 | [VS G2 资产批 2026-10-17](VS_G2_ASSETS_20261017.md) | G2 程序生成院子/五武器/SFX；已被 G3 批作为可切换回退保留。PR #56 → `vs/web`。 |
 | [VS Web greybox Pages 2026-10-17](VS_WEB_GREYBOX_PAGES_20261017.md) | **Web 试玩切片**：分支 `vs/web`（自 `vs/core` @ fa6bd08）导出灰盒到 GitHub Pages `/greybox/`。本地导出+Chromium smoke 已过；Pages API 启用被拒，待所有者打开 Actions Pages + `vs/web` 环境分支。**不合并 main / 不动 PR #54**。 |
 | [VS W2 模拟核心 v0 2026-10-17](VS_W2_SIM_V0_20261017.md) | **当前 VS 执行入口**：`ambush_vs/sim/` headless 一夜模拟；院子纸面 **v1.2**；A/B 金标；隔离测试。在 `vs/core` / PR #54，**未合入 main**。 |
