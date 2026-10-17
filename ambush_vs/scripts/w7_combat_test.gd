@@ -29,6 +29,7 @@ func _run_all() -> void:
 	_test_ammo_runs_out()
 	_test_plan_a_winnable_not_flawless()
 	_test_plan_b_beatable()
+	_test_soft_cap_off_control()
 	_test_determinism()
 	print("W7_COMBAT_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -214,6 +215,32 @@ func _test_plan_b_beatable() -> void:
 	_assert(str(s.get("outcome", "")) == "win", "plan B beatable with care outcome=%s" % s.get("outcome"))
 	_assert(bool(s.get("standard_ambush", false)) == true or str(s.get("outcome", "")) == "win",
 		"plan B remains a viable ambush")
+
+
+func _test_soft_cap_off_control() -> void:
+	## Measurement toggle only: default soft_cap keeps B winnable; OFF is harsher.
+	var plan: Dictionary = SimRunner.load_json("res://data/fixtures/plan_b.json")
+	var sim_on := _fresh_sim(plan.duplicate(true))
+	sim_on.enemy_return_soft_cap = true
+	var on_s := _run_to_end(sim_on)
+	var sim_off := _fresh_sim(plan.duplicate(true))
+	sim_off.enemy_return_soft_cap = false
+	var off_s := _run_to_end(sim_off)
+	_assert(str(on_s.get("outcome", "")) == "win", "soft_cap ON plan B still wins")
+	_assert(bool(sim_on.enemy_return_soft_cap) == true, "soft_cap ON flag sticky")
+	_assert(bool(sim_off.enemy_return_soft_cap) == false, "soft_cap OFF flag sticky")
+	var on_dead: Array = on_s.get("dead_ops", [])
+	var off_dead: Array = off_s.get("dead_ops", [])
+	var on_w: Array = on_s.get("wounded", [])
+	var off_w: Array = off_s.get("wounded", [])
+	var harsher := (
+		str(off_s.get("outcome", "")) != "win"
+		or off_dead.size() > on_dead.size()
+		or (off_dead.size() + off_w.size()) > (on_dead.size() + on_w.size())
+	)
+	_assert(harsher, "soft_cap OFF control is harsher on B (outcome/injury) on=%s/%s off=%s/%s" % [
+		on_s.get("outcome"), on_dead.size() + on_w.size(), off_s.get("outcome"), off_dead.size() + off_w.size()
+	])
 
 
 func _test_determinism() -> void:

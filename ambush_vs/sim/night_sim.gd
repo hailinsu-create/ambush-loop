@@ -50,6 +50,8 @@ var manual_detonate_tick: int = -1 ## set ≥0 to force manual at that tick
 var force_expose: bool = false ## test hook: treat squad as exposed every tick
 var skip_fire: bool = false
 var skip_enemy_fire: bool = false ## test hook
+## PLAY-6 default: each enemy scores at most one wounding hit. Measurement toggle only.
+var enemy_return_soft_cap: bool = true
 var max_ticks: int = 2000
 var speed_mul: float = 1.0 ## playback only; does not affect ticks/hash
 var next_night_alert: String = C.ALERT_QUIET ## raised by leaks (PLAY-6)
@@ -909,7 +911,7 @@ func _step_enemy_return_fire() -> void:
 			need += 1
 		if bool(e.get("in_cover", false)):
 			need = maxi(need - 1, 1) ## braced in cover
-		if int(e.get("_hits_scored", 0)) >= 1:
+		if enemy_return_soft_cap and int(e.get("_hits_scored", 0)) >= 1:
 			continue ## soft cap: one wounding hit per enemy (keeps B winnable)
 		var facing := SimGeom.bearing_deg(float(e["x"]), float(e["y"]), float(target["x"]), float(target["y"]))
 		e["fire_accum"] = float(e.get("fire_accum", 0.0)) + C.ENEMY_RETURN_RPM / 60.0 * C.DT_S
@@ -926,7 +928,7 @@ func _step_enemy_return_fire() -> void:
 			})
 			if float(e["shot_accum"]) + 1e-9 >= float(need):
 				e["shot_accum"] = 0.0
-				e["_hits_scored"] = 1
+				e["_hits_scored"] = int(e.get("_hits_scored", 0)) + 1
 				_damage_operator(target, e["id"])
 				break
 

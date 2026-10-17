@@ -32,3 +32,4 @@ PLAY-4 金标理由原文：`.cursor/docs/VS_PLAY4_WAIT_UX_20261017.md` §金标
 2. **弹药按 RPM 脉冲消耗**：旧实现每 tick 扣 1 发会在有限弹匣下误杀方案 B；改为 `fire_accum` 满 1.0 扣一发，金标随之重算。
 3. **方案 A 允许非 S**：还击负伤/清场变慢后评级 A 仍算通过；不再要求无伤 S。
 4. **还击软顶**：每名敌人最多造成 1 次队员命中，避免方案 B 被压成不可胜。
+5. **P0-1 量测（2026-10-17）**：`NightSim.enemy_return_soft_cap`（默认 true）仅供对照；关掉则 BASE-B 全灭。D.3 反例矩阵见 [`ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)。**金标未因本切片改动**。
