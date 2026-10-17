@@ -83,6 +83,11 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 	_routes.clear()
 	for r in level.get("enemies", {}).get("routes", []):
 		_routes[str(r["id"])] = r.get("waypoints", [])
+	## ADR-TRIGGER §3.4: unentered enemies switch to alarm_route on global alert.
+	var alarm_r: Variant = level.get("enemies", {}).get("alarm_route", {})
+	if typeof(alarm_r) == TYPE_DICTIONARY and not alarm_r.is_empty():
+		_routes[str(alarm_r.get("id", "alarm_combat_entry"))] = alarm_r.get("waypoints", [])
+		_routes["__alarm__"] = alarm_r.get("waypoints", [])
 
 	_exit_cells.clear()
 	for ex in level.get("exits", []):
@@ -754,6 +759,10 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 	# PLAY-6: arm survivors to seek cover / later flee.
 	# D.3 scout cost: flanks still in the east alley peel back to east_alley exit
 	# instead of diving west into the yard cover (where main-road MG would erase them).
+	## ADR-TRIGGER §3.4 / D.3 alert salvage: on alarm, unentered enemies snap onto
+	## alarm_route in cover mode (combat entry) so global alert is still winnable.
+	if trig == "alarm":
+		_alarm_force_enter_unentered()
 	_entered_at_detonate = 0
 	for e in enemies:
 		if e["alive"] and e["entered"] and not e["escaped"]:
@@ -774,7 +783,12 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 			## Timing cost: main-road rear still south of the packed band (y≥12)
 			## peels back to road_tail instead of diving north into the kill cone.
 			## At ideal t0 E4 is ≈11.5 — no peel; at t0−2 s E4 is ≈12.5 — escapes.
-			var rear_south := str(e.get("group", "")) == "main" and float(e["y"]) >= 12.0 - 1e-9
+			## Skip rear peel on alarm combat-entry (they are already on alarm_route).
+			var rear_south := (
+				trig != "alarm"
+				and str(e.get("group", "")) == "main"
+				and float(e["y"]) >= 12.0 - 1e-9
+			)
 			if flank_in_alley and not watched:
 				## Stay on alley centerline (y≈8) so barn MG LOS stays blocked by
 				## the (10,9) pier; a y=7 A* path dips into MG's clear lane.
@@ -793,7 +807,7 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 				e["mode"] = "flee"
 				e["cover_goal"] = _exit_cell_by_id("road_tail", ex, ey)
 				if e["cover_goal"].x < 0:
-					e["cover_goal"] = Vector2i(11, 14)
+					e["cover_goal"] = Vector2i(11, 15)
 				e["path"] = _road_tail_peel_path(ex, ey, e["cover_goal"])
 				e["in_cover"] = false
 				log.emit(tick, "enemy_flee", {
@@ -1272,12 +1286,47 @@ func _east_alley_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
 	return path
 
 
+func _alarm_force_enter_unentered() -> void:
+	## ADR-TRIGGER §3.4: unentered → alarm_route combat entry (cover, not march).
+	var wps: Array = _routes.get("__alarm__", [])
+	if wps.is_empty():
+		wps = _routes.get("alarm_combat_entry", [])
+	if wps.is_empty():
+		return
+	var stagger := 0
+	for e in enemies:
+		if not e["alive"] or e["entered"] or e["escaped"]:
+			continue
+		e["route_id"] = "alarm_combat_entry"
+		e["waypoints"] = wps
+		e["entered"] = true
+		e["enter_t_s"] = float(tick) * C.DT_S
+		## Stagger along the route so the column is not a single stack; start ≥1 cell
+		## in from the gate so road_tail (y=15) is behind them.
+		e["progress"] = 1.0 + float(stagger) * 0.75
+		stagger += 1
+		_place_enemy_on_path(e)
+		e["prev_x"] = e["x"]
+		e["prev_y"] = e["y"]
+		e["mode"] = "cover"
+		e["path"] = []
+		e["in_cover"] = false
+		e["cover_goal"] = _nearest_cover_cell(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
+		e["unwatched_ticks"] = 0
+		log.emit(tick, "enemy_enter", {
+			"actor": e["id"],
+			"pos": {"x": e["x"], "y": e["y"], "height": "ground"},
+			"payload": {"route_id": e["route_id"], "group": e["group"], "alarm": true},
+		})
+
+
 func _road_tail_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
-	## Fixed corridor: south along the main road to the spawn-edge exit.
+	## Fixed corridor: south along the main road to gate_n road_tail (y=15).
+	## Spawn cell (11,14) is NOT an exit — only y=15 counts — so alarm/march entry is safe.
 	var path: Array = [Vector2i(from_x, from_y)]
 	var y := from_y
 	var gx := goal.x if goal.x >= 0 else 11
-	var gy := goal.y if goal.y >= 0 else 14
+	var gy := goal.y if goal.y >= 0 else 15
 	while y < gy:
 		y += 1
 		path.append(Vector2i(11, y))

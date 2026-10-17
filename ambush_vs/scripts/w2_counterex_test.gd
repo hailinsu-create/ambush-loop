@@ -307,10 +307,10 @@ func _assert_alert_wins(on_m: Dictionary, off_m: Dictionary) -> void:
 	for name in ["quiet", "suspicious", "area_alert"]:
 		var r: Dictionary = on_m["ALERT-%s" % name]
 		_assert(int(r.get("wins", 0)) >= 1, "ALERT-%s soft_cap ON ≥1 plan wins got=%s" % [name, r.get("wins")])
-	# global: DEV_PLAN asks ≥1 win; current rules fail — document, do not fail CI.
+	# global: DEV_PLAN D.3 — each alert tier ≥1 plan win (alarm_route combat entry).
 	var g: Dictionary = on_m["ALERT-global_alert"]
 	_assert(g.has("wins"), "ALERT-global_alert measured")
-	_assert(int(g.get("wins", -1)) == 0, "ALERT-global_alert still 0 wins under soft_cap ON (documented gap)")
+	_assert(int(g.get("wins", 0)) >= 1, "ALERT-global_alert soft_cap ON ≥1 plan wins got=%s" % g.get("wins"))
 	# Soft-cap OFF control: still measured; may or may not collapse alert salvage
 	# depending on yard geometry — require the row exists and BASE-B differs.
 	var s_off: Dictionary = off_m["ALERT-suspicious"]
