@@ -18,6 +18,7 @@ var hits: Array = [] ## {x,y,age,life}
 var blasts: Array = [] ## {x,y,kind,age,life} kind=mine|grenade
 
 var fires_seen: int = 0
+var enemy_fires_seen: int = 0
 var hits_seen: int = 0
 var kills_seen: int = 0
 var mines_seen: int = 0
@@ -34,6 +35,7 @@ func reset() -> void:
 	hits.clear()
 	blasts.clear()
 	fires_seen = 0
+	enemy_fires_seen = 0
 	hits_seen = 0
 	kills_seen = 0
 	mines_seen = 0
@@ -46,6 +48,7 @@ func reset() -> void:
 func stats() -> Dictionary:
 	return {
 		"fires": fires_seen,
+		"enemy_fires": enemy_fires_seen,
 		"hits": hits_seen,
 		"kills": kills_seen,
 		"mines": mines_seen,
@@ -57,6 +60,7 @@ func stats() -> Dictionary:
 func consume_events(events: Array, enemies: Array, operators: Array) -> Dictionary:
 	## Process a slice of sim.log.events. Returns per-call counts.
 	var n_fire := 0
+	var n_enemy_fire := 0
 	var n_hit := 0
 	var n_kill := 0
 	var n_mine := 0
@@ -68,10 +72,14 @@ func consume_events(events: Array, enemies: Array, operators: Array) -> Dictiona
 				n_fire += 1
 				fires_seen += 1
 				_on_fire(ev, enemies, operators)
+			"enemy_fire":
+				n_enemy_fire += 1
+				enemy_fires_seen += 1
+				_on_enemy_fire(ev, enemies, operators)
 			"hit":
 				n_hit += 1
 				hits_seen += 1
-				_on_hit(ev, enemies)
+				_on_hit(ev, enemies, operators)
 			"kill":
 				n_kill += 1
 				kills_seen += 1
@@ -88,6 +96,7 @@ func consume_events(events: Array, enemies: Array, operators: Array) -> Dictiona
 				pass
 	return {
 		"fires": n_fire,
+		"enemy_fires": n_enemy_fire,
 		"hits": n_hit,
 		"kills": n_kill,
 		"mines": n_mine,
@@ -160,9 +169,40 @@ func _on_fire(ev: Dictionary, enemies: Array, operators: Array) -> void:
 	})
 
 
-func _on_hit(ev: Dictionary, enemies: Array) -> void:
+func _on_enemy_fire(ev: Dictionary, enemies: Array, operators: Array) -> void:
+	## PLAY-6 return fire: muzzle + tracer from enemy toward operator.
+	var actor := str(ev.get("actor", ""))
+	var target := str(ev.get("target", ""))
+	var pos: Dictionary = ev.get("pos", {})
+	var ax := float(pos.get("x", 0.0))
+	var ay := float(pos.get("y", 0.0))
+	var facing := float(ev.get("facing_deg", 0.0))
+	var en := _unit_by_id(enemies, actor)
+	if not en.is_empty():
+		ax = float(en.get("x", ax))
+		ay = float(en.get("y", ay))
+	var tx := ax + cos(deg_to_rad(facing))
+	var ty := ay + sin(deg_to_rad(facing))
+	var tgt := _unit_by_id(operators, target)
+	if not tgt.is_empty():
+		tx = float(tgt.get("x", tx))
+		ty = float(tgt.get("y", ty))
+		facing = rad_to_deg(atan2(ty - ay, tx - ax))
+	flashes.append({
+		"x": ax, "y": ay, "facing_deg": facing, "weapon_id": "enemy_rifle",
+		"age": 0.0, "life": MUZZLE_LIFE_S,
+	})
+	tracers.append({
+		"x0": ax, "y0": ay, "x1": tx, "y1": ty, "weapon_id": "enemy_rifle",
+		"age": 0.0, "life": TRACER_LIFE_S,
+	})
+
+
+func _on_hit(ev: Dictionary, enemies: Array, operators: Array = []) -> void:
 	var target := str(ev.get("target", ""))
 	var tgt := _unit_by_id(enemies, target)
+	if tgt.is_empty() and not operators.is_empty():
+		tgt = _unit_by_id(operators, target)
 	var x := 0.0
 	var y := 0.0
 	if not tgt.is_empty():

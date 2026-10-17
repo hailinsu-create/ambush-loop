@@ -526,7 +526,9 @@ func _refresh_op_cards() -> void:
 			var placed := bool(op_placed.get(oid, false))
 			var mark := "✓" if placed else "·"
 			var sel := "▸ " if oid == selected_op_id else ""
-			head.text = "%s%s %s · %s" % [sel, mark, dname, wlab]
+			var ammo_n := _op_ammo_display(oid, op)
+			var hp_bit := _op_hp_display(oid, op)
+			head.text = "%s%s %s · %s · 弹%d%s" % [sel, mark, dname, wlab, ammo_n, hp_bit]
 		var wrow := card.get_node_or_null("Weapons")
 		if wrow:
 			for wid in _assignable_weapon_ids():
@@ -539,6 +541,31 @@ func _refresh_op_cards() -> void:
 					wb.modulate = Color(1.0, 0.92, 0.55)
 				else:
 					wb.modulate = Color.WHITE
+
+
+func _op_ammo_display(oid: String, plan_op: Dictionary) -> int:
+	if sim != null:
+		for sop in sim.operators:
+			if str(sop.get("id", "")) == oid:
+				return int(sop.get("ammo", 0))
+	if plan_op.has("ammo"):
+		return int(plan_op.get("ammo", 0))
+	var wid := str(plan_op.get("weapon_id", ""))
+	return int(SimConstants.DEFAULT_AMMO.get(wid, 0))
+
+
+func _op_hp_display(oid: String, _plan_op: Dictionary) -> String:
+	if sim == null:
+		return ""
+	for sop in sim.operators:
+		if str(sop.get("id", "")) != oid:
+			continue
+		if not bool(sop.get("alive", true)):
+			return " · 阵亡"
+		if bool(sop.get("wounded", false)):
+			return " · 负伤%d/%d" % [int(sop.get("hp", 0)), int(sop.get("max_hp", SimConstants.OP_MAX_HP))]
+		return " · HP%d" % int(sop.get("hp", SimConstants.OP_MAX_HP))
+	return ""
 
 
 func _on_op_card_pressed(oid: String) -> void:
@@ -712,6 +739,28 @@ func can_start_wait() -> bool:
 	return start_block_reason().is_empty()
 
 
+func _apply_kit_ammo_to_plan() -> void:
+	## PLAY-6: finite ammo from gathered kit pools (or loadout_start) into each operator.
+	var pools: Dictionary = {} ## pool_id → rounds left
+	var src: Dictionary = gathered_kit if not gathered_kit.is_empty() else level.get("loadout_start", {})
+	for a in src.get("ammo_pools", []):
+		pools[str(a.get("pool_id", ""))] = int(a.get("rounds", 0))
+	for op in plan.get("operators", []):
+		var wid := str(op.get("weapon_id", ""))
+		if wid in ["grenade", "mine"]:
+			op["ammo"] = 0
+			continue
+		var pool := str(SimConstants.WEAPON_AMMO_POOL.get(wid, ""))
+		var default_n := int(SimConstants.DEFAULT_AMMO.get(wid, 12))
+		if pool != "" and pools.has(pool) and int(pools[pool]) > 0:
+			var take: int = mini(default_n, int(pools[pool]))
+			pools[pool] = int(pools[pool]) - take
+			op["ammo"] = take
+		elif not op.has("ammo"):
+			op["ammo"] = default_n
+		op["hp"] = int(op.get("hp", SimConstants.OP_MAX_HP))
+
+
 func _refresh_start_gate() -> void:
 	var reason := start_block_reason()
 	if btn_start:
@@ -727,6 +776,7 @@ func _start_wait() -> void:
 		label_info.text = reason
 		_refresh_start_gate()
 		return
+	_apply_kit_ammo_to_plan()
 	sim = NightSim.new()
 	sim.setup(level, plan, weapons)
 	sim.begin_wait()
@@ -1159,7 +1209,13 @@ func _consume_sim_log() -> void:
 			"fire":
 				if sfx:
 					sfx.play_weapon(str(ev.get("weapon_id", "kar98k")))
+			"enemy_fire":
+				if sfx:
+					sfx.play_weapon("kar98k")
 			"hit":
+				if sfx:
+					sfx.play_hit()
+			"op_wounded":
 				if sfx:
 					sfx.play_hit()
 			"kill":
@@ -1179,6 +1235,7 @@ func _consume_sim_log() -> void:
 					sfx.play_weapon("grenade")
 			_:
 				pass
+	_refresh_op_cards()
 	if int(got.get("mines", 0)) > 0 or int(got.get("grenade_blasts", 0)) > 0:
 		# Screen shake driven by combat_fx.shake_*
 		pass
@@ -1550,8 +1607,24 @@ func _auto_run_plan(which: String) -> void:
 	var captured_trigger := false
 	var captured_midfight := false
 	var captured_reaim := false
+	var captured_cover_fire := false
+	var captured_wounded := false
+	var force_leak := str(OS.get_environment("AMBUSH_GREYBOX_FORCE_LEAK")).to_lower() in ["1", "true"]
+	var leak_armed := false
 	while sim != null and not sim.is_finished():
 		sim.advance_one_tick()
+		# PLAY-6 capture helper: after detonate, mute friendlies and leave one survivor to flee/leak.
+		if force_leak and sim.detonate_tick >= 0 and not leak_armed and sim.tick >= sim.detonate_tick + 2:
+			sim.skip_fire = true
+			sim.skip_enemy_fire = true
+			var kept := ""
+			for e in sim.enemies:
+				if e["alive"] and e["entered"] and not e["escaped"]:
+					if kept == "":
+						kept = str(e["id"])
+					else:
+						sim._kill_enemy(e, "capture", "capture")
+			leak_armed = true
 		_consume_sim_log()
 		_tick_wait_audio()
 		if map_view and map_view.combat_fx:
@@ -1599,6 +1672,25 @@ func _auto_run_plan(which: String) -> void:
 			await get_tree().process_frame
 			_try_capture("midfight")
 			captured_midfight = true
+		# PLAY-6 evidence shots: enemy in cover returning fire; wounded operator.
+		if not captured_cover_fire and sim.detonate_tick >= 0:
+			var any_cover_fire := false
+			for e in sim.enemies:
+				if bool(e.get("in_cover", false)) and bool(e.get("alive", false)):
+					any_cover_fire = true
+					break
+			if any_cover_fire:
+				_push_map_snapshot()
+				await get_tree().process_frame
+				await get_tree().process_frame
+				_try_capture("cover_fire")
+				captured_cover_fire = true
+		if not captured_wounded and not (sim.wounded_ids as Array).is_empty():
+			_push_map_snapshot()
+			await get_tree().process_frame
+			await get_tree().process_frame
+			_try_capture("wounded")
+			captured_wounded = true
 	_consume_sim_log()
 	_push_map_snapshot()
 	await get_tree().process_frame
@@ -1614,6 +1706,9 @@ func _auto_run_plan(which: String) -> void:
 	await get_tree().process_frame
 	_try_capture("result")
 	_try_capture("review_a" if which == "A" else "review_b")
+	# PLAY-6: if this run had a leak, also tag a leak review shot.
+	if not (last_summary.get("escapes", []) as Array).is_empty():
+		_try_capture("leak_review")
 	var fxst := combat_fx_stats()
 	var log_fires := 0
 	if sim != null:

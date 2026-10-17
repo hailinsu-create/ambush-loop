@@ -6,7 +6,9 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS-PLAY5 中文复盘卡 2026-10-17](VS_PLAY5_REVIEW_CARD_20261017.md) | **当前 VS 玩法切片（PLAY-5）**：`vs/g3` 复盘卡（全歼/评级 S–C/白话原因/时间线）；搜尸 stub；HUD 无 tick/英文触发名。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-PLAY6 敌人反应 2026-10-17](VS_PLAY6_ENEMY_REACT_20261017.md) | **当前 VS 玩法切片（PLAY-6）**：`vs/g3` 起爆后掩体/还击/逃跑泄漏、队员 HP/负伤、有限弹药、复盘原因；复盘卡实心底；金标因战斗日志重算（t0 仍 520/560）。PR #57 → `vs/g2`。**不合并**。 |
+| [W2 断言数与金标 2026-10-17](VS_W2_COUNT_AND_GOLDEN_20261017.md) | W2 61→73（PLAY-4 wait-turn）说明；PLAY-4/PLAY-6 金标变更 DECISIONS。 |
+| [VS-PLAY5 中文复盘卡 2026-10-17](VS_PLAY5_REVIEW_CARD_20261017.md) | PLAY-5：复盘卡 + 搜尸 stub。已被 PLAY-6 接续。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-PLAY4 等待重瞄与节奏 2026-10-17](VS_PLAY4_WAIT_UX_20261017.md) | PLAY-4：WAIT 重瞄、脚步/环境/tension、院子节奏 t0 520/560。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-FX1 起爆战斗表现 2026-10-17](VS_FX1_COMBAT_FEEDBACK_20261017.md) | PLAY-3：视图消费 fire/hit/kill；枪口火/曳光/命中/地雷震/尸体。PLAY-4 起曳光加粗加亮、枪口放大。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-W4a 侦察搜集 2026-10-17](VS_W4A_SCOUT_GATHER_20261017.md) | PLAY-2 侦察搜集（ScoutSim）。PR #57 → `vs/g2`。**不合并**。 |

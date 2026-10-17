@@ -1670,6 +1670,11 @@ func _draw_combat_fx() -> void:
 			glow_col = Color(1.0, 0.65, 0.3, 0.4 * t)
 			width = 4.0
 			glow_w = 8.0
+		elif wid == "enemy_rifle":
+			col = Color(1.0, 0.35, 0.28, 0.95 * t)
+			glow_col = Color(0.95, 0.2, 0.15, 0.45 * t)
+			width = 3.8
+			glow_w = 8.0
 		draw_line(a, b, glow_col, glow_w)
 		draw_line(a, b, col, width)
 		draw_circle(b, 4.0, Color(1.0, 0.98, 0.82, 0.95 * t))
@@ -1725,7 +1730,41 @@ func _draw_units() -> void:
 		var etex: Texture2D = assets.enemy
 		if art_mode == ArtMode.G3 and g3 != null:
 			etex = g3.units.get("enemy_rifle", etex)
-		_draw_unit_tex(etex, float(e["x"]), float(e["y"]), 0.0, false)
+		var efacing := 0.0
+		if str(e.get("mode", "")) != "march":
+			# Face nearest living operator while in combat.
+			var best_d := 1e9
+			for op2 in operators:
+				if not op2.get("alive", true):
+					continue
+				var d2 := Vector2(float(op2["x"]) - float(e["x"]), float(op2["y"]) - float(e["y"])).length()
+				if d2 < best_d:
+					best_d = d2
+					efacing = rad_to_deg(atan2(float(op2["y"]) - float(e["y"]), float(op2["x"]) - float(e["x"])))
+		_draw_unit_tex(etex, float(e["x"]), float(e["y"]), efacing, false)
+		if bool(e.get("in_cover", false)):
+			var ep := cell_to_screen(float(e["x"]), float(e["y"]))
+			draw_arc(ep, cell_px * 0.62, 0, TAU, 20, Color(0.35, 0.75, 1.0, 0.85), 2.2)
+			draw_string(
+				ThemeDB.fallback_font,
+				ep + Vector2(-10, cell_px * 0.7),
+				"掩体",
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				11,
+				Color(0.55, 0.85, 1.0, 0.95)
+			)
+		elif str(e.get("mode", "")) == "flee":
+			var ep2 := cell_to_screen(float(e["x"]), float(e["y"]))
+			draw_string(
+				ThemeDB.fallback_font,
+				ep2 + Vector2(-10, cell_px * 0.7),
+				"逃",
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				11,
+				Color(1.0, 0.55, 0.35, 0.95)
+			)
 	for s in sentries:
 		var sp := _observer_xy(s)
 		var stex: Texture2D = assets.sentry
@@ -1763,6 +1802,18 @@ func _draw_units() -> void:
 				draw_arc(hp, cell_px * 0.92, 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.85), 1.6)
 		elif high:
 			draw_arc(hp, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
+		# PLAY-6 wounded: orange ring + label.
+		if bool(op.get("wounded", false)):
+			draw_arc(hp, cell_px * 0.68, 0, TAU, 24, Color(1.0, 0.45, 0.2, 0.95), 2.6)
+			draw_string(
+				ThemeDB.fallback_font,
+				hp + Vector2(-14, cell_px * 0.85),
+				"负伤",
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				11,
+				Color(1.0, 0.55, 0.3, 0.95)
+			)
 		# WAIT re-aim: turning indicator while turn_ticks_left > 0 (can't fire).
 		var turn_left := int(op.get("turn_ticks_left", 0))
 		if turn_left > 0:

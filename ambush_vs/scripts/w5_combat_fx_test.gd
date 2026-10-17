@@ -69,9 +69,10 @@ func _test_fx_consumes_plan_a_events() -> void:
 	_assert(fx.kills_seen == kill_n, "fx.kills_seen == log kills")
 	_assert(fx.bodies.size() == kill_n, "body sprites == kills got=%d" % fx.bodies.size())
 	_assert(fx.bodies.size() == sim.killed_ids.size(), "bodies == killed_ids")
-	# Tracers/flashes were spawned (may have aged out if advance called; we didn't).
-	_assert(fx.tracers.size() == fire_n, "tracers spawned per fire")
-	_assert(fx.flashes.size() == fire_n, "muzzle flashes spawned per fire")
+	# Tracers/flashes: friendly fire + PLAY-6 enemy_fire both spawn presentation.
+	var enemy_fire_n := _count_log(sim.log.events, "enemy_fire")
+	_assert(fx.tracers.size() == fire_n + enemy_fire_n, "tracers spawned per fire+enemy_fire")
+	_assert(fx.flashes.size() == fire_n + enemy_fire_n, "muzzle flashes spawned per fire+enemy_fire")
 
 
 func _test_golden_hash_unchanged() -> void:

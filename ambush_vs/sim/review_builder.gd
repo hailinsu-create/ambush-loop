@@ -10,7 +10,7 @@ const SimConstants := preload("res://sim/constants.gd")
 const IDEAL_T0_A_TICK := 520
 const IDEAL_T0_B_TICK := 560
 const VOLLEY_WINDOW_TICKS := 10
-const CLEAR_FAST_S := 0.8
+const CLEAR_FAST_S := 0.55 ## PLAY-6: cover scramble makes sub-0.55 rare; S stays elite
 
 
 static func build(sim, plan: Dictionary, op_display_names: Dictionary = {}) -> Dictionary:
@@ -98,12 +98,14 @@ static func _grade(summary: Dictionary, m: Dictionary) -> String:
 	var peak := str(m.get("alert_peak", "quiet"))
 	var volley := int(m.get("volley_kills", 0))
 	var clear_s := float(m.get("clear_s", -1.0))
-	if outcome != "win" or trig == "alarm" or esc >= 3 or peak == "global_alert":
+	var wounded_n := (summary.get("wounded", []) as Array).size()
+	var dead_n := (summary.get("dead_ops", []) as Array).size()
+	if outcome != "win" or trig == "alarm" or esc >= 3 or peak == "global_alert" or dead_n > 0:
 		return "C"
 	if not std or esc > 0 or peak == "area_alert":
 		return "B"
-	# Standard wipe, quiet/suspicious.
-	if volley >= 4 and clear_s >= 0.0 and clear_s <= CLEAR_FAST_S:
+	# Standard wipe, quiet/suspicious — wounds or slow clear → A (not trivially S).
+	if wounded_n == 0 and volley >= 4 and clear_s >= 0.0 and clear_s <= CLEAR_FAST_S:
 		return "S"
 	return "A"
 
@@ -170,6 +172,9 @@ static func _causes(
 	var clear_s := float(m.get("clear_s", -1.0))
 	var volley := int(m.get("volley_kills", 0))
 	var kill_actors: Dictionary = m.get("kill_actors", {})
+	var wounded: Array = summary.get("wounded", [])
+	var dead_ops: Array = summary.get("dead_ops", [])
+	var combat := _combat_flags(events)
 
 	# 1) Trigger / timing cause
 	if trig == "alarm":
@@ -185,29 +190,49 @@ static func _causes(
 		else:
 			out.append("%s，敌人仍在预设杀伤区内" % _trigger_zh(trig))
 
-	# 2) Top killer / first volley
-	var top_actor := ""
-	var top_n := 0
-	for a in kill_actors.keys():
-		var n := int(kill_actors[a])
-		if n > top_n:
-			top_n = n
-			top_actor = str(a)
-	if top_actor != "" and top_n > 0:
-		var label := _op_label(top_actor, plan, names)
-		if top_actor.begins_with("mine"):
-			out.append("地雷炸开了纵队头兵，撕开口子")
-		elif volley >= 4:
-			out.append("%s 在首轮点杀了 %d 人，压制势头很猛" % [label, volley])
+	# 2) PLAY-6: wound / suppression / ammo / kill narrative (prefer combat truth)
+	if not dead_ops.is_empty():
+		var dlab := _op_label(str(dead_ops[0]), plan, names)
+		out.append("%s 阵亡，火力缺口被敌人抓住" % dlab)
+	elif not wounded.is_empty():
+		var wlab := _op_label(str(wounded[0]), plan, names)
+		if not esc.is_empty():
+			out.append("%s被压制，左翼一人逃脱" % wlab)
 		else:
-			out.append("%s 扛下了主要击杀（%d 人），清场靠交叉火力补完" % [label, top_n])
+			out.append("%s被还击压制，开火变慢" % wlab)
+	elif bool(combat.get("ammo_empty", false)):
+		var alab := _op_label(str(combat.get("ammo_actor", "")), plan, names)
+		out.append("%s 弹药打空，压制断档" % alab)
+	else:
+		var top_actor := ""
+		var top_n := 0
+		for a in kill_actors.keys():
+			var n := int(kill_actors[a])
+			if n > top_n:
+				top_n = n
+				top_actor = str(a)
+		if top_actor != "" and top_n > 0:
+			var label := _op_label(top_actor, plan, names)
+			if top_actor.begins_with("mine"):
+				out.append("地雷炸开了纵队头兵，撕开口子")
+			elif volley >= 4:
+				out.append("%s 在首轮点杀了 %d 人，压制势头很猛" % [label, volley])
+			else:
+				out.append("%s 扛下了主要击杀（%d 人），清场靠交叉火力补完" % [label, top_n])
 
-	# 3) Alert / leaks / quality
-	if not esc.is_empty():
-		out.append("有 %d 人漏网逃脱，杀伤区或朝向还有缺口" % esc.size())
+	# 3) Leaks / alert / quality (skip if wound+leak already combined)
+	var wound_leak_combined := not wounded.is_empty() and not esc.is_empty()
+	if not wound_leak_combined and not esc.is_empty():
+		var next_a := str(summary.get("next_night_alert", "quiet"))
+		if next_a != "quiet" and next_a != "":
+			out.append("有 %d 人漏网逃脱，下一夜警报将升高" % esc.size())
+		else:
+			out.append("有 %d 人漏网逃脱，杀伤区或朝向还有缺口" % esc.size())
 	elif peak == "area_alert" or peak == "global_alert":
 		out.append("交火前警报已升高，标准伏击不可得")
-	elif std and clear_s >= 0.0 and clear_s <= CLEAR_FAST_S:
+	elif bool(combat.get("in_cover", false)) and std and clear_s > CLEAR_FAST_S:
+		out.append("残敌钻进掩体还击，清场比完美压制慢一拍")
+	elif std and clear_s >= 0.0 and clear_s <= CLEAR_FAST_S and wounded.is_empty():
 		out.append("警报保持安静，标准伏击成立")
 	elif std:
 		out.append("无人逃脱，但清场比完美压制慢一拍")
@@ -220,6 +245,20 @@ static func _causes(
 	while out.size() < 2:
 		out.append("复盘数据不足，建议再跑一局对照")
 	return out
+
+
+static func _combat_flags(events: Array) -> Dictionary:
+	var ammo_empty := false
+	var ammo_actor := ""
+	var in_cover := false
+	for e in events:
+		var t := str(e.get("type", ""))
+		if t == "ammo_empty" and not ammo_empty:
+			ammo_empty = true
+			ammo_actor = str(e.get("actor", ""))
+		if t == "enemy_in_cover":
+			in_cover = true
+	return {"ammo_empty": ammo_empty, "ammo_actor": ammo_actor, "in_cover": in_cover}
 
 
 static func _timeline(summary: Dictionary, m: Dictionary, events: Array, plan: Dictionary) -> Array:

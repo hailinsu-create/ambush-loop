@@ -1,7 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://ambushvsgreybox01"]
+[gd_scene load_steps=4 format=3 uid="uid://ambushvsgreybox01"]
 
 [ext_resource type="Script" path="res://scripts/greybox_controller.gd" id="1_ctrl"]
 [ext_resource type="Script" path="res://view/greybox_map.gd" id="2_map"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_review_panel"]
+bg_color = Color(0.06, 0.07, 0.09, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.62, 0.72, 0.55)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 4
+content_margin_top = 4
+content_margin_right = 4
+content_margin_bottom = 4
 
 [node name="GreyboxRoot" type="Control"]
 layout_mode = 3
@@ -239,6 +255,7 @@ offset_right = 300.0
 offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_review_panel")
 
 [node name="Margin" type="MarginContainer" parent="HUD/ResultPanel"]
 layout_mode = 2

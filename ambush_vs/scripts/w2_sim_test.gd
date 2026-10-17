@@ -343,6 +343,8 @@ func _test_wait_turn_blocks_fire() -> void:
 	_assert(_count_actor_fire(sim, str(op["id"])) == fires_before, "no fire while turn_ticks_left>0")
 	op["turn_ticks_left"] = 0
 	op["can_fire"] = true
+	# PLAY-6: ammo is RPM-gated (not per-tick); prime one round so a single step can fire.
+	op["fire_accum"] = 0.999
 	sim._step_fire()
 	_assert(_count_actor_fire(sim, str(op["id"])) > fires_before, "fires after turn completes")
 
