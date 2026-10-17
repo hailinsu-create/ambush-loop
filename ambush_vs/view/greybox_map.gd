@@ -22,6 +22,7 @@ signal aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, can
 signal ground_drag_started(start_cell: Vector2i, pos: Vector2)
 signal ground_drag_moved(cell: Vector2i, start_cell: Vector2i, pos: Vector2)
 signal ground_drag_ended(end_cell: Vector2i, start_cell: Vector2i, cancelled: bool)
+signal cell_hovered(cell: Vector2i) ## desktop hover (no button)
 
 enum ArtMode { G3, G2, G1 }
 
@@ -88,11 +89,18 @@ var legal_cells: Array = [] ## Vector2i walkable/placeable highlights
 var place_ghost_cell: Vector2i = Vector2i(-1, -1)
 var trip_preview_a: Vector2i = Vector2i(-1, -1)
 var trip_preview_b: Vector2i = Vector2i(-1, -1)
+## PLAY-UX PR-6: scout path preview + dest flag.
+var scout_preview_path: Array = [] ## Vector2i
+var scout_danger_cells: Array = [] ## Vector2i in enemy cones
+var scout_dest_flag: Vector2i = Vector2i(-1, -1)
+var scout_confirm_cell: Vector2i = Vector2i(-1, -1) ## ✓ bubble
+var scout_preview_cost_s: float = 0.0
 ## Counts for headless tests.
 var tap_emit_count: int = 0
 var drag_emit_count: int = 0
 var _dragging_ground: bool = false
 var _ground_start_cell: Vector2i = Vector2i(-1, -1)
+var _last_hover_cell: Vector2i = Vector2i(-999, -999)
 
 
 func _ready() -> void:
@@ -264,6 +272,11 @@ func apply_snapshot(snap: Dictionary) -> void:
 	supply_states = snap.get("supply_states", {}) as Dictionary
 	searched_bodies = snap.get("searched_bodies", {}) as Dictionary
 	body_search_enabled = bool(snap.get("body_search_enabled", false))
+	scout_preview_path = snap.get("scout_preview_path", []) as Array
+	scout_danger_cells = snap.get("scout_danger_cells", []) as Array
+	scout_dest_flag = snap.get("scout_dest_flag", Vector2i(-1, -1))
+	scout_confirm_cell = snap.get("scout_confirm_cell", Vector2i(-1, -1))
+	scout_preview_cost_s = float(snap.get("scout_preview_cost_s", 0.0))
 	queue_redraw()
 
 
@@ -358,6 +371,7 @@ func _draw() -> void:
 	_draw_legal_cells()
 	_draw_place_ghost()
 	_draw_trip_preview()
+	_draw_scout_path_preview()
 	# G1 readability overlays always on top of terrain/props.
 	if show_cones:
 		_draw_enemy_cones()
@@ -441,6 +455,67 @@ func _draw_trip_preview() -> void:
 	var pb := cell_to_screen(float(trip_preview_b.x), float(trip_preview_b.y))
 	draw_line(pa, pb, Color(1.0, 0.86, 0.3, 0.9), 3.5)
 	draw_circle(pb, cell_px * 0.22, Color(1.0, 0.86, 0.3, 0.85))
+
+
+func _draw_scout_path_preview() -> void:
+	## Dashed path; danger cells red; dest X flag; optional ✓ confirm bubble.
+	if scout_preview_path.size() >= 2:
+		for i in range(scout_preview_path.size() - 1):
+			var a: Vector2i = scout_preview_path[i]
+			var b: Vector2i = scout_preview_path[i + 1]
+			var pa := cell_to_screen(float(a.x), float(a.y))
+			var pb := cell_to_screen(float(b.x), float(b.y))
+			var danger := _scout_cell_danger(b) or _scout_cell_danger(a)
+			var col := Color(1.0, 0.25, 0.2, 0.95) if danger else Color(0.95, 0.95, 0.55, 0.9)
+			_draw_dashed(pa, pb, col, 2.5)
+	for dc in scout_danger_cells:
+		var c: Vector2i = dc
+		var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
+		draw_rect(Rect2(p, Vector2(cell_px, cell_px)), Color(1.0, 0.2, 0.15, 0.22), true)
+	var flag := scout_dest_flag
+	if flag.x >= 0:
+		var fp := cell_to_screen(float(flag.x), float(flag.y))
+		draw_line(fp + Vector2(-10, -10), fp + Vector2(10, 10), Color(1.0, 0.9, 0.3, 0.95), 3.0)
+		draw_line(fp + Vector2(10, -10), fp + Vector2(-10, 10), Color(1.0, 0.9, 0.3, 0.95), 3.0)
+		if scout_preview_cost_s > 0.0:
+			draw_string(
+				ThemeDB.fallback_font,
+				fp + Vector2(12, -8),
+				"%.0fs" % scout_preview_cost_s,
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 0.95, 0.6, 0.95)
+			)
+	if scout_confirm_cell.x >= 0:
+		var cp := cell_to_screen(float(scout_confirm_cell.x), float(scout_confirm_cell.y))
+		draw_circle(cp + Vector2(cell_px * 0.35, -cell_px * 0.35), cell_px * 0.28, Color(0.2, 0.75, 0.35, 0.92))
+		draw_string(
+			ThemeDB.fallback_font,
+			cp + Vector2(cell_px * 0.22, -cell_px * 0.22),
+			"✓",
+			HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(1, 1, 1, 1)
+		)
+
+
+func _scout_cell_danger(c: Vector2i) -> bool:
+	for d in scout_danger_cells:
+		if d == c:
+			return true
+	return false
+
+
+func _draw_dashed(a: Vector2, b: Vector2, col: Color, width: float) -> void:
+	var delta := b - a
+	var length := delta.length()
+	if length < 1.0:
+		return
+	var dir := delta / length
+	var pos := 0.0
+	var on := true
+	while pos < length:
+		var seg := minf(6.0, length - pos)
+		if on:
+			draw_line(a + dir * pos, a + dir * (pos + seg), col, width)
+		on = not on
+		pos += seg
 
 
 func _draw_high_slot_highlights() -> void:
@@ -2007,6 +2082,14 @@ func _gui_input(event: InputEvent) -> void:
 	if gesture == null:
 		_init_gesture_router()
 	gesture.bounds = Rect2(Vector2.ZERO, size)
+	# Desktop hover (no buttons): preview path without committing.
+	if event is InputEventMouseMotion:
+		var mm := event as InputEventMouseMotion
+		if mm.button_mask == 0 and int(gesture.state) == 0: ## IDLE
+			var hc := screen_to_cell(mm.position)
+			if hc != _last_hover_cell:
+				_last_hover_cell = hc
+				cell_hovered.emit(hc)
 	if gesture.feed(event):
 		accept_event()
 

@@ -114,6 +114,23 @@ func is_finished() -> bool:
 	return finished
 
 
+## Full A* path including start cell (empty = unreachable). Does not mutate state.
+func compute_path(op_id: String, goal: Vector2i) -> Array:
+	if finished or phase != "scout":
+		return []
+	if not grid.walkable(goal.x, goal.y):
+		return []
+	var op := _op_by_id(op_id)
+	if op.is_empty():
+		return []
+	var from := Vector2i(int(op["x"]), int(op["y"]))
+	return SimPathfinder.find_path_avoiding(grid, from, goal, _occupied_cells(op_id))
+
+
+func is_cell_watched(x: float, y: float, tier: String = "ground") -> bool:
+	return _seen_by_observers(x, y, tier)
+
+
 func request_move(op_id: String, goal: Vector2i) -> bool:
 	if finished or phase != "scout":
 		return false
@@ -125,9 +142,7 @@ func request_move(op_id: String, goal: Vector2i) -> bool:
 	# Cancel open if moving away.
 	op["open_supply_id"] = ""
 	op["open_ticks_left"] = 0
-	var from := Vector2i(int(op["x"]), int(op["y"]))
-	var avoid := _occupied_cells(op_id)
-	var path: Array = SimPathfinder.find_path_avoiding(grid, from, goal, avoid)
+	var path: Array = compute_path(op_id, goal)
 	if path.is_empty():
 		return false
 	# path[0] is current cell; queue the rest.

@@ -156,6 +156,13 @@ var _detonate_press_ms: int = 0
 var _detonate_holding: bool = false
 var _restart_confirm_armed: bool = false
 var detonate_now_ms_fn: Callable = Callable() ## test clock
+## PLAY-UX PR-6: scout path preview → confirm.
+var preview_path: Array = [] ## Vector2i full A* path
+var scout_danger_cells: Array = [] ## Vector2i
+var pending_scout_goal: Vector2i = Vector2i(-1, -1)
+var scout_dest_flag: Vector2i = Vector2i(-1, -1) ## sticky until arrival
+var scout_preview_cost_s: float = 0.0
+var _scout_hover_from_mouse: bool = false ## desktop hover preview active
 
 
 func _ready() -> void:
@@ -180,6 +187,8 @@ func _ready() -> void:
 	map_view.ground_drag_started.connect(_on_ground_drag_started)
 	map_view.ground_drag_moved.connect(_on_ground_drag_moved)
 	map_view.ground_drag_ended.connect(_on_ground_drag_ended)
+	map_view.cell_hovered.connect(_on_cell_hovered)
+	map_view.cell_long_pressed.connect(_on_cell_long_pressed)
 	map_view.unit_hit_radius_cells = 0.8
 	_build_portrait_strip()
 	_build_setup_tool_bars()
@@ -1048,7 +1057,7 @@ func _refresh_thumb_visibility() -> void:
 	if btn_thumb_start:
 		btn_thumb_start.visible = setup
 	if btn_thumb_pause:
-		btn_thumb_pause.visible = wait
+		btn_thumb_pause.visible = scout or wait
 	if btn_thumb_speed:
 		btn_thumb_speed.visible = wait
 	if btn_thumb_detonate:
@@ -1219,11 +1228,14 @@ func _toggle_pause() -> void:
 	if btn_thumb_pause:
 		btn_thumb_pause.text = t
 	if pause_menu:
+		# Restart confirm only in WAIT; scout pause is timing-only.
 		pause_menu.visible = paused and ui_phase == UiPhase.WAIT
 		if not paused:
 			_restart_confirm_armed = false
 			if btn_pause_confirm:
 				btn_pause_confirm.visible = false
+	if ui_phase == UiPhase.SCOUT:
+		label_info.text = "侦察已暂停 · 仍可点格预览/下令" if paused else "侦察继续"
 
 
 func _cycle_speed() -> void:
@@ -1342,17 +1354,136 @@ func _on_scout_cell_tapped(cell: Vector2i) -> void:
 	for op in scout.operators:
 		if int(op["x"]) == cell.x and int(op["y"]) == cell.y:
 			selected_op_id = str(op["id"])
-			label_info.text = "选中 %s · 再点格行走" % op_display_names.get(selected_op_id, selected_op_id)
+			_clear_scout_preview()
+			label_info.text = "选中 %s · 点格预览路径，再点确认" % op_display_names.get(selected_op_id, selected_op_id)
 			_push_map_snapshot()
 			return
 	if selected_op_id == "":
 		label_info.text = "请先点选一名队员"
 		return
+	# Desktop mouse: hover already set preview → click confirms immediately.
+	if _scout_hover_from_mouse and pending_scout_goal == cell and not preview_path.is_empty():
+		_confirm_scout_move(cell)
+		return
+	# Touch: first tap = preview; second tap same cell = confirm.
+	if pending_scout_goal == cell and not preview_path.is_empty():
+		_confirm_scout_move(cell)
+		return
+	_set_scout_preview(cell)
+	_push_map_snapshot()
+
+
+func _set_scout_preview(cell: Vector2i) -> void:
+	if scout == null or selected_op_id == "":
+		return
+	var path: Array = scout.compute_path(selected_op_id, cell)
+	if path.is_empty():
+		preview_path = []
+		scout_danger_cells = []
+		pending_scout_goal = Vector2i(-1, -1)
+		scout_preview_cost_s = 0.0
+		label_info.text = "无法到达 (%d,%d)" % [cell.x, cell.y]
+		return
+	preview_path = path
+	pending_scout_goal = cell
+	scout_dest_flag = cell
+	var steps := maxi(0, path.size() - 1)
+	scout_preview_cost_s = float(steps) * float(scout.move_ticks_per_cell()) * SimConstants.DT_S
+	scout_danger_cells = []
+	for p in path:
+		var c: Vector2i = p
+		var tier: String = str(grid.tier_at(float(c.x), float(c.y)))
+		if scout.is_cell_watched(float(c.x), float(c.y), tier):
+			scout_danger_cells.append(c)
+	var risk := " · 被看见风险" if not scout_danger_cells.is_empty() else ""
+	label_info.text = "预览 (%d,%d) · 耗时 %.0fs%s · 再点确认 / ✓" % [
+		cell.x, cell.y, scout_preview_cost_s, risk
+	]
+
+
+func _confirm_scout_move(cell: Vector2i) -> void:
+	if scout == null or selected_op_id == "":
+		return
 	if scout.request_move(selected_op_id, cell):
-		label_info.text = "%s 前往 (%d,%d)" % [op_display_names.get(selected_op_id, "队员"), cell.x, cell.y]
+		scout_dest_flag = cell
+		label_info.text = "%s 前往 (%d,%d) · %.0fs" % [
+			op_display_names.get(selected_op_id, "队员"), cell.x, cell.y, scout_preview_cost_s
+		]
+		preview_path = []
+		scout_danger_cells = []
+		pending_scout_goal = Vector2i(-1, -1)
+		_scout_hover_from_mouse = false
 	else:
 		label_info.text = "无法到达 (%d,%d)" % [cell.x, cell.y]
 	_push_map_snapshot()
+
+
+func _clear_scout_preview() -> void:
+	preview_path = []
+	scout_danger_cells = []
+	pending_scout_goal = Vector2i(-1, -1)
+	scout_preview_cost_s = 0.0
+	_scout_hover_from_mouse = false
+	# Keep dest flag until unit arrives (cleared in _process).
+
+
+func _on_cell_hovered(cell: Vector2i) -> void:
+	## Desktop hover preview during scout (does not commit path).
+	if ui_phase != UiPhase.SCOUT or scout == null or scout.is_finished():
+		return
+	if selected_op_id == "":
+		return
+	# Don't hover-preview on own unit cell.
+	for op in scout.operators:
+		if int(op["x"]) == cell.x and int(op["y"]) == cell.y:
+			return
+	_scout_hover_from_mouse = true
+	_set_scout_preview(cell)
+	_push_map_snapshot()
+
+
+func _on_cell_long_pressed(cell: Vector2i) -> void:
+	## PR-6: long-press = who sees here (replaces fake preview button).
+	preview_cell = cell
+	if ui_phase == UiPhase.SCOUT and scout != null:
+		preview_seers = _preview_who_sees_level_observers(cell)
+	elif ui_phase == UiPhase.SETUP:
+		preview_seers = _preview_who_sees(cell)
+	elif ui_phase == UiPhase.WAIT and sim != null:
+		preview_seers = sim.observers_seeing_cell(
+			float(cell.x), float(cell.y), grid.tier_at(float(cell.x), float(cell.y))
+		)
+	else:
+		return
+	label_info.text = "格 (%d,%d) · 可见观察者 %d" % [cell.x, cell.y, preview_seers.size()]
+	_push_map_snapshot()
+
+
+func _preview_who_sees_level_observers(cell: Vector2i) -> Array:
+	## Scout-phase who-sees without NightSim operators (sentries/patrols only).
+	if scout == null:
+		return []
+	var out: Array = []
+	var ttier: String = str(grid.tier_at(float(cell.x), float(cell.y)))
+	for s in scout.sentries:
+		if _observer_dict_sees(s, float(s["x"]), float(s["y"]), str(s.get("tier", "ground")), float(cell.x), float(cell.y), ttier):
+			out.append(s)
+	for p in scout.patrols:
+		if _observer_dict_sees(p, float(p["x"]), float(p["y"]), "ground", float(cell.x), float(cell.y), ttier):
+			out.append(p)
+	return out
+
+
+func _observer_dict_sees(obs: Dictionary, ox: float, oy: float, otier: String, tx: float, ty: float, ttier: String) -> bool:
+	var cone: Dictionary = obs.get("cone", {})
+	var facing := float(cone.get("facing_deg", 0))
+	var half := float(cone.get("angle_deg", 50)) * 0.5
+	var rng := float(cone.get("range_cells", 8))
+	if ttier == "high":
+		rng *= SimConstants.SILHOUETTE_MUL
+	if not SimGeom.in_cone(ox, oy, facing, half, rng, tx, ty):
+		return false
+	return grid.los_clear(ox, oy, otier, tx, ty, ttier)
 
 
 func _refresh_scout_hud() -> void:
@@ -1744,6 +1875,7 @@ func _process(delta: float) -> void:
 			_accum_s -= dt
 			scout.advance_one_tick()
 			gathered_kit = scout.kit_snapshot()
+		_clear_dest_flag_if_arrived()
 		_push_map_snapshot()
 		_refresh_scout_hud()
 		if scout.is_finished():
@@ -2182,7 +2314,24 @@ func _push_map_snapshot() -> void:
 		"supply_states": supply_states,
 		"searched_bodies": searched_bodies,
 		"body_search_enabled": body_search_enabled and ui_phase == UiPhase.RESULT,
+		"scout_preview_path": preview_path if ui_phase == UiPhase.SCOUT else [],
+		"scout_danger_cells": scout_danger_cells if ui_phase == UiPhase.SCOUT else [],
+		"scout_dest_flag": scout_dest_flag if ui_phase == UiPhase.SCOUT else Vector2i(-1, -1),
+		"scout_confirm_cell": pending_scout_goal if ui_phase == UiPhase.SCOUT else Vector2i(-1, -1),
+		"scout_preview_cost_s": scout_preview_cost_s if ui_phase == UiPhase.SCOUT else 0.0,
 	})
+
+
+func _clear_dest_flag_if_arrived() -> void:
+	if scout == null or scout_dest_flag.x < 0 or selected_op_id == "":
+		return
+	for op in scout.operators:
+		if str(op["id"]) != selected_op_id:
+			continue
+		var path: Array = op.get("path", [])
+		if path.is_empty() and int(op["x"]) == scout_dest_flag.x and int(op["y"]) == scout_dest_flag.y:
+			scout_dest_flag = Vector2i(-1, -1)
+		return
 
 
 func _auto_run_plan_b() -> void:

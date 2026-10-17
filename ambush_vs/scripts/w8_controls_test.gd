@@ -28,6 +28,7 @@ func _run_all() -> void:
 	await _test_wait_reaim_one_order()
 	await _test_setup_toolbar_and_trip()
 	await _test_hud_touch_sizing()
+	await _test_scout_path_preview()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -454,3 +455,76 @@ func _collect_buttons(n: Node, out: Array) -> void:
 			out.append(b)
 	for c in n.get_children():
 		_collect_buttons(c, out)
+
+
+func _test_scout_path_preview() -> void:
+	## PR-6: preview → confirm; pause freezes tick; hover preview + click confirms.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "scout preview scene err=%s" % err)
+	for _i in range(240):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.scout == null or scene.map_view == null:
+			continue
+		if scene.ui_phase != scene.UiPhase.SCOUT:
+			continue
+		var scout = scene.scout
+		var ops: Array = scout.operators
+		_assert(ops.size() >= 1, "scout has ops")
+		var oid := str(ops[0]["id"])
+		scene.selected_op_id = oid
+		scene.map_view.selected_op_id = oid
+		# Goal: walkable cell near entry (11,2) typically.
+		var goal := Vector2i(11, 2)
+		if not scene.grid.walkable(goal.x, goal.y):
+			goal = Vector2i(10, 2)
+		scene._scout_hover_from_mouse = false
+		scene._on_scout_cell_tapped(goal)
+		_assert(scene.preview_path.size() >= 1, "preview_path set")
+		_assert(scene.pending_scout_goal == goal, "pending goal")
+		var end: Vector2i = scene.preview_path[scene.preview_path.size() - 1]
+		_assert(end == goal, "preview ends at goal")
+		var path0: Array = ops[0].get("path", [])
+		_assert(path0.is_empty(), "op.path empty after first tap")
+		# Second tap confirms.
+		scene._on_scout_cell_tapped(goal)
+		var path1: Array = ops[0].get("path", [])
+		_assert(not path1.is_empty(), "op.path set after confirm")
+		# Other cell updates preview without committing (clear path first).
+		ops[0]["path"] = []
+		ops[0]["move_ticks_left"] = 0
+		scene._clear_scout_preview()
+		var goal2 := Vector2i(12, 2)
+		if not scene.grid.walkable(goal2.x, goal2.y):
+			goal2 = Vector2i(9, 2)
+		scene._on_scout_cell_tapped(goal2)
+		_assert(scene.pending_scout_goal == goal2, "preview updates to other cell")
+		_assert((ops[0].get("path", []) as Array).is_empty(), "path still empty on retarget")
+		# Pause freezes tick; orders still allowed.
+		var tick0: int = int(scout.tick)
+		scene.paused = true
+		for _f in range(60):
+			await process_frame
+		_assert(int(scout.tick) == tick0, "paused scout.tick unchanged got=%d want=%d" % [scout.tick, tick0])
+		scene._on_scout_cell_tapped(goal2) ## confirm while paused
+		_assert(not (ops[0].get("path", []) as Array).is_empty(), "can order while paused")
+		# Hover preview + mouse click confirms.
+		ops[0]["path"] = []
+		ops[0]["move_ticks_left"] = 0
+		scene._clear_scout_preview()
+		scene.paused = true
+		var goal3 := Vector2i(11, 3)
+		if not scene.grid.walkable(goal3.x, goal3.y):
+			goal3 = goal
+		scene._on_cell_hovered(goal3)
+		_assert(scene.preview_path.size() >= 1, "hover sets preview_path")
+		_assert((ops[0].get("path", []) as Array).is_empty(), "hover does not commit")
+		scene._on_scout_cell_tapped(goal3)
+		_assert(not (ops[0].get("path", []) as Array).is_empty(), "click after hover commits")
+		_assert(scene.btn_thumb_pause != null and scene.btn_thumb_pause.visible, "scout pause visible")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "scout preview scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
