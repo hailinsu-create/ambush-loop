@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS ADR v1 同步 2026-10-17](VS_ADR_V1_SYNC_20261017.md) | **当前 VS 规则入口**：TERMS + 三 ADR 已采纳 v1 + 院子纸面 v1.1 + 资产生成门禁。仅文档；在 `vs/core` / PR #54。 |
+| [VS W2 模拟核心 v0 2026-10-17](VS_W2_SIM_V0_20261017.md) | **当前 VS 执行入口**：`ambush_vs/sim/` headless 一夜模拟；院子 A/B 金标；隔离测试绿。在 `vs/core` / PR #54，**未合入 main**。 |
+| [VS ADR v1 同步 2026-10-17](VS_ADR_V1_SYNC_20261017.md) | VS 规则文档：TERMS + 三 ADR 已采纳 v1 + 院子纸面 v1.1 + 资产生成门禁。已被 W2 实现消费。 |
 | [开发规划 2026-10-16](DEV_PLAN_20261016.md) | VS 竖切开发规划（Notion 同源）；A1 仓库策略。执行骨架见 [VS A1 记录](VS_A1_SKELETON_20261016.md)；代码在分支 `vs/core`，**未合入 main**。ADR 正文以 `ambush_vs/docs/adr/` 为准（已采纳 v1 覆盖 PR #53 草案）。 |
 | [代码审计与优化记录](AMBUSH_CODE_AUDIT_20261002.md) | 寻路优化、504 条路径等价/311 个最短代价检查、完整六夜冒烟及实际截图已完成；代码 [PR #11](https://github.com/hailinsu-create/ambush-loop/pull/11) 与审计 [PR #12](https://github.com/hailinsu-create/ambush-loop/pull/12) 已创建，均未合并。记录其余优化建议；不替代设计 v2 或 M0 验收。 |
 | [游戏设计规划 v2](AMBUSH_DESIGN_V2_20260928.md) | 当前开发设计基线：玩法、高点规则、六关、视觉、手机操作、M0–M5。用户已同意以此推进；具体设计仍须逐切片实现、验证。 |
