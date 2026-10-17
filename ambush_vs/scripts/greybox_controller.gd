@@ -1167,6 +1167,8 @@ func _cancel_aim_drag() -> void:
 		map_view._dragging_op = ""
 		map_view.aim_preview_op = ""
 		map_view.aim_preview_deg = NAN
+		map_view.aim_snap_label = ""
+		map_view._set_aim_magnifier(false)
 		map_view.queue_redraw()
 	label_info.text = "转向已取消"
 	_push_map_snapshot()
@@ -2669,6 +2671,8 @@ func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
 	if world_dir.length() < 8.0:
 		return
 	var facing := rad_to_deg(atan2(-world_dir.y, world_dir.x))
+	if map_view and not is_nan(map_view.aim_preview_deg):
+		facing = float(map_view.aim_preview_deg)
 	if ui_phase == UiPhase.SETUP:
 		# Live facing while aiming near unit; place ghost when over a cell.
 		_last_unit_drag_cell = _cell
@@ -2683,11 +2687,20 @@ func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
 		return
 	if ui_phase == UiPhase.WAIT and sim != null and not sim.plan_locked:
 		# Preview cost text only — do NOT call request_operator_facing here.
-		var delta := _facing_delta_deg(float(_sim_op(selected_op_id).get("facing_deg", 0.0)), facing)
+		## Prefer map snapped preview when aim-dragging.
+		var preview := facing
+		var snap_lbl := ""
+		if map_view and not is_nan(map_view.aim_preview_deg):
+			preview = float(map_view.aim_preview_deg)
+			snap_lbl = str(map_view.aim_snap_label)
+		var delta := _facing_delta_deg(float(_sim_op(selected_op_id).get("facing_deg", 0.0)), preview)
 		var steps := int(ceil(delta / 45.0 - 1e-9))
 		var cost_s := float(steps) * SimConstants.TURN_COST_S_PER_45
 		var dname := str(op_display_names.get(selected_op_id, "队员"))
-		label_info.text = "%s 预览转向 %.0f° · 约 %.1fs · 松手确认 / 拖回取消" % [dname, delta, cost_s]
+		if snap_lbl != "":
+			label_info.text = "%s 吸附「%s」%.0f° · 约 %.1fs · 松手确认" % [dname, snap_lbl, preview, cost_s]
+		else:
+			label_info.text = "%s 预览转向 %.0f° · 约 %.1fs · 松手确认 / 拖回取消" % [dname, delta, cost_s]
 		_push_map_snapshot()
 
 
@@ -2718,8 +2731,8 @@ func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, c
 		label_info.text = "转向已取消"
 		_push_map_snapshot()
 		return
-	# ONE turn order on release. Integer degrees avoid ceil(90/45) float edge → 3 steps.
-	sim.request_operator_facing(op_id, roundf(preview_deg))
+	# ONE turn order on release. preview_deg already snap-quantized by the map.
+	sim.request_operator_facing(op_id, float(preview_deg))
 	_facing_submit_count += 1
 	_facing_before_aim = NAN
 	var op := _sim_op(op_id)
@@ -2728,7 +2741,7 @@ func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, c
 	if left > 0:
 		label_info.text = "%s 转向中 · %.1fs · 不能开火" % [dname, float(left) * SimConstants.DT_S]
 	else:
-		label_info.text = "%s 朝向已更新" % dname
+		label_info.text = "%s 朝向已更新 · %.0f°" % [dname, float(preview_deg)]
 	_refresh_portrait_strip()
 	_push_map_snapshot()
 

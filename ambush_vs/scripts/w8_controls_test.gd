@@ -26,6 +26,7 @@ func _run_all() -> void:
 	await _test_map_router_wired()
 	await _test_selection_hit_and_portraits()
 	await _test_wait_reaim_one_order()
+	await _test_aim_snap_and_magnifier()
 	await _test_setup_toolbar_and_trip()
 	await _test_hud_touch_sizing()
 	await _test_scout_path_preview()
@@ -319,6 +320,86 @@ func _test_setup_toolbar_and_trip() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 
 
+func _test_aim_snap_and_magnifier() -> void:
+	## P0-2: AimSnap 5° step + landmark snap; magnifier show/hide; one facing submit.
+	const AimSnap := preload("res://sim/aim_snap.gd")
+	## Pure snap math (no scene). 70° from (13,7) is far from 巷口/门/路口 → 5° step.
+	var step := AimSnap.snap_facing(72.0, 13.0, 7.0, {})
+	_assert(not bool(step.get("snapped", true)), "far-from-landmark uses step path snapped=%s label=%s" % [
+		step.get("snapped"), step.get("label")])
+	_assert(is_equal_approx(float(step["deg"]), 70.0), "5° step 72°→70° got=%s" % step.get("deg"))
+	## From plan-A Kar cell toward 巷口 (~11°) → snap label 巷口.
+	var alley := AimSnap.snap_facing(12.0, 13.0, 7.0, {})
+	_assert(bool(alley.get("snapped", false)), "near 巷口 snaps")
+	_assert(str(alley.get("label", "")) == "巷口", "snap label 巷口 got=%s" % alley.get("label"))
+	_assert(str(alley.get("label", "")).find("高") < 0 and str(alley.get("label", "")).find("barn") < 0,
+		"snap label never high-slot hint")
+
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "aim-snap scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null:
+			continue
+		scene.apply_layout_size(1280, 720)
+		await process_frame
+		scene._load_preset("A")
+		scene._start_wait()
+		await process_frame
+		if scene.sim == null:
+			continue
+		scene.paused = true
+		var map = scene.map_view
+		map.reset_camera()
+		map._fit_cell_px()
+		await process_frame
+		var oid := str(scene.sim.operators[1]["id"]) ## Kar @ (13,7) → 巷口
+		var op = scene.sim.operators[1]
+		var facing0 := float(op["facing_deg"])
+		scene.selected_op_id = oid
+		map.selected_op_id = oid
+		scene._facing_submit_count = 0
+		map.aim_magnifier_show_count = 0
+		map.aim_magnifier_hide_count = 0
+		var origin: Vector2 = map.cell_to_screen(float(op["x"]), float(op["y"]))
+		var drag_px: float = maxf(80.0, map.cell_px * 2.5)
+		## Drag toward ~11° (巷口) — should snap + show magnifier.
+		map.inject_input(_touch(origin, true))
+		_assert(not map.aim_magnifier_visible, "magnifier hidden before drag moves")
+		var alley_ang := deg_to_rad(11.0)
+		for s in range(8):
+			var p := origin + Vector2(cos(alley_ang), -sin(alley_ang)) * (drag_px * float(s + 1) / 8.0)
+			map.gesture.inject_move(p)
+		_assert(map.aim_magnifier_visible, "magnifier visible while aiming")
+		_assert(map.aim_magnifier_show_count >= 1, "magnifier show counted got=%d" % map.aim_magnifier_show_count)
+		_assert(str(map.aim_snap_label) != "", "snap label set mid-drag got='%s'" % map.aim_snap_label)
+		_assert(str(map.aim_snap_label).find("高") < 0, "snap label neutral mid-drag")
+		_assert(is_equal_approx(float(op["facing_deg"]), facing0), "facing unchanged mid-aim-snap")
+		_assert(scene._facing_submit_count == 0, "no submit mid-drag")
+		var end := origin + Vector2(cos(alley_ang), -sin(alley_ang)) * drag_px
+		map.inject_input(_touch(end, false))
+		_assert(scene._facing_submit_count == 1, "release submits facing once got=%d" % scene._facing_submit_count)
+		_assert(not map.aim_magnifier_visible, "magnifier hides on release")
+		_assert(map.aim_magnifier_hide_count >= 1, "magnifier hide counted")
+		## Second drag → cancel by returning near origin: still only one total submit.
+		var submits_after: int = int(scene._facing_submit_count)
+		var f2 := float(op["facing_deg"])
+		map.inject_input(_touch(origin, true))
+		map.gesture.inject_move(origin + Vector2(drag_px, 0))
+		_assert(map.aim_magnifier_visible, "magnifier returns on second drag")
+		map.inject_input(_touch(origin + Vector2(5, 0), false))
+		_assert(int(scene._facing_submit_count) == submits_after, "cancel does not submit again")
+		_assert(is_equal_approx(float(op["facing_deg"]), f2), "cancel keeps facing")
+		_assert(not map.aim_magnifier_visible, "magnifier hides on cancel")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "aim-snap scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
 func _test_wait_reaim_one_order() -> void:
 	## Drag 90° with many motions → exactly one request_operator_facing.
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
@@ -343,8 +424,9 @@ func _test_wait_reaim_one_order() -> void:
 		map.reset_camera()
 		map._fit_cell_px()
 		await process_frame
-		var oid := str(scene.sim.operators[1]["id"]) ## Kar
-		var op = scene.sim.operators[1]
+		## MG @ (5,9) facing 0°: 90° target is far from landmarks so snap stays on 5° step (=90°).
+		var oid := str(scene.sim.operators[0]["id"])
+		var op = scene.sim.operators[0]
 		var facing0 := float(op["facing_deg"])
 		scene.selected_op_id = oid
 		map.selected_op_id = oid
