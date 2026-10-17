@@ -55,6 +55,11 @@ jobs:
           set -euo pipefail
           ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w4_scout_test.gd
 
+      - name: Isolated W5 combat FX tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w5_combat_fx_test.gd
+
       - name: Direct entry rejected (expect 91)
         run: |
           set -euo pipefail

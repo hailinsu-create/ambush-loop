@@ -54,6 +54,17 @@ var g2_assets = null
 var sfx = null
 var g3_assets = null
 
+## PLAY-3 combat presentation (view-only; sim untouched).
+var _log_cursor: int = 0
+var _pending_result: bool = false
+var _result_delay_left: float = 0.0
+var _slow_mo_left: float = 0.0
+var _fx_fires_total: int = 0
+var _fx_kills_total: int = 0
+const RESULT_DELAY_AFTER_KILL_S := 2.0
+const SLOW_MO_S := 0.35
+const SLOW_MO_MUL := 0.28
+
 ## PLAY-1 setup state (view/controller only; not consumed by sim).
 var place_mode: PlaceMode = PlaceMode.NONE
 var op_placed: Dictionary = {} ## op_id → bool
@@ -686,6 +697,15 @@ func _start_wait() -> void:
 	_accum_s = 0.0
 	_last_alert = str(sim.alert)
 	_detonate_sfx_played = false
+	_log_cursor = 0
+	_pending_result = false
+	_result_delay_left = 0.0
+	_slow_mo_left = 0.0
+	_fx_fires_total = 0
+	_fx_kills_total = 0
+	if map_view and map_view.combat_fx:
+		map_view.combat_fx.reset()
+		map_view.shake_offset = Vector2.ZERO
 	btn_speed.text = "倍速 1×"
 	_set_ui_phase(UiPhase.WAIT)
 	_push_map_snapshot()
@@ -920,6 +940,11 @@ func scripted_place_cross_marker(ax: int, ay: int, bx: int, by: int) -> void:
 
 
 func _process(delta: float) -> void:
+	if sfx:
+		sfx.tick_gates(delta)
+	if map_view and map_view.combat_fx:
+		map_view.combat_fx.advance(delta)
+		_update_shake(delta)
 	if ui_phase == UiPhase.SCOUT and scout != null and not scout.is_finished() and not paused:
 		_accum_s += delta * speed_mul
 		var dt := SimConstants.DT_S
@@ -932,19 +957,100 @@ func _process(delta: float) -> void:
 		if scout.is_finished():
 			begin_setup_from_scout()
 		return
+	# Hold result panel until delay after last kill (PLAY-3).
+	if _pending_result:
+		_result_delay_left -= delta
+		_push_map_snapshot()
+		if _result_delay_left <= 0.0:
+			_pending_result = false
+			_show_result()
+		return
 	if ui_phase != UiPhase.WAIT or sim == null or paused:
 		return
-	_accum_s += delta * speed_mul
+	if _slow_mo_left > 0.0:
+		_slow_mo_left -= delta
+	var mul := speed_mul * (SLOW_MO_MUL if _slow_mo_left > 0.0 else 1.0)
+	_accum_s += delta * mul
 	var dt2 := SimConstants.DT_S
 	while _accum_s >= dt2 and not sim.is_finished():
 		_accum_s -= dt2
 		sim.advance_one_tick()
+		_consume_sim_log()
 		if sim.is_finished():
 			break
 	_push_map_snapshot()
 	_update_wait_labels()
-	if sim.is_finished():
-		_show_result()
+	if sim.is_finished() and not _pending_result:
+		_pending_result = true
+		_result_delay_left = RESULT_DELAY_AFTER_KILL_S
+		label_info.text = "清场…结算将在 %.0f 秒后显示" % RESULT_DELAY_AFTER_KILL_S
+
+
+func _consume_sim_log() -> void:
+	## Feed new NightSim log events into combat FX + per-shot audio.
+	if sim == null or map_view == null or map_view.combat_fx == null:
+		return
+	var events: Array = sim.log.events
+	if _log_cursor >= events.size():
+		return
+	var slice: Array = events.slice(_log_cursor)
+	_log_cursor = events.size()
+	var got: Dictionary = map_view.combat_fx.consume_events(slice, sim.enemies, sim.operators)
+	_fx_fires_total += int(got.get("fires", 0))
+	_fx_kills_total += int(got.get("kills", 0))
+	for ev in slice:
+		var t := str(ev.get("type", ""))
+		match t:
+			"fire":
+				if sfx:
+					sfx.play_weapon(str(ev.get("weapon_id", "kar98k")))
+			"hit":
+				if sfx:
+					sfx.play_hit()
+			"kill":
+				if sfx:
+					sfx.play_body_drop()
+				# Final-kill slow-mo when no living entered enemies remain.
+				if map_view.combat_fx.living_enemy_count(sim.enemies) == 0:
+					_slow_mo_left = SLOW_MO_S
+			"mine_detonate":
+				if sfx:
+					sfx.play_weapon("mine")
+			"grenade_throw":
+				if sfx:
+					sfx.play_grenade_throw()
+			"grenade_blast":
+				if sfx:
+					sfx.play_weapon("grenade")
+			_:
+				pass
+	if int(got.get("mines", 0)) > 0 or int(got.get("grenade_blasts", 0)) > 0:
+		# Screen shake driven by combat_fx.shake_*
+		pass
+	map_view.queue_redraw()
+
+
+func _update_shake(delta: float) -> void:
+	if map_view == null or map_view.combat_fx == null:
+		return
+	var fx = map_view.combat_fx
+	if fx.shake_time_left > 0:
+		fx.shake_time_left -= 1
+		var amp := float(fx.shake_amp) * (float(fx.shake_time_left) / 10.0)
+		map_view.shake_offset = Vector2(randf_range(-amp, amp), randf_range(-amp, amp))
+	else:
+		map_view.shake_offset = Vector2.ZERO
+		fx.shake_amp = 0.0
+
+
+func combat_fx_stats() -> Dictionary:
+	## Test hook: fires/kills consumed by the view layer.
+	if map_view == null or map_view.combat_fx == null:
+		return {"fires": _fx_fires_total, "kills": _fx_kills_total, "bodies": 0}
+	var st: Dictionary = map_view.combat_fx.stats()
+	st["fires_controller"] = _fx_fires_total
+	st["kills_controller"] = _fx_kills_total
+	return st
 
 
 func _update_wait_labels() -> void:
@@ -959,7 +1065,7 @@ func _update_wait_labels() -> void:
 
 
 func _sync_alert_sfx() -> void:
-	## Known G1 gap: wire four alert-tier cues into greybox on change.
+	## Alert tier change: g2 alert cue + enemy shout (art/audio_v2/alarm).
 	if sim == null or sfx == null:
 		return
 	var a := str(sim.alert)
@@ -969,20 +1075,13 @@ func _sync_alert_sfx() -> void:
 
 
 func _maybe_play_detonate_sfx() -> void:
+	## Sting only — per-shot weapon audio comes from fire events (PLAY-3).
 	if sim == null or sfx == null or _detonate_sfx_played:
 		return
 	if sim.detonate_tick < 0 or str(sim.trigger_used) == "":
 		return
 	_detonate_sfx_played = true
 	sfx.play("ambush_trigger", -2.0)
-	var trig := str(sim.trigger_used)
-	if trig == "mine_detonate":
-		sfx.play_weapon("mine")
-	else:
-		for op in sim.operators:
-			if op.get("alive", true):
-				sfx.play_weapon(str(op.get("weapon_id", "kar98k")))
-				break
 
 
 func _alert_zh(a: String) -> String:
@@ -1151,23 +1250,57 @@ func _auto_run_plan_a() -> void:
 	_try_capture("setup")
 	_start_wait()
 	paused = true ## prevent _process double-ticking during auto
+	var captured_trigger := false
+	var captured_midfight := false
 	while sim != null and not sim.is_finished():
 		sim.advance_one_tick()
+		_consume_sim_log()
+		if map_view and map_view.combat_fx:
+			map_view.combat_fx.advance(SimConstants.DT_S)
 		if sim.tick == 140:
 			_push_map_snapshot()
 			await get_tree().process_frame
 			await get_tree().process_frame
 			_try_capture("wait")
+		# Trigger moment: a few ticks after detonate with tracers live.
+		if not captured_trigger and sim.detonate_tick >= 0 and sim.tick >= sim.detonate_tick + 2:
+			_push_map_snapshot()
+			await get_tree().process_frame
+			await get_tree().process_frame
+			_try_capture("trigger")
+			captured_trigger = true
+		# Mid-fight: after some kills, still more living.
+		if (
+			not captured_midfight
+			and captured_trigger
+			and map_view.combat_fx != null
+			and map_view.combat_fx.kills_seen >= 2
+			and map_view.combat_fx.living_enemy_count(sim.enemies) > 0
+		):
+			_push_map_snapshot()
+			await get_tree().process_frame
+			await get_tree().process_frame
+			_try_capture("midfight")
+			captured_midfight = true
+	# Bodies on map before result panel.
+	_consume_sim_log()
 	_push_map_snapshot()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_try_capture("bodies")
 	_show_result()
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_try_capture("result")
+	var fxst := combat_fx_stats()
 	print(
 		"GREYBOX_AUTO_DONE detonate_tick=", last_summary.get("detonate_tick"),
 		" standard_ambush=", last_summary.get("standard_ambush"),
 		" outcome=", last_summary.get("outcome"),
-		" has_mg42=", is_mg42_unlocked()
+		" has_mg42=", is_mg42_unlocked(),
+		" fx_fires=", fxst.get("fires", 0),
+		" fx_kills=", fxst.get("kills", 0),
+		" fx_bodies=", fxst.get("bodies", 0)
 	)
 	if _capture_path != "" or _headless_auto:
 		await get_tree().process_frame

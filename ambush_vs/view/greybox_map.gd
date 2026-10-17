@@ -8,6 +8,7 @@ const SimConstants := preload("res://sim/constants.gd")
 const G1AssetsScript := preload("res://view/g1_assets.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
 const G3AssetsScript := preload("res://view/g3_assets.gd")
+const CombatFxScript := preload("res://view/combat_fx.gd")
 
 signal cell_tapped(cell: Vector2i)
 signal cell_dragged(cell: Vector2i, world_dir: Vector2)
@@ -55,6 +56,8 @@ var night: bool = true
 var highlight_high_slots: bool = false ## SETUP: gold wash on high_slots
 var op_display_names: Dictionary = {} ## op_id → Chinese label (never show raw ids)
 var supply_states: Dictionary = {} ## supply_id → {revealed, opened, opening, state, x, y}
+var combat_fx = null ## GreyboxCombatFx
+var shake_offset: Vector2 = Vector2.ZERO
 var _high_cells: Dictionary = {} ## "x,y" → high_slot id
 var _out_of_yard: Dictionary = {} ## "x,y" → border-touching wall mass (not a building)
 var _inner_wall: Dictionary = {} ## "x,y" → interior low-wall cells (stone strips)
@@ -68,6 +71,7 @@ func _ready() -> void:
 	assets.load_all()
 	g2 = G2AssetsScript.new()
 	g2.load_all()
+	combat_fx = CombatFxScript.new()
 	g3 = G3AssetsScript.new()
 	g3.load_all()
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -315,7 +319,14 @@ func _draw() -> void:
 	_draw_threat_slots()
 	_draw_marker_and_mines()
 	_draw_preview()
+	# Shake is visual-only (presentation); draw world under offset.
+	if shake_offset != Vector2.ZERO:
+		draw_set_transform(shake_offset, 0.0, Vector2.ONE)
+	_draw_bodies()
 	_draw_units()
+	_draw_combat_fx()
+	if shake_offset != Vector2.ZERO:
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	_draw_alert_badge()
 
 
@@ -1590,9 +1601,98 @@ func _draw_preview() -> void:
 		draw_line(sp, tp, Color(0.4, 0.8, 1.0, 0.85), 2.0)
 
 
+func _draw_bodies() -> void:
+	## Killed enemies leave a body sprite on the map (PLAY-3).
+	if combat_fx == null:
+		return
+	var base_xform := shake_offset
+	for id in combat_fx.bodies.keys():
+		var b: Dictionary = combat_fx.bodies[id]
+		var x := float(b.get("x", 0.0))
+		var y := float(b.get("y", 0.0))
+		var facing := float(b.get("facing_deg", 0.0))
+		var age := float(b.get("age", 0.0))
+		var fall := clampf(age / CombatFxScript.BODY_FALL_S, 0.0, 1.0)
+		var p := cell_to_screen(x, y)
+		var etex: Texture2D = assets.enemy
+		if art_mode == ArtMode.G3 and g3 != null:
+			etex = g3.units.get("enemy_rifle", etex)
+		var sz := cell_px * (0.95 if art_mode == ArtMode.G3 else 0.85)
+		# Lie flat: squash + darken.
+		var rot := deg_to_rad(facing + 90.0 * fall)
+		var col := Color(0.35, 0.32, 0.30, 0.92)
+		draw_circle(p + Vector2(0, cell_px * 0.12), cell_px * 0.18, Color(0.35, 0.05, 0.05, 0.45))
+		if etex:
+			draw_set_transform(base_xform + p, rot, Vector2(1.0, 0.55 + 0.45 * (1.0 - fall)))
+			draw_texture_rect(etex, Rect2(Vector2(-sz * 0.5, -sz * 0.5), Vector2(sz, sz)), false, col)
+			draw_set_transform(base_xform, 0.0, Vector2.ONE)
+		else:
+			draw_circle(p, cell_px * 0.28, col)
+
+
+func _draw_combat_fx() -> void:
+	if combat_fx == null:
+		return
+	for tr in combat_fx.tracers:
+		var a := cell_to_screen(float(tr["x0"]), float(tr["y0"]))
+		var b := cell_to_screen(float(tr["x1"]), float(tr["y1"]))
+		var t := 1.0 - float(tr["age"]) / maxf(0.001, float(tr["life"]))
+		var wid := str(tr.get("weapon_id", ""))
+		var col := Color(1.0, 0.85, 0.35, 0.85 * t)
+		var width := 2.2
+		if wid == "mg42":
+			col = Color(1.0, 0.55, 0.18, 0.9 * t)
+			width = 3.0
+		elif wid == "mp40":
+			col = Color(1.0, 0.75, 0.4, 0.8 * t)
+			width = 2.0
+		draw_line(a, b, col, width)
+		# bright tip
+		draw_circle(b, 2.5, Color(1.0, 0.95, 0.7, 0.9 * t))
+	for fl in combat_fx.flashes:
+		var p := cell_to_screen(float(fl["x"]), float(fl["y"]))
+		var facing := float(fl.get("facing_deg", 0.0))
+		# Screen: +x east, +y south-screen = -world-y → convert facing to screen angle.
+		var ang := deg_to_rad(-facing)
+		var t := 1.0 - float(fl["age"]) / maxf(0.001, float(fl["life"]))
+		var wid := str(fl.get("weapon_id", ""))
+		var reach := cell_px * (0.55 if wid == "mg42" else 0.38)
+		var tip := p + Vector2(cos(ang), sin(ang)) * reach
+		var side := Vector2(-sin(ang), cos(ang))
+		var hw := cell_px * (0.22 if wid == "mg42" else 0.14)
+		var poly := PackedVector2Array([
+			tip,
+			p + side * hw * 0.4,
+			p - Vector2(cos(ang), sin(ang)) * cell_px * 0.08,
+			p - side * hw * 0.4,
+		])
+		var glow := Color(1.0, 0.55, 0.15, 0.75 * t) if wid == "mg42" else Color(1.0, 0.78, 0.3, 0.7 * t)
+		draw_colored_polygon(poly, glow)
+		draw_circle(tip, cell_px * 0.08, Color(1.0, 0.95, 0.75, 0.95 * t))
+	for h in combat_fx.hits:
+		var p := cell_to_screen(float(h["x"]), float(h["y"]))
+		var t := 1.0 - float(h["age"]) / maxf(0.001, float(h["life"]))
+		var r := cell_px * 0.35 * (0.5 + 0.5 * t)
+		for i in range(6):
+			var a := deg_to_rad(float(i) * 60.0 + 10.0)
+			var tip2 := p + Vector2(cos(a), sin(a)) * r
+			draw_line(p, tip2, Color(1.0, 0.9, 0.45, 0.9 * t), 1.8)
+		draw_circle(p, cell_px * 0.1, Color(1.0, 1.0, 0.85, 0.85 * t))
+	for bl in combat_fx.blasts:
+		var p := cell_to_screen(float(bl["x"]), float(bl["y"]))
+		var t := 1.0 - float(bl["age"]) / maxf(0.001, float(bl["life"]))
+		var R := cell_px * (1.6 if str(bl.get("kind", "")) == "mine" else 1.3) * (0.4 + 0.6 * t)
+		draw_circle(p, R, Color(1.0, 0.45, 0.12, 0.35 * t))
+		draw_circle(p, R * 0.55, Color(1.0, 0.85, 0.3, 0.55 * t))
+		draw_circle(p, R * 0.2, Color(1.0, 0.98, 0.9, 0.85 * t))
+
+
 func _draw_units() -> void:
 	for e in enemies:
 		if not e.get("alive", true) or not e.get("entered", false) or e.get("escaped", false):
+			continue
+		# Skip living draw if already a body (shouldn't happen) 
+		if combat_fx != null and combat_fx.bodies.has(str(e.get("id", ""))):
 			continue
 		var etex: Texture2D = assets.enemy
 		if art_mode == ArtMode.G3 and g3 != null:
@@ -1650,10 +1750,10 @@ func _draw_unit_tex(tex: Texture2D, x: float, y: float, facing_deg: float, selec
 	if art_mode == ArtMode.G3 and g3 != null and g3.drop_shadow:
 		var sh := sz * 0.95
 		draw_texture_rect(g3.drop_shadow, Rect2(p - sh * 0.5 + Vector2(3, 5), sh), false, Color(1, 1, 1, 0.85))
-	# Rotate around center: draw via transform
-	draw_set_transform(p, deg_to_rad(-facing_deg), Vector2.ONE) # screen y flip ⇒ negate angle
-	draw_texture_rect(tex, Rect2(-sz * 0.5, sz), false)
-	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+	# Rotate around center: draw via transform (restore shake_offset after).
+	draw_set_transform(shake_offset + p, deg_to_rad(-facing_deg), Vector2.ONE) # screen y flip ⇒ negate angle
+	draw_texture_rect(tex, Rect2(Vector2(-sz.x * 0.5, -sz.y * 0.5), sz), false)
+	draw_set_transform(shake_offset, 0.0, Vector2.ONE)
 	if selected and art_mode != ArtMode.G3:
 		draw_arc(p, cell_px * 0.55, 0, TAU, 24, Color(1, 1, 0.4, 0.9), 2.0)
 
