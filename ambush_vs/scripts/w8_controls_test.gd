@@ -30,6 +30,7 @@ func _run_all() -> void:
 	await _test_hud_touch_sizing()
 	await _test_scout_path_preview()
 	await _test_undo_cancel()
+	await _test_camera_zoom_pan()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -600,4 +601,67 @@ func _test_undo_cancel() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "undo scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_camera_zoom_pan() -> void:
+	## PR-8: pinch/magnify zoom, pan, round-trip cell_to_screen, wheel anchor.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "camera scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null:
+			continue
+		var map = scene.map_view
+		map.reset_camera()
+		# Simulate pinch: two touches distance ×2 → zoom≈2.
+		map._touch_points[0] = Vector2(100, 100)
+		map._touch_points[1] = Vector2(140, 100)
+		map._begin_or_update_pinch()
+		map._touch_points[1] = Vector2(180, 100) ## dist 80 = 2×40
+		map._begin_or_update_pinch()
+		_assert(is_equal_approx(map.cam_zoom, 2.0) or absf(map.cam_zoom - 2.0) < 0.05,
+			"pinch zoom≈2 got=%s" % map.cam_zoom)
+		map.reset_camera()
+		var mg := InputEventMagnifyGesture.new()
+		mg.position = Vector2(200, 200)
+		mg.factor = 1.5
+		map._handle_camera_input(mg)
+		_assert(is_equal_approx(map.cam_zoom, 1.5), "magnify 1.5 got=%s" % map.cam_zoom)
+		map.zoom_at(Vector2(200, 200), 2.0) ## → 3 clamp to 2.5
+		_assert(map.cam_zoom <= map.CAM_ZOOM_MAX + 1e-3, "zoom clamped")
+		# Round-trip after zoom+pan.
+		map.set_camera(2.0, Vector2(40, 30))
+		var ok_rt := 0
+		for cell in [Vector2i(2, 2), Vector2i(5, 9), Vector2i(10, 7), Vector2i(12, 4), Vector2i(8, 8),
+			Vector2i(3, 11), Vector2i(15, 5), Vector2i(6, 3), Vector2i(11, 2), Vector2i(4, 6)]:
+			var scr: Vector2 = map.cell_to_screen(float(cell.x), float(cell.y))
+			var back: Vector2i = map.screen_to_cell(scr)
+			if back == cell:
+				ok_rt += 1
+		_assert(ok_rt == 10, "cell_to_screen round-trip 10/10 got=%d" % ok_rt)
+		# One-finger empty pan 60px → offset changes, no tap.
+		map.reset_camera()
+		map.allow_ground_pan = true
+		map.tap_emit_count = 0
+		var pan0: Vector2 = map.cam_pan
+		var p0 := Vector2(50, 50)
+		map.inject_input(_touch(p0, true))
+		map.gesture.inject_move(p0 + Vector2(60, 0))
+		map.inject_input(_touch(p0 + Vector2(60, 0), false))
+		_assert(map.cam_pan.distance_to(pan0) > 1.0, "pan offset changed")
+		_assert(map.tap_emit_count == 0, "pan emits no tap")
+		# Wheel zoom keeps cell under cursor.
+		map.reset_camera()
+		var anchor := Vector2(220, 180)
+		var cell_before: Vector2i = map.screen_to_cell(anchor)
+		map.zoom_at(anchor, 1.25)
+		var cell_after: Vector2i = map.screen_to_cell(anchor)
+		_assert(cell_before == cell_after, "wheel zoom anchors cell %s→%s" % [cell_before, cell_after])
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "camera scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")

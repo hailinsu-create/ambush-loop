@@ -101,6 +101,20 @@ var drag_emit_count: int = 0
 var _dragging_ground: bool = false
 var _ground_start_cell: Vector2i = Vector2i(-1, -1)
 var _last_hover_cell: Vector2i = Vector2i(-999, -999)
+## PLAY-UX PR-8: camera zoom/pan (map-local pixels).
+const CAM_ZOOM_MIN := 1.0
+const CAM_ZOOM_MAX := 2.5
+var cam_zoom: float = 1.0
+var cam_pan: Vector2 = Vector2.ZERO ## top-left of view in unzoomed map px
+var _pinch_active: bool = false
+var _pinch_start_dist: float = 0.0
+var _pinch_start_zoom: float = 1.0
+var _pinch_start_mid: Vector2 = Vector2.ZERO
+var _touch_points: Dictionary = {} ## index → Vector2
+var _panning: bool = false
+var _pan_last: Vector2 = Vector2.ZERO
+var allow_ground_pan: bool = true ## controller clears when trip tool active
+var _mid_dragging: bool = false
 
 
 func _ready() -> void:
@@ -280,16 +294,73 @@ func apply_snapshot(snap: Dictionary) -> void:
 	queue_redraw()
 
 
-func cell_to_screen(x: float, y: float) -> Vector2:
-	## origin x0_west_y0_south → screen y flips.
+func _cell_center_map_px(x: float, y: float) -> Vector2:
+	## Unzoomed map pixels; origin x0_west_y0_south → y flips.
 	return Vector2((x + 0.5) * cell_px, (float(grid_h) - y - 0.5) * cell_px)
 
 
+func cell_to_screen(x: float, y: float) -> Vector2:
+	## View space (after camera). Used for input + external callers.
+	return _map_to_view(_cell_center_map_px(x, y))
+
+
+func _map_to_view(p: Vector2) -> Vector2:
+	return (p - cam_pan) * cam_zoom
+
+
+func _view_to_map(p: Vector2) -> Vector2:
+	return p / maxf(cam_zoom, 0.01) + cam_pan
+
+
 func screen_to_cell(pos: Vector2) -> Vector2i:
-	var gx := int(floor(pos.x / cell_px))
-	var gy_screen := int(floor(pos.y / cell_px))
+	var mp := _view_to_map(pos)
+	var gx := int(floor(mp.x / cell_px))
+	var gy_screen := int(floor(mp.y / cell_px))
 	var gy := grid_h - 1 - gy_screen
 	return Vector2i(gx, gy)
+
+
+func set_camera(zoom: float, pan: Vector2) -> void:
+	cam_zoom = clampf(zoom, CAM_ZOOM_MIN, CAM_ZOOM_MAX)
+	cam_pan = pan
+	_clamp_camera()
+	queue_redraw()
+
+
+func reset_camera() -> void:
+	cam_zoom = 1.0
+	cam_pan = Vector2.ZERO
+	queue_redraw()
+
+
+func center_on_cell(x: float, y: float) -> void:
+	var c := _cell_center_map_px(x, y)
+	cam_pan = c - size * 0.5 / maxf(cam_zoom, 0.01)
+	_clamp_camera()
+	queue_redraw()
+
+
+func zoom_at(view_pos: Vector2, factor: float) -> void:
+	## Keep the map point under view_pos stable while scaling zoom.
+	var before := _view_to_map(view_pos)
+	cam_zoom = clampf(cam_zoom * factor, CAM_ZOOM_MIN, CAM_ZOOM_MAX)
+	var after := _view_to_map(view_pos)
+	cam_pan += before - after
+	_clamp_camera()
+	queue_redraw()
+
+
+func _clamp_camera() -> void:
+	var map_size := Vector2(float(grid_w) * cell_px, float(grid_h) * cell_px)
+	var view_map := size / maxf(cam_zoom, 0.01)
+	if view_map.x >= map_size.x:
+		cam_pan.x = (map_size.x - view_map.x) * 0.5
+	else:
+		cam_pan.x = clampf(cam_pan.x, 0.0, map_size.x - view_map.x)
+	if view_map.y >= map_size.y:
+		cam_pan.y = (map_size.y - view_map.y) * 0.5
+	else:
+		cam_pan.y = clampf(cam_pan.y, 0.0, map_size.y - view_map.y)
 
 
 func _collect_threat_slots() -> void:
@@ -355,8 +426,14 @@ func _draw() -> void:
 	if grid == null:
 		return
 	var map_size := Vector2(grid_w * cell_px, grid_h * cell_px)
-	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(Vector2.ZERO, map_size))
+	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(Vector2.ZERO, size))
 	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
+	# Apply camera: draw in unzoomed map space under view transform.
+	var z := cam_zoom
+	var pan := cam_pan
+	draw_set_transform(-pan * z + shake_offset, 0.0, Vector2(z, z))
+	cam_zoom = 1.0
+	cam_pan = Vector2.ZERO
 	_draw_tiles()
 	match art_mode:
 		ArtMode.G3:
@@ -372,7 +449,6 @@ func _draw() -> void:
 	_draw_place_ghost()
 	_draw_trip_preview()
 	_draw_scout_path_preview()
-	# G1 readability overlays always on top of terrain/props.
 	if show_cones:
 		_draw_enemy_cones()
 	if show_sectors:
@@ -381,14 +457,12 @@ func _draw() -> void:
 	_draw_threat_slots()
 	_draw_marker_and_mines()
 	_draw_preview()
-	# Shake is visual-only (presentation); draw world under offset.
-	if shake_offset != Vector2.ZERO:
-		draw_set_transform(shake_offset, 0.0, Vector2.ONE)
 	_draw_bodies()
 	_draw_units()
 	_draw_combat_fx()
-	if shake_offset != Vector2.ZERO:
-		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+	cam_zoom = z
+	cam_pan = pan
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	_draw_alert_badge()
 
 
@@ -2082,6 +2156,9 @@ func _gui_input(event: InputEvent) -> void:
 	if gesture == null:
 		_init_gesture_router()
 	gesture.bounds = Rect2(Vector2.ZERO, size)
+	if _handle_camera_input(event):
+		accept_event()
+		return
 	# Desktop hover (no buttons): preview path without committing.
 	if event is InputEventMouseMotion:
 		var mm := event as InputEventMouseMotion
@@ -2092,6 +2169,80 @@ func _gui_input(event: InputEvent) -> void:
 				cell_hovered.emit(hc)
 	if gesture.feed(event):
 		accept_event()
+
+
+func _handle_camera_input(event: InputEvent) -> bool:
+	## Pinch, wheel, middle-drag, magnify. Returns true if consumed.
+	if event is InputEventMagnifyGesture:
+		var mg := event as InputEventMagnifyGesture
+		zoom_at(mg.position, float(mg.factor))
+		return true
+	if event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		if mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
+			zoom_at(mb.position, 1.1)
+			return true
+		if mb.button_index == MOUSE_BUTTON_WHEEL_DOWN and mb.pressed:
+			zoom_at(mb.position, 1.0 / 1.1)
+			return true
+		if mb.button_index == MOUSE_BUTTON_MIDDLE:
+			_mid_dragging = mb.pressed
+			_pan_last = mb.position
+			return true
+	if event is InputEventMouseMotion and _mid_dragging:
+		var mm := event as InputEventMouseMotion
+		var delta: Vector2 = mm.position - _pan_last
+		_pan_last = mm.position
+		cam_pan -= delta / maxf(cam_zoom, 0.01)
+		_clamp_camera()
+		queue_redraw()
+		return true
+	# Multi-touch pinch / two-finger pan.
+	if event is InputEventScreenTouch:
+		var st := event as InputEventScreenTouch
+		if st.pressed:
+			_touch_points[st.index] = st.position
+		else:
+			_touch_points.erase(st.index)
+			if _touch_points.size() < 2:
+				_pinch_active = false
+		if _touch_points.size() >= 2:
+			_begin_or_update_pinch()
+			return true
+	if event is InputEventScreenDrag:
+		var sd := event as InputEventScreenDrag
+		if _touch_points.has(sd.index):
+			_touch_points[sd.index] = sd.position
+		if _touch_points.size() >= 2:
+			_begin_or_update_pinch()
+			return true
+	return false
+
+
+func _begin_or_update_pinch() -> void:
+	var pts: Array = _touch_points.values()
+	if pts.size() < 2:
+		return
+	var a: Vector2 = pts[0]
+	var b: Vector2 = pts[1]
+	var dist := a.distance_to(b)
+	var mid := (a + b) * 0.5
+	if not _pinch_active:
+		_pinch_active = true
+		_pinch_start_dist = maxf(dist, 1.0)
+		_pinch_start_zoom = cam_zoom
+		_pinch_start_mid = mid
+		return
+	var factor := dist / _pinch_start_dist
+	var target_zoom := clampf(_pinch_start_zoom * factor, CAM_ZOOM_MIN, CAM_ZOOM_MAX)
+	# Zoom about pinch midpoint; also pan with mid movement.
+	var before := _view_to_map(_pinch_start_mid)
+	cam_zoom = target_zoom
+	var after := _view_to_map(mid)
+	cam_pan += before - after
+	_pinch_start_mid = mid
+	_clamp_camera()
+	queue_redraw()
 
 
 func _on_gesture_tapped(pos: Vector2) -> void:
@@ -2111,6 +2262,8 @@ func _on_gesture_long_pressed(pos: Vector2) -> void:
 
 
 func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
+	if _pinch_active or _touch_points.size() >= 2:
+		return
 	var hit := nearest_op_at(start_pos)
 	if hit == "":
 		hit = nearest_op_at(pos)
@@ -2118,6 +2271,7 @@ func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
 	_drag_start = start_pos
 	aim_preview_op = hit
 	_dragging_ground = false
+	_panning = false
 	if hit != "":
 		selected_op_id = hit
 		unit_selected.emit(hit)
@@ -2128,13 +2282,26 @@ func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
 	else:
 		_dragging_ground = true
 		_ground_start_cell = screen_to_cell(start_pos)
-		ground_drag_started.emit(_ground_start_cell, pos)
+		if allow_ground_pan:
+			_panning = true
+			_pan_last = start_pos
+		else:
+			ground_drag_started.emit(_ground_start_cell, pos)
 	queue_redraw()
 
 
 func _on_gesture_drag_moved(pos: Vector2, start_pos: Vector2) -> void:
+	if _pinch_active or _touch_points.size() >= 2:
+		return
 	if _dragging_ground:
 		drag_emit_count += 1
+		if _panning and allow_ground_pan:
+			var delta: Vector2 = pos - _pan_last
+			_pan_last = pos
+			cam_pan -= delta / maxf(cam_zoom, 0.01)
+			_clamp_camera()
+			queue_redraw()
+			return
 		ground_drag_moved.emit(screen_to_cell(pos), _ground_start_cell, pos)
 		queue_redraw()
 		return
@@ -2153,8 +2320,13 @@ func _on_gesture_drag_moved(pos: Vector2, start_pos: Vector2) -> void:
 
 func _on_gesture_drag_ended(pos: Vector2, start_pos: Vector2, cancelled: bool) -> void:
 	if _dragging_ground:
+		if _panning and allow_ground_pan:
+			_panning = false
+			_dragging_ground = false
+			_ground_start_cell = Vector2i(-1, -1)
+			queue_redraw()
+			return
 		var end_cell := screen_to_cell(pos)
-		# Cancel if released near press origin (router already sets cancelled).
 		if pos.distance_to(start_pos) < gesture.slop_px:
 			cancelled = true
 		ground_drag_ended.emit(end_cell, _ground_start_cell, cancelled)
@@ -2166,7 +2338,6 @@ func _on_gesture_drag_ended(pos: Vector2, start_pos: Vector2, cancelled: bool) -
 	var origin := cell_to_screen(_op_pos(op_id).x, _op_pos(op_id).y) if op_id != "" else start_pos
 	var dir := pos - origin
 	var preview := aim_preview_deg
-	# Cancel if released near the unit center (drag back).
 	if op_id != "" and pos.distance_to(origin) < gesture.slop_px:
 		cancelled = true
 	if op_id != "":
@@ -2183,10 +2354,10 @@ func nearest_op_at(screen_pos: Vector2) -> String:
 		return _op_at_cell(screen_to_cell(screen_pos))
 	var best := ""
 	var best_d := unit_hit_radius_cells + 1e-9
-	# Continuous world cell space (Y flipped vs screen).
-	var local := screen_pos - shake_offset
-	var cx := local.x / maxf(cell_px, 1.0) - 0.5
-	var cy := float(grid_h) - local.y / maxf(cell_px, 1.0) - 0.5
+	# Continuous world cell space via camera inverse.
+	var mp := _view_to_map(screen_pos - shake_offset)
+	var cx := mp.x / maxf(cell_px, 1.0) - 0.5
+	var cy := float(grid_h) - mp.y / maxf(cell_px, 1.0) - 0.5
 	for op in operators:
 		if not bool(op.get("alive", true)):
 			continue

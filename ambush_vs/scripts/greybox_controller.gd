@@ -831,6 +831,8 @@ func _on_tool_chip(tool_id: String) -> void:
 			_trip_drag_start = Vector2i(-1, -1)
 		_:
 			place_mode = PlaceMode.OP
+	if map_view:
+		map_view.allow_ground_pan = setup_tool != "trigger"
 	label_info.text = "工具：%s" % {"op": "队员", "mine": "地雷", "trigger": "触发线"}.get(tool_id, tool_id)
 	_refresh_tool_chips()
 	_update_legal_highlights()
@@ -1015,6 +1017,20 @@ func _build_undo_cancel_buttons() -> void:
 	btn_cancel.offset_bottom = 140
 	$HUD.add_child(btn_cancel)
 	btn_cancel.pressed.connect(func(): _ui_tap(); _cancel_mode())
+	var btn_fit := _mk_touch_btn("全图", 88)
+	btn_fit.name = "FitCameraButton"
+	btn_fit.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	btn_fit.offset_left = 308
+	btn_fit.offset_top = 52
+	btn_fit.offset_right = 396
+	btn_fit.offset_bottom = 140
+	$HUD.add_child(btn_fit)
+	btn_fit.pressed.connect(func():
+		_ui_tap()
+		if map_view:
+			map_view.reset_camera()
+			label_info.text = "相机：全图"
+	)
 	_refresh_undo_cancel_visibility()
 
 
@@ -1141,6 +1157,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if k.keycode == KEY_Z and k.ctrl_pressed:
 			_undo()
+			get_viewport().set_input_as_handled()
+			return
+		# PR-8: WASD pan.
+		if map_view and k.keycode in [KEY_W, KEY_A, KEY_S, KEY_D, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT]:
+			var step := 48.0 / maxf(map_view.cam_zoom, 0.01)
+			match k.keycode:
+				KEY_W, KEY_UP:
+					map_view.cam_pan.y -= step
+				KEY_S, KEY_DOWN:
+					map_view.cam_pan.y += step
+				KEY_A, KEY_LEFT:
+					map_view.cam_pan.x -= step
+				KEY_D, KEY_RIGHT:
+					map_view.cam_pan.x += step
+			map_view._clamp_camera()
+			map_view.queue_redraw()
 			get_viewport().set_input_as_handled()
 			return
 
