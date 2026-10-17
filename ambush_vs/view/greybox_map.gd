@@ -1107,12 +1107,14 @@ func _draw_g3_props() -> void:
 
 
 func _draw_g3_prop_sprite(x: int, y: int, tex: Texture2D, scale: float) -> void:
-	## Prop on ground — soft oval contact only (no dark square cell backing).
+	## Prop on ground — no cell backing; tiny soft contact under footprint only.
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
 	var sz := cell_px * scale
 	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.42), Vector2(sz, sz))
-	_draw_g3_soft_contact(dest)
-	draw_texture_rect(tex, dest, false, Color(0.92, 0.94, 1.0, 1.0))
+	if g3 != null and g3.drop_shadow:
+		var sh := Rect2(dest.position + Vector2(sz * 0.2, sz * 0.7), Vector2(sz * 0.6, sz * 0.25))
+		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.30))
+	draw_texture_rect(tex, dest, false, Color(1.0, 1.0, 1.0, 1.0))
 
 
 func _cover_at(x: int, y: int) -> bool:
@@ -1187,17 +1189,18 @@ func _draw_g3_sandbag_runs() -> void:
 
 
 func _g3_bag_night_mod() -> Color:
-	return Color(0.78, 0.82, 0.92, 1.0)
+	## Sprites are already night-graded in the pipeline; keep readable (not near-black rings).
+	return Color(1.0, 1.0, 1.02, 1.0)
 
 
 func _draw_g3_soft_contact(rect: Rect2) -> void:
-	## Soft oval under sprite only — never a filled dark cell square.
+	## Tiny soft oval under sprite — never a filled dark cell square.
 	if g3 != null and g3.drop_shadow:
 		var sh := Rect2(
-			rect.position + Vector2(rect.size.x * 0.08, rect.size.y * 0.55),
-			Vector2(rect.size.x * 0.84, rect.size.y * 0.45)
+			rect.position + Vector2(rect.size.x * 0.15, rect.size.y * 0.62),
+			Vector2(rect.size.x * 0.70, rect.size.y * 0.28)
 		)
-		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.55))
+		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.35))
 
 
 func _draw_g3_bag_pile(x: int, y: int) -> void:
@@ -1207,122 +1210,107 @@ func _draw_g3_bag_pile(x: int, y: int) -> void:
 	if pile == null:
 		return
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
-	var sz := cell_px * 0.88
-	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.35), Vector2(sz, sz))
+	var sz := cell_px * 0.92
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.30), Vector2(sz, sz))
 	_draw_g3_soft_contact(dest)
 	draw_texture_rect(pile, dest, false, _g3_bag_night_mod())
 
 
 func _draw_g3_bag_joint(x: int, y: int) -> void:
-	## L corner or T junction overlay at axis turns.
-	var n := int(_cover_at(x, y + 1)) + int(_cover_at(x, y - 1)) + int(_cover_at(x + 1, y)) + int(_cover_at(x - 1, y))
-	var tex: Texture2D
-	if n >= 3:
-		tex = _g3_bag("sandbag_junction_t")
-		if tex == null:
-			tex = _g3_bag("sandbag_corner_l")
-	else:
-		tex = _g3_bag("sandbag_corner_l")
-		if tex == null:
-			tex = _g3_bag("sandbag_junction_t")
+	## L / T only for true 2-neighbor elbows or 3-neighbor T (skip thick-pad interiors).
+	var n := _cover_at(x, y + 1)
+	var s := _cover_at(x, y - 1)
+	var e := _cover_at(x + 1, y)
+	var w := _cover_at(x - 1, y)
+	var count := int(n) + int(s) + int(e) + int(w)
+	if count != 2 and count != 3:
+		return
+	if count == 2 and not ((n or s) and (e or w)):
+		return
+	var tex: Texture2D = _g3_bag("sandbag_junction_t") if count == 3 else _g3_bag("sandbag_corner_l")
+	if tex == null:
+		tex = _g3_bag("sandbag_corner_l") if count == 3 else _g3_bag("sandbag_junction_t")
 	if tex == null:
 		return
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
-	var sz := cell_px * 0.95
+	var sz := cell_px * 0.92
 	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.28), Vector2(sz, sz))
 	_draw_g3_soft_contact(dest)
 	draw_texture_rect(tex, dest, false, _g3_bag_night_mod())
 
 
 func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> void:
-	## Tile straight S/M/L along the full run; bags span cell width; 90° for vertical.
-	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
-	if not horizontal:
-		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
-	var run_len := float(length) * cell_px
-	# Soft contact strip under the wall (not a per-cell square).
-	var sh: Rect2
-	if horizontal:
-		sh = Rect2(base + Vector2(cell_px * 0.02, cell_px * 0.55), Vector2(run_len * 0.96, cell_px * 0.38))
-	else:
-		sh = Rect2(base + Vector2(cell_px * 0.28, cell_px * 0.02), Vector2(cell_px * 0.44, run_len * 0.96))
-	_draw_g3_soft_contact(sh)
-	var along := 0.0
-	## Cross-axis thickness ≈ 0.70 cell so bags fill the cell width of the run.
-	var wall_h := cell_px * 0.70
+	## One straight tile per cell, overlapping neighbors — continuous wall, full cell span.
+	var tex: Texture2D = _g3_bag("sandbag_straight_s")
+	if tex == null:
+		tex = _g3_bag("sandbag_straight_m")
+	if tex == null:
+		tex = _g3_bag("sandbag_straight")
+	if tex == null:
+		return
 	var mod := _g3_bag_night_mod()
-	while along < run_len - 0.5:
-		var remain := run_len - along
-		var tex: Texture2D
-		if remain >= cell_px * 2.4:
-			tex = _g3_bag("sandbag_straight_l")
-		elif remain >= cell_px * 1.5:
-			tex = _g3_bag("sandbag_straight_m")
-		else:
-			tex = _g3_bag("sandbag_straight_s")
-		if tex == null:
-			tex = _g3_bag("sandbag_straight_m")
-		if tex == null:
-			tex = _g3_bag("sandbag_straight")
-		if tex == null:
-			break
-		var tw := float(tex.get_width())
-		var th := float(tex.get_height())
-		var aspect := tw / maxf(1.0, th)
-		var dest_h := wall_h
-		var dest_w := dest_h * aspect
-		# Prefer filling along the run without leaving gaps; allow mild overlap.
-		if dest_w > remain:
-			dest_w = remain
-			dest_h = clampf(dest_w / aspect, cell_px * 0.45, cell_px * 0.85)
+	var tw := float(tex.get_width())
+	var th := float(tex.get_height())
+	var aspect := tw / maxf(1.0, th)
+	# Span full cell along the run; preserve aspect → thickness ≈ cell/aspect for S (~0.47).
+	var along_span := cell_px * 1.14 ## overlap kills seams
+	var thick := clampf(along_span / aspect, cell_px * 0.42, cell_px * 0.78)
+	for i in range(length):
+		var x := ox + i if horizontal else ox
+		var y := oy if horizontal else oy + i
+		var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
 		if horizontal:
-			var dest := Rect2(base + Vector2(along, (cell_px - dest_h) * 0.45), Vector2(dest_w, dest_h))
+			var dest := Rect2(
+				base + Vector2((cell_px - along_span) * 0.5, (cell_px - thick) * 0.42),
+				Vector2(along_span, thick)
+			)
+			_draw_g3_soft_contact(dest)
 			draw_texture_rect(tex, dest, false, mod)
 		else:
+			# Rotate horizontal sheet art 90° around cell center (matrix, not fragile set_transform).
 			var cx := base.x + cell_px * 0.5
-			var cy := base.y + along + dest_w * 0.5
-			draw_set_transform(Vector2(cx, cy), -PI * 0.5, Vector2.ONE)
-			draw_texture_rect(tex, Rect2(Vector2(-dest_w * 0.5, -dest_h * 0.5), Vector2(dest_w, dest_h)), false, mod)
-			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-		along += dest_w * 0.92
-	# End caps on free termini; L/T only at termini that turn into a perpendicular cover cell.
+			var cy := base.y + cell_px * 0.5
+			var xform := Transform2D(Vector2(0.0, -1.0), Vector2(1.0, 0.0), Vector2(cx, cy))
+			draw_set_transform_matrix(xform)
+			var dest_v := Rect2(Vector2(-along_span * 0.5, -thick * 0.5), Vector2(along_span, thick))
+			# Soft contact in local space (after rotation → thin strip along vertical run).
+			_draw_g3_soft_contact(dest_v)
+			draw_texture_rect(tex, dest_v, false, mod)
+			draw_set_transform_matrix(Transform2D.IDENTITY)
+	# Caps / joints only at true elbows (not every thick-pad side).
 	if length < 2:
 		return
 	var cap: Texture2D = _g3_bag("sandbag_end_cap")
-	var cap_sz := cell_px * 0.55
+	var ends: Array = []
 	if horizontal:
-		_draw_g3_bag_terminus(ox, oy, base + Vector2(0, 0), true, true, mod, cap, cap_sz)
-		_draw_g3_bag_terminus(ox + length - 1, oy, base + Vector2(run_len - cell_px, 0), true, false, mod, cap, cap_sz)
+		ends = [[ox, oy, true], [ox + length - 1, oy, false]]
 	else:
-		_draw_g3_bag_terminus(ox, oy + length - 1, base + Vector2(0, 0), false, true, mod, cap, cap_sz)
-		_draw_g3_bag_terminus(ox, oy, base + Vector2(0, run_len - cell_px), false, false, mod, cap, cap_sz)
-
-
-func _draw_g3_bag_terminus(
-	x: int, y: int, cell_base: Vector2, horizontal: bool, at_start: bool, mod: Color, cap: Texture2D, cap_sz: float
-) -> void:
-	## Joint if this end turns into a perpendicular cover neighbor; else end-cap.
-	var turn := false
-	if horizontal:
-		turn = _cover_at(x, y + 1) or _cover_at(x, y - 1)
-	else:
-		turn = _cover_at(x + 1, y) or _cover_at(x - 1, y)
-	var dest := Rect2(
-		cell_base + Vector2((cell_px - cap_sz) * 0.5, (cell_px - cap_sz) * 0.40),
-		Vector2(cap_sz, cap_sz)
-	)
-	if turn:
-		_draw_g3_bag_joint(x, y)
-		return
-	if cap == null:
-		return
-	if horizontal:
-		var ox := (-cap_sz * 0.15) if at_start else (cell_px - cap_sz * 0.85)
-		dest.position = cell_base + Vector2(ox, (cell_px - cap_sz) * 0.45)
-	else:
-		var oy := (-cap_sz * 0.15) if at_start else (cell_px - cap_sz * 0.85)
-		dest.position = cell_base + Vector2((cell_px - cap_sz) * 0.5, oy)
-	draw_texture_rect(cap, dest, false, mod)
+		ends = [[ox, oy, true], [ox, oy + length - 1, false]]
+	for e in ends:
+		var ex: int = e[0]
+		var ey: int = e[1]
+		# True turn: exactly one perpendicular cover neighbor and no continuation past end.
+		var n := _cover_at(ex, ey + 1)
+		var s := _cover_at(ex, ey - 1)
+		var ee := _cover_at(ex + 1, ey)
+		var w := _cover_at(ex - 1, ey)
+		var count := int(n) + int(s) + int(ee) + int(w)
+		if count == 2 and ((n or s) and (ee or w)):
+			_draw_g3_bag_joint(ex, ey)
+			continue
+		if count == 3:
+			_draw_g3_bag_joint(ex, ey)
+			continue
+		if cap == null:
+			continue
+		var base2 := Vector2(float(ex) * cell_px, float(grid_h - 1 - ey) * cell_px)
+		var cap_sz := cell_px * 0.50
+		draw_texture_rect(
+			cap,
+			Rect2(base2 + Vector2((cell_px - cap_sz) * 0.5, (cell_px - cap_sz) * 0.40), Vector2(cap_sz, cap_sz)),
+			false,
+			mod
+		)
 
 
 func _draw_g2_props() -> void:
