@@ -17,7 +17,7 @@ enum ArtMode { G3, G2, G1 }
 
 ## World-space UV: texture spans this many cells (seamless, no cell grid).
 ## Cobble atlas dominant ~43px stones → period 0.7 ⇒ ~7–8 stones/cell.
-const G3_TEX_CELLS := 4.0 ## default for mud/grass/planks
+const G3_TEX_CELLS := 6.0 ## mud/planks — longer period reduces cell-scale wash seams
 const G3_COBBLE_CELLS := 0.7 ## ~8–9 stones/cell (atlas dominant period ≈43px)
 const G3_ROOF_CELLS := 4.5 ## larger shingle texel so roofs read
 const G3_UNIT_SCALE := 1.6
@@ -336,7 +336,7 @@ func _g3_period(surf: String) -> float:
 		"roof_slate", "roof_shingle":
 			return G3_ROOF_CELLS
 		"grass":
-			return 3.2
+			return 6.5 ## long period — avoids cell-scale checker in grass plots
 		"mud", "outside":
 			return G3_TEX_CELLS
 		"stonewall":
@@ -421,10 +421,8 @@ func _draw_g3_terrain() -> void:
 		[15, 18, 11, 13],
 	]:
 		_fill_g3_surf_zone(z[0], z[1], z[2], z[3], "grass")
-	# Soft oversized grass washes (no per-cell strips) — kills right-yard square tint.
-	_wash_g3_grass_soft(4, 7, 2, 7)
-	_wash_g3_grass_soft(12, 16, 2, 4)
-	_wash_g3_grass_soft(14, 18, 10, 14)
+	# One continuous east-yard grass veil (not per-zone boxes) to kill cell/box tint.
+	_wash_g3_yard_grass_veil()
 	# Building underlays.
 	for y in range(grid_h):
 		for x in range(grid_w):
@@ -465,27 +463,26 @@ func _fill_g3_surf_zone(min_x: int, max_x: int, min_y: int, max_y: int, surf: St
 	)
 
 
-func _wash_g3_grass_soft(min_x: int, max_x: int, min_y: int, max_y: int) -> void:
-	## Continuous low-alpha grass over mud neighborhood — breaks cell-aligned tint patches.
+func _wash_g3_yard_grass_veil() -> void:
+	## Single low-alpha grass veil over open yard (mud+grass) — unifies value, no box edges.
 	if g3 == null or g3.tile_grass == null:
 		return
-	var pad := 1.35
-	var x0 := float(min_x) - pad
-	var y0 := float(min_y) - pad
-	var x1 := float(max_x) + pad
-	var y1 := float(max_y) + pad
+	var x0 := 3.0
+	var y0 := 1.0
+	var x1 := float(grid_w) - 2.0
+	var y1 := float(grid_h) - 1.0
 	var px := x0 * cell_px
 	var py := float(grid_h) * cell_px - y1 * cell_px
 	var dest := Rect2(px, py, (x1 - x0) * cell_px, (y1 - y0) * cell_px)
-	var mod := Color(0.47, 0.49, 0.46, 0.34)
-	_draw_g3_world_rect(g3.tile_grass, x0, y0, x1 - x0, y1 - y0, dest, mod, 3.6)
-	# Second, smaller, slightly greener wash — organic, not grid-aligned.
-	var inset := 0.55
-	var dest2 := dest.grow(-cell_px * inset)
-	mod.a = 0.22
-	_draw_g3_world_rect(
-		g3.tile_grass, x0 + inset, y0 + inset, (x1 - x0) - inset * 2.0, (y1 - y0) - inset * 2.0, dest2, mod, 4.1
-	)
+	# Long UV period so veil doesn't invent a cell-scale checker.
+	_draw_g3_world_rect(g3.tile_grass, x0, y0, x1 - x0, y1 - y0, dest, Color(0.46, 0.48, 0.45, 0.18), 7.5)
+	# East yard slightly stronger (right-side mud/grass read).
+	var ex0 := 13.0
+	var ey0 := 2.0
+	var ex1 := float(grid_w) - 1.5
+	var ey1 := 14.0
+	var edest := Rect2(ex0 * cell_px, float(grid_h) * cell_px - ey1 * cell_px, (ex1 - ex0) * cell_px, (ey1 - ey0) * cell_px)
+	_draw_g3_world_rect(g3.tile_grass, ex0, ey0, ex1 - ex0, ey1 - ey0, edest, Color(0.47, 0.49, 0.46, 0.16), 8.0)
 
 
 func _blend_g3_ground_edges() -> void:
