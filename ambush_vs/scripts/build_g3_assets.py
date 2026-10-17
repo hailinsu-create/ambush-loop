@@ -231,18 +231,11 @@ def make_high_edge_trim(size: int = 64) -> Image.Image:
 
 
 def add_roof_detail(im: Image.Image) -> Image.Image:
-	"""Ridge line + eaves darkening so high cells read as roofs, not grey fills."""
-	im = im.copy()
-	d = ImageDraw.Draw(im)
-	w, h = im.size
-	cx = w // 2
-	# ridge
-	d.line([(cx, 2), (cx, h - 2)], fill=(28, 30, 36, 255), width=max(2, w // 48))
-	d.line([(cx - 1, 2), (cx - 1, h - 2)], fill=(55, 58, 66, 180), width=1)
-	# eaves strip (south / bottom in top-down)
-	for y in range(h - h // 5, h):
-		a = int(90 * (y - (h - h // 5)) / max(1, h // 5))
-		d.line([(0, y), (w, y)], fill=(10, 10, 14, a))
+	"""Keep roof face seamless for world-UV. Ridge/eaves are drawn per-building at runtime.
+
+	Do NOT bake horizontal eaves bands into the tile — with world-space UV those
+	repeat every few cells and read as glitchy dark stripes.
+	"""
 	return im
 
 
