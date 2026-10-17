@@ -9,10 +9,15 @@ const G1AssetsScript := preload("res://view/g1_assets.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
 const G3AssetsScript := preload("res://view/g3_assets.gd")
 const CombatFxScript := preload("res://view/combat_fx.gd")
+const GestureRouterScript := preload("res://view/gesture_router.gd")
 
 signal cell_tapped(cell: Vector2i)
 signal cell_dragged(cell: Vector2i, world_dir: Vector2)
 signal unit_selected(op_id: String)
+signal cell_long_pressed(cell: Vector2i)
+signal aim_drag_started(op_id: String, pos: Vector2)
+signal aim_drag_updated(op_id: String, world_dir: Vector2, preview_deg: float)
+signal aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool)
 
 enum ArtMode { G3, G2, G1 }
 
@@ -66,6 +71,14 @@ var body_search_enabled: bool = false
 
 var _dragging_op: String = ""
 var _drag_start: Vector2 = Vector2.ZERO
+var gesture = null ## GestureRouter
+## Hit radius in cells (PLAY-UX PR-2). PR-1 keeps exact cell until strip lands.
+var unit_hit_radius_cells: float = 0.0
+var aim_preview_deg: float = NAN
+var aim_preview_op: String = ""
+## Counts for headless tests.
+var tap_emit_count: int = 0
+var drag_emit_count: int = 0
 
 
 func _ready() -> void:
@@ -78,6 +91,17 @@ func _ready() -> void:
 	g3.load_all()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	custom_minimum_size = Vector2(grid_w * cell_px, grid_h * cell_px)
+	_init_gesture_router()
+
+
+func _init_gesture_router() -> void:
+	gesture = GestureRouterScript.new()
+	gesture.bounds = Rect2(Vector2.ZERO, size)
+	gesture.tapped.connect(_on_gesture_tapped)
+	gesture.long_pressed.connect(_on_gesture_long_pressed)
+	gesture.drag_started.connect(_on_gesture_drag_started)
+	gesture.drag_moved.connect(_on_gesture_drag_moved)
+	gesture.drag_ended.connect(_on_gesture_drag_ended)
 
 
 func configure(level_data: Dictionary, sim_grid, weapons_table: Dictionary) -> void:
@@ -166,6 +190,8 @@ func _is_building_cell(kind: String, tier: String, x: int, y: int) -> bool:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
+		if gesture != null:
+			gesture.bounds = Rect2(Vector2.ZERO, size)
 		_fit_cell_px()
 		queue_redraw()
 
@@ -1860,45 +1886,94 @@ func _draw_alert_badge() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventScreenTouch:
-		var st := event as InputEventScreenTouch
-		_handle_pointer(st.position, st.pressed, false)
-	elif event is InputEventScreenDrag:
-		var sd := event as InputEventScreenDrag
-		_handle_pointer(sd.position, true, true)
-	elif event is InputEventMouseButton:
-		var mb := event as InputEventMouseButton
-		if mb.button_index == MOUSE_BUTTON_LEFT:
-			_handle_pointer(mb.position, mb.pressed, false)
-	elif event is InputEventMouseMotion:
-		var mm := event as InputEventMouseMotion
-		if mm.button_mask & MOUSE_BUTTON_MASK_LEFT:
-			_handle_pointer(mm.position, true, true)
+	if gesture == null:
+		_init_gesture_router()
+	gesture.bounds = Rect2(Vector2.ZERO, size)
+	if gesture.feed(event):
+		accept_event()
 
 
-func _handle_pointer(pos: Vector2, pressed: bool, dragging: bool) -> void:
+func _on_gesture_tapped(pos: Vector2) -> void:
+	tap_emit_count += 1
 	var cell := screen_to_cell(pos)
-	if not pressed:
-		if _dragging_op != "" and dragging == false:
-			pass
-		_dragging_op = ""
-		return
-	if dragging and _dragging_op != "":
-		var origin := cell_to_screen(
-			_op_pos(_dragging_op).x, _op_pos(_dragging_op).y
-		)
-		var dir := pos - origin
-		cell_dragged.emit(cell, dir)
-		return
-	# tap: select unit or preview cell
-	var hit := _op_at_cell(cell)
+	var hit := nearest_op_at(pos)
 	if hit != "":
 		selected_op_id = hit
-		_dragging_op = hit
 		unit_selected.emit(hit)
 		queue_redraw()
 		return
 	cell_tapped.emit(cell)
+
+
+func _on_gesture_long_pressed(pos: Vector2) -> void:
+	cell_long_pressed.emit(screen_to_cell(pos))
+
+
+func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
+	var hit := nearest_op_at(start_pos)
+	if hit == "":
+		hit = nearest_op_at(pos)
+	_dragging_op = hit
+	_drag_start = start_pos
+	aim_preview_op = hit
+	if hit != "":
+		selected_op_id = hit
+		unit_selected.emit(hit)
+		var origin := cell_to_screen(_op_pos(hit).x, _op_pos(hit).y)
+		var dir := pos - origin
+		aim_preview_deg = rad_to_deg(atan2(-dir.y, dir.x)) if dir.length() >= 1.0 else NAN
+		aim_drag_started.emit(hit, pos)
+	queue_redraw()
+
+
+func _on_gesture_drag_moved(pos: Vector2, start_pos: Vector2) -> void:
+	if _dragging_op == "":
+		return
+	drag_emit_count += 1
+	var origin := cell_to_screen(_op_pos(_dragging_op).x, _op_pos(_dragging_op).y)
+	var dir := pos - origin
+	var cell := screen_to_cell(pos)
+	cell_dragged.emit(cell, dir)
+	if dir.length() >= 1.0:
+		aim_preview_deg = rad_to_deg(atan2(-dir.y, dir.x))
+		aim_drag_updated.emit(_dragging_op, dir, aim_preview_deg)
+	queue_redraw()
+
+
+func _on_gesture_drag_ended(pos: Vector2, start_pos: Vector2, cancelled: bool) -> void:
+	var op_id := _dragging_op
+	var origin := cell_to_screen(_op_pos(op_id).x, _op_pos(op_id).y) if op_id != "" else start_pos
+	var dir := pos - origin
+	var preview := aim_preview_deg
+	# Cancel if released near the unit center (drag back).
+	if op_id != "" and pos.distance_to(origin) < gesture.slop_px:
+		cancelled = true
+	if op_id != "":
+		aim_drag_ended.emit(op_id, dir, preview, cancelled)
+	_dragging_op = ""
+	aim_preview_op = ""
+	aim_preview_deg = NAN
+	queue_redraw()
+
+
+## Nearest living operator within unit_hit_radius_cells (0 = exact cell match).
+func nearest_op_at(screen_pos: Vector2) -> String:
+	if unit_hit_radius_cells <= 1e-9:
+		return _op_at_cell(screen_to_cell(screen_pos))
+	var best := ""
+	var best_d := unit_hit_radius_cells + 1e-9
+	# Use continuous cell space from screen.
+	var local := screen_pos - shake_offset
+	var cx := local.x / maxf(cell_px, 1.0)
+	var cy := local.y / maxf(cell_px, 1.0)
+	for op in operators:
+		if not bool(op.get("alive", true)):
+			continue
+		var d := Vector2(float(op["x"]) - cx, float(op["y"]) - cy).length()
+		if d < best_d:
+			best_d = d
+			best = str(op["id"])
+	return best
 
 
 func _op_at_cell(cell: Vector2i) -> String:
@@ -1913,3 +1988,8 @@ func _op_pos(op_id: String) -> Vector2:
 		if str(op["id"]) == op_id:
 			return Vector2(float(op["x"]), float(op["y"]))
 	return Vector2.ZERO
+
+
+## Inject raw events for headless tests (bypasses Viewport).
+func inject_input(event: InputEvent) -> void:
+	_gui_input(event)
