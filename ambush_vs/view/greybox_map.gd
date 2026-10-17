@@ -6,12 +6,14 @@ class_name GreyboxMap
 const SimGeom := preload("res://sim/geom.gd")
 const SimConstants := preload("res://sim/constants.gd")
 const G1AssetsScript := preload("res://view/g1_assets.gd")
+const G2AssetsScript := preload("res://view/g2_assets.gd")
 
 signal cell_tapped(cell: Vector2i)
 signal cell_dragged(cell: Vector2i, world_dir: Vector2)
 signal unit_selected(op_id: String)
 
 var assets: G1Assets
+var g2: G2Assets
 var cell_px: float = 36.0
 var grid_w: int = 24
 var grid_h: int = 16
@@ -33,6 +35,7 @@ var preview_cell: Vector2i = Vector2i(-1, -1)
 var preview_seers: Array = []
 var show_sectors: bool = true
 var show_cones: bool = true
+var use_g2_art: bool = true ## default ON = G2 yard art; G1 overlays always available
 var selected_op_id: String = ""
 var threat_slot_cells: Array = [] ## Vector2i
 var night: bool = true
@@ -44,6 +47,8 @@ var _drag_start: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	assets = G1AssetsScript.new()
 	assets.load_all()
+	g2 = G2AssetsScript.new()
+	g2.load_all()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	custom_minimum_size = Vector2(grid_w * cell_px, grid_h * cell_px)
 
@@ -129,10 +134,18 @@ func _collect_threat_slots() -> void:
 					threat_slot_cells.append(cell)
 
 
+func set_use_g2_art(on: bool) -> void:
+	use_g2_art = on
+	queue_redraw()
+
+
 func _draw() -> void:
 	if grid == null:
 		return
 	_draw_tiles()
+	if use_g2_art:
+		_draw_night_dim()  # terrain only (before props / G1 overlays)
+		_draw_g2_props()
 	if show_cones:
 		_draw_enemy_cones()
 	if show_sectors:
@@ -150,20 +163,77 @@ func _draw_tiles() -> void:
 			var cell: Dictionary = grid.get_cell(x, y)
 			var kind := str(cell.get("kind", "wall"))
 			var tier := str(cell.get("tier", ""))
-			var tex: Texture2D = assets.tile_wall
-			if kind in ["wall", "structure"] or bool(cell.get("blocks_all_los", false)):
-				tex = assets.tile_wall
-			elif kind in ["ramp", "slope"]:
-				tex = assets.tile_ramp
-			elif bool(cell.get("low_cover", false)):
-				tex = assets.tile_low_cover
-			elif tier == SimConstants.TIER_HIGH or kind == "high":
-				tex = assets.tile_high
-			else:
-				tex = assets.tile_ground
+			var tex: Texture2D = _tile_tex_for(cell, kind, tier, x, y)
 			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 			if tex:
 				draw_texture_rect(tex, Rect2(p, Vector2(cell_px, cell_px)), false)
+
+
+func _tile_tex_for(cell: Dictionary, kind: String, tier: String, x: int, y: int) -> Texture2D:
+	if use_g2_art and g2 != null:
+		if kind == "wall" or (bool(cell.get("blocks_all_los", false)) and kind != "structure"):
+			return g2.tile_wall if g2.tile_wall else assets.tile_wall
+		if kind == "structure":
+			return g2.tile_wall if g2.tile_wall else assets.tile_wall
+		if kind in ["ramp", "slope"]:
+			return g2.tile_ramp if g2.tile_ramp else assets.tile_ramp
+		if bool(cell.get("low_cover", false)):
+			return g2.tile_low_cover if g2.tile_low_cover else assets.tile_low_cover
+		if tier == SimConstants.TIER_HIGH or kind == "high":
+			return g2.tile_high if g2.tile_high else assets.tile_high
+		if kind in ["road", "gate_n", "gate_s", "gate_e"]:
+			return g2.tile_cobble if g2.tile_cobble else assets.tile_ground
+		if kind == "alley":
+			return g2.tile_mud if g2.tile_mud else assets.tile_ground
+		# ground: alternate dirt / grass for yard texture without changing sim
+		if ((x + y * 3) % 5) == 0:
+			return g2.tile_grass if g2.tile_grass else assets.tile_ground
+		return g2.tile_dirt if g2.tile_dirt else assets.tile_ground
+	# G1 fallback
+	if kind in ["wall", "structure"] or bool(cell.get("blocks_all_los", false)):
+		return assets.tile_wall
+	if kind in ["ramp", "slope"]:
+		return assets.tile_ramp
+	if bool(cell.get("low_cover", false)):
+		return assets.tile_low_cover
+	if tier == SimConstants.TIER_HIGH or kind == "high":
+		return assets.tile_high
+	return assets.tile_ground
+
+
+func _draw_night_dim() -> void:
+	## Darken terrain only; overlays drawn after stay readable (ASSET_TIMING G2).
+	if not night:
+		return
+	draw_rect(Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px)), Color(0.02, 0.04, 0.1, 0.22), true)
+
+
+func _draw_g2_props() -> void:
+	if g2 == null:
+		return
+	# Barn / shed footprints on structure cells (sample corners).
+	for cell in level.get("cells", []):
+		var kind := str(cell.get("kind", ""))
+		var x := int(cell.get("x", -1))
+		var y := int(cell.get("y", -1))
+		if kind == "structure" and g2.prop_shed:
+			var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
+			draw_texture_rect(g2.prop_shed, Rect2(p, Vector2(cell_px, cell_px)), false)
+	for s in level.get("supplies", []):
+		var x := int(s.get("x", -1))
+		var y := int(s.get("y", -1))
+		if x < 0:
+			continue
+		var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
+		var hid := bool(s.get("hidden", false))
+		var tex: Texture2D = g2.prop_ammo_box if hid else g2.prop_crate
+		if tex:
+			draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.1), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
+	# Sparse barrel accents on a few ground cells near south gate for atmosphere.
+	if g2.prop_barrel:
+		for c in [Vector2i(9, 2), Vector2i(14, 3)]:
+			var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
+			draw_texture_rect(g2.prop_barrel, Rect2(p + Vector2(cell_px * 0.2, cell_px * 0.2), Vector2(cell_px * 0.6, cell_px * 0.6)), false)
 
 
 func _observer_xy(obs: Dictionary) -> Vector2:
@@ -302,11 +372,20 @@ func _draw_marker_and_mines() -> void:
 		if not m.get("alive", true):
 			continue
 		var p := cell_to_screen(float(m["x"]), float(m["y"]))
-		if assets.mine:
-			draw_texture_rect(assets.mine, Rect2(p - Vector2(cell_px * 0.4, cell_px * 0.4), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
+		var mine_tex: Texture2D = null
+		if use_g2_art and g2 != null:
+			mine_tex = g2.weapon_sprites.get("mine", null)
+		if mine_tex == null:
+			mine_tex = assets.mine
+		if mine_tex:
+			draw_texture_rect(mine_tex, Rect2(p - Vector2(cell_px * 0.4, cell_px * 0.4), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
 	for g in grenade_plans:
 		var p := cell_to_screen(float(g["aim_x"]), float(g["aim_y"]))
-		draw_circle(p, cell_px * 0.35, Color(0.9, 0.7, 0.2, 0.5))
+		if use_g2_art and g2 != null and g2.weapon_sprites.get("grenade", null):
+			var gt: Texture2D = g2.weapon_sprites["grenade"]
+			draw_texture_rect(gt, Rect2(p - Vector2(cell_px * 0.35, cell_px * 0.35), Vector2(cell_px * 0.7, cell_px * 0.7)), false)
+		else:
+			draw_circle(p, cell_px * 0.35, Color(0.9, 0.7, 0.2, 0.5))
 		draw_arc(p, cell_px * 2.0, 0, TAU, 32, Color(0.9, 0.7, 0.2, 0.35), 2.0)
 
 
@@ -337,8 +416,19 @@ func _draw_units() -> void:
 		if not op.get("alive", true):
 			continue
 		var high := str(op.get("tier", "ground")) == SimConstants.TIER_HIGH
-		var tex := assets.friendly_high if high else assets.friendly
+		var tex: Texture2D = assets.friendly_high if high else assets.friendly
+		if use_g2_art and g2 != null:
+			var wid := str(op.get("weapon_id", ""))
+			var g2u: Texture2D = g2.weapon_units.get(wid, null)
+			if g2u != null:
+				tex = g2u
+			elif high and assets.friendly_high:
+				tex = assets.friendly_high
 		_draw_unit_tex(tex, float(op["x"]), float(op["y"]), float(op["facing_deg"]), str(op["id"]) == selected_op_id)
+		if high and use_g2_art:
+			# Keep ADR-HEIGHT yellow high silhouette ring readable on G2 units.
+			var hp := cell_to_screen(float(op["x"]), float(op["y"]))
+			draw_arc(hp, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
 		# id label
 		var sp := cell_to_screen(float(op["x"]), float(op["y"]))
 		draw_string(ThemeDB.fallback_font, sp + Vector2(-10, -cell_px * 0.55), str(op["id"]).substr(0, 6), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.9, 0.95, 1.0))
