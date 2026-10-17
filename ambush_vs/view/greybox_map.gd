@@ -1088,13 +1088,10 @@ func _draw_g3_props() -> void:
 		var y := int(s.get("y", -1))
 		if x < 0:
 			continue
-		var p := Vector2(x * cell_px, (grid_h - 1 - y) * cell_px)
 		var hid := bool(s.get("hidden", false))
 		var tex: Texture2D = g3.props.get("ammo_crate" if hid else "crate_stack", null)
 		if tex:
-			if g3.drop_shadow:
-				draw_texture_rect(g3.drop_shadow, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.2), Vector2(cell_px * 0.8, cell_px * 0.7)), false, Color(1, 1, 1, 0.7))
-			draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.08, cell_px * 0.08), Vector2(cell_px * 0.84, cell_px * 0.84)), false)
+			_draw_g3_prop_sprite(x, y, tex, 0.70)
 	var accents := [
 		[Vector2i(9, 2), "barrel"],
 		[Vector2i(14, 3), "barrel"],
@@ -1106,8 +1103,16 @@ func _draw_g3_props() -> void:
 		var tex: Texture2D = g3.props.get(pname, null)
 		if tex == null:
 			continue
-		var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
-		draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.1), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
+		_draw_g3_prop_sprite(c.x, c.y, tex, 0.62)
+
+
+func _draw_g3_prop_sprite(x: int, y: int, tex: Texture2D, scale: float) -> void:
+	## Prop on ground — soft oval contact only (no dark square cell backing).
+	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
+	var sz := cell_px * scale
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.42), Vector2(sz, sz))
+	_draw_g3_soft_contact(dest)
+	draw_texture_rect(tex, dest, false, Color(0.92, 0.94, 1.0, 1.0))
 
 
 func _cover_at(x: int, y: int) -> bool:
@@ -1116,82 +1121,92 @@ func _cover_at(x: int, y: int) -> bool:
 	return bool(grid.get_cell(x, y).get("low_cover", false))
 
 
-func _cover_edge(x: int, y: int) -> bool:
-	## Only the rim of a cover blob — avoids sandbag carpet on filled pads.
-	if not _cover_at(x, y):
-		return false
-	for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-		if not _cover_at(x + d.x, y + d.y):
-			return true
-	return false
-
-
 func _g3_bag(name: String) -> Texture2D:
 	return g3.props.get(name, null) as Texture2D
 
 
 func _draw_g3_sandbag_runs() -> void:
-	## Cover rim → dedicated sheet sprites (straight / L / end / round). No yellow bars.
+	## All cover cells → longest H/V runs of straight tiles; pile only for isolates.
 	if _g3_bag("sandbag_straight_m") == null and _g3_bag("sandbag_straight") == null:
 		return
-	var corners: Dictionary = {}
+	var remaining: Dictionary = {}
 	for y in range(grid_h):
 		for x in range(grid_w):
-			if not _cover_edge(x, y):
-				continue
-			var h_nb := _cover_edge(x - 1, y) or _cover_edge(x + 1, y)
-			var v_nb := _cover_edge(x, y - 1) or _cover_edge(x, y + 1)
-			if h_nb and v_nb:
-				corners["%d,%d" % [x, y]] = true
-	var visited: Dictionary = {}
-	# Horizontal straight runs (skip pure corner cells).
-	for y in range(grid_h):
-		var x := 0
-		while x < grid_w:
-			var key := "%d,%d" % [x, y]
-			if not _cover_edge(x, y) or corners.has(key) or visited.has(key):
-				x += 1
-				continue
+			if _cover_at(x, y):
+				remaining["%d,%d" % [x, y]] = true
+	# Greedy: repeatedly claim the longest unvisited axis-aligned run.
+	while not remaining.is_empty():
+		var best_len := 0
+		var best_x := 0
+		var best_y := 0
+		var best_h := true
+		for key in remaining.keys():
+			var parts := str(key).split(",")
+			var x := int(parts[0])
+			var y := int(parts[1])
+			# Horizontal span through (x,y).
 			var x0 := x
-			while x < grid_w and _cover_edge(x, y) and not corners.has("%d,%d" % [x, y]):
-				visited["%d,%d" % [x, y]] = true
-				x += 1
-			var len_h := x - x0
-			if len_h >= 2:
-				_draw_g3_bag_straight(x0, y, len_h, true)
-			elif len_h == 1:
-				_draw_g3_bag_pile(x0, y)
-	# Vertical straight runs.
-	for x in range(grid_w):
-		var y := 0
-		while y < grid_h:
-			var key2 := "%d,%d" % [x, y]
-			if not _cover_edge(x, y) or corners.has(key2) or visited.has(key2):
-				y += 1
-				continue
+			while remaining.has("%d,%d" % [x0 - 1, y]):
+				x0 -= 1
+			var x1 := x
+			while remaining.has("%d,%d" % [x1 + 1, y]):
+				x1 += 1
+			var lh := x1 - x0 + 1
+			if lh > best_len:
+				best_len = lh
+				best_x = x0
+				best_y = y
+				best_h = true
+			# Vertical span.
 			var y0 := y
-			while y < grid_h and _cover_edge(x, y) and not corners.has("%d,%d" % [x, y]):
-				visited["%d,%d" % [x, y]] = true
-				y += 1
-			var len_v := y - y0
-			if len_v >= 2:
-				_draw_g3_bag_straight(x, y0, len_v, false)
-			elif len_v == 1:
-				_draw_g3_bag_pile(x, y0)
-	# Corners / T joints.
-	for ckey in corners.keys():
-		var parts := str(ckey).split(",")
-		_draw_g3_bag_corner(int(parts[0]), int(parts[1]))
+			while remaining.has("%d,%d" % [x, y0 - 1]):
+				y0 -= 1
+			var y1 := y
+			while remaining.has("%d,%d" % [x, y1 + 1]):
+				y1 += 1
+			var lv := y1 - y0 + 1
+			if lv > best_len:
+				best_len = lv
+				best_x = x
+				best_y = y0
+				best_h = false
+		if best_len <= 1:
+			break
+		if best_h:
+			for i in range(best_len):
+				remaining.erase("%d,%d" % [best_x + i, best_y])
+			_draw_g3_bag_straight(best_x, best_y, best_len, true)
+		else:
+			for i in range(best_len):
+				remaining.erase("%d,%d" % [best_x, best_y + i])
+			_draw_g3_bag_straight(best_x, best_y, best_len, false)
+	# Isolated singles → round pile only.
+	for key in remaining.keys():
+		var parts2 := str(key).split(",")
+		_draw_g3_bag_pile(int(parts2[0]), int(parts2[1]))
+	# L / T at cells where cover turns (neighbor on both axes).
+	for y in range(grid_h):
+		for x in range(grid_w):
+			if not _cover_at(x, y):
+				continue
+			var h_nb := _cover_at(x - 1, y) or _cover_at(x + 1, y)
+			var v_nb := _cover_at(x, y - 1) or _cover_at(x, y + 1)
+			if h_nb and v_nb:
+				_draw_g3_bag_joint(x, y)
 
 
 func _g3_bag_night_mod() -> Color:
 	return Color(0.78, 0.82, 0.92, 1.0)
 
 
-func _draw_g3_bag_shadow(rect: Rect2) -> void:
-	draw_rect(rect, Color(0, 0, 0, 0.42), true)
-	if g3.drop_shadow:
-		draw_texture_rect(g3.drop_shadow, rect, false, Color(1, 1, 1, 0.78))
+func _draw_g3_soft_contact(rect: Rect2) -> void:
+	## Soft oval under sprite only — never a filled dark cell square.
+	if g3 != null and g3.drop_shadow:
+		var sh := Rect2(
+			rect.position + Vector2(rect.size.x * 0.08, rect.size.y * 0.55),
+			Vector2(rect.size.x * 0.84, rect.size.y * 0.45)
+		)
+		draw_texture_rect(g3.drop_shadow, sh, false, Color(1, 1, 1, 0.55))
 
 
 func _draw_g3_bag_pile(x: int, y: int) -> void:
@@ -1201,46 +1216,56 @@ func _draw_g3_bag_pile(x: int, y: int) -> void:
 	if pile == null:
 		return
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
-	var sz := cell_px * 0.72
-	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.42), Vector2(sz, sz))
-	_draw_g3_bag_shadow(dest.grow(cell_px * 0.06))
+	var sz := cell_px * 0.88
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.35), Vector2(sz, sz))
+	_draw_g3_soft_contact(dest)
 	draw_texture_rect(pile, dest, false, _g3_bag_night_mod())
 
 
-func _draw_g3_bag_corner(x: int, y: int) -> void:
-	var corner: Texture2D = _g3_bag("sandbag_corner_l")
-	if corner == null:
-		corner = _g3_bag("sandbag_junction_t")
-	if corner == null:
+func _draw_g3_bag_joint(x: int, y: int) -> void:
+	## L corner or T junction overlay at axis turns.
+	var n := int(_cover_at(x, y + 1)) + int(_cover_at(x, y - 1)) + int(_cover_at(x + 1, y)) + int(_cover_at(x - 1, y))
+	var tex: Texture2D
+	if n >= 3:
+		tex = _g3_bag("sandbag_junction_t")
+		if tex == null:
+			tex = _g3_bag("sandbag_corner_l")
+	else:
+		tex = _g3_bag("sandbag_corner_l")
+		if tex == null:
+			tex = _g3_bag("sandbag_junction_t")
+	if tex == null:
 		return
 	var base := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
-	var sz := cell_px * 0.78
-	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.38), Vector2(sz, sz))
-	_draw_g3_bag_shadow(dest.grow(cell_px * 0.05))
-	draw_texture_rect(corner, dest, false, _g3_bag_night_mod())
+	var sz := cell_px * 0.95
+	var dest := Rect2(base + Vector2((cell_px - sz) * 0.5, (cell_px - sz) * 0.28), Vector2(sz, sz))
+	_draw_g3_soft_contact(dest)
+	draw_texture_rect(tex, dest, false, _g3_bag_night_mod())
 
 
 func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> void:
-	## Tile straight S/M/L segments; stack height ≈ 0.48 cell; preserve aspect (no stretch).
+	## Tile straight S/M/L along the full run; bags span cell width; 90° for vertical.
 	var base := Vector2(float(ox) * cell_px, float(grid_h - 1 - oy) * cell_px)
 	if not horizontal:
 		base = Vector2(float(ox) * cell_px, float(grid_h - 1 - (oy + length - 1)) * cell_px)
 	var run_len := float(length) * cell_px
-	var sh := Rect2(
-		base + Vector2(cell_px * 0.06, cell_px * 0.42),
-		Vector2(run_len * 0.92 if horizontal else cell_px * 0.55, cell_px * 0.42 if horizontal else run_len * 0.92)
-	)
-	_draw_g3_bag_shadow(sh)
+	# Soft contact strip under the wall (not a per-cell square).
+	var sh: Rect2
+	if horizontal:
+		sh = Rect2(base + Vector2(cell_px * 0.02, cell_px * 0.55), Vector2(run_len * 0.96, cell_px * 0.38))
+	else:
+		sh = Rect2(base + Vector2(cell_px * 0.28, cell_px * 0.02), Vector2(cell_px * 0.44, run_len * 0.96))
+	_draw_g3_soft_contact(sh)
 	var along := 0.0
-	## Stack height ≈ 0.45 cell so individual bags read ~phone-readable, not stretched planks.
-	var wall_h := cell_px * 0.48
+	## Cross-axis thickness ≈ 0.70 cell so bags fill the cell width of the run.
+	var wall_h := cell_px * 0.70
 	var mod := _g3_bag_night_mod()
-	while along < run_len - cell_px * 0.04:
+	while along < run_len - 0.5:
 		var remain := run_len - along
 		var tex: Texture2D
-		if remain >= cell_px * 2.5:
+		if remain >= cell_px * 2.4:
 			tex = _g3_bag("sandbag_straight_l")
-		elif remain >= cell_px * 1.7:
+		elif remain >= cell_px * 1.5:
 			tex = _g3_bag("sandbag_straight_m")
 		else:
 			tex = _g3_bag("sandbag_straight_s")
@@ -1255,29 +1280,35 @@ func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> v
 		var aspect := tw / maxf(1.0, th)
 		var dest_h := wall_h
 		var dest_w := dest_h * aspect
-		if dest_w > remain + cell_px * 0.08:
-			dest_w = remain + cell_px * 0.04
-			dest_h = dest_w / aspect
+		# Prefer filling along the run without leaving gaps; allow mild overlap.
+		if dest_w > remain:
+			dest_w = remain
+			dest_h = clampf(dest_w / aspect, cell_px * 0.45, cell_px * 0.85)
 		if horizontal:
-			var dest := Rect2(base + Vector2(along, (cell_px - dest_h) * 0.52), Vector2(dest_w, dest_h))
+			var dest := Rect2(base + Vector2(along, (cell_px - dest_h) * 0.45), Vector2(dest_w, dest_h))
 			draw_texture_rect(tex, dest, false, mod)
 		else:
-			# Rotate horizontal sheet art 90° for vertical runs.
 			var cx := base.x + cell_px * 0.5
 			var cy := base.y + along + dest_w * 0.5
 			draw_set_transform(Vector2(cx, cy), -PI * 0.5, Vector2.ONE)
 			draw_texture_rect(tex, Rect2(Vector2(-dest_w * 0.5, -dest_h * 0.5), Vector2(dest_w, dest_h)), false, mod)
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-		along += dest_w * 0.90
+		along += dest_w * 0.92
+	# End caps when the run terminus has no perpendicular cover.
 	var cap: Texture2D = _g3_bag("sandbag_end_cap")
-	if cap and length >= 2:
-		var cap_sz := cell_px * 0.52
-		if horizontal:
-			draw_texture_rect(cap, Rect2(base + Vector2(-cap_sz * 0.2, (cell_px - cap_sz) * 0.5), Vector2(cap_sz, cap_sz)), false, mod)
-			draw_texture_rect(cap, Rect2(base + Vector2(run_len - cap_sz * 0.8, (cell_px - cap_sz) * 0.5), Vector2(cap_sz, cap_sz)), false, mod)
-		else:
-			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, -cap_sz * 0.2), Vector2(cap_sz, cap_sz)), false, mod)
-			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, run_len - cap_sz * 0.8), Vector2(cap_sz, cap_sz)), false, mod)
+	if cap == null or length < 2:
+		return
+	var cap_sz := cell_px * 0.55
+	if horizontal:
+		if not _cover_at(ox - 1, oy):
+			draw_texture_rect(cap, Rect2(base + Vector2(-cap_sz * 0.15, (cell_px - cap_sz) * 0.45), Vector2(cap_sz, cap_sz)), false, mod)
+		if not _cover_at(ox + length, oy):
+			draw_texture_rect(cap, Rect2(base + Vector2(run_len - cap_sz * 0.85, (cell_px - cap_sz) * 0.45), Vector2(cap_sz, cap_sz)), false, mod)
+	else:
+		if not _cover_at(ox, oy + length):
+			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, -cap_sz * 0.15), Vector2(cap_sz, cap_sz)), false, mod)
+		if not _cover_at(ox, oy - 1):
+			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, run_len - cap_sz * 0.85), Vector2(cap_sz, cap_sz)), false, mod)
 
 
 func _draw_g2_props() -> void:
