@@ -752,18 +752,46 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 	standard_ambush = standard_ambush_eligible and any_entered and all_in and escaped_ids.is_empty()
 
 	# PLAY-6: arm survivors to seek cover / later flee.
+	# D.3 scout cost: flanks still in the east alley peel back to east_alley exit
+	# instead of diving west into the yard cover (where main-road MG would erase them).
 	_entered_at_detonate = 0
 	for e in enemies:
 		if e["alive"] and e["entered"] and not e["escaped"]:
 			_entered_at_detonate += 1
-			e["mode"] = "cover"
-			e["cover_goal"] = _nearest_cover_cell(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
 			e["path"] = []
-			e["in_cover"] = _cell_is_cover(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
-			log.emit(tick, "enemy_seek_cover", {
-				"actor": e["id"],
-				"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y},
-			})
+			var ex := int(floor(float(e["x"])))
+			var ey := int(floor(float(e["y"])))
+			## D.3 scout cost: unwatched flanks still in the east alley peel to
+			## east_alley. If any gun already covers them (e.g. Kar@L), they stay
+			## and fight / die in place — plan A must still clear.
+			## Watch test uses alley centerline y=8 (same cell they peel on) so a
+			## fractional y just outside Kar's 15° cone cannot false-trigger peel.
+			var flank_in_alley := str(e.get("group", "")) == "flank" and ex >= 17
+			var watch_probe: Dictionary = e.duplicate()
+			watch_probe["y"] = 8.0
+			var watched := flank_in_alley and _enemy_watched_by_squad(watch_probe)
+			if flank_in_alley and not watched:
+				## Stay on alley centerline (y≈8) so barn MG LOS stays blocked by
+				## the (10,9) pier; a y=7 A* path dips into MG's clear lane.
+				e["y"] = 8.0
+				ex = int(floor(float(e["x"])))
+				ey = 8
+				e["mode"] = "flee"
+				e["cover_goal"] = _east_alley_exit_cell(ex, ey)
+				e["path"] = _east_alley_peel_path(ex, ey, e["cover_goal"])
+				e["in_cover"] = false
+				log.emit(tick, "enemy_flee", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "east_alley_peel"},
+				})
+			else:
+				e["mode"] = "cover"
+				e["cover_goal"] = _nearest_cover_cell(ex, ey)
+				e["in_cover"] = _cell_is_cover(ex, ey)
+				log.emit(tick, "enemy_seek_cover", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y},
+				})
 
 	var payload_trig := {"trigger": trig}
 	if not bind.is_empty():
@@ -1112,6 +1140,63 @@ func _nearest_exit_cell(x: int, y: int) -> Vector2i:
 			best_d = d
 			best = Vector2i(ex, ey)
 	return best
+
+
+func _east_alley_exit_cell(x: int, y: int) -> Vector2i:
+	## Prefer east_alley exit cells; fall back to nearest fail-on-escape exit.
+	var best := Vector2i(-1, -1)
+	var best_d := 1e9
+	for key in _exit_cells.keys():
+		if str(_exit_cells[key]) != "east_alley":
+			continue
+		var parts: PackedStringArray = str(key).split(",")
+		if parts.size() < 2:
+			continue
+		var ex := int(parts[0])
+		var ey := int(parts[1])
+		var d := Vector2(ex - x, ey - y).length()
+		if d < best_d:
+			best_d = d
+			best = Vector2i(ex, ey)
+	if best.x >= 0:
+		return best
+	return _nearest_exit_cell(x, y)
+
+
+func _enemy_watched_by_squad(e: Dictionary) -> bool:
+	## True if any living gun operator has this enemy in cone + LOS.
+	for op in operators:
+		if not op["alive"]:
+			continue
+		var wid := str(op.get("weapon_id", ""))
+		if wid in ["grenade", "mine", ""]:
+			continue
+		var w: Dictionary = weapons.get(wid, {})
+		if w.is_empty():
+			continue
+		var half := float(w.get("sector_deg", 0)) * 0.5
+		var rng := float(w.get("max_range", 0))
+		if not SimGeom.in_cone(float(op["x"]), float(op["y"]), float(op["facing_deg"]), half, rng, float(e["x"]), float(e["y"])):
+			continue
+		if not grid.los_clear(float(op["x"]), float(op["y"]), str(op["tier"]), float(e["x"]), float(e["y"]), SimConstants.TIER_GROUND):
+			continue
+		return true
+	return false
+
+
+func _east_alley_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
+	## Fixed corridor: east along y=8 then step to the gate cell. Avoids A* dipping to y=7.
+	var path: Array = [Vector2i(from_x, from_y)]
+	var x := from_x
+	while x < 22:
+		x += 1
+		path.append(Vector2i(x, 8))
+	if goal.x >= 0:
+		if path[path.size() - 1] != Vector2i(goal.x, 8):
+			path.append(Vector2i(goal.x, 8))
+		if path[path.size() - 1] != goal:
+			path.append(goal)
+	return path
 
 
 func _pick_target(op: Dictionary, w: Dictionary) -> Dictionary:
