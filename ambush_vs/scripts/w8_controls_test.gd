@@ -34,6 +34,7 @@ func _run_all() -> void:
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
+	await _test_briefing_and_phase_tips()
 	await _test_hud_layout_no_overlap()
 	await _test_phase_camera_frames_content()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
@@ -872,10 +873,109 @@ func _test_desktop_shortcuts() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 
 
+func _test_briefing_and_phase_tips() -> void:
+	## P0-3: opening briefing appears, dismissible, reopen via ?; phase tip once.
+	const BriefingCopy := preload("res://ui/briefing_copy.gd")
+	## Blacklist on all teaching strings (also covered by w8_briefing_blacklist_test).
+	for t in BriefingCopy.all_teaching_texts():
+		var hits: PackedStringArray = BriefingCopy.forbidden_hits(str(t))
+		_assert(hits.is_empty(), "teaching text blacklist clean got=%s in=%s" % [str(hits), str(t).substr(0, 40)])
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "briefing scene err=%s" % err)
+	for _i in range(260):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.briefing_card == null:
+			continue
+		## Fit asserts at both playable viewports before content checks.
+		for size_pair in [Vector2i(1280, 720), Vector2i(844, 390)]:
+			scene.apply_layout_size(size_pair.x, size_pair.y)
+			scene._show_briefing_card()
+			await process_frame
+			await process_frame
+			await process_frame
+			var tag := "%dx%d" % [size_pair.x, size_pair.y]
+			_assert(scene.briefing_card.visible, "briefing visible %s" % tag)
+			_assert(scene.briefing_dimmer != null and scene.briefing_dimmer.visible,
+				"dimmer visible %s" % tag)
+			var lay: Dictionary = scene.briefing_layout_ok(float(size_pair.x), float(size_pair.y))
+			_assert(bool(lay.get("card_in", false)), "briefing card on-screen %s got=%s" % [tag, lay])
+			_assert(bool(lay.get("btn_in", false)), "briefing dismiss on-screen %s got=%s" % [tag, lay])
+			_assert(float(lay.get("btn_h", 0.0)) + 1e-3 >= 44.0,
+				"briefing dismiss ≥44px %s h=%s" % [tag, lay.get("btn_h")])
+			_assert(not bool(lay.get("text_clip", true)), "briefing text not clipped %s got=%s" % [tag, lay])
+			_assert(bool(lay.get("ok", false)), "briefing layout ok %s got=%s" % [tag, lay])
+		scene.apply_layout_size(1280, 720)
+		scene._show_briefing_card()
+		await process_frame
+		await process_frame
+		_assert(scene.briefing_card.visible, "briefing visible on first boot")
+		_assert(scene.briefing_show_count >= 1, "briefing show counted")
+		_assert(str(scene.briefing_body.text).contains("全歼"), "briefing mentions 全歼")
+		_assert(str(scene.briefing_body.text).contains("北门"), "briefing lists 北门")
+		_assert(str(scene.briefing_body.text).contains("南门"), "briefing lists 南门")
+		_assert(str(scene.briefing_body.text).contains("东巷"), "briefing lists 东巷")
+		_assert(str(scene.briefing_body.text).contains("侦察"), "briefing lists 侦察")
+		_assert(str(scene.briefing_body.text).contains("搜集"), "briefing lists 搜集")
+		_assert(str(scene.briefing_body.text).contains("布阵"), "briefing lists 布阵")
+		_assert(str(scene.briefing_body.text).contains("等待"), "briefing lists 等待")
+		_assert(str(scene.briefing_body.text).contains("起爆"), "briefing lists 起爆")
+		## Dismiss.
+		scene.btn_briefing_dismiss.pressed.emit()
+		await process_frame
+		_assert(not scene.briefing_card.visible, "briefing closes on 知道了")
+		_assert(scene.briefing_dimmer == null or not scene.briefing_dimmer.visible, "dimmer hides with card")
+		_assert(scene.briefing_dismiss_count >= 1, "briefing dismiss counted")
+		## Scout tip after dismiss (first scout entry may have been blocked by briefing).
+		scene._phase_tip_seen.erase("scout")
+		scene._set_ui_phase(scene.UiPhase.SCOUT)
+		await process_frame
+		_assert(scene.phase_tip_bar.visible, "scout tip shows once")
+		var tip1 := str(scene.phase_tip_label.text)
+		scene.btn_phase_tip_close.pressed.emit()
+		await process_frame
+		_assert(not scene.phase_tip_bar.visible, "scout tip closable")
+		scene._set_ui_phase(scene.UiPhase.SCOUT)
+		await process_frame
+		_assert(not scene.phase_tip_bar.visible, "scout tip does not repeat")
+		## Setup tip once.
+		scene._set_ui_phase(scene.UiPhase.SETUP)
+		await process_frame
+		_assert(scene.phase_tip_bar.visible, "setup tip shows")
+		_assert(str(scene.phase_tip_label.text) != tip1, "setup tip differs from scout")
+		scene._hide_phase_tip()
+		scene._set_ui_phase(scene.UiPhase.SETUP)
+		await process_frame
+		_assert(not scene.phase_tip_bar.visible, "setup tip once only")
+		## Reopen via ?
+		scene.btn_shortcuts_help.pressed.emit()
+		await process_frame
+		_assert(scene.briefing_card.visible, "? reopens briefing")
+		scene._dismiss_briefing_card(true)
+		await process_frame
+		_assert(not scene.briefing_card.visible, "briefing closed again")
+		## Layout still OK after briefing dismissed.
+		scene.dismiss_overlays_for_layout_test()
+		scene.apply_layout_size(1280, 720)
+		await process_frame
+		var map_frac: float = scene.map_viewport_area_fraction()
+		_assert(map_frac + 1e-4 >= 0.60, "map area after briefing dismiss ≥60%% got %.1f%%" % (map_frac * 100.0))
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "briefing scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
 func _test_hud_layout_no_overlap() -> void:
 	## No overlap + map fills leftover space (≥60% area; ≥75% in wait).
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "layout scene err=%s" % err)
 	for _i in range(220):
@@ -919,14 +1019,16 @@ func _test_hud_layout_no_overlap() -> void:
 							scene._start_wait()
 							await process_frame
 						scene._set_ui_phase(scene.UiPhase.RESULT)
-				if scene.pause_menu:
+				if scene.has_method("dismiss_overlays_for_layout_test"):
+					scene.dismiss_overlays_for_layout_test()
+				elif scene.pause_menu:
 					scene.pause_menu.visible = false
-				if scene.shortcuts_help:
-					scene.shortcuts_help.visible = false
-				if scene.info_card:
-					scene.info_card.visible = false
-				if scene.dev_menu:
-					scene.dev_menu.visible = false
+					if scene.shortcuts_help:
+						scene.shortcuts_help.visible = false
+					if scene.info_card:
+						scene.info_card.visible = false
+					if scene.dev_menu:
+						scene.dev_menu.visible = false
 				scene.apply_layout_size(size_pair.x, size_pair.y)
 				await process_frame
 				await process_frame
@@ -1092,6 +1194,7 @@ func _test_phase_camera_frames_content() -> void:
 	## At phase start, every operator + enemy spawn cell is inside the visible map view.
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "camera-frame scene err=%s" % err)
 	for _i in range(220):
@@ -1103,6 +1206,8 @@ func _test_phase_camera_frames_content() -> void:
 			for phase_name in ["scout", "setup", "wait"]:
 				scene.apply_layout_size(size_pair.x, size_pair.y)
 				await process_frame
+				if scene.has_method("dismiss_overlays_for_layout_test"):
+					scene.dismiss_overlays_for_layout_test()
 				match phase_name:
 					"scout":
 						scene._start_scout_phase()
