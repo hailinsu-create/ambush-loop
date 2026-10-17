@@ -24,7 +24,8 @@ PLAY-3 文档记 W2 **61**（当时无 wait-turn 用例）。PLAY-4 在 `w2_sim_
 | PLAY-5 `82aa445` | **未改**金标 | 复盘卡只读日志，不进 `NightSim` |
 | **PLAY-6**（本切片） | **已改** hash；t0 仍 520/560 | 起爆后掩体/还击/逃跑、队员 HP/弹药、按 RPM 扣弹进入 `NightSim` 日志 → 事件集变化。新 hash 见 `ambush_vs/data/golden/hashes.json`；理由见 [PLAY-6](VS_PLAY6_ENEMY_REACT_20261017.md) 与下方 DECISIONS |
 | P0-1 切片 1 `997e9f9` | **已改** hash；t0 仍 520/560 | `(10,9)` 墙 + 东巷侧翼 peel → 战斗日志变。见 [COUNTEREX](VS_P0_1_COUNTEREX_20261017.md) / 纸面 v1.3 |
-| P0-1 切片 2（本轮） | **已改** hash；t0 仍 520/560 | MP 150°、`(11,7)` 矮掩、`unwatched_break` / 监视钉住 → 事件集变。A=`a89a0e5a…` B=`759b56e1…`。见纸面 v1.4 |
+| P0-1 切片 2 `95028ef` | **已改** hash；t0 仍 520/560 | MP 150°、`(11,7)` 矮掩、`unwatched_break` / 监视钉住 → 事件集变。A=`a89a0e5a…` B=`759b56e1…`。见纸面 v1.4 |
+| P0-1 切片 3（本轮） | **未改** hash；t0 仍 520/560 | `road_tail` + 后尾 peel 只影响过早起爆；理想 A/B 日志不变。见纸面 v1.5 |
 
 PLAY-4 金标理由原文：`.cursor/docs/VS_PLAY4_WAIT_UX_20261017.md` §金标变更理由。
 
@@ -37,3 +38,4 @@ PLAY-4 金标理由原文：`.cursor/docs/VS_PLAY4_WAIT_UX_20261017.md` §金标
 5. **P0-1 量测（2026-10-17）**：`NightSim.enemy_return_soft_cap`（默认 true）仅供对照。D.3 矩阵见 [`COUNTEREX_P0_1_RESULTS`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)。
 6. **P0-1 切片 1（东巷）**：院子 **v1.3** — `(10,9)` 墙断 MG→巷口 LOS；未监视侧翼东撤。**改 hash**，t0 仍 520/560。理由：事件集变化（墙/东撤）。
 7. **P0-1 切片 2（F-B 交叉）**：院子 **v1.4** — 方案 B MP 150°、`(11,7)` 矮掩、`unwatched_break` + 监视钉住不逃。**改 hash**（A=`a89a0e5a…` B=`759b56e1…`），t0 仍 520/560。
+8. **P0-1 切片 3（起爆窗）**：院子 **v1.5** — 出口 `road_tail`；主路 `y≥12` 后尾 peel。**不改 hash**（理想窗无 peel），t0 仍 520/560。

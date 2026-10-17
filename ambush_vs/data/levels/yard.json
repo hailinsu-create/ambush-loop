@@ -1,6 +1,6 @@
 {
   "id": "yard",
-  "version": 5,
+  "version": 6,
   "title": "院子",
   "night": true,
   "ambush_targets": [
@@ -100,6 +100,24 @@
         {
           "x": 23,
           "y": 7
+        }
+      ],
+      "fail_on_enemy_escape": true
+    },
+    {
+      "id": "road_tail",
+      "cells": [
+        {
+          "x": 10,
+          "y": 14
+        },
+        {
+          "x": 11,
+          "y": 14
+        },
+        {
+          "x": 12,
+          "y": 14
         }
       ],
       "fail_on_enemy_escape": true
@@ -399,7 +417,8 @@
   "fail": {
     "enemy_escape_exits": [
       "south_gate",
-      "east_alley"
+      "east_alley",
+      "road_tail"
     ],
     "squad_wipe": true
   },

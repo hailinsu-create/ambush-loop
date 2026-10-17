@@ -771,6 +771,10 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 			var watch_probe: Dictionary = e.duplicate()
 			watch_probe["y"] = 8.0
 			var watched := flank_in_alley and _enemy_watched_by_squad(watch_probe)
+			## Timing cost: main-road rear still south of the packed band (y≥12)
+			## peels back to road_tail instead of diving north into the kill cone.
+			## At ideal t0 E4 is ≈11.5 — no peel; at t0−2 s E4 is ≈12.5 — escapes.
+			var rear_south := str(e.get("group", "")) == "main" and float(e["y"]) >= 12.0 - 1e-9
 			if flank_in_alley and not watched:
 				## Stay on alley centerline (y≈8) so barn MG LOS stays blocked by
 				## the (10,9) pier; a y=7 A* path dips into MG's clear lane.
@@ -784,6 +788,17 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 				log.emit(tick, "enemy_flee", {
 					"actor": e["id"],
 					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "east_alley_peel"},
+				})
+			elif rear_south:
+				e["mode"] = "flee"
+				e["cover_goal"] = _exit_cell_by_id("road_tail", ex, ey)
+				if e["cover_goal"].x < 0:
+					e["cover_goal"] = Vector2i(11, 14)
+				e["path"] = _road_tail_peel_path(ex, ey, e["cover_goal"])
+				e["in_cover"] = false
+				log.emit(tick, "enemy_flee", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "road_tail_peel"},
 				})
 			else:
 				e["mode"] = "cover"
@@ -1254,6 +1269,20 @@ func _east_alley_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
 			path.append(Vector2i(goal.x, 8))
 		if path[path.size() - 1] != goal:
 			path.append(goal)
+	return path
+
+
+func _road_tail_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
+	## Fixed corridor: south along the main road to the spawn-edge exit.
+	var path: Array = [Vector2i(from_x, from_y)]
+	var y := from_y
+	var gx := goal.x if goal.x >= 0 else 11
+	var gy := goal.y if goal.y >= 0 else 14
+	while y < gy:
+		y += 1
+		path.append(Vector2i(11, y))
+	if path[path.size() - 1] != Vector2i(gx, gy):
+		path.append(Vector2i(gx, gy))
 	return path
 
 

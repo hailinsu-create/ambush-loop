@@ -2,7 +2,7 @@
 
 | 字段 | 值 |
 |------|-----|
-| 状态 | **切片 2 已验证**；进行 T-A−2 / ALERT-global |
+| 状态 | **切片 3 已验证**；进行 ALERT-global |
 | 分支 | `vs/p0-1-counterex` |
 | 基线 | `vs/g3` @ `5f31b75` |
 | chatgpt | unavailable |
@@ -17,12 +17,13 @@ D.3 反例门「错了就会输」；软顶默认保留；逐片改几何使不�
 |----|------|------|
 | 0 | 量测门 + 软顶对照 | `b5a8a27` |
 | 1 | 东巷脱出；纸面 v1.3；金标 hash | `997e9f9` |
-| 2 | F-B30/60；纸面 v1.4；MP 150°；unwatched_break | （本切片） |
-| 3+ | T-A−2 / ALERT-global | 待做 |
+| 2 | F-B30/60；纸面 v1.4；MP 150°；unwatched_break | `95028ef` |
+| 3 | T-A−2；纸面 v1.5；`road_tail` 后尾 peel | （本切片） |
+| 4 | ALERT-global | 待做 |
 
-## 切片 2 后仍缺
+## 切片 3 后仍缺
 
-T-A−2、ALERT-global。
+ALERT-global（0 胜）。
 
 ## 替代关系
 
