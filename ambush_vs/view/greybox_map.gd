@@ -18,6 +18,10 @@ signal cell_long_pressed(cell: Vector2i)
 signal aim_drag_started(op_id: String, pos: Vector2)
 signal aim_drag_updated(op_id: String, world_dir: Vector2, preview_deg: float)
 signal aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool)
+## PLAY-UX PR-4: empty-cell drag (trip line / pan placeholder).
+signal ground_drag_started(start_cell: Vector2i, pos: Vector2)
+signal ground_drag_moved(cell: Vector2i, start_cell: Vector2i, pos: Vector2)
+signal ground_drag_ended(end_cell: Vector2i, start_cell: Vector2i, cancelled: bool)
 
 enum ArtMode { G3, G2, G1 }
 
@@ -79,9 +83,16 @@ var sel_ring_width: float = 4.0
 var unsel_ring_width: float = 1.6
 var aim_preview_deg: float = NAN
 var aim_preview_op: String = ""
+## PLAY-UX PR-4 overlays.
+var legal_cells: Array = [] ## Vector2i walkable/placeable highlights
+var place_ghost_cell: Vector2i = Vector2i(-1, -1)
+var trip_preview_a: Vector2i = Vector2i(-1, -1)
+var trip_preview_b: Vector2i = Vector2i(-1, -1)
 ## Counts for headless tests.
 var tap_emit_count: int = 0
 var drag_emit_count: int = 0
+var _dragging_ground: bool = false
+var _ground_start_cell: Vector2i = Vector2i(-1, -1)
 
 
 func _ready() -> void:
@@ -344,6 +355,9 @@ func _draw() -> void:
 		_:
 			pass
 	_draw_high_slot_highlights()
+	_draw_legal_cells()
+	_draw_place_ghost()
+	_draw_trip_preview()
 	# G1 readability overlays always on top of terrain/props.
 	if show_cones:
 		_draw_enemy_cones()
@@ -396,6 +410,37 @@ func _draw_supply_state_badge(sid: String, x: int, y: int) -> void:
 		_:
 			return
 	draw_string(ThemeDB.fallback_font, p, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, col)
+
+
+func _draw_legal_cells() -> void:
+	if legal_cells.is_empty():
+		return
+	for c in legal_cells:
+		var cell: Vector2i = c
+		var p := Vector2(cell.x * cell_px, (grid_h - 1 - cell.y) * cell_px)
+		draw_rect(Rect2(p, Vector2(cell_px, cell_px)), Color(0.25, 0.85, 0.40, 0.18), true)
+		draw_rect(Rect2(p + Vector2(1, 1), Vector2(cell_px - 2, cell_px - 2)), Color(0.35, 0.95, 0.50, 0.35), false, 1.5)
+
+
+func _draw_place_ghost() -> void:
+	if place_ghost_cell.x < 0:
+		return
+	var p := Vector2(place_ghost_cell.x * cell_px, (grid_h - 1 - place_ghost_cell.y) * cell_px)
+	draw_rect(Rect2(p, Vector2(cell_px, cell_px)), Color(1.0, 0.92, 0.35, 0.35), true)
+	draw_rect(Rect2(p + Vector2(2, 2), Vector2(cell_px - 4, cell_px - 4)), Color(1.0, 0.95, 0.4, 0.9), false, 2.5)
+	draw_string(ThemeDB.fallback_font, p + Vector2(cell_px * 0.28, cell_px * 0.62), "✓", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(1, 1, 0.7, 0.95))
+
+
+func _draw_trip_preview() -> void:
+	if trip_preview_a.x < 0:
+		return
+	var pa := cell_to_screen(float(trip_preview_a.x), float(trip_preview_a.y))
+	draw_circle(pa, cell_px * 0.22, Color(1.0, 0.86, 0.3, 0.85))
+	if trip_preview_b.x < 0:
+		return
+	var pb := cell_to_screen(float(trip_preview_b.x), float(trip_preview_b.y))
+	draw_line(pa, pb, Color(1.0, 0.86, 0.3, 0.9), 3.5)
+	draw_circle(pb, cell_px * 0.22, Color(1.0, 0.86, 0.3, 0.85))
 
 
 func _draw_high_slot_highlights() -> void:
@@ -1989,6 +2034,7 @@ func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
 	_dragging_op = hit
 	_drag_start = start_pos
 	aim_preview_op = hit
+	_dragging_ground = false
 	if hit != "":
 		selected_op_id = hit
 		unit_selected.emit(hit)
@@ -1996,10 +2042,19 @@ func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
 		var dir := pos - origin
 		aim_preview_deg = rad_to_deg(atan2(-dir.y, dir.x)) if dir.length() >= 1.0 else NAN
 		aim_drag_started.emit(hit, pos)
+	else:
+		_dragging_ground = true
+		_ground_start_cell = screen_to_cell(start_pos)
+		ground_drag_started.emit(_ground_start_cell, pos)
 	queue_redraw()
 
 
 func _on_gesture_drag_moved(pos: Vector2, start_pos: Vector2) -> void:
+	if _dragging_ground:
+		drag_emit_count += 1
+		ground_drag_moved.emit(screen_to_cell(pos), _ground_start_cell, pos)
+		queue_redraw()
+		return
 	if _dragging_op == "":
 		return
 	drag_emit_count += 1
@@ -2014,6 +2069,16 @@ func _on_gesture_drag_moved(pos: Vector2, start_pos: Vector2) -> void:
 
 
 func _on_gesture_drag_ended(pos: Vector2, start_pos: Vector2, cancelled: bool) -> void:
+	if _dragging_ground:
+		var end_cell := screen_to_cell(pos)
+		# Cancel if released near press origin (router already sets cancelled).
+		if pos.distance_to(start_pos) < gesture.slop_px:
+			cancelled = true
+		ground_drag_ended.emit(end_cell, _ground_start_cell, cancelled)
+		_dragging_ground = false
+		_ground_start_cell = Vector2i(-1, -1)
+		queue_redraw()
+		return
 	var op_id := _dragging_op
 	var origin := cell_to_screen(_op_pos(op_id).x, _op_pos(op_id).y) if op_id != "" else start_pos
 	var dir := pos - origin

@@ -129,6 +129,13 @@ const NEXT_NIGHT_KIT_PATH := "user://next_night_kit.json"
 ## PLAY-UX PR-2: bottom-left portrait strip (all phases).
 var portrait_strip: HBoxContainer = null
 var _facing_submit_count: int = 0 ## test: wait re-aim submissions
+## PLAY-UX PR-4: explicit tools + trigger chips.
+var tool_bar: HBoxContainer = null
+var trigger_chip_row: HBoxContainer = null
+var setup_tool: String = "op" ## op | mine | trigger
+var _trip_drag_start: Vector2i = Vector2i(-1, -1)
+var pending_place_cell: Vector2i = Vector2i(-1, -1) ## ghost confirm cell
+var _last_unit_drag_cell: Vector2i = Vector2i(-1, -1)
 
 
 func _ready() -> void:
@@ -150,8 +157,12 @@ func _ready() -> void:
 	map_view.cell_dragged.connect(_on_cell_dragged)
 	map_view.unit_selected.connect(_on_unit_selected)
 	map_view.aim_drag_ended.connect(_on_aim_drag_ended)
+	map_view.ground_drag_started.connect(_on_ground_drag_started)
+	map_view.ground_drag_moved.connect(_on_ground_drag_moved)
+	map_view.ground_drag_ended.connect(_on_ground_drag_ended)
 	map_view.unit_hit_radius_cells = 0.8
 	_build_portrait_strip()
+	_build_setup_tool_bars()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -371,7 +382,8 @@ func _init_blank_plan_from_scout() -> void:
 		}
 		ops.append(op)
 		op_display_names[oid] = dname
-		op_placed[oid] = false
+		# PLAY-UX PR-4: entry cell counts as placed (yellow reminder only).
+		op_placed[oid] = true
 		i += 1
 	var dt: Dictionary = level.get("default_trigger", {"type": "manual"}).duplicate(true)
 	dt.erase("plan_id")
@@ -396,10 +408,15 @@ func _init_blank_plan_from_scout() -> void:
 	}
 	selected_op_id = str(ops[0]["id"]) if ops else ""
 	place_mode = PlaceMode.OP
+	setup_tool = "op"
+	pending_place_cell = Vector2i(-1, -1)
 	_sync_trigger_option_from_plan()
 	_push_map_snapshot()
-	label_info.text = "从南门入场位开始 · 点队员卡选人，再点合法格放置；拖拽设朝向"
+	label_info.text = "入场位已就位 · 用工具栏放置/拖队员落位 · 仍在入场位可微调"
 	_refresh_op_cards()
+	_refresh_tool_chips()
+	_refresh_trigger_chips()
+	_update_legal_highlights()
 	_refresh_start_gate()
 
 
@@ -668,32 +685,163 @@ func _sync_trigger_option_from_plan() -> void:
 
 
 func _on_trigger_selected(idx: int) -> void:
+	## Trigger type only — does NOT switch place/tool mode (PLAY-UX PR-4).
 	if ui_phase != UiPhase.SETUP:
 		return
 	var t := str(trigger_option.get_item_metadata(idx))
+	_apply_trigger_type(t)
+	_refresh_trigger_chips()
+	_push_map_snapshot()
+	_refresh_start_gate()
+
+
+func _apply_trigger_type(t: String) -> void:
 	match t:
 		"see_first_enemy":
 			var bind := selected_op_id if selected_op_id else _op_id_for_weapon("kar98k")
 			if bind == "" and plan.get("operators", []):
 				bind = str(plan["operators"][0]["id"])
 			plan["trigger"] = {"type": "see_first_enemy", "bind": bind}
-			place_mode = PlaceMode.OP
-			label_info.text = "起爆：见首敌 · 绑定 %s" % op_display_names.get(bind, bind)
+			label_info.text = "起爆：见首敌 · 绑定 %s（工具不变）" % op_display_names.get(bind, bind)
 		"mine_detonate":
-			plan["mines"] = []
-			plan["trigger"] = {"type": "mine_detonate", "bind": ""}
-			place_mode = PlaceMode.MINE
-			label_info.text = "起爆：地雷 · 请点地图放置地雷"
+			if plan.get("mines", []).is_empty():
+				plan["mines"] = []
+			plan["trigger"] = {"type": "mine_detonate", "bind": str((plan.get("mines", [{}])[0] if plan.get("mines", []) else {}).get("id", ""))}
+			label_info.text = "起爆：地雷 · 用「地雷」工具放置"
 		"cross_marker":
-			plan["trigger"] = {"type": "cross_marker", "bind": "marker_y7"}
-			place_mode = PlaceMode.TRIGGER_A
-			label_info.text = "起爆：越线标记 · 请点地图设起点"
+			var trig: Dictionary = plan.get("trigger", {}).duplicate(true)
+			trig["type"] = "cross_marker"
+			if not trig.has("bind"):
+				trig["bind"] = "marker_y7"
+			plan["trigger"] = trig
+			label_info.text = "起爆：越线 · 用「触发线」工具一笔拖出"
 		"manual":
 			plan["trigger"] = {"type": "manual"}
-			place_mode = PlaceMode.OP
 			label_info.text = "起爆：手动"
+		_:
+			pass
+
+
+func _build_setup_tool_bars() -> void:
+	if tool_bar != null:
+		return
+	tool_bar = HBoxContainer.new()
+	tool_bar.name = "ToolBar"
+	tool_bar.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	tool_bar.offset_left = -420
+	tool_bar.offset_top = 52
+	tool_bar.offset_right = -8
+	tool_bar.offset_bottom = 140
+	tool_bar.add_theme_constant_override("separation", 6)
+	$HUD.add_child(tool_bar)
+	for pair in [["op", "队员"], ["mine", "地雷"], ["trigger", "触发线"]]:
+		var b := Button.new()
+		b.name = "Tool_%s" % pair[0]
+		b.text = str(pair[1])
+		b.custom_minimum_size = Vector2(100, 88)
+		b.toggle_mode = true
+		b.add_theme_font_size_override("font_size", 18)
+		b.pressed.connect(_on_tool_chip.bind(str(pair[0])))
+		tool_bar.add_child(b)
+	trigger_chip_row = HBoxContainer.new()
+	trigger_chip_row.name = "TriggerChips"
+	trigger_chip_row.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	trigger_chip_row.offset_left = -420
+	trigger_chip_row.offset_top = 148
+	trigger_chip_row.offset_right = -8
+	trigger_chip_row.offset_bottom = 236
+	trigger_chip_row.add_theme_constant_override("separation", 4)
+	$HUD.add_child(trigger_chip_row)
+	for pair in [
+		["see_first_enemy", "见首敌"],
+		["mine_detonate", "地雷"],
+		["cross_marker", "越线"],
+		["manual", "手动"],
+	]:
+		var c := Button.new()
+		c.name = "Trig_%s" % pair[0]
+		c.text = str(pair[1])
+		c.custom_minimum_size = Vector2(88, 88)
+		c.toggle_mode = true
+		c.add_theme_font_size_override("font_size", 16)
+		c.pressed.connect(_on_trigger_chip.bind(str(pair[0])))
+		trigger_chip_row.add_child(c)
+	_refresh_tool_chips()
+	_refresh_trigger_chips()
+	_update_setup_chrome_visibility()
+
+
+func _on_tool_chip(tool_id: String) -> void:
+	_ui_tap()
+	setup_tool = tool_id
+	match tool_id:
+		"mine":
+			place_mode = PlaceMode.MINE
+		"trigger":
+			place_mode = PlaceMode.TRIGGER_A
+			_trip_drag_start = Vector2i(-1, -1)
+		_:
+			place_mode = PlaceMode.OP
+	label_info.text = "工具：%s" % {"op": "队员", "mine": "地雷", "trigger": "触发线"}.get(tool_id, tool_id)
+	_refresh_tool_chips()
+	_update_legal_highlights()
 	_push_map_snapshot()
+
+
+func _on_trigger_chip(trig: String) -> void:
+	_ui_tap()
+	_apply_trigger_type(trig)
+	_sync_trigger_option_from_plan()
+	_refresh_trigger_chips()
+	# Explicit: tool mode unchanged.
+	_refresh_tool_chips()
 	_refresh_start_gate()
+	_push_map_snapshot()
+
+
+func _refresh_tool_chips() -> void:
+	if tool_bar == null:
+		return
+	for c in tool_bar.get_children():
+		var id := str(c.name).replace("Tool_", "")
+		c.button_pressed = id == setup_tool
+		c.modulate = Color(1.0, 0.92, 0.45) if id == setup_tool else Color.WHITE
+
+
+func _refresh_trigger_chips() -> void:
+	if trigger_chip_row == null:
+		return
+	var cur := str(plan.get("trigger", {}).get("type", "manual"))
+	for c in trigger_chip_row.get_children():
+		var id := str(c.name).replace("Trig_", "")
+		c.button_pressed = id == cur
+		c.modulate = Color(0.7, 0.9, 1.0) if id == cur else Color.WHITE
+
+
+func _update_setup_chrome_visibility() -> void:
+	var show := ui_phase == UiPhase.SETUP
+	if tool_bar:
+		tool_bar.visible = show
+	if trigger_chip_row:
+		trigger_chip_row.visible = show
+	if trigger_option:
+		trigger_option.visible = false ## replaced by chips
+
+
+func _update_legal_highlights() -> void:
+	if map_view == null or grid == null:
+		return
+	var cells: Array = []
+	if ui_phase != UiPhase.SETUP:
+		map_view.legal_cells = []
+		return
+	if setup_tool == "mine" or setup_tool == "op":
+		for y in range(grid.height):
+			for x in range(grid.width):
+				if grid.walkable(x, y):
+					cells.append(Vector2i(x, y))
+	map_view.legal_cells = cells
+	map_view.queue_redraw()
 
 
 func _set_ui_phase(p: UiPhase) -> void:
@@ -713,6 +861,10 @@ func _set_ui_phase(p: UiPhase) -> void:
 		UiPhase.RESULT:
 			label_phase.text = "结算"
 	_refresh_portrait_strip()
+	_update_setup_chrome_visibility()
+	_update_legal_highlights()
+	_refresh_tool_chips()
+	_refresh_trigger_chips()
 
 
 func start_block_reason() -> String:
@@ -885,14 +1037,16 @@ func _on_cell_tapped(cell: Vector2i) -> void:
 		match place_mode:
 			PlaceMode.MINE:
 				_place_mine_at(cell)
-			PlaceMode.TRIGGER_A:
-				_place_trigger_point(cell, true)
-			PlaceMode.TRIGGER_B:
-				_place_trigger_point(cell, false)
+			PlaceMode.TRIGGER_A, PlaceMode.TRIGGER_B:
+				# PR-4: trip line is one drag, not two taps.
+				label_info.text = "触发线：按住拖出起点→终点"
 			_:
 				if selected_op_id != "" and grid.walkable(cell.x, cell.y):
-					_move_selected_op(cell)
+					_handle_op_place_tap(cell)
 				else:
+					pending_place_cell = Vector2i(-1, -1)
+					if map_view:
+						map_view.place_ghost_cell = Vector2i(-1, -1)
 					label_info.text = "格 (%d,%d) · 可见观察者 %d" % [cell.x, cell.y, preview_seers.size()]
 		_push_map_snapshot()
 		_refresh_start_gate()
@@ -901,6 +1055,20 @@ func _on_cell_tapped(cell: Vector2i) -> void:
 		preview_seers = sim.observers_seeing_cell(float(cell.x), float(cell.y), grid.tier_at(float(cell.x), float(cell.y)))
 		label_info.text = "格 (%d,%d) · 可见 %d" % [cell.x, cell.y, preview_seers.size()]
 		_push_map_snapshot()
+
+
+func _handle_op_place_tap(cell: Vector2i) -> void:
+	## Ghost + confirm: first tap shows ✓, second tap same cell places.
+	if pending_place_cell == cell:
+		_move_selected_op(cell)
+		pending_place_cell = Vector2i(-1, -1)
+		if map_view:
+			map_view.place_ghost_cell = Vector2i(-1, -1)
+		return
+	pending_place_cell = cell
+	if map_view:
+		map_view.place_ghost_cell = cell
+	label_info.text = "放置预览 (%d,%d) · 再点确认 / 拖队员落位" % [cell.x, cell.y]
 
 
 func _on_scout_cell_tapped(cell: Vector2i) -> void:
@@ -944,13 +1112,17 @@ func _refresh_scout_hud() -> void:
 
 func _place_mine_at(cell: Vector2i) -> void:
 	if not grid.walkable(cell.x, cell.y):
-		label_info.text = "此处不能放地雷"
+		label_info.text = "此处不能放地雷（非法格）"
 		return
 	var mid := "mine_%d_%d" % [cell.x, cell.y]
 	plan["mines"] = [{"id": mid, "x": cell.x, "y": cell.y}]
 	plan["trigger"] = {"type": "mine_detonate", "bind": mid}
 	place_mode = PlaceMode.OP
-	label_info.text = "地雷已放在 (%d,%d)" % [cell.x, cell.y]
+	setup_tool = "op"
+	_refresh_tool_chips()
+	_refresh_trigger_chips()
+	_update_legal_highlights()
+	label_info.text = "地雷已放在 (%d,%d) · 工具回到队员" % [cell.x, cell.y]
 
 
 func _place_trigger_point(cell: Vector2i, is_a: bool) -> void:
@@ -999,26 +1171,32 @@ func _move_selected_op(cell: Vector2i) -> void:
 			op_placed[selected_op_id] = true
 			var dname := str(op_display_names.get(selected_op_id, "队员"))
 			var tier := str(op["tier"])
-			label_info.text = "%s 已放置 (%d,%d)%s" % [
+			label_info.text = "%s 已放置 (%d,%d)%s · 拖锥尖设朝向" % [
 				dname, cell.x, cell.y, " · 高点" if tier == "high" else ""
 			]
-			# PLAY-UX: deselect after placement so next empty tap won't teleports.
-			selected_op_id = ""
+			# PR-4: keep selection for aim handle; empty taps use ghost confirm (no teleport).
 			if map_view:
-				map_view.selected_op_id = ""
+				map_view.selected_op_id = selected_op_id
+				map_view.place_ghost_cell = Vector2i(-1, -1)
+			pending_place_cell = Vector2i(-1, -1)
 			_refresh_op_cards()
 			_refresh_portrait_strip()
 			return
 
 
 func _on_cell_dragged(_cell: Vector2i, world_dir: Vector2) -> void:
-	## SETUP: live facing preview while dragging. WAIT: preview only (commit on aim_drag_ended).
+	## SETUP place-drag: ghost under finger. WAIT: facing preview only.
 	if selected_op_id == "":
 		return
 	if world_dir.length() < 8.0:
 		return
 	var facing := rad_to_deg(atan2(-world_dir.y, world_dir.x))
 	if ui_phase == UiPhase.SETUP:
+		# Live facing while aiming near unit; place ghost when over a cell.
+		_last_unit_drag_cell = _cell
+		if setup_tool == "op" and map_view:
+			map_view.place_ghost_cell = _cell
+			pending_place_cell = _cell
 		for op in plan.get("operators", []):
 			if str(op["id"]) == selected_op_id:
 				op["facing_deg"] = facing
@@ -1040,6 +1218,9 @@ func _facing_delta_deg(from_deg: float, to_deg: float) -> float:
 
 
 func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool) -> void:
+	if ui_phase == UiPhase.SETUP:
+		_on_setup_unit_drag_ended(op_id, world_dir, preview_deg, cancelled)
+		return
 	if ui_phase != UiPhase.WAIT or sim == null or sim.plan_locked:
 		return
 	if cancelled or op_id == "" or world_dir.length() < 8.0 or is_nan(preview_deg):
@@ -1058,6 +1239,97 @@ func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, c
 		label_info.text = "%s 朝向已更新" % dname
 	_refresh_portrait_strip()
 	_push_map_snapshot()
+
+
+func _on_setup_unit_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool) -> void:
+	## Drag unit onto a walkable cell → place; else keep facing from drag.
+	var drop := _last_unit_drag_cell
+	_last_unit_drag_cell = Vector2i(-1, -1)
+	if map_view:
+		map_view.place_ghost_cell = Vector2i(-1, -1)
+	pending_place_cell = Vector2i(-1, -1)
+	if cancelled or op_id == "" or setup_tool != "op":
+		_push_map_snapshot()
+		return
+	selected_op_id = op_id
+	var ox := 0
+	var oy := 0
+	for op in plan.get("operators", []):
+		if str(op["id"]) == op_id:
+			ox = int(op["x"])
+			oy = int(op["y"])
+			break
+	if drop.x < 0 and map_view and world_dir.length() >= 8.0:
+		var screen_origin: Vector2 = map_view.cell_to_screen(float(ox), float(oy))
+		drop = map_view.screen_to_cell(screen_origin + world_dir)
+	if drop.x >= 0 and grid.walkable(drop.x, drop.y) and (drop.x != ox or drop.y != oy):
+		_move_selected_op(drop)
+		if not is_nan(preview_deg):
+			for op2 in plan.get("operators", []):
+				if str(op2["id"]) == op_id:
+					op2["facing_deg"] = preview_deg
+					break
+		_refresh_start_gate()
+		_push_map_snapshot()
+		return
+	# Same cell / short drag: facing only (already applied live).
+	_push_map_snapshot()
+	_refresh_start_gate()
+
+
+func _on_ground_drag_started(start_cell: Vector2i, _pos: Vector2) -> void:
+	if ui_phase != UiPhase.SETUP or setup_tool != "trigger":
+		return
+	_trip_drag_start = start_cell
+	if map_view:
+		map_view.trip_preview_a = start_cell
+		map_view.trip_preview_b = Vector2i(-1, -1)
+		map_view.queue_redraw()
+	label_info.text = "触发线起点 (%d,%d) · 拖到终点松手" % [start_cell.x, start_cell.y]
+
+
+func _on_ground_drag_moved(cell: Vector2i, start_cell: Vector2i, _pos: Vector2) -> void:
+	if ui_phase != UiPhase.SETUP or setup_tool != "trigger":
+		return
+	if map_view:
+		map_view.trip_preview_a = start_cell
+		map_view.trip_preview_b = cell
+		map_view.queue_redraw()
+	# Do NOT write plan.trigger mid-drag (PR-4 acceptance).
+
+
+func _on_ground_drag_ended(end_cell: Vector2i, start_cell: Vector2i, cancelled: bool) -> void:
+	if ui_phase != UiPhase.SETUP or setup_tool != "trigger":
+		if map_view:
+			map_view.trip_preview_a = Vector2i(-1, -1)
+			map_view.trip_preview_b = Vector2i(-1, -1)
+		return
+	if map_view:
+		map_view.trip_preview_a = Vector2i(-1, -1)
+		map_view.trip_preview_b = Vector2i(-1, -1)
+	if cancelled or start_cell == end_cell:
+		label_info.text = "触发线已取消"
+		_trip_drag_start = Vector2i(-1, -1)
+		_push_map_snapshot()
+		return
+	var trig: Dictionary = plan.get("trigger", {}).duplicate(true)
+	trig["type"] = "cross_marker"
+	if not trig.has("bind"):
+		trig["bind"] = "marker_y7"
+	trig["a"] = {"x": start_cell.x, "y": start_cell.y}
+	trig["b"] = {"x": end_cell.x, "y": end_cell.y}
+	plan["trigger"] = trig
+	_trip_drag_start = Vector2i(-1, -1)
+	setup_tool = "op"
+	place_mode = PlaceMode.OP
+	_refresh_tool_chips()
+	_refresh_trigger_chips()
+	_update_legal_highlights()
+	label_info.text = "越线标记已设 (%d,%d)–(%d,%d) · 工具回到队员" % [
+		start_cell.x, start_cell.y, end_cell.x, end_cell.y
+	]
+	_push_map_snapshot()
+	_refresh_start_gate()
 
 
 func _sim_op(op_id: String) -> Dictionary:
@@ -1082,8 +1354,14 @@ func _on_unit_selected(op_id: String) -> void:
 		_refresh_portrait_strip()
 		_push_map_snapshot()
 		return
+	setup_tool = "op"
 	place_mode = PlaceMode.OP
-	label_info.text = "选中 %s · 拖拽设朝向 · 点格放置" % dname
+	pending_place_cell = Vector2i(-1, -1)
+	if map_view:
+		map_view.place_ghost_cell = Vector2i(-1, -1)
+	label_info.text = "选中 %s · 拖到目标格落位 / 点格确认放置" % dname
+	_refresh_tool_chips()
+	_update_legal_highlights()
 	_refresh_op_cards()
 	_refresh_portrait_strip()
 	_push_map_snapshot()
@@ -1156,15 +1434,20 @@ func _on_portrait_pressed(oid: String) -> void:
 
 
 func scripted_place_operator(oid: String, x: int, y: int, facing_deg: float = 90.0) -> bool:
-	## Test/helper: place one operator as a player would.
+	## Test/helper: place one operator (bypasses ghost confirm).
 	if not grid.walkable(x, y):
 		return false
 	selected_op_id = oid
+	pending_place_cell = Vector2i(-1, -1)
 	_move_selected_op(Vector2i(x, y))
 	for op in plan.get("operators", []):
 		if str(op["id"]) == oid:
 			op["facing_deg"] = facing_deg
 			break
+	# Match UX2 acceptance: callers may expect clear selection after place helper.
+	selected_op_id = ""
+	if map_view:
+		map_view.selected_op_id = ""
 	_push_map_snapshot()
 	_refresh_start_gate()
 	return bool(op_placed.get(oid, false))

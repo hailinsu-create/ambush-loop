@@ -26,6 +26,7 @@ func _run_all() -> void:
 	await _test_map_router_wired()
 	await _test_selection_hit_and_portraits()
 	await _test_wait_reaim_one_order()
+	await _test_setup_toolbar_and_trip()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -194,7 +195,7 @@ func _test_selection_hit_and_portraits() -> void:
 		_assert(ops.size() >= 1, "has operators")
 		var oid := str(ops[0]["id"])
 		scene.scripted_place_operator(oid, 5, 9, 0.0)
-		_assert(str(scene.selected_op_id) == "", "deselected after placement")
+		_assert(str(scene.selected_op_id) == "", "scripted place clears selection")
 		var ox := float(ops[0]["x"])
 		var oy := float(ops[0]["y"])
 		var tap_pos: Vector2 = map.cell_to_screen(ox + 0.7, oy)
@@ -217,6 +218,96 @@ func _test_selection_hit_and_portraits() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "selection scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_setup_toolbar_and_trip() -> void:
+	## PR-4: tool chips, trigger chips don't switch tool, trip one-drag, ghost place, entry-as-placed.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "toolbar scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(scene.tool_bar != null, "tool bar exists")
+		_assert(scene.trigger_chip_row != null, "trigger chips exist")
+		_assert(str(scene.setup_tool) == "op", "default tool op")
+		_assert(scene.can_start_wait() == true, "entry-as-placed can start (see_first)")
+		var tool_before := str(scene.setup_tool)
+		scene._on_trigger_chip("mine_detonate")
+		_assert(str(scene.setup_tool) == tool_before,
+			"trigger chip does not switch tool got tool=%s" % scene.setup_tool)
+		_assert(str(scene.plan.get("trigger", {}).get("type", "")) == "mine_detonate", "trigger type mine")
+		# Mine tool: illegal cell no-op; legal places + returns to op.
+		scene._on_tool_chip("mine")
+		_assert(str(scene.setup_tool) == "mine", "tool chip mine")
+		_assert(not scene.map_view.legal_cells.is_empty(), "mine legal highlights")
+		var mines0: int = scene.plan.get("mines", []).size()
+		scene._place_mine_at(Vector2i(0, 0)) ## wall / illegal
+		_assert(scene.plan.get("mines", []).size() == mines0, "illegal mine cell no place")
+		# Find a walkable cell.
+		var wx := 8
+		var wy := 4
+		for y in range(scene.grid.height):
+			for x in range(scene.grid.width):
+				if scene.grid.walkable(x, y):
+					wx = x
+					wy = y
+					break
+		scene._on_tool_chip("mine")
+		scene._place_mine_at(Vector2i(wx, wy))
+		_assert(scene.plan.get("mines", []).size() == 1, "legal mine placed")
+		_assert(str(scene.setup_tool) == "op", "mine place returns tool to op")
+		# Trip line one drag (10,7)→(12,7); mid-drag trigger untouched.
+		scene._on_tool_chip("trigger")
+		_assert(str(scene.setup_tool) == "trigger", "tool chip trigger")
+		var trig0: Dictionary = scene.plan.get("trigger", {}).duplicate(true)
+		trig0.erase("a")
+		trig0.erase("b")
+		scene.plan["trigger"] = trig0
+		var map = scene.map_view
+		var a_pos: Vector2 = map.cell_to_screen(10.0, 7.0)
+		var b_pos: Vector2 = map.cell_to_screen(12.0, 7.0)
+		map.inject_input(_touch(a_pos, true))
+		map.gesture.inject_move(a_pos + Vector2(30, 0))
+		# Mid-drag: no a/b committed.
+		_assert(not scene.plan.get("trigger", {}).has("a"), "trip mid-drag no a")
+		_assert(not scene.plan.get("trigger", {}).has("b"), "trip mid-drag no b")
+		map.gesture.inject_move(b_pos)
+		map.inject_input(_touch(b_pos, false))
+		var trig: Dictionary = scene.plan.get("trigger", {})
+		_assert(trig.has("a") and trig.has("b"), "trip committed a/b")
+		_assert(int(trig["a"]["x"]) == 10 and int(trig["a"]["y"]) == 7, "trip a=(10,7)")
+		_assert(int(trig["b"]["x"]) == 12 and int(trig["b"]["y"]) == 7, "trip b=(12,7)")
+		_assert(str(scene.setup_tool) == "op", "trip returns tool to op")
+		# Ghost place: select → tap empty once → coords unchanged; second tap moves.
+		var ops: Array = scene.plan.get("operators", [])
+		var oid := str(ops[0]["id"])
+		scene.selected_op_id = oid
+		map.selected_op_id = oid
+		var ox := int(ops[0]["x"])
+		var oy := int(ops[0]["y"])
+		var empty := Vector2i(6, 5)
+		if not scene.grid.walkable(empty.x, empty.y):
+			empty = Vector2i(wx, wy)
+		# Avoid dropping on another operator.
+		for opx in ops:
+			if int(opx["x"]) == empty.x and int(opx["y"]) == empty.y:
+				empty = Vector2i(7, 5)
+		var epos: Vector2 = map.cell_to_screen(float(empty.x), float(empty.y))
+		map.inject_input(_touch(epos, true))
+		map.inject_input(_touch(epos, false))
+		_assert(int(ops[0]["x"]) == ox and int(ops[0]["y"]) == oy, "ghost tap does not move")
+		_assert(scene.pending_place_cell == empty, "ghost pending cell set")
+		map.inject_input(_touch(epos, true))
+		map.inject_input(_touch(epos, false))
+		_assert(int(ops[0]["x"]) == empty.x and int(ops[0]["y"]) == empty.y, "confirm tap places")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "toolbar scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 
 

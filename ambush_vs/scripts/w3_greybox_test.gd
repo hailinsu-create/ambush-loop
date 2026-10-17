@@ -170,8 +170,9 @@ func _test_blank_start_not_startable() -> void:
 		scene.begin_setup_from_scout()
 		for _i in range(4):
 			await process_frame
-	_assert(scene.can_start_wait() == false, "untouched blank start not startable")
-	_assert(str(scene.start_block_reason()) != "", "blank start has Chinese block reason")
+	# PLAY-UX PR-4: entry cells count as placed; see_first_enemy bind is remapped → startable.
+	_assert(scene.can_start_wait() == true, "entry-as-placed + complete trigger is startable")
+	_assert(str(scene.start_block_reason()) == "", "blank start open when trigger complete")
 	# Operators must be at squad_insertion (or scout end=entry), not plan A coords.
 	var ops: Array = scene.plan.get("operators", [])
 	_assert(ops.size() == 3, "blank start has 3 operators")
@@ -195,7 +196,7 @@ func _test_blank_start_not_startable() -> void:
 	_assert(scene.is_mg42_in_starting_kit() == false, "controller: MG42 not in starting kit")
 	_assert(scene.is_mg42_unlocked() == false, "MG42 still locked without scout pickup")
 	if scene.btn_start:
-		_assert(scene.btn_start.disabled == true, "StartButton disabled on blank start")
+		_assert(scene.btn_start.disabled == false, "StartButton enabled when entry-as-placed + trigger ok")
 
 
 func _test_scripted_placement_reaches_result() -> void:
