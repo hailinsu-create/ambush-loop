@@ -1,0 +1,94 @@
+# Deploy Ambush VS W3 greybox Web export to GitHub Pages.
+# Target URL: https://hailinsu-create.github.io/ambush-loop/greybox/
+# Requires repo Pages source = GitHub Actions, and github-pages env allowing branch vs/web.
+# Does not merge to main; does not change Android keystore; spend = public Actions only.
+name: deploy-greybox-pages
+
+on:
+  push:
+    branches: [vs/web]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-greybox
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Godot 4.7.2
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/godot.zip \
+            "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip"
+          sudo unzip -o /tmp/godot.zip -d /usr/local/bin
+          sudo chmod +x /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64
+          /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --version
+
+      - name: Install Web export templates
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/export_templates.tpz \
+            "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz"
+          mkdir -p /tmp/godot-templates
+          unzip -q /tmp/export_templates.tpz -d /tmp/godot-templates
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.7.2.stable"
+          if [ -d /tmp/godot-templates/templates ]; then
+            cp -a /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/4.7.2.stable/"
+          else
+            cp -a /tmp/godot-templates/. "$HOME/.local/share/godot/export_templates/4.7.2.stable/"
+          fi
+          test -f "$HOME/.local/share/godot/export_templates/4.7.2.stable/web_nothreads_release.zip"
+
+      - name: Import Ambush VS project
+        run: |
+          set -euo pipefail
+          /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_vs --import
+
+      - name: Export Web greybox
+        run: |
+          set -euo pipefail
+          mkdir -p build/web/greybox
+          /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_vs \
+            --export-release "Web" ../build/web/greybox/index.html
+          test -f build/web/greybox/index.html
+          test -f build/web/greybox/index.wasm
+          du -sh build/web/greybox
+          du -ah build/web/greybox | sort -h | tail -20
+
+      - name: Assemble Pages site (root index + /greybox/)
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/greybox
+          cp ambush_vs/web/pages_root/index.html _site/index.html
+          cp -a build/web/greybox/. _site/greybox/
+          # Ensure directory URLs resolve without relying on extensionless rewrites.
+          test -f _site/index.html
+          test -f _site/greybox/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

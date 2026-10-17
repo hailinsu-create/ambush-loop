@@ -6,6 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
+| [VS Web greybox Pages 2026-10-17](VS_WEB_GREYBOX_PAGES_20261017.md) | **Web 试玩切片**：分支 `vs/web`（自 `vs/core` @ fa6bd08）导出灰盒到 GitHub Pages `/greybox/`。本地导出+Chromium smoke 已过；Pages API 启用被拒，待所有者打开 Actions Pages + `vs/web` 环境分支。**不合并 main / 不动 PR #54**。 |
 | [VS W2 模拟核心 v0 2026-10-17](VS_W2_SIM_V0_20261017.md) | **当前 VS 执行入口**：`ambush_vs/sim/` headless 一夜模拟；院子纸面 **v1.2**；A/B 金标；隔离测试。在 `vs/core` / PR #54，**未合入 main**。 |
 | [VS ADR v1 同步 2026-10-17](VS_ADR_V1_SYNC_20261017.md) | VS 规则文档：TERMS + 三 ADR 已采纳 v1 + 院子纸面 v1.1 + 资产生成门禁。已被 W2 实现消费。 |
 | [开发规划 2026-10-16](DEV_PLAN_20261016.md) | VS 竖切开发规划（Notion 同源）；A1 仓库策略。执行骨架见 [VS A1 记录](VS_A1_SKELETON_20261016.md)；代码在分支 `vs/core`，**未合入 main**。ADR 正文以 `ambush_vs/docs/adr/` 为准（已采纳 v1 覆盖 PR #53 草案）。 |

@@ -86,9 +86,13 @@ func _apply_cjk_font() -> void:
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
 	if font_res == null:
 		return
-	for n in [label_phase, label_info, label_alert, result_label, btn_plan_a, btn_plan_b, btn_start, btn_preview, btn_pause, btn_speed, btn_detonate, btn_restart, btn_restart_wait]:
+	for n in [label_phase, label_info, label_alert, result_label, btn_plan_a, btn_plan_b, btn_start, btn_preview, btn_pause, btn_speed, btn_detonate, btn_restart, btn_restart_wait, trigger_option]:
 		if n:
 			n.add_theme_font_override("font", font_res)
+	if trigger_option:
+		var popup := trigger_option.get_popup()
+		if popup:
+			popup.add_theme_font_override("font", font_res)
 
 
 func _fill_trigger_options() -> void:
