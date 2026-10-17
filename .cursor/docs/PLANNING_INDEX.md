@@ -6,7 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS UX 操作修复 2026-10-17](VS_UX_CONTROLS_20261017.md) | **当前 VS 操作切片**：`vs/g3` 手势路由/选人/重瞄/工具栏/HUD（审计 PR-1…5）；sim/金标不变。PR #57 → `vs/g2`。**不合并**。 |
+| [VS UX 操作修复 2026-10-17](VS_UX_CONTROLS_20261017.md) | **当前 VS 操作切片**：`vs/g3` 审计 PR-1…10 已实现并验证（tip `fd11216`；W8 135 / 合计 358）；sim/金标不变。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-PLAY6 敌人反应 2026-10-17](VS_PLAY6_ENEMY_REACT_20261017.md) | PLAY-6 敌人反应；已被 UX 操作切片接续。PR #57 → `vs/g2`。**不合并**。 |
 | [W2 断言数与金标 2026-10-17](VS_W2_COUNT_AND_GOLDEN_20261017.md) | W2 61→73（PLAY-4 wait-turn）说明；PLAY-4/PLAY-6 金标变更 DECISIONS。 |
 | [VS-PLAY5 中文复盘卡 2026-10-17](VS_PLAY5_REVIEW_CARD_20261017.md) | PLAY-5：复盘卡 + 搜尸 stub。已被 PLAY-6 接续。PR #57 → `vs/g2`。**不合并**。 |
