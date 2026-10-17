@@ -491,6 +491,9 @@ func _auto_run_plan_a() -> void:
 		" standard_ambush=", last_summary.get("standard_ambush"),
 		" outcome=", last_summary.get("outcome")
 	)
+	if _capture_path != "" or _headless_auto:
+		await get_tree().process_frame
+		get_tree().quit(0)
 
 
 func _try_capture(tag: String) -> void:
