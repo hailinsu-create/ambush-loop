@@ -28,6 +28,12 @@ jobs:
           sudo chmod +x /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64
           /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --version
 
+      # Fresh checkout has no .godot/ class_name cache; W2 scripts use class_name.
+      - name: Import Ambush VS project
+        run: |
+          set -euo pipefail
+          /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 --headless --path ambush_vs --import
+
       - name: Isolated empty test (expect 0)
         run: |
           set -euo pipefail

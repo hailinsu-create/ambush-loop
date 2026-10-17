@@ -3,6 +3,7 @@ class_name SimEventLog
 
 ## 20 Hz event log + stable SHA-256 over canonical JSON lines.
 
+const SimConstants := preload("res://sim/constants.gd")
 
 var schema_version: int = 1
 var level_id: String = ""

@@ -3,6 +3,8 @@ class_name SimWeapons
 
 ## Load weapons.csv into id → Dictionary.
 
+const SimGeom := preload("res://sim/geom.gd")
+
 
 static func load_csv(path: String = "res://data/weapons.csv") -> Dictionary:
 	var out := {}

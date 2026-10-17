@@ -4,6 +4,9 @@ class_name SimGrid
 ## Single-layer grid: tier ground/high, wall/structure block all LOS,
 ## low cover blocks same-tier only (ADR-HEIGHT-01).
 
+const SimConstants := preload("res://sim/constants.gd")
+const SimGeom := preload("res://sim/geom.gd")
+
 var width: int = 0
 var height: int = 0
 ## cell key "x,y" → {kind, tier, walkable, blocks_all_los, low_cover}

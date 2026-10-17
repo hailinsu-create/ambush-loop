@@ -3,6 +3,8 @@ class_name SimLevelLoader
 
 ## Load level JSON into a Dictionary + SimGrid. Light validation against required fields.
 
+const SimGrid := preload("res://sim/grid.gd")
+
 
 static func load_path(path: String) -> Dictionary:
 	var f := FileAccess.open(path, FileAccess.READ)

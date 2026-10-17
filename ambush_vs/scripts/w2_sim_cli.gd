@@ -6,6 +6,7 @@ extends SceneTree
 ## Env: AMBUSH_PLAN=A|B|path  (default A)
 
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
+const SimRunner := preload("res://sim/runner.gd")
 
 
 func _init() -> void:
@@ -20,7 +21,7 @@ func _init() -> void:
 	if plan_arg.is_empty():
 		plan_arg = "A"
 	var plan_path := _resolve_plan(plan_arg)
-	var summary := SimRunner.run_plan(plan_path)
+	var summary: Dictionary = SimRunner.run_plan(plan_path)
 	if summary.has("error"):
 		printerr("W2_CLI_FAIL error=", summary["error"])
 		quit(1)

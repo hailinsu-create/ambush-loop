@@ -4,6 +4,11 @@ extends SceneTree
 ## Launch only via scripts/run_isolated_test.sh|.ps1.
 
 const TestStorageGuard := preload("res://scripts/test_storage_guard.gd")
+const SimRunner := preload("res://sim/runner.gd")
+const NightSim := preload("res://sim/night_sim.gd")
+const SimLevelLoader := preload("res://sim/level_loader.gd")
+const SimWeapons := preload("res://sim/weapons.gd")
+const SimGeom := preload("res://sim/geom.gd")
 
 var _failed := 0
 var _passed := 0
@@ -21,6 +26,7 @@ func _init() -> void:
 func _run_all() -> void:
 	_test_golden_a()
 	_test_golden_b()
+	_test_a_facing_stability()
 	_test_a06_area_alert()
 	_test_t08_global_alarm()
 	_test_t05_manual()
@@ -52,9 +58,9 @@ func _plan_b() -> Dictionary:
 
 
 func _test_golden_a() -> void:
-	var s := SimRunner.run_plan("res://data/fixtures/plan_a.json")
+	var s: Dictionary = SimRunner.run_plan("res://data/fixtures/plan_a.json")
 	_assert(int(s.get("detonate_tick", -1)) == 280, "golden A t0 tick=280 got=%s" % s.get("detonate_tick"))
-	_assert(str(s.get("trigger", "")) == "see_first_enemy", "golden A trigger")
+	_assert(str(s.get("trigger", "")) == "cross_marker", "golden A trigger=cross_marker got=%s" % s.get("trigger"))
 	_assert(bool(s.get("standard_ambush", false)) == true, "golden A standard_ambush")
 	_assert(str(s.get("outcome", "")) == "win", "golden A win")
 	_assert(s.get("escapes", []).is_empty(), "golden A no escapes")
@@ -62,6 +68,22 @@ func _test_golden_a() -> void:
 	var kills: Array = s.get("kills", [])
 	for t in targets:
 		_assert(kills.has(t), "golden A killed %s" % t)
+
+
+func _test_a_facing_stability() -> void:
+	## t0 must stay 280 under Kar facing ±1° (cross_marker is facing-independent;
+	## also assert kill-zone still covers F1 so standard ambush holds).
+	var base: Dictionary = _plan_a()
+	var base_facing := float(base["operators"][1]["facing_deg"])
+	_assert(is_equal_approx(base_facing, 15.0), "A Kar facing clean 15° got=%s" % base_facing)
+	for delta in [-1.0, 0.0, 1.0]:
+		var plan: Dictionary = _plan_a()
+		plan["operators"][1]["facing_deg"] = base_facing + delta
+		var s: Dictionary = SimRunner.run_plan_dict(plan)
+		_assert(int(s.get("detonate_tick", -1)) == 280,
+			"A facing%+.0f° t0=280 got=%s" % [delta, s.get("detonate_tick")])
+		_assert(bool(s.get("standard_ambush", false)) == true,
+			"A facing%+.0f° standard_ambush" % delta)
 
 
 func _test_golden_b() -> void:
@@ -175,29 +197,43 @@ func _test_t07_determinism() -> void:
 
 
 func _test_h01_high_gap() -> void:
-	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
-	var weapons := SimWeapons.load_csv()
-	var sim := NightSim.new()
+	## Yard v1.2: compare blocked fractions on the *intersection* of cones from
+	## (5,9) high vs (6,9) ground (same cells). Edge walls otherwise dominate.
+	var level: Dictionary = SimLevelLoader.load_path("res://data/levels/yard.json")
+	var weapons: Dictionary = SimWeapons.load_csv()
+	var sim = NightSim.new()
 	sim.setup(level, _plan_a(), weapons)
 	var facing := 0.0
 	var half := 30.0
 	var rng := 12.0
-	var high_frac := sim.sector_blocked_fraction(5.0, 9.0, facing, half, rng, "high")
-	var ground_frac := sim.sector_blocked_fraction(6.0, 9.0, facing, half, rng, "ground")
+	var total := 0
+	var high_blocked := 0
+	var ground_blocked := 0
 	var diff := 0
-	var r_ceil := 13
-	for y in range(9 - r_ceil, 9 + r_ceil + 1):
-		for x in range(6 - r_ceil, 6 + r_ceil + 1):
+	for y in range(0, sim.grid.height):
+		for x in range(0, sim.grid.width):
+			if not SimGeom.in_cone(5.0, 9.0, facing, half, rng, float(x), float(y)):
+				continue
 			if not SimGeom.in_cone(6.0, 9.0, facing, half, rng, float(x), float(y)):
 				continue
-			var tt := sim.grid.tier_at(float(x), float(y))
-			var g_clear := sim.grid.los_clear(6.0, 9.0, "ground", float(x), float(y), tt)
-			var h_clear := sim.grid.los_clear(5.0, 9.0, "high", float(x), float(y), tt)
+			total += 1
+			var tt: String = sim.grid.tier_at(float(x), float(y))
+			var h_clear: bool = sim.grid.los_clear(5.0, 9.0, "high", float(x), float(y), tt)
+			var g_clear: bool = sim.grid.los_clear(6.0, 9.0, "ground", float(x), float(y), tt)
+			if not h_clear:
+				high_blocked += 1
+			if not g_clear:
+				ground_blocked += 1
 			if (not g_clear) and h_clear:
 				diff += 1
-	_assert(diff > 0, "H-01 low-cover differential > 0 got=%d (high_frac=%s ground_frac=%s)" % [diff, high_frac, ground_frac])
-	# Overall blocked-fraction ratio is dominated by barn structure adjacency at (5,9);
-	# ADR 50% target needs denser low-cover — see W2_DISCREPANCIES.md.
+	_assert(total > 0, "H-01 intersect non-empty")
+	_assert(diff > 0, "H-01 low-cover differential > 0 got=%d" % diff)
+	var high_frac := float(high_blocked) / float(total)
+	var ground_frac := float(ground_blocked) / float(total)
+	_assert(
+		high_frac < ground_frac * 0.5 + 1e-6,
+		"H-01 high gap %s < 50%% of ground %s (intersect)" % [high_frac, ground_frac],
+	)
 
 
 func _test_h04_climb() -> void:

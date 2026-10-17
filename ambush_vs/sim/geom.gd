@@ -3,6 +3,8 @@ class_name SimGeom
 
 ## Angle 0° = east, CCW positive. Grid-center Euclidean. Cone inclusive.
 
+const SimConstants := preload("res://sim/constants.gd")
+
 
 static func cell_center(x: float, y: float) -> Vector2:
 	return Vector2(x + 0.5, y + 0.5)

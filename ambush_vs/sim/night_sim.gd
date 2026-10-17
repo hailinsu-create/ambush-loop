@@ -5,6 +5,12 @@ class_name NightSim
 ## Tick order (TERMS §4.1): input → move → mine → vision/expose → alert → trigger → fire.
 
 const C := preload("res://sim/constants.gd")
+const SimConstants := preload("res://sim/constants.gd")
+const SimGeom := preload("res://sim/geom.gd")
+const SimGrid := preload("res://sim/grid.gd")
+const SimEventLog := preload("res://sim/event_log.gd")
+const SimLevelLoader := preload("res://sim/level_loader.gd")
+const SimWeapons := preload("res://sim/weapons.gd")
 
 var level: Dictionary = {}
 var grid: SimGrid
@@ -263,6 +269,8 @@ func _make_enemy(sp: Dictionary) -> Dictionary:
 		"escaped": false,
 		"x": 0.0,
 		"y": 0.0,
+		"prev_x": 0.0,
+		"prev_y": 0.0,
 		"progress": offset, ## cells along polyline (may be negative until enter advances)
 		"hit_accum": 0.0,
 	}
@@ -279,6 +287,8 @@ func _step_move() -> void:
 				# Absolute clock: progress = speed*(t-enter)+offset (no enter-tick double-step).
 				e["progress"] = _march_speed * (t_s - float(e["enter_t_s"])) + float(e["path_offset_cells"])
 				_place_enemy_on_path(e)
+				e["prev_x"] = e["x"]
+				e["prev_y"] = e["y"]
 				log.emit(tick, "enemy_enter", {
 					"actor": e["id"],
 					"pos": {"x": e["x"], "y": e["y"], "height": "ground"},
@@ -287,6 +297,8 @@ func _step_move() -> void:
 			else:
 				continue
 		else:
+			e["prev_x"] = e["x"]
+			e["prev_y"] = e["y"]
 			e["progress"] = _march_speed * (t_s - float(e["enter_t_s"])) + float(e["path_offset_cells"])
 			_place_enemy_on_path(e)
 
@@ -522,15 +534,25 @@ func _step_trigger() -> void:
 
 
 func _crossed_marker(e: Dictionary, a: Dictionary, b: Dictionary) -> bool:
-	## Simple: enemy cell center on the side past the midpoint toward south, or on segment cells.
+	## Segment endpoints snap to cell coords. Headman crosses when the southbound
+	## path goes from prev_y > line_y to y <= line_y with x in [xmin, xmax].
 	var ax := float(a.get("x", 0))
 	var ay := float(a.get("y", 0))
 	var bx := float(b.get("x", 0))
 	var by := float(b.get("y", 0))
-	# Vertical-ish line across road: treat as crossing when y <= min(ay,by) along x near line
-	var mid_y := (ay + by) * 0.5
-	var mid_x := (ax + bx) * 0.5
-	return absf(float(e["x"]) - mid_x) <= 0.6 and float(e["y"]) <= mid_y + 1e-6
+	var x_min := minf(ax, bx)
+	var x_max := maxf(ax, bx)
+	var y_line := (ay + by) * 0.5
+	var x := float(e["x"])
+	var y := float(e["y"])
+	var prev_y := float(e.get("prev_y", y))
+	if x < x_min - 0.51 or x > x_max + 0.51:
+		return false
+	# Southbound cross of horizontal marker (yard main road).
+	if absf(ay - by) <= 1e-6:
+		return prev_y > y_line + 1e-9 and y <= y_line + 1e-9
+	# Fallback: reached the marker cell band.
+	return absf(y - y_line) <= 0.5 * _march_speed * C.DT_S + 1e-6 and x >= x_min - 0.51 and x <= x_max + 0.51
 
 
 func _op_sees_any_ambush_target(op: Dictionary) -> bool:
