@@ -23,6 +23,10 @@ PLAY-3 文档记 W2 **61**（当时无 wait-turn 用例）。PLAY-4 在 `w2_sim_
 | **PLAY-4** `c5bcd63` | **t0 520/560**；hash 重写 | 仅 `yard.json` `enter_t_s` **+12 s**（D7 20–30 s 首触）；几何/行军速度/计划不变 |
 | PLAY-5 `82aa445` | **未改**金标 | 复盘卡只读日志，不进 `NightSim` |
 | **PLAY-6**（本切片） | **已改** hash；t0 仍 520/560 | 起爆后掩体/还击/逃跑、队员 HP/弹药、按 RPM 扣弹进入 `NightSim` 日志 → 事件集变化。新 hash 见 `ambush_vs/data/golden/hashes.json`；理由见 [PLAY-6](VS_PLAY6_ENEMY_REACT_20261017.md) 与下方 DECISIONS |
+| P0-1 切片 1 `997e9f9` | **已改** hash；t0 仍 520/560 | `(10,9)` 墙 + 东巷侧翼 peel → 战斗日志变。见 [COUNTEREX](VS_P0_1_COUNTEREX_20261017.md) / 纸面 v1.3 |
+| P0-1 切片 2 `95028ef` | **已改** hash；t0 仍 520/560 | MP 150°、`(11,7)` 矮掩、`unwatched_break` / 监视钉住 → 事件集变。A=`a89a0e5a…` B=`759b56e1…`。见纸面 v1.4 |
+| P0-1 切片 3 `b63e475` | **未改** hash；t0 仍 520/560 | `road_tail` + 后尾 peel 只影响过早起爆；理想 A/B 日志不变。见纸面 v1.5 |
+| P0-1 切片 4（本轮） | **未改** hash；t0 仍 520/560 | `alarm_route` 战斗进场 + `road_tail`→y=15；理想 A/B 不经 alarm。见纸面 v1.6。W2 断言 **73→74**（A-06 双案可胜多 1 条） |
 
 PLAY-4 金标理由原文：`.cursor/docs/VS_PLAY4_WAIT_UX_20261017.md` §金标变更理由。
 
@@ -32,3 +36,8 @@ PLAY-4 金标理由原文：`.cursor/docs/VS_PLAY4_WAIT_UX_20261017.md` §金标
 2. **弹药按 RPM 脉冲消耗**：旧实现每 tick 扣 1 发会在有限弹匣下误杀方案 B；改为 `fire_accum` 满 1.0 扣一发，金标随之重算。
 3. **方案 A 允许非 S**：还击负伤/清场变慢后评级 A 仍算通过；不再要求无伤 S。
 4. **还击软顶**：每名敌人最多造成 1 次队员命中，避免方案 B 被压成不可胜。
+5. **P0-1 量测（2026-10-17）**：`NightSim.enemy_return_soft_cap`（默认 true）仅供对照。D.3 矩阵见 [`COUNTEREX_P0_1_RESULTS`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)。
+6. **P0-1 切片 1（东巷）**：院子 **v1.3** — `(10,9)` 墙断 MG→巷口 LOS；未监视侧翼东撤。**改 hash**，t0 仍 520/560。理由：事件集变化（墙/东撤）。
+7. **P0-1 切片 2（F-B 交叉）**：院子 **v1.4** — 方案 B MP 150°、`(11,7)` 矮掩、`unwatched_break` + 监视钉住不逃。**改 hash**（A=`a89a0e5a…` B=`759b56e1…`），t0 仍 520/560。
+8. **P0-1 切片 3（起爆窗）**：院子 **v1.5** — 出口 `road_tail`；主路 `y≥12` 后尾 peel。**不改 hash**（理想窗无 peel），t0 仍 520/560。
+9. **P0-1 切片 4（ALERT-global）**：院子 **v1.6** — `alarm_route` 强制进场；`road_tail` 改 y=15。**不改 hash**；W2 **74**（A-06 双胜）。

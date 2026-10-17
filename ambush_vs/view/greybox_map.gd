@@ -5,6 +5,7 @@ class_name GreyboxMap
 
 const SimGeom := preload("res://sim/geom.gd")
 const SimConstants := preload("res://sim/constants.gd")
+const AimSnap := preload("res://sim/aim_snap.gd")
 const G1AssetsScript := preload("res://view/g1_assets.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
 const G3AssetsScript := preload("res://view/g3_assets.gd")
@@ -18,6 +19,8 @@ signal cell_long_pressed(cell: Vector2i)
 signal aim_drag_started(op_id: String, pos: Vector2)
 signal aim_drag_updated(op_id: String, world_dir: Vector2, preview_deg: float)
 signal aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool)
+## P0-2: magnifier visibility for tests (true while aim-dragging with a valid preview).
+signal aim_magnifier_changed(visible: bool, label: String, deg: float)
 ## PLAY-UX PR-4: empty-cell drag (trip line / pan placeholder).
 signal ground_drag_started(start_cell: Vector2i, pos: Vector2)
 signal ground_drag_moved(cell: Vector2i, start_cell: Vector2i, pos: Vector2)
@@ -85,6 +88,12 @@ var sel_ring_width: float = 4.0
 var unsel_ring_width: float = 1.6
 var aim_preview_deg: float = NAN
 var aim_preview_op: String = ""
+## P0-2 aim snap + magnifier (touch/mouse).
+var aim_snap_label: String = ""
+var aim_magnifier_visible: bool = false
+var aim_finger_screen: Vector2 = Vector2.ZERO
+var aim_magnifier_show_count: int = 0 ## test
+var aim_magnifier_hide_count: int = 0 ## test
 ## PLAY-UX PR-4 overlays.
 var legal_cells: Array = [] ## Vector2i walkable/placeable highlights
 var place_ghost_cell: Vector2i = Vector2i(-1, -1)
@@ -696,6 +705,7 @@ func _draw() -> void:
 	cam_pan = pan
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	_draw_alert_badge()
+	_draw_aim_magnifier()
 
 
 func _supply_is_hidden(s: Dictionary) -> bool:
@@ -2016,6 +2026,83 @@ func _draw_aim_preview() -> void:
 	)
 
 
+func _draw_aim_magnifier() -> void:
+	## P0-2 loupe in view space — offset away from finger so it never sits under the tip.
+	if not aim_magnifier_visible or aim_preview_op == "" or is_nan(aim_preview_deg):
+		return
+	var op := {}
+	for o in operators:
+		if str(o.get("id", "")) == aim_preview_op:
+			op = o
+			break
+	if op.is_empty():
+		return
+	var wid := str(op.get("weapon_id", ""))
+	var w: Dictionary = weapons.get(wid, {})
+	var rng := float(w.get("max_range", 8.0))
+	var ox := float(op["x"])
+	var oy := float(op["y"])
+	var tip := cell_to_screen(
+		ox + cos(deg_to_rad(aim_preview_deg)) * minf(rng, 3.0),
+		oy + sin(deg_to_rad(aim_preview_deg)) * minf(rng, 3.0)
+	)
+	var away := tip - aim_finger_screen
+	if away.length() < 8.0:
+		away = Vector2(0, -1)
+	else:
+		away = away.normalized()
+	var loupe_r := 56.0
+	var center := tip + away * (loupe_r + 28.0)
+	## Keep loupe on-screen.
+	center.x = clampf(center.x, loupe_r + 4.0, size.x - loupe_r - 4.0)
+	center.y = clampf(center.y, loupe_r + 4.0, size.y - loupe_r - 4.0)
+	draw_circle(center, loupe_r, Color(0.08, 0.12, 0.18, 0.88))
+	draw_arc(center, loupe_r, 0.0, TAU, 48, Color(0.7, 0.9, 1.0, 0.95), 3.0)
+	## Mini wedge inside loupe (visual scale only).
+	var half := float(w.get("sector_deg", 40)) * 0.5
+	var pts: PackedVector2Array = [center]
+	var steps_w := 10
+	for i in range(steps_w + 1):
+		var a := deg_to_rad(aim_preview_deg - half + (2.0 * half) * float(i) / float(steps_w))
+		pts.append(center + Vector2(cos(a), -sin(a)) * (loupe_r * 0.72))
+	draw_colored_polygon(pts, Color(0.45, 0.85, 1.0, 0.35))
+	var deg_txt := "%.0f°" % aim_preview_deg
+	draw_string(ThemeDB.fallback_font, center + Vector2(-22, 6), deg_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color(0.95, 0.98, 1.0, 1.0))
+	if aim_snap_label != "":
+		draw_string(ThemeDB.fallback_font, center + Vector2(-28, 28), aim_snap_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1.0, 0.92, 0.55, 1.0))
+
+
+func _set_aim_magnifier(vis: bool, label: String = "", deg: float = NAN) -> void:
+	var was := aim_magnifier_visible
+	aim_magnifier_visible = vis
+	if vis and not was:
+		aim_magnifier_show_count += 1
+		aim_magnifier_changed.emit(true, label, deg)
+	elif (not vis) and was:
+		aim_magnifier_hide_count += 1
+		aim_magnifier_changed.emit(false, "", NAN)
+
+
+func _snap_aim_deg_for_op(op_id: String, raw_deg: float) -> Dictionary:
+	var op := {}
+	for o in operators:
+		if str(o.get("id", "")) == op_id:
+			op = o
+			break
+	if op.is_empty():
+		return AimSnap.snap_facing(raw_deg, 0.0, 0.0, level)
+	var wid := str(op.get("weapon_id", ""))
+	var w: Dictionary = weapons.get(wid, {})
+	return AimSnap.snap_facing(
+		raw_deg,
+		float(op["x"]),
+		float(op["y"]),
+		level,
+		float(w.get("sector_deg", 0.0)),
+		float(op.get("facing_deg", raw_deg))
+	)
+
+
 func _draw_weapon_sectors() -> void:
 	if grid == null:
 		return
@@ -2521,7 +2608,16 @@ func _on_gesture_drag_started(pos: Vector2, start_pos: Vector2) -> void:
 		unit_selected.emit(hit)
 		var origin := cell_to_screen(_op_pos(hit).x, _op_pos(hit).y)
 		var dir := pos - origin
-		aim_preview_deg = rad_to_deg(atan2(-dir.y, dir.x)) if dir.length() >= 1.0 else NAN
+		aim_finger_screen = pos
+		if dir.length() >= 1.0:
+			var snapped: Dictionary = _snap_aim_deg_for_op(hit, rad_to_deg(atan2(-dir.y, dir.x)))
+			aim_preview_deg = float(snapped["deg"])
+			aim_snap_label = str(snapped.get("label", ""))
+			_set_aim_magnifier(true, aim_snap_label, aim_preview_deg)
+		else:
+			aim_preview_deg = NAN
+			aim_snap_label = ""
+			_set_aim_magnifier(false)
 		aim_drag_started.emit(hit, pos)
 	else:
 		_dragging_ground = true
@@ -2556,8 +2652,12 @@ func _on_gesture_drag_moved(pos: Vector2, start_pos: Vector2) -> void:
 	var dir := pos - origin
 	var cell := screen_to_cell(pos)
 	cell_dragged.emit(cell, dir)
+	aim_finger_screen = pos
 	if dir.length() >= 1.0:
-		aim_preview_deg = rad_to_deg(atan2(-dir.y, dir.x))
+		var snapped: Dictionary = _snap_aim_deg_for_op(_dragging_op, rad_to_deg(atan2(-dir.y, dir.x)))
+		aim_preview_deg = float(snapped["deg"])
+		aim_snap_label = str(snapped.get("label", ""))
+		_set_aim_magnifier(true, aim_snap_label, aim_preview_deg)
 		aim_drag_updated.emit(_dragging_op, dir, aim_preview_deg)
 	queue_redraw()
 
@@ -2581,7 +2681,12 @@ func _on_gesture_drag_ended(pos: Vector2, start_pos: Vector2, cancelled: bool) -
 	var op_id := _dragging_op
 	var origin := cell_to_screen(_op_pos(op_id).x, _op_pos(op_id).y) if op_id != "" else start_pos
 	var dir := pos - origin
+	## Final snap so release commits the same degree the loupe showed.
 	var preview := aim_preview_deg
+	if op_id != "" and dir.length() >= 1.0:
+		var snapped_end: Dictionary = _snap_aim_deg_for_op(op_id, rad_to_deg(atan2(-dir.y, dir.x)))
+		preview = float(snapped_end["deg"])
+		aim_snap_label = str(snapped_end.get("label", ""))
 	if op_id != "" and pos.distance_to(origin) < gesture.slop_px:
 		cancelled = true
 	if op_id != "":
@@ -2589,6 +2694,8 @@ func _on_gesture_drag_ended(pos: Vector2, start_pos: Vector2, cancelled: bool) -
 	_dragging_op = ""
 	aim_preview_op = ""
 	aim_preview_deg = NAN
+	aim_snap_label = ""
+	_set_aim_magnifier(false)
 	queue_redraw()
 
 
