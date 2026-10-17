@@ -3,7 +3,7 @@
 - 日期：2026-10-17
 - 分支：`vs/g3`（Pages；**不合并**）
 - 状态：**已实现 / 本机隔离测试已绿**
-- 提交：`47ce7ea`（PLAY-6 + 截图捕获加固；金标 hash 在 `c17b6b3`）
+- 提交：`e7f7906`（PLAY-6 tip; core `47ce7ea` / `c17b6b3` + 截图捕获加固；金标 hash 在 `c17b6b3`）
 - 来源：差距报告 fix #6；ADR-TRIGGER §3.4 / DEV_PLAN W5
 
 ## 目标
@@ -20,15 +20,19 @@
 
 PLAY-6 把起爆后战斗写进 `NightSim` 日志（`enemy_seek_cover` / `enemy_in_cover` / `enemy_fire` / `op_wounded` / `enemy_flee` / `ammo_empty` 等），并改为按 RPM 脉冲消耗弹药。事件集与时序变化 → **必须重写** `data/golden/hashes.json`。t0 仍为 **520 / 560**（PLAY-4 节奏未动）。详见 [W2 断言数与金标](VS_W2_COUNT_AND_GOLDEN_20261017.md)。
 
-## 验收门槛
+## 验收（本机）
 
-| 项 | 期望 |
+| 套件 | 结果 |
 | --- | --- |
-| W2 | 绿；金标 t0 520/560；hash 已更新并文档说明 |
-| W3–W6 | 绿（W6 评级允许 A 非 S） |
-| W7 | cover / return-fire wound / flee+leak / ammo_empty / A 非完美 / B 可胜 / 确定性 |
-| 截图 | `greybox_cover_fire.png`、`greybox_wounded.png`、`greybox_leak_review.png` |
-| Pages | push `vs/g3` |
+| empty | 0 |
+| W2 | **73**（金标 t0 520/560；hash 已重写） |
+| W3 | **57** |
+| W4 | **27** |
+| W5 | **19** |
+| W6 | **25**（A 可为 A 非 S） |
+| W7 | **22**（cover / wound / flee+leak / ammo / A 非完美 / B 可胜 / 确定性） |
+| 截图 | `/opt/cursor/artifacts/greybox_cover_fire.png`、`greybox_wounded.png`、`greybox_leak_review.png` |
+| Pages | push `vs/g3` → deploy-greybox-pages |
 
 ## 非目标
 
