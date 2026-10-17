@@ -10,6 +10,8 @@ const SimWeapons := preload("res://sim/weapons.gd")
 const SimConstants := preload("res://sim/constants.gd")
 const SimGeom := preload("res://sim/geom.gd")
 const GreyboxMapScript := preload("res://view/greybox_map.gd")
+const G2AssetsScript := preload("res://view/g2_assets.gd")
+const G2SfxPlayerScript := preload("res://view/g2_sfx_player.gd")
 
 enum UiPhase { SETUP, WAIT, RESULT }
 
@@ -29,6 +31,11 @@ var selected_op_id: String = ""
 var last_summary: Dictionary = {}
 var _headless_auto: bool = false
 var _capture_path: String = ""
+var use_g2_art: bool = true
+var _last_alert: String = "quiet"
+var _detonate_sfx_played: bool = false
+var g2_assets = null
+var sfx = null
 
 @onready var map_view: GreyboxMap = $MapHost/GreyboxMap
 @onready var hud: Control = $HUD
@@ -39,6 +46,7 @@ var _capture_path: String = ""
 @onready var btn_plan_b: Button = $HUD/SetupPanel/PlanBButton
 @onready var btn_start: Button = $HUD/SetupPanel/StartButton
 @onready var btn_preview: Button = $HUD/SetupPanel/PreviewButton
+@onready var btn_g2_art: Button = $HUD/SetupPanel/G2ArtButton
 @onready var trigger_option: OptionButton = $HUD/SetupPanel/TriggerOption
 @onready var setup_panel: Control = $HUD/SetupPanel
 @onready var wait_panel: Control = $HUD/WaitPanel
@@ -53,23 +61,32 @@ var _capture_path: String = ""
 
 func _ready() -> void:
 	_apply_cjk_font()
+	g2_assets = G2AssetsScript.new()
+	g2_assets.load_all()
+	sfx = G2SfxPlayerScript.new()
+	add_child(sfx)
+	sfx.configure(g2_assets)
 	level = SimLevelLoader.load_path("res://data/levels/yard.json")
 	weapons = SimWeapons.load_csv()
 	grid = SimLevelLoader.build_grid(level)
 	map_view.configure(level, grid, weapons)
+	map_view.set_use_g2_art(use_g2_art)
 	map_view.cell_tapped.connect(_on_cell_tapped)
 	map_view.cell_dragged.connect(_on_cell_dragged)
 	map_view.unit_selected.connect(_on_unit_selected)
 
-	btn_plan_a.pressed.connect(func(): _load_preset("A"))
-	btn_plan_b.pressed.connect(func(): _load_preset("B"))
-	btn_start.pressed.connect(_start_wait)
-	btn_preview.pressed.connect(_toggle_preview_hint)
-	btn_pause.pressed.connect(_toggle_pause)
-	btn_speed.pressed.connect(_cycle_speed)
-	btn_detonate.pressed.connect(_manual_detonate)
-	btn_restart.pressed.connect(_restart)
-	btn_restart_wait.pressed.connect(_restart)
+	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
+	btn_plan_b.pressed.connect(func(): _ui_tap(); _load_preset("B"))
+	btn_start.pressed.connect(func(): _ui_tap(); _start_wait())
+	btn_preview.pressed.connect(func(): _ui_tap(); _toggle_preview_hint())
+	btn_pause.pressed.connect(func(): _ui_tap(); _toggle_pause())
+	btn_speed.pressed.connect(func(): _ui_tap(); _cycle_speed())
+	btn_detonate.pressed.connect(func(): _ui_tap(); _manual_detonate())
+	btn_restart.pressed.connect(func(): _ui_tap(); _restart())
+	btn_restart_wait.pressed.connect(func(): _ui_tap(); _restart())
+	if btn_g2_art:
+		btn_g2_art.pressed.connect(_toggle_g2_art)
+		_refresh_g2_button()
 
 	_fill_trigger_options()
 	_load_preset("A")
@@ -78,6 +95,11 @@ func _ready() -> void:
 	# Headless automation hooks (W3 test / PNG capture).
 	_headless_auto = str(OS.get_environment("AMBUSH_GREYBOX_AUTO")).to_lower() in ["1", "true", "a"]
 	_capture_path = str(OS.get_environment("AMBUSH_GREYBOX_CAPTURE"))
+	var g2_env := str(OS.get_environment("AMBUSH_GREYBOX_G2")).to_lower()
+	if g2_env in ["0", "false", "off"]:
+		use_g2_art = false
+		map_view.set_use_g2_art(false)
+		_refresh_g2_button()
 	if _headless_auto:
 		call_deferred("_auto_run_plan_a")
 
@@ -86,13 +108,32 @@ func _apply_cjk_font() -> void:
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
 	if font_res == null:
 		return
-	for n in [label_phase, label_info, label_alert, result_label, btn_plan_a, btn_plan_b, btn_start, btn_preview, btn_pause, btn_speed, btn_detonate, btn_restart, btn_restart_wait, trigger_option]:
+	for n in [label_phase, label_info, label_alert, result_label, btn_plan_a, btn_plan_b, btn_start, btn_preview, btn_g2_art, btn_pause, btn_speed, btn_detonate, btn_restart, btn_restart_wait, trigger_option]:
 		if n:
 			n.add_theme_font_override("font", font_res)
 	if trigger_option:
 		var popup := trigger_option.get_popup()
 		if popup:
 			popup.add_theme_font_override("font", font_res)
+
+
+func _ui_tap() -> void:
+	if sfx:
+		sfx.play("ui_tap", -8.0)
+
+
+func _toggle_g2_art() -> void:
+	_ui_tap()
+	use_g2_art = not use_g2_art
+	map_view.set_use_g2_art(use_g2_art)
+	_refresh_g2_button()
+	label_info.text = "G2 美术：%s（G1 锥/扇/标记仍叠加）" % ("开" if use_g2_art else "关")
+
+
+func _refresh_g2_button() -> void:
+	if btn_g2_art == null:
+		return
+	btn_g2_art.text = "G2 美术：开" if use_g2_art else "G2 美术：关"
 
 
 func _fill_trigger_options() -> void:
@@ -176,6 +217,8 @@ func _start_wait() -> void:
 	paused = false
 	speed_mul = 1.0
 	_accum_s = 0.0
+	_last_alert = str(sim.alert)
+	_detonate_sfx_played = false
 	btn_speed.text = "倍速 1×"
 	_set_ui_phase(UiPhase.WAIT)
 	_push_map_snapshot()
@@ -292,10 +335,39 @@ func _process(delta: float) -> void:
 func _update_wait_labels() -> void:
 	if sim == null:
 		return
+	_sync_alert_sfx()
+	_maybe_play_detonate_sfx()
 	label_alert.text = _alert_zh(sim.alert)
 	label_info.text = "t=%d (%.1fs) · 阶段 %s · 触发 %s" % [
 		sim.tick, float(sim.tick) * SimConstants.DT_S, sim.phase, sim.trigger_used if sim.trigger_used else str(sim.trigger.get("type", ""))
 	]
+
+
+func _sync_alert_sfx() -> void:
+	## Known G1 gap: wire four alert-tier cues into greybox on change.
+	if sim == null or sfx == null:
+		return
+	var a := str(sim.alert)
+	if a != _last_alert:
+		sfx.play_alert(a)
+		_last_alert = a
+
+
+func _maybe_play_detonate_sfx() -> void:
+	if sim == null or sfx == null or _detonate_sfx_played:
+		return
+	if sim.detonate_tick < 0 or str(sim.trigger_used) == "":
+		return
+	_detonate_sfx_played = true
+	sfx.play("ambush_trigger", -2.0)
+	var trig := str(sim.trigger_used)
+	if trig == "mine_detonate":
+		sfx.play_weapon("mine")
+	else:
+		for op in sim.operators:
+			if op.get("alive", true):
+				sfx.play_weapon(str(op.get("weapon_id", "kar98k")))
+				break
 
 
 func _alert_zh(a: String) -> String:
@@ -419,6 +491,9 @@ func _auto_run_plan_a() -> void:
 		" standard_ambush=", last_summary.get("standard_ambush"),
 		" outcome=", last_summary.get("outcome")
 	)
+	if _capture_path != "" or _headless_auto:
+		await get_tree().process_frame
+		get_tree().quit(0)
 
 
 func _try_capture(tag: String) -> void:

@@ -9,6 +9,7 @@ const NightSim := preload("res://sim/night_sim.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
 const G1AssetsScript := preload("res://view/g1_assets.gd")
+const G2AssetsScript := preload("res://view/g2_assets.gd")
 
 var _failed := 0
 var _passed := 0
@@ -25,6 +26,7 @@ func _run_all() -> void:
 	_test_plan_a_via_interactive_api()
 	_test_view_snapshot_does_not_mutate_sim()
 	_test_g1_assets_load()
+	_test_g2_assets_load()
 	await _test_greybox_scene_boots()
 	print("W3_GREYBOX_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -84,6 +86,24 @@ func _test_g1_assets_load() -> void:
 	_assert(a.alert_icons.has("suspicious"), "g1 alert suspicious")
 	_assert(a.trigger_icons.has("cross_marker"), "g1 trigger cross_marker")
 	_assert(a.threat_slot != null, "g1 threat_slot")
+
+
+func _test_g2_assets_load() -> void:
+	## All referenced G2 texture + SFX paths must load (G2 asset batch).
+	var a = G2AssetsScript.new()
+	a.load_all()
+	_assert(a.all_textures_ok(), "g2 textures ok")
+	_assert(a.all_sfx_ok(), "g2 sfx ok")
+	var missing: Array = []
+	for path in G2AssetsScript.referenced_texture_paths():
+		if load(path) as Texture2D == null:
+			missing.append(path)
+	for cue in G2AssetsScript.referenced_sfx_cues():
+		var spath := "res://assets/g2/sfx/%s.wav" % cue
+		if load(spath) as AudioStream == null:
+			missing.append(spath)
+	_assert(missing.is_empty(), "g2 all referenced paths load missing=%s" % str(missing))
+	_assert(a.weapon_icons.size() == 5 and a.weapon_units.size() == 5, "g2 five weapons icons+units")
 
 
 func _test_greybox_scene_boots() -> void:

@@ -1,12 +1,12 @@
 # Deploy Ambush VS W3 greybox Web export to GitHub Pages.
 # Target URL: https://hailinsu-create.github.io/ambush-loop/greybox/
-# Requires repo Pages source = GitHub Actions, and github-pages env allowing branch vs/web.
+# Requires repo Pages source = GitHub Actions, and github-pages env allowing branch vs/web or vs/g2.
 # Does not merge to main; does not change Android keystore; spend = public Actions only.
 name: deploy-greybox-pages
 
 on:
   push:
-    branches: [vs/web]
+    branches: [vs/web, vs/g2]
   workflow_dispatch:
 
 permissions:
