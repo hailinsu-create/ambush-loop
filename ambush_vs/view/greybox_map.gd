@@ -1184,15 +1184,6 @@ func _draw_g3_sandbag_runs() -> void:
 	for key in remaining.keys():
 		var parts2 := str(key).split(",")
 		_draw_g3_bag_pile(int(parts2[0]), int(parts2[1]))
-	# L / T at cells where cover turns (neighbor on both axes).
-	for y in range(grid_h):
-		for x in range(grid_w):
-			if not _cover_at(x, y):
-				continue
-			var h_nb := _cover_at(x - 1, y) or _cover_at(x + 1, y)
-			var v_nb := _cover_at(x, y - 1) or _cover_at(x, y + 1)
-			if h_nb and v_nb:
-				_draw_g3_bag_joint(x, y)
 
 
 func _g3_bag_night_mod() -> Color:
@@ -1294,21 +1285,44 @@ func _draw_g3_bag_straight(ox: int, oy: int, length: int, horizontal: bool) -> v
 			draw_texture_rect(tex, Rect2(Vector2(-dest_w * 0.5, -dest_h * 0.5), Vector2(dest_w, dest_h)), false, mod)
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 		along += dest_w * 0.92
-	# End caps when the run terminus has no perpendicular cover.
-	var cap: Texture2D = _g3_bag("sandbag_end_cap")
-	if cap == null or length < 2:
+	# End caps on free termini; L/T only at termini that turn into a perpendicular cover cell.
+	if length < 2:
 		return
+	var cap: Texture2D = _g3_bag("sandbag_end_cap")
 	var cap_sz := cell_px * 0.55
 	if horizontal:
-		if not _cover_at(ox - 1, oy):
-			draw_texture_rect(cap, Rect2(base + Vector2(-cap_sz * 0.15, (cell_px - cap_sz) * 0.45), Vector2(cap_sz, cap_sz)), false, mod)
-		if not _cover_at(ox + length, oy):
-			draw_texture_rect(cap, Rect2(base + Vector2(run_len - cap_sz * 0.85, (cell_px - cap_sz) * 0.45), Vector2(cap_sz, cap_sz)), false, mod)
+		_draw_g3_bag_terminus(ox, oy, base + Vector2(0, 0), true, true, mod, cap, cap_sz)
+		_draw_g3_bag_terminus(ox + length - 1, oy, base + Vector2(run_len - cell_px, 0), true, false, mod, cap, cap_sz)
 	else:
-		if not _cover_at(ox, oy + length):
-			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, -cap_sz * 0.15), Vector2(cap_sz, cap_sz)), false, mod)
-		if not _cover_at(ox, oy - 1):
-			draw_texture_rect(cap, Rect2(base + Vector2((cell_px - cap_sz) * 0.5, run_len - cap_sz * 0.85), Vector2(cap_sz, cap_sz)), false, mod)
+		_draw_g3_bag_terminus(ox, oy + length - 1, base + Vector2(0, 0), false, true, mod, cap, cap_sz)
+		_draw_g3_bag_terminus(ox, oy, base + Vector2(0, run_len - cell_px), false, false, mod, cap, cap_sz)
+
+
+func _draw_g3_bag_terminus(
+	x: int, y: int, cell_base: Vector2, horizontal: bool, at_start: bool, mod: Color, cap: Texture2D, cap_sz: float
+) -> void:
+	## Joint if this end turns into a perpendicular cover neighbor; else end-cap.
+	var turn := false
+	if horizontal:
+		turn = _cover_at(x, y + 1) or _cover_at(x, y - 1)
+	else:
+		turn = _cover_at(x + 1, y) or _cover_at(x - 1, y)
+	var dest := Rect2(
+		cell_base + Vector2((cell_px - cap_sz) * 0.5, (cell_px - cap_sz) * 0.40),
+		Vector2(cap_sz, cap_sz)
+	)
+	if turn:
+		_draw_g3_bag_joint(x, y)
+		return
+	if cap == null:
+		return
+	if horizontal:
+		var ox := (-cap_sz * 0.15) if at_start else (cell_px - cap_sz * 0.85)
+		dest.position = cell_base + Vector2(ox, (cell_px - cap_sz) * 0.45)
+	else:
+		var oy := (-cap_sz * 0.15) if at_start else (cell_px - cap_sz * 0.85)
+		dest.position = cell_base + Vector2((cell_px - cap_sz) * 0.5, oy)
+	draw_texture_rect(cap, dest, false, mod)
 
 
 func _draw_g2_props() -> void:
