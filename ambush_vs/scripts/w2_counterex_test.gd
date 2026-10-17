@@ -20,6 +20,7 @@ const T0_B := 560
 ## Cases that currently satisfy D.3 under default soft_cap=ON (must stay true).
 const HOLDING_IDS := [
 	"F-A30", "F-A60",
+	"F-B30", "F-B60",
 	"T-A-4", "T-A+2", "T-A+4",
 	"T-B-4", "T-B-2", "T-B+2", "T-B+4",
 	"W-A-MG→Kar",
@@ -27,7 +28,6 @@ const HOLDING_IDS := [
 ]
 ## Cases that do NOT yet satisfy D.3 under soft_cap=ON (document; watch regressions).
 const PENDING_IDS := [
-	"F-B30", "F-B60",
 	"T-A-2",
 ]
 

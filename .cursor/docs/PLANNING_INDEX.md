@@ -6,7 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS P0-1 D.3 反例门 2026-10-17](VS_P0_1_COUNTEREX_20261017.md) | **当前 VS 执行切片**：D.3 反例命名用例 + 软顶对照；结果表 [`ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)。分支 `vs/p0-1-counterex` → draft PR 合入 `vs/g3`。**不合并**。 |
+| [VS P0-1 D.3 反例门 2026-10-17](VS_P0_1_COUNTEREX_20261017.md) | **当前 VS 执行切片**：切片 2 已验证（F-B30/60）；结果表 [`ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)；院子纸面 **v1.4**。分支 `vs/p0-1-counterex` → draft PR 合入 `vs/g3`。**不合并**。遗留 T-A−2、ALERT-global。 |
 | [VS UX 布局修复 2026-10-17](VS_UX_LAYOUT_20261017.md) | 手机紧凑头像条 + 取景排除 HUD；W8 **273**。PR #57 → `vs/g2`。**不合并**；已被 P0-1 反例门接续。 |
 | [VS UX 操作修复 2026-10-17](VS_UX_CONTROLS_20261017.md) | 审计 PR-1…10 手势/选人/重瞄/工具栏/HUD/快捷键；已被布局修复接续。PR #57 → `vs/g2`。**不合并**。 |
 | [VS-PLAY6 敌人反应 2026-10-17](VS_PLAY6_ENEMY_REACT_20261017.md) | PLAY-6 敌人反应；已被 UX 操作切片接续。PR #57 → `vs/g2`。**不合并**。 |

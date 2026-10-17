@@ -1,7 +1,10 @@
 {
   "id": "B",
   "label": "地面交叉+地雷",
-  "trigger": { "type": "mine_detonate", "bind": "mine_11_6" },
+  "trigger": {
+    "type": "mine_detonate",
+    "bind": "mine_11_6"
+  },
   "operators": [
     {
       "id": "op_kar_B",
@@ -16,7 +19,7 @@
       "x": 16,
       "y": 8,
       "tier": "ground",
-      "facing_deg": 186,
+      "facing_deg": 150,
       "weapon_id": "mp40"
     },
     {
@@ -28,9 +31,25 @@
       "weapon_id": "grenade"
     }
   ],
-  "mines": [{ "id": "mine_11_6", "x": 11, "y": 6 }],
+  "mines": [
+    {
+      "id": "mine_11_6",
+      "x": 11,
+      "y": 6
+    }
+  ],
   "grenades": [
-    { "actor": "op_grenade", "aim_x": 18, "aim_y": 8, "delay_ticks": 12 },
-    { "actor": "op_grenade", "aim_x": 17, "aim_y": 7, "delay_ticks": 24 }
+    {
+      "actor": "op_grenade",
+      "aim_x": 18,
+      "aim_y": 8,
+      "delay_ticks": 12
+    },
+    {
+      "actor": "op_grenade",
+      "aim_x": 17,
+      "aim_y": 7,
+      "delay_ticks": 24
+    }
   ]
 }

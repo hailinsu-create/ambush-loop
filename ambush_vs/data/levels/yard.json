@@ -1,6 +1,6 @@
 {
   "id": "yard",
-  "version": 4,
+  "version": 5,
   "title": "院子",
   "night": true,
   "ambush_targets": [
@@ -1637,7 +1637,11 @@
       "x": 11,
       "y": 7,
       "kind": "road",
-      "tier": "ground"
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
     },
     {
       "x": 12,

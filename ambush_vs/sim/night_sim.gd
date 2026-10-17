@@ -759,6 +759,7 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 		if e["alive"] and e["entered"] and not e["escaped"]:
 			_entered_at_detonate += 1
 			e["path"] = []
+			e["unwatched_ticks"] = 0
 			var ex := int(floor(float(e["x"])))
 			var ey := int(floor(float(e["y"])))
 			## D.3 scout cost: unwatched flanks still in the east alley peel to
@@ -1007,6 +1008,25 @@ func _damage_operator(op: Dictionary, actor: String) -> void:
 func _update_flee_modes() -> void:
 	if detonate_tick < 0 or _entered_at_detonate <= 0:
 		return
+	## Unwatched survivors break contact after ~1.5 s (plan B facing gap → escape).
+	const UNWATCHED_BREAK_TICKS := 30
+	for e in enemies:
+		if not e["alive"] or e["escaped"] or not e["entered"]:
+			continue
+		if str(e.get("mode", "")) == "flee":
+			continue
+		if _enemy_watched_by_squad(e):
+			e["unwatched_ticks"] = 0
+		else:
+			e["unwatched_ticks"] = int(e.get("unwatched_ticks", 0)) + 1
+			if int(e["unwatched_ticks"]) >= UNWATCHED_BREAK_TICKS:
+				e["mode"] = "flee"
+				e["path"] = []
+				e["cover_goal"] = _flee_exit_cell(e)
+				log.emit(tick, "enemy_flee", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "unwatched_break"},
+				})
 	var living := 0
 	for e in enemies:
 		if e["alive"] and e["entered"] and not e["escaped"]:
@@ -1019,9 +1039,13 @@ func _update_flee_modes() -> void:
 			continue
 		if str(e.get("mode", "")) == "flee":
 			continue
+		## Pinned by a gun cone: stay and die / wait for unwatched_break instead.
+		if _enemy_watched_by_squad(e):
+			continue
 		e["mode"] = "flee"
 		e["path"] = []
-		e["cover_goal"] = _nearest_exit_cell(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
+		## Prefer south when breaking contact; east peel is detonate-only for alley flanks.
+		e["cover_goal"] = _flee_exit_cell(e)
 		log.emit(tick, "enemy_flee", {
 			"actor": e["id"],
 			"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "strength": ratio},
@@ -1142,6 +1166,38 @@ func _nearest_exit_cell(x: int, y: int) -> Vector2i:
 	return best
 
 
+func _flee_exit_cell(e: Dictionary) -> Vector2i:
+	var x := int(floor(float(e["x"])))
+	var y := int(floor(float(e["y"])))
+	var flank := str(e.get("group", "")) == "flank"
+	var watched := _enemy_watched_by_squad(e)
+	if flank and not watched and x >= 17:
+		return _east_alley_exit_cell(x, y)
+	## Prefer south_gate when watched or main-road troops.
+	var south := _exit_cell_by_id("south_gate", x, y)
+	if south.x >= 0:
+		return south
+	return _nearest_exit_cell(x, y)
+
+
+func _exit_cell_by_id(exit_id: String, x: int, y: int) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_d := 1e9
+	for key in _exit_cells.keys():
+		if str(_exit_cells[key]) != exit_id:
+			continue
+		var parts: PackedStringArray = str(key).split(",")
+		if parts.size() < 2:
+			continue
+		var ex := int(parts[0])
+		var ey := int(parts[1])
+		var d := Vector2(ex - x, ey - y).length()
+		if d < best_d:
+			best_d = d
+			best = Vector2i(ex, ey)
+	return best
+
+
 func _east_alley_exit_cell(x: int, y: int) -> Vector2i:
 	## Prefer east_alley exit cells; fall back to nearest fail-on-escape exit.
 	var best := Vector2i(-1, -1)
@@ -1165,6 +1221,8 @@ func _east_alley_exit_cell(x: int, y: int) -> Vector2i:
 
 func _enemy_watched_by_squad(e: Dictionary) -> bool:
 	## True if any living gun operator has this enemy in cone + LOS.
+	if skip_fire:
+		return false ## test hook: muted friendlies do not pin
 	for op in operators:
 		if not op["alive"]:
 			continue
