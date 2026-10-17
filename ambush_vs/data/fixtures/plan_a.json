@@ -1,0 +1,33 @@
+{
+  "id": "A",
+  "label": "高点压制",
+  "trigger": { "type": "see_first_enemy", "bind": "op_kar_L" },
+  "operators": [
+    {
+      "id": "op_mg42",
+      "x": 5,
+      "y": 9,
+      "tier": "high",
+      "facing_deg": 0,
+      "weapon_id": "mg42"
+    },
+    {
+      "id": "op_kar_L",
+      "x": 13,
+      "y": 7,
+      "tier": "high",
+      "facing_deg": 18.3895,
+      "weapon_id": "kar98k"
+    },
+    {
+      "id": "op_mp40",
+      "x": 11,
+      "y": 2,
+      "tier": "ground",
+      "facing_deg": 90,
+      "weapon_id": "mp40"
+    }
+  ],
+  "mines": [],
+  "grenades": []
+}
