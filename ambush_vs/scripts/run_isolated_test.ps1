@@ -7,7 +7,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$allowed = @("empty_test.gd", "w2_sim_test.gd", "w2_sim_cli.gd", "w3_greybox_test.gd", "w4_scout_test.gd", "w5_combat_fx_test.gd", "w6_review_test.gd", "w7_combat_test.gd", "w8_controls_test.gd")
+$allowed = @("empty_test.gd", "w2_sim_test.gd", "w2_sim_cli.gd", "w3_greybox_test.gd", "w4_scout_test.gd", "w5_combat_fx_test.gd", "w6_review_test.gd", "w7_combat_test.gd", "w8_controls_test.gd", "ux_controls_capture.gd")
 if ($allowed -notcontains $Entry) {
     Write-Error "Unsupported test entry for ambush_vs: $Entry"
     exit 2
