@@ -31,6 +31,7 @@ func _run_all() -> void:
 	await _test_scout_path_preview()
 	await _test_undo_cancel()
 	await _test_camera_zoom_pan()
+	await _test_info_card()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -664,4 +665,47 @@ func _test_camera_zoom_pan() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "camera scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _count_tooltips(n: Node) -> int:
+	var c := 0
+	if n is Control and str((n as Control).tooltip_text) != "":
+		c += 1
+	for ch in n.get_children():
+		c += _count_tooltips(ch)
+	return c
+
+
+func _test_info_card() -> void:
+	## PR-9: long-press / hover info card; no tooltip_text left.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "info card scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(scene.info_card != null, "info card exists")
+		var hash0 := JSON.stringify(scene.plan)
+		scene._show_info_card_at(Vector2i(5, 9))
+		_assert(scene.info_card.visible, "info card visible on long-press path")
+		_assert(str(scene.info_card_label.text).contains("可见观察者"), "info has 可见观察者")
+		_assert(JSON.stringify(scene.plan) == hash0, "plan unchanged by info card")
+		scene._hide_info_card()
+		# Hover dwell 300ms.
+		scene.info_now_ms_fn = func(): return 5000
+		scene._on_cell_hovered(Vector2i(8, 4))
+		scene.info_now_ms_fn = func(): return 5000 + scene.HOVER_INFO_MS + 5
+		scene._process(0.016)
+		_assert(scene.info_card.visible, "hover dwell shows info card")
+		scene._on_cell_hovered(Vector2i(9, 4)) ## move away arms new; hides
+		_assert(not scene.info_card.visible or scene._hover_info_cell == Vector2i(9, 4), "hover move resets")
+		scene._strip_all_tooltips()
+		_assert(_count_tooltips(scene) == 0, "no tooltip_text left")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "info card scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")

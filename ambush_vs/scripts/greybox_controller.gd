@@ -171,6 +171,14 @@ var btn_cancel: Button = null
 var _aim_drag_active: bool = false
 var _facing_before_aim: float = NAN
 var _skip_next_place_undo: bool = false
+## PLAY-UX PR-9: long-press / hover info card.
+var info_card: PanelContainer = null
+var info_card_label: Label = null
+var _hover_info_cell: Vector2i = Vector2i(-999, -999)
+var _hover_info_ms: int = 0
+var _hover_info_armed: bool = false
+const HOVER_INFO_MS := 300
+var info_now_ms_fn: Callable = Callable()
 
 
 func _ready() -> void:
@@ -203,6 +211,8 @@ func _ready() -> void:
 	_build_setup_tool_bars()
 	_build_touch_hud()
 	_build_undo_cancel_buttons()
+	_build_info_card()
+	_strip_all_tooltips()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -519,9 +529,6 @@ func _build_kit_row() -> void:
 			tr.modulate = Color(0.45, 0.45, 0.45, 0.85)
 			lab.text = "MG42"
 			lab.modulate = Color(0.55, 0.55, 0.55)
-			box.tooltip_text = "需在隐蔽补给点找到"
-			tr.tooltip_text = "需在隐蔽补给点找到"
-			lab.tooltip_text = "需在隐蔽补给点找到"
 		else:
 			lab.text = str(WEAPON_LABEL_ZH.get(wid, wid))
 			if wid == "mg42":
@@ -569,7 +576,6 @@ func _build_op_cards() -> void:
 			mg.name = "W_mg42"
 			mg.text = "MG42"
 			mg.disabled = true
-			mg.tooltip_text = "需在隐蔽补给点找到"
 			mg.custom_minimum_size = Vector2(TOUCH_MIN_PX, TOUCH_MIN_PX)
 			mg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			mg.add_theme_font_size_override("font_size", BODY_FONT_PX)
@@ -1627,12 +1633,17 @@ func _clear_scout_preview() -> void:
 
 
 func _on_cell_hovered(cell: Vector2i) -> void:
-	## Desktop hover preview during scout (does not commit path).
+	## Desktop hover: scout path preview + PR-9 info card arming.
+	if cell != _hover_info_cell:
+		_hover_info_cell = cell
+		_hover_info_ms = _info_now_ms()
+		_hover_info_armed = true
+		if info_card and info_card.visible:
+			_hide_info_card()
 	if ui_phase != UiPhase.SCOUT or scout == null or scout.is_finished():
 		return
 	if selected_op_id == "":
 		return
-	# Don't hover-preview on own unit cell.
 	for op in scout.operators:
 		if int(op["x"]) == cell.x and int(op["y"]) == cell.y:
 			return
@@ -1642,22 +1653,160 @@ func _on_cell_hovered(cell: Vector2i) -> void:
 
 
 func _on_cell_long_pressed(cell: Vector2i) -> void:
-	## PR-6 who-sees; PR-7 long-press delete mine / trip line in SETUP.
+	## PR-6 who-sees; PR-7 delete mine/line; PR-9 info card.
 	preview_cell = cell
 	if ui_phase == UiPhase.SETUP:
 		if _try_delete_mine_at(cell) or _try_delete_trip_near(cell):
 			return
-		preview_seers = _preview_who_sees(cell)
-	elif ui_phase == UiPhase.SCOUT and scout != null:
+	_show_info_card_at(cell)
+	_push_map_snapshot()
+
+
+func _build_info_card() -> void:
+	info_card = PanelContainer.new()
+	info_card.name = "InfoCard"
+	info_card.visible = false
+	info_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	info_card.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	info_card.offset_left = -220
+	info_card.offset_top = 56
+	info_card.offset_right = 220
+	info_card.offset_bottom = 220
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 12)
+	margin.add_theme_constant_override("margin_right", 12)
+	margin.add_theme_constant_override("margin_top", 10)
+	margin.add_theme_constant_override("margin_bottom", 10)
+	info_card.add_child(margin)
+	info_card_label = Label.new()
+	info_card_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	info_card_label.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	margin.add_child(info_card_label)
+	$HUD.add_child(info_card)
+
+
+func _info_now_ms() -> int:
+	if info_now_ms_fn.is_valid():
+		return int(info_now_ms_fn.call())
+	return Time.get_ticks_msec()
+
+
+func _show_info_card_at(cell: Vector2i) -> void:
+	preview_cell = cell
+	var lines: PackedStringArray = []
+	var unit_txt := _info_text_for_unit_at(cell)
+	if unit_txt != "":
+		lines.append(unit_txt)
+	var enemy_txt := _info_text_for_enemy_at(cell)
+	if enemy_txt != "":
+		lines.append(enemy_txt)
+	var crate_txt := _info_text_for_supply_at(cell)
+	if crate_txt != "":
+		lines.append(crate_txt)
+	# Always include cell geometry + who sees.
+	if ui_phase == UiPhase.SCOUT and scout != null:
 		preview_seers = _preview_who_sees_level_observers(cell)
+	elif ui_phase == UiPhase.SETUP:
+		preview_seers = _preview_who_sees(cell)
 	elif ui_phase == UiPhase.WAIT and sim != null:
 		preview_seers = sim.observers_seeing_cell(
 			float(cell.x), float(cell.y), grid.tier_at(float(cell.x), float(cell.y))
 		)
 	else:
-		return
-	label_info.text = "格 (%d,%d) · 可见观察者 %d" % [cell.x, cell.y, preview_seers.size()]
-	_push_map_snapshot()
+		preview_seers = []
+	var tier: String = str(grid.tier_at(float(cell.x), float(cell.y))) if grid else "ground"
+	lines.append("格 (%d,%d) · 地形 %s" % [cell.x, cell.y, "高点" if tier == "high" else "地面"])
+	lines.append("可见观察者 %d" % preview_seers.size())
+	if info_card_label:
+		info_card_label.text = "\n".join(lines)
+	if info_card:
+		info_card.visible = true
+	label_info.text = lines[lines.size() - 1]
+
+
+func _hide_info_card() -> void:
+	if info_card:
+		info_card.visible = false
+	_hover_info_armed = false
+
+
+func _info_text_for_unit_at(cell: Vector2i) -> String:
+	var ops: Array = []
+	if ui_phase == UiPhase.SCOUT and scout:
+		ops = scout.operators
+	elif ui_phase == UiPhase.WAIT and sim:
+		ops = sim.operators
+	elif plan:
+		ops = plan.get("operators", [])
+	for op in ops:
+		if int(floor(float(op["x"]))) != cell.x or int(floor(float(op["y"]))) != cell.y:
+			continue
+		var oid := str(op["id"])
+		var dname := str(op_display_names.get(oid, oid))
+		var wid := str(op.get("weapon_id", ""))
+		var wlabel := str(WEAPON_LABEL_ZH.get(wid, wid))
+		var hp := int(op.get("hp", SimConstants.OP_MAX_HP))
+		var ammo := int(op.get("ammo", 0))
+		var observer := ""
+		if str(plan.get("trigger", {}).get("type", "")) == "see_first_enemy" and str(plan.get("trigger", {}).get("bind", "")) == oid:
+			observer = " · 起爆观察员"
+		var fire := ""
+		if ui_phase == UiPhase.WAIT and int(op.get("turn_ticks_left", 0)) > 0:
+			fire = " · 转向中禁火"
+		return "%s · %s · HP%d 弹%d%s%s" % [dname, wlabel, hp, ammo, observer, fire]
+	return ""
+
+
+func _info_text_for_enemy_at(cell: Vector2i) -> String:
+	var enemies: Array = []
+	if ui_phase == UiPhase.WAIT and sim:
+		enemies = sim.enemies
+	for e in enemies:
+		if not bool(e.get("alive", true)):
+			continue
+		if int(floor(float(e["x"]))) == cell.x and int(floor(float(e["y"]))) == cell.y:
+			return "敌人 %s · 模式 %s" % [str(e.get("id", "?")), str(e.get("mode", ""))]
+	# Sentries / patrols.
+	var obs_list: Array = []
+	if ui_phase == UiPhase.SCOUT and scout:
+		obs_list = scout.sentries + scout.patrols
+	elif sim:
+		obs_list = sim.sentries + sim.patrols
+	else:
+		obs_list = level.get("sentries", []) + level.get("patrols", [])
+	for o in obs_list:
+		if int(floor(float(o.get("x", -1)))) == cell.x and int(floor(float(o.get("y", -1)))) == cell.y:
+			return "岗望/巡逻 %s · 朝向 %.0f°" % [
+				str(o.get("id", "?")),
+				float(o.get("cone", {}).get("facing_deg", 0.0)),
+			]
+	return ""
+
+
+func _info_text_for_supply_at(cell: Vector2i) -> String:
+	if scout == null:
+		return ""
+	for s in scout.supplies:
+		if int(s.get("x", -1)) != cell.x or int(s.get("y", -1)) != cell.y:
+			continue
+		if not bool(s.get("revealed", false)):
+			return "补给点（未揭示）"
+		var opened := bool(s.get("opened", false))
+		var sid := str(s.get("id", ""))
+		var mg_hint := ""
+		if sid == "hidden_H" and not is_mg42_unlocked():
+			mg_hint = " · 可能有 MG42"
+		return "补给 %s · %s%s" % [sid, "已开" if opened else "未开", mg_hint]
+	return ""
+
+
+func _strip_all_tooltips(n: Node = null) -> void:
+	if n == null:
+		n = self
+	if n is Control:
+		(n as Control).tooltip_text = ""
+	for c in n.get_children():
+		_strip_all_tooltips(c)
 
 
 func _try_delete_mine_at(cell: Vector2i) -> bool:
@@ -2132,6 +2281,12 @@ func _process(delta: float) -> void:
 	if map_view and map_view.combat_fx:
 		map_view.combat_fx.advance(delta)
 		_update_shake(delta)
+	# PR-9: desktop hover dwell → info card.
+	if _hover_info_armed and _hover_info_cell.x > -900:
+		if _info_now_ms() - _hover_info_ms >= HOVER_INFO_MS:
+			_hover_info_armed = false
+			_show_info_card_at(_hover_info_cell)
+			_push_map_snapshot()
 	if ui_phase == UiPhase.SCOUT and scout != null and not scout.is_finished() and not paused:
 		_accum_s += delta * speed_mul
 		var dt := SimConstants.DT_S
