@@ -225,7 +225,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "重新开始"
 
-[node name="ResultPanel" type="VBoxContainer" parent="HUD"]
+[node name="ResultPanel" type="PanelContainer" parent="HUD"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -233,22 +233,78 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -280.0
-offset_top = -160.0
-offset_right = 280.0
-offset_bottom = 160.0
+offset_left = -300.0
+offset_top = -220.0
+offset_right = 300.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="HUD/ResultPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="HUD/ResultPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleRow" type="HBoxContainer" parent="HUD/ResultPanel/Margin/VBox"]
+layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ResultLabel" type="Label" parent="HUD/ResultPanel"]
+[node name="OutcomeLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox/TitleRow"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "结算"
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "全歼"
+
+[node name="GradeLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox/TitleRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "S"
+
+[node name="SubtitleLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "伏击质量"
 autowrap_mode = 3
 
-[node name="RestartButton" type="Button" parent="HUD/ResultPanel"]
-custom_minimum_size = Vector2(0, 56)
+[node name="TimelineLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "再来一局"
+theme_override_font_sizes/font_size = 14
+text = "时间线"
+autowrap_mode = 3
+
+[node name="CausesLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "原因"
+autowrap_mode = 3
+
+[node name="BodyHintLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = ""
+autowrap_mode = 3
+
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel/Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = ""
+
+[node name="RestartButton" type="Button" parent="HUD/ResultPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "再来一局（保留布阵）"
+
+[node name="RescoutButton" type="Button" parent="HUD/ResultPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "重新侦察"

@@ -61,6 +61,8 @@ var shake_offset: Vector2 = Vector2.ZERO
 var _high_cells: Dictionary = {} ## "x,y" → high_slot id
 var _out_of_yard: Dictionary = {} ## "x,y" → border-touching wall mass (not a building)
 var _inner_wall: Dictionary = {} ## "x,y" → interior low-wall cells (stone strips)
+var searched_bodies: Dictionary = {} ## enemy_id → true (PLAY-5)
+var body_search_enabled: bool = false
 
 var _dragging_op: String = ""
 var _drag_start: Vector2 = Vector2.ZERO
@@ -220,6 +222,8 @@ func apply_snapshot(snap: Dictionary) -> void:
 	highlight_high_slots = bool(snap.get("highlight_high_slots", false))
 	op_display_names = snap.get("op_display_names", {}) as Dictionary
 	supply_states = snap.get("supply_states", {}) as Dictionary
+	searched_bodies = snap.get("searched_bodies", {}) as Dictionary
+	body_search_enabled = bool(snap.get("body_search_enabled", false))
 	queue_redraw()
 
 
@@ -1628,6 +1632,19 @@ func _draw_bodies() -> void:
 			draw_set_transform(base_xform, 0.0, Vector2.ONE)
 		else:
 			draw_circle(p, cell_px * 0.28, col)
+		# PLAY-5: lootable body marker until searched.
+		if body_search_enabled and not searched_bodies.has(str(id)):
+			var pulse := 0.55 + 0.45 * absf(sin(Time.get_ticks_msec() * 0.006))
+			draw_arc(p, cell_px * 0.55, 0, TAU, 24, Color(1.0, 0.85, 0.3, pulse), 2.4)
+			draw_string(
+				ThemeDB.fallback_font,
+				p + Vector2(-14, cell_px * 0.7),
+				"搜尸",
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				12,
+				Color(1.0, 0.9, 0.4, 0.95)
+			)
 
 
 func _draw_combat_fx() -> void:

@@ -11,6 +11,7 @@ const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
 const SimConstants := preload("res://sim/constants.gd")
 const SimGeom := preload("res://sim/geom.gd")
+const ReviewBuilder := preload("res://sim/review_builder.gd")
 const GreyboxMapScript := preload("res://view/greybox_map.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
 const G2SfxPlayerScript := preload("res://view/g2_sfx_player.gd")
@@ -105,12 +106,26 @@ var example_plans_open: bool = false
 @onready var setup_panel: Control = $HUD/SetupPanel
 @onready var wait_panel: Control = $HUD/WaitPanel
 @onready var result_panel: Control = $HUD/ResultPanel
-@onready var result_label: Label = $HUD/ResultPanel/ResultLabel
+@onready var result_label: Label = $HUD/ResultPanel/Margin/VBox/ResultLabel
+@onready var outcome_label: Label = $HUD/ResultPanel/Margin/VBox/TitleRow/OutcomeLabel
+@onready var grade_label: Label = $HUD/ResultPanel/Margin/VBox/TitleRow/GradeLabel
+@onready var subtitle_label: Label = $HUD/ResultPanel/Margin/VBox/SubtitleLabel
+@onready var timeline_label: Label = $HUD/ResultPanel/Margin/VBox/TimelineLabel
+@onready var causes_label: Label = $HUD/ResultPanel/Margin/VBox/CausesLabel
+@onready var body_hint_label: Label = $HUD/ResultPanel/Margin/VBox/BodyHintLabel
 @onready var btn_pause: Button = $HUD/WaitPanel/PauseButton
 @onready var btn_speed: Button = $HUD/WaitPanel/SpeedButton
 @onready var btn_detonate: Button = $HUD/WaitPanel/DetonateButton
-@onready var btn_restart: Button = $HUD/ResultPanel/RestartButton
+@onready var btn_restart: Button = $HUD/ResultPanel/Margin/VBox/RestartButton
+@onready var btn_rescout: Button = $HUD/ResultPanel/Margin/VBox/RescoutButton
 @onready var btn_restart_wait: Button = $HUD/WaitPanel/RestartWaitButton
+
+## PLAY-5 review + body search
+var last_review: Dictionary = {}
+var searched_bodies: Dictionary = {} ## enemy_id → true
+var next_night_loot: Array = [] ## stub persistence for next night kit
+var body_search_enabled: bool = false
+const NEXT_NIGHT_KIT_PATH := "user://next_night_kit.json"
 
 
 func _ready() -> void:
@@ -142,6 +157,8 @@ func _ready() -> void:
 	btn_detonate.pressed.connect(func(): _ui_tap(); _manual_detonate())
 	btn_restart.pressed.connect(func(): _ui_tap(); _restart())
 	btn_restart_wait.pressed.connect(func(): _ui_tap(); _restart())
+	if btn_rescout:
+		btn_rescout.pressed.connect(func(): _ui_tap(); _restart_scout())
 	if btn_begin_setup:
 		btn_begin_setup.pressed.connect(func(): _ui_tap(); begin_setup_from_scout())
 	if btn_scout_preview:
@@ -175,15 +192,27 @@ func _ready() -> void:
 		_refresh_start_gate()
 	else:
 		_start_scout_phase()
+	_load_next_night_loot_stub()
 	if _headless_auto:
-		call_deferred("_auto_run_plan_a")
+		var plan_env := str(OS.get_environment("AMBUSH_GREYBOX_PLAN")).to_upper()
+		if plan_env == "B":
+			call_deferred("_auto_run_plan_b")
+		else:
+			call_deferred("_auto_run_plan_a")
 
 
 func _apply_cjk_font() -> void:
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
 	if font_res == null:
 		return
-	for n in [label_phase, label_info, label_alert, result_label, label_scout_clock, label_scout_kit, btn_begin_setup, btn_scout_preview, btn_example, btn_plan_a, btn_plan_b, btn_start, label_start_reason, btn_preview, btn_g2_art, btn_pause, btn_speed, btn_detonate, btn_restart, btn_restart_wait, trigger_option]:
+	for n in [
+		label_phase, label_info, label_alert, result_label, outcome_label, grade_label,
+		subtitle_label, timeline_label, causes_label, body_hint_label,
+		label_scout_clock, label_scout_kit, btn_begin_setup, btn_scout_preview,
+		btn_example, btn_plan_a, btn_plan_b, btn_start, label_start_reason, btn_preview,
+		btn_g2_art, btn_pause, btn_speed, btn_detonate, btn_restart, btn_rescout,
+		btn_restart_wait, trigger_option,
+	]:
 		if n:
 			n.add_theme_font_override("font", font_res)
 	if trigger_option:
@@ -749,6 +778,9 @@ func _restart() -> void:
 	## Keep player's last plan (DESIGN_V2 §4.5); do not force preset A.
 	sim = null
 	last_summary = {}
+	last_review = {}
+	searched_bodies.clear()
+	body_search_enabled = false
 	preview_cell = Vector2i(-1, -1)
 	preview_seers = []
 	place_mode = PlaceMode.OP
@@ -760,11 +792,33 @@ func _restart() -> void:
 	label_info.text = "已保留上一局计划 · 可继续微调"
 
 
+func _restart_scout() -> void:
+	## PLAY-5: full reset into scout/gather for a fresh night.
+	sim = null
+	scout = null
+	last_summary = {}
+	last_review = {}
+	searched_bodies.clear()
+	body_search_enabled = false
+	plan = {}
+	gathered_kit = {}
+	op_placed.clear()
+	op_display_names.clear()
+	preview_cell = Vector2i(-1, -1)
+	preview_seers = []
+	_start_scout_phase()
+	_push_map_snapshot()
+	label_info.text = "重新侦察 · 搜集补给后再布阵"
+
+
 func _toggle_preview_hint() -> void:
 	label_info.text = "点地面：看谁能看见这里（预览＝模拟）"
 
 
 func _on_cell_tapped(cell: Vector2i) -> void:
+	if ui_phase == UiPhase.RESULT and body_search_enabled:
+		if _try_search_body_at(cell):
+			return
 	if ui_phase == UiPhase.SCOUT:
 		_on_scout_cell_tapped(cell)
 		return
@@ -1160,9 +1214,23 @@ func _update_wait_labels() -> void:
 	_sync_alert_sfx()
 	_maybe_play_detonate_sfx()
 	label_alert.text = _alert_zh(sim.alert)
-	label_info.text = "t=%d (%.1fs) · 阶段 %s · 触发 %s" % [
-		sim.tick, float(sim.tick) * SimConstants.DT_S, sim.phase, sim.trigger_used if sim.trigger_used else str(sim.trigger.get("type", ""))
-	]
+	var sec := int(floor(float(sim.tick) * SimConstants.DT_S))
+	var phase_zh := "等待"
+	match str(sim.phase):
+		"detonate":
+			phase_zh = "交火"
+		"resolve":
+			phase_zh = "清场"
+		"wait":
+			phase_zh = "等待"
+		_:
+			phase_zh = "进行中"
+	var trig_zh := ""
+	if str(sim.trigger_used) != "":
+		trig_zh = " · " + ReviewBuilder.trigger_zh(str(sim.trigger_used))
+	elif sim.plan_locked:
+		trig_zh = " · 计划锁定"
+	label_info.text = "已等待 %d 秒 · %s%s" % [sec, phase_zh, trig_zh]
 
 
 func _sync_alert_sfx() -> void:
@@ -1201,43 +1269,160 @@ func _alert_zh(a: String) -> String:
 
 func _show_result() -> void:
 	last_summary = sim.outcome_summary()
+	last_review = ReviewBuilder.build(sim, plan, op_display_names)
 	if sfx:
 		sfx.stop_ambient()
+	searched_bodies.clear()
+	body_search_enabled = bool(last_review.get("full_wipe", false))
 	_set_ui_phase(UiPhase.RESULT)
-	var reason := _reason_zh(last_summary)
-	result_label.text = "\n".join([
-		"标准伏击：%s" % ("是" if bool(last_summary.get("standard_ambush", false)) else "否"),
-		"胜负：%s" % ("胜利" if str(last_summary.get("outcome", "")) == "win" else "失败"),
-		"起爆 tick：%s  条件：%s" % [str(last_summary.get("detonate_tick", -1)), str(last_summary.get("trigger", ""))],
-		"击杀：%s" % ",".join(last_summary.get("kills", [])),
-		"逃脱：%s" % (",".join(last_summary.get("escapes", [])) if last_summary.get("escapes", []) else "无"),
-		"警报档：%s" % _alert_zh(str(last_summary.get("alert", ""))),
-		"原因：%s" % reason,
-	])
+	_apply_review_card(last_review)
 	_push_map_snapshot()
 
 
-func _reason_zh(s: Dictionary) -> String:
-	var r := str(s.get("reason", ""))
-	var trig := str(s.get("trigger", ""))
-	if trig == "alarm":
-		return "被岗哨/巡逻发现升至全图警报"
-	if r == "enemy_escape":
-		var t0 := int(s.get("detonate_tick", -1))
-		if t0 >= 0 and t0 < T0_EARLY_TICK:
-			return "起爆过早（侧翼未入杀伤区）"
-		if t0 > T0_LATE_TICK:
-			return "起爆过晚"
-		return "敌人逃脱"
-	if r == "clear":
-		if bool(s.get("standard_ambush", false)):
-			return "标准伏击成功"
-		return "清场但未达标准伏击"
-	if r == "timeout":
-		return "超时"
-	if trig == "manual":
-		return "手动起爆"
-	return r if r else "—"
+func _apply_review_card(rev: Dictionary) -> void:
+	var outcome_zh := str(rev.get("outcome_zh", "失败"))
+	var grade := str(rev.get("grade", "C"))
+	if outcome_label:
+		outcome_label.text = outcome_zh
+	if grade_label:
+		grade_label.text = grade
+		match grade:
+			"S":
+				grade_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.25))
+			"A":
+				grade_label.add_theme_color_override("font_color", Color(0.55, 0.9, 0.55))
+			"B":
+				grade_label.add_theme_color_override("font_color", Color(0.7, 0.85, 1.0))
+			_:
+				grade_label.add_theme_color_override("font_color", Color(0.95, 0.55, 0.45))
+	var std := bool(rev.get("standard_ambush", false))
+	if subtitle_label:
+		subtitle_label.text = "伏击质量 %s · %s · %s" % [
+			grade,
+			"标准伏击" if std else "非标准伏击",
+			_alert_zh(str(rev.get("summary", {}).get("alert", "quiet"))),
+		]
+	var chips: Array = rev.get("timeline", [])
+	if timeline_label:
+		timeline_label.text = "时间线：" + " → ".join(chips)
+	var causes: Array = rev.get("causes", [])
+	var lines: Array = []
+	for i in range(causes.size()):
+		lines.append("%d. %s" % [i + 1, str(causes[i])])
+	if causes_label:
+		causes_label.text = "\n".join(lines)
+	if body_hint_label:
+		if body_search_enabled:
+			var left := _lootable_body_ids().size() - searched_bodies.size()
+			body_hint_label.text = "清场搜尸：点地图上的尸体缴获补给（剩余 %d）· 带入下一夜" % maxi(0, left)
+			body_hint_label.visible = true
+		else:
+			body_hint_label.text = ""
+			body_hint_label.visible = false
+	# Hidden debug mirror for tests (not shown).
+	if result_label:
+		result_label.visible = false
+		result_label.text = "%s|%s" % [outcome_zh, grade]
+	label_info.text = "%s · 评级 %s" % [outcome_zh, grade]
+
+
+func review_card_text() -> String:
+	## Test hook: concatenated player-facing review strings (no forbidden tokens).
+	var parts: Array = []
+	if outcome_label:
+		parts.append(outcome_label.text)
+	if grade_label:
+		parts.append(grade_label.text)
+	if subtitle_label:
+		parts.append(subtitle_label.text)
+	if timeline_label:
+		parts.append(timeline_label.text)
+	if causes_label:
+		parts.append(causes_label.text)
+	if body_hint_label and body_hint_label.visible:
+		parts.append(body_hint_label.text)
+	return "\n".join(parts)
+
+
+func _lootable_body_ids() -> Array:
+	var out: Array = []
+	if map_view == null or map_view.combat_fx == null:
+		return out
+	for id in map_view.combat_fx.bodies.keys():
+		out.append(str(id))
+	return out
+
+
+func _try_search_body_at(cell: Vector2i) -> bool:
+	if map_view == null or map_view.combat_fx == null:
+		return false
+	for id in map_view.combat_fx.bodies.keys():
+		if searched_bodies.has(str(id)):
+			continue
+		var b: Dictionary = map_view.combat_fx.bodies[id]
+		var bx := int(floor(float(b.get("x", -99))))
+		var by := int(floor(float(b.get("y", -99))))
+		if bx == cell.x and by == cell.y:
+			_search_body(str(id))
+			return true
+	return false
+
+
+func _search_body(enemy_id: String) -> void:
+	if searched_bodies.has(enemy_id):
+		return
+	searched_bodies[enemy_id] = true
+	var loot := _roll_body_loot(enemy_id)
+	next_night_loot.append(loot)
+	_save_next_night_loot_stub()
+	if sfx:
+		sfx.play("ui_tap", -6.0)
+	var left := 0
+	for id in _lootable_body_ids():
+		if not searched_bodies.has(str(id)):
+			left += 1
+	label_info.text = "搜尸获得：%s · 已存入下一夜套件" % str(loot.get("label_zh", "补给"))
+	if body_hint_label:
+		if left > 0:
+			body_hint_label.text = "清场搜尸：点尸体继续缴获（剩余 %d）" % left
+		else:
+			body_hint_label.text = "尸体已搜完 · 补给将带入下一夜"
+	_push_map_snapshot()
+
+
+func _roll_body_loot(_enemy_id: String) -> Dictionary:
+	## Deterministic stub loot for next-night kit (no RNG).
+	var n := next_night_loot.size()
+	match n % 3:
+		0:
+			return {"kind": "ammo", "pool_id": "ammo_9mm", "rounds": 16, "label_zh": "9mm 弹药 ×16"}
+		1:
+			return {"kind": "ammo", "pool_id": "ammo_792", "rounds": 10, "label_zh": "7.92 弹药 ×10"}
+		_:
+			return {"kind": "codex", "item_id": "luger_codex", "label_zh": "图鉴：卢格手枪（收藏）"}
+
+
+func _save_next_night_loot_stub() -> void:
+	var f := FileAccess.open(NEXT_NIGHT_KIT_PATH, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({"loot": next_night_loot}, "\t"))
+
+
+func _load_next_night_loot_stub() -> void:
+	next_night_loot.clear()
+	if not FileAccess.file_exists(NEXT_NIGHT_KIT_PATH):
+		return
+	var f := FileAccess.open(NEXT_NIGHT_KIT_PATH, FileAccess.READ)
+	if f == null:
+		return
+	var parsed: Variant = JSON.parse_string(f.get_as_text())
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return
+	var arr: Array = (parsed as Dictionary).get("loot", [])
+	for item in arr:
+		if typeof(item) == TYPE_DICTIONARY:
+			next_night_loot.append(item)
 
 
 func _push_map_snapshot() -> void:
@@ -1289,11 +1474,21 @@ func _push_map_snapshot() -> void:
 		"highlight_high_slots": ui_phase == UiPhase.SETUP,
 		"op_display_names": op_display_names,
 		"supply_states": supply_states,
+		"searched_bodies": searched_bodies,
+		"body_search_enabled": body_search_enabled and ui_phase == UiPhase.RESULT,
 	})
 
 
+func _auto_run_plan_b() -> void:
+	await _auto_run_plan("B")
+
+
 func _auto_run_plan_a() -> void:
-	## Headless: scout shots → setup w/ MG42 → load A → wait/result (golden path).
+	await _auto_run_plan("A")
+
+
+func _auto_run_plan(which: String) -> void:
+	## Headless: scout → setup → load A|B → wait/result. Captures review_a / review_b.
 	for _i in range(8):
 		await get_tree().process_frame
 	map_view._fit_cell_px()
@@ -1339,7 +1534,6 @@ func _auto_run_plan_a() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_try_capture("setup_mg42")
-	# PLAY-1 mid blank placement shot, then golden A.
 	_try_capture("blank")
 	if plan.get("operators", []):
 		var oid0 := str(plan["operators"][0]["id"])
@@ -1347,7 +1541,7 @@ func _auto_run_plan_a() -> void:
 	_push_map_snapshot()
 	await get_tree().process_frame
 	_try_capture("mid")
-	_load_preset("A")
+	_load_preset(which)
 	_push_map_snapshot()
 	await get_tree().process_frame
 	_try_capture("setup")
@@ -1371,6 +1565,7 @@ func _auto_run_plan_a() -> void:
 		if (
 			not captured_reaim
 			and _capture_path != ""
+			and which == "A"
 			and sim.tick == 200
 			and sim.detonate_tick < 0
 		):
@@ -1386,14 +1581,12 @@ func _auto_run_plan_a() -> void:
 				await get_tree().process_frame
 				_try_capture("reaim")
 				captured_reaim = true
-		# Trigger moment: a few ticks after detonate with tracers live.
 		if not captured_trigger and sim.detonate_tick >= 0 and sim.tick >= sim.detonate_tick + 2:
 			_push_map_snapshot()
 			await get_tree().process_frame
 			await get_tree().process_frame
 			_try_capture("trigger")
 			captured_trigger = true
-		# Mid-fight: after some kills, still more living.
 		if (
 			not captured_midfight
 			and captured_trigger
@@ -1406,16 +1599,21 @@ func _auto_run_plan_a() -> void:
 			await get_tree().process_frame
 			_try_capture("midfight")
 			captured_midfight = true
-	# Bodies on map before result panel.
 	_consume_sim_log()
 	_push_map_snapshot()
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_try_capture("bodies")
 	_show_result()
+	# Demo one body search so hint updates before review shot.
+	if body_search_enabled and map_view and map_view.combat_fx:
+		for bid in map_view.combat_fx.bodies.keys():
+			_search_body(str(bid))
+			break
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_try_capture("result")
+	_try_capture("review_a" if which == "A" else "review_b")
 	var fxst := combat_fx_stats()
 	var log_fires := 0
 	if sim != null:
@@ -1423,15 +1621,19 @@ func _auto_run_plan_a() -> void:
 			if str(ev.get("type", "")) == "fire":
 				log_fires += 1
 	print(
-		"GREYBOX_AUTO_DONE detonate_tick=", last_summary.get("detonate_tick"),
+		"GREYBOX_AUTO_DONE plan=", which,
+		" detonate_tick=", last_summary.get("detonate_tick"),
 		" standard_ambush=", last_summary.get("standard_ambush"),
 		" outcome=", last_summary.get("outcome"),
+		" grade=", last_review.get("grade", ""),
+		" outcome_zh=", last_review.get("outcome_zh", ""),
 		" has_mg42=", is_mg42_unlocked(),
 		" fx_fires=", fxst.get("fires", 0),
 		" fx_fires_ctrl=", fxst.get("fires_controller", _fx_fires_total),
 		" log_fires=", log_fires,
 		" fx_kills=", fxst.get("kills", 0),
-		" fx_bodies=", fxst.get("bodies", 0)
+		" fx_bodies=", fxst.get("bodies", 0),
+		" loot_n=", next_night_loot.size()
 	)
 	if _capture_path != "" or _headless_auto:
 		await get_tree().process_frame
