@@ -737,9 +737,12 @@ func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> v
 	surf = _surface_key(mid_cell, mk, mt, int((min_x + max_x) / 2), int((min_y + max_y) / 2))
 	if not surf.begins_with("roof"):
 		surf = "roof_slate"
+	# Row strips (correct grid-y ↔ screen-y) with horizontal continuity — no cell seams.
 	var cells_w := float(max_x - min_x + 1)
-	var cells_h := float(max_y - min_y + 1)
-	_draw_g3_world_rect(_g3_tex(surf), float(min_x), float(min_y), cells_w, cells_h, footprint)
+	for gy in range(max_y, min_y - 1, -1):
+		var row_py := float(grid_h - 1 - gy) * cell_px
+		var row := Rect2(x0 - 0.5, row_py - 0.5, w + 1.0, cell_px + 1.0)
+		_draw_g3_world_rect(_g3_tex(surf), float(min_x), float(gy), cells_w, 1.0, row)
 	# Soft shadow on ground just south of the building (outside the roof face).
 	var eaves := Rect2(footprint.position + Vector2(cell_px * 0.05, h + 1), Vector2(w * 1.0, cell_px * 0.42))
 	draw_rect(eaves, Color(0, 0, 0, 0.45), true)
