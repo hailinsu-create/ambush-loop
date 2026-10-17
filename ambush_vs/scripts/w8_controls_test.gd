@@ -24,6 +24,7 @@ func _run_all() -> void:
 	_test_gesture_long_press()
 	_test_gesture_drag_back_cancels()
 	await _test_map_router_wired()
+	await _test_selection_hit_and_portraits()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -170,4 +171,49 @@ func _test_map_router_wired() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "greybox scene not ready for map router test")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_selection_hit_and_portraits() -> void:
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "selection scene err=%s" % err)
+	for _i in range(180):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		var map = scene.map_view
+		_assert(is_equal_approx(float(map.unit_hit_radius_cells), 0.8), "hit radius 0.8")
+		_assert(float(map.sel_ring_width) / maxf(float(map.unsel_ring_width), 0.01) >= 2.0 - 1e-6,
+			"sel/unsel ring width ratio ≥2 got=%s/%s" % [map.sel_ring_width, map.unsel_ring_width])
+		# Place first op, then tap 0.7 cells away → select, coords unchanged.
+		var ops: Array = scene.plan.get("operators", [])
+		_assert(ops.size() >= 1, "has operators")
+		var oid := str(ops[0]["id"])
+		scene.scripted_place_operator(oid, 5, 9, 0.0)
+		_assert(str(scene.selected_op_id) == "", "deselected after placement")
+		var ox := float(ops[0]["x"])
+		var oy := float(ops[0]["y"])
+		var tap_pos: Vector2 = map.cell_to_screen(ox + 0.7, oy)
+		map.inject_input(_touch(tap_pos, true))
+		map.inject_input(_touch(tap_pos, false))
+		_assert(str(scene.selected_op_id) == oid, "select nearest within 0.8 cell")
+		_assert(is_equal_approx(float(ops[0]["x"]), ox) and is_equal_approx(float(ops[0]["y"]), oy),
+			"tap select does not move unit")
+		var facing0 := float(ops[0]["facing_deg"])
+		# Wobble <22 px must not change facing (tap, not drag).
+		var center: Vector2 = map.cell_to_screen(ox, oy)
+		map.inject_input(_touch(center, true))
+		map.gesture.inject_move(center + Vector2(10, 0))
+		map.inject_input(_touch(center + Vector2(10, 0), false))
+		_assert(is_equal_approx(float(ops[0]["facing_deg"]), facing0), "wobble <22px does not change facing")
+		# Portrait strip selects.
+		_assert(scene.portrait_strip != null, "portrait strip exists")
+		scene._on_portrait_pressed(oid)
+		_assert(str(scene.selected_op_id) == oid, "portrait selects op")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "selection scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")

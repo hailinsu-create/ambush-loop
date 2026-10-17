@@ -126,6 +126,9 @@ var searched_bodies: Dictionary = {} ## enemy_id → true
 var next_night_loot: Array = [] ## stub persistence for next night kit
 var body_search_enabled: bool = false
 const NEXT_NIGHT_KIT_PATH := "user://next_night_kit.json"
+## PLAY-UX PR-2: bottom-left portrait strip (all phases).
+var portrait_strip: HBoxContainer = null
+var _facing_submit_count: int = 0 ## test: wait re-aim submissions
 
 
 func _ready() -> void:
@@ -146,6 +149,8 @@ func _ready() -> void:
 	map_view.cell_tapped.connect(_on_cell_tapped)
 	map_view.cell_dragged.connect(_on_cell_dragged)
 	map_view.unit_selected.connect(_on_unit_selected)
+	map_view.unit_hit_radius_cells = 0.8
+	_build_portrait_strip()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -706,6 +711,7 @@ func _set_ui_phase(p: UiPhase) -> void:
 			label_phase.text = "等待"
 		UiPhase.RESULT:
 			label_phase.text = "结算"
+	_refresh_portrait_strip()
 
 
 func start_block_reason() -> String:
@@ -995,7 +1001,12 @@ func _move_selected_op(cell: Vector2i) -> void:
 			label_info.text = "%s 已放置 (%d,%d)%s" % [
 				dname, cell.x, cell.y, " · 高点" if tier == "high" else ""
 			]
+			# PLAY-UX: deselect after placement so next empty tap won't teleports.
+			selected_op_id = ""
+			if map_view:
+				map_view.selected_op_id = ""
 			_refresh_op_cards()
+			_refresh_portrait_strip()
 			return
 
 
@@ -1040,16 +1051,85 @@ func _on_unit_selected(op_id: String) -> void:
 	var dname := str(op_display_names.get(op_id, "队员"))
 	if ui_phase == UiPhase.SCOUT:
 		label_info.text = "选中 %s · 点格行走开箱" % dname
+		_refresh_portrait_strip()
 		_push_map_snapshot()
 		return
 	if ui_phase == UiPhase.WAIT:
-		label_info.text = "选中 %s · 拖拽重瞄（转向耗时，期间不能开火）" % dname
+		label_info.text = "选中 %s · 拖锥尖重瞄（松手确认）" % dname
+		_refresh_portrait_strip()
 		_push_map_snapshot()
 		return
 	place_mode = PlaceMode.OP
 	label_info.text = "选中 %s · 拖拽设朝向 · 点格放置" % dname
 	_refresh_op_cards()
+	_refresh_portrait_strip()
 	_push_map_snapshot()
+
+
+func _build_portrait_strip() -> void:
+	if portrait_strip != null:
+		return
+	portrait_strip = HBoxContainer.new()
+	portrait_strip.name = "PortraitStrip"
+	portrait_strip.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	portrait_strip.offset_left = 8
+	portrait_strip.offset_top = -120
+	portrait_strip.offset_right = 420
+	portrait_strip.offset_bottom = -8
+	portrait_strip.add_theme_constant_override("separation", 8)
+	portrait_strip.mouse_filter = Control.MOUSE_FILTER_STOP
+	$HUD.add_child(portrait_strip)
+	_refresh_portrait_strip()
+
+
+func _refresh_portrait_strip() -> void:
+	if portrait_strip == null:
+		return
+	for c in portrait_strip.get_children():
+		c.queue_free()
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	var ops: Array = []
+	if ui_phase == UiPhase.SCOUT and scout != null:
+		ops = scout.operators
+	elif ui_phase == UiPhase.WAIT and sim != null:
+		ops = sim.operators
+	elif plan.has("operators"):
+		ops = plan.get("operators", [])
+	var i := 0
+	for op in ops:
+		i += 1
+		var oid := str(op.get("id", ""))
+		var btn := Button.new()
+		btn.name = "Portrait_%s" % oid
+		btn.custom_minimum_size = Vector2(96, 96)
+		btn.toggle_mode = true
+		btn.button_pressed = oid == selected_op_id
+		var dname := str(op_display_names.get(oid, op.get("display_name", "%d号" % i)))
+		var wlab := str(WEAPON_LABEL_ZH.get(str(op.get("weapon_id", "")), op.get("weapon_id", "")))
+		var ammo_n := _op_ammo_display(oid, op)
+		var hp_n := int(op.get("hp", SimConstants.OP_MAX_HP))
+		if sim != null:
+			for sop in sim.operators:
+				if str(sop.get("id", "")) == oid:
+					hp_n = int(sop.get("hp", hp_n))
+					break
+		btn.text = "%s\n%s\nHP%d 弹%d" % [dname, wlab, hp_n, ammo_n]
+		btn.add_theme_font_size_override("font_size", 14)
+		if font_res:
+			btn.add_theme_font_override("font", font_res)
+		if oid == selected_op_id:
+			btn.modulate = Color(1.0, 0.95, 0.55)
+		btn.pressed.connect(_on_portrait_pressed.bind(oid))
+		portrait_strip.add_child(btn)
+	portrait_strip.visible = ui_phase != UiPhase.RESULT
+
+
+func _on_portrait_pressed(oid: String) -> void:
+	_ui_tap()
+	selected_op_id = oid
+	if map_view:
+		map_view.selected_op_id = oid
+	_on_unit_selected(oid)
 
 
 func scripted_place_operator(oid: String, x: int, y: int, facing_deg: float = 90.0) -> bool:

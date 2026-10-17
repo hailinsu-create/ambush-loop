@@ -72,8 +72,11 @@ var body_search_enabled: bool = false
 var _dragging_op: String = ""
 var _drag_start: Vector2 = Vector2.ZERO
 var gesture = null ## GestureRouter
-## Hit radius in cells (PLAY-UX PR-2). PR-1 keeps exact cell until strip lands.
-var unit_hit_radius_cells: float = 0.0
+## Hit radius in cells (PLAY-UX PR-2): nearest unit within this range.
+var unit_hit_radius_cells: float = 0.8
+## Selection ring metrics (for tests).
+var sel_ring_width: float = 4.0
+var unsel_ring_width: float = 1.6
 var aim_preview_deg: float = NAN
 var aim_preview_op: String = ""
 ## Counts for headless tests.
@@ -1819,15 +1822,17 @@ func _draw_units() -> void:
 				tex = g2u
 		var is_sel := str(op["id"]) == selected_op_id
 		_draw_unit_tex(tex, float(op["x"]), float(op["y"]), float(op["facing_deg"]), is_sel)
-		# Team ring on every friendly (selected = brighter); high keeps gold accent.
+		# Selection: thick pulsing ring; unselected faint.
 		var hp := cell_to_screen(float(op["x"]), float(op["y"]))
-		if art_mode == ArtMode.G3:
-			var ring_col := Color(1.0, 0.95, 0.35, 0.95) if is_sel else Color(1.0, 0.88, 0.25, 0.72)
-			draw_arc(hp, cell_px * 0.78, 0, TAU, 28, ring_col, 2.2 if is_sel else 1.8)
-			if high:
-				draw_arc(hp, cell_px * 0.92, 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.85), 1.6)
-		elif high:
-			draw_arc(hp, cell_px * 0.5, 0, TAU, 24, Color(1.0, 0.82, 0.16, 0.95), 2.0)
+		if is_sel:
+			var pulse := 0.55 + 0.45 * absf(sin(Time.get_ticks_msec() * 0.007))
+			var rw := sel_ring_width
+			draw_arc(hp, cell_px * 0.82, 0, TAU, 36, Color(1.0, 0.95, 0.35, pulse), rw)
+			draw_arc(hp, cell_px * 0.95, 0, TAU, 36, Color(1.0, 0.85, 0.2, 0.55 * pulse), rw * 0.6)
+		else:
+			draw_arc(hp, cell_px * 0.72, 0, TAU, 24, Color(1.0, 0.88, 0.25, 0.35), unsel_ring_width)
+		if high:
+			draw_arc(hp, cell_px * (1.05 if is_sel else 0.88), 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.7 if is_sel else 0.35), 1.6)
 		# PLAY-6 wounded: orange ring + label.
 		if bool(op.get("wounded", false)):
 			draw_arc(hp, cell_px * 0.68, 0, TAU, 24, Color(1.0, 0.45, 0.2, 0.95), 2.6)
@@ -1856,9 +1861,18 @@ func _draw_units() -> void:
 				12,
 				Color(0.7, 0.9, 1.0, 0.95)
 			)
-		var sp := cell_to_screen(float(op["x"]), float(op["y"]))
-		var label := str(op_display_names.get(str(op["id"]), op.get("display_name", "队员")))
-		draw_string(ThemeDB.fallback_font, sp + Vector2(-18, -cell_px * 0.55), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.9, 0.95, 1.0))
+		# Name only on selected (avoid overlap clutter).
+		if is_sel:
+			var label := str(op_display_names.get(str(op["id"]), op.get("display_name", "队员")))
+			draw_string(
+				ThemeDB.fallback_font,
+				hp + Vector2(-22, -cell_px * 0.7),
+				label,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				14,
+				Color(1.0, 0.98, 0.75, 0.98)
+			)
 
 
 func _draw_unit_tex(tex: Texture2D, x: float, y: float, facing_deg: float, selected: bool) -> void:
@@ -1962,10 +1976,10 @@ func nearest_op_at(screen_pos: Vector2) -> String:
 		return _op_at_cell(screen_to_cell(screen_pos))
 	var best := ""
 	var best_d := unit_hit_radius_cells + 1e-9
-	# Use continuous cell space from screen.
+	# Continuous world cell space (Y flipped vs screen).
 	var local := screen_pos - shake_offset
-	var cx := local.x / maxf(cell_px, 1.0)
-	var cy := local.y / maxf(cell_px, 1.0)
+	var cx := local.x / maxf(cell_px, 1.0) - 0.5
+	var cy := float(grid_h) - local.y / maxf(cell_px, 1.0) - 0.5
 	for op in operators:
 		if not bool(op.get("alive", true)):
 			continue
