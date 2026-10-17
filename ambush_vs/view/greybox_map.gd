@@ -94,13 +94,37 @@ func _notification(what: int) -> void:
 func _fit_cell_px() -> void:
 	if grid_w <= 0 or grid_h <= 0:
 		return
-	var avail := size
+	# Prefer MapHost size (outside SubViewportContainer).
+	var avail := Vector2.ZERO
+	var sv: SubViewport = get_viewport() as SubViewport
+	if sv != null:
+		var svc := sv.get_parent()
+		if svc is Control and svc.get_parent() is Control:
+			avail = (svc.get_parent() as Control).size
+		elif svc is Control:
+			avail = (svc as Control).size
 	if avail.x < 8.0 or avail.y < 8.0:
 		avail = get_parent_area_size() if get_parent() else Vector2(960, 640)
 	if avail.x < 8.0 or avail.y < 8.0:
 		avail = Vector2(960, 640)
 	cell_px = minf(avail.x / float(grid_w), avail.y / float(grid_h))
-	custom_minimum_size = Vector2(grid_w * cell_px, grid_h * cell_px)
+	var map_size := Vector2(grid_w * cell_px, grid_h * cell_px)
+	custom_minimum_size = map_size
+	size = map_size
+	position = Vector2.ZERO
+	clip_contents = true
+	# SubViewport size == map pixels: container cannot show anything outside the map.
+	if sv != null:
+		sv.size = Vector2i(maxi(1, int(round(map_size.x))), maxi(1, int(round(map_size.y))))
+		var svc2 := sv.get_parent()
+		if svc2 is Control:
+			(svc2 as Control).size = map_size
+			(svc2 as Control).position = Vector2(
+				maxf(0.0, (avail.x - map_size.x) * 0.5),
+				maxf(0.0, (avail.y - map_size.y) * 0.5)
+			)
+	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(Vector2.ZERO, map_size))
+	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
 
 
 func apply_snapshot(snap: Dictionary) -> void:
@@ -193,6 +217,9 @@ func art_mode_label() -> String:
 func _draw() -> void:
 	if grid == null:
 		return
+	var map_size := Vector2(grid_w * cell_px, grid_h * cell_px)
+	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(Vector2.ZERO, map_size))
+	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
 	_draw_tiles()
 	match art_mode:
 		ArtMode.G3:
@@ -229,27 +256,62 @@ func _draw_tiles() -> void:
 				var tex: Texture2D = _tile_tex_for(cell, kind, tier, x, y)
 				if tex:
 					draw_texture_rect(tex, rect, false)
+	if art_mode == ArtMode.G3 and g3 != null:
+		_draw_g3_roof_footprints()
+
+
+func _is_wall_kind(kind: String, cell: Dictionary) -> bool:
+	return kind == "wall" or (bool(cell.get("blocks_all_los", false)) and kind != "structure")
+
+
+func _open_neighbor(x: int, y: int) -> bool:
+	## True if a cardinal neighbor is walkable open ground (not wall mass).
+	for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var nx: int = x + int(d.x)
+		var ny: int = y + int(d.y)
+		if nx < 0 or ny < 0 or nx >= grid_w or ny >= grid_h:
+			continue
+		var ncell: Dictionary = grid.get_cell(nx, ny)
+		var nk := str(ncell.get("kind", "wall"))
+		if nk in ["wall"]:
+			continue
+		if bool(ncell.get("blocks_all_los", false)) and nk != "structure":
+			continue
+		return true
+	return false
 
 
 func _surface_key(cell: Dictionary, kind: String, tier: String, x: int, y: int) -> String:
-	if kind == "wall" or (bool(cell.get("blocks_all_los", false)) and kind != "structure"):
-		return "stonewall"
-	if kind == "structure":
-		return "stonewall"
-	if kind in ["ramp", "slope"]:
-		return "planks"
+	## Open ground ≈ mud + grass patches + cobble roads (yard_concept). Walls are strips, not fills.
 	if tier == SimConstants.TIER_HIGH or kind == "high" or _high_cells.has("%d,%d" % [x, y]):
 		var hid := str(_high_cells.get("%d,%d" % [x, y], ""))
 		return "roof_shingle" if hid == "low_wall_pad" else "roof_slate"
+	if kind == "structure":
+		return "planks"
+	if _is_wall_kind(kind, cell):
+		# Walls are always narrow stone strips over yard ground — never full-cell stone/roof fills.
+		return "stonewall"
+	if kind in ["ramp", "slope"]:
+		return "planks"
 	if kind in ["road", "gate_n", "gate_s", "gate_e"]:
 		return "cobble"
 	if kind == "alley":
 		return "mud"
-	if ((x + y * 3) % 5) == 0:
+	# Small cobble pad only on the south face of high pads (doorstep), not a stone yard.
+	if _near_high(x, y, 1) and not _high_cells.has("%d,%d" % [x, y]) and ((x + 2 * y) % 5) == 0:
+		return "cobble"
+	# Grass patches — yard_concept is mostly mud with grass, not stone.
+	if ((x * 3 + y * 5) % 3) == 0:
 		return "grass"
-	if ((x * 2 + y) % 7) == 0:
-		return "planks"
 	return "mud"
+
+
+func _near_high(x: int, y: int, radius: int) -> bool:
+	for dy in range(-radius, radius + 1):
+		for dx in range(-radius, radius + 1):
+			if _high_cells.has("%d,%d" % [x + dx, y + dy]):
+				return true
+	return false
 
 
 func _g3_tex(surface: String) -> Texture2D:
@@ -272,33 +334,137 @@ func _g3_tex(surface: String) -> Texture2D:
 
 func _draw_g3_cell(cell: Dictionary, kind: String, tier: String, x: int, y: int, rect: Rect2) -> void:
 	var surf := _surface_key(cell, kind, tier, x, y)
-	# Structures: ground under shed, not a grey wall fill.
+	# Structures: plank ground under shed prop (not stone fill).
 	if kind == "structure":
-		_draw_g3_world_sample(g3.tile_planks, x, y, rect)
+		_draw_g3_world_sample(g3.tile_mud, x, y, rect)
+		_draw_g3_world_sample(g3.tile_planks, x, y, rect, Color(1, 1, 1, 0.85))
 		return
 	if surf == "stonewall":
-		_draw_g3_world_sample(g3.tile_stonewall, x, y, rect)
-		# Height / thickness shadow along south edge (screen-bottom).
-		draw_rect(Rect2(rect.position + Vector2(0, rect.size.y * 0.72), Vector2(rect.size.x, rect.size.y * 0.28)), Color(0, 0, 0, 0.35), true)
-		draw_rect(Rect2(rect.position, Vector2(rect.size.x, 2)), Color(0, 0, 0, 0.25), true)
+		# Yard ground under the strip — never full-cell stone maze.
+		_draw_g3_world_sample(g3.tile_mud, x, y, rect)
+		if _open_neighbor(x, y):
+			_draw_g3_wall_strip(x, y, rect)
+		else:
+			# Deep unwalkable mass: dark building fill (not stonewall texture).
+			draw_rect(rect, Color(0.14, 0.12, 0.11, 0.72), true)
+			draw_rect(Rect2(rect.position + Vector2(0, rect.size.y * 0.7), Vector2(rect.size.x, rect.size.y * 0.3)), Color(0, 0, 0, 0.35), true)
 		return
 	if surf.begins_with("roof"):
-		# Drop shadow first so roof sits above neighbors.
-		if g3.drop_shadow:
-			draw_texture_rect(g3.drop_shadow, Rect2(rect.position + Vector2(3, 5), rect.size), false)
-		_draw_g3_world_sample(_g3_tex(surf), x, y, rect)
-		# Ridge line (gable) for concept readability.
-		var mid_x := rect.position.x + rect.size.x * 0.5
-		draw_line(Vector2(mid_x, rect.position.y + 2), Vector2(mid_x, rect.position.y + rect.size.y - 2), Color(0.12, 0.13, 0.16, 0.95), 2.0)
-		# Eaves shadow along south.
-		draw_rect(Rect2(rect.position + Vector2(0, rect.size.y * 0.78), Vector2(rect.size.x, rect.size.y * 0.22)), Color(0, 0, 0, 0.28), true)
-		if g3.high_edge:
-			draw_texture_rect(g3.high_edge, rect, false)
+		_draw_g3_roof_cell(surf, x, y, rect)
 		return
 	# Ground types — world-space UV + soft neighbor blend.
 	_draw_g3_world_sample(_g3_tex(surf), x, y, rect)
 	if surf in ["mud", "grass", "cobble", "planks"]:
 		_blend_g3_edges(x, y, surf, rect)
+
+
+func _draw_g3_wall_strip(x: int, y: int, rect: Rect2) -> void:
+	## Narrow raised stone strip + cast shadow toward open neighbors.
+	var t := 0.18
+	var strip := Rect2(
+		rect.position + Vector2(rect.size.x * (1.0 - t) * 0.5, rect.size.y * (1.0 - t) * 0.35),
+		Vector2(rect.size.x * t, rect.size.y * t * 1.15)
+	)
+	# Prefer a band along the edge facing open ground.
+	var open_e := _cell_open(x + 1, y)
+	var open_w := _cell_open(x - 1, y)
+	var open_n := _cell_open(x, y + 1)
+	var open_s := _cell_open(x, y - 1)
+	if open_e and not open_w:
+		strip = Rect2(rect.position + Vector2(rect.size.x * (1.0 - t), rect.size.y * 0.08), Vector2(rect.size.x * t, rect.size.y * 0.84))
+	elif open_w and not open_e:
+		strip = Rect2(rect.position + Vector2(0, rect.size.y * 0.08), Vector2(rect.size.x * t, rect.size.y * 0.84))
+	elif open_s and not open_n:
+		strip = Rect2(rect.position + Vector2(rect.size.x * 0.08, rect.size.y * (1.0 - t)), Vector2(rect.size.x * 0.84, rect.size.y * t))
+	elif open_n and not open_s:
+		strip = Rect2(rect.position + Vector2(rect.size.x * 0.08, 0), Vector2(rect.size.x * 0.84, rect.size.y * t))
+	_draw_g3_world_sample(g3.tile_stonewall, x, y, strip)
+	# Cast shadow on the ground (south-east of strip).
+	draw_rect(
+		Rect2(strip.position + Vector2(2, strip.size.y * 0.65), Vector2(strip.size.x + 3, strip.size.y * 0.45)),
+		Color(0, 0, 0, 0.38),
+		true
+	)
+	draw_rect(Rect2(strip.position, Vector2(strip.size.x, 2)), Color(0.15, 0.15, 0.18, 0.7), true)
+
+
+func _cell_open(x: int, y: int) -> bool:
+	if x < 0 or y < 0 or x >= grid_w or y >= grid_h:
+		return false
+	var ncell: Dictionary = grid.get_cell(x, y)
+	var nk := str(ncell.get("kind", "wall"))
+	if nk == "wall":
+		return false
+	if bool(ncell.get("blocks_all_los", false)) and nk != "structure":
+		return false
+	return true
+
+
+func _draw_g3_roof_cell(surf: String, x: int, y: int, rect: Rect2) -> void:
+	## Roof tile — footprint ridge/eaves drawn per high_slot after tiles.
+	if g3.drop_shadow:
+		draw_texture_rect(g3.drop_shadow, Rect2(rect.position + Vector2(2, 4), rect.size), false, Color(1, 1, 1, 0.7))
+	_draw_g3_world_sample(_g3_tex(surf), x, y, rect)
+	# Local eaves darkening on the roof surface.
+	draw_rect(Rect2(rect.position + Vector2(0, rect.size.y * 0.72), Vector2(rect.size.x, rect.size.y * 0.28)), Color(0, 0, 0, 0.38), true)
+	# Slight lift highlight on north edge (moon).
+	draw_rect(Rect2(rect.position, Vector2(rect.size.x, 3)), Color(0.85, 0.82, 0.7, 0.25), true)
+	if g3.high_edge:
+		draw_texture_rect(g3.high_edge, rect, false, Color(1, 1, 1, 0.9))
+
+
+func _draw_g3_roof_footprints() -> void:
+	## Clear building footprint: ground eaves shadow + ridge across each high_slot only.
+	for hs in level.get("high_slots", []):
+		var cells: Array = hs.get("cells", [])
+		if cells.is_empty():
+			continue
+		var min_x := 999
+		var max_x := -1
+		var min_y := 999
+		var max_y := -1
+		for c in cells:
+			var cx := int(c["x"])
+			var cy := int(c["y"])
+			min_x = mini(min_x, cx)
+			max_x = maxi(max_x, cx)
+			min_y = mini(min_y, cy)
+			max_y = maxi(max_y, cy)
+		_stroke_roof_footprint(min_x, max_x, min_y, max_y)
+
+
+func _stroke_roof_footprint(min_x: int, max_x: int, min_y: int, max_y: int) -> void:
+	var x0 := float(min_x) * cell_px
+	var y0 := float(grid_h - 1 - max_y) * cell_px
+	var w := float(max_x - min_x + 1) * cell_px
+	var h := float(max_y - min_y + 1) * cell_px
+	var footprint := Rect2(x0, y0, w, h)
+	# Eaves / drop shadow on the GROUND south of the building (not on the roof face).
+	var eaves := Rect2(footprint.position + Vector2(cell_px * 0.05, h - 2), Vector2(w * 1.05, cell_px * 0.45))
+	draw_rect(eaves, Color(0, 0, 0, 0.42), true)
+	if g3.drop_shadow:
+		draw_texture_rect(
+			g3.drop_shadow,
+			Rect2(eaves.position + Vector2(0, cell_px * 0.05), Vector2(eaves.size.x, cell_px * 0.55)),
+			false,
+			Color(1, 1, 1, 0.85)
+		)
+	# Ridge line across the building long axis.
+	var mid_x := footprint.position.x + w * 0.5
+	draw_line(
+		Vector2(mid_x, footprint.position.y + 3),
+		Vector2(mid_x, footprint.position.y + h - 3),
+		Color(0.10, 0.11, 0.14, 0.95),
+		3.0
+	)
+	draw_line(
+		Vector2(mid_x - 2, footprint.position.y + 3),
+		Vector2(mid_x - 2, footprint.position.y + h - 3),
+		Color(0.45, 0.46, 0.50, 0.55),
+		1.5
+	)
+	# Eaves outline on roof edge.
+	draw_rect(footprint.grow(-1.0), Color(0.08, 0.08, 0.1, 0.7), false, 2.0)
 
 
 func _draw_g3_world_sample(tex: Texture2D, cell_x: int, cell_y: int, dest: Rect2, modulate: Color = Color(1, 1, 1, 1)) -> void:
@@ -470,13 +636,7 @@ func _draw_g3_props() -> void:
 					if g3.drop_shadow:
 						draw_texture_rect(g3.drop_shadow, Rect2(rect.position + Vector2(2, 4), rect.size), false)
 					draw_texture_rect(shed, Rect2(rect.position - Vector2(cell_px * 0.05, cell_px * 0.08), rect.size * 1.1), false)
-			if bool(cell.get("low_cover", false)):
-				var bag_name := "sandbag_straight" if ((x + y) % 2) == 0 else "sandbag_curve"
-				var bag: Texture2D = g3.props.get(bag_name, null)
-				if bag == null:
-					bag = g3.props.get("sandbag_straight", null)
-				if bag:
-					draw_texture_rect(bag, Rect2(p + Vector2(cell_px * 0.05, cell_px * 0.1), Vector2(cell_px * 0.9, cell_px * 0.8)), false)
+	_draw_g3_sandbag_runs()
 	for s in level.get("supplies", []):
 		var x := int(s.get("x", -1))
 		var y := int(s.get("y", -1))
@@ -486,11 +646,10 @@ func _draw_g3_props() -> void:
 		var hid := bool(s.get("hidden", false))
 		var tex: Texture2D = g3.props.get("ammo_crate" if hid else "crate_stack", null)
 		if tex:
-			draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.1), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
+			draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.05, cell_px * 0.05), Vector2(cell_px * 0.9, cell_px * 0.9)), false)
 	var accents := [
 		[Vector2i(9, 2), "barrel"],
 		[Vector2i(14, 3), "barrel"],
-		[Vector2i(8, 5), "hay_bale"],
 		[Vector2i(16, 4), "cart"],
 	]
 	for a in accents:
@@ -500,7 +659,85 @@ func _draw_g3_props() -> void:
 		if tex == null:
 			continue
 		var p := Vector2(c.x * cell_px, (grid_h - 1 - c.y) * cell_px)
-		draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.15, cell_px * 0.15), Vector2(cell_px * 0.7, cell_px * 0.7)), false)
+		draw_texture_rect(tex, Rect2(p + Vector2(cell_px * 0.1, cell_px * 0.1), Vector2(cell_px * 0.8, cell_px * 0.8)), false)
+
+
+func _cover_at(x: int, y: int) -> bool:
+	if x < 0 or y < 0 or x >= grid_w or y >= grid_h:
+		return false
+	return bool(grid.get_cell(x, y).get("low_cover", false))
+
+
+func _draw_g3_sandbag_runs() -> void:
+	## Cover cells only: merge adjacent into continuous sandbag lines filling the cell band.
+	var bag: Texture2D = g3.props.get("sandbag_straight", null)
+	var bag_curve: Texture2D = g3.props.get("sandbag_curve", bag)
+	if bag == null:
+		return
+	var sand := Color(0.62, 0.55, 0.38, 0.92)
+	var sand_dark := Color(0.35, 0.30, 0.20, 0.75)
+	var visited: Dictionary = {}
+	for y in range(grid_h):
+		for x in range(grid_w):
+			if not _cover_at(x, y):
+				continue
+			var key := "%d,%d" % [x, y]
+			if visited.has(key):
+				continue
+			# Prefer longest axis run from this seed.
+			var x0 := x
+			while _cover_at(x0 - 1, y):
+				x0 -= 1
+			var x1 := x
+			while _cover_at(x1 + 1, y):
+				x1 += 1
+			var y0 := y
+			while _cover_at(x, y0 - 1):
+				y0 -= 1
+			var y1 := y
+			while _cover_at(x, y1 + 1):
+				y1 += 1
+			var h_len := x1 - x0 + 1
+			var v_len := y1 - y0 + 1
+			if h_len >= v_len and h_len >= 2:
+				for xi in range(x0, x1 + 1):
+					visited["%d,%d" % [xi, y]] = true
+				var p := Vector2(float(x0) * cell_px, float(grid_h - 1 - y) * cell_px)
+				var run_w := float(h_len) * cell_px
+				var r := Rect2(p + Vector2(0, cell_px * 0.12), Vector2(run_w, cell_px * 0.76))
+				_draw_sandbag_band(r, bag, sand, sand_dark, false)
+			elif v_len >= 2:
+				for yi in range(y0, y1 + 1):
+					visited["%d,%d" % [x, yi]] = true
+				var top := float(grid_h - 1 - y1) * cell_px
+				var run_h := float(v_len) * cell_px
+				var r2 := Rect2(Vector2(float(x) * cell_px + cell_px * 0.12, top), Vector2(cell_px * 0.76, run_h))
+				_draw_sandbag_band(r2, bag, sand, sand_dark, true)
+			else:
+				visited[key] = true
+				var p3 := Vector2(float(x) * cell_px, float(grid_h - 1 - y) * cell_px)
+				var r3 := Rect2(p3 + Vector2(cell_px * 0.06, cell_px * 0.12), Vector2(cell_px * 0.88, cell_px * 0.76))
+				var tex: Texture2D = bag_curve if bag_curve else bag
+				_draw_sandbag_band(r3, tex, sand, sand_dark, false)
+
+
+func _draw_sandbag_band(r: Rect2, tex: Texture2D, sand: Color, sand_dark: Color, vertical: bool) -> void:
+	if g3.drop_shadow:
+		draw_texture_rect(g3.drop_shadow, Rect2(r.position + Vector2(2, 4), r.size), false, Color(1, 1, 1, 0.8))
+	# Opaque stacked-bag body (sprite alone is sparse alpha and reads as tiny stamps).
+	draw_rect(r, sand, true)
+	var step := maxf(6.0, cell_px * 0.22)
+	var n := maxi(1, int(r.size.x / step)) if not vertical else maxi(1, int(r.size.y / step))
+	for i in range(n):
+		var o := float(i) * step
+		if vertical:
+			draw_rect(Rect2(r.position + Vector2(2, o + 1), Vector2(r.size.x - 4, minf(step - 2, r.size.y - o - 1))), sand_dark if (i % 2) == 0 else sand, true)
+		else:
+			draw_rect(Rect2(r.position + Vector2(o + 1, 2), Vector2(minf(step - 2, r.size.x - o - 1), r.size.y - 4)), sand_dark if (i % 2) == 0 else sand, true)
+	draw_rect(Rect2(r.position + Vector2(0, r.size.y * 0.62), Vector2(r.size.x, r.size.y * 0.38)), Color(0.25, 0.2, 0.12, 0.55), true)
+	if tex:
+		draw_texture_rect(tex, r, false, Color(1, 1, 1, 0.55))
+	draw_rect(r, Color(0.18, 0.15, 0.1, 0.7), false, 2.0)
 
 
 func _draw_g2_props() -> void:
@@ -589,8 +826,9 @@ func _draw_one_cone(
 
 func _draw_wedge(ox: float, oy: float, facing: float, half: float, rng: float, col: Color, outline_only: bool) -> void:
 	var origin := cell_to_screen(ox, oy)
+	var map_rect := Rect2(Vector2.ZERO, Vector2(grid_w * cell_px, grid_h * cell_px))
 	var pts := PackedVector2Array()
-	pts.append(origin)
+	pts.append(origin.clamp(map_rect.position, map_rect.end))
 	var steps := maxi(8, int(half * 2.0))
 	for i in range(steps + 1):
 		var a := facing - half + (2.0 * half) * (float(i) / float(steps))
@@ -598,15 +836,25 @@ func _draw_wedge(ox: float, oy: float, facing: float, half: float, rng: float, c
 		# Screen: +x east, +y screen-down = -world-y; world 0°=east CCW.
 		var wx := (ox + 0.5) + rng * cos(rad)
 		var wy := (oy + 0.5) + rng * sin(rad)
-		pts.append(Vector2(wx * cell_px, (float(grid_h) - wy) * cell_px))
+		var p := Vector2(wx * cell_px, (float(grid_h) - wy) * cell_px)
+		pts.append(p.clamp(map_rect.position, map_rect.end))
 	if outline_only:
 		for i in range(1, pts.size()):
-			draw_line(pts[i - 1] if i > 1 else pts[0], pts[i], col, 2.0)
+			_draw_line_clipped(pts[i - 1] if i > 1 else pts[0], pts[i], col, 2.0, map_rect)
 		if pts.size() > 1:
-			draw_line(pts[0], pts[1], col, 2.0)
-			draw_line(pts[0], pts[pts.size() - 1], col, 2.0)
+			_draw_line_clipped(pts[0], pts[1], col, 2.0, map_rect)
+			_draw_line_clipped(pts[0], pts[pts.size() - 1], col, 2.0, map_rect)
 	else:
 		draw_colored_polygon(pts, col)
+
+
+func _draw_line_clipped(a: Vector2, b: Vector2, col: Color, width: float, rect: Rect2) -> void:
+	## Cohen–Sutherland-ish clamp: skip if both ends outside same half-plane after clamp.
+	var aa := a.clamp(rect.position, rect.end)
+	var bb := b.clamp(rect.position, rect.end)
+	if aa.distance_squared_to(bb) < 0.25:
+		return
+	draw_line(aa, bb, col, width)
 
 
 func _draw_weapon_sectors() -> void:

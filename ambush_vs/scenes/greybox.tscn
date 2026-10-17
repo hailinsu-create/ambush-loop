@@ -13,24 +13,35 @@ grow_vertical = 2
 script = ExtResource("1_ctrl")
 
 [node name="MapHost" type="Control" parent="."]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 56.0
-offset_right = -280.0
+offset_right = -272.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GreyboxMap" type="Control" parent="MapHost"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MapHost"]
+clip_contents = true
+layout_mode = 0
+anchors_preset = 0
+stretch = false
+
+[node name="SubViewport" type="SubViewport" parent="MapHost/SubViewportContainer"]
+handle_input_locally = true
+size = Vector2i(960, 640)
+render_target_update_mode = 4
+transparent_bg = true
+size_2d_override_stretch = true
+
+[node name="GreyboxMap" type="Control" parent="MapHost/SubViewportContainer/SubViewport"]
+clip_contents = true
+layout_mode = 0
+anchors_preset = 0
 script = ExtResource("2_map")
 
 [node name="HUD" type="Control" parent="."]

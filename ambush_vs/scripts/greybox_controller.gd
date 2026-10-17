@@ -39,7 +39,8 @@ var _detonate_sfx_played: bool = false
 var g2_assets = null
 var sfx = null
 
-@onready var map_view: GreyboxMap = $MapHost/GreyboxMap
+@onready var map_view: GreyboxMap = $MapHost/SubViewportContainer/SubViewport/GreyboxMap
+@onready var map_viewport: SubViewport = $MapHost/SubViewportContainer/SubViewport
 @onready var hud: Control = $HUD
 @onready var label_phase: Label = $HUD/TopBar/PhaseLabel
 @onready var label_info: Label = $HUD/TopBar/InfoLabel

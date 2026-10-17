@@ -263,11 +263,11 @@ def build_tiles() -> dict:
 	meta = {}
 	# Per-material lift so mud/grass/cobble stay distinguishable under moonlight.
 	boosts = {
-		"mud": (1.22, 8.0, (1.12, 0.98, 0.88)),  # warmer brown
-		"grass": (1.18, 6.0, (0.90, 1.18, 0.92)),  # greener
-		"cobble": (1.20, 10.0, (1.05, 1.02, 0.92)),  # less blue-grey
-		"planks": (1.16, 8.0, (1.10, 1.00, 0.90)),
-		"stonewall": (1.14, 8.0, (1.02, 1.00, 0.96)),
+		"mud": (1.28, 10.0, (1.18, 0.96, 0.82)),  # warmer brown
+		"grass": (1.24, 8.0, (0.85, 1.28, 0.88)),  # greener
+		"cobble": (1.26, 12.0, (1.08, 1.04, 0.90)),  # cooler grey, not blue wash
+		"planks": (1.20, 10.0, (1.14, 1.00, 0.86)),
+		"stonewall": (1.16, 8.0, (1.04, 1.00, 0.94)),
 	}
 	for name, src_name in mapping.items():
 		im = Image.open(SRC / src_name)
@@ -276,9 +276,9 @@ def build_tiles() -> dict:
 		arr = np.asarray(tile).astype(np.float32)
 		rgb = arr[..., :3] * mul + add
 		rgb *= np.array(tint, dtype=np.float32)
-		# Mild local contrast so world-UV detail reads at map scale.
+		# Stronger local contrast so mud/grass/cobble separate under moonlight.
 		mean = rgb.mean(axis=(0, 1), keepdims=True)
-		rgb = mean + (rgb - mean) * 1.15
+		rgb = mean + (rgb - mean) * 1.28
 		arr[..., :3] = np.clip(rgb, 0, 255)
 		tile = Image.fromarray(arr.astype(np.uint8), "RGBA")
 		save_webp(tile, f"tiles/{name}.webp")
