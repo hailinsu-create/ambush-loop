@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ambushloop.local/schema/events.json",
   "title": "Ambush VS Sim Event Log",
-  "description": "固定 20 Hz tick 事件日志契约（规划 B.4）。复盘卡、标准伏击判定、金标哈希只读本结构。W1 仅定 schema + 院子片段。",
+  "description": "固定 20 Hz tick 事件日志契约（规划 B.4）。复盘卡、标准伏击判定、金标哈希只读本结构。对齐 TERMS/ADR v1、院子 v1.1。",
   "type": "object",
   "required": ["schema_version", "level_id", "level_version", "tick_hz", "events"],
   "properties": {
@@ -126,7 +126,8 @@
                 "properties": {
                   "trigger": {
                     "type": "string",
-                    "enum": ["see_first_enemy", "mine_detonate", "cross_marker", "manual", "global_alert_force"]
+                    "enum": ["see_first_enemy", "mine_detonate", "cross_marker", "manual", "alarm"],
+                    "description": "alarm＝全图警报进入 detonate（ADR-TRIGGER M5）；勿用阶段名 ALERT"
                   },
                   "bind": { "type": "string" }
                 }
@@ -157,10 +158,10 @@
 
   "examples": [
     {
-      "_comment": "院子方案 A 纸面最佳时刻附近片段（假日志，非整局）；t0_A≈14s → tick≈280 @20Hz",
+      "_comment": "院子 A v1.1；t0_A=14s→tick=280；首枪=Kar@L see_first_enemy（非 MG）",
       "schema_version": 1,
       "level_id": "yard",
-      "level_version": 1,
+      "level_version": 2,
       "plan_id": "A",
       "tick_hz": 20,
       "seed": null,
@@ -171,7 +172,7 @@
           "t_s": 0,
           "type": "sim_start",
           "actor": "system",
-          "payload": { "plan_id": "A" }
+          "payload": { "plan_id": "A", "night": true, "ambush_targets": ["E1", "E2", "E3", "E4", "F1", "F2"] }
         },
         {
           "tick": 0,
@@ -200,9 +201,9 @@
           "tick": 280,
           "t_s": 14,
           "type": "trigger",
-          "actor": "op_mg42",
-          "weapon_id": "mg42",
-          "payload": { "trigger": "see_first_enemy", "bind": "op_mg42" }
+          "actor": "op_kar_L",
+          "weapon_id": "kar98k",
+          "payload": { "trigger": "see_first_enemy", "bind": "op_kar_L" }
         },
         {
           "tick": 280,
@@ -222,18 +223,7 @@
           "tick": 281,
           "t_s": 14.05,
           "type": "fire",
-          "actor": "op_mg42",
-          "target": "E3",
-          "weapon_id": "mg42",
-          "pos": { "x": 5, "y": 9, "height": "high" },
-          "facing_deg": 355,
-          "payload": { "in_kill_zone": true }
-        },
-        {
-          "tick": 282,
-          "t_s": 14.1,
-          "type": "fire",
-          "actor": "op_kar",
+          "actor": "op_kar_L",
           "target": "F1",
           "weapon_id": "kar98k",
           "pos": { "x": 13, "y": 7, "height": "high" },
@@ -241,10 +231,21 @@
           "payload": { "in_kill_zone": true }
         },
         {
+          "tick": 282,
+          "t_s": 14.1,
+          "type": "fire",
+          "actor": "op_mg42",
+          "target": "E3",
+          "weapon_id": "mg42",
+          "pos": { "x": 5, "y": 9, "height": "high" },
+          "facing_deg": 0,
+          "payload": { "in_kill_zone": true }
+        },
+        {
           "tick": 300,
           "t_s": 15,
           "type": "hit",
-          "actor": "op_kar",
+          "actor": "op_kar_L",
           "target": "F1",
           "weapon_id": "kar98k",
           "payload": { "shots_needed_band": "far", "fatal": true }
@@ -253,7 +254,7 @@
           "tick": 300,
           "t_s": 15,
           "type": "kill",
-          "actor": "op_kar",
+          "actor": "op_kar_L",
           "target": "F1",
           "weapon_id": "kar98k"
         },
@@ -296,10 +297,10 @@
       }
     },
     {
-      "_comment": "院子方案 B 地雷起爆瞬间片段；t0_B≈16s → tick≈320",
+      "_comment": "院子 B v1.1；t0_B=16s→tick=320；trigger=mine_detonate",
       "schema_version": 1,
       "level_id": "yard",
-      "level_version": 1,
+      "level_version": 2,
       "plan_id": "B",
       "tick_hz": 20,
       "seed": null,
@@ -347,6 +348,52 @@
           "payload": { "radius_cells": 2 }
         }
       ]
+    },
+    {
+      "_comment": "T-08：全图警报进入 detonate，trigger=alarm；标准伏击失败",
+      "schema_version": 1,
+      "level_id": "yard",
+      "level_version": 2,
+      "plan_id": "A_alarm",
+      "tick_hz": 20,
+      "seed": null,
+      "events": [
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "alert_change",
+          "actor": "system",
+          "payload": { "from": "area_alert", "to": "global_alert", "reason": "expose_30_ticks" }
+        },
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "trigger",
+          "actor": "system",
+          "payload": { "trigger": "alarm" }
+        },
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "detonate",
+          "actor": "system",
+          "payload": { "standard_ambush_eligible": false }
+        },
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "phase",
+          "actor": "system",
+          "payload": { "phase": "detonate" }
+        }
+      ],
+      "summary": {
+        "outcome": "win",
+        "standard_ambush": false,
+        "replay_primary_cause": "全图警报强制起爆",
+        "detonate_tick": 100,
+        "log_hash": "pending_w2"
+      }
     }
   ]
 }

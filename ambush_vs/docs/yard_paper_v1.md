@@ -2,11 +2,12 @@
 
 | 字段 | 值 |
 |------|-----|
-| 状态 | **纸面定稿候选（待审）** |
+| 状态 | **历史保留**（已被 [yard_paper_v1_1.md](yard_paper_v1_1.md) 替代） |
 | 日期 | 2026-10-16（Asia/Shanghai） |
 | 依据 | [开发规划 D](https://app.notion.com/p/41d1a402652d49548f2fc51ee325271b)、[玩法定位](https://app.notion.com/p/3fab407a692a819883aad3c16554c4b7)、ADR-TRIGGER-01 / ADR-ALERT-01 / ADR-HEIGHT-01 |
 | 目的 | W1 在写模拟代码前证明：双解存在；朝向反例成立；起爆时机扫描主因可解释 |
 | 仓库同步 | `ambush_vs/docs/yard_paper_v1.md`（PR #54 / `vs/core`） |
+| 替代 | **2026-10-17 起以 v1.1 为准**（F1/F3/E4 几何重算；本文件不改数字，只作历史） |
 
 ---
 

@@ -2,13 +2,36 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ambushloop.local/schema/level.json",
   "title": "Ambush VS Level",
-  "description": "关卡 JSON 契约（规划 E.4）。模拟核心只读本结构；呈现层不得发明网格外状态。W1 仅定 schema + 院子片段，不写模拟代码。",
+  "description": "关卡 JSON 契约（规划 E.4）。模拟核心只读本结构；呈现层不得发明网格外状态。对齐院子纸面 v1.1 / ADR v1；不写模拟代码。",
   "type": "object",
-  "required": ["id", "version", "grid", "cells", "exits", "enemies", "sentries", "supplies"],
+  "required": ["id", "version", "grid", "cells", "exits", "enemies", "sentries", "supplies", "ambush_targets", "night"],
   "properties": {
     "id": { "type": "string", "description": "关卡 id，如 yard" },
     "version": { "type": "integer", "minimum": 1, "description": "关卡数据版本；与金标日志配对" },
     "title": { "type": "string" },
+    "night": {
+      "type": "boolean",
+      "description": "夜间关卡；true 时高点剪影 ×1.5（ADR-HEIGHT-01）。VS 六夜均为 true"
+    },
+    "ambush_targets": {
+      "type": "array",
+      "description": "伏击目标组 id（TERMS）；see_first_enemy/cross_marker 只对这些敌人生效",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "default_trigger": {
+      "type": "object",
+      "description": "新开局预选起爆条件（ADR-TRIGGER-01）；方案专属绑定写在此，不写进 ADR",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["see_first_enemy", "mine_detonate", "cross_marker", "manual"]
+        },
+        "bind": { "type": "string" },
+        "plan_id": { "type": "string", "description": "可选：该默认所属登记方案" }
+      }
+    },
     "grid": {
       "type": "object",
       "required": ["width", "height", "meters_per_cell"],
@@ -34,7 +57,12 @@
           "y": { "type": "integer" },
           "kind": {
             "type": "string",
-            "enum": ["ground", "road", "alley", "wall", "high", "ramp", "gate_n", "gate_s", "gate_e"]
+            "enum": ["ground", "road", "alley", "wall", "high", "ramp", "gate_n", "gate_s", "gate_e", "structure"]
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["ground", "high"],
+            "description": "单层网格档位（TERMS §7）；wall/structure 可省略"
           },
           "cover": {
             "type": "object",
@@ -125,6 +153,22 @@
               }
             }
           }
+        },
+        "alarm_route": {
+          "type": "object",
+          "description": "全图警报后未入场敌人改走的路线（ADR-TRIGGER M5）",
+          "required": ["id", "waypoints"],
+          "properties": {
+            "id": { "type": "string" },
+            "waypoints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x", "y"],
+                "properties": { "x": { "type": "integer" }, "y": { "type": "integer" } }
+              }
+            }
+          }
         }
       }
     },
@@ -132,11 +176,12 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "x", "y", "cone"],
+        "required": ["id", "x", "y", "cone", "tier"],
         "properties": {
           "id": { "type": "string" },
           "x": { "type": "integer" },
           "y": { "type": "integer" },
+          "tier": { "type": "string", "enum": ["ground", "high"] },
           "cone": {
             "type": "object",
             "required": ["facing_deg", "angle_deg", "range_cells"],
@@ -149,7 +194,22 @@
           "threatens_slots": {
             "type": "array",
             "items": { "type": "string" },
-            "description": "区域警戒时标红失效的埋伏点 id（ADR-ALERT-01）"
+            "description": "区域警戒时 alert_route 将覆盖的埋伏点；每集合最多废一个基准方案关键位"
+          },
+          "alert_route": {
+            "type": "object",
+            "description": "区域警戒时锥改扫路径/朝向（物理化标红，ADR-ALERT M4）",
+            "properties": {
+              "facing_deg": { "type": "number" },
+              "waypoints": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["x", "y"],
+                  "properties": { "x": { "type": "integer" }, "y": { "type": "integer" } }
+                }
+              }
+            }
           }
         }
       }
@@ -173,6 +233,22 @@
           "threatens_slots": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "alert_route": {
+            "type": "object",
+            "description": "区域警戒切换路线（ADR-ALERT M4）",
+            "required": ["waypoints"],
+            "properties": {
+              "waypoints": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["x", "y"],
+                  "properties": { "x": { "type": "integer" }, "y": { "type": "integer" } }
+                }
+              },
+              "edge_s": { "type": "number" }
+            }
           }
         }
       }
@@ -283,10 +359,17 @@
 
   "examples": [
     {
-      "_comment": "院子相关示例片段（非整关）；对齐 yard_paper_v1 / 规划 D.1",
+      "_comment": "院子片段；对齐 yard_paper_v1_1（非整关）",
       "id": "yard",
-      "version": 1,
+      "version": 2,
       "title": "院子",
+      "night": true,
+      "ambush_targets": ["E1", "E2", "E3", "E4", "F1", "F2"],
+      "default_trigger": {
+        "type": "see_first_enemy",
+        "bind": "op_kar_L",
+        "plan_id": "A"
+      },
       "grid": { "width": 24, "height": 16, "meters_per_cell": 1, "origin": "x0_west_y0_south" },
       "high_slots": [
         {
@@ -350,11 +433,19 @@
             ]
           }
         ],
+        "alarm_route": {
+          "id": "alarm_combat_entry",
+          "waypoints": [
+            { "x": 11, "y": 14 },
+            { "x": 11, "y": 10 },
+            { "x": 12, "y": 9 }
+          ]
+        },
         "spawns": [
           { "id": "E1", "route_id": "main_road", "enter_t_s": 0, "group": "main" },
-          { "id": "E2", "route_id": "main_road", "enter_t_s": 4, "group": "main" },
-          { "id": "E3", "route_id": "main_road", "enter_t_s": 8, "group": "main" },
-          { "id": "E4", "route_id": "main_road", "enter_t_s": 12, "group": "main" },
+          { "id": "E2", "route_id": "main_road", "enter_t_s": 3, "group": "main" },
+          { "id": "E3", "route_id": "main_road", "enter_t_s": 6, "group": "main" },
+          { "id": "E4", "route_id": "main_road", "enter_t_s": 9, "group": "main" },
           { "id": "F1", "route_id": "east_flank", "enter_t_s": 4, "group": "flank" },
           { "id": "F2", "route_id": "east_flank", "enter_t_s": 4, "group": "flank" }
         ]
@@ -364,23 +455,33 @@
           "id": "gatehouse_G",
           "x": 8,
           "y": 14,
-          "cone": { "facing_deg": 315, "angle_deg": 50, "range_cells": 8 },
-          "threatens_slots": ["low_wall_pad", "west_cover_8_5"]
+          "tier": "high",
+          "cone": { "facing_deg": -59, "angle_deg": 50, "range_cells": 8 },
+          "threatens_slots": ["low_wall_pad"],
+          "alert_route": { "facing_deg": -54 }
         }
       ],
       "patrols": [
         {
           "id": "west_patrol",
           "waypoints": [
-            { "x": 5, "y": 12 },
-            { "x": 5, "y": 8 },
-            { "x": 5, "y": 4 },
+            { "x": 6, "y": 12 },
+            { "x": 6, "y": 8 },
+            { "x": 6, "y": 4 },
             { "x": 8, "y": 4 },
             { "x": 8, "y": 8 },
             { "x": 8, "y": 12 }
           ],
           "edge_s": 6,
-          "threatens_slots": ["west_cover_8_5"]
+          "threatens_slots": ["west_cover_8_5"],
+          "alert_route": {
+            "waypoints": [
+              { "x": 8, "y": 8 },
+              { "x": 8, "y": 5 },
+              { "x": 9, "y": 5 }
+            ],
+            "edge_s": 4
+          }
         }
       ],
       "supplies": [
@@ -431,9 +532,9 @@
           "id": "A",
           "label": "高点压制",
           "expect": "win",
-          "trigger": { "type": "see_first_enemy", "bind": "op_mg42" },
+          "trigger": { "type": "see_first_enemy", "bind": "op_kar_L" },
           "t0_s": 14,
-          "notes": "MG42@谷仓；Kar@矮墙台盯巷口；MP40 守南门"
+          "notes": "Kar@L 盯巷口为首枪；MG42@谷仓朝向0°；MP40 守南门"
         },
         {
           "id": "B",
@@ -441,7 +542,7 @@
           "expect": "win",
           "trigger": { "type": "mine_detonate", "bind": "mine_11_6" },
           "t0_s": 16,
-          "notes": "雷@(11,6)；Kar/MP 交叉；手雷封巷后"
+          "notes": "雷@(11,6) 布阵阶段放置；Kar/MP 交叉；手雷封巷后"
         },
         {
           "id": "F-A30",
@@ -455,11 +556,15 @@
         "squad_wipe": true
       },
       "cells": [
-        { "x": 11, "y": 6, "kind": "road" },
-        { "x": 11, "y": 9, "kind": "road" },
-        { "x": 5, "y": 9, "kind": "high" },
-        { "x": 4, "y": 7, "kind": "ramp" },
-        { "x": 12, "y": 9, "kind": "ground", "cover": { "height": "low", "blocks_los_same_level": true } }
+        { "x": 11, "y": 6, "kind": "road", "tier": "ground" },
+        { "x": 11, "y": 9, "kind": "road", "tier": "ground" },
+        { "x": 5, "y": 9, "kind": "high", "tier": "high" },
+        { "x": 6, "y": 9, "kind": "ground", "tier": "ground" },
+        { "x": 4, "y": 7, "kind": "ramp", "tier": "ground" },
+        { "x": 9, "y": 12, "kind": "wall" },
+        { "x": 5, "y": 10, "kind": "structure" },
+        { "x": 8, "y": 14, "kind": "high", "tier": "high" },
+        { "x": 12, "y": 9, "kind": "ground", "tier": "ground", "cover": { "height": "low", "blocks_los_same_level": true } }
       ]
     }
   ]
