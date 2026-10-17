@@ -249,22 +249,30 @@ func _fit_cell_px() -> void:
 		avail = get_parent_area_size() if get_parent() else Vector2(960, 640)
 	if avail.x < 8.0 or avail.y < 8.0:
 		avail = Vector2(960, 640)
-	cell_px = minf(avail.x / float(grid_w), avail.y / float(grid_h))
+	var fit_w := avail.x / float(grid_w)
+	var fit_h := avail.y / float(grid_h)
+	## Phone: fit-height. Desktop: cover so MapHost is edge-to-edge (clip overflow).
+	var phone := avail.y < 420.0
+	if phone:
+		cell_px = fit_h
+	else:
+		cell_px = maxf(fit_w, fit_h)
 	var map_size := Vector2(grid_w * cell_px, grid_h * cell_px)
 	custom_minimum_size = map_size
 	size = map_size
 	position = Vector2.ZERO
 	clip_contents = true
-	# SubViewport size == map pixels: container cannot show anything outside the map.
+	# SubViewport matches map pixels; container is centered (may overflow MapHost — clipped).
 	if sv != null:
 		sv.size = Vector2i(maxi(1, int(round(map_size.x))), maxi(1, int(round(map_size.y))))
 		var svc2 := sv.get_parent()
 		if svc2 is Control:
 			(svc2 as Control).size = map_size
 			(svc2 as Control).position = Vector2(
-				maxf(0.0, (avail.x - map_size.x) * 0.5),
-				maxf(0.0, (avail.y - map_size.y) * 0.5)
+				(avail.x - map_size.x) * 0.5,
+				(avail.y - map_size.y) * 0.5
 			)
+			(svc2 as Control).clip_contents = true
 	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(Vector2.ZERO, map_size))
 	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
 

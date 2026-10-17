@@ -138,14 +138,19 @@ var pending_place_cell: Vector2i = Vector2i(-1, -1) ## ghost confirm cell
 var _last_unit_drag_cell: Vector2i = Vector2i(-1, -1)
 ## PLAY-UX PR-5: touch HUD (≥88px primary), thumb cluster, pause menu, long-press detonate.
 const TOUCH_MIN_PX := 88.0
-const CHIP_MIN_PX := 48.0 ## compact panel chips (right column)
+const CHIP_MIN_PX := 44.0 ## compact panel chips (right column)
 const BODY_FONT_PX := 22 ## ≥22 design-px; ≥12 pt at 0.542 phone scale
-const CHIP_FONT_PX := 15
+const CHIP_FONT_PX := 14
 const DETONATE_LONGPRESS_MS := 500
-const RIGHT_COL_FRAC := 0.30 ## ~384px at 1280
-const RIGHT_COL_MIN_PX := 240.0
-const TOP_BAR_H := 44.0
-const PORTRAIT_H := 104.0
+const RIGHT_COL_FRAC := 0.28 ## desktop setup/scout panel
+const RIGHT_COL_PHONE_FRAC := 0.32 ## phone drawer open (keeps map area ≥60%)
+const RIGHT_COL_MIN_PX := 220.0
+const DRAWER_TAB_W := 36.0
+const WAIT_RAIL_DESKTOP_W := 84.0
+const WAIT_RAIL_PHONE_W := 68.0
+const TOP_BAR_H := 36.0
+const PORTRAIT_H := 96.0
+const PHONE_H_MAX := 500.0 ## design-px height → phone chrome
 var thumb_bar: HBoxContainer = null
 var btn_thumb_start: Button = null
 var btn_thumb_begin: Button = null
@@ -196,9 +201,13 @@ var right_column_bg: Panel = null
 var right_column_vbox: VBoxContainer = null
 var right_scroll: ScrollContainer = null
 var right_scroll_body: VBoxContainer = null
-var action_footer: HBoxContainer = null
+var action_footer: HBoxContainer = null ## setup/scout primary actions (horizontal)
+var wait_rail_box: VBoxContainer = null ## wait-phase slim vertical rail
 var utility_bar: HBoxContainer = null
+var utility_backdrop: PanelContainer = null
 var portrait_backdrop: PanelContainer = null
+var btn_drawer_tab: Button = null
+var drawer_open: bool = true ## phone setup/scout drawer
 var _hud_layout_ready: bool = false
 var layout_size_override: Vector2 = Vector2.ZERO ## tests/capture: stable size when window resize is ignored
 
@@ -564,24 +573,24 @@ func _build_kit_row() -> void:
 
 
 func _build_op_cards() -> void:
-	## Compact: one HBox per operator — name select + 4 weapon chips in a single row.
+	## Two-line card: name on line 1, full short weapon names on line 2.
 	if op_cards == null:
 		return
 	for c in op_cards.get_children():
 		c.queue_free()
 	var font_res = load("res://ui/fonts/web_ui_font.tres")
-	op_cards.add_theme_constant_override("separation", 6)
+	op_cards.add_theme_constant_override("separation", 8)
 	for op in plan.get("operators", []):
 		var oid := str(op["id"])
-		var card := HBoxContainer.new()
+		var card := VBoxContainer.new()
 		card.name = "Card_%s" % oid
-		card.add_theme_constant_override("separation", 4)
-		card.custom_minimum_size = Vector2(0, CHIP_MIN_PX)
+		card.add_theme_constant_override("separation", 3)
+		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var head := Button.new()
 		head.name = "Select"
-		head.custom_minimum_size = Vector2(64, CHIP_MIN_PX)
+		head.custom_minimum_size = Vector2(0, 36)
 		head.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		head.size_flags_stretch_ratio = 1.2
+		head.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		head.add_theme_font_size_override("font_size", CHIP_FONT_PX)
 		if font_res:
 			head.add_theme_font_override("font", font_res)
@@ -589,17 +598,15 @@ func _build_op_cards() -> void:
 		card.add_child(head)
 		var wrow := HBoxContainer.new()
 		wrow.name = "Weapons"
-		wrow.add_theme_constant_override("separation", 2)
+		wrow.add_theme_constant_override("separation", 3)
 		wrow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		wrow.size_flags_stretch_ratio = 2.0
 		for wid in _assignable_weapon_ids():
 			var wb := Button.new()
 			wb.name = "W_%s" % wid
 			wb.text = str(WEAPON_LABEL_ZH.get(wid, wid))
-			wb.custom_minimum_size = Vector2(28, CHIP_MIN_PX)
+			wb.custom_minimum_size = Vector2(0, 36)
 			wb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			wb.clip_text = true
-			wb.add_theme_font_size_override("font_size", 11)
+			wb.add_theme_font_size_override("font_size", 12)
 			if font_res:
 				wb.add_theme_font_override("font", font_res)
 			wb.pressed.connect(_on_op_weapon_picked.bind(oid, wid))
@@ -609,10 +616,9 @@ func _build_op_cards() -> void:
 			mg.name = "W_mg42"
 			mg.text = "MG42"
 			mg.disabled = true
-			mg.custom_minimum_size = Vector2(28, CHIP_MIN_PX)
+			mg.custom_minimum_size = Vector2(0, 36)
 			mg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			mg.clip_text = true
-			mg.add_theme_font_size_override("font_size", 11)
+			mg.add_theme_font_size_override("font_size", 12)
 			if font_res:
 				mg.add_theme_font_override("font", font_res)
 			wrow.add_child(mg)
@@ -637,15 +643,14 @@ func _refresh_op_cards() -> void:
 			var mark := "✓" if placed else "·"
 			var sel := "▸" if oid == selected_op_id else ""
 			var ammo_n := _op_ammo_display(oid, op)
-			head.text = "%s%s%s ·%s" % [sel, mark, dname, wlab]
-			head.clip_text = true
-			head.tooltip_text = "" ## ammo in portrait strip; keep row single-line
+			head.text = "%s%s%s · %s · 弹%d" % [sel, mark, dname, wlab, ammo_n]
 		var wrow := card.get_node_or_null("Weapons")
 		if wrow:
 			for wid in _assignable_weapon_ids():
 				var wb: Button = wrow.get_node_or_null("W_%s" % wid)
 				if wb == null:
 					continue
+				wb.text = str(WEAPON_LABEL_ZH.get(wid, wid))
 				var equipped: bool = str(op.get("weapon_id", "")) == str(wid)
 				wb.disabled = false
 				if equipped:
@@ -1436,31 +1441,40 @@ func _opaque_panel_style() -> StyleBoxFlat:
 
 
 func _install_hud_layout() -> void:
-	## Container layout: map left; opaque scrollable right column; portraits over map margin.
+	## Map fills leftover space; utility/portraits float as overlays; right chrome is panel/drawer/rail.
 	if _hud_layout_ready:
 		return
 	_hud_layout_ready = true
-	# Top bar: phase + info/tool + alert only (already HBox in scene).
-	var top: Control = $HUD/TopBar
-	top.offset_top = 4
-	top.offset_bottom = TOP_BAR_H
-	top.offset_left = 8
-	top.offset_right = -8
 
-	# Utility bar under top bar, over map margin (left of right column).
+	# Utility overlay (semi-opaque) floating on map top-left — does not push MapHost.
+	utility_backdrop = PanelContainer.new()
+	utility_backdrop.name = "UtilityBackdrop"
+	utility_backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
+	var ustyle := StyleBoxFlat.new()
+	ustyle.bg_color = Color(0.05, 0.06, 0.08, 0.78)
+	ustyle.content_margin_left = 4
+	ustyle.content_margin_right = 4
+	ustyle.content_margin_top = 3
+	ustyle.content_margin_bottom = 3
+	ustyle.corner_radius_top_left = 4
+	ustyle.corner_radius_top_right = 4
+	ustyle.corner_radius_bottom_right = 4
+	ustyle.corner_radius_bottom_left = 4
+	utility_backdrop.add_theme_stylebox_override("panel", ustyle)
+	$HUD.add_child(utility_backdrop)
 	utility_bar = HBoxContainer.new()
 	utility_bar.name = "UtilityBar"
-	utility_bar.add_theme_constant_override("separation", 4)
-	utility_bar.mouse_filter = Control.MOUSE_FILTER_STOP
-	$HUD.add_child(utility_bar)
+	utility_bar.add_theme_constant_override("separation", 3)
+	utility_backdrop.add_child(utility_bar)
 	for b in [btn_dev_toggle, btn_undo, btn_cancel, btn_fit_camera, btn_shortcuts_help]:
 		if b == null:
 			continue
 		if b.get_parent():
 			b.get_parent().remove_child(b)
+		b.custom_minimum_size = Vector2(CHIP_MIN_PX, CHIP_MIN_PX)
 		utility_bar.add_child(b)
 
-	# Right column shell (Control, not PanelContainer — children must not expand width).
+	# Right column shell.
 	right_column = Control.new()
 	right_column.name = "RightColumn"
 	right_column.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -1472,6 +1486,13 @@ func _install_hud_layout() -> void:
 	right_column_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	right_column_bg.add_theme_stylebox_override("panel", _opaque_panel_style())
 	right_column.add_child(right_column_bg)
+	btn_drawer_tab = Button.new()
+	btn_drawer_tab.name = "DrawerTab"
+	btn_drawer_tab.text = "‹"
+	btn_drawer_tab.custom_minimum_size = Vector2(DRAWER_TAB_W, 72)
+	btn_drawer_tab.add_theme_font_size_override("font_size", 18)
+	btn_drawer_tab.pressed.connect(_on_drawer_tab_pressed)
+	right_column.add_child(btn_drawer_tab)
 	right_column_vbox = VBoxContainer.new()
 	right_column_vbox.name = "RightColumnVBox"
 	right_column_vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -1494,7 +1515,6 @@ func _install_hud_layout() -> void:
 	right_scroll_body.add_theme_constant_override("separation", 8)
 	right_scroll.add_child(right_scroll_body)
 
-	# Reparent phase panels into scroll body (containers, no absolute offsets).
 	for p in [scout_panel, setup_panel, wait_panel]:
 		if p == null:
 			continue
@@ -1506,20 +1526,17 @@ func _install_hud_layout() -> void:
 		if p is VBoxContainer:
 			(p as VBoxContainer).add_theme_constant_override("separation", 8)
 
-	# Tool / trigger chips at top of SetupPanel.
 	if setup_panel and tool_bar and tool_bar.get_parent() == null:
 		setup_panel.add_child(tool_bar)
 		setup_panel.move_child(tool_bar, 0)
 	if setup_panel and trigger_chip_row and trigger_chip_row.get_parent() == null:
 		setup_panel.add_child(trigger_chip_row)
 		setup_panel.move_child(trigger_chip_row, 1)
-	# Keep StartButton/StartReason in panel but Start is footer-owned.
 	if btn_start:
 		btn_start.visible = false
 	if trigger_option:
 		trigger_option.visible = false
 
-	# Fixed primary action footer (bottom of right column).
 	action_footer = HBoxContainer.new()
 	action_footer.name = "ActionFooter"
 	action_footer.add_theme_constant_override("separation", 6)
@@ -1533,16 +1550,27 @@ func _install_hud_layout() -> void:
 		action_footer.add_child(thumb_bar)
 		thumb_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-	# Portrait strip over darkened map margin (bottom-left).
+	wait_rail_box = VBoxContainer.new()
+	wait_rail_box.name = "WaitRail"
+	wait_rail_box.visible = false
+	wait_rail_box.add_theme_constant_override("separation", 8)
+	wait_rail_box.alignment = BoxContainer.ALIGNMENT_CENTER
+	right_column.add_child(wait_rail_box)
+
+	# Portrait strip floats over map bottom-left.
 	portrait_backdrop = PanelContainer.new()
 	portrait_backdrop.name = "PortraitBackdrop"
 	portrait_backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
 	var pstyle := StyleBoxFlat.new()
-	pstyle.bg_color = Color(0.05, 0.06, 0.08, 0.82)
-	pstyle.content_margin_left = 6
-	pstyle.content_margin_right = 6
-	pstyle.content_margin_top = 4
-	pstyle.content_margin_bottom = 4
+	pstyle.bg_color = Color(0.05, 0.06, 0.08, 0.78)
+	pstyle.content_margin_left = 5
+	pstyle.content_margin_right = 5
+	pstyle.content_margin_top = 3
+	pstyle.content_margin_bottom = 3
+	pstyle.corner_radius_top_left = 4
+	pstyle.corner_radius_top_right = 4
+	pstyle.corner_radius_bottom_right = 4
+	pstyle.corner_radius_bottom_left = 4
 	portrait_backdrop.add_theme_stylebox_override("panel", pstyle)
 	$HUD.add_child(portrait_backdrop)
 	if portrait_strip:
@@ -1551,7 +1579,6 @@ func _install_hud_layout() -> void:
 		_clear_control_anchors(portrait_strip)
 		portrait_backdrop.add_child(portrait_strip)
 
-	# Result stays centered overlay; raise above column.
 	if result_panel:
 		$HUD.move_child(result_panel, -1)
 	if pause_menu:
@@ -1562,6 +1589,10 @@ func _install_hud_layout() -> void:
 		$HUD.move_child(info_card, -1)
 	if dev_menu:
 		$HUD.move_child(dev_menu, -1)
+	if utility_backdrop:
+		$HUD.move_child(utility_backdrop, -1)
+	if portrait_backdrop:
+		$HUD.move_child(portrait_backdrop, -1)
 
 
 func _clear_control_anchors(c: Control) -> void:
@@ -1592,7 +1623,6 @@ func _view_size() -> Vector2:
 
 func apply_layout_size(w: int, h: int, resize_window: bool = false) -> void:
 	## Force chrome geometry for a logical viewport (tests + capture).
-	## Default: do not resize the OS window — keep a large framebuffer and crop.
 	layout_size_override = Vector2(w, h)
 	if resize_window:
 		DisplayServer.window_set_size(Vector2i(w, h))
@@ -1602,13 +1632,109 @@ func apply_layout_size(w: int, h: int, resize_window: bool = false) -> void:
 	_relayout_hud()
 
 
+func _is_phone_layout() -> bool:
+	return _view_size().y < PHONE_H_MAX
+
+
+func _chrome_kind() -> String:
+	## desktop_panel | phone_drawer | phone_tab | wait_rail
+	if ui_phase == UiPhase.WAIT:
+		return "wait_rail"
+	if ui_phase == UiPhase.RESULT:
+		return "none"
+	if _is_phone_layout():
+		return "phone_drawer" if drawer_open else "phone_tab"
+	return "desktop_panel"
+
+
 func _right_column_width() -> float:
 	var w := _view_size().x
-	## On very short phone widths keep a usable column without eating the whole map.
-	var frac_w := w * RIGHT_COL_FRAC
-	if w <= 900.0:
-		return clampf(maxf(RIGHT_COL_MIN_PX, frac_w), 200.0, w * 0.36)
-	return maxf(RIGHT_COL_MIN_PX, frac_w)
+	match _chrome_kind():
+		"none":
+			return 0.0
+		"wait_rail":
+			return WAIT_RAIL_PHONE_W if _is_phone_layout() else WAIT_RAIL_DESKTOP_W
+		"phone_tab":
+			return DRAWER_TAB_W
+		"phone_drawer":
+			return clampf(w * RIGHT_COL_PHONE_FRAC, 180.0, w * 0.36)
+		_:
+			return clampf(maxf(RIGHT_COL_MIN_PX, w * RIGHT_COL_FRAC), RIGHT_COL_MIN_PX, w * 0.32)
+
+
+func _on_drawer_tab_pressed() -> void:
+	_ui_tap()
+	if ui_phase == UiPhase.WAIT:
+		return ## wait rail is not a toggle drawer
+	drawer_open = not drawer_open
+	_relayout_hud()
+
+
+func _reparent_btn(b: Button, parent: Node) -> void:
+	if b == null or parent == null:
+		return
+	if b.get_parent() == parent:
+		return
+	if b.get_parent():
+		b.get_parent().remove_child(b)
+	parent.add_child(b)
+
+
+func _configure_action_footer_for_chrome(kind: String) -> void:
+	var rail := kind == "wait_rail"
+	if wait_rail_box:
+		wait_rail_box.visible = rail
+	if action_footer:
+		action_footer.visible = not rail and kind != "phone_tab" and kind != "none"
+	if rail:
+		## Vertical round-ish action stack on the right edge.
+		for b in [btn_thumb_pause, btn_thumb_speed, btn_thumb_detonate]:
+			_reparent_btn(b, wait_rail_box)
+		if btn_thumb_begin:
+			btn_thumb_begin.visible = false
+		if btn_thumb_start:
+			btn_thumb_start.visible = false
+		if btn_thumb_pause:
+			btn_thumb_pause.text = "暂停"
+			btn_thumb_pause.custom_minimum_size = Vector2(56, 56)
+			btn_thumb_pause.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		if btn_thumb_speed:
+			btn_thumb_speed.text = "%s×" % str(speed_mul).replace(".0", "")
+			btn_thumb_speed.custom_minimum_size = Vector2(56, 56)
+			btn_thumb_speed.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		if btn_thumb_detonate:
+			btn_thumb_detonate.text = "起爆"
+			btn_thumb_detonate.custom_minimum_size = Vector2(56, 56)
+			btn_thumb_detonate.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		if wait_rail_box:
+			var h := right_column.size.y if right_column.size.y > 8.0 else 200.0
+			_place_rect(wait_rail_box, 8, 24, _right_column_width() - 8, h - 16)
+	else:
+		## Restore horizontal thumb cluster inside the panel footer.
+		if thumb_bar == null:
+			return
+		for b in [btn_thumb_begin, btn_thumb_start, btn_thumb_pause, btn_thumb_speed, btn_thumb_detonate]:
+			_reparent_btn(b, thumb_bar)
+		if btn_thumb_pause:
+			btn_thumb_pause.text = "暂停"
+			btn_thumb_pause.custom_minimum_size = Vector2(88, TOUCH_MIN_PX)
+			btn_thumb_pause.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if btn_thumb_speed:
+			btn_thumb_speed.text = "倍速 %s×" % str(speed_mul).replace(".0", "")
+			btn_thumb_speed.custom_minimum_size = Vector2(100, TOUCH_MIN_PX)
+			btn_thumb_speed.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if btn_thumb_detonate:
+			btn_thumb_detonate.text = "长按起爆"
+			btn_thumb_detonate.custom_minimum_size = Vector2(120, TOUCH_MIN_PX)
+			btn_thumb_detonate.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if btn_thumb_begin:
+			btn_thumb_begin.text = "开始布阵"
+			btn_thumb_begin.custom_minimum_size = Vector2(120, TOUCH_MIN_PX)
+			btn_thumb_begin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if btn_thumb_start:
+			btn_thumb_start.text = "开始等待"
+			btn_thumb_start.custom_minimum_size = Vector2(120, TOUCH_MIN_PX)
+			btn_thumb_start.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 
 func _relayout_hud() -> void:
@@ -1617,32 +1743,69 @@ func _relayout_hud() -> void:
 	var view := _view_size()
 	var view_w := view.x
 	var view_h := view.y
+	var kind := _chrome_kind()
 	var col_w := _right_column_width()
-	var util_h := CHIP_MIN_PX + 4
-	var map_top := TOP_BAR_H + util_h + 6
-	var map_bottom := view_h - PORTRAIT_H - 4
-	var map_right := view_w - col_w - 4
-	## Absolute offsets from logical view size (works even when window buffer is larger).
-	_place_rect(map_host, 4, map_top, map_right, map_bottom)
-	_place_rect(right_column, view_w - col_w, TOP_BAR_H + 2, view_w - 2, view_h - 2)
-	if right_scroll_body:
-		right_scroll_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	## Map fills everything except top bar + right chrome — overlays do not shrink it.
+	var map_top := TOP_BAR_H + 2.0
+	var map_bottom := view_h - 2.0
+	var map_left := 2.0
+	var map_right := view_w - col_w - 2.0
+	if map_right < map_left + 80.0:
+		map_right = map_left + 80.0
+	_place_rect(map_host, map_left, map_top, map_right, map_bottom)
+
+	var top: Control = $HUD/TopBar
+	if top:
+		_place_rect(top, 6, 2, view_w - 6, TOP_BAR_H)
+
+	## Right chrome.
+	if kind == "none" or col_w < 1.0:
+		right_column.visible = false
+	else:
+		right_column.visible = true
+		_place_rect(right_column, view_w - col_w, TOP_BAR_H + 2, view_w - 2, view_h - 2)
+		var show_scroll := kind == "desktop_panel" or kind == "phone_drawer"
+		if right_scroll:
+			right_scroll.visible = show_scroll
+		if right_column_vbox:
+			right_column_vbox.visible = kind != "phone_tab"
+			if kind == "wait_rail":
+				right_column_vbox.offset_left = 6
+				right_column_vbox.offset_right = -6
+			elif kind == "phone_drawer":
+				right_column_vbox.offset_left = DRAWER_TAB_W + 4
+				right_column_vbox.offset_right = -6
+			else:
+				right_column_vbox.offset_left = 8
+				right_column_vbox.offset_right = -8
+		if btn_drawer_tab:
+			var show_tab := kind == "phone_drawer" or kind == "phone_tab"
+			btn_drawer_tab.visible = show_tab
+			if show_tab:
+				btn_drawer_tab.text = "›" if drawer_open else "‹"
+				_place_rect(btn_drawer_tab, 0, view_h * 0.35 - TOP_BAR_H, DRAWER_TAB_W, view_h * 0.35 - TOP_BAR_H + 72)
+		if right_column_bg:
+			right_column_bg.visible = kind != "phone_tab"
+		_configure_action_footer_for_chrome(kind)
+
 	for p in [setup_panel, scout_panel, wait_panel]:
 		if p:
 			p.custom_minimum_size = Vector2(0, 0)
 
-	var top: Control = $HUD/TopBar
-	if top:
-		_place_rect(top, 8, 4, view_w - 8, TOP_BAR_H)
-
-	if utility_bar:
-		_place_rect(utility_bar, 8, TOP_BAR_H + 2, minf(420, map_right - 8), TOP_BAR_H + 2 + CHIP_MIN_PX)
+	## Floating overlays on map edges.
+	if utility_backdrop:
+		var uw := minf(280.0, map_right - map_left - 12.0)
+		_place_rect(utility_backdrop, map_left + 6, map_top + 6, map_left + 6 + uw, map_top + 6 + CHIP_MIN_PX + 8)
+		utility_backdrop.visible = ui_phase != UiPhase.RESULT
 
 	if portrait_backdrop:
-		_place_rect(portrait_backdrop, 4, view_h - PORTRAIT_H, minf(420, map_right - 4), view_h - 4)
+		var pw := minf(400.0, (map_right - map_left) * 0.55)
+		_place_rect(portrait_backdrop, map_left + 6, map_bottom - PORTRAIT_H - 4, map_left + 6 + pw, map_bottom - 4)
+		portrait_backdrop.visible = ui_phase != UiPhase.RESULT
 
 	if map_view:
 		map_view._fit_cell_px()
+		map_view.reset_camera()
 		map_view.queue_redraw()
 
 
@@ -1656,6 +1819,7 @@ func _place_rect(c: Control, left: float, top: float, right: float, bottom: floa
 	c.offset_top = top
 	c.offset_right = right
 	c.offset_bottom = bottom
+	c.size = Vector2(maxf(1.0, right - left), maxf(1.0, bottom - top))
 	c.grow_horizontal = Control.GROW_DIRECTION_END
 	c.grow_vertical = Control.GROW_DIRECTION_END
 
@@ -1672,9 +1836,23 @@ func map_viewport_rect() -> Rect2:
 	return map_host.get_global_rect()
 
 
+func map_viewport_area_fraction() -> float:
+	var view := _view_size()
+	var area := view.x * view.y
+	if area < 1.0:
+		return 0.0
+	var r := map_viewport_rect()
+	## Prefer logical layout size over global rect when framebuffer ≠ logical view.
+	var logical_w := r.size.x
+	var logical_h := r.size.y
+	if layout_size_override.x > 8.0:
+		var col_w := _right_column_width()
+		logical_w = maxf(1.0, layout_size_override.x - col_w - 4.0)
+		logical_h = maxf(1.0, layout_size_override.y - TOP_BAR_H - 4.0)
+	return (logical_w * logical_h) / area
+
+
 func _refresh_thumb_visibility() -> void:
-	if thumb_bar == null:
-		return
 	var scout := ui_phase == UiPhase.SCOUT
 	var setup := ui_phase == UiPhase.SETUP
 	var wait := ui_phase == UiPhase.WAIT
@@ -1688,7 +1866,8 @@ func _refresh_thumb_visibility() -> void:
 		btn_thumb_speed.visible = wait
 	if btn_thumb_detonate:
 		btn_thumb_detonate.visible = wait
-	thumb_bar.visible = scout or setup or wait
+	if action_footer:
+		action_footer.visible = scout or setup or wait
 
 
 func _detonate_now_ms() -> int:
@@ -1744,6 +1923,13 @@ func _set_ui_phase(p: UiPhase) -> void:
 	_refresh_trigger_chips()
 	_refresh_thumb_visibility()
 	_refresh_undo_cancel_visibility()
+	## Phone wait auto-collapses drawer to slim rail; setup/scout keep last drawer state.
+	if p == UiPhase.WAIT and _is_phone_layout():
+		drawer_open = false
+	elif p == UiPhase.SETUP or p == UiPhase.SCOUT:
+		if not _is_phone_layout():
+			drawer_open = true
+	_relayout_hud()
 	if p == UiPhase.SETUP and undo_stack.is_empty() and not plan.is_empty():
 		# Baseline so first undo after mutations is meaningful.
 		pass

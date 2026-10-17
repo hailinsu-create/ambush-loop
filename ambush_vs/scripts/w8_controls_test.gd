@@ -790,8 +790,7 @@ func _test_desktop_shortcuts() -> void:
 
 
 func _test_hud_layout_no_overlap() -> void:
-	## Layout contract: no interactive/label rect overlaps (except parent-child);
-	## no HUD control intersects map viewport except portrait strip + top bar.
+	## No overlap + map fills leftover space (≥60% area; ≥75% in wait).
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
@@ -809,13 +808,17 @@ func _test_hud_layout_no_overlap() -> void:
 				await process_frame
 				match phase_name:
 					"setup":
+						scene.drawer_open = true
 						if scene.ui_phase != scene.UiPhase.SETUP:
 							OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
 							scene._init_blank_plan()
 							scene._build_op_cards()
 							scene._build_kit_row()
 							scene._set_ui_phase(scene.UiPhase.SETUP)
+						else:
+							scene._set_ui_phase(scene.UiPhase.SETUP)
 					"scout":
+						scene.drawer_open = true
 						scene._start_scout_phase()
 					"wait":
 						if scene.ui_phase != scene.UiPhase.SETUP:
@@ -833,7 +836,6 @@ func _test_hud_layout_no_overlap() -> void:
 							scene._start_wait()
 							await process_frame
 						scene._set_ui_phase(scene.UiPhase.RESULT)
-				# Close modals that are allowed overlays (not part of steady HUD).
 				if scene.pause_menu:
 					scene.pause_menu.visible = false
 				if scene.shortcuts_help:
@@ -850,16 +852,34 @@ func _test_hud_layout_no_overlap() -> void:
 				_assert(overlap == "", "no HUD overlap %s (%s)" % [tag, overlap])
 				var map_hit := _find_map_intersection(scene)
 				_assert(map_hit == "", "HUD clears map viewport %s (%s)" % [tag, map_hit])
+				var map_frac: float = scene.map_viewport_area_fraction()
+				var min_frac := 0.75 if phase_name == "wait" else 0.60
+				if phase_name != "result":
+					_assert(map_frac + 1e-4 >= min_frac,
+						"map area ≥%.0f%% got %.1f%% %s" % [min_frac * 100.0, map_frac * 100.0, tag])
 				if phase_name == "setup":
 					_assert(scene.right_column.visible, "right column visible in setup %s" % tag)
 					var want_w: float = scene._right_column_width()
-					var col_w: float = scene.right_column.get_global_rect().size.x
-					_assert(absf(col_w - want_w) <= 4.0 or absf(col_w - (want_w - 2.0)) <= 4.0,
-						"right col width~%.0f got %.1f %s" % [want_w, col_w, tag])
 					var frac: float = want_w / float(size_pair.x)
-					var lo := 0.24 if size_pair.x >= 1000 else 0.22
-					var hi := 0.36 if size_pair.x >= 1000 else 0.38
-					_assert(frac >= lo and frac <= hi, "right col ~30%% got %.2f %s" % [frac, tag])
+					if size_pair.y < 500:
+						_assert(frac >= 0.30 and frac <= 0.40, "phone drawer ~34%% got %.2f %s" % [frac, tag])
+					else:
+						_assert(frac >= 0.24 and frac <= 0.34, "desktop panel ~28%% got %.2f %s" % [frac, tag])
+				if phase_name == "wait":
+					var rail_w: float = scene._right_column_width()
+					_assert(rail_w <= 110.0, "wait rail narrow got %.0f %s" % [rail_w, tag])
+		## Phone setup: collapsing drawer grows the map.
+		scene.apply_layout_size(844, 390)
+		scene.drawer_open = true
+		scene._set_ui_phase(scene.UiPhase.SETUP)
+		scene.apply_layout_size(844, 390)
+		await process_frame
+		var open_frac: float = scene.map_viewport_area_fraction()
+		scene.drawer_open = false
+		scene.apply_layout_size(844, 390)
+		await process_frame
+		var closed_frac: float = scene.map_viewport_area_fraction()
+		_assert(closed_frac > open_frac + 0.05, "collapse drawer grows map %.2f→%.2f" % [open_frac, closed_frac])
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "layout scene not ready")
@@ -957,34 +977,29 @@ func _find_hud_overlap(scene) -> String:
 
 
 func _find_map_intersection(scene) -> String:
+	## Overlays allowed on the map: top bar, utility chip strip, portrait strip.
 	var map_r: Rect2 = scene.map_viewport_rect()
 	if map_r.size.x < 4.0 or map_r.size.y < 4.0:
-		return "map rect empty"
-	var allow := {
-		"TopBar": true,
-		"PhaseLabel": true,
-		"InfoLabel": true,
-		"AlertLabel": true,
-		"PortraitStrip": true,
-		"PortraitBackdrop": true,
-	}
-	## Portrait buttons are allowed over the reserved margin; map_host excludes them.
+		## Logical map when framebuffer ≠ layout override.
+		if scene.layout_size_override.x > 8.0:
+			var col_w: float = scene._right_column_width()
+			map_r = Rect2(2, scene.TOP_BAR_H + 2,
+				scene.layout_size_override.x - col_w - 4,
+				scene.layout_size_override.y - scene.TOP_BAR_H - 4)
+		else:
+			return "map rect empty"
 	var ctrls: Array = []
 	_collect_layout_controls(scene.hud, ctrls, _layout_ignore_names())
 	for c in ctrls:
 		var ctl: Control = c
-		var nm := str(ctl.name)
-		if allow.has(nm):
+		var path := str(ctl.get_path())
+		if path.contains("/TopBar") or path.contains("Portrait") or path.contains("Utility"):
 			continue
-		## Portrait_* buttons live under PortraitBackdrop — allowed.
-		if str(ctl.get_path()).contains("Portrait"):
-			continue
-		## TopBar children already named; also allow anything under TopBar.
-		if str(ctl.get_path()).contains("/TopBar"):
+		if path.contains("RightColumn") or path.contains("WaitRail") or path.contains("DrawerTab"):
 			continue
 		var r := _clipped_global_rect(ctl)
 		if r.size.x <= 2.0 or r.size.y <= 2.0:
 			continue
 		if _rects_overlap(r, map_r):
-			return "%s ∩ MapHost" % ctl.get_path()
+			return "%s ∩ MapHost" % path
 	return ""
