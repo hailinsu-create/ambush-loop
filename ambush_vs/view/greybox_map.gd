@@ -103,8 +103,10 @@ var _dragging_ground: bool = false
 var _ground_start_cell: Vector2i = Vector2i(-1, -1)
 var _last_hover_cell: Vector2i = Vector2i(-999, -999)
 ## PLAY-UX PR-8: camera zoom/pan (map-local pixels).
+## Zoom 1 = whole yard (contain-fit into MapHost). Zoom >1 = content framing / pinch.
 const CAM_ZOOM_MIN := 1.0
 const CAM_ZOOM_MAX := 2.5
+const FRAME_MARGIN_CELLS := 0.5
 var cam_zoom: float = 1.0
 var cam_pan: Vector2 = Vector2.ZERO ## top-left of view in unzoomed map px
 var _pinch_active: bool = false
@@ -116,6 +118,7 @@ var _panning: bool = false
 var _pan_last: Vector2 = Vector2.ZERO
 var allow_ground_pan: bool = true ## controller clears when trip tool active
 var _mid_dragging: bool = false
+var map_host_letterbox: ColorRect = null ## dark ground behind contain-fit map
 
 
 func _ready() -> void:
@@ -238,45 +241,57 @@ func _fit_cell_px() -> void:
 		return
 	# Prefer MapHost size (outside SubViewportContainer).
 	var avail := Vector2.ZERO
+	var host: Control = null
 	var sv: SubViewport = get_viewport() as SubViewport
 	if sv != null:
 		var svc := sv.get_parent()
 		if svc is Control and svc.get_parent() is Control:
-			avail = (svc.get_parent() as Control).size
+			host = svc.get_parent() as Control
+			avail = host.size
 		elif svc is Control:
 			avail = (svc as Control).size
 	if avail.x < 8.0 or avail.y < 8.0:
 		avail = get_parent_area_size() if get_parent() else Vector2(960, 640)
 	if avail.x < 8.0 or avail.y < 8.0:
 		avail = Vector2(960, 640)
-	var fit_w := avail.x / float(grid_w)
-	var fit_h := avail.y / float(grid_h)
-	## Cover MapHost edge-to-edge (clip overflow). Prefer height when aspects are close
-	## so phone landscape still reads as fit-height; otherwise expand to fill width too.
-	var host_aspect := avail.x / maxf(avail.y, 1.0)
-	var map_aspect := float(grid_w) / float(grid_h)
-	if host_aspect <= map_aspect * 1.08:
-		cell_px = fit_h ## fit-height (map as tall as host; slight side crop or pad)
-	else:
-		cell_px = maxf(fit_w, fit_h) ## wide host → cover width
+	## Contain-fit: whole yard visible; letterbox filled with dark ground (no cover crop).
+	cell_px = minf(avail.x / float(grid_w), avail.y / float(grid_h))
 	var map_size := Vector2(grid_w * cell_px, grid_h * cell_px)
 	custom_minimum_size = map_size
 	size = map_size
 	position = Vector2.ZERO
 	clip_contents = true
-	# SubViewport matches map pixels; container is centered (may overflow MapHost — clipped).
+	if host != null:
+		_ensure_letterbox(host, avail)
 	if sv != null:
 		sv.size = Vector2i(maxi(1, int(round(map_size.x))), maxi(1, int(round(map_size.y))))
 		var svc2 := sv.get_parent()
 		if svc2 is Control:
 			(svc2 as Control).size = map_size
 			(svc2 as Control).position = Vector2(
-				(avail.x - map_size.x) * 0.5,
-				(avail.y - map_size.y) * 0.5
+				maxf(0.0, (avail.x - map_size.x) * 0.5),
+				maxf(0.0, (avail.y - map_size.y) * 0.5)
 			)
 			(svc2 as Control).clip_contents = true
 	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(Vector2.ZERO, map_size))
 	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
+
+
+func _ensure_letterbox(host: Control, avail: Vector2) -> void:
+	## Dark ground behind the contain-fit map (visible in letterbox bands).
+	if map_host_letterbox == null or not is_instance_valid(map_host_letterbox):
+		map_host_letterbox = ColorRect.new()
+		map_host_letterbox.name = "MapLetterbox"
+		map_host_letterbox.color = Color(0.04, 0.05, 0.06, 1.0)
+		map_host_letterbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		host.add_child(map_host_letterbox)
+		host.move_child(map_host_letterbox, 0)
+	map_host_letterbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	map_host_letterbox.offset_left = 0
+	map_host_letterbox.offset_top = 0
+	map_host_letterbox.offset_right = 0
+	map_host_letterbox.offset_bottom = 0
+	map_host_letterbox.size = avail
 
 
 func apply_snapshot(snap: Dictionary) -> void:
@@ -339,9 +354,154 @@ func set_camera(zoom: float, pan: Vector2) -> void:
 
 
 func reset_camera() -> void:
+	## Whole-yard default (contain-fit already shows the full grid at zoom 1).
 	cam_zoom = 1.0
 	cam_pan = Vector2.ZERO
 	queue_redraw()
+
+
+func frame_yard() -> void:
+	reset_camera()
+
+
+func frame_map_rect_px(bbox: Rect2) -> void:
+	## Fit an axis-aligned map-pixel rect into the view with current size.
+	if bbox.size.x < 1.0 or bbox.size.y < 1.0 or size.x < 8.0 or size.y < 8.0:
+		frame_yard()
+		return
+	var zx := size.x / bbox.size.x
+	var zy := size.y / bbox.size.y
+	var z := clampf(minf(zx, zy), CAM_ZOOM_MIN, CAM_ZOOM_MAX)
+	var pan := bbox.position + bbox.size * 0.5 - size * 0.5 / z
+	set_camera(z, pan)
+
+
+func frame_cells(cells: Array, margin_cells: float = FRAME_MARGIN_CELLS) -> void:
+	## Fit cell centers (world coords) into view with margin in cells.
+	if cells.is_empty():
+		frame_yard()
+		return
+	var min_x := 1e9
+	var max_x := -1e9
+	var min_y := 1e9
+	var max_y := -1e9
+	for c in cells:
+		var cx: float
+		var cy: float
+		if c is Vector2i:
+			cx = float((c as Vector2i).x)
+			cy = float((c as Vector2i).y)
+		elif c is Vector2:
+			cx = (c as Vector2).x
+			cy = (c as Vector2).y
+		elif c is Dictionary:
+			cx = float(c.get("x", 0))
+			cy = float(c.get("y", 0))
+		else:
+			continue
+		min_x = minf(min_x, cx)
+		max_x = maxf(max_x, cx)
+		min_y = minf(min_y, cy)
+		max_y = maxf(max_y, cy)
+	if max_x < min_x:
+		frame_yard()
+		return
+	min_x = maxf(0.0, min_x - margin_cells)
+	max_x = minf(float(grid_w - 1), max_x + margin_cells)
+	min_y = maxf(0.0, min_y - margin_cells)
+	max_y = minf(float(grid_h - 1), max_y + margin_cells)
+	## Map px: y flips (world +y south → screen -y).
+	var left := min_x * cell_px
+	var right := (max_x + 1.0) * cell_px
+	var top := (float(grid_h) - 1.0 - max_y) * cell_px
+	var bottom := (float(grid_h) - min_y) * cell_px
+	frame_map_rect_px(Rect2(left, top, maxf(1.0, right - left), maxf(1.0, bottom - top)))
+
+
+func collect_content_frame_cells() -> Array:
+	## Operators + weapon-cone tips + enemy spawn / approach waypoints.
+	var out: Array = []
+	for op in operators:
+		if not bool(op.get("alive", true)):
+			continue
+		var ox := float(op.get("x", 0))
+		var oy := float(op.get("y", 0))
+		out.append(Vector2(ox, oy))
+		var wid := str(op.get("weapon_id", ""))
+		if wid in ["grenade", "mine", ""]:
+			continue
+		var w: Dictionary = weapons.get(wid, {})
+		if w.is_empty():
+			continue
+		var half := float(w.get("sector_deg", 40)) * 0.5
+		var rng := float(w.get("max_range", 8))
+		if half <= 0.0 or rng <= 0.0:
+			continue
+		var facing := float(op.get("facing_deg", 0))
+		for t in [0.0, 0.5, 1.0]:
+			var a := deg_to_rad(facing - half + 2.0 * half * t)
+			out.append(Vector2(ox + cos(a) * rng, oy + sin(a) * rng))
+	var enemies_cfg: Dictionary = level.get("enemies", {})
+	for route in enemies_cfg.get("routes", []):
+		for wp in route.get("waypoints", []):
+			out.append(Vector2(float(wp.get("x", 0)), float(wp.get("y", 0))))
+	var alarm: Dictionary = enemies_cfg.get("alarm_route", {})
+	for wp in alarm.get("waypoints", []):
+		out.append(Vector2(float(wp.get("x", 0)), float(wp.get("y", 0))))
+	return out
+
+
+func enemy_spawn_cells() -> Array:
+	## Primary entry cells (first waypoint of each spawn route + north road).
+	var out: Array = []
+	var seen: Dictionary = {}
+	var enemies_cfg: Dictionary = level.get("enemies", {})
+	var routes_by_id: Dictionary = {}
+	for route in enemies_cfg.get("routes", []):
+		routes_by_id[str(route.get("id", ""))] = route
+	for sp in enemies_cfg.get("spawns", []):
+		var rid := str(sp.get("route_id", ""))
+		var route: Dictionary = routes_by_id.get(rid, {})
+		var wps: Array = route.get("waypoints", [])
+		if wps.is_empty():
+			continue
+		var wp: Dictionary = wps[0]
+		var cell := Vector2i(int(wp.get("x", 0)), int(wp.get("y", 0)))
+		var key := "%d,%d" % [cell.x, cell.y]
+		if seen.has(key):
+			continue
+		seen[key] = true
+		out.append(cell)
+	if out.is_empty():
+		out.append(Vector2i(11, 14))
+	return out
+
+
+func frame_for_phase(phase_name: String) -> void:
+	## scout → whole yard; setup/wait → content bbox; else yard.
+	var p := phase_name.to_lower()
+	if p == "scout":
+		frame_yard()
+		return
+	if p == "setup" or p == "wait":
+		var cells := collect_content_frame_cells()
+		for c in enemy_spawn_cells():
+			cells.append(c)
+		if cells.is_empty():
+			frame_yard()
+		else:
+			frame_cells(cells, FRAME_MARGIN_CELLS)
+		return
+	frame_yard()
+
+
+func cell_in_visible_view(cell: Vector2i, inset_px: float = 1.0) -> bool:
+	## True when cell center projects inside the current camera view rect.
+	if cell_px <= 0.0 or size.x < 8.0 or size.y < 8.0:
+		return false
+	var v := _map_to_view(_cell_center_map_px(float(cell.x), float(cell.y)))
+	var r := Rect2(Vector2(inset_px, inset_px), size - Vector2(inset_px * 2.0, inset_px * 2.0))
+	return r.has_point(v)
 
 
 func center_on_cell(x: float, y: float) -> void:

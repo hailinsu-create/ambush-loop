@@ -34,6 +34,7 @@ func _run_all() -> void:
 	await _test_info_card()
 	await _test_desktop_shortcuts()
 	await _test_hud_layout_no_overlap()
+	await _test_phase_camera_frames_content()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -1003,3 +1004,61 @@ func _find_map_intersection(scene) -> String:
 		if _rects_overlap(r, map_r):
 			return "%s ∩ MapHost" % path
 	return ""
+
+
+func _test_phase_camera_frames_content() -> void:
+	## At phase start, every operator + enemy spawn cell is inside the visible map view.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "camera-frame scene err=%s" % err)
+	for _i in range(220):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		for size_pair in [Vector2i(1280, 720), Vector2i(844, 390)]:
+			for phase_name in ["scout", "setup", "wait"]:
+				scene.apply_layout_size(size_pair.x, size_pair.y)
+				await process_frame
+				match phase_name:
+					"scout":
+						scene._start_scout_phase()
+					"setup":
+						scene.drawer_open = true
+						if scene.ui_phase != scene.UiPhase.SETUP:
+							scene.begin_setup_from_scout()
+						scene._load_preset("A")
+						scene._push_map_snapshot()
+						scene._set_ui_phase(scene.UiPhase.SETUP)
+					"wait":
+						if scene.ui_phase != scene.UiPhase.SETUP:
+							scene.begin_setup_from_scout()
+							scene._load_preset("A")
+						scene._start_wait()
+						await process_frame
+						if scene.sim:
+							scene.paused = true
+				scene.apply_layout_size(size_pair.x, size_pair.y)
+				scene._push_map_snapshot()
+				scene._apply_default_camera()
+				await process_frame
+				await process_frame
+				var tag := "%s@%dx%d" % [phase_name, size_pair.x, size_pair.y]
+				var map = scene.map_view
+				_assert(map.cell_px > 0.0, "cell_px>0 %s" % tag)
+				var ops: Array = map.operators
+				_assert(not ops.is_empty(), "ops present %s" % tag)
+				for op in ops:
+					if not bool(op.get("alive", true)):
+						continue
+					var cell := Vector2i(int(op["x"]), int(op["y"]))
+					_assert(map.cell_in_visible_view(cell),
+						"op %s cell %s in view %s" % [op.get("id", "?"), cell, tag])
+				for spawn in map.enemy_spawn_cells():
+					_assert(map.cell_in_visible_view(spawn),
+						"spawn %s in view %s" % [spawn, tag])
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "camera-frame scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")

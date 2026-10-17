@@ -420,6 +420,8 @@ func begin_setup_from_scout() -> void:
 	_build_kit_row()
 	_set_ui_phase(UiPhase.SETUP)
 	_refresh_start_gate()
+	_push_map_snapshot()
+	_apply_default_camera()
 	var mg := "已解锁 MG42" if is_mg42_unlocked() else "尚未取得 MG42"
 	label_info.text = "布阵开始 · 套件已带入 · %s" % mg
 
@@ -1063,9 +1065,8 @@ func _build_undo_cancel_buttons() -> void:
 	btn_fit_camera.name = "FitCameraButton"
 	btn_fit_camera.pressed.connect(func():
 		_ui_tap()
-		if map_view:
-			map_view.reset_camera()
-			label_info.text = "相机：全图"
+		_apply_default_camera()
+		label_info.text = "相机：复位"
 	)
 	_refresh_undo_cancel_visibility()
 
@@ -1805,8 +1806,27 @@ func _relayout_hud() -> void:
 
 	if map_view:
 		map_view._fit_cell_px()
-		map_view.reset_camera()
+		_apply_default_camera()
 		map_view.queue_redraw()
+
+
+func _apply_default_camera() -> void:
+	## Per-phase default framing (scout = yard; setup/wait = content bbox).
+	if map_view == null:
+		return
+	match ui_phase:
+		UiPhase.SCOUT:
+			map_view.frame_for_phase("scout")
+		UiPhase.SETUP, UiPhase.WAIT:
+			## Prefer live snapshot ops; fall back to plan positions for framing.
+			if map_view.operators.is_empty() and not plan.is_empty():
+				var ops: Array = []
+				for op in plan.get("operators", []):
+					ops.append(op.duplicate(true))
+				map_view.operators = ops
+			map_view.frame_for_phase("wait" if ui_phase == UiPhase.WAIT else "setup")
+		_:
+			map_view.frame_yard()
 
 
 func _place_rect(c: Control, left: float, top: float, right: float, bottom: float) -> void:
@@ -1930,6 +1950,7 @@ func _set_ui_phase(p: UiPhase) -> void:
 		if not _is_phone_layout():
 			drawer_open = true
 	_relayout_hud()
+	_apply_default_camera()
 	if p == UiPhase.SETUP and undo_stack.is_empty() and not plan.is_empty():
 		# Baseline so first undo after mutations is meaningful.
 		pass
@@ -2034,6 +2055,7 @@ func _start_wait() -> void:
 	if sfx:
 		sfx.start_ambient("ambient_yard", -14.0)
 	_push_map_snapshot()
+	_apply_default_camera()
 
 
 func _toggle_pause() -> void:
