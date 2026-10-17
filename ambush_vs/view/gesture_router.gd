@@ -38,6 +38,14 @@ func reset() -> void:
 	_last_pos = Vector2.ZERO
 
 
+## Force-cancel in-progress press/drag (Esc / ✕). Emits drag_ended cancelled if dragging.
+func cancel() -> void:
+	if state == State.DRAGGING:
+		drag_ended.emit(_last_pos, _press_pos, true)
+	state = State.IDLE
+	_long_fired = false
+
+
 func now_ms() -> int:
 	if now_ms_fn.is_valid():
 		return int(now_ms_fn.call())

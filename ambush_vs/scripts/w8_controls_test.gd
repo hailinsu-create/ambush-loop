@@ -29,6 +29,7 @@ func _run_all() -> void:
 	await _test_setup_toolbar_and_trip()
 	await _test_hud_touch_sizing()
 	await _test_scout_path_preview()
+	await _test_undo_cancel()
 	print("W8_CONTROLS_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -527,4 +528,76 @@ func _test_scout_path_preview() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		return
 	_assert(false, "scout preview scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _plan_fingerprint(plan: Dictionary) -> String:
+	return JSON.stringify(plan)
+
+
+func _test_undo_cancel() -> void:
+	## PR-7: undo stack, Esc exits tool, Esc cancels aim drag.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "undo scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(scene.btn_undo != null and scene.btn_cancel != null, "undo/cancel buttons")
+		var base := _plan_fingerprint(scene.plan)
+		var ops: Array = scene.plan.get("operators", [])
+		var oid := str(ops[0]["id"])
+		# Place → facing → mine → undo ×3 → deep equal.
+		scene.scripted_place_operator(oid, 5, 9, 0.0)
+		# scripted_place bypasses undo; do player-like mutations.
+		scene.undo_stack.clear()
+		base = _plan_fingerprint(scene.plan)
+		scene.selected_op_id = oid
+		scene._push_undo()
+		ops[0]["x"] = 6
+		ops[0]["y"] = 5
+		scene._push_undo()
+		ops[0]["facing_deg"] = 45.0
+		scene._on_tool_chip("mine")
+		# Find walkable for mine.
+		var mx := 8
+		var my := 4
+		for y in range(scene.grid.height):
+			for x in range(scene.grid.width):
+				if scene.grid.walkable(x, y):
+					mx = x
+					my = y
+					break
+		scene._place_mine_at(Vector2i(mx, my))
+		_assert(scene.undo_stack.size() >= 3, "undo stack depth ≥3 got=%d" % scene.undo_stack.size())
+		scene._undo()
+		scene._undo()
+		scene._undo()
+		_assert(_plan_fingerprint(scene.plan) == base, "undo×3 restores plan")
+		# Tool=trigger, Esc → OP, trigger unchanged.
+		var trig0 := _plan_fingerprint(scene.plan.get("trigger", {}))
+		scene._on_tool_chip("trigger")
+		_assert(str(scene.setup_tool) == "trigger", "tool trigger")
+		var esc := InputEventKey.new()
+		esc.keycode = KEY_ESCAPE
+		esc.pressed = true
+		scene._unhandled_input(esc)
+		_assert(str(scene.setup_tool) == "op", "Esc returns tool to op")
+		_assert(_plan_fingerprint(scene.plan.get("trigger", {})) == trig0, "Esc leaves trigger")
+		# Aim drag + Esc → facing unchanged.
+		ops = scene.plan.get("operators", [])
+		oid = str(ops[0]["id"])
+		scene.selected_op_id = oid
+		var f0 := float(ops[0]["facing_deg"])
+		scene._on_aim_drag_started_track(oid, Vector2.ZERO)
+		ops[0]["facing_deg"] = f0 + 90.0
+		scene._aim_drag_active = true
+		scene._cancel_mode()
+		_assert(is_equal_approx(float(ops[0]["facing_deg"]), f0), "Esc cancels aim facing got=%s want=%s" % [ops[0]["facing_deg"], f0])
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		return
+	_assert(false, "undo scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")

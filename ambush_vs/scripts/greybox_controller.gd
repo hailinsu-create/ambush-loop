@@ -163,6 +163,14 @@ var pending_scout_goal: Vector2i = Vector2i(-1, -1)
 var scout_dest_flag: Vector2i = Vector2i(-1, -1) ## sticky until arrival
 var scout_preview_cost_s: float = 0.0
 var _scout_hover_from_mouse: bool = false ## desktop hover preview active
+## PLAY-UX PR-7: undo stack + cancel.
+const UNDO_MAX := 30
+var undo_stack: Array = [] ## deep-copied plan snapshots
+var btn_undo: Button = null
+var btn_cancel: Button = null
+var _aim_drag_active: bool = false
+var _facing_before_aim: float = NAN
+var _skip_next_place_undo: bool = false
 
 
 func _ready() -> void:
@@ -184,6 +192,7 @@ func _ready() -> void:
 	map_view.cell_dragged.connect(_on_cell_dragged)
 	map_view.unit_selected.connect(_on_unit_selected)
 	map_view.aim_drag_ended.connect(_on_aim_drag_ended)
+	map_view.aim_drag_started.connect(_on_aim_drag_started_track)
 	map_view.ground_drag_started.connect(_on_ground_drag_started)
 	map_view.ground_drag_moved.connect(_on_ground_drag_moved)
 	map_view.ground_drag_ended.connect(_on_ground_drag_ended)
@@ -193,6 +202,7 @@ func _ready() -> void:
 	_build_portrait_strip()
 	_build_setup_tool_bars()
 	_build_touch_hud()
+	_build_undo_cancel_buttons()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -446,6 +456,7 @@ func _init_blank_plan_from_scout() -> void:
 	place_mode = PlaceMode.OP
 	setup_tool = "op"
 	pending_place_cell = Vector2i(-1, -1)
+	undo_stack.clear()
 	_sync_trigger_option_from_plan()
 	_push_map_snapshot()
 	label_info.text = "入场位已就位 · 用工具栏放置/拖队员落位 · 仍在入场位可微调"
@@ -657,6 +668,7 @@ func _on_op_weapon_picked(oid: String, wid: String) -> void:
 	if held >= max_count:
 		label_info.text = "起始套件中该武器已分完"
 		return
+	_push_undo()
 	for op in plan.get("operators", []):
 		if str(op["id"]) == oid:
 			op["weapon_id"] = wid
@@ -732,6 +744,7 @@ func _on_trigger_selected(idx: int) -> void:
 
 
 func _apply_trigger_type(t: String) -> void:
+	_push_undo()
 	match t:
 		"see_first_enemy":
 			var bind := selected_op_id if selected_op_id else _op_id_for_weapon("kar98k")
@@ -982,6 +995,156 @@ func _build_pause_menu() -> void:
 	)
 
 
+func _build_undo_cancel_buttons() -> void:
+	btn_undo = _mk_touch_btn("↶", 88)
+	btn_undo.name = "UndoButton"
+	btn_undo.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	btn_undo.offset_left = 116
+	btn_undo.offset_top = 52
+	btn_undo.offset_right = 204
+	btn_undo.offset_bottom = 140
+	btn_undo.tooltip_text = ""
+	$HUD.add_child(btn_undo)
+	btn_undo.pressed.connect(func(): _ui_tap(); _undo())
+	btn_cancel = _mk_touch_btn("✕", 88)
+	btn_cancel.name = "CancelButton"
+	btn_cancel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	btn_cancel.offset_left = 212
+	btn_cancel.offset_top = 52
+	btn_cancel.offset_right = 300
+	btn_cancel.offset_bottom = 140
+	$HUD.add_child(btn_cancel)
+	btn_cancel.pressed.connect(func(): _ui_tap(); _cancel_mode())
+	_refresh_undo_cancel_visibility()
+
+
+func _refresh_undo_cancel_visibility() -> void:
+	var show := ui_phase == UiPhase.SETUP or ui_phase == UiPhase.SCOUT or ui_phase == UiPhase.WAIT
+	if btn_undo:
+		btn_undo.visible = ui_phase == UiPhase.SETUP
+		btn_undo.disabled = undo_stack.is_empty()
+	if btn_cancel:
+		btn_cancel.visible = show
+
+
+func _push_undo() -> void:
+	if ui_phase != UiPhase.SETUP or plan.is_empty():
+		return
+	undo_stack.append({
+		"plan": plan.duplicate(true),
+		"op_placed": op_placed.duplicate(true),
+		"setup_tool": setup_tool,
+		"place_mode": place_mode,
+		"selected_op_id": selected_op_id,
+	})
+	while undo_stack.size() > UNDO_MAX:
+		undo_stack.pop_front()
+	_refresh_undo_cancel_visibility()
+
+
+func _undo() -> void:
+	if undo_stack.is_empty() or ui_phase != UiPhase.SETUP:
+		return
+	var snap: Dictionary = undo_stack.pop_back()
+	plan = snap.get("plan", {}).duplicate(true)
+	op_placed = snap.get("op_placed", {}).duplicate(true)
+	setup_tool = str(snap.get("setup_tool", "op"))
+	place_mode = snap.get("place_mode", PlaceMode.OP)
+	selected_op_id = str(snap.get("selected_op_id", ""))
+	pending_place_cell = Vector2i(-1, -1)
+	if map_view:
+		map_view.place_ghost_cell = Vector2i(-1, -1)
+		map_view.selected_op_id = selected_op_id
+	_refresh_tool_chips()
+	_refresh_trigger_chips()
+	_update_legal_highlights()
+	_refresh_op_cards()
+	_refresh_portrait_strip()
+	_refresh_start_gate()
+	_refresh_undo_cancel_visibility()
+	label_info.text = "已撤销"
+	_push_map_snapshot()
+
+
+func _cancel_mode() -> void:
+	## ✕ / Esc / Android back: exit tool, clear preview, cancel aim drag.
+	if _aim_drag_active:
+		_cancel_aim_drag()
+		return
+	if ui_phase == UiPhase.SCOUT:
+		_clear_scout_preview()
+		scout_dest_flag = Vector2i(-1, -1)
+		label_info.text = "已取消预览"
+		_push_map_snapshot()
+		return
+	if ui_phase == UiPhase.SETUP:
+		pending_place_cell = Vector2i(-1, -1)
+		if map_view:
+			map_view.place_ghost_cell = Vector2i(-1, -1)
+			map_view.trip_preview_a = Vector2i(-1, -1)
+			map_view.trip_preview_b = Vector2i(-1, -1)
+		if setup_tool != "op" or place_mode != PlaceMode.OP:
+			setup_tool = "op"
+			place_mode = PlaceMode.OP
+			_trip_drag_start = Vector2i(-1, -1)
+			_refresh_tool_chips()
+			_update_legal_highlights()
+			label_info.text = "工具回到队员"
+		else:
+			label_info.text = "已取消"
+		_push_map_snapshot()
+		return
+	if ui_phase == UiPhase.WAIT:
+		label_info.text = "已取消"
+		_push_map_snapshot()
+
+
+func _cancel_aim_drag() -> void:
+	## Restore facing (setup) / skip submit (wait); cancel gesture.
+	if ui_phase == UiPhase.SETUP and selected_op_id != "" and not is_nan(_facing_before_aim):
+		for op in plan.get("operators", []):
+			if str(op["id"]) == selected_op_id:
+				op["facing_deg"] = _facing_before_aim
+				break
+	_aim_drag_active = false
+	_facing_before_aim = NAN
+	if map_view and map_view.gesture:
+		map_view.gesture.cancel()
+		map_view._dragging_op = ""
+		map_view.aim_preview_op = ""
+		map_view.aim_preview_deg = NAN
+		map_view.queue_redraw()
+	label_info.text = "转向已取消"
+	_push_map_snapshot()
+
+
+func _on_aim_drag_started_track(op_id: String, _pos: Vector2) -> void:
+	_aim_drag_active = true
+	if ui_phase == UiPhase.SETUP:
+		_push_undo()
+		_skip_next_place_undo = true
+		for op in plan.get("operators", []):
+			if str(op["id"]) == op_id:
+				_facing_before_aim = float(op.get("facing_deg", 0.0))
+				break
+	elif ui_phase == UiPhase.WAIT and sim != null:
+		var op := _sim_op(op_id)
+		_facing_before_aim = float(op.get("facing_deg", 0.0))
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		var k := event as InputEventKey
+		if k.keycode == KEY_ESCAPE or k.keycode == KEY_BACK:
+			_cancel_mode()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_Z and k.ctrl_pressed:
+			_undo()
+			get_viewport().set_input_as_handled()
+			return
+
+
 func _build_dev_menu() -> void:
 	btn_dev_toggle = _mk_touch_btn("开发", 100)
 	btn_dev_toggle.name = "DevMenuToggle"
@@ -1117,6 +1280,10 @@ func _set_ui_phase(p: UiPhase) -> void:
 	_refresh_tool_chips()
 	_refresh_trigger_chips()
 	_refresh_thumb_visibility()
+	_refresh_undo_cancel_visibility()
+	if p == UiPhase.SETUP and undo_stack.is_empty() and not plan.is_empty():
+		# Baseline so first undo after mutations is meaningful.
+		pass
 
 
 func start_block_reason() -> String:
@@ -1443,12 +1610,14 @@ func _on_cell_hovered(cell: Vector2i) -> void:
 
 
 func _on_cell_long_pressed(cell: Vector2i) -> void:
-	## PR-6: long-press = who sees here (replaces fake preview button).
+	## PR-6 who-sees; PR-7 long-press delete mine / trip line in SETUP.
 	preview_cell = cell
-	if ui_phase == UiPhase.SCOUT and scout != null:
-		preview_seers = _preview_who_sees_level_observers(cell)
-	elif ui_phase == UiPhase.SETUP:
+	if ui_phase == UiPhase.SETUP:
+		if _try_delete_mine_at(cell) or _try_delete_trip_near(cell):
+			return
 		preview_seers = _preview_who_sees(cell)
+	elif ui_phase == UiPhase.SCOUT and scout != null:
+		preview_seers = _preview_who_sees_level_observers(cell)
 	elif ui_phase == UiPhase.WAIT and sim != null:
 		preview_seers = sim.observers_seeing_cell(
 			float(cell.x), float(cell.y), grid.tier_at(float(cell.x), float(cell.y))
@@ -1457,6 +1626,48 @@ func _on_cell_long_pressed(cell: Vector2i) -> void:
 		return
 	label_info.text = "格 (%d,%d) · 可见观察者 %d" % [cell.x, cell.y, preview_seers.size()]
 	_push_map_snapshot()
+
+
+func _try_delete_mine_at(cell: Vector2i) -> bool:
+	var mines: Array = plan.get("mines", [])
+	for i in range(mines.size()):
+		var m: Dictionary = mines[i]
+		if int(m.get("x", -1)) == cell.x and int(m.get("y", -1)) == cell.y:
+			_push_undo()
+			mines.remove_at(i)
+			plan["mines"] = mines
+			if str(plan.get("trigger", {}).get("type", "")) == "mine_detonate":
+				plan["trigger"] = {"type": "mine_detonate", "bind": ""}
+			label_info.text = "已删除地雷 (%d,%d)" % [cell.x, cell.y]
+			_refresh_start_gate()
+			_push_map_snapshot()
+			return true
+	return false
+
+
+func _try_delete_trip_near(cell: Vector2i) -> bool:
+	var trig: Dictionary = plan.get("trigger", {})
+	if str(trig.get("type", "")) != "cross_marker" or not trig.has("a") or not trig.has("b"):
+		return false
+	var a := Vector2i(int(trig["a"]["x"]), int(trig["a"]["y"]))
+	var b := Vector2i(int(trig["b"]["x"]), int(trig["b"]["y"]))
+	# Near either endpoint or midpoint (Chebyshev ≤1).
+	var mid := Vector2i(int(round((a.x + b.x) * 0.5)), int(round((a.y + b.y) * 0.5)))
+	if _cheb(cell, a) > 1 and _cheb(cell, b) > 1 and _cheb(cell, mid) > 1:
+		return false
+	_push_undo()
+	trig = trig.duplicate(true)
+	trig.erase("a")
+	trig.erase("b")
+	plan["trigger"] = trig
+	label_info.text = "已删除触发线"
+	_refresh_start_gate()
+	_push_map_snapshot()
+	return true
+
+
+func _cheb(p: Vector2i, q: Vector2i) -> int:
+	return maxi(absi(p.x - q.x), absi(p.y - q.y))
 
 
 func _preview_who_sees_level_observers(cell: Vector2i) -> Array:
@@ -1508,6 +1719,7 @@ func _place_mine_at(cell: Vector2i) -> void:
 	if not grid.walkable(cell.x, cell.y):
 		label_info.text = "此处不能放地雷（非法格）"
 		return
+	_push_undo()
 	var mid := "mine_%d_%d" % [cell.x, cell.y]
 	plan["mines"] = [{"id": mid, "x": cell.x, "y": cell.y}]
 	plan["trigger"] = {"type": "mine_detonate", "bind": mid}
@@ -1557,6 +1769,11 @@ func _move_selected_op(cell: Vector2i) -> void:
 		if str(op["id"]) != selected_op_id and int(op["x"]) == cell.x and int(op["y"]) == cell.y:
 			label_info.text = "该格已有队员"
 			return
+	# Aim-drag already pushed undo at drag start; ghost/tap place needs its own.
+	if _skip_next_place_undo:
+		_skip_next_place_undo = false
+	else:
+		_push_undo()
 	for op in plan.get("operators", []):
 		if str(op["id"]) == selected_op_id:
 			op["x"] = cell.x
@@ -1612,18 +1829,32 @@ func _facing_delta_deg(from_deg: float, to_deg: float) -> float:
 
 
 func _on_aim_drag_ended(op_id: String, world_dir: Vector2, preview_deg: float, cancelled: bool) -> void:
+	_aim_drag_active = false
 	if ui_phase == UiPhase.SETUP:
+		if cancelled and not is_nan(_facing_before_aim):
+			for op in plan.get("operators", []):
+				if str(op["id"]) == op_id:
+					op["facing_deg"] = _facing_before_aim
+					break
+			_facing_before_aim = NAN
+			label_info.text = "转向已取消"
+			_push_map_snapshot()
+			return
+		_facing_before_aim = NAN
 		_on_setup_unit_drag_ended(op_id, world_dir, preview_deg, cancelled)
 		return
 	if ui_phase != UiPhase.WAIT or sim == null or sim.plan_locked:
+		_facing_before_aim = NAN
 		return
 	if cancelled or op_id == "" or world_dir.length() < 8.0 or is_nan(preview_deg):
+		_facing_before_aim = NAN
 		label_info.text = "转向已取消"
 		_push_map_snapshot()
 		return
 	# ONE turn order on release.
 	sim.request_operator_facing(op_id, preview_deg)
 	_facing_submit_count += 1
+	_facing_before_aim = NAN
 	var op := _sim_op(op_id)
 	var left := int(op.get("turn_ticks_left", 0))
 	var dname := str(op_display_names.get(op_id, "队员"))
@@ -1706,6 +1937,7 @@ func _on_ground_drag_ended(end_cell: Vector2i, start_cell: Vector2i, cancelled: 
 		_trip_drag_start = Vector2i(-1, -1)
 		_push_map_snapshot()
 		return
+	_push_undo()
 	var trig: Dictionary = plan.get("trigger", {}).duplicate(true)
 	trig["type"] = "cross_marker"
 	if not trig.has("bind"):
