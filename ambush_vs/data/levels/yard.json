@@ -1,0 +1,2686 @@
+{
+  "id": "yard",
+  "version": 3,
+  "title": "院子",
+  "night": true,
+  "ambush_targets": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "F1",
+    "F2"
+  ],
+  "default_trigger": {
+    "type": "see_first_enemy",
+    "bind": "op_kar_L",
+    "plan_id": "A"
+  },
+  "grid": {
+    "width": 24,
+    "height": 16,
+    "meters_per_cell": 1,
+    "origin": "x0_west_y0_south"
+  },
+  "map_ascii": "#########NNNN###########\n####...TG.==.####.######\n####.C.TT.==.####.######\n####.P.#P.==.####.######\n###bbb#...==......######\n###bBB....==w.....######\n###bBB....==w..ww......#\n###bbb#.P.==...ww~~~~~.#\n####RR....==.LL.....~~~E\n####....ww==.LL.....~~~E\n####....ww==........~H.#\n####.P..Pw==.w.C..######\n####.....w==.w....######\n####......==......######\n####......==......######\n##########SSS###########",
+  "high_slots": [
+    {
+      "id": "barn_l2",
+      "cells": [
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "enter_cost_s": 2,
+      "silhouette_mul": 1.5
+    },
+    {
+      "id": "low_wall_pad",
+      "cells": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "enter_cost_s": 2,
+      "silhouette_mul": 1.5
+    }
+  ],
+  "exits": [
+    {
+      "id": "south_gate",
+      "cells": [
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 12,
+          "y": 0
+        }
+      ],
+      "fail_on_enemy_escape": true
+    },
+    {
+      "id": "east_alley",
+      "cells": [
+        {
+          "x": 23,
+          "y": 6
+        },
+        {
+          "x": 23,
+          "y": 7
+        }
+      ],
+      "fail_on_enemy_escape": true
+    }
+  ],
+  "enemies": {
+    "march_speed_cells_per_s": 0.5,
+    "routes": [
+      {
+        "id": "main_road",
+        "waypoints": [
+          {
+            "x": 11,
+            "y": 14
+          },
+          {
+            "x": 11,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "id": "east_flank",
+        "waypoints": [
+          {
+            "x": 23,
+            "y": 7
+          },
+          {
+            "x": 18,
+            "y": 8
+          },
+          {
+            "x": 11,
+            "y": 8
+          }
+        ]
+      }
+    ],
+    "alarm_route": {
+      "id": "alarm_combat_entry",
+      "waypoints": [
+        {
+          "x": 11,
+          "y": 14
+        },
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 9
+        }
+      ]
+    },
+    "spawns": [
+      {
+        "id": "E1",
+        "route_id": "main_road",
+        "enter_t_s": 0,
+        "group": "main"
+      },
+      {
+        "id": "E2",
+        "route_id": "main_road",
+        "enter_t_s": 3,
+        "group": "main"
+      },
+      {
+        "id": "E3",
+        "route_id": "main_road",
+        "enter_t_s": 6,
+        "group": "main"
+      },
+      {
+        "id": "E4",
+        "route_id": "main_road",
+        "enter_t_s": 9,
+        "group": "main"
+      },
+      {
+        "id": "F1",
+        "route_id": "east_flank",
+        "enter_t_s": 4,
+        "group": "flank"
+      },
+      {
+        "id": "F2",
+        "route_id": "east_flank",
+        "enter_t_s": 4,
+        "group": "flank",
+        "path_offset_cells": -1.0
+      }
+    ]
+  },
+  "sentries": [
+    {
+      "id": "gatehouse_G",
+      "x": 8,
+      "y": 14,
+      "tier": "high",
+      "cone": {
+        "facing_deg": -59.0,
+        "angle_deg": 50.0,
+        "range_cells": 8.0
+      },
+      "threatens_slots": [
+        "low_wall_pad"
+      ],
+      "alert_route": {
+        "facing_deg": -54.0
+      }
+    }
+  ],
+  "patrols": [
+    {
+      "id": "west_patrol",
+      "waypoints": [
+        {
+          "x": 6,
+          "y": 12
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "edge_s": 6.0,
+      "cone": {
+        "facing_deg": 0.0,
+        "angle_deg": 50.0,
+        "range_cells": 6.0
+      },
+      "threatens_slots": [
+        "west_cover_8_5"
+      ],
+      "alert_route": {
+        "waypoints": [
+          {
+            "x": 8,
+            "y": 8
+          },
+          {
+            "x": 8,
+            "y": 5
+          },
+          {
+            "x": 9,
+            "y": 5
+          }
+        ],
+        "edge_s": 4.0,
+        "facing_deg": 0.0
+      }
+    }
+  ],
+  "supplies": [
+    {
+      "id": "crate_nw",
+      "x": 5,
+      "y": 13,
+      "visibility": "open",
+      "contents": [
+        {
+          "weapon_id": "ammo_7.92",
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": "crate_se",
+      "x": 15,
+      "y": 4,
+      "visibility": "open",
+      "contents": [
+        {
+          "weapon_id": "ammo_9mm",
+          "amount": 16
+        }
+      ]
+    },
+    {
+      "id": "hidden_H",
+      "x": 21,
+      "y": 5,
+      "visibility": "hidden",
+      "requires_scout_region": "east_alley",
+      "contents": [
+        {
+          "weapon_id": "mg42",
+          "amount": 1
+        }
+      ]
+    }
+  ],
+  "loadout_start": {
+    "weapons": [
+      {
+        "weapon_id": "kar98k",
+        "count": 1
+      },
+      {
+        "weapon_id": "mp40",
+        "count": 1
+      },
+      {
+        "weapon_id": "mine",
+        "count": 1
+      },
+      {
+        "weapon_id": "grenade",
+        "count": 2
+      }
+    ],
+    "ammo_pools": [
+      {
+        "pool_id": "7.92",
+        "rounds": 30
+      },
+      {
+        "pool_id": "9mm",
+        "rounds": 32
+      }
+    ]
+  },
+  "ambush_slots": [
+    {
+      "id": "barn_op",
+      "x": 5,
+      "y": 9,
+      "height": "high"
+    },
+    {
+      "id": "low_wall_pad",
+      "x": 13,
+      "y": 7,
+      "height": "high"
+    },
+    {
+      "id": "south_hold",
+      "x": 11,
+      "y": 2,
+      "height": "ground"
+    },
+    {
+      "id": "west_cover_8_5",
+      "x": 8,
+      "y": 5,
+      "height": "ground"
+    },
+    {
+      "id": "east_cover_16_8",
+      "x": 16,
+      "y": 8,
+      "height": "ground"
+    }
+  ],
+  "plans": [
+    {
+      "id": "A",
+      "label": "高点压制",
+      "expect": "win",
+      "trigger": {
+        "type": "see_first_enemy",
+        "bind": "op_kar_L"
+      },
+      "t0_s": 14
+    },
+    {
+      "id": "B",
+      "label": "地面交叉+地雷",
+      "expect": "win",
+      "trigger": {
+        "type": "mine_detonate",
+        "bind": "mine_11_6"
+      },
+      "t0_s": 16
+    }
+  ],
+  "fail": {
+    "enemy_escape_exits": [
+      "south_gate",
+      "east_alley"
+    ],
+    "squad_wipe": true
+  },
+  "cells": [
+    {
+      "x": 0,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 15,
+      "kind": "gate_n",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 15,
+      "kind": "gate_n",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 15,
+      "kind": "gate_n",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 15,
+      "kind": "gate_n",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 14,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 8,
+      "y": 14,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 9,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 14,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 14,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 13,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 8,
+      "y": 13,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 9,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 13,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 13,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 12,
+      "kind": "road",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 11,
+      "y": 12,
+      "kind": "road",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 12,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 13,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 11,
+      "kind": "structure"
+    },
+    {
+      "x": 4,
+      "y": 11,
+      "kind": "structure"
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "kind": "structure"
+    },
+    {
+      "x": 6,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 8,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "kind": "road",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 11,
+      "y": 11,
+      "kind": "road",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 12,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 13,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 15,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 16,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 10,
+      "kind": "structure"
+    },
+    {
+      "x": 4,
+      "y": 10,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 8,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 10,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 9,
+      "kind": "structure"
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 9,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 9,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 17,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "kind": "structure"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "kind": "structure"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "kind": "structure"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 16,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 17,
+      "y": 8,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 8,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 8,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 8,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 8,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 8,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "kind": "ramp",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "kind": "ramp",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 14,
+      "y": 7,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 15,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 7,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 7,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 7,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 7,
+      "kind": "gate_e",
+      "tier": "ground"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 6,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 14,
+      "y": 6,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 15,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 6,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 6,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 6,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 6,
+      "kind": "gate_e",
+      "tier": "ground"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 5,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 5,
+      "kind": "alley",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 4,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 14,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 14,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "kind": "gate_s",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "kind": "gate_s",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "kind": "gate_s",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "kind": "wall"
+    }
+  ]
+}

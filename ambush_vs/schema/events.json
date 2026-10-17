@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambushloop.local/schema/events.json",
+  "title": "Ambush VS Sim Event Log",
+  "description": "固定 20 Hz tick 事件日志契约（规划 B.4）。复盘卡、标准伏击判定、金标哈希只读本结构。对齐 TERMS/ADR v1、院子 v1.1。",
+  "type": "object",
+  "required": ["schema_version", "level_id", "level_version", "tick_hz", "events"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "level_id": { "type": "string" },
+    "level_version": { "type": "integer" },
+    "plan_id": { "type": "string", "description": "登记方案或反例 id" },
+    "tick_hz": { "type": "integer", "const": 20 },
+    "seed": {
+      "type": "null",
+      "description": "VS 内零随机；字段保留为 null 以标明契约"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "speed_mul": { "type": "number", "enum": [1, 2, 4] },
+        "started_at_local": { "type": "string", "description": "Asia/Shanghai ISO-8601，仅元数据" }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "summary": {
+      "type": "object",
+      "description": "跑完后由验证器填写；可选",
+      "properties": {
+        "outcome": { "type": "string", "enum": ["win", "lose"] },
+        "standard_ambush": { "type": "boolean" },
+        "replay_primary_cause": { "type": "string" },
+        "detonate_tick": { "type": "integer" },
+        "log_hash": { "type": "string", "description": "规范化事件序列哈希" }
+      }
+    }
+  },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "required": ["tick", "type"],
+      "properties": {
+        "tick": { "type": "integer", "minimum": 0 },
+        "t_s": { "type": "number", "description": "tick / tick_hz；可选冗余" },
+        "type": {
+          "type": "string",
+          "enum": [
+            "sim_start",
+            "phase",
+            "enemy_enter",
+            "enemy_move",
+            "alert_change",
+            "slot_invalidated",
+            "trigger",
+            "detonate",
+            "fire",
+            "hit",
+            "kill",
+            "suppress",
+            "reload",
+            "ammo_empty",
+            "grenade_throw",
+            "grenade_blast",
+            "mine_place",
+            "mine_detonate",
+            "enemy_react",
+            "enemy_retreat",
+            "enemy_escape",
+            "squad_down",
+            "loot",
+            "codex_unlock",
+            "sim_end"
+          ]
+        },
+        "actor": { "type": "string", "description": "operator id / enemy id / system" },
+        "target": { "type": "string" },
+        "weapon_id": { "type": "string" },
+        "pos": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "height": { "type": "string", "enum": ["ground", "high", "ramp"] }
+          }
+        },
+        "facing_deg": { "type": "number" },
+        "payload": {
+          "type": "object",
+          "description": "按 type 扩展；勿放呈现层字段",
+          "additionalProperties": true
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "alert_change" } } },
+          "then": {
+            "properties": {
+              "payload": {
+                "type": "object",
+                "required": ["from", "to"],
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "enum": ["quiet", "suspicious", "area_alert", "global_alert"]
+                  },
+                  "to": {
+                    "type": "string",
+                    "enum": ["quiet", "suspicious", "area_alert", "global_alert"]
+                  },
+                  "reason": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "trigger" } } },
+          "then": {
+            "properties": {
+              "payload": {
+                "type": "object",
+                "required": ["trigger"],
+                "properties": {
+                  "trigger": {
+                    "type": "string",
+                    "enum": ["see_first_enemy", "mine_detonate", "cross_marker", "manual", "alarm"],
+                    "description": "alarm＝全图警报进入 detonate（ADR-TRIGGER M5）；勿用阶段名 ALERT"
+                  },
+                  "bind": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "phase" } } },
+          "then": {
+            "properties": {
+              "payload": {
+                "type": "object",
+                "required": ["phase"],
+                "properties": {
+                  "phase": {
+                    "type": "string",
+                    "enum": ["scout", "setup", "wait", "detonate", "resolve", "sweep"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+
+  "examples": [
+    {
+      "_comment": "院子 A v1.1；t0_A=14s→tick=280；首枪=Kar@L see_first_enemy（非 MG）",
+      "schema_version": 1,
+      "level_id": "yard",
+      "level_version": 2,
+      "plan_id": "A",
+      "tick_hz": 20,
+      "seed": null,
+      "meta": { "speed_mul": 1 },
+      "events": [
+        {
+          "tick": 0,
+          "t_s": 0,
+          "type": "sim_start",
+          "actor": "system",
+          "payload": { "plan_id": "A", "night": true, "ambush_targets": ["E1", "E2", "E3", "E4", "F1", "F2"] }
+        },
+        {
+          "tick": 0,
+          "t_s": 0,
+          "type": "phase",
+          "actor": "system",
+          "payload": { "phase": "wait" }
+        },
+        {
+          "tick": 0,
+          "t_s": 0,
+          "type": "enemy_enter",
+          "actor": "E1",
+          "pos": { "x": 11, "y": 14, "height": "ground" },
+          "payload": { "route_id": "main_road", "group": "main" }
+        },
+        {
+          "tick": 80,
+          "t_s": 4,
+          "type": "enemy_enter",
+          "actor": "F1",
+          "pos": { "x": 23, "y": 6, "height": "ground" },
+          "payload": { "route_id": "east_flank", "group": "flank" }
+        },
+        {
+          "tick": 280,
+          "t_s": 14,
+          "type": "trigger",
+          "actor": "op_kar_L",
+          "weapon_id": "kar98k",
+          "payload": { "trigger": "see_first_enemy", "bind": "op_kar_L" }
+        },
+        {
+          "tick": 280,
+          "t_s": 14,
+          "type": "detonate",
+          "actor": "system",
+          "payload": { "standard_ambush_eligible": true }
+        },
+        {
+          "tick": 280,
+          "t_s": 14,
+          "type": "phase",
+          "actor": "system",
+          "payload": { "phase": "detonate" }
+        },
+        {
+          "tick": 281,
+          "t_s": 14.05,
+          "type": "fire",
+          "actor": "op_kar_L",
+          "target": "F1",
+          "weapon_id": "kar98k",
+          "pos": { "x": 13, "y": 7, "height": "high" },
+          "facing_deg": 18,
+          "payload": { "in_kill_zone": true }
+        },
+        {
+          "tick": 282,
+          "t_s": 14.1,
+          "type": "fire",
+          "actor": "op_mg42",
+          "target": "E3",
+          "weapon_id": "mg42",
+          "pos": { "x": 5, "y": 9, "height": "high" },
+          "facing_deg": 0,
+          "payload": { "in_kill_zone": true }
+        },
+        {
+          "tick": 300,
+          "t_s": 15,
+          "type": "hit",
+          "actor": "op_kar_L",
+          "target": "F1",
+          "weapon_id": "kar98k",
+          "payload": { "shots_needed_band": "far", "fatal": true }
+        },
+        {
+          "tick": 300,
+          "t_s": 15,
+          "type": "kill",
+          "actor": "op_kar_L",
+          "target": "F1",
+          "weapon_id": "kar98k"
+        },
+        {
+          "tick": 400,
+          "t_s": 20,
+          "type": "phase",
+          "actor": "system",
+          "payload": { "phase": "sweep" }
+        },
+        {
+          "tick": 420,
+          "t_s": 21,
+          "type": "loot",
+          "actor": "op_mp40",
+          "target": "E2",
+          "payload": { "weapon_id": "mp40", "amount": 0 }
+        },
+        {
+          "tick": 421,
+          "t_s": 21.05,
+          "type": "codex_unlock",
+          "actor": "system",
+          "payload": { "weapon_id": "luger", "source": "搜尸" }
+        },
+        {
+          "tick": 500,
+          "t_s": 25,
+          "type": "sim_end",
+          "actor": "system",
+          "payload": { "outcome": "win", "escaped": 0 }
+        }
+      ],
+      "summary": {
+        "outcome": "win",
+        "standard_ambush": true,
+        "replay_primary_cause": "计划起爆",
+        "detonate_tick": 280,
+        "log_hash": "pending_w2"
+      }
+    },
+    {
+      "_comment": "院子 B v1.1；t0_B=16s→tick=320；trigger=mine_detonate",
+      "schema_version": 1,
+      "level_id": "yard",
+      "level_version": 2,
+      "plan_id": "B",
+      "tick_hz": 20,
+      "seed": null,
+      "events": [
+        {
+          "tick": 320,
+          "t_s": 16,
+          "type": "mine_detonate",
+          "actor": "mine_11_6",
+          "target": "E1",
+          "weapon_id": "mine",
+          "pos": { "x": 11, "y": 6, "height": "ground" }
+        },
+        {
+          "tick": 320,
+          "t_s": 16,
+          "type": "trigger",
+          "actor": "system",
+          "weapon_id": "mine",
+          "payload": { "trigger": "mine_detonate", "bind": "mine_11_6" }
+        },
+        {
+          "tick": 320,
+          "t_s": 16,
+          "type": "detonate",
+          "actor": "system",
+          "payload": { "standard_ambush_eligible": true }
+        },
+        {
+          "tick": 321,
+          "t_s": 16.05,
+          "type": "grenade_throw",
+          "actor": "op_grenade",
+          "weapon_id": "grenade",
+          "pos": { "x": 15, "y": 4, "height": "ground" },
+          "payload": { "aim_x": 18, "aim_y": 8 }
+        },
+        {
+          "tick": 332,
+          "t_s": 16.6,
+          "type": "grenade_blast",
+          "actor": "op_grenade",
+          "weapon_id": "grenade",
+          "pos": { "x": 18, "y": 8, "height": "ground" },
+          "payload": { "radius_cells": 2 }
+        }
+      ]
+    },
+    {
+      "_comment": "T-08：全图警报进入 detonate，trigger=alarm；标准伏击失败",
+      "schema_version": 1,
+      "level_id": "yard",
+      "level_version": 2,
+      "plan_id": "A_alarm",
+      "tick_hz": 20,
+      "seed": null,
+      "events": [
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "alert_change",
+          "actor": "system",
+          "payload": { "from": "area_alert", "to": "global_alert", "reason": "expose_30_ticks" }
+        },
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "trigger",
+          "actor": "system",
+          "payload": { "trigger": "alarm" }
+        },
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "detonate",
+          "actor": "system",
+          "payload": { "standard_ambush_eligible": false }
+        },
+        {
+          "tick": 100,
+          "t_s": 5,
+          "type": "phase",
+          "actor": "system",
+          "payload": { "phase": "detonate" }
+        }
+      ],
+      "summary": {
+        "outcome": "win",
+        "standard_ambush": false,
+        "replay_primary_cause": "全图警报强制起爆",
+        "detonate_tick": 100,
+        "log_hash": "pending_w2"
+      }
+    }
+  ]
+}

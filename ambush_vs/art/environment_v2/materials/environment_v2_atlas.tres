@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://art/environment_v2/textures/environment_v2_albedo.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/environment_v2/textures/environment_v2_orm.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/environment_v2/textures/environment_v2_normal.png" id="3"]
+
+[resource]
+resource_name = "environment_v2_atlas"
+albedo_texture = ExtResource("1")
+metallic = 1.0
+metallic_texture = ExtResource("2")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 0.45
+normal_texture = ExtResource("3")
