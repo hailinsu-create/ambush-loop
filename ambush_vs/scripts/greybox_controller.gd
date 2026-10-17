@@ -195,6 +195,19 @@ var info_now_ms_fn: Callable = Callable()
 ## PLAY-UX PR-10: shortcuts help overlay.
 var shortcuts_help: PanelContainer = null
 var btn_shortcuts_help: Button = null
+## P0-3: opening briefing + once-per-phase tips (neutral copy only).
+const BriefingCopy := preload("res://ui/briefing_copy.gd")
+var briefing_card: PanelContainer = null
+var briefing_body: Label = null
+var btn_briefing_dismiss: Button = null
+var phase_tip_bar: PanelContainer = null
+var phase_tip_label: Label = null
+var btn_phase_tip_close: Button = null
+var _briefing_shown_this_run: bool = false
+var _phase_tip_seen: Dictionary = {} ## phase_name → true
+var briefing_show_count: int = 0 ## test
+var briefing_dismiss_count: int = 0 ## test
+var phase_tip_show_count: int = 0 ## test
 ## PLAY-UX layout: opaque right column + map left (containers, not absolute stacks).
 var map_host: Control = null
 var right_column: Control = null
@@ -247,6 +260,8 @@ func _ready() -> void:
 	_build_undo_cancel_buttons()
 	_build_info_card()
 	_build_shortcuts_help()
+	_build_briefing_card()
+	_build_phase_tip_bar()
 	_strip_all_tooltips()
 	_install_hud_layout()
 
@@ -293,6 +308,7 @@ func _ready() -> void:
 		art_mode_name = "G2"
 		_refresh_art_button()
 	var skip_scout := str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]
+	var skip_brief := str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]
 	if skip_scout:
 		gathered_kit = level.get("loadout_start", {}).duplicate(true)
 		_init_blank_plan()
@@ -303,6 +319,11 @@ func _ready() -> void:
 	else:
 		_start_scout_phase()
 	_load_next_night_loot_stub()
+	## Opening briefing on first interactive boot (not AUTO / explicit skip).
+	if (not _headless_auto) and (not skip_brief) and (not skip_scout):
+		call_deferred("_show_briefing_card")
+	elif skip_brief or skip_scout or _headless_auto:
+		_dismiss_briefing_card(false)
 	if _headless_auto:
 		var plan_env := str(OS.get_environment("AMBUSH_GREYBOX_PLAN")).to_upper()
 		if plan_env == "B":
@@ -1192,10 +1213,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var k := event as InputEventKey
 		if k.keycode == KEY_ESCAPE or k.keycode == KEY_BACK:
-			if shortcuts_help and shortcuts_help.visible:
+			if briefing_card and briefing_card.visible:
+				_dismiss_briefing_card(true)
+			elif phase_tip_bar and phase_tip_bar.visible:
+				_hide_phase_tip()
+			elif shortcuts_help and shortcuts_help.visible:
 				shortcuts_help.visible = false
 			else:
 				_cancel_mode()
+			get_viewport().set_input_as_handled()
+			return
+		if k.keycode == KEY_F1:
+			_toggle_shortcuts_help()
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode == KEY_Z and k.ctrl_pressed:
@@ -1230,7 +1259,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode == KEY_SLASH and k.shift_pressed: ## ?
-			_toggle_shortcuts_help()
+			_toggle_briefing_card()
 			get_viewport().set_input_as_handled()
 			return
 		if k.keycode in [KEY_1, KEY_2, KEY_3, KEY_KP_1, KEY_KP_2, KEY_KP_3]:
@@ -1352,9 +1381,10 @@ func _on_cell_right_clicked(cell: Vector2i) -> void:
 
 
 func _build_shortcuts_help() -> void:
+	## "?" chip opens the briefing card (P0-3). Desktop shortcuts stay on F1 / Shift+/.
 	btn_shortcuts_help = _mk_chip_btn("?", CHIP_MIN_PX)
 	btn_shortcuts_help.name = "ShortcutsHelpButton"
-	btn_shortcuts_help.pressed.connect(func(): _ui_tap(); _toggle_shortcuts_help())
+	btn_shortcuts_help.pressed.connect(func(): _ui_tap(); _toggle_briefing_card())
 	shortcuts_help = PanelContainer.new()
 	shortcuts_help.name = "ShortcutsHelp"
 	shortcuts_help.visible = false
@@ -1365,7 +1395,7 @@ func _build_shortcuts_help() -> void:
 	shortcuts_help.offset_bottom = 200
 	var lab := Label.new()
 	lab.add_theme_font_size_override("font_size", BODY_FONT_PX)
-	lab.text = "快捷键\n1/2/3 选人\nQ/E 旋转 ±15°\n右键 朝向\n空格 暂停\n+/- 倍速\nTab/M/L 工具\nCtrl+Z 撤销\nEsc 取消\nWASD 平移\n滚轮 缩放"
+	lab.text = "快捷键\n1/2/3 选人\nQ/E 旋转 ±15°\n右键 朝向\n空格 暂停\n+/- 倍速\nTab/M/L 工具\nCtrl+Z 撤销\nEsc 取消\nF1 本面板\nWASD 平移\n滚轮 缩放"
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 16)
 	margin.add_theme_constant_override("margin_right", 16)
@@ -1379,6 +1409,173 @@ func _build_shortcuts_help() -> void:
 func _toggle_shortcuts_help() -> void:
 	if shortcuts_help:
 		shortcuts_help.visible = not shortcuts_help.visible
+
+
+func _build_briefing_card() -> void:
+	briefing_card = PanelContainer.new()
+	briefing_card.name = "BriefingCard"
+	briefing_card.visible = false
+	briefing_card.mouse_filter = Control.MOUSE_FILTER_STOP
+	briefing_card.set_anchors_preset(Control.PRESET_CENTER)
+	briefing_card.offset_left = -300
+	briefing_card.offset_top = -260
+	briefing_card.offset_right = 300
+	briefing_card.offset_bottom = 260
+	briefing_card.add_theme_stylebox_override("panel", _opaque_panel_style())
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 20)
+	margin.add_theme_constant_override("margin_right", 20)
+	margin.add_theme_constant_override("margin_top", 16)
+	margin.add_theme_constant_override("margin_bottom", 16)
+	briefing_card.add_child(margin)
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 12)
+	margin.add_child(vbox)
+	var title := Label.new()
+	title.name = "BriefingTitle"
+	title.text = BriefingCopy.TITLE
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", maxi(BODY_FONT_PX + 4, 26))
+	vbox.add_child(title)
+	briefing_body = Label.new()
+	briefing_body.name = "BriefingBody"
+	briefing_body.text = BriefingCopy.BODY
+	briefing_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	briefing_body.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	vbox.add_child(briefing_body)
+	btn_briefing_dismiss = Button.new()
+	btn_briefing_dismiss.name = "BriefingDismiss"
+	btn_briefing_dismiss.text = BriefingCopy.DISMISS
+	btn_briefing_dismiss.custom_minimum_size = Vector2(0, TOUCH_MIN_PX)
+	btn_briefing_dismiss.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	btn_briefing_dismiss.pressed.connect(func(): _ui_tap(); _dismiss_briefing_card(true))
+	vbox.add_child(btn_briefing_dismiss)
+	$HUD.add_child(briefing_card)
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	if font_res:
+		title.add_theme_font_override("font", font_res)
+		briefing_body.add_theme_font_override("font", font_res)
+		btn_briefing_dismiss.add_theme_font_override("font", font_res)
+
+
+func _build_phase_tip_bar() -> void:
+	phase_tip_bar = PanelContainer.new()
+	phase_tip_bar.name = "PhaseTipBar"
+	phase_tip_bar.visible = false
+	phase_tip_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	phase_tip_bar.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	phase_tip_bar.offset_left = 8
+	phase_tip_bar.offset_top = TOP_BAR_H + 4
+	phase_tip_bar.offset_right = -8
+	phase_tip_bar.offset_bottom = TOP_BAR_H + 56
+	phase_tip_bar.add_theme_stylebox_override("panel", _opaque_panel_style())
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	phase_tip_bar.add_child(row)
+	phase_tip_label = Label.new()
+	phase_tip_label.name = "PhaseTipLabel"
+	phase_tip_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	phase_tip_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	phase_tip_label.add_theme_font_size_override("font_size", BODY_FONT_PX)
+	row.add_child(phase_tip_label)
+	btn_phase_tip_close = Button.new()
+	btn_phase_tip_close.name = "PhaseTipClose"
+	btn_phase_tip_close.text = BriefingCopy.TIP_CLOSE
+	btn_phase_tip_close.custom_minimum_size = Vector2(96, CHIP_MIN_PX)
+	btn_phase_tip_close.add_theme_font_size_override("font_size", CHIP_FONT_PX)
+	btn_phase_tip_close.pressed.connect(func(): _ui_tap(); _hide_phase_tip())
+	row.add_child(btn_phase_tip_close)
+	$HUD.add_child(phase_tip_bar)
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	if font_res:
+		phase_tip_label.add_theme_font_override("font", font_res)
+		btn_phase_tip_close.add_theme_font_override("font", font_res)
+
+
+func _show_briefing_card() -> void:
+	if briefing_card == null:
+		return
+	if shortcuts_help:
+		shortcuts_help.visible = false
+	_hide_phase_tip()
+	briefing_card.visible = true
+	_briefing_shown_this_run = true
+	briefing_show_count += 1
+	$HUD.move_child(briefing_card, -1)
+
+
+func _dismiss_briefing_card(count: bool = true) -> void:
+	if briefing_card and briefing_card.visible and count:
+		briefing_dismiss_count += 1
+	if briefing_card:
+		briefing_card.visible = false
+
+
+func _toggle_briefing_card() -> void:
+	if briefing_card == null:
+		return
+	if briefing_card.visible:
+		_dismiss_briefing_card(true)
+	else:
+		_show_briefing_card()
+
+
+func _phase_name(p: UiPhase) -> String:
+	match p:
+		UiPhase.SCOUT:
+			return "scout"
+		UiPhase.SETUP:
+			return "setup"
+		UiPhase.WAIT:
+			return "wait"
+		UiPhase.RESULT:
+			return "result"
+		_:
+			return ""
+
+
+func _maybe_show_phase_tip(p: UiPhase) -> void:
+	if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]:
+		return
+	## Isolation / layout smokes set SKIP_SCOUT — don't inject tips under asserts.
+	if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]:
+		return
+	if _headless_auto:
+		return
+	if briefing_card and briefing_card.visible:
+		return ## don't stack tip under opening briefing
+	var key := _phase_name(p)
+	if key == "" or bool(_phase_tip_seen.get(key, false)):
+		return
+	var tip := BriefingCopy.phase_tip(key)
+	if tip == "":
+		return
+	_phase_tip_seen[key] = true
+	if phase_tip_label:
+		phase_tip_label.text = tip
+	if phase_tip_bar:
+		phase_tip_bar.visible = true
+		phase_tip_show_count += 1
+		$HUD.move_child(phase_tip_bar, -1)
+
+
+func _hide_phase_tip() -> void:
+	if phase_tip_bar:
+		phase_tip_bar.visible = false
+
+
+func dismiss_overlays_for_layout_test() -> void:
+	## W8 layout asserts: briefing/tips must not cover the map.
+	_dismiss_briefing_card(false)
+	_hide_phase_tip()
+	if shortcuts_help:
+		shortcuts_help.visible = false
+	if info_card:
+		info_card.visible = false
+	if pause_menu:
+		pause_menu.visible = false
+	if dev_menu:
+		dev_menu.visible = false
 
 
 func _build_dev_menu() -> void:
@@ -1591,6 +1788,10 @@ func _install_hud_layout() -> void:
 		$HUD.move_child(shortcuts_help, -1)
 	if info_card:
 		$HUD.move_child(info_card, -1)
+	if phase_tip_bar:
+		$HUD.move_child(phase_tip_bar, -1)
+	if briefing_card:
+		$HUD.move_child(briefing_card, -1)
 	if dev_menu:
 		$HUD.move_child(dev_menu, -1)
 	if utility_backdrop:
@@ -2006,6 +2207,7 @@ func _set_ui_phase(p: UiPhase) -> void:
 			drawer_open = true
 	_relayout_hud()
 	_apply_default_camera()
+	_maybe_show_phase_tip(p)
 	if p == UiPhase.SETUP and undo_stack.is_empty() and not plan.is_empty():
 		# Baseline so first undo after mutations is meaningful.
 		pass
