@@ -18,7 +18,7 @@ enum ArtMode { G3, G2, G1 }
 ## World-space UV: texture spans this many cells (seamless, no cell grid).
 ## Cobble atlas ≈11 stones wide → period ~1.5 ⇒ ~7 stones/cell (target 6–8).
 const G3_TEX_CELLS := 4.0 ## default for mud/grass/planks
-const G3_COBBLE_CELLS := 0.85 ## ~7 stones/cell (atlas dominant period ≈43px)
+const G3_COBBLE_CELLS := 0.7 ## ~8–9 stones/cell (atlas dominant period ≈43px)
 const G3_ROOF_CELLS := 4.5 ## larger shingle texel so roofs read
 const G3_UNIT_SCALE := 1.6
 const G3_WALL_STRIP := 0.36 ## ~1/3 cell dry-stone wall width
@@ -835,13 +835,16 @@ func _draw_g3_world_rect(
 	period: float = -1.0
 ) -> void:
 	## World-space UV; `period` = cells spanned by one texture repeat.
+	## Tiles in ≤0.95-of-atlas chunks so wrap helper never stretches across >1 period.
 	if tex == null:
 		return
 	var tex_cells := period if period > 0.0 else G3_TEX_CELLS
+	if tex_cells < 0.05:
+		tex_cells = 0.05
 	var tw := float(tex.get_width())
 	var th := float(tex.get_height())
-	# Chunk so each sample spans < one texture period (wrapped helper handles one wrap).
-	var max_chunk := tex_cells * 0.9
+	# Max cells per chunk so source UV width/height stays ≤ 0.95 * atlas.
+	var max_chunk := tex_cells * 0.95
 	var x_cells := 0.0
 	while x_cells < cells_w - 0.001:
 		var cw := minf(max_chunk, cells_w - x_cells)
@@ -856,6 +859,7 @@ func _draw_g3_world_rect(
 			var vh := th / tex_cells * ch
 			var u0 := fposmod((cell_x + x_cells) * (tw / tex_cells), tw)
 			var v0 := fposmod((cell_y + y_cells) * (th / tex_cells), th)
+			# If we still straddle the atlas edge, split once more along U then V.
 			_draw_region_wrapped(tex, sub, u0, v0, uw, vh, tw, th, modulate)
 			y_cells += ch
 		x_cells += cw
