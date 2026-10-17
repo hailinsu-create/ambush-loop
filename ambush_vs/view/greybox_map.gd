@@ -251,12 +251,14 @@ func _fit_cell_px() -> void:
 		avail = Vector2(960, 640)
 	var fit_w := avail.x / float(grid_w)
 	var fit_h := avail.y / float(grid_h)
-	## Phone: fit-height. Desktop: cover so MapHost is edge-to-edge (clip overflow).
-	var phone := avail.y < 420.0
-	if phone:
-		cell_px = fit_h
+	## Cover MapHost edge-to-edge (clip overflow). Prefer height when aspects are close
+	## so phone landscape still reads as fit-height; otherwise expand to fill width too.
+	var host_aspect := avail.x / maxf(avail.y, 1.0)
+	var map_aspect := float(grid_w) / float(grid_h)
+	if host_aspect <= map_aspect * 1.08:
+		cell_px = fit_h ## fit-height (map as tall as host; slight side crop or pad)
 	else:
-		cell_px = maxf(fit_w, fit_h)
+		cell_px = maxf(fit_w, fit_h) ## wide host → cover width
 	var map_size := Vector2(grid_w * cell_px, grid_h * cell_px)
 	custom_minimum_size = map_size
 	size = map_size
