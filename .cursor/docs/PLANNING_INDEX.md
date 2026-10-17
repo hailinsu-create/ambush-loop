@@ -6,7 +6,20 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS G2 资产批 2026-10-17](VS_G2_ASSETS_20261017.md) | **当前 VS 美术切片**：分支 `vs/g2`（自 `vs/web` @ 8ad7068）程序生成院子/五武器/SFX，灰盒默认 G2 美术+警报音接线；PR → `vs/web`。所有者覆盖 G2 真机门禁。**不合并 main / 不动 PR #54/#55 merges**。 |
+| [VS P0-3 简报与最小教学 2026-10-17](VS_P0_3_BRIEF_20261017.md) | **当前 VS 执行切片**：开局简报 + 阶段提示 + 教学文案黑名单。分支 `vs/p0-3-brief` → draft PR 合入 `vs/p0-2-aim`。**不合并**。试玩 Pages 部署被环境分支策略阻塞（见文档）。 |
+| [VS P0-2 朝向吸附与放大镜 2026-10-17](VS_P0_2_AIM_SNAP_20261017.md) | 放大镜 + AimSnap + G.1 容差门；结果表 [`ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md`](../../ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md)。分支 `vs/p0-2-aim` → draft PR 合入 `vs/p0-1-counterex`。**不合并**；已被 P0-3 接续。 |
+| [VS P0-1 D.3 反例门 2026-10-17](VS_P0_1_COUNTEREX_20261017.md) | 切片 0–4 已验证（D.3 门全绿）；结果表 [`ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)；院子纸面 **v1.6**。分支 `vs/p0-1-counterex` → draft PR 合入 `vs/g3`。**不合并**；已被 P0-2 接续。 |
+| [VS UX 布局修复 2026-10-17](VS_UX_LAYOUT_20261017.md) | 手机紧凑头像条 + 取景排除 HUD；W8 **273**。PR #57 → `vs/g2`。**不合并**；已被 P0-1 反例门接续。 |
+| [VS UX 操作修复 2026-10-17](VS_UX_CONTROLS_20261017.md) | 审计 PR-1…10 手势/选人/重瞄/工具栏/HUD/快捷键；已被布局修复接续。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-PLAY6 敌人反应 2026-10-17](VS_PLAY6_ENEMY_REACT_20261017.md) | PLAY-6 敌人反应；已被 UX 操作切片接续。PR #57 → `vs/g2`。**不合并**。 |
+| [W2 断言数与金标 2026-10-17](VS_W2_COUNT_AND_GOLDEN_20261017.md) | W2 61→73（PLAY-4 wait-turn）说明；PLAY-4/PLAY-6 金标变更 DECISIONS。 |
+| [VS-PLAY5 中文复盘卡 2026-10-17](VS_PLAY5_REVIEW_CARD_20261017.md) | PLAY-5：复盘卡 + 搜尸 stub。已被 PLAY-6 接续。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-PLAY4 等待重瞄与节奏 2026-10-17](VS_PLAY4_WAIT_UX_20261017.md) | PLAY-4：WAIT 重瞄、脚步/环境/tension、院子节奏 t0 520/560。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-FX1 起爆战斗表现 2026-10-17](VS_FX1_COMBAT_FEEDBACK_20261017.md) | PLAY-3：视图消费 fire/hit/kill；枪口火/曳光/命中/地雷震/尸体。PLAY-4 起曳光加粗加亮、枪口放大。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-W4a 侦察搜集 2026-10-17](VS_W4A_SCOUT_GATHER_20261017.md) | PLAY-2 侦察搜集（ScoutSim）。PR #57 → `vs/g2`。**不合并**。 |
+| [VS-UX1 空白布阵起手 2026-10-17](VS_UX1_BLANK_SETUP_20261017.md) | PLAY-1 空白板布阵（已被 PLAY-2 接在侦察之后）。G3 美术 Round 8 后暂停。PR #57 → `vs/g2`。**不合并**。 |
+| [VS G3 高细节美术 2026-10-17](VS_G3_ART_20261017.md) | VS 美术切片（**已暂停**）：`vs/g3` Round 8 — 连续沙袋墙 + 去格背板。PR #57 → `vs/g2`。**不合并**；不再做 G3 打磨直至所有者要求。 |
+| [VS G2 资产批 2026-10-17](VS_G2_ASSETS_20261017.md) | G2 程序生成院子/五武器/SFX；已被 G3 批作为可切换回退保留。PR #56 → `vs/web`。 |
 | [VS Web greybox Pages 2026-10-17](VS_WEB_GREYBOX_PAGES_20261017.md) | **Web 试玩切片**：分支 `vs/web`（自 `vs/core` @ fa6bd08）导出灰盒到 GitHub Pages `/greybox/`。本地导出+Chromium smoke 已过；Pages API 启用被拒，待所有者打开 Actions Pages + `vs/web` 环境分支。**不合并 main / 不动 PR #54**。 |
 | [VS W2 模拟核心 v0 2026-10-17](VS_W2_SIM_V0_20261017.md) | **当前 VS 执行入口**：`ambush_vs/sim/` headless 一夜模拟；院子纸面 **v1.2**；A/B 金标；隔离测试。在 `vs/core` / PR #54，**未合入 main**。 |
 | [VS ADR v1 同步 2026-10-17](VS_ADR_V1_SYNC_20261017.md) | VS 规则文档：TERMS + 三 ADR 已采纳 v1 + 院子纸面 v1.1 + 资产生成门禁。已被 W2 实现消费。 |

@@ -37,6 +37,7 @@ func _run_all() -> void:
 	_test_h06_no_height_damage_mult()
 	_test_alert_escalation()
 	_test_gatehouse_blocks_g_to_l()
+	_test_wait_turn_blocks_fire()
 	_update_or_compare_golden_hashes()
 
 
@@ -49,6 +50,14 @@ func _assert(cond: bool, msg: String) -> void:
 		printerr("FAIL ", msg)
 
 
+func _count_actor_fire(sim: NightSim, actor: String) -> int:
+	var n := 0
+	for e in sim.log.events:
+		if str(e.get("type", "")) == "fire" and str(e.get("actor", "")) == actor:
+			n += 1
+	return n
+
+
 func _plan_a() -> Dictionary:
 	return SimRunner.load_json("res://data/fixtures/plan_a.json")
 
@@ -58,8 +67,9 @@ func _plan_b() -> Dictionary:
 
 
 func _test_golden_a() -> void:
+	## PLAY-4 pacing: yard enter_t +12 s → t0_A = 26 s = tick 520 (was 280).
 	var s: Dictionary = SimRunner.run_plan("res://data/fixtures/plan_a.json")
-	_assert(int(s.get("detonate_tick", -1)) == 280, "golden A t0 tick=280 got=%s" % s.get("detonate_tick"))
+	_assert(int(s.get("detonate_tick", -1)) == 520, "golden A t0 tick=520 got=%s" % s.get("detonate_tick"))
 	_assert(str(s.get("trigger", "")) == "cross_marker", "golden A trigger=cross_marker got=%s" % s.get("trigger"))
 	_assert(bool(s.get("standard_ambush", false)) == true, "golden A standard_ambush")
 	_assert(str(s.get("outcome", "")) == "win", "golden A win")
@@ -71,24 +81,26 @@ func _test_golden_a() -> void:
 
 
 func _test_a_facing_stability() -> void:
-	## t0 must stay 280 under Kar facing ±1° (cross_marker is facing-independent;
+	## t0 must stay 520 under Kar facing ±1° (cross_marker is facing-independent;
 	## also assert kill-zone still covers F1 so standard ambush holds).
+	## P0-2: published Kar aim is 巷口 (~11°), not the old 15° cone-edge guess.
 	var base: Dictionary = _plan_a()
 	var base_facing := float(base["operators"][1]["facing_deg"])
-	_assert(is_equal_approx(base_facing, 15.0), "A Kar facing clean 15° got=%s" % base_facing)
+	_assert(is_equal_approx(base_facing, 11.0), "A Kar facing clean 11° got=%s" % base_facing)
 	for delta in [-1.0, 0.0, 1.0]:
 		var plan: Dictionary = _plan_a()
 		plan["operators"][1]["facing_deg"] = base_facing + delta
 		var s: Dictionary = SimRunner.run_plan_dict(plan)
-		_assert(int(s.get("detonate_tick", -1)) == 280,
-			"A facing%+.0f° t0=280 got=%s" % [delta, s.get("detonate_tick")])
+		_assert(int(s.get("detonate_tick", -1)) == 520,
+			"A facing%+.0f° t0=520 got=%s" % [delta, s.get("detonate_tick")])
 		_assert(bool(s.get("standard_ambush", false)) == true,
 			"A facing%+.0f° standard_ambush" % delta)
 
 
 func _test_golden_b() -> void:
+	## PLAY-4 pacing: yard enter_t +12 s → t0_B = 28 s = tick 560 (was 320).
 	var s := SimRunner.run_plan("res://data/fixtures/plan_b.json")
-	_assert(int(s.get("detonate_tick", -1)) == 320, "golden B t0 tick=320 got=%s" % s.get("detonate_tick"))
+	_assert(int(s.get("detonate_tick", -1)) == 560, "golden B t0 tick=560 got=%s" % s.get("detonate_tick"))
 	_assert(str(s.get("trigger", "")) == "mine_detonate", "golden B trigger")
 	_assert(bool(s.get("standard_ambush", false)) == true, "golden B standard_ambush")
 	_assert(str(s.get("outcome", "")) == "win", "golden B win")
@@ -290,6 +302,54 @@ func _test_alert_escalation() -> void:
 	_assert(str(sim.trigger_used) == "alarm", "alert seq ends with alarm trigger")
 
 
+func _test_wait_turn_blocks_fire() -> void:
+	## PLAY-4 / ADR-TRIGGER §3.2: 90° turn = 2 s = 40 ticks; facing applied; can_fire false meanwhile.
+	var plan := _plan_a()
+	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	var sim := NightSim.new()
+	sim.setup(level, plan, SimWeapons.load_csv())
+	sim.begin_wait()
+	var op: Dictionary = sim.operators[1] ## Kar@L
+	var start_facing := float(op["facing_deg"])
+	var target := start_facing + 90.0
+	sim.request_operator_facing(str(op["id"]), target)
+	_assert(is_equal_approx(float(op["facing_deg"]), target), "wait turn facing set to target")
+	_assert(int(op["turn_ticks_left"]) == 40, "wait turn 90° → 40 ticks got=%s" % op["turn_ticks_left"])
+	_assert(bool(op["can_fire"]) == false, "wait turn blocks can_fire")
+	# Advance almost the full cost: still blocked.
+	for _i in range(39):
+		sim.advance_one_tick()
+	_assert(int(op["turn_ticks_left"]) == 1, "wait turn 1 tick left got=%s" % op["turn_ticks_left"])
+	_assert(bool(op["can_fire"]) == false, "wait turn still blocked at 1 left")
+	_assert(is_equal_approx(float(op["facing_deg"]), target), "wait turn facing held after delay almost done")
+	sim.advance_one_tick()
+	_assert(int(op["turn_ticks_left"]) == 0, "wait turn complete")
+	_assert(bool(op["can_fire"]) == true, "wait turn restores can_fire")
+	_assert(is_equal_approx(float(op["facing_deg"]), target), "wait turn facing after full delay")
+	# Isolate Kar: mute other ops so only turn-gate is under test.
+	for other in sim.operators:
+		if str(other["id"]) != str(op["id"]):
+			other["can_fire"] = false
+	sim.request_operator_facing(str(op["id"]), float(op["facing_deg"]) + 45.0)
+	_assert(int(op["turn_ticks_left"]) == 20, "45° turn = 20 ticks")
+	_assert(bool(op["can_fire"]) == false, "45° turn blocks can_fire")
+	var e0: Dictionary = sim.enemies[0]
+	e0["entered"] = true
+	e0["alive"] = true
+	e0["escaped"] = false
+	e0["x"] = float(op["x"])
+	e0["y"] = float(op["y"])
+	var fires_before := _count_actor_fire(sim, str(op["id"]))
+	sim._step_fire()
+	_assert(_count_actor_fire(sim, str(op["id"])) == fires_before, "no fire while turn_ticks_left>0")
+	op["turn_ticks_left"] = 0
+	op["can_fire"] = true
+	# PLAY-6: ammo is RPM-gated (not per-tick); prime one round so a single step can fire.
+	op["fire_accum"] = 0.999
+	sim._step_fire()
+	_assert(_count_actor_fire(sim, str(op["id"])) > fires_before, "fires after turn completes")
+
+
 func _test_gatehouse_blocks_g_to_l() -> void:
 	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
 	var grid := SimLevelLoader.build_grid(level)
@@ -313,16 +373,17 @@ func _update_or_compare_golden_hashes() -> void:
 		"t0_a": int(a.get("detonate_tick", -1)),
 		"t0_b": int(b.get("detonate_tick", -1)),
 	}
+	# Rewrite when AMBUSH_WRITE_GOLDEN=1 (PLAY-4 pacing shift must document reason in commit).
+	if OS.get_environment("AMBUSH_WRITE_GOLDEN") == "1":
+		var abs_path := ProjectSettings.globalize_path(path)
+		var f := FileAccess.open(abs_path, FileAccess.WRITE)
+		f.store_string(JSON.stringify(got, "\t"))
+		print("WROTE_GOLDEN ", abs_path, " ", JSON.stringify(got))
+		_assert(got["t0_a"] == 520 and got["t0_b"] == 560, "golden write t0s 520/560")
+		return
 	if not FileAccess.file_exists(path):
-		# Write absolute path under project for first seed when AMBUSH_WRITE_GOLDEN=1
-		if OS.get_environment("AMBUSH_WRITE_GOLDEN") == "1":
-			var abs_path := ProjectSettings.globalize_path(path)
-			var f := FileAccess.open(abs_path, FileAccess.WRITE)
-			f.store_string(JSON.stringify(got, "\t"))
-			print("WROTE_GOLDEN ", abs_path)
-		else:
-			print("GOLDEN_HASHES_CANDIDATE ", JSON.stringify(got))
-			_assert(got["t0_a"] == 280 and got["t0_b"] == 320, "golden candidate t0s")
+		print("GOLDEN_HASHES_CANDIDATE ", JSON.stringify(got))
+		_assert(got["t0_a"] == 520 and got["t0_b"] == 560, "golden candidate t0s")
 		return
 	var f2 := FileAccess.open(path, FileAccess.READ)
 	var exp: Variant = JSON.parse_string(f2.get_as_text())

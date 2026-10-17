@@ -1,6 +1,6 @@
 {
   "id": "yard",
-  "version": 3,
+  "version": 7,
   "title": "院子",
   "night": true,
   "ambush_targets": [
@@ -22,7 +22,7 @@
     "meters_per_cell": 1,
     "origin": "x0_west_y0_south"
   },
-  "map_ascii": "#########NNNN###########\n####...TG.==.####.######\n####.C.TT.==.####.######\n####.P.#P.==.####.######\n###bbb#...==......######\n###bBB....==w.....######\n###bBB....==w..ww......#\n###bbb#.P.==...ww~~~~~.#\n####RR....==.LL.....~~~E\n####....ww==.LL.....~~~E\n####....ww==........~H.#\n####.P..Pw==.w.C..######\n####.....w==.w....######\n####......==......######\n####......==......######\n##########SSS###########",
+  "map_ascii": "#########NNNN###########\n####...TG.==.####.######\n####.C.TT.==.####.######\n####.P.#P.==.####.######\n###bbb#...==......######\n###bBB....==w.....######\n###bBB....#=w..ww......#\n###bbb#.P.==...ww~~~~~.#\n####RR....==.LL.....~~~E\n####....ww==.LL.....~~~E\n####....ww==........~H.#\n####.P..Pw==.w.C..######\n####.....w==.w....######\n####......==......######\n####......==......######\n##########SSS###########",
   "high_slots": [
     {
       "id": "barn_l2",
@@ -103,6 +103,24 @@
         }
       ],
       "fail_on_enemy_escape": true
+    },
+    {
+      "id": "road_tail",
+      "cells": [
+        {
+          "x": 10,
+          "y": 15
+        },
+        {
+          "x": 11,
+          "y": 15
+        },
+        {
+          "x": 12,
+          "y": 15
+        }
+      ],
+      "fail_on_enemy_escape": true
     }
   ],
   "enemies": {
@@ -160,37 +178,37 @@
       {
         "id": "E1",
         "route_id": "main_road",
-        "enter_t_s": 0,
+        "enter_t_s": 12,
         "group": "main"
       },
       {
         "id": "E2",
         "route_id": "main_road",
-        "enter_t_s": 3,
+        "enter_t_s": 15,
         "group": "main"
       },
       {
         "id": "E3",
         "route_id": "main_road",
-        "enter_t_s": 6,
+        "enter_t_s": 18,
         "group": "main"
       },
       {
         "id": "E4",
         "route_id": "main_road",
-        "enter_t_s": 9,
+        "enter_t_s": 21,
         "group": "main"
       },
       {
         "id": "F1",
         "route_id": "east_flank",
-        "enter_t_s": 4,
+        "enter_t_s": 16,
         "group": "flank"
       },
       {
         "id": "F2",
         "route_id": "east_flank",
-        "enter_t_s": 4,
+        "enter_t_s": 16,
         "group": "flank",
         "path_offset_cells": -1.0
       }
@@ -399,7 +417,8 @@
   "fail": {
     "enemy_escape_exits": [
       "south_gate",
-      "east_alley"
+      "east_alley",
+      "road_tail"
     ],
     "squad_wipe": true
   },
@@ -1316,13 +1335,12 @@
     {
       "x": 10,
       "y": 9,
-      "kind": "road",
-      "tier": "ground"
+      "kind": "wall"
     },
     {
       "x": 11,
       "y": 9,
-      "kind": "road",
+      "kind": "ground",
       "tier": "ground"
     },
     {
@@ -1638,7 +1656,11 @@
       "x": 11,
       "y": 7,
       "kind": "road",
-      "tier": "ground"
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
     },
     {
       "x": 12,
@@ -2681,6 +2703,29 @@
       "x": 23,
       "y": 0,
       "kind": "wall"
+    }
+  ],
+  "squad_insertion": [
+    {
+      "id": "op_1",
+      "x": 10,
+      "y": 1,
+      "facing_deg": 90,
+      "display_name": "1号·步枪手"
+    },
+    {
+      "id": "op_2",
+      "x": 11,
+      "y": 1,
+      "facing_deg": 90,
+      "display_name": "2号·冲锋手"
+    },
+    {
+      "id": "op_3",
+      "x": 12,
+      "y": 1,
+      "facing_deg": 90,
+      "display_name": "3号·爆破手"
     }
   ]
 }
