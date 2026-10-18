@@ -7,7 +7,7 @@ set -euo pipefail
 godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-empty_test.gd}"
 case "$entry" in
-  empty_test.gd|w2_sim_test.gd|w2_sim_cli.gd|w3_greybox_test.gd) ;;
+  empty_test.gd|w2_sim_test.gd|w2_sim_cli.gd|w2_counterex_test.gd|w2_counterex_probe.gd|w2_aim_tolerance_test.gd|w3_greybox_test.gd|w4_scout_test.gd|w5_combat_fx_test.gd|w6_review_test.gd|w7_combat_test.gd|w8_controls_test.gd|w8_briefing_blacklist_test.gd|w9_playtest_test.gd|ux_controls_capture.gd|ux_aim_magnifier_capture.gd|ux_briefing_capture.gd) ;;
   *)
     printf 'Unsupported test entry for ambush_vs: %s\n' "$entry" >&2
     exit 2
@@ -27,7 +27,7 @@ export AMBUSH_TEST_RUN_ID="$run_id"
 printf 'TEST_RUN_ID=%s\nTEST_DATA_ROOT=%s\nTEST_ENTRY=%s\n' "$run_id" "$data_root" "$entry"
 set +e
 "$godot_bin" --headless --path "$project_root" -s "res://scripts/$entry" 2>&1 | tee "$run_dir/run.log"
-exit_code="${PIPESTATUS[0]}"
+exit_code=${PIPESTATUS[0]:-1}
 set -e
 printf 'TEST_LOG=%s\nTEST_EXIT=%s\n' "$run_dir/run.log" "$exit_code"
 exit "$exit_code"

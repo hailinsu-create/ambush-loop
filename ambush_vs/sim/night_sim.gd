@@ -11,6 +11,7 @@ const SimGrid := preload("res://sim/grid.gd")
 const SimEventLog := preload("res://sim/event_log.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
+const SimPathfinder := preload("res://sim/pathfinder.gd")
 
 var level: Dictionary = {}
 var grid: SimGrid
@@ -44,11 +45,17 @@ var area_expose_streak: int = 0
 
 var escaped_ids: Array = []
 var killed_ids: Array = []
+var wounded_ids: Array = [] ## PLAY-6 operator ids wounded (not dead)
 var manual_detonate_tick: int = -1 ## set ≥0 to force manual at that tick
 var force_expose: bool = false ## test hook: treat squad as exposed every tick
 var skip_fire: bool = false
+var skip_enemy_fire: bool = false ## test hook
+## PLAY-6 default: each enemy scores at most one wounding hit. Measurement toggle only.
+var enemy_return_soft_cap: bool = true
 var max_ticks: int = 2000
 var speed_mul: float = 1.0 ## playback only; does not affect ticks/hash
+var next_night_alert: String = C.ALERT_QUIET ## raised by leaks (PLAY-6)
+var _entered_at_detonate: int = 0
 
 var _routes: Dictionary = {}
 var _ambush_target_set: Dictionary = {}
@@ -76,6 +83,11 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 	_routes.clear()
 	for r in level.get("enemies", {}).get("routes", []):
 		_routes[str(r["id"])] = r.get("waypoints", [])
+	## ADR-TRIGGER §3.4: unentered enemies switch to alarm_route on global alert.
+	var alarm_r: Variant = level.get("enemies", {}).get("alarm_route", {})
+	if typeof(alarm_r) == TYPE_DICTIONARY and not alarm_r.is_empty():
+		_routes[str(alarm_r.get("id", "alarm_combat_entry"))] = alarm_r.get("waypoints", [])
+		_routes["__alarm__"] = alarm_r.get("waypoints", [])
 
 	_exit_cells.clear()
 	for ex in level.get("exits", []):
@@ -147,6 +159,9 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 	area_expose_streak = 0
 	escaped_ids.clear()
 	killed_ids.clear()
+	wounded_ids.clear()
+	next_night_alert = C.ALERT_QUIET
+	_entered_at_detonate = 0
 	_done = false
 	_outcome = ""
 
@@ -201,6 +216,10 @@ func is_finished() -> bool:
 
 func outcome_summary() -> Dictionary:
 	var h := log.hash_sha256()
+	var dead_ops: Array = []
+	for op in operators:
+		if not op["alive"]:
+			dead_ops.append(op["id"])
 	var summary := {
 		"outcome": _outcome,
 		"standard_ambush": standard_ambush,
@@ -209,6 +228,9 @@ func outcome_summary() -> Dictionary:
 		"alert": alert,
 		"kills": killed_ids.duplicate(),
 		"escapes": escaped_ids.duplicate(),
+		"wounded": wounded_ids.duplicate(),
+		"dead_ops": dead_ops,
+		"next_night_alert": next_night_alert,
 		"log_hash": h,
 		"reason": _end_reason(),
 	}
@@ -225,6 +247,7 @@ func request_manual_detonate() -> void:
 
 func request_operator_facing(op_id: String, new_facing_deg: float) -> void:
 	## WAIT turn cost: 1.0 s per 45° (ADR-TRIGGER §3.2 / TERMS §9.3). SETUP should set facing before begin_wait.
+	## Facing snaps to the aim; fire is blocked for the turn duration (view shows a turning indicator).
 	if phase != C.PHASE_WAIT or plan_locked:
 		return
 	var op := _find_op(op_id)
@@ -232,11 +255,14 @@ func request_operator_facing(op_id: String, new_facing_deg: float) -> void:
 		return
 	var delta := SimGeom.abs_angle_delta_deg(float(op["facing_deg"]), new_facing_deg)
 	var steps := int(ceil(delta / 45.0 - 1e-9))
-	if steps <= 0:
-		op["facing_deg"] = new_facing_deg
-		return
 	op["facing_deg"] = new_facing_deg
+	if steps <= 0:
+		op["turn_ticks_left"] = 0
+		if not bool(op.get("climbing", false)):
+			op["can_fire"] = true
+		return
 	op["turn_ticks_left"] = maxi(int(op.get("turn_ticks_left", 0)), steps * C.TICK_HZ)
+	op["can_fire"] = false
 
 
 func observers_seeing_cell(tx: float, ty: float, target_tier: String) -> Array:
@@ -318,6 +344,8 @@ func _step_turn_cooldowns() -> void:
 		var left := int(op.get("turn_ticks_left", 0))
 		if left > 0:
 			op["turn_ticks_left"] = left - 1
+			if int(op["turn_ticks_left"]) <= 0 and not bool(op.get("climbing", false)):
+				op["can_fire"] = true
 
 
 func _set_phase(t: int, p: String) -> void:
@@ -332,12 +360,14 @@ func _make_op(op: Dictionary) -> Dictionary:
 	var tier := str(op.get("tier", grid.tier_at(x, y)))
 	if climbing:
 		tier = SimConstants.TIER_GROUND
+	var wid := str(op.get("weapon_id", ""))
+	var ammo_default := int(C.DEFAULT_AMMO.get(wid, 12))
 	return {
 		"id": str(op["id"]),
 		"x": x,
 		"y": y,
 		"facing_deg": float(op.get("facing_deg", 0)),
-		"weapon_id": str(op.get("weapon_id", "")),
+		"weapon_id": wid,
 		"tier": tier,
 		"alive": true,
 		"can_fire": not climbing,
@@ -345,9 +375,14 @@ func _make_op(op: Dictionary) -> Dictionary:
 		"climb_ticks_left": int(op.get("climb_ticks_left", 0)),
 		"turn_ticks_left": 0,
 		"shot_accum": 0.0,
+		"fire_accum": 0.0,
 		"locked_facing": float(op.get("facing_deg", 0)),
 		"locked_x": x,
 		"locked_y": y,
+		"hp": int(op.get("hp", C.OP_MAX_HP)),
+		"max_hp": C.OP_MAX_HP,
+		"wounded": false,
+		"ammo": int(op.get("ammo", ammo_default)),
 	}
 
 
@@ -371,6 +406,13 @@ func _make_enemy(sp: Dictionary) -> Dictionary:
 		"prev_y": 0.0,
 		"progress": offset, ## cells along polyline (may be negative until enter advances)
 		"hit_accum": 0.0,
+		"mode": "march", ## march | cover | flee
+		"in_cover": false,
+		"cover_goal": Vector2i(-1, -1),
+		"path": [],
+		"shot_accum": 0.0,
+		"fire_accum": 0.0,
+		"_hits_scored": 0,
 	}
 
 
@@ -397,8 +439,11 @@ func _step_move() -> void:
 		else:
 			e["prev_x"] = e["x"]
 			e["prev_y"] = e["y"]
-			e["progress"] = _march_speed * (t_s - float(e["enter_t_s"])) + float(e["path_offset_cells"])
-			_place_enemy_on_path(e)
+			if detonate_tick >= 0:
+				_step_enemy_combat_move(e)
+			else:
+				e["progress"] = _march_speed * (t_s - float(e["enter_t_s"])) + float(e["path_offset_cells"])
+				_place_enemy_on_path(e)
 
 	# Patrols loop edges
 	for p in patrols:
@@ -711,6 +756,73 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 				all_in = false
 	standard_ambush = standard_ambush_eligible and any_entered and all_in and escaped_ids.is_empty()
 
+	# PLAY-6: arm survivors to seek cover / later flee.
+	# D.3 scout cost: flanks still in the east alley peel back to east_alley exit
+	# instead of diving west into the yard cover (where main-road MG would erase them).
+	## ADR-TRIGGER §3.4 / D.3 alert salvage: on alarm, unentered enemies snap onto
+	## alarm_route in cover mode (combat entry) so global alert is still winnable.
+	if trig == "alarm":
+		_alarm_force_enter_unentered()
+	_entered_at_detonate = 0
+	for e in enemies:
+		if e["alive"] and e["entered"] and not e["escaped"]:
+			_entered_at_detonate += 1
+			e["path"] = []
+			e["unwatched_ticks"] = 0
+			var ex := int(floor(float(e["x"])))
+			var ey := int(floor(float(e["y"])))
+			## D.3 scout cost: unwatched flanks still in the east alley peel to
+			## east_alley. If any gun already covers them (e.g. Kar@L), they stay
+			## and fight / die in place — plan A must still clear.
+			## Watch test uses alley centerline y=8 (same cell they peel on) so a
+			## fractional y just outside Kar's 15° cone cannot false-trigger peel.
+			var flank_in_alley := str(e.get("group", "")) == "flank" and ex >= 17
+			var watch_probe: Dictionary = e.duplicate()
+			watch_probe["y"] = 8.0
+			var watched := flank_in_alley and _enemy_watched_by_squad(watch_probe)
+			## Timing cost: main-road rear still south of the packed band (y≥12)
+			## peels back to road_tail instead of diving north into the kill cone.
+			## At ideal t0 E4 is ≈11.5 — no peel; at t0−2 s E4 is ≈12.5 — escapes.
+			## Skip rear peel on alarm combat-entry (they are already on alarm_route).
+			var rear_south := (
+				trig != "alarm"
+				and str(e.get("group", "")) == "main"
+				and float(e["y"]) >= 12.0 - 1e-9
+			)
+			if flank_in_alley and not watched:
+				## Stay on alley centerline (y≈8) so barn MG LOS stays blocked by
+				## the (10,9) pier; a y=7 A* path dips into MG's clear lane.
+				e["y"] = 8.0
+				ex = int(floor(float(e["x"])))
+				ey = 8
+				e["mode"] = "flee"
+				e["cover_goal"] = _east_alley_exit_cell(ex, ey)
+				e["path"] = _east_alley_peel_path(ex, ey, e["cover_goal"])
+				e["in_cover"] = false
+				log.emit(tick, "enemy_flee", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "east_alley_peel"},
+				})
+			elif rear_south:
+				e["mode"] = "flee"
+				e["cover_goal"] = _exit_cell_by_id("road_tail", ex, ey)
+				if e["cover_goal"].x < 0:
+					e["cover_goal"] = Vector2i(11, 15)
+				e["path"] = _road_tail_peel_path(ex, ey, e["cover_goal"])
+				e["in_cover"] = false
+				log.emit(tick, "enemy_flee", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "road_tail_peel"},
+				})
+			else:
+				e["mode"] = "cover"
+				e["cover_goal"] = _nearest_cover_cell(ex, ey)
+				e["in_cover"] = _cell_is_cover(ex, ey)
+				log.emit(tick, "enemy_seek_cover", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y},
+				})
+
 	var payload_trig := {"trigger": trig}
 	if not bind.is_empty():
 		payload_trig["bind"] = bind
@@ -768,8 +880,14 @@ func _pos_in_kill_zone(x: float, y: float, kz: Dictionary) -> bool:
 
 
 func _step_fire() -> void:
-	if skip_fire:
-		return
+	if not skip_fire:
+		_step_friendly_fire()
+	if not skip_enemy_fire and detonate_tick >= 0:
+		_step_enemy_return_fire()
+	_update_flee_modes()
+
+
+func _step_friendly_fire() -> void:
 	for op in operators:
 		if not op["alive"] or not op["can_fire"]:
 			continue
@@ -784,31 +902,437 @@ func _step_fire() -> void:
 		var rpm := float(w.get("rpm", 0))
 		if rpm <= 0.0:
 			continue
+		if int(op.get("ammo", 0)) <= 0:
+			if not bool(op.get("_ammo_logged", false)):
+				op["_ammo_logged"] = true
+				log.emit(tick, "ammo_empty", {"actor": op["id"], "weapon_id": wid})
+			continue
 		var target := _pick_target(op, w)
 		if target.is_empty():
 			continue
 		var dist := SimGeom.dist_centers(float(op["x"]), float(op["y"]), float(target["x"]), float(target["y"]))
 		var need := SimWeapons.shots_needed(w, dist)
+		if bool(op.get("wounded", false)):
+			need += 1 ## aim penalty
+			rpm *= C.WOUNDED_RPM_MUL ## slower cadence while wounded
+		# PLAY-6: cover braces survivors; runners (flee) are easier to cut down.
+		if bool(target.get("in_cover", false)):
+			need += 1
+		elif str(target.get("mode", "march")) == "cover":
+			need += 1 ## scrambling toward cover
 		if need >= 99:
 			continue
-		op["shot_accum"] = float(op["shot_accum"]) + rpm / 60.0 * C.DT_S
-		log.emit(tick, "fire", {
-			"actor": op["id"],
-			"target": target["id"],
-			"weapon_id": wid,
-			"pos": {"x": op["x"], "y": op["y"], "height": op["tier"]},
-			"facing_deg": op["facing_deg"],
-			"payload": {"in_kill_zone": true},
-		})
-		if float(op["shot_accum"]) + 1e-9 >= float(need):
-			op["shot_accum"] = 0.0
-			log.emit(tick, "hit", {
+		# PLAY-6 finite ammo: consume one round per RPM pulse, not per sim tick.
+		op["fire_accum"] = float(op.get("fire_accum", 0.0)) + rpm / 60.0 * C.DT_S
+		while float(op["fire_accum"]) + 1e-9 >= 1.0 and int(op["ammo"]) > 0:
+			op["fire_accum"] = float(op["fire_accum"]) - 1.0
+			op["ammo"] = int(op["ammo"]) - 1
+			op["shot_accum"] = float(op["shot_accum"]) + 1.0
+			log.emit(tick, "fire", {
 				"actor": op["id"],
 				"target": target["id"],
 				"weapon_id": wid,
-				"payload": {"shots_needed_band": SimGeom.range_band(dist), "fatal": true},
+				"pos": {"x": op["x"], "y": op["y"], "height": op["tier"]},
+				"facing_deg": op["facing_deg"],
+				"payload": {"in_kill_zone": true, "ammo_left": op["ammo"]},
 			})
-			_kill_enemy(target, op["id"], wid)
+			if float(op["shot_accum"]) + 1e-9 >= float(need):
+				op["shot_accum"] = 0.0
+				log.emit(tick, "hit", {
+					"actor": op["id"],
+					"target": target["id"],
+					"weapon_id": wid,
+					"payload": {"shots_needed_band": SimGeom.range_band(dist), "fatal": true},
+				})
+				_kill_enemy(target, op["id"], wid)
+				break
+		if int(op["ammo"]) <= 0 and not bool(op.get("_ammo_logged", false)):
+			op["_ammo_logged"] = true
+			log.emit(tick, "ammo_empty", {"actor": op["id"], "weapon_id": wid})
+
+
+func _step_enemy_return_fire() -> void:
+	for e in enemies:
+		if not e["alive"] or not e["entered"] or e["escaped"]:
+			continue
+		if str(e.get("mode", "")) == "flee":
+			continue ## fleeing: no return fire
+		var target := _pick_op_target(e)
+		if target.is_empty():
+			continue
+		var dist := SimGeom.dist_centers(float(e["x"]), float(e["y"]), float(target["x"]), float(target["y"]))
+		if dist > C.ENEMY_RETURN_RANGE + 1e-9:
+			continue
+		## Accuracy by range + cover; near-range braced shots can wound in ~1 s.
+		var need := 1 if dist <= C.RANGE_NEAR_MAX + 1e-9 else 2
+		if dist > C.RANGE_MID_MAX:
+			need += 1
+		if bool(e.get("in_cover", false)):
+			need = maxi(need - 1, 1) ## braced in cover
+		if enemy_return_soft_cap and int(e.get("_hits_scored", 0)) >= 1:
+			continue ## soft cap: one wounding hit per enemy (keeps B winnable)
+		var facing := SimGeom.bearing_deg(float(e["x"]), float(e["y"]), float(target["x"]), float(target["y"]))
+		e["fire_accum"] = float(e.get("fire_accum", 0.0)) + C.ENEMY_RETURN_RPM / 60.0 * C.DT_S
+		while float(e["fire_accum"]) + 1e-9 >= 1.0:
+			e["fire_accum"] = float(e["fire_accum"]) - 1.0
+			e["shot_accum"] = float(e.get("shot_accum", 0.0)) + 1.0
+			log.emit(tick, "enemy_fire", {
+				"actor": e["id"],
+				"target": target["id"],
+				"weapon_id": "enemy_rifle",
+				"pos": {"x": e["x"], "y": e["y"], "height": "ground"},
+				"facing_deg": facing,
+				"payload": {"in_cover": bool(e.get("in_cover", false))},
+			})
+			if float(e["shot_accum"]) + 1e-9 >= float(need):
+				e["shot_accum"] = 0.0
+				e["_hits_scored"] = int(e.get("_hits_scored", 0)) + 1
+				_damage_operator(target, e["id"])
+				break
+
+
+func _pick_op_target(e: Dictionary) -> Dictionary:
+	var best: Dictionary = {}
+	var best_d := 1e9
+	for op in operators:
+		if not op["alive"]:
+			continue
+		var ox := float(op["x"])
+		var oy := float(op["y"])
+		if not grid.los_clear(float(e["x"]), float(e["y"]), C.TIER_GROUND, ox, oy, str(op["tier"])):
+			continue
+		var d := SimGeom.dist_centers(float(e["x"]), float(e["y"]), ox, oy)
+		if d < best_d:
+			best_d = d
+			best = op
+	return best
+
+
+func _damage_operator(op: Dictionary, actor: String) -> void:
+	if not op["alive"]:
+		return
+	op["hp"] = int(op.get("hp", C.OP_MAX_HP)) - 1
+	log.emit(tick, "hit", {
+		"actor": actor,
+		"target": op["id"],
+		"weapon_id": "enemy_rifle",
+		"payload": {"hp_left": op["hp"], "friendly": true},
+	})
+	if int(op["hp"]) <= 0:
+		op["alive"] = false
+		op["can_fire"] = false
+		op["wounded"] = false
+		log.emit(tick, "kill", {"actor": actor, "target": op["id"], "weapon_id": "enemy_rifle"})
+		return
+	op["wounded"] = true
+	if not wounded_ids.has(op["id"]):
+		wounded_ids.append(op["id"])
+	log.emit(tick, "op_wounded", {
+		"actor": actor,
+		"target": op["id"],
+		"payload": {"hp": op["hp"]},
+	})
+
+
+func _update_flee_modes() -> void:
+	if detonate_tick < 0 or _entered_at_detonate <= 0:
+		return
+	## Unwatched survivors break contact after ~1.5 s (plan B facing gap → escape).
+	const UNWATCHED_BREAK_TICKS := 30
+	for e in enemies:
+		if not e["alive"] or e["escaped"] or not e["entered"]:
+			continue
+		if str(e.get("mode", "")) == "flee":
+			continue
+		if _enemy_watched_by_squad(e):
+			e["unwatched_ticks"] = 0
+		else:
+			e["unwatched_ticks"] = int(e.get("unwatched_ticks", 0)) + 1
+			if int(e["unwatched_ticks"]) >= UNWATCHED_BREAK_TICKS:
+				e["mode"] = "flee"
+				e["path"] = []
+				e["cover_goal"] = _flee_exit_cell(e)
+				log.emit(tick, "enemy_flee", {
+					"actor": e["id"],
+					"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "reason": "unwatched_break"},
+				})
+	var living := 0
+	for e in enemies:
+		if e["alive"] and e["entered"] and not e["escaped"]:
+			living += 1
+	var ratio := float(living) / float(_entered_at_detonate)
+	if ratio > C.FLEE_STRENGTH_RATIO + 1e-9:
+		return
+	for e in enemies:
+		if not e["alive"] or e["escaped"] or not e["entered"]:
+			continue
+		if str(e.get("mode", "")) == "flee":
+			continue
+		## Pinned by a gun cone: stay and die / wait for unwatched_break instead.
+		if _enemy_watched_by_squad(e):
+			continue
+		e["mode"] = "flee"
+		e["path"] = []
+		## Prefer south when breaking contact; east peel is detonate-only for alley flanks.
+		e["cover_goal"] = _flee_exit_cell(e)
+		log.emit(tick, "enemy_flee", {
+			"actor": e["id"],
+			"payload": {"gx": e["cover_goal"].x, "gy": e["cover_goal"].y, "strength": ratio},
+		})
+
+
+func _step_enemy_combat_move(e: Dictionary) -> void:
+	var mode := str(e.get("mode", "cover"))
+	var goal: Vector2i = e.get("cover_goal", Vector2i(-1, -1))
+	if mode == "flee":
+		goal = e.get("cover_goal", Vector2i(-1, -1))
+		if goal.x < 0:
+			goal = _nearest_exit_cell(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
+			e["cover_goal"] = goal
+	elif mode == "cover":
+		if bool(e.get("in_cover", false)):
+			return
+		if goal.x < 0:
+			goal = _nearest_cover_cell(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
+			e["cover_goal"] = goal
+	else:
+		return
+	if goal.x < 0:
+		return
+	_advance_along_goal(e, goal)
+	var cx := int(floor(float(e["x"])))
+	var cy := int(floor(float(e["y"])))
+	if mode == "cover" and _cell_is_cover(cx, cy):
+		e["in_cover"] = true
+		e["path"] = []
+		log.emit(tick, "enemy_in_cover", {"actor": e["id"], "pos": {"x": e["x"], "y": e["y"], "height": "ground"}})
+
+
+func _advance_along_goal(e: Dictionary, goal: Vector2i) -> void:
+	var from := Vector2i(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
+	if from == goal:
+		e["x"] = float(goal.x)
+		e["y"] = float(goal.y)
+		return
+	var path: Array = e.get("path", [])
+	if path.is_empty() or Vector2i(path[path.size() - 1]) != goal:
+		path = SimPathfinder.find_path(grid, from, goal)
+		e["path"] = path
+	if path.size() < 2:
+		# Greedy neighbor fallback.
+		var step := _greedy_step(from, goal)
+		e["x"] = float(step.x)
+		e["y"] = float(step.y)
+		return
+	var next: Vector2i = path[1]
+	var cur := Vector2(float(e["x"]), float(e["y"]))
+	var tgt := Vector2(float(next.x), float(next.y))
+	var dir := tgt - cur
+	var dist := dir.length()
+	var step_len := C.COMBAT_STEP_CELLS * C.DT_S
+	if dist <= step_len + 1e-9:
+		e["x"] = float(next.x)
+		e["y"] = float(next.y)
+		path.remove_at(0)
+		e["path"] = path
+	else:
+		var n := dir.normalized()
+		e["x"] = cur.x + n.x * step_len
+		e["y"] = cur.y + n.y * step_len
+
+
+func _greedy_step(from: Vector2i, goal: Vector2i) -> Vector2i:
+	var best := from
+	var best_d := from.distance_squared_to(goal)
+	for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var n: Vector2i = from + d
+		if not grid.walkable(n.x, n.y):
+			continue
+		var dd := n.distance_squared_to(goal)
+		if dd < best_d:
+			best_d = dd
+			best = n
+	return best
+
+
+func _cell_is_cover(x: int, y: int) -> bool:
+	return bool(grid.get_cell(x, y).get("low_cover", false))
+
+
+func _nearest_cover_cell(x: int, y: int) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_d := 1e9
+	var r := C.COVER_SEEK_RADIUS
+	for yy in range(y - r, y + r + 1):
+		for xx in range(x - r, x + r + 1):
+			if not grid.walkable(xx, yy):
+				continue
+			if not _cell_is_cover(xx, yy):
+				continue
+			var d := Vector2(xx - x, yy - y).length()
+			if d < best_d:
+				best_d = d
+				best = Vector2i(xx, yy)
+	if best.x < 0:
+		# Fallback: nearest walkable not current (duck in place).
+		return Vector2i(x, y)
+	return best
+
+
+func _nearest_exit_cell(x: int, y: int) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_d := 1e9
+	for key in _exit_cells.keys():
+		var parts: PackedStringArray = str(key).split(",")
+		if parts.size() < 2:
+			continue
+		var ex := int(parts[0])
+		var ey := int(parts[1])
+		var d := Vector2(ex - x, ey - y).length()
+		if d < best_d:
+			best_d = d
+			best = Vector2i(ex, ey)
+	return best
+
+
+func _flee_exit_cell(e: Dictionary) -> Vector2i:
+	var x := int(floor(float(e["x"])))
+	var y := int(floor(float(e["y"])))
+	var flank := str(e.get("group", "")) == "flank"
+	var watched := _enemy_watched_by_squad(e)
+	if flank and not watched and x >= 17:
+		return _east_alley_exit_cell(x, y)
+	## Prefer south_gate when watched or main-road troops.
+	var south := _exit_cell_by_id("south_gate", x, y)
+	if south.x >= 0:
+		return south
+	return _nearest_exit_cell(x, y)
+
+
+func _exit_cell_by_id(exit_id: String, x: int, y: int) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_d := 1e9
+	for key in _exit_cells.keys():
+		if str(_exit_cells[key]) != exit_id:
+			continue
+		var parts: PackedStringArray = str(key).split(",")
+		if parts.size() < 2:
+			continue
+		var ex := int(parts[0])
+		var ey := int(parts[1])
+		var d := Vector2(ex - x, ey - y).length()
+		if d < best_d:
+			best_d = d
+			best = Vector2i(ex, ey)
+	return best
+
+
+func _east_alley_exit_cell(x: int, y: int) -> Vector2i:
+	## Prefer east_alley exit cells; fall back to nearest fail-on-escape exit.
+	var best := Vector2i(-1, -1)
+	var best_d := 1e9
+	for key in _exit_cells.keys():
+		if str(_exit_cells[key]) != "east_alley":
+			continue
+		var parts: PackedStringArray = str(key).split(",")
+		if parts.size() < 2:
+			continue
+		var ex := int(parts[0])
+		var ey := int(parts[1])
+		var d := Vector2(ex - x, ey - y).length()
+		if d < best_d:
+			best_d = d
+			best = Vector2i(ex, ey)
+	if best.x >= 0:
+		return best
+	return _nearest_exit_cell(x, y)
+
+
+func _enemy_watched_by_squad(e: Dictionary) -> bool:
+	## True if any living gun operator has this enemy in cone + LOS.
+	if skip_fire:
+		return false ## test hook: muted friendlies do not pin
+	for op in operators:
+		if not op["alive"]:
+			continue
+		var wid := str(op.get("weapon_id", ""))
+		if wid in ["grenade", "mine", ""]:
+			continue
+		var w: Dictionary = weapons.get(wid, {})
+		if w.is_empty():
+			continue
+		var half := float(w.get("sector_deg", 0)) * 0.5
+		var rng := float(w.get("max_range", 0))
+		if not SimGeom.in_cone(float(op["x"]), float(op["y"]), float(op["facing_deg"]), half, rng, float(e["x"]), float(e["y"])):
+			continue
+		if not grid.los_clear(float(op["x"]), float(op["y"]), str(op["tier"]), float(e["x"]), float(e["y"]), SimConstants.TIER_GROUND):
+			continue
+		return true
+	return false
+
+
+func _east_alley_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
+	## Fixed corridor: east along y=8 then step to the gate cell. Avoids A* dipping to y=7.
+	var path: Array = [Vector2i(from_x, from_y)]
+	var x := from_x
+	while x < 22:
+		x += 1
+		path.append(Vector2i(x, 8))
+	if goal.x >= 0:
+		if path[path.size() - 1] != Vector2i(goal.x, 8):
+			path.append(Vector2i(goal.x, 8))
+		if path[path.size() - 1] != goal:
+			path.append(goal)
+	return path
+
+
+func _alarm_force_enter_unentered() -> void:
+	## ADR-TRIGGER §3.4: unentered → alarm_route combat entry (cover, not march).
+	var wps: Array = _routes.get("__alarm__", [])
+	if wps.is_empty():
+		wps = _routes.get("alarm_combat_entry", [])
+	if wps.is_empty():
+		return
+	var stagger := 0
+	for e in enemies:
+		if not e["alive"] or e["entered"] or e["escaped"]:
+			continue
+		e["route_id"] = "alarm_combat_entry"
+		e["waypoints"] = wps
+		e["entered"] = true
+		e["enter_t_s"] = float(tick) * C.DT_S
+		## Stagger along the route so the column is not a single stack; start ≥1 cell
+		## in from the gate so road_tail (y=15) is behind them.
+		e["progress"] = 1.0 + float(stagger) * 0.75
+		stagger += 1
+		_place_enemy_on_path(e)
+		e["prev_x"] = e["x"]
+		e["prev_y"] = e["y"]
+		e["mode"] = "cover"
+		e["path"] = []
+		e["in_cover"] = false
+		e["cover_goal"] = _nearest_cover_cell(int(floor(float(e["x"]))), int(floor(float(e["y"]))))
+		e["unwatched_ticks"] = 0
+		log.emit(tick, "enemy_enter", {
+			"actor": e["id"],
+			"pos": {"x": e["x"], "y": e["y"], "height": "ground"},
+			"payload": {"route_id": e["route_id"], "group": e["group"], "alarm": true},
+		})
+
+
+func _road_tail_peel_path(from_x: int, from_y: int, goal: Vector2i) -> Array:
+	## Fixed corridor: south along the main road to gate_n road_tail (y=15).
+	## Spawn cell (11,14) is NOT an exit — only y=15 counts — so alarm/march entry is safe.
+	var path: Array = [Vector2i(from_x, from_y)]
+	var y := from_y
+	var gx := goal.x if goal.x >= 0 else 11
+	var gy := goal.y if goal.y >= 0 else 15
+	while y < gy:
+		y += 1
+		path.append(Vector2i(11, y))
+	if path[path.size() - 1] != Vector2i(gx, gy):
+		path.append(Vector2i(gx, gy))
+	return path
 
 
 func _pick_target(op: Dictionary, w: Dictionary) -> Dictionary:
@@ -880,9 +1404,14 @@ func _check_escapes() -> void:
 			log.emit(tick, "enemy_escape", {
 				"actor": e["id"],
 				"pos": {"x": e["x"], "y": e["y"], "height": "ground"},
-				"payload": {"exit": _exit_cells[key]},
+				"payload": {"exit": _exit_cells[key], "flee": str(e.get("mode", "")) == "flee"},
 			})
 			standard_ambush = false
+			# Leaks raise next-night alert at least one tier.
+			if next_night_alert == C.ALERT_QUIET:
+				next_night_alert = C.ALERT_SUSPICIOUS
+			elif next_night_alert == C.ALERT_SUSPICIOUS:
+				next_night_alert = C.ALERT_AREA
 
 
 func _check_end() -> void:

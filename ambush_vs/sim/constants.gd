@@ -32,3 +32,25 @@ const SILHOUETTE_MUL := 1.5
 const RANGE_NEAR_MAX := 5.0
 const RANGE_MID_MAX := 10.0
 const RANGE_FAR_MAX := 16.0
+
+## PLAY-6 combat reaction (ADR-TRIGGER §3.4 / DEV_PLAN W5).
+const COVER_SEEK_RADIUS := 4
+const FLEE_STRENGTH_RATIO := 0.34 ## flee when living/entered_at_detonate below this
+const OP_MAX_HP := 3
+const ENEMY_RETURN_RPM := 220.0 ## lands a wound during a ~1 s post-detonate fight
+const ENEMY_RETURN_RANGE := 12.0
+const COMBAT_STEP_CELLS := 2.2 ## cells/s toward cover or exit
+const WOUNDED_RPM_MUL := 0.65 ## wounded operators fire slower
+const DEFAULT_AMMO := {
+	"kar98k": 20,
+	"mp40": 48,
+	"mg42": 28,
+	"grenade": 0,
+	"mine": 0,
+}
+## Weapon → ammo pool_id (matches yard loadout_start / scout kit).
+const WEAPON_AMMO_POOL := {
+	"kar98k": "7.92",
+	"mg42": "7.92",
+	"mp40": "9mm",
+}

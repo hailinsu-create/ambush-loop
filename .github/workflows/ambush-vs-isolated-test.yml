@@ -45,10 +45,50 @@ jobs:
           set -euo pipefail
           ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w2_sim_test.gd
 
+      - name: Isolated W2 D.3 counterex tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w2_counterex_test.gd
+
+      - name: Isolated W2 aim tolerance G.1 (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w2_aim_tolerance_test.gd
+
       - name: Isolated W3 greybox tests (expect 0)
         run: |
           set -euo pipefail
           ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w3_greybox_test.gd
+
+      - name: Isolated W4 scout tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w4_scout_test.gd
+
+      - name: Isolated W5 combat FX tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w5_combat_fx_test.gd
+
+      - name: Isolated W6 review tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w6_review_test.gd
+
+      - name: Isolated W7 combat tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w7_combat_test.gd
+
+      - name: Isolated W8 controls tests (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w8_controls_test.gd
+
+      - name: Isolated W8 briefing blacklist (expect 0)
+        run: |
+          set -euo pipefail
+          ambush_vs/scripts/run_isolated_test.sh /usr/local/bin/Godot_v4.7.2-stable_linux.x86_64 w8_briefing_blacklist_test.gd
 
       - name: Direct entry rejected (expect 91)
         run: |

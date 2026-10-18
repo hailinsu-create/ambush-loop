@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "gate": "G3-art-batch",
+  "source": "assets/g3/src/",
+  "license": "project-owned (owner image tool for Ambush Loop)",
+  "pipeline": "scripts/build_g3_assets.py",
+  "tile_px": 256,
+  "outputs": {
+    "tiles": {
+      "mud": "tiles/mud.webp",
+      "grass": "tiles/grass.webp",
+      "cobble": "tiles/cobble.webp",
+      "planks": "tiles/planks.webp",
+      "stonewall": "tiles/stonewall.webp",
+      "roof_slate": "tiles/roof_slate.webp",
+      "roof_shingle": "tiles/roof_shingle.webp"
+    },
+    "props": {
+      "ammo_crate": "props/ammo_crate.webp",
+      "crate_stack": "props/crate_stack.webp",
+      "barrel": "props/barrel.webp",
+      "hay_bale": "props/hay_bale.webp",
+      "cart": "props/cart.webp",
+      "shed_roof": "props/shed_roof.webp",
+      "sandbag_straight_s": "props/sandbag_straight_s.webp",
+      "sandbag_straight_m": "props/sandbag_straight_m.webp",
+      "sandbag_straight_l": "props/sandbag_straight_l.webp",
+      "sandbag_corner_l": "props/sandbag_corner_l.webp",
+      "sandbag_junction_t": "props/sandbag_junction_t.webp",
+      "sandbag_end_cap": "props/sandbag_end_cap.webp",
+      "sandbag_pile_round": "props/sandbag_pile_round.webp",
+      "sandbag_straight": "props/sandbag_straight.webp",
+      "sandbag_curve": "props/sandbag_curve.webp"
+    },
+    "units": {
+      "friendly_kar98k": "units/friendly_kar98k.webp",
+      "friendly_mp40": "units/friendly_mp40.webp",
+      "friendly_mg42": "units/friendly_mg42.webp",
+      "friendly_grenade": "units/friendly_grenade.webp",
+      "enemy_rifle": "units/enemy_rifle.webp",
+      "enemy_smg": "units/enemy_smg.webp",
+      "enemy_mg": "units/enemy_mg.webp",
+      "enemy_officer": "units/enemy_officer.webp"
+    },
+    "weapons": {
+      "kar98k": "weapons/icons/kar98k.webp",
+      "mp40": "weapons/icons/mp40.webp",
+      "mg42": "weapons/icons/mg42.webp",
+      "grenade": "weapons/icons/grenade.webp",
+      "mine": "weapons/icons/mine.webp"
+    },
+    "fx": {
+      "lantern": "fx/lantern_glow.webp",
+      "vignette": "fx/vignette.webp"
+    }
+  }
+}

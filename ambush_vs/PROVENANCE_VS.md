@@ -163,4 +163,8 @@
 - `scripts/run_isolated_test.sh`、`scripts/run_isolated_test.ps1`
 - `art/audio_v2/LICENSE`（CB5 tip 缺失，按 manifest CC0-1.0 补回）
 - `PROVENANCE_VS.md`、`THIRD_PARTY_NOTICES.md`、`README.md`
+- `sim/pathfinder.gd`：逻辑改编自 `ambush_loop/scripts/raid/pathfinder.gd`（main / tip `989f8ebb5bdf5f6ff2bef3542f93349c06f40117`），改为 `SimGrid` 可变宽高；非字节拷贝
+- `sim/scout_sim.gd`、`scripts/w4_scout_test.gd`：PLAY-2 侦察阶段（本分支新建）
+- `view/combat_fx.gd`、`scripts/w5_combat_fx_test.gd`：PLAY-3 战斗表现（本分支新建）；枪口样式参考 `ambush_loop/scripts/fx/muzzle_flash.gd`（非字节拷贝）
+- 额外 SFX 使用已入库 `art/audio_v2/{hit,body_drop,alarm,kill}.wav`（见上表 CB5 拷贝）
 
