@@ -1,6 +1,6 @@
 # Ambush VS — 第三方与素材许可台账（初稿）
 
-本台账覆盖 `ambush_vs/art/` 与 `ambush_vs/ui/fonts/` 下入库素材。引入提交见分支 `vs/core`；逐文件路径与来源 SHA 见 `PROVENANCE_VS.md`。
+本台账覆盖 `ambush_vs/art/`、`ambush_vs/assets/audio_v2/` 与 `ambush_vs/ui/fonts/` 下入库素材。引入提交见分支 `vs/core`；逐文件路径与来源 SHA 见 `PROVENANCE_VS.md`。
 
 | 路径 / 包 | 许可 | 来源摘要 | 状态 |
 | --- | --- | --- | --- |
@@ -8,6 +8,7 @@
 | `ui/fonts/DejaVuSans.ttf`、`ui/fonts/DejaVu-LICENSE.txt` | Bitstream Vera + DejaVu 变更（见许可证文件） | DejaVu Sans 2.37；自 CB5 tip 拷贝 | 已入库；全文见 `ui/fonts/DejaVu-LICENSE.txt` |
 | `ui/fonts/README.md`、`ui/fonts/web_ui_font.tres` | 项目说明 / Godot 资源 | 随字体包自 CB5 tip 拷贝 | 已入库 |
 | `art/audio_v2/*.wav`、`art/audio_v2/manifest.json` | CC0-1.0（生成音频）；manifest 注明脚本侧 MIT（脚本未拷入 VS） | 程序化合成，无采样录音；自 CB5 tip 拷贝 | 已入库；**`LICENSE` 在 CB5 tip 缺失，已于 VS 补回 `art/audio_v2/LICENSE`（CC0 1.0 Universal 全文）** |
+| `assets/audio_v2/*.wav`（hit/body_drop/alarm/kill/tension/ambient_yard） | CC0-1.0 | 自 `art/audio_v2/` 同名文件字节拷贝（T1 Web 导出） | 已入库；许可全文见 `art/audio_v2/LICENSE` |
 | `art/environment_v2/**`（GLB、贴图、materials、manifest） | 本项目原创程序化几何与材质；无外部付费依赖（见 manifest `usage`） | Blender 管线；自 CB5 tip 拷贝 | 已入库；非第三方，记入台账便于 CI 路径覆盖 |
 
 ## 引擎

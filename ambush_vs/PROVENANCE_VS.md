@@ -155,6 +155,21 @@
 
 合计拷贝文件数：138（不含本文件与新建骨架）。
 
+## T1 同仓字节拷贝（Web 导出）
+
+> T1（Web 音效导出修复）将下列 6 个运行时 cue 以**同仓字节拷贝**复制到 `assets/audio_v2/`，来源为 `vs/g3`。原因：Web 预设的 `exclude_filter` 排除 `art/*`，运行时引用必须放在 `assets/` 下才能进包；`art/audio_v2/` 仍为许可与来源记录。
+
+| 目标路径（ambush_vs/） | 来源路径 | 来源分支 | 来源 SHA |
+| --- | --- | --- | --- |
+| `assets/audio_v2/hit.wav` | `ambush_vs/art/audio_v2/hit.wav` | `vs/g3` | `0de03bc3892464578d2d9b5a8d9106522172b27b` |
+| `assets/audio_v2/body_drop.wav` | `ambush_vs/art/audio_v2/body_drop.wav` | `vs/g3` | `0de03bc3892464578d2d9b5a8d9106522172b27b` |
+| `assets/audio_v2/alarm.wav` | `ambush_vs/art/audio_v2/alarm.wav` | `vs/g3` | `0de03bc3892464578d2d9b5a8d9106522172b27b` |
+| `assets/audio_v2/kill.wav` | `ambush_vs/art/audio_v2/kill.wav` | `vs/g3` | `0de03bc3892464578d2d9b5a8d9106522172b27b` |
+| `assets/audio_v2/tension.wav` | `ambush_vs/art/audio_v2/tension.wav` | `vs/g3` | `0de03bc3892464578d2d9b5a8d9106522172b27b` |
+| `assets/audio_v2/ambient_yard.wav` | `ambush_vs/art/audio_v2/ambient_yard.wav` | `vs/g3` | `0de03bc3892464578d2d9b5a8d9106522172b27b` |
+
+本节合计：6。
+
 ## 本分支新建（非拷贝）
 
 - `project.godot`、`export_presets.cfg`、`icon.svg`（icon 视觉同 main `ambush_loop/icon.svg`，作 VS 占位）

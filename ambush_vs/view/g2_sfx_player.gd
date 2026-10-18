@@ -2,11 +2,23 @@ extends Node
 class_name G2SfxPlayer
 
 ## Thin one-shot SFX helper for greybox. Does not own gameplay logic.
-## Extra combat cues load from art/audio_v2 (already in tree / PROVENANCE).
+## Extra combat cues load from assets/audio_v2. These are byte-copies of the
+## art/audio_v2 sources kept under assets/ because the Web preset excludes
+## `art/*` from the pck (T1 web audio export fix); art/audio_v2 remains the
+## licensed source of record.
+
+const EXTRA_CUES := [
+	["hit", "res://assets/audio_v2/hit.wav"],
+	["body_drop", "res://assets/audio_v2/body_drop.wav"],
+	["alert_shout", "res://assets/audio_v2/alarm.wav"],
+	["kill", "res://assets/audio_v2/kill.wav"],
+	["tension", "res://assets/audio_v2/tension.wav"],
+	["ambient_yard", "res://assets/audio_v2/ambient_yard.wav"],
+]
 
 var assets = null ## G2Assets
 var _players: Array = [] ## AudioStreamPlayer pool
-var _extra: Dictionary = {} ## cue → AudioStream (art/audio_v2)
+var _extra: Dictionary = {} ## cue → AudioStream (assets/audio_v2)
 var enabled: bool = true
 var _mg42_gate_s: float = 0.0
 var _foot_gate_s: float = 0.0
@@ -26,14 +38,7 @@ func configure(g2_assets) -> void:
 	_ambient_player.bus = "Master"
 	add_child(_ambient_player)
 	_extra.clear()
-	for pair in [
-		["hit", "res://art/audio_v2/hit.wav"],
-		["body_drop", "res://art/audio_v2/body_drop.wav"],
-		["alert_shout", "res://art/audio_v2/alarm.wav"],
-		["kill", "res://art/audio_v2/kill.wav"],
-		["tension", "res://art/audio_v2/tension.wav"],
-		["ambient_yard", "res://art/audio_v2/ambient_yard.wav"],
-	]:
+	for pair in EXTRA_CUES:
 		var stream := load(str(pair[1])) as AudioStream
 		if stream:
 			_extra[str(pair[0])] = stream
