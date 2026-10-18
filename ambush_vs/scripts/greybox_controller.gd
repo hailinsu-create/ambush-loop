@@ -16,6 +16,8 @@ const GreyboxMapScript := preload("res://view/greybox_map.gd")
 const G2AssetsScript := preload("res://view/g2_assets.gd")
 const G2SfxPlayerScript := preload("res://view/g2_sfx_player.gd")
 const G3AssetsScript := preload("res://view/g3_assets.gd")
+const PlaytestMode := preload("res://ui/playtest_mode.gd")
+const MatchLog := preload("res://ui/match_log.gd")
 
 enum UiPhase { SCOUT, SETUP, WAIT, RESULT }
 enum PlaceMode { NONE, OP, MINE, TRIGGER_A, TRIGGER_B }
@@ -119,6 +121,21 @@ var example_plans_open: bool = false
 @onready var btn_restart: Button = $HUD/ResultPanel/Margin/VBox/RestartButton
 @onready var btn_rescout: Button = $HUD/ResultPanel/Margin/VBox/RescoutButton
 @onready var btn_restart_wait: Button = $HUD/WaitPanel/RestartWaitButton
+
+## P0-4: playtest build switch + match log export.
+var playtest_mode: bool = false
+var playtest_source: String = "off"
+var match_now_ms_fn: Callable = Callable() ## test clock (defaults to Time.get_ticks_msec())
+var last_match_log: Dictionary = {}
+var last_match_log_path: String = ""
+var export_count: int = 0
+var export_log_button: Button = null
+var export_log_status: Label = null
+var _match_beat: String = ""
+var _match_beat_started_ms: int = 0
+var _match_beats_ms: Dictionary = {"scout": 0, "setup": 0, "wait": 0, "fire": 0}
+var _match_started_unix: float = 0.0
+var _match_started_iso: String = ""
 
 ## PLAY-5 review + body search
 var last_review: Dictionary = {}
@@ -239,6 +256,9 @@ var layout_size_override: Vector2 = Vector2.ZERO ## tests/capture: stable size w
 
 
 func _ready() -> void:
+	playtest_source = PlaytestMode.source()
+	playtest_mode = playtest_source != "off"
+	_start_match_tracker()
 	_apply_cjk_font()
 	g2_assets = G2AssetsScript.new()
 	g2_assets.load_all()
@@ -276,6 +296,7 @@ func _ready() -> void:
 	_build_phase_tip_bar()
 	_strip_all_tooltips()
 	_install_hud_layout()
+	_build_export_log_controls()
 
 	btn_example.pressed.connect(func(): _ui_tap(); _toggle_example_plans())
 	btn_plan_a.pressed.connect(func(): _ui_tap(); _load_preset("A"))
@@ -307,20 +328,27 @@ func _ready() -> void:
 	_apply_touch_sizing()
 	_relayout_hud()
 
-	# Headless automation hooks (W3 test / PNG capture).
-	_headless_auto = str(OS.get_environment("AMBUSH_GREYBOX_AUTO")).to_lower() in ["1", "true", "a"]
-	_capture_path = str(OS.get_environment("AMBUSH_GREYBOX_CAPTURE"))
-	var art_env := str(OS.get_environment("AMBUSH_GREYBOX_ART")).to_lower()
-	if art_env in ["g1", "1"]:
-		map_view.set_art_mode(map_view.ArtMode.G1)
-		art_mode_name = "G1"
-		_refresh_art_button()
-	elif art_env in ["g2", "2"]:
-		map_view.set_art_mode(map_view.ArtMode.G2)
-		art_mode_name = "G2"
-		_refresh_art_button()
-	var skip_scout := str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]
-	var skip_brief := str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]
+	# Headless automation hooks (W3 test / PNG capture); ignored by playtest builds.
+	if not playtest_mode:
+		_headless_auto = str(OS.get_environment("AMBUSH_GREYBOX_AUTO")).to_lower() in ["1", "true", "a"]
+		_capture_path = str(OS.get_environment("AMBUSH_GREYBOX_CAPTURE"))
+		var art_env := str(OS.get_environment("AMBUSH_GREYBOX_ART")).to_lower()
+		if art_env in ["g1", "1"]:
+			map_view.set_art_mode(map_view.ArtMode.G1)
+			art_mode_name = "G1"
+			_refresh_art_button()
+		elif art_env in ["g2", "2"]:
+			map_view.set_art_mode(map_view.ArtMode.G2)
+			art_mode_name = "G2"
+			_refresh_art_button()
+	var skip_scout := (
+		(not playtest_mode)
+		and str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]
+	)
+	var skip_brief := (
+		(not playtest_mode)
+		and str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]
+	)
 	if skip_scout:
 		gathered_kit = level.get("loadout_start", {}).duplicate(true)
 		_init_blank_plan()
@@ -342,6 +370,7 @@ func _ready() -> void:
 			call_deferred("_auto_run_plan_b")
 		else:
 			call_deferred("_auto_run_plan_a")
+	_apply_playtest_lockdown()
 
 
 func _apply_cjk_font() -> void:
@@ -381,6 +410,118 @@ func _refresh_art_button() -> void:
 	if btn_g2_art == null:
 		return
 	btn_g2_art.text = "美术：%s" % art_mode_name
+
+
+func _build_export_log_controls() -> void:
+	## P0-4: export button lives next to 「重新侦察」; playtest builds only.
+	if btn_rescout == null or btn_rescout.get_parent() == null:
+		return
+	var parent := btn_rescout.get_parent()
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	export_log_button = Button.new()
+	export_log_button.name = "ExportLogButton"
+	export_log_button.text = "导出日志"
+	export_log_button.custom_minimum_size = btn_rescout.custom_minimum_size
+	export_log_button.add_theme_font_size_override("font_size", btn_rescout.get_theme_font_size("font_size"))
+	if font_res:
+		export_log_button.add_theme_font_override("font", font_res)
+	export_log_button.visible = playtest_mode
+	export_log_button.pressed.connect(func(): _ui_tap(); export_match_log())
+	parent.add_child(export_log_button)
+	export_log_status = Label.new()
+	export_log_status.name = "ExportLogStatus"
+	export_log_status.text = ""
+	export_log_status.visible = false
+	export_log_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	export_log_status.add_theme_font_size_override("font_size", 12)
+	if font_res:
+		export_log_status.add_theme_font_override("font", font_res)
+	parent.add_child(export_log_status)
+
+
+func export_match_log() -> bool:
+	if last_match_log.is_empty():
+		return false
+	var text := JSON.stringify(last_match_log, "  ")
+	if DisplayServer.get_name() != "headless":
+		DisplayServer.clipboard_set(text)
+	var fname := last_match_log_path.get_file()
+	if fname.is_empty():
+		fname = "match.json"
+	if OS.has_feature("web"):
+		JavaScriptBridge.download_buffer(text.to_utf8_buffer(), fname, "application/json")
+		if export_log_status:
+			export_log_status.text = "已下载并复制到剪贴板"
+	else:
+		if export_log_status:
+			export_log_status.text = "已保存：%s（已复制）" % ProjectSettings.globalize_path(last_match_log_path)
+	if export_log_status:
+		export_log_status.visible = true
+	export_count += 1
+	return true
+
+
+func _apply_playtest_lockdown() -> void:
+	## P0-4: playtest builds expose no dev/debug entries.
+	if not playtest_mode:
+		return
+	if btn_dev_toggle:
+		btn_dev_toggle.visible = false
+		btn_dev_toggle.disabled = true
+	if dev_menu:
+		dev_menu.visible = false
+	for b in [btn_example, btn_plan_a, btn_plan_b, btn_preview, btn_g2_art, btn_scout_preview]:
+		if b:
+			b.visible = false
+			b.disabled = true
+	example_plans_open = false
+	if export_log_button:
+		export_log_button.visible = true
+
+
+func dev_entries_visible() -> bool:
+	for n in [btn_dev_toggle, dev_menu, btn_example, btn_plan_a, btn_plan_b, btn_preview, btn_g2_art, btn_scout_preview]:
+		if n != null and (n as Control).is_visible_in_tree():
+			return true
+	return false
+
+
+func force_leak_allowed() -> bool:
+	## Capture-only debug hook; never available to playtest builds.
+	if playtest_mode:
+		return false
+	return _capture_path != "" and str(OS.get_environment("AMBUSH_GREYBOX_FORCE_LEAK")).to_lower() in ["1", "true"]
+
+
+func _match_now_ms() -> int:
+	if match_now_ms_fn.is_valid():
+		return int(match_now_ms_fn.call())
+	return Time.get_ticks_msec()
+
+
+func _start_match_tracker() -> void:
+	_match_beats_ms = {"scout": 0, "setup": 0, "wait": 0, "fire": 0}
+	_match_beat = ""
+	_match_beat_started_ms = _match_now_ms()
+	_match_started_unix = Time.get_unix_time_from_system()
+	_match_started_iso = Time.get_datetime_string_from_system()
+
+
+func _match_switch_beat(beat: String) -> void:
+	if _match_beat == beat:
+		return
+	_close_match_beat()
+	_match_beat = beat
+	_match_beat_started_ms = _match_now_ms()
+
+
+func _close_match_beat() -> void:
+	if _match_beat.is_empty():
+		return
+	var now := _match_now_ms()
+	_match_beats_ms[_match_beat] = int(_match_beats_ms.get(_match_beat, 0)) + maxi(0, now - _match_beat_started_ms)
+	_match_beat = ""
+	_match_beat_started_ms = now
 
 
 func starting_kit_weapon_ids() -> Array:
@@ -557,11 +698,17 @@ func _op_id_for_weapon(wid: String) -> String:
 
 
 func _toggle_example_plans() -> void:
+	if playtest_mode:
+		example_plans_open = false
+		return
 	example_plans_open = not example_plans_open
 	_set_example_plans_visible(example_plans_open)
 
 
 func _set_example_plans_visible(vis: bool) -> void:
+	if playtest_mode:
+		example_plans_open = false
+		return
 	example_plans_open = vis
 	if btn_plan_a:
 		btn_plan_a.visible = vis
@@ -784,6 +931,8 @@ func _fill_trigger_options() -> void:
 
 
 func _load_preset(which: String) -> void:
+	if playtest_mode:
+		return
 	var path := "res://data/fixtures/plan_a.json" if which == "A" else "res://data/fixtures/plan_b.json"
 	plan = SimRunner.load_json(path).duplicate(true)
 	op_display_names.clear()
@@ -1918,11 +2067,12 @@ func _phase_name(p: UiPhase) -> String:
 
 
 func _maybe_show_phase_tip(p: UiPhase) -> void:
-	if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]:
-		return
-	## Isolation / layout smokes set SKIP_SCOUT — don't inject tips under asserts.
-	if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]:
-		return
+	if not playtest_mode:
+		if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_BRIEF")).to_lower() in ["1", "true"]:
+			return
+		## Isolation / layout smokes set SKIP_SCOUT — don't inject tips under asserts.
+		if str(OS.get_environment("AMBUSH_GREYBOX_SKIP_SCOUT")).to_lower() in ["1", "true"]:
+			return
 	if _headless_auto:
 		return
 	if briefing_card and briefing_card.visible:
@@ -2021,6 +2171,9 @@ func _build_dev_menu() -> void:
 	$HUD.add_child(dev_menu)
 	btn_dev_toggle.pressed.connect(func():
 		_ui_tap()
+		if playtest_mode:
+			dev_menu.visible = false
+			return
 		dev_menu.visible = not dev_menu.visible
 	)
 	# Move debug controls into the menu (reparent keeps signal connections).
@@ -2038,6 +2191,7 @@ func _build_dev_menu() -> void:
 		btn_plan_a.visible = false
 	if btn_plan_b:
 		btn_plan_b.visible = false
+	_apply_playtest_lockdown()
 
 
 func _apply_touch_sizing() -> void:
@@ -2647,6 +2801,15 @@ func _set_ui_phase(p: UiPhase) -> void:
 	_relayout_hud()
 	_apply_default_camera()
 	_maybe_show_phase_tip(p)
+	match p:
+		UiPhase.SCOUT:
+			_match_switch_beat("scout")
+		UiPhase.SETUP:
+			_match_switch_beat("setup")
+		UiPhase.WAIT:
+			_match_switch_beat("wait")
+		UiPhase.RESULT:
+			_close_match_beat()
 	if p == UiPhase.SETUP and undo_stack.is_empty() and not plan.is_empty():
 		# Baseline so first undo after mutations is meaningful.
 		pass
@@ -2797,6 +2960,7 @@ func _restart() -> void:
 	sim = null
 	last_summary = {}
 	last_review = {}
+	_start_match_tracker()
 	searched_bodies.clear()
 	body_search_enabled = false
 	preview_cell = Vector2i(-1, -1)
@@ -2816,6 +2980,7 @@ func _restart_scout() -> void:
 	scout = null
 	last_summary = {}
 	last_review = {}
+	_start_match_tracker()
 	searched_bodies.clear()
 	body_search_enabled = false
 	plan = {}
@@ -3797,6 +3962,8 @@ func _tick_cone_tension() -> void:
 
 func _consume_sim_log() -> void:
 	## Feed new NightSim log events into combat FX + per-shot audio.
+	if sim != null and sim.detonate_tick >= 0 and _match_beat == "wait":
+		_match_switch_beat("fire")
 	if sim == null or map_view == null or map_view.combat_fx == null:
 		return
 	var events: Array = sim.log.events
@@ -3931,6 +4098,21 @@ func _alert_zh(a: String) -> String:
 func _show_result() -> void:
 	last_summary = sim.outcome_summary()
 	last_review = ReviewBuilder.build(sim, plan, op_display_names)
+	_close_match_beat()
+	if sim != null:
+		last_match_log = MatchLog.build(
+			last_summary,
+			sim.log.events,
+			str(level.get("id", "")),
+			plan,
+			playtest_mode,
+			playtest_source,
+			_match_started_iso,
+			_match_started_unix,
+			_match_beats_ms,
+			int(sim.tick)
+		)
+		last_match_log_path = MatchLog.save(last_match_log)
 	if sfx:
 		sfx.stop_ambient()
 	searched_bodies.clear()
@@ -4231,10 +4413,7 @@ func _auto_run_plan(which: String) -> void:
 	var captured_cover_fire := false
 	var captured_wounded := false
 	## Capture-only helper; never arm during normal AUTO tests (require CAPTURE dir).
-	var force_leak := (
-		_capture_path != ""
-		and str(OS.get_environment("AMBUSH_GREYBOX_FORCE_LEAK")).to_lower() in ["1", "true"]
-	)
+	var force_leak := force_leak_allowed()
 	var leak_armed := false
 	while sim != null and not sim.is_finished():
 		sim.advance_one_tick()
