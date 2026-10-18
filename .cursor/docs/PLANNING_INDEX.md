@@ -1,12 +1,13 @@
 # Ambush Loop 规划与续开发入口
 
-更新日期：2026-10-17。仅用于本游戏；设计文件不是实现或验收证明。
+更新日期：2026-10-18。仅用于本游戏；设计文件不是实现或验收证明。
 
 ## 当前有效规划
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS P0-3 简报与最小教学 2026-10-17](VS_P0_3_BRIEF_20261017.md) | **当前 VS 执行切片**：开局简报 + 阶段提示 + 教学文案黑名单。分支 `vs/p0-3-brief` → draft PR 合入 `vs/p0-2-aim`。**不合并**。试玩 Pages 部署被环境分支策略阻塞（见文档）。 |
+| [VS P0-4 试玩构建开关 + 对局日志 2026-10-18](VS_P0_4_PLAYTEST_20261018.md) | **当前 VS 执行切片**：`?playtest=1` / `AMBUSH_PLAYTEST` / feature `playtest` 隐藏开发入口；每局 JSON 日志 + 「导出日志」；W9 新增。分支 `vs/p0-4-playtest` → draft PR 合入 `vs/g3`。**不合并**。 |
+| [VS P0-3 简报与最小教学 2026-10-17](VS_P0_3_BRIEF_20261017.md) | 开局简报 + 阶段提示 + 教学文案黑名单。分支 `vs/p0-3-brief` → draft PR 合入 `vs/p0-2-aim`。**不合并**。试玩 Pages 部署被环境分支策略阻塞（见文档）。 |
 | [VS P0-2 朝向吸附与放大镜 2026-10-17](VS_P0_2_AIM_SNAP_20261017.md) | 放大镜 + AimSnap + G.1 容差门；结果表 [`ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md`](../../ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md)。分支 `vs/p0-2-aim` → draft PR 合入 `vs/p0-1-counterex`。**不合并**；已被 P0-3 接续。 |
 | [VS P0-1 D.3 反例门 2026-10-17](VS_P0_1_COUNTEREX_20261017.md) | 切片 0–4 已验证（D.3 门全绿）；结果表 [`ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md`](../../ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md)；院子纸面 **v1.6**。分支 `vs/p0-1-counterex` → draft PR 合入 `vs/g3`。**不合并**；已被 P0-2 接续。 |
 | [VS UX 布局修复 2026-10-17](VS_UX_LAYOUT_20261017.md) | 手机紧凑头像条 + 取景排除 HUD；W8 **273**。PR #57 → `vs/g2`。**不合并**；已被 P0-1 反例门接续。 |
