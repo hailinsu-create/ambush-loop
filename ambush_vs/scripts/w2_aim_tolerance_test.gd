@@ -20,18 +20,13 @@ const AimSnap := preload("res://sim/aim_snap.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimGeom := preload("res://sim/geom.gd")
 
-## T6 hard default (assist OFF): these finger-slip matrix cells still complete the
-## ambush but a flank escapes. Exact measured outcomes, no range fallback.
-const HARD_TIER_EXCEPTIONS := {
-	"A|0|5,10|-5": {"outcome": "lose", "escapes": ["F2", "F1"]},
-	"A|0|5,10|0": {"outcome": "lose", "escapes": ["F2", "F1"]},
-	"A|0|5,10|5": {"outcome": "lose", "escapes": ["F2", "F1"]},
-	"B|0|9,6|-5": {"outcome": "lose", "escapes": ["E2"]},
-	"B|0|9,6|0": {"outcome": "lose", "escapes": ["E2"]},
-	"B|0|9,6|5": {"outcome": "lose", "escapes": ["E2"]},
-	"B|1|15,8|-5": {"outcome": "lose", "escapes": ["E4"]},
-	"B|1|15,8|0": {"outcome": "lose", "escapes": ["E4"]},
-}
+## T7 yard v1.7: every cover-pad ±1 cell must either win or be explicitly
+## forbidden in the level (`no_place` + Chinese reason, rejected by the controller).
+## The old T6 finger-slip lose exceptions are gone: those cells are now no_place.
+const WEST_NO_PLACE_CELLS := [
+	Vector2i(7, 4), Vector2i(7, 5), Vector2i(7, 6), Vector2i(8, 4),
+]
+const NO_PLACE_REASON_WEST := "此掩体侧射界被挡，禁止落位"
 
 var _failed := 0
 var _passed := 0
@@ -57,9 +52,26 @@ func _assert(cond: bool, msg: String) -> void:
 
 func _run() -> void:
 	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	_assert_west_cells_explicitly_forbidden(level)
 	_assert_plan_tolerance("A", "res://data/fixtures/plan_a.json", level)
 	_assert_plan_tolerance("B", "res://data/fixtures/plan_b.json", level)
 	_assert_counterex_still_holds()
+
+
+func _no_place_reason(level: Dictionary, x: int, y: int) -> String:
+	for c in level.get("cells", []):
+		if int(c["x"]) == x and int(c["y"]) == y:
+			if not bool(c.get("no_place", false)):
+				return ""
+			return str(c.get("no_place_reason_zh", ""))
+	return ""
+
+
+func _assert_west_cells_explicitly_forbidden(level: Dictionary) -> void:
+	for cell in WEST_NO_PLACE_CELLS:
+		var reason := _no_place_reason(level, cell.x, cell.y)
+		_assert(reason == NO_PLACE_REASON_WEST,
+			"west no-place cell (%d,%d) reason=%s" % [cell.x, cell.y, reason])
 
 
 func _high_slots(level: Dictionary) -> Dictionary:
@@ -78,13 +90,6 @@ func _slot_of(xy: Vector2i, slots: Dictionary) -> String:
 			if c == xy:
 				return str(id)
 	return ""
-
-
-func _has_cover(level: Dictionary, x: int, y: int) -> bool:
-	for c in level.get("cells", []):
-		if int(c["x"]) == x and int(c["y"]) == y:
-			return c.has("cover") and c["cover"] != null
-	return false
 
 
 ## Intent landmark for an operator in a published plan (neutral names only).
@@ -124,13 +129,9 @@ func _cells_to_test(which: String, oi: int, op: Dictionary, level: Dictionary, s
 				if absi(c.x - ox0) <= 1 and absi(c.y - oy0) <= 1:
 					add.call(c)
 		return out
-	var home_cover := _has_cover(level, ox0, oy0)
 	for dx in [-1, 0, 1]:
 		for dy in [-1, 0, 1]:
-			var c := Vector2i(ox0 + int(dx), oy0 + int(dy))
-			if home_cover and c != home and not _has_cover(level, c.x, c.y):
-				continue ## off cover-pad (wrong side of sandbags) — not a G.1 finger slip
-			add.call(c)
+			add.call(Vector2i(ox0 + int(dx), oy0 + int(dy)))
 	return out
 
 
@@ -154,15 +155,12 @@ func _assert_plan_tolerance(which: String, path: String, level: Dictionary) -> v
 				p["operators"][oi]["y"] = oy
 				p["operators"][oi]["facing_deg"] = center_f + float(df)
 				var s: Dictionary = SimRunner.run_plan_dict(p)
-				var key := "%s|%d|%d,%d|%d" % [which, oi, ox, oy, int(df)]
 				var tag := "%s op%d@(%d,%d) aim%+.0f (c=%.1f)" % [which, oi, ox, oy, df, center_f]
-				if HARD_TIER_EXCEPTIONS.has(key):
-					var exp: Dictionary = HARD_TIER_EXCEPTIONS[key]
-					var got_esc: Array = s.get("escapes", [])
-					_assert(
-						str(s.get("outcome", "")) == str(exp["outcome"]) and got_esc == exp["escapes"],
-						"%s hard-tier outcome=%s esc=%s (want %s/%s)" % [
-							tag, s.get("outcome"), got_esc, exp["outcome"], exp["escapes"]])
+				var no_place := _no_place_reason(level, ox, oy)
+				if not no_place.is_empty():
+					_assert(str(s.get("outcome", "")) != "",
+						"%s no_place reason=%s (measured outcome=%s esc=%s)" % [
+							tag, no_place, s.get("outcome"), s.get("escapes")])
 				else:
 					_assert(str(s.get("outcome", "")) == "win",
 						"%s wins got=%s esc=%s" % [tag, s.get("outcome"), s.get("escapes")])

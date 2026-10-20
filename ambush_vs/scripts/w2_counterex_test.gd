@@ -19,13 +19,23 @@ const TICK_HZ := 20
 const T0_A := 520
 const T0_B := 560
 
+## T7 strict group: these four key mistakes must end in outcome=="lose" on the
+## default hard tier. (They used to be win and only satisfied D.3 on paper.)
+## 代定，盲测后可调：调 STRICT_LOSE_IDS 后同步结果页与 yard_paper_v1_7。
+const STRICT_LOSE_IDS := ["F-A60", "T-A+2", "T-A+4", "W-A-MG→Kar"]
+## T7 transition gate (owner-defaulted): if a strict case cannot be made to lose,
+## it may pass only as win + standard_ambush==false + grade C + a review cause
+## naming the timing/geometry mistake. Target is empty; T-A+4 must never be standard.
+## 代定，盲测后可调：关掉即恢复“严判组必须全 lose”。
+const COUNTEREX_TRANSITION_GATE := true
+## 代定，盲测后可调：逐例登记走过渡门的用例（当前为空 = 全部已判负）。
+const TRANSITION_IDS := []
 ## Cases that satisfy D.3 under the new default (assist OFF; strict three-criterion D.3).
 const HOLDING_IDS := [
-	"F-A30", "F-A60",
+	"F-A30",
 	"F-B30", "F-B60",
-	"T-A-4", "T-A-2", "T-A+2", "T-A+4",
+	"T-A-4", "T-A-2",
 	"T-B-4", "T-B-2", "T-B+2", "T-B+4",
-	"W-A-MG→Kar",
 	"S-unscout-east",
 ]
 ## Cases that do NOT satisfy D.3 under assist OFF (document; watch regressions).
@@ -67,6 +77,8 @@ func _run_all() -> void:
 	_rows.append_array(on_matrix.values())
 	_assert_baselines(on_matrix, off_matrix)
 	_assert_holding_gates(off_matrix)
+	_assert_strict_loses(off_matrix)
+	_assert_transition_gate(off_matrix)
 	_assert_pending_documented(off_matrix)
 	_assert_alert_wins(on_matrix, off_matrix)
 	_assert_soft_cap_control_differs(on_matrix, off_matrix)
@@ -102,6 +114,9 @@ func _run_plan(plan: Dictionary, soft_cap: bool) -> Dictionary:
 	sim.enemy_return_soft_cap = soft_cap
 	var summary: Dictionary = sim.run()
 	var m := _metrics(summary, sim.log.events)
+	var rev := ReviewBuilder.build(sim, plan)
+	m["grade"] = str(rev.get("grade", ""))
+	m["causes"] = rev.get("causes", [])
 	m["soft_cap"] = soft_cap
 	return m
 
@@ -322,6 +337,50 @@ func _assert_holding_gates(off_m: Dictionary) -> void:
 		var r: Dictionary = off_m[id]
 		_assert(bool(r.get("holds_strict", false)),
 			"holding gate %s must stay D.3-true under default assist OFF" % id)
+
+
+func _assert_strict_loses(off_m: Dictionary) -> void:
+	for id in STRICT_LOSE_IDS:
+		if COUNTEREX_TRANSITION_GATE and TRANSITION_IDS.has(id):
+			continue ## fallback: self._assert_transition_gate enforces win/C/non-standard
+		var r: Dictionary = off_m[id]
+		var outcome := str(r.get("outcome", ""))
+		_assert(outcome == "lose", "strict %s outcome=lose got=%s" % [id, outcome])
+		var evidence := (
+			int(r.get("escape_n", 0)) >= 1
+			or int(r.get("dead_ops_n", 0)) >= 1
+			or float(r.get("clear_s", -1.0)) < 0.0
+		)
+		_assert(evidence, "strict %s has fail evidence esc=%s dead=%s clear=%s" % [
+			id, r.get("escape_n"), r.get("dead_ops_n"), r.get("clear_s")])
+		_assert(bool(r.get("standard_ambush", true)) == false,
+			"strict %s is not a standard ambush" % id)
+	var ta4: Dictionary = off_m["T-A+4"]
+	_assert(bool(ta4.get("standard_ambush", true)) == false,
+		"T-A+4 standard_ambush must be false")
+
+
+func _assert_transition_gate(off_m: Dictionary) -> void:
+	_assert(COUNTEREX_TRANSITION_GATE == true,
+		"T7 transition gate is enabled as fallback")
+	_assert(TRANSITION_IDS.is_empty(),
+		"T7 transition list is empty (all strict cases lose) got=%s" % [TRANSITION_IDS])
+	for id in TRANSITION_IDS:
+		_assert(STRICT_LOSE_IDS.has(id), "transition id %s is a strict case" % id)
+	if not COUNTEREX_TRANSITION_GATE:
+		return
+	for id in TRANSITION_IDS:
+		var r: Dictionary = off_m[id]
+		if str(r.get("outcome", "")) == "lose":
+			_assert(true, "transition case %s resolved by geometry (lose)" % id)
+			continue
+		_assert(str(r.get("outcome", "")) == "win", "transition %s is win got=%s" % [id, r.get("outcome")])
+		_assert(bool(r.get("standard_ambush", true)) == false,
+			"transition %s is not standard" % id)
+		_assert(str(r.get("grade", "")) == "C", "transition %s grade C got=%s" % [id, r.get("grade")])
+		var joined := "|".join(r.get("causes", []))
+		_assert(joined.contains("晚") or joined.contains("偏早") or joined.contains("朝向") or joined.contains("漏网"),
+			"transition %s review names the mistake got=%s" % [id, joined])
 
 
 func _assert_pending_documented(off_m: Dictionary) -> void:
