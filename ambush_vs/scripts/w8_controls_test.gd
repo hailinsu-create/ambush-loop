@@ -31,6 +31,8 @@ func _run_all() -> void:
 	await _test_hud_touch_sizing()
 	await _test_scout_path_preview()
 	await _test_undo_cancel()
+	await _test_climb_placement_feedback()
+	await _test_climb_wait_status()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
@@ -713,6 +715,103 @@ func _test_undo_cancel() -> void:
 		return
 	_assert(false, "undo scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _portrait_status_text(scene) -> String:
+	## Ignore nodes already queued for deletion by a portrait rebuild this frame.
+	var out := ""
+	if scene.portrait_strip == null:
+		return out
+	for c in scene.portrait_strip.get_children():
+		if c is BaseButton and not (c as BaseButton).is_queued_for_deletion():
+			out += str((c as BaseButton).text) + "\n"
+	return out
+
+
+func _test_climb_placement_feedback() -> void:
+	## T5: placing on a high cell says the operator will climb first; ground does
+	## not; undoing the high placement leaves no climb state at wait start.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb feedback scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		var ops: Array = scene.plan.get("operators", [])
+		var id0 := str(ops[0]["id"])
+		var id1 := str(ops[1]["id"])
+		scene.scripted_place_operator(id0, 5, 9, 0.0)
+		_assert(str(scene.label_info.text).contains("攀爬"),
+			"high placement label mentions 攀爬 got=%s" % scene.label_info.text)
+		scene.selected_op_id = id0
+		scene._undo()
+		scene.scripted_place_operator(id1, 11, 2, 90.0)
+		_assert(not str(scene.label_info.text).contains("攀爬"),
+			"ground placement label has no 攀爬 got=%s" % scene.label_info.text)
+		scene.scripted_place_cross_marker(10, 7, 12, 7)
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "climb feedback sim started")
+			return
+		var op0 = scene.sim.operators[0]
+		_assert(bool(op0.get("climbing", false)) == false,
+			"undone high placement does not climb at wait start")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "climb feedback scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_climb_wait_status() -> void:
+	## T5: at wait start the info line and the portrait card say 攀爬中 (no
+	## blacklisted teaching words); the card clears once the climb ends.
+	const BriefingCopy := preload("res://ui/briefing_copy.gd")
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb status scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		scene.apply_layout_size(1280, 720)
+		await process_frame
+		var ops: Array = scene.plan.get("operators", [])
+		var id0 := str(ops[0]["id"])
+		var id1 := str(ops[1]["id"])
+		scene.scripted_place_operator(id0, 5, 9, 0.0)
+		scene.scripted_place_operator(id1, 11, 2, 90.0)
+		scene.scripted_place_cross_marker(10, 7, 12, 7)
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "climb status sim started")
+			return
+		scene.paused = true
+		_assert(str(scene.label_info.text).contains("攀爬中"),
+			"wait opening label mentions 攀爬中 got=%s" % scene.label_info.text)
+		_assert(BriefingCopy.forbidden_hits(str(scene.label_info.text)).is_empty(),
+			"wait opening label blacklist clean got=%s" % str(scene.label_info.text))
+		_assert(_portrait_status_text(scene).contains("攀爬中"),
+			"portrait shows 攀爬中 at wait start got=%s" % _portrait_status_text(scene))
+		for _t in range(40):
+			scene.sim.advance_one_tick()
+		scene._refresh_climb_status()
+		_assert(not _portrait_status_text(scene).contains("攀爬中"),
+			"portrait clears 攀爬中 after climb got=%s" % _portrait_status_text(scene))
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "climb status scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 
 
 func _test_camera_zoom_pan() -> void:

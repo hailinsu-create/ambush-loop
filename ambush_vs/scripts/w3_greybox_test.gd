@@ -33,6 +33,7 @@ func _run_all() -> void:
 	_test_mg42_not_in_starting_kit()
 	await _test_blank_start_not_startable()
 	await _test_scripted_placement_reaches_result()
+	await _test_start_wait_climb()
 	await _test_greybox_scene_boots()
 	print("W3_GREYBOX_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -243,6 +244,59 @@ func _test_scripted_placement_reaches_result() -> void:
 	_assert(int(ls.get("detonate_tick", -1)) >= 0, "scripted placement detonated")
 
 
+func _test_start_wait_climb() -> void:
+	## T5: on _start_wait every high-cell operator begins a ~2 s (40 tick) climb
+	## from an adjacent ground departure cell (ground tier, no fire); ground
+	## operators do not climb. After 40 sim ticks the high op is back on its
+	## target cell at high tier and can fire again.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb scene err=%s" % err)
+	var scene = await _wait_scene_ready()
+	_assert(scene != null, "climb scene ready")
+	if scene == null:
+		return
+	if scene.has_method("begin_setup_from_scout"):
+		scene.begin_setup_from_scout()
+		for _i in range(4):
+			await process_frame
+	var ops: Array = scene.plan.get("operators", [])
+	_assert(ops.size() >= 3, "climb has operators")
+	var id0 := str(ops[0]["id"])
+	var id1 := str(ops[1]["id"])
+	var id2 := str(ops[2]["id"])
+	scene.scripted_place_operator(id0, 5, 9, 0.0)
+	scene.scripted_place_operator(id1, 13, 7, 15.0)
+	scene.scripted_place_operator(id2, 11, 2, 90.0)
+	scene.scripted_place_cross_marker(10, 7, 12, 7)
+	scene._start_wait()
+	if scene.sim == null:
+		_assert(false, "climb sim started")
+		return
+	var sim = scene.sim
+	var high0 = sim.operators[0]
+	var low2 = sim.operators[2]
+	_assert(bool(high0.get("climbing", false)) == true, "climb high op climbing at wait start")
+	_assert(str(high0.get("tier", "")) == "ground", "climb high op tier ground while climbing got=%s" % high0.get("tier"))
+	_assert(bool(high0.get("can_fire", true)) == false, "climb high op cannot fire while climbing")
+	var dep0: Vector2i = scene._climb_departure_cell(Vector2i(5, 9))
+	_assert(
+		int(high0["x"]) == dep0.x and int(high0["y"]) == dep0.y
+			and scene.grid.tier_at(float(dep0.x), float(dep0.y)) == "ground",
+		"climb high op runs at ground departure %s" % dep0
+	)
+	_assert(bool(low2.get("climbing", false)) == false, "climb ground op does not climb")
+	for _i in range(40):
+		sim.advance_one_tick()
+	_assert(
+		str(high0.get("tier", "")) == "high" and int(high0["x"]) == 5 and int(high0["y"]) == 9,
+		"climb high op on high target after 40 ticks got=(%s,%s)/%s" % [high0["x"], high0["y"], high0.get("tier")]
+	)
+	_assert(bool(high0.get("can_fire", true)) == true, "climb high op can fire after 40 ticks")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
 func _test_greybox_scene_boots() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
@@ -254,8 +308,14 @@ func _test_greybox_scene_boots() -> void:
 		if scene != null and scene.get("last_summary") is Dictionary:
 			var ls: Dictionary = scene.last_summary
 			if not ls.is_empty():
-				_assert(int(ls.get("detonate_tick", -1)) == 520, "scene auto plan A t0=520 got=%s" % ls.get("detonate_tick"))
-				_assert(bool(ls.get("standard_ambush", false)) == true, "scene auto standard_ambush")
+				## T5 climb changed plan A's auto scene result: the MG now climbs up
+				## from its east ground departure (6,9) during the first 2 s, where the
+				## southbound west patrol spots it → early suspicious, later area/global
+				## alert → alarm detonate at 298 instead of the cross_marker 520. The
+				## squad still wipes the wave (win) but the standard ambush is lost.
+				## The direct API tests above stay at 520/standard (no climb applied).
+				_assert(int(ls.get("detonate_tick", -1)) == 298, "scene auto plan A t0=298 (climb) got=%s" % ls.get("detonate_tick"))
+				_assert(bool(ls.get("standard_ambush", false)) == false, "scene auto plan A standard_ambush lost to climb exposure")
 				_assert(str(ls.get("outcome", "")) == "win", "scene auto win")
 				OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 				return

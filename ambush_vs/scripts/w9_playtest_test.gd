@@ -184,8 +184,16 @@ func _test_playtest_match_log_export() -> void:
 	var id0 := str(ops[0]["id"])
 	var id1 := str(ops[1]["id"])
 	var id2 := str(ops[2]["id"])
-	scene.scripted_place_operator(id0, 5, 9, 0.0)
-	scene.scripted_place_operator(id1, 13, 7, 15.0)
+	## T5: place on the ground cover slots (west_cover_8_5 / east_cover_16_8) rather
+	## than the plan-A high seats (5,9)/(13,7). Under the climb contract a high-cell
+	## operator starts the night 2 s on its exposed ground departure cell, so in this
+	## hand-built scenario the west patrol spots it instantly → premature
+	## area/global alert → "alarm" detonate while the shooters are already down,
+	## leaving zero "fire" events in the log. These ground slots keep the same
+	## intent (three scripted shooters + cross_marker at (10,7)-(12,7)) and restore
+	## the cross_marker t0 where the log records friendly fire.
+	scene.scripted_place_operator(id0, 8, 5, 38.0)
+	scene.scripted_place_operator(id1, 16, 8, 150.0)
 	scene.scripted_place_operator(id2, 11, 2, 90.0)
 	scene._on_op_weapon_picked(id0, "kar98k")
 	scene._on_op_weapon_picked(id1, "mp40")

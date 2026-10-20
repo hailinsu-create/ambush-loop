@@ -2414,6 +2414,19 @@ func _draw_units() -> void:
 			draw_string(ThemeDB.fallback_font, hp + Vector2(-8, -cell_px * 1.05), "眼", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.6, 0.95, 1.0, 0.95))
 		if high:
 			draw_arc(hp, cell_px * (1.05 if is_sel else 0.88), 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.7 if is_sel else 0.35), 1.6)
+		# T5 climb: operator is mid-climb at its departure ground cell.
+		if bool(op.get("climbing", false)):
+			var cs := Time.get_ticks_msec() * 0.006
+			draw_arc(hp, cell_px * 0.92, cs, cs + TAU * 0.8, 28, Color(0.6, 0.9, 1.0, 0.85), 2.0)
+			draw_string(
+				ThemeDB.fallback_font,
+				hp + Vector2(-6, -cell_px * 0.72),
+				"↑",
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				14,
+				Color(0.7, 0.95, 1.0, 0.95)
+			)
 		# PLAY-6 wounded: orange ring + label.
 		if bool(op.get("wounded", false)):
 			draw_arc(hp, cell_px * 0.68, 0, TAU, 24, Color(1.0, 0.45, 0.2, 0.95), 2.6)

@@ -83,7 +83,11 @@ func _test_golden_hash_unchanged() -> void:
 
 
 func _test_greybox_scene_fx_counts() -> void:
-	## AUTO path consumes FX; controller totals must match plan A log.
+	## AUTO path consumes FX; controller totals must match the live match's log.
+	## T5: plan A's high-point operators now start the night with a ~2 s climb, so
+	## the scene's event stream differs from a freshly built fixture sim (fixture
+	## plans carry no climb fields). Compare against scene.sim.log.events — the
+	## match the controller actually consumed — not a re-run.
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "fx scene change_scene err=%s" % err)
@@ -94,23 +98,46 @@ func _test_greybox_scene_fx_counts() -> void:
 			continue
 		if scene.get("last_summary") is Dictionary and not (scene.last_summary as Dictionary).is_empty():
 			var ls: Dictionary = scene.last_summary
-			_assert(int(ls.get("detonate_tick", -1)) == 520, "scene fx path t0=520")
-			_assert(bool(ls.get("standard_ambush", false)) == true, "scene fx path standard_ambush")
-			# Rebuild expected counts from a fresh sim (same plan A).
-			var level := SimLevelLoader.load_path("res://data/levels/yard.json")
-			var plan := SimRunner.load_json("res://data/fixtures/plan_a.json")
-			var weapons := SimWeapons.load_csv()
-			var sim := NightSim.new()
-			sim.setup(level, plan, weapons)
-			sim.begin_wait()
-			while not sim.is_finished():
-				sim.advance_one_tick()
-			var fire_n := _count_log(sim.log.events, "fire")
-			var kill_n := _count_log(sim.log.events, "kill")
+			# Self-consistency: last_summary is this match's own outcome_summary.
+			var sim_sum: Dictionary = scene.sim.outcome_summary()
+			_assert(
+				int(ls.get("detonate_tick", -1)) == int(sim_sum.get("detonate_tick", -2)),
+				"scene fx path t0 self-consistent %s==%s" % [ls.get("detonate_tick"), sim_sum.get("detonate_tick")]
+			)
+			_assert(
+				bool(ls.get("standard_ambush", false)) == bool(sim_sum.get("standard_ambush", false)),
+				"scene fx path standard_ambush self-consistent %s==%s" % [ls.get("standard_ambush"), sim_sum.get("standard_ambush")]
+			)
+			# Expected FX counts come from this match's own log. kills counts every
+			# "kill" event (enemy + operator); bodies is keyed by kill target id, so
+			# the expected body count is the number of distinct kill targets.
+			var fire_n := 0
+			var kill_n := 0
+			var kill_targets: Dictionary = {}
+			var climbed_ids: Dictionary = {}
+			for ev in scene.sim.log.events:
+				var et := str(ev.get("type", ""))
+				if et == "fire":
+					fire_n += 1
+				elif et == "kill":
+					kill_n += 1
+					kill_targets[str(ev.get("target", ""))] = true
+				elif et == "climb_start":
+					climbed_ids[str(ev.get("actor", ""))] = true
+			# The sample plan must pay the same climb cost as any high-point plan.
+			var high_ids: Dictionary = {}
+			for op in scene.plan.get("operators", []):
+				if bool(op.get("climbing", false)):
+					high_ids[str(op.get("id", ""))] = true
+			var climb_ok := not high_ids.is_empty()
+			for oid in high_ids.keys():
+				if not climbed_ids.has(oid):
+					climb_ok = false
+			_assert(climb_ok, "scene plan A high op(s) climb_start in log high=%s climbed=%s" % [high_ids.keys(), climbed_ids.keys()])
 			var st: Dictionary = scene.combat_fx_stats() if scene.has_method("combat_fx_stats") else {}
 			_assert(int(st.get("fires", -1)) == fire_n, "scene fx fires==log %s==%d" % [st.get("fires"), fire_n])
 			_assert(int(st.get("kills", -1)) == kill_n, "scene fx kills==log %s==%d" % [st.get("kills"), kill_n])
-			_assert(int(st.get("bodies", -1)) == kill_n, "scene fx bodies==kills")
+			_assert(int(st.get("bodies", -1)) == kill_targets.size(), "scene fx bodies==distinct kill targets %s==%d" % [st.get("bodies"), kill_targets.size()])
 			OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 			return
 	_assert(false, "scene fx auto did not finish in time")

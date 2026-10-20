@@ -147,6 +147,8 @@ const NEXT_NIGHT_KIT_PATH := "user://next_night_kit.json"
 ## PLAY-UX PR-2: bottom-left portrait strip (all phases).
 var portrait_strip: HBoxContainer = null
 var _facing_submit_count: int = 0 ## test: wait re-aim submissions
+## T5 climb: signature of the last climbing state pushed to the portrait strip.
+var _climb_status_sig: String = ""
 ## PLAY-UX PR-4: explicit tools + trigger chips.
 var tool_bar: HBoxContainer = null
 var trigger_chip_row: HBoxContainer = null
@@ -2900,6 +2902,91 @@ func _refresh_start_gate() -> void:
 		label_start_reason.visible = not reason.is_empty()
 
 
+func _climb_departure_cell(target: Vector2i) -> Vector2i:
+	## T5: the ground cell an operator climbs up from / down to. Scan the target's
+	## 8-neighbourhood in fixed compass order N,E,S,W,NE,SE,SW,NW (grid y grows
+	## north; level origin x0_west_y0_south). walkable() must be checked first:
+	## walls/structures report tier "ground" through tier_at(). Among walkable
+	## ground cells prefer the one nearest squad_insertion[0] (Euclidean); ties
+	## fall back to the scan order. No candidate → the target cell itself.
+	var order := [
+		Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0),
+		Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1),
+	]
+	var best := Vector2i(-1, -1)
+	var best_d := INF
+	for d in order:
+		var nx: int = target.x + d.x
+		var ny: int = target.y + d.y
+		if grid == null or not grid.walkable(nx, ny):
+			continue
+		if grid.tier_at(float(nx), float(ny)) != SimConstants.TIER_GROUND:
+			continue
+		var dist := _climb_ref_dist(nx, ny)
+		if best.x < 0 or dist < best_d - 1e-9:
+			best = Vector2i(nx, ny)
+			best_d = dist
+	if best.x < 0:
+		return target
+	return best
+
+
+func _climb_ref_dist(x: int, y: int) -> float:
+	var ins: Array = level.get("squad_insertion", [])
+	if ins.is_empty():
+		return 0.0 ## no reference point → first-in-order wins every tie
+	var p: Dictionary = ins[0]
+	return Vector2(float(x), float(y)).distance_to(
+		Vector2(float(p.get("x", x)), float(p.get("y", y)))
+	)
+
+
+func _apply_climb_to_plan() -> void:
+	## T5: operators standing on a high cell begin the night climbing up from the
+	## adjacent ground cell. Done here once (not at placement) so point-tap,
+	## drag-drop, preset and scripted placement all share one path, and undo never
+	## leaves stale climb fields behind. climb_ticks_left is erased so the sim
+	## derives the +2.0 s cost from the frozen constants (40 ticks).
+	for op in plan.get("operators", []):
+		var cell := Vector2i(int(op.get("x", 0)), int(op.get("y", 0)))
+		var on_high: bool = grid != null and grid.tier_at(float(cell.x), float(cell.y)) == SimConstants.TIER_HIGH
+		if on_high:
+			var dep := _climb_departure_cell(cell)
+			op["climbing"] = true
+			op["climb_from"] = {"x": dep.x, "y": dep.y}
+			op.erase("climb_ticks_left")
+		else:
+			op.erase("climbing")
+			op.erase("climb_from")
+			op.erase("climb_ticks_left")
+
+
+func _climbing_count() -> int:
+	if sim == null:
+		return 0
+	var n := 0
+	for op in sim.operators:
+		if bool(op.get("climbing", false)):
+			n += 1
+	return n
+
+
+func _refresh_climb_status() -> void:
+	## T5: WAIT ticks run outside _refresh_portrait_strip's normal path, so only
+	## rebuild the portrait strip when the climbing signature actually changes.
+	if sim == null:
+		_climb_status_sig = ""
+		return
+	var parts: Array = []
+	for op in sim.operators:
+		parts.append("%s:%d" % [str(op.get("id", "")), 1 if bool(op.get("climbing", false)) else 0])
+	var sig := ",".join(parts)
+	if sig == _climb_status_sig:
+		return
+	_climb_status_sig = sig
+	_refresh_portrait_strip()
+
+
 func _start_wait() -> void:
 	var reason := start_block_reason()
 	if not reason.is_empty():
@@ -2912,6 +2999,8 @@ func _start_wait() -> void:
 		plan["start_alert"] = carried_alert
 	else:
 		plan.erase("start_alert")
+	## T5 climb: high-point operators start the night climbing (see comment there).
+	_apply_climb_to_plan()
 	sim = NightSim.new()
 	sim.setup(level, plan, weapons)
 	sim.begin_wait()
@@ -2937,6 +3026,12 @@ func _start_wait() -> void:
 		sfx.start_ambient("ambient_yard", -14.0)
 	_push_map_snapshot()
 	_apply_default_camera()
+	## T5 climb: announce the opening climb and refresh portrait status.
+	_climb_status_sig = ""
+	_refresh_climb_status()
+	var climbing_n := _climbing_count()
+	if climbing_n > 0:
+		label_info.text = "%d 人攀爬中（约 2 秒，期间不能开火）" % climbing_n
 
 
 func _toggle_pause() -> void:
@@ -3481,7 +3576,8 @@ func _move_selected_op(cell: Vector2i) -> void:
 			var dname := str(op_display_names.get(selected_op_id, "队员"))
 			var tier := str(op["tier"])
 			label_info.text = "%s 已放置 (%d,%d)%s · 拖锥尖设朝向" % [
-				dname, cell.x, cell.y, " · 高点" if tier == "high" else ""
+				dname, cell.x, cell.y,
+				" · 高点 · 开局先攀爬约 2 秒，期间不能开火" if tier == "high" else ""
 			]
 			# PR-4: keep selection for aim handle; empty taps use ghost confirm (no teleport).
 			if map_view:
@@ -3810,7 +3906,10 @@ func _refresh_portrait_strip() -> void:
 			if ui_phase == UiPhase.WAIT and sim != null:
 				for sop in sim.operators:
 					if str(sop.get("id", "")) == oid:
-						if int(sop.get("turn_ticks_left", 0)) > 0 or not bool(sop.get("can_fire", true)):
+						## T5: climbing hides the generic 禁火 tag (climb blocks fire too).
+						if bool(sop.get("climbing", false)):
+							status = "\n攀爬中"
+						elif int(sop.get("turn_ticks_left", 0)) > 0 or not bool(sop.get("can_fire", true)):
 							status = "\n禁火"
 						break
 			btn.text = "%s\n%s\nHP%d 弹%d%s" % [dname, wlab, hp_n, ammo_n, status]
@@ -3915,6 +4014,8 @@ func _process(delta: float) -> void:
 		if sim.is_finished():
 			break
 	_push_map_snapshot()
+	## T5: reflect climb start/end on the portrait cards when the state changes.
+	_refresh_climb_status()
 	_update_wait_labels()
 	if sim.is_finished() and not _pending_result:
 		_pending_result = true
