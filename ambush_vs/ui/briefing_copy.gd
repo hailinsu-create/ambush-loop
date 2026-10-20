@@ -14,6 +14,8 @@ const SEC_BEATS := "五拍"
 
 const GOAL_BODY := "全歼来犯，不放跑任何人。"
 const EXIT_BODY := "北门、南门、东巷——任一有人逃脱即失败。"
+const ASSIST_OFF := "还击辅助：关"
+const ASSIST_ON := "还击辅助：开（每名敌人最多命中一次）"
 
 ## Beat chips: short name only (row of numbered tags).
 const BEATS := [
@@ -57,13 +59,17 @@ static func all_teaching_texts() -> PackedStringArray:
 	var out := PackedStringArray([
 		TITLE, BODY, DISMISS,
 		SEC_GOAL, SEC_EXIT, SEC_BEATS,
-		GOAL_BODY, EXIT_BODY, BEAT_HINT, TIP, TIP_PHONE,
+		GOAL_BODY, EXIT_BODY, ASSIST_OFF, ASSIST_ON, BEAT_HINT, TIP, TIP_PHONE,
 		TIP_SCOUT, TIP_SETUP, TIP_WAIT, TIP_RESULT, TIP_CLOSE,
 	])
 	for b in BEATS:
 		out.append("%s%s" % [b["n"], b["name"]])
 		out.append(str(b["name"]))
 	return out
+
+
+static func assist_label(on: bool) -> String:
+	return ASSIST_ON if on else ASSIST_OFF
 
 
 static func phase_tip(phase_name: String) -> String:

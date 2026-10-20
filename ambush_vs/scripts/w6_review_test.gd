@@ -67,9 +67,10 @@ func _test_plan_a_vs_b_review() -> void:
 	var rb := _run_review("res://data/fixtures/plan_b.json")
 	_assert(str(ra.get("outcome_zh", "")) == "全歼", "A outcome 全歼 got=%s" % ra.get("outcome_zh"))
 	_assert(str(rb.get("outcome_zh", "")) == "全歼", "B outcome 全歼 got=%s" % rb.get("outcome_zh"))
-	# PLAY-6: return fire / cover means A is no longer a trivial S; both stay winnable A-tier.
-	_assert(str(ra.get("grade", "")) in ["A", "S"], "A grade A|S got=%s" % ra.get("grade"))
-	_assert(str(rb.get("grade", "")) in ["A", "B"], "B grade A|B got=%s" % rb.get("grade"))
+	## T6 hard default (assist OFF): A stays standard with one wound (A); B loses
+	## an operator in the return-fire fight, which is a C on the quality scale.
+	_assert(str(ra.get("grade", "")) == "A", "A grade A got=%s" % ra.get("grade"))
+	_assert(str(rb.get("grade", "")) == "C", "B grade C got=%s" % rb.get("grade"))
 	var ca: Array = ra.get("causes", [])
 	var cb: Array = rb.get("causes", [])
 	_assert(ca.size() >= 2 and ca.size() <= 3, "A causes 2–3 got=%d" % ca.size())
@@ -164,7 +165,7 @@ func _test_scene_review_card() -> void:
 			continue
 		if scene.get("last_review") is Dictionary and not (scene.last_review as Dictionary).is_empty():
 			var rev: Dictionary = scene.last_review
-			_assert(str(rev.get("grade", "")) in ["A", "S"], "scene review A grade A|S got=%s" % rev.get("grade"))
+			_assert(str(rev.get("grade", "")) == "A", "scene review A grade A got=%s" % rev.get("grade"))
 			_assert(str(rev.get("outcome_zh", "")) == "全歼", "scene review A 全歼")
 			if scene.has_method("review_card_text"):
 				var hud := str(scene.review_card_text())

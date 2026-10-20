@@ -35,6 +35,7 @@ func _run_all() -> void:
 	await _test_climb_wait_status()
 	await _test_climb_access_controls()
 	await _test_climb_fractional_seconds()
+	await _test_return_fire_assist_controls()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
@@ -968,6 +969,85 @@ func _test_climb_fractional_seconds() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 		return
 	_assert(false, "fractional climb scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_return_fire_assist_controls() -> void:
+	## T6: player-facing difficulty switch, env preset, plan handoff, and persistence.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	OS.set_environment("AMBUSH_RETURN_ASSIST", "")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "assist controls scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(scene.return_fire_assist == false, "assist defaults OFF in controller")
+		_assert(scene.btn_return_fire_assist != null, "assist button exists")
+		_assert(scene.btn_return_fire_assist.is_visible_in_tree(), "assist button visible in SETUP")
+		_assert(str(scene.btn_return_fire_assist.text) == "还击辅助：关",
+			"assist OFF button copy got=%s" % scene.btn_return_fire_assist.text)
+		scene._load_preset("A")
+		scene._push_undo()
+		scene._toggle_return_fire_assist()
+		_assert(scene.return_fire_assist == true, "toggle turns assist ON")
+		_assert(str(scene.btn_return_fire_assist.text) == "还击辅助：开（每名敌人最多命中一次）",
+			"assist ON button copy got=%s" % scene.btn_return_fire_assist.text)
+		_assert(bool(scene.plan.get("return_fire_assist", false)) == true,
+			"toggle mirrors setting into plan")
+		scene._undo()
+		_assert(scene.return_fire_assist == true, "undo does not drop assist setting")
+		_assert(str(scene.btn_return_fire_assist.text).contains("还击辅助：开"),
+			"undo keeps assist button copy got=%s" % scene.btn_return_fire_assist.text)
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "assist scene sim started")
+			return
+		_assert(bool(scene.plan.get("return_fire_assist", false)) == true,
+			"wait start writes return_fire_assist=true into plan")
+		_assert(bool(scene.sim.enemy_return_soft_cap) == true, "sim receives assist ON")
+		scene._restart()
+		_assert(scene.return_fire_assist == true, "retry keeps assist setting")
+		_assert(str(scene.btn_return_fire_assist.text).contains("还击辅助：开"),
+			"retry keeps assist button copy got=%s" % scene.btn_return_fire_assist.text)
+		scene._show_briefing_card()
+		_assert(scene.briefing_assist_label != null, "briefing has assist line")
+		_assert(str(scene.briefing_assist_label.text) == "还击辅助：开（每名敌人最多命中一次）",
+			"briefing shows current assist ON got=%s" % scene.briefing_assist_label.text)
+		scene._dismiss_briefing_card(false)
+		scene._toggle_return_fire_assist()
+		scene._show_briefing_card()
+		_assert(str(scene.briefing_assist_label.text) == "还击辅助：关",
+			"briefing shows current assist OFF got=%s" % scene.briefing_assist_label.text)
+		scene._dismiss_briefing_card(false)
+		OS.set_environment("AMBUSH_RETURN_ASSIST", "1")
+		var err2 := change_scene_to_file("res://scenes/greybox.tscn")
+		_assert(err2 == OK, "assist env scene err=%s" % err2)
+		for _j in range(200):
+			await process_frame
+			var scene2 = current_scene
+			if scene2 == null or scene2.map_view == null or scene2.plan.is_empty():
+				continue
+			_assert(scene2.return_fire_assist == true, "AMBUSH_RETURN_ASSIST=1 presets assist ON")
+			_assert(str(scene2.btn_return_fire_assist.text).contains("还击辅助：开"),
+				"env preset updates button got=%s" % scene2.btn_return_fire_assist.text)
+			scene2._toggle_return_fire_assist()
+			_assert(scene2.return_fire_assist == false, "button can turn env preset OFF")
+			OS.set_environment("AMBUSH_RETURN_ASSIST", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+			return
+		_assert(false, "assist env scene not ready")
+		OS.set_environment("AMBUSH_RETURN_ASSIST", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "assist controls scene not ready")
+	OS.set_environment("AMBUSH_RETURN_ASSIST", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 

@@ -7,7 +7,7 @@
 | 判定 | 逃脱 ≥1 **或** 清场用时 +50% **或** 受伤 +50%（相对同案 BASE） |
 | 受伤 | `wounded_n + dead_ops_n` |
 | 清场用时 | detonate → last kill（秒） |
-| 软顶 | 默认 ON；`NightSim.enemy_return_soft_cap` 仅测量 |
+| 软顶 | 2026-10-17 时默认 ON（仅测量）；T6 起改为显式两档，默认 OFF（见文末） |
 | 测试 | `w2_counterex_test.gd` + W7 soft-cap 对照 |
 | 院子 | **v1.6**（切片 4）；金标 hash **未改**（相对切片 2），t0 仍 520/560 |
 
@@ -71,3 +71,53 @@
 ## 3. 遗留
 
 无（本 PR 几何切片目标门均已成立）。Draft PR **不合并**。
+
+
+---
+
+## T6 软顶显式难度（2026-10-20）
+
+### 默认档代定
+
+- 规划第 5 节推荐项 **A**：硬核默认无软顶，`RETURN_FIRE_ASSIST_DEFAULT := false`。
+- 辅助档保留 PLAY-6 旧规则：`RETURN_FIRE_ASSIST_MAX_HITS_PER_ENEMY := 1`（每名敌人最多一次致伤命中）。
+- 两档均为可配置常量，盲测后可只调常量；`NightSim.setup()` 读可选 plan 键 `return_fire_assist`，缺省用常量。
+- 控制器布阵阶段可见切换；`AMBUSH_RETURN_ASSIST=1` 仅非 playtest 预设开。
+- 事件流 schema 不变（没有新增事件字段）；plan fixture 不含该键，因此默认翻到 OFF 后仅战斗结果/事件流变化。
+
+### 两档全矩阵（实测，`w2_counterex_test.gd`）
+
+OFF = 新默认（硬核，无软顶）；ON = 还击辅助（每敌最多 1 次致伤命中）。受伤 = `wounded + dead_ops`。
+
+| 用例 | OFF outcome | OFF 逃脱 | OFF 清场s | OFF 受伤 | OFF 阵亡 | ON outcome | ON 逃脱 | ON 清场s | ON 受伤 | ON 阵亡 | OFF D.3 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| BASE-A | win | 0 | 0.55 | 1 | 0 | win | 0 | 0.55 | 1 | 0 | （基线） |
+| BASE-B | win | 0 | 3.25 | 2 | 1 | win | 0 | 3.25 | 1 | 0 | （基线） |
+| F-A30 | lose | 2 | 0.7 | 2 | 1 | lose | 2 | 0.7 | 2 | 1 | 成立 |
+| F-B30 | lose | 1 | 2.2 | 2 | 1 | lose | 1 | 2.2 | 1 | 0 | 成立 |
+| F-A60 | win | 0 | 4.75 | 5 | 2 | win | 0 | 4.15 | 3 | 1 | 成立 |
+| F-B60 | lose | 1 | 2.2 | 2 | 1 | lose | 1 | 2.2 | 1 | 0 | 成立 |
+| T-A-4 | lose | 2 | 1.05 | 2 | 1 | lose | 1 | 6.55 | 1 | 0 | 成立 |
+| T-A-2 | lose | 1 | 0.5 | 1 | 0 | lose | 1 | 0.5 | 1 | 0 | 成立 |
+| T-A+0 | win | 0 | 0.65 | 2 | 1 | win | 0 | 0.65 | 2 | 1 | （理想窗） |
+| T-A+2 | win | 0 | 1.65 | 2 | 1 | win | 0 | 1.65 | 2 | 1 | 成立 |
+| T-A+4 | win | 0 | 1.85 | 2 | 1 | win | 0 | 1.85 | 2 | 1 | 成立 |
+| T-B-4 | lose | 3 | 2.05 | 2 | 1 | lose | 3 | 2.05 | 2 | 1 | 成立 |
+| T-B-2 | lose | 1 | 3.25 | 2 | 1 | lose | 1 | 3.25 | 2 | 1 | 成立 |
+| T-B+0 | win | 0 | 6.5 | 2 | 1 | win | 0 | 6.5 | 2 | 1 | （理想窗） |
+| T-B+2 | win | 0 | 3.25 | 3 | 1 | win | 0 | 3.25 | 3 | 1 | 成立 |
+| T-B+4 | lose | 2 | 1.1 | 5 | 2 | lose | 1 | 6.55 | 3 | 0 | 成立 |
+| W-A-MG→Kar | win | 0 | 5.5 | 5 | 2 | win | 0 | 4.95 | 3 | 1 | 成立 |
+| S-unscout-east | lose | 2 | 0.25 | 0 | 0 | lose | 2 | 0.25 | 0 | 0 | 成立 |
+| ALERT-quiet | wins=2 | — | — | — | — | wins=2 | — | — | — | — | 成立 |
+| ALERT-suspicious | wins=2 | — | — | — | — | wins=2 | — | — | — | — | 成立 |
+| ALERT-area_alert | wins=2 | — | — | — | — | wins=2 | — | — | — | — | 成立 |
+| ALERT-global_alert | wins=2 | — | — | — | — | wins=2 | — | — | — | — | 成立 |
+
+### 结论与更正
+
+- **HOLDING 不变**：原 `HOLDING_IDS` 在 OFF（新默认）下逐个实测仍满足严格 D.3；`PENDING_IDS` 仍为空，没有放宽 D.3 口径。
+- **四档 ALERT 在 OFF 下均 wins=2**；没有出现警报档不可胜。
+- **旧结论「OFF 时 B 全灭」更正**：OFF 下 BASE-B 仍为 **win**，但代价是一名队员阵亡、另一人负伤（受伤 2）；ON 下同案只剩 1 人负伤（受伤 1）。因此 OFF 不是“必败/全灭”，而是“可胜但更伤”；W6 的 B 评级也从 A/B 变为 **C**（阵亡即 C）。
+- **金标**：plan A 事件流不变（hash `a89a0e5a…`，t0 520）；plan B 因默认翻到 OFF 变化为 `d3f35826…`，t0 仍 560。`hashes.json` 已重生成。
+- **测试**：`w2_counterex_test.gd` 两档全部跑并打印对比表；W7 对照改为“OFF 默认更伤、ON 更宽松”；W8/W9 覆盖按钮、env、plan 键、简报/结算档位与 match log 字段。
