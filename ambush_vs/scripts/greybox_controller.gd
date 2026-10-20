@@ -8,6 +8,7 @@ const SimRunner := preload("res://sim/runner.gd")
 const NightSim := preload("res://sim/night_sim.gd")
 const ScoutSim := preload("res://sim/scout_sim.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
+const SimLevels := preload("res://sim/levels.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
 const SimConstants := preload("res://sim/constants.gd")
 const SimGeom := preload("res://sim/geom.gd")
@@ -33,6 +34,8 @@ const WEAPON_LABEL_ZH := {
 
 var ui_phase: UiPhase = UiPhase.SCOUT
 var level: Dictionary = {}
+var level_id: String = ""
+var level_source: String = ""
 var weapons: Dictionary = {}
 var plan: Dictionary = {}
 var sim: NightSim = null
@@ -267,7 +270,9 @@ func _ready() -> void:
 	sfx = G2SfxPlayerScript.new()
 	add_child(sfx)
 	sfx.configure(g2_assets)
-	level = SimLevelLoader.load_path("res://data/levels/yard.json")
+	level_id = SimLevels.selected_id()
+	level_source = SimLevels.selection_source()
+	level = SimLevelLoader.load_path(SimLevels.path_for(level_id))
 	weapons = SimWeapons.load_csv()
 	grid = SimLevelLoader.build_grid(level)
 	map_view.configure(level, grid, weapons)
