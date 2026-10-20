@@ -200,9 +200,23 @@ func begin_wait() -> void:
 			"weapon_id": "mine",
 			"pos": {"x": m["x"], "y": m["y"], "height": "ground"},
 		})
+	## T5 climb: announce each operator that starts the night mid-climb.
+	## Fixed tick-0 order: sim_start → mine_place → climb_start* → phase(wait) → alert_change(scout_carry).
+	## Plans without a climbing op emit nothing here (event stream byte-identical to golden).
+	for op in operators:
+		if not bool(op.get("climbing", false)):
+			continue
+		log.emit(0, "climb_start", {
+			"actor": op["id"],
+			"pos": {"x": op["x"], "y": op["y"], "height": "ground"},
+			"payload": {
+				"to": {"x": op.get("climb_to_x", op["x"]), "y": op.get("climb_to_y", op["y"])},
+				"ticks": int(op.get("climb_ticks_left", 0)),
+			},
+		})
 	_set_phase(0, C.PHASE_WAIT)
 	## T4 scout carry: apply the alert the scout brought into setup.
-	## Fixed tick-0 order: sim_start → mine_place → phase(wait) → alert_change(scout_carry).
+	## Fixed tick-0 order: sim_start → mine_place → climb_start* → phase(wait) → alert_change(scout_carry).
 	## Non-quiet emits one alert_change; quiet (default) emits nothing (event stream byte-identical).
 	if start_alert != C.ALERT_QUIET:
 		_set_alert(start_alert, "scout_carry")
@@ -340,6 +354,10 @@ func _tick_once() -> void:
 	if phase == C.PHASE_WAIT and manual_detonate_tick >= 0 and tick == manual_detonate_tick:
 		_enter_detonate("manual", "system")
 	_step_turn_cooldowns()
+	## 1.5 climb (T5 enter/leave high point): decrements the +2.0 s cost before move.
+	## Runs after turn cooldowns (so a just-expired turn cannot unlock a still-climbing op)
+	## and before move (the operator keeps its departure cell until the climb ends).
+	_step_climb()
 
 	## 2 move
 	_step_move()
@@ -375,8 +393,39 @@ func _step_turn_cooldowns() -> void:
 		var left := int(op.get("turn_ticks_left", 0))
 		if left > 0:
 			op["turn_ticks_left"] = left - 1
+			## Still climbing ⇒ no fire even if the turn cost just elapsed; _step_climb
+			## unlocks when the climb itself finishes (see below).
 			if int(op["turn_ticks_left"]) <= 0 and not bool(op.get("climbing", false)):
 				op["can_fire"] = true
+
+
+func _step_climb() -> void:
+	## T5 contract: while `climbing`, the operator runs at the departure cell
+	## (climb_from, already copied into x/y by _make_op) with tier=ground, cannot
+	## fire, and is exposed at the departure cell/ground (no ×1.5 silhouette).
+	## Each tick decrements climb_ticks_left; on reaching 0 the operator snaps to
+	## the target cell (climb_to_x/y), takes that cell's real tier, and can fire
+	## unless a turn cooldown is still running. Death does not end a climb (dead
+	## ops are skipped; their climb state is simply frozen).
+	if phase != C.PHASE_WAIT and phase != C.PHASE_SETUP and phase != C.PHASE_DETONATE and phase != C.PHASE_RESOLVE:
+		return
+	for op in operators:
+		if not op["alive"] or not bool(op.get("climbing", false)):
+			continue
+		op["climb_ticks_left"] = int(op.get("climb_ticks_left", 0)) - 1
+		if int(op["climb_ticks_left"]) > 0:
+			continue
+		op["climb_ticks_left"] = 0
+		op["climbing"] = false
+		op["x"] = float(op.get("climb_to_x", op["x"]))
+		op["y"] = float(op.get("climb_to_y", op["y"]))
+		op["tier"] = grid.tier_at(float(op["x"]), float(op["y"]))
+		if int(op.get("turn_ticks_left", 0)) <= 0:
+			op["can_fire"] = true
+		log.emit(tick, "climb_end", {
+			"actor": op["id"],
+			"pos": {"x": op["x"], "y": op["y"], "height": op["tier"]},
+		})
 
 
 func _set_phase(t: int, p: String) -> void:
@@ -385,14 +434,31 @@ func _set_phase(t: int, p: String) -> void:
 
 
 func _make_op(op: Dictionary) -> Dictionary:
-	var x := float(op["x"])
-	var y := float(op["y"])
+	## Optional T5 climb contract (plan.operators[i]):
+	##   climbing: true,
+	##   climb_from: {x, y}         departure cell (缺省 = target cell)
+	##   climb_ticks_left: int      default = int(round(CLIMB_COST_S * TICK_HZ)) = 40
+	##   x, y                       target cell
+	## ground→high and high→ground share one path: while climbing the operator runs
+	## at climb_from, acts as ground tier, cannot fire, and exposure uses the
+	## departure cell/ground; on finish x,y = target, tier = grid.tier_at(target),
+	## can_fire = true (unless a turn cooldown is still running).
+	var target_x := float(op["x"])
+	var target_y := float(op["y"])
 	var climbing := bool(op.get("climbing", false))
-	var tier := str(op.get("tier", grid.tier_at(x, y)))
+	var x := target_x
+	var y := target_y
+	if climbing and typeof(op.get("climb_from", null)) == TYPE_DICTIONARY:
+		var cf: Dictionary = op["climb_from"]
+		x = float(cf.get("x", target_x))
+		y = float(cf.get("y", target_y))
+	var tier := str(op.get("tier", grid.tier_at(target_x, target_y)))
 	if climbing:
 		tier = SimConstants.TIER_GROUND
 	var wid := str(op.get("weapon_id", ""))
 	var ammo_default := int(C.DEFAULT_AMMO.get(wid, 12))
+	## Default climb length is derived from the frozen constants, never hardcoded.
+	var climb_default := int(round(C.CLIMB_COST_S * float(C.TICK_HZ)))
 	return {
 		"id": str(op["id"]),
 		"x": x,
@@ -403,13 +469,15 @@ func _make_op(op: Dictionary) -> Dictionary:
 		"alive": true,
 		"can_fire": not climbing,
 		"climbing": climbing,
-		"climb_ticks_left": int(op.get("climb_ticks_left", 0)),
+		"climb_ticks_left": int(op.get("climb_ticks_left", climb_default)) if climbing else int(op.get("climb_ticks_left", 0)),
+		"climb_to_x": target_x,
+		"climb_to_y": target_y,
 		"turn_ticks_left": 0,
 		"shot_accum": 0.0,
 		"fire_accum": 0.0,
 		"locked_facing": float(op.get("facing_deg", 0)),
-		"locked_x": x,
-		"locked_y": y,
+		"locked_x": target_x,
+		"locked_y": target_y,
 		"hp": int(op.get("hp", C.OP_MAX_HP)),
 		"max_hp": C.OP_MAX_HP,
 		"wounded": false,

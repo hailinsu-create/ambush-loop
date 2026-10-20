@@ -33,6 +33,8 @@ func _run_all() -> void:
 	_test_mg42_not_in_starting_kit()
 	await _test_blank_start_not_startable()
 	await _test_scripted_placement_reaches_result()
+	await _test_start_wait_climb()
+	await _test_scene_climb_access_exposure()
 	await _test_greybox_scene_boots()
 	print("W3_GREYBOX_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -243,6 +245,141 @@ func _test_scripted_placement_reaches_result() -> void:
 	_assert(int(ls.get("detonate_tick", -1)) >= 0, "scripted placement detonated")
 
 
+func _test_start_wait_climb() -> void:
+	## T5: on _start_wait every high-cell operator begins a ~2 s (40 tick) climb
+	## from an adjacent ground departure cell (ground tier, no fire); ground
+	## operators do not climb. After 40 sim ticks the high op is back on its
+	## target cell at high tier and can fire again.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb scene err=%s" % err)
+	var scene = await _wait_scene_ready()
+	_assert(scene != null, "climb scene ready")
+	if scene == null:
+		return
+	if scene.has_method("begin_setup_from_scout"):
+		scene.begin_setup_from_scout()
+		for _i in range(4):
+			await process_frame
+	var ops: Array = scene.plan.get("operators", [])
+	_assert(ops.size() >= 3, "climb has operators")
+	var id0 := str(ops[0]["id"])
+	var id1 := str(ops[1]["id"])
+	var id2 := str(ops[2]["id"])
+	scene.scripted_place_operator(id0, 5, 9, 0.0)
+	scene.scripted_place_operator(id1, 13, 7, 15.0)
+	scene.scripted_place_operator(id2, 11, 2, 90.0)
+	scene.scripted_place_cross_marker(10, 7, 12, 7)
+	scene._start_wait()
+	if scene.sim == null:
+		_assert(false, "climb sim started")
+		return
+	var sim = scene.sim
+	var high0 = sim.operators[0]
+	var low2 = sim.operators[2]
+	_assert(bool(high0.get("climbing", false)) == true, "climb high op climbing at wait start")
+	_assert(str(high0.get("tier", "")) == "ground", "climb high op tier ground while climbing got=%s" % high0.get("tier"))
+	_assert(bool(high0.get("can_fire", true)) == false, "climb high op cannot fire while climbing")
+	var dep0: Vector2i = scene._climb_departure_cell(Vector2i(5, 9))
+	_assert(
+		int(high0["x"]) == dep0.x and int(high0["y"]) == dep0.y
+			and scene.grid.tier_at(float(dep0.x), float(dep0.y)) == "ground",
+		"climb high op runs at ground departure %s" % dep0
+	)
+	_assert(bool(low2.get("climbing", false)) == false, "climb ground op does not climb")
+	for _i in range(40):
+		sim.advance_one_tick()
+	_assert(
+		str(high0.get("tier", "")) == "high" and int(high0["x"]) == 5 and int(high0["y"]) == 9,
+		"climb high op on high target after 40 ticks got=(%s,%s)/%s" % [high0["x"], high0["y"], high0.get("tier")]
+	)
+	_assert(bool(high0.get("can_fire", true)) == true, "climb high op can fire after 40 ticks")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _test_scene_climb_access_exposure() -> void:
+	## T5b: the east door is fast but sits in the west patrol cone; the north
+	## ladder is longer but unseen. Same sample plan A, only the MG entrance differs.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb access scene err=%s" % err)
+	var scene = await _wait_scene_ready()
+	_assert(scene != null, "climb access scene ready")
+	if scene == null:
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	if scene.has_method("begin_setup_from_scout"):
+		scene.begin_setup_from_scout()
+		for _i in range(4):
+			await process_frame
+	scene._load_preset("A")
+	var mg: Dictionary = scene._plan_op("op_mg42")
+	_assert(str(mg.get("climb_access", "")) == "barn_north_ladder", "preset A uses north ladder")
+	_assert(scene.set_op_climb_access("op_mg42", "barn_east_door"), "select east door")
+	scene._start_wait()
+	if scene.sim == null:
+		_assert(false, "east door sim started")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	scene.paused = true
+	var saw_climb_start := false
+	var saw_suspicious := false
+	for _t in range(40):
+		scene.sim.advance_one_tick()
+		for ev in scene.sim.log.events:
+			var et := str(ev.get("type", ""))
+			if et == "climb_start" and str(ev.get("actor", "")) == "op_mg42":
+				saw_climb_start = true
+			if et == "alert_change" and int(ev.get("tick", -1)) < 40:
+				var payload: Dictionary = ev.get("payload", {})
+				if str(payload.get("to", "")) == "suspicious":
+					saw_suspicious = true
+	_assert(saw_climb_start, "east door emits climb_start")
+	_assert(scene.sim.first_exposed_tick >= 0 and scene.sim.first_exposed_tick < 40,
+		"east door exposed during climb got=%s" % scene.sim.first_exposed_tick)
+	_assert(saw_suspicious, "east door raises suspicion during climb")
+	while not scene.sim.is_finished():
+		scene.sim.advance_one_tick()
+	var east_sum: Dictionary = scene.sim.outcome_summary()
+	_assert(bool(east_sum.get("standard_ambush", false)) == false,
+		"east door loses standard ambush got=%s" % east_sum.get("standard_ambush"))
+	_assert(str(east_sum.get("trigger", "")) == "alarm",
+		"east door detonates on alarm got=%s" % east_sum.get("trigger"))
+
+	## Retry keeps the plan; choose the north ladder and repeat.
+	scene._restart()
+	_assert(str(scene._plan_op("op_mg42").get("climb_access", "")) == "barn_east_door",
+		"retry keeps chosen entrance")
+	_assert(scene.set_op_climb_access("op_mg42", "barn_north_ladder"), "select north ladder")
+	scene._start_wait()
+	if scene.sim == null:
+		_assert(false, "north ladder sim started")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	scene.paused = true
+	for _t in range(60):
+		scene.sim.advance_one_tick()
+	_assert(int(scene.sim.first_exposed_tick) < 0 or int(scene.sim.first_exposed_tick) >= 60,
+		"north ladder unseen during climb first_exposed=%s" % scene.sim.first_exposed_tick)
+	_assert(int(scene.sim.wait_exposed_ticks) == 0,
+		"north ladder climb adds no exposed ticks got=%d" % scene.sim.wait_exposed_ticks)
+	while not scene.sim.is_finished():
+		scene.sim.advance_one_tick()
+	var north_sum: Dictionary = scene.sim.outcome_summary()
+	_assert(int(north_sum.get("detonate_tick", -1)) == 520,
+		"north ladder t0=520 got=%s" % north_sum.get("detonate_tick"))
+	_assert(bool(north_sum.get("standard_ambush", false)) == true,
+		"north ladder keeps standard ambush")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
 func _test_greybox_scene_boots() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
@@ -257,6 +394,22 @@ func _test_greybox_scene_boots() -> void:
 				_assert(int(ls.get("detonate_tick", -1)) == 520, "scene auto plan A t0=520 got=%s" % ls.get("detonate_tick"))
 				_assert(bool(ls.get("standard_ambush", false)) == true, "scene auto standard_ambush")
 				_assert(str(ls.get("outcome", "")) == "win", "scene auto win")
+				var start_cell := Vector2i(-1, -1)
+				var end_tick := -1
+				var ticks := -1
+				for ev in scene.sim.log.events:
+					var et := str(ev.get("type", ""))
+					if et == "climb_start" and str(ev.get("actor", "")) == "op_mg42":
+						var pos: Dictionary = ev.get("pos", {})
+						start_cell = Vector2i(int(pos.get("x", -1)), int(pos.get("y", -1)))
+						var payload: Dictionary = ev.get("payload", {})
+						ticks = int(payload.get("ticks", -1))
+					elif et == "climb_end" and str(ev.get("actor", "")) == "op_mg42":
+						end_tick = int(ev.get("tick", -1))
+				_assert(start_cell == Vector2i(5, 12),
+					"scene auto MG climb_start at north ladder got=%s" % start_cell)
+				_assert(ticks == 60, "scene auto MG climb length 60 ticks got=%s" % ticks)
+				_assert(end_tick == 59, "scene auto MG climb_end tick 59 got=%s" % end_tick)
 				OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 				return
 	_assert(false, "scene auto did not produce last_summary in time")

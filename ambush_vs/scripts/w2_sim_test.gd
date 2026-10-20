@@ -58,6 +58,50 @@ func _count_actor_fire(sim: NightSim, actor: String) -> int:
 	return n
 
 
+func _count_events(sim: NightSim, type: String, actor: String = "") -> int:
+	var n := 0
+	for e in sim.log.events:
+		if str(e.get("type", "")) != type:
+			continue
+		if actor != "" and str(e.get("actor", "")) != actor:
+			continue
+		n += 1
+	return n
+
+
+func _event_tick(sim: NightSim, type: String, actor: String = "") -> int:
+	for e in sim.log.events:
+		if str(e.get("type", "")) != type:
+			continue
+		if actor != "" and str(e.get("actor", "")) != actor:
+			continue
+		return int(e.get("tick", -1))
+	return -1
+
+
+func _find_neighbor_of_tier(grid, cx: int, cy: int, want: String) -> Vector2i:
+	## Fixed 8-neighbour order. walkable() guards against walls/structures, which
+	## report tier "ground" through tier_at() and would otherwise be picked.
+	var order := [
+		Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0),
+		Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(-1, -1),
+	]
+	for d in order:
+		var nx: int = cx + d.x
+		var ny: int = cy + d.y
+		if grid.walkable(nx, ny) and grid.tier_at(float(nx), float(ny)) == want:
+			return Vector2i(nx, ny)
+	return Vector2i(-1, -1)
+
+
+func _find_first_cell_of_tier(grid, want: String) -> Vector2i:
+	for y in range(grid.height):
+		for x in range(grid.width):
+			if grid.walkable(x, y) and grid.tier_at(float(x), float(y)) == want:
+				return Vector2i(x, y)
+	return Vector2i(-1, -1)
+
+
 func _plan_a() -> Dictionary:
 	return SimRunner.load_json("res://data/fixtures/plan_a.json")
 
@@ -249,19 +293,148 @@ func _test_h01_high_gap() -> void:
 
 
 func _test_h04_climb() -> void:
-	## Climb +2.0 s = 40 ticks; during climb tier acts as ground / no fire.
+	## T5 contract: climb +2.0 s = 40 ticks. While climbing the operator runs at the
+	## departure cell (climb_from) at ground tier, cannot fire, and is exposed at the
+	## departure cell/ground (no ×1.5 silhouette). On finish it snaps to the target
+	## cell / that cell's tier and regains fire (unless a turn cooldown is running).
+	## ground→high and high→ground share one path. Fields are opt-in: a plan without
+	## `climbing` is byte-identical to the golden stream.
 	var ticks := int(round(2.0 * 20.0))
 	_assert(ticks == 40, "H-04 climb 2.0s = 40 ticks")
-	var plan := _plan_a()
-	plan["operators"][0]["climbing"] = true
-	plan["operators"][0]["climb_ticks_left"] = 40
+
 	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	var grid := SimLevelLoader.build_grid(level)
+	var weapons := SimWeapons.load_csv()
+
+	## --- Up-climb: operators[0] (op_mg42) target (5,9) high, from an adjacent ground cell. ---
+	var op0_x := int(float(_plan_a()["operators"][0]["x"]))
+	var op0_y := int(float(_plan_a()["operators"][0]["y"]))
+	var op0_tier := str(_plan_a()["operators"][0]["tier"])
+	_assert(op0_tier == "high", "H-04 operators[0] starts high got=%s" % op0_tier)
+	var up_from := _find_neighbor_of_tier(grid, op0_x, op0_y, "ground")
+	_assert(up_from.x >= 0, "H-04 found ground neighbour for high op")
+
+	var up := _plan_a()
+	up["operators"][0]["climbing"] = true
+	up["operators"][0]["climb_from"] = {"x": up_from.x, "y": up_from.y}
+	# climb_ticks_left intentionally omitted → default derived from CLIMB_COST_S*TICK_HZ.
 	var sim := NightSim.new()
-	sim.setup(level, plan, SimWeapons.load_csv())
+	sim.setup(level, up, weapons)
+	sim.begin_wait()
 	var op: Dictionary = sim.operators[0]
+
 	_assert(bool(op["climbing"]) == true, "H-04 climbing flag")
 	_assert(str(op["tier"]) == "ground", "H-04 climb tier ground")
 	_assert(bool(op["can_fire"]) == false, "H-04 no fire while climbing")
+	_assert(int(op["climb_ticks_left"]) == 40, "H-04 default climb ticks=40 got=%s" % op["climb_ticks_left"])
+	_assert(int(op["x"]) == up_from.x and int(op["y"]) == up_from.y,
+		"H-04 runs at climb_from got=(%s,%s) want=(%s,%s)" % [op["x"], op["y"], up_from.x, up_from.y])
+
+	## Ticks 1..39: still mid-climb, still at the departure cell.
+	for _i in range(39):
+		sim.advance_one_tick()
+	_assert(bool(op["climbing"]) == true, "H-04 still climbing at 39 ticks")
+	_assert(bool(op["can_fire"]) == false, "H-04 still no fire at 39 ticks")
+	_assert(int(op["x"]) == up_from.x and int(op["y"]) == up_from.y,
+		"H-04 still at climb_from at 39 ticks got=(%s,%s)" % [op["x"], op["y"]])
+
+	## 40th processed tick: climb completes.
+	sim.advance_one_tick()
+	_assert(bool(op["climbing"]) == false, "H-04 climb ends at 40 ticks")
+	_assert(str(op["tier"]) == "high", "H-04 tier target high after climb got=%s" % op["tier"])
+	_assert(int(op["x"]) == op0_x and int(op["y"]) == op0_y,
+		"H-04 at target after climb got=(%s,%s) want=(%s,%s)" % [op["x"], op["y"], op0_x, op0_y])
+	_assert(bool(op["can_fire"]) == true, "H-04 can fire after climb")
+
+	## --- Events: exactly one climb_start + one climb_end; drift-free off-by-one. ---
+	_assert(_count_events(sim, "climb_start") == 1, "H-04 one climb_start got=%d" % _count_events(sim, "climb_start"))
+	_assert(_count_events(sim, "climb_end") == 1, "H-04 one climb_end got=%d" % _count_events(sim, "climb_end"))
+	## climb_start is emitted by begin_wait() (tick 0); climb_end fires on the tick
+	## whose _step_climb reaches zero. begin_wait() only announces (no decrement),
+	## so the 40 decrements land on processed ticks 0..39 → climb_end tick == 39.
+	var end_tick := _event_tick(sim, "climb_end", str(op["id"]))
+	_assert(end_tick == ticks - 1, "H-04 climb_end tick=%d (nominal 40, off-by-one) got=%d" % [ticks - 1, end_tick])
+	_assert(_event_tick(sim, "climb_start", str(op["id"])) == 0, "H-04 climb_start at tick 0")
+
+	## Default plan (no climbing) must emit no climb_* events and keep the golden hash.
+	var gold: Dictionary = SimRunner.load_json("res://data/golden/hashes.json")
+	var base: Dictionary = SimRunner.run_plan("res://data/fixtures/plan_a.json")
+	var base_sim: NightSim = base["sim"]
+	_assert(_count_events(base_sim, "climb_start") == 0 and _count_events(base_sim, "climb_end") == 0,
+		"H-04 no-climb plan_a emits no climb_* events")
+	_assert(str(base.get("log_hash", "")) == str(gold.get("plan_a", "")),
+		"H-04 no-climb plan_a hash matches golden")
+
+	## --- Departure-cell exposure: deterministic probe on the low_wall_pad column. ---
+	## Synthetic sentry due -y of x=13, range 3.5: the departure ground cell (13,8)
+	## is 4.0 away → out of range (not seen); the high target (13,7) is 5.0 away and
+	## is seen only through the ×1.5 night silhouette (5.0 ≤ 3.5×1.5 = 5.25). So a
+	## correct climb (ground tier, no silhouette) must not be exposed, whereas the
+	## same operator parked on the high target would be.
+	var exp_plan := _plan_a()
+	exp_plan["operators"][1]["climbing"] = true
+	var exp_from := _find_neighbor_of_tier(grid, 13, 7, "ground") ## op_kar_L target (13,7) high
+	_assert(exp_from.x == 13 and exp_from.y == 8, "H-04 exposure probe departure=(%d,%d)" % [exp_from.x, exp_from.y])
+	exp_plan["operators"][1]["climb_from"] = {"x": exp_from.x, "y": exp_from.y}
+	var esim := NightSim.new()
+	esim.setup(level, exp_plan, weapons)
+	esim.begin_wait()
+	var eop: Dictionary = esim.operators[1]
+	_assert(int(eop["x"]) == exp_from.x and int(eop["y"]) == exp_from.y, "H-04 exposure op runs at departure")
+	esim.sentries = [{
+		"id": "t5_probe", "x": 13, "y": 12, "tier": "ground",
+		"cone": {"facing_deg": -90.0, "angle_deg": 60.0, "range_cells": 3.5},
+	}]
+	esim.patrols = []
+	_assert(esim._seen_by_observers(13.0, 8.0, "ground") == false, "H-04 probe: departure ground not visible")
+	_assert(esim._seen_by_observers(13.0, 7.0, "high") == true, "H-04 probe: target high visible via silhouette")
+	_assert(esim._step_vision_expose() == false, "H-04 climbing op not exposed (departure ground, no silhouette)")
+
+	## --- Down-climb (leave high): ground target, high departure. ---
+	var down_plan := _plan_a()
+	var down_to := _find_first_cell_of_tier(grid, "high") ## op_mp40 target (11,2) is ground
+	_assert(down_to.x >= 0 and str(_plan_a()["operators"][2]["tier"]) == "ground", "H-04 down op target is ground")
+	down_plan["operators"][2]["climbing"] = true
+	down_plan["operators"][2]["climb_from"] = {"x": down_to.x, "y": down_to.y}
+	var dsim := NightSim.new()
+	dsim.setup(level, down_plan, weapons)
+	dsim.begin_wait()
+	var dop: Dictionary = dsim.operators[2]
+	_assert(str(dop["tier"]) == "ground" and not bool(dop["can_fire"]), "H-04 down-climb mid: ground/no fire")
+	for _i in range(40):
+		dsim.advance_one_tick()
+	_assert(bool(dop["climbing"]) == false, "H-04 down-climb ends")
+	_assert(str(dop["tier"]) == "ground", "H-04 down-climb tier ground at target")
+	_assert(int(dop["x"]) == 11 and int(dop["y"]) == 2, "H-04 down-climb at target got=(%s,%s)" % [dop["x"], dop["y"]])
+
+	## --- Countdown gate: not just a data tag — one tick left must flip state. ---
+	var gate := _plan_a()
+	gate["operators"][0]["climbing"] = true
+	gate["operators"][0]["climb_from"] = {"x": up_from.x, "y": up_from.y}
+	gate["operators"][0]["climb_ticks_left"] = 1
+	var gsim := NightSim.new()
+	gsim.setup(level, gate, weapons)
+	gsim.begin_wait()
+	var gop: Dictionary = gsim.operators[0]
+	_assert(bool(gop["can_fire"]) == false, "H-04 gate: blocked with 1 tick left")
+	gsim.advance_one_tick()
+	_assert(bool(gop["can_fire"]) == true, "H-04 gate: fire after final tick")
+	_assert(str(gop["tier"]) == "high", "H-04 gate: tier resolves to target high got=%s" % gop["tier"])
+
+	## --- Detonate during climb: alarm at tick 0 must not unlock mid-climb fire. ---
+	var det := _plan_a()
+	det["start_alert"] = "global_alert" ## T4 carry: arms trigger=alarm on the first WAIT tick
+	det["operators"][0]["climbing"] = true
+	det["operators"][0]["climb_from"] = {"x": up_from.x, "y": up_from.y}
+	var detsim := NightSim.new()
+	detsim.setup(level, det, weapons)
+	detsim.begin_wait()
+	var detop: Dictionary = detsim.operators[0]
+	for _i in range(39):
+		detsim.advance_one_tick()
+	_assert(int(detsim.detonate_tick) == 0, "H-04 detonate-in-climb at tick 0 got=%d" % detsim.detonate_tick)
+	_assert(bool(detop["climbing"]) == true and not bool(detop["can_fire"]), "H-04 detonate-in-climb still climbing/no fire")
+	_assert(_count_events(detsim, "fire", str(detop["id"])) == 0, "H-04 no mid-climb fire while detonated")
 
 
 func _test_h06_no_height_damage_mult() -> void:

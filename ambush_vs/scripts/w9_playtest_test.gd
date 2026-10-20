@@ -184,9 +184,13 @@ func _test_playtest_match_log_export() -> void:
 	var id0 := str(ops[0]["id"])
 	var id1 := str(ops[1]["id"])
 	var id2 := str(ops[2]["id"])
+	## T5b: keep the original plan-A high seats, but take the unseen north ladder
+	## for the (5,9) operator. The east door would be spotted by the west patrol
+	## during the climb, which left the log with zero friendly fire.
 	scene.scripted_place_operator(id0, 5, 9, 0.0)
 	scene.scripted_place_operator(id1, 13, 7, 15.0)
 	scene.scripted_place_operator(id2, 11, 2, 90.0)
+	_assert(scene.set_op_climb_access(id0, "barn_north_ladder"), "log op0 takes north ladder")
 	scene._on_op_weapon_picked(id0, "kar98k")
 	scene._on_op_weapon_picked(id1, "mp40")
 	scene._on_op_weapon_picked(id2, "grenade")

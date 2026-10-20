@@ -31,6 +31,10 @@ func _run_all() -> void:
 	await _test_hud_touch_sizing()
 	await _test_scout_path_preview()
 	await _test_undo_cancel()
+	await _test_climb_placement_feedback()
+	await _test_climb_wait_status()
+	await _test_climb_access_controls()
+	await _test_climb_fractional_seconds()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
@@ -713,6 +717,259 @@ func _test_undo_cancel() -> void:
 		return
 	_assert(false, "undo scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+
+
+func _portrait_status_text(scene) -> String:
+	## Ignore nodes already queued for deletion by a portrait rebuild this frame.
+	var out := ""
+	if scene.portrait_strip == null:
+		return out
+	for c in scene.portrait_strip.get_children():
+		if c is BaseButton and not (c as BaseButton).is_queued_for_deletion():
+			out += str((c as BaseButton).text) + "\n"
+	return out
+
+
+func _test_climb_placement_feedback() -> void:
+	## T5: placing on a high cell says the operator will climb first; ground does
+	## not; undoing the high placement leaves no climb state at wait start.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb feedback scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		var ops: Array = scene.plan.get("operators", [])
+		var id0 := str(ops[0]["id"])
+		var id1 := str(ops[1]["id"])
+		scene.scripted_place_operator(id0, 5, 9, 0.0)
+		_assert(str(scene.label_info.text).contains("攀爬"),
+			"high placement label mentions 攀爬 got=%s" % scene.label_info.text)
+		scene.selected_op_id = id0
+		scene._undo()
+		scene.scripted_place_operator(id1, 11, 2, 90.0)
+		_assert(not str(scene.label_info.text).contains("攀爬"),
+			"ground placement label has no 攀爬 got=%s" % scene.label_info.text)
+		scene.scripted_place_cross_marker(10, 7, 12, 7)
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "climb feedback sim started")
+			return
+		var op0 = scene.sim.operators[0]
+		_assert(bool(op0.get("climbing", false)) == false,
+			"undone high placement does not climb at wait start")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "climb feedback scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_climb_wait_status() -> void:
+	## T5: at wait start the info line and the portrait card say 攀爬中 (no
+	## blacklisted teaching words); the card clears once the climb ends.
+	const BriefingCopy := preload("res://ui/briefing_copy.gd")
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb status scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		scene.apply_layout_size(1280, 720)
+		await process_frame
+		var ops: Array = scene.plan.get("operators", [])
+		var id0 := str(ops[0]["id"])
+		var id1 := str(ops[1]["id"])
+		scene.scripted_place_operator(id0, 5, 9, 0.0)
+		scene.scripted_place_operator(id1, 11, 2, 90.0)
+		scene.scripted_place_cross_marker(10, 7, 12, 7)
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "climb status sim started")
+			return
+		scene.paused = true
+		_assert(str(scene.label_info.text).contains("攀爬中"),
+			"wait opening label mentions 攀爬中 got=%s" % scene.label_info.text)
+		_assert(BriefingCopy.forbidden_hits(str(scene.label_info.text)).is_empty(),
+			"wait opening label blacklist clean got=%s" % str(scene.label_info.text))
+		_assert(_portrait_status_text(scene).contains("攀爬中"),
+			"portrait shows 攀爬中 at wait start got=%s" % _portrait_status_text(scene))
+		for _t in range(40):
+			scene.sim.advance_one_tick()
+		scene._refresh_climb_status()
+		_assert(not _portrait_status_text(scene).contains("攀爬中"),
+			"portrait clears 攀爬中 after climb got=%s" % _portrait_status_text(scene))
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "climb status scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_climb_access_controls() -> void:
+	## T5b: barn has two entrances. Tapping the placed operator's cell rotates the
+	## entrance, copy names the trade-off, undo restores it, and retry clears the
+	## sim climb fields so SETUP never paints the climb arc.
+	const BriefingCopy := preload("res://ui/briefing_copy.gd")
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb access controls scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		scene._load_preset("A")
+		var mg: Dictionary = scene._plan_op("op_mg42")
+		_assert(str(mg.get("climb_access", "")) == "barn_north_ladder",
+			"preset A MG starts on north ladder")
+		scene.selected_op_id = "op_mg42"
+		scene.pending_place_cell = Vector2i(-1, -1)
+		scene._handle_op_place_tap(Vector2i(5, 9))
+		_assert(str(mg.get("climb_access", "")) == "barn_east_door",
+			"tapping current cell rotates to east door got=%s" % mg.get("climb_access"))
+		_assert(str(scene.label_info.text).contains("入口：东侧门"),
+			"east door copy got=%s" % scene.label_info.text)
+		_assert(str(scene.label_info.text).contains("看得见"),
+			"east door copy warns about patrol got=%s" % scene.label_info.text)
+		_assert(BriefingCopy.forbidden_hits(str(scene.label_info.text)).is_empty(),
+			"east door copy blacklist clean got=%s" % scene.label_info.text)
+		scene._handle_op_place_tap(Vector2i(5, 9))
+		_assert(str(mg.get("climb_access", "")) == "barn_north_ladder",
+			"tap rotates back to north ladder got=%s" % mg.get("climb_access"))
+		_assert(str(scene.label_info.text).contains("入口：北侧梯子"),
+			"north ladder copy got=%s" % scene.label_info.text)
+		_assert(str(scene.label_info.text).contains("绕行"),
+			"north ladder copy mentions detour got=%s" % scene.label_info.text)
+		_assert(BriefingCopy.forbidden_hits(str(scene.label_info.text)).is_empty(),
+			"north ladder copy blacklist clean got=%s" % scene.label_info.text)
+		_assert(scene.set_op_climb_access("op_mg42", "no_such_entry") == false,
+			"invalid climb access id rejected")
+		_assert(str(mg.get("climb_access", "")) == "barn_north_ladder",
+			"invalid id leaves entrance unchanged")
+		_assert(scene.set_op_climb_access("no_such_op", "barn_east_door") == false,
+			"unknown operator rejected")
+		_assert(scene.set_op_climb_access("op_mg42", "barn_east_door") == true,
+			"switch to east door for undo test")
+		_assert(scene.set_op_climb_access("op_mg42", "barn_north_ladder") == true,
+			"switch back to north ladder")
+		scene._undo()
+		_assert(str(scene._plan_op("op_mg42").get("climb_access", "")) == "barn_east_door",
+			"undo restores previous entrance got=%s" % scene._plan_op("op_mg42").get("climb_access"))
+		var map = scene.map_view
+		_assert(map.access_marker_glyph({"label_zh": "北侧梯子"}) == "梯",
+			"north ladder marker glyph")
+		_assert(map.access_marker_glyph({"label_zh": "东侧门"}) == "门",
+			"east door marker glyph")
+		var fake_climb := {"id": "op_mg42", "climbing": true}
+		_assert(not map.should_draw_climb_marker(fake_climb),
+			"SETUP never draws climb marker")
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "climb access wait started")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+			return
+		scene.paused = true
+		var live_climb: Dictionary = {}
+		for sop in map.operators:
+			if str(sop.get("id", "")) == "op_mg42":
+				live_climb = sop
+		_assert(map.should_draw_climb_marker(live_climb),
+			"WAIT draws live sim climb marker phase=%s" % map.phase)
+		scene._restart()
+		_assert(scene.ui_phase == scene.UiPhase.SETUP, "retry returns to SETUP")
+		var stale := false
+		for op in scene.plan.get("operators", []):
+			if op.has("climbing") or op.has("climb_from") or op.has("climb_ticks_left"):
+				stale = true
+		_assert(not stale, "retry clears plan climb fields")
+		_assert(str(scene._plan_op("op_mg42").get("climb_access", "")) == "barn_east_door",
+			"retry keeps chosen entrance got=%s" % scene._plan_op("op_mg42").get("climb_access"))
+		_assert(map.phase == "setup" and not map.ops_from_sim,
+			"retry snapshot is plan/setup not sim ops")
+		_assert(not map.should_draw_climb_marker(fake_climb),
+			"retry SETUP still hides climb marker")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "climb access controls scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_climb_fractional_seconds() -> void:
+	## T5c: access times are floats; ticks round once, copy drops ".0" for whole
+	## seconds but keeps one decimal otherwise. Runtime level edit only.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "fractional climb scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(is_equal_approx(scene._climb_access_seconds({"id": "t", "climb_s": 2.5}), 2.5),
+			"climb seconds keeps 2.5")
+		_assert(scene._climb_access_ticks({"id": "t", "climb_s": 2.5}) == 50,
+			"climb ticks 2.5s=50")
+		_assert(scene._climb_access_ticks({"climb_s": 2.04}) == 41,
+			"climb ticks 2.04s=41")
+		_assert(scene._climb_access_ticks({"climb_s": 3.0}) == 60,
+			"climb ticks 3.0s=60")
+		_assert(scene._climb_access_ticks({}) == 40,
+			"climb ticks default=40")
+		_assert(scene._fmt_secs(2.5) == "2.5", "fmt secs 2.5")
+		_assert(scene._fmt_secs(3.0) == "3", "fmt secs 3.0 drops decimal")
+		_assert(scene._fmt_secs(2.0) == "2", "fmt secs 2.0 keeps old copy")
+		var entry: Dictionary = {}
+		for hs in scene.level.get("high_slots", []):
+			if str(hs.get("id", "")) != "barn_l2":
+				continue
+			for a in hs.get("access", []):
+				if str(a.get("id", "")) == "barn_north_ladder":
+					entry = a
+		_assert(not entry.is_empty(), "fractional test finds north ladder entry")
+		if entry.is_empty():
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+			return
+		var old_climb_s: Variant = entry.get("climb_s", 3.0)
+		entry["climb_s"] = 2.5
+		scene._load_preset("A")
+		scene.scripted_place_operator("op_mg42", 5, 9, 0.0)
+		_assert(str(scene.label_info.text).contains("2.5 秒"),
+			"placement hint shows fractional seconds got=%s" % scene.label_info.text)
+		scene._load_preset("A")
+		_assert(scene.set_op_climb_access("op_mg42", "barn_north_ladder"),
+			"fractional ladder access selected")
+		_assert(str(scene.label_info.text).contains("2.5 秒"),
+			"entrance copy shows fractional seconds got=%s" % scene.label_info.text)
+		scene._start_wait()
+		var mg: Dictionary = scene._plan_op("op_mg42")
+		_assert(int(mg.get("climb_ticks_left", -1)) == 50,
+			"plan A north ladder 2.5s=50 ticks got=%s" % mg.get("climb_ticks_left"))
+		entry["climb_s"] = old_climb_s
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "fractional climb scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 
 
 func _test_camera_zoom_pan() -> void:

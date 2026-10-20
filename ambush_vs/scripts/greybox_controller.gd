@@ -147,6 +147,8 @@ const NEXT_NIGHT_KIT_PATH := "user://next_night_kit.json"
 ## PLAY-UX PR-2: bottom-left portrait strip (all phases).
 var portrait_strip: HBoxContainer = null
 var _facing_submit_count: int = 0 ## test: wait re-aim submissions
+## T5 climb: signature of the last climbing state pushed to the portrait strip.
+var _climb_status_sig: String = ""
 ## PLAY-UX PR-4: explicit tools + trigger chips.
 var tool_bar: HBoxContainer = null
 var trigger_chip_row: HBoxContainer = null
@@ -964,6 +966,12 @@ func _load_preset(which: String) -> void:
 		op_placed[oid] = true
 		i += 1
 	selected_op_id = str(plan.get("operators", [{}])[0].get("id", "")) if plan.get("operators", []) else ""
+	if which == "A":
+		## T5b: sample plan A takes the longer, unwatched north ladder so it keeps
+		## the standard ambush. The fixture itself stays climb-free for W2 goldens.
+		var mg := _plan_op("op_mg42")
+		if not mg.is_empty():
+			mg["climb_access"] = "barn_north_ladder"
 	place_mode = PlaceMode.OP
 	_sync_trigger_option_from_plan()
 	_build_op_cards()
@@ -2785,6 +2793,9 @@ func _on_detonate_up() -> void:
 
 func _set_ui_phase(p: UiPhase) -> void:
 	ui_phase = p
+	if p == UiPhase.SETUP:
+		## T5b display fix: retry/back-to-setup must not keep sim climb markers.
+		_clear_plan_climb_state()
 	if scout_panel:
 		scout_panel.visible = p == UiPhase.SCOUT
 	setup_panel.visible = p == UiPhase.SETUP
@@ -2900,6 +2911,214 @@ func _refresh_start_gate() -> void:
 		label_start_reason.visible = not reason.is_empty()
 
 
+func _high_slot_for_cell(cell: Vector2i) -> Dictionary:
+	## T5b: the high_slots entry whose cells contain `cell` (empty when none).
+	for hs in level.get("high_slots", []):
+		for c in hs.get("cells", []):
+			if int(c.get("x", -1)) == cell.x and int(c.get("y", -1)) == cell.y:
+				return hs
+	return {}
+
+
+func _climb_access_entries(slot: Dictionary) -> Array:
+	var arr: Variant = slot.get("access", [])
+	return arr if typeof(arr) == TYPE_ARRAY else []
+
+
+func _find_climb_access(slot: Dictionary, access_id: String) -> Dictionary:
+	for a in _climb_access_entries(slot):
+		if typeof(a) == TYPE_DICTIONARY and str(a.get("id", "")) == access_id:
+			return a
+	return {}
+
+
+func _climb_access_seconds(entry: Dictionary) -> float:
+	return float(entry.get("climb_s", SimConstants.CLIMB_COST_S))
+
+
+func _climb_access_ticks(entry: Dictionary) -> int:
+	return maxi(1, int(round(_climb_access_seconds(entry) * float(SimConstants.TICK_HZ))))
+
+
+func _fmt_secs(s: float) -> String:
+	## Whole seconds read "3"; fractional seconds keep one decimal ("2.5").
+	if is_equal_approx(s, round(s)):
+		return str(int(round(s)))
+	return "%.1f" % s
+
+
+func _climb_access_label(entry: Dictionary) -> String:
+	## Setup copy for entry switching; never uses the briefing FORBIDDEN words.
+	var name_zh := str(entry.get("label_zh", "入口"))
+	var secs := _fmt_secs(_climb_access_seconds(entry))
+	match str(entry.get("id", "")):
+		"barn_north_ladder":
+			return "入口：北侧梯子（绕行，约 %s 秒）" % secs
+		"barn_east_door":
+			return "入口：东侧门（约 %s 秒，西侧巡逻看得见）" % secs
+		_:
+			return "入口：%s（约 %s 秒）" % [name_zh, secs]
+
+
+func _plan_op(op_id: String) -> Dictionary:
+	for op in plan.get("operators", []):
+		if str(op.get("id", "")) == op_id:
+			return op
+	return {}
+
+
+func _clear_plan_climb_state() -> void:
+	## Leaving WAIT (retry / back to setup): drop the sim-facing climb fields but
+	## keep climb_access, which is the player's chosen entrance.
+	for op in plan.get("operators", []):
+		op.erase("climbing")
+		op.erase("climb_from")
+		op.erase("climb_ticks_left")
+
+
+func _climb_departure_cell(target: Vector2i) -> Vector2i:
+	## T5: the ground cell an operator climbs up from / down to. Scan the target's
+	## 8-neighbourhood in fixed compass order N,E,S,W,NE,SE,SW,NW (grid y grows
+	## north; level origin x0_west_y0_south). walkable() must be checked first:
+	## walls/structures report tier "ground" through tier_at(). Among walkable
+	## ground cells prefer the one nearest squad_insertion[0] (Euclidean); ties
+	## fall back to the scan order. No candidate → the target cell itself.
+	var order := [
+		Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0),
+		Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1),
+	]
+	var best := Vector2i(-1, -1)
+	var best_d := INF
+	for d in order:
+		var nx: int = target.x + d.x
+		var ny: int = target.y + d.y
+		if grid == null or not grid.walkable(nx, ny):
+			continue
+		if grid.tier_at(float(nx), float(ny)) != SimConstants.TIER_GROUND:
+			continue
+		var dist := _climb_ref_dist(nx, ny)
+		if best.x < 0 or dist < best_d - 1e-9:
+			best = Vector2i(nx, ny)
+			best_d = dist
+	if best.x < 0:
+		return target
+	return best
+
+
+func _climb_ref_dist(x: int, y: int) -> float:
+	var ins: Array = level.get("squad_insertion", [])
+	if ins.is_empty():
+		return 0.0 ## no reference point → first-in-order wins every tie
+	var p: Dictionary = ins[0]
+	return Vector2(float(x), float(y)).distance_to(
+		Vector2(float(p.get("x", x)), float(p.get("y", y)))
+	)
+
+
+func _apply_climb_to_plan() -> void:
+	## T5: operators standing on a high cell begin the night climbing up from a
+	## ground cell. Done here once (not at placement) so point-tap, drag-drop,
+	## preset and scripted placement all share one path, and undo never leaves
+	## stale climb fields behind.
+	## T5b: high_slots with an `access` list use that entry's cell/time. Missing
+	## climb_access falls back to access[0] (barn east door: fast but watched).
+	## Slots without `access` keep the T5 8-neighbour rule and 40-tick default.
+	for op in plan.get("operators", []):
+		var cell := Vector2i(int(op.get("x", 0)), int(op.get("y", 0)))
+		var on_high: bool = grid != null and grid.tier_at(float(cell.x), float(cell.y)) == SimConstants.TIER_HIGH
+		if on_high:
+			var slot := _high_slot_for_cell(cell)
+			var access := _climb_access_entries(slot)
+			if not access.is_empty():
+				var entry := _find_climb_access(slot, str(op.get("climb_access", "")))
+				if entry.is_empty():
+					entry = access[0]
+				op["climb_access"] = str(entry.get("id", ""))
+				op["climbing"] = true
+				op["climb_from"] = {
+					"x": int(entry.get("x", cell.x)),
+					"y": int(entry.get("y", cell.y)),
+				}
+				op["climb_ticks_left"] = _climb_access_ticks(entry)
+			else:
+				var dep := _climb_departure_cell(cell)
+				op["climbing"] = true
+				op["climb_from"] = {"x": dep.x, "y": dep.y}
+				op.erase("climb_ticks_left")
+		else:
+			op.erase("climbing")
+			op.erase("climb_from")
+			op.erase("climb_ticks_left")
+
+
+func set_op_climb_access(op_id: String, access_id: String) -> bool:
+	## Test/script API: choose the entrance used by a high-cell operator.
+	## Returns false for unknown operators, slots without access, or bad ids.
+	if ui_phase != UiPhase.SETUP or plan.is_empty():
+		return false
+	var op := _plan_op(op_id)
+	if op.is_empty():
+		return false
+	var cell := Vector2i(int(op.get("x", 0)), int(op.get("y", 0)))
+	var slot := _high_slot_for_cell(cell)
+	var entry := _find_climb_access(slot, access_id)
+	if entry.is_empty():
+		return false
+	var changed := str(op.get("climb_access", "")) != access_id
+	if changed:
+		_push_undo()
+		op["climb_access"] = access_id
+	label_info.text = _climb_access_label(entry)
+	_push_map_snapshot()
+	return true
+
+
+func _cycle_climb_access(op_id: String) -> bool:
+	## Tap the selected operator's current barn cell again to rotate entrances.
+	var op := _plan_op(op_id)
+	if op.is_empty():
+		return false
+	var cell := Vector2i(int(op.get("x", 0)), int(op.get("y", 0)))
+	var slot := _high_slot_for_cell(cell)
+	var access := _climb_access_entries(slot)
+	if access.size() < 2:
+		return false
+	var cur := str(op.get("climb_access", ""))
+	var idx := 0
+	for i in range(access.size()):
+		if str(access[i].get("id", "")) == cur:
+			idx = i
+			break
+	var next_entry: Dictionary = access[(idx + 1) % access.size()]
+	return set_op_climb_access(op_id, str(next_entry.get("id", "")))
+
+
+func _climbing_count() -> int:
+	if sim == null:
+		return 0
+	var n := 0
+	for op in sim.operators:
+		if bool(op.get("climbing", false)):
+			n += 1
+	return n
+
+
+func _refresh_climb_status() -> void:
+	## T5: WAIT ticks run outside _refresh_portrait_strip's normal path, so only
+	## rebuild the portrait strip when the climbing signature actually changes.
+	if sim == null:
+		_climb_status_sig = ""
+		return
+	var parts: Array = []
+	for op in sim.operators:
+		parts.append("%s:%d" % [str(op.get("id", "")), 1 if bool(op.get("climbing", false)) else 0])
+	var sig := ",".join(parts)
+	if sig == _climb_status_sig:
+		return
+	_climb_status_sig = sig
+	_refresh_portrait_strip()
+
+
 func _start_wait() -> void:
 	var reason := start_block_reason()
 	if not reason.is_empty():
@@ -2912,6 +3131,8 @@ func _start_wait() -> void:
 		plan["start_alert"] = carried_alert
 	else:
 		plan.erase("start_alert")
+	## T5 climb: high-point operators start the night climbing (see comment there).
+	_apply_climb_to_plan()
 	sim = NightSim.new()
 	sim.setup(level, plan, weapons)
 	sim.begin_wait()
@@ -2937,6 +3158,17 @@ func _start_wait() -> void:
 		sfx.start_ambient("ambient_yard", -14.0)
 	_push_map_snapshot()
 	_apply_default_camera()
+	## T5 climb: announce the opening climb and refresh portrait status.
+	_climb_status_sig = ""
+	_refresh_climb_status()
+	var climbing_n := _climbing_count()
+	if climbing_n > 0:
+		var max_ticks := 0
+		for op in sim.operators:
+			if bool(op.get("climbing", false)):
+				max_ticks = maxi(max_ticks, int(op.get("climb_ticks_left", 0)))
+		var secs := _fmt_secs(float(max_ticks) / float(SimConstants.TICK_HZ))
+		label_info.text = "%d 人攀爬中（约 %s 秒，期间不能开火）" % [climbing_n, secs]
 
 
 func _toggle_pause() -> void:
@@ -3056,6 +3288,19 @@ func _on_cell_tapped(cell: Vector2i) -> void:
 
 func _handle_op_place_tap(cell: Vector2i) -> void:
 	## Ghost + confirm: first tap shows ✓, second tap same cell places.
+	var op := _plan_op(selected_op_id)
+	var same_cell := (
+		not op.is_empty()
+		and int(op.get("x", -1)) == cell.x
+		and int(op.get("y", -1)) == cell.y
+	)
+	if same_cell and _climb_access_entries(_high_slot_for_cell(cell)).size() > 1:
+		## T5b: tapping an already-placed multi-entrance cell rotates the entrance.
+		_cycle_climb_access(selected_op_id)
+		pending_place_cell = Vector2i(-1, -1)
+		if map_view:
+			map_view.place_ghost_cell = Vector2i(-1, -1)
+		return
 	if pending_place_cell == cell:
 		_move_selected_op(cell)
 		pending_place_cell = Vector2i(-1, -1)
@@ -3480,8 +3725,19 @@ func _move_selected_op(cell: Vector2i) -> void:
 			op_placed[selected_op_id] = true
 			var dname := str(op_display_names.get(selected_op_id, "队员"))
 			var tier := str(op["tier"])
+			var climb_hint := ""
+			if tier == "high":
+				var secs := _climb_access_seconds({})
+				var slot := _high_slot_for_cell(cell)
+				var access := _climb_access_entries(slot)
+				if not access.is_empty():
+					var entry := _find_climb_access(slot, str(op.get("climb_access", "")))
+					if entry.is_empty():
+						entry = access[0]
+					secs = _climb_access_seconds(entry)
+				climb_hint = " · 高点 · 开局先攀爬约 %s 秒，期间不能开火" % _fmt_secs(secs)
 			label_info.text = "%s 已放置 (%d,%d)%s · 拖锥尖设朝向" % [
-				dname, cell.x, cell.y, " · 高点" if tier == "high" else ""
+				dname, cell.x, cell.y, climb_hint
 			]
 			# PR-4: keep selection for aim handle; empty taps use ghost confirm (no teleport).
 			if map_view:
@@ -3810,7 +4066,10 @@ func _refresh_portrait_strip() -> void:
 			if ui_phase == UiPhase.WAIT and sim != null:
 				for sop in sim.operators:
 					if str(sop.get("id", "")) == oid:
-						if int(sop.get("turn_ticks_left", 0)) > 0 or not bool(sop.get("can_fire", true)):
+						## T5: climbing hides the generic 禁火 tag (climb blocks fire too).
+						if bool(sop.get("climbing", false)):
+							status = "\n攀爬中"
+						elif int(sop.get("turn_ticks_left", 0)) > 0 or not bool(sop.get("can_fire", true)):
 							status = "\n禁火"
 						break
 			btn.text = "%s\n%s\nHP%d 弹%d%s" % [dname, wlab, hp_n, ammo_n, status]
@@ -3915,6 +4174,8 @@ func _process(delta: float) -> void:
 		if sim.is_finished():
 			break
 	_push_map_snapshot()
+	## T5: reflect climb start/end on the portrait cards when the state changes.
+	_refresh_climb_status()
 	_update_wait_labels()
 	if sim.is_finished() and not _pending_result:
 		_pending_result = true
@@ -4302,6 +4563,7 @@ func _push_map_snapshot() -> void:
 	var al := "quiet"
 	var ph := "setup"
 	var supply_states: Dictionary = {}
+	var ops_from_sim := false
 	if ui_phase == UiPhase.SCOUT and scout != null:
 		ops = scout.operators
 		sentries = scout.sentries
@@ -4311,6 +4573,7 @@ func _push_map_snapshot() -> void:
 		supply_states = scout.supply_draw_states()
 	elif sim != null:
 		ops = sim.operators
+		ops_from_sim = true
 		enemies = sim.enemies
 		sentries = sim.sentries
 		patrols = sim.patrols
@@ -4338,6 +4601,7 @@ func _push_map_snapshot() -> void:
 		"preview_seers": preview_seers,
 		"selected_op_id": selected_op_id,
 		"highlight_high_slots": ui_phase == UiPhase.SETUP,
+		"ops_from_sim": ops_from_sim,
 		"op_display_names": op_display_names,
 		"supply_states": supply_states,
 		"searched_bodies": searched_bodies,
