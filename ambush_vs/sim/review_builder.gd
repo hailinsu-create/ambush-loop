@@ -47,6 +47,7 @@ static func _compute_metrics(summary: Dictionary, events: Array) -> Dictionary:
 	var first_fire := -1
 	var last_kill := -1
 	var volley_kills := 0
+	var volley_by_actor: Dictionary = {} ## actor → first-volley kill count
 	var kill_actors: Dictionary = {} ## actor → count
 	var alert_peak := "quiet"
 	var alert_rank := {"quiet": 0, "suspicious": 1, "area_alert": 2, "global_alert": 3}
@@ -61,6 +62,7 @@ static func _compute_metrics(summary: Dictionary, events: Array) -> Dictionary:
 			kill_actors[actor] = int(kill_actors.get(actor, 0)) + 1
 			if det >= 0 and tick >= det and tick <= det + VOLLEY_WINDOW_TICKS:
 				volley_kills += 1
+				volley_by_actor[actor] = int(volley_by_actor.get(actor, 0)) + 1
 		if t == "alert_change" or t == "alert":
 			var a := str(e.get("payload", {}).get("alert", e.get("alert", "")))
 			if int(alert_rank.get(a, -1)) > int(alert_rank.get(alert_peak, 0)):
@@ -78,6 +80,7 @@ static func _compute_metrics(summary: Dictionary, events: Array) -> Dictionary:
 		"last_kill_tick": last_kill,
 		"clear_s": clear_s,
 		"volley_kills": volley_kills,
+		"volley_by_actor": volley_by_actor,
 		"kill_actors": kill_actors,
 		"alert_peak": alert_peak,
 		"escape_n": (summary.get("escapes", []) as Array).size(),
@@ -138,6 +141,20 @@ static func _trigger_zh(trig: String) -> String:
 			return "被发现被迫交火"
 		_:
 			return "计划起爆"
+
+
+static func _is_known_actor(actor: String, plan: Dictionary, names: Dictionary) -> bool:
+	if names.has(actor) and str(names[actor]) != "":
+		return true
+	for op in plan.get("operators", []):
+		if str(op.get("id", "")) == actor:
+			return true
+	for mine in plan.get("mines", []):
+		if str(mine.get("id", "")) == actor:
+			return true
+	if actor.begins_with("mine"):
+		return true
+	return false
 
 
 static func _op_label(op_id: String, plan: Dictionary, names: Dictionary) -> String:
@@ -206,19 +223,30 @@ static func _causes(
 	else:
 		var top_actor := ""
 		var top_n := 0
+		var total_kills := 0
 		for a in kill_actors.keys():
 			var n := int(kill_actors[a])
+			total_kills += n
+			if not _is_known_actor(str(a), plan, names):
+				continue
 			if n > top_n:
 				top_n = n
 				top_actor = str(a)
+		var volley_by_actor: Dictionary = m.get("volley_by_actor", {})
 		if top_actor != "" and top_n > 0:
 			var label := _op_label(top_actor, plan, names)
+			var own_volley := int(volley_by_actor.get(top_actor, 0))
 			if top_actor.begins_with("mine"):
 				out.append("地雷炸开了纵队头兵，撕开口子")
-			elif volley >= 4:
-				out.append("%s 在首轮点杀了 %d 人，压制势头很猛" % [label, volley])
+			elif own_volley >= 4:
+				out.append("%s在首轮点杀了 %d 人，压制势头很猛" % [label, own_volley])
 			else:
-				out.append("%s 扛下了主要击杀（%d 人），清场靠交叉火力补完" % [label, top_n])
+				out.append("%s扛下了主要击杀（%d 人），清场靠交叉火力补完" % [label, top_n])
+		elif total_kills > 0:
+			if volley >= 4:
+				out.append("首轮齐射点杀了 %d 人，压制势头很猛" % volley)
+			else:
+				out.append("交叉火力完成清场（%d 人）" % total_kills)
 
 	# 3) Leaks / alert / quality (skip if wound+leak already combined)
 	var wound_leak_combined := not wounded.is_empty() and not esc.is_empty()
