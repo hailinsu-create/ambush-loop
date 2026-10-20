@@ -34,6 +34,7 @@ func _run_all() -> void:
 	await _test_climb_placement_feedback()
 	await _test_climb_wait_status()
 	await _test_climb_access_controls()
+	await _test_climb_fractional_seconds()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
@@ -905,6 +906,68 @@ func _test_climb_access_controls() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 		return
 	_assert(false, "climb access controls scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_climb_fractional_seconds() -> void:
+	## T5c: access times are floats; ticks round once, copy drops ".0" for whole
+	## seconds but keeps one decimal otherwise. Runtime level edit only.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "fractional climb scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(is_equal_approx(scene._climb_access_seconds({"id": "t", "climb_s": 2.5}), 2.5),
+			"climb seconds keeps 2.5")
+		_assert(scene._climb_access_ticks({"id": "t", "climb_s": 2.5}) == 50,
+			"climb ticks 2.5s=50")
+		_assert(scene._climb_access_ticks({"climb_s": 2.04}) == 41,
+			"climb ticks 2.04s=41")
+		_assert(scene._climb_access_ticks({"climb_s": 3.0}) == 60,
+			"climb ticks 3.0s=60")
+		_assert(scene._climb_access_ticks({}) == 40,
+			"climb ticks default=40")
+		_assert(scene._fmt_secs(2.5) == "2.5", "fmt secs 2.5")
+		_assert(scene._fmt_secs(3.0) == "3", "fmt secs 3.0 drops decimal")
+		_assert(scene._fmt_secs(2.0) == "2", "fmt secs 2.0 keeps old copy")
+		var entry: Dictionary = {}
+		for hs in scene.level.get("high_slots", []):
+			if str(hs.get("id", "")) != "barn_l2":
+				continue
+			for a in hs.get("access", []):
+				if str(a.get("id", "")) == "barn_north_ladder":
+					entry = a
+		_assert(not entry.is_empty(), "fractional test finds north ladder entry")
+		if entry.is_empty():
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+			return
+		var old_climb_s: Variant = entry.get("climb_s", 3.0)
+		entry["climb_s"] = 2.5
+		scene._load_preset("A")
+		scene.scripted_place_operator("op_mg42", 5, 9, 0.0)
+		_assert(str(scene.label_info.text).contains("2.5 秒"),
+			"placement hint shows fractional seconds got=%s" % scene.label_info.text)
+		scene._load_preset("A")
+		_assert(scene.set_op_climb_access("op_mg42", "barn_north_ladder"),
+			"fractional ladder access selected")
+		_assert(str(scene.label_info.text).contains("2.5 秒"),
+			"entrance copy shows fractional seconds got=%s" % scene.label_info.text)
+		scene._start_wait()
+		var mg: Dictionary = scene._plan_op("op_mg42")
+		_assert(int(mg.get("climb_ticks_left", -1)) == 50,
+			"plan A north ladder 2.5s=50 ticks got=%s" % mg.get("climb_ticks_left"))
+		entry["climb_s"] = old_climb_s
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "fractional climb scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 

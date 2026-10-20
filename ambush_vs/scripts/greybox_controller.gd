@@ -2932,21 +2932,32 @@ func _find_climb_access(slot: Dictionary, access_id: String) -> Dictionary:
 	return {}
 
 
-func _climb_access_seconds(entry: Dictionary) -> int:
-	return int(round(float(entry.get("climb_s", SimConstants.CLIMB_COST_S))))
+func _climb_access_seconds(entry: Dictionary) -> float:
+	return float(entry.get("climb_s", SimConstants.CLIMB_COST_S))
+
+
+func _climb_access_ticks(entry: Dictionary) -> int:
+	return maxi(1, int(round(_climb_access_seconds(entry) * float(SimConstants.TICK_HZ))))
+
+
+func _fmt_secs(s: float) -> String:
+	## Whole seconds read "3"; fractional seconds keep one decimal ("2.5").
+	if is_equal_approx(s, round(s)):
+		return str(int(round(s)))
+	return "%.1f" % s
 
 
 func _climb_access_label(entry: Dictionary) -> String:
 	## Setup copy for entry switching; never uses the briefing FORBIDDEN words.
 	var name_zh := str(entry.get("label_zh", "入口"))
-	var secs := _climb_access_seconds(entry)
+	var secs := _fmt_secs(_climb_access_seconds(entry))
 	match str(entry.get("id", "")):
 		"barn_north_ladder":
-			return "入口：北侧梯子（绕行，约 %d 秒）" % secs
+			return "入口：北侧梯子（绕行，约 %s 秒）" % secs
 		"barn_east_door":
-			return "入口：东侧门（约 %d 秒，西侧巡逻看得见）" % secs
+			return "入口：东侧门（约 %s 秒，西侧巡逻看得见）" % secs
 		_:
-			return "入口：%s（约 %d 秒）" % [name_zh, secs]
+			return "入口：%s（约 %s 秒）" % [name_zh, secs]
 
 
 func _plan_op(op_id: String) -> Dictionary:
@@ -3028,7 +3039,7 @@ func _apply_climb_to_plan() -> void:
 					"x": int(entry.get("x", cell.x)),
 					"y": int(entry.get("y", cell.y)),
 				}
-				op["climb_ticks_left"] = _climb_access_seconds(entry) * SimConstants.TICK_HZ
+				op["climb_ticks_left"] = _climb_access_ticks(entry)
 			else:
 				var dep := _climb_departure_cell(cell)
 				op["climbing"] = true
@@ -3156,8 +3167,8 @@ func _start_wait() -> void:
 		for op in sim.operators:
 			if bool(op.get("climbing", false)):
 				max_ticks = maxi(max_ticks, int(op.get("climb_ticks_left", 0)))
-		var secs := int(round(float(max_ticks) / float(SimConstants.TICK_HZ)))
-		label_info.text = "%d 人攀爬中（约 %d 秒，期间不能开火）" % [climbing_n, secs]
+		var secs := _fmt_secs(float(max_ticks) / float(SimConstants.TICK_HZ))
+		label_info.text = "%d 人攀爬中（约 %s 秒，期间不能开火）" % [climbing_n, secs]
 
 
 func _toggle_pause() -> void:
@@ -3716,7 +3727,7 @@ func _move_selected_op(cell: Vector2i) -> void:
 			var tier := str(op["tier"])
 			var climb_hint := ""
 			if tier == "high":
-				var secs := int(SimConstants.CLIMB_COST_S)
+				var secs := _climb_access_seconds({})
 				var slot := _high_slot_for_cell(cell)
 				var access := _climb_access_entries(slot)
 				if not access.is_empty():
@@ -3724,7 +3735,7 @@ func _move_selected_op(cell: Vector2i) -> void:
 					if entry.is_empty():
 						entry = access[0]
 					secs = _climb_access_seconds(entry)
-				climb_hint = " · 高点 · 开局先攀爬约 %d 秒，期间不能开火" % secs
+				climb_hint = " · 高点 · 开局先攀爬约 %s 秒，期间不能开火" % _fmt_secs(secs)
 			label_info.text = "%s 已放置 (%d,%d)%s · 拖锥尖设朝向" % [
 				dname, cell.x, cell.y, climb_hint
 			]
