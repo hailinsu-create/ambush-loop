@@ -6,6 +6,7 @@ class_name SimRunner
 const _NightSim := preload("res://sim/night_sim.gd")
 const _LevelLoader := preload("res://sim/level_loader.gd")
 const _Weapons := preload("res://sim/weapons.gd")
+const _SimLevels := preload("res://sim/levels.gd")
 
 
 static func load_json(path: String) -> Dictionary:
@@ -19,8 +20,14 @@ static func load_json(path: String) -> Dictionary:
 	return v
 
 
-static func run_plan(plan_path: String, level_path: String = "res://data/levels/yard.json") -> Dictionary:
-	var level: Dictionary = _LevelLoader.load_path(level_path)
+static func _resolve_level_path(level_path: String) -> String:
+	if level_path.is_empty():
+		return _SimLevels.path_for(_SimLevels.DEFAULT_ID)
+	return level_path
+
+
+static func run_plan(plan_path: String, level_path: String = "") -> Dictionary:
+	var level: Dictionary = _LevelLoader.load_path(_resolve_level_path(level_path))
 	if level.is_empty():
 		return {"error": "level"}
 	var plan := load_json(plan_path)
@@ -36,8 +43,8 @@ static func run_plan(plan_path: String, level_path: String = "res://data/levels/
 	return summary
 
 
-static func run_plan_dict(plan: Dictionary, level_path: String = "res://data/levels/yard.json", tweaks: Dictionary = {}) -> Dictionary:
-	var level: Dictionary = _LevelLoader.load_path(level_path)
+static func run_plan_dict(plan: Dictionary, level_path: String = "", tweaks: Dictionary = {}) -> Dictionary:
+	var level: Dictionary = _LevelLoader.load_path(_resolve_level_path(level_path))
 	if level.is_empty():
 		return {"error": "level"}
 	var weapons: Dictionary = _Weapons.load_csv()
@@ -50,3 +57,7 @@ static func run_plan_dict(plan: Dictionary, level_path: String = "res://data/lev
 	summary["event_log"] = sim.log.to_dict()
 	summary["sim"] = sim
 	return summary
+
+
+static func run_level_plan(level_id: String, plan: Dictionary, tweaks: Dictionary = {}) -> Dictionary:
+	return run_plan_dict(plan, _SimLevels.path_for(level_id), tweaks)
