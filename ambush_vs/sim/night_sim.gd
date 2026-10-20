@@ -53,8 +53,9 @@ var manual_detonate_tick: int = -1 ## set ≥0 to force manual at that tick
 var force_expose: bool = false ## test hook: treat squad as exposed every tick
 var skip_fire: bool = false
 var skip_enemy_fire: bool = false ## test hook
-## PLAY-6 default: each enemy scores at most one wounding hit. Measurement toggle only.
-var enemy_return_soft_cap: bool = true
+## T6 explicit difficulty: soft cap is the assist tier, off by default (hard tier).
+## Tests may still override this after setup(); setup() reads optional plan["return_fire_assist"].
+var enemy_return_soft_cap: bool = C.RETURN_FIRE_ASSIST_DEFAULT
 var max_ticks: int = 2000
 var speed_mul: float = 1.0 ## playback only; does not affect ticks/hash
 var next_night_alert: String = C.ALERT_QUIET ## raised by leaks (PLAY-6)
@@ -149,6 +150,9 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 
 	phase = C.PHASE_SETUP
 	alert = C.ALERT_QUIET
+	## T6: optional difficulty key; missing/illegal → constant default. Tests may still override after setup().
+	var rfa: Variant = plan.get("return_fire_assist", C.RETURN_FIRE_ASSIST_DEFAULT)
+	enemy_return_soft_cap = bool(rfa) if typeof(rfa) == TYPE_BOOL else C.RETURN_FIRE_ASSIST_DEFAULT
 	## T4: optional plan key; missing/empty/illegal → quiet (golden path unchanged).
 	start_alert = _valid_start_alert(plan.get("start_alert", ""))
 	tick = 0
@@ -1082,8 +1086,8 @@ func _step_enemy_return_fire() -> void:
 			need += 1
 		if bool(e.get("in_cover", false)):
 			need = maxi(need - 1, 1) ## braced in cover
-		if enemy_return_soft_cap and int(e.get("_hits_scored", 0)) >= 1:
-			continue ## soft cap: one wounding hit per enemy (keeps B winnable)
+		if enemy_return_soft_cap and int(e.get("_hits_scored", 0)) >= C.RETURN_FIRE_ASSIST_MAX_HITS_PER_ENEMY:
+			continue ## assist cap: bounded wounding hits per enemy
 		var facing := SimGeom.bearing_deg(float(e["x"]), float(e["y"]), float(target["x"]), float(target["y"]))
 		e["fire_accum"] = float(e.get("fire_accum", 0.0)) + C.ENEMY_RETURN_RPM / 60.0 * C.DT_S
 		while float(e["fire_accum"]) + 1e-9 >= 1.0:

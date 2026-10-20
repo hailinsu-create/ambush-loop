@@ -161,7 +161,13 @@ static func _map_plan(src: Dictionary) -> Dictionary:
 	var trig: Dictionary = {}
 	if typeof(src.get("trigger", {})) == TYPE_DICTIONARY:
 		trig = (src.get("trigger", {}) as Dictionary).duplicate(true)
-	return {"operators": ops, "mines": mines, "grenades": grenades, "trigger": trig}
+	return {
+		"operators": ops,
+		"mines": mines,
+		"grenades": grenades,
+		"trigger": trig,
+		"return_fire_assist": bool(src.get("return_fire_assist", SimConstants.RETURN_FIRE_ASSIST_DEFAULT)),
+	}
 
 
 static func _array_copy(v: Variant) -> Array:

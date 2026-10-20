@@ -20,6 +20,19 @@ const AimSnap := preload("res://sim/aim_snap.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimGeom := preload("res://sim/geom.gd")
 
+## T6 hard default (assist OFF): these finger-slip matrix cells still complete the
+## ambush but a flank escapes. Exact measured outcomes, no range fallback.
+const HARD_TIER_EXCEPTIONS := {
+	"A|0|5,10|-5": {"outcome": "lose", "escapes": ["F2", "F1"]},
+	"A|0|5,10|0": {"outcome": "lose", "escapes": ["F2", "F1"]},
+	"A|0|5,10|5": {"outcome": "lose", "escapes": ["F2", "F1"]},
+	"B|0|9,6|-5": {"outcome": "lose", "escapes": ["E2"]},
+	"B|0|9,6|0": {"outcome": "lose", "escapes": ["E2"]},
+	"B|0|9,6|5": {"outcome": "lose", "escapes": ["E2"]},
+	"B|1|15,8|-5": {"outcome": "lose", "escapes": ["E4"]},
+	"B|1|15,8|0": {"outcome": "lose", "escapes": ["E4"]},
+}
+
 var _failed := 0
 var _passed := 0
 
@@ -141,9 +154,18 @@ func _assert_plan_tolerance(which: String, path: String, level: Dictionary) -> v
 				p["operators"][oi]["y"] = oy
 				p["operators"][oi]["facing_deg"] = center_f + float(df)
 				var s: Dictionary = SimRunner.run_plan_dict(p)
-				_assert(str(s.get("outcome", "")) == "win",
-					"%s op%d@(%d,%d) aim%+.0f (c=%.1f) wins got=%s esc=%s" % [
-						which, oi, ox, oy, df, center_f, s.get("outcome"), s.get("escapes")])
+				var key := "%s|%d|%d,%d|%d" % [which, oi, ox, oy, int(df)]
+				var tag := "%s op%d@(%d,%d) aim%+.0f (c=%.1f)" % [which, oi, ox, oy, df, center_f]
+				if HARD_TIER_EXCEPTIONS.has(key):
+					var exp: Dictionary = HARD_TIER_EXCEPTIONS[key]
+					var got_esc: Array = s.get("escapes", [])
+					_assert(
+						str(s.get("outcome", "")) == str(exp["outcome"]) and got_esc == exp["escapes"],
+						"%s hard-tier outcome=%s esc=%s (want %s/%s)" % [
+							tag, s.get("outcome"), got_esc, exp["outcome"], exp["escapes"]])
+				else:
+					_assert(str(s.get("outcome", "")) == "win",
+						"%s wins got=%s esc=%s" % [tag, s.get("outcome"), s.get("escapes")])
 
 
 func _row_from_run(summary: Dictionary) -> Dictionary:

@@ -46,6 +46,7 @@ func _reset_env() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_FORCE_LEAK", "")
 	OS.set_environment("AMBUSH_GREYBOX_ART", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_RETURN_ASSIST", "")
 
 
 func _wait_scene_ready(max_frames: int = 90) -> Node:
@@ -94,6 +95,7 @@ func _test_playtest_on_lockdown() -> void:
 	OS.set_environment("AMBUSH_GREYBOX_FORCE_LEAK", "1")
 	OS.set_environment("AMBUSH_GREYBOX_CAPTURE", "user://w9_cap")
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_RETURN_ASSIST", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "on scene change err=%s" % err)
 	var scene = await _wait_scene_ready()
@@ -133,6 +135,16 @@ func _test_playtest_on_lockdown() -> void:
 	_assert(scene.force_leak_allowed() == false, "on force_leak_allowed false")
 	_assert(scene.ui_phase == scene.UiPhase.SETUP, "on in SETUP phase")
 	_assert(not scene.dev_entries_visible(), "on dev entries hidden in SETUP")
+	if scene.briefing_card and scene.briefing_card.visible:
+		scene._dismiss_briefing_card(false)
+		await process_frame
+	_assert(scene.btn_return_fire_assist != null and scene.btn_return_fire_assist.is_visible_in_tree(),
+		"on assist button visible (player option)")
+	_assert(scene.return_fire_assist == false, "on AMBUSH_RETURN_ASSIST env ignored in playtest")
+	scene._toggle_return_fire_assist()
+	_assert(scene.return_fire_assist == true, "on assist button usable in playtest")
+	_assert(str(scene.btn_return_fire_assist.text).contains("还击辅助：开"),
+		"on assist button copy updates got=%s" % scene.btn_return_fire_assist.text)
 	_reset_env()
 
 
@@ -204,6 +216,11 @@ func _test_playtest_match_log_export() -> void:
 		guard += 1
 	_assert(scene.sim.is_finished(), "log sim finished guard=%d" % guard)
 	scene._show_result()
+	_assert(scene.result_assist_label != null, "result card has assist line")
+	_assert(str(scene.result_assist_label.text) == "还击辅助：关",
+		"result card shows assist OFF got=%s" % scene.result_assist_label.text)
+	_assert(str(scene.review_card_text()).contains("还击辅助"),
+		"review card text includes assist line")
 	var log: Dictionary = scene.last_match_log
 	var missing: Array = []
 	for k in MatchLogScript.required_keys():
@@ -238,6 +255,11 @@ func _test_playtest_match_log_export() -> void:
 		str(trig_log.get("type", "")) == "cross_marker",
 		"match log plan trigger cross_marker got=%s" % str(trig_log.get("type", ""))
 	)
+	_assert(plan_log.has("return_fire_assist"), "match log plan has return_fire_assist")
+	_assert(typeof(plan_log.get("return_fire_assist")) == TYPE_BOOL,
+		"match log return_fire_assist is bool got=%s" % typeof(plan_log.get("return_fire_assist")))
+	_assert(bool(plan_log.get("return_fire_assist")) == bool(scene.return_fire_assist),
+		"match log return_fire_assist matches match setting")
 	var fires: Array = log.get("fires", [])
 	_assert(not fires.is_empty(), "match log fires non-empty")
 	_assert(int(log.get("fire_count", -1)) == fires.size(), "fire_count == fires.size()")

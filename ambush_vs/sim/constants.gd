@@ -40,6 +40,10 @@ const FLEE_STRENGTH_RATIO := 0.34 ## flee when living/entered_at_detonate below 
 const OP_MAX_HP := 3
 const ENEMY_RETURN_RPM := 220.0 ## lands a wound during a ~1 s post-detonate fight
 const ENEMY_RETURN_RANGE := 12.0
+## T6 explicit return-fire difficulty. Default is the hard tier (no per-enemy cap).
+## Assist tier keeps the old PLAY-6 soft cap; both remain tunable after blind playtests.
+const RETURN_FIRE_ASSIST_DEFAULT := false ## owner-defaulted T6 recommendation A; retune after blind test
+const RETURN_FIRE_ASSIST_MAX_HITS_PER_ENEMY := 1 ## wounding hits per enemy while assist is ON
 const COMBAT_STEP_CELLS := 2.2 ## cells/s toward cover or exit
 const WOUNDED_RPM_MUL := 0.65 ## wounded operators fire slower
 const DEFAULT_AMMO := {

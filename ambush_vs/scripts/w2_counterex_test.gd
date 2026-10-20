@@ -1,8 +1,9 @@
 extends SceneTree
 
-## P0-1 / D.3 counterexample gates (W2 family) + soft-cap control (W7 family).
-## Asserts: (1) measurement harness; (2) currently-holding gates stay green;
-## (3) soft-cap OFF control differs from default; (4) known non-holding cases stay documented.
+## P0-1 / D.3 counterexample gates (W2 family) + T6 return-fire difficulty.
+## Asserts: (1) measurement harness in both difficulty tiers; (2) currently-holding
+## D.3 gates stay green under the new default (assist OFF); (3) known non-holding
+## cases stay documented; (4) four alert tiers still salvage ≥1 plan on OFF.
 ## Full matrix → ambush_vs/docs/COUNTEREX_P0_1_RESULTS_20261017.md
 ## Launch only via scripts/run_isolated_test.sh|.ps1.
 
@@ -12,12 +13,13 @@ const NightSim := preload("res://sim/night_sim.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
 const ReviewBuilder := preload("res://sim/review_builder.gd")
+const C := preload("res://sim/constants.gd")
 
 const TICK_HZ := 20
 const T0_A := 520
 const T0_B := 560
 
-## Cases that currently satisfy D.3 under default soft_cap=ON (must stay true).
+## Cases that satisfy D.3 under the new default (assist OFF; strict three-criterion D.3).
 const HOLDING_IDS := [
 	"F-A30", "F-A60",
 	"F-B30", "F-B60",
@@ -26,7 +28,7 @@ const HOLDING_IDS := [
 	"W-A-MG→Kar",
 	"S-unscout-east",
 ]
-## Cases that do NOT yet satisfy D.3 under soft_cap=ON (document; watch regressions).
+## Cases that do NOT satisfy D.3 under assist OFF (document; watch regressions).
 const PENDING_IDS := []
 
 var _failed := 0
@@ -57,16 +59,18 @@ func _assert(cond: bool, msg: String) -> void:
 
 
 func _run_all() -> void:
-	_test_soft_cap_default_true()
+	_test_soft_cap_default()
+	_test_plan_key_roundtrip()
 	var on_matrix := _measure_matrix(true)
 	var off_matrix := _measure_matrix(false)
-	_rows.append_array(on_matrix.values())
 	_rows.append_array(off_matrix.values())
+	_rows.append_array(on_matrix.values())
 	_assert_baselines(on_matrix, off_matrix)
-	_assert_holding_gates(on_matrix)
-	_assert_pending_documented(on_matrix)
+	_assert_holding_gates(off_matrix)
+	_assert_pending_documented(off_matrix)
 	_assert_alert_wins(on_matrix, off_matrix)
 	_assert_soft_cap_control_differs(on_matrix, off_matrix)
+	_print_comparison(off_matrix, on_matrix)
 
 
 func _plan_a() -> Dictionary:
@@ -269,34 +273,61 @@ func _run_to_alert_then_finish(plan: Dictionary, soft: bool, target_alert: Strin
 	return _metrics(sim.outcome_summary(), sim.log.events)
 
 
-func _test_soft_cap_default_true() -> void:
+func _test_soft_cap_default() -> void:
 	var sim := NightSim.new()
-	_assert(sim.enemy_return_soft_cap == true, "enemy_return_soft_cap defaults true (PLAY-6 rule unchanged)")
+	_assert(sim.enemy_return_soft_cap == C.RETURN_FIRE_ASSIST_DEFAULT,
+		"enemy_return_soft_cap defaults to RETURN_FIRE_ASSIST_DEFAULT got=%s" % sim.enemy_return_soft_cap)
+	_assert(C.RETURN_FIRE_ASSIST_DEFAULT == false,
+		"T6 owner default is hard tier (assist OFF) got=%s" % C.RETURN_FIRE_ASSIST_DEFAULT)
+	_assert(C.RETURN_FIRE_ASSIST_MAX_HITS_PER_ENEMY == 1,
+		"assist cap constant is 1 hit/enemy got=%s" % C.RETURN_FIRE_ASSIST_MAX_HITS_PER_ENEMY)
+
+
+func _test_plan_key_roundtrip() -> void:
+	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	var weapons := SimWeapons.load_csv()
+	var quiet_sim := NightSim.new()
+	quiet_sim.setup(level, _plan_a(), weapons)
+	_assert(quiet_sim.enemy_return_soft_cap == false, "plan without key -> assist OFF")
+	var assist_plan := _plan_a()
+	assist_plan["return_fire_assist"] = true
+	var assist_sim := NightSim.new()
+	assist_sim.setup(level, assist_plan, weapons)
+	_assert(assist_sim.enemy_return_soft_cap == true, "plan return_fire_assist=true -> assist ON")
+	assist_sim.enemy_return_soft_cap = false
+	_assert(assist_sim.enemy_return_soft_cap == false, "post-setup test override still wins")
 
 
 func _assert_baselines(on_m: Dictionary, off_m: Dictionary) -> void:
-	var ba: Dictionary = on_m["BASE-A"]
-	var bb: Dictionary = on_m["BASE-B"]
-	_assert(str(ba.get("outcome")) == "win", "BASE-A soft_cap ON wins")
-	_assert(str(bb.get("outcome")) == "win", "BASE-B soft_cap ON wins (soft cap load-bearing)")
+	var ba: Dictionary = off_m["BASE-A"]
+	var bb: Dictionary = off_m["BASE-B"]
+	_assert(str(ba.get("outcome")) == "win", "BASE-A default assist OFF wins")
+	_assert(str(bb.get("outcome")) == "win", "BASE-B default assist OFF wins")
 	_assert(int(ba.get("detonate_tick", -1)) == T0_A, "BASE-A t0=%d" % T0_A)
 	_assert(int(bb.get("detonate_tick", -1)) == T0_B, "BASE-B t0=%d" % T0_B)
-	var bb_off: Dictionary = off_m["BASE-B"]
-	_assert(str(bb_off.get("outcome")) != "win" or int(bb_off.get("injury_n", 0)) > int(bb.get("injury_n", 0)),
-		"soft_cap OFF makes BASE-B worse (lose or +injury) got outcome=%s inj=%s vs on inj=%s" % [
-			bb_off.get("outcome"), bb_off.get("injury_n"), bb.get("injury_n")])
+	_assert(bool(ba.get("standard_ambush", false)) == true, "BASE-A default standard_ambush")
+	_assert(bool(bb.get("standard_ambush", false)) == true, "BASE-B default standard_ambush")
+	_assert(str(on_m["BASE-A"].get("outcome")) == "win", "BASE-A assist ON wins")
+	_assert(str(on_m["BASE-B"].get("outcome")) == "win", "BASE-B assist ON wins")
+	var bb_assist: Dictionary = on_m["BASE-B"]
+	_assert(
+		str(bb.get("outcome")) != "win"
+		or int(bb.get("injury_n", 0)) > int(bb_assist.get("injury_n", 0)),
+		"assist OFF is harsher on BASE-B (lose or +injury) off=%s/inj%s on=win/inj%s" % [
+			bb.get("outcome"), bb.get("injury_n"), bb_assist.get("injury_n")])
 
 
-func _assert_holding_gates(on_m: Dictionary) -> void:
+func _assert_holding_gates(off_m: Dictionary) -> void:
 	for id in HOLDING_IDS:
-		var r: Dictionary = on_m[id]
-		_assert(bool(r.get("holds_strict", false)), "holding gate %s must stay D.3-true under soft_cap ON" % id)
+		var r: Dictionary = off_m[id]
+		_assert(bool(r.get("holds_strict", false)),
+			"holding gate %s must stay D.3-true under default assist OFF" % id)
 
 
-func _assert_pending_documented(on_m: Dictionary) -> void:
+func _assert_pending_documented(off_m: Dictionary) -> void:
 	for id in PENDING_IDS:
-		_assert(on_m.has(id), "pending case %s present in matrix" % id)
-		var r: Dictionary = on_m[id]
+		_assert(off_m.has(id), "pending case %s present in matrix" % id)
+		var r: Dictionary = off_m[id]
 		# Honest lock: these currently do NOT hold; if a future geometry fix makes them hold,
 		# move id into HOLDING_IDS and update the results doc (do not silently pass).
 		_assert(bool(r.get("holds_strict", true)) == false,
@@ -304,17 +335,13 @@ func _assert_pending_documented(on_m: Dictionary) -> void:
 
 
 func _assert_alert_wins(on_m: Dictionary, off_m: Dictionary) -> void:
-	for name in ["quiet", "suspicious", "area_alert"]:
-		var r: Dictionary = on_m["ALERT-%s" % name]
-		_assert(int(r.get("wins", 0)) >= 1, "ALERT-%s soft_cap ON ≥1 plan wins got=%s" % [name, r.get("wins")])
-	# global: DEV_PLAN D.3 — each alert tier ≥1 plan win (alarm_route combat entry).
-	var g: Dictionary = on_m["ALERT-global_alert"]
-	_assert(g.has("wins"), "ALERT-global_alert measured")
-	_assert(int(g.get("wins", 0)) >= 1, "ALERT-global_alert soft_cap ON ≥1 plan wins got=%s" % g.get("wins"))
-	# Soft-cap OFF control: still measured; may or may not collapse alert salvage
-	# depending on yard geometry — require the row exists and BASE-B differs.
-	var s_off: Dictionary = off_m["ALERT-suspicious"]
-	_assert(s_off.has("wins"), "soft_cap OFF: ALERT-suspicious measured wins=%s" % s_off.get("wins"))
+	for name in ["quiet", "suspicious", "area_alert", "global_alert"]:
+		var r_off: Dictionary = off_m["ALERT-%s" % name]
+		_assert(int(r_off.get("wins", 0)) >= 1,
+			"ALERT-%s default assist OFF ≥1 plan wins got=%s" % [name, r_off.get("wins")])
+		var r_on: Dictionary = on_m["ALERT-%s" % name]
+		_assert(int(r_on.get("wins", 0)) >= 1,
+			"ALERT-%s assist ON ≥1 plan wins got=%s" % [name, r_on.get("wins")])
 
 
 func _assert_soft_cap_control_differs(on_m: Dictionary, off_m: Dictionary) -> void:
@@ -325,4 +352,23 @@ func _assert_soft_cap_control_differs(on_m: Dictionary, off_m: Dictionary) -> vo
 		or int(on_b.get("injury_n", 0)) != int(off_b.get("injury_n", 0))
 		or int(on_b.get("dead_ops_n", 0)) != int(off_b.get("dead_ops_n", 0))
 	)
-	_assert(changed, "soft_cap ON/OFF control differs on BASE-B")
+	_assert(changed, "assist ON/OFF control differs on BASE-B")
+
+
+func _print_comparison(off_m: Dictionary, on_m: Dictionary) -> void:
+	## Two-tier side-by-side table for the results doc (default first).
+	print("COUNTEREX_COMPARE_BEGIN")
+	print("id|off_outcome|off_esc|off_clear_s|off_inj|off_dead|on_outcome|on_esc|on_clear_s|on_inj|on_dead|off_holds|on_holds")
+	for id in off_m.keys():
+		var off: Dictionary = off_m[id]
+		var on: Dictionary = on_m[id]
+		if off.has("wins"):
+			print("%s|wins=%s|wins=%s" % [id, off.get("wins"), on.get("wins")])
+			continue
+		print("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % [
+			id,
+			off.get("outcome"), off.get("escape_n"), off.get("clear_s"), off.get("injury_n"), off.get("dead_ops_n"),
+			on.get("outcome"), on.get("escape_n"), on.get("clear_s"), on.get("injury_n"), on.get("dead_ops_n"),
+			off.get("holds_strict", "-"), on.get("holds_strict", "-"),
+		])
+	print("COUNTEREX_COMPARE_END")

@@ -40,6 +40,8 @@ var scout: ScoutSim = null
 var grid = null
 var gathered_kit: Dictionary = {} ## from scout → setup weapon pool
 var carried_alert: String = "quiet" ## T4: scout alert handed into setup/wait
+## T6 explicit return-fire difficulty (player option, not a dev entry).
+var return_fire_assist: bool = SimConstants.RETURN_FIRE_ASSIST_DEFAULT
 
 var paused: bool = false
 var speed_mul: float = 1.0
@@ -253,6 +255,9 @@ var utility_bar: HBoxContainer = null
 var utility_backdrop: PanelContainer = null
 var portrait_backdrop: PanelContainer = null
 var btn_drawer_tab: Button = null
+var btn_return_fire_assist: Button = null
+var briefing_assist_label: Label = null
+var result_assist_label: Label = null
 var drawer_open: bool = true ## phone setup/scout drawer
 var _hud_layout_ready: bool = false
 var layout_size_override: Vector2 = Vector2.ZERO ## tests/capture: stable size when window resize is ignored
@@ -261,6 +266,8 @@ var layout_size_override: Vector2 = Vector2.ZERO ## tests/capture: stable size w
 func _ready() -> void:
 	playtest_source = PlaytestMode.source()
 	playtest_mode = playtest_source != "off"
+	if not playtest_mode:
+		return_fire_assist = str(OS.get_environment("AMBUSH_RETURN_ASSIST")).to_lower() in ["1", "true"]
 	_start_match_tracker()
 	_apply_cjk_font()
 	g2_assets = G2AssetsScript.new()
@@ -291,6 +298,7 @@ func _ready() -> void:
 	map_host = $MapHost
 	_build_portrait_strip()
 	_build_setup_tool_bars()
+	_build_return_fire_assist_button()
 	_build_touch_hud()
 	_build_undo_cancel_buttons()
 	_build_info_card()
@@ -386,7 +394,7 @@ func _apply_cjk_font() -> void:
 		label_scout_clock, label_scout_kit, btn_begin_setup, btn_scout_preview,
 		btn_example, btn_plan_a, btn_plan_b, btn_start, label_start_reason, btn_preview,
 		btn_g2_art, btn_pause, btn_speed, btn_detonate, btn_restart, btn_rescout,
-		btn_restart_wait, trigger_option,
+		btn_restart_wait, trigger_option, btn_return_fire_assist,
 	]:
 		if n:
 			n.add_theme_font_override("font", font_res)
@@ -1025,6 +1033,37 @@ func _apply_trigger_type(t: String) -> void:
 			label_info.text = "起爆：手动"
 		_:
 			pass
+
+
+func _build_return_fire_assist_button() -> void:
+	## T6: explicit player-facing difficulty switch in the setup button stack.
+	if btn_return_fire_assist != null or setup_panel == null:
+		return
+	btn_return_fire_assist = Button.new()
+	btn_return_fire_assist.name = "ReturnFireAssistButton"
+	btn_return_fire_assist.custom_minimum_size = Vector2(0, 40)
+	btn_return_fire_assist.clip_text = true
+	btn_return_fire_assist.add_theme_font_size_override("font_size", 14)
+	btn_return_fire_assist.pressed.connect(func(): _ui_tap(); _toggle_return_fire_assist())
+	setup_panel.add_child(btn_return_fire_assist)
+	if btn_plan_b and btn_plan_b.get_parent() == setup_panel:
+		setup_panel.move_child(btn_return_fire_assist, btn_plan_b.get_index() + 1)
+	_refresh_return_fire_assist_button()
+
+
+func _toggle_return_fire_assist() -> void:
+	if ui_phase != UiPhase.SETUP:
+		return
+	return_fire_assist = not return_fire_assist
+	plan["return_fire_assist"] = return_fire_assist
+	_refresh_return_fire_assist_button()
+	label_info.text = BriefingCopy.assist_label(return_fire_assist)
+
+
+func _refresh_return_fire_assist_button() -> void:
+	if btn_return_fire_assist == null:
+		return
+	btn_return_fire_assist.text = BriefingCopy.assist_label(return_fire_assist)
 
 
 func _build_setup_tool_bars() -> void:
@@ -1753,6 +1792,9 @@ func _build_briefing_card() -> void:
 	briefing_exit_body = _mk_briefing_body_label(BriefingCopy.EXIT_BODY)
 	briefing_exit_body.name = "BriefingExitBody"
 	briefing_content.add_child(briefing_exit_body)
+	briefing_assist_label = _mk_briefing_body_label(BriefingCopy.assist_label(return_fire_assist))
+	briefing_assist_label.name = "BriefingAssistLabel"
+	briefing_content.add_child(briefing_assist_label)
 
 	var beats_head := _mk_briefing_section_head(BriefingCopy.SEC_BEATS)
 	beats_head.name = "BriefingBeatsHead"
@@ -1809,7 +1851,7 @@ func _build_briefing_card() -> void:
 	if font_res:
 		briefing_title.add_theme_font_override("font", font_res)
 		btn_briefing_dismiss.add_theme_font_override("font", font_res)
-		for n in [briefing_goal_body, briefing_exit_body, briefing_beat_hint, briefing_tip]:
+		for n in [briefing_goal_body, briefing_exit_body, briefing_assist_label, briefing_beat_hint, briefing_tip]:
 			if n:
 				n.add_theme_font_override("font", font_res)
 		for child in briefing_content.get_children():
@@ -1866,6 +1908,8 @@ func _layout_briefing_card() -> void:
 
 	if briefing_body:
 		briefing_body.text = BriefingCopy.BODY
+	if briefing_assist_label:
+		briefing_assist_label.text = BriefingCopy.assist_label(return_fire_assist)
 	## Phone: chips carry the five beats; drop long hint, use short tip so type can grow.
 	if briefing_beat_hint:
 		briefing_beat_hint.visible = not phone
@@ -1942,7 +1986,7 @@ func _briefing_apply_type(head_fs: int, body_fs: int, chip_fs: int, hint_fs: int
 		for child in briefing_content.get_children():
 			if child is Label and str(child.name).ends_with("Head"):
 				child.add_theme_font_size_override("font_size", head_fs)
-	for lab in [briefing_goal_body, briefing_exit_body]:
+	for lab in [briefing_goal_body, briefing_exit_body, briefing_assist_label]:
 		if lab:
 			lab.add_theme_font_size_override("font_size", body_fs)
 			lab.custom_minimum_size = Vector2(inner_w, 0)
@@ -1972,11 +2016,14 @@ func _briefing_estimate_content_h(inner_w: float, body_fs: int, head_fs: int, ch
 	var char_w := float(body_fs) * 0.92
 	var lines_goal := maxi(1, int(ceil(float(BriefingCopy.GOAL_BODY.length()) * char_w / maxf(inner_w, 1.0))))
 	var lines_exit := maxi(1, int(ceil(float(BriefingCopy.EXIT_BODY.length()) * char_w / maxf(inner_w, 1.0))))
+	var lines_assist := maxi(1, int(ceil(float(BriefingCopy.ASSIST_ON.length()) * char_w / maxf(inner_w, 1.0))))
 	var lines_tip := maxi(1, int(ceil(float(tip_text.length()) * float(hint_fs) * 0.92 / maxf(inner_w, 1.0))))
-	var n_rows := 7 ## 3 heads + 2 bodies + chips + tip
+	var n_rows := 8 ## 3 heads + 3 bodies + chips + tip
 	h += float(head_fs + 4) + float(lines_goal) * float(body_fs + 4)
 	h += float(sep)
 	h += float(head_fs + 4) + float(lines_exit) * float(body_fs + 4)
+	h += float(sep)
+	h += float(lines_assist) * float(body_fs + 4)
 	h += float(sep)
 	h += float(head_fs + 4) + float(chip_fs + 20)
 	h += float(sep)
@@ -2167,7 +2214,7 @@ func briefing_layout_ok(view_w: float = -1.0, view_h: float = -1.0) -> Dictionar
 	var scroll_w := briefing_scroll.size.x if briefing_scroll else card_r.size.x
 	var clip := false
 	## Visible section bodies + tip must sit inside the scroll width.
-	for lab in [briefing_goal_body, briefing_exit_body, briefing_beat_hint, briefing_tip]:
+	for lab in [briefing_goal_body, briefing_exit_body, briefing_assist_label, briefing_beat_hint, briefing_tip]:
 		if lab == null or not lab.visible:
 			continue
 		if lab.size.x > scroll_w + 2.0:
@@ -3126,6 +3173,8 @@ func _start_wait() -> void:
 		_refresh_start_gate()
 		return
 	_apply_kit_ammo_to_plan()
+	## T6: hand the explicit difficulty into the plan so NightSim/match log agree.
+	plan["return_fire_assist"] = return_fire_assist
 	## T4: hand the scout alert into the plan; quiet erases any stale key.
 	if carried_alert != "quiet":
 		plan["start_alert"] = carried_alert
@@ -4406,6 +4455,21 @@ func _show_result() -> void:
 	_push_map_snapshot()
 
 
+func _ensure_result_assist_label() -> void:
+	if result_assist_label != null or subtitle_label == null or subtitle_label.get_parent() == null:
+		return
+	result_assist_label = Label.new()
+	result_assist_label.name = "ResultAssistLabel"
+	result_assist_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	result_assist_label.add_theme_font_size_override("font_size", 14)
+	var font_res = load("res://ui/fonts/web_ui_font.tres")
+	if font_res:
+		result_assist_label.add_theme_font_override("font", font_res)
+	var parent := subtitle_label.get_parent()
+	parent.add_child(result_assist_label)
+	parent.move_child(result_assist_label, subtitle_label.get_index() + 1)
+
+
 func _apply_review_card(rev: Dictionary) -> void:
 	var outcome_zh := str(rev.get("outcome_zh", "失败"))
 	var grade := str(rev.get("grade", "C"))
@@ -4422,6 +4486,9 @@ func _apply_review_card(rev: Dictionary) -> void:
 				grade_label.add_theme_color_override("font_color", Color(0.7, 0.85, 1.0))
 			_:
 				grade_label.add_theme_color_override("font_color", Color(0.95, 0.55, 0.45))
+	_ensure_result_assist_label()
+	if result_assist_label:
+		result_assist_label.text = BriefingCopy.assist_label(return_fire_assist)
 	var std := bool(rev.get("standard_ambush", false))
 	if subtitle_label:
 		subtitle_label.text = "伏击质量 %s · %s · %s" % [
@@ -4462,6 +4529,8 @@ func review_card_text() -> String:
 		parts.append(grade_label.text)
 	if subtitle_label:
 		parts.append(subtitle_label.text)
+	if result_assist_label:
+		parts.append(result_assist_label.text)
 	if timeline_label:
 		parts.append(timeline_label.text)
 	if causes_label:
