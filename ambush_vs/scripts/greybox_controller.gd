@@ -608,7 +608,7 @@ func _carried_alert_hint(a: String) -> String:
 	## T4 neutral setup copy for the alert carried out of scout. No height/barn spoilers.
 	match a:
 		"suspicious":
-			return " · 敌人已起疑，暴露过久警报会继续升级"
+			return " · 敌人已起疑，岗哨和巡逻看得更远"
 		"area_alert":
 			return " · 敌人已加强警戒，巡逻改走警戒路线，标准伏击不可得"
 		"global_alert":

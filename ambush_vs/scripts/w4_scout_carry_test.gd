@@ -10,6 +10,7 @@ const SimRunner := preload("res://sim/runner.gd")
 const NightSim := preload("res://sim/night_sim.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 const SimWeapons := preload("res://sim/weapons.gd")
+const C := preload("res://sim/constants.gd")
 
 const LEVEL := "res://data/levels/yard.json"
 
@@ -31,6 +32,7 @@ func _run_all() -> void:
 	_test_winnable_gate()
 	_test_carry_not_start_loss()
 	await _test_scene_carry()
+	_test_suspicious_cost()
 	print("W4_SCOUT_CARRY_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
 
@@ -76,6 +78,41 @@ func _finish(sim: NightSim) -> Dictionary:
 func _run(which: String, start_alert: String) -> Dictionary:
 	var plan: Dictionary = _plan(which) if start_alert == "" else _plan_with(which, start_alert)
 	return _finish(_new_sim(plan))
+
+
+func _count_alert_to(sim: NightSim, tier: String) -> int:
+	var n := 0
+	for e in sim.log.events:
+		if str(e.get("type", "")) != "alert_change":
+			continue
+		if str(e.get("payload", {}).get("to", "")) == tier:
+			n += 1
+	return n
+
+
+func _run_metrics(which: String, start_alert: String) -> Dictionary:
+	## Full-night run plus diagnostic counters (wait_exposed_ticks/first_exposed_tick).
+	var plan: Dictionary = _plan(which) if start_alert == "" else _plan_with(which, start_alert)
+	var sim := _new_sim(plan)
+	var summary := _finish(sim)
+	return {
+		"summary": summary,
+		"wait_exposed_ticks": sim.wait_exposed_ticks,
+		"first_exposed_tick": sim.first_exposed_tick,
+		"alert_change_to_suspicious": _count_alert_to(sim, "suspicious"),
+	}
+
+
+func _suspicion_worse(q: Dictionary, x: Dictionary) -> bool:
+	## Is the suspicious carry measurably more exposed than quiet?
+	## Chosen metric: wait_exposed_ticks (WAIT ticks judged exposed), tie-break earlier
+	## first_exposed_tick. NOTE: alert_change→suspicious is NOT used here because the
+	## scout_carry alert_change itself adds one at tick 0 (would pass even at mul=1.0).
+	if int(x["wait_exposed_ticks"]) > int(q["wait_exposed_ticks"]):
+		return true
+	var qf := int(q["first_exposed_tick"])
+	var xf := int(x["first_exposed_tick"])
+	return xf >= 0 and (qf < 0 or xf < qf)
 
 
 func _has_scout_carry(sim: NightSim) -> bool:
@@ -214,6 +251,59 @@ func _test_carry_not_start_loss() -> void:
 			if str(s.get("outcome", "")) == "lose" and reason == "":
 				normal = false
 		_assert(normal, "%s carry ends with a normal reason (not start-loss) %s" % [tier, " ".join(reasons)])
+
+
+func _metric_line(which: String, tag: String, m: Dictionary) -> void:
+	var s: Dictionary = m["summary"]
+	print("SUSPICIOUS_COST which=%s tier=%s standard_ambush=%s trigger=%s detonate=%d wait_exposed_ticks=%d first_exposed_tick=%d alert_change_to_suspicious=%d outcome=%s dead_ops=%d wounded=%d" % [
+		which, tag, str(s.get("standard_ambush", false)), str(s.get("trigger", "")), int(s.get("detonate_tick", -1)),
+		int(m["wait_exposed_ticks"]), int(m["first_exposed_tick"]), int(m["alert_change_to_suspicious"]),
+		str(s.get("outcome", "")), (s.get("dead_ops", []) as Array).size(), (s.get("wounded", []) as Array).size(),
+	])
+
+
+func _test_suspicious_cost() -> void:
+	_assert(C.CARRY_SUSPICIOUS_RANGE_MUL > 1.0, "CARRY_SUSPICIOUS_RANGE_MUL > 1.0 got=%s" % C.CARRY_SUSPICIOUS_RANGE_MUL)
+	var q_a := _run_metrics("A", "")
+	var s_a := _run_metrics("A", "suspicious")
+	var q_b := _run_metrics("B", "")
+	var s_b := _run_metrics("B", "suspicious")
+	_metric_line("A", "quiet", q_a)
+	_metric_line("A", "suspicious", s_a)
+	_metric_line("B", "quiet", q_b)
+	_metric_line("B", "suspicious", s_b)
+
+	_assert(bool(s_a["summary"].get("standard_ambush", false)), "suspicious A standard_ambush true")
+	_assert(bool(s_b["summary"].get("standard_ambush", false)), "suspicious B standard_ambush true")
+
+	var worse_a := _suspicion_worse(q_a, s_a)
+	var worse_b := _suspicion_worse(q_b, s_b)
+	_assert(worse_a or worse_b, "suspicious carry raises alert metric vs quiet (A_worse=%s B_worse=%s) qA=%d/%d sA=%d/%d qB=%d/%d sB=%d/%d" % [
+		worse_a, worse_b,
+		int(q_a["wait_exposed_ticks"]), int(q_a["first_exposed_tick"]), int(s_a["wait_exposed_ticks"]), int(s_a["first_exposed_tick"]),
+		int(q_b["wait_exposed_ticks"]), int(q_b["first_exposed_tick"]), int(s_b["wait_exposed_ticks"]), int(s_b["first_exposed_tick"]),
+	])
+	## Hard assertion on the plan that measurably worsens (B), chosen metric wait_exposed_ticks:
+	## suspicious B is exposed far longer than quiet B while keeping the standard ambush.
+	_assert(
+		int(s_b["wait_exposed_ticks"]) > int(q_b["wait_exposed_ticks"]),
+		"suspicious B wait_exposed_ticks worse than quiet (%d > %d) first_exposed %d < %d" % [
+			int(s_b["wait_exposed_ticks"]), int(q_b["wait_exposed_ticks"]),
+			int(s_b["first_exposed_tick"]), int(q_b["first_exposed_tick"]),
+		]
+	)
+	_assert(
+		int(s_b["first_exposed_tick"]) >= 0 and int(s_b["first_exposed_tick"]) < int(q_b["first_exposed_tick"]),
+		"suspicious B first_exposed_tick earlier than quiet (%d < %d)" % [int(s_b["first_exposed_tick"]), int(q_b["first_exposed_tick"])]
+	)
+
+	## Diagnostics must not perturb the default path: no-key == explicit quiet.
+	for which in ["A", "B"]:
+		var q := _run_metrics(which, "quiet")
+		var d := _run_metrics(which, "")
+		_assert(int(q["wait_exposed_ticks"]) == int(d["wait_exposed_ticks"]), "plan %s quiet vs default wait_exposed_ticks equal (%d/%d)" % [
+			which, int(q["wait_exposed_ticks"]), int(d["wait_exposed_ticks"]),
+		])
 
 
 func _clear_env() -> void:

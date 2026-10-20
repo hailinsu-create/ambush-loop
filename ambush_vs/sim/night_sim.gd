@@ -43,6 +43,8 @@ var expose_streak: int = 0
 var suspicious_count: int = 0
 var suspicious_recover_ticks: int = 0
 var area_expose_streak: int = 0
+var wait_exposed_ticks: int = 0 ## T4 diagnostic only: WAIT ticks judged exposed (not in summary/events)
+var first_exposed_tick: int = -1 ## T4 diagnostic only: first WAIT tick exposed (-1 = never)
 
 var escaped_ids: Array = []
 var killed_ids: Array = []
@@ -160,6 +162,8 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 	suspicious_count = 0
 	suspicious_recover_ticks = 0
 	area_expose_streak = 0
+	wait_exposed_ticks = 0
+	first_exposed_tick = -1
 	escaped_ids.clear()
 	killed_ids.clear()
 	wounded_ids.clear()
@@ -345,6 +349,11 @@ func _tick_once() -> void:
 
 	## 4 vision / exposure
 	var exposed := _step_vision_expose()
+	if phase == C.PHASE_WAIT and exposed:
+		## T4 diagnostic only: count WAIT exposure. Never written to summary or events.
+		wait_exposed_ticks += 1
+		if first_exposed_tick < 0:
+			first_exposed_tick = tick
 
 	## 5 alert update
 	_step_alert(exposed)
@@ -600,6 +609,10 @@ func _observer_sees(
 	var rng := float(cone.get("range_cells", 8))
 	if _night and ttier == SimConstants.TIER_HIGH:
 		rng *= SimConstants.SILHOUETTE_MUL
+	## T4: scout-carried suspicious → sentry/patrol cones see further for the whole night.
+	## Keyed on the carry-in start_alert (not the live alert), so quiet/default is unchanged.
+	if start_alert == C.ALERT_SUSPICIOUS:
+		rng *= C.CARRY_SUSPICIOUS_RANGE_MUL
 	if not SimGeom.in_cone(ox, oy, facing, half, rng, tx, ty):
 		return false
 	return grid.los_clear(ox, oy, otier, tx, ty, ttier)
