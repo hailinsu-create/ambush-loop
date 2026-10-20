@@ -1,0 +1,60 @@
+{
+  "id": "WB",
+  "label": "窄扇点杀+爆点封后",
+  "trigger": {
+    "type": "mine_detonate",
+    "bind": "mine_door"
+  },
+  "operators": [
+    {
+      "id": "op_kar_dock",
+      "x": 5,
+      "y": 10,
+      "tier": "high",
+      "facing_deg": -15,
+      "weapon_id": "kar98k"
+    },
+    {
+      "id": "op_mp40_door",
+      "x": 19,
+      "y": 10,
+      "tier": "ground",
+      "facing_deg": 30,
+      "weapon_id": "mp40"
+    },
+    {
+      "id": "op_grenade_door",
+      "x": 3,
+      "y": 12,
+      "tier": "ground",
+      "facing_deg": 30,
+      "weapon_id": "grenade"
+    }
+  ],
+  "mines": [
+    {
+      "id": "mine_main",
+      "x": 16,
+      "y": 8
+    },
+    {
+      "id": "mine_door",
+      "x": 20,
+      "y": 11
+    }
+  ],
+  "grenades": [
+    {
+      "actor": "op_grenade_door",
+      "aim_x": 16.5,
+      "aim_y": 8,
+      "delay_ticks": 1
+    },
+    {
+      "actor": "op_grenade_door",
+      "aim_x": 20,
+      "aim_y": 11,
+      "delay_ticks": 1
+    }
+  ]
+}

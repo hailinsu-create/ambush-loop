@@ -878,6 +878,12 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 	# instead of diving west into the yard cover (where main-road MG would erase them).
 	## ADR-TRIGGER §3.4 / D.3 alert salvage: on alarm, unentered enemies snap onto
 	## alarm_route in cover mode (combat entry) so global alert is still winnable.
+	## T9: peel geometry is level data driven; absent keys keep the yard defaults
+	## (17 / 8 / 12) so the yard event stream is byte-identical.
+	var peel_cfg: Dictionary = level.get("peel", {}) if typeof(level.get("peel", {})) == TYPE_DICTIONARY else {}
+	var flank_peel_min_x := float(peel_cfg.get("flank_min_x", 17.0))
+	var flank_peel_lane_y := float(peel_cfg.get("flank_lane_y", 8.0))
+	var rear_peel_min_y := float(peel_cfg.get("rear_min_y", 12.0))
 	if trig == "alarm":
 		_alarm_force_enter_unentered()
 	_entered_at_detonate = 0
@@ -893,9 +899,13 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 			## and fight / die in place — plan A must still clear.
 			## Watch test uses alley centerline y=8 (same cell they peel on) so a
 			## fractional y just outside Kar's 15° cone cannot false-trigger peel.
-			var flank_in_alley := str(e.get("group", "")) == "flank" and ex >= 17
+			var flank_in_alley := (
+				flank_peel_min_x < 900.0
+				and str(e.get("group", "")) == "flank"
+				and float(ex) >= flank_peel_min_x - 1e-9
+			)
 			var watch_probe: Dictionary = e.duplicate()
-			watch_probe["y"] = 8.0
+			watch_probe["y"] = flank_peel_lane_y
 			var watched := flank_in_alley and _enemy_watched_by_squad(watch_probe)
 			## Timing cost: main-road rear still south of the packed band (y≥12)
 			## peels back to road_tail instead of diving north into the kill cone.
@@ -903,8 +913,9 @@ func _enter_detonate(trig: String, actor: String, bind: String = "") -> void:
 			## Skip rear peel on alarm combat-entry (they are already on alarm_route).
 			var rear_south := (
 				trig != "alarm"
+				and rear_peel_min_y < 900.0
 				and str(e.get("group", "")) == "main"
-				and float(e["y"]) >= 12.0 - 1e-9
+				and float(e["y"]) >= rear_peel_min_y - 1e-9
 			)
 			if flank_in_alley and not watched:
 				## Stay on alley centerline (y≈8) so barn MG LOS stays blocked by

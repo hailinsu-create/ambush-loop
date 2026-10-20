@@ -362,6 +362,15 @@
         },
         "squad_wipe": { "type": "boolean", "default": true }
       }
+    },
+    "peel": {
+      "type": "object",
+      "description": "T9: optional detonate-peel geometry. Missing keys keep yard defaults (flank_min_x=17, flank_lane_y=8, rear_min_y=12). Values >=900 disable that peel.",
+      "properties": {
+        "flank_min_x": { "type": "number" },
+        "flank_lane_y": { "type": "number" },
+        "rear_min_y": { "type": "number" }
+      }
     }
   },
 

@@ -1,0 +1,2421 @@
+{
+  "id": "warehouse",
+  "version": 1,
+  "title": "仓道 · 窄口",
+  "night": true,
+  "ambush_targets": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "F1",
+    "F2"
+  ],
+  "default_trigger": {
+    "type": "manual"
+  },
+  "grid": {
+    "width": 24,
+    "height": 16,
+    "meters_per_cell": 1,
+    "origin": "x0_west_y0_south"
+  },
+  "high_slots": [
+    {
+      "id": "loading_dock",
+      "cells": [
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 3,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 11
+        },
+        {
+          "x": 5,
+          "y": 11
+        }
+      ],
+      "enter_cost_s": 2,
+      "silhouette_mul": 1.5,
+      "access": [
+        {
+          "id": "dock_east_stair",
+          "x": 6,
+          "y": 11,
+          "label_zh": "东侧装卸梯",
+          "climb_s": 2.0
+        },
+        {
+          "id": "dock_north_ladder",
+          "x": 4,
+          "y": 12,
+          "label_zh": "北侧爬梯",
+          "climb_s": 3.0
+        }
+      ]
+    }
+  ],
+  "exits": [
+    {
+      "id": "west_shutter",
+      "cells": [
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        }
+      ],
+      "fail_on_enemy_escape": true
+    },
+    {
+      "id": "east_gate",
+      "cells": [
+        {
+          "x": 23,
+          "y": 7
+        },
+        {
+          "x": 23,
+          "y": 8
+        }
+      ],
+      "fail_on_enemy_escape": true
+    },
+    {
+      "id": "south_freight",
+      "cells": [
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 12,
+          "y": 0
+        }
+      ],
+      "fail_on_enemy_escape": true
+    }
+  ],
+  "enemies": {
+    "march_speed_cells_per_s": 0.5,
+    "routes": [
+      {
+        "id": "main_hall",
+        "waypoints": [
+          {
+            "x": 23,
+            "y": 8
+          },
+          {
+            "x": 1,
+            "y": 8
+          }
+        ]
+      },
+      {
+        "id": "door_flank",
+        "waypoints": [
+          {
+            "x": 20,
+            "y": 15
+          },
+          {
+            "x": 20,
+            "y": 9
+          },
+          {
+            "x": 19,
+            "y": 8
+          },
+          {
+            "x": 17,
+            "y": 8
+          },
+          {
+            "x": 13,
+            "y": 8
+          }
+        ]
+      }
+    ],
+    "alarm_route": {
+      "id": "alarm_combat_entry",
+      "waypoints": [
+        {
+          "x": 20,
+          "y": 15
+        },
+        {
+          "x": 20,
+          "y": 9
+        },
+        {
+          "x": 19,
+          "y": 8
+        },
+        {
+          "x": 17,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 8
+        }
+      ]
+    },
+    "spawns": [
+      {
+        "id": "E1",
+        "route_id": "main_hall",
+        "enter_t_s": 10,
+        "group": "main"
+      },
+      {
+        "id": "E2",
+        "route_id": "main_hall",
+        "enter_t_s": 13,
+        "group": "main"
+      },
+      {
+        "id": "E3",
+        "route_id": "main_hall",
+        "enter_t_s": 16,
+        "group": "main"
+      },
+      {
+        "id": "E4",
+        "route_id": "main_hall",
+        "enter_t_s": 19,
+        "group": "main"
+      },
+      {
+        "id": "F1",
+        "route_id": "door_flank",
+        "enter_t_s": 19,
+        "group": "flank"
+      },
+      {
+        "id": "F2",
+        "route_id": "door_flank",
+        "enter_t_s": 20,
+        "group": "flank"
+      }
+    ]
+  },
+  "sentries": [],
+  "patrols": [],
+  "supplies": [
+    {
+      "id": "crate_dock",
+      "x": 5,
+      "y": 13,
+      "visibility": "open",
+      "contents": [
+        {
+          "weapon_id": "ammo_7.92",
+          "amount": 10
+        }
+      ]
+    }
+  ],
+  "loadout_start": {
+    "weapons": [
+      {
+        "weapon_id": "kar98k",
+        "count": 1
+      },
+      {
+        "weapon_id": "mp40",
+        "count": 1
+      },
+      {
+        "weapon_id": "mine",
+        "count": 2
+      },
+      {
+        "weapon_id": "grenade",
+        "count": 2
+      }
+    ],
+    "ammo_pools": [
+      {
+        "pool_id": "7.92",
+        "rounds": 30
+      },
+      {
+        "pool_id": "9mm",
+        "rounds": 32
+      }
+    ]
+  },
+  "ambush_slots": [
+    {
+      "id": "dock_mg",
+      "x": 4,
+      "y": 10,
+      "height": "high"
+    },
+    {
+      "id": "dock_kar",
+      "x": 5,
+      "y": 10,
+      "height": "high"
+    },
+    {
+      "id": "door_guard",
+      "x": 19,
+      "y": 8,
+      "height": "ground"
+    }
+  ],
+  "fail": {
+    "enemy_escape_exits": [
+      "west_shutter",
+      "east_gate",
+      "south_freight"
+    ],
+    "squad_wipe": true
+  },
+  "peel": {
+    "flank_min_x": 999,
+    "rear_min_y": 999
+  },
+  "_t9_note_zh": "T9 代定，盲测后可调：peel 关闭 yard 的东巷/主路尾剥队几何；t0 520/540；两案见 plans。",
+  "plans": [
+    {
+      "id": "WA",
+      "label": "货台宽扇压制",
+      "expect": "win",
+      "trigger": {
+        "type": "manual"
+      },
+      "t0_s": 26,
+      "notes": "MG42@货台(5,10) 宽扇封长廊与东门；MP40@近门(19,10) 补盲区；第三人是预设爆点手。"
+    },
+    {
+      "id": "WB",
+      "label": "窄扇点杀+爆点封后",
+      "expect": "win",
+      "trigger": {
+        "type": "mine_detonate",
+        "bind": "mine_door"
+      },
+      "t0_s": 27,
+      "notes": "Kar98k@货台(5,10) 点杀纵队；地雷(16,8)/(20,11) 与手雷(16.5,8)/(20,11) 封后。"
+    },
+    {
+      "id": "F-WA30",
+      "label": "A 货台射手 +30°",
+      "expect": "lose",
+      "notes": "朝向反例：宽扇转向北，主廊无人压制，4 人从东门漏网。"
+    },
+    {
+      "id": "T-WA-4",
+      "label": "A 提前 4s 起爆",
+      "expect": "lose",
+      "notes": "时机反例：尾兵尚未进入货台射程，1 人漏网。"
+    },
+    {
+      "id": "W-WA-MG→Kar",
+      "label": "A 把 MG42 换成 Kar98k",
+      "expect": "lose",
+      "notes": "换枪反例：窄扇点杀压不住纵队，4 人漏网。"
+    },
+    {
+      "id": "S-WA-no-dock",
+      "label": "A 未占货台高点",
+      "expect": "lose",
+      "notes": "未侦察/错位反例：只守近门，主廊全漏。"
+    }
+  ],
+  "map_ascii": "###################NN###\n###################..###\n###....############..###\n###....###########X..###\n###^^^............X..###\n###^^^R...........X..###\n##=====............#.###\n.::::::::::::::::::::::E\n.::::::::::::::::::::::E\n###########..###########\n###########..###########\n###########..###########\n###########..###########\n###########..###########\n###########..###########\n###########SS###########",
+  "cells": [
+    {
+      "x": 0,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "kind": "gate_s",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "kind": "gate_s",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 2,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 3,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 4,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 4,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 5,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 5,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 6,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 21,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 6,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 7,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 7,
+      "kind": "gate_e",
+      "tier": "ground"
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 22,
+      "y": 8,
+      "kind": "road",
+      "tier": "ground"
+    },
+    {
+      "x": 23,
+      "y": 8,
+      "kind": "gate_e",
+      "tier": "ground"
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 3,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 19,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 20,
+      "y": 9,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 9,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 10,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 4,
+      "y": 10,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "kind": "ramp",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "kind": "structure"
+    },
+    {
+      "x": 19,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 10,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 10,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 11,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 4,
+      "y": 11,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "kind": "high",
+      "tier": "high"
+    },
+    {
+      "x": 6,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 8,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 9,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 11,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 12,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 13,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 14,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 15,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 16,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 17,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 18,
+      "y": 11,
+      "kind": "structure"
+    },
+    {
+      "x": 19,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 11,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 11,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 4,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 12,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 13,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 12,
+      "kind": "structure"
+    },
+    {
+      "x": 19,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 12,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 12,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 4,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 5,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 6,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 7,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 12,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 13,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 13,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 13,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 12,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 13,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 14,
+      "kind": "ground",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 14,
+      "kind": "wall"
+    },
+    {
+      "x": 0,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 1,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 2,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 3,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 4,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 5,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 6,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 7,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 8,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 9,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 10,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 11,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 12,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 13,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 15,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 17,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 19,
+      "y": 15,
+      "kind": "gate_n",
+      "tier": "ground"
+    },
+    {
+      "x": 20,
+      "y": 15,
+      "kind": "gate_n",
+      "tier": "ground"
+    },
+    {
+      "x": 21,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 22,
+      "y": 15,
+      "kind": "wall"
+    },
+    {
+      "x": 23,
+      "y": 15,
+      "kind": "wall"
+    }
+  ]
+}
