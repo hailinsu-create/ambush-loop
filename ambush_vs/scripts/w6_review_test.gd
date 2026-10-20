@@ -26,6 +26,7 @@ func _run_all() -> void:
 	_test_causes_reference_units()
 	_test_hud_forbidden_tokens()
 	_test_body_search_stub()
+	_test_actor_label_attribution()
 	await _test_scene_review_card()
 	print("W6_REVIEW_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -180,3 +181,96 @@ func _test_scene_review_card() -> void:
 	_assert(false, "scene review auto did not finish")
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
 	OS.set_environment("AMBUSH_GREYBOX_PLAN", "")
+
+
+func _label_fresh_sim(plan: Dictionary, opts: Dictionary = {}) -> NightSim:
+	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	var sim := NightSim.new()
+	sim.setup(level, plan, SimWeapons.load_csv())
+	if opts.has("skip_fire"):
+		sim.skip_fire = bool(opts["skip_fire"])
+	if opts.has("skip_enemy_fire"):
+		sim.skip_enemy_fire = bool(opts["skip_enemy_fire"])
+	if opts.has("max_ticks"):
+		sim.max_ticks = int(opts["max_ticks"])
+	return sim
+
+
+func _test_actor_label_attribution() -> void:
+	var plan: Dictionary = SimRunner.load_json("res://data/fixtures/plan_a.json")
+	var names := _names_for(plan)
+	var summary := {
+		"trigger": "cross_marker",
+		"standard_ambush": true,
+		"outcome": "win",
+		"escapes": [],
+		"wounded": [],
+		"dead_ops": [],
+		"alert": "quiet",
+	}
+	# 1) Unknown actor only → squad-level wording, no bare 队员.
+	var m1 := {
+		"detonate_tick": 520,
+		"alert_peak": "quiet",
+		"clear_s": 0.5,
+		"volley_kills": 5,
+		"kill_actors": {"test": 5},
+		"volley_by_actor": {"test": 5},
+	}
+	var c1 := "|".join(ReviewBuilder._causes(summary, m1, plan, names, []))
+	_assert(c1.find("队员") < 0, "unknown actor no bare 队员 got=%s" % c1)
+	_assert(c1.find("首轮齐射点杀了 5 人") >= 0, "unknown actor squad volley got=%s" % c1)
+
+	# 2) Known units, volley spread → biggest unit gets 扛下 label.
+	var m2 := {
+		"detonate_tick": 520,
+		"alert_peak": "quiet",
+		"clear_s": 0.5,
+		"volley_kills": 5,
+		"kill_actors": {"op_mg42": 2, "op_kar_L": 3},
+		"volley_by_actor": {"op_mg42": 2, "op_kar_L": 3},
+	}
+	var c2 := "|".join(ReviewBuilder._causes(summary, m2, plan, names, []))
+	_assert(c2.find("点杀了 5 人") < 0, "spread volley not attributed as 5 got=%s" % c2)
+	_assert(c2.find(str(names["op_kar_L"])) >= 0, "known top actor label got=%s" % c2)
+	_assert(c2.find("扛下了主要击杀（3 人）") >= 0, "known top actor own kills got=%s" % c2)
+
+	# 3) Known unit + unknown actor → known unit's own volley number.
+	var m3 := {
+		"detonate_tick": 520,
+		"alert_peak": "quiet",
+		"clear_s": 0.5,
+		"volley_kills": 10,
+		"kill_actors": {"test": 6, "op_mg42": 4},
+		"volley_by_actor": {"test": 6, "op_mg42": 4},
+	}
+	var c3 := "|".join(ReviewBuilder._causes(summary, m3, plan, names, []))
+	_assert(c3.find(str(names["op_mg42"])) >= 0, "known actor label with unknown present got=%s" % c3)
+	_assert(c3.find("在首轮点杀了 4 人") >= 0, "known actor own volley got=%s" % c3)
+	_assert(c3.find("队员") < 0, "known+unknown no bare 队员 got=%s" % c3)
+
+	# 4) No stray space before 在首轮 / 扛下.
+	for c in [c1, c2, c3]:
+		_assert(c.find(" 在首轮") < 0 and c.find(" 扛下") < 0, "no stray space in cause got=%s" % c)
+
+	# 5) Real sim leak: injected unknown actor kills must not read as bare 队员.
+	var sim := _label_fresh_sim(plan, {"skip_fire": true, "skip_enemy_fire": true})
+	sim.begin_wait()
+	while not sim.is_finished():
+		sim.advance_one_tick()
+		if sim.detonate_tick >= 0 and sim.tick == sim.detonate_tick + 1:
+			var kept := ""
+			for e in sim.enemies:
+				if e["alive"] and e["entered"] and not e["escaped"]:
+					if kept == "":
+						kept = str(e["id"])
+					else:
+						sim._kill_enemy(e, "test", "test")
+		if not (sim.escaped_ids as Array).is_empty():
+			break
+		if sim.detonate_tick >= 0 and sim.tick - sim.detonate_tick > 400:
+			break
+	_assert(not (sim.escaped_ids as Array).is_empty(), "leak sim escaped_ids non-empty got=%s" % [sim.escaped_ids])
+	var rev := ReviewBuilder.build(sim, plan, names)
+	var c4 := "|".join(rev.get("causes", []))
+	_assert(c4.find("队员") < 0, "leak review causes no bare 队员 got=%s" % c4)
