@@ -9,9 +9,12 @@ const SimLevels := preload("res://sim/levels.gd")
 const SimLevelLoader := preload("res://sim/level_loader.gd")
 
 const TICK_HZ := 20
-const T0_A := 520
-const T0_B := 560
 const PLAN_KEYS := ["plan_a", "plan_b"]
+## Per-level named counterexamples. t0 values come from each level's golden file.
+const NAMED_CASES := {
+	"yard": ["F-A30", "T-B+4"],
+	"warehouse": ["F-WA30", "T-WA-4", "W-WA-MG→Kar", "S-WA-no-dock"],
+}
 
 var _failed := 0
 var _passed := 0
@@ -88,29 +91,59 @@ func _test_fixture_wins() -> void:
 
 
 func _test_named_lose_cases() -> void:
-	var cases := {
-		"F-A30": _plan_f_a30(),
-		"T-B+4": _plan_t_b_plus4(),
-	}
-	for id_v in cases.keys():
-		var id := str(id_v)
-		var summary := SimRunner.run_level_plan(SimLevels.DEFAULT_ID, cases[id])
-		_assert(str(summary.get("outcome", "")) == "lose",
-			"named counterexample %s loses got=%s" % [id, summary.get("outcome")])
+	for level_id_v in SimLevels.ids():
+		var level_id := str(level_id_v)
+		for case_id_v in NAMED_CASES.get(level_id, []):
+			var case_id := str(case_id_v)
+			var plan := _build_named_case(level_id, case_id)
+			var summary := SimRunner.run_level_plan(level_id, plan)
+			_assert(str(summary.get("outcome", "")) == "lose",
+				"%s named counterexample %s loses got=%s" % [
+					level_id, case_id, summary.get("outcome")])
 
 
-func _plan_f_a30() -> Dictionary:
-	var plan := SimRunner.load_json(str(SimLevels.fixtures_for(SimLevels.DEFAULT_ID)["plan_a"]))
-	plan["operators"][0]["facing_deg"] = float(plan["operators"][0]["facing_deg"]) + 30.0
-	return plan
+func _build_named_case(level_id: String, case_id: String) -> Dictionary:
+	var fixtures := SimLevels.fixtures_for(level_id)
+	var golden := _read_golden(level_id)
+	match case_id:
+		"F-A30":
+			var plan := SimRunner.load_json(str(fixtures["plan_a"]))
+			plan["operators"][0]["facing_deg"] = float(plan["operators"][0]["facing_deg"]) + 30.0
+			return plan
+		"T-B+4":
+			var plan := SimRunner.load_json(str(fixtures["plan_b"]))
+			plan["trigger"] = {"type": "manual"}
+			plan["manual_detonate_tick"] = int(golden.get("t0_b", -1)) + 4 * TICK_HZ
+			plan["mines"] = []
+			return plan
+		"F-WA30":
+			var plan := SimRunner.load_json(str(fixtures["plan_a"]))
+			plan["operators"][0]["facing_deg"] = float(plan["operators"][0]["facing_deg"]) + 30.0
+			return plan
+		"T-WA-4":
+			var plan := SimRunner.load_json(str(fixtures["plan_a"]))
+			plan["trigger"] = {"type": "manual"}
+			plan["manual_detonate_tick"] = int(golden.get("t0_a", -1)) - 4 * TICK_HZ
+			plan["mines"] = []
+			return plan
+		"W-WA-MG→Kar":
+			var plan := SimRunner.load_json(str(fixtures["plan_a"]))
+			plan["operators"][0]["weapon_id"] = "kar98k"
+			return plan
+		"S-WA-no-dock":
+			var plan := SimRunner.load_json(str(fixtures["plan_a"]))
+			plan["operators"].remove_at(0)
+			return plan
+		_:
+			return {}
 
 
-func _plan_t_b_plus4() -> Dictionary:
-	var plan := SimRunner.load_json(str(SimLevels.fixtures_for(SimLevels.DEFAULT_ID)["plan_b"]))
-	plan["trigger"] = {"type": "manual"}
-	plan["manual_detonate_tick"] = T0_B + 4 * TICK_HZ
-	plan["mines"] = []
-	return plan
+func _read_golden(level_id: String) -> Dictionary:
+	var f := FileAccess.open(SimLevels.golden_path_for(level_id), FileAccess.READ)
+	if f == null:
+		return {}
+	var v: Variant = JSON.parse_string(f.get_as_text())
+	return v if typeof(v) == TYPE_DICTIONARY else {}
 
 
 func _test_deterministic_golden_hashes() -> void:
@@ -135,8 +168,8 @@ func _test_deterministic_golden_hashes() -> void:
 			var t0_key := "t0_a" if plan_key == "plan_a" else "t0_b"
 			var t0 := int(first.get("detonate_tick", -1))
 			_assert(t0 == int(exp.get(t0_key, -1)), "%s/%s t0=%d matches golden %s" % [id, plan_key, t0, t0_key])
-		_assert(int(exp.get("t0_a", -1)) == T0_A, "%s golden t0_a=%d" % [id, T0_A])
-		_assert(int(exp.get("t0_b", -1)) == T0_B, "%s golden t0_b=%d" % [id, T0_B])
+		_assert(int(exp.get("t0_a", -1)) > 0, "%s golden t0_a present" % id)
+		_assert(int(exp.get("t0_b", -1)) > 0, "%s golden t0_b present" % id)
 
 
 func _test_resolve_id() -> void:

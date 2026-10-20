@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS T7 院子几何 v1.7 2026-10-20](VS_T7_YARD_V17_20261020.md) | **当前 VS 执行切片**（规划 T7）：4 个关键反例（F-A60/T-A+2/T-A+4/W-A-MG→Kar）默认硬核下判负；11 个无解格改 `no_place` + 控制器拒绝；金标重生成但 t0 仍 520/560。纸面 v1.7 / `yard.json` v8。堆叠在 T6 上（base `vs/p1-softcap`）。**不合并**。 |
+| [VS T9 仓道第二关（sim 层）2026-10-20](VS_T9_WAREHOUSE_20261020.md) | **当前 VS 执行切片**（规划 T9 第 1 步）：`warehouse.json` v1 + 两套可胜标准伏击 fixture + 4 个命名反例（全部 lose，严格组 F-WA30 / W-WA-MG→Kar）+ 金标 `hashes_warehouse.json`；`night_sim` 仅加可选 `level.peel`（yard 缺省不变）。W3 契约 65（yard 40 + warehouse 25），新 W2 warehouse 25。控制器/地图留到下一轮。**仅工作区，未提交/未推送**。 |
+| [VS T7 院子几何 v1.7 2026-10-20](VS_T7_YARD_V17_20261020.md) | 规划 T7：4 个关键反例（F-A60/T-A+2/T-A+4/W-A-MG→Kar）默认硬核下判负；11 个无解格改 `no_place` + 控制器拒绝；金标重生成但 t0 仍 520/560。纸面 v1.7 / `yard.json` v8。堆叠在 T6 上（base `vs/p1-softcap`）。**不合并**。 |
 | [VS T8 多关卡框架 2026-10-20](VS_T8_LEVEL_FRAMEWORK_20261020.md) | 规划 T8：关卡注册表 `SimLevels` + `AMBUSH_LEVEL` / `?level=` 选择 + 按关金标约定。分支 `vs/p1-level-framework` → draft PR #68 合入 `vs/g3`；`vs/p1-level2`（T9）已把它合进来。**不合并**。 |
 | [VS T6 还击软顶显式难度 2026-10-20](VS_T6_SOFTCAP_20261020.md) | 已被 T7 接续（规划 T6）：默认档由我们代定为硬核（`RETURN_FIRE_ASSIST_DEFAULT=false`），辅助档可在布阵里打开；两档矩阵；plan_b 金标更新。堆叠在 T5 上（base `vs/t5-climb`）。**不合并**。 |
 | [VS T5 高点攀爬代价 2026-10-20](VS_T5_CLIMB_20261020.md) | 已被 T6 接续（规划 T5）：上下高点 +2s、禁射、出发格暴露；`CLIMB_COST_S` 生效；W2 107 / W3 85 / W8 391。谷仓加北侧梯子入口（不被西巡逻看见，3 秒），示例方案 A 走北梯、保住标准伏击。收尾：攀爬支持小数秒（W8 405）；新 W5b 39 测得北梯起爆前不被看见（假设一直站在那里，tick 599 才被看见）。堆叠在 T4 上（base `vs/t4-scout-carry`）。**不合并**。 |

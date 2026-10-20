@@ -17,6 +17,14 @@ static func registry() -> Dictionary:
 				"plan_b": "res://data/fixtures/plan_b.json",
 			},
 		},
+		"warehouse": {
+			"path": "res://data/levels/warehouse.json",
+			"golden": "res://data/golden/hashes_warehouse.json",
+			"fixtures": {
+				"plan_a": "res://data/fixtures/plan_warehouse_a.json",
+				"plan_b": "res://data/fixtures/plan_warehouse_b.json",
+			},
+		},
 	}
 
 

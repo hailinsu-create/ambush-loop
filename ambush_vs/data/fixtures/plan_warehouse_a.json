@@ -1,0 +1,36 @@
+{
+  "id": "WA",
+  "label": "货台宽扇压制",
+  "trigger": {
+    "type": "manual"
+  },
+  "manual_detonate_tick": 520,
+  "operators": [
+    {
+      "id": "op_mg42_dock",
+      "x": 5,
+      "y": 10,
+      "tier": "high",
+      "facing_deg": 0,
+      "weapon_id": "mg42"
+    },
+    {
+      "id": "op_mp40_door",
+      "x": 19,
+      "y": 10,
+      "tier": "ground",
+      "facing_deg": 30,
+      "weapon_id": "mp40"
+    },
+    {
+      "id": "op_grenade_door",
+      "x": 3,
+      "y": 12,
+      "tier": "ground",
+      "facing_deg": 30,
+      "weapon_id": "grenade"
+    }
+  ],
+  "mines": [],
+  "grenades": []
+}

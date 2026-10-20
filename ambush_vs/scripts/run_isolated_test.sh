@@ -7,7 +7,7 @@ set -euo pipefail
 godot_bin="${1:?Pass an absolute path to Godot 4.7.2}"
 entry="${2:-empty_test.gd}"
 case "$entry" in
-  empty_test.gd|w2_sim_test.gd|w2_sim_cli.gd|w2_counterex_test.gd|w2_counterex_probe.gd|w2_aim_tolerance_test.gd|w3_greybox_test.gd|w3_level_contract_test.gd|w4_scout_test.gd|w4_scout_carry_test.gd|w5_combat_fx_test.gd|w5b_ladder_safety_test.gd|w6_review_test.gd|w7_combat_test.gd|w8_controls_test.gd|w8_briefing_blacklist_test.gd|w9_playtest_test.gd|ux_controls_capture.gd|ux_aim_magnifier_capture.gd|ux_briefing_capture.gd) ;;
+  empty_test.gd|w2_sim_test.gd|w2_sim_cli.gd|w2_counterex_test.gd|w2_warehouse_counterex_test.gd|w2_counterex_probe.gd|w2_aim_tolerance_test.gd|w3_greybox_test.gd|w3_level_contract_test.gd|w4_scout_test.gd|w4_scout_carry_test.gd|w5_combat_fx_test.gd|w5b_ladder_safety_test.gd|w6_review_test.gd|w7_combat_test.gd|w8_controls_test.gd|w8_briefing_blacklist_test.gd|w9_playtest_test.gd|ux_controls_capture.gd|ux_aim_magnifier_capture.gd|ux_briefing_capture.gd) ;;
   *)
     printf 'Unsupported test entry for ambush_vs: %s\n' "$entry" >&2
     exit 2
