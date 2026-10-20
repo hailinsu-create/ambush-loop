@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS T4 侦察警报带入埋伏 2026-10-20](VS_T4_SCOUT_CARRY_20261020.md) | **当前 VS 执行切片**（规划 `NEXT_PLAN_20261018` T4）：`plan.start_alert` 携带侦察警报；area/global 失去标准伏击、A/B 仍可胜；新增 W4 carry 39；起疑轻代价（发现距离 ×1.3）。替代 W4a「埋伏从安静开始」。分支 `vs/t4-scout-carry` → draft PR 合入 `vs/g3`。**不合并**；起疑力度已拍板。 |
+| [VS T5 高点攀爬代价 2026-10-20](VS_T5_CLIMB_20261020.md) | **当前 VS 执行切片**（规划 T5）：上下高点 +2s、禁射、出发格暴露；`CLIMB_COST_S` 生效；W2 107 / W3 67 / W8 366。堆叠在 T4 上（base `vs/t4-scout-carry`）。⚠ 谷仓出发格在西巡逻锥内，示例方案 A 场景掉到 C，待拍板。**不合并**。 |
+| [VS T4 侦察警报带入埋伏 2026-10-20](VS_T4_SCOUT_CARRY_20261020.md) | 已被 T5 接续（规划 `NEXT_PLAN_20261018` T4）：`plan.start_alert` 携带侦察警报；area/global 失去标准伏击、A/B 仍可胜；新增 W4 carry 39；起疑轻代价（发现距离 ×1.3）。替代 W4a「埋伏从安静开始」。分支 `vs/t4-scout-carry` → draft PR 合入 `vs/g3`。**不合并**；起疑力度已拍板。 |
 | [VS P0-4 试玩构建开关 + 对局日志 2026-10-18](VS_P0_4_PLAYTEST_20261018.md) | **当前 VS 执行切片**：`?playtest=1` / `AMBUSH_PLAYTEST` / feature `playtest` 隐藏开发入口；每局 JSON 日志 + 「导出日志」；W9 新增。分支 `vs/p0-4-playtest` → draft PR 合入 `vs/g3`。**不合并**。 |
 | [VS P0-3 简报与最小教学 2026-10-17](VS_P0_3_BRIEF_20261017.md) | 开局简报 + 阶段提示 + 教学文案黑名单。分支 `vs/p0-3-brief` → draft PR 合入 `vs/p0-2-aim`。**不合并**。试玩 Pages 部署被环境分支策略阻塞（见文档）。 |
 | [VS P0-2 朝向吸附与放大镜 2026-10-17](VS_P0_2_AIM_SNAP_20261017.md) | 放大镜 + AimSnap + G.1 容差门；结果表 [`ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md`](../../ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md)。分支 `vs/p0-2-aim` → draft PR 合入 `vs/p0-1-counterex`。**不合并**；已被 P0-3 接续。 |
