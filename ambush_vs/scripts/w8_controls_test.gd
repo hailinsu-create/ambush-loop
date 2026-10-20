@@ -987,18 +987,19 @@ func _test_no_place_guard() -> void:
 		var scene = current_scene
 		if scene == null or scene.map_view == null or scene.plan.is_empty():
 			continue
-		_assert(str(scene._no_place_reason(Vector2i(7, 4))) == "此掩体侧射界被挡，禁止落位",
-			"west no-place reason got=%s" % scene._no_place_reason(Vector2i(7, 4)))
-		_assert(str(scene._no_place_reason(Vector2i(5, 9))).is_empty(),
-			"published barn cell stays placeable")
-		_assert(not scene.map_view.legal_cells.has(Vector2i(7, 4)),
-			"op legal highlights exclude no-place cell")
-		_assert(not scene.map_view.legal_cells.has(Vector2i(5, 10)),
-			"op legal highlights exclude blocked high cell")
+		var has_no_place_fn: bool = scene.has_method("_no_place_reason")
+		_assert(has_no_place_fn, "controller exposes _no_place_reason")
+		if not has_no_place_fn:
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+			return
 		scene._load_preset("A")
 		var mg: Dictionary = scene._plan_op("op_mg42")
 		var ox := int(mg["x"])
 		var oy := int(mg["y"])
+		_assert(scene.scripted_place_operator("op_mg42", 9, 6, 0.0) == false,
+			"scripted no-place returns false")
+		_assert(int(mg["x"]) == ox and int(mg["y"]) == oy, "scripted no-place leaves op in place")
 		scene.selected_op_id = "op_mg42"
 		scene.pending_place_cell = Vector2i(-1, -1)
 		scene._move_selected_op(Vector2i(7, 4))
@@ -1012,9 +1013,14 @@ func _test_no_place_guard() -> void:
 		_assert(scene.pending_place_cell == Vector2i(-1, -1), "no-place ghost not armed")
 		_assert(str(scene.label_info.text).contains("禁止落位"),
 			"no-place ghost tap shows reason got=%s" % scene.label_info.text)
-		_assert(scene.scripted_place_operator("op_mg42", 9, 6, 0.0) == false,
-			"scripted no-place returns false")
-		_assert(int(mg["x"]) == ox and int(mg["y"]) == oy, "scripted no-place leaves op in place")
+		_assert(str(scene._no_place_reason(Vector2i(7, 4))) == "此掩体侧射界被挡，禁止落位",
+			"west no-place reason got=%s" % scene._no_place_reason(Vector2i(7, 4)))
+		_assert(str(scene._no_place_reason(Vector2i(5, 9))).is_empty(),
+			"published barn cell stays placeable")
+		_assert(not scene.map_view.legal_cells.has(Vector2i(7, 4)),
+			"op legal highlights exclude no-place cell")
+		_assert(not scene.map_view.legal_cells.has(Vector2i(5, 10)),
+			"op legal highlights exclude blocked high cell")
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 		return
