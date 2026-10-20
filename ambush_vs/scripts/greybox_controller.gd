@@ -39,6 +39,7 @@ var sim: NightSim = null
 var scout: ScoutSim = null
 var grid = null
 var gathered_kit: Dictionary = {} ## from scout → setup weapon pool
+var carried_alert: String = "quiet" ## T4: scout alert handed into setup/wait
 
 var paused: bool = false
 var speed_mul: float = 1.0
@@ -586,6 +587,7 @@ func begin_setup_from_scout() -> void:
 	## 「开始布阵」— hand gathered kit to PLAY-1 blank setup.
 	if scout != null and not scout.is_finished():
 		scout.finish_scout("player")
+	carried_alert = str(scout.alert) if scout != null else "quiet"
 	if scout != null:
 		gathered_kit = scout.kit_snapshot()
 	else:
@@ -598,7 +600,21 @@ func begin_setup_from_scout() -> void:
 	_push_map_snapshot()
 	_apply_default_camera()
 	var mg := "已解锁 MG42" if is_mg42_unlocked() else "尚未取得 MG42"
-	label_info.text = "布阵开始 · 套件已带入 · %s" % mg
+	label_alert.text = "侦察带入 · " + _alert_zh(carried_alert)
+	label_info.text = "布阵开始 · 套件已带入 · %s%s" % [mg, _carried_alert_hint(carried_alert)]
+
+
+func _carried_alert_hint(a: String) -> String:
+	## T4 neutral setup copy for the alert carried out of scout. No height/barn spoilers.
+	match a:
+		"suspicious":
+			return " · 敌人已起疑，岗哨和巡逻看得更远"
+		"area_alert":
+			return " · 敌人已加强警戒，巡逻改走警戒路线，标准伏击不可得"
+		"global_alert":
+			return " · 全图警报，埋伏一开局就会交火"
+		_:
+			return ""
 
 
 func _init_blank_plan() -> void:
@@ -935,6 +951,7 @@ func _load_preset(which: String) -> void:
 		return
 	var path := "res://data/fixtures/plan_a.json" if which == "A" else "res://data/fixtures/plan_b.json"
 	plan = SimRunner.load_json(path).duplicate(true)
+	carried_alert = "quiet"
 	op_display_names.clear()
 	op_placed.clear()
 	var i := 0
@@ -2890,6 +2907,11 @@ func _start_wait() -> void:
 		_refresh_start_gate()
 		return
 	_apply_kit_ammo_to_plan()
+	## T4: hand the scout alert into the plan; quiet erases any stale key.
+	if carried_alert != "quiet":
+		plan["start_alert"] = carried_alert
+	else:
+		plan.erase("start_alert")
 	sim = NightSim.new()
 	sim.setup(level, plan, weapons)
 	sim.begin_wait()
@@ -2985,6 +3007,7 @@ func _restart_scout() -> void:
 	body_search_enabled = false
 	plan = {}
 	gathered_kit = {}
+	carried_alert = "quiet"
 	op_placed.clear()
 	op_display_names.clear()
 	preview_cell = Vector2i(-1, -1)

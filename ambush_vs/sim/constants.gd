@@ -27,6 +27,7 @@ const TURN_COST_S_PER_45 := 1.0
 const CLIMB_COST_S := 2.0
 
 const SILHOUETTE_MUL := 1.5
+const CARRY_SUSPICIOUS_RANGE_MUL := 1.3 ## T4: scout-carried suspicious → sentry/patrol cone range ×1.3 for the whole night
 
 ## Range band cutoffs (meters = cells). Shots-needed from weapons.csv.
 const RANGE_NEAR_MAX := 5.0
