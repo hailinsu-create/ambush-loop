@@ -33,6 +33,7 @@ func _run_all() -> void:
 	await _test_undo_cancel()
 	await _test_climb_placement_feedback()
 	await _test_climb_wait_status()
+	await _test_climb_access_controls()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
 	await _test_desktop_shortcuts()
@@ -810,6 +811,100 @@ func _test_climb_wait_status() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 		return
 	_assert(false, "climb status scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_climb_access_controls() -> void:
+	## T5b: barn has two entrances. Tapping the placed operator's cell rotates the
+	## entrance, copy names the trade-off, undo restores it, and retry clears the
+	## sim climb fields so SETUP never paints the climb arc.
+	const BriefingCopy := preload("res://ui/briefing_copy.gd")
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "climb access controls scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		scene._load_preset("A")
+		var mg: Dictionary = scene._plan_op("op_mg42")
+		_assert(str(mg.get("climb_access", "")) == "barn_north_ladder",
+			"preset A MG starts on north ladder")
+		scene.selected_op_id = "op_mg42"
+		scene.pending_place_cell = Vector2i(-1, -1)
+		scene._handle_op_place_tap(Vector2i(5, 9))
+		_assert(str(mg.get("climb_access", "")) == "barn_east_door",
+			"tapping current cell rotates to east door got=%s" % mg.get("climb_access"))
+		_assert(str(scene.label_info.text).contains("入口：东侧门"),
+			"east door copy got=%s" % scene.label_info.text)
+		_assert(str(scene.label_info.text).contains("看得见"),
+			"east door copy warns about patrol got=%s" % scene.label_info.text)
+		_assert(BriefingCopy.forbidden_hits(str(scene.label_info.text)).is_empty(),
+			"east door copy blacklist clean got=%s" % scene.label_info.text)
+		scene._handle_op_place_tap(Vector2i(5, 9))
+		_assert(str(mg.get("climb_access", "")) == "barn_north_ladder",
+			"tap rotates back to north ladder got=%s" % mg.get("climb_access"))
+		_assert(str(scene.label_info.text).contains("入口：北侧梯子"),
+			"north ladder copy got=%s" % scene.label_info.text)
+		_assert(str(scene.label_info.text).contains("绕行"),
+			"north ladder copy mentions detour got=%s" % scene.label_info.text)
+		_assert(BriefingCopy.forbidden_hits(str(scene.label_info.text)).is_empty(),
+			"north ladder copy blacklist clean got=%s" % scene.label_info.text)
+		_assert(scene.set_op_climb_access("op_mg42", "no_such_entry") == false,
+			"invalid climb access id rejected")
+		_assert(str(mg.get("climb_access", "")) == "barn_north_ladder",
+			"invalid id leaves entrance unchanged")
+		_assert(scene.set_op_climb_access("no_such_op", "barn_east_door") == false,
+			"unknown operator rejected")
+		_assert(scene.set_op_climb_access("op_mg42", "barn_east_door") == true,
+			"switch to east door for undo test")
+		_assert(scene.set_op_climb_access("op_mg42", "barn_north_ladder") == true,
+			"switch back to north ladder")
+		scene._undo()
+		_assert(str(scene._plan_op("op_mg42").get("climb_access", "")) == "barn_east_door",
+			"undo restores previous entrance got=%s" % scene._plan_op("op_mg42").get("climb_access"))
+		var map = scene.map_view
+		_assert(map.access_marker_glyph({"label_zh": "北侧梯子"}) == "梯",
+			"north ladder marker glyph")
+		_assert(map.access_marker_glyph({"label_zh": "东侧门"}) == "门",
+			"east door marker glyph")
+		var fake_climb := {"id": "op_mg42", "climbing": true}
+		_assert(not map.should_draw_climb_marker(fake_climb),
+			"SETUP never draws climb marker")
+		scene._start_wait()
+		if scene.sim == null:
+			_assert(false, "climb access wait started")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+			OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+			return
+		scene.paused = true
+		var live_climb: Dictionary = {}
+		for sop in map.operators:
+			if str(sop.get("id", "")) == "op_mg42":
+				live_climb = sop
+		_assert(map.should_draw_climb_marker(live_climb),
+			"WAIT draws live sim climb marker phase=%s" % map.phase)
+		scene._restart()
+		_assert(scene.ui_phase == scene.UiPhase.SETUP, "retry returns to SETUP")
+		var stale := false
+		for op in scene.plan.get("operators", []):
+			if op.has("climbing") or op.has("climb_from") or op.has("climb_ticks_left"):
+				stale = true
+		_assert(not stale, "retry clears plan climb fields")
+		_assert(str(scene._plan_op("op_mg42").get("climb_access", "")) == "barn_east_door",
+			"retry keeps chosen entrance got=%s" % scene._plan_op("op_mg42").get("climb_access"))
+		_assert(map.phase == "setup" and not map.ops_from_sim,
+			"retry snapshot is plan/setup not sim ops")
+		_assert(not map.should_draw_climb_marker(fake_climb),
+			"retry SETUP still hides climb marker")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "climb access controls scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 

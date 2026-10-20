@@ -164,12 +164,7 @@ func _test_scene_review_card() -> void:
 			continue
 		if scene.get("last_review") is Dictionary and not (scene.last_review as Dictionary).is_empty():
 			var rev: Dictionary = scene.last_review
-			## T5 climb: the AUTO plan A now climbs up at wait start; the MG's east
-			## ground departure (6,9) is spotted by the west patrol during the 2 s
-			## climb, so the scene run loses standard ambush (alarm detonate) and the
-			## Kar is lost — grade falls to C while the wave is still wiped (全歼).
-			## Direct (non-scene) plan A reviews above remain A|S.
-			_assert(str(rev.get("grade", "")) in ["A", "C"], "scene review A grade A|C (climb) got=%s" % rev.get("grade"))
+			_assert(str(rev.get("grade", "")) in ["A", "S"], "scene review A grade A|S got=%s" % rev.get("grade"))
 			_assert(str(rev.get("outcome_zh", "")) == "全歼", "scene review A 全歼")
 			if scene.has_method("review_card_text"):
 				var hud := str(scene.review_card_text())

@@ -84,10 +84,10 @@ func _test_golden_hash_unchanged() -> void:
 
 func _test_greybox_scene_fx_counts() -> void:
 	## AUTO path consumes FX; controller totals must match the live match's log.
-	## T5: plan A's high-point operators now start the night with a ~2 s climb, so
-	## the scene's event stream differs from a freshly built fixture sim (fixture
-	## plans carry no climb fields). Compare against scene.sim.log.events — the
-	## match the controller actually consumed — not a re-run.
+	## T5 climb: the scene plan carries climb fields that the bare fixture does
+	## not, so compare counts against scene.sim.log.events — the match actually
+	## consumed — not a re-run. T5b: preset A takes the north ladder and restores
+	## the standard ambush (520).
 	OS.set_environment("AMBUSH_GREYBOX_AUTO", "1")
 	var err := change_scene_to_file("res://scenes/greybox.tscn")
 	_assert(err == OK, "fx scene change_scene err=%s" % err)
@@ -98,6 +98,8 @@ func _test_greybox_scene_fx_counts() -> void:
 			continue
 		if scene.get("last_summary") is Dictionary and not (scene.last_summary as Dictionary).is_empty():
 			var ls: Dictionary = scene.last_summary
+			_assert(int(ls.get("detonate_tick", -1)) == 520, "scene fx path t0=520 got=%s" % ls.get("detonate_tick"))
+			_assert(bool(ls.get("standard_ambush", false)) == true, "scene fx path standard_ambush")
 			# Self-consistency: last_summary is this match's own outcome_summary.
 			var sim_sum: Dictionary = scene.sim.outcome_summary()
 			_assert(

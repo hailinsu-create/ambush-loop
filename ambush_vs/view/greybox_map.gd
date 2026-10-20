@@ -68,6 +68,7 @@ var selected_op_id: String = ""
 var threat_slot_cells: Array = [] ## Vector2i
 var night: bool = true
 var highlight_high_slots: bool = false ## SETUP: gold wash on high_slots
+var ops_from_sim: bool = false ## snapshot operators come from the live sim
 var op_display_names: Dictionary = {} ## op_id → Chinese label (never show raw ids)
 var supply_states: Dictionary = {} ## supply_id → {revealed, opened, opening, state, x, y}
 var combat_fx = null ## GreyboxCombatFx
@@ -319,6 +320,7 @@ func apply_snapshot(snap: Dictionary) -> void:
 	preview_seers = snap.get("preview_seers", [])
 	selected_op_id = str(snap.get("selected_op_id", selected_op_id))
 	highlight_high_slots = bool(snap.get("highlight_high_slots", false))
+	ops_from_sim = bool(snap.get("ops_from_sim", false))
 	op_display_names = snap.get("op_display_names", {}) as Dictionary
 	supply_states = snap.get("supply_states", {}) as Dictionary
 	searched_bodies = snap.get("searched_bodies", {}) as Dictionary
@@ -850,6 +852,45 @@ func _draw_high_slot_highlights() -> void:
 			var r := Rect2(Vector2(x * cell_px, (grid_h - 1 - y) * cell_px), Vector2(cell_px, cell_px))
 			draw_rect(r, Color(1.0, 0.82, 0.25, 0.22), true)
 			draw_rect(r.grow(-1.0), Color(1.0, 0.88, 0.35, 0.55), false, 1.5)
+		## T5b: mark each entrance cell with a tiny glyph (no new assets).
+		for a in _access_entries(hs):
+			var ax := int(a.get("x", -1))
+			var ay := int(a.get("y", -1))
+			if ax < 0:
+				continue
+			var p := Vector2(ax * cell_px, (grid_h - 1 - ay) * cell_px)
+			var glyph := access_marker_glyph(a)
+			draw_rect(Rect2(p + Vector2(2, 2), Vector2(cell_px - 4, cell_px - 4)), Color(0.35, 0.75, 1.0, 0.20), true)
+			draw_string(
+				ThemeDB.fallback_font,
+				p + Vector2(cell_px * 0.28, cell_px * 0.64),
+				glyph,
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.72, 0.93, 1.0, 0.95)
+			)
+
+
+func _access_entries(hs: Dictionary) -> Array:
+	var arr: Variant = hs.get("access", [])
+	return arr if typeof(arr) == TYPE_ARRAY else []
+
+
+func access_marker_glyph(access: Dictionary) -> String:
+	var label := str(access.get("label_zh", ""))
+	if label.contains("梯"):
+		return "梯"
+	if label.contains("门"):
+		return "门"
+	return "入"
+
+
+func should_draw_climb_marker(op: Dictionary) -> bool:
+	## T5b display fix: only live sim operators in WAIT/DETONATE/RESOLVE draw the
+	## climb arc. SETUP (retry, preset load) never does, even with stale plan flags.
+	if not ops_from_sim:
+		return false
+	if phase != "wait" and phase != "detonate" and phase != "resolve":
+		return false
+	return bool(op.get("climbing", false))
 
 
 func _draw_tiles() -> void:
@@ -2414,8 +2455,8 @@ func _draw_units() -> void:
 			draw_string(ThemeDB.fallback_font, hp + Vector2(-8, -cell_px * 1.05), "眼", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.6, 0.95, 1.0, 0.95))
 		if high:
 			draw_arc(hp, cell_px * (1.05 if is_sel else 0.88), 0, TAU, 28, Color(1.0, 0.82, 0.16, 0.7 if is_sel else 0.35), 1.6)
-		# T5 climb: operator is mid-climb at its departure ground cell.
-		if bool(op.get("climbing", false)):
+		# T5 climb: operator is mid-climb at its departure ground cell (live sim only).
+		if should_draw_climb_marker(op):
 			var cs := Time.get_ticks_msec() * 0.006
 			draw_arc(hp, cell_px * 0.92, cs, cs + TAU * 0.8, 28, Color(0.6, 0.9, 1.0, 0.85), 2.0)
 			draw_string(
