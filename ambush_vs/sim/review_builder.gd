@@ -223,11 +223,8 @@ static func _causes(
 	# 3) Leaks / alert / quality (skip if wound+leak already combined)
 	var wound_leak_combined := not wounded.is_empty() and not esc.is_empty()
 	if not wound_leak_combined and not esc.is_empty():
-		var next_a := str(summary.get("next_night_alert", "quiet"))
-		if next_a != "quiet" and next_a != "":
-			out.append("有 %d 人漏网逃脱，下一夜警报将升高" % esc.size())
-		else:
-			out.append("有 %d 人漏网逃脱，杀伤区或朝向还有缺口" % esc.size())
+		# next_night_alert stays a NightSim log/data field; VS review card never surfaces cross-night consequences (T2).
+		out.append("有 %d 人漏网逃脱，杀伤区或朝向还有缺口" % esc.size())
 	elif peak == "area_alert" or peak == "global_alert":
 		out.append("交火前警报已升高，标准伏击不可得")
 	elif bool(combat.get("in_cover", false)) and std and clear_s > CLEAR_FAST_S:

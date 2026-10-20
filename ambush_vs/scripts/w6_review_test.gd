@@ -26,6 +26,7 @@ func _run_all() -> void:
 	_test_causes_reference_units()
 	_test_hud_forbidden_tokens()
 	_test_body_search_stub()
+	_test_no_next_night_copy()
 	await _test_scene_review_card()
 	print("W6_REVIEW_TEST_SUMMARY passed=", _passed, " failed=", _failed)
 	quit(0 if _failed == 0 else 1)
@@ -60,6 +61,55 @@ func _run_review(plan_path: String) -> Dictionary:
 	while not sim.is_finished():
 		sim.advance_one_tick()
 	return ReviewBuilder.build(sim, plan, _names_for(plan))
+
+
+func _fresh_sim(plan: Dictionary, opts: Dictionary = {}) -> NightSim:
+	var level := SimLevelLoader.load_path("res://data/levels/yard.json")
+	var sim := NightSim.new()
+	sim.setup(level, plan, SimWeapons.load_csv())
+	if opts.has("skip_fire"):
+		sim.skip_fire = bool(opts["skip_fire"])
+	if opts.has("skip_enemy_fire"):
+		sim.skip_enemy_fire = bool(opts["skip_enemy_fire"])
+	if opts.has("max_ticks"):
+		sim.max_ticks = int(opts["max_ticks"])
+	return sim
+
+
+func _test_no_next_night_copy() -> void:
+	## T2: VS review card never surfaces cross-night consequences.
+	var ra := _run_review("res://data/fixtures/plan_a.json")
+	var rb := _run_review("res://data/fixtures/plan_b.json")
+	var blob_a := "|".join(ra.get("causes", [])) + "||" + "|".join(ra.get("timeline", []))
+	var blob_b := "|".join(rb.get("causes", [])) + "||" + "|".join(rb.get("timeline", []))
+	_assert(blob_a.find("下一夜") < 0, "plan A review has no 下一夜 copy got=%s" % blob_a)
+	_assert(blob_b.find("下一夜") < 0, "plan B review has no 下一夜 copy got=%s" % blob_b)
+	# Leak case: skip friendly/enemy fire, wipe to one survivor, let it escape (mirrors w7).
+	var plan: Dictionary = SimRunner.load_json("res://data/fixtures/plan_a.json")
+	var sim := _fresh_sim(plan, {"skip_fire": true, "skip_enemy_fire": true})
+	sim.begin_wait()
+	while not sim.is_finished():
+		sim.advance_one_tick()
+		if sim.detonate_tick >= 0 and sim.tick == sim.detonate_tick + 1:
+			var kept := ""
+			for e in sim.enemies:
+				if e["alive"] and e["entered"] and not e["escaped"]:
+					if kept == "":
+						kept = str(e["id"])
+					else:
+						sim._kill_enemy(e, "test", "test")
+		if not (sim.escaped_ids as Array).is_empty():
+			break
+		if sim.detonate_tick >= 0 and sim.tick - sim.detonate_tick > 400:
+			break
+	_assert(not (sim.escaped_ids as Array).is_empty(), "leak case escaped_ids non-empty got=%s" % [sim.escaped_ids])
+	var s := sim.outcome_summary()
+	_assert(str(s.get("next_night_alert", "quiet")) != "quiet",
+		"leak case next_night_alert data field still raised got=%s" % s.get("next_night_alert"))
+	var rev := ReviewBuilder.build(sim, plan, _names_for(plan))
+	var blob := "|".join(rev.get("causes", [])) + "||" + "|".join(rev.get("timeline", []))
+	_assert(blob.find("下一夜") < 0, "leak review has no 下一夜 copy got=%s" % blob)
+	_assert(blob.find("漏网") >= 0 or blob.find("逃脱") >= 0, "leak review mentions 漏网/逃脱 got=%s" % blob)
 
 
 func _test_plan_a_vs_b_review() -> void:
@@ -170,6 +220,8 @@ func _test_scene_review_card() -> void:
 				var hud := str(scene.review_card_text())
 				_assert(hud.find("全歼") >= 0, "scene card shows 全歼")
 				_assert(not ReviewBuilder.hud_has_forbidden(hud), "scene card HUD clean")
+				_assert(hud.find("下一夜警报") < 0, "scene card no 下一夜警报 got=%s" % hud)
+				_assert(hud.find("警报将升高") < 0, "scene card no 警报将升高 got=%s" % hud)
 			var loot_n := 0
 			if scene.get("next_night_loot") is Array:
 				loot_n = (scene.next_night_loot as Array).size()
