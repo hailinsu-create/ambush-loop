@@ -6,7 +6,8 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [VS T6 还击软顶显式难度 2026-10-20](VS_T6_SOFTCAP_20261020.md) | **当前 VS 执行切片**（规划 T6）：默认档由我们代定为硬核（`RETURN_FIRE_ASSIST_DEFAULT=false`），辅助档可在布阵里打开；两档矩阵；plan_b 金标更新。堆叠在 T5 上（base `vs/t5-climb`）。**不合并**。 |
+| [VS T7 院子几何 v1.7 2026-10-20](VS_T7_YARD_V17_20261020.md) | **当前 VS 执行切片**（规划 T7）：4 个关键反例（F-A60/T-A+2/T-A+4/W-A-MG→Kar）默认硬核下判负；11 个无解格改 `no_place` + 控制器拒绝；金标重生成但 t0 仍 520/560。纸面 v1.7 / `yard.json` v8。基于 `vs/p1-softcap`。**仅本地工作区，未 commit/push**。 |
+| [VS T6 还击软顶显式难度 2026-10-20](VS_T6_SOFTCAP_20261020.md) | 已被 T7 接续（规划 T6）：默认档由我们代定为硬核（`RETURN_FIRE_ASSIST_DEFAULT=false`），辅助档可在布阵里打开；两档矩阵；plan_b 金标更新。堆叠在 T5 上（base `vs/t5-climb`）。**不合并**。 |
 | [VS T5 高点攀爬代价 2026-10-20](VS_T5_CLIMB_20261020.md) | 已被 T6 接续（规划 T5）：上下高点 +2s、禁射、出发格暴露；`CLIMB_COST_S` 生效；W2 107 / W3 85 / W8 391。谷仓加北侧梯子入口（不被西巡逻看见，3 秒），示例方案 A 走北梯、保住标准伏击。收尾：攀爬支持小数秒（W8 405）；新 W5b 39 测得北梯起爆前不被看见（假设一直站在那里，tick 599 才被看见）。堆叠在 T4 上（base `vs/t4-scout-carry`）。**不合并**。 |
 | [VS T4 侦察警报带入埋伏 2026-10-20](VS_T4_SCOUT_CARRY_20261020.md) | 已被 T5 接续（规划 `NEXT_PLAN_20261018` T4）：`plan.start_alert` 携带侦察警报；area/global 失去标准伏击、A/B 仍可胜；新增 W4 carry 39；起疑轻代价（发现距离 ×1.3）。替代 W4a「埋伏从安静开始」。分支 `vs/t4-scout-carry` → draft PR 合入 `vs/g3`。**不合并**；起疑力度已拍板。 |
 | [VS P0-4 试玩构建开关 + 对局日志 2026-10-18](VS_P0_4_PLAYTEST_20261018.md) | **当前 VS 执行切片**：`?playtest=1` / `AMBUSH_PLAYTEST` / feature `playtest` 隐藏开发入口；每局 JSON 日志 + 「导出日志」；W9 新增。分支 `vs/p0-4-playtest` → draft PR 合入 `vs/g3`。**不合并**。 |

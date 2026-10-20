@@ -1,7 +1,8 @@
 {
   "id": "yard",
-  "version": 7,
+  "version": 8,
   "title": "院子",
+  "_t7_defaults_note_zh": "T7 代定，盲测后可调：东巷 F1/F2 enter_t_s=17；(11,6) 为矮掩体；no_place 格见各 cell 的 no_place_reason_zh。",
   "night": true,
   "ambush_targets": [
     "E1",
@@ -218,13 +219,13 @@
       {
         "id": "F1",
         "route_id": "east_flank",
-        "enter_t_s": 16,
+        "enter_t_s": 17,
         "group": "flank"
       },
       {
         "id": "F2",
         "route_id": "east_flank",
-        "enter_t_s": 16,
+        "enter_t_s": 17,
         "group": "flank",
         "path_offset_cells": -1.0
       }
@@ -1164,7 +1165,9 @@
       "x": 5,
       "y": 10,
       "kind": "high",
-      "tier": "high"
+      "tier": "high",
+      "no_place": true,
+      "no_place_reason_zh": "此高点无法同时封锁主路与东巷，禁止落位"
     },
     {
       "x": 6,
@@ -1304,7 +1307,9 @@
       "x": 4,
       "y": 9,
       "kind": "high",
-      "tier": "high"
+      "tier": "high",
+      "no_place": true,
+      "no_place_reason_zh": "此高点侧射界被墙挡住，禁止落位"
     },
     {
       "x": 5,
@@ -1541,7 +1546,9 @@
       "cover": {
         "height": "low",
         "blocks_los_same_level": true
-      }
+      },
+      "no_place": true,
+      "no_place_reason_zh": "此掩体侧射界被挡，禁止落位"
     },
     {
       "x": 16,
@@ -1700,19 +1707,25 @@
       "x": 15,
       "y": 7,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此格无法覆盖东巷退路，禁止落位"
     },
     {
       "x": 16,
       "y": 7,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此格无法覆盖东巷退路，禁止落位"
     },
     {
       "x": 17,
       "y": 7,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此格无法覆盖东巷退路，禁止落位"
     },
     {
       "x": 18,
@@ -1792,7 +1805,9 @@
       "x": 7,
       "y": 6,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此掩体侧射界被挡，禁止落位"
     },
     {
       "x": 8,
@@ -1812,7 +1827,9 @@
       "cover": {
         "height": "low",
         "blocks_los_same_level": true
-      }
+      },
+      "no_place": true,
+      "no_place_reason_zh": "此掩体侧射界被挡，禁止落位"
     },
     {
       "x": 10,
@@ -1824,7 +1841,11 @@
       "x": 11,
       "y": 6,
       "kind": "road",
-      "tier": "ground"
+      "tier": "ground",
+      "cover": {
+        "height": "low",
+        "blocks_los_same_level": true
+      }
     },
     {
       "x": 12,
@@ -1940,7 +1961,9 @@
       "x": 7,
       "y": 5,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此掩体侧射界被挡，禁止落位"
     },
     {
       "x": 8,
@@ -2087,13 +2110,17 @@
       "x": 7,
       "y": 4,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此掩体侧射界被挡，禁止落位"
     },
     {
       "x": 8,
       "y": 4,
       "kind": "ground",
-      "tier": "ground"
+      "tier": "ground",
+      "no_place": true,
+      "no_place_reason_zh": "此掩体侧射界被挡，禁止落位"
     },
     {
       "x": 9,

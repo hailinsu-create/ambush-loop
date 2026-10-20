@@ -86,6 +86,8 @@ var op_placed: Dictionary = {} ## op_id → bool
 var op_display_names: Dictionary = {} ## op_id → Chinese
 var kit_weapon_counts: Dictionary = {} ## weapon_id → remaining in kit (for UI)
 var example_plans_open: bool = false
+## T7 yard v1.7: cells explicitly forbidden for operator placement (射界/退路缺口).
+var _no_place_cells: Dictionary = {} ## "x,y" → Chinese reason
 
 @onready var map_view: GreyboxMap = $MapHost/SubViewportContainer/SubViewport/GreyboxMap
 @onready var map_viewport: SubViewport = $MapHost/SubViewportContainer/SubViewport
@@ -280,6 +282,7 @@ func _ready() -> void:
 	level = SimLevelLoader.load_path("res://data/levels/yard.json")
 	weapons = SimWeapons.load_csv()
 	grid = SimLevelLoader.build_grid(level)
+	_index_no_place_cells()
 	map_view.configure(level, grid, weapons)
 	map_view.set_art_mode(map_view.ArtMode.G3)
 	art_mode_name = "G3"
@@ -1179,10 +1182,15 @@ func _update_legal_highlights() -> void:
 		map_view.queue_redraw()
 		return
 	match setup_tool:
-		"mine", "op":
+		"mine":
 			for y in range(grid.height):
 				for x in range(grid.width):
 					if grid.walkable(x, y):
+						cells.append(Vector2i(x, y))
+		"op":
+			for y in range(grid.height):
+				for x in range(grid.width):
+					if grid.walkable(x, y) and _no_place_reason(Vector2i(x, y)).is_empty():
 						cells.append(Vector2i(x, y))
 		"trigger":
 			## Trip line uses drag endpoints; no full-yard flood fill.
@@ -2958,6 +2966,18 @@ func _refresh_start_gate() -> void:
 		label_start_reason.visible = not reason.is_empty()
 
 
+func _index_no_place_cells() -> void:
+	_no_place_cells.clear()
+	for c in level.get("cells", []):
+		if bool(c.get("no_place", false)):
+			var reason := str(c.get("no_place_reason_zh", "此格禁止落位"))
+			_no_place_cells["%d,%d" % [int(c["x"]), int(c["y"])]] = reason
+
+
+func _no_place_reason(cell: Vector2i) -> String:
+	return str(_no_place_cells.get("%d,%d" % [cell.x, cell.y], ""))
+
+
 func _high_slot_for_cell(cell: Vector2i) -> Dictionary:
 	## T5b: the high_slots entry whose cells contain `cell` (empty when none).
 	for hs in level.get("high_slots", []):
@@ -3337,6 +3357,13 @@ func _on_cell_tapped(cell: Vector2i) -> void:
 
 func _handle_op_place_tap(cell: Vector2i) -> void:
 	## Ghost + confirm: first tap shows ✓, second tap same cell places.
+	var no_place := _no_place_reason(cell)
+	if not no_place.is_empty():
+		label_info.text = no_place
+		pending_place_cell = Vector2i(-1, -1)
+		if map_view:
+			map_view.place_ghost_cell = Vector2i(-1, -1)
+		return
 	var op := _plan_op(selected_op_id)
 	var same_cell := (
 		not op.is_empty()
@@ -3756,6 +3783,13 @@ func _preview_who_sees(cell: Vector2i) -> Array:
 func _move_selected_op(cell: Vector2i) -> void:
 	if selected_op_id == "":
 		return
+	var no_place := _no_place_reason(cell)
+	if not no_place.is_empty():
+		label_info.text = no_place
+		pending_place_cell = Vector2i(-1, -1)
+		if map_view:
+			map_view.place_ghost_cell = Vector2i(-1, -1)
+		return
 	# Reject stacking on another operator.
 	for op in plan.get("operators", []):
 		if str(op["id"]) != selected_op_id and int(op["x"]) == cell.x and int(op["y"]) == cell.y:
@@ -4143,6 +4177,10 @@ func _on_portrait_pressed(oid: String) -> void:
 func scripted_place_operator(oid: String, x: int, y: int, facing_deg: float = 90.0) -> bool:
 	## Test/helper: place one operator (bypasses ghost confirm).
 	if not grid.walkable(x, y):
+		return false
+	var no_place := _no_place_reason(Vector2i(x, y))
+	if not no_place.is_empty():
+		label_info.text = no_place
 		return false
 	selected_op_id = oid
 	pending_place_cell = Vector2i(-1, -1)

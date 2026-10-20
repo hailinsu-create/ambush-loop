@@ -35,6 +35,7 @@ func _run_all() -> void:
 	await _test_climb_wait_status()
 	await _test_climb_access_controls()
 	await _test_climb_fractional_seconds()
+	await _test_no_place_guard()
 	await _test_return_fire_assist_controls()
 	await _test_camera_zoom_pan()
 	await _test_info_card()
@@ -969,6 +970,55 @@ func _test_climb_fractional_seconds() -> void:
 		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 		return
 	_assert(false, "fractional climb scene not ready")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+
+
+func _test_no_place_guard() -> void:
+	## T7 v1.7: fingerprint cells are either winnable or explicitly no_place; the
+	## controller rejects placement and shows the Chinese reason from yard.json.
+	OS.set_environment("AMBUSH_GREYBOX_AUTO", "")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "1")
+	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "1")
+	var err := change_scene_to_file("res://scenes/greybox.tscn")
+	_assert(err == OK, "no-place guard scene err=%s" % err)
+	for _i in range(200):
+		await process_frame
+		var scene = current_scene
+		if scene == null or scene.map_view == null or scene.plan.is_empty():
+			continue
+		_assert(str(scene._no_place_reason(Vector2i(7, 4))) == "此掩体侧射界被挡，禁止落位",
+			"west no-place reason got=%s" % scene._no_place_reason(Vector2i(7, 4)))
+		_assert(str(scene._no_place_reason(Vector2i(5, 9))).is_empty(),
+			"published barn cell stays placeable")
+		_assert(not scene.map_view.legal_cells.has(Vector2i(7, 4)),
+			"op legal highlights exclude no-place cell")
+		_assert(not scene.map_view.legal_cells.has(Vector2i(5, 10)),
+			"op legal highlights exclude blocked high cell")
+		scene._load_preset("A")
+		var mg: Dictionary = scene._plan_op("op_mg42")
+		var ox := int(mg["x"])
+		var oy := int(mg["y"])
+		scene.selected_op_id = "op_mg42"
+		scene.pending_place_cell = Vector2i(-1, -1)
+		scene._move_selected_op(Vector2i(7, 4))
+		_assert(int(mg["x"]) == ox and int(mg["y"]) == oy, "no-place move rejected")
+		_assert(str(scene.label_info.text).contains("禁止落位"),
+			"no-place move shows reason got=%s" % scene.label_info.text)
+		_assert(str(scene.label_info.text).contains("侧射界"),
+			"no-place move names blocked arc got=%s" % scene.label_info.text)
+		scene._handle_op_place_tap(Vector2i(5, 10))
+		_assert(int(mg["x"]) == ox and int(mg["y"]) == oy, "no-place ghost tap rejected")
+		_assert(scene.pending_place_cell == Vector2i(-1, -1), "no-place ghost not armed")
+		_assert(str(scene.label_info.text).contains("禁止落位"),
+			"no-place ghost tap shows reason got=%s" % scene.label_info.text)
+		_assert(scene.scripted_place_operator("op_mg42", 9, 6, 0.0) == false,
+			"scripted no-place returns false")
+		_assert(int(mg["x"]) == ox and int(mg["y"]) == oy, "scripted no-place leaves op in place")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
+		OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
+		return
+	_assert(false, "no-place guard scene not ready")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_SCOUT", "")
 	OS.set_environment("AMBUSH_GREYBOX_SKIP_BRIEF", "")
 

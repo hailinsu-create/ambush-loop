@@ -71,6 +71,14 @@
               "height": { "type": "string", "enum": ["low", "high"] },
               "blocks_los_same_level": { "type": "boolean", "default": true }
             }
+          },
+          "no_place": {
+            "type": "boolean",
+            "description": "T7 院子 v1.7：该格禁止队员落位（射界被挡/退路缺口）"
+          },
+          "no_place_reason_zh": {
+            "type": "string",
+            "description": "给玩家的中文拒绝原因；no_place=true 时必填"
           }
         }
       }
