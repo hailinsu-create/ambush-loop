@@ -20,6 +20,7 @@ var log: SimEventLog
 
 var phase: String = C.PHASE_SETUP
 var alert: String = C.ALERT_QUIET
+var start_alert: String = C.ALERT_QUIET ## optional plan["start_alert"] carried from scout (T4)
 var tick: int = 0
 var plan_id: String = ""
 var plan_locked: bool = false
@@ -146,6 +147,8 @@ func setup(level_data: Dictionary, plan: Dictionary, weapons_table: Dictionary) 
 
 	phase = C.PHASE_SETUP
 	alert = C.ALERT_QUIET
+	## T4: optional plan key; missing/empty/illegal → quiet (golden path unchanged).
+	start_alert = _valid_start_alert(plan.get("start_alert", ""))
 	tick = 0
 	plan_locked = false
 	detonate_tick = -1
@@ -194,6 +197,25 @@ func begin_wait() -> void:
 			"pos": {"x": m["x"], "y": m["y"], "height": "ground"},
 		})
 	_set_phase(0, C.PHASE_WAIT)
+	## T4 scout carry: apply the alert the scout brought into setup.
+	## Fixed tick-0 order: sim_start → mine_place → phase(wait) → alert_change(scout_carry).
+	## Non-quiet emits one alert_change; quiet (default) emits nothing (event stream byte-identical).
+	if start_alert != C.ALERT_QUIET:
+		_set_alert(start_alert, "scout_carry")
+		match start_alert:
+			C.ALERT_SUSPICIOUS:
+				## Carry-in does not pre-occupy the second_suspicious counter, so the standard
+				## ambush stays available as planning requires. The heavier suspicious_count=1
+				## variant is documented in the results doc pending owner ruling.
+				suspicious_recover_ticks = 0
+				## standard_ambush_eligible stays true.
+			C.ALERT_AREA:
+				standard_ambush_eligible = false
+				alert_reached_area_before_detonate = true
+			C.ALERT_GLOBAL:
+				## First WAIT tick arms trigger=alarm through the existing _step_trigger.
+				standard_ambush_eligible = false
+				alert_reached_area_before_detonate = true
 
 
 func advance_one_tick() -> bool:
@@ -635,6 +657,16 @@ func _set_alert(to: String, reason: String) -> void:
 		"actor": "system",
 		"payload": {"from": from, "to": to, "reason": reason},
 	})
+
+
+func _valid_start_alert(v: Variant) -> String:
+	## Accept only the four tiers; anything else (missing/empty/"foo") → quiet.
+	var s := str(v)
+	match s:
+		C.ALERT_SUSPICIOUS, C.ALERT_AREA, C.ALERT_GLOBAL:
+			return s
+		_:
+			return C.ALERT_QUIET
 
 
 func _step_trigger() -> void:
