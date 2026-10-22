@@ -6,7 +6,7 @@
 
 | 文档 | 定位与状态 |
 | --- | --- |
-| [GPU 工作方案 2026-10-23](GPU_WORK_PLAN_20261023.md) | **美术 GPU 工作入口**（v2）：释放 AutoDL 791/592 后，按需新开 AutoDL 5090 自己跑 Hunyuan3D-2.1 + UniRig，过不了质量门的单件才走混元 API；场景/动作/MR/渲染在本机 CPU。预计约 ¥25–35（全走 API 约 ¥175）。分支 `vs/docs-gpu-plan` → draft PR #72 合入 `vs/g3`。**不合并**。 |
+| [GPU 工作方案 2026-10-23](GPU_WORK_PLAN_20261023.md) | **美术 GPU 工作入口**（v2）：释放 AutoDL 791/592 后，按需新开 AutoDL 5090 自己跑 Hunyuan3D-2.1 + UniRig，过不了质量门的单件才走混元 API；场景/动作/MR/渲染在本机 CPU。预计约 ¥32–35，含补救预留（全走 API 约 ¥175）。分支 `vs/docs-gpu-plan` → draft PR #72 合入 `vs/g3`。**不合并**。 |
 | [VS P0-4 试玩构建开关 + 对局日志 2026-10-18](VS_P0_4_PLAYTEST_20261018.md) | **当前 VS 执行切片**：`?playtest=1` / `AMBUSH_PLAYTEST` / feature `playtest` 隐藏开发入口；每局 JSON 日志 + 「导出日志」；W9 新增。分支 `vs/p0-4-playtest` → draft PR 合入 `vs/g3`。**不合并**。 |
 | [VS P0-3 简报与最小教学 2026-10-17](VS_P0_3_BRIEF_20261017.md) | 开局简报 + 阶段提示 + 教学文案黑名单。分支 `vs/p0-3-brief` → draft PR 合入 `vs/p0-2-aim`。**不合并**。试玩 Pages 部署被环境分支策略阻塞（见文档）。 |
 | [VS P0-2 朝向吸附与放大镜 2026-10-17](VS_P0_2_AIM_SNAP_20261017.md) | 放大镜 + AimSnap + G.1 容差门；结果表 [`ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md`](../../ambush_vs/docs/AIM_TOLERANCE_P0_2_RESULTS_20261017.md)。分支 `vs/p0-2-aim` → draft PR 合入 `vs/p0-1-counterex`。**不合并**；已被 P0-3 接续。 |
